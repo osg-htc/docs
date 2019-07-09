@@ -2487,7 +2487,7 @@ the default mappings, or migrate from edg-mkgridmap or GUMS.</p>
 <li>
 <p>Consult the default VO mappings in <code>/usr/share/osg/voms-mapfile-default</code> to determine the mapped Unix account names.
     Each of the mapfiles has the following format:</p>
-<div class="codehilite"><pre><span></span><span class="ss">&quot;<span style="color:red">&lt;VO, VO role, VO group or user&gt;</span>&quot;</span> <span class="o">%</span><span class="n">RED</span><span class="o">%&lt;</span><span class="n">Unix</span> <span class="n">account</span><span class="o">&gt;%</span><span class="n">ENDCOLOR</span><span class="o">%</span>
+<div class="codehilite"><pre><span></span>&quot;<span style="color:red">&lt;VO, VO role, VO group or user&gt;</span>&quot; <span style="color:red">&lt;Unix account&gt;</span>
 </pre></div>
 
 
@@ -2683,12 +2683,12 @@ To migrate any custom authentication configuration from GUMS to the LCMAPS VOMS 
 <h4 id="mapping-vos">Mapping VOs<a class="headerlink" href="#mapping-vos" title="Permanent link">&para;</a></h4>
 <p>To map VOs, VO roles, or VO groups to Unix accounts based on their VOMS attributes, create <code>/etc/grid-security/voms-mapfile</code>.
 An example of the format of a <code>voms-mapfile</code> follows:</p>
-<div class="codehilite"><pre><span></span><span class="o">#</span> <span class="k">map</span> <span class="n">GLOW</span> <span class="n">jobs</span> <span class="k">in</span> <span class="n">the</span> <span class="n">chtc</span> <span class="k">group</span> <span class="k">to</span> <span class="n">the</span> <span class="s1">&#39;glow1&#39;</span> <span class="n">Unix</span> <span class="n">account</span><span class="p">.</span>
-<span class="ss">&quot;/GLOW/chtc/*&quot;</span> <span class="n">glow1</span>
-<span class="o">#</span> <span class="k">map</span> <span class="n">GLOW</span> <span class="n">jobs</span> <span class="k">with</span> <span class="n">the</span> <span class="n">htpc</span> <span class="k">role</span> <span class="k">to</span> <span class="n">the</span> <span class="s1">&#39;glow2&#39;</span> <span class="n">Unix</span> <span class="n">account</span><span class="p">.</span>
-<span class="ss">&quot;/GLOW/Role=htpc/*&quot;</span> <span class="n">glow2</span>
-<span class="o">#</span> <span class="k">map</span> <span class="n">other</span> <span class="n">GLOW</span> <span class="n">jobs</span> <span class="k">to</span> <span class="n">the</span> <span class="s1">&#39;glow&#39;</span> <span class="n">Unix</span> <span class="n">account</span><span class="p">.</span>
-<span class="ss">&quot;/GLOW/*&quot;</span> <span class="n">glow</span>
+<div class="codehilite"><pre><span></span># map GLOW jobs in the chtc group to the &#39;glow1&#39; Unix account.
+&quot;/GLOW/chtc/*&quot; glow1
+# map GLOW jobs with the htpc role to the &#39;glow2&#39; Unix account.
+&quot;/GLOW/Role=htpc/*&quot; glow2
+# map other GLOW jobs to the &#39;glow&#39; Unix account.
+&quot;/GLOW/*&quot; glow
 </pre></div>
 
 
@@ -2709,8 +2709,8 @@ Do not edit <code>voms-mapfile-default</code> as your changes will be overwritte
 <h4 id="mapping-users">Mapping users<a class="headerlink" href="#mapping-users" title="Permanent link">&para;</a></h4>
 <p>To map specific users to Unix accounts based on their certificates' DNs, create <code>/etc/grid-security/grid-mapfile</code>.
 An example of the format of a <code>grid-mapfile</code> follows:</p>
-<div class="codehilite"><pre><span></span><span class="o">#</span> <span class="k">map</span> <span class="n">Matyas</span><span class="s1">&#39;s FNAL DN to the &#39;</span><span class="n">matyas</span><span class="err">&#39;</span> <span class="n">Unix</span> <span class="n">account</span>
-<span class="ss">&quot;/DC=gov/DC=fnal/O=Fermilab/OU=People/CN=Matyas Selmeci/CN=UID:matyas&quot;</span> <span class="n">matyas</span>
+<div class="codehilite"><pre><span></span># map Matyas&#39;s FNAL DN to the &#39;matyas&#39; Unix account
+&quot;/DC=gov/DC=fnal/O=Fermilab/OU=People/CN=Matyas Selmeci/CN=UID:matyas&quot; matyas
 </pre></div>
 
 
@@ -2723,8 +2723,8 @@ able to access your resources.</p>
 <p><code>/etc/grid-security/ban-voms-mapfile</code> is used to ban an entire VO or a role withing a VO from accessing resources on
 your machine.
 An example of the format of a <code>ban-voms-mapfile</code> follows:</p>
-<div class="codehilite"><pre><span></span><span class="o">#</span> <span class="n">ban</span> <span class="n">CMS</span> <span class="n">production</span> <span class="n">jobs</span>
-<span class="ss">&quot;/cms/Role=production/*&quot;</span>
+<div class="codehilite"><pre><span></span># ban CMS production jobs
+&quot;/cms/Role=production/*&quot;
 </pre></div>
 
 
@@ -2743,8 +2743,8 @@ In that case, the file should not contain any entries. If the file does not exis
 <h4 id="banning-users">Banning users<a class="headerlink" href="#banning-users" title="Permanent link">&para;</a></h4>
 <p><code>/etc/grid-security/ban-mapfile</code> is used to ban specific users from accessing your resources based on their
 certificates' DNs. An example of the format of a <code>ban-mapfile</code> follows:</p>
-<div class="codehilite"><pre><span></span><span class="o">#</span> <span class="n">ban</span> <span class="n">Matyas</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">FNAL</span> <span class="n">DN</span>
-<span class="ss">&quot;/DC=gov/DC=fnal/O=Fermilab/OU=People/CN=Matyas Selmeci/CN=UID:matyas&quot;</span>
+<div class="codehilite"><pre><span></span># ban Matyas&#39;s FNAL DN
+&quot;/DC=gov/DC=fnal/O=Fermilab/OU=People/CN=Matyas Selmeci/CN=UID:matyas&quot;
 </pre></div>
 
 
@@ -2828,7 +2828,7 @@ VOMS authentication as well as common LCMAPS VOMS authentication issues.</p>
 <li>
 <p>Disable HTCondor-CE authentication caches by creating <code>/etc/condor-ce/config.d/99-disablegsicache.conf</code> with the
    following contents:</p>
-<div class="codehilite"><pre><span></span><span class="n">GSS_ASSIST_GRIDMAP_CACHE_EXPIRATION</span> <span class="o">=</span> <span class="mi">0</span>
+<div class="codehilite"><pre><span></span>GSS_ASSIST_GRIDMAP_CACHE_EXPIRATION = 0
 </pre></div>
 
 
@@ -2867,13 +2867,13 @@ VOMS authentication as well as common LCMAPS VOMS authentication issues.</p>
 </li>
 <li>
 <p>Set <code>--loglevel=5</code> under the <code>-authzfunparms</code> of the <code>sec.protocol /usr/lib64 gsi</code> line. For example:</p>
-<div class="codehilite"><pre><span></span><span class="s s-Atom">sec</span><span class="p">.</span><span class="s s-Atom">protocol</span> <span class="o">/</span><span class="s s-Atom">usr</span><span class="o">/</span><span class="s s-Atom">lib64</span> <span class="s s-Atom">gsi</span> <span class="o">-</span><span class="nn">certdir</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">certificates</span> <span class="s s-Atom">\</span>
-            <span class="o">-</span><span class="nn">cert</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">xrootd</span><span class="o">/</span><span class="s s-Atom">xrootdcert</span><span class="p">.</span><span class="s s-Atom">pem</span> <span class="s s-Atom">\</span>
-            <span class="o">-</span><span class="nn">key</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">xrootd</span><span class="o">/</span><span class="s s-Atom">xrootdkey</span><span class="p">.</span><span class="s s-Atom">pem</span> <span class="s s-Atom">\</span>
-            <span class="o">-</span><span class="nn">crl</span><span class="p">:</span><span class="mi">1</span> <span class="s s-Atom">\</span>
-            <span class="o">-</span><span class="nn">authzfun</span><span class="p">:</span><span class="s s-Atom">libXrdLcmaps</span><span class="p">.</span><span class="s s-Atom">so</span> <span class="s s-Atom">\</span>
-<span class="hll">            <span class="o">-</span><span class="nn">authzfunparms</span><span class="p">:</span><span class="s s-Atom">--lcmapscfg=/etc</span><span class="o">/</span><span class="s s-Atom">xrootd</span><span class="o">/</span><span class="s s-Atom">lcmaps</span><span class="p">.</span><span class="s s-Atom">cfg</span><span class="p">,</span><span class="s s-Atom">--loglevel</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="s s-Atom">--policy</span><span class="o">=</span><span class="s s-Atom">authorize_only</span> <span class="s s-Atom">\</span>
-</span>            <span class="o">-</span><span class="nn">gmapopt</span><span class="p">:</span><span class="mi">10</span> <span class="o">-</span><span class="nn">gmapto</span><span class="p">:</span><span class="mi">0</span>
+<div class="codehilite"><pre><span></span>sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
+            -cert:/etc/grid-security/xrootd/xrootdcert.pem \
+            -key:/etc/grid-security/xrootd/xrootdkey.pem \
+            -crl:1 \
+            -authzfun:libXrdLcmaps.so \
+<span class="hll">            -authzfunparms:--lcmapscfg=/etc/xrootd/lcmaps.cfg,--loglevel=5,--policy=authorize_only \
+</span>            -gmapopt:10 -gmapto:0
 </pre></div>
 
 
@@ -2911,7 +2911,7 @@ VOMS authentication as well as common LCMAPS VOMS authentication issues.</p>
 <p>If you have the EPEL version of the GridFTP server, you may see error messages in <code>journalctl</code> (EL7),
 <code>var/log/messages</code> (EL6), or the location specified by <code>LCMAPS_LOG_FILE</code>.</p>
 <p><strong>Symptoms</strong></p>
-<div class="codehilite"><pre><span></span><span class="nv">Apr</span> <span class="mi">11</span> <span class="mi">13</span>:<span class="mi">51</span>:<span class="mi">41</span> <span class="nv">atlas</span><span class="o">-</span><span class="nv">hub</span> <span class="nv">globus</span><span class="o">-</span><span class="nv">gridftp</span><span class="o">-</span><span class="nv">server</span>: <span class="nv">You</span> <span class="nv">are</span> <span class="nv">still</span> <span class="nv">root</span> <span class="nv">after</span> <span class="nv">the</span> <span class="nv">LCMAPS</span> <span class="nv">execution</span>. <span class="nv">The</span> <span class="nv">implicit</span> <span class="nv">root</span><span class="o">-</span><span class="nv">mapping</span> <span class="nv">safety</span> <span class="nv">is</span> <span class="nv">enabled</span>. <span class="nv">See</span> <span class="nv">documentation</span> <span class="k">for</span> <span class="nv">details</span>
+<div class="codehilite"><pre><span></span>Apr 11 13:51:41 atlas-hub globus-gridftp-server: You are still root after the LCMAPS execution. The implicit root-mapping safety is enabled. See documentation for details
 </pre></div>
 
 
@@ -3002,40 +3002,40 @@ be present in your existing <code>/etc/lcmaps.db</code> file.</p>
 <li>
 <p>Ensure the following lines are present in the "Module definitions" section (the top section, before
     <code>authorize_only</code>) of <code>/etc/lcmaps.db</code>:</p>
-<div class="codehilite"><pre><span></span><span class="n">gridmapfile</span> <span class="o">=</span> <span class="ss">&quot;lcmaps_localaccount.mod&quot;</span>
-              <span class="ss">&quot;-gridmap /etc/grid-security/grid-mapfile&quot;</span>
-<span class="n">banfile</span> <span class="o">=</span> <span class="ss">&quot;lcmaps_ban_dn.mod&quot;</span>
-          <span class="ss">&quot;-banmapfile /etc/grid-security/ban-mapfile&quot;</span>
-<span class="n">banvomsfile</span> <span class="o">=</span> <span class="ss">&quot;lcmaps_ban_fqan.mod&quot;</span>
-              <span class="ss">&quot;-banmapfile /etc/grid-security/ban-voms-mapfile&quot;</span>
-<span class="n">vomsmapfile</span> <span class="o">=</span> <span class="ss">&quot;lcmaps_voms_localaccount.mod&quot;</span>
-              <span class="ss">&quot;-gridmap /etc/grid-security/voms-mapfile&quot;</span>
-<span class="n">defaultmapfile</span> <span class="o">=</span> <span class="ss">&quot;lcmaps_voms_localaccount2.mod&quot;</span>
-                 <span class="ss">&quot;-gridmap /usr/share/osg/voms-mapfile-default&quot;</span>
+<div class="codehilite"><pre><span></span>gridmapfile = &quot;lcmaps_localaccount.mod&quot;
+              &quot;-gridmap /etc/grid-security/grid-mapfile&quot;
+banfile = &quot;lcmaps_ban_dn.mod&quot;
+          &quot;-banmapfile /etc/grid-security/ban-mapfile&quot;
+banvomsfile = &quot;lcmaps_ban_fqan.mod&quot;
+              &quot;-banmapfile /etc/grid-security/ban-voms-mapfile&quot;
+vomsmapfile = &quot;lcmaps_voms_localaccount.mod&quot;
+              &quot;-gridmap /etc/grid-security/voms-mapfile&quot;
+defaultmapfile = &quot;lcmaps_voms_localaccount2.mod&quot;
+                 &quot;-gridmap /usr/share/osg/voms-mapfile-default&quot;
 
-<span class="n">verifyproxynokey</span> <span class="o">=</span> <span class="ss">&quot;lcmaps_verify_proxy2.mod&quot;</span>
-          <span class="ss">&quot;--allow-limited-proxy&quot;</span>
-          <span class="ss">&quot;--discard_private_key_absence&quot;</span>
-          <span class="ss">&quot; -certdir /etc/grid-security/certificates&quot;</span>
+verifyproxynokey = &quot;lcmaps_verify_proxy2.mod&quot;
+          &quot;--allow-limited-proxy&quot;
+          &quot;--discard_private_key_absence&quot;
+          &quot; -certdir /etc/grid-security/certificates&quot;
 </pre></div>
 
 
 </li>
 <li>
 <p>Edit the <code>authorize_only</code> section so that it contains only the following uncommented lines:</p>
-<div class="codehilite"><pre><span></span><span class="n">verifyproxynokey</span> <span class="o">-&gt;</span> <span class="n">banfile</span>
-<span class="n">banfile</span> <span class="o">-&gt;</span> <span class="n">banvomsfile</span> <span class="o">|</span> <span class="n">bad</span>
-<span class="n">banvomsfile</span> <span class="o">-&gt;</span> <span class="n">gridmapfile</span> <span class="o">|</span> <span class="n">bad</span>
-<span class="n">gridmapfile</span> <span class="o">-&gt;</span> <span class="n">good</span> <span class="o">|</span> <span class="n">vomsmapfile</span>
-<span class="n">vomsmapfile</span> <span class="o">-&gt;</span> <span class="n">good</span> <span class="o">|</span> <span class="n">defaultmapfile</span>
-<span class="n">defaultmapfile</span> <span class="o">-&gt;</span> <span class="n">good</span> <span class="o">|</span> <span class="n">bad</span>
+<div class="codehilite"><pre><span></span>verifyproxynokey -&gt; banfile
+banfile -&gt; banvomsfile | bad
+banvomsfile -&gt; gridmapfile | bad
+gridmapfile -&gt; good | vomsmapfile
+vomsmapfile -&gt; good | defaultmapfile
+defaultmapfile -&gt; good | bad
 </pre></div>
 
 
 </li>
 <li>
 <p>Edit <code>/etc/grid-security/gsi-authz.conf</code> and ensure that it contains the following line with a newline at the end:</p>
-<div class="codehilite"><pre><span></span><span class="n">globus_mapping</span> <span class="n">liblcas_lcmaps_gt4_mapping</span><span class="p">.</span><span class="n">so</span> <span class="n">lcmaps_callout</span>
+<div class="codehilite"><pre><span></span>globus_mapping liblcas_lcmaps_gt4_mapping.so lcmaps_callout
 </pre></div>
 
 

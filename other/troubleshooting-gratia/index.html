@@ -2287,16 +2287,16 @@
 <p>In normal cases, <code>osg-configure</code> does the editing of the probe configuration files, at least on the CE. The configuration is found in <code>/etc/osg/config.d/30-gratia.ini</code> and <a href="../configuration-with-osg-configure#gratia">documented elsewhere</a>.</p>
 <p>If there are problems or special configuration, you might need to edit the Gratia configuration files yourself. Each probe has a separate configuration file found in <code>/etc/gratia/<span style="color:red">PROBE-NAME</span>/ProbeConfig</code>.</p>
 <p>The ProbeConfig files have many details. A few options that you might need to edit are shown before. This is <strong>not</strong> a complete file, but only shows a subset of the options.</p>
-<div class="codehilite"><pre><span></span><span class="o">&lt;</span><span class="n">ProbeConfiguration</span> 
+<div class="codehilite"><pre><span></span>&lt;ProbeConfiguration 
 
-    <span class="n">CollectorHost</span><span class="o">=</span><span class="ss">&quot;gratia-osg-itb.opensciencegrid.org:80&quot;</span>
-    <span class="n">SSLHost</span><span class="o">=</span><span class="ss">&quot;gratia-osg-itb.opensciencegrid.org:80&quot;</span>
-    <span class="n">SSLRegistrationHost</span><span class="o">=</span><span class="ss">&quot;gratia-osg-itb.opensciencegrid.org:80&quot;</span>
+    CollectorHost=&quot;gratia-osg-itb.opensciencegrid.org:80&quot;
+    SSLHost=&quot;gratia-osg-itb.opensciencegrid.org:80&quot;
+    SSLRegistrationHost=&quot;gratia-osg-itb.opensciencegrid.org:80&quot;
 
-    <span class="n">ProbeName</span><span class="o">=</span><span class="ss">&quot;condor:fermicloud084.fnal.gov&quot;</span>
-    <span class="n">SiteName</span><span class="o">=</span><span class="ss">&quot;WISC_OSG_EDU&quot;</span>
-    <span class="n">EnableProbe</span><span class="o">=</span><span class="ss">&quot;1&quot;</span>
-<span class="o">/&gt;</span>
+    ProbeName=&quot;condor:fermicloud084.fnal.gov&quot;
+    SiteName=&quot;WISC_OSG_EDU&quot;
+    EnableProbe=&quot;1&quot;
+/&gt;
 </pre></div>
 
 
@@ -2363,35 +2363,35 @@
 <h2 id="have-you-configured-the-resource-names-correctly">Have you configured the resource names correctly?<a class="headerlink" href="#have-you-configured-the-resource-names-correctly" title="Permanent link">&para;</a></h2>
 <p>Do the names of your resources match the names in <a href="https://github.com/opensciencegrid/topology/tree/master/topology">OIM</a>?
 Gratia retrieves the resource name from the <code>Site Information</code> section of the <code>/etc/osg/config.d/40-siteinfo.ini</code></p>
-<div class="codehilite"><pre><span></span><span class="p">;</span><span class="o">===================================================================</span>
-<span class="p">;</span>                       <span class="n">Site</span> <span class="n">Information</span>
-<span class="p">;</span><span class="o">===================================================================</span>
+<div class="codehilite"><pre><span></span>;===================================================================
+;                       Site Information
+;===================================================================
 
-<span class="p">[</span><span class="n">Site</span> <span class="n">Information</span><span class="p">]</span>
-<span class="p">;</span> <span class="n">The</span> <span class="n">group</span> <span class="n">option</span> <span class="n">indicates</span> <span class="n">the</span> <span class="n">group</span> <span class="n">that</span> <span class="n">the</span> <span class="n">OSG</span> <span class="n">site</span> <span class="n">should</span> <span class="n">be</span> <span class="n">listed</span> <span class="k">in</span><span class="p">,</span>
-<span class="p">;</span> <span class="k">for</span> <span class="n">production</span> <span class="n">sites</span> <span class="n">this</span> <span class="n">should</span> <span class="n">be</span> <span class="n">OSG</span><span class="p">,</span> <span class="k">for</span> <span class="n">vtb</span> <span class="n">or</span> <span class="n">itb</span> <span class="n">testing</span> <span class="n">it</span> <span class="n">should</span> <span class="n">be</span>
-<span class="p">;</span> <span class="n">OSG</span><span class="o">-</span><span class="n">ITB</span>
-<span class="p">;</span> 
-<span class="p">;</span> <span class="n">YOU</span> <span class="n">WILL</span> <span class="n">NEED</span> <span class="n">TO</span> <span class="n">CHANGE</span> <span class="n">THIS</span>
-<span class="n">group</span> <span class="o">=</span> <span class="n">OSG</span>
+[Site Information]
+; The group option indicates the group that the OSG site should be listed in,
+; for production sites this should be OSG, for vtb or itb testing it should be
+; OSG-ITB
+; 
+; YOU WILL NEED TO CHANGE THIS
+group = OSG
 
-<span class="p">;</span> <span class="n">The</span> <span class="n">host_name</span> <span class="n">setting</span> <span class="n">should</span> <span class="n">give</span> <span class="n">the</span> <span class="n">host</span> <span class="n">name</span> <span class="n">of</span> <span class="n">the</span> <span class="n">CE</span>  <span class="n">that</span> <span class="n">is</span> <span class="n">being</span> 
-<span class="p">;</span> <span class="n">configured</span><span class="p">,</span> <span class="n">this</span> <span class="n">setting</span> <span class="n">must</span> <span class="n">be</span> <span class="n">a</span> <span class="n">valid</span> <span class="n">dns</span> <span class="n">name</span> <span class="n">that</span> <span class="n">resolves</span>
-<span class="p">;</span> 
-<span class="p">;</span> <span class="n">YOU</span> <span class="n">WILL</span> <span class="n">NEED</span> <span class="n">TO</span> <span class="n">CHANGE</span> <span class="n">THIS</span>
-<span class="n">host_name</span> <span class="o">=</span> <span class="n">tusker</span><span class="o">-</span><span class="n">gw1</span><span class="p">.</span><span class="n">unl</span><span class="p">.</span><span class="n">edu</span>
+; The host_name setting should give the host name of the CE  that is being 
+; configured, this setting must be a valid dns name that resolves
+; 
+; YOU WILL NEED TO CHANGE THIS
+host_name = tusker-gw1.unl.edu
 
-<span class="p">;</span> <span class="n">The</span> <span class="n">resource</span> <span class="n">setting</span> <span class="n">should</span> <span class="n">be</span> <span class="n">set</span> <span class="n">to</span> <span class="n">the</span> <span class="n">same</span> <span class="n">value</span> <span class="n">as</span> <span class="n">used</span> <span class="k">in</span> <span class="n">the</span> <span class="n">OIM</span> 
-<span class="p">;</span> <span class="n">registration</span> <span class="n">at</span> <span class="n">the</span> <span class="n">goc</span> 
-<span class="p">;</span> 
-<span class="p">;</span> <span class="n">YOU</span> <span class="n">WILL</span> <span class="n">NEED</span> <span class="n">TO</span> <span class="n">CHANGE</span> <span class="n">THIS</span>
-<span class="n">resource</span> <span class="o">=</span> <span class="n">Tusker</span><span class="o">-</span><span class="n">CE1</span>
+; The resource setting should be set to the same value as used in the OIM 
+; registration at the goc 
+; 
+; YOU WILL NEED TO CHANGE THIS
+resource = Tusker-CE1
 
-<span class="p">;</span> <span class="n">The</span> <span class="n">resource_group</span> <span class="n">setting</span> <span class="n">should</span> <span class="n">be</span> <span class="n">set</span> <span class="n">to</span> <span class="n">the</span> <span class="n">same</span> <span class="n">value</span> <span class="n">as</span> <span class="n">used</span> <span class="k">in</span> <span class="n">the</span> <span class="n">OIM</span> 
-<span class="p">;</span> <span class="n">registration</span> <span class="n">at</span> <span class="n">the</span> <span class="n">goc</span> 
-<span class="p">;</span> 
-<span class="p">;</span> <span class="n">YOU</span> <span class="n">WILL</span> <span class="n">NEED</span> <span class="n">TO</span> <span class="n">CHANGE</span> <span class="n">THIS</span>
-<span class="n">resource_group</span> <span class="o">=</span> <span class="n">Tusker</span>
+; The resource_group setting should be set to the same value as used in the OIM 
+; registration at the goc 
+; 
+; YOU WILL NEED TO CHANGE THIS
+resource_group = Tusker
 </pre></div>
 
 
@@ -2402,11 +2402,11 @@ Gratia retrieves the resource name from the <code>Site Information</code> sectio
 <li>Open a <a href="https://support.opensciencegrid.org/helpdesk/tickets/new">support ticket</a></li>
 <li>Select "Software or Service"</li>
 <li>Select "GRACC Operations"</li>
-<li>Type a friendly email that asks the GRACC team to change your site name at the collector. Make sure to tell them the old name and the new name.  Below is an example email:<div class="codehilite"><pre><span></span><span class="n">Hello</span> <span class="n">GRACC</span> <span class="n">Team</span><span class="p">,</span>
+<li>Type a friendly email that asks the GRACC team to change your site name at the collector. Make sure to tell them the old name and the new name.  Below is an example email:<div class="codehilite"><pre><span></span>Hello GRACC Team,
 
-<span class="n">Please</span> <span class="n">change</span> <span class="n">the</span> <span class="n">site</span> <span class="n">name</span> <span class="k">of</span> <span class="n">my</span> <span class="n">site</span> <span class="k">from</span> <span class="o">&lt;</span><span class="k">Insert</span> <span class="k">Old</span> <span class="n">Name</span><span class="o">&gt;</span> <span class="k">to</span> <span class="o">&lt;</span><span class="k">Insert</span> <span class="k">New</span> <span class="n">Name</span><span class="o">&gt;</span><span class="p">.</span>
+Please change the site name of my site from &lt;Insert Old Name&gt; to &lt;Insert New Name&gt;.
 
-<span class="n">Thanks</span><span class="p">,</span> <span class="p">...</span>
+Thanks, ...
 </pre></div>
 
 
@@ -2458,27 +2458,27 @@ Gratia retrieves the resource name from the <code>Site Information</code> sectio
 
 
 <p>Not much is printed to the screen, but you can see progress in the Gratia log file:</p>
-<div class="codehilite"><pre><span></span><span class="mi">13</span>:<span class="mi">35</span>:<span class="mi">28</span> <span class="nv">CDT</span> <span class="nv">Gratia</span>: <span class="nv">Initializing</span> <span class="nv">Gratia</span> <span class="nv">with</span> <span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">gratia</span><span class="o">/</span><span class="nv">condor</span><span class="o">/</span><span class="nv">ProbeConfig</span>
-<span class="mi">13</span>:<span class="mi">35</span>:<span class="mi">28</span> <span class="nv">CDT</span> <span class="nv">Gratia</span>: <span class="nv">Creating</span> <span class="nv">a</span> <span class="nv">ProbeDetails</span> <span class="nv">record</span> <span class="mi">2012</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">04</span><span class="nv">T18</span>:<span class="mi">35</span>:<span class="mi">28</span><span class="nv">Z</span>
-<span class="mi">13</span>:<span class="mi">35</span>:<span class="mi">28</span> <span class="nv">CDT</span> <span class="nv">Gratia</span>: <span class="o">***********************************************************</span>
-<span class="mi">13</span>:<span class="mi">35</span>:<span class="mi">28</span> <span class="nv">CDT</span> <span class="nv">Gratia</span>: <span class="nv">OK</span> <span class="o">-</span> <span class="nv">Handshake</span> <span class="nv">added</span> <span class="nv">to</span> <span class="nv">bundle</span> <span class="ss">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">100</span><span class="ss">)</span>
-<span class="mi">13</span>:<span class="mi">35</span>:<span class="mi">28</span> <span class="nv">CDT</span> <span class="nv">Gratia</span>: <span class="o">***********************************************************</span>
-<span class="mi">13</span>:<span class="mi">35</span>:<span class="mi">28</span> <span class="nv">CDT</span> <span class="nv">Gratia</span>: <span class="nv">List</span> <span class="nv">of</span> <span class="nv">backup</span> <span class="nv">directories</span>: [<span class="nv">u</span><span class="s1">&#39;</span><span class="s">/var/lib/gratia/tmp</span><span class="s1">&#39;</span>]
-<span class="mi">13</span>:<span class="mi">35</span>:<span class="mi">28</span> <span class="nv">CDT</span> <span class="nv">Gratia</span>: <span class="nv">Reprocessing</span> <span class="nv">response</span>: <span class="nv">OK</span> <span class="o">-</span> <span class="nv">Reprocessing</span> <span class="mi">0</span> <span class="nv">record</span><span class="ss">(</span><span class="nv">s</span><span class="ss">)</span> <span class="nv">uploaded</span>, <span class="mi">0</span> <span class="nv">bundled</span>, <span class="mi">0</span> <span class="nv">failed</span>
-<span class="mi">13</span>:<span class="mi">35</span>:<span class="mi">28</span> <span class="nv">CDT</span> <span class="nv">Gratia</span>: <span class="nv">After</span> <span class="nv">reprocessing</span>: <span class="mi">0</span> <span class="nv">in</span> <span class="nv">outbox</span> <span class="mi">0</span> <span class="nv">in</span> <span class="nv">staged</span> <span class="nv">outbox</span> <span class="mi">0</span> <span class="nv">tar</span> <span class="nv">files</span>
-<span class="mi">13</span>:<span class="mi">35</span>:<span class="mi">28</span> <span class="nv">CDT</span> <span class="nv">Gratia</span>: <span class="nv">Creating</span> <span class="nv">a</span> <span class="nv">UsageRecord</span> <span class="mi">2012</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">04</span><span class="nv">T18</span>:<span class="mi">35</span>:<span class="mi">28</span><span class="nv">Z</span>
+<div class="codehilite"><pre><span></span>13:35:28 CDT Gratia: Initializing Gratia with /etc/gratia/condor/ProbeConfig
+13:35:28 CDT Gratia: Creating a ProbeDetails record 2012-04-04T18:35:28Z
+13:35:28 CDT Gratia: ***********************************************************
+13:35:28 CDT Gratia: OK - Handshake added to bundle (1/100)
+13:35:28 CDT Gratia: ***********************************************************
+13:35:28 CDT Gratia: List of backup directories: [u&#39;/var/lib/gratia/tmp&#39;]
+13:35:28 CDT Gratia: Reprocessing response: OK - Reprocessing 0 record(s) uploaded, 0 bundled, 0 failed
+13:35:28 CDT Gratia: After reprocessing: 0 in outbox 0 in staged outbox 0 tar files
+13:35:28 CDT Gratia: Creating a UsageRecord 2012-04-04T18:35:28Z
 ...
-<span class="mi">13</span>:<span class="mi">35</span>:<span class="mi">29</span> <span class="nv">CDT</span> <span class="nv">Gratia</span>: <span class="nv">Processing</span> <span class="nv">bundle</span> <span class="nv">file</span>: 
-<span class="mi">13</span>:<span class="mi">35</span>:<span class="mi">29</span> <span class="nv">CDT</span> <span class="nv">Gratia</span>: <span class="nv">Processing</span> <span class="nv">bundle</span> <span class="nv">file</span>: <span class="o">/</span><span class="nv">var</span><span class="o">/</span><span class="nv">lib</span><span class="o">/</span><span class="nv">gratia</span><span class="o">/</span><span class="nv">tmp</span><span class="o">/</span><span class="nv">gratiafiles</span><span class="o">/</span>
-    <span class="nv">subdir</span>.<span class="nv">condor_fermicloud084</span>.<span class="nv">fnal</span>.<span class="nv">gov_gratia</span><span class="o">-</span><span class="nv">osg</span><span class="o">-</span><span class="nv">itb</span>.<span class="nv">opensciencegrid</span>.<span class="nv">org_80</span><span class="o">/</span>
-    <span class="nv">outbox</span><span class="o">/</span><span class="nv">r</span>.<span class="mi">18425</span>.<span class="nv">condor_fermicloud084</span>.<span class="nv">fnal</span>.<span class="nv">gov_gratia</span><span class="o">-</span><span class="nv">osg</span><span class="o">-</span><span class="nv">itb</span>.<span class="nv">opensciencegrid</span>.<span class="nv">org_80</span>.<span class="nv">gratia</span>.<span class="nv">xml__BSuXo18428</span>
+13:35:29 CDT Gratia: Processing bundle file: 
+13:35:29 CDT Gratia: Processing bundle file: /var/lib/gratia/tmp/gratiafiles/
+    subdir.condor_fermicloud084.fnal.gov_gratia-osg-itb.opensciencegrid.org_80/
+    outbox/r.18425.condor_fermicloud084.fnal.gov_gratia-osg-itb.opensciencegrid.org_80.gratia.xml__BSuXo18428
 ...
-<span class="mi">13</span>:<span class="mi">35</span>:<span class="mi">29</span> <span class="nv">CDT</span> <span class="nv">Gratia</span>: <span class="o">***********************************************************</span>
-<span class="mi">13</span>:<span class="mi">35</span>:<span class="mi">29</span> <span class="nv">CDT</span> <span class="nv">Gratia</span>: <span class="nv">Removing</span> <span class="nv">log</span> <span class="nv">files</span> <span class="nv">older</span> <span class="nv">than</span> <span class="mi">31</span> <span class="nv">days</span> <span class="nv">from</span> <span class="o">/</span><span class="nv">var</span><span class="o">/</span><span class="nv">log</span><span class="o">/</span><span class="nv">gratia</span>
-<span class="mi">13</span>:<span class="mi">35</span>:<span class="mi">29</span> <span class="nv">CDT</span> <span class="nv">Gratia</span>: <span class="o">/</span><span class="nv">var</span><span class="o">/</span><span class="nv">log</span><span class="o">/</span><span class="nv">gratia</span> <span class="nv">uses</span> <span class="mi">0</span>.<span class="mi">035</span><span class="o">%</span> <span class="nv">and</span> <span class="nv">there</span> <span class="nv">is</span> <span class="mi">73</span><span class="o">%</span> <span class="nv">free</span>
-<span class="mi">13</span>:<span class="mi">35</span>:<span class="mi">29</span> <span class="nv">CDT</span> <span class="nv">Gratia</span>: <span class="nv">Removing</span> <span class="nv">incomplete</span> <span class="nv">data</span> <span class="nv">files</span> <span class="nv">older</span> <span class="nv">than</span> <span class="mi">31</span> <span class="nv">days</span> <span class="nv">from</span> <span class="o">/</span><span class="nv">var</span><span class="o">/</span><span class="nv">lib</span><span class="o">/</span><span class="nv">gratia</span><span class="o">/</span><span class="nv">data</span><span class="o">/</span>
-<span class="mi">13</span>:<span class="mi">35</span>:<span class="mi">29</span> <span class="nv">CDT</span> <span class="nv">Gratia</span>: <span class="o">/</span><span class="nv">var</span><span class="o">/</span><span class="nv">lib</span><span class="o">/</span><span class="nv">gratia</span><span class="o">/</span><span class="nv">data</span> <span class="nv">uses</span> <span class="mi">0</span><span class="o">%</span> <span class="nv">and</span> <span class="nv">there</span> <span class="nv">is</span> <span class="mi">73</span><span class="o">%</span> <span class="nv">free</span>
-<span class="mi">13</span>:<span class="mi">35</span>:<span class="mi">29</span> <span class="nv">CDT</span> <span class="nv">Gratia</span>: <span class="k">End</span> <span class="nv">of</span> <span class="nv">execution</span> <span class="nv">summary</span>: <span class="nv">new</span> <span class="nv">records</span> <span class="nv">sent</span> <span class="nv">successfully</span>: <span class="mi">37</span>
+13:35:29 CDT Gratia: ***********************************************************
+13:35:29 CDT Gratia: Removing log files older than 31 days from /var/log/gratia
+13:35:29 CDT Gratia: /var/log/gratia uses 0.035% and there is 73% free
+13:35:29 CDT Gratia: Removing incomplete data files older than 31 days from /var/lib/gratia/data/
+13:35:29 CDT Gratia: /var/lib/gratia/data uses 0% and there is 73% free
+13:35:29 CDT Gratia: End of execution summary: new records sent successfully: 37
 </pre></div>
 
 

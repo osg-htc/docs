@@ -2484,7 +2484,7 @@ For example, if you are using Certbot for Let's Encrypt, you should write a "dep
 <h3 id="adjust-disk-utilization">Adjust disk utilization<a class="headerlink" href="#adjust-disk-utilization" title="Permanent link">&para;</a></h3>
 <p>To adjust the disk utilization of your cache, create or edit a file named <code>/etc/xrootd/config.d/90-local.cfg</code>
 and set the values of <code>pfc.diskusage</code>.</p>
-<div class="codehilite"><pre><span></span><span class="n">pfc</span><span class="p">.</span><span class="n">diskusage</span> <span class="mi">0</span><span class="p">.</span><span class="mi">90</span> <span class="mi">0</span><span class="p">.</span><span class="mi">95</span>
+<div class="codehilite"><pre><span></span>pfc.diskusage 0.90 0.95
 </pre></div>
 
 
@@ -2496,7 +2496,7 @@ the XRootD service will delete cached files until usage goes below the low water
 This feature is disabled by default, but you may enable it if you need help troubleshooting your server.</p>
 <p>To enable remote debugging, edit <code>/etc/xrootd/digauth.cfg</code> and specify the authorizations for reading digFS.
 An example of authorizations:</p>
-<div class="codehilite"><pre><span></span><span class="k">all</span> <span class="n">allow</span> <span class="n">gsi</span> <span class="k">g</span><span class="o">=/</span><span class="n">glow</span> <span class="n">h</span><span class="o">=*</span><span class="p">.</span><span class="n">cs</span><span class="p">.</span><span class="n">wisc</span><span class="p">.</span><span class="n">edu</span>
+<div class="codehilite"><pre><span></span>all allow gsi g=/glow h=*.cs.wisc.edu
 </pre></div>
 
 
@@ -2514,13 +2514,13 @@ To use HTTPS:</p>
 </li>
 <li>
 <p>Create a file named <code>/etc/xrootd/config.d/11-cache-https.cfg</code> with the following contents:</p>
-<div class="codehilite"><pre><span></span># <span class="nv">Support</span> <span class="nv">HTTPS</span> <span class="nv">access</span> <span class="nv">to</span> <span class="nv">unauthenticated</span> <span class="nv">cache</span>
-<span class="k">if</span> <span class="nv">named</span> <span class="nv">stash</span><span class="o">-</span><span class="nv">cache</span>
-  <span class="nv">http</span>.<span class="nv">cadir</span> <span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">grid</span><span class="o">-</span><span class="nv">security</span><span class="o">/</span><span class="nv">certificates</span>
-  <span class="nv">http</span>.<span class="nv">cert</span> <span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">grid</span><span class="o">-</span><span class="nv">security</span><span class="o">/</span><span class="nv">xrd</span><span class="o">/</span><span class="nv">xrdcert</span>.<span class="nv">pem</span>
-  <span class="nv">http</span>.<span class="nv">key</span> <span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">grid</span><span class="o">-</span><span class="nv">security</span><span class="o">/</span><span class="nv">xrd</span><span class="o">/</span><span class="nv">xrdkey</span>.<span class="nv">pem</span>
-  <span class="nv">http</span>.<span class="nv">secxtractor</span> <span class="o">/</span><span class="nv">usr</span><span class="o">/</span><span class="nv">lib64</span><span class="o">/</span><span class="nv">libXrdLcmaps</span>.<span class="nv">so</span>
-<span class="nv">fi</span>
+<div class="codehilite"><pre><span></span># Support HTTPS access to unauthenticated cache
+if named stash-cache
+  http.cadir /etc/grid-security/certificates
+  http.cert /etc/grid-security/xrd/xrdcert.pem
+  http.key /etc/grid-security/xrd/xrdkey.pem
+  http.secxtractor /usr/lib64/libXrdLcmaps.so
+fi
 </pre></div>
 
 
@@ -2617,8 +2617,8 @@ As a reminder, here are common service commands (all run as <code>root</code>) f
 
 
 <p><code>curl</code> may not correctly report a failure, so verify that the contents of the file are:</p>
-<div class="codehilite"><pre><span></span><span class="o">&gt;</span><span class="n">Derek</span><span class="err">&#39;</span><span class="n">s</span> <span class="k">first</span> <span class="n">query</span><span class="o">!</span>
-<span class="n">MPVSDSGFDNSSKTMKDDTIPTEDYEEITKESEMGDATKITSKIDANVIEKKDTDSENNITIAQDDEKVSWLQRVVEFFE</span>
+<div class="codehilite"><pre><span></span>&gt;Derek&#39;s first query!
+MPVSDSGFDNSSKTMKDDTIPTEDYEEITKESEMGDATKITSKIDANVIEKKDTDSENNITIAQDDEKVSWLQRVVEFFE
 </pre></div>
 
 
@@ -2631,20 +2631,20 @@ As a reminder, here are common service commands (all run as <code>root</code>) f
 
 <p>The output of the above command should detail what the collector knows about the status of your cache.
 Here is an example snippet of the output:</p>
-<div class="codehilite"><pre><span></span><span class="n">AuthenticatedIdentity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;sc-cache.chtc.wisc.edu@daemon.opensciencegrid.org&quot;</span><span class="w"></span>
-<span class="n">AuthenticationMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;GSI&quot;</span><span class="w"></span>
-<span class="n">free_cache_bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">868104454144</span><span class="w"></span>
-<span class="n">free_cache_fraction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.8022261674321525</span><span class="w"></span>
-<span class="n">LastHeardFrom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1552002482</span><span class="w"></span>
-<span class="n">most_recent_access_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1551997049</span><span class="w"></span>
-<span class="n">MyType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;Machine&quot;</span><span class="w"></span>
-<span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;xrootd@sc-cache.chtc.wisc.edu&quot;</span><span class="w"></span>
-<span class="n">ping_elapsed_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.00763392448425293</span><span class="w"></span>
-<span class="n">ping_response_code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-<span class="n">ping_response_message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;[SUCCESS] &quot;</span><span class="w"></span>
-<span class="n">ping_response_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;ok&quot;</span><span class="w"></span>
-<span class="n">STASHCACHE_DaemonVersion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;1.0.0&quot;</span><span class="w"></span>
-<span class="p">...</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>AuthenticatedIdentity = &quot;sc-cache.chtc.wisc.edu@daemon.opensciencegrid.org&quot;
+AuthenticationMethod = &quot;GSI&quot;
+free_cache_bytes = 868104454144
+free_cache_fraction = 0.8022261674321525
+LastHeardFrom = 1552002482
+most_recent_access_time = 1551997049
+MyType = &quot;Machine&quot;
+Name = &quot;xrootd@sc-cache.chtc.wisc.edu&quot;
+ping_elapsed_time = 0.00763392448425293
+ping_response_code = 0
+ping_response_message = &quot;[SUCCESS] &quot;
+ping_response_status = &quot;ok&quot;
+STASHCACHE_DaemonVersion = &quot;1.0.0&quot;
+...
 </pre></div>
 
 

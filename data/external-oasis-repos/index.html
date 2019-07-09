@@ -2357,9 +2357,9 @@ The next steps will fail if the web server is not accessible.</p>
 </li>
 <li>
 <p>Create a <a href="https://support.opensciencegrid.org/helpdesk/tickets/new">support ticket</a> using the following template:</p>
-<div class="codehilite"><pre><span></span><span class="nv">Please</span> <span class="nv">add</span> <span class="nv">a</span> <span class="nv">new</span> <span class="nv">CVMFS</span> <span class="nv">repository</span> <span class="nv">to</span> <span class="nv">OASIS</span> <span class="k">for</span> <span class="nv">VO</span> <span class="o">&lt;</span><span class="nv">VO</span> <span class="nv">NAME</span><span class="o">&gt;</span> <span class="nv">using</span> <span class="nv">the</span> <span class="nv">URL</span>
-    <span class="nv">http</span>:<span class="o">//&lt;</span><span class="nv">FQDN</span><span class="o">&gt;</span>:<span class="mi">8000</span><span class="o">/</span><span class="nv">cvmfs</span><span class="o">/&lt;</span><span class="nv">OASIS</span> <span class="nv">REPOSITORY</span><span class="o">&gt;</span>
-<span class="nv">The</span> <span class="nv">VO</span> <span class="nv">responsible</span> <span class="nv">manager</span> <span class="nv">will</span> <span class="nv">be</span> <span class="o">&lt;</span><span class="nv">OASIS</span> <span class="nv">MANAGER</span><span class="o">&gt;</span>.
+<div class="codehilite"><pre><span></span>Please add a new CVMFS repository to OASIS for VO &lt;VO NAME&gt; using the URL
+    http://&lt;FQDN&gt;:8000/cvmfs/&lt;OASIS REPOSITORY&gt;
+The VO responsible manager will be &lt;OASIS MANAGER&gt;.
 </pre></div>
 
 
@@ -2391,7 +2391,7 @@ The next steps will fail if the web server is not accessible.</p>
 <p>Within an hour, the repository updates should appear at the OSG Operations and FNAL Stratum-1 servers.</p>
 <p>On success, make sure the whitelist update happens daily by creating <code>/etc/cron.d/fetch-cvmfs-whitelist</code> with the
 following contents:</p>
-<div class="codehilite"><pre><span></span><span class="mi">5</span> <span class="mi">4</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="o">%</span><span class="n">BLUE</span><span class="o">%</span><span class="n">LIBRARIAN</span><span class="o">%</span><span class="n">ENDCOLOR</span><span class="o">%</span> <span class="n">cd</span> <span class="o">/</span><span class="n">srv</span><span class="o">/</span><span class="n">cvmfs</span><span class="o">/%</span><span class="n">RED</span><span class="o">%</span><span class="n">example</span><span class="p">.</span><span class="n">opensciencegrid</span><span class="p">.</span><span class="n">org</span><span class="o">%</span><span class="n">ENDCOLOR</span><span class="o">%</span> <span class="o">&amp;&amp;</span> <span class="n">wget</span> <span class="o">-</span><span class="n">qO</span> <span class="p">.</span><span class="n">cvmfswhitelist</span><span class="p">.</span><span class="k">new</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">oasis</span><span class="p">.</span><span class="n">opensciencegrid</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">cvmfs</span><span class="o">/%</span><span class="n">RED</span><span class="o">%</span><span class="n">example</span><span class="p">.</span><span class="n">opensciencegrid</span><span class="p">.</span><span class="n">org</span><span class="o">%</span><span class="n">ENDCOLOR</span><span class="o">%/</span><span class="p">.</span><span class="n">cvmfswhitelist</span> <span class="o">&amp;&amp;</span> <span class="n">mv</span> <span class="p">.</span><span class="n">cvmfswhitelist</span><span class="p">.</span><span class="k">new</span> <span class="p">.</span><span class="n">cvmfswhitelist</span>
+<div class="codehilite"><pre><span></span>5 4 * * * <span style="color:blue">LIBRARIAN</span> cd /srv/cvmfs/<span style="color:red">example.opensciencegrid.org</span> &amp;&amp; wget -qO .cvmfswhitelist.new http://oasis.opensciencegrid.org/cvmfs/<span style="color:red">example.opensciencegrid.org</span>/.cvmfswhitelist &amp;&amp; mv .cvmfswhitelist.new .cvmfswhitelist
 </pre></div>
 
 

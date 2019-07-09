@@ -2308,8 +2308,8 @@ exporting an underlying storage system (e.g., <a href="../../install-hadoop/">HD
 <li>
 <p>Add an <code>all.export</code> directive for each directory that you wish to serve via XRootD.
     For example, to serve the contents of <code>/store</code> and <code>/public</code>:</p>
-<div class="codehilite"><pre><span></span><span class="k">all</span><span class="p">.</span><span class="n">export</span> <span class="o">/</span><span class="n">store</span><span class="o">/</span>
-<span class="k">all</span><span class="p">.</span><span class="n">export</span> <span class="o">/</span><span class="k">public</span><span class="o">/</span>
+<div class="codehilite"><pre><span></span>all.export /store/
+all.export /public/
 </pre></div>
 
 
@@ -2325,7 +2325,7 @@ Access controls should be managed via <a href="#configuring-authorization">autho
    For example, the XRootD service registered at the
    <a href="https://github.com/opensciencegrid/topology/blob/master/topology/Fermi%20National%20Accelerator%20Laboratory/FermiGrid/FNAL_PUBLIC_DCACHE.yaml#L6">FermiGrid site</a>
    should set the following configuration:</p>
-<div class="codehilite"><pre><span></span><span class="k">all</span><span class="p">.</span><span class="n">sitename</span>   <span class="n">Fermilab</span> <span class="k">Public</span> <span class="n">DCache</span>
+<div class="codehilite"><pre><span></span>all.sitename   Fermilab Public DCache
 </pre></div>
 
 
@@ -2336,33 +2336,33 @@ Access controls should be managed via <a href="#configuring-authorization">autho
 </li>
 <li>
 <p>Append the following configuration to the end of <code>/etc/xrootd/xrootd-standalone.cfg</code></p>
-<div class="codehilite"><pre><span></span><span class="n">xrd</span><span class="p">.</span><span class="n">port</span> <span class="mi">1094</span>
-<span class="k">all</span><span class="p">.</span><span class="k">role</span> <span class="n">server</span>
+<div class="codehilite"><pre><span></span>xrd.port 1094
+all.role server
 
-<span class="n">cms</span><span class="p">.</span><span class="n">allow</span> <span class="k">host</span> <span class="o">*</span>
-<span class="o">#</span> <span class="n">Logging</span> <span class="n">verbosity</span>
-<span class="n">xrootd</span><span class="p">.</span><span class="n">trace</span> <span class="n">emsg</span> <span class="n">login</span> <span class="n">stall</span> <span class="n">redirect</span>
-<span class="n">ofs</span><span class="p">.</span><span class="n">trace</span> <span class="o">-</span><span class="k">all</span>
-<span class="n">xrd</span><span class="p">.</span><span class="n">trace</span> <span class="n">conn</span>
-<span class="n">cms</span><span class="p">.</span><span class="n">trace</span> <span class="k">all</span>
+cms.allow host *
+# Logging verbosity
+xrootd.trace emsg login stall redirect
+ofs.trace -all
+xrd.trace conn
+cms.trace all
 
-<span class="n">xrd</span><span class="p">.</span><span class="n">report</span> <span class="n">xrd</span><span class="o">-</span><span class="n">report</span><span class="p">.</span><span class="n">osgstorage</span><span class="p">.</span><span class="n">org</span><span class="p">:</span><span class="mi">9931</span>
-<span class="n">xrootd</span><span class="p">.</span><span class="n">monitor</span> <span class="k">all</span> <span class="err">\</span>
-               <span class="n">auth</span> <span class="err">\</span>
-               <span class="n">flush</span> <span class="mi">30</span><span class="n">s</span> <span class="err">\</span>
-               <span class="n">window</span> <span class="mi">5</span><span class="n">s</span> <span class="n">fstat</span> <span class="mi">60</span> <span class="n">lfn</span> <span class="n">ops</span> <span class="n">xfr</span> <span class="mi">5</span> <span class="err">\</span>
-               <span class="n">dest</span> <span class="n">redir</span> <span class="n">fstat</span> <span class="n">info</span> <span class="k">user</span> <span class="n">xrd</span><span class="o">-</span><span class="n">report</span><span class="p">.</span><span class="n">osgstorage</span><span class="p">.</span><span class="n">org</span><span class="p">:</span><span class="mi">9930</span> <span class="err">\</span>
-               <span class="n">dest</span> <span class="n">fstat</span> <span class="n">info</span> <span class="k">user</span> <span class="n">xrd</span><span class="o">-</span><span class="n">mon</span><span class="p">.</span><span class="n">osgstorage</span><span class="p">.</span><span class="n">org</span><span class="p">:</span><span class="mi">9930</span>
+xrd.report xrd-report.osgstorage.org:9931
+xrootd.monitor all \
+               auth \
+               flush 30s \
+               window 5s fstat 60 lfn ops xfr 5 \
+               dest redir fstat info user xrd-report.osgstorage.org:9930 \
+               dest fstat info user xrd-mon.osgstorage.org:9930
 
-<span class="n">xrd</span><span class="p">.</span><span class="n">network</span> <span class="n">keepalive</span> <span class="n">kaparms</span> <span class="mi">10</span><span class="n">m</span><span class="p">,</span><span class="mi">1</span><span class="n">m</span><span class="p">,</span><span class="mi">5</span>
-<span class="n">xrd</span><span class="p">.</span><span class="n">timeout</span> <span class="n">idle</span> <span class="mi">60</span><span class="n">m</span>
+xrd.network keepalive kaparms 10m,1m,5
+xrd.timeout idle 60m
 </pre></div>
 
 
 </li>
 <li>
 <p>On EL 6, set the default options to use the standalone configuration in the <code>/etc/sysconfig/xrootd</code> file.</p>
-<div class="codehilite"><pre><span></span><span class="n">XROOTD_DEFAULT_OPTIONS</span><span class="o">=</span><span class="ss">&quot;-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-standalone.cfg -k fifo&quot;</span>
+<div class="codehilite"><pre><span></span>XROOTD_DEFAULT_OPTIONS=&quot;-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-standalone.cfg -k fifo&quot;
 </pre></div>
 
 
@@ -2511,7 +2511,7 @@ As a reminder, here are common service commands (all run as <code>root</code>):<
 <h3 id="service-configuration">Service Configuration<a class="headerlink" href="#service-configuration" title="Permanent link">&para;</a></h3>
 <p>On EL 6, which config to use is set in the file <code>/etc/sysconfig/xrootd</code>.</p>
 <p>To use the standalone config, you would use:</p>
-<div class="codehilite"><pre><span></span><span class="n">XROOTD_DEFAULT_OPTIONS</span><span class="o">=</span><span class="ss">&quot;-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-<span style="color:red">standalone</span>.cfg -k fifo&quot;</span>
+<div class="codehilite"><pre><span></span>XROOTD_DEFAULT_OPTIONS=&quot;-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-<span style="color:red">standalone</span>.cfg -k fifo&quot;
 </pre></div>
 
 

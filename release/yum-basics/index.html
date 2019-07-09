@@ -2681,15 +2681,15 @@
 <ol>
 <li>
 <p>Enable the installation of debuginfo packages. This only needs to be done once. Edit the yum repo file, usually <code>/etc/yum.repos.d/osg.repo</code> to enable the separate debuginfo repository. Near the bottom of the file, you'll see the <code>osg-debug</code> repo: </p>
-<div class="codehilite"><pre><span></span><span class="k">[osg-debug]</span>
+<div class="codehilite"><pre><span></span>[osg-debug]
 
-<span class="na">name</span><span class="o">=</span><span class="s">OSG Software for Enterprise Linux 5 - $basearch - Debug</span>
-<span class="na">baseurl</span><span class="o">=</span><span class="s">http://repo.opensciencegrid.org/osg-release/$basearch/debu</span>
-<span class="na">failovermethod</span><span class="o">=</span><span class="s">priority </span>
-<span class="na">priority</span><span class="o">=</span><span class="s">98 </span>
-<span class="na">enabled</span><span class="o">=</span><span class="s">1</span>
-<span class="na">gpgcheck</span><span class="o">=</span><span class="s">1 </span>
-<span class="na">gpgkey</span><span class="o">=</span><span class="s">file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG</span>
+name=OSG Software for Enterprise Linux 5 - $basearch - Debug
+baseurl=http://repo.opensciencegrid.org/osg-release/$basearch/debu
+failovermethod=priority 
+priority=98 
+enabled=1
+gpgcheck=1 
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
 </pre></div>
 
 

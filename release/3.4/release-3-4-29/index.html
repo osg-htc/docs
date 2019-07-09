@@ -2393,7 +2393,7 @@ To start using Singularity via GlideinWMS, see:</p>
    separate, individual ports.
    To start using shared port, change the secondary collectors lines and the CCBs lines (if any) in
    <code>/etc/gwms-frontend/frontend.xml</code>, changing the address to include the shared port sinful string:</p>
-<div class="codehilite"><pre><span></span><span class="o">&lt;</span><span class="n">collector</span> <span class="n">DN</span><span class="o">=</span><span class="ss">&quot;/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=gwms-frontend.domain&quot;</span> <span class="k">group</span><span class="o">=</span><span class="ss">&quot;default&quot;</span> <span class="n">node</span><span class="o">=</span><span class="ss">&quot;gwms-frontend.domain:9618?sock=collector0-40&quot;</span> <span class="n">secondary</span><span class="o">=</span><span class="ss">&quot;True&quot;</span><span class="o">/&gt;</span>
+<div class="codehilite"><pre><span></span>&lt;collector DN=&quot;/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=gwms-frontend.domain&quot; group=&quot;default&quot; node=&quot;gwms-frontend.domain:9618?sock=collector0-40&quot; secondary=&quot;True&quot;/&gt;
 </pre></div>
 
 
@@ -2410,7 +2410,7 @@ Please update <em>all</em> RSV packages by running the following command on your
 
 
 <p>Additionally, if you are using osg-configure, please edit <code>/etc/osg/config.d/30-rsv.ini</code> and set the following:</p>
-<div class="codehilite"><pre><span></span><span class="n">enable_gratia</span> <span class="o">=</span> <span class="k">False</span>
+<div class="codehilite"><pre><span></span>enable_gratia = False
 </pre></div>
 
 
@@ -2449,37 +2449,37 @@ Please update <em>all</em> RSV packages by running the following command on your
 </ul>
 <h3 id="rpms">RPMs<a class="headerlink" href="#rpms" title="Permanent link">&para;</a></h3>
 <p>If you wish to manually update your system, you can run yum update against the following packages:</p>
-<div class="codehilite"><pre><span></span><span class="n">myproxy</span> <span class="n">myproxy</span><span class="o">-</span><span class="k">admin</span> <span class="n">myproxy</span><span class="o">-</span><span class="n">debuginfo</span> <span class="n">myproxy</span><span class="o">-</span><span class="n">devel</span> <span class="n">myproxy</span><span class="o">-</span><span class="n">doc</span> <span class="n">myproxy</span><span class="o">-</span><span class="n">libs</span> <span class="n">myproxy</span><span class="o">-</span><span class="n">server</span> <span class="n">myproxy</span><span class="o">-</span><span class="n">voms</span> <span class="n">osg</span><span class="o">-</span><span class="k">version</span> <span class="n">stash</span><span class="o">-</span><span class="k">cache</span> <span class="n">stash</span><span class="o">-</span><span class="n">origin</span> <span class="n">xcache</span>
+<div class="codehilite"><pre><span></span>myproxy myproxy-admin myproxy-debuginfo myproxy-devel myproxy-doc myproxy-libs myproxy-server myproxy-voms osg-version stash-cache stash-origin xcache
 </pre></div>
 
 
 <p>If you wish to only update the RPMs that changed, the set of RPMs is:</p>
 <h4 id="enterprise-linux-6_1">Enterprise Linux 6<a class="headerlink" href="#enterprise-linux-6_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="n">myproxy</span><span class="o">-</span><span class="mi">6</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el6</span>
-<span class="n">myproxy</span><span class="o">-</span><span class="k">admin</span><span class="o">-</span><span class="mi">6</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el6</span>
-<span class="n">myproxy</span><span class="o">-</span><span class="n">debuginfo</span><span class="o">-</span><span class="mi">6</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el6</span>
-<span class="n">myproxy</span><span class="o">-</span><span class="n">devel</span><span class="o">-</span><span class="mi">6</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el6</span>
-<span class="n">myproxy</span><span class="o">-</span><span class="n">doc</span><span class="o">-</span><span class="mi">6</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el6</span>
-<span class="n">myproxy</span><span class="o">-</span><span class="n">libs</span><span class="o">-</span><span class="mi">6</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el6</span>
-<span class="n">myproxy</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="mi">6</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el6</span>
-<span class="n">myproxy</span><span class="o">-</span><span class="n">voms</span><span class="o">-</span><span class="mi">6</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el6</span>
-<span class="n">osg</span><span class="o">-</span><span class="k">version</span><span class="o">-</span><span class="mi">3</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">29</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el6</span>
+<div class="codehilite"><pre><span></span>myproxy-6.2.3-1.1.osg34.el6
+myproxy-admin-6.2.3-1.1.osg34.el6
+myproxy-debuginfo-6.2.3-1.1.osg34.el6
+myproxy-devel-6.2.3-1.1.osg34.el6
+myproxy-doc-6.2.3-1.1.osg34.el6
+myproxy-libs-6.2.3-1.1.osg34.el6
+myproxy-server-6.2.3-1.1.osg34.el6
+myproxy-voms-6.2.3-1.1.osg34.el6
+osg-version-3.4.29-1.osg34.el6
 </pre></div>
 
 
 <h4 id="enterprise-linux-7_1">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="n">myproxy</span><span class="o">-</span><span class="mi">6</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el7</span>
-<span class="n">myproxy</span><span class="o">-</span><span class="k">admin</span><span class="o">-</span><span class="mi">6</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el7</span>
-<span class="n">myproxy</span><span class="o">-</span><span class="n">debuginfo</span><span class="o">-</span><span class="mi">6</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el7</span>
-<span class="n">myproxy</span><span class="o">-</span><span class="n">devel</span><span class="o">-</span><span class="mi">6</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el7</span>
-<span class="n">myproxy</span><span class="o">-</span><span class="n">doc</span><span class="o">-</span><span class="mi">6</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el7</span>
-<span class="n">myproxy</span><span class="o">-</span><span class="n">libs</span><span class="o">-</span><span class="mi">6</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el7</span>
-<span class="n">myproxy</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="mi">6</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el7</span>
-<span class="n">myproxy</span><span class="o">-</span><span class="n">voms</span><span class="o">-</span><span class="mi">6</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el7</span>
-<span class="n">osg</span><span class="o">-</span><span class="k">version</span><span class="o">-</span><span class="mi">3</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">29</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el7</span>
-<span class="n">stash</span><span class="o">-</span><span class="k">cache</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el7</span>
-<span class="n">stash</span><span class="o">-</span><span class="n">origin</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el7</span>
-<span class="n">xcache</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el7</span>
+<div class="codehilite"><pre><span></span>myproxy-6.2.3-1.1.osg34.el7
+myproxy-admin-6.2.3-1.1.osg34.el7
+myproxy-debuginfo-6.2.3-1.1.osg34.el7
+myproxy-devel-6.2.3-1.1.osg34.el7
+myproxy-doc-6.2.3-1.1.osg34.el7
+myproxy-libs-6.2.3-1.1.osg34.el7
+myproxy-server-6.2.3-1.1.osg34.el7
+myproxy-voms-6.2.3-1.1.osg34.el7
+osg-version-3.4.29-1.osg34.el7
+stash-cache-1.0.5-1.osg34.el7
+stash-origin-1.0.5-1.osg34.el7
+xcache-1.0.5-1.osg34.el7
 </pre></div>
                 
                   

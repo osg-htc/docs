@@ -2562,7 +2562,7 @@ To simplify installation, OSG provides convenience RPMs that install all require
 <p><strong>(Optional)</strong> If your HTCondor batch system is already installed via non-OSG RPM means, add the line below to
 <code>/etc/yum.repos.d/osg.repo</code>.
    Otherwise, skip to the next step.</p>
-<div class="codehilite"><pre><span></span><span class="n">exclude</span><span class="o">=</span><span class="n">condor</span>
+<div class="codehilite"><pre><span></span>exclude=condor
 </pre></div>
 
 
@@ -2619,7 +2619,7 @@ The details of this configuration is likely site-specific and therefore beyond t
 </div>
 <p>Enable your batch system in the HTCondor-CE configuration by editing the <code>enabled</code> field in the
 <code>/etc/osg/config.d/20-&lt;YOUR BATCH SYSTEM&gt;.ini</code>:</p>
-<div class="codehilite"><pre><span></span><span class="n">enabled</span> <span class="o">=</span> <span class="k">True</span>
+<div class="codehilite"><pre><span></span>enabled = True
 </pre></div>
 
 
@@ -2643,7 +2643,7 @@ daemons can write to the spool directory.</p>
 <p>You can control the value of the spool directory by setting <code>SPOOL</code> in <code>/etc/condor-ce/config.d/99-local.conf</code> (create
 this file if it doesn't exist).
 For example, the following sets the <code>SPOOL</code> directory to <code>/home/condor</code>:</p>
-<div class="codehilite"><pre><span></span><span class="n">SPOOL</span> <span class="o">=</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">condor</span>
+<div class="codehilite"><pre><span></span>SPOOL = /home/condor
 </pre></div>
 
 
@@ -2724,8 +2724,8 @@ document.</p>
 and interface to use when communicating to each other.
 Set <code>NETWORK_HOSTNAME</code> and <code>NETWORK_INTERFACE</code> to the hostname and IP address of your public interface, respectively, in
 <code>/etc/condor-ce/config.d/99-local.conf</code> directory with the line:</p>
-<div class="codehilite"><pre><span></span><span class="n">NETWORK_HOSTNAME</span> <span class="o">=</span> <span class="o">%</span><span class="n">RED</span><span class="o">%</span><span class="n">condorce</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">com</span><span class="o">%</span><span class="n">ENDCOLOR</span><span class="o">%</span>
-<span class="n">NETWORK_INTERFACE</span> <span class="o">=</span> <span class="o">%</span><span class="n">RED</span><span class="o">%</span><span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="o">%</span><span class="n">ENDCOLOR</span><span class="o">%</span>
+<div class="codehilite"><pre><span></span>NETWORK_HOSTNAME = <span style="color:red">condorce.example.com</span>
+NETWORK_INTERFACE = <span style="color:red">127.0.0.1</span>
 </pre></div>
 
 
@@ -2743,8 +2743,8 @@ configuring them in unison.</p>
 <li>
 <p><strong>To change the default limit</strong> on the number of locally run jobs (the current default is 20), add the following to
   <code>/etc/condor-ce/config.d/99-local.conf</code>:</p>
-<div class="codehilite"><pre><span></span><span class="nv">START_LOCAL_UNIVERSE</span> <span class="o">=</span> TotalLocalJobsRunning + TotalSchedulerJobsRunning &lt; <span style="color:red">&lt;JOB-LIMIT&gt;</span>
-<span class="nv">START_SCHEDULER_UNIVERSE</span> <span class="o">=</span> <span class="k">$(</span>START_LOCAL_UNIVERSE<span class="k">)</span>
+<div class="codehilite"><pre><span></span>START_LOCAL_UNIVERSE = TotalLocalJobsRunning + TotalSchedulerJobsRunning &lt; <span style="color:red">&lt;JOB-LIMIT&gt;</span>
+START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
 </pre></div>
 
 
@@ -2752,16 +2752,16 @@ configuring them in unison.</p>
 <li>
 <p><strong>To only allow a specific user</strong> to start locally run jobs, add the following to
   <code>/etc/condor-ce/config.d/99-local.conf</code>:</p>
-<div class="codehilite"><pre><span></span><span class="nv">START_LOCAL_UNIVERSE</span> <span class="o">=</span> target.Owner <span class="o">=</span>?<span class="o">=</span> <span class="s2">&quot;<span style="color:red">&lt;USERNAME&gt;</span>&quot;</span>
-<span class="nv">START_SCHEDULER_UNIVERSE</span> <span class="o">=</span> <span class="k">$(</span>START_LOCAL_UNIVERSE<span class="k">)</span>
+<div class="codehilite"><pre><span></span>START_LOCAL_UNIVERSE = target.Owner =?= &quot;<span style="color:red">&lt;USERNAME&gt;</span>&quot;
+START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
 </pre></div>
 
 
 </li>
 <li>
 <p><strong>To disable</strong> locally run jobs, add the following to <code>/etc/condor-ce/config.d/99-local.conf</code>:</p>
-<div class="codehilite"><pre><span></span><span class="nv">START_LOCAL_UNIVERSE</span> <span class="o">=</span> False
-<span class="nv">START_SCHEDULER_UNIVERSE</span> <span class="o">=</span> <span class="k">$(</span>START_LOCAL_UNIVERSE<span class="k">)</span>
+<div class="codehilite"><pre><span></span>START_LOCAL_UNIVERSE = False
+START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
 </pre></div>
 
 
@@ -2807,7 +2807,7 @@ Use the following table to determine which file requires editing:</p>
 </tbody>
 </table>
 <p>Then edit the value of <code>SuppressNoDNRecords</code> on each of your CE's so that it reads:</p>
-<div class="codehilite"><pre><span></span><span class="n">SuppressNoDNRecords</span><span class="o">=</span><span class="ss">&quot;1&quot;</span>
+<div class="codehilite"><pre><span></span>SuppressNoDNRecords=&quot;1&quot;
 </pre></div>
 
 
@@ -2823,13 +2823,13 @@ UID, their DN, or their VOMS attributes.</p>
 <ul>
 <li>
 <p><strong>To map UIDs to an accounting group,</strong> add entries to <code>/etc/osg/uid_table.txt</code> with the following form:</p>
-<div class="codehilite"><pre><span></span><span class="n">uid</span> <span class="n">GroupName</span>
+<div class="codehilite"><pre><span></span>uid GroupName
 </pre></div>
 
 
 <p>The following is an example <code>uid_table.txt</code>:</p>
-<div class="codehilite"><pre><span></span><span class="n">uscms02</span> <span class="n">TestGroup</span>
-<span class="n">osg</span>     <span class="n">other</span><span class="p">.</span><span class="n">osgedu</span>
+<div class="codehilite"><pre><span></span>uscms02 TestGroup
+osg     other.osgedu
 </pre></div>
 
 
@@ -2837,15 +2837,15 @@ UID, their DN, or their VOMS attributes.</p>
 <li>
 <p><strong>To map DNs or VOMS attributes to an accounting group,</strong> add lines to <code>/etc/osg/extattr_table.txt</code> with the
     following form:</p>
-<div class="codehilite"><pre><span></span><span class="c"><span style="color:red">SubjectOrAttribute</span> GroupName</span>
+<div class="codehilite"><pre><span></span><span style="color:red">SubjectOrAttribute</span> GroupName
 </pre></div>
 
 
 <p>The <span style="color:red">SubjectOrAttribute</span> can be a Perl regular expression. The following is an example <code>extattr_table.txt</code>:</p>
-<div class="codehilite"><pre><span></span><span class="n">cmsprio</span> <span class="n">cms</span><span class="p">.</span><span class="n">other</span><span class="p">.</span><span class="n">prio</span>
-<span class="n">cms</span><span class="err">\</span><span class="o">/</span><span class="k">Role</span><span class="o">=</span><span class="n">production</span> <span class="n">cms</span><span class="p">.</span><span class="n">prod</span>
-<span class="err">\</span><span class="o">/</span><span class="n">DC</span><span class="o">=</span><span class="n">com</span><span class="err">\</span><span class="o">/</span><span class="n">DC</span><span class="o">=</span><span class="n">DigiCert</span><span class="o">-</span><span class="n">Grid</span><span class="err">\</span><span class="o">/</span><span class="n">O</span><span class="o">=</span><span class="k">Open</span><span class="err">\</span> <span class="n">Science</span><span class="err">\</span> <span class="n">Grid</span><span class="err">\</span><span class="o">/</span><span class="n">OU</span><span class="o">=</span><span class="n">People</span><span class="err">\</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="n">Brian</span><span class="err">\</span> <span class="n">Lin</span><span class="err">\</span> <span class="mi">1047</span> <span class="n">osg</span><span class="p">.</span><span class="n">test</span>
-<span class="p">.</span><span class="o">*</span> <span class="n">other</span>
+<div class="codehilite"><pre><span></span>cmsprio cms.other.prio
+cms\/Role=production cms.prod
+\/DC=com\/DC=DigiCert-Grid\/O=Open\ Science\ Grid\/OU=People\/CN=Brian\ Lin\ 1047 osg.test
+.* other
 </pre></div>
 
 
@@ -2868,7 +2868,7 @@ both files.</p>
 </li>
 <li>
 <p>Next, uncomment the <code>DAEMON_LIST</code> configuration located at <code>/etc/condor-ce/config.d/05-ce-view.conf</code>:</p>
-<div class="codehilite"><pre><span></span><span class="nv">DAEMON_LIST</span> <span class="o">=</span> <span class="k">$(</span>DAEMON_LIST<span class="k">)</span>, CEVIEW, GANGLIAD, SCHEDD
+<div class="codehilite"><pre><span></span>DAEMON_LIST = $(DAEMON_LIST), CEVIEW, GANGLIAD, SCHEDD
 </pre></div>
 
 
@@ -2994,9 +2994,9 @@ To register your resource:</p>
 <p>Identify the facility, site, and resource group where your HTCondor-CE is hosted.
     For example, the Center for High Throughput Computing at the University of Wisconsin-Madison uses the following
     information:</p>
-<div class="codehilite"><pre><span></span><span class="n">Facility</span><span class="o">:</span> <span class="n">University</span> <span class="n">of</span> <span class="n">Wisconsin</span>
-<span class="n">Site</span><span class="o">:</span> <span class="n">CHTC</span>
-<span class="n">Resource</span> <span class="n">Group</span><span class="o">:</span> <span class="n">CHTC</span>
+<div class="codehilite"><pre><span></span>Facility: University of Wisconsin
+Site: CHTC
+Resource Group: CHTC
 </pre></div>
 
 

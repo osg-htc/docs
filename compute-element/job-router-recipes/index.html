@@ -2824,7 +2824,7 @@ If the job meets the requirements of multiple routes,  the route that is chosen 
 </table>
 <p>If you're using HTCondor &gt;= 8.7.1 and would like to use round-robin matching, add the following text to a file in
 <code>/etc/condor-ce/config.d/</code>:</p>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ROUND_ROBIN_SELECTION</span> <span class="o">=</span> <span class="k">True</span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ROUND_ROBIN_SELECTION = True
 </pre></div>
 
 
@@ -2834,28 +2834,28 @@ If the job meets the requirements of multiple routes,  the route that is chosen 
 <p>The minimum requirements for a route are that you specify the type of batch system that jobs should be routed to and a name for each route. Default routes can be found in <code>/usr/share/condor-ce/config.d/02-ce-&lt;batch system&gt;-defaults.conf</code>, provided by the <code>osg-ce-&lt;batch system&gt;</code> packages.</p>
 <h4 id="batch-system">Batch system<a class="headerlink" href="#batch-system" title="Permanent link">&para;</a></h4>
 <p>Each route needs to indicate the type of batch system that jobs should be routed to. For HTCondor batch systems, the <code>TargetUniverse</code> attribute needs to be set to <code>5</code> or <code>"vanilla"</code>. For all other batch systems, the <code>TargetUniverse</code> attribute needs to be set to <code>9</code> or <code>"grid"</code> and the <code>GridResource</code> attribute needs to be set to <code>"batch &lt;batch system&gt;"</code> (where <code>&lt;batch system&gt;</code> can be one of <code>pbs</code>, <code>slurm</code>, <code>lsf</code>, or <code>sge</code>).</p>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ENTRIES</span><span class="w"> </span><span class="err">@</span><span class="o">=</span><span class="n">jre</span><span class="w"></span>
-<span class="o">[</span><span class="n"></span>
-<span class="n">  <span style="color:red">TargetUniverse = 5;</span></span>
-<span class="n">  name = &quot;Route jobs to HTCondor&quot;;</span>
-<span class="o">]</span><span class="w"></span>
-<span class="o">[</span><span class="n"></span>
-<span class="n">  <span style="color:red">GridResource = &quot;batch pbs&quot;;</span></span>
-<span class="n">  <span style="color:red">TargetUniverse = 9;</span></span>
-<span class="n">  name = &quot;Route jobs to PBS&quot;;</span>
-<span class="o">]</span><span class="w"></span>
-<span class="nv">@jre</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+[
+  <span style="color:red">TargetUniverse = 5;</span>
+  name = &quot;Route jobs to HTCondor&quot;;
+]
+[
+  <span style="color:red">GridResource = &quot;batch pbs&quot;;</span>
+  <span style="color:red">TargetUniverse = 9;</span>
+  name = &quot;Route jobs to PBS&quot;;
+]
+@jre
 </pre></div>
 
 
 <h4 id="route-name">Route name<a class="headerlink" href="#route-name" title="Permanent link">&para;</a></h4>
 <p>To identify routes, you will need to assign a name to the route with the <code>name</code> attribute:</p>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ENTRIES</span><span class="w"> </span><span class="err">@</span><span class="o">=</span><span class="n">jre</span><span class="w"></span>
-<span class="o">[</span><span class="n"></span>
-<span class="n">  TargetUniverse = 5;</span>
-<span class="n">  <span style="color:red">name = &quot;Route jobs to HTCondor&quot;;</span></span>
-<span class="o">]</span><span class="w"></span>
-<span class="nv">@jre</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+[
+  TargetUniverse = 5;
+  <span style="color:red">name = &quot;Route jobs to HTCondor&quot;;</span>
+]
+@jre
 </pre></div>
 
 
@@ -2870,57 +2870,57 @@ you will need to write multiple job routes where each route is enclosed by squar
 The following routes takes incoming jobs that have a <code>queue</code> attribute set to <code>"analy"</code> and routes them to the site's
 HTCondor batch system.
 Any other jobs will be sent to that site's PBS batch system.</p>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ENTRIES</span><span class="w"> </span><span class="err">@</span><span class="o">=</span><span class="n">jre</span><span class="w"></span>
-<span class="o">%</span><span class="n">RED</span><span class="o">%[</span><span class="n"></span></span>
-<span class="n">  TargetUniverse = 5;</span>
-<span class="n">  name = &quot;Route jobs to HTCondor&quot;;</span>
-<span class="n">  Requirements = (TARGET.queue =?= &quot;analy&quot;);</span>
-<span class="n"><span style="color:red"></span><span class="o">]</span><span class="w"></span>
-<span class="o">[</span><span class="n"></span></span>
-<span class="n">  GridResource = &quot;batch pbs&quot;;</span>
-<span class="n">  TargetUniverse = 9;</span>
-<span class="n">  name = &quot;Route jobs to PBS&quot;;</span>
-<span class="n">  Requirements = (TARGET.queue =!= &quot;analy&quot;);</span>
-<span class="n"><span style="color:red"></span><span class="o">]%</span><span class="n">ENDCOLOR</span><span class="o">%</span><span class="w"></span>
-<span class="nv">@jre</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+<span style="color:red">[</span>
+  TargetUniverse = 5;
+  name = &quot;Route jobs to HTCondor&quot;;
+  Requirements = (TARGET.queue =?= &quot;analy&quot;);
+<span style="color:red">]
+[</span>
+  GridResource = &quot;batch pbs&quot;;
+  TargetUniverse = 9;
+  name = &quot;Route jobs to PBS&quot;;
+  Requirements = (TARGET.queue =!= &quot;analy&quot;);
+<span style="color:red">]</span>
+@jre
 </pre></div>
 
 
 <h3 id="writing-comments">Writing comments<a class="headerlink" href="#writing-comments" title="Permanent link">&para;</a></h3>
 <p>To write comments you can use <code>#</code> to comment a line:</p>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ENTRIES</span><span class="w"> </span><span class="err">@</span><span class="o">=</span><span class="n">jre</span><span class="w"></span>
-<span class="o">[</span><span class="n"></span>
-<span class="n">  TargetUniverse = 5;</span>
-<span class="n">  name = &quot;# comments&quot;;</span>
-<span class="n">  # This is a comment</span>
-<span class="o">]</span><span class="w"></span>
-<span class="nv">@jre</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+[
+  TargetUniverse = 5;
+  name = &quot;# comments&quot;;
+  # This is a comment
+]
+@jre
 </pre></div>
 
 
 <h3 id="setting-attributes-for-all-routes">Setting attributes for all routes<a class="headerlink" href="#setting-attributes-for-all-routes" title="Permanent link">&para;</a></h3>
 <p>To set an attribute that will be applied to all routes, you will need to ensure that <code>MERGE_JOB_ROUTER_DEFAULT_ADS</code> is set to <code>True</code> (check the value with <a href="../troubleshoot-htcondor-ce#condor_ce_config_val">condor_ce_config_val</a>) and use the <a href="#setting-attributes">set_</a> function in the <code>JOB_ROUTER_DEFAULTS</code>. The following configuration sets the <code>Periodic_Hold</code> attribute for all routes:</p>
-<div class="codehilite"><pre><span></span><span class="c"># Use the defaults generated by the condor_ce_router_defaults script.  To add</span>
-<span class="c"># additional defaults, add additional lines of the form:</span>
-<span class="c">#</span>
-<span class="c">#   JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) [set_foo = 1;]</span>
-<span class="c">#</span>
-<span class="nv">MERGE_JOB_ROUTER_DEFAULT_ADS</span><span class="o">=</span>True
-<span class="nv">JOB_ROUTER_DEFAULTS</span> <span class="o">=</span> <span class="k">$(</span>JOB_ROUTER_DEFAULTS<span class="k">)</span> <span style="color:red"><span class="o">[</span><span class="nv">set_Periodic_Hold</span> <span class="o">=</span> <span class="o">(</span>NumJobStarts &gt;<span class="o">=</span> <span class="m">1</span> <span class="o">&amp;&amp;</span> <span class="nv">JobStatus</span> <span class="o">==</span> <span class="m">1</span><span class="o">)</span> <span class="o">||</span> NumJobStarts &gt; <span class="m">1</span><span class="p">;</span><span class="o">]</span></span>
+<div class="codehilite"><pre><span></span># Use the defaults generated by the condor_ce_router_defaults script.  To add
+# additional defaults, add additional lines of the form:
+#
+#   JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) [set_foo = 1;]
+#
+MERGE_JOB_ROUTER_DEFAULT_ADS=True
+JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) <span style="color:red">[set_Periodic_Hold = (NumJobStarts &gt;= 1 &amp;&amp; JobStatus == 1) || NumJobStarts &gt; 1;]</span>
 </pre></div>
 
 
 <h3 id="filtering-jobs-based-on">Filtering jobs based on…<a class="headerlink" href="#filtering-jobs-based-on" title="Permanent link">&para;</a></h3>
 <p>To filter jobs, use the <code>Requirements</code> attribute. Jobs will evaluate against the ClassAd expression set in the <code>Requirements</code> and if the expression evaluates to <code>TRUE</code>, the route will match. More information on the syntax of ClassAd's can be found in the <a href="http://research.cs.wisc.edu/htcondor/manual/v8.6/4_1HTCondor_s_ClassAd.html">HTCondor manual</a>. For an example on how incoming jobs interact with filtering in job routes, consult <a href="../../compute-element/submit-htcondor-ce">this document</a>.</p>
 <p>When setting requirements, you need to prefix job attributes that you are filtering with <code>TARGET.</code> so that the job route knows to compare the attribute of the incoming job rather than the route’s own attribute. For example, if an incoming job has a <code>queue = "analy"</code> attribute, then the following job route will not match:</p>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ENTRIES</span><span class="w"> </span><span class="err">@</span><span class="o">=</span><span class="n">jre</span><span class="w"></span>
-<span class="o">[</span><span class="n"></span>
-<span class="n">  TargetUniverse = 5;</span>
-<span class="n">  name = &quot;Filtering by queue&quot;;</span>
-<span class="n">  queue = &quot;not-analy&quot;;</span>
-<span class="n">  <span style="color:red">Requirements = (queue =?= &quot;analy&quot;);</span></span>
-<span class="o">]</span><span class="w"></span>
-<span class="nv">@jre</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+[
+  TargetUniverse = 5;
+  name = &quot;Filtering by queue&quot;;
+  queue = &quot;not-analy&quot;;
+  <span style="color:red">Requirements = (queue =?= &quot;analy&quot;);</span>
+]
+@jre
 </pre></div>
 
 
@@ -2935,50 +2935,50 @@ Any other jobs will be sent to that site's PBS batch system.</p>
 </div>
 <h4 id="glidein-queue">Glidein queue<a class="headerlink" href="#glidein-queue" title="Permanent link">&para;</a></h4>
 <p>To filter jobs based on their glidein queue attribute, your routes will need a <code>Requirements</code> expression using the incoming job's <code>queue</code> attribute. The following entry routes jobs to PBS if the incoming job (specified by <code>TARGET</code>) is an <code>analy</code> (Analysis) glidein:</p>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ENTRIES</span><span class="w"> </span><span class="err">@</span><span class="o">=</span><span class="n">jre</span><span class="w"></span>
-<span class="o">[</span><span class="n"></span>
-<span class="n">  TargetUniverse = 5;</span>
-<span class="n">  name = &quot;Filtering by queue&quot;;</span>
-<span class="n">  <span style="color:red">Requirements = (TARGET.queue =?= &quot;analy&quot;);</span></span>
-<span class="o">]</span><span class="w"></span>
-<span class="nv">@jre</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+[
+  TargetUniverse = 5;
+  name = &quot;Filtering by queue&quot;;
+  <span style="color:red">Requirements = (TARGET.queue =?= &quot;analy&quot;);</span>
+]
+@jre
 </pre></div>
 
 
 <h4 id="job-submitter">Job submitter<a class="headerlink" href="#job-submitter" title="Permanent link">&para;</a></h4>
 <p>To filter jobs based on who submitted it, your routes will need a <code>Requirements</code> expression using the incoming job's <code>Owner</code> attribute. The following entry routes jobs to the HTCondor batch system if the submitter is <code>usatlas2</code>:</p>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ENTRIES</span><span class="w"> </span><span class="err">@</span><span class="o">=</span><span class="n">jre</span><span class="w"></span>
-<span class="o">[</span><span class="n"></span>
-<span class="n">  TargetUniverse = 5;</span>
-<span class="n">  name = &quot;Filtering by job submitter&quot;;</span>
-<span class="n">  <span style="color:red">Requirements = (TARGET.Owner =?= &quot;usatlas2&quot;);</span></span>
-<span class="o">]</span><span class="w"></span>
-<span class="nv">@jre</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+[
+  TargetUniverse = 5;
+  name = &quot;Filtering by job submitter&quot;;
+  <span style="color:red">Requirements = (TARGET.Owner =?= &quot;usatlas2&quot;);</span>
+]
+@jre
 </pre></div>
 
 
 <p>Alternatively, you can match based on regular expression. The following entry routes jobs to the PBS batch system if the submitter's name begins with <code>usatlas</code>:</p>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ENTRIES</span><span class="w"> </span><span class="err">@</span><span class="o">=</span><span class="n">jre</span><span class="w"></span>
-<span class="o">[</span><span class="n"></span>
-<span class="n">  GridResource = &quot;batch pbs&quot;;</span>
-<span class="n">  TargetUniverse = 9;</span>
-<span class="n">  name = &quot;Filtering by job submitter (regular expression)&quot;;</span>
-<span class="n">  <span style="color:red">Requirements = regexp(&quot;^usatlas&quot;, TARGET.Owner);</span></span>
-<span class="o">]</span><span class="w"></span>
-<span class="nv">@jre</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+[
+  GridResource = &quot;batch pbs&quot;;
+  TargetUniverse = 9;
+  name = &quot;Filtering by job submitter (regular expression)&quot;;
+  <span style="color:red">Requirements = regexp(&quot;^usatlas&quot;, TARGET.Owner);</span>
+]
+@jre
 </pre></div>
 
 
 <h4 id="voms-attribute">VOMS attribute<a class="headerlink" href="#voms-attribute" title="Permanent link">&para;</a></h4>
 <p>To filter jobs based on the subject of the job's proxy, your routes will need a <code>Requirements</code> expression using the incoming job's <code>x509UserProxyFirstFQAN</code> attribute. The following entry routes jobs to the PBS batch system if the proxy subject contains <code>/cms/Role=Pilot</code>:</p>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ENTRIES</span><span class="w"> </span><span class="err">@</span><span class="o">=</span><span class="n">jre</span><span class="w"></span>
-<span class="o">[</span><span class="n"></span>
-<span class="n">  GridResource = &quot;batch pbs&quot;;</span>
-<span class="n">  TargetUniverse = 9;</span>
-<span class="n">  name = &quot;Filtering by VOMS attribute (regex)&quot;;</span>
-<span class="n">  <span style="color:red">Requirements = regexp(&quot;\/cms\/Role\=pilot&quot;, TARGET.x509UserProxyFirstFQAN);</span></span>
-<span class="o">]</span><span class="w"></span>
-<span class="nv">@jre</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+[
+  GridResource = &quot;batch pbs&quot;;
+  TargetUniverse = 9;
+  name = &quot;Filtering by VOMS attribute (regex)&quot;;
+  <span style="color:red">Requirements = regexp(&quot;\/cms\/Role\=pilot&quot;, TARGET.x509UserProxyFirstFQAN);</span>
+]
+@jre
 </pre></div>
 
 
@@ -2986,7 +2986,7 @@ Any other jobs will be sent to that site's PBS batch system.</p>
 <p>This section outlines how to set default job limits, memory, cores, and maximum walltime. For an example on how users can override these defaults, consult <a href="../submit-htcondor-ce#route-defaults">this document</a>.</p>
 <h4 id="maximum-number-of-jobs">Maximum number of jobs<a class="headerlink" href="#maximum-number-of-jobs" title="Permanent link">&para;</a></h4>
 <p>To set a default limit to the maximum number of jobs per route, you can edit the configuration variable <code>CONDORCE_MAX_JOBS</code> in <code>/etc/condor-ce/config.d/01-ce-router.conf</code>:</p>
-<div class="codehilite"><pre><span></span><span class="n">CONDORCE_MAX_JOBS</span> <span class="o">=</span> <span class="mi">10000</span>
+<div class="codehilite"><pre><span></span>CONDORCE_MAX_JOBS = 10000
 </pre></div>
 
 
@@ -2996,43 +2996,43 @@ Any other jobs will be sent to that site's PBS batch system.</p>
 </div>
 <h4 id="maximum-memory">Maximum memory<a class="headerlink" href="#maximum-memory" title="Permanent link">&para;</a></h4>
 <p>To set a default maximum memory (in MB) for routed jobs, set the attribute <code>default_maxMemory</code>:</p>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ENTRIES</span><span class="w"> </span><span class="err">@</span><span class="o">=</span><span class="n">jre</span><span class="w"></span>
-<span class="o">[</span><span class="n"></span>
-<span class="n">  GridResource = &quot;batch pbs&quot;;</span>
-<span class="n">  TargetUniverse = 9;</span>
-<span class="n">  name = &quot;Request memory&quot;;</span>
-<span class="n">  # Set the requested memory to 1 GB</span>
-<span class="n">  <span style="color:red">set_default_maxMemory = 1000;</span></span>
-<span class="o">]</span><span class="w"></span>
-<span class="nv">@jre</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+[
+  GridResource = &quot;batch pbs&quot;;
+  TargetUniverse = 9;
+  name = &quot;Request memory&quot;;
+  # Set the requested memory to 1 GB
+  <span style="color:red">set_default_maxMemory = 1000;</span>
+]
+@jre
 </pre></div>
 
 
 <h4 id="number-of-cores-to-request">Number of cores to request<a class="headerlink" href="#number-of-cores-to-request" title="Permanent link">&para;</a></h4>
 <p>To set a default number of cores for routed jobs, set the attribute <code>default_xcount</code>:</p>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ENTRIES</span><span class="w"> </span><span class="err">@</span><span class="o">=</span><span class="n">jre</span><span class="w"></span>
-<span class="o">[</span><span class="n"></span>
-<span class="n">  GridResource = &quot;batch pbs&quot;;</span>
-<span class="n">  TargetUniverse = 9;</span>
-<span class="n">  name = &quot;Request CPU&quot;;</span>
-<span class="n">  # Set the requested cores to 8</span>
-<span class="n">  <span style="color:red">set_default_xcount = 8;</span></span>
-<span class="o">]</span><span class="w"></span>
-<span class="nv">@jre</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+[
+  GridResource = &quot;batch pbs&quot;;
+  TargetUniverse = 9;
+  name = &quot;Request CPU&quot;;
+  # Set the requested cores to 8
+  <span style="color:red">set_default_xcount = 8;</span>
+]
+@jre
 </pre></div>
 
 
 <h4 id="maximum-walltime">Maximum walltime<a class="headerlink" href="#maximum-walltime" title="Permanent link">&para;</a></h4>
 <p>To set a default maximum walltime (in minutes) for routed jobs, set the attribute <code>default_maxWallTime</code>:</p>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ENTRIES</span><span class="w"> </span><span class="err">@</span><span class="o">=</span><span class="n">jre</span><span class="w"></span>
-<span class="o">[</span><span class="n"></span>
-<span class="n">  GridResource = &quot;batch pbs&quot;;</span>
-<span class="n">  TargetUniverse = 9;</span>
-<span class="n">  name = &quot;Setting WallTime&quot;;</span>
-<span class="n">  # Set the max walltime to 1 hr</span>
-<span class="n">  <span style="color:red">set_default_maxWallTime = 60;</span></span>
-<span class="o">]</span><span class="w"></span>
-<span class="nv">@jre</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+[
+  GridResource = &quot;batch pbs&quot;;
+  TargetUniverse = 9;
+  name = &quot;Setting WallTime&quot;;
+  # Set the max walltime to 1 hr
+  <span style="color:red">set_default_maxWallTime = 60;</span>
+]
+@jre
 </pre></div>
 
 
@@ -3048,40 +3048,40 @@ Any other jobs will be sent to that site's PBS batch system.</p>
 <p>More documentation can be found in the <a href="http://research.cs.wisc.edu/htcondor/manual/v8.6/5_4HTCondor_Job.html#SECTION00644000000000000000">HTCondor manual</a>.</p>
 <h4 id="copying-attributes">Copying attributes<a class="headerlink" href="#copying-attributes" title="Permanent link">&para;</a></h4>
 <p>To copy the value of an attribute of the incoming job to an attribute of the routed job, use <code>copy_</code>. The following route copies the <code>environment</code> attribute of the incoming job and sets the attribute <code>Original_Environment</code> on the routed job to the same value:</p>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ENTRIES</span><span class="w"> </span><span class="err">@</span><span class="o">=</span><span class="n">jre</span><span class="w"></span>
-<span class="o">[</span><span class="n"></span>
-<span class="n">  GridResource = &quot;batch pbs&quot;;</span>
-<span class="n">  TargetUniverse = 9;</span>
-<span class="n">  name = &quot;Copying attributes&quot;;</span>
-<span class="n">  <span style="color:red">copy_environment = &quot;Original_Environment&quot;;</span></span>
-<span class="o">]</span><span class="w"></span>
-<span class="nv">@jre</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+[
+  GridResource = &quot;batch pbs&quot;;
+  TargetUniverse = 9;
+  name = &quot;Copying attributes&quot;;
+  <span style="color:red">copy_environment = &quot;Original_Environment&quot;;</span>
+]
+@jre
 </pre></div>
 
 
 <h4 id="removing-attributes">Removing attributes<a class="headerlink" href="#removing-attributes" title="Permanent link">&para;</a></h4>
 <p>To remove an attribute of the incoming job from the routed job, use <code>delete_</code>. The following route removes the <code>environment</code> attribute from the routed job:</p>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ENTRIES</span><span class="w"> </span><span class="err">@</span><span class="o">=</span><span class="n">jre</span><span class="w"></span>
-<span class="o">[</span><span class="n"></span>
-<span class="n">  GridResource = &quot;batch pbs&quot;;</span>
-<span class="n">  TargetUniverse = 9;</span>
-<span class="n">  name = &quot;Copying attributes&quot;;</span>
-<span class="n">  <span style="color:red">delete_environment = True;</span></span>
-<span class="o">]</span><span class="w"></span>
-<span class="nv">@jre</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+[
+  GridResource = &quot;batch pbs&quot;;
+  TargetUniverse = 9;
+  name = &quot;Copying attributes&quot;;
+  <span style="color:red">delete_environment = True;</span>
+]
+@jre
 </pre></div>
 
 
 <h4 id="setting-attributes">Setting attributes<a class="headerlink" href="#setting-attributes" title="Permanent link">&para;</a></h4>
 <p>To set an attribute on the routed job, use <code>set_</code>. The following route sets the Job's <code>Rank</code> attribute to 5:</p>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ENTRIES</span><span class="w"> </span><span class="err">@</span><span class="o">=</span><span class="n">jre</span><span class="w"></span>
-<span class="o">[</span><span class="n"></span>
-<span class="n">  GridResource = &quot;batch pbs&quot;;</span>
-<span class="n">  TargetUniverse = 9;</span>
-<span class="n">  name = &quot;Setting an attribute&quot;;</span>
-<span class="n">  <span style="color:red">set_Rank = 5;</span></span>
-<span class="o">]</span><span class="w"></span>
-<span class="nv">@jre</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+[
+  GridResource = &quot;batch pbs&quot;;
+  TargetUniverse = 9;
+  name = &quot;Setting an attribute&quot;;
+  <span style="color:red">set_Rank = 5;</span>
+]
+@jre
 </pre></div>
 
 
@@ -3091,14 +3091,14 @@ Any other jobs will be sent to that site's PBS batch system.</p>
 <p class="admonition-title">Note</p>
 <p>If a value is set in JOB_ROUTER_DEFAULTS with <code>eval_set_&lt;variable&gt;</code>, override it by using <code>eval_set_&lt;variable&gt;</code> in the <code>JOB_ROUTER_ENTRIES</code>.</p>
 </div>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ENTRIES</span><span class="w"> </span><span class="err">@</span><span class="o">=</span><span class="n">jre</span><span class="w"></span>
-<span class="o">[</span><span class="n"></span>
-<span class="n">  GridResource = &quot;batch pbs&quot;;</span>
-<span class="n">  TargetUniverse = 9;</span>
-<span class="n">  name = &quot;Setting an attribute with a !ClassAd expression&quot;;</span>
-<span class="n">  <span style="color:red">eval_set_Experiment = strcat(&quot;atlas.&quot;, Owner);</span></span>
-<span class="o">]</span><span class="w"></span>
-<span class="nv">@jre</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+[
+  GridResource = &quot;batch pbs&quot;;
+  TargetUniverse = 9;
+  name = &quot;Setting an attribute with a !ClassAd expression&quot;;
+  <span style="color:red">eval_set_Experiment = strcat(&quot;atlas.&quot;, Owner);</span>
+]
+@jre
 </pre></div>
 
 
@@ -3110,55 +3110,55 @@ Any other jobs will be sent to that site's PBS batch system.</p>
 </div>
 <h4 id="total-jobs">Total jobs<a class="headerlink" href="#total-jobs" title="Permanent link">&para;</a></h4>
 <p>To set a limit on the number of jobs for a specific route, set the <a href="http://research.cs.wisc.edu/htcondor/manual/v8.6/5_4HTCondor_Job.html#57134">MaxJobs</a> attribute:</p>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ENTRIES</span><span class="w"> </span><span class="err">@</span><span class="o">=</span><span class="n">jre</span><span class="w"></span>
-<span class="o">[</span><span class="n"></span>
-<span class="n">  GridResource = &quot;batch pbs&quot;;</span>
-<span class="n">  TargetUniverse = 9;</span>
-<span class="n">  name = &quot;Limit the total number of jobs to 100&quot;;</span>
-<span class="n">  <span style="color:red">MaxJobs = 100;</span></span>
-<span class="o">]</span><span class="w"></span>
-<span class="o">[</span><span class="n"></span>
-<span class="n">  GridResource = &quot;batch pbs&quot;;</span>
-<span class="n">  TargetUniverse = 9;</span>
-<span class="n">  name = &quot;Limit the total number of jobs to 75&quot;;</span>
-<span class="n">  <span style="color:red">MaxJobs = 75;</span></span>
-<span class="o">]</span><span class="w"></span>
-<span class="nv">@jre</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+[
+  GridResource = &quot;batch pbs&quot;;
+  TargetUniverse = 9;
+  name = &quot;Limit the total number of jobs to 100&quot;;
+  <span style="color:red">MaxJobs = 100;</span>
+]
+[
+  GridResource = &quot;batch pbs&quot;;
+  TargetUniverse = 9;
+  name = &quot;Limit the total number of jobs to 75&quot;;
+  <span style="color:red">MaxJobs = 75;</span>
+]
+@jre
 </pre></div>
 
 
 <h4 id="idle-jobs">Idle jobs<a class="headerlink" href="#idle-jobs" title="Permanent link">&para;</a></h4>
 <p>To set a limit on the number of idle jobs for a specific route, set the <a href="http://research.cs.wisc.edu/htcondor/manual/v8.6/5_4HTCondor_Job.html#57135">MaxIdleJobs</a> attribute:</p>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ENTRIES</span><span class="w"> </span><span class="err">@</span><span class="o">=</span><span class="n">jre</span><span class="w"></span>
-<span class="o">[</span><span class="n"></span>
-<span class="n">  TargetUniverse = 5;</span>
-<span class="n">  name = &quot;Limit the total number of idle jobs to 100&quot;;</span>
-<span class="n">  <span style="color:red">MaxIdleJobs = 100;</span></span>
-<span class="o">]</span><span class="w"></span>
-<span class="o">[</span><span class="n"></span>
-<span class="n">  TargetUniverse = 5;</span>
-<span class="n">  name = &quot;Limit the total number of idle jobs to 75&quot;;</span>
-<span class="n">  <span style="color:red">MaxIdleJobs = 75;</span></span>
-<span class="o">]</span><span class="w"></span>
-<span class="nv">@jre</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+[
+  TargetUniverse = 5;
+  name = &quot;Limit the total number of idle jobs to 100&quot;;
+  <span style="color:red">MaxIdleJobs = 100;</span>
+]
+[
+  TargetUniverse = 5;
+  name = &quot;Limit the total number of idle jobs to 75&quot;;
+  <span style="color:red">MaxIdleJobs = 75;</span>
+]
+@jre
 </pre></div>
 
 
 <h3 id="debugging-routes">Debugging routes<a class="headerlink" href="#debugging-routes" title="Permanent link">&para;</a></h3>
 <p>To help debug expressions in your routes, you can use the <code>debug()</code> function. First, set the debug mode for the JobRouter by editing a file in <code>/etc/condor-ce/config.d/</code> to read</p>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_DEBUG</span> <span class="o">=</span> <span class="n">D_ALWAYS</span><span class="p">:</span><span class="mi">2</span> <span class="n">D_CAT</span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_DEBUG = D_ALWAYS:2 D_CAT
 </pre></div>
 
 
 <p>Then wrap the problematic attribute in <code>debug()</code>:</p>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ENTRIES</span><span class="w"> </span><span class="err">@</span><span class="o">=</span><span class="n">jre</span><span class="w"></span>
-<span class="o">[</span><span class="n"></span>
-<span class="n">  GridResource = &quot;batch pbs&quot;;</span>
-<span class="n">  TargetUniverse = 9;</span>
-<span class="n">  name = &quot;Debugging a difficult !ClassAd expression&quot;;</span>
-<span class="n">  <span style="color:red">eval_set_Experiment = debug(strcat(&quot;atlas&quot;, Name));</span></span>
-<span class="o">]</span><span class="w"></span>
-<span class="nv">@jre</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+[
+  GridResource = &quot;batch pbs&quot;;
+  TargetUniverse = 9;
+  name = &quot;Debugging a difficult !ClassAd expression&quot;;
+  <span style="color:red">eval_set_Experiment = debug(strcat(&quot;atlas&quot;, Name));</span>
+]
+@jre
 </pre></div>
 
 
@@ -3168,30 +3168,30 @@ Any other jobs will be sent to that site's PBS batch system.</p>
 <h3 id="setting-periodic-hold-release-or-remove">Setting periodic hold, release or remove<a class="headerlink" href="#setting-periodic-hold-release-or-remove" title="Permanent link">&para;</a></h3>
 <p>To release, remove or put a job on hold if it meets certain criteria, use the <code>PERIODIC_*</code> family of attributes. By default, periodic expressions are evaluated once every 300 seconds but this can be changed by setting <code>PERIODIC_EXPR_INTERVAL</code> in your CE's configuration.</p>
 <p>In this example, we set the routed job on hold if the job is idle and has been started at least once or if the job has tried to start more than once.  This will catch jobs which are starting and stopping multiple times.</p>
-<div class="codehilite"><pre><span></span><span class="nv">JOB_ROUTER_ENTRIES</span> @<span class="o">=</span><span class="nv">jre</span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
 [
-  <span class="nv">TargetUniverse</span> <span class="o">=</span> <span class="mi">5</span><span class="c1">;</span>
-  <span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">Setting periodic statements</span><span class="s2">&quot;</span><span class="c1">;</span>
-  <span class="o">%</span><span class="nv">RED</span><span class="o">%</span># <span class="nv">Puts</span> <span class="nv">the</span> <span class="nv">routed</span> <span class="nv">job</span> <span class="nv">on</span> <span class="nv">hold</span> <span class="k">if</span> <span class="nv">the</span> <span class="nv">job</span><span class="s1">&#39;</span><span class="s">s been idle and has been started at least once or if the job has tried to start more than once</span>
-  <span class="nv">set_Periodic_Hold</span> <span class="o">=</span> <span class="ss">(</span><span class="nv">NumJobStarts</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nv">JobStatus</span> <span class="o">==</span> <span class="mi">1</span><span class="ss">)</span> <span class="o">||</span> <span class="nv">NumJobStarts</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="c1">;</span>
-  # <span class="nv">Remove</span> <span class="nv">routed</span> <span class="nv">jobs</span> <span class="k">if</span> <span class="nv">their</span> <span class="nv">walltime</span> <span class="nv">is</span> <span class="nv">longer</span> <span class="nv">than</span> <span class="mi">3</span> <span class="nv">days</span> <span class="nv">and</span> <span class="mi">5</span> <span class="nv">minutes</span>
-  <span class="nv">set_Periodic_Remove</span> <span class="o">=</span> <span class="ss">(</span> <span class="nv">RemoteWallClockTime</span> <span class="o">&gt;</span> <span class="ss">(</span><span class="mi">3</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="mi">60</span><span class="ss">)</span> <span class="ss">)</span><span class="c1">;</span>
-  # <span class="nv">Release</span> <span class="nv">routed</span> <span class="nv">jobs</span> <span class="k">if</span> <span class="nv">the</span> <span class="nv">condor_starter</span> <span class="nv">couldn</span><span class="s1">&#39;</span><span class="s">t start the executable and </span><span class="s1">&#39;</span><span class="nv">VMGAHP_ERR_INTERNAL</span><span class="s1">&#39;</span><span class="s"> is in the HoldReason</span>
-  <span class="nv">set_Periodic_Release</span> <span class="o">=</span> <span class="nv">HoldReasonCode</span> <span class="o">==</span> <span class="mi">6</span> <span class="o">&amp;&amp;</span> <span class="nv">regexp</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">VMGAHP_ERR_INTERNAL</span><span class="s2">&quot;</span>, <span class="nv">HoldReason</span><span class="ss">)</span><span class="c1">;</span></span>
+  TargetUniverse = 5;
+  name = &quot;Setting periodic statements&quot;;
+  <span style="color:red"># Puts the routed job on hold if the job&#39;s been idle and has been started at least once or if the job has tried to start more than once
+  set_Periodic_Hold = (NumJobStarts &gt;= 1 &amp;&amp; JobStatus == 1) || NumJobStarts &gt; 1;
+  # Remove routed jobs if their walltime is longer than 3 days and 5 minutes
+  set_Periodic_Remove = ( RemoteWallClockTime &gt; (3*24*60*60 + 5*60) );
+  # Release routed jobs if the condor_starter couldn&#39;t start the executable and &#39;VMGAHP_ERR_INTERNAL&#39; is in the HoldReason
+  set_Periodic_Release = HoldReasonCode == 6 &amp;&amp; regexp(&quot;VMGAHP_ERR_INTERNAL&quot;, HoldReason);</span>
 ]
-@<span class="nv">jre</span>
+@jre
 </pre></div>
 
 
 <h3 id="setting-routed-job-requirements">Setting routed job requirements<a class="headerlink" href="#setting-routed-job-requirements" title="Permanent link">&para;</a></h3>
 <p>If you need to set requirements on your routed job, you will need to use <code>set_Requirements</code> instead of <code>Requirements</code>. The <code>Requirements</code> attribute filters jobs coming into your CE into different job routes whereas <code>set_Requirements</code> will set conditions on the routed job that must be met by the worker node it lands on. For more information on requirements, consult the <a href="http://research.cs.wisc.edu/htcondor/manual/v8.6/2_5Submitting_Job.html#SECTION00357000000000000000">HTCondor manual</a>.</p>
 <p>To ensure that your job lands on a Linux machine in your pool:</p>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ENTRIES</span><span class="w"> </span><span class="err">@</span><span class="o">=</span><span class="n">jre</span><span class="w"></span>
-<span class="o">[</span><span class="n"></span>
-<span class="n">  TargetUniverse = 5;</span>
-<span class="n">  <span style="color:red">set_Requirements =  OpSys == &quot;LINUX&quot;;</span></span>
-<span class="o">]</span><span class="w"></span>
-<span class="nv">@jre</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+[
+  TargetUniverse = 5;
+  <span style="color:red">set_Requirements =  OpSys == &quot;LINUX&quot;;</span>
+]
+@jre
 </pre></div>
 
 
@@ -3201,31 +3201,31 @@ Any other jobs will be sent to that site's PBS batch system.</p>
 <p>This section contains information about job routes that can be used if you are running a non-HTCondor batch system at your site.</p>
 <h3 id="setting-a-default-batch-queue">Setting a default batch queue<a class="headerlink" href="#setting-a-default-batch-queue" title="Permanent link">&para;</a></h3>
 <p>To set a default queue for routed jobs, set the attribute <code>default_queue</code>:</p>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ENTRIES</span><span class="w"> </span><span class="err">@</span><span class="o">=</span><span class="n">jre</span><span class="w"></span>
-<span class="o">[</span><span class="n"></span>
-<span class="n">  GridResource = &quot;batch pbs&quot;;</span>
-<span class="n">  TargetUniverse = 9;</span>
-<span class="n">  name = &quot;Setting batch system queues&quot;;</span>
-<span class="n">  <span style="color:red">set_default_queue = &quot;osg_queue&quot;;</span></span>
-<span class="o">]</span><span class="w"></span>
-<span class="nv">@jre</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+[
+  GridResource = &quot;batch pbs&quot;;
+  TargetUniverse = 9;
+  name = &quot;Setting batch system queues&quot;;
+  <span style="color:red">set_default_queue = &quot;osg_queue&quot;;</span>
+]
+@jre
 </pre></div>
 
 
 <h3 id="setting-batch-system-directives">Setting batch system directives<a class="headerlink" href="#setting-batch-system-directives" title="Permanent link">&para;</a></h3>
 <p>To write batch system directives that are not supported in the route examples above, you will need to edit the job submit script for your local batch system in <code>/etc/blahp/</code> (e.g., if your local batch system is PBS, edit <code>/etc/blahp/pbs_local_submit_attributes.sh</code>). This file is sourced during submit time and anything printed to stdout is appended to the batch system job submit script. ClassAd attributes can be passed from the routed job to the local submit attributes script via the <code>default_remote_cerequirements</code> attribute, which can take the following form:</p>
-<div class="codehilite"><pre><span></span><span class="n">default_remote_cerequirements</span> <span class="o">=</span> <span class="ss">&quot;foo == X &amp;&amp; bar == \&quot;</span><span class="n">Y</span><span class="err">\</span><span class="ss">&quot; &amp;&amp; ...&quot;</span>
+<div class="codehilite"><pre><span></span>default_remote_cerequirements = &quot;foo == X &amp;&amp; bar == \&quot;Y\&quot; &amp;&amp; ...&quot;
 </pre></div>
 
 
 <p>This sets <code>foo</code> to value <code>X</code> and <code>bar</code> to the string <code>Y</code> (escaped double-quotes are required for string values) in the environment of the local submit attributes script. The following example sets the maximum walltime to 1 hour and the accounting group to the <code>x509UserProxyFirstFQAN</code> attribute of the job submitted to a PBS batch system</p>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ENTRIES</span><span class="w"> </span><span class="err">@</span><span class="o">=</span><span class="n">jre</span><span class="w"> </span><span class="o">[</span><span class="n"></span>
-<span class="n">     GridResource = &quot;batch pbs&quot;;</span>
-<span class="n">     TargetUniverse = 9;</span>
-<span class="n">     name = &quot;Setting job submit variables&quot;;</span>
-<span class="n">     <span style="color:red">set_default_remote_cerequirements = strcat(&quot;Walltime == 3600 &amp;&amp; AccountingGroup ==&quot;&quot;, x509UserProxyFirstFQAN, &quot;\&quot;&quot;);</span></span>
-<span class="o">]</span><span class="w"></span>
-<span class="nv">@jre</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre [
+     GridResource = &quot;batch pbs&quot;;
+     TargetUniverse = 9;
+     name = &quot;Setting job submit variables&quot;;
+     <span style="color:red">set_default_remote_cerequirements = strcat(&quot;Walltime == 3600 &amp;&amp; AccountingGroup ==&quot;&quot;, x509UserProxyFirstFQAN, &quot;\&quot;&quot;);</span>
+]
+@jre
 </pre></div>
 
 
@@ -3239,8 +3239,8 @@ Any other jobs will be sent to that site's PBS batch system.</p>
 </td></tr></table>
 
 <p>This results in the following being appended to the script that gets submitted to your batch system:</p>
-<div class="codehilite"><pre><span></span><span class="o">#</span><span class="n">PBS</span> <span class="o">-</span><span class="n">l</span> <span class="n">walltime</span><span class="o">=</span><span class="mi">3600</span>
-<span class="o">#</span><span class="n">PBS</span> <span class="o">-</span><span class="n">A</span> <span class="o">%</span><span class="n">RED</span><span class="o">%&lt;</span><span class="n">CE</span> <span class="n">job</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">x509UserProxyFirstFQAN</span> <span class="n">attribute</span><span class="o">&gt;%</span><span class="n">ENDCOLOR</span><span class="o">%</span>
+<div class="codehilite"><pre><span></span>#PBS -l walltime=3600
+#PBS -A <span style="color:red">&lt;CE job&#39;s x509UserProxyFirstFQAN attribute&gt;</span>
 </pre></div>
 
 
@@ -3260,182 +3260,182 @@ Any other jobs will be sent to that site's PBS batch system.</p>
 <li>There is a difference between <code>Requirements</code> and <code>set_requirements</code>. The <code>Requirements</code> attribute matches jobs to specific routes while the <code>set_requirements</code> sets the <code>Requirements</code> attribute on the <em>routed</em> job, which confines which machines that the routed job can land on.</li>
 </ul>
 <p>Source: <a href="https://www.aglt2.org/wiki/bin/view/AGLT2/CondorCE#The_JobRouter_configuration_file_content">https://www.aglt2.org/wiki/bin/view/AGLT2/CondorCE#The_JobRouter_configuration_file_content</a></p>
-<div class="codehilite"><pre><span></span><span class="nv">JOB_ROUTER_ENTRIES</span> @<span class="o">=</span><span class="nv">jre</span>
-# <span class="nv">Still</span> <span class="nv">to</span> <span class="k">do</span> <span class="nv">on</span> <span class="nv">all</span> <span class="nv">routes</span>, <span class="nv">get</span> <span class="nv">job</span> <span class="nv">requirements</span> <span class="nv">and</span> <span class="nv">add</span> <span class="nv">them</span> <span class="nv">here</span>
-# <span class="nv">Route</span> <span class="nv">no</span> <span class="mi">1</span>
-# <span class="nv">Analysis</span> <span class="nv">queue</span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+# Still to do on all routes, get job requirements and add them here
+# Route no 1
+# Analysis queue
   [
-    <span class="nv">GridResource</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">condor localhost localhost</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">eval_set_GridResource</span> <span class="o">=</span> <span class="nv">strcat</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">condor </span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s">$(FULL_HOSTNAME)</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s"> $(JOB_ROUTER_SCHEDD2_POOL)</span><span class="s2">&quot;</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">Requirements</span> <span class="o">=</span> <span class="nv">target</span>.<span class="nv">queue</span><span class="o">==</span><span class="s2">&quot;</span><span class="s">analy</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">Name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">Analysis Queue</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">TargetUniverse</span> <span class="o">=</span> <span class="mi">5</span><span class="c1">;</span>
-    <span class="nv">eval_set_IdleMP8Pressure</span> <span class="o">=</span> $<span class="ss">(</span><span class="nv">IdleMP8Pressure</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">eval_set_LastAndFrac</span> <span class="o">=</span> $<span class="ss">(</span><span class="nv">LastAndFrac</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">set_requirements</span> <span class="o">=</span> <span class="ss">(</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">TotalDisk</span> <span class="o">=</span>?<span class="o">=</span> <span class="nv">undefined</span> <span class="ss">)</span> <span class="o">||</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">TotalDisk</span> <span class="o">&gt;=</span> <span class="mi">21000000</span> <span class="ss">)</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Arch</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">X86_64</span><span class="s2">&quot;</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">OpSys</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">LINUX</span><span class="s2">&quot;</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Disk</span> <span class="o">&gt;=</span> <span class="nv">RequestDisk</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Memory</span> <span class="o">&gt;=</span> <span class="nv">RequestMemory</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">HasFileTransfer</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span><span class="nv">IfThenElse</span><span class="ss">((</span><span class="nv">Owner</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">atlasconnect</span><span class="s2">&quot;</span> <span class="o">||</span> <span class="nv">Owner</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">muoncal</span><span class="s2">&quot;</span><span class="ss">)</span>,<span class="nv">IfThenElse</span><span class="ss">(</span><span class="nv">IdleMP8Pressure</span>,<span class="ss">(</span><span class="nv">TARGET</span>.<span class="nv">PARTITIONED</span> <span class="o">=!=</span> <span class="nv">TRUE</span><span class="ss">)</span>,<span class="nv">True</span><span class="ss">)</span>,<span class="nv">IfThenElse</span><span class="ss">(</span><span class="nv">LastAndFrac</span>,<span class="ss">(</span><span class="nv">TARGET</span>.<span class="nv">PARTITIONED</span> <span class="o">=!=</span> <span class="nv">TRUE</span><span class="ss">)</span>,<span class="nv">True</span><span class="ss">)))</span><span class="c1">;</span>
-    <span class="nv">eval_set_AccountingGroup</span> <span class="o">=</span> <span class="nv">strcat</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">group_gatekpr.prod.analy.</span><span class="s2">&quot;</span>,<span class="nv">Owner</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">set_localQue</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">Analysis</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">set_IsAnalyJob</span> <span class="o">=</span> <span class="nv">True</span><span class="c1">;</span>
-    <span class="nv">set_JobPrio</span> <span class="o">=</span> <span class="mi">5</span><span class="c1">;</span>
-    <span class="nv">set_Rank</span> <span class="o">=</span> <span class="ss">(</span><span class="nv">SlotID</span> <span class="o">+</span> <span class="ss">(</span><span class="mi">64</span><span class="o">-</span><span class="nv">TARGET</span>.<span class="nv">DETECTED_CORES</span><span class="ss">))</span><span class="o">*</span><span class="mi">1</span>.<span class="mi">0</span><span class="c1">;</span>
-    <span class="nv">set_JobMemoryLimit</span> <span class="o">=</span> <span class="mi">4194000</span><span class="c1">;</span>
-    <span class="nv">set_Periodic_Remove</span> <span class="o">=</span> <span class="ss">(</span> <span class="ss">(</span> <span class="nv">RemoteWallClockTime</span> <span class="o">&gt;</span> <span class="ss">(</span><span class="mi">3</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="mi">60</span><span class="ss">)</span> <span class="ss">)</span> <span class="o">||</span> <span class="ss">(</span><span class="nv">ImageSize</span> <span class="o">&gt;</span> <span class="nv">JobMemoryLimit</span><span class="ss">)</span> <span class="ss">)</span><span class="c1">;</span>
+    GridResource = &quot;condor localhost localhost&quot;;
+    eval_set_GridResource = strcat(&quot;condor &quot;, &quot;$(FULL_HOSTNAME)&quot;, &quot; $(JOB_ROUTER_SCHEDD2_POOL)&quot;);
+    Requirements = target.queue==&quot;analy&quot;;
+    Name = &quot;Analysis Queue&quot;;
+    TargetUniverse = 5;
+    eval_set_IdleMP8Pressure = $(IdleMP8Pressure);
+    eval_set_LastAndFrac = $(LastAndFrac);
+    set_requirements = ( ( TARGET.TotalDisk =?= undefined ) || ( TARGET.TotalDisk &gt;= 21000000 ) ) &amp;&amp; ( TARGET.Arch == &quot;X86_64&quot; ) &amp;&amp; ( TARGET.OpSys == &quot;LINUX&quot; ) &amp;&amp; ( TARGET.Disk &gt;= RequestDisk ) &amp;&amp; ( TARGET.Memory &gt;= RequestMemory ) &amp;&amp; ( TARGET.HasFileTransfer ) &amp;&amp; (IfThenElse((Owner == &quot;atlasconnect&quot; || Owner == &quot;muoncal&quot;),IfThenElse(IdleMP8Pressure,(TARGET.PARTITIONED =!= TRUE),True),IfThenElse(LastAndFrac,(TARGET.PARTITIONED =!= TRUE),True)));
+    eval_set_AccountingGroup = strcat(&quot;group_gatekpr.prod.analy.&quot;,Owner);
+    set_localQue = &quot;Analysis&quot;;
+    set_IsAnalyJob = True;
+    set_JobPrio = 5;
+    set_Rank = (SlotID + (64-TARGET.DETECTED_CORES))*1.0;
+    set_JobMemoryLimit = 4194000;
+    set_Periodic_Remove = ( ( RemoteWallClockTime &gt; (3*24*60*60 + 5*60) ) || (ImageSize &gt; JobMemoryLimit) );
   ]
-# <span class="nv">Route</span> <span class="nv">no</span> <span class="mi">2</span>
-# <span class="nv">splitterNT</span> <span class="nv">queue</span>
+# Route no 2
+# splitterNT queue
   [
-    <span class="nv">GridResource</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">condor localhost localhost</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">eval_set_GridResource</span> <span class="o">=</span> <span class="nv">strcat</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">condor </span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s">$(FULL_HOSTNAME)</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s"> $(JOB_ROUTER_SCHEDD2_POOL)</span><span class="s2">&quot;</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">Requirements</span> <span class="o">=</span> <span class="nv">target</span>.<span class="nv">queue</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">splitterNT</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">Name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">Splitter ntuple queue</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">TargetUniverse</span> <span class="o">=</span> <span class="mi">5</span><span class="c1">;</span>
-    <span class="nv">set_requirements</span> <span class="o">=</span> <span class="ss">(</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">TotalDisk</span> <span class="o">=</span>?<span class="o">=</span> <span class="nv">undefined</span> <span class="ss">)</span> <span class="o">||</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">TotalDisk</span> <span class="o">&gt;=</span> <span class="mi">21000000</span> <span class="ss">)</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Arch</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">X86_64</span><span class="s2">&quot;</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">OpSys</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">LINUX</span><span class="s2">&quot;</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Disk</span> <span class="o">&gt;=</span> <span class="nv">RequestDisk</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Memory</span> <span class="o">&gt;=</span> <span class="nv">RequestMemory</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">HasFileTransfer</span> <span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">eval_set_AccountingGroup</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">group_calibrate.muoncal</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">set_localQue</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">Splitter</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">set_IsAnalyJob</span> <span class="o">=</span> <span class="nv">False</span><span class="c1">;</span>
-    <span class="nv">set_JobPrio</span> <span class="o">=</span> <span class="mi">10</span><span class="c1">;</span>
-    <span class="nv">set_Rank</span> <span class="o">=</span> <span class="ss">(</span><span class="nv">SlotID</span> <span class="o">+</span> <span class="ss">(</span><span class="mi">64</span><span class="o">-</span><span class="nv">TARGET</span>.<span class="nv">DETECTED_CORES</span><span class="ss">))</span><span class="o">*</span><span class="mi">1</span>.<span class="mi">0</span><span class="c1">;</span>
-    <span class="nv">set_JobMemoryLimit</span> <span class="o">=</span> <span class="mi">4194000</span><span class="c1">;</span>
-    <span class="nv">set_Periodic_Remove</span> <span class="o">=</span> <span class="ss">(</span> <span class="ss">(</span> <span class="nv">RemoteWallClockTime</span> <span class="o">&gt;</span> <span class="ss">(</span><span class="mi">3</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="mi">60</span><span class="ss">)</span> <span class="ss">)</span> <span class="o">||</span> <span class="ss">(</span><span class="nv">ImageSize</span> <span class="o">&gt;</span> <span class="nv">JobMemoryLimit</span><span class="ss">)</span> <span class="ss">)</span><span class="c1">;</span>
+    GridResource = &quot;condor localhost localhost&quot;;
+    eval_set_GridResource = strcat(&quot;condor &quot;, &quot;$(FULL_HOSTNAME)&quot;, &quot; $(JOB_ROUTER_SCHEDD2_POOL)&quot;);
+    Requirements = target.queue == &quot;splitterNT&quot;;
+    Name = &quot;Splitter ntuple queue&quot;;
+    TargetUniverse = 5;
+    set_requirements = ( ( TARGET.TotalDisk =?= undefined ) || ( TARGET.TotalDisk &gt;= 21000000 ) ) &amp;&amp; ( TARGET.Arch == &quot;X86_64&quot; ) &amp;&amp; ( TARGET.OpSys == &quot;LINUX&quot; ) &amp;&amp; ( TARGET.Disk &gt;= RequestDisk ) &amp;&amp; ( TARGET.Memory &gt;= RequestMemory ) &amp;&amp; ( TARGET.HasFileTransfer );
+    eval_set_AccountingGroup = &quot;group_calibrate.muoncal&quot;;
+    set_localQue = &quot;Splitter&quot;;
+    set_IsAnalyJob = False;
+    set_JobPrio = 10;
+    set_Rank = (SlotID + (64-TARGET.DETECTED_CORES))*1.0;
+    set_JobMemoryLimit = 4194000;
+    set_Periodic_Remove = ( ( RemoteWallClockTime &gt; (3*24*60*60 + 5*60) ) || (ImageSize &gt; JobMemoryLimit) );
   ]
-# <span class="nv">Route</span> <span class="nv">no</span> <span class="mi">3</span>
-# <span class="nv">splitter</span> <span class="nv">queue</span>
+# Route no 3
+# splitter queue
   [
-    <span class="nv">GridResource</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">condor localhost localhost</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">eval_set_GridResource</span> <span class="o">=</span> <span class="nv">strcat</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">condor </span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s">$(FULL_HOSTNAME)</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s"> $(JOB_ROUTER_SCHEDD2_POOL)</span><span class="s2">&quot;</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">Requirements</span> <span class="o">=</span> <span class="nv">target</span>.<span class="nv">queue</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">splitter</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">Name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">Splitter queue</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">TargetUniverse</span> <span class="o">=</span> <span class="mi">5</span><span class="c1">;</span>
-    <span class="nv">set_requirements</span> <span class="o">=</span> <span class="ss">(</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">TotalDisk</span> <span class="o">=</span>?<span class="o">=</span> <span class="nv">undefined</span> <span class="ss">)</span> <span class="o">||</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">TotalDisk</span> <span class="o">&gt;=</span> <span class="mi">21000000</span> <span class="ss">)</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Arch</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">X86_64</span><span class="s2">&quot;</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">OpSys</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">LINUX</span><span class="s2">&quot;</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Disk</span> <span class="o">&gt;=</span> <span class="nv">RequestDisk</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Memory</span> <span class="o">&gt;=</span> <span class="nv">RequestMemory</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">HasFileTransfer</span> <span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">eval_set_AccountingGroup</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">group_calibrate.muoncal</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">set_localQue</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">Splitter</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">set_IsAnalyJob</span> <span class="o">=</span> <span class="nv">False</span><span class="c1">;</span>
-    <span class="nv">set_JobPrio</span> <span class="o">=</span> <span class="mi">15</span><span class="c1">;</span>
-    <span class="nv">set_Rank</span> <span class="o">=</span> <span class="ss">(</span><span class="nv">SlotID</span> <span class="o">+</span> <span class="ss">(</span><span class="mi">64</span><span class="o">-</span><span class="nv">TARGET</span>.<span class="nv">DETECTED_CORES</span><span class="ss">))</span><span class="o">*</span><span class="mi">1</span>.<span class="mi">0</span><span class="c1">;</span>
-    <span class="nv">set_JobMemoryLimit</span> <span class="o">=</span> <span class="mi">4194000</span><span class="c1">;</span>
-    <span class="nv">set_Periodic_Remove</span> <span class="o">=</span> <span class="ss">(</span> <span class="ss">(</span> <span class="nv">RemoteWallClockTime</span> <span class="o">&gt;</span> <span class="ss">(</span><span class="mi">3</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="mi">60</span><span class="ss">)</span> <span class="ss">)</span> <span class="o">||</span> <span class="ss">(</span><span class="nv">ImageSize</span> <span class="o">&gt;</span> <span class="nv">JobMemoryLimit</span><span class="ss">)</span> <span class="ss">)</span><span class="c1">;</span>
+    GridResource = &quot;condor localhost localhost&quot;;
+    eval_set_GridResource = strcat(&quot;condor &quot;, &quot;$(FULL_HOSTNAME)&quot;, &quot; $(JOB_ROUTER_SCHEDD2_POOL)&quot;);
+    Requirements = target.queue == &quot;splitter&quot;;
+    Name = &quot;Splitter queue&quot;;
+    TargetUniverse = 5;
+    set_requirements = ( ( TARGET.TotalDisk =?= undefined ) || ( TARGET.TotalDisk &gt;= 21000000 ) ) &amp;&amp; ( TARGET.Arch == &quot;X86_64&quot; ) &amp;&amp; ( TARGET.OpSys == &quot;LINUX&quot; ) &amp;&amp; ( TARGET.Disk &gt;= RequestDisk ) &amp;&amp; ( TARGET.Memory &gt;= RequestMemory ) &amp;&amp; ( TARGET.HasFileTransfer );
+    eval_set_AccountingGroup = &quot;group_calibrate.muoncal&quot;;
+    set_localQue = &quot;Splitter&quot;;
+    set_IsAnalyJob = False;
+    set_JobPrio = 15;
+    set_Rank = (SlotID + (64-TARGET.DETECTED_CORES))*1.0;
+    set_JobMemoryLimit = 4194000;
+    set_Periodic_Remove = ( ( RemoteWallClockTime &gt; (3*24*60*60 + 5*60) ) || (ImageSize &gt; JobMemoryLimit) );
   ]
-# <span class="nv">Route</span> <span class="nv">no</span> <span class="mi">4</span>
-# <span class="nv">xrootd</span> <span class="nv">queue</span>
+# Route no 4
+# xrootd queue
   [
-    <span class="nv">GridResource</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">condor localhost localhost</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">eval_set_GridResource</span> <span class="o">=</span> <span class="nv">strcat</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">condor </span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s">$(FULL_HOSTNAME)</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s"> $(JOB_ROUTER_SCHEDD2_POOL)</span><span class="s2">&quot;</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">Requirements</span> <span class="o">=</span> <span class="nv">target</span>.<span class="nv">queue</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">xrootd</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">Name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">Xrootd queue</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">TargetUniverse</span> <span class="o">=</span> <span class="mi">5</span><span class="c1">;</span>
-    <span class="nv">set_requirements</span> <span class="o">=</span> <span class="ss">(</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">TotalDisk</span> <span class="o">=</span>?<span class="o">=</span> <span class="nv">undefined</span> <span class="ss">)</span> <span class="o">||</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">TotalDisk</span> <span class="o">&gt;=</span> <span class="mi">21000000</span> <span class="ss">)</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Arch</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">X86_64</span><span class="s2">&quot;</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">OpSys</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">LINUX</span><span class="s2">&quot;</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Disk</span> <span class="o">&gt;=</span> <span class="nv">RequestDisk</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Memory</span> <span class="o">&gt;=</span> <span class="nv">RequestMemory</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">HasFileTransfer</span> <span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">eval_set_AccountingGroup</span> <span class="o">=</span> <span class="nv">strcat</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">group_gatekpr.prod.analy.</span><span class="s2">&quot;</span>,<span class="nv">Owner</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">set_localQue</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">Analysis</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">set_IsAnalyJob</span> <span class="o">=</span> <span class="nv">True</span><span class="c1">;</span>
-    <span class="nv">set_JobPrio</span> <span class="o">=</span> <span class="mi">35</span><span class="c1">;</span>
-    <span class="nv">set_Rank</span> <span class="o">=</span> <span class="ss">(</span><span class="nv">SlotID</span> <span class="o">+</span> <span class="ss">(</span><span class="mi">64</span><span class="o">-</span><span class="nv">TARGET</span>.<span class="nv">DETECTED_CORES</span><span class="ss">))</span><span class="o">*</span><span class="mi">1</span>.<span class="mi">0</span><span class="c1">;</span>
-    <span class="nv">set_JobMemoryLimit</span> <span class="o">=</span> <span class="mi">4194000</span><span class="c1">;</span>
-    <span class="nv">set_Periodic_Remove</span> <span class="o">=</span> <span class="ss">(</span> <span class="ss">(</span> <span class="nv">RemoteWallClockTime</span> <span class="o">&gt;</span> <span class="ss">(</span><span class="mi">3</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="mi">60</span><span class="ss">)</span> <span class="ss">)</span> <span class="o">||</span> <span class="ss">(</span><span class="nv">ImageSize</span> <span class="o">&gt;</span> <span class="nv">JobMemoryLimit</span><span class="ss">)</span> <span class="ss">)</span><span class="c1">;</span>
+    GridResource = &quot;condor localhost localhost&quot;;
+    eval_set_GridResource = strcat(&quot;condor &quot;, &quot;$(FULL_HOSTNAME)&quot;, &quot; $(JOB_ROUTER_SCHEDD2_POOL)&quot;);
+    Requirements = target.queue == &quot;xrootd&quot;;
+    Name = &quot;Xrootd queue&quot;;
+    TargetUniverse = 5;
+    set_requirements = ( ( TARGET.TotalDisk =?= undefined ) || ( TARGET.TotalDisk &gt;= 21000000 ) ) &amp;&amp; ( TARGET.Arch == &quot;X86_64&quot; ) &amp;&amp; ( TARGET.OpSys == &quot;LINUX&quot; ) &amp;&amp; ( TARGET.Disk &gt;= RequestDisk ) &amp;&amp; ( TARGET.Memory &gt;= RequestMemory ) &amp;&amp; ( TARGET.HasFileTransfer );
+    eval_set_AccountingGroup = strcat(&quot;group_gatekpr.prod.analy.&quot;,Owner);
+    set_localQue = &quot;Analysis&quot;;
+    set_IsAnalyJob = True;
+    set_JobPrio = 35;
+    set_Rank = (SlotID + (64-TARGET.DETECTED_CORES))*1.0;
+    set_JobMemoryLimit = 4194000;
+    set_Periodic_Remove = ( ( RemoteWallClockTime &gt; (3*24*60*60 + 5*60) ) || (ImageSize &gt; JobMemoryLimit) );
   ]
-# <span class="nv">Route</span> <span class="nv">no</span> <span class="mi">5</span>
-# <span class="nv">Tier3Test</span> <span class="nv">queue</span>
+# Route no 5
+# Tier3Test queue
   [
-    <span class="nv">GridResource</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">condor localhost localhost</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">eval_set_GridResource</span> <span class="o">=</span> <span class="nv">strcat</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">condor </span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s">$(FULL_HOSTNAME)</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s"> $(JOB_ROUTER_SCHEDD2_POOL)</span><span class="s2">&quot;</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">Requirements</span> <span class="o">=</span> <span class="nv">target</span>.<span class="nv">queue</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">Tier3Test</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">Name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">Tier3 Test Queue</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">TargetUniverse</span> <span class="o">=</span> <span class="mi">5</span><span class="c1">;</span>
-    <span class="nv">set_requirements</span> <span class="o">=</span> <span class="ss">(</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">TotalDisk</span> <span class="o">=</span>?<span class="o">=</span> <span class="nv">undefined</span> <span class="ss">)</span> <span class="o">||</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">TotalDisk</span> <span class="o">&gt;=</span> <span class="mi">21000000</span> <span class="ss">)</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Arch</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">X86_64</span><span class="s2">&quot;</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">OpSys</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">LINUX</span><span class="s2">&quot;</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Disk</span> <span class="o">&gt;=</span> <span class="nv">RequestDisk</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Memory</span> <span class="o">&gt;=</span> <span class="nv">RequestMemory</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">HasFileTransfer</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">IS_TIER3_TEST_QUEUE</span> <span class="o">=</span>?<span class="o">=</span> <span class="nv">True</span> <span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">eval_set_AccountingGroup</span> <span class="o">=</span> <span class="nv">strcat</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">group_gatekpr.prod.analy.</span><span class="s2">&quot;</span>,<span class="nv">Owner</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">set_localQue</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">Tier3Test</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">set_IsTier3TestJob</span> <span class="o">=</span> <span class="nv">True</span><span class="c1">;</span>
-    <span class="nv">set_IsAnalyJob</span> <span class="o">=</span> <span class="nv">True</span><span class="c1">;</span>
-    <span class="nv">set_JobPrio</span> <span class="o">=</span> <span class="mi">20</span><span class="c1">;</span>
-    <span class="nv">set_Rank</span> <span class="o">=</span> <span class="ss">(</span><span class="nv">SlotID</span> <span class="o">+</span> <span class="ss">(</span><span class="mi">64</span><span class="o">-</span><span class="nv">TARGET</span>.<span class="nv">DETECTED_CORES</span><span class="ss">))</span><span class="o">*</span><span class="mi">1</span>.<span class="mi">0</span><span class="c1">;</span>
-    <span class="nv">set_JobMemoryLimit</span> <span class="o">=</span> <span class="mi">4194000</span><span class="c1">;</span>
-    <span class="nv">set_Periodic_Remove</span> <span class="o">=</span> <span class="ss">(</span> <span class="ss">(</span> <span class="nv">RemoteWallClockTime</span> <span class="o">&gt;</span> <span class="ss">(</span><span class="mi">3</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="mi">60</span><span class="ss">)</span> <span class="ss">)</span> <span class="o">||</span> <span class="ss">(</span><span class="nv">ImageSize</span> <span class="o">&gt;</span> <span class="nv">JobMemoryLimit</span><span class="ss">)</span> <span class="ss">)</span><span class="c1">;</span>
+    GridResource = &quot;condor localhost localhost&quot;;
+    eval_set_GridResource = strcat(&quot;condor &quot;, &quot;$(FULL_HOSTNAME)&quot;, &quot; $(JOB_ROUTER_SCHEDD2_POOL)&quot;);
+    Requirements = target.queue == &quot;Tier3Test&quot;;
+    Name = &quot;Tier3 Test Queue&quot;;
+    TargetUniverse = 5;
+    set_requirements = ( ( TARGET.TotalDisk =?= undefined ) || ( TARGET.TotalDisk &gt;= 21000000 ) ) &amp;&amp; ( TARGET.Arch == &quot;X86_64&quot; ) &amp;&amp; ( TARGET.OpSys == &quot;LINUX&quot; ) &amp;&amp; ( TARGET.Disk &gt;= RequestDisk ) &amp;&amp; ( TARGET.Memory &gt;= RequestMemory ) &amp;&amp; ( TARGET.HasFileTransfer ) &amp;&amp; ( IS_TIER3_TEST_QUEUE =?= True );
+    eval_set_AccountingGroup = strcat(&quot;group_gatekpr.prod.analy.&quot;,Owner);
+    set_localQue = &quot;Tier3Test&quot;;
+    set_IsTier3TestJob = True;
+    set_IsAnalyJob = True;
+    set_JobPrio = 20;
+    set_Rank = (SlotID + (64-TARGET.DETECTED_CORES))*1.0;
+    set_JobMemoryLimit = 4194000;
+    set_Periodic_Remove = ( ( RemoteWallClockTime &gt; (3*24*60*60 + 5*60) ) || (ImageSize &gt; JobMemoryLimit) );
   ]
-# <span class="nv">Route</span> <span class="nv">no</span> <span class="mi">6</span>
-# <span class="nv">mp8</span> <span class="nv">queue</span>
+# Route no 6
+# mp8 queue
   [
-    <span class="nv">GridResource</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">condor localhost localhost</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">eval_set_GridResource</span> <span class="o">=</span> <span class="nv">strcat</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">condor </span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s">$(FULL_HOSTNAME)</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s"> $(JOB_ROUTER_SCHEDD2_POOL)</span><span class="s2">&quot;</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">Requirements</span> <span class="o">=</span> <span class="nv">target</span>.<span class="nv">queue</span><span class="o">==</span><span class="s2">&quot;</span><span class="s">mp8</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">Name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">MCORE Queue</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">TargetUniverse</span> <span class="o">=</span> <span class="mi">5</span><span class="c1">;</span>
-    <span class="nv">set_requirements</span> <span class="o">=</span> <span class="ss">(</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">TotalDisk</span> <span class="o">=</span>?<span class="o">=</span> <span class="nv">undefined</span> <span class="ss">)</span> <span class="o">||</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">TotalDisk</span> <span class="o">&gt;=</span> <span class="mi">21000000</span> <span class="ss">)</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Arch</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">X86_64</span><span class="s2">&quot;</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">OpSys</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">LINUX</span><span class="s2">&quot;</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Disk</span> <span class="o">&gt;=</span> <span class="nv">RequestDisk</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Memory</span> <span class="o">&gt;=</span> <span class="nv">RequestMemory</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">HasFileTransfer</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">((</span> <span class="nv">TARGET</span>.<span class="nv">Cpus</span> <span class="o">==</span> <span class="mi">8</span> <span class="o">&amp;&amp;</span> <span class="nv">TARGET</span>.<span class="nv">CPU_TYPE</span> <span class="o">=</span>?<span class="o">=</span> <span class="s2">&quot;</span><span class="s">mp8</span><span class="s2">&quot;</span> <span class="ss">)</span> <span class="o">||</span> <span class="nv">TARGET</span>.<span class="nv">PARTITIONED</span> <span class="o">=</span>?<span class="o">=</span> <span class="nv">True</span> <span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">eval_set_AccountingGroup</span> <span class="o">=</span> <span class="nv">strcat</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">group_gatekpr.prod.mcore.</span><span class="s2">&quot;</span>,<span class="nv">Owner</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">set_localQue</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">MP8</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">set_IsAnalyJob</span> <span class="o">=</span> <span class="nv">False</span><span class="c1">;</span>
-    <span class="nv">set_JobPrio</span> <span class="o">=</span> <span class="mi">25</span><span class="c1">;</span>
-    <span class="nv">set_Rank</span> <span class="o">=</span> <span class="mi">0</span>.<span class="mi">0</span><span class="c1">;</span>
-    <span class="nv">eval_set_RequestCpus</span> <span class="o">=</span> <span class="mi">8</span><span class="c1">;</span>
-    <span class="nv">set_JobMemoryLimit</span> <span class="o">=</span> <span class="mi">33552000</span><span class="c1">;</span>
-    <span class="nv">set_Slot_Type</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">mp8</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">set_Periodic_Remove</span> <span class="o">=</span> <span class="ss">(</span> <span class="ss">(</span> <span class="nv">RemoteWallClockTime</span> <span class="o">&gt;</span> <span class="ss">(</span><span class="mi">3</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="mi">60</span><span class="ss">)</span> <span class="ss">)</span> <span class="o">||</span> <span class="ss">(</span><span class="nv">ImageSize</span> <span class="o">&gt;</span> <span class="nv">JobMemoryLimit</span><span class="ss">)</span> <span class="ss">)</span><span class="c1">;</span>
+    GridResource = &quot;condor localhost localhost&quot;;
+    eval_set_GridResource = strcat(&quot;condor &quot;, &quot;$(FULL_HOSTNAME)&quot;, &quot; $(JOB_ROUTER_SCHEDD2_POOL)&quot;);
+    Requirements = target.queue==&quot;mp8&quot;;
+    Name = &quot;MCORE Queue&quot;;
+    TargetUniverse = 5;
+    set_requirements = ( ( TARGET.TotalDisk =?= undefined ) || ( TARGET.TotalDisk &gt;= 21000000 ) ) &amp;&amp; ( TARGET.Arch == &quot;X86_64&quot; ) &amp;&amp; ( TARGET.OpSys == &quot;LINUX&quot; ) &amp;&amp; ( TARGET.Disk &gt;= RequestDisk ) &amp;&amp; ( TARGET.Memory &gt;= RequestMemory ) &amp;&amp; ( TARGET.HasFileTransfer ) &amp;&amp; (( TARGET.Cpus == 8 &amp;&amp; TARGET.CPU_TYPE =?= &quot;mp8&quot; ) || TARGET.PARTITIONED =?= True );
+    eval_set_AccountingGroup = strcat(&quot;group_gatekpr.prod.mcore.&quot;,Owner);
+    set_localQue = &quot;MP8&quot;;
+    set_IsAnalyJob = False;
+    set_JobPrio = 25;
+    set_Rank = 0.0;
+    eval_set_RequestCpus = 8;
+    set_JobMemoryLimit = 33552000;
+    set_Slot_Type = &quot;mp8&quot;;
+    set_Periodic_Remove = ( ( RemoteWallClockTime &gt; (3*24*60*60 + 5*60) ) || (ImageSize &gt; JobMemoryLimit) );
   ]
-# <span class="nv">Route</span> <span class="nv">no</span> <span class="mi">7</span>
-# <span class="nv">Installation</span> <span class="nv">queue</span>, <span class="nv">triggered</span> <span class="nv">by</span> <span class="nv">usatlas2</span> <span class="nv">user</span>
+# Route no 7
+# Installation queue, triggered by usatlas2 user
   [
-    <span class="nv">GridResource</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">condor localhost localhost</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">eval_set_GridResource</span> <span class="o">=</span> <span class="nv">strcat</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">condor </span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s">$(FULL_HOSTNAME)</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s"> $(JOB_ROUTER_SCHEDD2_POOL)</span><span class="s2">&quot;</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">Requirements</span> <span class="o">=</span> <span class="nv">target</span>.<span class="nv">queue</span> <span class="nv">is</span> <span class="nv">undefined</span> <span class="o">&amp;&amp;</span> <span class="nv">target</span>.<span class="nv">Owner</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">usatlas2</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">Name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">Install Queue</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">TargetUniverse</span> <span class="o">=</span> <span class="mi">5</span><span class="c1">;</span>
-    <span class="nv">set_requirements</span> <span class="o">=</span> <span class="ss">(</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">TotalDisk</span> <span class="o">=</span>?<span class="o">=</span> <span class="nv">undefined</span> <span class="ss">)</span> <span class="o">||</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">TotalDisk</span> <span class="o">&gt;=</span> <span class="mi">21000000</span> <span class="ss">)</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Arch</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">X86_64</span><span class="s2">&quot;</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">OpSys</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">LINUX</span><span class="s2">&quot;</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Disk</span> <span class="o">&gt;=</span> <span class="nv">RequestDisk</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Memory</span> <span class="o">&gt;=</span> <span class="nv">RequestMemory</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">HasFileTransfer</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">IS_INSTALL_QUE</span> <span class="o">=</span>?<span class="o">=</span> <span class="nv">True</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span><span class="nv">TARGET</span>.<span class="nv">AGLT2_SITE</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">UM</span><span class="s2">&quot;</span> <span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">eval_set_AccountingGroup</span> <span class="o">=</span> <span class="nv">strcat</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">group_gatekpr.other.</span><span class="s2">&quot;</span>,<span class="nv">Owner</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">set_localQue</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">Default</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">set_IsAnalyJob</span> <span class="o">=</span> <span class="nv">False</span><span class="c1">;</span>
-    <span class="nv">set_IsInstallJob</span> <span class="o">=</span> <span class="nv">True</span><span class="c1">;</span>
-    <span class="nv">set_JobPrio</span> <span class="o">=</span> <span class="mi">15</span><span class="c1">;</span>
-    <span class="nv">set_Rank</span> <span class="o">=</span> <span class="ss">(</span><span class="nv">SlotID</span> <span class="o">+</span> <span class="ss">(</span><span class="mi">64</span><span class="o">-</span><span class="nv">TARGET</span>.<span class="nv">DETECTED_CORES</span><span class="ss">))</span><span class="o">*</span><span class="mi">1</span>.<span class="mi">0</span><span class="c1">;</span>
-    <span class="nv">set_JobMemoryLimit</span> <span class="o">=</span> <span class="mi">4194000</span><span class="c1">;</span>
-    <span class="nv">set_Periodic_Remove</span> <span class="o">=</span> <span class="ss">(</span> <span class="ss">(</span> <span class="nv">RemoteWallClockTime</span> <span class="o">&gt;</span> <span class="ss">(</span><span class="mi">3</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="mi">60</span><span class="ss">)</span> <span class="ss">)</span> <span class="o">||</span> <span class="ss">(</span><span class="nv">ImageSize</span> <span class="o">&gt;</span> <span class="nv">JobMemoryLimit</span><span class="ss">)</span> <span class="ss">)</span><span class="c1">;</span>
+    GridResource = &quot;condor localhost localhost&quot;;
+    eval_set_GridResource = strcat(&quot;condor &quot;, &quot;$(FULL_HOSTNAME)&quot;, &quot; $(JOB_ROUTER_SCHEDD2_POOL)&quot;);
+    Requirements = target.queue is undefined &amp;&amp; target.Owner == &quot;usatlas2&quot;;
+    Name = &quot;Install Queue&quot;;
+    TargetUniverse = 5;
+    set_requirements = ( ( TARGET.TotalDisk =?= undefined ) || ( TARGET.TotalDisk &gt;= 21000000 ) ) &amp;&amp; ( TARGET.Arch == &quot;X86_64&quot; ) &amp;&amp; ( TARGET.OpSys == &quot;LINUX&quot; ) &amp;&amp; ( TARGET.Disk &gt;= RequestDisk ) &amp;&amp; ( TARGET.Memory &gt;= RequestMemory ) &amp;&amp; ( TARGET.HasFileTransfer ) &amp;&amp; ( TARGET.IS_INSTALL_QUE =?= True ) &amp;&amp; (TARGET.AGLT2_SITE == &quot;UM&quot; );
+    eval_set_AccountingGroup = strcat(&quot;group_gatekpr.other.&quot;,Owner);
+    set_localQue = &quot;Default&quot;;
+    set_IsAnalyJob = False;
+    set_IsInstallJob = True;
+    set_JobPrio = 15;
+    set_Rank = (SlotID + (64-TARGET.DETECTED_CORES))*1.0;
+    set_JobMemoryLimit = 4194000;
+    set_Periodic_Remove = ( ( RemoteWallClockTime &gt; (3*24*60*60 + 5*60) ) || (ImageSize &gt; JobMemoryLimit) );
   ]
-# <span class="nv">Route</span> <span class="nv">no</span> <span class="mi">8</span>
-# <span class="nv">Default</span> <span class="nv">queue</span> <span class="k">for</span> <span class="nv">usatlas1</span> <span class="nv">user</span>
+# Route no 8
+# Default queue for usatlas1 user
   [
-    <span class="nv">GridResource</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">condor localhost localhost</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">eval_set_GridResource</span> <span class="o">=</span> <span class="nv">strcat</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">condor </span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s">$(FULL_HOSTNAME)</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s"> $(JOB_ROUTER_SCHEDD2_POOL)</span><span class="s2">&quot;</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">Requirements</span> <span class="o">=</span> <span class="nv">target</span>.<span class="nv">queue</span> <span class="nv">is</span> <span class="nv">undefined</span> <span class="o">&amp;&amp;</span> <span class="nv">regexp</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">usatlas1</span><span class="s2">&quot;</span>,<span class="nv">target</span>.<span class="nv">Owner</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">Name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">ATLAS Production Queue</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">TargetUniverse</span> <span class="o">=</span> <span class="mi">5</span><span class="c1">;</span>
-    <span class="nv">set_requirements</span> <span class="o">=</span> <span class="ss">(</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">TotalDisk</span> <span class="o">=</span>?<span class="o">=</span> <span class="nv">undefined</span> <span class="ss">)</span> <span class="o">||</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">TotalDisk</span> <span class="o">&gt;=</span> <span class="mi">21000000</span> <span class="ss">)</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Arch</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">X86_64</span><span class="s2">&quot;</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">OpSys</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">LINUX</span><span class="s2">&quot;</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Disk</span> <span class="o">&gt;=</span> <span class="nv">RequestDisk</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Memory</span> <span class="o">&gt;=</span> <span class="nv">RequestMemory</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">HasFileTransfer</span> <span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">eval_set_AccountingGroup</span> <span class="o">=</span> <span class="nv">strcat</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">group_gatekpr.prod.prod.</span><span class="s2">&quot;</span>,<span class="nv">Owner</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">set_localQue</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">Default</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">set_IsAnalyJob</span> <span class="o">=</span> <span class="nv">False</span><span class="c1">;</span>
-    <span class="nv">set_Rank</span> <span class="o">=</span> <span class="ss">(</span><span class="nv">SlotID</span> <span class="o">+</span> <span class="ss">(</span><span class="mi">64</span><span class="o">-</span><span class="nv">TARGET</span>.<span class="nv">DETECTED_CORES</span><span class="ss">))</span><span class="o">*</span><span class="mi">1</span>.<span class="mi">0</span><span class="c1">;</span>
-    <span class="nv">set_JobMemoryLimit</span> <span class="o">=</span> <span class="mi">4194000</span><span class="c1">;</span>
-    <span class="nv">set_Periodic_Remove</span> <span class="o">=</span> <span class="ss">(</span> <span class="ss">(</span> <span class="nv">RemoteWallClockTime</span> <span class="o">&gt;</span> <span class="ss">(</span><span class="mi">3</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="mi">60</span><span class="ss">)</span> <span class="ss">)</span> <span class="o">||</span> <span class="ss">(</span><span class="nv">ImageSize</span> <span class="o">&gt;</span> <span class="nv">JobMemoryLimit</span><span class="ss">)</span> <span class="ss">)</span><span class="c1">;</span>
+    GridResource = &quot;condor localhost localhost&quot;;
+    eval_set_GridResource = strcat(&quot;condor &quot;, &quot;$(FULL_HOSTNAME)&quot;, &quot; $(JOB_ROUTER_SCHEDD2_POOL)&quot;);
+    Requirements = target.queue is undefined &amp;&amp; regexp(&quot;usatlas1&quot;,target.Owner);
+    Name = &quot;ATLAS Production Queue&quot;;
+    TargetUniverse = 5;
+    set_requirements = ( ( TARGET.TotalDisk =?= undefined ) || ( TARGET.TotalDisk &gt;= 21000000 ) ) &amp;&amp; ( TARGET.Arch == &quot;X86_64&quot; ) &amp;&amp; ( TARGET.OpSys == &quot;LINUX&quot; ) &amp;&amp; ( TARGET.Disk &gt;= RequestDisk ) &amp;&amp; ( TARGET.Memory &gt;= RequestMemory ) &amp;&amp; ( TARGET.HasFileTransfer );
+    eval_set_AccountingGroup = strcat(&quot;group_gatekpr.prod.prod.&quot;,Owner);
+    set_localQue = &quot;Default&quot;;
+    set_IsAnalyJob = False;
+    set_Rank = (SlotID + (64-TARGET.DETECTED_CORES))*1.0;
+    set_JobMemoryLimit = 4194000;
+    set_Periodic_Remove = ( ( RemoteWallClockTime &gt; (3*24*60*60 + 5*60) ) || (ImageSize &gt; JobMemoryLimit) );
   ]
-# <span class="nv">Route</span> <span class="nv">no</span> <span class="mi">9</span>
-# <span class="nv">Default</span> <span class="nv">queue</span> <span class="k">for</span> <span class="nv">any</span> <span class="nv">other</span> <span class="nv">usatlas</span> <span class="nv">account</span>
+# Route no 9
+# Default queue for any other usatlas account
   [
-    <span class="nv">GridResource</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">condor localhost localhost</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">eval_set_GridResource</span> <span class="o">=</span> <span class="nv">strcat</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">condor </span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s">$(FULL_HOSTNAME)</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s"> $(JOB_ROUTER_SCHEDD2_POOL)</span><span class="s2">&quot;</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">Requirements</span> <span class="o">=</span> <span class="nv">target</span>.<span class="nv">queue</span> <span class="nv">is</span> <span class="nv">undefined</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span><span class="nv">regexp</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">usatlas2</span><span class="s2">&quot;</span>,<span class="nv">target</span>.<span class="nv">Owner</span><span class="ss">)</span> <span class="o">||</span> <span class="nv">regexp</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">usatlas3</span><span class="s2">&quot;</span>,<span class="nv">target</span>.<span class="nv">Owner</span><span class="ss">))</span><span class="c1">;</span>
-    <span class="nv">Name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">Other ATLAS Production</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">TargetUniverse</span> <span class="o">=</span> <span class="mi">5</span><span class="c1">;</span>
-    <span class="nv">set_requirements</span> <span class="o">=</span> <span class="ss">(</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">TotalDisk</span> <span class="o">=</span>?<span class="o">=</span> <span class="nv">undefined</span> <span class="ss">)</span> <span class="o">||</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">TotalDisk</span> <span class="o">&gt;=</span> <span class="mi">21000000</span> <span class="ss">)</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Arch</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">X86_64</span><span class="s2">&quot;</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">OpSys</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">LINUX</span><span class="s2">&quot;</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Disk</span> <span class="o">&gt;=</span> <span class="nv">RequestDisk</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Memory</span> <span class="o">&gt;=</span> <span class="nv">RequestMemory</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">HasFileTransfer</span> <span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">eval_set_AccountingGroup</span> <span class="o">=</span> <span class="nv">strcat</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">group_gatekpr.other.</span><span class="s2">&quot;</span>,<span class="nv">Owner</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">set_localQue</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">Default</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">set_IsAnalyJob</span> <span class="o">=</span> <span class="nv">False</span><span class="c1">;</span>
-    <span class="nv">set_Rank</span> <span class="o">=</span> <span class="ss">(</span><span class="nv">SlotID</span> <span class="o">+</span> <span class="ss">(</span><span class="mi">64</span><span class="o">-</span><span class="nv">TARGET</span>.<span class="nv">DETECTED_CORES</span><span class="ss">))</span><span class="o">*</span><span class="mi">1</span>.<span class="mi">0</span><span class="c1">;</span>
-    <span class="nv">set_JobMemoryLimit</span> <span class="o">=</span> <span class="mi">4194000</span><span class="c1">;</span>
-    <span class="nv">set_Periodic_Remove</span> <span class="o">=</span> <span class="ss">(</span> <span class="ss">(</span> <span class="nv">RemoteWallClockTime</span> <span class="o">&gt;</span> <span class="ss">(</span><span class="mi">3</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="mi">60</span><span class="ss">)</span> <span class="ss">)</span> <span class="o">||</span> <span class="ss">(</span><span class="nv">ImageSize</span> <span class="o">&gt;</span> <span class="nv">JobMemoryLimit</span><span class="ss">)</span> <span class="ss">)</span><span class="c1">;</span>
+    GridResource = &quot;condor localhost localhost&quot;;
+    eval_set_GridResource = strcat(&quot;condor &quot;, &quot;$(FULL_HOSTNAME)&quot;, &quot; $(JOB_ROUTER_SCHEDD2_POOL)&quot;);
+    Requirements = target.queue is undefined &amp;&amp; (regexp(&quot;usatlas2&quot;,target.Owner) || regexp(&quot;usatlas3&quot;,target.Owner));
+    Name = &quot;Other ATLAS Production&quot;;
+    TargetUniverse = 5;
+    set_requirements = ( ( TARGET.TotalDisk =?= undefined ) || ( TARGET.TotalDisk &gt;= 21000000 ) ) &amp;&amp; ( TARGET.Arch == &quot;X86_64&quot; ) &amp;&amp; ( TARGET.OpSys == &quot;LINUX&quot; ) &amp;&amp; ( TARGET.Disk &gt;= RequestDisk ) &amp;&amp; ( TARGET.Memory &gt;= RequestMemory ) &amp;&amp; ( TARGET.HasFileTransfer );
+    eval_set_AccountingGroup = strcat(&quot;group_gatekpr.other.&quot;,Owner);
+    set_localQue = &quot;Default&quot;;
+    set_IsAnalyJob = False;
+    set_Rank = (SlotID + (64-TARGET.DETECTED_CORES))*1.0;
+    set_JobMemoryLimit = 4194000;
+    set_Periodic_Remove = ( ( RemoteWallClockTime &gt; (3*24*60*60 + 5*60) ) || (ImageSize &gt; JobMemoryLimit) );
   ]
-# <span class="nv">Route</span> <span class="nv">no</span> <span class="mi">10</span>
-# <span class="nv">Anything</span> <span class="k">else</span>. <span class="nv">Set</span> <span class="nv">queue</span> <span class="nv">as</span> <span class="nv">Default</span> <span class="nv">and</span> <span class="nv">assign</span> <span class="nv">to</span> <span class="nv">other</span> <span class="nv">VOs</span>
+# Route no 10
+# Anything else. Set queue as Default and assign to other VOs
   [
-    <span class="nv">GridResource</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">condor localhost localhost</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">eval_set_GridResource</span> <span class="o">=</span> <span class="nv">strcat</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">condor </span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s">$(FULL_HOSTNAME)</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s"> $(JOB_ROUTER_SCHEDD2_POOL)</span><span class="s2">&quot;</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">Requirements</span> <span class="o">=</span> <span class="nv">target</span>.<span class="nv">queue</span> <span class="nv">is</span> <span class="nv">undefined</span> <span class="o">&amp;&amp;</span> <span class="nv">ifThenElse</span><span class="ss">(</span><span class="nv">regexp</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">usatlas</span><span class="s2">&quot;</span>,<span class="nv">target</span>.<span class="nv">Owner</span><span class="ss">)</span>,<span class="nv">false</span>,<span class="nv">true</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">Name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">Other Jobs</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">TargetUniverse</span> <span class="o">=</span> <span class="mi">5</span><span class="c1">;</span>
-    <span class="nv">set_requirements</span> <span class="o">=</span> <span class="ss">(</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">TotalDisk</span> <span class="o">=</span>?<span class="o">=</span> <span class="nv">undefined</span> <span class="ss">)</span> <span class="o">||</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">TotalDisk</span> <span class="o">&gt;=</span> <span class="mi">21000000</span> <span class="ss">)</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Arch</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">X86_64</span><span class="s2">&quot;</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">OpSys</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">LINUX</span><span class="s2">&quot;</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Disk</span> <span class="o">&gt;=</span> <span class="nv">RequestDisk</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">Memory</span> <span class="o">&gt;=</span> <span class="nv">RequestMemory</span> <span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="ss">(</span> <span class="nv">TARGET</span>.<span class="nv">HasFileTransfer</span> <span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">eval_set_AccountingGroup</span> <span class="o">=</span> <span class="nv">strcat</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">group_VOgener.</span><span class="s2">&quot;</span>,<span class="nv">Owner</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">set_localQue</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">Default</span><span class="s2">&quot;</span><span class="c1">;</span>
-    <span class="nv">set_IsAnalyJob</span> <span class="o">=</span> <span class="nv">False</span><span class="c1">;</span>
-    <span class="nv">set_Rank</span> <span class="o">=</span> <span class="ss">(</span><span class="nv">SlotID</span> <span class="o">+</span> <span class="ss">(</span><span class="mi">64</span><span class="o">-</span><span class="nv">TARGET</span>.<span class="nv">DETECTED_CORES</span><span class="ss">))</span><span class="o">*</span><span class="mi">1</span>.<span class="mi">0</span><span class="c1">;</span>
-    <span class="nv">set_JobMemoryLimit</span> <span class="o">=</span> <span class="mi">4194000</span><span class="c1">;</span>
-    <span class="nv">set_Periodic_Remove</span> <span class="o">=</span> <span class="ss">(</span> <span class="ss">(</span> <span class="nv">RemoteWallClockTime</span> <span class="o">&gt;</span> <span class="ss">(</span><span class="mi">3</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="mi">60</span><span class="ss">)</span> <span class="ss">)</span> <span class="o">||</span> <span class="ss">(</span><span class="nv">ImageSize</span> <span class="o">&gt;</span> <span class="nv">JobMemoryLimit</span><span class="ss">)</span> <span class="ss">)</span><span class="c1">;</span>
+    GridResource = &quot;condor localhost localhost&quot;;
+    eval_set_GridResource = strcat(&quot;condor &quot;, &quot;$(FULL_HOSTNAME)&quot;, &quot; $(JOB_ROUTER_SCHEDD2_POOL)&quot;);
+    Requirements = target.queue is undefined &amp;&amp; ifThenElse(regexp(&quot;usatlas&quot;,target.Owner),false,true);
+    Name = &quot;Other Jobs&quot;;
+    TargetUniverse = 5;
+    set_requirements = ( ( TARGET.TotalDisk =?= undefined ) || ( TARGET.TotalDisk &gt;= 21000000 ) ) &amp;&amp; ( TARGET.Arch == &quot;X86_64&quot; ) &amp;&amp; ( TARGET.OpSys == &quot;LINUX&quot; ) &amp;&amp; ( TARGET.Disk &gt;= RequestDisk ) &amp;&amp; ( TARGET.Memory &gt;= RequestMemory ) &amp;&amp; ( TARGET.HasFileTransfer );
+    eval_set_AccountingGroup = strcat(&quot;group_VOgener.&quot;,Owner);
+    set_localQue = &quot;Default&quot;;
+    set_IsAnalyJob = False;
+    set_Rank = (SlotID + (64-TARGET.DETECTED_CORES))*1.0;
+    set_JobMemoryLimit = 4194000;
+    set_Periodic_Remove = ( ( RemoteWallClockTime &gt; (3*24*60*60 + 5*60) ) || (ImageSize &gt; JobMemoryLimit) );
   ]
-  @<span class="nv">jre</span>
+  @jre
 </pre></div>
 
 
@@ -3447,63 +3447,63 @@ Any other jobs will be sent to that site's PBS batch system.</p>
 <li>There is a difference between <code>Requirements</code> and <code>set_requirements</code>. The <code>Requirements</code> attribute matches <em>incoming</em> jobs to specific routes while the <code>set_requirements</code> sets the <code>Requirements</code> attribute on the <em>routed</em> job, which confines which machines that the routed job can land on.</li>
 </ul>
 <p>Source: <a href="http://www.usatlas.bnl.gov/twiki/bin/view/Admins/HTCondorCE.html">http://www.usatlas.bnl.gov/twiki/bin/view/Admins/HTCondorCE.html</a></p>
-<div class="codehilite"><pre><span></span><span class="err">JOB_ROUTER_ENTRIES</span> <span class="err">@=jre</span>
-   <span class="err">[</span>
-     <span class="nv">GridResource</span> <span class="o">=</span> <span class="s2">&quot;condor localhost localhost&quot;</span><span class="p">;</span>
-     <span class="nv">eval_set_GridResource</span> <span class="o">=</span> strcat<span class="o">(</span><span class="s2">&quot;condor &quot;</span>, <span class="s2">&quot;</span><span class="k">$(</span>FULL_HOSTNAME<span class="k">)</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="k">$(</span>FULL_HOSTNAME<span class="k">)</span><span class="s2">&quot;</span><span class="o">)</span><span class="p">;</span>
-     <span class="nv">TargetUniverse</span> <span class="o">=</span> <span class="m">5</span><span class="p">;</span>
-     <span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot;BNL_Condor_Pool_long&quot;</span><span class="p">;</span>
-     <span class="nv">Requirements</span> <span class="o">=</span> target.queue<span class="o">==</span><span class="s2">&quot;analysis.long&quot;</span><span class="p">;</span>
-     <span class="nv">eval_set_RACF_Group</span> <span class="o">=</span> <span class="s2">&quot;long&quot;</span><span class="p">;</span>
-     <span class="nv">set_Experiment</span> <span class="o">=</span> <span class="s2">&quot;atlas&quot;</span><span class="p">;</span>
-     <span class="nv">set_requirements</span> <span class="o">=</span> <span class="o">(</span> <span class="o">(</span> <span class="nv">Arch</span> <span class="o">==</span> <span class="s2">&quot;INTEL&quot;</span> <span class="o">||</span> <span class="nv">Arch</span> <span class="o">==</span> <span class="s2">&quot;X86_64&quot;</span> <span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> <span class="nv">CPU_Experiment</span> <span class="o">==</span> <span class="s2">&quot;atlas&quot;</span> <span class="o">)</span> <span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> TARGET.OpSys <span class="o">==</span> <span class="s2">&quot;LINUX&quot;</span> <span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> TARGET.Disk &gt;<span class="o">=</span> RequestDisk <span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> TARGET.Memory &gt;<span class="o">=</span> RequestMemory <span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> TARGET.HasFileTransfer <span class="o">)</span><span class="p">;</span>
-     <span class="nv">set_Job_Type</span> <span class="o">=</span> <span class="s2">&quot;cas&quot;</span><span class="p">;</span>
-     <span class="nv">set_JobLeaseDuration</span> <span class="o">=</span> <span class="m">3600</span><span class="p">;</span>
-     <span class="nv">set_Periodic_Hold</span> <span class="o">=</span> <span class="o">(</span>NumJobStarts &gt;<span class="o">=</span> <span class="m">1</span> <span class="o">&amp;&amp;</span> <span class="nv">JobStatus</span> <span class="o">==</span> <span class="m">1</span><span class="o">)</span> <span class="o">||</span> NumJobStarts &gt; <span class="m">1</span><span class="p">;</span>
-     <span class="nv">eval_set_VO</span> <span class="o">=</span> x509UserProxyVOName<span class="p">;</span>
-   <span class="o">]</span>
-   <span class="o">[</span>
-     <span class="nv">GridResource</span> <span class="o">=</span> <span class="s2">&quot;condor localhost localhost&quot;</span><span class="p">;</span>
-     <span class="nv">eval_set_GridResource</span> <span class="o">=</span> strcat<span class="o">(</span><span class="s2">&quot;condor &quot;</span>, <span class="s2">&quot;</span><span class="k">$(</span>FULL_HOSTNAME<span class="k">)</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="k">$(</span>FULL_HOSTNAME<span class="k">)</span><span class="s2">&quot;</span><span class="o">)</span><span class="p">;</span>
-     <span class="nv">TargetUniverse</span> <span class="o">=</span> <span class="m">5</span><span class="p">;</span>
-     <span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot;BNL_Condor_Pool_short&quot;</span><span class="p">;</span>
-     <span class="nv">Requirements</span> <span class="o">=</span> target.queue<span class="o">==</span><span class="s2">&quot;analysis.short&quot;</span><span class="p">;</span>
-     <span class="nv">eval_set_RACF_Group</span> <span class="o">=</span> <span class="s2">&quot;short&quot;</span><span class="p">;</span>
-     <span class="nv">set_Experiment</span> <span class="o">=</span> <span class="s2">&quot;atlas&quot;</span><span class="p">;</span>
-     <span class="nv">set_requirements</span> <span class="o">=</span> <span class="o">(</span> <span class="o">(</span> <span class="nv">Arch</span> <span class="o">==</span> <span class="s2">&quot;INTEL&quot;</span> <span class="o">||</span> <span class="nv">Arch</span> <span class="o">==</span> <span class="s2">&quot;X86_64&quot;</span> <span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> <span class="nv">CPU_Experiment</span> <span class="o">==</span> <span class="s2">&quot;atlas&quot;</span> <span class="o">)</span> <span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> TARGET.OpSys <span class="o">==</span> <span class="s2">&quot;LINUX&quot;</span> <span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> TARGET.Disk &gt;<span class="o">=</span> RequestDisk <span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> TARGET.Memory &gt;<span class="o">=</span> RequestMemory <span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> TARGET.HasFileTransfer <span class="o">)</span><span class="p">;</span>
-     <span class="nv">set_Job_Type</span> <span class="o">=</span> <span class="s2">&quot;cas&quot;</span><span class="p">;</span>
-     <span class="nv">set_JobLeaseDuration</span> <span class="o">=</span> <span class="m">3600</span><span class="p">;</span>
-     <span class="nv">set_Periodic_Hold</span> <span class="o">=</span> <span class="o">(</span>NumJobStarts &gt;<span class="o">=</span> <span class="m">1</span> <span class="o">&amp;&amp;</span> <span class="nv">JobStatus</span> <span class="o">==</span> <span class="m">1</span><span class="o">)</span> <span class="o">||</span> NumJobStarts &gt; <span class="m">1</span><span class="p">;</span>
-     <span class="nv">eval_set_VO</span> <span class="o">=</span> x509UserProxyVOName<span class="p">;</span>
-   <span class="o">]</span>
-   <span class="o">[</span>
-     <span class="nv">GridResource</span> <span class="o">=</span> <span class="s2">&quot;condor localhost localhost&quot;</span><span class="p">;</span>
-     <span class="nv">eval_set_GridResource</span> <span class="o">=</span> strcat<span class="o">(</span><span class="s2">&quot;condor &quot;</span>, <span class="s2">&quot;</span><span class="k">$(</span>FULL_HOSTNAME<span class="k">)</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="k">$(</span>FULL_HOSTNAME<span class="k">)</span><span class="s2">&quot;</span><span class="o">)</span><span class="p">;</span>
-     <span class="nv">TargetUniverse</span> <span class="o">=</span> <span class="m">5</span><span class="p">;</span>
-     <span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot;BNL_Condor_Pool_grid&quot;</span><span class="p">;</span>
-     <span class="nv">Requirements</span> <span class="o">=</span> target.queue<span class="o">==</span><span class="s2">&quot;grid&quot;</span><span class="p">;</span>
-     <span class="nv">eval_set_RACF_Group</span> <span class="o">=</span> <span class="s2">&quot;grid&quot;</span><span class="p">;</span>
-     <span class="nv">set_Experiment</span> <span class="o">=</span> <span class="s2">&quot;atlas&quot;</span><span class="p">;</span>
-     <span class="nv">set_requirements</span> <span class="o">=</span> <span class="o">(</span> <span class="o">(</span> <span class="nv">Arch</span> <span class="o">==</span> <span class="s2">&quot;INTEL&quot;</span> <span class="o">||</span> <span class="nv">Arch</span> <span class="o">==</span> <span class="s2">&quot;X86_64&quot;</span> <span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> <span class="nv">CPU_Experiment</span> <span class="o">==</span> <span class="s2">&quot;atlas&quot;</span> <span class="o">)</span> <span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> TARGET.OpSys <span class="o">==</span> <span class="s2">&quot;LINUX&quot;</span> <span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> TARGET.Disk &gt;<span class="o">=</span> RequestDisk <span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> TARGET.Memory &gt;<span class="o">=</span> RequestMemory <span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> TARGET.HasFileTransfer <span class="o">)</span><span class="p">;</span>
-     <span class="nv">set_Job_Type</span> <span class="o">=</span> <span class="s2">&quot;cas&quot;</span><span class="p">;</span>
-     <span class="nv">set_JobLeaseDuration</span> <span class="o">=</span> <span class="m">3600</span><span class="p">;</span>
-     <span class="nv">set_Periodic_Hold</span> <span class="o">=</span> <span class="o">(</span>NumJobStarts &gt;<span class="o">=</span> <span class="m">1</span> <span class="o">&amp;&amp;</span> <span class="nv">JobStatus</span> <span class="o">==</span> <span class="m">1</span><span class="o">)</span> <span class="o">||</span> NumJobStarts &gt; <span class="m">1</span><span class="p">;</span>
-     <span class="nv">eval_set_VO</span> <span class="o">=</span> x509UserProxyVOName<span class="p">;</span>
-   <span class="o">]</span>
-   <span class="o">[</span>
-     <span class="nv">GridResource</span> <span class="o">=</span> <span class="s2">&quot;condor localhost localhost&quot;</span><span class="p">;</span>
-     <span class="nv">eval_set_GridResource</span> <span class="o">=</span> strcat<span class="o">(</span><span class="s2">&quot;condor &quot;</span>, <span class="s2">&quot;</span><span class="k">$(</span>FULL_HOSTNAME<span class="k">)</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="k">$(</span>FULL_HOSTNAME<span class="k">)</span><span class="s2">&quot;</span><span class="o">)</span><span class="p">;</span>
-     <span class="nv">TargetUniverse</span> <span class="o">=</span> <span class="m">5</span><span class="p">;</span>
-     <span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot;BNL_Condor_Pool&quot;</span><span class="p">;</span>
-     <span class="nv">Requirements</span> <span class="o">=</span> target.queue is undefined<span class="p">;</span>
-     <span class="nv">eval_set_RACF_Group</span> <span class="o">=</span> <span class="s2">&quot;grid&quot;</span><span class="p">;</span>
-     <span class="nv">set_requirements</span> <span class="o">=</span> <span class="o">(</span> <span class="o">(</span> <span class="nv">Arch</span> <span class="o">==</span> <span class="s2">&quot;INTEL&quot;</span> <span class="o">||</span> <span class="nv">Arch</span> <span class="o">==</span> <span class="s2">&quot;X86_64&quot;</span> <span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> <span class="nv">CPU_Experiment</span> <span class="o">==</span> <span class="s2">&quot;rcf&quot;</span> <span class="o">)</span> <span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> TARGET.OpSys <span class="o">==</span> <span class="s2">&quot;LINUX&quot;</span> <span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> TARGET.Disk &gt;<span class="o">=</span> RequestDisk <span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> TARGET.Memory &gt;<span class="o">=</span> RequestMemory <span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> TARGET.HasFileTransfer <span class="o">)</span><span class="p">;</span>
-     <span class="nv">set_Experiment</span> <span class="o">=</span> <span class="s2">&quot;atlas&quot;</span><span class="p">;</span>
-     <span class="nv">set_Job_Type</span> <span class="o">=</span> <span class="s2">&quot;cas&quot;</span><span class="p">;</span>
-     <span class="nv">set_JobLeaseDuration</span> <span class="o">=</span> <span class="m">3600</span><span class="p">;</span>
-     <span class="nv">set_Periodic_Hold</span> <span class="o">=</span> <span class="o">(</span>NumJobStarts &gt;<span class="o">=</span> <span class="m">1</span> <span class="o">&amp;&amp;</span> <span class="nv">JobStatus</span> <span class="o">==</span> <span class="m">1</span><span class="o">)</span> <span class="o">||</span> NumJobStarts &gt; <span class="m">1</span><span class="p">;</span>
-     <span class="nv">eval_set_VO</span> <span class="o">=</span> x509UserProxyVOName<span class="p">;</span>
-   <span class="o">]</span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+   [
+     GridResource = &quot;condor localhost localhost&quot;;
+     eval_set_GridResource = strcat(&quot;condor &quot;, &quot;$(FULL_HOSTNAME)&quot;, &quot;$(FULL_HOSTNAME)&quot;);
+     TargetUniverse = 5;
+     name = &quot;BNL_Condor_Pool_long&quot;;
+     Requirements = target.queue==&quot;analysis.long&quot;;
+     eval_set_RACF_Group = &quot;long&quot;;
+     set_Experiment = &quot;atlas&quot;;
+     set_requirements = ( ( Arch == &quot;INTEL&quot; || Arch == &quot;X86_64&quot; ) &amp;&amp; ( CPU_Experiment == &quot;atlas&quot; ) ) &amp;&amp; ( TARGET.OpSys == &quot;LINUX&quot; ) &amp;&amp; ( TARGET.Disk &gt;= RequestDisk ) &amp;&amp; ( TARGET.Memory &gt;= RequestMemory ) &amp;&amp; ( TARGET.HasFileTransfer );
+     set_Job_Type = &quot;cas&quot;;
+     set_JobLeaseDuration = 3600;
+     set_Periodic_Hold = (NumJobStarts &gt;= 1 &amp;&amp; JobStatus == 1) || NumJobStarts &gt; 1;
+     eval_set_VO = x509UserProxyVOName;
+   ]
+   [
+     GridResource = &quot;condor localhost localhost&quot;;
+     eval_set_GridResource = strcat(&quot;condor &quot;, &quot;$(FULL_HOSTNAME)&quot;, &quot;$(FULL_HOSTNAME)&quot;);
+     TargetUniverse = 5;
+     name = &quot;BNL_Condor_Pool_short&quot;;
+     Requirements = target.queue==&quot;analysis.short&quot;;
+     eval_set_RACF_Group = &quot;short&quot;;
+     set_Experiment = &quot;atlas&quot;;
+     set_requirements = ( ( Arch == &quot;INTEL&quot; || Arch == &quot;X86_64&quot; ) &amp;&amp; ( CPU_Experiment == &quot;atlas&quot; ) ) &amp;&amp; ( TARGET.OpSys == &quot;LINUX&quot; ) &amp;&amp; ( TARGET.Disk &gt;= RequestDisk ) &amp;&amp; ( TARGET.Memory &gt;= RequestMemory ) &amp;&amp; ( TARGET.HasFileTransfer );
+     set_Job_Type = &quot;cas&quot;;
+     set_JobLeaseDuration = 3600;
+     set_Periodic_Hold = (NumJobStarts &gt;= 1 &amp;&amp; JobStatus == 1) || NumJobStarts &gt; 1;
+     eval_set_VO = x509UserProxyVOName;
+   ]
+   [
+     GridResource = &quot;condor localhost localhost&quot;;
+     eval_set_GridResource = strcat(&quot;condor &quot;, &quot;$(FULL_HOSTNAME)&quot;, &quot;$(FULL_HOSTNAME)&quot;);
+     TargetUniverse = 5;
+     name = &quot;BNL_Condor_Pool_grid&quot;;
+     Requirements = target.queue==&quot;grid&quot;;
+     eval_set_RACF_Group = &quot;grid&quot;;
+     set_Experiment = &quot;atlas&quot;;
+     set_requirements = ( ( Arch == &quot;INTEL&quot; || Arch == &quot;X86_64&quot; ) &amp;&amp; ( CPU_Experiment == &quot;atlas&quot; ) ) &amp;&amp; ( TARGET.OpSys == &quot;LINUX&quot; ) &amp;&amp; ( TARGET.Disk &gt;= RequestDisk ) &amp;&amp; ( TARGET.Memory &gt;= RequestMemory ) &amp;&amp; ( TARGET.HasFileTransfer );
+     set_Job_Type = &quot;cas&quot;;
+     set_JobLeaseDuration = 3600;
+     set_Periodic_Hold = (NumJobStarts &gt;= 1 &amp;&amp; JobStatus == 1) || NumJobStarts &gt; 1;
+     eval_set_VO = x509UserProxyVOName;
+   ]
+   [
+     GridResource = &quot;condor localhost localhost&quot;;
+     eval_set_GridResource = strcat(&quot;condor &quot;, &quot;$(FULL_HOSTNAME)&quot;, &quot;$(FULL_HOSTNAME)&quot;);
+     TargetUniverse = 5;
+     name = &quot;BNL_Condor_Pool&quot;;
+     Requirements = target.queue is undefined;
+     eval_set_RACF_Group = &quot;grid&quot;;
+     set_requirements = ( ( Arch == &quot;INTEL&quot; || Arch == &quot;X86_64&quot; ) &amp;&amp; ( CPU_Experiment == &quot;rcf&quot; ) ) &amp;&amp; ( TARGET.OpSys == &quot;LINUX&quot; ) &amp;&amp; ( TARGET.Disk &gt;= RequestDisk ) &amp;&amp; ( TARGET.Memory &gt;= RequestMemory ) &amp;&amp; ( TARGET.HasFileTransfer );
+     set_Experiment = &quot;atlas&quot;;
+     set_Job_Type = &quot;cas&quot;;
+     set_JobLeaseDuration = 3600;
+     set_Periodic_Hold = (NumJobStarts &gt;= 1 &amp;&amp; JobStatus == 1) || NumJobStarts &gt; 1;
+     eval_set_VO = x509UserProxyVOName;
+   ]
    @jre
 </pre></div>
                 

@@ -2325,7 +2325,7 @@ The version of CVMFS installed should be &gt;= 2.4.1</p>
 </li>
 <li>
 <p>Create or edit <code>/etc/auto.master</code> to have the following contents:</p>
-<div class="codehilite"><pre><span></span><span class="o">/</span><span class="n">cvmfs</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">auto</span><span class="p">.</span><span class="n">cvmfs</span>
+<div class="codehilite"><pre><span></span>/cvmfs /etc/auto.cvmfs
 </pre></div>
 
 
@@ -2350,7 +2350,7 @@ The version of CVMFS installed should be &gt;= 2.4.1</p>
 </li>
 <li>
 <p>Put the following in <code>/etc/auto.master.d/cvmfs.autofs</code>:</p>
-<div class="codehilite"><pre><span></span><span class="o">/</span><span class="n">cvmfs</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">auto</span><span class="p">.</span><span class="n">cvmfs</span>
+<div class="codehilite"><pre><span></span>/cvmfs /etc/auto.cvmfs
 </pre></div>
 
 
@@ -2369,9 +2369,9 @@ CVMFS configuration. Below is a sample configuration, but please note
 that you will need to <strong>edit the parts in angle brackets</strong>. In
 particular, the <code>CVMFS_HTTP_PROXY</code> line below must be edited for your
 site.</p>
-<div class="codehilite"><pre><span></span><span class="n">CVMFS_REPOSITORIES</span><span class="o">=</span><span class="ss">&quot;`echo $((echo oasis.opensciencegrid.org;echo cms.cern.ch;ls /cvmfs)|sort -u)|tr &#39; &#39; ,`&quot;</span>
-<span class="n">CVMFS_QUOTA_LIMIT</span><span class="o">=&lt;</span><span class="n">QUOTA</span> <span class="k">LIMIT</span><span class="o">&gt;</span>
-<span class="n">CVMFS_HTTP_PROXY</span><span class="o">=</span><span class="ss">&quot;&lt;SQUID URL&gt;:&lt;SQUID PORT&gt;&quot;</span>
+<div class="codehilite"><pre><span></span>CVMFS_REPOSITORIES=&quot;`echo $((echo oasis.opensciencegrid.org;echo cms.cern.ch;ls /cvmfs)|sort -u)|tr &#39; &#39; ,`&quot;
+CVMFS_QUOTA_LIMIT=&lt;QUOTA LIMIT&gt;
+CVMFS_HTTP_PROXY=&quot;&lt;SQUID URL&gt;:&lt;SQUID PORT&gt;&quot;
 </pre></div>
 
 
@@ -2388,7 +2388,7 @@ the instructions to <a href="../../data/frontier-squid">install squid from OSG</
 Vertical bars separating proxies means to load balance between them
 and try them all before continuing. A semicolon between proxies means
 to try that one only after the previous ones have failed. For example:</p>
-<div class="codehilite"><pre><span></span><span class="nt">CVMFS_HTTP_PROXY</span><span class="o">=</span><span class="s2">&quot;http://squid1.example.com:3128|http://squid2.example.com:3128;http://old-squid.example.com:3128&quot;</span>
+<div class="codehilite"><pre><span></span>CVMFS_HTTP_PROXY=&quot;http://squid1.example.com:3128|http://squid2.example.com:3128;http://old-squid.example.com:3128&quot;
 </pre></div>
 
 

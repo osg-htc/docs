@@ -2360,7 +2360,7 @@ getting the OSG-supported versions.</p>
 </li>
 <li>
 <p>Ensure that <code>/etc/yum.conf</code> has the following line in the <code>[main]</code> section:</p>
-<div class="codehilite"><pre><span></span><span class="n">plugins</span><span class="o">=</span><span class="mi">1</span>
+<div class="codehilite"><pre><span></span>plugins=1
 </pre></div>
 
 
@@ -2436,15 +2436,15 @@ For instructions on upgrading from one OSG series to another, see the
 <p>The only OSG repository enabled by default is the release one.
 If you want to <a href="#repositories">enable another one</a> (e.g. <code>osg-testing</code>), then edit its file
 (e.g. <code>/etc/yum.repos.d/osg-testing.repo</code>) and change the enabled option from 0 to 1:</p>
-<div class="codehilite"><pre><span></span><span class="k">[osg-testing]</span>
-<span class="na">name</span><span class="o">=</span><span class="s">OSG Software for Enterprise Linux 7 - Testing - $basearch</span>
-<span class="c1">#baseurl=https://repo.opensciencegrid.org/osg/3.4/el7/testing/$basearch</span>
-<span class="na">mirrorlist</span><span class="o">=</span><span class="s">https://repo.opensciencegrid.org/mirror/osg/3.4/el7/testing/$basearch</span>
-<span class="na">failovermethod</span><span class="o">=</span><span class="s">priority</span>
-<span class="na">priority</span><span class="o">=</span><span class="s">98</span>
-<span class="na">enabled</span><span class="o">=</span><span class="s"><span style="color:red">1</span></span>
-<span class="na">gpgcheck</span><span class="o">=</span><span class="s">1</span>
-<span class="na">gpgkey</span><span class="o">=</span><span class="s">file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG</span>
+<div class="codehilite"><pre><span></span>[osg-testing]
+name=OSG Software for Enterprise Linux 7 - Testing - $basearch
+#baseurl=https://repo.opensciencegrid.org/osg/3.4/el7/testing/$basearch
+mirrorlist=https://repo.opensciencegrid.org/mirror/osg/3.4/el7/testing/$basearch
+failovermethod=priority
+priority=98
+enabled=<span style="color:red">1</span>
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
 </pre></div>
 
 
@@ -2485,12 +2485,12 @@ priority = 98</p>
 <p>If you run a large site (&gt;20 nodes), you should consider setting up a local mirror for the OSG repositories.
 A local Yum mirror allows you to reduce the amount of external bandwidth used when updating or installing packages.</p>
 <p>Add the following to a file in <code>/etc/cron.d</code>:</p>
-<div class="codehilite"><pre><span></span><span class="o">%</span><span class="nv">RED</span><span class="o">%</span><span class="k">RANDOM</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="nv">root</span> <span class="nv">rsync</span> <span class="o">-</span><span class="nv">aH</span> <span class="nv">rsync</span>:<span class="o">//</span><span class="nv">repo</span>.<span class="nv">opensciencegrid</span>.<span class="nv">org</span><span class="o">/</span><span class="nv">osg</span><span class="o">/</span> <span class="o">/</span><span class="nv">var</span><span class="o">/</span><span class="nv">www</span><span class="o">/</span><span class="nv">html</span><span class="o">/</span><span class="nv">osg</span><span class="o">/</span>
+<div class="codehilite"><pre><span></span><span style="color:red">RANDOM</span> * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/ /var/www/html/osg/
 </pre></div>
 
 
 <p>Or, to mirror only a single repository:</p>
-<div class="codehilite"><pre><span></span><span class="o">%</span><span class="nv">RED</span><span class="o">%</span><span class="k">RANDOM</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="nv">root</span> <span class="nv">rsync</span> <span class="o">-</span><span class="nv">aH</span> <span class="nv">rsync</span>:<span class="o">//</span><span class="nv">repo</span>.<span class="nv">opensciencegrid</span>.<span class="nv">org</span><span class="o">/</span><span class="nv">osg</span><span class="o">/%</span><span class="nv">RED</span><span class="o">%</span><span class="nv">OSG_RELEASE</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%/</span><span class="nv">el6</span><span class="o">/</span><span class="nv">development</span> <span class="o">/</span><span class="nv">var</span><span class="o">/</span><span class="nv">www</span><span class="o">/</span><span class="nv">html</span><span class="o">/</span><span class="nv">osg</span><span class="o">/%</span><span class="nv">RED</span><span class="o">%</span><span class="nv">OSG_RELEASE</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%/</span><span class="nv">el6</span>
+<div class="codehilite"><pre><span></span><span style="color:red">RANDOM</span> * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/<span style="color:red">OSG_RELEASE</span>/el6/development /var/www/html/osg/<span style="color:red">OSG_RELEASE</span>/el6
 </pre></div>
 
 

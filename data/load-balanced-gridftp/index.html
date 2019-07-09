@@ -2537,8 +2537,8 @@
 </li>
 <li>
 <p>Edit <code>/etc/sysconfig/globus-gridftp-server</code> to identify the shared certificate-key pair:</p>
-<div class="codehilite"><pre><span></span><span class="n">export</span> <span class="n">X509_USER_CERT</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">grid</span><span class="o">-</span><span class="k">security</span><span class="o">/</span><span class="n">gridftp</span><span class="o">/</span><span class="n">gridftp</span><span class="o">-</span><span class="n">hostcert</span><span class="p">.</span><span class="n">pem</span>
-<span class="n">export</span> <span class="n">X509_USER_KEY</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">grid</span><span class="o">-</span><span class="k">security</span><span class="o">/</span><span class="n">gridftp</span><span class="o">/</span><span class="n">gridftp</span><span class="o">-</span><span class="n">hostkey</span><span class="p">.</span><span class="n">pem</span>
+<div class="codehilite"><pre><span></span>export X509_USER_CERT=/etc/grid-security/gridftp/gridftp-hostcert.pem
+export X509_USER_KEY=/etc/grid-security/gridftp/gridftp-hostkey.pem
 </pre></div>
 
 
@@ -2549,9 +2549,9 @@
 <ol>
 <li>
 <p>Create a list of GridFTP server hostnames in <code>load-balanced-hosts.txt</code>:</p>
-<div class="codehilite"><pre><span></span><span class="o">&lt;</span><span class="n">GRIDFTP</span><span class="o">-</span><span class="n">SERVER</span><span class="o">-#</span><span class="mi">1</span><span class="o">-</span><span class="n">HOSTNAME</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">VIRTUAL</span><span class="o">-</span><span class="n">HOSTNAME</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="n">GRIDFTP</span><span class="o">-</span><span class="n">SERVER</span><span class="o">-#</span><span class="mi">2</span><span class="o">-</span><span class="n">HOSTNAME</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">VIRTUAL</span><span class="o">-</span><span class="n">HOSTNAME</span><span class="o">&gt;</span>
-<span class="p">[...]</span>
+<div class="codehilite"><pre><span></span>&lt;GRIDFTP-SERVER-#1-HOSTNAME&gt; &lt;VIRTUAL-HOSTNAME&gt;
+&lt;GRIDFTP-SERVER-#2-HOSTNAME&gt; &lt;VIRTUAL-HOSTNAME&gt;
+[...]
 </pre></div>
 
 
@@ -2669,7 +2669,7 @@
 </li>
 <li>
 <p>Install the <code>keepalived</code> package:</p>
-<div class="codehilite"><pre><span></span><span class="n">root</span><span class="nv">@host</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">yum</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">keepalived</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>root@host # yum install keepalived
 </pre></div>
 
 
@@ -2677,36 +2677,36 @@
 </ol>
 <h3 id="required-configuration">Required configuration<a class="headerlink" href="#required-configuration" title="Permanent link">&para;</a></h3>
 <p>On the primary load balancer, edit <code>/etc/keepalived/keepalived.conf</code>:</p>
-<div class="codehilite"><pre><span></span><span class="nv">global_defs</span> {
-   <span class="nv">router_id</span> <span class="o">&lt;</span><span class="nv">STRING</span><span class="o">-</span><span class="nv">LABEL</span><span class="o">-</span><span class="k">FOR</span><span class="o">-</span><span class="nv">YOUR</span><span class="o">-</span><span class="nv">LOAD</span><span class="o">-</span><span class="nv">BALANCED</span><span class="o">-</span><span class="nv">SYSTEM</span><span class="o">&gt;</span>
+<div class="codehilite"><pre><span></span>global_defs {
+   router_id &lt;STRING-LABEL-FOR-YOUR-LOAD-BALANCED-SYSTEM&gt;
 }
 
-<span class="nv">vrrp_instance</span> <span class="nv">VI_gridftp</span> {
-    <span class="nv">state</span> <span class="nv">MASTER</span>
-    <span class="nv">interface</span> <span class="o">&lt;</span><span class="nv">NETWORK</span><span class="o">-</span><span class="nv">INTERFACE</span><span class="o">&gt;</span>
-    <span class="nv">virtual_router_id</span> <span class="o">&lt;</span><span class="nv">INTEGER</span><span class="o">-</span><span class="nv">BETWEEN</span><span class="o">-</span><span class="mi">0</span><span class="o">-</span><span class="nv">AND</span><span class="o">-</span><span class="mi">255</span><span class="o">&gt;</span>
-    <span class="nv">priority</span> <span class="mi">100</span>
-    <span class="nv">virtual_ipaddress</span> {
-        <span class="o">&lt;</span><span class="nv">VIRTUAL</span><span class="o">-</span><span class="nv">IP</span><span class="o">-</span><span class="nv">ADDRESS</span><span class="o">&gt;/&lt;</span><span class="nv">SUBNET</span><span class="o">-</span><span class="nv">MASK</span><span class="o">&gt;</span> <span class="nv">dev</span> <span class="o">&lt;</span><span class="nv">NETWORK</span><span class="o">-</span><span class="nv">INTERFACE</span><span class="o">&gt;</span>
+vrrp_instance VI_gridftp {
+    state MASTER
+    interface &lt;NETWORK-INTERFACE&gt;
+    virtual_router_id &lt;INTEGER-BETWEEN-0-AND-255&gt;
+    priority 100
+    virtual_ipaddress {
+        &lt;VIRTUAL-IP-ADDRESS&gt;/&lt;SUBNET-MASK&gt; dev &lt;NETWORK-INTERFACE&gt;
     }
 }
 
-<span class="nv">virtual_server</span> <span class="o">&lt;</span><span class="nv">VIRTUAL</span><span class="o">-</span><span class="nv">IP</span><span class="o">-</span><span class="nv">ADDRESS</span><span class="o">&gt;</span> <span class="mi">2811</span> {
-    <span class="nv">delay_loop</span> <span class="mi">10</span>
-    <span class="nv">lb_algo</span> <span class="nv">wlc</span>
-    <span class="nv">lb_kind</span> <span class="nv">DR</span>
-    <span class="nv">protocol</span> <span class="nv">tcp</span>
+virtual_server &lt;VIRTUAL-IP-ADDRESS&gt; 2811 {
+    delay_loop 10
+    lb_algo wlc
+    lb_kind DR
+    protocol tcp
 
-    <span class="nv">real_server</span> <span class="o">&lt;</span><span class="nv">GRIDFTP</span><span class="o">-</span><span class="nv">SERVER</span><span class="o">-</span><span class="sc">#1</span><span class="o">-</span><span class="nv">IP</span> <span class="nv">ADDRESS</span><span class="o">&gt;</span> {
-        <span class="nv">TCP_CHECK</span> {
-            <span class="nv">connect_timeout</span> <span class="mi">3</span>
-            <span class="nv">connect_port</span> <span class="mi">2811</span>
+    real_server &lt;GRIDFTP-SERVER-#1-IP ADDRESS&gt; {
+        TCP_CHECK {
+            connect_timeout 3
+            connect_port 2811
         }
     }
-    <span class="nv">real_server</span> <span class="o">&lt;</span><span class="nv">GRIDFTP</span><span class="o">-</span><span class="nv">SERVER</span><span class="o">-</span><span class="sc">#2</span><span class="o">-</span><span class="nv">IP</span><span class="o">-</span><span class="nv">ADDRESS</span><span class="o">&gt;</span> {
-        <span class="nv">TCP_CHECK</span> {
-            <span class="nv">connect_timeout</span> <span class="mi">3</span>
-            <span class="nv">connect_port</span> <span class="mi">2811</span>
+    real_server &lt;GRIDFTP-SERVER-#2-IP-ADDRESS&gt; {
+        TCP_CHECK {
+            connect_timeout 3
+            connect_port 2811
         }
     }
     [...]
@@ -2734,29 +2734,29 @@
 <p class="admonition-title">Note</p>
 <p>Priority specifies the order of preferred load balancer fallback, where larger values corresponds to a higher preference.</p>
 </div>
-<div class="codehilite"><pre><span></span><span class="n">vrrp_instance</span> <span class="n">VI_gridftp</span> <span class="err">{</span>
-    <span class="k">state</span> <span class="n">BACKUP</span>
-    <span class="n">interface</span> <span class="o">&lt;</span><span class="n">NETWORK</span><span class="o">-</span><span class="n">INTERFACE</span><span class="o">&gt;</span>
-    <span class="n">virtual_router_id</span> <span class="o">&lt;</span><span class="n">SAME</span><span class="o">-</span><span class="n">ID</span><span class="o">-</span><span class="k">AS</span><span class="o">-</span><span class="n">MASTER</span><span class="o">-</span><span class="k">LOAD</span><span class="o">-</span><span class="n">BALANCER</span><span class="o">&gt;</span>
-    <span class="n">priority</span> <span class="o">&lt;</span><span class="n">PRIORITY</span><span class="o">-</span><span class="nb">INTEGER</span><span class="o">&gt;</span>
-    <span class="n">virtual_ipaddress</span> <span class="err">{</span>
-        <span class="o">&lt;</span><span class="n">VIRTUAL</span><span class="o">-</span><span class="n">IP</span><span class="o">-</span><span class="n">ADDRESS</span><span class="o">&gt;/&lt;</span><span class="n">SUBNET</span><span class="o">-</span><span class="n">MASK</span><span class="o">&gt;</span> <span class="n">dev</span> <span class="o">&lt;</span><span class="n">NETWORK</span><span class="o">-</span><span class="n">INTERFACE</span><span class="o">&gt;</span>
-    <span class="err">}</span>
-<span class="err">}</span>
+<div class="codehilite"><pre><span></span>vrrp_instance VI_gridftp {
+    state BACKUP
+    interface &lt;NETWORK-INTERFACE&gt;
+    virtual_router_id &lt;SAME-ID-AS-MASTER-LOAD-BALANCER&gt;
+    priority &lt;PRIORITY-INTEGER&gt;
+    virtual_ipaddress {
+        &lt;VIRTUAL-IP-ADDRESS&gt;/&lt;SUBNET-MASK&gt; dev &lt;NETWORK-INTERFACE&gt;
+    }
+}
 </pre></div>
 
 
 <h4 id="enabling-e-mail-notifications">Enabling e-mail notifications<a class="headerlink" href="#enabling-e-mail-notifications" title="Permanent link">&para;</a></h4>
 <p>To receive e-mails when the state of your load-balanced system changes, update the <code>global_defs</code> section of <code>/etc/keepalived/keepalived.conf</code> for each of your load balancer nodes:</p>
-<div class="codehilite"><pre><span></span><span class="n">notification_email</span> <span class="err">{</span>
-<span class="o">&lt;</span><span class="k">NOTIFY</span><span class="o">-</span><span class="n">EMAIL</span><span class="o">-</span><span class="n">ADDRESS</span><span class="o">-#</span><span class="mi">1</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="k">NOTIFY</span><span class="o">-</span><span class="n">EMAIL</span><span class="o">-</span><span class="n">ADDRESS</span><span class="o">-#</span><span class="mi">2</span><span class="o">&gt;</span>
-<span class="p">[...]</span>
-<span class="err">}</span>
-<span class="n">notification_email_from</span> <span class="o">&lt;</span><span class="k">FROM</span><span class="o">-</span><span class="n">EMAIL</span><span class="o">-</span><span class="n">ADDRESS</span><span class="o">&gt;</span>
-<span class="n">smtp_server</span> <span class="o">&lt;</span><span class="n">SMTP</span><span class="o">-</span><span class="n">SERVER</span><span class="o">-</span><span class="n">IP</span><span class="o">-</span><span class="n">ADDRESS</span><span class="o">&gt;</span>
-<span class="n">smtp_connect_timeout</span> <span class="mi">60</span>
-<span class="n">router_id</span> <span class="o">&lt;</span><span class="n">MACHINE</span><span class="o">-</span><span class="n">IDENTIFYING</span><span class="o">-</span><span class="n">STRING</span><span class="o">&gt;</span>
+<div class="codehilite"><pre><span></span>notification_email {
+&lt;NOTIFY-EMAIL-ADDRESS-#1&gt;
+&lt;NOTIFY-EMAIL-ADDRESS-#2&gt;
+[...]
+}
+notification_email_from &lt;FROM-EMAIL-ADDRESS&gt;
+smtp_server &lt;SMTP-SERVER-IP-ADDRESS&gt;
+smtp_connect_timeout 60
+router_id &lt;MACHINE-IDENTIFYING-STRING&gt;
 </pre></div>
 
 

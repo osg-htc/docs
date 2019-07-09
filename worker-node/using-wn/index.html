@@ -2265,7 +2265,7 @@ We recommend one of the following solutions:</p>
   them for the job so that the batch system performs the clean up.
   For example, HTCondor has this ability through
   <a href="http://research.cs.wisc.edu/htcondor/manual/v8.6/3_5Configuration_Macros.html#24738">MOUNT_UNDER_SCRATCH</a>:</p>
-<div class="codehilite"><pre><span></span><span class="nv">MOUNT_UNDER_SCRATCH</span> <span class="o">=</span> <span class="k">$(</span>MOUNT_UNDER_SCRATCH<span class="k">)</span>, &lt;PATH TO OSG_WN_TMP&gt;
+<div class="codehilite"><pre><span></span>MOUNT_UNDER_SCRATCH = $(MOUNT_UNDER_SCRATCH), &lt;PATH TO OSG_WN_TMP&gt;
 </pre></div>
 
 

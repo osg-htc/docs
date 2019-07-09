@@ -2403,29 +2403,29 @@
 <ol>
 <li>
 <p>Write a submit file, <code>ce_test.sub</code>:</p>
-<div class="codehilite"><pre><span></span># <span class="nv">Required</span> <span class="k">for</span> <span class="nv">local</span> <span class="nv">HTCondor</span><span class="o">-</span><span class="nv">CE</span> <span class="nv">submission</span>
-<span class="nv">universe</span> <span class="o">=</span> <span class="nv">vanilla</span>
-<span class="nv">use_x509userproxy</span> <span class="o">=</span> <span class="nv">true</span>
-<span class="o">+</span><span class="nv">Owner</span> <span class="o">=</span> <span class="nv">undefined</span>
+<div class="codehilite"><pre><span></span># Required for local HTCondor-CE submission
+universe = vanilla
+use_x509userproxy = true
++Owner = undefined
 
-# <span class="nv">Files</span>
-<span class="nv">executable</span> <span class="o">=</span> <span class="o">%</span><span class="nv">RED</span><span class="o">%</span><span class="nv">ce_test</span>.<span class="nv">sh</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span>
-<span class="nv">output</span> <span class="o">=</span> <span class="nv">ce_test</span>.<span class="nv">out</span>
-<span class="nv">error</span> <span class="o">=</span> <span class="nv">ce_test</span>.<span class="nv">err</span>
-<span class="nv">log</span> <span class="o">=</span> <span class="nv">ce_test</span>.<span class="nv">log</span>
+# Files
+executable = <span style="color:red">ce_test.sh</span>
+output = ce_test.out
+error = ce_test.err
+log = ce_test.log
 
-# <span class="nv">File</span> <span class="nv">transfer</span> <span class="nv">behavior</span>
-<span class="nv">ShouldTransferFiles</span> <span class="o">=</span> <span class="nv">YES</span>
-<span class="nv">WhenToTransferOutput</span> <span class="o">=</span> <span class="nv">ON_EXIT</span>
+# File transfer behavior
+ShouldTransferFiles = YES
+WhenToTransferOutput = ON_EXIT
 
-# <span class="nv">Optional</span> <span class="nv">resource</span> <span class="nv">requests</span>
-#<span class="o">+</span><span class="nv">xcount</span> <span class="o">=</span> <span class="mi">4</span>            # <span class="nv">Request</span> <span class="mi">4</span> <span class="nv">cores</span>
-#<span class="o">+</span><span class="nv">maxMemory</span> <span class="o">=</span> <span class="mi">4000</span>      # <span class="nv">Request</span> <span class="mi">4</span><span class="nv">GB</span> <span class="nv">of</span> <span class="nv">RAM</span>
-#<span class="o">+</span><span class="nv">maxWallTime</span> <span class="o">=</span> <span class="mi">120</span>     # <span class="nv">Request</span> <span class="mi">2</span> <span class="nv">hrs</span> <span class="nv">of</span> <span class="nv">wall</span> <span class="nv">clock</span> <span class="nv">time</span>
-#<span class="o">+</span><span class="nv">remote_queue</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">osg</span><span class="s2">&quot;</span>  # <span class="nv">Request</span> <span class="nv">the</span> <span class="nv">OSG</span> <span class="nv">queue</span>
+# Optional resource requests
+#+xcount = 4            # Request 4 cores
+#+maxMemory = 4000      # Request 4GB of RAM
+#+maxWallTime = 120     # Request 2 hrs of wall clock time
+#+remote_queue = &quot;osg&quot;  # Request the OSG queue
 
-# <span class="nv">Run</span> <span class="nv">job</span> <span class="nv">once</span>
-<span class="nv">queue</span>
+# Run job once
+queue
 </pre></div>
 
 
@@ -2485,29 +2485,29 @@ env
 <ol>
 <li>
 <p>Write a submit file, <code>ce_test.sub</code>:</p>
-<div class="codehilite"><pre><span></span># <span class="nv">Required</span> <span class="k">for</span> <span class="nv">remote</span> <span class="nv">HTCondor</span><span class="o">-</span><span class="nv">CE</span> <span class="nv">submission</span>
-<span class="nv">universe</span> <span class="o">=</span> <span class="nv">grid</span>
-<span class="nv">use_x509userproxy</span> <span class="o">=</span> <span class="nv">true</span>
-<span class="nv">grid_resource</span> <span class="o">=</span> <span class="nv">condor</span> <span class="o">%</span><span class="nv">RED</span><span class="o">%</span><span class="nv">condorce</span>.<span class="nv">example</span>.<span class="nv">com</span> <span class="nv">condorce</span>.<span class="nv">example</span>.<span class="nv">com</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span>:<span class="mi">9619</span>
+<div class="codehilite"><pre><span></span># Required for remote HTCondor-CE submission
+universe = grid
+use_x509userproxy = true
+grid_resource = condor <span style="color:red">condorce.example.com condorce.example.com</span>:9619
 
-# <span class="nv">Files</span>
-<span class="nv">executable</span> <span class="o">=</span> <span class="o">%</span><span class="nv">RED</span><span class="o">%</span><span class="nv">ce_test</span>.<span class="nv">sh</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span>
-<span class="nv">output</span> <span class="o">=</span> <span class="nv">ce_test</span>.<span class="nv">out</span>
-<span class="nv">error</span> <span class="o">=</span> <span class="nv">ce_test</span>.<span class="nv">err</span>
-<span class="nv">log</span> <span class="o">=</span> <span class="nv">ce_test</span>.<span class="nv">log</span>
+# Files
+executable = <span style="color:red">ce_test.sh</span>
+output = ce_test.out
+error = ce_test.err
+log = ce_test.log
 
-# <span class="nv">File</span> <span class="nv">transfer</span> <span class="nv">behavior</span>
-<span class="nv">ShouldTransferFiles</span> <span class="o">=</span> <span class="nv">YES</span>
-<span class="nv">WhenToTransferOutput</span> <span class="o">=</span> <span class="nv">ON_EXIT</span>
+# File transfer behavior
+ShouldTransferFiles = YES
+WhenToTransferOutput = ON_EXIT
 
-# <span class="nv">Optional</span> <span class="nv">resource</span> <span class="nv">requests</span>
-#<span class="o">+</span><span class="nv">xcount</span> <span class="o">=</span> <span class="mi">4</span>            # <span class="nv">Request</span> <span class="mi">4</span> <span class="nv">cores</span>
-#<span class="o">+</span><span class="nv">maxMemory</span> <span class="o">=</span> <span class="mi">4000</span>      # <span class="nv">Request</span> <span class="mi">4</span><span class="nv">GB</span> <span class="nv">of</span> <span class="nv">RAM</span>
-#<span class="o">+</span><span class="nv">maxWallTime</span> <span class="o">=</span> <span class="mi">120</span>     # <span class="nv">Request</span> <span class="mi">2</span> <span class="nv">hrs</span> <span class="nv">of</span> <span class="nv">wall</span> <span class="nv">clock</span> <span class="nv">time</span>
-#<span class="o">+</span><span class="nv">remote_queue</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">osg</span><span class="s2">&quot;</span>  # <span class="nv">Request</span> <span class="nv">the</span> <span class="nv">OSG</span> <span class="nv">queue</span>
+# Optional resource requests
+#+xcount = 4            # Request 4 cores
+#+maxMemory = 4000      # Request 4GB of RAM
+#+maxWallTime = 120     # Request 2 hrs of wall clock time
+#+remote_queue = &quot;osg&quot;  # Request the OSG queue
 
-# <span class="nv">Run</span> <span class="nv">job</span> <span class="nv">once</span>
-<span class="nv">queue</span>
+# Run job once
+queue
 </pre></div>
 
 
@@ -2605,21 +2605,21 @@ to job routes.</p>
 <p class="admonition-title">Note</p>
 <p>Setting a custom attribute for job submission requires the <code>+</code> prefix in your submit file but it is unnecessary in the job routes.</p>
 </div>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ENTRIES</span> <span class="o">=</span> <span class="p">[</span> <span class="err">\</span>
-     <span class="n">TargetUniverse</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="err">\</span>
-     <span class="n">name</span> <span class="o">=</span> <span class="ss">&quot;Route 1&quot;</span><span class="p">;</span> <span class="err">\</span>
-     <span class="n">Requirements</span> <span class="o">=</span> <span class="p">(</span><span class="n">TARGET</span><span class="p">.</span><span class="n">foo</span> <span class="o">=?=</span> <span class="ss">&quot;bar&quot;</span><span class="p">);</span> <span class="err">\</span>
-<span class="p">]</span> <span class="err">\</span>
-<span class="p">[</span> <span class="err">\</span>
-     <span class="n">TargetUniverse</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="err">\</span>
-     <span class="n">name</span> <span class="o">=</span> <span class="ss">&quot;Route 2&quot;</span><span class="p">;</span> <span class="err">\</span>
-     <span class="n">Requirements</span> <span class="o">=</span> <span class="p">(</span><span class="n">TARGET</span><span class="p">.</span><span class="n">foo</span> <span class="o">=?=</span> <span class="ss">&quot;baz&quot;</span><span class="p">);</span> <span class="err">\</span>
-<span class="p">]</span> <span class="err">\</span>
-<span class="p">[</span> <span class="err">\</span>
-     <span class="n">TargetUniverse</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="err">\</span>
-     <span class="n">name</span> <span class="o">=</span> <span class="ss">&quot;Route 3&quot;</span><span class="p">;</span> <span class="err">\</span>
-     <span class="n">Requirements</span> <span class="o">=</span> <span class="p">(</span><span class="n">TARGET</span><span class="p">.</span><span class="n">foo</span> <span class="o">=!=</span> <span class="ss">&quot;bar&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">TARGET</span><span class="p">.</span><span class="n">foo</span> <span class="o">=!=</span> <span class="ss">&quot;baz&quot;</span><span class="p">);</span> <span class="err">\</span>
-<span class="p">]</span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES = [ \
+     TargetUniverse = 5; \
+     name = &quot;Route 1&quot;; \
+     Requirements = (TARGET.foo =?= &quot;bar&quot;); \
+] \
+[ \
+     TargetUniverse = 5; \
+     name = &quot;Route 2&quot;; \
+     Requirements = (TARGET.foo =?= &quot;baz&quot;); \
+] \
+[ \
+     TargetUniverse = 5; \
+     name = &quot;Route 3&quot;; \
+     Requirements = (TARGET.foo =!= &quot;bar&quot;) &amp;&amp; (TARGET.foo =!= &quot;baz&quot;); \
+]
 </pre></div>
 
 
@@ -2628,11 +2628,11 @@ to job routes.</p>
 <p><a href="../job-router-recipes#setting-a-default">Route defaults</a> can be set for batch system queue, maximum memory, number of cores to request, and maximum walltime. The submitting user can override any of these by setting the corresponding <a href="#job-attributes">attribute</a> in their job.</p>
 <p><strong>Examples</strong></p>
 <p>The following route takes all incoming jobs and submits them to an HTCondor batch system requesting 1GB of memory.</p>
-<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_ENTRIES</span> <span class="o">=</span> <span class="p">[</span> <span class="err">\</span>
-     <span class="n">TargetUniverse</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="err">\</span>
-     <span class="n">name</span> <span class="o">=</span> <span class="ss">&quot;Route 1&quot;</span><span class="p">;</span> <span class="err">\</span>
-     <span class="n">set_default_maxMemory</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span> <span class="err">\</span>
-<span class="p">]</span>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES = [ \
+     TargetUniverse = 5; \
+     name = &quot;Route 1&quot;; \
+     set_default_maxMemory = 1000; \
+]
 </pre></div>
 
 
@@ -2640,31 +2640,31 @@ to job routes.</p>
 <h2 id="troubleshooting-your-jobs">Troubleshooting Your Jobs<a class="headerlink" href="#troubleshooting-your-jobs" title="Permanent link">&para;</a></h2>
 <h4 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h4>
 <p>All interactions between <code>condor_submit</code> and the CE will be recorded in the file specified by the <code>log</code> attribute in your submit file. This includes acknowledgement of the job in your local queue, connection to the CE, and a record of job completion:</p>
-<div class="codehilite"><pre><span></span><span class="mi">000</span> <span class="ss">(</span><span class="mi">786</span>.<span class="mi">000</span>.<span class="mi">000</span><span class="ss">)</span> <span class="mi">12</span><span class="o">/</span><span class="mi">09</span> <span class="mi">16</span>:<span class="mi">49</span>:<span class="mi">55</span> <span class="nv">Job</span> <span class="nv">submitted</span> <span class="nv">from</span> <span class="nv">host</span>: <span class="o">&lt;</span><span class="mi">131</span>.<span class="mi">225</span>.<span class="mi">154</span>.<span class="mi">68</span>:<span class="mi">53134</span><span class="o">&gt;</span>
+<div class="codehilite"><pre><span></span>000 (786.000.000) 12/09 16:49:55 Job submitted from host: &lt;131.225.154.68:53134&gt;
 ...
-<span class="mi">027</span> <span class="ss">(</span><span class="mi">786</span>.<span class="mi">000</span>.<span class="mi">000</span><span class="ss">)</span> <span class="mi">12</span><span class="o">/</span><span class="mi">09</span> <span class="mi">16</span>:<span class="mi">50</span>:<span class="mi">09</span> <span class="nv">Job</span> <span class="nv">submitted</span> <span class="nv">to</span> <span class="nv">grid</span> <span class="nv">resource</span>
-    <span class="nv">GridResource</span>: <span class="nv">condor</span> <span class="nv">condorce</span>.<span class="nv">example</span>.<span class="nv">com</span> <span class="nv">condorce</span>.<span class="nv">example</span>.<span class="nv">com</span>:<span class="mi">9619</span>
-    <span class="nv">GridJobId</span>: <span class="nv">condor</span> <span class="nv">condorce</span>.<span class="nv">example</span>.<span class="nv">com</span> <span class="nv">condorce</span>.<span class="nv">example</span>.<span class="nv">com</span>:<span class="mi">9619</span> <span class="mi">796</span>.<span class="mi">0</span>
+027 (786.000.000) 12/09 16:50:09 Job submitted to grid resource
+    GridResource: condor condorce.example.com condorce.example.com:9619
+    GridJobId: condor condorce.example.com condorce.example.com:9619 796.0
 ...
-<span class="mi">005</span> <span class="ss">(</span><span class="mi">786</span>.<span class="mi">000</span>.<span class="mi">000</span><span class="ss">)</span> <span class="mi">12</span><span class="o">/</span><span class="mi">09</span> <span class="mi">16</span>:<span class="mi">52</span>:<span class="mi">19</span> <span class="nv">Job</span> <span class="nv">terminated</span>.
-        <span class="ss">(</span><span class="mi">1</span><span class="ss">)</span> <span class="nv">Normal</span> <span class="nv">termination</span> <span class="ss">(</span><span class="k">return</span> <span class="nv">value</span> <span class="mi">0</span><span class="ss">)</span>
-                <span class="nv">Usr</span> <span class="mi">0</span> <span class="mi">00</span>:<span class="mi">00</span>:<span class="mi">00</span>, <span class="nv">Sys</span> <span class="mi">0</span> <span class="mi">00</span>:<span class="mi">00</span>:<span class="mi">00</span>  <span class="o">-</span>  <span class="nv">Run</span> <span class="nv">Remote</span> <span class="nv">Usage</span>
-                <span class="nv">Usr</span> <span class="mi">0</span> <span class="mi">00</span>:<span class="mi">00</span>:<span class="mi">00</span>, <span class="nv">Sys</span> <span class="mi">0</span> <span class="mi">00</span>:<span class="mi">00</span>:<span class="mi">00</span>  <span class="o">-</span>  <span class="nv">Run</span> <span class="nv">Local</span> <span class="nv">Usage</span>
-                <span class="nv">Usr</span> <span class="mi">0</span> <span class="mi">00</span>:<span class="mi">00</span>:<span class="mi">00</span>, <span class="nv">Sys</span> <span class="mi">0</span> <span class="mi">00</span>:<span class="mi">00</span>:<span class="mi">00</span>  <span class="o">-</span>  <span class="nv">Total</span> <span class="nv">Remote</span> <span class="nv">Usage</span>
-                <span class="nv">Usr</span> <span class="mi">0</span> <span class="mi">00</span>:<span class="mi">00</span>:<span class="mi">00</span>, <span class="nv">Sys</span> <span class="mi">0</span> <span class="mi">00</span>:<span class="mi">00</span>:<span class="mi">00</span>  <span class="o">-</span>  <span class="nv">Total</span> <span class="nv">Local</span> <span class="nv">Usage</span>
-        <span class="mi">0</span>  <span class="o">-</span>  <span class="nv">Run</span> <span class="nv">Bytes</span> <span class="nv">Sent</span> <span class="nv">By</span> <span class="nv">Job</span>
-        <span class="mi">0</span>  <span class="o">-</span>  <span class="nv">Run</span> <span class="nv">Bytes</span> <span class="nv">Received</span> <span class="nv">By</span> <span class="nv">Job</span>
-        <span class="mi">0</span>  <span class="o">-</span>  <span class="nv">Total</span> <span class="nv">Bytes</span> <span class="nv">Sent</span> <span class="nv">By</span> <span class="nv">Job</span>
-        <span class="mi">0</span>  <span class="o">-</span>  <span class="nv">Total</span> <span class="nv">Bytes</span> <span class="nv">Received</span> <span class="nv">By</span> <span class="nv">Job</span>
+005 (786.000.000) 12/09 16:52:19 Job terminated.
+        (1) Normal termination (return value 0)
+                Usr 0 00:00:00, Sys 0 00:00:00  -  Run Remote Usage
+                Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+                Usr 0 00:00:00, Sys 0 00:00:00  -  Total Remote Usage
+                Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+        0  -  Run Bytes Sent By Job
+        0  -  Run Bytes Received By Job
+        0  -  Total Bytes Sent By Job
+        0  -  Total Bytes Received By Job
 </pre></div>
 
 
 <p>If there are issues contacting the CE, you will see error messages about a 'Down Globus Resource':</p>
-<div class="codehilite"><pre><span></span><span class="mi">020</span> <span class="p">(</span><span class="mi">788</span><span class="p">.</span><span class="mi">000</span><span class="p">.</span><span class="mi">000</span><span class="p">)</span> <span class="mi">12</span><span class="o">/</span><span class="mi">09</span> <span class="mi">16</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="mi">17</span> <span class="n">Detected</span> <span class="n">Down</span> <span class="n">Globus</span> <span class="n">Resource</span>
-    <span class="n">RM</span><span class="o">-</span><span class="n">Contact</span><span class="p">:</span> <span class="n">fermicloud133</span><span class="p">.</span><span class="n">fnal</span><span class="p">.</span><span class="n">gov</span>
-<span class="p">...</span>
-<span class="mi">026</span> <span class="p">(</span><span class="mi">788</span><span class="p">.</span><span class="mi">000</span><span class="p">.</span><span class="mi">000</span><span class="p">)</span> <span class="mi">12</span><span class="o">/</span><span class="mi">09</span> <span class="mi">16</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="mi">17</span> <span class="n">Detected</span> <span class="n">Down</span> <span class="n">Grid</span> <span class="n">Resource</span>
-    <span class="n">GridResource</span><span class="p">:</span> <span class="n">condor</span> <span class="n">condorce</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">com</span> <span class="n">condorce</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">com</span><span class="p">:</span><span class="mi">9619</span>
+<div class="codehilite"><pre><span></span>020 (788.000.000) 12/09 16:56:17 Detected Down Globus Resource
+    RM-Contact: fermicloud133.fnal.gov
+...
+026 (788.000.000) 12/09 16:56:17 Detected Down Grid Resource
+    GridResource: condor condorce.example.com condorce.example.com:9619
 </pre></div>
 
 

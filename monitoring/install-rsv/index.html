@@ -2485,17 +2485,17 @@ This can be done in the configuration of the <a href="../../security/lcmaps-voms
 </li>
 <li>
 <p>Change the default port for HTTP connections to 8000 by editing <code>/etc/httpd/conf/httpd.conf</code></p>
-<div class="codehilite"><pre><span></span><span class="k">Listen</span> <span class="mi">8000</span>
+<div class="codehilite"><pre><span></span>Listen 8000
 </pre></div>
 
 
 </li>
 <li>
 <p>Set up HTTPS access by editing <code>/etc/httpd/conf.d/ssl.conf</code>:</p>
-<div class="codehilite"><pre><span></span><span class="k">Listen</span> <span class="mi">8443</span>
-<span class="o">&lt;</span><span class="n">VirtualHost</span> <span class="n">_default_</span><span class="p">:</span><span class="mi">8443</span><span class="o">&gt;</span>
-<span class="n">SSLCertificateFile</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">grid</span><span class="o">-</span><span class="k">security</span><span class="o">/</span><span class="n">http</span><span class="o">/</span><span class="n">httpcert2</span><span class="p">.</span><span class="n">pem</span>
-<span class="n">SSLCertificateKeyFile</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">grid</span><span class="o">-</span><span class="k">security</span><span class="o">/</span><span class="n">http</span><span class="o">/</span><span class="n">httpkey2</span><span class="p">.</span><span class="n">pem</span>
+<div class="codehilite"><pre><span></span>Listen 8443
+&lt;VirtualHost _default_:8443&gt;
+SSLCertificateFile /etc/grid-security/http/httpcert2.pem
+SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
 </pre></div>
 
 
@@ -2756,7 +2756,7 @@ To use it:</p>
 <p class="admonition-title">Warning</p>
 <p>If you manage your <code>/etc/passwd</code> file with configuration management software such as Puppet, CFEngine or 411, make sure the UID and GID in <code>/etc/condor-cron/config.d/condor_ids</code> matches the UID and GID of the <code>cndrcron</code> user and group in <code>/etc/passwd</code>. If it does not, create a file named <code>/etc/condor-cron/config.d/condor_ids_override</code> with the contents:</p>
 </div>
-<div class="codehilite"><pre><span></span><span class="n">CONDOR_IDS</span><span class="o">=</span><span class="n">UID</span><span class="p">.</span><span class="n">GID</span>
+<div class="codehilite"><pre><span></span>CONDOR_IDS=UID.GID
 </pre></div>
 
 

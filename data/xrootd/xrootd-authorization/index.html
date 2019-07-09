@@ -2105,22 +2105,22 @@ only by the xrootd user, optionally readable by others.</p>
 <p>(The path <code>/etc/xrootd/auth_file</code> corresponds to the
 <a href="http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606592"><code>acc.authdb</code></a> parameter in your xrootd config.)</p>
 <p>Here is an example <code>/etc/xrootd/auth_file</code> :</p>
-<div class="codehilite"><pre><span></span># <span class="nv">This</span> <span class="nv">means</span> <span class="nv">that</span> <span class="nv">all</span> <span class="nv">the</span> <span class="nv">users</span> <span class="nv">have</span> <span class="nv">read</span> <span class="nv">access</span> <span class="nv">to</span> <span class="nv">the</span> <span class="nv">datasets</span>, <span class="nv">_except_</span> <span class="nv">under</span> <span class="o">/</span><span class="nv">private</span>
-<span class="hll"><span class="nv">u</span> <span class="o">*</span> <span class="o">-</span><span class="nv">rl</span> <span class="o">&lt;</span><span class="nv">STORAGE</span> <span class="nv">PATH</span><span class="o">&gt;/</span><span class="nv">private</span> <span class="o">/</span><span class="nv">data</span><span class="o">/</span><span class="nv">xrootdfs</span> <span class="nv">rl</span>
+<div class="codehilite"><pre><span></span># This means that all the users have read access to the datasets, _except_ under /private
+<span class="hll">u * -rl &lt;STORAGE PATH&gt;/private /data/xrootdfs rl
 </span>
-# <span class="nv">Or</span> <span class="nv">the</span> <span class="nv">following</span>, <span class="nv">without</span> <span class="nv">a</span> <span class="nv">restricted</span> <span class="o">/</span><span class="nv">private</span> <span class="nv">dir</span>
-<span class="hll"># <span class="nv">u</span> <span class="o">*</span> <span class="o">&lt;</span><span class="nv">STORAGE</span> <span class="nv">PATH</span><span class="o">&gt;</span> <span class="nv">rl</span>
+# Or the following, without a restricted /private dir
+<span class="hll"># u * &lt;STORAGE PATH&gt; rl
 </span>
-# <span class="nv">This</span> <span class="nv">means</span> <span class="nv">that</span> <span class="nv">all</span> <span class="nv">the</span> <span class="nv">users</span> <span class="nv">have</span> <span class="nv">full</span> <span class="nv">access</span> <span class="nv">to</span> <span class="nv">their</span> <span class="nv">private</span> <span class="nv">home</span> <span class="nv">dirs</span>
-<span class="hll"><span class="nv">u</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nv">STORAGE</span> <span class="nv">PATH</span><span class="o">&gt;/</span><span class="nv">home</span><span class="o">/</span>@<span class="o">=/</span> <span class="nv">a</span>
+# This means that all the users have full access to their private home dirs
+<span class="hll">u = &lt;STORAGE PATH&gt;/home/@=/ a
 </span>
-# <span class="nv">This</span> <span class="nv">means</span> <span class="nv">that</span> <span class="nv">the</span> <span class="nv">privileged</span> <span class="s1">&#39;</span><span class="s">xrootd</span><span class="s1">&#39;</span> <span class="nv">user</span> <span class="nv">can</span> <span class="k">do</span> <span class="nv">everything</span>
-# <span class="nv">There</span> <span class="nv">must</span> <span class="nv">be</span> <span class="nv">at</span> <span class="nv">least</span> <span class="nv">one</span> <span class="nv">such</span> <span class="nv">user</span> <span class="nv">in</span> <span class="nv">order</span> <span class="nv">to</span> <span class="nv">create</span> <span class="nv">the</span>
-# <span class="nv">private</span> <span class="nv">dirs</span> <span class="k">for</span> <span class="nv">users</span> <span class="nv">willing</span> <span class="nv">to</span> <span class="nv">store</span> <span class="nv">their</span> <span class="nv">data</span> <span class="nv">in</span> <span class="nv">the</span> <span class="nv">facility</span>
-<span class="hll"><span class="nv">u</span> <span class="nv">xrootd</span> <span class="o">&lt;</span><span class="nv">STORAGE</span> <span class="nv">PATH</span><span class="o">&gt;</span> <span class="nv">a</span>
+# This means that the privileged &#39;xrootd&#39; user can do everything
+# There must be at least one such user in order to create the
+# private dirs for users willing to store their data in the facility
+<span class="hll">u xrootd &lt;STORAGE PATH&gt; a
 </span>
-# <span class="nv">This</span> <span class="nv">means</span> <span class="nv">that</span> <span class="nv">users</span> <span class="nv">in</span> <span class="nv">group</span> <span class="s1">&#39;</span><span class="s">biology</span><span class="s1">&#39;</span> <span class="nv">can</span> <span class="k">do</span> <span class="nv">anything</span> <span class="nv">under</span> <span class="nv">the</span> <span class="s1">&#39;</span><span class="s">genomics</span><span class="s1">&#39;</span> <span class="nv">directory</span>
-<span class="hll"><span class="nv">g</span> <span class="nv">biology</span> <span class="o">&lt;</span><span class="nv">STORAGE</span> <span class="nv">PATH</span><span class="o">&gt;/</span><span class="nv">genomics</span> <span class="nv">a</span>
+# This means that users in group &#39;biology&#39; can do anything under the &#39;genomics&#39; directory
+<span class="hll">g biology &lt;STORAGE PATH&gt;/genomics a
 </span></pre></div>
 
 
@@ -2130,13 +2130,13 @@ xrootd config file.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Specific paths need to be specified <em>before</em> generic paths; e.g., this does not work:</p>
-<div class="codehilite"><pre><span></span>    <span class="n">u</span> <span class="o">*</span> <span class="n">rl</span> <span class="o">/</span><span class="k">data</span><span class="o">/</span><span class="n">xrootdfs</span> <span class="o">-</span><span class="n">rl</span> <span class="o">/</span><span class="k">data</span><span class="o">/</span><span class="n">xrootdfs</span><span class="o">/</span><span class="n">private</span>
+<div class="codehilite"><pre><span></span>    u * rl /data/xrootdfs -rl /data/xrootdfs/private
 </pre></div>
 
 
 </div>
 <p>More generally, each configuration line of the auth file has the following form:</p>
-<div class="codehilite"><pre><span></span><span class="n">idtype</span> <span class="n">id</span> <span class="n">path</span> <span class="n">privs</span>
+<div class="codehilite"><pre><span></span>idtype id path privs
 </pre></div>
 
 
@@ -2226,16 +2226,16 @@ on all data nodes:</p>
 </li>
 <li>
 <p>Add the following lines to the configuration that you chose above:</p>
-<div class="codehilite"><pre><span></span><span class="s s-Atom">xrootd</span><span class="p">.</span><span class="s s-Atom">seclib</span> <span class="o">/</span><span class="s s-Atom">usr</span><span class="o">/</span><span class="s s-Atom">lib64</span><span class="o">/</span><span class="s s-Atom">libXrdSec</span><span class="o">-</span><span class="mf">4.</span><span class="s s-Atom">so</span>
-<span class="s s-Atom">sec</span><span class="p">.</span><span class="s s-Atom">protocol</span> <span class="o">/</span><span class="s s-Atom">usr</span><span class="o">/</span><span class="s s-Atom">lib64</span> <span class="s s-Atom">gsi</span> <span class="o">-</span><span class="nn">certdir</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">certificates</span> <span class="s s-Atom">\</span>
-                    <span class="o">-</span><span class="nn">cert</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">xrd</span><span class="o">/</span><span class="s s-Atom">xrdcert</span><span class="p">.</span><span class="s s-Atom">pem</span> <span class="s s-Atom">\</span>
-                    <span class="o">-</span><span class="nn">key</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">xrd</span><span class="o">/</span><span class="s s-Atom">xrdkey</span><span class="p">.</span><span class="s s-Atom">pem</span> <span class="s s-Atom">\</span>
-                    <span class="o">-</span><span class="nn">crl</span><span class="p">:</span><span class="mi">1</span> <span class="s s-Atom">\</span>
-                    <span class="o">-</span><span class="nn">authzfun</span><span class="p">:</span><span class="s s-Atom">libXrdLcmaps</span><span class="p">.</span><span class="s s-Atom">so</span> <span class="s s-Atom">\</span>
-                    <span class="o">-</span><span class="nn">authzfunparms</span><span class="p">:</span><span class="s s-Atom">--lcmapscfg=/etc</span><span class="o">/</span><span class="s s-Atom">xrootd</span><span class="o">/</span><span class="s s-Atom">lcmaps</span><span class="p">.</span><span class="s s-Atom">cfg</span><span class="p">,</span><span class="s s-Atom">--loglevel</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="s s-Atom">--policy</span><span class="o">=</span><span class="s s-Atom">authorize_only</span> <span class="s s-Atom">\</span>
-                    <span class="o">-</span><span class="nn">gmapopt</span><span class="p">:</span><span class="mi">10</span> <span class="o">-</span><span class="nn">gmapto</span><span class="p">:</span><span class="mi">0</span>
-<span class="s s-Atom">acc</span><span class="p">.</span><span class="s s-Atom">authdb</span> <span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">xrootd</span><span class="o">/</span><span class="s s-Atom">auth_file</span>
-<span class="s s-Atom">ofs</span><span class="p">.</span><span class="s s-Atom">authorize</span>
+<div class="codehilite"><pre><span></span>xrootd.seclib /usr/lib64/libXrdSec-4.so
+sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
+                    -cert:/etc/grid-security/xrd/xrdcert.pem \
+                    -key:/etc/grid-security/xrd/xrdkey.pem \
+                    -crl:1 \
+                    -authzfun:libXrdLcmaps.so \
+                    -authzfunparms:--lcmapscfg=/etc/xrootd/lcmaps.cfg,--loglevel=0,--policy=authorize_only \
+                    -gmapopt:10 -gmapto:0
+acc.authdb /etc/xrootd/auth_file
+ofs.authorize
 </pre></div>
 
 

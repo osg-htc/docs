@@ -2447,7 +2447,7 @@ Assuming you installed GridFTP using the <code>osg-se-hadoop-gridftp</code> rpm,
 </tbody>
 </table>
 <p>The RPM installs the Gratia probe into the system crontab, but does not configure it. The configuration of the probe is controlled by the file</p>
-<div class="codehilite"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">gratia</span><span class="o">/</span><span class="n">gridftp</span><span class="o">-</span><span class="n">transfer</span><span class="o">/</span><span class="n">ProbeConfig</span>
+<div class="codehilite"><pre><span></span>/etc/gratia/gridftp-transfer/ProbeConfig
 </pre></div>
 
 
@@ -2524,9 +2524,9 @@ Assuming you installed GridFTP using the <code>osg-se-hadoop-gridftp</code> rpm,
 <h3 id="optional-configuration">Optional configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h3>
 <h4 id="setting-transfer-limits-for-gridftp-hdfs">Setting transfer limits for GridFTP-HDFS<a class="headerlink" href="#setting-transfer-limits-for-gridftp-hdfs" title="Permanent link">&para;</a></h4>
 <p>To set a limit on the total or per-user number of transfers, create <code>/etc/sysconfig/gridftp-hdfs</code> and set the following configuration:</p>
-<div class="codehilite"><pre><span></span><span class="n">export</span> <span class="n">GRIDFTP_TRANSFER_LIMIT</span><span class="o">=</span><span class="ss">&quot;80&quot;</span>
-<span class="n">export</span> <span class="n">GRIDFTP_DEFAULT_USER_TRANSFER_LIMIT</span><span class="o">=</span><span class="ss">&quot;50&quot;</span>
-<span class="n">export</span> <span class="n">GRIDFTP_</span><span class="o">%</span><span class="n">RED</span><span class="o">%&lt;</span><span class="n">UNIX</span> <span class="n">USERNAME</span><span class="o">&gt;%</span><span class="n">ENDCOLOR</span><span class="o">%</span><span class="n">_USER_TRANSFER_LIMIT</span><span class="o">=</span><span class="ss">&quot;40&quot;</span>
+<div class="codehilite"><pre><span></span>export GRIDFTP_TRANSFER_LIMIT=&quot;80&quot;
+export GRIDFTP_DEFAULT_USER_TRANSFER_LIMIT=&quot;50&quot;
+export GRIDFTP_<span style="color:red">&lt;UNIX USERNAME&gt;</span>_USER_TRANSFER_LIMIT=&quot;40&quot;
 </pre></div>
 
 
@@ -2550,9 +2550,9 @@ Assuming you installed GridFTP using the <code>osg-se-hadoop-gridftp</code> rpm,
 
 <p>Note that the variables <code>GLOBUS_TCP_PORT_RANGE</code> and <code>GLOBUS_TCP_SOURCE_RANGE</code> can be set here to allow GridFTP to navigate around firewall rules (these affect the inbound and outbound ports, respectively).</p>
 <p>To troubleshoot LCMAPS authorization, you can add the following to <code>/etc/sysconfig/globus-gridftp-server</code> and choose a higher debug level:</p>
-<div class="codehilite"><pre><span></span><span class="o">#</span> <span class="k">level</span> <span class="mi">0</span><span class="p">:</span> <span class="k">no</span> <span class="n">messages</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="n">errors</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="n">also</span> <span class="n">warnings</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="n">also</span> <span class="n">notices</span><span class="p">,</span>
-<span class="o">#</span>  <span class="mi">4</span><span class="p">:</span> <span class="n">also</span> <span class="n">info</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="n">maximum</span> <span class="n">debug</span>
-<span class="n">LCMAPS_DEBUG_LEVEL</span><span class="o">=</span><span class="mi">2</span>
+<div class="codehilite"><pre><span></span># level 0: no messages, 1: errors, 2: also warnings, 3: also notices,
+#  4: also info, 5: maximum debug
+LCMAPS_DEBUG_LEVEL=2
 </pre></div>
 
 

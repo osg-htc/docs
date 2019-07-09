@@ -3168,11 +3168,11 @@ A secondary schedd is optional. You will need to delete the secondary schedd lin
 </li>
 </ol>
 <p>[Example 1]</p>
-<div class="codehilite"><pre><span></span>        <span class="p">:::</span><span class="n">xml</span>
-        <span class="o">&lt;</span><span class="n">collector</span> <span class="n">DN</span><span class="o">=</span><span class="ss">&quot;DN of main collector&quot;</span>
-               <span class="n">node</span><span class="o">=</span><span class="ss">&quot;hostname.domain.tld:9618&quot;</span> <span class="n">secondary</span><span class="o">=</span><span class="ss">&quot;False&quot;</span><span class="o">/&gt;</span>
-        <span class="o">&lt;</span><span class="n">collector</span> <span class="n">DN</span><span class="o">=</span><span class="ss">&quot;DN of secondary collectors (usually same as DN in line above)&quot;</span>
-               <span class="n">node</span><span class="o">=</span><span class="ss">&quot;hostname.domain.tld:9620-9660&quot;</span> <span class="n">secondary</span><span class="o">=</span><span class="ss">&quot;True&quot;</span><span class="o">/&gt;</span>
+<div class="codehilite"><pre><span></span>        :::xml
+        &lt;collector DN=&quot;DN of main collector&quot;
+               node=&quot;hostname.domain.tld:9618&quot; secondary=&quot;False&quot;/&gt;
+        &lt;collector DN=&quot;DN of secondary collectors (usually same as DN in line above)&quot;
+               node=&quot;hostname.domain.tld:9620-9660&quot; secondary=&quot;True&quot;/&gt;
 </pre></div>
 
 
@@ -3184,21 +3184,21 @@ The shared port configuration is incompatible if your Frontend is talking to Fac
 To transition to the use of shared port for secondary collectors, you have to change the collectors section in the Frontend configuration. If you are using the default port range for the secondary collectors as shown in [Example 2] below, then you should replace it with port <code>9618</code> and the sock-range as shown in [Example 1] above.</p>
 <p>If you have a more complex configuration, please read the <a href="http://glideinwms.fnal.gov/doc.prd/frontend/configuration.html">detailed GlideinWMS configuration</a></p>
 <p>[Example 2]</p>
-<div class="codehilite"><pre><span></span>        <span class="p">:::</span><span class="n">xml</span>
-        <span class="o">&lt;</span><span class="n">collector</span> <span class="n">DN</span><span class="o">=</span><span class="ss">&quot;DN of main collector&quot;</span>
-               <span class="n">node</span><span class="o">=</span><span class="ss">&quot;hostname.domain.tld:9618&quot;</span> <span class="n">secondary</span><span class="o">=</span><span class="ss">&quot;False&quot;</span><span class="o">/&gt;</span>
-        <span class="o">&lt;</span><span class="n">collector</span> <span class="n">DN</span><span class="o">=</span><span class="ss">&quot;DN of secondary collectors (usually same as DN in line above)&quot;</span>
-               <span class="n">node</span><span class="o">=</span><span class="err">“</span><span class="n">hostname</span><span class="p">.</span><span class="k">domain</span><span class="p">.</span><span class="n">tld</span><span class="p">:</span><span class="mi">9618</span><span class="o">?</span><span class="n">sock</span><span class="o">=</span><span class="n">collector0</span><span class="o">-</span><span class="mi">40</span><span class="ss">&quot; secondary=&quot;</span><span class="k">True</span><span class="err">&quot;</span><span class="o">/&gt;</span>
+<div class="codehilite"><pre><span></span>        :::xml
+        &lt;collector DN=&quot;DN of main collector&quot;
+               node=&quot;hostname.domain.tld:9618&quot; secondary=&quot;False&quot;/&gt;
+        &lt;collector DN=&quot;DN of secondary collectors (usually same as DN in line above)&quot;
+               node=“hostname.domain.tld:9618?sock=collector0-40&quot; secondary=&quot;True&quot;/&gt;
 </pre></div>
 
 
 <ol>
 <li>The CCBs information.
-    If you have a different configuration of the HTCondor Connection Brokering (CCB servers) from the default (usually the section is empty as the User Collectors acts as CCB if needed), you can set the connection in the CCB section the same way that User Collector information previously mentioned. Also, the same rules for transition to shared_port of the connections, apply to the CCBs.<div class="codehilite"><pre><span></span>    <span class="p">:::</span><span class="n">xml</span>
-    <span class="o">&lt;</span><span class="n">ccb</span> <span class="n">DN</span><span class="o">=</span><span class="ss">&quot;DN of the CCB server&quot;</span>
-           <span class="n">node</span><span class="o">=</span><span class="ss">&quot;hostname.domain.tld:9618&quot;</span><span class="o">/&gt;</span>
-    <span class="o">&lt;</span><span class="n">ccb</span> <span class="n">DN</span><span class="o">=</span><span class="ss">&quot;DN of the CCB server&quot;</span>
-           <span class="n">node</span><span class="o">=</span><span class="err">“</span><span class="n">hostname</span><span class="p">.</span><span class="k">domain</span><span class="p">.</span><span class="n">tld</span><span class="p">:</span><span class="mi">9618</span><span class="o">?</span><span class="n">sock</span><span class="o">=</span><span class="n">collector0</span><span class="o">-</span><span class="mi">40</span><span class="ss">&quot; secondary=&quot;</span><span class="k">True</span><span class="err">&quot;</span><span class="o">/&gt;</span>
+    If you have a different configuration of the HTCondor Connection Brokering (CCB servers) from the default (usually the section is empty as the User Collectors acts as CCB if needed), you can set the connection in the CCB section the same way that User Collector information previously mentioned. Also, the same rules for transition to shared_port of the connections, apply to the CCBs.<div class="codehilite"><pre><span></span>    :::xml
+    &lt;ccb DN=&quot;DN of the CCB server&quot;
+           node=&quot;hostname.domain.tld:9618&quot;/&gt;
+    &lt;ccb DN=&quot;DN of the CCB server&quot;
+           node=“hostname.domain.tld:9618?sock=collector0-40&quot; secondary=&quot;True&quot;/&gt;
 </pre></div>
 
 
@@ -3317,12 +3317,12 @@ on the local machine. It is important that you map the DN's of:</p>
 <p>Below is an example mapfile, by default found in
 <code>/etc/condor/certs/condor_mapfile</code>. In this example there are lines for each of
 services mentioned above.</p>
-<div class="codehilite"><pre><span></span><span class="n">GSI</span> <span class="ss">&quot;<span style="color:red">DN of schedd proxy</span>&quot;</span> <span class="n">schedd</span>
-<span class="n">GSI</span> <span class="ss">&quot;<span style="color:green">DN of frontend proxy</span>&quot;</span> <span class="n">frontend</span>
-<span class="n">GSI</span> <span class="ss">&quot;<span style="color:red">DN of pilot proxy</span>$&quot;</span> <span class="n">pilot_proxy</span>
-<span class="n">GSI</span> <span class="ss">&quot;^/DC=org/DC=doegrids/OU=Services/CN=personal-submit-host2.mydomain.edu$&quot;</span> <span class="o">%</span><span class="n">RED</span><span class="o">&lt;</span><span class="n">example_of_format</span><span class="o">&gt;%</span><span class="n">ENDCOLOR</span><span class="o">%</span>
-<span class="n">GSI</span> <span class="p">(.</span><span class="o">*</span><span class="p">)</span> <span class="n">anonymous</span>
-<span class="n">FS</span> <span class="p">(.</span><span class="o">*</span><span class="p">)</span> <span class="err">\</span><span class="mi">1</span>
+<div class="codehilite"><pre><span></span>GSI &quot;<span style="color:red">DN of schedd proxy</span>&quot; schedd
+GSI &quot;<span style="color:green">DN of frontend proxy</span>&quot; frontend
+GSI &quot;<span style="color:red">DN of pilot proxy</span>$&quot; pilot_proxy
+GSI &quot;^/DC=org/DC=doegrids/OU=Services/CN=personal-submit-host2.mydomain.edu$&quot; %RED&lt;example_of_format&gt;</span>
+GSI (.*) anonymous
+FS (.*) \1
 </pre></div>
 
 
@@ -3341,11 +3341,11 @@ and renew the <span style="color:green">pilot proxies</span> and <span style="co
 <p>For each of your <span style="color:green">pilot proxies</span>, create a <code>[PILOT &lt;NAME&gt;]</code> section, where <code>&lt;NAME&gt;</code> is a descriptive
    name for the proxy that is unique to your local configuration. In each section, set the <code>proxy_cert</code>, <code>proxy_key</code>,
    <code>output</code>, and <code>vo</code> corresponding to each pilot proxy:</p>
-<div class="codehilite"><pre><span></span><span class="k">[PILOT <span style="color:red">&lt;NAME&gt;</span>]</span>
-<span class="na">proxy_cert</span> <span class="o">=</span> <span class="s"><span style="color:red">&lt;PATH TO THE PILOT CERTIFICATE&gt;</span></span>
-<span class="na">proxy_key</span> <span class="o">=</span> <span class="s"><span style="color:red">&lt;PATH TO THE PILOT KEY&gt;</span></span>
-<span class="na">output</span> <span class="o">=</span> <span class="s"><span style="color:red">&lt;PATH TO CREATE THE PILOT PROXY&gt;</span></span>
-<span class="na">vo</span> <span class="o">=</span> <span class="s"><span style="color:red">&lt;NAME OF VIRTUAL ORGANIZATION&gt;</span></span>
+<div class="codehilite"><pre><span></span>[PILOT <span style="color:red">&lt;NAME&gt;</span>]
+proxy_cert = <span style="color:red">&lt;PATH TO THE PILOT CERTIFICATE&gt;</span>
+proxy_key = <span style="color:red">&lt;PATH TO THE PILOT KEY&gt;</span>
+output = <span style="color:red">&lt;PATH TO CREATE THE PILOT PROXY&gt;</span>
+vo = <span style="color:red">&lt;NAME OF VIRTUAL ORGANIZATION&gt;</span>
 </pre></div>
 
 
@@ -3356,10 +3356,10 @@ setting <code>use_voms_server</code>. Choose one of the following options:</p>
 <p>To directly sign the VOMS attributes (recommended), you must have access to the <code>vo</code>'s certificate and key.
   Specify the paths to the <code>vo</code> certificate and key, and optionally, the VOMS attribute (e.g. <code>/osg/Role=NULL/Capability=NULL</code>
   for the OSG VO):</p>
-<div class="codehilite"><pre><span></span><span class="n">use_voms_server</span> <span class="o">=</span> <span class="k">false</span>
-<span class="n">vo_cert</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PATH</span> <span class="k">TO</span> <span class="n">THE</span> <span class="n">PILOT</span> <span class="n">CERTIFICATE</span><span class="o">&gt;</span>
-<span class="n">vo_key</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PATH</span> <span class="k">TO</span> <span class="n">THE</span> <span class="n">PILOT</span> <span class="k">KEY</span><span class="o">&gt;</span>
-<span class="n">fqan</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">VOMS</span> <span class="n">ATTRIBUTE</span><span class="o">&gt;</span>
+<div class="codehilite"><pre><span></span>use_voms_server = false
+vo_cert = &lt;PATH TO THE PILOT CERTIFICATE&gt;
+vo_key = &lt;PATH TO THE PILOT KEY&gt;
+fqan = &lt;VOMS ATTRIBUTE&gt;
 </pre></div>
 
 
@@ -3371,8 +3371,8 @@ setting <code>use_voms_server</code>. Choose one of the following options:</p>
 <li>
 <p>To have your proxy's VOMS attributes signed by the <code>vo</code>'s VOMS server, set <code>use_voms_server = true</code>
   and the VOMS attribute (e.g. <code>/osg/Role=NULL/Capability=NULL</code> for the OSG VO):</p>
-<div class="codehilite"><pre><span></span><span class="n">use_voms_server</span> <span class="o">=</span> <span class="k">true</span>
-<span class="n">fqan</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">VOMS</span> <span class="n">ATTRIBUTE</span><span class="o">&gt;</span>
+<div class="codehilite"><pre><span></span>use_voms_server = true
+fqan = &lt;VOMS ATTRIBUTE&gt;
 </pre></div>
 
 
@@ -3384,10 +3384,10 @@ in the OSG, <code>use_voms_server = false</code> is the preferred method for sig
 </li>
 </ul>
 <p>Optionally, the proxy renewal <code>frequency</code> and <code>lifetime</code> (in hours) can be specified in each <code>[PILOT &lt;NAME&gt;]</code> section:</p>
-<div class="codehilite"><pre><span></span><span class="o">#</span> <span class="k">Default</span><span class="p">:</span> <span class="mi">1</span>
-<span class="n">frequency</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">RENEWAL</span> <span class="n">FREQUENCY</span><span class="o">&gt;</span>
-<span class="o">#</span> <span class="k">Default</span><span class="p">:</span> <span class="mi">24</span>
-<span class="n">lifetime</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PROXY</span> <span class="n">LIFETIME</span><span class="o">&gt;</span>
+<div class="codehilite"><pre><span></span># Default: 1
+frequency = &lt;RENEWAL FREQUENCY&gt;
+# Default: 24
+lifetime = &lt;PROXY LIFETIME&gt;
 </pre></div>
 
 
@@ -3395,10 +3395,10 @@ in the OSG, <code>use_voms_server = false</code> is the preferred method for sig
 <li>
 <p>Configure the location and output of the <span style="color:green">VO Frontend proxy</span> under the <code>[FRONTEND]</code> section and set
    the <code>proxy_cert</code>, <code>proxy_key</code>, and <code>output</code> to paths corresponding to your VO Frontend:</p>
-<div class="codehilite"><pre><span></span><span class="k">[FRONTEND]</span>
-<span class="na">proxy_cert</span> <span class="o">=</span> <span class="s"><span style="color:red">&lt;PATH TO THE FRONTEND CERTIFICATE&gt;</span></span>
-<span class="na">proxy_key</span> <span class="o">=</span> <span class="s"><span style="color:red">&lt;PATH TO THE FRONTEND KEY&gt;</span></span>
-<span class="na">output</span> <span class="o">=</span> <span class="s"><span style="color:red">&lt;PATH TO CREATE THE FRONTEND PROXY&gt;</span></span>
+<div class="codehilite"><pre><span></span>[FRONTEND]
+proxy_cert = <span style="color:red">&lt;PATH TO THE FRONTEND CERTIFICATE&gt;</span>
+proxy_key = <span style="color:red">&lt;PATH TO THE FRONTEND KEY&gt;</span>
+output = <span style="color:red">&lt;PATH TO CREATE THE FRONTEND PROXY&gt;</span>
 </pre></div>
 
 
@@ -3428,13 +3428,13 @@ in the OSG, <code>use_voms_server = false</code> is the preferred method for sig
 </li>
 <li>
 <p>Edit the ProbeConfig located in <code>/etc/gratia/condor/ProbeConfig</code>. First, edit the <code>SiteName</code> and <code>ProbeName</code> to be a unique identifier for your GlideinWMS Submit host. There can be multiple probes (with different names) per site. If you haven't already, you should register your GlideinWMS submit host in <a href="https://github.com/opensciencegrid/topology/">OIM</a>. Then you can use the name you used to register the resource.</p>
-<div class="codehilite"><pre><span></span><span class="n">ProbeName</span><span class="o">=</span><span class="ss">&quot;condor:&lt;hostname&gt;&quot;</span>
-<span class="n">SiteName</span><span class="o">=</span><span class="ss">&quot;HCC-GlideinWMW-Frontend&quot;</span>
+<div class="codehilite"><pre><span></span>ProbeName=&quot;condor:&lt;hostname&gt;&quot;
+SiteName=&quot;HCC-GlideinWMW-Frontend&quot;
 </pre></div>
 
 
 <p>Next, turn the probe on by setting <code>EnableProbe</code>:</p>
-<div class="codehilite"><pre><span></span><span class="n">EnableProbe</span><span class="o">=</span><span class="ss">&quot;1&quot;</span>
+<div class="codehilite"><pre><span></span>EnableProbe=&quot;1&quot;
 </pre></div>
 
 
@@ -3451,22 +3451,22 @@ in the OSG, <code>use_voms_server = false</code> is the preferred method for sig
 <p>The following sections contain additional configuration that may be required depending on the customizations you've made to your GlideinWMS frontend installation.</p>
 <h5 id="users-without-certificates">Users without Certificates<a class="headerlink" href="#users-without-certificates" title="Permanent link">&para;</a></h5>
 <p>If you have users that submit jobs without a certificate explicitly declared in the submit file, you will need to add <code>MapUnknownToGroup</code> to the ProbeConfig. In the file <code>/etc/gratia/condor/ProbeConfig</code>, add the value after the <code>EnableProbe</code>.</p>
-<div class="codehilite"><pre><span></span>    <span class="p">...</span>
-    <span class="n">SuppressGridLocalRecords</span><span class="o">=</span><span class="ss">&quot;0&quot;</span>
-    <span class="n">EnableProbe</span><span class="o">=</span><span class="ss">&quot;1&quot;</span>
-    <span class="o">%</span><span class="n">RED</span><span class="o">%</span><span class="n">MapUnknownToGroup</span><span class="o">=</span><span class="ss">&quot;1&quot;</span><span class="o">%</span><span class="n">ENDCOLOR</span><span class="o">%</span>
+<div class="codehilite"><pre><span></span>    ...
+    SuppressGridLocalRecords=&quot;0&quot;
+    EnableProbe=&quot;1&quot;
+    <span style="color:red">MapUnknownToGroup=&quot;1&quot;</span>
 
-    <span class="n">Title3</span><span class="o">=</span><span class="ss">&quot;Tuning parameter&quot;</span>
-    <span class="p">...</span>
+    Title3=&quot;Tuning parameter&quot;
+    ...
 </pre></div>
 
 
 <p>Further, if you want to record all usage as coming from a single VO, you can configure the probe to override the 'guessed' VO. In the below example, replace the <span style="color:red">Engage</span> with a registered VO that you would like to report as. If you don't have a VO that you are affiliated with, you may use Engage.</p>
-<div class="codehilite"><pre><span></span><span class="p">...</span>
-    <span class="n">MapUnknownToGroup</span><span class="o">=</span><span class="ss">&quot;1&quot;</span>
-    <span class="n">MapGroupToRole</span><span class="o">=</span><span class="ss">&quot;1&quot;</span>
-    <span class="n">VOOverride</span><span class="o">=</span><span class="ss">&quot;Engage&quot;</span>
-<span class="p">...</span>
+<div class="codehilite"><pre><span></span>...
+    MapUnknownToGroup=&quot;1&quot;
+    MapGroupToRole=&quot;1&quot;
+    VOOverride=&quot;Engage&quot;
+...
 </pre></div>
 
 
@@ -3480,11 +3480,11 @@ in the OSG, <code>use_voms_server = false</code> is the preferred method for sig
 
 <h5 id="different-collector-and-other-customizations">Different collector and other customizations<a class="headerlink" href="#different-collector-and-other-customizations" title="Permanent link">&para;</a></h5>
 <p>By default the probe reports to the OSG GRACC. To change that you must edit the configuration file, <code>/etc/gratia/condor/ProbeConfig</code>, and replace the OSG production host with your desired one:</p>
-<div class="codehilite"><pre><span></span><span class="p">...</span>
-    <span class="n">CollectorHost</span><span class="o">=</span><span class="ss">&quot;gratia-osg-prod.opensciencegrid.org:80&quot;</span>
-    <span class="n">SSLHost</span><span class="o">=</span><span class="ss">&quot;gratia-osg-prod.opensciencegrid.org:443&quot;</span>
-    <span class="n">SSLRegistrationHost</span><span class="o">=</span><span class="ss">&quot;gratia-osg-prod.opensciencegrid.org:80&quot;</span>
-<span class="p">...</span>
+<div class="codehilite"><pre><span></span>...
+    CollectorHost=&quot;gratia-osg-prod.opensciencegrid.org:80&quot;
+    SSLHost=&quot;gratia-osg-prod.opensciencegrid.org:443&quot;
+    SSLRegistrationHost=&quot;gratia-osg-prod.opensciencegrid.org:80&quot;
+...
 </pre></div>
 
 
@@ -3505,14 +3505,14 @@ to test a specific site), a Frontend can be configured to match on
 <ol>
 <li>
 <p>In the Frontend's global <code>&lt;match&gt;</code> stanza, set the <code>match_expr</code>:</p>
-<div class="codehilite"><pre><span></span><span class="s1">&#39;((job.get(&quot;DESIRED_Sites&quot;,&quot;nosite&quot;)==&quot;nosite&quot;) or (glidein[&quot;attrs&quot;][&quot;GLIDEIN_Site&quot;] in job.get(&quot;DESIRED_Sites&quot;,&quot;nosite&quot;).split(&quot;,&quot;)))&#39;</span>
+<div class="codehilite"><pre><span></span>&#39;((job.get(&quot;DESIRED_Sites&quot;,&quot;nosite&quot;)==&quot;nosite&quot;) or (glidein[&quot;attrs&quot;][&quot;GLIDEIN_Site&quot;] in job.get(&quot;DESIRED_Sites&quot;,&quot;nosite&quot;).split(&quot;,&quot;)))&#39;
 </pre></div>
 
 
 </li>
 <li>
 <p>In the same <code>&lt;match&gt;</code> stanza, set the <code>start_expr</code>:</p>
-<div class="codehilite"><pre><span></span><span class="err">&#39;</span><span class="p">(</span><span class="n">DESIRED_Sites</span><span class="o">=?=</span><span class="n">undefined</span> <span class="o">||</span> <span class="n">stringListMember</span><span class="p">(</span><span class="n">GLIDEIN_Site</span><span class="p">,</span><span class="n">DESIRED_Sites</span><span class="p">,</span><span class="ss">&quot;,&quot;</span><span class="p">))</span>
+<div class="codehilite"><pre><span></span>&#39;(DESIRED_Sites=?=undefined || stringListMember(GLIDEIN_Site,DESIRED_Sites,&quot;,&quot;))
 </pre></div>
 
 
@@ -3732,14 +3732,14 @@ jobs to HTCondor.</p>
 <ol>
 <li>
 <p>Verify all HTCondor daemons are started.</p>
-<div class="codehilite"><pre><span></span><span class="k">user</span><span class="nv">@host</span><span class="w"> </span><span class="err">$</span><span class="w"> </span><span class="n">condor_config_val</span><span class="w"> </span><span class="o">-</span><span class="n">verbose</span><span class="w"> </span><span class="n">DAEMON_LIST</span><span class="w"></span>
-<span class="nl">DAEMON_LIST</span><span class="p">:</span><span class="w"> </span><span class="n">MASTER</span><span class="p">,</span><span class="w">  </span><span class="n">COLLECTOR</span><span class="p">,</span><span class="w"> </span><span class="n">NEGOTIATOR</span><span class="p">,</span><span class="w">  </span><span class="n">SCHEDD</span><span class="p">,</span><span class="w"> </span><span class="n">SHARED_PORT</span><span class="p">,</span><span class="w"> </span><span class="n">SCHEDDJOBS2</span><span class="w"> </span><span class="n">COLLECTOR0</span><span class="w"> </span><span class="n">COLLECTOR1</span><span class="w"> </span><span class="n">COLLECTOR2</span><span class="w"></span>
-<span class="n">COLLECTOR3</span><span class="w"> </span><span class="n">COLLECTOR4</span><span class="w"> </span><span class="n">COLLECTOR5</span><span class="w"> </span><span class="n">COLLECTOR6</span><span class="w"> </span><span class="n">COLLECTOR7</span><span class="w"> </span><span class="n">COLLECTOR8</span><span class="w"> </span><span class="n">COLLECTOR9</span><span class="w"> </span><span class="n">COLLECTOR10</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR11</span><span class="p">,</span><span class="w"></span>
-<span class="n">COLLECTOR12</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR13</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR14</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR15</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR16</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR17</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR18</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR19</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR20</span><span class="p">,</span><span class="w"></span>
-<span class="n">COLLECTOR21</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR22</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR23</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR24</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR25</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR26</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR27</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR28</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR29</span><span class="p">,</span><span class="w"></span>
-<span class="n">COLLECTOR30</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR31</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR32</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR33</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR34</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR35</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR36</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR37</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR38</span><span class="p">,</span><span class="w"></span>
-<span class="n">COLLECTOR39</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECTOR40</span><span class="w"></span>
-<span class="n">Defined</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="s1">&#39;/etc/condor/config.d/11_gwms_secondary_collectors.config&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="mf">193.</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>user@host $ condor_config_val -verbose DAEMON_LIST
+DAEMON_LIST: MASTER,  COLLECTOR, NEGOTIATOR,  SCHEDD, SHARED_PORT, SCHEDDJOBS2 COLLECTOR0 COLLECTOR1 COLLECTOR2
+COLLECTOR3 COLLECTOR4 COLLECTOR5 COLLECTOR6 COLLECTOR7 COLLECTOR8 COLLECTOR9 COLLECTOR10 , COLLECTOR11,
+COLLECTOR12, COLLECTOR13, COLLECTOR14, COLLECTOR15, COLLECTOR16, COLLECTOR17, COLLECTOR18, COLLECTOR19, COLLECTOR20,
+COLLECTOR21, COLLECTOR22, COLLECTOR23, COLLECTOR24, COLLECTOR25, COLLECTOR26, COLLECTOR27, COLLECTOR28, COLLECTOR29,
+COLLECTOR30, COLLECTOR31, COLLECTOR32, COLLECTOR33, COLLECTOR34, COLLECTOR35, COLLECTOR36, COLLECTOR37, COLLECTOR38,
+COLLECTOR39, COLLECTOR40
+Defined in &#39;/etc/condor/config.d/11_gwms_secondary_collectors.config&#39;, line 193.
 </pre></div>
 
 
@@ -3768,17 +3768,17 @@ jobs to HTCondor.</p>
 </ol>
 <h3 id="glideinwms-job-submission">GlideinWMS Job submission<a class="headerlink" href="#glideinwms-job-submission" title="Permanent link">&para;</a></h3>
 <p>HTCondor submit file <code>glidein-job.sub</code>. This is a simple job printing the hostname of the host where the job is running:</p>
-<div class="codehilite"><pre><span></span><span class="o">#</span><span class="n">file</span> <span class="n">glidein</span><span class="o">-</span><span class="n">job</span><span class="p">.</span><span class="n">sub</span>
-<span class="n">universe</span> <span class="o">=</span> <span class="n">vanilla</span>
-<span class="n">executable</span> <span class="o">=</span> <span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">hostname</span>
-<span class="k">output</span> <span class="o">=</span> <span class="n">glidein</span><span class="o">/</span><span class="n">test</span><span class="p">.</span><span class="k">out</span>
-<span class="n">error</span> <span class="o">=</span> <span class="n">glidein</span><span class="o">/</span><span class="n">test</span><span class="p">.</span><span class="n">err</span>
-<span class="n">requirements</span> <span class="o">=</span> <span class="n">IS_GLIDEIN</span> <span class="o">==</span> <span class="k">True</span>
-<span class="n">log</span> <span class="o">=</span> <span class="n">glidein</span><span class="o">/</span><span class="n">test</span><span class="p">.</span><span class="n">log</span>
-<span class="n">ShouldTransferFiles</span> <span class="o">=</span> <span class="n">YES</span>
+<div class="codehilite"><pre><span></span>#file glidein-job.sub
+universe = vanilla
+executable = /bin/hostname
+output = glidein/test.out
+error = glidein/test.err
+requirements = IS_GLIDEIN == True
+log = glidein/test.log
+ShouldTransferFiles = YES
 
-<span class="n">when_to_transfer_output</span> <span class="o">=</span> <span class="n">ON_EXIT</span>
-<span class="n">queue</span>
+when_to_transfer_output = ON_EXIT
+queue
 </pre></div>
 
 
@@ -3935,7 +3935,7 @@ made available on the Web:
 </ul>
 <h3 id="frontend-doesnt-trust-factory">Frontend doesn't trust Factory<a class="headerlink" href="#frontend-doesnt-trust-factory" title="Permanent link">&para;</a></h3>
 <p>If your frontend complains in the debug log:</p>
-<div class="codehilite"><pre><span></span><span class="nv">code</span> <span class="mi">256</span>:[<span class="s1">&#39;</span><span class="s">Error: communication error</span><span class="se">\n</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">AUTHENTICATE:1003:Failed to authenticate with any method</span><span class="se">\n</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">AUTHENTICATE:1004:Failed to authenticate using GSI</span><span class="se">\n</span><span class="s1">&#39;</span>, <span class="s2">&quot;</span><span class="s">GSI:5006:Failed to authenticate because the subject &#39;/DC=org/DC=doegrids/OU=Services/CN=devg-3.t2.ucsd.edu&#39; is not currently trusted by you.  If it should be, add it to GSI_DAEMON_NAME in the condor_config, or use the environment variable override (check the manual).</span><span class="se">\n</span><span class="s2">&quot;</span>, <span class="s1">&#39;</span><span class="s">GSI:5004:Failed to gss_assist_gridmap /DC=org/DC=doegrids/OU=Services/CN=devg-3.t2.ucsd.edu to a local user.</span>
+<div class="codehilite"><pre><span></span>code 256:[&#39;Error: communication error\n&#39;, &#39;AUTHENTICATE:1003:Failed to authenticate with any method\n&#39;, &#39;AUTHENTICATE:1004:Failed to authenticate using GSI\n&#39;, &quot;GSI:5006:Failed to authenticate because the subject &#39;/DC=org/DC=doegrids/OU=Services/CN=devg-3.t2.ucsd.edu&#39; is not currently trusted by you.  If it should be, add it to GSI_DAEMON_NAME in the condor_config, or use the environment variable override (check the manual).\n&quot;, &#39;GSI:5004:Failed to gss_assist_gridmap /DC=org/DC=doegrids/OU=Services/CN=devg-3.t2.ucsd.edu to a local user.
 </pre></div>
 
 

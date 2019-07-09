@@ -2282,13 +2282,13 @@ or <code>/etc/xrootd/config.d/9*.cfg</code> (for directives that are processed A
 </table>
 <p>For example, if the HCC VO would like to set up an origin server exporting from the mount point <code>/mnt/stash</code>,
 and HCC's registered namespace is <code>/hcc</code>, then the following would be set in <code>10-common-site-local.cfg</code>:</p>
-<div class="codehilite"><pre><span></span><span class="k">set</span> <span class="n">rootdir</span> <span class="o">=</span> <span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">stash</span>
-<span class="k">set</span> <span class="n">resourcename</span> <span class="o">=</span> <span class="n">HCC_STASH_ORIGIN</span>
+<div class="codehilite"><pre><span></span>set rootdir = /mnt/stash
+set resourcename = HCC_STASH_ORIGIN
 </pre></div>
 
 
 <p>And the following would be set in <code>10-origin-site-local.cfg</code>:</p>
-<div class="codehilite"><pre><span></span><span class="k">set</span> <span class="n">originexport</span> <span class="o">=</span> <span class="o">/</span><span class="n">hcc</span>
+<div class="codehilite"><pre><span></span>set originexport = /hcc
 </pre></div>
 
 

@@ -2353,12 +2353,12 @@
 <li>
 <p>Add the new Tester to your GlideinWMS front-end configuration.
    Edit the file <code>/etc/gwms-frontend/frontend.xml</code> and add a line as follows within the <code>&lt;schedds&gt;</code> element</p>
-<div class="codehilite"><pre><span></span><span class="o">&lt;</span><span class="n">schedd</span> <span class="n">DN</span><span class="o">=</span><span class="ss">&quot;<span style="color:red">&lt;TESTER_DN&gt;</span>&quot;</span> <span class="n">fullname</span><span class="o">=</span><span class="ss">&quot;<span style="color:red">&lt;TESTER_HOSTNAME&gt;</span>&quot;</span><span class="o">&gt;</span>
+<div class="codehilite"><pre><span></span>&lt;schedd DN=&quot;<span style="color:red">&lt;TESTER_DN&gt;</span>&quot; fullname=&quot;<span style="color:red">&lt;TESTER_HOSTNAME&gt;</span>&quot;&gt;
 </pre></div>
 
 
 <p>Where <code>TESTER_DN</code> is the Distinguished Name (DN) of the host certificate of your Tester host (as above), and <code>TESTER_HOSTNAME</code> is the fully qualified hostname of the Tester host. For example:</p>
-<div class="codehilite"><pre><span></span><span class="o">&lt;</span><span class="n">schedd</span> <span class="n">DN</span><span class="o">=</span><span class="ss">&quot;/DC=com/DC=DigiCert-Grid/O=Open Science Grid/OU=Services/CN=fermicloud357.fnal.gov&quot;</span> <span class="n">fullname</span><span class="o">=</span><span class="ss">&quot;fermicloud357.fnal.gov&quot;</span><span class="o">&gt;</span>
+<div class="codehilite"><pre><span></span>&lt;schedd DN=&quot;/DC=com/DC=DigiCert-Grid/O=Open Science Grid/OU=Services/CN=fermicloud357.fnal.gov&quot; fullname=&quot;fermicloud357.fnal.gov&quot;&gt;
 </pre></div>
 
 
@@ -2376,12 +2376,12 @@
 <p>Configure the Tester for the VOs that your Front-end supports</p>
 <p>Edit the file <code>/etc/rsv/metrics/org.osg.local-gfactory-site-querying-local.conf</code>. The <code>constraint</code> line is an HTCondor ClassAd expression containing one <code>stringListMember</code> function per VO that your Front-end supports. If there is more than one VO, the function invocations are joined by the “logical or” operator, <code>||</code>. Edit the <code>constraint</code> line for your Front-end.</p>
 <p>For example, for a single VO named <code>Foo</code>, the line would be:</p>
-<div class="codehilite"><pre><span></span><span class="k">constraint</span> <span class="o">=</span> <span class="n">stringListMember</span><span class="p">(</span><span class="ss">&quot;Foo&quot;</span><span class="p">,</span> <span class="n">GLIDEIN_Supported_VOs</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span>constraint = stringListMember(&quot;Foo&quot;, GLIDEIN_Supported_VOs)
 </pre></div>
 
 
 <p>For two VOs named <code>Foo</code> and <code>Bar</code>, the line would be:</p>
-<div class="codehilite"><pre><span></span><span class="k">constraint</span> <span class="o">=</span> <span class="n">stringListMember</span><span class="p">(</span><span class="ss">&quot;Foo&quot;</span><span class="p">,</span> <span class="n">GLIDEIN_Supported_VOs</span><span class="p">)</span> <span class="o">||</span> <span class="n">stringListMember</span><span class="p">(</span><span class="ss">&quot;Bar&quot;</span><span class="p">,</span> <span class="n">GLIDEIN_Supported_VOs</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span>constraint = stringListMember(&quot;Foo&quot;, GLIDEIN_Supported_VOs) || stringListMember(&quot;Bar&quot;, GLIDEIN_Supported_VOs)
 </pre></div>
 
 
@@ -2402,8 +2402,8 @@
 <li>
 <p>Configure the special HTCondor-RSV instance with your host IP address.</p>
 <p>Create the file <code>/etc/condor/config.d/98_public_interface.config</code> with this content:</p>
-<div class="codehilite"><pre><span></span><span class="n">NETWORK_INTERFACE</span> <span class="o">=</span> <span class="o">%</span><span class="n">RED</span><span class="o">%&lt;</span><span class="n">ADDRESS</span><span class="o">&gt;%</span><span class="n">ENDCOLOR</span><span class="o">%</span>
-<span class="n">CONDOR_HOST</span> <span class="o">=</span> <span class="o">%</span><span class="n">RED</span><span class="o">%&lt;</span><span class="n">CENTRAL_MGR</span><span class="o">&gt;%</span><span class="n">ENDCOLOR</span><span class="o">%</span>
+<div class="codehilite"><pre><span></span>NETWORK_INTERFACE = <span style="color:red">&lt;ADDRESS&gt;</span>
+CONDOR_HOST = <span style="color:red">&lt;CENTRAL_MGR&gt;</span>
 </pre></div>
 
 

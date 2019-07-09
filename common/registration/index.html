@@ -2358,26 +2358,26 @@ host to avoid any duplicate registrations:</p>
 <ul>
 <li>
 <p>If your resource group already exists under your facility and site, open the following URL in your browser:</p>
-<div class="codehilite"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">opensciencegrid</span><span class="o">/</span><span class="n">topology</span><span class="o">/</span><span class="n">edit</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">topology</span><span class="o">/&lt;</span><span class="n">FACILITY</span><span class="o">&gt;/&lt;</span><span class="n">SITE</span><span class="o">&gt;/&lt;</span><span class="n">RESOURCE</span> <span class="k">GROUP</span><span class="o">&gt;</span><span class="p">.</span><span class="n">yaml</span>
+<div class="codehilite"><pre><span></span>https://github.com/opensciencegrid/topology/edit/master/topology/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCE GROUP&gt;.yaml
 </pre></div>
 
 
 <p>For example, to add a resource to the <code>CHTC</code> resource group for the <code>CHTC</code> site at the <code>University of
 Wisconsin</code>, open the following URL:</p>
-<div class="codehilite"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">opensciencegrid</span><span class="o">/</span><span class="n">topology</span><span class="o">/</span><span class="n">edit</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">topology</span><span class="o">/</span><span class="n">University</span> <span class="k">of</span> <span class="n">Wisconsin</span><span class="o">/</span><span class="n">CHTC</span><span class="o">/</span><span class="n">CHTC</span><span class="p">.</span><span class="n">yaml</span>
+<div class="codehilite"><pre><span></span>https://github.com/opensciencegrid/topology/edit/master/topology/University of Wisconsin/CHTC/CHTC.yaml
 </pre></div>
 
 
 </li>
 <li>
 <p>If any of your facility, site, or resource group do not exist, open the following URL in your browser:</p>
-<div class="codehilite"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">opensciencegrid</span><span class="o">/</span><span class="n">topology</span><span class="o">/</span><span class="k">new</span><span class="o">/</span><span class="n">master</span><span class="o">?</span><span class="n">filename</span><span class="o">=</span><span class="n">topology</span><span class="o">/&lt;</span><span class="n">FACILITY</span><span class="o">&gt;/&lt;</span><span class="n">SITE</span><span class="o">&gt;/&lt;</span><span class="n">RESOURCE</span> <span class="k">GROUP</span><span class="o">&gt;</span><span class="p">.</span><span class="n">yaml</span>
+<div class="codehilite"><pre><span></span>https://github.com/opensciencegrid/topology/new/master?filename=topology/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCE GROUP&gt;.yaml
 </pre></div>
 
 
 <p>For example, to create a <code>CHTC-Slurm-HPC</code> resource group for the Center for High Throughput Computing (<code>CHTC</code>)
 at the <code>University of Wisconsin</code>, open the following URL:</p>
-<div class="codehilite"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">opensciencegrid</span><span class="o">/</span><span class="n">topology</span><span class="o">/</span><span class="k">new</span><span class="o">/</span><span class="n">master</span><span class="o">?</span><span class="n">filename</span><span class="o">=</span><span class="n">topology</span><span class="o">/</span><span class="n">University</span> <span class="k">of</span> <span class="n">Wisconsin</span><span class="o">/</span><span class="n">CHTC</span><span class="o">/</span><span class="n">CHTC</span><span class="o">-</span><span class="n">Slurm</span><span class="o">-</span><span class="n">HPC</span><span class="p">.</span><span class="n">yaml</span>
+<div class="codehilite"><pre><span></span>https://github.com/opensciencegrid/topology/new/master?filename=topology/University of Wisconsin/CHTC/CHTC-Slurm-HPC.yaml
 </pre></div>
 
 
@@ -2398,7 +2398,7 @@ access to the OSG copy of the topology data, which is why you are creating a pul
 </li>
 <li>
 <p>Submit your changes as a pull request, providing a descriptive commit message. For example:</p>
-<div class="codehilite"><pre><span></span><span class="n">Adding</span> <span class="n">a</span> <span class="k">new</span> <span class="n">compute</span> <span class="n">element</span> <span class="k">to</span> <span class="n">the</span> <span class="n">CHTC</span>
+<div class="codehilite"><pre><span></span>Adding a new compute element to the CHTC
 </pre></div>
 
 
@@ -2429,7 +2429,7 @@ access to the OSG copy of the topology data, which is why you are creating a pul
 </li>
 <li>
 <p>Submit your changes as a pull request, providing a descriptive commit message. For example:</p>
-<div class="codehilite"><pre><span></span><span class="nv">Updating</span> <span class="nv">administrative</span> <span class="nv">contact</span> <span class="nv">information</span> <span class="k">for</span> <span class="nv">CHTC</span><span class="o">-</span><span class="nv">glidein2</span>
+<div class="codehilite"><pre><span></span>Updating administrative contact information for CHTC-glidein2
 </pre></div>
 
 
@@ -2437,17 +2437,17 @@ access to the OSG copy of the topology data, which is why you are creating a pul
 </ol>
 <h3 id="retiring-resources">Retiring resources<a class="headerlink" href="#retiring-resources" title="Permanent link">&para;</a></h3>
 <p>To retire an already registered resource, set <code>Active: false</code>. For example:</p>
-<div class="codehilite"><pre><span></span><span class="p">...</span>
-<span class="n">Production</span><span class="p">:</span> <span class="k">true</span>
-<span class="n">Resources</span><span class="p">:</span>
-  <span class="n">GLOW</span><span class="p">:</span>
-<span class="hll">    <span class="n">Active</span><span class="p">:</span> <span class="k">false</span>
-</span>    <span class="p">...</span>
-    <span class="n">Services</span><span class="p">:</span>
-      <span class="n">CE</span><span class="p">:</span>
-        <span class="n">Description</span><span class="p">:</span> <span class="n">Compute</span> <span class="n">Element</span>
-        <span class="n">Details</span><span class="p">:</span>
-          <span class="n">hidden</span><span class="p">:</span> <span class="k">false</span>
+<div class="codehilite"><pre><span></span>...
+Production: true
+Resources:
+  GLOW:
+<span class="hll">    Active: false
+</span>    ...
+    Services:
+      CE:
+        Description: Compute Element
+        Details:
+          hidden: false
 </pre></div>
 
 
@@ -2465,7 +2465,7 @@ registering a downtime.</p>
 <p>For example, downtimes for resources in the <code>CHTC-Slurm-HPC</code> resource group of the <code>CHTC</code> site at the <code>University of
 Wisconsin</code> can be found and registered in the following file, relative to the
 <a href="https://github.com/opensciencegrid/topology/tree/master/">root of the topology repository</a>:</p>
-<div class="codehilite"><pre><span></span><span class="n">topology</span><span class="o">/</span><span class="n">University</span> <span class="k">of</span> <span class="n">Wisconsin</span><span class="o">/</span><span class="n">CHTC</span><span class="o">/</span><span class="n">CHTC</span><span class="o">-</span><span class="n">Slurm</span><span class="o">-</span><span class="n">HPC_downtime</span><span class="p">.</span><span class="n">yaml</span>
+<div class="codehilite"><pre><span></span>topology/University of Wisconsin/CHTC/CHTC-Slurm-HPC_downtime.yaml
 </pre></div>
 
 
@@ -2544,7 +2544,7 @@ Follow the instructions below:</p>
 <li>
 <p>Open the following URL in your browser using the facility, site, and resource group names to replace
     <code>&lt;FACILITY&gt;</code>, <code>&lt;SITE&gt;</code>, and <code>&lt;RESOURCE GROUP&gt;</code>, respectively:</p>
-<div class="codehilite"><pre><span></span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">opensciencegrid</span><span class="o">/</span><span class="n">topology</span><span class="o">/</span><span class="n">edit</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">topology</span><span class="o">/&lt;</span><span class="n">FACILITY</span><span class="o">&gt;/&lt;</span><span class="n">SITE</span><span class="o">&gt;/&lt;</span><span class="n">RESOURCE</span> <span class="k">GROUP</span><span class="o">&gt;</span><span class="n">_downtime</span><span class="p">.</span><span class="n">yaml</span>
+<div class="codehilite"><pre><span></span> https://github.com/opensciencegrid/topology/edit/master/topology/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCE GROUP&gt;_downtime.yaml
 </pre></div>
 
 
@@ -2562,7 +2562,7 @@ access to the OSG copy of the topology data, which is why you are creating a pul
 </li>
 <li>
 <p>Submit your changes as a pull request, providing a descriptive commit message. For example:</p>
-<div class="codehilite"><pre><span></span><span class="nv">Move</span> <span class="nv">forward</span> <span class="k">end</span> <span class="nv">date</span> <span class="k">for</span> <span class="nv">CHTC</span><span class="o">-</span><span class="nv">glidein2</span> <span class="nv">regular</span> <span class="nv">maintenance</span>
+<div class="codehilite"><pre><span></span>Move forward end date for CHTC-glidein2 regular maintenance
 </pre></div>
 
 
@@ -2610,7 +2610,7 @@ access to the OSG copy of the topology data, which is why you are creating a pul
 </li>
 <li>
 <p>Submit your changes as a pull request, providing a descriptive commit message. For example:</p>
-<div class="codehilite"><pre><span></span><span class="nv">Updating</span> <span class="nv">contact</span> <span class="nv">information</span> <span class="k">for</span> <span class="nv">the</span> <span class="nv">GLOW</span> <span class="nv">VO</span>
+<div class="codehilite"><pre><span></span>Updating contact information for the GLOW VO
 </pre></div>
 
 
@@ -2648,7 +2648,7 @@ access to the OSG copy of the topology data, which is why you are creating a pul
 </li>
 <li>
 <p>Submit your changes as a pull request, providing a descriptive commit message. For example:</p>
-<div class="codehilite"><pre><span></span><span class="nv">Updating</span> <span class="nv">contact</span> <span class="nv">information</span> <span class="k">for</span> <span class="nv">the</span> <span class="nv">Mu2e</span> <span class="nv">project</span>
+<div class="codehilite"><pre><span></span>Updating contact information for the Mu2e project
 </pre></div>
 
 

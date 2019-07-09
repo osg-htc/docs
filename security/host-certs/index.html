@@ -2571,12 +2571,12 @@ The steps to setup the timer are as follows:</p>
 <ol>
 <li>
 <p>Create a service file called <code>/etc/systemd/system/certbot.service</code> with the following contents</p>
-<div class="codehilite"><pre><span></span><span class="k">[Unit]</span>
-<span class="na">Description</span><span class="o">=</span><span class="s">Let&#39;s Encrypt renewal</span>
+<div class="codehilite"><pre><span></span>[Unit]
+Description=Let&#39;s Encrypt renewal
 
-<span class="k">[Service]</span>
-<span class="na">Type</span><span class="o">=</span><span class="s">oneshot</span>
-<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/bin/certbot renew --quiet --agree-tos</span>
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/certbot renew --quiet --agree-tos
 </pre></div>
 
 
@@ -2584,16 +2584,16 @@ The steps to setup the timer are as follows:</p>
 <li>
 <p>Once the certbot service is working correctly, you will need to create the timer file.
    Create the timer file at <code>/etc/systemd/system/certbot.timer</code>) with the following contents:</p>
-<div class="codehilite"><pre><span></span><span class="k">[Unit]</span>
-<span class="na">Description</span><span class="o">=</span><span class="s">Twice daily renewal of Let&#39;s Encrypt&#39;s certificates</span>
+<div class="codehilite"><pre><span></span>[Unit]
+Description=Twice daily renewal of Let&#39;s Encrypt&#39;s certificates
 
-<span class="k">[Timer]</span>
-<span class="na">OnCalendar</span><span class="o">=</span><span class="s">0/12:00:00</span>
-<span class="na">RandomizedDelaySec</span><span class="o">=</span><span class="s">1h</span>
-<span class="na">Persistent</span><span class="o">=</span><span class="s">true</span>
+[Timer]
+OnCalendar=0/12:00:00
+RandomizedDelaySec=1h
+Persistent=true
 
-<span class="k">[Install]</span>
-<span class="na">WantedBy</span><span class="o">=</span><span class="s">timers.target</span>
+[Install]
+WantedBy=timers.target
 </pre></div>
 
 
