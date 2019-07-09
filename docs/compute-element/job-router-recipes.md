@@ -554,7 +554,7 @@ This results in the following being appended to the script that gets submitted t
 
 ```
 #PBS -l walltime=3600
-#PBS -A %RED%<CE job's x509UserProxyFirstFQAN attribute>%ENDCOLOR%
+#PBS -A <CE job's x509UserProxyFirstFQAN attribute>
 ```
 
 Reference
