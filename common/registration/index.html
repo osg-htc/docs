@@ -2351,9 +2351,14 @@ host to avoid any duplicate registrations:</p>
 <li><strong>If the search doesn't return any results</strong>, skip to <a href="#new-resources">these instructions</a> for registering a new
   resource.</li>
 <li><strong>If the search returns a single YAML file</strong>, open the link to the YAML file and skip to
-  <a href="#modifying-existing-resources">these instructions</a> for modifying an existing resources.</li>
+  <a href="#modifying-existing-resources">these instructions</a> for modifying existing resources.</li>
 <li><strong>If the search returns more than one YAML file</strong>, please <a href="#getting-help">contact us</a>.</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are adding a new service to a host which is already registered as a resource,
+follow the <a href="#modifying-existing-resources">instructions</a> for modifying existing resources.</p>
+</div>
 </li>
 </ol>
 <h3 id="new-resources">New resources<a class="headerlink" href="#new-resources" title="Permanent link">&para;</a></h3>
@@ -2433,15 +2438,18 @@ access to the OSG copy of the topology data, which is why you are creating a pul
    as a guide.
    You may leave any <code>ID</code> or <code>GroupID</code> fields blank.
    Make sure that the formatting and indentation of the modified entry does not change.</p>
-<div class="admonition note">
-<p class="admonition-title">"You're editing a file in a project you don't have write access to."</p>
-<p>If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
-access to the OSG copy of the topology data, which is why you are creating a pull request.</p>
-</div>
 </li>
-<li>
-<p>Submit your changes as a pull request, providing a descriptive commit message. For example:</p>
-<div class="codehilite"><pre><span></span>Updating administrative contact information for CHTC-glidein2
+</ol>
+<p>If you are adding a new service to a host that is already registered as a resource,
+   add the new service to the existing resource; do not create a new resource for the same host.</p>
+<div class="codehilite"><pre><span></span>!!! note &quot;&quot;You&#39;re editing a file in a project you don&#39;t have write access to.&quot;&quot;
+    If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
+    access to the OSG copy of the topology data, which is why you are creating a pull request.
+</pre></div>
+
+
+<ol>
+<li>Submit your changes as a pull request, providing a descriptive commit message. For example:<div class="codehilite"><pre><span></span>Updating administrative contact information for CHTC-glidein2
 </pre></div>
 
 
