@@ -1,6 +1,10 @@
 Configuring XRootD Authorization
 ================================
 
+!!!bug "EL7 version compatibility"
+    There is an incompatibility with EL7 < 7.5 due to an issue with the `globus-gsi-proxy-core` package
+
+
 There are several authorization options in XRootD available through its security plugins.
 In this document, we will cover the [`xrootd-lcmaps`](#enabling-xrootd-lcmaps-authorization) security option supported
 in the OSG.
