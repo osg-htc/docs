@@ -212,7 +212,7 @@ an InCommon subscription.
 1. Run the following command to obtain the host certificate with Let's Encrypt:
 
         :::console
-        root@host # certbot certonly --standalone --email %RED%<ADMIN_EMAIL>%ENDCOLOR% -d %RED%<HOST>%ENDCOLOR%
+        root@host # certbot certonly --standalone --email <ADMIN_EMAIL> -d <HOST>
 
 1. Set up hostcert/hostkey links:
 
