@@ -9,6 +9,7 @@ Release Notes
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.32](/release/3.4/release-3-4-32)     | 2019-07-25 | Frontier Squid 4.4-2.1, Singularity 3.2.1-1.1, VO Package v94; Upcoming: HTCondor 8.8.4 |
 | [3.4.31-2](/release/3.4/release-3-4-31-2) | 2019-07-02 | IGTF 1.101                                                              |
 | [3.4.31](/release/3.4/release-3-4-31)     | 2019-06-13 | Singularity 3.2.1, GlideinWMS 3.4.5-2, HTCondor 8.6.13-1.4, VO Package v93; Upcoming: HTCondor 8.8.3 |
 | [3.4.30-2](/release/3.4/release-3-4-30-2) | 2019-05-30 | IGTF 1.99, VO Package v92                                               |
