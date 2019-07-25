@@ -77,7 +77,7 @@ host to avoid any duplicate registrations:
     - **If the search doesn't return any results**, skip to [these instructions](#new-resources) for registering a new
       resource.
     - **If the search returns a single YAML file**, open the link to the YAML file and skip to
-      [these instructions](#modifying-existing-resources) for modifying an existing resources.
+      [these instructions](#modifying-existing-resources) for modifying existing resources.
     - **If the search returns more than one YAML file**, please [contact us](#getting-help).
 
 ### New resources ###
