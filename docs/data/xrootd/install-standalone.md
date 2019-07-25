@@ -1,3 +1,7 @@
+!!!bug "EL7 version compatibility"
+    There is an incompatibility with EL7 < 7.5 due to an issue with the xrootd-lcmaps package
+
+
 Install XRootD Standalone
 =========================
 
