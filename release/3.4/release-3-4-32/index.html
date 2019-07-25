@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://opensciencegrid.github.io/docs/release/3.4/release-3-4-7/">
+        <link rel="canonical" href="https://opensciencegrid.github.io/docs/release/3.4/release-3-4-32/">
       
       
       
@@ -38,7 +38,7 @@
     
     
       
-        <title>OSG Release 3.4.7 - OSG Documentation</title>
+        <title>OSG Release 3.4.32 - OSG Documentation</title>
       
     
     
@@ -94,7 +94,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#osg-software-release-347" tabindex="1" class="md-skip">
+      <a href="#osg-software-release-3432" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -120,7 +120,7 @@
                 OSG Documentation
               </span>
               <span class="md-header-nav__topic">
-                OSG Release 3.4.7
+                OSG Release 3.4.32
               </span>
             
           
@@ -1153,11 +1153,231 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../release-3-4-32/" title="OSG Release 3.4.32" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        OSG Release 3.4.32
+      </label>
+    
+    <a href="./" title="OSG Release 3.4.32" class="md-nav__link md-nav__link--active">
       OSG Release 3.4.32
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary-of-changes" title="Summary of changes" class="md-nav__link">
+    Summary of changes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" title="Notes" class="md-nav__link">
+    Notes
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#glideinwms" title="GlideinWMS" class="md-nav__link">
+    GlideinWMS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-issues" title="Known Issues" class="md-nav__link">
+    Known Issues
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-to-the-new-release" title="Updating to the new release" class="md-nav__link">
+    Updating to the new release
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-repositories" title="Update Repositories" class="md-nav__link">
+    Update Repositories
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-software" title="Update Software" class="md-nav__link">
+    Update Software
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#need-help" title="Need help?" class="md-nav__link">
+    Need help?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detailed-changes-in-this-release" title="Detailed changes in this release" class="md-nav__link">
+    Detailed changes in this release
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#packages" title="Packages" class="md-nav__link">
+    Packages
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-6" title="Enterprise Linux 6" class="md-nav__link">
+    Enterprise Linux 6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-7" title="Enterprise Linux 7" class="md-nav__link">
+    Enterprise Linux 7
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rpms" title="RPMs" class="md-nav__link">
+    RPMs
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-6_1" title="Enterprise Linux 6" class="md-nav__link">
+    Enterprise Linux 6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-7_1" title="Enterprise Linux 7" class="md-nav__link">
+    Enterprise Linux 7
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upcoming-packages" title="Upcoming Packages" class="md-nav__link">
+    Upcoming Packages
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-6_2" title="Enterprise Linux 6" class="md-nav__link">
+    Enterprise Linux 6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-7_2" title="Enterprise Linux 7" class="md-nav__link">
+    Enterprise Linux 7
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upcoming-rpms" title="Upcoming RPMs" class="md-nav__link">
+    Upcoming RPMs
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-6_3" title="Enterprise Linux 6" class="md-nav__link">
+    Enterprise Linux 6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-7_3" title="Enterprise Linux 7" class="md-nav__link">
+    Enterprise Linux 7
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -1645,211 +1865,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        OSG Release 3.4.7
-      </label>
-    
-    <a href="./" title="OSG Release 3.4.7" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../release-3-4-7/" title="OSG Release 3.4.7" class="md-nav__link">
       OSG Release 3.4.7
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#summary-of-changes" title="Summary of changes" class="md-nav__link">
-    Summary of changes
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#known-issues" title="Known Issues" class="md-nav__link">
-    Known Issues
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#updating-to-the-new-release" title="Updating to the new release" class="md-nav__link">
-    Updating to the new release
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#update-repositories" title="Update Repositories" class="md-nav__link">
-    Update Repositories
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#update-software" title="Update Software" class="md-nav__link">
-    Update Software
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#need-help" title="Need help?" class="md-nav__link">
-    Need help?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#detailed-changes-in-this-release" title="Detailed changes in this release" class="md-nav__link">
-    Detailed changes in this release
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#packages" title="Packages" class="md-nav__link">
-    Packages
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#enterprise-linux-6" title="Enterprise Linux 6" class="md-nav__link">
-    Enterprise Linux 6
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#enterprise-linux-7" title="Enterprise Linux 7" class="md-nav__link">
-    Enterprise Linux 7
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rpms" title="RPMs" class="md-nav__link">
-    RPMs
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#enterprise-linux-6_1" title="Enterprise Linux 6" class="md-nav__link">
-    Enterprise Linux 6
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#enterprise-linux-7_1" title="Enterprise Linux 7" class="md-nav__link">
-    Enterprise Linux 7
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#upcoming-packages" title="Upcoming Packages" class="md-nav__link">
-    Upcoming Packages
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#enterprise-linux-6_2" title="Enterprise Linux 6" class="md-nav__link">
-    Enterprise Linux 6
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#enterprise-linux-7_2" title="Enterprise Linux 7" class="md-nav__link">
-    Enterprise Linux 7
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#upcoming-rpms" title="Upcoming RPMs" class="md-nav__link">
-    Upcoming RPMs
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#enterprise-linux-6_3" title="Enterprise Linux 6" class="md-nav__link">
-    Enterprise Linux 6
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#enterprise-linux-7_3" title="Enterprise Linux 7" class="md-nav__link">
-    Enterprise Linux 7
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -2215,6 +2235,26 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#notes" title="Notes" class="md-nav__link">
+    Notes
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#glideinwms" title="GlideinWMS" class="md-nav__link">
+    GlideinWMS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#known-issues" title="Known Issues" class="md-nav__link">
     Known Issues
   </a>
@@ -2392,45 +2432,81 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/release/3.4/release-3-4-7.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/release/3.4/release-3-4-32.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="osg-software-release-347">OSG Software Release 3.4.7<a class="headerlink" href="#osg-software-release-347" title="Permanent link">&para;</a></h1>
-<p><strong>Release Date</strong>: 2018-02-01</p>
+                <h1 id="osg-software-release-3432">OSG Software Release 3.4.32<a class="headerlink" href="#osg-software-release-3432" title="Permanent link">&para;</a></h1>
+<p><strong>Release Date</strong>: 2019-07-25</p>
 <h2 id="summary-of-changes">Summary of changes<a class="headerlink" href="#summary-of-changes" title="Permanent link">&para;</a></h2>
 <p>This release contains:</p>
 <ul>
-<li>HDFS 2.6 and related tools (GridFTP-HDFS and XRootD-HDFS) are now available in the Upcoming Repository for Enterprise Linux 7</li>
-<li><a href="https://github.com/singularityware/singularity/releases">Singularity 2.4.2</a>: Feature upgrade from Singularity 2.3.2<ul>
-<li>See <a href="http://singularity.lbl.gov/release-2-4">Singularity 2.4 release notes</a> for a list of new features and improvements</li>
+<li>Frontier Squid 4.4-2.1: <a href="http://www.squid-cache.org/Advisories/SQUID-2019_5.txt">Address remote code execution vulnerability</a></li>
+<li>Singularity 3.2.1-1.1: Applied two patches<ul>
+<li><a href="https://github.com/sylabs/singularity/pull/3456">Fixed regression in mounting custom home directories</a></li>
+<li><a href="https://github.com/sylabs/singularity/pull/3803">Fix problem binding read-only file-systems, such as CVMFS, when running unprivileged</a></li>
 </ul>
 </li>
-<li><a href="https://pegasus.isi.edu/2018/01/16/pegasus-4-8-1-released/">Pegasus 4.8.1</a>: Feature upgrade from Pegasus 4.7.4<ul>
-<li>See <a href="https://pegasus.isi.edu/2017/09/05/pegasus-4-8-0-released/">Pegasus 4.8.0 release notes</a> for a list of new features and improvements</li>
+<li><a href="https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-94">VO Package v94</a>: Updated certificate DNs for LSST and SuperCDMS</li>
+<li>Upcoming repository:<ul>
+<li><a href="https://www-auth.cs.wisc.edu/lists/htcondor-world/2019/msg00014.shtml">HTCondor 8.8.4</a><ul>
+<li>Python 3 bindings - see version history for details</li>
+<li>Can configure DAGMan to dramatically reduce memory usage on some DAGs</li>
+<li>Improved scalability when using the python bindings to qedit jobs</li>
+<li>Fixed infrequent schedd crashes when removing scheduler universe jobs</li>
+<li>The condor_master creates run and lock directories when systemd doesn't</li>
+<li>The condor daemon obituary email now contains the last 200 lines of log</li>
 </ul>
 </li>
-<li>Updated gratia-probe to account for GPUs</li>
-<li>perfSONAR-tools meta-package including updated BWCTL, OWAMP, and nuttcp packages</li>
-<li><a href="https://www-auth.cs.wisc.edu/lists/htcondor-world/2018/msg00000.shtml">HTCondor 8.6.9</a>: Bug fix release</li>
-<li><a href="http://frontier.cern.ch/dist/rpms/frontier-squidRELEASE_NOTES">frontier-squid 3.5.27-2.1</a>: Bug fix release</li>
-<li>Minor bug fix for osg-user-cert-renew</li>
-<li><a href="https://www-auth.cs.wisc.edu/lists/htcondor-world/2018/msg00001.shtml">HTCondor 8.7.6</a> in the Upcoming respository</li>
 </ul>
-<p>These <a href="https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.7%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC">JIRA tickets</a> were addressed in this release.</p>
-<div class="admonition note">
-<p class="admonition-title">Notes</p>
+</li>
+</ul>
+<p>These <a href="https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.32%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC">JIRA tickets</a> were addressed in this release.</p>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<p>This section describes important upgrade notes and/or caveats for packages available in the OSG release repositories.
+Detailed changes are below. All of the documentation can be found <a href="../../..">here</a>.</p>
 <ul>
 <li>OSG 3.4 contains only 64-bit components.</li>
-<li>StashCache is supported on EL7 only.</li>
-<li>xrootd-lcmaps will remain at 1.2.1-2 on EL6.</li>
-<li>OSG PKI tools now create service certificate files where the service tag is separated from the hostname with an underscore ('_'). This new format first appeared in OSG PKI tools version 2.1.2.</li>
+<li>StashCache is only supported on EL7</li>
 </ul>
+<h3 id="glideinwms">GlideinWMS<a class="headerlink" href="#glideinwms" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>GlideinWMS 3.4.5 is the last release supporting Globus GRAM (a.k.a. GT2/GT5).</p>
+</li>
+<li>
+<p>For new Singularity features introduced in GlideinWMS 3.4.1, all factories and frontends need to be &gt;= 3.4.1.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>OSG GlideinWMS factories are running at least 3.4.1</p>
 </div>
-<p>Detailed changes are below. All of the documentation can be found <a href="../../..">here</a>.</p>
-<h2 id="known-issues">Known Issues<a class="headerlink" href="#known-issues" title="Permanent link">&para;</a></h2>
+<p>If some of the connected Factories are &lt;= 3.4.1 you will see an error during reconfig/upgrade if you try to use
+features that require a newer Factory.
+To start using Singularity via GlideinWMS, see:</p>
 <ul>
-<li>Because the Gratia system has been turned off, RSV emits the following warning: <code>WARNING: Gratia server gratia-osg-prod.opensciencegrid.org:80 not responding to obtain last contact details</code>. This warning can safely be ignored.</li>
+<li><a href="https://glideinwms.fnal.gov/doc.prd/frontend/configuration.html#singularity">https://glideinwms.fnal.gov/doc.prd/frontend/configuration.html#singularity</a></li>
+<li><a href="https://glideinwms.fnal.gov/doc.prd/factory/configuration.html#singularity">https://glideinwms.fnal.gov/doc.prd/factory/configuration.html#singularity</a></li>
+<li><a href="https://glideinwms.fnal.gov/doc.prd/factory/custom_vars.html#singularity_vars">https://glideinwms.fnal.gov/doc.prd/factory/custom_vars.html#singularity_vars</a></li>
 </ul>
+</li>
+<li>
+<p>Upgrades from &lt;= 3.4.0 may require merging <code>/etc/condor/config.d/*.rpmnew</code> files and a restart of HTCondor.</p>
+</li>
+<li>
+<p>GlideinWMS &gt;= 3.4.5 uses shared port, requiring only port 9618.
+   To ease the transition to shared port, the User Collector secondary collectors and CCBs support both shared and
+   separate, individual ports.
+   To start using shared port, change the secondary collectors lines and the CCBs lines (if any) in
+   <code>/etc/gwms-frontend/frontend.xml</code>, changing the address to include the shared port sinful string:</p>
+<div class="codehilite"><pre><span></span>&lt;collector DN=&quot;/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=gwms-frontend.domain&quot; group=&quot;default&quot; node=&quot;gwms-frontend.domain:9618?sock=collector0-40&quot; secondary=&quot;True&quot;/&gt;
+</pre></div>
+
+
+</li>
+</ol>
+<p>Replacing <code>gwms-frontend-domain</code> with the hostname of your GlideinWMS frontend.
+   See the <a href="https://glideinwms.fnal.gov/doc.prd/components/condor.html#collectors">GlideinWMS documentation</a> for details.</p>
+<h2 id="known-issues">Known Issues<a class="headerlink" href="#known-issues" title="Permanent link">&para;</a></h2>
+<p>None.</p>
 <h2 id="updating-to-the-new-release">Updating to the new release<a class="headerlink" href="#updating-to-the-new-release" title="Permanent link">&para;</a></h2>
 <p>To update to the OSG 3.4 series, please consult the page on <a href="../../../release/release_series#updating-from-osg-31-32-33-to-33-or-34">updating between release series</a>.</p>
 <h3 id="update-repositories">Update Repositories<a class="headerlink" href="#update-repositories" title="Permanent link">&para;</a></h3>
@@ -2455,221 +2531,54 @@
 <p>We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.</p>
 <h4 id="enterprise-linux-6">Enterprise Linux 6<a class="headerlink" href="#enterprise-linux-6" title="Permanent link">&para;</a></h4>
 <ul>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=I2util-1.2-2.1.osg34.el6">I2util-1.2-2.1.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=bwctl-1.5.2-5.osg34.el6">bwctl-1.5.2-5.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=condor-8.6.9-1.1.osg34.el6">condor-8.6.9-1.1.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=frontier-squid-3.5.27-2.1.osg34.el6">frontier-squid-3.5.27-2.1.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=gratia-probe-1.19.0-1.osg34.el6">gratia-probe-1.19.0-1.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=nuttcp-8.1.4-1.osg34.el6">nuttcp-8.1.4-1.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-build-1.11.2-1.osg34.el6">osg-build-1.11.2-1.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-ca-generator-1.3.2-1.osg34.el6">osg-ca-generator-1.3.2-1.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-ce-3.4-4.osg34.el6">osg-ce-3.4-4.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-gridftp-3.4-5.osg34.el6">osg-gridftp-3.4-5.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-gridftp-xrootd-3.4-2.osg34.el6">osg-gridftp-xrootd-3.4-2.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-pki-tools-2.1.4-1.osg34.el6">osg-pki-tools-2.1.4-1.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-test-2.0.1-1.osg34.el6">osg-test-2.0.1-1.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-version-3.4.7-1.osg34.el6">osg-version-3.4.7-1.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-wn-client-3.4-4.osg34.el6">osg-wn-client-3.4-4.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=owamp-3.4-10.osg34.el6">owamp-3.4-10.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=pegasus-4.8.1-1.2.osg34.el6">pegasus-4.8.1-1.2.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=perfsonar-tools-4.0.1-1.3.osg34.el6">perfsonar-tools-4.0.1-1.3.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=singularity-2.4.2-1.osg34.el6">singularity-2.4.2-1.osg34.el6</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=frontier-squid-4.4-2.1.osg34.el6">frontier-squid-4.4-2.1.osg34.el6</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=glite-lbjp-common-gsoap-plugin-3.2.12-7.osg34.el6">glite-lbjp-common-gsoap-plugin-3.2.12-7.osg34.el6</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-version-3.4.32-1.osg34.el6">osg-version-3.4.32-1.osg34.el6</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=singularity-3.2.1-1.1.osg34.el6">singularity-3.2.1-1.1.osg34.el6</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=vo-client-94-1.osg34.el6">vo-client-94-1.osg34.el6</a></li>
 </ul>
 <h4 id="enterprise-linux-7">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7" title="Permanent link">&para;</a></h4>
 <ul>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=I2util-1.2-2.1.osg34.el7">I2util-1.2-2.1.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=bwctl-1.5.2-5.osg34.el7">bwctl-1.5.2-5.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=condor-8.6.9-1.1.osg34.el7">condor-8.6.9-1.1.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=frontier-squid-3.5.27-2.1.osg34.el7">frontier-squid-3.5.27-2.1.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=gratia-probe-1.19.0-1.osg34.el7">gratia-probe-1.19.0-1.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=nuttcp-8.1.4-1.osg34.el7">nuttcp-8.1.4-1.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-build-1.11.2-1.osg34.el7">osg-build-1.11.2-1.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-ca-generator-1.3.2-1.osg34.el7">osg-ca-generator-1.3.2-1.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-ce-3.4-4.osg34.el7">osg-ce-3.4-4.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-gridftp-3.4-5.osg34.el7">osg-gridftp-3.4-5.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-gridftp-xrootd-3.4-2.osg34.el7">osg-gridftp-xrootd-3.4-2.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-pki-tools-2.1.4-1.osg34.el7">osg-pki-tools-2.1.4-1.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-test-2.0.1-1.osg34.el7">osg-test-2.0.1-1.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-version-3.4.7-1.osg34.el7">osg-version-3.4.7-1.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-wn-client-3.4-4.osg34.el7">osg-wn-client-3.4-4.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=owamp-3.4-10.osg34.el7">owamp-3.4-10.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=pegasus-4.8.1-1.2.osg34.el7">pegasus-4.8.1-1.2.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=perfsonar-tools-4.0.1-1.3.osg34.el7">perfsonar-tools-4.0.1-1.3.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=singularity-2.4.2-1.osg34.el7">singularity-2.4.2-1.osg34.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=frontier-squid-4.4-2.1.osg34.el7">frontier-squid-4.4-2.1.osg34.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=glite-lbjp-common-gsoap-plugin-3.2.12-7.osg34.el7">glite-lbjp-common-gsoap-plugin-3.2.12-7.osg34.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-version-3.4.32-1.osg34.el7">osg-version-3.4.32-1.osg34.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=singularity-3.2.1-1.1.osg34.el7">singularity-3.2.1-1.1.osg34.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=vo-client-94-1.osg34.el7">vo-client-94-1.osg34.el7</a></li>
 </ul>
 <h3 id="rpms">RPMs<a class="headerlink" href="#rpms" title="Permanent link">&para;</a></h3>
 <p>If you wish to manually update your system, you can run yum update against the following packages:</p>
-<div class="codehilite"><pre><span></span>bwctl bwctl-client bwctl-debuginfo bwctl-devel bwctl-server condor condor-all condor-bosco condor-classads condor-classads-devel condor-cream-gahp condor-debuginfo condor-kbdd condor-procd condor-python condor-std-universe condor-test condor-vm-gahp frontier-squid frontier-squid-debuginfo gratia-probe-common gratia-probe-condor gratia-probe-condor-events gratia-probe-dcache-storage gratia-probe-dcache-storagegroup gratia-probe-dcache-transfer gratia-probe-debuginfo gratia-probe-enstore-storage gratia-probe-enstore-tapedrive gratia-probe-enstore-transfer gratia-probe-glexec gratia-probe-glideinwms gratia-probe-gram gratia-probe-gridftp-transfer gratia-probe-hadoop-storage gratia-probe-htcondor-ce gratia-probe-lsf gratia-probe-metric gratia-probe-onevm gratia-probe-pbs-lsf gratia-probe-services gratia-probe-sge gratia-probe-slurm gratia-probe-xrootd-storage gratia-probe-xrootd-transfer I2util I2util-debuginfo igtf-ca-certs nuttcp nuttcp-debuginfo osg-build osg-build-base osg-build-koji osg-build-mock osg-build-tests osg-ca-certs osg-ca-generator osg-ce osg-ce-bosco osg-ce-condor osg-ce-lsf osg-ce-pbs osg-ce-sge osg-ce-slurm osg-gridftp osg-gridftp-xrootd osg-pki-tools osg-test osg-test-log-viewer osg-version osg-wn-client owamp owamp-client owamp-debuginfo owamp-server pegasus pegasus-debuginfo perfsonar-tools singularity singularity-debuginfo singularity-devel singularity-runtime
+<div class="codehilite"><pre><span></span>frontier-squid frontier-squid-debuginfo glite-lbjp-common-gsoap-plugin glite-lbjp-common-gsoap-plugin-debuginfo glite-lbjp-common-gsoap-plugin-devel igtf-ca-certs osg-ca-certs osg-version singularity singularity-debuginfo vo-client vo-client-dcache vo-client-lcmaps-voms
 </pre></div>
 
 
 <p>If you wish to only update the RPMs that changed, the set of RPMs is:</p>
 <h4 id="enterprise-linux-6_1">Enterprise Linux 6<a class="headerlink" href="#enterprise-linux-6_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span>bwctl-1.5.2-5.osg34.el6
-bwctl-client-1.5.2-5.osg34.el6
-bwctl-debuginfo-1.5.2-5.osg34.el6
-bwctl-devel-1.5.2-5.osg34.el6
-bwctl-server-1.5.2-5.osg34.el6
-condor-8.6.9-1.1.osg34.el6
-condor-all-8.6.9-1.1.osg34.el6
-condor-bosco-8.6.9-1.1.osg34.el6
-condor-classads-8.6.9-1.1.osg34.el6
-condor-classads-devel-8.6.9-1.1.osg34.el6
-condor-cream-gahp-8.6.9-1.1.osg34.el6
-condor-debuginfo-8.6.9-1.1.osg34.el6
-condor-kbdd-8.6.9-1.1.osg34.el6
-condor-procd-8.6.9-1.1.osg34.el6
-condor-python-8.6.9-1.1.osg34.el6
-condor-std-universe-8.6.9-1.1.osg34.el6
-condor-test-8.6.9-1.1.osg34.el6
-condor-vm-gahp-8.6.9-1.1.osg34.el6
-frontier-squid-3.5.27-2.1.osg34.el6
-frontier-squid-debuginfo-3.5.27-2.1.osg34.el6
-gratia-probe-1.19.0-1.osg34.el6
-gratia-probe-common-1.19.0-1.osg34.el6
-gratia-probe-condor-1.19.0-1.osg34.el6
-gratia-probe-condor-events-1.19.0-1.osg34.el6
-gratia-probe-dcache-storage-1.19.0-1.osg34.el6
-gratia-probe-dcache-storagegroup-1.19.0-1.osg34.el6
-gratia-probe-dcache-transfer-1.19.0-1.osg34.el6
-gratia-probe-debuginfo-1.19.0-1.osg34.el6
-gratia-probe-enstore-storage-1.19.0-1.osg34.el6
-gratia-probe-enstore-tapedrive-1.19.0-1.osg34.el6
-gratia-probe-enstore-transfer-1.19.0-1.osg34.el6
-gratia-probe-glexec-1.19.0-1.osg34.el6
-gratia-probe-glideinwms-1.19.0-1.osg34.el6
-gratia-probe-gram-1.19.0-1.osg34.el6
-gratia-probe-gridftp-transfer-1.19.0-1.osg34.el6
-gratia-probe-hadoop-storage-1.19.0-1.osg34.el6
-gratia-probe-htcondor-ce-1.19.0-1.osg34.el6
-gratia-probe-lsf-1.19.0-1.osg34.el6
-gratia-probe-metric-1.19.0-1.osg34.el6
-gratia-probe-onevm-1.19.0-1.osg34.el6
-gratia-probe-pbs-lsf-1.19.0-1.osg34.el6
-gratia-probe-services-1.19.0-1.osg34.el6
-gratia-probe-sge-1.19.0-1.osg34.el6
-gratia-probe-slurm-1.19.0-1.osg34.el6
-gratia-probe-xrootd-storage-1.19.0-1.osg34.el6
-gratia-probe-xrootd-transfer-1.19.0-1.osg34.el6
-I2util-1.2-2.1.osg34.el6
-I2util-debuginfo-1.2-2.1.osg34.el6
-nuttcp-8.1.4-1.osg34.el6
-nuttcp-debuginfo-8.1.4-1.osg34.el6
-osg-build-1.11.2-1.osg34.el6
-osg-build-base-1.11.2-1.osg34.el6
-osg-build-koji-1.11.2-1.osg34.el6
-osg-build-mock-1.11.2-1.osg34.el6
-osg-build-tests-1.11.2-1.osg34.el6
-osg-ca-generator-1.3.2-1.osg34.el6
-osg-ce-3.4-4.osg34.el6
-osg-ce-bosco-3.4-4.osg34.el6
-osg-ce-condor-3.4-4.osg34.el6
-osg-ce-lsf-3.4-4.osg34.el6
-osg-ce-pbs-3.4-4.osg34.el6
-osg-ce-sge-3.4-4.osg34.el6
-osg-ce-slurm-3.4-4.osg34.el6
-osg-gridftp-3.4-5.osg34.el6
-osg-gridftp-xrootd-3.4-2.osg34.el6
-osg-pki-tools-2.1.4-1.osg34.el6
-osg-test-2.0.1-1.osg34.el6
-osg-test-log-viewer-2.0.1-1.osg34.el6
-osg-version-3.4.7-1.osg34.el6
-osg-wn-client-3.4-4.osg34.el6
-owamp-3.4-10.osg34.el6
-owamp-client-3.4-10.osg34.el6
-owamp-debuginfo-3.4-10.osg34.el6
-owamp-server-3.4-10.osg34.el6
-pegasus-4.8.1-1.2.osg34.el6
-pegasus-debuginfo-4.8.1-1.2.osg34.el6
-perfsonar-tools-4.0.1-1.3.osg34.el6
-singularity-2.4.2-1.osg34.el6
-singularity-debuginfo-2.4.2-1.osg34.el6
-singularity-devel-2.4.2-1.osg34.el6
-singularity-runtime-2.4.2-1.osg34.el6
+<div class="codehilite"><pre><span></span>frontier-squid-4.4-2.1.osg34.el6
+frontier-squid-debuginfo-4.4-2.1.osg34.el6
+glite-lbjp-common-gsoap-plugin-3.2.12-7.osg34.el6
+glite-lbjp-common-gsoap-plugin-debuginfo-3.2.12-7.osg34.el6
+glite-lbjp-common-gsoap-plugin-devel-3.2.12-7.osg34.el6
+osg-version-3.4.32-1.osg34.el6
+singularity-3.2.1-1.1.osg34.el6
+singularity-debuginfo-3.2.1-1.1.osg34.el6
+vo-client-94-1.osg34.el6
+vo-client-dcache-94-1.osg34.el6
+vo-client-lcmaps-voms-94-1.osg34.el6
 </pre></div>
 
 
 <h4 id="enterprise-linux-7_1">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span>bwctl-1.5.2-5.osg34.el7
-bwctl-client-1.5.2-5.osg34.el7
-bwctl-debuginfo-1.5.2-5.osg34.el7
-bwctl-devel-1.5.2-5.osg34.el7
-bwctl-server-1.5.2-5.osg34.el7
-condor-8.6.9-1.1.osg34.el7
-condor-all-8.6.9-1.1.osg34.el7
-condor-bosco-8.6.9-1.1.osg34.el7
-condor-classads-8.6.9-1.1.osg34.el7
-condor-classads-devel-8.6.9-1.1.osg34.el7
-condor-cream-gahp-8.6.9-1.1.osg34.el7
-condor-debuginfo-8.6.9-1.1.osg34.el7
-condor-kbdd-8.6.9-1.1.osg34.el7
-condor-procd-8.6.9-1.1.osg34.el7
-condor-python-8.6.9-1.1.osg34.el7
-condor-test-8.6.9-1.1.osg34.el7
-condor-vm-gahp-8.6.9-1.1.osg34.el7
-frontier-squid-3.5.27-2.1.osg34.el7
-frontier-squid-debuginfo-3.5.27-2.1.osg34.el7
-gratia-probe-1.19.0-1.osg34.el7
-gratia-probe-common-1.19.0-1.osg34.el7
-gratia-probe-condor-1.19.0-1.osg34.el7
-gratia-probe-condor-events-1.19.0-1.osg34.el7
-gratia-probe-dcache-storage-1.19.0-1.osg34.el7
-gratia-probe-dcache-storagegroup-1.19.0-1.osg34.el7
-gratia-probe-dcache-transfer-1.19.0-1.osg34.el7
-gratia-probe-debuginfo-1.19.0-1.osg34.el7
-gratia-probe-enstore-storage-1.19.0-1.osg34.el7
-gratia-probe-enstore-tapedrive-1.19.0-1.osg34.el7
-gratia-probe-enstore-transfer-1.19.0-1.osg34.el7
-gratia-probe-glexec-1.19.0-1.osg34.el7
-gratia-probe-glideinwms-1.19.0-1.osg34.el7
-gratia-probe-gram-1.19.0-1.osg34.el7
-gratia-probe-gridftp-transfer-1.19.0-1.osg34.el7
-gratia-probe-hadoop-storage-1.19.0-1.osg34.el7
-gratia-probe-htcondor-ce-1.19.0-1.osg34.el7
-gratia-probe-lsf-1.19.0-1.osg34.el7
-gratia-probe-metric-1.19.0-1.osg34.el7
-gratia-probe-onevm-1.19.0-1.osg34.el7
-gratia-probe-pbs-lsf-1.19.0-1.osg34.el7
-gratia-probe-services-1.19.0-1.osg34.el7
-gratia-probe-sge-1.19.0-1.osg34.el7
-gratia-probe-slurm-1.19.0-1.osg34.el7
-gratia-probe-xrootd-storage-1.19.0-1.osg34.el7
-gratia-probe-xrootd-transfer-1.19.0-1.osg34.el7
-I2util-1.2-2.1.osg34.el7
-I2util-debuginfo-1.2-2.1.osg34.el7
-nuttcp-8.1.4-1.osg34.el7
-nuttcp-debuginfo-8.1.4-1.osg34.el7
-osg-build-1.11.2-1.osg34.el7
-osg-build-base-1.11.2-1.osg34.el7
-osg-build-koji-1.11.2-1.osg34.el7
-osg-build-mock-1.11.2-1.osg34.el7
-osg-build-tests-1.11.2-1.osg34.el7
-osg-ca-generator-1.3.2-1.osg34.el7
-osg-ce-3.4-4.osg34.el7
-osg-ce-bosco-3.4-4.osg34.el7
-osg-ce-condor-3.4-4.osg34.el7
-osg-ce-lsf-3.4-4.osg34.el7
-osg-ce-pbs-3.4-4.osg34.el7
-osg-ce-sge-3.4-4.osg34.el7
-osg-ce-slurm-3.4-4.osg34.el7
-osg-gridftp-3.4-5.osg34.el7
-osg-gridftp-xrootd-3.4-2.osg34.el7
-osg-pki-tools-2.1.4-1.osg34.el7
-osg-test-2.0.1-1.osg34.el7
-osg-test-log-viewer-2.0.1-1.osg34.el7
-osg-version-3.4.7-1.osg34.el7
-osg-wn-client-3.4-4.osg34.el7
-owamp-3.4-10.osg34.el7
-owamp-client-3.4-10.osg34.el7
-owamp-debuginfo-3.4-10.osg34.el7
-owamp-server-3.4-10.osg34.el7
-pegasus-4.8.1-1.2.osg34.el7
-pegasus-debuginfo-4.8.1-1.2.osg34.el7
-perfsonar-tools-4.0.1-1.3.osg34.el7
-singularity-2.4.2-1.osg34.el7
-singularity-debuginfo-2.4.2-1.osg34.el7
-singularity-devel-2.4.2-1.osg34.el7
-singularity-runtime-2.4.2-1.osg34.el7
+<div class="codehilite"><pre><span></span>frontier-squid-4.4-2.1.osg34.el7
+frontier-squid-debuginfo-4.4-2.1.osg34.el7
+glite-lbjp-common-gsoap-plugin-3.2.12-7.osg34.el7
+glite-lbjp-common-gsoap-plugin-debuginfo-3.2.12-7.osg34.el7
+glite-lbjp-common-gsoap-plugin-devel-3.2.12-7.osg34.el7
+osg-version-3.4.32-1.osg34.el7
+singularity-3.2.1-1.1.osg34.el7
+singularity-debuginfo-3.2.1-1.1.osg34.el7
+vo-client-94-1.osg34.el7
+vo-client-dcache-94-1.osg34.el7
+vo-client-lcmaps-voms-94-1.osg34.el7
 </pre></div>
 
 
@@ -2677,102 +2586,54 @@ singularity-runtime-2.4.2-1.osg34.el7
 <p>We added or updated the following packages to the <strong>upcoming</strong> OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.</p>
 <h4 id="enterprise-linux-6_2">Enterprise Linux 6<a class="headerlink" href="#enterprise-linux-6_2" title="Permanent link">&para;</a></h4>
 <ul>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=condor-8.7.6-1.1.osgup.el6">condor-8.7.6-1.1.osgup.el6</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=condor-8.8.4-1.osgup.el6">condor-8.8.4-1.osgup.el6</a></li>
 </ul>
 <h4 id="enterprise-linux-7_2">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7_2" title="Permanent link">&para;</a></h4>
 <ul>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=avro-libs-1.7.6%2Bcdh5.13.0%2B135-1.cdh5.13.0.p0.34.1.osgup.el7">avro-libs-1.7.6+cdh5.13.0+135-1.cdh5.13.0.p0.34.1.osgup.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=bigtop-jsvc-0.3.0-1.2.osgup.el7">bigtop-jsvc-0.3.0-1.2.osgup.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=bigtop-utils-0.7.0%2Bcdh5.13.0%2B0-1.cdh5.13.0.p0.34.1.osgup.el7">bigtop-utils-0.7.0+cdh5.13.0+0-1.cdh5.13.0.p0.34.1.osgup.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=condor-8.7.6-1.1.osgup.el7">condor-8.7.6-1.1.osgup.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=gridftp-hdfs-1.1.1-1.1.osgup.el7">gridftp-hdfs-1.1.1-1.1.osgup.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=hadoop-2.6.0%2Bcdh5.12.1%2B2540-1.cdh5.12.1.p0.3.7.osgup.el7">hadoop-2.6.0+cdh5.12.1+2540-1.cdh5.12.1.p0.3.7.osgup.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-gridftp-hdfs-3.4-1.osgup.el7">osg-gridftp-hdfs-3.4-1.osgup.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-se-hadoop-3.4-3.osgup.el7">osg-se-hadoop-3.4-3.osgup.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=xrootd-hdfs-1.9.2-5.osgup.el7">xrootd-hdfs-1.9.2-5.osgup.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=zookeeper-3.4.3%2B15-1.cdh4.0.1.p0.6.osgup.el7">zookeeper-3.4.3+15-1.cdh4.0.1.p0.6.osgup.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=condor-8.8.4-1.osgup.el7">condor-8.8.4-1.osgup.el7</a></li>
 </ul>
 <h3 id="upcoming-rpms">Upcoming RPMs<a class="headerlink" href="#upcoming-rpms" title="Permanent link">&para;</a></h3>
 <p>If you wish to manually update your system, you can run yum update against the following packages:</p>
-<div class="codehilite"><pre><span></span>condor condor-all condor-annex-ec2 condor-bosco condor-classads condor-classads-devel condor-cream-gahp condor-debuginfo condor-kbdd condor-procd condor-python condor-std-universe condor-test condor-vm-gahp
+<div class="codehilite"><pre><span></span>condor condor-all condor-annex-ec2 condor-bosco condor-classads condor-classads-devel condor-cream-gahp condor-debuginfo condor-kbdd condor-procd condor-std-universe condor-test condor-vm-gahp minicondor python2-condor python3-condor
 </pre></div>
 
 
 <p>If you wish to only update the RPMs that changed, the set of RPMs is:</p>
 <h4 id="enterprise-linux-6_3">Enterprise Linux 6<a class="headerlink" href="#enterprise-linux-6_3" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span>condor-8.7.6-1.1.osgup.el6
-condor-all-8.7.6-1.1.osgup.el6
-condor-annex-ec2-8.7.6-1.1.osgup.el6
-condor-bosco-8.7.6-1.1.osgup.el6
-condor-classads-8.7.6-1.1.osgup.el6
-condor-classads-devel-8.7.6-1.1.osgup.el6
-condor-cream-gahp-8.7.6-1.1.osgup.el6
-condor-debuginfo-8.7.6-1.1.osgup.el6
-condor-kbdd-8.7.6-1.1.osgup.el6
-condor-procd-8.7.6-1.1.osgup.el6
-condor-python-8.7.6-1.1.osgup.el6
-condor-std-universe-8.7.6-1.1.osgup.el6
-condor-test-8.7.6-1.1.osgup.el6
-condor-vm-gahp-8.7.6-1.1.osgup.el6
+<div class="codehilite"><pre><span></span>condor-8.8.4-1.osgup.el6
+condor-all-8.8.4-1.osgup.el6
+condor-annex-ec2-8.8.4-1.osgup.el6
+condor-bosco-8.8.4-1.osgup.el6
+condor-classads-8.8.4-1.osgup.el6
+condor-classads-devel-8.8.4-1.osgup.el6
+condor-cream-gahp-8.8.4-1.osgup.el6
+condor-debuginfo-8.8.4-1.osgup.el6
+condor-kbdd-8.8.4-1.osgup.el6
+condor-procd-8.8.4-1.osgup.el6
+condor-std-universe-8.8.4-1.osgup.el6
+condor-test-8.8.4-1.osgup.el6
+condor-vm-gahp-8.8.4-1.osgup.el6
+minicondor-8.8.4-1.osgup.el6
+python2-condor-8.8.4-1.osgup.el6
 </pre></div>
 
 
 <h4 id="enterprise-linux-7_3">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7_3" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span>avro-doc-1.7.6+cdh5.13.0+135-1.cdh5.13.0.p0.34.1.osgup.el7
-avro-libs-1.7.6+cdh5.13.0+135-1.cdh5.13.0.p0.34.1.osgup.el7
-avro-tools-1.7.6+cdh5.13.0+135-1.cdh5.13.0.p0.34.1.osgup.el7
-bigtop-jsvc-0.3.0-1.2.osgup.el7
-bigtop-jsvc-debuginfo-0.3.0-1.2.osgup.el7
-bigtop-utils-0.7.0+cdh5.13.0+0-1.cdh5.13.0.p0.34.1.osgup.el7
-condor-8.7.6-1.1.osgup.el7
-condor-all-8.7.6-1.1.osgup.el7
-condor-annex-ec2-8.7.6-1.1.osgup.el7
-condor-bosco-8.7.6-1.1.osgup.el7
-condor-classads-8.7.6-1.1.osgup.el7
-condor-classads-devel-8.7.6-1.1.osgup.el7
-condor-cream-gahp-8.7.6-1.1.osgup.el7
-condor-debuginfo-8.7.6-1.1.osgup.el7
-condor-kbdd-8.7.6-1.1.osgup.el7
-condor-procd-8.7.6-1.1.osgup.el7
-condor-python-8.7.6-1.1.osgup.el7
-condor-test-8.7.6-1.1.osgup.el7
-condor-vm-gahp-8.7.6-1.1.osgup.el7
-gridftp-hdfs-1.1.1-1.1.osgup.el7
-gridftp-hdfs-debuginfo-1.1.1-1.1.osgup.el7
-hadoop-0.20-conf-pseudo-2.6.0+cdh5.12.1+2540-1.cdh5.12.1.p0.3.7.osgup.el7
-hadoop-0.20-mapreduce-2.6.0+cdh5.12.1+2540-1.cdh5.12.1.p0.3.7.osgup.el7
-hadoop-2.6.0+cdh5.12.1+2540-1.cdh5.12.1.p0.3.7.osgup.el7
-hadoop-client-2.6.0+cdh5.12.1+2540-1.cdh5.12.1.p0.3.7.osgup.el7
-hadoop-conf-pseudo-2.6.0+cdh5.12.1+2540-1.cdh5.12.1.p0.3.7.osgup.el7
-hadoop-debuginfo-2.6.0+cdh5.12.1+2540-1.cdh5.12.1.p0.3.7.osgup.el7
-hadoop-doc-2.6.0+cdh5.12.1+2540-1.cdh5.12.1.p0.3.7.osgup.el7
-hadoop-hdfs-2.6.0+cdh5.12.1+2540-1.cdh5.12.1.p0.3.7.osgup.el7
-hadoop-hdfs-datanode-2.6.0+cdh5.12.1+2540-1.cdh5.12.1.p0.3.7.osgup.el7
-hadoop-hdfs-fuse-2.6.0+cdh5.12.1+2540-1.cdh5.12.1.p0.3.7.osgup.el7
-hadoop-hdfs-journalnode-2.6.0+cdh5.12.1+2540-1.cdh5.12.1.p0.3.7.osgup.el7
-hadoop-hdfs-namenode-2.6.0+cdh5.12.1+2540-1.cdh5.12.1.p0.3.7.osgup.el7
-hadoop-hdfs-nfs3-2.6.0+cdh5.12.1+2540-1.cdh5.12.1.p0.3.7.osgup.el7
-hadoop-hdfs-secondarynamenode-2.6.0+cdh5.12.1+2540-1.cdh5.12.1.p0.3.7.osgup.el7
-hadoop-hdfs-zkfc-2.6.0+cdh5.12.1+2540-1.cdh5.12.1.p0.3.7.osgup.el7
-hadoop-httpfs-2.6.0+cdh5.12.1+2540-1.cdh5.12.1.p0.3.7.osgup.el7
-hadoop-kms-2.6.0+cdh5.12.1+2540-1.cdh5.12.1.p0.3.7.osgup.el7
-hadoop-kms-server-2.6.0+cdh5.12.1+2540-1.cdh5.12.1.p0.3.7.osgup.el7
-hadoop-libhdfs-2.6.0+cdh5.12.1+2540-1.cdh5.12.1.p0.3.7.osgup.el7
-hadoop-libhdfs-devel-2.6.0+cdh5.12.1+2540-1.cdh5.12.1.p0.3.7.osgup.el7
-hadoop-mapreduce-2.6.0+cdh5.12.1+2540-1.cdh5.12.1.p0.3.7.osgup.el7
-hadoop-yarn-2.6.0+cdh5.12.1+2540-1.cdh5.12.1.p0.3.7.osgup.el7
-osg-gridftp-hdfs-3.4-1.osgup.el7
-osg-se-hadoop-3.4-3.osgup.el7
-osg-se-hadoop-client-3.4-3.osgup.el7
-osg-se-hadoop-datanode-3.4-3.osgup.el7
-osg-se-hadoop-gridftp-3.4-3.osgup.el7
-osg-se-hadoop-namenode-3.4-3.osgup.el7
-osg-se-hadoop-secondarynamenode-3.4-3.osgup.el7
-xrootd-hdfs-1.9.2-5.osgup.el7
-xrootd-hdfs-debuginfo-1.9.2-5.osgup.el7
-xrootd-hdfs-devel-1.9.2-5.osgup.el7
-zookeeper-3.4.3+15-1.cdh4.0.1.p0.6.osgup.el7
-zookeeper-server-3.4.3+15-1.cdh4.0.1.p0.6.osgup.el7
+<div class="codehilite"><pre><span></span>condor-8.8.4-1.osgup.el7
+condor-all-8.8.4-1.osgup.el7
+condor-annex-ec2-8.8.4-1.osgup.el7
+condor-bosco-8.8.4-1.osgup.el7
+condor-classads-8.8.4-1.osgup.el7
+condor-classads-devel-8.8.4-1.osgup.el7
+condor-cream-gahp-8.8.4-1.osgup.el7
+condor-debuginfo-8.8.4-1.osgup.el7
+condor-kbdd-8.8.4-1.osgup.el7
+condor-procd-8.8.4-1.osgup.el7
+condor-test-8.8.4-1.osgup.el7
+condor-vm-gahp-8.8.4-1.osgup.el7
+minicondor-8.8.4-1.osgup.el7
+python2-condor-8.8.4-1.osgup.el7
+python3-condor-8.8.4-1.osgup.el7
 </pre></div>
                 
                   
@@ -2794,7 +2655,7 @@ zookeeper-server-3.4.3+15-1.cdh4.0.1.p0.6.osgup.el7
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../release-3-4-8/" title="OSG Release 3.4.8" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../notes/" title="Release Note Overview" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -2803,19 +2664,19 @@ zookeeper-server-3.4.3+15-1.cdh4.0.1.p0.6.osgup.el7
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                OSG Release 3.4.8
+                Release Note Overview
               </span>
             </div>
           </a>
         
         
-          <a href="../release-3-4-6-2/" title="OSG Release 3.4.6-2" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../release-3-4-31-2/" title="OSG Release 3.4.31-2" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                OSG Release 3.4.6-2
+                OSG Release 3.4.31-2
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
