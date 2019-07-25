@@ -11,7 +11,7 @@ This release contains:
 -   Frontier Squid 4.4-2.1: [Address remote code execution vulnerability](http://www.squid-cache.org/Advisories/SQUID-2019_5.txt)
 -   Singularity 3.2.1-1.1: Applied two patches
     -   [Fixed regression in mounting custom home directories](https://github.com/sylabs/singularity/pull/3456)
-    -   [Fix problem binding read-only file-systems such as CVMFS when running unprivileged](https://github.com/sylabs/singularity/pull/3803)
+    -   [Fix problem binding read-only file-systems, such as CVMFS, when running unprivileged](https://github.com/sylabs/singularity/pull/3803)
 -   [VO Package v94](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-94): Updated certificate DNs for LSST and SuperCDMS
 -   Upcoming repository:
     -   [HTCondor 8.8.4](https://www-auth.cs.wisc.edu/lists/htcondor-world/2019/msg00014.shtml)
