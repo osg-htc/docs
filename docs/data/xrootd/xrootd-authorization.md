@@ -1,5 +1,5 @@
 !!!bug "EL7 version compatibility"
-    There is an incompatibility with EL7 < 7.5 due to an issue with the xrootd-lcmaps package
+    There is an incompatibility with EL7 < 7.5 due to an issue with the globus-gsi-proxy-core package
 
 Configuring XRootD Authorization
 ================================
