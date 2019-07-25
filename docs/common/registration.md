@@ -80,6 +80,10 @@ host to avoid any duplicate registrations:
       [these instructions](#modifying-existing-resources) for modifying existing resources.
     - **If the search returns more than one YAML file**, please [contact us](#getting-help).
 
+    !!! note
+        If you are adding a new service to a host which is already registered as a resource,
+        follow the [instructions](#modifying-existing-resources) for modifying existing resources.
+
 ### New resources ###
 
 To register a new resource, follow the instructions below:
@@ -139,6 +143,9 @@ To modify an existing resource, follow these instructions:
    as a guide.
    You may leave any `ID` or `GroupID` fields blank.
    Make sure that the formatting and indentation of the modified entry does not change.
+
+   If you are adding a new service to a host that is already registered as a resource,
+   add the new service to the existing resource; do not create a new resource for the same host.
 
     !!! note ""You're editing a file in a project you don't have write access to.""
         If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
