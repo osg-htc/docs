@@ -1,8 +1,9 @@
-!!!bug "EL7 version compatibility"
-    There is an incompatibility with EL7 < 7.5 due to an issue with the globus-gsi-proxy-core package
-
 Using XRootD 
 =============
+
+!!!bug "EL7 version compatibility"
+    There is an incompatibility with EL7 < 7.5 due to an issue with the `globus-gsi-proxy-core` package
+
 
 XRootD is a high performance data system widely used by several science VOs on OSG to store and to distribute data to
 jobs.
