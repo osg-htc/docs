@@ -2,572 +2,572 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>https://opensciencegrid.github.io/docs/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/site-planning/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/compute-element/htcondor-ce-overview/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/compute-element/hosted-ce/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/compute-element/install-htcondor-ce/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/compute-element/job-router-recipes/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/compute-element/troubleshoot-htcondor-ce/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/compute-element/submit-htcondor-ce/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/worker-node/using-wn/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/worker-node/install-wn/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/worker-node/install-wn-tarball/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/worker-node/install-wn-oasis/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/worker-node/install-cvmfs/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/worker-node/install-singularity/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/worker-node/using-wn-containers/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/data/frontier-squid/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/data/update-oasis/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/data/external-oasis-repos/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/data/gridftp/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/data/load-balanced-gridftp/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/data/xrootd/overview/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/data/xrootd/install-standalone/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/data/xrootd/install-storage-element/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/data/xrootd/xrootd-authorization/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/data/xrootd/install-client/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/data/stashcache/overview/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/data/stashcache/install-cache/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/data/stashcache/install-origin/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/data/stashcache/vo-data/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/data/hadoop-overview/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/data/install-hadoop/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/submit/osg-flock/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/security/lcmaps-voms-authentication/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/security/host-certs/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/security/user-certs/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/security/certificate-management/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/common/ca/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/common/yum/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/other/configuration-with-osg-configure/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/common/registration/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/other/gsissh/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/other/install-gwms-frontend/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/other/install-cvmfs-stratum1/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/other/network-performance-toolkit/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/other/troubleshooting-gratia/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/other/schedd-filebeats/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/notes/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-32/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-31-2/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-31/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-30-2/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-30/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-29-2/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-29/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-28-2/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-28/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-27-2/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-27/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-26-2/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-26/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-25/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-24-2/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-24/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-23/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-22-2/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-22/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-21/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-20/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-19/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-18-2/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-18/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-17-3/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-17-2/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-17/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-16-2/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-16/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-15/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-14-2/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-14/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-13/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-12-3/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-12-2/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-12/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-11/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-10/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-9-2/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-9/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-8/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-7/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-6-2/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-6/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-5-4/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-5-3/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-5-2/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-5/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-4-3/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-4-2/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-4/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-3/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-2-2/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-2/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-1-2/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-1/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-0-2/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-0/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/release_series/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/supported_platforms/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/yum-basics/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/signing/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/monitoring/install-rsv/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/monitoring/advanced-rsv-configuration/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/monitoring/rsv-control/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/monitoring/install-rsv-gwms-tester/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/common/help/</loc>
-     <lastmod>2019-07-25</lastmod>
+     <lastmod>2019-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
