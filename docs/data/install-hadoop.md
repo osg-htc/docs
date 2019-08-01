@@ -868,7 +868,7 @@ You will see the entire configuration in XML format, for example:
 </p>
 </details>
 
-Please refer to the [Apache Hadoop FAQ webpage](http://wiki.apache.org/hadoop/FAQ) for answers to common questions/concerns
+Please refer to the [Apache Hadoop documentation](https://hadoop.apache.org/docs/r2.6.0/) for answers to common questions/concerns
 
 ### FUSE ###
 
