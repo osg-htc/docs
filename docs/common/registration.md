@@ -2,7 +2,7 @@ Registering in the OSG
 ======================
 
 The OSG keeps a registry containing active projects, virtual organizations (VOs), resources, and resource
-downtimes stored as as [YAML files](https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html)
+downtimes stored as [YAML files](https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html)
 in the [topology GitHub repository](https://github.com/opensciencegrid/topology/).
 This registry is used for [accounting data](https://gracc.opensciencegrid.org), contact information, and resource
 availability, particularly if your site is part of the [World LHC Computing Grid](http://wlcg.web.cern.ch/) (WLCG).
