@@ -40,7 +40,7 @@ Gratia Probe Configuration
 1. Copy over the recommended probe configuration:
 
         :::console
-        root@host # cp /etc/gratia/condor/Probeconfig-flocking /etc/gratia/condor/Probeconfig
+        root@host # cp /etc/gratia/condor/ProbeConfig-flocking /etc/gratia/condor/ProbeConfig
 
 1. Fill in the values for `ProbeName` and `SiteName` with the hostname and Topology resource name, respectively. For example:
 
