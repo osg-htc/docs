@@ -99,7 +99,7 @@ root@host # yum install osg-pki-tools
                      --country US \
                      --state Wisconsin \
                      --locality Madison \
-                     --organization 'University of Wisconsin' \
+                     --organization 'University of Wisconsin-Madison' \
                      --altname foo.opensciencegrid.org \
                      --altname bar.opensciencegrid.org
 
