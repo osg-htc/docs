@@ -130,11 +130,12 @@ Verifying XRootD Authorization
 To verify the LCMAPS security, run the following commands from a machine with your user certificate/key pair,
 `xrootd-client`, and `voms-clients-cpp` installed:
 
-1. Destroy any pre-existing proxies and attempt a copy to a directory (which we will refer to as `<DESTINATION PATH>`) on the `<XROOTD HOST>` to verify failure:
+1. Destroy any pre-existing proxies and attempt a copy to a directory (which we will refer to as `<DESTINATION PATH>`) on the `<XROOTD HOST>`, which
+is the hostname of the xrrotd server, to verify failure:
 
         :::console
         user@client $ voms-proxy-destroy
-        user@client $ xrdcp /bin/bash root://%RED%<XROOTD HOST>%ENDCOLOR%/%RED%<DESTINATION PATH>%ENDCOLOR%
+        user@client $ xrdcp /bin/bash root://<XROOTD HOST>/<DESTINATION PATH>
         180213 13:56:49 396570 cryptossl_X509CreateProxy: EEC certificate has expired
         [0B/0B][100%][==================================================][0B/s]
         Run: [FATAL] Auth failed
@@ -150,7 +151,7 @@ To verify the LCMAPS security, run the following commands from a machine with yo
 
         :::console
         user@client $ voms-proxy-init
-        user@client $ xrdcp  /bin/sh root://%RED%<XROOTD HOST>%ENDCOLOR%/%RED%<DESTINATION PATH>%ENDCOLOR%
+        user@client $ xrdcp  /bin/sh root://<XROOTD HOST>/<DESTINATION PATH>
         [938.1kB/938.1kB][100%][==================================================][938.1kB/s]
 
     If your transfer does not succeed, run the previous command with `--debug 2` for more information.

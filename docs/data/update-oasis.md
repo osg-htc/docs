@@ -40,8 +40,10 @@ user@host $ gsissh -o GSSAPIDelegateCredentials=yes oasis-login.opensciencegrid.
 In case the user can be mapped to more than one account, specify it explicitly in a command like this
 
 ``` console
-user@host $ gsissh -o GSSAPIDelegateCredentials=yes ouser.%RED%VO%ENDCOLOR%@oasis-login.opensciencegrid.org
+user@host $ gsissh -o GSSAPIDelegateCredentials=yes ouser.<VO>%@oasis-login.opensciencegrid.org
 ```
+
+Change `<VO>` for the name of the Virtual Organization you are trying to access.
 
 Instead of putting `-o GSSAPIDelegateCredentials=yes` on the command line, you can put it in your `~/.ssh/config` like this:
 

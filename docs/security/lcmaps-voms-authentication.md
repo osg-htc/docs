@@ -53,7 +53,7 @@ the default mappings, or migrate from edg-mkgridmap or GUMS.
 1.  Consult the default VO mappings in `/usr/share/osg/voms-mapfile-default` to determine the mapped Unix account names.
     Each of the mapfiles has the following format:
 
-        "%RED%<VO, VO role, VO group or user>%ENDCOLOR%" %RED%<Unix account>%ENDCOLOR%
+        "<VO, VO role, VO group or user>" <Unix account>
 
 
 1.  Create Unix accounts for each VO, VO role, VO group, and user that you wish to support.
@@ -308,7 +308,7 @@ To validate the LCMAPS VOMS plugin by itself, use the following procedure to tes
 1.  As an unprivileged user, create a VOMS proxy (filling in `<YOUR_VO>` with a VO you are a member of):
 
         :::console
-        user@host $ voms-proxy-init -voms %RED%<YOUR_VO>%ENDCOLOR%
+        user@host $ voms-proxy-init -voms <YOUR_VO>
 
 1.  Verify that your credentials are mapped as expected:
 

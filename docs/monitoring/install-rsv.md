@@ -154,10 +154,12 @@ Start the services in the order listed and stop them in reverse order. As a remi
 
 | To …                                        | Run the command …                     |
 |:--------------------------------------------|:--------------------------------------|
-| Start a service                             | `service %RED%<SERVICE-NAME>%ENDCOLOR% start` |
-| Stop a service                              | `service %RED%<SERVICE-NAME>%ENDCOLOR% stop`  |
-| Enable a service to start during boot       | `chkconfig %RED%<SERVICE-NAME>%ENDCOLOR% on`  |
-| Disable a service from starting during boot | `chkconfig %RED%<SERVICE-NAME>%ENDCOLOR% off` |
+| Start a service                             | `service <SERVICE-NAME> start` |
+| Stop a service                              | `service <SERVICE-NAME> stop`  |
+| Enable a service to start during boot       | `chkconfig <SERVICE-NAME> on`  |
+| Disable a service from starting during boot | `chkconfig <SERVICE-NAME> off` |
+
+Where `<SERVICE-NAME>` is the name of the service on the table above.
 
 ### Running RSV manually
 
@@ -197,9 +199,11 @@ You can find more information on troubleshooting RSV in the [rsv-control documen
 If you see `Failed to send record Failed to send via Gratia: Server unable to receive data:` in `/var/log/rsv/consumers/gratia-consumer.output` you should process to disable the gratia consumer using the following commands
 
 ```console
-root@host#  rsv-control --disable --host %RED%<YOUR RSV HOST>%ENDCOLOR% gratia-consumer
-root@host#  rsv-control --off --host %RED%<YOUR RSV HOST>%ENDCOLOR% gratia-consumer
+root@host#  rsv-control --disable --host <YOUR RSV HOST> gratia-consumer
+root@host#  rsv-control --off --host <YOUR RSV HOST> gratia-consumer
 ```
+
+Change `<YOUR RSV HOST>` for the hostname of the server where you are installing RSV.
 
 ### Important file locations
 
@@ -344,4 +348,4 @@ See [instructions](../security/host-certs.md) to request a service certificate.
 | various       | various     | various    |  	     | YES      | Allow outbound network connection to all services that you want to test        |
 
 
-Or, if you'd rather have your RSV web page appear as `%RED%https%ENDCOLOR%://...:8443/rsv/` like it used to in OSG 1.2, the first column above would be **HTTPS** / **tcp** / **8443**. See [above](#configuring-the-rsv-web-server-to-use-https-instead-of-http) for how to configure this.
+Or, if you'd rather have your RSV web page appear as `https://...:8443/rsv/` like it used to in OSG 1.2, the first column above would be **HTTPS** / **tcp** / **8443**. See [above](#configuring-the-rsv-web-server-to-use-https-instead-of-http) for how to configure this.

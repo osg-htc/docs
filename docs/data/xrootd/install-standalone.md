@@ -198,14 +198,14 @@ On EL 6, which config to use is set in the file `/etc/sysconfig/xrootd`.
 To use the standalone config, you would use:
 
 ``` file
-XROOTD_DEFAULT_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-%RED%standalone%ENDCOLOR%.cfg -k fifo"
+XROOTD_DEFAULT_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-standalone.cfg -k fifo"
 ```
 
 On EL 7, which config to use is determined by the service name given to `systemctl`.
 To use the standalone config, you would use:
 
 ``` console
-root@host # systemctl start xrootd@%RED%standalone%ENDCOLOR%
+root@host # systemctl start xrootd@standalone
 ```
 
 ### File locations

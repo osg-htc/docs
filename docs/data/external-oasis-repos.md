@@ -93,17 +93,17 @@ Prior to creation, the repository administrator will need to make two decisions:
 
 -   **Select a repository name**; typically, this is derived from the VO or project's name and ends in
     `opensciencegrid.org`.  For example, the NoVA VO runs the repository `nova.opensciencegrid.org`.  For this section,
-    we will use %RED%example.opensciencegrid.org%ENDCOLOR%.
--   **Select a repository owner**: Software publication will need to run by a non-`root` Unix user account; for this
-    document, we will use %BLUE%LIBRARIAN%ENDCOLOR% as the account name of the repository owner.
+    we will use `<EXAMPLE.OPENSCIENCEGRID.ORG>`.
+-   **Select a repository owner**: Software publication will need to run by a non`root` Unix user account; for this
+    document, we will use `<LIBRARIAN>` as the account name of the repository owner.
 
 The initial repository creation must be run as `root`:
 
-    :::console
+    :::console hl_lines="3 4"
     root@host # echo -e "\*\\t\\t-\\tnofile\\t\\t16384" >>/etc/security/limits.conf
     root@host # ulimit -n 16384
-    root@host # cvmfs_server mkfs -o %BLUE%LIBRARIAN%ENDCOLOR% %RED%example.opensciencegrid.org%ENDCOLOR%
-    root@host # cat >/srv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%/.htaccess <<xEOFx
+    root@host # cvmfs_server mkfs -o <LIBRARIAN> <EXAMPLE.OPENSCIENCEGRID.ORG>
+    root@host # cat >/srv/cvmfs/<EXAMPLE.OPENSCIENCEGRID.ORG>/.htaccess <<xEOFx
     Order deny,allow
     Deny from all
     Allow from 127.0.0.1
@@ -116,8 +116,8 @@ Here, we increase the number of open files allowed, create the repository using 
 
 Next, adjust the configuration in the repository as follows.  
 
-    :::console
-    root@host # cat >>/etc/cvmfs/repositories.d/%RED%example.opensciencegrid.org%ENDCOLOR%/server.conf <<xEOFx
+    :::console hl_lines="1"
+    root@host # cat >>/etc/cvmfs/repositories.d/<EXAMPLE.OPENSCIENCEGRID.ORG>/server.conf <<xEOFx
     CVMFS_AUTO_TAG_TIMESPAN="2 weeks ago"
     CVMFS_IGNORE_XDIR_HARDLINKS=true
     CVMFS_GENERATE_LEGACY_BULK_CHUNKS=false
@@ -130,8 +130,8 @@ Also, check the [cvmfs documentation](http://cvmfs.readthedocs.io/en/latest/cpt-
 
 Now verify that the repository is readable over HTTP:
 
-    :::console
-    root@host # wget -qO- http://localhost:8000/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%/.cvmfswhitelist | cat -v
+    :::console hl_lines="1"
+    root@host # wget -qO- http://localhost:8000/cvmfs/<EXAMPLE.OPENSCIENCEGRID.ORG>/.cvmfswhitelist | cat -v
 
 That should print several lines including some gibberish at the end.
 
@@ -165,27 +165,27 @@ In order to host a repository on OASIS, perform the following steps:
 
 1. One you are told in the ticket to proceed to the next step, execute the following commands:
 
-        :::console
-        root@host # wget -O /srv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%/.cvmfswhitelist \
-                    http://oasis.opensciencegrid.org/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%/.cvmfswhitelist 
+        :::console hl_lines="1 2 4"
+        root@host # wget -O /srv/cvmfs/<EXAMPLE.OPENSCIENCEGRID.ORG>/.cvmfswhitelist \
+                    http://oasis.opensciencegrid.org/cvmfs/<EXAMPLE.OPENSCIENCEGRID.ORG>/.cvmfswhitelist
         root@host # cp /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub \
-                    /etc/cvmfs/keys/%RED%example.opensciencegrid.org%ENDCOLOR%.pub
+                    /etc/cvmfs/keys/<EXAMPLE.OPENSCIENCEGRID.ORG>.pub
 
-    Replace %RED%example.opensciencegrid.org%ENDCOLOR% as appropriate.
+    Replace `<EXAMPLE.OPENSCIENCEGRID.ORG>` as appropriate.
     
 1. Verify that publishing operation succeeds:
 
-        :::console
-        root@host # su %BLUE%LIBRARIAN%ENDCOLOR% -c "cvmfs_server transaction %RED%example.opensciencegrid.org%ENDCOLOR%"
-        root@host # su %BLUE%LIBRARIAN%ENDCOLOR% -c "cvmfs_server publish %RED%example.opensciencegrid.org%ENDCOLOR%"
+        :::console hl_lines="1 2"
+        root@host # su <LIBRARIAN> -c "cvmfs_server transaction <EXAMPLE.OPENSCIENCEGRID.ORG>"
+        root@host # su <LIBRARIAN> -c "cvmfs_server publish <EXAMPLE.OPENSCIENCEGRID.ORG>"
 
     Within an hour, the repository updates should appear at the OSG Operations and FNAL Stratum-1 servers.
 
     On success, make sure the whitelist update happens daily by creating `/etc/cron.d/fetch-cvmfs-whitelist` with the
     following contents:
         
-        :::
-        5 4 * * * %BLUE%LIBRARIAN%ENDCOLOR% cd /srv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR% && wget -qO .cvmfswhitelist.new http://oasis.opensciencegrid.org/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%/.cvmfswhitelist && mv .cvmfswhitelist.new .cvmfswhitelist
+        :::hl_lines="1"
+        5 4 * * * <LIBRARIAN> cd /srv/cvmfs/<EXAMPLE.OPENSCIENCEGRID.ORG> && wget -qO .cvmfswhitelist.new http://oasis.opensciencegrid.org/cvmfs/<EXAMPLE.OPENSCIENCEGRID.ORG>/.cvmfswhitelist && mv .cvmfswhitelist.new .cvmfswhitelist
 
     !!! note
         This cronjob eliminates the need for the repository service administrator to periodically use
@@ -194,7 +194,7 @@ In order to host a repository on OASIS, perform the following steps:
 1. Update the open support ticket to indicate that the previous steps have been completed
 
 Once the repository is fully replicated on the OSG, the VO may proceed in publishing into CVMFS using the
-%BLUE%LIBRARIAN%ENDCOLOR% account on the repository server.
+`<LIBRARIAN>` account on the repository server.
 
 !!! tip
     We strongly recommend the repository maintainer read through the upstream documentation on
@@ -220,11 +220,11 @@ The latter can take longer because it requires OSG Operations intervention.
 If you are recreating the repository on the same machine, use the following command to 
 remove the repository configuration while preserving the data and keys:
 
-```console
-root@host # cvmfs_server rmfs -p example.opensciencegrid.org
+```console hl_lines="1"
+root@host # cvmfs_server rmfs -p <EXAMPLE.OPENSCIENCEGRID.ORG>
 ```
 
-Otherwise if it is a new machine, copy the keys from /etc/cvmfs/keys/%RED%example.opensciencegrid.org%ENDCOLOR%.* and the data from /srv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR% from the old server to the new, making sure that no publish operations happen on the old server while you copy the data.
+Otherwise if it is a new machine, copy the keys from /etc/cvmfs/keys/`<EXAMPLE.OPENSCIENCEGRID.ORG>`.* and the data from /srv/cvmfs/`<EXAMPLE.OPENSCIENCEGRID.ORG>` from the old server to the new, making sure that no publish operations happen on the old server while you copy the data.
 
 Then in either case use `cvmfs_server import` instead of `cvmfs_server mkfs` in the above instructions for [Creating the Repository](#creating-a-repository), in order to reuse old data and keys.
 
@@ -241,8 +241,8 @@ If you create a replacement repository on a new machine from scratch, follow the
 -   When you do the publish in step 5, add a `-n NNNN` option where `NNNN` is a revision number greater than the number on the existing repository.
     That number can be found by this command on a client machine:
 
-        :::console
-        user@host $ attr -qg revision /cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%
+        :::console hl_lines="1"
+        user@host $ attr -qg revision /cvmfs/<EXAMPLE.OPENSCIENCEGRID.ORG>
 
 -   Skip step 6; there is no need to tell OSG Operations when you are finished.
 -   After enough time has elapsed for the publish to propagate to clients, typically around 15 minutes, verify that the new chosen revision has reached a client.
@@ -255,5 +255,5 @@ In order to remove a repository that is being hosted on OASIS, perform the follo
 1.  If the repository has been replicated outside of the U.S., open a GGUS ticket asking that the replication be removed
     from EGI Stratum-1s. Wait until this ticket is resolved before proceeding.
 2.  Open a [support ticket](https://support.opensciencegrid.org/helpdesk/tickets/new) asking to shut down the repository, giving the repository
-    name (e.g., %RED%example.opensciencegrid.org%ENDCOLOR%), and the corresponding VO.
+    name (e.g., `<EXAMPLE.OPENSCIENCEGRID.ORG>`), and the corresponding VO.
 

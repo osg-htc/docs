@@ -96,8 +96,10 @@ Therefore, the VOMS Admin service should be disabled immediately.
 1. Turn off and disable the VOMS Admin server webapp:
 
         :::console
-        root@voms # service %RED%<SERVICE NAME>%ENDCOLOR% stop
-        root@voms # chkconfig disable %RED%<SERVICE NAME>%ENDCOLOR%
+        root@voms # service <SERVICE NAME> stop
+        root@voms # chkconfig disable <SERVICE NAME>
+
+Where `<SERVICE NAME>` is one of the listed on the table above
 
 ### Disabling the VOMS service ###
 
@@ -112,9 +114,10 @@ To find all clients requesting VOMS attribute signatures, run the following comm
 
 ``` console
 root@voms # awk -F ':' '/Received request from/ {print $11}' \
-    /var/log/voms/voms.%RED%<VO>%ENDCOLOR% \
-    /var/log/voms/voms.%RED%<VO>%ENDCOLOR%.[0-9] | sort | uniq -c
+    /var/log/voms/voms.<VO> \
+    /var/log/voms/voms.<VO>.[0-9] | sort | uniq -c
 ```
+Change `<VO>` for your Virtual Organization name
 
 - If there are any GlideinWMS frontends requesting VOMS attribute signatures:
 

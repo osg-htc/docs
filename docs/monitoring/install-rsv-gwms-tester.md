@@ -42,8 +42,8 @@ Complete these steps **on your GlideinWMS Front-end Central Manager host**:
 
 1. Authorize the Tester host to connect to your Central Manager:
 
-        :::console
-        root@host # glidecondor_addDN -allow-others -daemon %RED%<COMMENT> <TESTER_DN>%ENDCOLOR% condor
+        :::console hl_lines="1"
+        root@host # glidecondor_addDN -allow-others -daemon <COMMENT> <TESTER_DN> condor
 
 
      Where `COMMENT` is a human-readable label for the Tester host (e.g., “RSV GWMS Tester at myhost”), and `TESTER_DN` is the Distinguished Name (DN) of the host certificate of your Tester host. Most likely, you will need to quote both of these values to protect them from the shell. For example:
@@ -66,8 +66,8 @@ Complete these steps **on your GlideinWMS Front-end Central Manager host**:
 3. Add the new Tester to your GlideinWMS front-end configuration.
    Edit the file `/etc/gwms-frontend/frontend.xml` and add a line as follows within the `<schedds>` element
 
-        :::file
-        <schedd DN="%RED%<TESTER_DN>%ENDCOLOR%" fullname="%RED%<TESTER_HOSTNAME>%ENDCOLOR%">
+        :::file hl_lines="1"
+        <schedd DN="<TESTER_DN>" fullname="<TESTER_HOSTNAME>">
 
      Where `TESTER_DN` is the Distinguished Name (DN) of the host certificate of your Tester host (as above), and `TESTER_HOSTNAME` is the fully qualified hostname of the Tester host. For example:
 
@@ -101,8 +101,8 @@ Complete the following steps **on your Tester host**:
 
 2. Authorize the central manager of your Front-end to connect to the tester host:
 
-        :::console
-        root@host # glidecondor_addDN -allow-others -daemon %RED%<COMMENT> <CENTRAL_MGR>%ENDCOLOR% condor
+        :::console hl_lines="1"
+        root@host # glidecondor_addDN -allow-others -daemon <COMMENT> <CENTRAL_MGR> condor
 
     Where `COMMENT` is a human-readable identifier for the Central Manager, and `CENTRAL_MGR` is the Distinguished Name (DN) of the host certificate of your GlideinWMS Front-end’s Central Manager host. Most likely, you will need to quote both of these values to protect them from the shell. For example:
 
@@ -113,9 +113,9 @@ Complete the following steps **on your Tester host**:
 
     Create the file `/etc/condor/config.d/98_public_interface.config` with this content:
 
-        :::file
-        NETWORK_INTERFACE = %RED%<ADDRESS>%ENDCOLOR%
-        CONDOR_HOST = %RED%<CENTRAL_MGR>%ENDCOLOR%
+        :::file hl_lines="1 2"
+        NETWORK_INTERFACE = <ADDRESS>
+        CONDOR_HOST = <CENTRAL_MGR>
 
     Where `ADDRESS` is the IP address of your Tester host, and `CENTRAL_MGR` is the hostname of your GlideinWMS Front-end Central Manager.
 
@@ -155,7 +155,7 @@ You can view the latest results of both probe types on an RSV results web page, 
 
 #### Viewing RSV results online
 
-To see the latest results, access `https://%RED%<HOSTNAME>%ENDCOLOR%/rsv/` (where `HOSTNAME` is the name of your Tester host).
+To see the latest results, access `https://<HOSTNAME>` (where `HOSTNAME` is the name of your Tester host).
 
 -   There should be one result row per site supported by your VO(s), using the “org.osg.general.dummy-vanilla-probe” probe (aka *metric*)
 -   There should be exactly one result row for the probe that fetches the list of sites, which is the “org.osg.local-gfactory-site-querying-local” probe (aka *metric*)
@@ -178,10 +178,10 @@ root@host # rsv-control --run org.osg.local-gfactory-site-querying-local --host 
 The probe produces many lines of output, some of which are just about the probe execution itself. But look for lines like this:
 
 ```console
-MSG: Updating configuration for host %RED%<UCSD>%ENDCOLOR%
+MSG: Updating configuration for host <SITE_NAME>
 ```
 
-The highlighted name is the site name, and there should be one such line per site supported by your VO(s).
+Where `<SITE_NAME>` is the name of the site, and there should be one such line per site supported by your VO(s).
 
 Troubleshooting RSV-GWMS-Tester
 -------------------------------

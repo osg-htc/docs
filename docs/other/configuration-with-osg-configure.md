@@ -42,17 +42,22 @@ To see a list of modules, including whether they can be run separately, run:
 ``` console
 [root@server] osg-configure -l
 ```
-If the module can be run separately, specify it with the `-m %RED%<MODULE>%ENDCOLOR%` option:
+If the module can be run separately, specify it with the `-m <MODULE>` option, where `<MODULE>` is one of the items
+of the output of the previous command.
+
 ``` console
-[root@server] osg-configure -c -m %RED%<MODULE>%ENDCOLOR%
+[root@server] osg-configure -c -m <MODULE>
 ```
 
 Options may be specified in multiple INI files, which may make it hard to determine which value OSG-Configure uses.
 You may query the final value of an option via one of these methods:
 ``` console
-[root@server] osg-configure -o %RED%<OPTION>%ENDCOLOR%
-[root@server] osg-configure -o %RED%<SECTION>%ENDCOLOR%.%RED%<OPTION>%ENDCOLOR%
+[root@server] osg-configure -q -o <OPTION>
+[root@server] osg-configure -q -o <SECTION>.<OPTION>
 ```
+
+Where `<OPTION>` is the variable from which we want to know the value and `<SECTION>` refers to a section in any of the INI
+files, i.e. any name between brackets e.g. [Squid]
 
 Logs are written to `/var/log/osg/osg-configure.log`.
 If something goes wrong, specify the `-d` flag to add more verbose output to `osg-configure.log`.

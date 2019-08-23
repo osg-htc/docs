@@ -104,16 +104,17 @@ Look for any abnormal termination and report it if it is a non-trivial site issu
 
 To set a limit on the total or per-user number of transfers, create `/etc/sysconfig/gridftp-hdfs` and set the following configuration:
 
-    :::file
+    :::file hl_lines="3"
     export GRIDFTP_TRANSFER_LIMIT="80"
     export GRIDFTP_DEFAULT_USER_TRANSFER_LIMIT="50"
-    export GRIDFTP_%RED%<UNIX USERNAME>%ENDCOLOR%_USER_TRANSFER_LIMIT="40"
+    export GRIDFTP_<UNIX USERNAME>_USER_TRANSFER_LIMIT="40"
 
 In the above configuration:
 
 - There would be no more than 80 transfers going at a time, across all users.
 - By default, any single user can have no more than 50 transfers at a time.
-- The `%RED%<UNIX USERNAME>%ENDCOLOR%` user has a more stringent limit of 40 transfers at a time.
+- The `<UNIX USERNAME>` user has a more stringent limit of 40 transfers at a time.
+
 
 !!!note
     This limits are per gridftp server. If you have several gridftp servers you may want to have this limits divided by the number of gridftp servers at your site.

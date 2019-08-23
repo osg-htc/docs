@@ -64,11 +64,11 @@ The configuration of filebeats revolves around this file `/etc/filebeat/filebeat
         #username: "elastic"
         #password: "changeme"
 
-1. The general section should look like this, where `hostname` should be replaced by the hostname of the machine you are installing filebeats on.
+1. The general section should look like this, where `<HOSTNAME>` should be replaced by the hostname of the machine you are installing filebeats on.
 
         :::file
         #================================ General =====================================
-        name: %RED%<hostname>%ENDCOLOR%
+        name: <HOSTNAME>
         tags: ["xfer-log"]
 
 1. Test that the configuration is correct by running:

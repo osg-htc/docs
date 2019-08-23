@@ -252,7 +252,7 @@ See <http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/hdfs-d
 
 #### Special NameNode instructions for brand new installs
 
-If this is a new installation (%RED%and only if this is a brand new installation%ENDCOLOR%), you should run the following command as the `hdfs` user. (Otherwise, be sure to `chown` your storage directory to hdfs after running):
+If this is a new installation (**and only if this is a brand new installation**), you should run the following command as the `hdfs` user. (Otherwise, be sure to `chown` your storage directory to hdfs after running):
 
 ``` console
 hadoop namenode -format
@@ -269,10 +269,10 @@ FUSE is typically installed as part of this installation, but, if you are runnin
 You can add the FUSE to be mounted at boot time by adding the following line to `/etc/fstab`:
 
 ``` file
-hadoop-fuse-dfs# %RED%/mnt/hadoop%ENDCOLOR% fuse server=%RED%namenode.host%ENDCOLOR%,port=9000,rdbuffer=131072,allow_other 0 0
+hadoop-fuse-dfs# </MNT/HADOOP> fuse server=<NAMENODE.HOST>,port=9000,rdbuffer=131072,allow_other 0 0
 ```
 
-Be sure to change the `/mnt/hadoop` mount point and `namenode.host` to match your local configuration. To match the help documents, we recommend using `/mnt/hadoop` as your mountpoint.
+Be sure to change the `</MNT/HADOOP>` mount point and `<NAMENODE.HOST>` to match your local configuration. To match the help documents, we recommend using `</MNT/HADOOP>` as your mountpoint.
 
 Once your `/etc/fstab` is updated, to mount FUSE run:
 
@@ -419,7 +419,7 @@ This file controls which paths in HDFS should be monitored. This is in the Windo
 **Note: for the current version of the storage.cfg, there is an error, and you may need to delete the "probe/" subdirectory for the ProbeConfig location**
 
 ``` file
-ProbeConfig = /etc/gratia/%RED%probe/%ENDCOLOR%hadoop-storage/ProbeConfig
+ProbeConfig = /etc/gratia/probe/hadoop-storage/ProbeConfig
 ```
 
 For each logical "area" (arbitrarily defined by you), specify both a given name and a list of paths that belong to that area. Unix globs are accepted.
@@ -495,10 +495,11 @@ Validation
 The first thing you may want to do after installing and starting your primary NameNode is to verify that the web interface works. In your web browser go to:
 
 ``` file
-http://%RED%namenode.hostname%ENDCOLOR%:50070/dfshealth.jsp
+http://<NAMENODE.HOSTNAME>:50070/dfshealth.jsp
 ```
 
-Get familiar with Hadoop commands. Run hadoop with no arguments to see the list of commands.
+Change `<NAMENODE.HOSTNAME>` for the hostname of your Primary NameNode. Get familiar with Hadoop commands.
+Run hadoop with no arguments to see the list of commands.
 
 <details>
   <summary>Show detailed ouput</summary>
@@ -642,10 +643,11 @@ Troubleshooting
 To view all of the currently configured settings of Hadoop from the web interface, enter the following url in your browser:
 
 ``` file
-http://%RED%namenode.hostname%ENDCOLOR%:50070/conf
+http://<NAMENODE.HOSTNAME>:50070/conf
 ```
 
-You will see the entire configuration in XML format, for example:
+Change `<NAMENODE.HOSTNAME>` for the hostname of your Primary NameNode. You will see the entire configuration in XML
+format, for example:
 
 <details>
   <summary>Expand XML configuration</summary>
@@ -881,10 +883,11 @@ If you are running a custom kernel, then be sure to enable the `fuse` module wit
 To start the FUSE mount in debug mode, you can run the FUSE mount command by hand:
 
 ``` console
-root@host #  /usr/bin/hadoop-fuse-dfs  /mnt/hadoop -o rw,server=%RED%namenode.host%ENDCOLOR%,port=9000,rdbuffer=131072,allow_other -d
+root@host #  /usr/bin/hadoop-fuse-dfs  /mnt/hadoop -o rw,server=<NAMENODE.HOST>,port=9000,rdbuffer=131072,allow_other -d
 ```
 
-Debug output will be printed to stderr, which you will probably want to redirect to a file. Most FUSE-related problems can be tackled by reading through the stderr and looking for error messages.
+Change `<NAMENODE.HOSTNAME>` for the hostname of your Primary NameNode. Debug output will be printed to stderr, which
+you will probably want to redirect to a file. Most FUSE-related problems can be tackled by reading through the stderr and looking for error messages.
 
 #### GridFTP ####
 
