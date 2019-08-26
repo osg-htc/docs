@@ -37,9 +37,13 @@ Since the start of the RPM-based OSG software stack, we have offered the followi
     The main differences between 3.3 and 3.2 are the dropping of EL5 support, the addition of EL7 support, and the
     dropping of Globus GRAM support.
 
--   **OSG 3.4** started June 2017.
+-   **OSG 3.4** started June 2017 and will reach its end-of-life in November 2020.
     The main differences between it and 3.3 are the removal of edg-mkgridmap, GUMS, BeStMan, and VOMS Admin Server
     packages.
+
+-   **OSG 3.5** started August 2019.
+    The main differences between it and 3.4 were the introduction of the HTCondor 8.8 and 8.9 series;
+    also the RSV monitoring probes, EL6 support, and CREAM support were all dropped.
 
 OSG Upcoming
 ------------
