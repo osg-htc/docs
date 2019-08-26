@@ -97,7 +97,7 @@ enable_gratia = False
 Updating to the new release
 ---------------------------
 
-To update to the OSG 3.4 series, please consult the page on [updating between release series](/release/release_series#updating-from-osg-31-32-33-to-33-or-34).
+To update to the OSG 3.4 series, please consult the page on [updating between release series](/release/release_series#updating-to-osg-35).
 
 ### Update Repositories
 

@@ -61,11 +61,14 @@ See the [yum repositories document](/common/yum) for instructions on installing 
 
 <a name="updating-from-old"></a>
 
-Updating from OSG 3.1, 3.2, 3.3 to 3.4
---------------------------------------
+Updating to OSG 3.5
+-------------------
 
-If you have an existing installation based on OSG 3.1, 3.2, or 3.3 (which will be referred to as the *old series*),
-and want to upgrade to 3.4 (the *new series*), we recommend the following procedure:
+!!! note "OS Version Support"
+    OSG 3.5 only supports EL7
+
+If you have an existing installation based on OSG release verison >= 3.4 (which will be referred to as the *old series*),
+and want to upgrade to 3.5 (the *new series*), we recommend the following procedure:
 
 1.  First, remove the old series yum repositories:
 
@@ -80,13 +83,7 @@ and want to upgrade to 3.4 (the *new series*), we recommend the following proced
 2.  Install the OSG repositories:
 
         :::console
-        root@host # rpm -Uvh <URL>
-
-    where `<URL>` is one of the following:
-
-    | Series                    | EL6 URL (for RHEL6, CentOS6, or SL6)                             | EL7 URL (for RHEL7, CentOS7, or SL7)                             |
-    |:--------------------------|:-----------------------------------------------------------------|:-----------------------------------------------------------------|
-    | **OSG 3.4**               | `http://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm` | `http://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm` |
+        root@host # rpm -Uvh https://repo.opensciencegrid.org/osg/3.5/osg-3.5-el7-release-latest.rpm
 
 3.  Clean yum cache:
 
