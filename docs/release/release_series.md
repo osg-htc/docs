@@ -25,12 +25,10 @@ OSG Release Series
 Since the start of the RPM-based OSG software stack, we have offered the following release series:
 
 -   **OSG 3.1** started in April 2012, and was end-of-lifed in April 2015.
-    While the files have not been removed, it is strongly recommended that it not be installed anymore.
     Historically, there were 3.0.x releases as well, but there was no separate release series for 3.0 and 3.1;
     we simply went from 3.0.10 to 3.1.0 in the same repositories.
 
 -   **OSG 3.2** started in November 2013, and was end-of-lifed in August 2016.
-    While the files have not been removed, it is strongly recommended that it not be installed anymore.
     The main differences between it and 3.1 were the introduction of glideinWMS 3.2, HTCondor 8.0, and Hadoop/HDFS 2.0;
     also the gLite CE Monitor system was dropped in favor of osg-info-services.
 
