@@ -2223,10 +2223,11 @@
 
 
 <p>In case the user can be mapped to more than one account, specify it explicitly in a command like this</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> gsissh -o <span class="nv">GSSAPIDelegateCredentials</span><span class="o">=</span>yes ouser.<span style="color:red">VO</span>@oasis-login.opensciencegrid.org
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> gsissh -o <span class="nv">GSSAPIDelegateCredentials</span><span class="o">=</span>yes ouser.&lt;VO&gt;%@oasis-login.opensciencegrid.org
 </pre></div>
 
 
+<p>Change <code>&lt;VO&gt;</code> for the name of the Virtual Organization you are trying to access.</p>
 <p>Instead of putting <code>-o GSSAPIDelegateCredentials=yes</code> on the command line, you can put it in your <code>~/.ssh/config</code> like this:</p>
 <div class="codehilite"><pre><span></span><span class="go">Host oasis-login.opensciencegrid.org</span>
 <span class="go">    GSSAPIDelegateCredentials yes</span>

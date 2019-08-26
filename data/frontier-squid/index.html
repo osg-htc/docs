@@ -2434,13 +2434,13 @@ services.</p>
 </table>
 <h2 id="validating-frontier-squid">Validating Frontier Squid<a class="headerlink" href="#validating-frontier-squid" title="Permanent link">&para;</a></h2>
 <p>As any user on another computer, do the following (where
-<code><span style="color:red">my.squid.host.edu</span></code> is the fully qualified domain name of your
+<code>&lt;MY.SQUID.HOST.EDU&gt;</code> is the fully qualified domain name of your
 squid server):</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> <span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span>http://<span style="color:red">my.squid.host.edu</span>:3128
+<div class="codehilite"><pre><span></span><span class="hll"><span class="gp">user@host $</span> <span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span>http://<span class="sb">`</span>&lt;MY.SQUID.HOST.EDU&gt;<span class="sb">`</span>:3128
+</span><span class="gp">user@host $</span> wget -qdO/dev/null http://frontier.cern.ch <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">|</span>grep X-Cache
+<span class="go">X-Cache: MISS from `&lt;MY.SQUID.HOST.EDU&gt;`</span>
 <span class="gp">user@host $</span> wget -qdO/dev/null http://frontier.cern.ch <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">|</span>grep X-Cache
-<span class="go">X-Cache: MISS from <span style="color:red">my.squid.host.edu</span></span>
-<span class="gp">user@host $</span> wget -qdO/dev/null http://frontier.cern.ch <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">|</span>grep X-Cache
-<span class="go">X-Cache: HIT from <span style="color:red">my.squid.host.edu</span></span>
+<span class="go">X-Cache: HIT from `&lt;MY.SQUID.HOST.EDU&gt;`</span>
 </pre></div>
 
 

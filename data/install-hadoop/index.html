@@ -3071,7 +3071,7 @@ If you do not run a Secondary NameNode, skip to the <a href="#finalizing-the-upg
 <p>NameNodes must have a <code>/etc/hosts_exclude</code> present</p>
 </div>
 <h4 id="special-namenode-instructions-for-brand-new-installs">Special NameNode instructions for brand new installs<a class="headerlink" href="#special-namenode-instructions-for-brand-new-installs" title="Permanent link">&para;</a></h4>
-<p>If this is a new installation (<span style="color:red">and only if this is a brand new installation</span>), you should run the following command as the <code>hdfs</code> user. (Otherwise, be sure to <code>chown</code> your storage directory to hdfs after running):</p>
+<p>If this is a new installation (<strong>and only if this is a brand new installation</strong>), you should run the following command as the <code>hdfs</code> user. (Otherwise, be sure to <code>chown</code> your storage directory to hdfs after running):</p>
 <div class="codehilite"><pre><span></span><span class="go">hadoop namenode -format</span>
 </pre></div>
 
@@ -3081,11 +3081,11 @@ If you do not run a Secondary NameNode, skip to the <a href="#finalizing-the-upg
 <p>A FUSE mount is required on any node that you would like to use standard POSIX-like commands on the Hadoop filesystem. FUSE (or "File system in User SpacE") is a way to access HDFS using typical UNIX directory commands (i.e., POSIX-like access). Note that not all advanced functions of a full POSIX-compliant file system are necessarily available.</p>
 <p>FUSE is typically installed as part of this installation, but, if you are running a customized or non-standard system, make sure that the fuse kernel module is installed and loaded with <code>modprobe fuse</code>.</p>
 <p>You can add the FUSE to be mounted at boot time by adding the following line to <code>/etc/fstab</code>:</p>
-<div class="codehilite"><pre><span></span>hadoop-fuse-dfs# <span style="color:red">/mnt/hadoop</span> fuse server=<span style="color:red">namenode.host</span>,port=9000,rdbuffer=131072,allow_other 0 0
+<div class="codehilite"><pre><span></span>hadoop-fuse-dfs# &lt;/MNT/HADOOP&gt; fuse server=&lt;NAMENODE.HOST&gt;,port=9000,rdbuffer=131072,allow_other 0 0
 </pre></div>
 
 
-<p>Be sure to change the <code>/mnt/hadoop</code> mount point and <code>namenode.host</code> to match your local configuration. To match the help documents, we recommend using <code>/mnt/hadoop</code> as your mountpoint.</p>
+<p>Be sure to change the <code>&lt;/MNT/HADOOP&gt;</code> mount point and <code>&lt;NAMENODE.HOST&gt;</code> to match your local configuration. To match the help documents, we recommend using <code>&lt;/MNT/HADOOP&gt;</code> as your mountpoint.</p>
 <p>Once your <code>/etc/fstab</code> is updated, to mount FUSE run:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> mkdir /mnt/hadoop
 <span class="gp">root@host #</span> mount /mnt/hadoop
@@ -3294,7 +3294,7 @@ Some of the environment variables that can be used in <code>/etc/sysconfig/gridf
 <h4 id="storagecfg">storage.cfg<a class="headerlink" href="#storagecfg" title="Permanent link">&para;</a></h4>
 <p>This file controls which paths in HDFS should be monitored. This is in the Windows INI format.</p>
 <p><strong>Note: for the current version of the storage.cfg, there is an error, and you may need to delete the "probe/" subdirectory for the ProbeConfig location</strong></p>
-<div class="codehilite"><pre><span></span>ProbeConfig = /etc/gratia/<span style="color:red">probe/</span>hadoop-storage/ProbeConfig
+<div class="codehilite"><pre><span></span>ProbeConfig = /etc/gratia/probe/hadoop-storage/ProbeConfig
 </pre></div>
 
 
@@ -3396,11 +3396,12 @@ ProbeConfig = %(gratia_location)s/hadoop-storage/ProbeConfig
 </table>
 <h2 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
 <p>The first thing you may want to do after installing and starting your primary NameNode is to verify that the web interface works. In your web browser go to:</p>
-<div class="codehilite"><pre><span></span>http://<span style="color:red">namenode.hostname</span>:50070/dfshealth.jsp
+<div class="codehilite"><pre><span></span>http://&lt;NAMENODE.HOSTNAME&gt;:50070/dfshealth.jsp
 </pre></div>
 
 
-<p>Get familiar with Hadoop commands. Run hadoop with no arguments to see the list of commands.</p>
+<p>Change <code>&lt;NAMENODE.HOSTNAME&gt;</code> for the hostname of your Primary NameNode. Get familiar with Hadoop commands.
+Run hadoop with no arguments to see the list of commands.</p>
 <p><details>
   <summary>Show detailed ouput</summary>
    <p></p>
@@ -3532,11 +3533,12 @@ ProbeConfig = %(gratia_location)s/hadoop-storage/ProbeConfig
 <h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
 <h3 id="hadoop">Hadoop<a class="headerlink" href="#hadoop" title="Permanent link">&para;</a></h3>
 <p>To view all of the currently configured settings of Hadoop from the web interface, enter the following url in your browser:</p>
-<div class="codehilite"><pre><span></span>http://<span style="color:red">namenode.hostname</span>:50070/conf
+<div class="codehilite"><pre><span></span>http://&lt;NAMENODE.HOSTNAME&gt;:50070/conf
 </pre></div>
 
 
-<p>You will see the entire configuration in XML format, for example:</p>
+<p>Change <code>&lt;NAMENODE.HOSTNAME&gt;</code> for the hostname of your Primary NameNode. You will see the entire configuration in XML
+format, for example:</p>
 <p><details>
   <summary>Expand XML configuration</summary>
     <p></p>
@@ -3763,11 +3765,12 @@ ProbeConfig = %(gratia_location)s/hadoop-storage/ProbeConfig
 <p>If you are running a custom kernel, then be sure to enable the <code>fuse</code> module with <code>CONFIG_FUSE_FS=m</code> in your kernel config. Building and installing a <code>fuse</code> kernel module for your custom kernel is beyond the scope of this document.</p>
 <h4 id="running-fuse-in-debug-mode">Running FUSE in Debug Mode<a class="headerlink" href="#running-fuse-in-debug-mode" title="Permanent link">&para;</a></h4>
 <p>To start the FUSE mount in debug mode, you can run the FUSE mount command by hand:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span>  /usr/bin/hadoop-fuse-dfs  /mnt/hadoop -o rw,server<span class="o">=</span><span style="color:red">namenode.host</span>,port<span class="o">=</span><span class="m">9000</span>,rdbuffer<span class="o">=</span><span class="m">131072</span>,allow_other -d
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span>  /usr/bin/hadoop-fuse-dfs  /mnt/hadoop -o rw,server<span class="o">=</span>&lt;NAMENODE.HOST&gt;,port<span class="o">=</span><span class="m">9000</span>,rdbuffer<span class="o">=</span><span class="m">131072</span>,allow_other -d
 </pre></div>
 
 
-<p>Debug output will be printed to stderr, which you will probably want to redirect to a file. Most FUSE-related problems can be tackled by reading through the stderr and looking for error messages.</p>
+<p>Change <code>&lt;NAMENODE.HOSTNAME&gt;</code> for the hostname of your Primary NameNode. Debug output will be printed to stderr, which
+you will probably want to redirect to a file. Most FUSE-related problems can be tackled by reading through the stderr and looking for error messages.</p>
 <h4 id="gridftp">GridFTP<a class="headerlink" href="#gridftp" title="Permanent link">&para;</a></h4>
 <h4 id="starting-gridftp-in-standalone-mode">Starting GridFTP in Standalone Mode<a class="headerlink" href="#starting-gridftp-in-standalone-mode" title="Permanent link">&para;</a></h4>
 <p>If you would like to test the gridftp-hdfs server in a debug standalone mode, you can run the command:</p>

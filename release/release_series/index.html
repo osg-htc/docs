@@ -2413,13 +2413,14 @@ Therefore, the VOMS Admin service should be disabled immediately.</p>
 </li>
 <li>
 <p>Turn off and disable the VOMS Admin server webapp:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@voms #</span> service <span style="color:red">&lt;SERVICE NAME&gt;</span> stop
-<span class="gp">root@voms #</span> chkconfig disable <span style="color:red">&lt;SERVICE NAME&gt;</span>
+<div class="codehilite"><pre><span></span><span class="gp">root@voms #</span> service &lt;SERVICE NAME&gt; stop
+<span class="gp">root@voms #</span> chkconfig disable &lt;SERVICE NAME&gt;
 </pre></div>
 
 
 </li>
 </ol>
+<p>Where <code>&lt;SERVICE NAME&gt;</code> is one of the listed on the table above</p>
 <h3 id="disabling-the-voms-service">Disabling the VOMS service<a class="headerlink" href="#disabling-the-voms-service" title="Permanent link">&para;</a></h3>
 <p>The VOMS service accepts requests from clients to sign the VOMS attributes of their proxies.
 These VOMS attributes can then be used to authorize job submissions and file transfers in the OSG.</p>
@@ -2427,11 +2428,12 @@ These VOMS attributes can then be used to authorize job submissions and file tra
 <h4 id="identifying-voms-clients">Identifying VOMS clients<a class="headerlink" href="#identifying-voms-clients" title="Permanent link">&para;</a></h4>
 <p>To find all clients requesting VOMS attribute signatures, run the following command:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@voms #</span> awk -F <span class="s1">&#39;:&#39;</span> <span class="s1">&#39;/Received request from/ {print $11}&#39;</span> <span class="se">\</span>
-    /var/log/voms/voms.<span style="color:red">&lt;VO&gt;</span> <span class="se">\</span>
-    /var/log/voms/voms.<span style="color:red">&lt;VO&gt;</span>.<span class="o">[</span><span class="m">0</span>-9<span class="o">]</span> <span class="p">|</span> sort <span class="p">|</span> uniq -c
+    /var/log/voms/voms.&lt;VO&gt; <span class="se">\</span>
+    /var/log/voms/voms.&lt;VO&gt;.<span class="o">[</span><span class="m">0</span>-9<span class="o">]</span> <span class="p">|</span> sort <span class="p">|</span> uniq -c
 </pre></div>
 
 
+<p>Change <code>&lt;VO&gt;</code> for your Virtual Organization name</p>
 <ul>
 <li>
 <p>If there are any GlideinWMS frontends requesting VOMS attribute signatures:</p>

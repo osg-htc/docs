@@ -4109,13 +4109,13 @@ Route Matches: Condor_Test
 </pre></div>
 
 
-<p>To troubleshoot why this is occuring, look at the combined Requirements expressions for all routes and compare it to the job’s ClassAd provided. The combined Requirements expression is <span style="color:red">highlighted below</span>:</p>
+<p>To troubleshoot why this is occuring, look at the combined Requirements expressions for all routes and compare it to the job’s ClassAd provided. The combined Requirements expression is highlighted below:</p>
 <div class="codehilite"><pre><span></span>Umbrella constraint: ((target.x509userproxysubject =!= UNDEFINED) &amp;&amp;
 (target.x509UserProxyExpiration =!= UNDEFINED) &amp;&amp;
 (time() &lt; target.x509UserProxyExpiration) &amp;&amp;
 (target.JobUniverse =?= 5 || target.JobUniverse =?= 1)) &amp;&amp;
-<span style="color:red">( (target.osgTestPBS is true) || (true) )</span> &amp;&amp;
-(target.ProcId &gt;= 0 &amp;&amp; target.JobStatus == 1 &amp;&amp;
+<span class="hll">( (target.osgTestPBS is true) || (true) ) &amp;&amp;
+</span>(target.ProcId &gt;= 0 &amp;&amp; target.JobStatus == 1 &amp;&amp;
 (target.StageInStart is undefined || target.StageInFinish isnt undefined) &amp;&amp;
 target.Managed isnt &quot;ScheddDone&quot; &amp;&amp;
 target.Managed isnt &quot;Extenal&quot; &amp;&amp;

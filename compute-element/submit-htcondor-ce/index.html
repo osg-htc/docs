@@ -2433,11 +2433,11 @@ use_x509userproxy = true
 +Owner = undefined
 
 # Files
-executable = <span style="color:red">ce_test.sh</span>
+executable = ce_test.sh
 output = ce_test.out
 error = ce_test.err
-log = ce_test.log
-
+<span class="hll">log = ce_test.log
+</span>
 # File transfer behavior
 ShouldTransferFiles = YES
 WhenToTransferOutput = ON_EXIT
@@ -2512,11 +2512,11 @@ env
 <div class="codehilite"><pre><span></span># Required for remote HTCondor-CE submission
 universe = grid
 use_x509userproxy = true
-grid_resource = condor <span style="color:red">condorce.example.com condorce.example.com</span>:9619
-
+<span class="hll">grid_resource = condor condorce.example.com condorce.example.com:9619
+</span>
 # Files
-executable = <span style="color:red">ce_test.sh</span>
-output = ce_test.out
+<span class="hll">executable = ce_test.sh
+</span>output = ce_test.out
 error = ce_test.err
 log = ce_test.log
 

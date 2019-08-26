@@ -2307,8 +2307,8 @@
 <ol>
 <li>Edit your <code>/etc/rsv/rsv-nagios.conf</code> file and fill in the appropriate information. The path of the configuration file is specified in <code>/etc/rsv/consumers/nagios-consumer.conf</code>.</li>
 <li>
-<p>If your Nagios config file contains password information you will want to lock down the permissions. Here is a suggested way to do this (replace <span style="color:red">rsvuser</span> with the group of your RSV user (<code>rsvuser</code> by default)):</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> chown root:<span style="color:red">rsvuser</span> /etc/rsv/rsv-nagios.conf
+<p>If your Nagios config file contains password information you will want to lock down the permissions. Here is a suggested way to do this (replace <code>&lt;RSVUSER&gt;</code> with the group of your RSV user (<code>rsvuser</code> by default)):</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> chown root:&lt;RSVUSER&gt; /etc/rsv/rsv-nagios.conf
 <span class="gp">root@host#</span> chmod <span class="m">0440</span> /etc/rsv/rsv-nagios.conf
 </pre></div>
 

@@ -2351,8 +2351,8 @@
 <ol>
 <li>
 <p>Authorize the Tester host to connect to your Central Manager:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> glidecondor_addDN -allow-others -daemon <span style="color:red">&lt;COMMENT&gt; &lt;TESTER_DN&gt;</span> condor
-</pre></div>
+<div class="codehilite"><pre><span></span><span class="hll"><span class="gp">root@host #</span> glidecondor_addDN -allow-others -daemon &lt;COMMENT&gt; &lt;TESTER_DN&gt; condor
+</span></pre></div>
 
 
 <p>Where <code>COMMENT</code> is a human-readable label for the Tester host (e.g., “RSV GWMS Tester at myhost”), and <code>TESTER_DN</code> is the Distinguished Name (DN) of the host certificate of your Tester host. Most likely, you will need to quote both of these values to protect them from the shell. For example:</p>
@@ -2377,8 +2377,8 @@
 <li>
 <p>Add the new Tester to your GlideinWMS front-end configuration.
    Edit the file <code>/etc/gwms-frontend/frontend.xml</code> and add a line as follows within the <code>&lt;schedds&gt;</code> element</p>
-<div class="codehilite"><pre><span></span>&lt;schedd DN=&quot;<span style="color:red">&lt;TESTER_DN&gt;</span>&quot; fullname=&quot;<span style="color:red">&lt;TESTER_HOSTNAME&gt;</span>&quot;&gt;
-</pre></div>
+<div class="codehilite"><pre><span></span><span class="hll">&lt;schedd DN=&quot;&lt;TESTER_DN&gt;&quot; fullname=&quot;&lt;TESTER_HOSTNAME&gt;&quot;&gt;
+</span></pre></div>
 
 
 <p>Where <code>TESTER_DN</code> is the Distinguished Name (DN) of the host certificate of your Tester host (as above), and <code>TESTER_HOSTNAME</code> is the fully qualified hostname of the Tester host. For example:</p>
@@ -2413,8 +2413,8 @@
 </li>
 <li>
 <p>Authorize the central manager of your Front-end to connect to the tester host:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> glidecondor_addDN -allow-others -daemon <span style="color:red">&lt;COMMENT&gt; &lt;CENTRAL_MGR&gt;</span> condor
-</pre></div>
+<div class="codehilite"><pre><span></span><span class="hll"><span class="gp">root@host #</span> glidecondor_addDN -allow-others -daemon &lt;COMMENT&gt; &lt;CENTRAL_MGR&gt; condor
+</span></pre></div>
 
 
 <p>Where <code>COMMENT</code> is a human-readable identifier for the Central Manager, and <code>CENTRAL_MGR</code> is the Distinguished Name (DN) of the host certificate of your GlideinWMS Front-end’s Central Manager host. Most likely, you will need to quote both of these values to protect them from the shell. For example:</p>
@@ -2426,9 +2426,9 @@
 <li>
 <p>Configure the special HTCondor-RSV instance with your host IP address.</p>
 <p>Create the file <code>/etc/condor/config.d/98_public_interface.config</code> with this content:</p>
-<div class="codehilite"><pre><span></span>NETWORK_INTERFACE = <span style="color:red">&lt;ADDRESS&gt;</span>
-CONDOR_HOST = <span style="color:red">&lt;CENTRAL_MGR&gt;</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><span class="hll">NETWORK_INTERFACE = &lt;ADDRESS&gt;
+</span><span class="hll">CONDOR_HOST = &lt;CENTRAL_MGR&gt;
+</span></pre></div>
 
 
 <p>Where <code>ADDRESS</code> is the IP address of your Tester host, and <code>CENTRAL_MGR</code> is the hostname of your GlideinWMS Front-end Central Manager.</p>
@@ -2483,7 +2483,7 @@ CONDOR_HOST = <span style="color:red">&lt;CENTRAL_MGR&gt;</span>
 </ul>
 <p>You can view the latest results of both probe types on an RSV results web page, or you can manually run the first probe to see the full list of sites.</p>
 <h4 id="viewing-rsv-results-online">Viewing RSV results online<a class="headerlink" href="#viewing-rsv-results-online" title="Permanent link">&para;</a></h4>
-<p>To see the latest results, access <code>https://<span style="color:red">&lt;HOSTNAME&gt;</span>/rsv/</code> (where <code>HOSTNAME</code> is the name of your Tester host).</p>
+<p>To see the latest results, access <code>https://&lt;HOSTNAME&gt;</code> (where <code>HOSTNAME</code> is the name of your Tester host).</p>
 <ul>
 <li>There should be one result row per site supported by your VO(s), using the “org.osg.general.dummy-vanilla-probe” probe (aka <em>metric</em>)</li>
 <li>There should be exactly one result row for the probe that fetches the list of sites, which is the “org.osg.local-gfactory-site-querying-local” probe (aka <em>metric</em>)</li>
@@ -2499,11 +2499,11 @@ CONDOR_HOST = <span style="color:red">&lt;CENTRAL_MGR&gt;</span>
 
 
 <p>The probe produces many lines of output, some of which are just about the probe execution itself. But look for lines like this:</p>
-<div class="codehilite"><pre><span></span><span class="go">MSG: Updating configuration for host <span style="color:red">&lt;UCSD&gt;</span></span>
+<div class="codehilite"><pre><span></span><span class="go">MSG: Updating configuration for host &lt;SITE_NAME&gt;</span>
 </pre></div>
 
 
-<p>The highlighted name is the site name, and there should be one such line per site supported by your VO(s).</p>
+<p>Where <code>&lt;SITE_NAME&gt;</code> is the name of the site, and there should be one such line per site supported by your VO(s).</p>
 <h2 id="troubleshooting-rsv-gwms-tester">Troubleshooting RSV-GWMS-Tester<a class="headerlink" href="#troubleshooting-rsv-gwms-tester" title="Permanent link">&para;</a></h2>
 <p>You can find more information on troubleshooting in the <a href="../../monitoring/install-rsv#troubleshooting-rsv">RSV troubleshooting section</a></p>
 <p>Logs and configuration:</p>

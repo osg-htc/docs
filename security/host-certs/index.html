@@ -2436,21 +2436,23 @@ Additional options and descriptions can be found <a href="https://github.com/ope
    its intended host and copy over the key you generated above.</li>
 <li>
 <p>Verify that the issuer <code>CN</code> field is <code>InCommon IGTF Server CA</code>:</p>
-<div class="codehilite"><pre><span></span><span class="gp">$</span> openssl x509 -in <span style="color:red">&lt;PATH TO CERTIFICATE&gt;</span> -noout -issuer
+<div class="codehilite"><pre><span></span><span class="gp">$</span> openssl x509 -in &lt;PATH TO CERTIFICATE&gt; -noout -issuer
 <span class="go">issuer= /C=US/O=Internet2/OU=InCommon/CN=InCommon IGTF Server CA</span>
 </pre></div>
 
 
+<p>Where <code>&lt;PATH TO CERTIFICATE&gt;</code> is the file you downloaded in the previous step</p>
 </li>
 <li>
 <p>Install the host certificate and key:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cp <span style="color:red">&lt;PATH TO CERTIFICATE&gt;</span> /etc/grid-security/hostcert.pem
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cp &lt;PATH TO CERTIFICATE&gt; /etc/grid-security/hostcert.pem
 <span class="gp">root@host #</span> chmod <span class="m">444</span> /etc/grid-security/hostcert.pem
-<span class="gp">root@host #</span> cp <span style="color:red">&lt;PATH TO KEY&gt;</span> /etc/grid-security/hostkey.pem
+<span class="gp">root@host #</span> cp &lt;PATH TO KEY&gt; /etc/grid-security/hostkey.pem
 <span class="gp">root@host #</span> chmod <span class="m">400</span> /etc/grid-security/hostkey.pem
 </pre></div>
 
 
+<p>Where <code>&lt;PATH TO KEY&gt;</code> is the ".key" file you created in the first step</p>
 </li>
 </ol>
 <h3 id="requesting-certificates-as-a-registration-authority">Requesting certificates as a registration authority<a class="headerlink" href="#requesting-certificates-as-a-registration-authority" title="Permanent link">&para;</a></h3>

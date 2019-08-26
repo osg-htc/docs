@@ -2511,7 +2511,7 @@ the default mappings, or migrate from edg-mkgridmap or GUMS.</p>
 <li>
 <p>Consult the default VO mappings in <code>/usr/share/osg/voms-mapfile-default</code> to determine the mapped Unix account names.
     Each of the mapfiles has the following format:</p>
-<div class="codehilite"><pre><span></span>&quot;<span style="color:red">&lt;VO, VO role, VO group or user&gt;</span>&quot; <span style="color:red">&lt;Unix account&gt;</span>
+<div class="codehilite"><pre><span></span>&quot;&lt;VO, VO role, VO group or user&gt;&quot; &lt;Unix account&gt;
 </pre></div>
 
 
@@ -2811,7 +2811,7 @@ therefore, there are no running services and it does not have to be invoked manu
 </li>
 <li>
 <p>As an unprivileged user, create a VOMS proxy (filling in <code>&lt;YOUR_VO&gt;</code> with a VO you are a member of):</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> voms-proxy-init -voms <span style="color:red">&lt;YOUR_VO&gt;</span>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> voms-proxy-init -voms &lt;YOUR_VO&gt;
 </pre></div>
 
 

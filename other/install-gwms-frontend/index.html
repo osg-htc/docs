@@ -3004,10 +3004,10 @@ You can figure out which port will be used by running the following command:</p>
 <h3 id="credentials-and-proxies">Credentials and Proxies<a class="headerlink" href="#credentials-and-proxies" title="Permanent link">&para;</a></h3>
 <p>The VO Frontend will use two credentials in its interactions with the other GlideinWMS services. At this time, these will be proxy files.</p>
 <ol>
-<li>the <span style="color:green">VO Frontend proxy</span> (used to authenticate with the other GlideinWMS services).</li>
-<li>one or more GlideinWMS <span style="color:red">pilot proxies</span> (used/delegated to the Factory services and submitted on the GlideinWMS pilot jobs).</li>
+<li>the <strong>VO Frontend proxy</strong> (used to authenticate with the other GlideinWMS services).</li>
+<li>one or more GlideinWMS <strong>pilot proxies</strong> (used/delegated to the Factory services and submitted on the GlideinWMS pilot jobs).</li>
 </ol>
-<p>The <span style="color:green">VO Frontend proxy</span> and the <span style="color:red"> pilot proxy</span> can
+<p>The <strong>VO Frontend proxy</strong> and the <strong>pilot proxy</strong> can
 be the same. By default, the VO Frontend will run as user <code>frontend</code> (UID is
 machine dependent) so these proxies must be owned by the user <code>frontend</code>.</p>
 <div class="admonition note">
@@ -3062,7 +3062,9 @@ request to the GlideinWMS Factory.</p>
 <li>The factory identity, e.g.: <code>gfactory@gfactory-1.t2.ucsd.edu</code></li>
 <li>The identity on the Factory you will be mapped to. Something like: <code>username@gfactory-1.t2.ucsd.edu</code></li>
 <li>Your security name. A unique name, usually containing your VO name: <code>My_SecName</code></li>
-<li>A string to add in the main Factory query_expr in the Frontend configuration, e.g. <code>stringListMember("<span style="color:red">VO</span>",GLIDEIN_Supported_VOs)</code>. This is used to select the entries you can use. From there you get the correct name of the VO (above in this list).</li>
+<li>A string to add in the main Factory query_expr in the Frontend configuration, e.g. <code>stringListMember("&lt;VO&gt;",GLIDEIN_Supported_VOs)</code>.
+   This is used to select the entries you can use.
+   From there you get the correct name of the VO (above in this list).</li>
 </ol>
 <h2 id="installing-glideinwms-frontend">Installing GlideinWMS Frontend<a class="headerlink" href="#installing-glideinwms-frontend" title="Permanent link">&para;</a></h2>
 <h3 id="installing-htcondor">Installing HTCondor<a class="headerlink" href="#installing-htcondor" title="Permanent link">&para;</a></h3>
@@ -3122,10 +3124,10 @@ machines):</p>
 <li>Reconfigure and Start the Frontend</li>
 </ol>
 <h4 id="configuring-the-frontend">Configuring the Frontend<a class="headerlink" href="#configuring-the-frontend" title="Permanent link">&para;</a></h4>
-<p>The VO Frontend configuration file is <code>/etc/gwms-frontend/frontend.xml</code>. The next steps will describe each line that you will need to edit if you are using the OSG Factory at UCSD. The portions to edit are highlighted in red font. If you are using a different Factory more changes are necessary, please check the VO Frontend configuration reference.</p>
+<p>The VO Frontend configuration file is <code>/etc/gwms-frontend/frontend.xml</code>. The next steps will describe each line that you will need to edit if you are using the OSG Factory at UCSD. The portions to edit are highlighted. If you are using a different Factory more changes are necessary, please check the VO Frontend configuration reference.</p>
 <ol>
 <li>
-<p>The VO you are affiliated with. This will identify those CEs that the GlideinWMS pilot will be authorized to run on using the <span style="color:red">pilot proxy</span> described previously in <a href="#credentials-and-proxies">this section</a>. Sometimes the whole <code>query_expr</code> is provided to you by the Factory operators (see Factory access above):</p>
+<p>The VO you are affiliated with. This will identify those CEs that the GlideinWMS pilot will be authorized to run on using the <strong>pilot proxy</strong> described previously in <a href="#credentials-and-proxies">this section</a>. Sometimes the whole <code>query_expr</code> is provided to you by the Factory operators (see Factory access above):</p>
 <div class="codehilite"><pre><span></span><span class="nt">&lt;factory</span> <span class="na">query_expr=</span><span class="s">&#39;((stringListMember(&quot;VO&quot;, GLIDEIN_Supported_VOs)))&#39;</span><span class="nt">&gt;</span>
 </pre></div>
 
@@ -3148,7 +3150,7 @@ machines):</p>
 <li>The <code>classad_proxy</code> in the security entry is the location of the VO Frontend proxy described previously <a href="#credentials-and-proxies">here</a>.</li>
 <li>The <code>proxy_DN</code> is the DN of the <code>classad_proxy</code> above.</li>
 <li>The <code>security_name</code> identifies this VO Frontend to the the Factory, It is provided by the Factory operator.</li>
-<li>The <code>absfname</code> in the credential entry is the location of the GlideinWMS <span style="color:red"><code>pilot</code></span> proxy described in the requirements section <a href="#credentials-and-proxies">here</a>. There can be multiple pilot proxies, or even other kind of keys (e.g. if you use cloud resources). <strong><em>The type and trust_domain of the credential must match respectively auth_method and trust_domain used in the entry definition in the Factory. If there is no match, between these two attributes in one of the credentials and the corresponding ones in some entry in one of the Factories, then this Frontend cannot trigger glideins.</em></strong>
+<li>The <code>absfname</code> in the credential entry is the location of the GlideinWMS <strong>pilot proxy</strong> described in the requirements section <a href="#credentials-and-proxies">here</a>. There can be multiple pilot proxies, or even other kind of keys (e.g. if you use cloud resources). <strong><em>The type and trust_domain of the credential must match respectively auth_method and trust_domain used in the entry definition in the Factory. If there is no match, between these two attributes in one of the credentials and the corresponding ones in some entry in one of the Factories, then this Frontend cannot trigger glideins.</em></strong>
 Both the <code>classad_proxy</code> and <code>absfname</code> files should be owned by <code>frontend</code> user.<div class="codehilite"><pre><span></span><span class="nt">&lt;security</span> <span class="na">classad_proxy=</span><span class="s">&quot;/tmp/vo_proxy&quot;</span> <span class="na">proxy_DN=</span><span class="s">&quot;DN of vo_proxy&quot;</span>
       <span class="na">proxy_selection_plugin=</span><span class="s">&quot;ProxyAll&quot;</span>
       <span class="na">security_name=</span><span class="s">&quot;The security name, this is used by factory&quot;</span>
@@ -3167,7 +3169,7 @@ Both the <code>classad_proxy</code> and <code>absfname</code> files should be ow
 <li>
 <p>The schedd information.</p>
 <ul>
-<li>The <code>DN</code> of the <span style="color:green">VO Frontend Proxy</span> described previously <a href="#credentials-and-proxies">here</a>.</li>
+<li>The <code>DN</code> of the <strong>VO Frontend Proxy</strong> described previously <a href="#credentials-and-proxies">here</a>.</li>
 <li>The <code>fullname</code> attribute is the fully qualified domain name of the host where you installed the VO Frontend (<code>hostname --fqdn</code>).
 A secondary schedd is optional. You will need to delete the secondary schedd line if you are not using it. Multiple schedds allow the Frontend to service requests from multiple submit hosts.<div class="codehilite"><pre><span></span><span class="nt">&lt;schedds&gt;</span>
   <span class="nt">&lt;schedd</span> <span class="na">DN=</span><span class="s">&quot;Cert DN used by the schedd at fullname:&quot;</span>
@@ -3184,7 +3186,7 @@ A secondary schedd is optional. You will need to delete the secondary schedd lin
 <li>
 <p>The User Collector information.</p>
 <ul>
-<li>The <code>DN</code> of the <span style="color:green">VO Frontend Proxy</span> described previously <a href="#credentials-and-proxies">here</a>.</li>
+<li>The <code>DN</code> of the <strong>VO Frontend Proxy</strong> described previously <a href="#credentials-and-proxies">here</a>.</li>
 <li>The <code>node</code> attribute is the full hostname of the collectors (<code>hostname --fqdn</code>) and port</li>
 <li>The <code>secondary</code> attribute indicates whether the element is for the primary or secondary collectors (True/False).
  The default HTCondor configuration of the VO Frontend starts multiple Collector processes on the host (<code>/etc/condor/config.d/11_gwms_secondary_collectors.config</code>). The <code>DN</code> and <code>hostname</code> on the first line are the hostname and the host certificate of the VO Frontend. The <code>DN</code> and <code>hostname</code> on the second line are the same as the ones in the first one. The hostname (e.g. hostname.domain.tld) is filled automatically during the installation. The secondary collector connection can be defined as sinful string for the sock case , e.g., hostname.domain.tld:9618?sock=collector16.</li>
@@ -3310,7 +3312,7 @@ the local collector. HTCondor uses the mapfile to map certificates to pseudo-use
 on the local machine. It is important that you map the DN's of:</p>
 <ul>
 <li>
-<p><span style="color:red">Each schedd proxy</span>: The <code>DN</code> of each schedd that the frontend talks to. Specified in the frontend.xml schedd element <code>DN</code> attribute:</p>
+<p><strong>Each schedd proxy</strong>: The <code>DN</code> of each schedd that the frontend talks to. Specified in the frontend.xml schedd element <code>DN</code> attribute:</p>
 <div class="codehilite"><pre><span></span><span class="nt">&lt;schedds&gt;</span>
   <span class="nt">&lt;schedd</span> <span class="na">DN=</span><span class="s">&quot;/DC=org/DC=doegrids/OU=Services/CN=YOUR_HOST&quot;</span> <span class="na">fullname=</span><span class="s">&quot;YOUR_HOST&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;schedd</span> <span class="na">DN=</span><span class="s">&quot;/DC=org/DC=doegrids/OU=Services/CN=YOUR_HOST&quot;</span> <span class="na">fullname=</span><span class="s">&quot;schedd_jobs2@YOUR_HOST&quot;</span><span class="nt">/&gt;</span>
@@ -3320,14 +3322,14 @@ on the local machine. It is important that you map the DN's of:</p>
 
 </li>
 <li>
-<p><span style="color:green">Frontend proxy</span>: The DN of the proxy that the Frontend uses to communicate with the other GlideinWMS services. Specified in the frontend.xml security element <code>proxy_DN</code> attribute:</p>
+<p><strong>Frontend proxy</strong>: The DN of the proxy that the Frontend uses to communicate with the other GlideinWMS services. Specified in the frontend.xml security element <code>proxy_DN</code> attribute:</p>
 <div class="codehilite"><pre><span></span><span class="nt">&lt;security</span> <span class="na">classad_proxy=</span><span class="s">&quot;/tmp/vo_proxy&quot;</span> <span class="na">proxy_DN=</span><span class="s">&quot;DN of vo_proxy&quot;</span> <span class="err">....</span>
 </pre></div>
 
 
 </li>
 <li>
-<p><span style="color:red">Each pilot proxy</span> The DN of <strong>each</strong> proxy that the frontend forwards to the factory to use with the GlideinWMS pilots.  This allows the !GlideinWMS pilot jobs to communicate with the User Collector. Specified in the frontend.xml proxy <code>absfname</code> attribute (you need to specify the <code>DN</code> of each of those proxies:</p>
+<p><strong>Each pilot proxy</strong> The DN of <strong>each</strong> proxy that the frontend forwards to the factory to use with the GlideinWMS pilots.  This allows the GlideinWMS pilot jobs to communicate with the User Collector. Specified in the frontend.xml proxy <code>absfname</code> attribute (you need to specify the <code>DN</code> of each of those proxies:</p>
 <div class="codehilite"><pre><span></span><span class="nt">&lt;security</span> <span class="err">....</span>
 <span class="err">&lt;proxies</span><span class="nt">&gt;</span>
    <span class="nt">&lt; proxy</span> <span class="na">absfname=</span><span class="s">&quot;/tmp/vo_proxy&quot;</span> <span class="err">....</span>
@@ -3341,15 +3343,17 @@ on the local machine. It is important that you map the DN's of:</p>
 <p>Below is an example mapfile, by default found in
 <code>/etc/condor/certs/condor_mapfile</code>. In this example there are lines for each of
 services mentioned above.</p>
-<div class="codehilite"><pre><span></span>GSI &quot;<span style="color:red">DN of schedd proxy</span>&quot; schedd
-GSI &quot;<span style="color:green">DN of frontend proxy</span>&quot; frontend
-GSI &quot;<span style="color:red">DN of pilot proxy</span>$&quot; pilot_proxy
-GSI &quot;^/DC=org/DC=doegrids/OU=Services/CN=personal-submit-host2.mydomain.edu$&quot; %RED&lt;example_of_format&gt;</span>
+<div class="codehilite"><pre><span></span>GSI &quot;&lt;DN OF SCHEDD PROXY&gt;&quot; schedd
+GSI &quot;&lt;DN OF FRONTEND PROXY&gt;&quot; frontend
+GSI &quot;&lt;DN OF PILOT PROXY&gt;&quot; pilot_proxy
+GSI &quot;^/DC=org/DC=doegrids/OU=Services/CN=personal-submit-host2.mydomain.edu$&quot; &lt;example_of_format&gt;
 GSI (.*) anonymous
 FS (.*) \1
 </pre></div>
 
 
+<p>Change <code>&lt;DN OF SCHEDD PROXY&gt;</code>, <code>&lt;DN OF FRONTEND PROXY&gt;</code>, and  <code>&lt;DN OF PILOT PROXY&gt;</code> to the distinguished names of the
+respective proxies.</p>
 <h4 id="restarting-htcondor">Restarting HTCondor<a class="headerlink" href="#restarting-htcondor" title="Permanent link">&para;</a></h4>
 <p>After configuring HTCondor, be sure to restart HTCondor:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service condor restart
@@ -3358,21 +3362,23 @@ FS (.*) \1
 
 <h3 id="proxy-configuration">Proxy Configuration<a class="headerlink" href="#proxy-configuration" title="Permanent link">&para;</a></h3>
 <p>GlideinWMS comes with the <a href="#managing-glideinwms-services">gwms-renew-proxies service</a> that can automatically generate
-and renew the <span style="color:green">pilot proxies</span> and <span style="color:green">VO Frontend proxy</span>. To configure this service, modify
+and renew the <strong>pilot proxies</strong> and <strong>VO Frontend proxy</strong>. To configure this service, modify
 <code>/etc/gwms-frontend/proxies.ini</code> using the following instructions:</p>
 <ol>
 <li>
-<p>For each of your <span style="color:green">pilot proxies</span>, create a <code>[PILOT &lt;NAME&gt;]</code> section, where <code>&lt;NAME&gt;</code> is a descriptive
+<p>For each of your <strong>pilot proxies</strong>, create a <code>[PILOT &lt;NAME&gt;]</code> section, where <code>&lt;NAME&gt;</code> is a descriptive
    name for the proxy that is unique to your local configuration. In each section, set the <code>proxy_cert</code>, <code>proxy_key</code>,
    <code>output</code>, and <code>vo</code> corresponding to each pilot proxy:</p>
-<div class="codehilite"><pre><span></span>[PILOT <span style="color:red">&lt;NAME&gt;</span>]
-proxy_cert = <span style="color:red">&lt;PATH TO THE PILOT CERTIFICATE&gt;</span>
-proxy_key = <span style="color:red">&lt;PATH TO THE PILOT KEY&gt;</span>
-output = <span style="color:red">&lt;PATH TO CREATE THE PILOT PROXY&gt;</span>
-vo = <span style="color:red">&lt;NAME OF VIRTUAL ORGANIZATION&gt;</span>
+<div class="codehilite"><pre><span></span>[PILOT &lt;NAME&gt;]
+proxy_cert = &lt;PATH TO THE PILOT CERTIFICATE&gt;
+proxy_key = &lt;PATH TO THE PILOT KEY&gt;
+output = &lt;PATH TO CREATE THE PILOT PROXY&gt;
+vo = &lt;NAME OF VIRTUAL ORGANIZATION&gt;
 </pre></div>
 
 
+<p>Change <code>&lt;PATH TO THE PILOT CERTIFICATE&gt;</code>, <code>&lt;PATH TO THE PILOT KEY&gt;</code> and <code>&lt;PATH TO CREATE THE PILOT PROXY&gt;</code>
+appropriately to point to the locations of the pilot certificate, pilot key, and pilot proxy, respectively.</p>
 <p>Additionally, in each <code>[PILOT &lt;NAME&gt;]</code> section, you must specify how the proxy's VOMS attributes will be signed by
 setting <code>use_voms_server</code>. Choose one of the following options:</p>
 <ul>
@@ -3417,12 +3423,12 @@ lifetime = &lt;PROXY LIFETIME&gt;
 
 </li>
 <li>
-<p>Configure the location and output of the <span style="color:green">VO Frontend proxy</span> under the <code>[FRONTEND]</code> section and set
+<p>Configure the location and output of the <strong>VO Frontend proxy</strong> under the <code>[FRONTEND]</code> section and set
    the <code>proxy_cert</code>, <code>proxy_key</code>, and <code>output</code> to paths corresponding to your VO Frontend:</p>
 <div class="codehilite"><pre><span></span>[FRONTEND]
-proxy_cert = <span style="color:red">&lt;PATH TO THE FRONTEND CERTIFICATE&gt;</span>
-proxy_key = <span style="color:red">&lt;PATH TO THE FRONTEND KEY&gt;</span>
-output = <span style="color:red">&lt;PATH TO CREATE THE FRONTEND PROXY&gt;</span>
+proxy_cert = &lt;PATH TO THE FRONTEND CERTIFICATE&gt;
+proxy_key = &lt;PATH TO THE FRONTEND KEY&gt;
+output = &lt;PATH TO CREATE THE FRONTEND PROXY&gt;
 </pre></div>
 
 
@@ -3432,8 +3438,13 @@ output = <span style="color:red">&lt;PATH TO CREATE THE FRONTEND PROXY&gt;</span
 </div>
 </li>
 <li>
-<p><strong>(OPTIONAL)</strong> If you are running the <code>gwms-frontend</code> service under a non-default user (default: <code>frontend</code>),
+<p><strong>(OPTIONAL)</strong> If you are running the <code>gwms-frontend</code> service under a <code>&lt;NON-DEFAULT USER&gt;</code> (default: <code>frontend</code>),
    specify the user as the owner of your proxies under the <code>[COMMON]</code> section:</p>
+<div class="codehilite"><pre><span></span>[COMMON]
+owner = &lt;NON-DEFAULT USER&gt;
+</pre></div>
+
+
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The <code>[COMMON]</code> section is required but its contents are optional</p>
@@ -3478,19 +3489,19 @@ SiteName=&quot;HCC-GlideinWMW-Frontend&quot;
 <div class="codehilite"><pre><span></span>    ...
     SuppressGridLocalRecords=&quot;0&quot;
     EnableProbe=&quot;1&quot;
-    <span style="color:red">MapUnknownToGroup=&quot;1&quot;</span>
-
+<span class="hll">    MapUnknownToGroup=&quot;1&quot;
+</span>
     Title3=&quot;Tuning parameter&quot;
     ...
 </pre></div>
 
 
-<p>Further, if you want to record all usage as coming from a single VO, you can configure the probe to override the 'guessed' VO. In the below example, replace the <span style="color:red">Engage</span> with a registered VO that you would like to report as. If you don't have a VO that you are affiliated with, you may use Engage.</p>
+<p>Further, if you want to record all usage as coming from a single VO, you can configure the probe to override the 'guessed' VO. In the below example, replace <code>&lt;ENGAGE&gt;</code> with a registered VO that you would like to report as. If you don't have a VO that you are affiliated with, you may use "Engage".</p>
 <div class="codehilite"><pre><span></span>...
     MapUnknownToGroup=&quot;1&quot;
     MapGroupToRole=&quot;1&quot;
-    VOOverride=&quot;Engage&quot;
-...
+<span class="hll">    VOOverride=&quot;&lt;ENGAGE&gt;&quot;
+</span>...
 </pre></div>
 
 
@@ -3787,9 +3798,11 @@ Defined in &#39;/etc/condor/config.d/11_gwms_secondary_collectors.config&#39;, l
 <p>To see the details of the glidein resource use <code>condor_status -subsystem glideresource -l</code>, including the GlideFactoryName.</p>
 </li>
 <li>
-<p>Verify that the Factory is seeing correctly the Frontend using <code>condor_status -pool <span style="color:red">&lt;FACTORY_HOST&gt;</span> -any -constraint 'FrontendName==<span style="color:red">"&lt;FRONTEND_NAME_FROM_CONFIG&gt;"</span>' -l</code>, including the GlideFactoryName.</p>
+<p>Verify that the Factory is seeing correctly the Frontend using <code>condor_status -pool &lt;FACTORY_HOST&gt; -any -constraint 'FrontendName=="&lt;FRONTEND_NAME_FROM_CONFIG&gt;"' -l</code>, including the GlideFactoryName.</p>
 </li>
 </ol>
+<p>Where <code>&lt;FACTORY_HOST&gt;</code> is the hostname of the factory being used, for example: gfactory-1.t2.ucsd.edu and
+<FRONTEND_NAME_FROM_CONFIG> is the value set for "frontend_name" in the frontend.xml file</p>
 <h3 id="glideinwms-job-submission">GlideinWMS Job submission<a class="headerlink" href="#glideinwms-job-submission" title="Permanent link">&para;</a></h3>
 <p>HTCondor submit file <code>glidein-job.sub</code>. This is a simple job printing the hostname of the host where the job is running:</p>
 <div class="codehilite"><pre><span></span>#file glidein-job.sub
@@ -3935,7 +3948,7 @@ made available on the Web:
 <h3 id="frontend-reconfig-failing">Frontend reconfig failing<a class="headerlink" href="#frontend-reconfig-failing" title="Permanent link">&para;</a></h3>
 <p>If <code>service gwms-frontend reconfig</code> fails at the end with an error like "Writing back config file failed, Reconfiguring the frontend [FAILED]", make sure that <code>/etc/gwms-frontend/</code> belongs to the <code>frontend</code> user. It must be able to write to update the configuration file.</p>
 <h3 id="frontend-failing-to-start">Frontend failing to start<a class="headerlink" href="#frontend-failing-to-start" title="Permanent link">&para;</a></h3>
-<p>If the startup script of the frontend is failing, check the log file for errors (probably <code>/var/log/gwms-frontend/frontend/frontend.<span style="color:red">TODAY</span>.err.log</code> and <code>.debug.log</code>).</p>
+<p>If the startup script of the frontend is failing, check the log file for errors (probably <code>/var/log/gwms-frontend/frontend/frontend.&lt;TODAY's DATE&gt;.err.log</code> and <code>.debug.log</code>).</p>
 <p>If you find errors like <em>"Exception occurred: ... 'ExpatError: no element found: line 1, column 0\n']"</em> and <em>"IOError: [Errno 9] Bad file descriptor"</em> you may have an empty status file (<code>/var/lib/gwms-frontend/vofrontend/monitor/group_*/frontend_status.xml</code>) that causes GlideinWMS Frontend not to start. The glideinFrontend crashes after a XML parsing exception visible in the log file ("Exception occurred: ... 'ExpatError: no element found: line 1, column 0\n']").</p>
 <p>Remove the status file. Then start the frontend. The Frontend will be fixed in future versions to handle this automatically.</p>
 <h3 id="certificates-not-there">Certificates not there<a class="headerlink" href="#certificates-not-there" title="Permanent link">&para;</a></h3>

@@ -2575,22 +2575,23 @@ SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
 <tbody>
 <tr>
 <td align="left">Start a service</td>
-<td align="left"><code>service <span style="color:red">&lt;SERVICE-NAME&gt;</span> start</code></td>
+<td align="left"><code>service &lt;SERVICE-NAME&gt; start</code></td>
 </tr>
 <tr>
 <td align="left">Stop a service</td>
-<td align="left"><code>service <span style="color:red">&lt;SERVICE-NAME&gt;</span> stop</code></td>
+<td align="left"><code>service &lt;SERVICE-NAME&gt; stop</code></td>
 </tr>
 <tr>
 <td align="left">Enable a service to start during boot</td>
-<td align="left"><code>chkconfig <span style="color:red">&lt;SERVICE-NAME&gt;</span> on</code></td>
+<td align="left"><code>chkconfig &lt;SERVICE-NAME&gt; on</code></td>
 </tr>
 <tr>
 <td align="left">Disable a service from starting during boot</td>
-<td align="left"><code>chkconfig <span style="color:red">&lt;SERVICE-NAME&gt;</span> off</code></td>
+<td align="left"><code>chkconfig &lt;SERVICE-NAME&gt; off</code></td>
 </tr>
 </tbody>
 </table>
+<p>Where <code>&lt;SERVICE-NAME&gt;</code> is the name of the service on the table above.</p>
 <h3 id="running-rsv-manually">Running RSV manually<a class="headerlink" href="#running-rsv-manually" title="Permanent link">&para;</a></h3>
 <p>Normally, the HTCondor-Cron scheduler runs RSV periodically. However, you can run RSV probes manually at any time:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rsv-control --run --all-enabled
@@ -2618,11 +2619,12 @@ To use it:</p>
 </div>
 <h3 id="failed-to-send-via-gratia">Failed to send via Gratia<a class="headerlink" href="#failed-to-send-via-gratia" title="Permanent link">&para;</a></h3>
 <p>If you see <code>Failed to send record Failed to send via Gratia: Server unable to receive data:</code> in <code>/var/log/rsv/consumers/gratia-consumer.output</code> you should process to disable the gratia consumer using the following commands</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host#</span>  rsv-control --disable --host <span style="color:red">&lt;YOUR RSV HOST&gt;</span> gratia-consumer
-<span class="gp">root@host#</span>  rsv-control --off --host <span style="color:red">&lt;YOUR RSV HOST&gt;</span> gratia-consumer
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span>  rsv-control --disable --host &lt;YOUR RSV HOST&gt; gratia-consumer
+<span class="gp">root@host#</span>  rsv-control --off --host &lt;YOUR RSV HOST&gt; gratia-consumer
 </pre></div>
 
 
+<p>Change <code>&lt;YOUR RSV HOST&gt;</code> for the hostname of the server where you are installing RSV.</p>
 <h3 id="important-file-locations">Important file locations<a class="headerlink" href="#important-file-locations" title="Permanent link">&para;</a></h3>
 <p>Logs and configuration:</p>
 <table>
@@ -2849,7 +2851,7 @@ To use it:</p>
 </tr>
 </tbody>
 </table>
-<p>Or, if you'd rather have your RSV web page appear as <code><span style="color:red">https</span>://...:8443/rsv/</code> like it used to in OSG 1.2, the first column above would be <strong>HTTPS</strong> / <strong>tcp</strong> / <strong>8443</strong>. See <a href="#configuring-the-rsv-web-server-to-use-https-instead-of-http">above</a> for how to configure this.</p>
+<p>Or, if you'd rather have your RSV web page appear as <code>https://...:8443/rsv/</code> like it used to in OSG 1.2, the first column above would be <strong>HTTPS</strong> / <strong>tcp</strong> / <strong>8443</strong>. See <a href="#configuring-the-rsv-web-server-to-use-https-instead-of-http">above</a> for how to configure this.</p>
                 
                   
                 

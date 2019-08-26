@@ -2526,18 +2526,21 @@ To see a list of modules, including whether they can be run separately, run:</p>
 </pre></div>
 
 
-<p>If the module can be run separately, specify it with the <code>-m <span style="color:red">&lt;MODULE&gt;</span></code> option:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@server] osg-configure -c -m <span style="color:red">&lt;MODULE&gt;</span></span>
+<p>If the module can be run separately, specify it with the <code>-m &lt;MODULE&gt;</code> option, where <code>&lt;MODULE&gt;</code> is one of the items
+of the output of the previous command.</p>
+<div class="codehilite"><pre><span></span><span class="go">[root@server] osg-configure -c -m &lt;MODULE&gt;</span>
 </pre></div>
 
 
 <p>Options may be specified in multiple INI files, which may make it hard to determine which value OSG-Configure uses.
 You may query the final value of an option via one of these methods:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@server] osg-configure -o <span style="color:red">&lt;OPTION&gt;</span></span>
-<span class="gp">[root@server] osg-configure -o <span style="color:red">&lt;SECTION&gt;</span>.<span style="color:red">&lt;OPTION&gt;</span></span>
+<div class="codehilite"><pre><span></span><span class="go">[root@server] osg-configure -q -o &lt;OPTION&gt;</span>
+<span class="go">[root@server] osg-configure -q -o &lt;SECTION&gt;.&lt;OPTION&gt;</span>
 </pre></div>
 
 
+<p>Where <code>&lt;OPTION&gt;</code> is the variable from which we want to know the value and <code>&lt;SECTION&gt;</code> refers to a section in any of the INI
+files, i.e. any name between brackets e.g. <code>[Squid]</code>.</p>
 <p>Logs are written to <code>/var/log/osg/osg-configure.log</code>.
 If something goes wrong, specify the <code>-d</code> flag to add more verbose output to <code>osg-configure.log</code>.</p>
 <p>The rest of this document will detail what to specify in the INI files.</p>

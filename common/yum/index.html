@@ -2459,15 +2459,15 @@ For instructions on upgrading from one OSG series to another, see the
 
 <p>The only OSG repository enabled by default is the release one.
 If you want to <a href="#repositories">enable another one</a> (e.g. <code>osg-testing</code>), then edit its file
-(e.g. <code>/etc/yum.repos.d/osg-testing.repo</code>) and change the enabled option from 0 to 1:</p>
+(e.g. <code>/etc/yum.repos.d/osg-testing.repo</code>) and change the <code>enabled</code> option from 0 to 1:</p>
 <div class="codehilite"><pre><span></span>[osg-testing]
 name=OSG Software for Enterprise Linux 7 - Testing - $basearch
 #baseurl=https://repo.opensciencegrid.org/osg/3.4/el7/testing/$basearch
 mirrorlist=https://repo.opensciencegrid.org/mirror/osg/3.4/el7/testing/$basearch
 failovermethod=priority
 priority=98
-enabled=<span style="color:red">1</span>
-gpgcheck=1
+<span class="hll">enabled=1
+</span>gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
 </pre></div>
 
@@ -2502,24 +2502,26 @@ Therefore we recommend security-only automatic updates or disabling automatic up
 <p>Sites using <a href="https://spacewalkproject.github.io/">Spacewalk</a> to manage RPM packages will need to configure OSG Yum
 repository priorities using their Spacewalk ID. For example, if the OSG 3.4 repository's Spacewalk ID is
 <code>centos_7_osg34_dev</code>, modify <code>/etc/yum/pluginconf.d/90-osg.conf</code> to include the following:</p>
-<p>```
-[centos_7_osg_34_dev]
-priority = 98</p>
+<div class="codehilite"><pre><span></span>[centos_7_osg_34_dev]
+priority = 98
+</pre></div>
+
+
 <h2 id="repository-mirrors">Repository Mirrors<a class="headerlink" href="#repository-mirrors" title="Permanent link">&para;</a></h2>
 <p>If you run a large site (&gt;20 nodes), you should consider setting up a local mirror for the OSG repositories.
 A local Yum mirror allows you to reduce the amount of external bandwidth used when updating or installing packages.</p>
 <p>Add the following to a file in <code>/etc/cron.d</code>:</p>
-<div class="codehilite"><pre><span></span><span style="color:red">RANDOM</span> * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/ /var/www/html/osg/
+<div class="codehilite"><pre><span></span>&lt;RANDOM&gt; * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/ /var/www/html/osg/
 </pre></div>
 
 
 <p>Or, to mirror only a single repository:</p>
-<div class="codehilite"><pre><span></span><span style="color:red">RANDOM</span> * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/<span style="color:red">OSG_RELEASE</span>/el6/development /var/www/html/osg/<span style="color:red">OSG_RELEASE</span>/el6
+<div class="codehilite"><pre><span></span>&lt;RANDOM&gt; * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/&lt;OSG_RELEASE&gt;/el6/development /var/www/html/osg/&lt;OSG_RELEASE&gt;/el6
 </pre></div>
 
 
-<p>Replace <span style="color:red">RANDOM</span> with a number between 0 and 59.</p>
-<p>Replace <span style="color:red">OSG_RELEASE</span> with the OSG release you would like to use (e.g. '3.4').</p>
+<p>Replace <code>&lt;OSG_RELEASE&gt;</code> with the OSG release you would like to use (e.g. <code>3.4</code>) and <code>&lt;RANDOM&gt;</code> with a number between 0
+and 59.</p>
 <p>On your worker node, you can replace the <code>baseurl</code> line of <code>/etc/yum.repos.d/osg.repo</code> with the appropriate URL for your
 mirror.</p>
 <p>If you are interested in having your mirror be part of the OSG's default set of mirrors,

@@ -2325,16 +2325,16 @@ The next steps will fail if the web server is not accessible.</p>
 <ul>
 <li><strong>Select a repository name</strong>; typically, this is derived from the VO or project's name and ends in
     <code>opensciencegrid.org</code>.  For example, the NoVA VO runs the repository <code>nova.opensciencegrid.org</code>.  For this section,
-    we will use <span style="color:red">example.opensciencegrid.org</span>.</li>
+    we will use <code>&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;</code>.</li>
 <li><strong>Select a repository owner</strong>: Software publication will need to run by a non-<code>root</code> Unix user account; for this
-    document, we will use <span style="color:blue">LIBRARIAN</span> as the account name of the repository owner.</li>
+    document, we will use <code>&lt;LIBRARIAN&gt;</code> as the account name of the repository owner.</li>
 </ul>
 <p>The initial repository creation must be run as <code>root</code>:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> -e <span class="s2">&quot;\*\\t\\t-\\tnofile\\t\\t16384&quot;</span> &gt;&gt;/etc/security/limits.conf
 <span class="gp">root@host #</span> <span class="nb">ulimit</span> -n <span class="m">16384</span>
-<span class="gp">root@host #</span> cvmfs_server mkfs -o <span style="color:blue">LIBRARIAN</span> <span style="color:red">example.opensciencegrid.org</span>
-<span class="gp">root@host #</span> cat &gt;/srv/cvmfs/<span style="color:red">example.opensciencegrid.org</span>/.htaccess <span class="s">&lt;&lt;xEOFx</span>
-<span class="go">Order deny,allow</span>
+<span class="hll"><span class="gp">root@host #</span> cvmfs_server mkfs -o &lt;LIBRARIAN&gt; &lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;
+</span><span class="hll"><span class="gp">root@host #</span> cat &gt;/srv/cvmfs/&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;/.htaccess <span class="s">&lt;&lt;xEOFx</span>
+</span><span class="go">Order deny,allow</span>
 <span class="go">Deny from all</span>
 <span class="go">Allow from 127.0.0.1</span>
 <span class="go">Allow from ::1</span>
@@ -2346,8 +2346,8 @@ The next steps will fail if the web server is not accessible.</p>
 
 <p>Here, we increase the number of open files allowed, create the repository using the <code>mkfs</code> command, and then limit the hosts that are allowed to access the repo to the OSG CDN.</p>
 <p>Next, adjust the configuration in the repository as follows.  </p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cat &gt;&gt;/etc/cvmfs/repositories.d/<span style="color:red">example.opensciencegrid.org</span>/server.conf <span class="s">&lt;&lt;xEOFx</span>
-<span class="go">CVMFS_AUTO_TAG_TIMESPAN=&quot;2 weeks ago&quot;</span>
+<div class="codehilite"><pre><span></span><span class="hll"><span class="gp">root@host #</span> cat &gt;&gt;/etc/cvmfs/repositories.d/&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;/server.conf <span class="s">&lt;&lt;xEOFx</span>
+</span><span class="go">CVMFS_AUTO_TAG_TIMESPAN=&quot;2 weeks ago&quot;</span>
 <span class="go">CVMFS_IGNORE_XDIR_HARDLINKS=true</span>
 <span class="go">CVMFS_GENERATE_LEGACY_BULK_CHUNKS=false</span>
 <span class="go">CVMFS_AUTOCATALOGS=true</span>
@@ -2359,8 +2359,8 @@ The next steps will fail if the web server is not accessible.</p>
 
 <p>Also, check the <a href="http://cvmfs.readthedocs.io/en/latest/cpt-repo.html#configuration-recommendation-by-use-case">cvmfs documentation</a> for additional recommendations for special purpose repositories.</p>
 <p>Now verify that the repository is readable over HTTP:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> wget -qO- http://localhost:8000/cvmfs/<span style="color:red">example.opensciencegrid.org</span>/.cvmfswhitelist <span class="p">|</span> cat -v
-</pre></div>
+<div class="codehilite"><pre><span></span><span class="hll"><span class="gp">root@host #</span> wget -qO- http://localhost:8000/cvmfs/&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;/.cvmfswhitelist <span class="p">|</span> cat -v
+</span></pre></div>
 
 
 <p>That should print several lines including some gibberish at the end.</p>
@@ -2396,26 +2396,26 @@ The VO responsible manager will be &lt;OASIS MANAGER&gt;.
 </li>
 <li>
 <p>One you are told in the ticket to proceed to the next step, execute the following commands:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> wget -O /srv/cvmfs/<span style="color:red">example.opensciencegrid.org</span>/.cvmfswhitelist <span class="se">\</span>
-            http://oasis.opensciencegrid.org/cvmfs/<span style="color:red">example.opensciencegrid.org</span>/.cvmfswhitelist 
-<span class="gp">root@host #</span> cp /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub <span class="se">\</span>
-            /etc/cvmfs/keys/<span style="color:red">example.opensciencegrid.org</span>.pub
-</pre></div>
+<div class="codehilite"><pre><span></span><span class="hll"><span class="gp">root@host #</span> wget -O /srv/cvmfs/&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;/.cvmfswhitelist <span class="se">\</span>
+</span><span class="hll">            http://oasis.opensciencegrid.org/cvmfs/&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;/.cvmfswhitelist
+</span><span class="gp">root@host #</span> cp /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub <span class="se">\</span>
+<span class="hll">            /etc/cvmfs/keys/&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;.pub
+</span></pre></div>
 
 
-<p>Replace <span style="color:red">example.opensciencegrid.org</span> as appropriate.</p>
+<p>Replace <code>&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;</code> as appropriate.</p>
 </li>
 <li>
 <p>Verify that publishing operation succeeds:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> su <span style="color:blue">LIBRARIAN</span> -c <span class="s2">&quot;cvmfs_server transaction <span style="color:red">example.opensciencegrid.org</span>&quot;</span>
-<span class="gp">root@host #</span> su <span style="color:blue">LIBRARIAN</span> -c <span class="s2">&quot;cvmfs_server publish <span style="color:red">example.opensciencegrid.org</span>&quot;</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><span class="hll"><span class="gp">root@host #</span> su &lt;LIBRARIAN&gt; -c <span class="s2">&quot;cvmfs_server transaction &lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;&quot;</span>
+</span><span class="hll"><span class="gp">root@host #</span> su &lt;LIBRARIAN&gt; -c <span class="s2">&quot;cvmfs_server publish &lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;&quot;</span>
+</span></pre></div>
 
 
 <p>Within an hour, the repository updates should appear at the OSG Operations and FNAL Stratum-1 servers.</p>
 <p>On success, make sure the whitelist update happens daily by creating <code>/etc/cron.d/fetch-cvmfs-whitelist</code> with the
 following contents:</p>
-<div class="codehilite"><pre><span></span>5 4 * * * <span style="color:blue">LIBRARIAN</span> cd /srv/cvmfs/<span style="color:red">example.opensciencegrid.org</span> &amp;&amp; wget -qO .cvmfswhitelist.new http://oasis.opensciencegrid.org/cvmfs/<span style="color:red">example.opensciencegrid.org</span>/.cvmfswhitelist &amp;&amp; mv .cvmfswhitelist.new .cvmfswhitelist
+<div class="codehilite"><pre><span></span>5 4 * * * &lt;LIBRARIAN&gt; cd /srv/cvmfs/&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt; &amp;&amp; wget -qO .cvmfswhitelist.new http://oasis.opensciencegrid.org/cvmfs/&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;/.cvmfswhitelist &amp;&amp; mv .cvmfswhitelist.new .cvmfswhitelist
 </pre></div>
 
 
@@ -2430,7 +2430,7 @@ following contents:</p>
 </li>
 </ol>
 <p>Once the repository is fully replicated on the OSG, the VO may proceed in publishing into CVMFS using the
-<span style="color:blue">LIBRARIAN</span> account on the repository server.</p>
+<code>&lt;LIBRARIAN&gt;</code> account on the repository server.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>We strongly recommend the repository maintainer read through the upstream documentation on
@@ -2450,11 +2450,11 @@ The latter can take longer because it requires OSG Operations intervention.</p>
 <h3 id="without-changing-the-server-dns-name">Without changing the server DNS name<a class="headerlink" href="#without-changing-the-server-dns-name" title="Permanent link">&para;</a></h3>
 <p>If you are recreating the repository on the same machine, use the following command to 
 remove the repository configuration while preserving the data and keys:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cvmfs_server rmfs -p example.opensciencegrid.org
-</pre></div>
+<div class="codehilite"><pre><span></span><span class="hll"><span class="gp">root@host #</span> cvmfs_server rmfs -p &lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;
+</span></pre></div>
 
 
-<p>Otherwise if it is a new machine, copy the keys from /etc/cvmfs/keys/<span style="color:red">example.opensciencegrid.org</span>.* and the data from /srv/cvmfs/<span style="color:red">example.opensciencegrid.org</span> from the old server to the new, making sure that no publish operations happen on the old server while you copy the data.</p>
+<p>Otherwise if it is a new machine, copy the keys from /etc/cvmfs/keys/<code>&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;</code>.* and the data from /srv/cvmfs/<code>&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;</code> from the old server to the new, making sure that no publish operations happen on the old server while you copy the data.</p>
 <p>Then in either case use <code>cvmfs_server import</code> instead of <code>cvmfs_server mkfs</code> in the above instructions for <a href="#creating-a-repository">Creating the Repository</a>, in order to reuse old data and keys.</p>
 <p>If you run an old and a new machine in parallel for a while, make sure that when you put the new machine into production (by moving the DNS name) that the new machine has had at least as many publishes as the old machine, so the revision number does not decrease.</p>
 <h3 id="with-changing-the-server-dns-name">With changing the server DNS name<a class="headerlink" href="#with-changing-the-server-dns-name" title="Permanent link">&para;</a></h3>
@@ -2468,8 +2468,8 @@ remove the repository configuration while preserving the data and keys:</p>
 <li>
 <p>When you do the publish in step 5, add a <code>-n NNNN</code> option where <code>NNNN</code> is a revision number greater than the number on the existing repository.
     That number can be found by this command on a client machine:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> attr -qg revision /cvmfs/<span style="color:red">example.opensciencegrid.org</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><span class="hll"><span class="gp">user@host $</span> attr -qg revision /cvmfs/&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;
+</span></pre></div>
 
 
 </li>
@@ -2484,7 +2484,7 @@ remove the repository configuration while preserving the data and keys:</p>
 <li>If the repository has been replicated outside of the U.S., open a GGUS ticket asking that the replication be removed
     from EGI Stratum-1s. Wait until this ticket is resolved before proceeding.</li>
 <li>Open a <a href="https://support.opensciencegrid.org/helpdesk/tickets/new">support ticket</a> asking to shut down the repository, giving the repository
-    name (e.g., <span style="color:red">example.opensciencegrid.org</span>), and the corresponding VO.</li>
+    name (e.g., <code>&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;</code>), and the corresponding VO.</li>
 </ol>
                 
                   

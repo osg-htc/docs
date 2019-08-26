@@ -2626,10 +2626,11 @@ To simplify installation, OSG provides convenience RPMs that install all require
 </li>
 <li>
 <p>Install the CE software:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install <span style="color:red">&lt;PACKAGE&gt;</span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install &lt;PACKAGE&gt;
 </pre></div>
 
 
+<p>Where <code>&lt;PACKAGE&gt;</code> is the package you selected in the above step.</p>
 </li>
 </ol>
 <h2 id="configuring-htcondor-ce">Configuring HTCondor-CE<a class="headerlink" href="#configuring-htcondor-ce" title="Permanent link">&para;</a></h2>
@@ -2748,8 +2749,8 @@ document.</p>
 and interface to use when communicating to each other.
 Set <code>NETWORK_HOSTNAME</code> and <code>NETWORK_INTERFACE</code> to the hostname and IP address of your public interface, respectively, in
 <code>/etc/condor-ce/config.d/99-local.conf</code> directory with the line:</p>
-<div class="codehilite"><pre><span></span>NETWORK_HOSTNAME = <span style="color:red">condorce.example.com</span>
-NETWORK_INTERFACE = <span style="color:red">127.0.0.1</span>
+<div class="codehilite"><pre><span></span>NETWORK_HOSTNAME = condorce.example.com
+NETWORK_INTERFACE = 127.0.0.1
 </pre></div>
 
 
@@ -2767,24 +2768,26 @@ configuring them in unison.</p>
 <li>
 <p><strong>To change the default limit</strong> on the number of locally run jobs (the current default is 20), add the following to
   <code>/etc/condor-ce/config.d/99-local.conf</code>:</p>
-<div class="codehilite"><pre><span></span>START_LOCAL_UNIVERSE = TotalLocalJobsRunning + TotalSchedulerJobsRunning &lt; <span style="color:red">&lt;JOB-LIMIT&gt;</span>
+<div class="codehilite"><pre><span></span>START_LOCAL_UNIVERSE = TotalLocalJobsRunning + TotalSchedulerJobsRunning &lt; &lt;JOB-LIMIT&gt;
 START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
 </pre></div>
 
 
+<p>Where <code>&lt;JOB-LIMIT&gt;</code> is the maximum number of jobs allowed to run locally</p>
 </li>
 <li>
 <p><strong>To only allow a specific user</strong> to start locally run jobs, add the following to
   <code>/etc/condor-ce/config.d/99-local.conf</code>:</p>
-<div class="codehilite"><pre><span></span>START_LOCAL_UNIVERSE = target.Owner =?= &quot;<span style="color:red">&lt;USERNAME&gt;</span>&quot;
+<div class="codehilite"><pre><span></span>START_LOCAL_UNIVERSE = target.Owner =?= &quot;&lt;USERNAME&gt;&quot;
 START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
 </pre></div>
 
 
 </li>
-<li>
-<p><strong>To disable</strong> locally run jobs, add the following to <code>/etc/condor-ce/config.d/99-local.conf</code>:</p>
-<div class="codehilite"><pre><span></span>START_LOCAL_UNIVERSE = False
+</ul>
+<p>Change <code>&lt;USERNAME&gt;</code> for the username allowed to run jobs locally</p>
+<ul>
+<li><strong>To disable</strong> locally run jobs, add the following to <code>/etc/condor-ce/config.d/99-local.conf</code>:<div class="codehilite"><pre><span></span>START_LOCAL_UNIVERSE = False
 START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
 </pre></div>
 
@@ -2861,11 +2864,11 @@ osg     other.osgedu
 <li>
 <p><strong>To map DNs or VOMS attributes to an accounting group,</strong> add lines to <code>/etc/osg/extattr_table.txt</code> with the
     following form:</p>
-<div class="codehilite"><pre><span></span><span style="color:red">SubjectOrAttribute</span> GroupName
+<div class="codehilite"><pre><span></span>SubjectOrAttribute GroupName
 </pre></div>
 
 
-<p>The <span style="color:red">SubjectOrAttribute</span> can be a Perl regular expression. The following is an example <code>extattr_table.txt</code>:</p>
+<p>The <code>SubjectOrAttribute</code> can be a Perl regular expression. The following is an example <code>extattr_table.txt</code>:</p>
 <div class="codehilite"><pre><span></span>cmsprio cms.other.prio
 cms\/Role=production cms.prod
 \/DC=com\/DC=DigiCert-Grid\/O=Open\ Science\ Grid\/OU=People\/CN=Brian\ Lin\ 1047 osg.test

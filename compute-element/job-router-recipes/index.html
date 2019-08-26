@@ -2860,13 +2860,13 @@ If the job meets the requirements of multiple routes,  the route that is chosen 
 <p>Each route needs to indicate the type of batch system that jobs should be routed to. For HTCondor batch systems, the <code>TargetUniverse</code> attribute needs to be set to <code>5</code> or <code>"vanilla"</code>. For all other batch systems, the <code>TargetUniverse</code> attribute needs to be set to <code>9</code> or <code>"grid"</code> and the <code>GridResource</code> attribute needs to be set to <code>"batch &lt;batch system&gt;"</code> (where <code>&lt;batch system&gt;</code> can be one of <code>pbs</code>, <code>slurm</code>, <code>lsf</code>, or <code>sge</code>).</p>
 <div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
 [
-  <span style="color:red">TargetUniverse = 5;</span>
-  name = &quot;Route jobs to HTCondor&quot;;
+<span class="hll">  TargetUniverse = 5;
+</span>  name = &quot;Route jobs to HTCondor&quot;;
 ]
 [
-  <span style="color:red">GridResource = &quot;batch pbs&quot;;</span>
-  <span style="color:red">TargetUniverse = 9;</span>
-  name = &quot;Route jobs to PBS&quot;;
+<span class="hll">  GridResource = &quot;batch pbs&quot;;
+</span><span class="hll">  TargetUniverse = 9;
+</span>  name = &quot;Route jobs to PBS&quot;;
 ]
 @jre
 </pre></div>
@@ -2877,8 +2877,8 @@ If the job meets the requirements of multiple routes,  the route that is chosen 
 <div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
 [
   TargetUniverse = 5;
-  <span style="color:red">name = &quot;Route jobs to HTCondor&quot;;</span>
-]
+<span class="hll">  name = &quot;Route jobs to HTCondor&quot;;
+</span>]
 @jre
 </pre></div>
 
@@ -2895,18 +2895,18 @@ The following routes takes incoming jobs that have a <code>queue</code> attribut
 HTCondor batch system.
 Any other jobs will be sent to that site's PBS batch system.</p>
 <div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
-<span style="color:red">[</span>
-  TargetUniverse = 5;
+<span class="hll">[
+</span>  TargetUniverse = 5;
   name = &quot;Route jobs to HTCondor&quot;;
   Requirements = (TARGET.queue =?= &quot;analy&quot;);
-<span style="color:red">]
-[</span>
-  GridResource = &quot;batch pbs&quot;;
+<span class="hll">]
+</span><span class="hll">[
+</span>  GridResource = &quot;batch pbs&quot;;
   TargetUniverse = 9;
   name = &quot;Route jobs to PBS&quot;;
   Requirements = (TARGET.queue =!= &quot;analy&quot;);
-<span style="color:red">]</span>
-@jre
+<span class="hll">]
+</span>@jre
 </pre></div>
 
 
@@ -2916,8 +2916,8 @@ Any other jobs will be sent to that site's PBS batch system.</p>
 [
   TargetUniverse = 5;
   name = &quot;# comments&quot;;
-  # This is a comment
-]
+<span class="hll">  # This is a comment
+</span>]
 @jre
 </pre></div>
 
@@ -2930,8 +2930,8 @@ Any other jobs will be sent to that site's PBS batch system.</p>
 #   JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) [set_foo = 1;]
 #
 MERGE_JOB_ROUTER_DEFAULT_ADS=True
-JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) <span style="color:red">[set_Periodic_Hold = (NumJobStarts &gt;= 1 &amp;&amp; JobStatus == 1) || NumJobStarts &gt; 1;]</span>
-</pre></div>
+<span class="hll">JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) [set_Periodic_Hold = (NumJobStarts &gt;= 1 &amp;&amp; JobStatus == 1) || NumJobStarts &gt; 1;]
+</span></pre></div>
 
 
 <h3 id="filtering-jobs-based-on">Filtering jobs based on…<a class="headerlink" href="#filtering-jobs-based-on" title="Permanent link">&para;</a></h3>
@@ -2942,8 +2942,8 @@ JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) <span style="color:red">[set_Period
   TargetUniverse = 5;
   name = &quot;Filtering by queue&quot;;
   queue = &quot;not-analy&quot;;
-  <span style="color:red">Requirements = (queue =?= &quot;analy&quot;);</span>
-]
+<span class="hll">  Requirements = (queue =?= &quot;analy&quot;);
+</span>]
 @jre
 </pre></div>
 
@@ -2963,8 +2963,8 @@ JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) <span style="color:red">[set_Period
 [
   TargetUniverse = 5;
   name = &quot;Filtering by queue&quot;;
-  <span style="color:red">Requirements = (TARGET.queue =?= &quot;analy&quot;);</span>
-]
+<span class="hll">  Requirements = (TARGET.queue =?= &quot;analy&quot;);
+</span>]
 @jre
 </pre></div>
 
@@ -2975,8 +2975,8 @@ JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) <span style="color:red">[set_Period
 [
   TargetUniverse = 5;
   name = &quot;Filtering by job submitter&quot;;
-  <span style="color:red">Requirements = (TARGET.Owner =?= &quot;usatlas2&quot;);</span>
-]
+<span class="hll">  Requirements = (TARGET.Owner =?= &quot;usatlas2&quot;);
+</span>]
 @jre
 </pre></div>
 
@@ -2987,8 +2987,8 @@ JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) <span style="color:red">[set_Period
   GridResource = &quot;batch pbs&quot;;
   TargetUniverse = 9;
   name = &quot;Filtering by job submitter (regular expression)&quot;;
-  <span style="color:red">Requirements = regexp(&quot;^usatlas&quot;, TARGET.Owner);</span>
-]
+<span class="hll">  Requirements = regexp(&quot;^usatlas&quot;, TARGET.Owner);
+</span>]
 @jre
 </pre></div>
 
@@ -3000,8 +3000,8 @@ JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) <span style="color:red">[set_Period
   GridResource = &quot;batch pbs&quot;;
   TargetUniverse = 9;
   name = &quot;Filtering by VOMS attribute (regex)&quot;;
-  <span style="color:red">Requirements = regexp(&quot;\/cms\/Role\=pilot&quot;, TARGET.x509UserProxyFirstFQAN);</span>
-]
+<span class="hll">  Requirements = regexp(&quot;\/cms\/Role\=pilot&quot;, TARGET.x509UserProxyFirstFQAN);
+</span>]
 @jre
 </pre></div>
 
@@ -3026,8 +3026,8 @@ JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) <span style="color:red">[set_Period
   TargetUniverse = 9;
   name = &quot;Request memory&quot;;
   # Set the requested memory to 1 GB
-  <span style="color:red">set_default_maxMemory = 1000;</span>
-]
+<span class="hll">  set_default_maxMemory = 1000;
+</span>]
 @jre
 </pre></div>
 
@@ -3040,8 +3040,8 @@ JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) <span style="color:red">[set_Period
   TargetUniverse = 9;
   name = &quot;Request CPU&quot;;
   # Set the requested cores to 8
-  <span style="color:red">set_default_xcount = 8;</span>
-]
+<span class="hll">  set_default_xcount = 8;
+</span>]
 @jre
 </pre></div>
 
@@ -3054,8 +3054,8 @@ JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) <span style="color:red">[set_Period
   TargetUniverse = 9;
   name = &quot;Setting WallTime&quot;;
   # Set the max walltime to 1 hr
-  <span style="color:red">set_default_maxWallTime = 60;</span>
-]
+<span class="hll">  set_default_maxWallTime = 60;
+</span>]
 @jre
 </pre></div>
 
@@ -3077,8 +3077,8 @@ JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) <span style="color:red">[set_Period
   GridResource = &quot;batch pbs&quot;;
   TargetUniverse = 9;
   name = &quot;Copying attributes&quot;;
-  <span style="color:red">copy_environment = &quot;Original_Environment&quot;;</span>
-]
+<span class="hll">  copy_environment = &quot;Original_Environment&quot;;
+</span>]
 @jre
 </pre></div>
 
@@ -3090,8 +3090,8 @@ JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) <span style="color:red">[set_Period
   GridResource = &quot;batch pbs&quot;;
   TargetUniverse = 9;
   name = &quot;Copying attributes&quot;;
-  <span style="color:red">delete_environment = True;</span>
-]
+<span class="hll">  delete_environment = True;
+</span>]
 @jre
 </pre></div>
 
@@ -3103,8 +3103,8 @@ JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) <span style="color:red">[set_Period
   GridResource = &quot;batch pbs&quot;;
   TargetUniverse = 9;
   name = &quot;Setting an attribute&quot;;
-  <span style="color:red">set_Rank = 5;</span>
-]
+<span class="hll">  set_Rank = 5;
+</span>]
 @jre
 </pre></div>
 
@@ -3120,8 +3120,8 @@ JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) <span style="color:red">[set_Period
   GridResource = &quot;batch pbs&quot;;
   TargetUniverse = 9;
   name = &quot;Setting an attribute with a !ClassAd expression&quot;;
-  <span style="color:red">eval_set_Experiment = strcat(&quot;atlas.&quot;, Owner);</span>
-]
+<span class="hll">  eval_set_Experiment = strcat(&quot;atlas.&quot;, Owner);
+</span>]
 @jre
 </pre></div>
 
@@ -3139,14 +3139,14 @@ JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) <span style="color:red">[set_Period
   GridResource = &quot;batch pbs&quot;;
   TargetUniverse = 9;
   name = &quot;Limit the total number of jobs to 100&quot;;
-  <span style="color:red">MaxJobs = 100;</span>
-]
+<span class="hll">  MaxJobs = 100;
+</span>]
 [
   GridResource = &quot;batch pbs&quot;;
   TargetUniverse = 9;
   name = &quot;Limit the total number of jobs to 75&quot;;
-  <span style="color:red">MaxJobs = 75;</span>
-]
+<span class="hll">  MaxJobs = 75;
+</span>]
 @jre
 </pre></div>
 
@@ -3157,13 +3157,13 @@ JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) <span style="color:red">[set_Period
 [
   TargetUniverse = 5;
   name = &quot;Limit the total number of idle jobs to 100&quot;;
-  <span style="color:red">MaxIdleJobs = 100;</span>
-]
+<span class="hll">  MaxIdleJobs = 100;
+</span>]
 [
   TargetUniverse = 5;
   name = &quot;Limit the total number of idle jobs to 75&quot;;
-  <span style="color:red">MaxIdleJobs = 75;</span>
-]
+<span class="hll">  MaxIdleJobs = 75;
+</span>]
 @jre
 </pre></div>
 
@@ -3180,8 +3180,8 @@ JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) <span style="color:red">[set_Period
   GridResource = &quot;batch pbs&quot;;
   TargetUniverse = 9;
   name = &quot;Debugging a difficult !ClassAd expression&quot;;
-  <span style="color:red">eval_set_Experiment = debug(strcat(&quot;atlas&quot;, Name));</span>
-]
+<span class="hll">  eval_set_Experiment = debug(strcat(&quot;atlas&quot;, Name));
+</span>]
 @jre
 </pre></div>
 
@@ -3196,13 +3196,13 @@ JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) <span style="color:red">[set_Period
 [
   TargetUniverse = 5;
   name = &quot;Setting periodic statements&quot;;
-  <span style="color:red"># Puts the routed job on hold if the job&#39;s been idle and has been started at least once or if the job has tried to start more than once
-  set_Periodic_Hold = (NumJobStarts &gt;= 1 &amp;&amp; JobStatus == 1) || NumJobStarts &gt; 1;
-  # Remove routed jobs if their walltime is longer than 3 days and 5 minutes
+  # Puts the routed job on hold if the job&#39;s been idle and has been started at least once or if the job has tried to start more than once
+<span class="hll">  set_Periodic_Hold = (NumJobStarts &gt;= 1 &amp;&amp; JobStatus == 1) || NumJobStarts &gt; 1;
+</span>  # Remove routed jobs if their walltime is longer than 3 days and 5 minutes
   set_Periodic_Remove = ( RemoteWallClockTime &gt; (3*24*60*60 + 5*60) );
   # Release routed jobs if the condor_starter couldn&#39;t start the executable and &#39;VMGAHP_ERR_INTERNAL&#39; is in the HoldReason
-  set_Periodic_Release = HoldReasonCode == 6 &amp;&amp; regexp(&quot;VMGAHP_ERR_INTERNAL&quot;, HoldReason);</span>
-]
+<span class="hll">  set_Periodic_Release = HoldReasonCode == 6 &amp;&amp; regexp(&quot;VMGAHP_ERR_INTERNAL&quot;, HoldReason);
+</span>]
 @jre
 </pre></div>
 
@@ -3213,8 +3213,8 @@ JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) <span style="color:red">[set_Period
 <div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
 [
   TargetUniverse = 5;
-  <span style="color:red">set_Requirements =  OpSys == &quot;LINUX&quot;;</span>
-]
+<span class="hll">  set_Requirements =  OpSys == &quot;LINUX&quot;;
+</span>]
 @jre
 </pre></div>
 
@@ -3230,8 +3230,8 @@ JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) <span style="color:red">[set_Period
   GridResource = &quot;batch pbs&quot;;
   TargetUniverse = 9;
   name = &quot;Setting batch system queues&quot;;
-  <span style="color:red">set_default_queue = &quot;osg_queue&quot;;</span>
-]
+<span class="hll">  set_default_queue = &quot;osg_queue&quot;;
+</span>]
 @jre
 </pre></div>
 
@@ -3247,8 +3247,8 @@ JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) <span style="color:red">[set_Period
      GridResource = &quot;batch pbs&quot;;
      TargetUniverse = 9;
      name = &quot;Setting job submit variables&quot;;
-     <span style="color:red">set_default_remote_cerequirements = strcat(&quot;Walltime == 3600 &amp;&amp; AccountingGroup ==&quot;&quot;, x509UserProxyFirstFQAN, &quot;\&quot;&quot;);</span>
-]
+<span class="hll">     set_default_remote_cerequirements = strcat(&quot;Walltime == 3600 &amp;&amp; AccountingGroup ==&quot;&quot;, x509UserProxyFirstFQAN, &quot;\&quot;&quot;);
+</span>]
 @jre
 </pre></div>
 

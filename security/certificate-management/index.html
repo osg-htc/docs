@@ -2730,7 +2730,7 @@ CA certificates.</p>
 </ol>
 <h5 id="setup-the-ca-certificates">Setup the CA certificates<a class="headerlink" href="#setup-the-ca-certificates" title="Permanent link">&para;</a></h5>
 <p>The Certificate Authority Package is preferably be used by grid users without root privileges <em>or</em> if the CA certificates will not be shared by other installations on the same host.</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> osg-ca-manage setupca --location <span style="color:red">root</span> --url osg
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> osg-ca-manage setupca --location root --url osg
 <span class="go">Setting CA Certificates for at &#39;/etc/grid-security/certificates&#39;</span>
 
 <span class="go">Setup completed successfully.</span>
@@ -2739,7 +2739,7 @@ CA certificates.</p>
 
 <p>After a successful installation the certificates will be installed in (<code>/etc/grid-security/certificates</code> in this example). Typically to write into this default location you will need root privileges.</p>
 <p>If you need to need to install it with out root privileges use</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-ca-manage setupca --location <span style="color:red"><span class="nv">$HOME</span>/certificates</span> --url osg
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-ca-manage setupca --location <span class="nv">$HOME</span>/certificates --url osg
 <span class="go">Setting CA Certificates for at &#39;$HOME/certificates&#39;</span>
 
 <span class="go">Setup completed successfully.</span>

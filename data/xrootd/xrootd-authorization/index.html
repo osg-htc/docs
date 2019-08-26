@@ -2281,7 +2281,7 @@ ofs.authorize
 <li>
 <p>Destroy any pre-existing proxies and attempt a copy to a directory (which we will refer to as <code>&lt;DESTINATION PATH&gt;</code>) on the <code>&lt;XROOTD HOST&gt;</code> to verify failure:</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@client $</span> voms-proxy-destroy
-<span class="gp">user@client $</span> xrdcp /bin/bash root://<span style="color:red">&lt;XROOTD HOST&gt;</span>/<span style="color:red">&lt;DESTINATION PATH&gt;</span>
+<span class="gp">user@client $</span> xrdcp /bin/bash root://&lt;XROOTD HOST&gt;/&lt;DESTINATION PATH&gt;
 <span class="go">180213 13:56:49 396570 cryptossl_X509CreateProxy: EEC certificate has expired</span>
 <span class="go">[0B/0B][100%][==================================================][0B/s]</span>
 <span class="go">Run: [FATAL] Auth failed</span>
@@ -2302,7 +2302,7 @@ ofs.authorize
 <li>
 <p>Generate your proxy and verify that you can successfully transfer files:</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@client $</span> voms-proxy-init
-<span class="gp">user@client $</span> xrdcp  /bin/sh root://<span style="color:red">&lt;XROOTD HOST&gt;</span>/<span style="color:red">&lt;DESTINATION PATH&gt;</span>
+<span class="gp">user@client $</span> xrdcp  /bin/sh root://&lt;XROOTD HOST&gt;/&lt;DESTINATION PATH&gt;
 <span class="go">[938.1kB/938.1kB][100%][==================================================][938.1kB/s]</span>
 </pre></div>
 
