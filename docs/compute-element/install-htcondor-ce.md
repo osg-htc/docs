@@ -85,7 +85,8 @@ To simplify installation, OSG provides convenience RPMs that install all require
 
         :::console
         root@host # yum install <PACKAGE>
-    Where `<PACKAGE>` is one of the options listed on the right columns of the table above.
+
+    Where `<PACKAGE>` is the package you selected in the above step.
 
 Configuring HTCondor-CE
 -----------------------
@@ -235,6 +236,7 @@ configuring them in unison.
 
         START_LOCAL_UNIVERSE = TotalLocalJobsRunning + TotalSchedulerJobsRunning < <JOB-LIMIT>
         START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
+
     Where `<JOB-LIMIT>` is the maximum number of jobs allowed to run locally
 
 - **To only allow a specific user** to start locally run jobs, add the following to
@@ -242,6 +244,7 @@ configuring them in unison.
 
         START_LOCAL_UNIVERSE = target.Owner =?= "<USERNAME>"
         START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
+
    Change `<USERNAME>` for the username allowed to run jobs locally
 
 - **To disable** locally run jobs, add the following to `/etc/condor-ce/config.d/99-local.conf`:
@@ -299,7 +302,7 @@ UID, their DN, or their VOMS attributes.
 
         SubjectOrAttribute GroupName
 
-    The SubjectOrAttribute can be a Perl regular expression. The following is an example `extattr_table.txt`:
+    The `SubjectOrAttribute` can be a Perl regular expression. The following is an example `extattr_table.txt`:
 
         cmsprio cms.other.prio
         cms\/Role=production cms.prod

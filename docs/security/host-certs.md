@@ -117,7 +117,7 @@ root@host # yum install osg-pki-tools
         $ openssl x509 -in <PATH TO CERTIFICATE> -noout -issuer
         issuer= /C=US/O=Internet2/OU=InCommon/CN=InCommon IGTF Server CA
 
-    Where `<PATH TO CERTIFICATE>` is the file you downloaded on the previous step
+    Where `<PATH TO CERTIFICATE>` is the file you downloaded in the previous step
 
 1. Install the host certificate and key:
 

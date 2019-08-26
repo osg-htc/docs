@@ -135,7 +135,9 @@ In the reply from the OSG Factory managers you will receive some information nee
 4. The factory identity, e.g.: `gfactory@gfactory-1.t2.ucsd.edu`
 5. The identity on the Factory you will be mapped to. Something like: `username@gfactory-1.t2.ucsd.edu`
 6. Your security name. A unique name, usually containing your VO name: `My_SecName`
-7. A string to add in the main Factory query\_expr in the Frontend configuration, e.g. `stringListMember("<VO>",GLIDEIN_Supported_VOs)`. This is used to select the entries you can use. From there you get the correct name of the VO (above in this list).
+7. A string to add in the main Factory query\_expr in the Frontend configuration, e.g. `stringListMember("<VO>",GLIDEIN_Supported_VOs)`.
+   This is used to select the entries you can use.
+   From there you get the correct name of the VO (above in this list).
 
 Installing GlideinWMS Frontend
 ------------------------------
@@ -423,7 +425,8 @@ GSI (.*) anonymous
 FS (.*) \1
 ```
 
-Change `<DN OF SCHEDD PROXY>`, `<DN OF FRONTEND PROXY>` and  `<DN OF PILOT PROXY>` for the appropiate DNs
+Change `<DN OF SCHEDD PROXY>`, `<DN OF FRONTEND PROXY>`, and  `<DN OF PILOT PROXY>` to the distinguished names of the
+respective proxies.
 
 #### Restarting HTCondor
 
@@ -449,7 +452,7 @@ and renew the **pilot proxies** and **VO Frontend proxy**. To configure this ser
         vo = <NAME OF VIRTUAL ORGANIZATION>
 
     Change `<PATH TO THE PILOT CERTIFICATE>`, `<PATH TO THE PILOT KEY>` and `<PATH TO CREATE THE PILOT PROXY>`
-    appropiately to point to the certificate and key files.
+    appropriately to point to the locations of the pilot certificate, pilot key, and pilot proxy, respectively.
 
     Additionally, in each `[PILOT <NAME>]` section, you must specify how the proxy's VOMS attributes will be signed by
     setting `use_voms_server`. Choose one of the following options:

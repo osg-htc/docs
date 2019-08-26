@@ -94,7 +94,7 @@ Prior to creation, the repository administrator will need to make two decisions:
 -   **Select a repository name**; typically, this is derived from the VO or project's name and ends in
     `opensciencegrid.org`.  For example, the NoVA VO runs the repository `nova.opensciencegrid.org`.  For this section,
     we will use `<EXAMPLE.OPENSCIENCEGRID.ORG>`.
--   **Select a repository owner**: Software publication will need to run by a non`root` Unix user account; for this
+-   **Select a repository owner**: Software publication will need to run by a non-`root` Unix user account; for this
     document, we will use `<LIBRARIAN>` as the account name of the repository owner.
 
 The initial repository creation must be run as `root`:

@@ -224,7 +224,7 @@ The HTCondor Gratia probe will not publish accounting information about jobs wit
 
 **or if you need to go back to the beginning of time**
 
-    :::console
+    :::console hl_lines="1"
     root@host # /usr/share/gratia/condor/condor_meter --history --verbose
     2014-06-03 10:06:19 CDT Gratia: RUNNING condor_meter MANUALLY using all HTCondor history
     2014-06-03 10:06:19 CDT Gratia: RUNNING: condor_history -l

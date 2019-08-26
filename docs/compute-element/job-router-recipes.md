@@ -123,7 +123,7 @@ The following routes takes incoming jobs that have a `queue` attribute set to `"
 HTCondor batch system.
 Any other jobs will be sent to that site's PBS batch system.
 
-```
+```hl_lines="2 6 7 12"
 JOB_ROUTER_ENTRIES @=jre
 [
   TargetUniverse = 5;
@@ -143,7 +143,7 @@ JOB_ROUTER_ENTRIES @=jre
 
 To write comments you can use `#` to comment a line:
 
-```
+```hl_lines="5"
 JOB_ROUTER_ENTRIES @=jre
 [
   TargetUniverse = 5;

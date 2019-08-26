@@ -57,7 +57,7 @@ You may query the final value of an option via one of these methods:
 ```
 
 Where `<OPTION>` is the variable from which we want to know the value and `<SECTION>` refers to a section in any of the INI
-files, i.e. any name between brackets e.g. [Squid]
+files, i.e. any name between brackets e.g. `[Squid]`.
 
 Logs are written to `/var/log/osg/osg-configure.log`.
 If something goes wrong, specify the `-d` flag to add more verbose output to `osg-configure.log`.

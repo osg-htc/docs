@@ -151,7 +151,7 @@ Install the OSG repositories:
 
 The only OSG repository enabled by default is the release one.
 If you want to [enable another one](#repositories) (e.g. `osg-testing`), then edit its file
-(e.g. `/etc/yum.repos.d/osg-testing.repo`) and change the enabled option from 0 to 1:
+(e.g. `/etc/yum.repos.d/osg-testing.repo`) and change the `enabled` option from 0 to 1:
 
 ``` file hl_lines="7"
 [osg-testing]
@@ -199,6 +199,7 @@ repository priorities using their Spacewalk ID. For example, if the OSG 3.4 repo
 ```
 [centos_7_osg_34_dev]
 priority = 98
+```
 
 Repository Mirrors
 ------------------
@@ -217,9 +218,8 @@ Or, to mirror only a single repository:
     <RANDOM> * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/<OSG_RELEASE>/el6/development /var/www/html/osg/<OSG_RELEASE>/el6
 
 
-Replace `<RANDOM>` with a number between 0 and 59.
-
-Replace `<OSG_RELEASE>` with the OSG release you would like to use (e.g. '3.4').
+Replace `<OSG_RELEASE>` with the OSG release you would like to use (e.g. `3.4`) and `<RANDOM>` with a number between 0
+and 59.
 
 On your worker node, you can replace the `baseurl` line of `/etc/yum.repos.d/osg.repo` with the appropriate URL for your
 mirror.
