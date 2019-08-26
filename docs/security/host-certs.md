@@ -114,16 +114,20 @@ root@host # yum install osg-pki-tools
 1. Verify that the issuer `CN` field is ` InCommon IGTF Server CA`:
 
         :::console
-        $ openssl x509 -in %RED%<PATH TO CERTIFICATE>%ENDCOLOR% -noout -issuer
+        $ openssl x509 -in <PATH TO CERTIFICATE> -noout -issuer
         issuer= /C=US/O=Internet2/OU=InCommon/CN=InCommon IGTF Server CA
+
+    Where `<PATH TO CERTIFICATE>` is the file you downloaded in the previous step
 
 1. Install the host certificate and key:
 
         :::console
-        root@host # cp %RED%<PATH TO CERTIFICATE>%ENDCOLOR% /etc/grid-security/hostcert.pem
+        root@host # cp <PATH TO CERTIFICATE> /etc/grid-security/hostcert.pem
         root@host # chmod 444 /etc/grid-security/hostcert.pem
-        root@host # cp %RED%<PATH TO KEY>%ENDCOLOR% /etc/grid-security/hostkey.pem
+        root@host # cp <PATH TO KEY> /etc/grid-security/hostkey.pem
         root@host # chmod 400 /etc/grid-security/hostkey.pem
+
+    Where `<PATH TO KEY>` is the ".key" file you created in the first step
 
 ### Requesting certificates as a registration authority
 

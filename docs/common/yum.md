@@ -151,16 +151,16 @@ Install the OSG repositories:
 
 The only OSG repository enabled by default is the release one.
 If you want to [enable another one](#repositories) (e.g. `osg-testing`), then edit its file
-(e.g. `/etc/yum.repos.d/osg-testing.repo`) and change the enabled option from 0 to 1:
+(e.g. `/etc/yum.repos.d/osg-testing.repo`) and change the `enabled` option from 0 to 1:
 
-``` file
+``` file hl_lines="7"
 [osg-testing]
 name=OSG Software for Enterprise Linux 7 - Testing - $basearch
 #baseurl=https://repo.opensciencegrid.org/osg/3.4/el7/testing/$basearch
 mirrorlist=https://repo.opensciencegrid.org/mirror/osg/3.4/el7/testing/$basearch
 failovermethod=priority
 priority=98
-enabled=%RED%1%ENDCOLOR%
+enabled=1
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
 ```
@@ -199,6 +199,7 @@ repository priorities using their Spacewalk ID. For example, if the OSG 3.4 repo
 ```
 [centos_7_osg_34_dev]
 priority = 98
+```
 
 Repository Mirrors
 ------------------
@@ -209,17 +210,16 @@ A local Yum mirror allows you to reduce the amount of external bandwidth used wh
 Add the following to a file in `/etc/cron.d`:
 
     :::file
-    %RED%RANDOM%ENDCOLOR% * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/ /var/www/html/osg/
+    <RANDOM> * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/ /var/www/html/osg/
 
 Or, to mirror only a single repository:
 
     :::file
-    %RED%RANDOM%ENDCOLOR% * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/%RED%OSG_RELEASE%ENDCOLOR%/el6/development /var/www/html/osg/%RED%OSG_RELEASE%ENDCOLOR%/el6
+    <RANDOM> * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/<OSG_RELEASE>/el6/development /var/www/html/osg/<OSG_RELEASE>/el6
 
 
-Replace %RED%RANDOM%ENDCOLOR% with a number between 0 and 59.
-
-Replace %RED%OSG\_RELEASE%ENDCOLOR% with the OSG release you would like to use (e.g. '3.4').
+Replace `<OSG_RELEASE>` with the OSG release you would like to use (e.g. `3.4`) and `<RANDOM>` with a number between 0
+and 59.
 
 On your worker node, you can replace the `baseurl` line of `/etc/yum.repos.d/osg.repo` with the appropriate URL for your
 mirror.

@@ -134,7 +134,7 @@ To verify the LCMAPS security, run the following commands from a machine with yo
 
         :::console
         user@client $ voms-proxy-destroy
-        user@client $ xrdcp /bin/bash root://%RED%<XROOTD HOST>%ENDCOLOR%/%RED%<DESTINATION PATH>%ENDCOLOR%
+        user@client $ xrdcp /bin/bash root://<XROOTD HOST>/<DESTINATION PATH>
         180213 13:56:49 396570 cryptossl_X509CreateProxy: EEC certificate has expired
         [0B/0B][100%][==================================================][0B/s]
         Run: [FATAL] Auth failed
@@ -150,7 +150,7 @@ To verify the LCMAPS security, run the following commands from a machine with yo
 
         :::console
         user@client $ voms-proxy-init
-        user@client $ xrdcp  /bin/sh root://%RED%<XROOTD HOST>%ENDCOLOR%/%RED%<DESTINATION PATH>%ENDCOLOR%
+        user@client $ xrdcp  /bin/sh root://<XROOTD HOST>/<DESTINATION PATH>
         [938.1kB/938.1kB][100%][==================================================][938.1kB/s]
 
     If your transfer does not succeed, run the previous command with `--debug 2` for more information.

@@ -121,15 +121,15 @@ Start the frontier-squid service and enable it to start at boot time. As a remin
 ## Validating Frontier Squid
 
 As any user on another computer, do the following (where
-`%RED%my.squid.host.edu%ENDCOLOR%` is the fully qualified domain name of your
+`<MY.SQUID.HOST.EDU>` is the fully qualified domain name of your
 squid server):
 
-``` console
-user@host $ export http_proxy=http://%RED%my.squid.host.edu%ENDCOLOR%:3128
+``` console hl_lines="1"
+user@host $ export http_proxy=http://`<MY.SQUID.HOST.EDU>`:3128
 user@host $ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep X-Cache
-X-Cache: MISS from %RED%my.squid.host.edu%ENDCOLOR%
+X-Cache: MISS from `<MY.SQUID.HOST.EDU>`
 user@host $ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep X-Cache
-X-Cache: HIT from %RED%my.squid.host.edu%ENDCOLOR%
+X-Cache: HIT from `<MY.SQUID.HOST.EDU>`
 ```
 
 If the grep doesn't print anything, try removing it from the pipeline

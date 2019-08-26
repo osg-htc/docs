@@ -152,7 +152,7 @@ Push notifications using the Duo Mobile app are required.
 
 Once you have set all those up, run `cigetcert` as follows:
 ```console
-user@host $ cigetcert -u %RED%<USERNAME>%ENDCOLOR% -i XSEDE
+user@host $ cigetcert -u <USERNAME> -i XSEDE
 ```
 `<USERNAME>` is your username at portal.xsede.org.
 You will get prompted to "Enter XSEDE Kerberos Password."

@@ -84,8 +84,9 @@ To simplify installation, OSG provides convenience RPMs that install all require
 1. Install the CE software:
 
         :::console
-        root@host # yum install %RED%<PACKAGE>%ENDCOLOR%
+        root@host # yum install <PACKAGE>
 
+    Where `<PACKAGE>` is the package you selected in the above step.
 
 Configuring HTCondor-CE
 -----------------------
@@ -212,8 +213,8 @@ Set `NETWORK_HOSTNAME` and `NETWORK_INTERFACE` to the hostname and IP address of
 `/etc/condor-ce/config.d/99-local.conf` directory with the line:
 
 ``` file
-NETWORK_HOSTNAME = %RED%condorce.example.com%ENDCOLOR%
-NETWORK_INTERFACE = %RED%127.0.0.1%ENDCOLOR%
+NETWORK_HOSTNAME = condorce.example.com
+NETWORK_INTERFACE = 127.0.0.1
 ```
 
 Replacing `condorce.example.com` text with your public interface’s hostname and `127.0.0.1` with your public interface’s
@@ -233,14 +234,18 @@ configuring them in unison.
 - **To change the default limit** on the number of locally run jobs (the current default is 20), add the following to
   `/etc/condor-ce/config.d/99-local.conf`:
 
-        START_LOCAL_UNIVERSE = TotalLocalJobsRunning + TotalSchedulerJobsRunning < %RED%<JOB-LIMIT>%ENDCOLOR%
+        START_LOCAL_UNIVERSE = TotalLocalJobsRunning + TotalSchedulerJobsRunning < <JOB-LIMIT>
         START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
+
+    Where `<JOB-LIMIT>` is the maximum number of jobs allowed to run locally
 
 - **To only allow a specific user** to start locally run jobs, add the following to
   `/etc/condor-ce/config.d/99-local.conf`:
 
-        START_LOCAL_UNIVERSE = target.Owner =?= "%RED%<USERNAME>%ENDCOLOR%"
+        START_LOCAL_UNIVERSE = target.Owner =?= "<USERNAME>"
         START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
+
+   Change `<USERNAME>` for the username allowed to run jobs locally
 
 - **To disable** locally run jobs, add the following to `/etc/condor-ce/config.d/99-local.conf`:
 
@@ -295,9 +300,9 @@ UID, their DN, or their VOMS attributes.
 -   **To map DNs or VOMS attributes to an accounting group,** add lines to `/etc/osg/extattr_table.txt` with the
     following form:
 
-        %RED%SubjectOrAttribute%ENDCOLOR% GroupName
+        SubjectOrAttribute GroupName
 
-    The %RED%SubjectOrAttribute%ENDCOLOR% can be a Perl regular expression. The following is an example `extattr_table.txt`:
+    The `SubjectOrAttribute` can be a Perl regular expression. The following is an example `extattr_table.txt`:
 
         cmsprio cms.other.prio
         cms\/Role=production cms.prod
