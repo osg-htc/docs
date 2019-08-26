@@ -24,26 +24,26 @@ OSG Release Series
 
 Since the start of the RPM-based OSG software stack, we have offered the following release series:
 
--   **OSG 3.1** started in April 2012, and was end-of-lifed in April 2015.
-    Historically, there were 3.0.x releases as well, but there was no separate release series for 3.0 and 3.1;
-    we simply went from 3.0.10 to 3.1.0 in the same repositories.
+-   **OSG 3.5** started August 2019.
+    The main differences between it and 3.4 were the introduction of the HTCondor 8.8 and 8.9 series;
+    also the RSV monitoring probes, EL6 support, and CREAM support were all dropped.
 
--   **OSG 3.2** started in November 2013, and was end-of-lifed in August 2016.
-    The main differences between it and 3.1 were the introduction of glideinWMS 3.2, HTCondor 8.0, and Hadoop/HDFS 2.0;
-    also the gLite CE Monitor system was dropped in favor of osg-info-services.
+-   **OSG 3.4** started June 2017 and will reach its end-of-life in November 2020.
+    The main differences between it and 3.3 are the removal of edg-mkgridmap, GUMS, BeStMan, and VOMS Admin Server
+    packages.
 
 -   **OSG 3.3** started in August 2015 and was end-of-lifed in May 2018.
     While the files have not been removed, it is strongly recommended that it not be installed anymore.
     The main differences between 3.3 and 3.2 are the dropping of EL5 support, the addition of EL7 support, and the
     dropping of Globus GRAM support.
 
--   **OSG 3.4** started June 2017 and will reach its end-of-life in November 2020.
-    The main differences between it and 3.3 are the removal of edg-mkgridmap, GUMS, BeStMan, and VOMS Admin Server
-    packages.
+-   **OSG 3.2** started in November 2013, and was end-of-lifed in August 2016.
+    The main differences between it and 3.1 were the introduction of glideinWMS 3.2, HTCondor 8.0, and Hadoop/HDFS 2.0;
+    also the gLite CE Monitor system was dropped in favor of osg-info-services.
 
--   **OSG 3.5** started August 2019.
-    The main differences between it and 3.4 were the introduction of the HTCondor 8.8 and 8.9 series;
-    also the RSV monitoring probes, EL6 support, and CREAM support were all dropped.
+-   **OSG 3.1** started in April 2012, and was end-of-lifed in April 2015.
+    Historically, there were 3.0.x releases as well, but there was no separate release series for 3.0 and 3.1;
+    we simply went from 3.0.10 to 3.1.0 in the same repositories.
 
 OSG Upcoming
 ------------
