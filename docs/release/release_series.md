@@ -121,6 +121,35 @@ and want to upgrade to 3.5 (the *new series*), we recommend the following proced
     If you are not having the expected result or having problems with Yum please see the
     [Yum troubleshooting guide](/release/yum-basics#troubleshooting)
 
+Upgrading to HTCondor 8.8.x
+---------------------------
+
+The OSG 3.5 release series contains HTCondor 8.8, a major version upgrade from the previously released versions in the OSG.
+See the HTCondor 8.8 manual for an overview of the
+[changes](https://htcondor.readthedocs.io/en/v8_8_4/version-history/upgrading-from-86-to-88-series.html).
+To update HTCondor on your HTCondor-CE and/or HTCondor pool hosts, perform the following steps:
+
+1. Update all HTCondor packages:
+
+        :::console
+        root@host # yum update 'condor\*'
+
+1. **HTCondor pools only:** The default authentication configuration changed in HTCondor 8.8 in OSG 3.5.
+   If you are experiencing issues with communication between hosts in your pool after the upgrade,
+   the default authentication configuration is listed in `/etc/condor/config.d/00-pool_password.config`:
+   ensure that any default configuration is overriden with your own
+   [security configuration](https://htcondor.readthedocs.io/en/v8_8_4/admin-manual/security.html) in subsequent files.
+
+1. **HTCondor-CE hosts only:** The HTCondor 8.8 series changed the default job route matching order
+   [from round-robin to first matching route](/compute-element/job-router-recipes#how-jobs-match-to-job-routes).
+   To use the old round-robin matching order, add the following configuration to `/etc/condor-ce/config.d/99-local.conf`:
+
+        JOB_ROUTER_ROUND_ROBIN_SELECTION = True
+
+1. Clean-up deprecated packages:
+
+        :::console
+        root@host # yum remove 'rsv*' glite-ce-cream-client-api-c
 
 References
 ----------
