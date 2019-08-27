@@ -97,6 +97,26 @@ and want to upgrade to 3.5 (the *new series*), we recommend the following proced
 
     This command will update **all** packages on your system.
 
+1. Remove any deprecated packages that were previously installed:
+
+        :::console
+        root@host # yum remove osg-version \
+                               osg-control \
+                               'rsv*' \
+                               glite-ce-cream-client-api-c \
+                               glite-lbjp-common-gsoap-plugin \
+                               xacml
+
+    If you did not have any of the above packages installed, Yum will not remove any packages:
+
+        No Match for argument: osg-version
+        No Match for argument: osg-control
+        No Match for argument: rsv*
+        No Match for argument: glite-ce-cream-client-api-c
+        No Match for argument: glite-lbjp-common-gsoap-plugin
+        No Match for argument: xacml
+        No Packages marked for removal
+
 !!! tip "Running into issues?"
     If you are not having the expected result or having problems with Yum please see the
     [Yum troubleshooting guide](/release/yum-basics#troubleshooting)
