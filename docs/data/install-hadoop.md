@@ -84,7 +84,7 @@ from OSG 3.4.
 The upgrade process occurs in several steps:
 
 1. [Preparing for the upgrade](#preparing-for-the-upgrade)
-1. [Updating to OSG 3.4](#updating-to-osg-34)
+1. [Updating to OSG 3.5 or 3.4](#updating-to-osg-35-or-34)
 1. [Upgrading the Primary NameNode](#upgrading-the-primary-namenode)
 1. [Upgrading the DataNodes](#upgrading-the-datanodes)
 1. [Upgrading the Secondary NameNode](#upgrading-the-secondary-namenode)
@@ -131,7 +131,7 @@ Before upgrading, backup your configuration data and HDFS metadata.
    If more than one directory appears in the list (as in the example above), choose the most convenient directory.
    All of the directories in the list will have the same contents.
 
-### Updating to OSG 3.4 ###
+### Updating to OSG 3.5 or 3.4 ###
 
 Once your HDFS services have been turned off and the HDFS metadata has been backed up, update each node to OSG 3.4 by
 following the instructions in [this section](/release/release_series/#updating-from-old).

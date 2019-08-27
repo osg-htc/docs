@@ -52,7 +52,7 @@ There is one more OSG Series called "upcoming" which contains major updates plan
 The yum repositories for upcoming (`osg-upcoming` and `osg-upcoming-testing`) are available from all OSG 3.x series, and
 individual packages can be installed from Upcoming without needing to update entirely to a new series.
 Note, however, that packages in the "upcoming" repositories are tested against the most recent OSG series.
-As of the time of writing, `osg-upcoming` is meant to work with OSG 3.4.
+As of the time of writing, `osg-upcoming` is meant to work with OSG 3.5.
 
 Installing an OSG Release Series
 --------------------------------

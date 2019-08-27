@@ -160,7 +160,7 @@ To migrate from edg-mkgridmap to the LCMAPS VOMS plugin, perform the following p
     !!! warning
         In the output from this command, yum should **not** list other packages than the one.
         If it lists other packages, cancel the erase operation, make sure the other packages are updated to their latest
-        OSG 3.4 versions (they should have ".osg34" in their versions), and try again.
+        OSG 3.5 versions (they should have ".osg35" in their versions), and try again.
 
 #### Migrating from GUMS
 
