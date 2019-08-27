@@ -66,9 +66,9 @@ supported by the OSG.
 
 The definitive list of software in the contrib repository can be found here:
 
--   [OSG 3.5 EL7 contrib software repository](http://repo.opensciencegrid.org/osg/3.5/el7/contrib/x86_64/)
--   [OSG 3.4 EL7 contrib software repository](http://repo.opensciencegrid.org/osg/3.4/el7/contrib/x86_64/)
--   [OSG 3.4 EL6 contrib software repository](http://repo.opensciencegrid.org/osg/3.4/el6/contrib/x86_64/)
+-   [OSG 3.5 EL7 contrib software repository](https://repo.opensciencegrid.org/osg/3.5/el7/contrib/x86_64/)
+-   [OSG 3.4 EL7 contrib software repository](https://repo.opensciencegrid.org/osg/3.4/el7/contrib/x86_64/)
+-   [OSG 3.4 EL6 contrib software repository](https://repo.opensciencegrid.org/osg/3.4/el6/contrib/x86_64/)
 
 If you would like to distribute your software in the OSG `contrib` repository, please [contact us](/common/help) with a
 description of your software, what users it serves, and relevant RPM packaging.
@@ -113,7 +113,7 @@ The instructions for this vary based on your OS:
 
 ### Install the EPEL repositories
 
-OSG software depends on packages distributed via the [EPEL](http://fedoraproject.org/wiki/EPEL) repositories.
+OSG software depends on packages distributed via the [EPEL](https://fedoraproject.org/wiki/EPEL) repositories.
 You must install and enable these first.
 
 -   Install the EPEL repository, if not already present.  Choose the right version to match your OS version.
