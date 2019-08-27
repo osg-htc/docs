@@ -83,7 +83,7 @@ and want to upgrade to 3.5 (the *new series*), we recommend the following proced
 2.  Install the OSG repositories:
 
         :::console
-        root@host # rpm -Uvh https://repo.opensciencegrid.org/osg/3.5/osg-3.5-el7-release-latest.rpm
+        root@host # yum install https://repo.opensciencegrid.org/osg/3.5/osg-3.5-el7-release-latest.rpm
 
 3.  Clean yum cache:
 
