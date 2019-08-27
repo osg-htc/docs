@@ -66,8 +66,9 @@ supported by the OSG.
 
 The definitive list of software in the contrib repository can be found here:
 
--   [OSG 3.4 EL6 contrib software repository](http://repo.opensciencegrid.org/osg/3.4/el6/contrib/x86_64/)
+-   [OSG 3.5 EL7 contrib software repository](http://repo.opensciencegrid.org/osg/3.5/el7/contrib/x86_64/)
 -   [OSG 3.4 EL7 contrib software repository](http://repo.opensciencegrid.org/osg/3.4/el7/contrib/x86_64/)
+-   [OSG 3.4 EL6 contrib software repository](http://repo.opensciencegrid.org/osg/3.4/el6/contrib/x86_64/)
 
 If you would like to distribute your software in the OSG `contrib` repository, please [contact us](/common/help) with a
 description of your software, what users it serves, and relevant RPM packaging.
@@ -141,29 +142,38 @@ This document assumes a fresh install.
 For instructions on upgrading from one OSG series to another, see the
 [release series document](/release/release_series#updating-from-old).
 
-Install the OSG repositories:
+1. Install the OSG repository for your OS version and the [OSG release series](/release/release_series) that you wish to
+   use:
 
-    :::console
-    ## EPEL 6 (For RHEL 6, CentOS 6, and SL 6)
-    root@host # yum install https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm
-    ## EPEL 7 (For RHEL 7, CentOS 7, and SL 7)
-    root@host # yum install https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm
+    - OSG 3.5 EL7:
 
-The only OSG repository enabled by default is the release one.
-If you want to [enable another one](#repositories) (e.g. `osg-testing`), then edit its file
-(e.g. `/etc/yum.repos.d/osg-testing.repo`) and change the `enabled` option from 0 to 1:
+            :::console
+            root@host # yum install https://repo.opensciencegrid.org/osg/3.5/osg-3.5-el7-release-latest.rpm
 
-``` file hl_lines="7"
-[osg-testing]
-name=OSG Software for Enterprise Linux 7 - Testing - $basearch
-#baseurl=https://repo.opensciencegrid.org/osg/3.4/el7/testing/$basearch
-mirrorlist=https://repo.opensciencegrid.org/mirror/osg/3.4/el7/testing/$basearch
-failovermethod=priority
-priority=98
-enabled=1
-gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
-```
+    - OSG 3.4 EL7:
+
+            :::console
+            root@host # yum install https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm
+
+    - OSG 3.4 EL6:
+
+            :::console
+            root@host # yum install https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm
+
+1. The only OSG repository enabled by default is the release one.
+   If you want to [enable another one](#repositories) (e.g. `osg-testing`), then edit its file
+   (e.g. `/etc/yum.repos.d/osg-testing.repo`) and change the `enabled` option from 0 to 1:
+
+        :::file hl_lines="7"
+        [osg-testing]
+        name=OSG Software for Enterprise Linux 7 - Testing - $basearch
+        #baseurl=https://repo.opensciencegrid.org/osg/3.5/el7/testing/$basearch
+        mirrorlist=https://repo.opensciencegrid.org/mirror/osg/3.5/el7/testing/$basearch
+        failovermethod=priority
+        priority=98
+        enabled=1
+        gpgcheck=1
+        gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
 
 Optional Configuration
 ----------------------
