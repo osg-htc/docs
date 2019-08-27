@@ -67,7 +67,7 @@ Updating to OSG 3.5
 !!! note "OS Version Support"
     OSG 3.5 only supports EL7
 
-If you have an existing installation based on OSG release verison >= 3.4 (which will be referred to as the *old series*),
+If you have an existing installation based on OSG release version <= 3.4 (which will be referred to as the *old series*),
 and want to upgrade to 3.5 (the *new series*), we recommend the following procedure:
 
 1.  First, remove the old series yum repositories:
