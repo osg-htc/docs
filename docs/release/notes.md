@@ -20,7 +20,7 @@ To update to the OSG 3.5 series, please consult the page on
 
 | Version                             | Date       | Summary                                                           |
 |:------------------------------------|:-----------|:------------------------------------------------------------------|
-| [3.5.0](/release/3.5/release-3-5-0) | 2019-08-29 | CVMFS 2.6.2, HTCondor 8.8.4, XCache 1.1.1, OSG XRootD 3.5, OSG Configure 3.0.0; Upcoming: HTCondor 8.9.2 |
+| [3.5.0](/release/3.5/release-3-5-0) | 2019-08-29 | CVMFS 2.6.2, HTCondor 8.8.4, XCache 1.1.1, OSG XRootD 3.5, OSG Configure 3.0.0, XRootD LCMAPS 1.7.4, XRootD HDFS 2.1.6; Upcoming: HTCondor 8.9.2 |
 
 OSG 3.4
 -------
