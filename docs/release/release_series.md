@@ -144,11 +144,11 @@ To update HTCondor on your HTCondor-CE and/or HTCondor pool hosts, perform the f
 1. Update all HTCondor packages:
 
         :::console
-        root@host # yum update 'condor\*'
+        root@host # yum update 'condor*'
 
 1. **HTCondor pools only:** The default authentication configuration changed in HTCondor 8.8 in OSG 3.5.
    If you are experiencing issues with communication between hosts in your pool after the upgrade,
-   the default authentication configuration is listed in `/etc/condor/config.d/00-pool_password.config`:
+   the default authentication configuration is listed in `/etc/condor/config.d/00-osg_default_security.config`:
    ensure that any default configuration is overriden with your own
    [security configuration](https://htcondor.readthedocs.io/en/v8_8_4/admin-manual/security.html) in subsequent files.
 
@@ -165,7 +165,7 @@ To update HTCondor on your HTCondor-CE and/or HTCondor pool hosts, perform the f
 
 ### Upgrading to OSG Configure 3 ###
 
-The OSG 3.5 release series contains HTCondor 8.8, a major version upgrade from the previously released versions in the OSG.
+The OSG 3.5 release series contains OSG-Configure 3, a major version upgrade from the previously released versions in the OSG.
 See the OSG Configure release notes for an overview of the
 [changes](https://github.com/opensciencegrid/osg-configure/releases/tag/v3.0.0).
 To update OSG Configure on your HTCondor-CE, perform the following steps:
