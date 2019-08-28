@@ -48,7 +48,9 @@ this release contains the following package updates:
     See the known issue with this version [below](#known-issues).
 
 -   XCache 1.1.1: This release includes packages for ATLAS and CMS XCaches as well as Stash Origin HTTP/S support.
--   OSG Configure 3.3.0: A [major version release](https://github.com/opensciencegrid/osg-configure/releases/tag/v3.0.0)
+-   OSG Configure 3.3.0: A [major version release](https://github.com/opensciencegrid/osg-configure/releases/tag/v3.0.0).
+    See the [manual upgrade instructions](/release/release_series#upgrading-to-osg-configure-3) before
+    upgrading to this version.
 -   OSG XRootD 3.5: A meta-package including common configuration across [standalone](/data/xrootd/install-standalone),
     [storage element](/data/xrootd/install-storage-element), and [caching](/data/stashcache/overview) installations of
     XRootD.

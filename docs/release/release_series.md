@@ -127,12 +127,14 @@ and want to upgrade to 3.5 (the *new series*), we recommend the following proced
         No Match for argument: xacml
         No Packages marked for removal
 
+1. If you are updating an HTCondor-CE host, please consult the manual [HTCondor](#upgrading-to-htcondor-8.8.x) and
+[OSG Configure](#upgrading-to-osg-configure-3) instructions below.
+
 !!! tip "Running into issues?"
     If you are not having the expected result or having problems with Yum please see the
     [Yum troubleshooting guide](/release/yum-basics#troubleshooting)
 
-Upgrading to HTCondor 8.8.x
----------------------------
+### Upgrading to HTCondor 8.8.x ###
 
 The OSG 3.5 release series contains HTCondor 8.8, a major version upgrade from the previously released versions in the OSG.
 See the HTCondor 8.8 manual for an overview of the
@@ -160,6 +162,30 @@ To update HTCondor on your HTCondor-CE and/or HTCondor pool hosts, perform the f
 
         :::console
         root@host # yum remove 'rsv*' glite-ce-cream-client-api-c
+
+### Upgrading to OSG Configure 3 ###
+
+The OSG 3.5 release series contains HTCondor 8.8, a major version upgrade from the previously released versions in the OSG.
+See the OSG Configure release notes for an overview of the
+[changes](https://github.com/opensciencegrid/osg-configure/releases/tag/v3.0.0).
+To update OSG Configure on your HTCondor-CE, perform the following steps:
+
+1. If you haven't already, [update to OSG 3.5](#updating-to-osg-35).
+
+1. If you have `site_name` set in `/etc/osg/config.d/40-siteinfo.ini`, delete it and specify `resource` instead.
+   `resource` should match the resource name that's registered in
+   [OSG Topology](/common/registration/#registering-resources).
+
+1.  Set `resource_group` in `/etc/osg/config.d/40-siteinfo.ini` to the resource group registered in
+    [OSG Topology](/common/registration/#registering-resources),
+    i.e. the name of the `.yaml` file in OSG Topology that contains the registered resouce above.
+
+1.  Set `host_name` to the host name that is registered in [OSG Topology](/common/registration/#registering-resources).
+    This may be different from the FQDN of the host if you're using a DNS alias, for example.
+
+1.  OSG Configure will warn about config options that it does not recognize;
+    delete these options from the config to get rid of the warnings.
+
 
 References
 ----------
