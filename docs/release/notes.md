@@ -1,11 +1,35 @@
 Release Notes
 =============
 
-!!! note
-    The 3.3 series was [end-of-lifed in May 2018](https://opensciencegrid.org/technology/policy/release-series/#life-cycle-dates).
-    Please [upgrade to the 3.4 series](/release/release_series#updating-to-osg-35) at your earliest convenience.
+This page contains links to detailed notes for release in the currently supported
+[OSG release series](/release/release_series).
+For our policy on release series support, please consult
+[this page](https://opensciencegrid.org/technology/policy/release-series/).
 
-### OSG 3.4 ###
+OSG 3.5
+-------
+
+**Supported OS Versions:** EL7
+
+The OSG 3.5 release series introduces HTCondor 8.8 and 8.9, available in `osg-release` and `osg-upcoming`, respectively.
+It also drops support for the RSV monitoring probes, CREAM CEs, and Enterprise Linux 6.
+See the initial [OSG 3.5.0 release notes](/release/3.5/release-3-5-0) for additional details.
+
+To update to the OSG 3.5 series, please consult the page on
+[updating between release series](/release/release_series#updating-to-osg-35).
+
+| Version                             | Date       | Summary                                                           |
+|:------------------------------------|:-----------|:------------------------------------------------------------------|
+| [3.5.0](/release/3.5/release-3-5-0) | 2019-08-29 | CVMFS 2.6.2, HTCondor 8.8.4, XCache 1.1.1, OSG XRootD 3.5, OSG Configure 3.0.0; Upcoming: HTCondor 8.9.2 |
+
+OSG 3.4
+-------
+
+**Supported OS Versions:** EL7, EL6
+
+With the release of OSG 3.5.0 in August 2019, the end-of-life dates have been set for OSG 3.4 per our
+[policy](https://opensciencegrid.org/technology/policy/release-series/):
+regular support will end in **February 2020** and critical bug/security support will end in **November 2020**.
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
