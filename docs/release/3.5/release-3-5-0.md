@@ -1,7 +1,7 @@
 OSG Software Release 3.5.0
 ===========================
 
-**Release Date:** 2019-08-29    
+**Release Date:** 2019-08-30    
 **Supported OS Versions:** EL7
 
 Summary of changes
