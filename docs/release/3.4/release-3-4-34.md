@@ -9,7 +9,7 @@ Summary of changes
 
 This release contains:
 
--   XCache 1.1.1: ATLAS and CMS XCache; Stash Origin HTTP/S Support
+-   XCache 1.1.1: This release includes packages for ATLAS and CMS XCaches as well as Stash Origin HTTP/S support.
 -   osg-configure 2.4: improvements for Slurm, PBS Pro, BOSCO, Frontier Squid
 -   OSG XRootD 3.5: A meta-package including common configuration across [standalone](/data/xrootd/install-standalone),
     [storage element](/data/xrootd/install-storage-element), and [caching](/data/stashcache/overview) installations of
