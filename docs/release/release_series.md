@@ -127,18 +127,18 @@ and want to upgrade to 3.5 (the *new series*), we recommend the following proced
         No Match for argument: xacml
         No Packages marked for removal
 
-1. If you are updating an HTCondor-CE host, please consult the manual [HTCondor](#upgrading-to-htcondor-8.8.x) and
-[OSG Configure](#upgrading-to-osg-configure-3) instructions below.
+1. If you are updating an HTCondor-CE host, please consult the manual [HTCondor](#updating-to-htcondor-8.8.x) and
+[OSG Configure](#updating-to-osg-configure-3) instructions below.
 
 !!! tip "Running into issues?"
     If you are not having the expected result or having problems with Yum please see the
     [Yum troubleshooting guide](/release/yum-basics#troubleshooting)
 
-### Upgrading to HTCondor 8.8.x ###
+### Updating to HTCondor 8.8.x ###
 
 The OSG 3.5 release series contains HTCondor 8.8, a major version upgrade from the previously released versions in the OSG.
 See the HTCondor 8.8 manual for an overview of the
-[changes](https://htcondor.readthedocs.io/en/v8_8_4/version-history/upgrading-from-86-to-88-series.html).
+[changes](https://htcondor.readthedocs.io/en/v8_8_4/version-history/updating-from-86-to-88-series.html).
 To update HTCondor on your HTCondor-CE and/or HTCondor pool hosts, perform the following steps:
 
 1. Update all HTCondor packages:
@@ -163,7 +163,7 @@ To update HTCondor on your HTCondor-CE and/or HTCondor pool hosts, perform the f
         :::console
         root@host # yum remove 'rsv*' glite-ce-cream-client-api-c
 
-### Upgrading to OSG Configure 3 ###
+### Updating to OSG Configure 3 ###
 
 The OSG 3.5 release series contains OSG-Configure 3, a major version upgrade from the previously released versions in the OSG.
 See the OSG Configure release notes for an overview of the
