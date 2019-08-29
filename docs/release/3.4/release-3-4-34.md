@@ -14,7 +14,8 @@ This release contains:
     [storage element](/data/xrootd/install-storage-element), and [caching](/data/stashcache/overview) installations of
     XRootD.
 -   XRootD HDFS 2.1.6: includes default configuration in `/etc/xrootd/40-xrootd-hdfs.cfg`.
--   xrootd-lcmaps 1.7.4: now includes default XRootD configuration in /etc
+-   XRootD LCMAPS 1.7.4: includes default authorization configuration in `/etc/xrootd/config.d/40-xrootd-lcmaps.cfg`.
+    To use the default configuration, uncomment the `# set EnableLcmaps = 1` line in `/etc/xrootd/config.d/10-xrootd-lcmaps.cfg`.
 -   MyProxy 6.2.4: Remove usage statistics collection support
 -   [CCTools 7.0.14](http://ccl.cse.nd.edu/software/): Bug fix release
 -   osg-system-profiler 1.4.3: Remove collection of obsolete information
