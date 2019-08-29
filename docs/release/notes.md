@@ -33,6 +33,7 @@ regular support will end in **February 2020** and critical bug/security support 
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.34](/release/3.4/release-3-4-34)     | 2019-08-29 | XCache 1.1.1, osg-configure 2.4.1, osg-xrootd 3.4.4, xrootd-hdfs 2.1.6, xrootd-lcmaps 1.7.4, MyProxy 6.2.4, CCTools 7.0.14, osg-system-profiler 1.4.3 |
 | [3.4.33](/release/3.4/release-3-4-33)     | 2019-08-01 | Frontier Squid 4.8, XRootD 4.10.0, cvmfs-x509-helper 2.0                |
 | [3.4.32](/release/3.4/release-3-4-32)     | 2019-07-25 | Frontier Squid 4.4-2.1, Singularity 3.2.1-1.1, VO Package v94; Upcoming: HTCondor 8.8.4 |
 | [3.4.31-2](/release/3.4/release-3-4-31-2) | 2019-07-02 | IGTF 1.101                                                              |
