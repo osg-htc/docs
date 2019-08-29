@@ -138,7 +138,7 @@ and want to upgrade to 3.5 (the *new series*), we recommend the following proced
 
 The OSG 3.5 release series contains HTCondor 8.8, a major version upgrade from the previously released versions in the OSG.
 See the HTCondor 8.8 manual for an overview of the
-[changes](https://htcondor.readthedocs.io/en/v8_8_4/version-history/updating-from-86-to-88-series.html).
+[changes](https://htcondor.readthedocs.io/en/v8_8_4/version-history/upgrading-from-86-to-88-series.html).
 To update HTCondor on your HTCondor-CE and/or HTCondor pool hosts, perform the following steps:
 
 1. Update all HTCondor packages:
