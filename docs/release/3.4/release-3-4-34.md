@@ -19,7 +19,7 @@ This release contains:
     To use the default configuration, uncomment the `# set EnableLcmaps = 1` line in `/etc/xrootd/config.d/10-xrootd-lcmaps.cfg`.
 -   MyProxy 6.2.4: Remove usage statistics collection support
 -   [CCTools 7.0.14](http://ccl.cse.nd.edu/software/): Bug fix release
--   osg-system-profiler 1.4.3: Remove collection of obsolete information
+-   OSG System Profiler 1.4.3: Remove collection of obsolete information
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.34%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
