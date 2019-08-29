@@ -11,7 +11,7 @@ This release contains:
 -   XCache 1.1.1: ATLAS and CMS XCache; Stash Origin HTTP/S Support
 -   osg-configure 2.4: improvements for Slurm, PBS Pro, BOSCO, Frontier Squid
 -   osg-xrootd 3.4-4: New meta package for OSG XRootD configuration
--   xrootd-hdfs 2.1.6: now includes default XRootD configuration in /etc
+-   XRootD HDFS 2.1.6: includes default configuration in `/etc/xrootd/40-xrootd-hdfs.cfg`.
 -   xrootd-lcmaps 1.7.4: now includes default XRootD configuration in /etc
 -   MyProxy 6.2.4: Remove usage statistics collection support
 -   [CCTools 7.0.14](http://ccl.cse.nd.edu/software/): Bug fix release
