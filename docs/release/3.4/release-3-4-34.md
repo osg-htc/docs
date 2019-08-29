@@ -65,7 +65,8 @@ Detailed changes are below. All of the documentation can be found [here](/index.
 Known Issues
 ------------
 
-None.
+OSG System Profiler verifies all installed packages, which may result in
+[excessively long run times](https://opensciencegrid.atlassian.net/browse/SOFTWARE-3804).
 
 Updating to the new release
 ---------------------------
