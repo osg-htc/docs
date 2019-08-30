@@ -19,7 +19,7 @@ To update to the OSG 3.5 release series, please consult the page on
 
 !!! question "Where are GlideinWMS and HTCondor-CE?"
     HTCondor-CE (including `osg-ce` metapackages) and GlideinWMS are both absent in OSG 3.5.0:
-    we expect major version upgrades that may require manual intervention for both of these packages so we are holding
+    we expect major version updates that may require manual intervention for both of these packages so we are holding
     their initial releases in this series until they are ready.
 
 !!! warning "OSG 3.4 end-of-life"
@@ -35,8 +35,16 @@ this release contains the following package updates:
 -   HTCondor 8.8.4: The current HTCondor [stable release](https://htcondor.readthedocs.io/en/v8_8_4/version-history/stable-release-series-88.html).
     See the [manual update instructions](/release/release_series#updating-to-htcondor-8.8.x) before
     updating to this version.
+    Some highlights from the 8.8 release series include:
+    -   Automatically add AWS resources to your pool using HTCondor Annex
+    -   The Python bindings now include submit functionality
+    -   Added the ability to run a job immediately by replacing a running job
+    -   HTCondor now tracks and reports GPU utilization
+    -   Several performance enhancements in the collector
+    -   The grid universe can create and manage VM instances in Microsoft Azure
+    -   The MUNGE security method is now supported on all Linux platforms
 -   CVMFS 2.6.2: A [bug fix release](https://cvmfs.readthedocs.io/en/2.6/cpt-releasenotes.html).
-    Note the upgrade recommendations from the developers:
+    Note the update recommendations from the developers:
 
     > As with previous releases, upgrading clients should be seamless just by installing the new package from the
     > repository.
@@ -65,8 +73,18 @@ this release contains the following package updates:
 -   [CCTools 7.0.14](http://ccl.cse.nd.edu/software/): Bug fix release
 -   OSG System Profiler 1.4.3: Remove collection of obsolete information
     See the known issue with this version [below](#known-issues).
--   Upcoming repository:
-    - HTCondor 8.9.2: The current HTCondor [development release](https://htcondor.readthedocs.io/en/v8_9_2/version-history/development-release-series-89.html)
+-   HTCondor 8.9.2 (upcoming): The current HTCondor
+    [development release](https://htcondor.readthedocs.io/en/v8_9_2/version-history/development-release-series-89.html).
+    Some highlights from the 8.9 release series include:
+    -   New TOKEN authentication method enables fine-grained authorization control
+    -   All HTCondor daemons run under a condor_master share a security session
+    -   An efficient HTTP/S plugin that supports uploads and authentication tokens
+    -   The HTTP/HTTPS file transfer plugin will timeout and retry transfers
+    -   HTCondor automatically supports GPU jobs in Docker and Singularity
+    -   File transfer times are now recorded in the user job log and the job ad
+    -   A new multi-file box.com file transfer plugin to download files
+    -   Configuration options for job-log time-stamps (UTC, ISO 8601, sub-second)
+    -   Several improvements to SSL authentication
 
 These
 [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.5.0%20)
