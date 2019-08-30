@@ -12,7 +12,7 @@ This document is intended for System Administrators who are installing
 `frontier-squid`, the OSG distribution of the Frontier Squid software.
 
 !!! note "Applicable versions"
-    This document applies to software from the OSG 3.4 Release Series.
+    This document applies to software from the OSG 3.5 and 3.4 Release Series.
     The version of frontier-squid installed should be >= 3.5.24-3.1.
     When using OSG software from a previous Release Series (eg, OSG 3.3)
     and a frontier-squid version in the 2.7STABLE9 series, refer to the
