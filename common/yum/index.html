@@ -1278,10 +1278,46 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-2" type="checkbox" id="nav-10-2">
     
     <label class="md-nav__link" for="nav-10-2">
-      3.4 Release Notes
+      3.5 Release Notes
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
       <label class="md-nav__title" for="nav-10-2">
+        3.5 Release Notes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release/3.5/release-3-5-0/" title="OSG Release 3.5.0" class="md-nav__link">
+      OSG Release 3.5.0
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-3" type="checkbox" id="nav-10-3">
+    
+    <label class="md-nav__link" for="nav-10-3">
+      3.4 Release Notes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-10-3">
         3.4 Release Notes
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -2075,11 +2111,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
     
     <label class="md-nav__link" for="nav-11">
-      Monitoring
+      Deprecated
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
       <label class="md-nav__title" for="nav-11">
-        Monitoring
+        Deprecated
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -2376,8 +2412,9 @@ Particularly, contrib software is not guaranteed to be compatible with the rest 
 supported by the OSG.</p>
 <p>The definitive list of software in the contrib repository can be found here:</p>
 <ul>
-<li><a href="http://repo.opensciencegrid.org/osg/3.4/el6/contrib/x86_64/">OSG 3.4 EL6 contrib software repository</a></li>
-<li><a href="http://repo.opensciencegrid.org/osg/3.4/el7/contrib/x86_64/">OSG 3.4 EL7 contrib software repository</a></li>
+<li><a href="https://repo.opensciencegrid.org/osg/3.5/el7/contrib/x86_64/">OSG 3.5 EL7 contrib software repository</a></li>
+<li><a href="https://repo.opensciencegrid.org/osg/3.4/el7/contrib/x86_64/">OSG 3.4 EL7 contrib software repository</a></li>
+<li><a href="https://repo.opensciencegrid.org/osg/3.4/el6/contrib/x86_64/">OSG 3.4 EL6 contrib software repository</a></li>
 </ul>
 <p>If you would like to distribute your software in the OSG <code>contrib</code> repository, please <a href="../../common/help">contact us</a> with a
 description of your software, what users it serves, and relevant RPM packaging.</p>
@@ -2425,7 +2462,7 @@ or if the <code>enabled</code> line is missing
 (i.e. it is enabled unless specified otherwise.)</p>
 </div>
 <h3 id="install-the-epel-repositories">Install the EPEL repositories<a class="headerlink" href="#install-the-epel-repositories" title="Permanent link">&para;</a></h3>
-<p>OSG software depends on packages distributed via the <a href="http://fedoraproject.org/wiki/EPEL">EPEL</a> repositories.
+<p>OSG software depends on packages distributed via the <a href="https://fedoraproject.org/wiki/EPEL">EPEL</a> repositories.
 You must install and enable these first.</p>
 <ul>
 <li>
@@ -2461,21 +2498,42 @@ otherwise, you might have dependency resolution ("depsolving") issues.</p>
 <p>This document assumes a fresh install.
 For instructions on upgrading from one OSG series to another, see the
 <a href="../../release/release_series#updating-from-old">release series document</a>.</p>
-<p>Install the OSG repositories:</p>
-<div class="codehilite"><pre><span></span><span class="gp">#</span><span class="c1"># EPEL 6 (For RHEL 6, CentOS 6, and SL 6)</span>
-<span class="gp">root@host #</span> yum install https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm
-<span class="gp">#</span><span class="c1"># EPEL 7 (For RHEL 7, CentOS 7, and SL 7)</span>
-<span class="gp">root@host #</span> yum install https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm
+<ol>
+<li>
+<p>Install the OSG repository for your OS version and the <a href="../../release/release_series">OSG release series</a> that you wish to
+   use:</p>
+<ul>
+<li>
+<p>OSG 3.5 EL7:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install https://repo.opensciencegrid.org/osg/3.5/osg-3.5-el7-release-latest.rpm
 </pre></div>
 
 
+</li>
+<li>
+<p>OSG 3.4 EL7:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm
+</pre></div>
+
+
+</li>
+<li>
+<p>OSG 3.4 EL6:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm
+</pre></div>
+
+
+</li>
+</ul>
+</li>
+<li>
 <p>The only OSG repository enabled by default is the release one.
-If you want to <a href="#repositories">enable another one</a> (e.g. <code>osg-testing</code>), then edit its file
-(e.g. <code>/etc/yum.repos.d/osg-testing.repo</code>) and change the <code>enabled</code> option from 0 to 1:</p>
+   If you want to <a href="#repositories">enable another one</a> (e.g. <code>osg-testing</code>), then edit its file
+   (e.g. <code>/etc/yum.repos.d/osg-testing.repo</code>) and change the <code>enabled</code> option from 0 to 1:</p>
 <div class="codehilite"><pre><span></span>[osg-testing]
 name=OSG Software for Enterprise Linux 7 - Testing - $basearch
-#baseurl=https://repo.opensciencegrid.org/osg/3.4/el7/testing/$basearch
-mirrorlist=https://repo.opensciencegrid.org/mirror/osg/3.4/el7/testing/$basearch
+#baseurl=https://repo.opensciencegrid.org/osg/3.5/el7/testing/$basearch
+mirrorlist=https://repo.opensciencegrid.org/mirror/osg/3.5/el7/testing/$basearch
 failovermethod=priority
 priority=98
 <span class="hll">enabled=1
@@ -2484,6 +2542,8 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
 </pre></div>
 
 
+</li>
+</ol>
 <h2 id="optional-configuration">Optional Configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h2>
 <h3 id="enable-automatic-security-updates">Enable automatic security updates<a class="headerlink" href="#enable-automatic-security-updates" title="Permanent link">&para;</a></h3>
 <p>For production services, we suggest only changing software versions during controlled downtime.

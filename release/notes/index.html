@@ -1149,6 +1149,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#osg-35" title="OSG 3.5" class="md-nav__link">
+    OSG 3.5
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#osg-34" title="OSG 3.4" class="md-nav__link">
     OSG 3.4
   </a>
@@ -1176,10 +1183,46 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-2" type="checkbox" id="nav-10-2">
     
     <label class="md-nav__link" for="nav-10-2">
-      3.4 Release Notes
+      3.5 Release Notes
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
       <label class="md-nav__title" for="nav-10-2">
+        3.5 Release Notes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../3.5/release-3-5-0/" title="OSG Release 3.5.0" class="md-nav__link">
+      OSG Release 3.5.0
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-3" type="checkbox" id="nav-10-3">
+    
+    <label class="md-nav__link" for="nav-10-3">
+      3.4 Release Notes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-10-3">
         3.4 Release Notes
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1973,11 +2016,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
     
     <label class="md-nav__link" for="nav-11">
-      Monitoring
+      Deprecated
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
       <label class="md-nav__title" for="nav-11">
-        Monitoring
+        Deprecated
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -2068,6 +2111,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#osg-35" title="OSG 3.5" class="md-nav__link">
+    OSG 3.5
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#osg-34" title="OSG 3.4" class="md-nav__link">
     OSG 3.4
   </a>
@@ -2094,12 +2144,38 @@
                 
                 
                 <h1 id="release-notes">Release Notes<a class="headerlink" href="#release-notes" title="Permanent link">&para;</a></h1>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The 3.3 series was <a href="https://opensciencegrid.org/technology/policy/release-series/#life-cycle-dates">end-of-lifed in May 2018</a>.
-Please <a href="../../release/release_series/#updating-from-osg-31-32-33-to-34">upgrade to the 3.4 series</a> at your earliest convenience.</p>
-</div>
-<h3 id="osg-34">OSG 3.4<a class="headerlink" href="#osg-34" title="Permanent link">&para;</a></h3>
+<p>This page contains links to detailed notes for release in the currently supported
+<a href="../../release/release_series">OSG release series</a>.
+For our policy on release series support, please consult
+<a href="https://opensciencegrid.org/technology/policy/release-series/">this page</a>.</p>
+<h2 id="osg-35">OSG 3.5<a class="headerlink" href="#osg-35" title="Permanent link">&para;</a></h2>
+<p><strong>Supported OS Versions:</strong> EL7</p>
+<p>The OSG 3.5 release series introduces HTCondor 8.8 and 8.9, available in <code>osg-release</code> and <code>osg-upcoming</code>, respectively.
+It also drops support for the RSV monitoring probes, CREAM CEs, and Enterprise Linux 6.
+See the initial <a href="../../release/3.5/release-3-5-0">OSG 3.5.0 release notes</a> for additional details.</p>
+<p>To update to the OSG 3.5 series, please consult the page on
+<a href="../../release/release_series#updating-to-osg-35">updating between release series</a>.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Version</th>
+<th align="left">Date</th>
+<th align="left">Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="../../release/3.5/release-3-5-0">3.5.0</a></td>
+<td align="left">2019-08-30</td>
+<td align="left">CVMFS 2.6.2, HTCondor 8.8.4, XCache 1.1.1, OSG XRootD 3.5, OSG Configure 3.0.0, XRootD LCMAPS 1.7.4, XRootD HDFS 2.1.6; Upcoming: HTCondor 8.9.2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="osg-34">OSG 3.4<a class="headerlink" href="#osg-34" title="Permanent link">&para;</a></h2>
+<p><strong>Supported OS Versions:</strong> EL7, EL6</p>
+<p>With the release of OSG 3.5.0 in August 2019, the end-of-life dates have been set for OSG 3.4 per our
+<a href="https://opensciencegrid.org/technology/policy/release-series/">policy</a>:
+regular support will end in <strong>February 2020</strong> and critical bug/security support will end in <strong>November 2020</strong>.</p>
 <table>
 <thead>
 <tr>
@@ -2446,13 +2522,13 @@ Please <a href="../../release/release_series/#updating-from-osg-31-32-33-to-34">
           </a>
         
         
-          <a href="../3.4/release-3-4-34/" title="OSG Release 3.4.34" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../3.5/release-3-5-0/" title="OSG Release 3.5.0" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                OSG Release 3.4.34
+                OSG Release 3.5.0
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
