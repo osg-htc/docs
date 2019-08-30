@@ -31,7 +31,7 @@ In addition to the packages that were carried over from [OSG 3.4.33](/release/3.
 this release contains the following package updates:
 
 -   HTCondor 8.8.4: The current HTCondor [stable release](https://htcondor.readthedocs.io/en/v8_8_4/version-history/stable-release-series-88.html).
-    See the [manual upgrade instructions](/release/release_series#updating-to-htcondor-8.8.x) before
+    See the [manual update instructions](/release/release_series#updating-to-htcondor-8.8.x) before
     updating to this version.
 -   CVMFS 2.6.2: A [bug fix release](https://cvmfs.readthedocs.io/en/2.6/cpt-releasenotes.html).
     Note the upgrade recommendations from the developers:
@@ -51,7 +51,7 @@ this release contains the following package updates:
 -   XCache 1.1.1: This release includes packages for ATLAS and CMS XCaches as well as Stash Origin HTTP/S support.
 -   OSG Configure 3.0.0: A [major version release](https://github.com/opensciencegrid/osg-configure/releases/tag/v3.0.0),
     including changes from the OSG Configure 2.4 series and dropping some deprecated features.
-    See the [manual upgrade instructions](/release/release_series#updating-to-osg-configure-3) before updating to this
+    See the [manual update instructions](/release/release_series#updating-to-osg-configure-3) before updating to this
     version.
 -   OSG XRootD 3.5: A meta-package including common configuration across [standalone](/data/xrootd/install-standalone),
     [storage element](/data/xrootd/install-storage-element), and [caching](/data/stashcache/overview) installations of
