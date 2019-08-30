@@ -9,6 +9,8 @@ Summary of changes
 
 This initial release of the OSG 3.5 release series is based on the packages available in
 [OSG 3.4.33](/release/3.4/release-3-4-33#) with some [additions](#package-updates) and [subtractions](#package-removals).
+Additionally, the contents of the [upcoming repository](/release/release_series#osg-upcoming) have been emptied
+of packages related to OSG 3.4 and replaced with packages for OSG 3.5.
 Other notable changes in this release series include dropping support for Enterprise Linux 6 and
 [CREAM CEs](https://opensciencegrid.org/technology/policy/cream-support/).
 
