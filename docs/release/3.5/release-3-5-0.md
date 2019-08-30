@@ -91,7 +91,7 @@ The following packages are obsolete and have been removed from the OSG 3.5 Yum r
 
 - autopyfactory
 - CREAM packages:
-    - glite-ce-cream-client-api-c
+    - glite-ce-cream-client-api-c (replaced by an empty package to ease updates to 3.5)
     - glite-ce-wsdl
     - glite-build-common-cpp
 - PerfSONAR client tools:
@@ -104,7 +104,7 @@ The following packages are obsolete and have been removed from the OSG 3.5 Yum r
 - osg-control
 - osg-version
 - osg-vo-map
-- rsv
+- rsv (replaced by an empty package to ease updates to 3.5)
 - xacml
 
 Known Issues
