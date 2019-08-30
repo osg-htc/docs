@@ -30,7 +30,8 @@ To update to the OSG 3.5 release series, please consult the page on
 In addition to the packages that were carried over from [OSG 3.4.33](/release/3.4/release-3-4-33#),
 this release contains the following package updates:
 
--   HTCondor 8.8.4: See the [manual upgrade instructions](/release/release_series#updating-to-htcondor-8.8.x) before
+-   HTCondor 8.8.4: The current HTCondor [stable release](https://htcondor.readthedocs.io/en/v8_8_4/version-history/stable-release-series-88.html).
+    See the [manual upgrade instructions](/release/release_series#updating-to-htcondor-8.8.x) before
     updating to this version.
 -   CVMFS 2.6.2: A [bug fix release](https://cvmfs.readthedocs.io/en/2.6/cpt-releasenotes.html).
     Note the upgrade recommendations from the developers:
@@ -48,7 +49,8 @@ this release contains the following package updates:
     See the known issue with this version [below](#known-issues).
 
 -   XCache 1.1.1: This release includes packages for ATLAS and CMS XCaches as well as Stash Origin HTTP/S support.
--   OSG Configure 3.0.0: A [major version release](https://github.com/opensciencegrid/osg-configure/releases/tag/v3.0.0).
+-   OSG Configure 3.0.0: A [major version release](https://github.com/opensciencegrid/osg-configure/releases/tag/v3.0.0),
+    including changes from the OSG Configure 2.4 series and dropping some deprecated features.
     See the [manual upgrade instructions](/release/release_series#updating-to-osg-configure-3) before updating to this
     version.
 -   OSG XRootD 3.5: A meta-package including common configuration across [standalone](/data/xrootd/install-standalone),
@@ -57,6 +59,12 @@ this release contains the following package updates:
 -   XRootD LCMAPS 1.7.4: includes default authorization configuration in `/etc/xrootd/config.d/40-xrootd-lcmaps.cfg`.
     To use the default configuration, uncomment the `# set EnableLcmaps = 1` line in `/etc/xrootd/config.d/10-xrootd-lcmaps.cfg`.
 -   XRootD HDFS 2.1.6: includes default configuration in `/etc/xrootd/40-xrootd-hdfs.cfg`.
+-   MyProxy 6.2.4: Remove usage statistics collection support
+-   [CCTools 7.0.14](http://ccl.cse.nd.edu/software/): Bug fix release
+-   OSG System Profiler 1.4.3: Remove collection of obsolete information
+    See the known issue with this version [below](#known-issues).
+-   Upcoming repository:
+    - HTCondor 8.9.2: The current HTCondor [development release](https://htcondor.readthedocs.io/en/v8_9_2/version-history/development-release-series-89.html)
 
 These
 [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.5.0%20)
@@ -102,8 +110,11 @@ The following packages are obsolete and have been removed from the OSG 3.5 Yum r
 Known Issues
 ------------
 
-CVMFS 2.6.2 has a known memory leak when using an `/etc/hosts` file with lines only containing whitespace
+- CVMFS 2.6.2 has a known memory leak when using an `/etc/hosts` file with lines only containing whitespace
 ([CVM-1796](https://sft.its.cern.ch/jira/browse/CVM-1796))
+- OSG System Profiler verifies all installed packages, which may result in
+[excessively long run times](https://opensciencegrid.atlassian.net/browse/SOFTWARE-3804).
+
 
 Updating to the New Release
 ---------------------------
