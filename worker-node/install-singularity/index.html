@@ -2461,7 +2461,7 @@ requiring the <code>--net=host</code> option in Docker).</p>
 unprivileged user and verify that singularity in OASIS works:</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@host $</span> /cvmfs/oasis.opensciencegrid.org/mis/singularity/bin/singularity <span class="se">\</span>
                 <span class="nb">exec</span> --contain --ipc --pid --bind /cvmfs <span class="se">\</span>
-                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 <span class="se">\</span>
+                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el6:latest <span class="se">\</span>
                 ps -ef
 <span class="go">WARNING: Container does not have an exec helper script, calling &#39;ps&#39; directly</span>
 <span class="go">UID        PID  PPID  C STIME TTY          TIME CMD</span>
@@ -2563,7 +2563,7 @@ Red Hat when they are discovered.</p>
 <p>After singularity is installed, as an ordinary user run the following
 command to verify it:</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@host $</span> singularity <span class="nb">exec</span> --contain --ipc --pid --bind /cvmfs <span class="se">\</span>
-                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 <span class="se">\</span>
+                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el6:latest <span class="se">\</span>
                 ps -ef
 <span class="go">WARNING: Container does not have an exec helper script, calling &#39;ps&#39; directly</span>
 <span class="go">UID        PID  PPID  C STIME TTY          TIME CMD</span>
