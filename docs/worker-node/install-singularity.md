@@ -155,7 +155,7 @@ unprivileged user and verify that singularity in OASIS works:
 ```console
 user@host $ /cvmfs/oasis.opensciencegrid.org/mis/singularity/bin/singularity \
                 exec --contain --ipc --pid --bind /cvmfs \
-                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 \
+                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el6:latest \
                 ps -ef
 WARNING: Container does not have an exec helper script, calling 'ps' directly
 UID        PID  PPID  C STIME TTY          TIME CMD
@@ -263,7 +263,7 @@ command to verify it:
 
 ```console
 user@host $ singularity exec --contain --ipc --pid --bind /cvmfs \
-                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 \
+                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el6:latest \
                 ps -ef
 WARNING: Container does not have an exec helper script, calling 'ps' directly
 UID        PID  PPID  C STIME TTY          TIME CMD
