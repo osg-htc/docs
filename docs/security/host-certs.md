@@ -107,7 +107,7 @@ root@host # yum install osg-pki-tools
     Additional options and descriptions can be found [here](https://github.com/opensciencegrid/osg-pki-tools#options).
 
 1. Find your institution-specific InCommon contact
-   (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/division-of-information-technology/strategic-operations-departments-people/cybersecurity/security-tools-software/server-certificates)
+   (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/division-of-information-technology/strategic-operations-departments-people/cybersecurity/security-tools-software/server-certificates))
    submit the CSR that you generated above, and request a 1-year `IGTF Server Certificate` for `OTHER` server software.
 1. After the certificate has been issued by your institution, download the host certificate only (not the full chain) to
    its intended host and copy over the key you generated above.
