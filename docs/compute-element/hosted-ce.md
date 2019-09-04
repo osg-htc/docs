@@ -1,10 +1,6 @@
 Requesting an OSG Hosted CE
 ===========================
 
-
-Introduction
-------------
-
 An OSG Hosted Compute Element (CE) is the entry point for jobs coming from the OSG;
 it handles authorization and delegation of jobs to your existing campus HPC/HTC cluster.
 
@@ -102,13 +98,13 @@ Providing the OSG Worker Node client (HTCondor batch systems only)
 
 All OSG sites need to provide the OSG Worker Node Client on each worker node in the cluster.
 This is normally handled by OSG staff for a Hosted CE, but requires shared home directories across the cluster.
+
 However, for sites with an HTCondor batch system, often there is no shared filesystem set up.
-If it is easier for your site to install and maintain the Worker Node Client on each worker node than to set up a shared file system, you have the following options:
+If you run an HTCondor site and it is easier to install and maintain the Worker Node Client on each worker node than to
+set up and maintain shared file system, you have the following options:
 
 -   Install the [Worker Node Client from RPM](/worker-node/install-wn)
-
 -   Install the [Worker Node Client from tarball](/worker-node/install-wn-tarball)
-
 -   Install the Worker Node Client from [OASIS](/worker-node/install-wn-oasis)
 
 

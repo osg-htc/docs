@@ -110,6 +110,6 @@ at all.
 <!-- TODO: these figures were all garbage.  Redraw
 ## Example Configurations
 This section contains a few example that illustrate how the different elements contributing to an OSG site can be
-combined. Each %GRAY%gray%ENDCOLOR% box represents a physical resource or virtual machine that is required in the
+combined. Each gray box represents a physical resource or virtual machine that is required in the
 example.
 -->

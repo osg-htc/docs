@@ -70,7 +70,7 @@ DataFederations:
   StashCache:
     Namespaces:
       /astro/PUBLIC:
-        - ANY
+        - PUBLIC
     AllowedCaches:
       - ANY
     AllowedOrigins:
@@ -89,13 +89,13 @@ The list will contain one or more of these:
 
 - `FQAN:<VOMS FQAN>` allows someone using a proxy with the specified VOMS FQAN
 - `DN:<DN>` allows someone using a proxy with that specific DN
-- `ANY` allows anyone; this is used for public data
+- `PUBLIC` allows anyone; this is used for public data
 
 A complete declaration looks like:
 ```yaml
     Namespaces:
       /astro/PUBLIC:
-        - ANY
+        - PUBLIC
       /astro/PROTECTED:
         - FQAN:/Astro
         - DN:/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=People/CN=Matyas Selmeci

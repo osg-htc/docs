@@ -2,7 +2,7 @@ Registering in the OSG
 ======================
 
 The OSG keeps a registry containing active projects, virtual organizations (VOs), resources, and resource
-downtimes stored as as [YAML files](https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html)
+downtimes stored as [YAML files](https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html)
 in the [topology GitHub repository](https://github.com/opensciencegrid/topology/).
 This registry is used for [accounting data](https://gracc.opensciencegrid.org), contact information, and resource
 availability, particularly if your site is part of the [World LHC Computing Grid](http://wlcg.web.cern.ch/) (WLCG).
@@ -51,12 +51,12 @@ See the full list of services that should be registered in the OSG topology
 
 OSG resources are stored under a hierarchy of facilities, sites, and resource groups, defined as follows:
 
-| Level          | Definition                                                                                                                                                             |
-|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Facility       | The institution or company where your resource is located, e.g. `University of Wisconsin`                                                                              |
-| Site           | Smaller than a facility; typically represents an academic department, research group, or a computing center, e.g. `CHTC` for the Center for High Throughput Computing. |
-| Resource Group | A logical grouping of resources, e.g. you may group together resources that serve your Slurm cluster under a resource group named `CHTC-Slurm-HPC`                     |
-| Resource       | A host that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts. A resource may provide more than one service.                        |
+| Level          | Definition                                                                                                                                                                    |
+|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Facility       | The institution or company where your resource is located, e.g. `University of Wisconsin`                                                                                     |
+| Site           | Smaller than a facility; typically represents an academic department, research group, or a computing center, e.g. `CHTC` for the Center for High Throughput Computing.        |
+| Resource Group | A logical grouping of resources at a site. Production and testing resources must be placed into separate Resource Groups.                                                     |
+| Resource       | A host belonging to a resource group that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts. A resource may provide more than one service. |
 
 OSG resources are stored in the GitHub repository as YAML files under a directory structure that reflects the above
 hierarchy, i.e. `topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml` from the
@@ -77,8 +77,12 @@ host to avoid any duplicate registrations:
     - **If the search doesn't return any results**, skip to [these instructions](#new-resources) for registering a new
       resource.
     - **If the search returns a single YAML file**, open the link to the YAML file and skip to
-      [these instructions](#modifying-existing-resources) for modifying an existing resources.
+      [these instructions](#modifying-existing-resources) for modifying existing resources.
     - **If the search returns more than one YAML file**, please [contact us](#getting-help).
+
+    !!! note
+        If you are adding a new service to a host which is already registered as a resource,
+        follow the [instructions](#modifying-existing-resources) for modifying existing resources.
 
 ### New resources ###
 
@@ -140,6 +144,9 @@ To modify an existing resource, follow these instructions:
    You may leave any `ID` or `GroupID` fields blank.
    Make sure that the formatting and indentation of the modified entry does not change.
 
+   If you are adding a new service to a host that is already registered as a resource,
+   add the new service to the existing resource; do not create a new resource for the same host.
+
     !!! note ""You're editing a file in a project you don't have write access to.""
         If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
         access to the OSG copy of the topology data, which is why you are creating a pull request.
@@ -150,31 +157,24 @@ To modify an existing resource, follow these instructions:
 
 ### Retiring resources ###
 
-To retire an already registered resource, choose one of the following, depending on the resource's service(s):
+To retire an already registered resource, set `Active: false`. For example:
 
-- If the resource contains a `CE` (Compute Element) or `Submit Node` (GlideinWMS frontend) service, set `Active: false`
-  within resource group's YAML file.
-  For example, to remove the resource GLOW, edit the file `topology/University of Wisconsin/GLOW/GLOW.yaml`, setting
-  `Active: false`:
+``` hl_lines="5"
+...
+Production: true
+Resources:
+  GLOW:
+    Active: false
+    ...
+    Services:
+      CE:
+        Description: Compute Element
+        Details:
+          hidden: false
+```
 
-        ...
-        Production: true
-        Resources:
-          GLOW:
-            Active: %RED%false%ENDCOLOR%
-            ...
-            Services:
-              CE:
-                Description: Compute Element
-                Details:
-                  hidden: false
-
-    You may have to add the `Active` attribute it if does not already exist within the resource definition.
-
-- If the resource does not contain a `CE` (Compute Element) or OSG submitter service, you may remove the resource
-  completely.
-  If there are no more resources in the resource group, you may remove the entire resource group file.
-
+If the `Active` attribute does not already exist within the resource definition, add it.
+If your resource becomes available again, set `Active: true`.
 
 Registering Resource Downtimes
 ------------------------------
@@ -182,9 +182,9 @@ Registering Resource Downtimes
 Resource downtime is a finite period of time for which one or more of the grid services of a registered resource are
 unavailable.
 
-!!! note
-    If your registered resource is expected to be in downtime for an undetermined amount of time, set `Active: False`
-    in the resource instead.
+!!! warning
+    If you expect your resource to be indefinitely unavailable, [retire the resource](#retiring-resources) instead of
+    registering a downtime.
 
 Downtimes are stored in YAML files alongside the resource group YAML files as described [here](#registering-resources).
 
@@ -193,7 +193,7 @@ Wisconsin` can be found and registered in the following file, relative to the
 [root of the topology repository](https://github.com/opensciencegrid/topology/tree/master/):
 
 ```
-topology/University of Wisconsin/CHTC/CHTC-Slurm-HPC_downtime.yaml`
+topology/University of Wisconsin/CHTC/CHTC-Slurm-HPC_downtime.yaml
 ```
 
 !!! note 

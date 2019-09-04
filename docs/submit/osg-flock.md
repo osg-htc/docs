@@ -3,7 +3,7 @@ Configuring a submit host to flock to OSG
 
 If you have a HTCondor submit node on your campus, it can be configured
 to spill over onto available resources on the Open Science Grid. In
-HTCondor terms this is called [flocking](https://research.cs.wisc.edu/htcondor/manual/latest/ConnectingHTCondorPoolswithFlocking.html)
+HTCondor terms this is called [flocking](https://htcondor.readthedocs.io/en/stable/grid-computing/connecting-pools-with-flocking.html)
 
 If you are interested in this solution, please open a
 [new ticket](https://support.opensciencegrid.org/helpdesk/tickets/new) with the hostname.
@@ -40,7 +40,7 @@ Gratia Probe Configuration
 1. Copy over the recommended probe configuration:
 
         :::console
-        root@host # cp /etc/gratia/condor/Probeconfig-flocking /etc/gratia/condor/Probeconfig
+        root@host # cp /etc/gratia/condor/ProbeConfig-flocking /etc/gratia/condor/ProbeConfig
 
 1. Fill in the values for `ProbeName` and `SiteName` with the hostname and Topology resource name, respectively. For example:
 

@@ -12,7 +12,7 @@ This document is intended for System Administrators who are installing
 `frontier-squid`, the OSG distribution of the Frontier Squid software.
 
 !!! note "Applicable versions"
-    This document applies to software from the OSG 3.4 Release Series.
+    This document applies to software from the OSG 3.5 and 3.4 Release Series.
     The version of frontier-squid installed should be >= 3.5.24-3.1.
     When using OSG software from a previous Release Series (eg, OSG 3.3)
     and a frontier-squid version in the 2.7STABLE9 series, refer to the
@@ -121,15 +121,15 @@ Start the frontier-squid service and enable it to start at boot time. As a remin
 ## Validating Frontier Squid
 
 As any user on another computer, do the following (where
-`%RED%my.squid.host.edu%ENDCOLOR%` is the fully qualified domain name of your
+`<MY.SQUID.HOST.EDU>` is the fully qualified domain name of your
 squid server):
 
-``` console
-user@host $ export http_proxy=http://%RED%my.squid.host.edu%ENDCOLOR%:3128
+``` console hl_lines="1"
+user@host $ export http_proxy=http://`<MY.SQUID.HOST.EDU>`:3128
 user@host $ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep X-Cache
-X-Cache: MISS from %RED%my.squid.host.edu%ENDCOLOR%
+X-Cache: MISS from `<MY.SQUID.HOST.EDU>`
 user@host $ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep X-Cache
-X-Cache: HIT from %RED%my.squid.host.edu%ENDCOLOR%
+X-Cache: HIT from `<MY.SQUID.HOST.EDU>`
 ```
 
 If the grep doesn't print anything, try removing it from the pipeline
@@ -161,7 +161,7 @@ To register your Frontier Squid host, follow the general registration instructio
     Replacing `<FULLY QUALIFIED DOMAIN NAME>` with your Frontier Squid server's DNS entry or in the case of multiple
     Frontier Squid servers for a single resource, the round-robin DNS entry.
 
-    See the [BNL_ATLAS_Frontier_Squid](https://github.com/opensciencegrid/topology/blob/master/topology/Brookhaven%20National%20Laboratory/Brookhaven%20ATLAS%20Tier1/BNL-ATLAS.yaml#L306-L325) 
+    See the [BNL_ATLAS_Frontier_Squid](https://github.com/opensciencegrid/topology/blob/80e482279b10c7b13fc7688c71833c14ebdc1b50/topology/Brookhaven%20National%20Laboratory/Brookhaven%20ATLAS%20Tier1/BNL-ATLAS.yaml#L298-L318) 
     for a complete example.
 
 2.  If you are setting up a new resource, set `Active: false`.

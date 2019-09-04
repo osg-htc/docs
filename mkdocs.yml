@@ -29,7 +29,7 @@ pages:
   - 'Install Singularity': 'worker-node/install-singularity.md'
   - 'Using WN Containers': 'worker-node/using-wn-containers.md'
 - Data:
-  - HTTP & CVMFS:
+  - HTTP & OASIS:
     - 'Install Squid HTTP Cache': 'data/frontier-squid.md'
     - 'Update OASIS Shared Repo': 'data/update-oasis.md'
     - 'Install an OASIS Repo': 'data/external-oasis-repos.md'
@@ -72,7 +72,17 @@ pages:
   - 'Install Transfer Log Filebeats': 'other/schedd-filebeats.md'
 - Release Information:
   - 'Release Note Overview': 'release/notes.md'
+  - 3.5 Release Notes:
+    - OSG Release 3.5.0: 'release/3.5/release-3-5-0.md'
   - 3.4 Release Notes:
+    - 'OSG Release 3.4.34': 'release/3.4/release-3-4-34.md'
+    - 'OSG Release 3.4.33': 'release/3.4/release-3-4-33.md'
+    - 'OSG Release 3.4.32': 'release/3.4/release-3-4-32.md'
+    - 'OSG Release 3.4.31-2': 'release/3.4/release-3-4-31-2.md'
+    - 'OSG Release 3.4.31': 'release/3.4/release-3-4-31.md'
+    - 'OSG Release 3.4.30-2': 'release/3.4/release-3-4-30-2.md'
+    - 'OSG Release 3.4.30': 'release/3.4/release-3-4-30.md'
+    - 'OSG Release 3.4.29-2': 'release/3.4/release-3-4-29-2.md'
     - 'OSG Release 3.4.29': 'release/3.4/release-3-4-29.md'
     - 'OSG Release 3.4.28-2': 'release/3.4/release-3-4-28-2.md'
     - 'OSG Release 3.4.28': 'release/3.4/release-3-4-28.md'
@@ -129,7 +139,7 @@ pages:
   - 'Supported Platforms': 'release/supported_platforms.md'
   - 'Yum Basics': 'release/yum-basics.md'
   - 'RPM Signing': 'release/signing.md'
-- Monitoring:
+- Deprecated:
   - 'Install RSV': 'monitoring/install-rsv.md'
   - 'Advanced RSV Configuration': 'monitoring/advanced-rsv-configuration.md'
   - 'Manage RSV via rsv-control': 'monitoring/rsv-control.md'
@@ -138,7 +148,7 @@ pages:
 
 markdown_extensions:
   - admonition
-  - codehilite
+  - codehilite:
+      guess_lang: False
   - toc:
-     permalink: True
-  - osg_markdown.colors
+      permalink: True

@@ -174,7 +174,7 @@ Next decide at what location to install the Certificate Authority Package:
 The Certificate Authority Package is preferably be used by grid users without root privileges *or* if the CA certificates will not be shared by other installations on the same host.
 
 ``` console
-root@host # osg-ca-manage setupca --location %RED%root%ENDCOLOR% --url osg
+root@host # osg-ca-manage setupca --location root --url osg
 Setting CA Certificates for at '/etc/grid-security/certificates'
 
 Setup completed successfully.
@@ -185,7 +185,7 @@ After a successful installation the certificates will be installed in (`/etc/gri
 If you need to need to install it with out root privileges use
 
 ``` console
-user@host $ osg-ca-manage setupca --location %RED%$HOME/certificates%ENDCOLOR% --url osg
+user@host $ osg-ca-manage setupca --location $HOME/certificates --url osg
 Setting CA Certificates for at '$HOME/certificates'
 
 Setup completed successfully.

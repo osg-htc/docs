@@ -46,20 +46,6 @@ The following section describes the steps required to configure the LCMAPS VOMS 
 Additionally, there are [optional configuration](#optional-configuration) instructions if you need to make changes to
 the default mappings, or migrate from edg-mkgridmap or GUMS.
 
-
-### Enabling the LCMAPS VOMS plugin
-
-To configure your host to use LCMAPS VOMS plugin authentication, edit `/etc/osg/config.d/10-misc.ini` and set the
-following options:
-
-``` ini
-edit_lcmaps_db = True
-authorization_method = vomsmap
-```
-
-If the `glexec_location` option is present, you must comment it out or set it to `UNAVAILABLE`.
-The LCMAPS VOMS plugin does not work with gLExec.
-
 ### Supporting mapped VOs and users
 
  Ensure Unix accounts exist for each VO, VO role, VO group, or user you choose to support in the [mapfiles](#configuration-files):
@@ -67,7 +53,7 @@ The LCMAPS VOMS plugin does not work with gLExec.
 1.  Consult the default VO mappings in `/usr/share/osg/voms-mapfile-default` to determine the mapped Unix account names.
     Each of the mapfiles has the following format:
 
-        "%RED%<VO, VO role, VO group or user>%ENDCOLOR%" %RED%<Unix account>%ENDCOLOR%
+        "<VO, VO role, VO group or user>" <Unix account>
 
 
 1.  Create Unix accounts for each VO, VO role, VO group, and user that you wish to support.
@@ -84,9 +70,6 @@ The LCMAPS VOMS plugin does not work with gLExec.
     | [Fermilab](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/Fermilab.yaml) | `fnalgrid`          |
     | [HCC](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/HCC.yaml)           | `hcc`               |
     | [Gluex](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/Gluex.yaml)       | `gluex`             |
-
-    Additionally, it is also recommended to create the `mis` Unix account,
-    which is used by OSG staff to assist with troubleshooting.
 
 1.  Edit `/etc/osg/config.d/30-gip.ini` and specify the supported VOs per [Subcluster or ResourceEntry section](/other/configuration-with-osg-configure#subcluster-resource-entry):
 
@@ -177,7 +160,7 @@ To migrate from edg-mkgridmap to the LCMAPS VOMS plugin, perform the following p
     !!! warning
         In the output from this command, yum should **not** list other packages than the one.
         If it lists other packages, cancel the erase operation, make sure the other packages are updated to their latest
-        OSG 3.4 versions (they should have ".osg34" in their versions), and try again.
+        OSG 3.5 versions (they should have ".osg35" in their versions), and try again.
 
 #### Migrating from GUMS
 
@@ -301,9 +284,6 @@ If you want to consider all FQANs, you must set the appropriate option.
 
 -   If you are using osg-configure, set `all_fqans = True` in `10-misc.ini`, then run `osg-configure -c`
 
-    !!! note
-        If you are using OSG 3.4, osg-configure should be at least version 2.2.2.
-
 -   If you are configuring `lcmaps.db` manually (see [manual configuration](#manual-configuration) below),
     add `"-all-fqans"` to the module definitions for `vomsmapfile` and `defaultmapfile`
 
@@ -328,7 +308,7 @@ To validate the LCMAPS VOMS plugin by itself, use the following procedure to tes
 1.  As an unprivileged user, create a VOMS proxy (filling in `<YOUR_VO>` with a VO you are a member of):
 
         :::console
-        user@host $ voms-proxy-init -voms %RED%<YOUR_VO>%ENDCOLOR%
+        user@host $ voms-proxy-init -voms <YOUR_VO>
 
 1.  Verify that your credentials are mapped as expected:
 
@@ -383,12 +363,15 @@ If you are troubleshooting an XRootD host, follow these instructions to raise th
     | Standalone mode                 | `/etc/xrootd/xrootd-standalone.cfg` |
     | Clustered mode                  | `/etc/xrootd/xrootd-clustered.cfg`  |
 
-1. Set `--loglevel,5` under the `-authzfunparms` of the `sec.protocol /usr/lib64 gsi` line. For example:
+1. Set `--loglevel=5` under the `-authzfunparms` of the `sec.protocol /usr/lib64 gsi` line. For example:
 
+        :::file hl_lines="6"
         sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
                     -cert:/etc/grid-security/xrootd/xrootdcert.pem \
-                    -key:/etc/grid-security/xrootd/xrootdkey.pem -crl:1 \
-                    -authzfun:libXrdLcmaps.so -authzfunparms:%RED%--loglevel,5%ENDCOLOR% \
+                    -key:/etc/grid-security/xrootd/xrootdkey.pem \
+                    -crl:1 \
+                    -authzfun:libXrdLcmaps.so \
+                    -authzfunparms:--lcmapscfg=/etc/xrootd/lcmaps.cfg,--loglevel=5,--policy=authorize_only \
                     -gmapopt:10 -gmapto:0
 
 1. Restart the [xrootd](/data/xrootd/install-storage-element#managing-xrootd-services) service

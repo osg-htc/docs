@@ -1,5 +1,9 @@
-Installing and Maintaining XRootD
-=================================
+Installing an XRootD Storage Element
+====================================
+
+!!!bug "EL7 version compatibility"
+    There is an incompatibility with EL7 < 7.5 due to an issue with the `globus-gsi-proxy-core` package
+
 
 [XRootD](http://xrootd.org/) is a hierarchical storage system that can be used in a variety of ways to access data,
 typically distributed among actual storage resources. 
@@ -40,31 +44,6 @@ root@host # yum install xrootd
 Configuring an XRootD Server
 ----------------------------
 
-### Minimal configuration
-
-A new installation of XRootD is already configured to run a standalone server that serves files from `/tmp` on the local
-file system. 
-This configuration is useful to verify basic connectivity between your clients and your server. 
-To do this, start the `xrootd` service with standalone config as described in the [managing services
-section](#managing-xrootd-services).
-
-You should be able now to copy a file such as `/bin/sh` using `xrdcp` command into `/tmp`. 
-To test, do:
-
-``` console
-root@host # yum install xrootd-client
-root@host # xrdcp /bin/sh root://localhost:1094//tmp/first_test
-[xrootd] Total 0.76 MB  [====================] 100.00 % [inf MB/s]
-root@host # ls -l /tmp/first_test
--rw-r--r-- 1 xrootd xrootd 801512 Apr 11 10:48 /tmp/first_test
-```
-
-Other than for testing, a standalone server is useful when you want to serve files off of a single host with lots of
-large disks. 
-If your storage capacity is spread out over multiple hosts, you will need to set up an XRootD cluster.
-
-### Advanced configuration
-
 An advanced XRootD setup has multiple components; it is important to validate that each additional component that you
 set up is working before moving on to the next component. 
 We have included validation instructions after each component below.
@@ -88,7 +67,7 @@ Note that for large virtual organizations, a site-level redirector may actually 
 or global redirector that handles access to a multi-level hierarchy. 
 This section will only cover handling one level of XRootD hierarchy.
 
-In the instructions below, %RED%RDRNODE%ENDCOLOR% will refer to the redirector host and %RED%DATANODE%ENDCOLOR% will
+In the instructions below, `<RDRNODE>` will refer to the redirector host and `<DATANODE>` will
 refer to the data node host. 
 These should be replaced with the fully-qualified domain name of the host in question.
 
@@ -97,9 +76,9 @@ These should be replaced with the fully-qualified domain name of the host in que
 You will need to modify the `xrootd-clustered.cfg` on the redirector node and each data node. 
 The following example should serve as a base configuration for clustering. Further customizations are detailed below.
 
-``` file
-all.export %RED%/tmp%ENDCOLOR% stage
-set xrdr = %RED%RDRNODE%ENDCOLOR%
+``` file hl_lines="1 2 11"
+all.export /mnt/xrootd stage
+set xrdr = <RDRNODE>
 all.manager $(xrdr):3121
 
 if $(xrdr)
@@ -108,17 +87,17 @@ if $(xrdr)
 else
   # Lines in this block are executed on all nodes but the redirector node
   all.role server
-  cms.space min %RED%2g 5g%ENDCOLOR%
+  cms.space min 2g 5g
 fi
 ```
 
 You will need to customize the following lines:
 
-| Configuration Line                     | Changes Needed                                                                                                                                                                                                                                                                      |
-|:---------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `all.export %RED%/tmp%ENDCOLOR% stage` | Change `/tmp` to the directory to allow XRootD access to                                                                                                                                                                                                                            |
-| `set xrdr=%RED%RDRNODE%ENDCOLOR%`      | Change to the hostname of the redirector                                                                                                                                                                                                                                            |
-| `cms.space min %RED%2g 5g%ENDCOLOR%`   | Reserve this amount of free space on the node. For this example, if space falls below 2GB, xrootd will not store further files on this node until space climbs above 5GB. You can use `k`, `m`, `g`, or `t` to indicate kilobyte, megabytes, gigabytes, or terabytes, respectively. |
+| Configuration Line             | Changes Needed                                                                                                                                                                                                                                                                      |
+|:-------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `all.export /mnt/xrootd stage` | Change `/mnt/xrootd` to the directory to allow XRootD access to                                                                                                                                                                                                                            |
+| `set xrdr=<RDRNODE>`           | Change to the hostname of the redirector                                                                                                                                                                                                                                            |
+| `cms.space min 2g 5g`          | Reserve this amount of free space on the node. For this example, if space falls below 2GB, xrootd will not store further files on this node until space climbs above 5GB. You can use `k`, `m`, `g`, or `t` to indicate kilobyte, megabytes, gigabytes, or terabytes, respectively. |
 
 Further information can be found at <http://xrootd.slac.stanford.edu/doc>
 
@@ -127,14 +106,14 @@ Further information can be found at <http://xrootd.slac.stanford.edu/doc>
 Start both `xrootd` and `cmsd` on all nodes according to the instructions in the [managing services
 section](#ManagingServices).
 
-Verify that you can copy a file such as `/bin/sh` to `/tmp` on the server data via the redirector:
+Verify that you can copy a file such as `/bin/sh` to `/mnt/xrootd` on the server data via the redirector:
 
 ``` console
-root@host # xrdcp /bin/sh  root://%RED%RDRNODE%ENDCOLOR%:1094///tmp/second_test
+root@host # xrdcp /bin/sh  root://<RDRNODE>:1094///mnt/xrootd/second_test
 [xrootd] Total 0.76 MB  [====================] 100.00 % [inf MB/s]
 ```
 
-Check that the `/tmp/second_test` is located on data server %RED%DATANODE%ENDCOLOR%.
+Check that the `/mnt/xrootd/second_test` is located on data server `<DATANODE>`.
 
 ### (Optional) Adding Simple Server Inventory to your cluster
 
@@ -165,19 +144,19 @@ root@host # mkdir -p /data/inventory
 root@host # chown xrootd:xrootd /data/inventory
 ```
 
-On the data server (host B) let's use a storage cache that will be at a different location from `/tmp`. 
+On the data server (host B) let's use a storage cache that will be at a different location from `/mnt/xrootd`. 
 
 ``` console
 root@host # mkdir -p  /local/xrootd
 root@host # chown xrootd:xrootd /local/xrootd
 ```
 
-We will be running two instances of XRootD on %RED%hostA%ENDCOLOR%. 
+We will be running two instances of XRootD on `<HOST A>`.
 Modify `/etc/xrootd/xrootd-clustered.cfg` to give the two instances different behavior, as such:
 
-``` file
+``` file hl_lines="2"
 all.export /data/xrootdfs
-set xrdr=%RED%hostA%ENDCOLOR%
+set xrdr=<HOST A>
 all.manager $(xrdr):3121
 if $(xrdr) && named cns
       all.export /data/inventory
@@ -196,7 +175,7 @@ fi
 ```
 
 The value of `oss.localroot` will be prepended to any file access.  
-E.g. accessing `root://%RED%RDRNODE%ENDCOLOR%:1094//data/xrootdfs/test1` will actually go to
+E.g. accessing `root://<RDRNODE>:1094//data/xrootdfs/test1` will actually go to
 `/local/xrootd/data/xrootdfs/test1`.
 
 #### Starting a second instance of XRootD on EL 6
@@ -204,18 +183,18 @@ E.g. accessing `root://%RED%RDRNODE%ENDCOLOR%:1094//data/xrootdfs/test1` will ac
 The procedure for starting a second instance differs between EL 6 and EL 7. 
 This section is the procedure for EL 6.
 
-Now, we have to change `/etc/sysconfig/xrootd` on the redirector node (%RED%hostA%ENDCOLOR%) to run multiple instances
+Now, we have to change `/etc/sysconfig/xrootd` on the redirector node (`<HOST A>`) to run multiple instances
 of XRootD. 
 The second instance of XRootD will be named "cns" and will be used for SSI.
 
-```file
+```file hl_lines="3 4 5 6 7"
 XROOTD_USER=xrootd 
 XROOTD_GROUP=xrootd 
-XROOTD_DEFAULT_OPTIONS="%RED%-k 7%ENDCOLOR% -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg"
-%RED%XROOTD_CNS_OPTIONS="-k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg"%ENDCOLOR% 
-CMSD_DEFAULT_OPTIONS="%RED%-k 7%ENDCOLOR% -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg" 
-FRMD_DEFAULT_OPTIONS="%RED%-k 7%ENDCOLOR% -l /var/log/xrootd/frmd.log -c /etc/xrootd/xrootd-clustered.cfg" 
-%RED%XROOTD_INSTANCES="default cns"%ENDCOLOR% 
+XROOTD_DEFAULT_OPTIONS="-k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg"
+XROOTD_CNS_OPTIONS="-k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg"
+CMSD_DEFAULT_OPTIONS="-k 7 -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg"
+FRMD_DEFAULT_OPTIONS="-k 7 -l /var/log/xrootd/frmd.log -c /etc/xrootd/xrootd-clustered.cfg"
+XROOTD_INSTANCES="default cns"
 CMSD_INSTANCES="default" 
 FRMD_INSTANCES="default" 
 ```
@@ -225,10 +204,10 @@ On redirector you will see:
 
 ```console
 root@host # service xrootd start 
-Starting xrootd (xrootd, default): %GREEN%[ OK ]%ENDCOLOR% 
-Starting xrootd (xrootd, cns): %GREEN%[ OK ]%ENDCOLOR% 
+Starting xrootd (xrootd, default): [ OK ]
+Starting xrootd (xrootd, cns): [ OK ]
 root@host # service cmsd start 
-Starting xrootd (cmsd, default): %GREEN%[ OK ]%ENDCOLOR% 
+Starting xrootd (cmsd, default): [ OK ]
 ```
 
 On redirector node you should see two instances of xrootd running:
@@ -239,8 +218,8 @@ xrootd 29036 0.0 0.0 44008 3172 ? Sl Apr11 0:00 /usr/bin/xrootd -k 7 -l /var/log
 xrootd 29108 0.0 0.0 43868 3016 ? Sl Apr11 0:00 /usr/bin/xrootd -k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-cns.pid -n cns
 xrootd 29196 0.0 0.0 51420 3692 ? Sl Apr11 0:00 /usr/bin/cmsd -k 7 -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/cmsd-default.pid -n default
 ```
-%RED%Warning%ENDCOLOR% the log file for second named instance of xrootd with be
-placed in `/var/log/xrootd/cns/xrootd.log`
+!!! warning
+    The log file for second named instance of xrootd with be placed in `/var/log/xrootd/cns/xrootd.log`
 
 On data server node you should that XrdCnsd process has been started:
 
@@ -270,10 +249,10 @@ root@host # systemctl start xrootd@cns
 
 #### Testing an XRootD cluster with SSI
 
-1.  Copy file to redirector node specifying storage path (/data/xrootdfs instead of /tmp):
+1.  Copy file to redirector node specifying storage path (/data/xrootdfs instead of /mnt/xrootd):
 
 ```console
-root@host # xrdcp /bin/sh root://%RED%RDRNODE%ENDCOLOR%:1094//data/xrootdfs/test1 
+root@host # xrdcp /bin/sh root://<RDRNODE>:1094//data/xrootdfs/test1
 [xrootd] Total 0.00 MB [================] 100.00 % [inf MB/s] 
 ```
 
@@ -294,7 +273,7 @@ fermicloud054.fnal.gov complete inventory as of Tue Apr 12 07:38:29 2011 /data/x
 
 XRootD can be accessed using the HTTP protocol. To do that:
 
-1.   Modify `/etc/xrootd/xrootd-clustered.cfg` and add the following lines. You will also need to add the configuration regarding [lcmaps authorization](#security-option-3-xrootd-lcmaps-authorization).
+1.  Modify `/etc/xrootd/xrootd-clustered.cfg` and add the following lines.
 
         :::file
            if exec xrootd
@@ -307,7 +286,9 @@ XRootD can be accessed using the HTTP protocol. To do that:
             http.staticpreload http://static/robots.txt /etc/xrootd/robots.txt
             http.desthttps yes
            fi
-  
+
+1. Add [LCMAPS authorization](/data/xrootd/xrootd-authorization) configuration to `/etc/xrootd/xrootd-clustered.cfg`.
+
 1.   Create robots.txt. Add file `/etc/xrootd/robots.txt` with these contents:
 
         :::file
@@ -319,7 +300,7 @@ XRootD can be accessed using the HTTP protocol. To do that:
      From the terminal, generate a proxy and attempt to use davix-get to copy from your XRootD host (the XRootD service needs running; see the [services section](#managing-xrootd-services)).  For example, if your server has a file named `/store/user/test.root`:
    
         :::console
-           davix-get https://%RED%yourHostname%ENDCOLOR%:1094/store/user/test.root -E /tmp/x509up_u`id -u` --capath /etc/grid-security/certificates
+        davix-get https://<YOUR FQDN>:1094/store/user/test.root -E /mnt/xrootd/x509up_u`id -u` --capath /etc/grid-security/certificates
 
 !!! note
     For clients to successfully read from the regional redirector, HTTPS must be enabled for the data servers and the site-level redirector.
@@ -339,7 +320,7 @@ Modify `/etc/fstab` by adding the following entries:
 
     :::file
     ....
-    xrootdfs                %RED%/mnt/xrootd%ENDCOLOR%              fuse    rdr=xroot://%RED%redirector1.domain.com%ENDCOLOR%:1094/%RED%/path/%ENDCOLOR%,uid=xrootd 0 0
+    xrootdfs                /mnt/xrootd              fuse    rdr=xroot://<REDIRECTOR FQDN>:1094/<PATH TO FILE>,uid=xrootd 0 0
 
 
 Replace `/mnt/xrootd` with the path that you would like to access with. 
@@ -370,7 +351,7 @@ configuration:
 
 ``` file
 # Integrate with CMS TFC, placed in /etc/xrootd/storage.xml
-oss.namelib /usr/lib64/libXrdCmsTfc.so file:/etc/xrootd/storage.xml%ORANGE%?protocol=hadoop%ENDCOLOR%
+oss.namelib /usr/lib64/libXrdCmsTfc.so file:/etc/xrootd/storage.xml?protocol=hadoop
 ```
 
 Add the orange text only if you are running hadoop (see below).
@@ -382,19 +363,17 @@ See the CMS TWiki for more information:
 
 ### (Optional) Adding Hadoop support to XRootD
 
-HDFS-based sites should utilize the `xrootd-hdfs` plugin to allow XRootD to access their storage.
+Hadoop File System (HDFS) based sites should utilize the `xrootd-hdfs` plugin to allow XRootD to access their storage:
 
-``` console
-root@host # yum install xrootd-hdfs
-```
+1. Install the XRootD HDFS plugin package:
 
-You will then need to add the following lines to your
-`/etc/xrootd/xrootd-clustered.cfg`:
+        :::console
+        root@host # yum install xrootd-hdfs
 
-``` file
-xrootd.fslib /usr/lib64/libXrdOfs.so
-ofs.osslib /usr/lib64/libXrdHdfs.so
-```
+1. Add the following configuration to `/etc/xrootd/xrootd-clustered.cfg`:
+
+        :::file
+        ofs.osslib /usr/lib64/libXrdHdfs.so
 
 For more information, see [the HDFS installation documents](/data/install-hadoop).
 
@@ -470,7 +449,7 @@ authentication section of the GridFTP guide](/data/gridftp#configuring-authentic
 Edit `/etc/sysconfig/xrootd-dsi` to set `XROOTD_VMP` to use your XRootD redirector.
 
     :::bash
-    export XROOTD_VMP="%RED%redirector:1094:/local_path=/remote_path%ENDCOLOR%"
+    export XROOTD_VMP="redirector:1094:/local_path=/remote_path"
 
 !!! warning
     The syntax of `XROOTD_VMP` is tricky; make sure to use the following guidance:
@@ -504,26 +483,26 @@ On EL 6, which config to use is set in the file `/etc/sysconfig/xrootd`.
 For example, to have `xrootd` use the clustered config, you would have a line such as this:
 
 ``` file
-XROOTD_DEFAULT_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-%RED%clustered%ENDCOLOR%.cfg -k fifo"
+XROOTD_DEFAULT_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -k fifo"
 ```
 
 To use the standalone config instead, you would use:
 
 ``` file
-XROOTD_DEFAULT_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-%RED%standalone%ENDCOLOR%.cfg -k fifo"
+XROOTD_DEFAULT_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-standalone.cfg -k fifo"
 ```
 
 On EL 7, which config to use is determined by the service name given to `systemctl`. 
 For example, to have `xrootd` use the clustered config, you would start up `xrootd` with this line:
 
 ``` console
-root@host # systemctl start xrootd@%RED%clustered%ENDCOLOR%
+root@host # systemctl start xrootd@clustered
 ```
 
 To use the standalone config instead, you would use:
 
 ``` console
-root@host # systemctl start xrootd@%RED%standalone%ENDCOLOR%
+root@host # systemctl start xrootd@standalone
 ```
 
 The services are:

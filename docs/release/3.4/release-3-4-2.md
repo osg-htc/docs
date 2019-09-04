@@ -54,8 +54,6 @@ COLLECTOR.USE_SHARED_PORT=False
 Updating to the new release
 ---------------------------
 
-To update to the OSG 3.4 series, please consult the page on [updating between release series](/release/release_series#updating-from-osg-31-32-33-to-33-or-34).
-
 ### Update Repositories
 
 To update to this series, you need to to [install the current OSG repositories](/common/yum#install-osg-repositories).

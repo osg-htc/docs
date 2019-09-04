@@ -1,7 +1,11 @@
 Configuring XRootD Authorization
 ================================
 
-There are several authorization options in XRootD available through the security plugins. 
+!!!bug "EL7 version compatibility"
+    There is an incompatibility with EL7 < 7.5 due to an issue with the `globus-gsi-proxy-core` package
+
+
+There are several authorization options in XRootD available through its security plugins.
 In this document, we will cover the [`xrootd-lcmaps`](#enabling-xrootd-lcmaps-authorization) security option supported
 in the OSG.
 
@@ -22,26 +26,26 @@ only by the xrootd user, optionally readable by others.
 
 Here is an example `/etc/xrootd/auth_file` :
 
-```file
+```file hl_lines="2 5 8 13 16"
 # This means that all the users have read access to the datasets, _except_ under /private
-u * -rl %RED%/data/xrootdfs%ENDCOLOR%/private %RED%/data/xrootdfs%ENDCOLOR% rl
+u * -rl <STORAGE PATH>/private /data/xrootdfs rl
 
 # Or the following, without a restricted /private dir
-# u * %RED%/data/xrootdfs%ENDCOLOR% rl
+# u * <STORAGE PATH> rl
 
-# This means that all the users have full access to their private dirs
-u = %RED%/data/xrootdfs%ENDCOLOR%/home/@=/ a
+# This means that all the users have full access to their private home dirs
+u = <STORAGE PATH>/home/@=/ a
 
-# This means that this privileged user can do everything
-# You need at least one user like that, in order to create the
+# This means that the privileged 'xrootd' user can do everything
+# There must be at least one such user in order to create the
 # private dirs for users willing to store their data in the facility
-u xrootd %RED%/data/xrootdfs%ENDCOLOR% a
+u xrootd <STORAGE PATH> a
 
-# This means that users in group 'biology' can do anything under this path
-g biology %RED%/data/xrootdfs%ENDCOLOR%/biology a
+# This means that users in group 'biology' can do anything under the 'genomics' directory
+g biology <STORAGE PATH>/genomics a
 ```
 
-Here we assume that your storage path is `/data/xrootdfs`.
+Replacing `<STORAGE PATH>` with the path to the directory that will contain data served by XRootD, e.g. `/data/xrootdfs`.
 This path is relative to the `oss.localroot` or `all.localroot` configuration values, if either one is defined in the
 xrootd config file.
 
@@ -83,7 +87,7 @@ on all data nodes:
 
 1. Install [CA certificates](/common/ca#installing-ca-certificates) and [manage CRLs](/common/ca#installing-ca-certificates#managing-certificate-revocation-lists)
 
-1. Follow the instructions for requesting a [service certificate](/security/host-certs#requesting-and-installing-a-service-certificate),
+1. Follow the instructions for requesting a [service certificate](/security/host-certs#requesting-service-certificates),
    using `xrootd` for both the `<SERVICE>` and `<OWNER>`, resulting in a certificate and key in `/etc/grid-security/xrd/xrdcert.pem`
    and `/etc/grid-security/xrd/xrdkey.pem`, respectively.
 
@@ -110,13 +114,18 @@ on all data nodes:
             xrootd.seclib /usr/lib64/libXrdSec-4.so
             sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
                                 -cert:/etc/grid-security/xrd/xrdcert.pem \
-                                -key:/etc/grid-security/xrd/xrdkey.pem -crl:1 \
-                                -authzfun:libXrdLcmaps.so -authzfunparms:--loglevel,0,--policy,authorize_only \
+                                -key:/etc/grid-security/xrd/xrdkey.pem \
+                                -crl:1 \
+                                -authzfun:libXrdLcmaps.so \
+                                -authzfunparms:lcmapscfg=/etc/lcmaps.db,loglevel=0,policy=authorize_only \
                                 -gmapopt:10 -gmapto:0
             acc.authdb /etc/xrootd/auth_file
             ofs.authorize
 
 1. Restart the [relevant services](/data/xrootd/install-standalone/#using-xrootd)
+
+Verifying XRootD Authorization
+------------------------------
 
 To verify the LCMAPS security, run the following commands from a machine with your user certificate/key pair,
 `xrootd-client`, and `voms-clients-cpp` installed:
@@ -125,7 +134,7 @@ To verify the LCMAPS security, run the following commands from a machine with yo
 
         :::console
         user@client $ voms-proxy-destroy
-        user@client $ xrdcp /bin/bash root://%RED%<XROOTD HOST>%ENDCOLOR%/%RED%<DESTINATION PATH>%ENDCOLOR%
+        user@client $ xrdcp /bin/bash root://<XROOTD HOST>/<DESTINATION PATH>
         180213 13:56:49 396570 cryptossl_X509CreateProxy: EEC certificate has expired
         [0B/0B][100%][==================================================][0B/s]
         Run: [FATAL] Auth failed
@@ -141,7 +150,7 @@ To verify the LCMAPS security, run the following commands from a machine with yo
 
         :::console
         user@client $ voms-proxy-init
-        user@client $ xrdcp  /bin/sh root://%RED%<XROOTD HOST>%ENDCOLOR%/%RED%<DESTINATION PATH>%ENDCOLOR%
+        user@client $ xrdcp  /bin/sh root://<XROOTD HOST>/<DESTINATION PATH>
         [938.1kB/938.1kB][100%][==================================================][938.1kB/s]
 
     If your transfer does not succeed, run the previous command with `--debug 2` for more information.

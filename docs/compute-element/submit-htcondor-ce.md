@@ -70,13 +70,14 @@ This method uses `condor_ce_submit` to submit directly to an HTCondor-CE. The on
 
 1.  Write a submit file, `ce_test.sub`:
 
+        ::file hl_lines="10"
         # Required for local HTCondor-CE submission
         universe = vanilla
         use_x509userproxy = true
         +Owner = undefined
 
         # Files
-        executable = %RED%ce_test.sh%ENDCOLOR%
+        executable = ce_test.sh
         output = ce_test.out
         error = ce_test.err
         log = ce_test.log
@@ -132,13 +133,14 @@ Once the `condor` service is running, write a submit file and submit your job:
 
 1.  Write a submit file, `ce_test.sub`:
 
+        ::file hl_lines="4 7"
         # Required for remote HTCondor-CE submission
         universe = grid
         use_x509userproxy = true
-        grid_resource = condor %RED%condorce.example.com condorce.example.com%ENDCOLOR%:9619
+        grid_resource = condor condorce.example.com condorce.example.com:9619
 
         # Files
-        executable = %RED%ce_test.sh%ENDCOLOR%
+        executable = ce_test.sh
         output = ce_test.out
         error = ce_test.err
         log = ce_test.log

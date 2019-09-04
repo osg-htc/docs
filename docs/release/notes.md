@@ -1,14 +1,46 @@
 Release Notes
 =============
 
-!!! note
-    The 3.3 series was [end-of-lifed in May 2018](https://opensciencegrid.org/technology/policy/release-series/#life-cycle-dates).
-    Please [upgrade to the 3.4 series](/release/release_series/#updating-from-osg-31-32-33-to-34) at your earliest convenience.
+This page contains links to detailed notes for release in the currently supported
+[OSG release series](/release/release_series).
+For our policy on release series support, please consult
+[this page](https://opensciencegrid.org/technology/policy/release-series/).
 
-### OSG 3.4 ###
+OSG 3.5
+-------
+
+**Supported OS Versions:** EL7
+
+The OSG 3.5 release series introduces HTCondor 8.8 and 8.9, available in `osg-release` and `osg-upcoming`, respectively.
+It also drops support for the RSV monitoring probes, CREAM CEs, and Enterprise Linux 6.
+See the initial [OSG 3.5.0 release notes](/release/3.5/release-3-5-0) for additional details.
+
+To update to the OSG 3.5 series, please consult the page on
+[updating between release series](/release/release_series#updating-to-osg-35).
+
+| Version                             | Date       | Summary                                                           |
+|:------------------------------------|:-----------|:------------------------------------------------------------------|
+| [3.5.0](/release/3.5/release-3-5-0) | 2019-08-30 | CVMFS 2.6.2, HTCondor 8.8.4, XCache 1.1.1, OSG XRootD 3.5, OSG Configure 3.0.0, XRootD LCMAPS 1.7.4, XRootD HDFS 2.1.6; Upcoming: HTCondor 8.9.2 |
+
+OSG 3.4
+-------
+
+**Supported OS Versions:** EL7, EL6
+
+With the release of OSG 3.5.0 in August 2019, the end-of-life dates have been set for OSG 3.4 per our
+[policy](https://opensciencegrid.org/technology/policy/release-series/):
+regular support will end in **February 2020** and critical bug/security support will end in **November 2020**.
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.34](/release/3.4/release-3-4-34)     | 2019-08-29 | XCache 1.1.1, osg-configure 2.4.1, osg-xrootd 3.4.4, xrootd-hdfs 2.1.6, xrootd-lcmaps 1.7.4, MyProxy 6.2.4, CCTools 7.0.14, osg-system-profiler 1.4.3 |
+| [3.4.33](/release/3.4/release-3-4-33)     | 2019-08-01 | Frontier Squid 4.8, XRootD 4.10.0, cvmfs-x509-helper 2.0                |
+| [3.4.32](/release/3.4/release-3-4-32)     | 2019-07-25 | Frontier Squid 4.4-2.1, Singularity 3.2.1-1.1, VO Package v94; Upcoming: HTCondor 8.8.4 |
+| [3.4.31-2](/release/3.4/release-3-4-31-2) | 2019-07-02 | IGTF 1.101                                                              |
+| [3.4.31](/release/3.4/release-3-4-31)     | 2019-06-13 | Singularity 3.2.1, GlideinWMS 3.4.5-2, HTCondor 8.6.13-1.4, VO Package v93; Upcoming: HTCondor 8.8.3 |
+| [3.4.30-2](/release/3.4/release-3-4-30-2) | 2019-05-30 | IGTF 1.99, VO Package v92                                               |
+| [3.4.30](/release/3.4/release-3-4-30)     | 2019-05-16 | BLAHP 1.81.41, VO Package V91, xrootd-voms-plugin 0.6.0, osg-pki-tools 3.3.0; Upcoming: Singularity 3.1.1-1.1, osg-se-hadoop, BLAHP 1.18.41 |
+| [3.4.29-2](/release/3.4/release-3-4-29-2) | 2019-05-07 | VO Package v90                                                          |
 | [3.4.29](/release/3.4/release-3-4-29)     | 2019-05-02 | XCache 1.0.5, MyProxy 6.2.3                                             |
 | [3.4.28-2](/release/3.4/release-3-4-28-2) | 2019-04-30 | IGTF 1.98                                                               |
 | [3.4.28](/release/3.4/release-3-4-28)     | 2019-04-25 | XRootD 4.9.1, xrootd-hdfs 2.1.4, GlideinWMS 3.4.5, osg-flock 1.1, VO Package v89; Upcoming: HTCondor 8.8.2 |

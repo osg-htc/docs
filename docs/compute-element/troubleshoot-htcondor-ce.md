@@ -682,19 +682,21 @@ root@host # condor_ce_job_router_info -match-jobs -ignore-prior-routing -jobads 
         Route Matches: Local_PBS
         Route Matches: Condor_Test
 
-    To troubleshoot why this is occuring, look at the combined Requirements expressions for all routes and compare it to the job’s ClassAd provided. The combined Requirements expression is %RED%highlighted below%ENDCOLOR%:
+    To troubleshoot why this is occuring, look at the combined Requirements expressions for all routes and compare it to the job’s ClassAd provided. The combined Requirements expression is highlighted below:
 
+        ::::file hl_lines="5"
         Umbrella constraint: ((target.x509userproxysubject =!= UNDEFINED) &&
         (target.x509UserProxyExpiration =!= UNDEFINED) &&
         (time() < target.x509UserProxyExpiration) &&
         (target.JobUniverse =?= 5 || target.JobUniverse =?= 1)) &&
-        %RED%( (target.osgTestPBS is true) || (true) )%ENDCOLOR% &&
+        ( (target.osgTestPBS is true) || (true) ) &&
         (target.ProcId >= 0 && target.JobStatus == 1 &&
         (target.StageInStart is undefined || target.StageInFinish isnt undefined) &&
         target.Managed isnt "ScheddDone" &&
         target.Managed isnt "Extenal" &&
         target.Owner isnt Undefined &&
         target.RoutedBy isnt "htcondor-ce")
+
 
     Both routes evaluate to `true` for the job’s ClassAd because it contained `osgTestPBS = true`. Make sure your routes are mutually exclusive, otherwise you may have jobs routed incorrectly! See the [job route configuration page](job-router-recipes) for more details.
 
@@ -950,6 +952,14 @@ troubleshoot issues with job routing.
 
     This means that HTCondor-CE cannot communicate with your HTCondor batch system.
     Verify that the `condor` service is running on the HTCondor-CE host and is configured for your central manager.
+
+-   **(HTCondor batch systems only)** If you see the following error message:
+
+        JobRouter failure (src=2810466.0,dest=47968.0,route=MWT2_UCORE): giving up, because submitted job is still not in job queue mirror (submitted 605 seconds ago).  Perhaps it has been removed?
+
+    Ensure that `condor_config_val SPOOL` and `condor_ce_config_val JOB_ROUTER_SCHEDD2_SPOOL` return the same value.
+    If they don't, change the value of `JOB_ROUTER_SCHEDD2_SPOOL` in your HTCondor-CE configuration to match `SPOOL`
+    from your HTCondor configuration.
 
 -   If you have `D_ALWAYS:2` turned on for the job router, you will see errors like the following:
 
