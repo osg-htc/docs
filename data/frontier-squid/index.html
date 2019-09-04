@@ -2525,9 +2525,19 @@ for a complete example.</p>
 <p>If you are setting up a new resource, set <code>Active: false</code>.
     Only set <code>Active: true</code> for a resource when it is accepting requests and ready for production.</p>
 </li>
+<li>
+<p>Normally registered squids will be monitored by WLCG.  This is
+strongly recommended even for non-WLCG sites so operations experts can
+help with diagnosing problems.  However, if a site declines
+monitoring, that can be indicated by setting <code>Monitored: false</code> in a
+<code>Details:</code> section below <code>Description:</code>.  Registration is still
+important for the sake of excluding squids from worker node failover
+monitors.  The default if <code>Details:</code> <code>Monitored:</code> is not set is
+<code>true</code>.</p>
+</li>
 </ol>
-<p>If you are running a WLCG site, a few hours after a squid is registered
-and marked <code>Active</code>, 
+<p>A few hours after a squid is registered and marked <code>Active</code> (and not
+marked <code>Monitored: false</code>), 
 <a href="https://twiki.cern.ch/twiki/bin/view/LCG/WLCGSquidRegistration#Verify_monitor">verify that it is monitored by WLCG</a>.</p>
 <h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
 <h3 id="users">Users<a class="headerlink" href="#users" title="Permanent link">&para;</a></h3>
