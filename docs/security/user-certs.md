@@ -37,8 +37,7 @@ Follow the steps below to get an user certificate:
     ![Institution Selection](/img/cilogon_select_idp.png).
 
     !!! warning
-        Do not use Google, GitHub, or ORCID as providers, because they use the OpenID CA and many OSG resources
-        do not support certificates using that CA.
+        Do not use Google, GitHub, or ORCID as providers since they are not widely supported in the OSG.
         If your institution is not on the list, please contact your institution's IT support to see if they can support
         CILogon.
 
