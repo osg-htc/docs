@@ -35,6 +35,8 @@ Before preparing your cluster for OSG jobs, consider the following requirements:
     there must be a shared file system between the submit server and the compute nodes.
     See [this section](#providing-the-osg-worker-node-client-htcondor-batch-systems-only) for details.
 
+-   [Temporary scratch space](/worker-node/using-wn#for-site-administrators) on each worker node
+
 
 Which Science Communities and Institutions am I Supporting?
 -----------------------------------------------------------

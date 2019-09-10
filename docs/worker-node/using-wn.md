@@ -56,13 +56,18 @@ Custom variables and those that aren't listed may be defined in the [Local Setti
 |:-----------------------|:------------------------------|:-----------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------|
 | `$OSG_GRID`            | `Storage`/`grid_dir`          | Location of additional environment variables.              | Pilots should source `$OSG_GRID/setup.sh` in order to guarantee the environment contains the worker node binaries in `$PATH`. |
 | `$OSG_SQUID_LOCATION`, | `Squid`/`location`            | Location of a HTTP caching proxy server                    | Utilize this service for downloading files via HTTP for cache-friendly workflows.                                             |
-| `$OSG_WN_TMP`          | `Storage`/`worker_node_temp`  | Temporary storage area in which your job(s) run            | Local to each worker node. See [this section](#osg_wn_tmp) below for details.                   |
+| `$OSG_WN_TMP`          | `Storage`/`worker_node_temp`  | Temporary storage area in pilot job(s) run                 | Local to each worker node. See [this section](#osg_wn_tmp) below for details.                   |
 | `$X509_CERT_DIR`       |                               | Location of the CA certificates                            | If not defined, defaults to `/etc/grid-security/certificates`.                                                                |
 | `$_CONDOR_SCRATCH_DIR` |                               | Suggested temporary storage for glideinWMS-based payloads. | Users should prefer this environment variable over `$OSG_WN_TMP` if running inside glideinWMS.                                |
 
 ### OSG_WN_TMP ###
 
-Site administrators are responsible for ensuring that `$OSG_WN_TMP` is cleaned up.
+As [described above](#the-worker-node-environment) `OSG_WN_TMP` is a temporary storage area on each worker node for
+pilot jobs to use as temporary scratch space.
+
+#### For site administrators  ####
+
+Site administrators are responsible for cleaning up the contents of `$OSG_WN_TMP`.
 We recommend one of the following solutions:
 
 - **(Recommended)** Use batch-system capabilities to create directories in the job scratch directory and bind mount
