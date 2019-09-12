@@ -56,7 +56,7 @@ Custom variables and those that aren't listed may be defined in the [Local Setti
 |:-----------------------|:------------------------------|:-----------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------|
 | `$OSG_GRID`            | `Storage`/`grid_dir`          | Location of additional environment variables.              | Pilots should source `$OSG_GRID/setup.sh` in order to guarantee the environment contains the worker node binaries in `$PATH`. |
 | `$OSG_SQUID_LOCATION`, | `Squid`/`location`            | Location of a HTTP caching proxy server                    | Utilize this service for downloading files via HTTP for cache-friendly workflows.                                             |
-| `$OSG_WN_TMP`          | `Storage`/`worker_node_temp`  | Temporary storage area in pilot job(s) run                 | Local to each worker node. See [this section](#osg_wn_tmp) below for details.                   |
+| `$OSG_WN_TMP`          | `Storage`/`worker_node_temp`  | Temporary storage area workspace for pilot job(s)          | Local to each worker node. See [this section](#osg_wn_tmp) below for details.                   |
 | `$X509_CERT_DIR`       |                               | Location of the CA certificates                            | If not defined, defaults to `/etc/grid-security/certificates`.                                                                |
 | `$_CONDOR_SCRATCH_DIR` |                               | Suggested temporary storage for glideinWMS-based payloads. | Users should prefer this environment variable over `$OSG_WN_TMP` if running inside glideinWMS.                                |
 
