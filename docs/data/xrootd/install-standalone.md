@@ -186,9 +186,11 @@ To get assistance. please use the [Help Procedure](/common/help/) page.
 Reference
 ---------
 
-- [XRootD documentation](http://xrootd.slac.stanford.edu/doc)
+- [XRootD documentation](https://xrootd.slac.stanford.edu/docs.html)
 - [Export directive](https://xrootd.slac.stanford.edu/doc/dev49/ofs_config.htm#_Toc522916544) in the XRootD
   configuration and [relevant options](https://xrootd.slac.stanford.edu/doc/dev49/ofs_config.htm#_defaults)
+- [Export directive](https://xrootd.org/doc/dev48/ofs_config.htm#_Toc401930729) in the XRootD configuration and
+  [relevant options](https://xrootd.org/doc/dev48/ofs_config.htm#_Toc401930728)
 
 
 ### Service Configuration
