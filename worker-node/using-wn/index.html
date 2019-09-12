@@ -435,6 +435,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#for-site-administrators" title="For site administrators" class="md-nav__link">
+    For site administrators
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#for-vo-managers" title="For VO managers" class="md-nav__link">
     For VO managers
   </a>
@@ -2174,6 +2181,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#for-site-administrators" title="For site administrators" class="md-nav__link">
+    For site administrators
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#for-vo-managers" title="For VO managers" class="md-nav__link">
     For VO managers
   </a>
@@ -2311,7 +2325,7 @@ Custom variables and those that aren't listed may be defined in the <a href="../
 <tr>
 <td align="left"><code>$OSG_WN_TMP</code></td>
 <td align="left"><code>Storage</code>/<code>worker_node_temp</code></td>
-<td align="left">Temporary storage area in which your job(s) run</td>
+<td align="left">Temporary storage area workspace for pilot job(s)</td>
 <td align="left">Local to each worker node. See <a href="#osg_wn_tmp">this section</a> below for details.</td>
 </tr>
 <tr>
@@ -2329,7 +2343,10 @@ Custom variables and those that aren't listed may be defined in the <a href="../
 </tbody>
 </table>
 <h3 id="osg_wn_tmp">OSG_WN_TMP<a class="headerlink" href="#osg_wn_tmp" title="Permanent link">&para;</a></h3>
-<p>Site administrators are responsible for ensuring that <code>$OSG_WN_TMP</code> is cleaned up.
+<p>As <a href="#the-worker-node-environment">described above</a> <code>OSG_WN_TMP</code> is a temporary storage area on each worker node for
+pilot jobs to use as temporary scratch space.</p>
+<h4 id="for-site-administrators">For site administrators<a class="headerlink" href="#for-site-administrators" title="Permanent link">&para;</a></h4>
+<p>Site administrators are responsible for cleaning up the contents of <code>$OSG_WN_TMP</code>.
 We recommend one of the following solutions:</p>
 <ul>
 <li>
