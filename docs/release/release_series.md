@@ -146,11 +146,12 @@ To update HTCondor on your HTCondor-CE and/or HTCondor pool hosts, perform the f
         :::console
         root@host # yum update 'condor*'
 
-1. **HTCondor pools only:** The default authentication configuration changed in HTCondor 8.8 in OSG 3.5.
+1. **HTCondor pools only:** The default authentication, `DAEMON_LIST`, and `CONDOR_HOST` configuration changed in
+   HTCondor 8.8 in OSG 3.5.
    If you are experiencing issues with communication between hosts in your pool after the upgrade,
-   the default authentication configuration is listed in `/etc/condor/config.d/00-osg_default_security.config`:
-   ensure that any default configuration is overriden with your own
-   [security configuration](https://htcondor.readthedocs.io/en/v8_8_4/admin-manual/security.html) in subsequent files.
+   the default OSG configuration is listed in `/etc/condor/config.d/00-osg_default_*.config`:
+   ensure that any default configuration is overriden with your own `DAEMON_LIST`, `CONDOR_HOST`, and/or
+   [security](https://htcondor.readthedocs.io/en/v8_8_4/admin-manual/security.html) configuration in subsequent files.
 
 1. **HTCondor-CE hosts only:** The HTCondor 8.8 series changed the default job route matching order
    [from round-robin to first matching route](/compute-element/job-router-recipes#how-jobs-match-to-job-routes).
