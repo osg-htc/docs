@@ -126,6 +126,22 @@ Next, adjust the configuration in the repository as follows.
     CVMFS_FORCE_REMOUNT_WARNING=false
     xEOFx
 
+Additionally, especially if files will be frequently deleted, enabling
+garbage collection is recommended in this way:
+
+    :::console hl_lines="1"
+    root@host # cat >>/etc/cvmfs/repositories.d/<EXAMPLE.OPENSCIENCEGRID.ORG>/server.conf <<xEOFx
+    CVMFS_GARBAGE_COLLECTION=true
+    CVMFS_AUTO_GC=false
+    xEOFx
+
+The above assumes that you have your own mechanism to run cvmfs_server
+gc regularly (typically daily) at a time when it won't interfere with
+publications, since garbage collection and publication can't be done at
+the same time.  `CVMFS_AUTO_GC=true` will automatically run garbage
+collection periodically after publications, but those times are not
+always convenient.
+
 Also, check the [cvmfs documentation](http://cvmfs.readthedocs.io/en/latest/cpt-repo.html#configuration-recommendation-by-use-case) for additional recommendations for special purpose repositories.
 
 Now verify that the repository is readable over HTTP:
