@@ -13,7 +13,9 @@ This release contains:
     -   Fixed installation failure due to missing globus-usage dependency
     -   Removed usage statistics collection and reporting back to developers
 -   [Singularity 3.4.0](https://github.com/sylabs/singularity/releases/tag/v3.4.0): Added encrypted container support
--   [GlideinWMS 3.4.6](https://glideinwms.fnal.gov/doc.v3_4_6/history.html): Made Factory compatible with older 3.4 Frontends
+-   [GlideinWMS 3.4.6](https://glideinwms.fnal.gov/doc.v3_4_6/history.html)
+    -   Improved Singularity scripts
+    -   Made Factory compatible with older 3.4 Frontends
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.35%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
