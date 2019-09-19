@@ -2405,6 +2405,21 @@ The next steps will fail if the web server is not accessible.</p>
 </pre></div>
 
 
+<p>Additionally, especially if files will be frequently deleted, enabling
+garbage collection is recommended in this way:</p>
+<div class="codehilite"><pre><span></span><span class="hll"><span class="gp">root@host #</span> cat &gt;&gt;/etc/cvmfs/repositories.d/&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;/server.conf <span class="s">&lt;&lt;xEOFx</span>
+</span><span class="go">CVMFS_GARBAGE_COLLECTION=true</span>
+<span class="go">CVMFS_AUTO_GC=false</span>
+<span class="go">xEOFx</span>
+</pre></div>
+
+
+<p>The above assumes that you have your own mechanism to run cvmfs_server
+gc regularly (typically daily) at a time when it won't interfere with
+publications, since garbage collection and publication can't be done at
+the same time.  <code>CVMFS_AUTO_GC=true</code> will automatically run garbage
+collection periodically after publications, but those times are not
+always convenient.</p>
 <p>Also, check the <a href="http://cvmfs.readthedocs.io/en/latest/cpt-repo.html#configuration-recommendation-by-use-case">cvmfs documentation</a> for additional recommendations for special purpose repositories.</p>
 <p>Now verify that the repository is readable over HTTP:</p>
 <div class="codehilite"><pre><span></span><span class="hll"><span class="gp">root@host #</span> wget -qO- http://localhost:8000/cvmfs/&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;/.cvmfswhitelist <span class="p">|</span> cat -v
