@@ -48,11 +48,11 @@ Below is an example of the monitoring views that will be available for your clus
 
 Each community is mapped to your site with a generic user account, with names osg01 - osg20. The mappings are as follows:
 
-| User | VO(s) | FQANs |
+| User | VO(s) | Description |
 | ---- | ----- | ----- |
-| osg01 | OSG | /osg/Role=NULL/Capability=NULL |
-| osg02 | GLOW | /GLOW/Role=htpc/Capability=NULL |
-| osg03 | HCC | /hcc/Role=NULL/Capability=NULL |
+| osg01 | OSG | Projects (primarily single PI, such as OSG-Connect) supported directly by the OSG organization. |
+| osg02 | GLOW | Projects coming from the Center for High Throughput Computing at the University of Wisconsin-Madison. |
+| osg03 | HCC | Projects coming from the Holland Computing Center at the University of Nebraska - Lincoln. |
 | osg04 - osg20 | TBD | TBD |
 
 Security
