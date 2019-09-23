@@ -2277,6 +2277,38 @@ see <a href="../../compute-element/install-htcondor-ce">this page</a> for instal
 <p>The OSG provides monitoring to view which communities are accessing your site, their fields of science, and home institution.
 Below is an example of the monitoring views that will be available for your cluster.</p>
 <p><img alt="monitoring graphs" src="../../compute-element/img/monitoring_graphs.png" /></p>
+<p>Each community is mapped to your site with a generic user account, with names osg01 - osg20. The mappings are as follows:</p>
+<table>
+<thead>
+<tr>
+<th>User</th>
+<th>VO(s)</th>
+<th>FQANs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>osg01</td>
+<td>OSG</td>
+<td>/osg/Role=NULL/Capability=NULL</td>
+</tr>
+<tr>
+<td>osg02</td>
+<td>GLOW</td>
+<td>/GLOW/Role=htpc/Capability=NULL</td>
+</tr>
+<tr>
+<td>osg03</td>
+<td>HCC</td>
+<td>/hcc/Role=NULL/Capability=NULL</td>
+</tr>
+<tr>
+<td>osg04 - osg20</td>
+<td>TBD</td>
+<td>TBD</td>
+</tr>
+</tbody>
+</table>
 <h2 id="security">Security<a class="headerlink" href="#security" title="Permanent link">&para;</a></h2>
 <p>OSG takes multiple precautions to maintain security and prevent unauthorized
 usage of resources:</p>
