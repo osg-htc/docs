@@ -46,6 +46,14 @@ Below is an example of the monitoring views that will be available for your clus
 
 ![monitoring graphs](/compute-element/img/monitoring_graphs.png)
 
+Each community is mapped to your site with a generic user account, with names osg01 - osg20. The mappings are as follows:
+
+| User | VO(s) | FQANs |
+| ---- | ----- | ----- |
+| osg01 | OSG | /osg/Role=NULL/Capability=NULL |
+| osg02 | GLOW | /GLOW/Role=htpc/Capability=NULL |
+| osg03 | HCC | /hcc/Role=NULL/Capability=NULL |
+| osg04 - osg20 | TBD | TBD |
 
 Security
 --------
