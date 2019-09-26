@@ -1,18 +1,28 @@
-Configuring an HTCondor Submit Host to Send Excess Jobs to OSG
-==============================================================
+Configuring an HTCondor Submit Host to Send Jobs to the OSG
+===========================================================
 
 This document explains how to add a path for user jobs to flow from your local site out to the OSG,
 which in most cases means that the jobs will have far more resources available to run on than locally.
 If your local batch system frequently has many jobs waiting to run for a long time,
+you do not have a local batch system,
 or if you simply want to provide a local entry point for OSG-bound jobs,
 adding a path to OSG may result in less waiting for your users.
+
+Note that if you do not have a local batch system, consider having your users use
+[OSG Connect](https://support.opensciencegrid.org/support/solutions), which will require less
+infrastructure work at your site.
+
+!!!note
+    Flocking to the OSG requires some modification to user workflows.
+    After installation, see the [usage](#usage) section for instructions on what your users will need to do.
+
 
 Background
 ----------
 Every batch computing system has one or more entry points that users log on to and use to hand over their computing work
 to the batch system for completion.
 For the HTCondor batch system, we say that users log on to a submit host to submit their jobs to HTCondor,
-where they wait ("are queued") until computing resources are available to run them.
+where the jobs wait ("are queued") until computing resources are available to run them.
 In a purely local HTCondor system, there are one to a few submit hosts and many computing resources.
 
 An HTCondor submit host can also be configured to forward excess jobs to an OSG-managed submit host.
@@ -22,17 +32,21 @@ on top of one of your existing HTCondor submit hosts.
 This approach allows a user to submit locally and have their jobs run locally or,
 if the user chooses and if local resources are unavailable, have their jobs automatically flock to OSG.
 If you do not have an HTCondor batch system, following these instructions will install the HTCondor submit service
-and configure it only to forward jobs to OSG.
+and configure it only to forward jobs to the OSG.
 In other words, you do not need a whole HTCondor batch system just to have a local OSG submit host.
-
-!!!note
-    Flocking to the OSG requires some modification to user workflows.
-    See the [usage](#usage) section after installation for instructions on what your users will need to do.
 
 
 Before Starting
 ---------------
-Before starting the installation process, consider the following technical requirements:
+Because jobs running in OSG run in a completely different environment than your local cluster,
+and require additional considerations for data movement,
+you or your campus will need to provide additional support for your users to enable them to
+properly use OSG.
+Send email to <help@opensciencegrid.org> saying that you would like to flock jobs to OSG,
+and we will consult with you about the proper solution for your site and what needs to be set up
+at both the OSG and at your site.
+
+Also consider the following technical requirements:
 
 * __Operating system:__ A RHEL 6 or 7 compatible operating system.
 * __User IDs:__ If it does not exist already, the installation will create the Linux user ID `condor`.
@@ -64,7 +78,8 @@ There are two options for authentication of your submit host to the OSG: GSI and
 Of these, GSI is the recommended method, but it will require obtaining a host certificate for your submit host.
 See our [documentation](/security/host-certs.md) for instructions on how to request and install host certificates.
 
-If you are unable to obtain a host certificate, use the "pool password" authentication method, described below.
+If you are unable to obtain a host certificate, use the "pool password" authentication method,
+[described in the Configuring Authentication section](#configuring-authentication).
 
 
 ### Request to be allowed to flock to OSG
@@ -94,11 +109,10 @@ we provide a recommended configuration for flocking.
         :::console
         root@host # cp /etc/gratia/condor/ProbeConfig-flocking /etc/gratia/condor/ProbeConfig
 
-1. Fill in the value for `ProbeName` with the hostname of your submit host.
-   For example:
+1. Fill in the value for `ProbeName` with the hostname of your submit host, with the following format:
 
         :::xml
-        ProbeName="condor:foo.example.edu"
+        ProbeName="condor:<HOSTNAME>"
         
 1. Fill in the value for `SiteName` with the Resource Name you registered in Topology (see instructions above).
    For example:
@@ -110,13 +124,14 @@ we provide a recommended configuration for flocking.
 Configuring Authentication
 --------------------------
 If you have obtained a host certificate according to the [instructions](/security/host-certs.md),
-you do not need to do any additional configuration and may skip the rest of this section.
+you do not need to do any additional configuration and may [continue to the next section](#managing-services).
 
 If you cannot obtain a host certificate, then configure pool password authentication via the following instructions:
 
 1. Send email to <help@opensciencegrid.org> requesting the pool password file for flocking.
 
-1. Place the pool password file in `/etc/condor/pool_password`.
+1. Move the pool password file you have received to `/etc/condor/pool_password`;
+   set the ownership of that file to `condor:condor` and the permissions to `0600`.
 
 1. Create a configration file named `/etc/condor/config.d/90-flock-pool-password.conf` with the following contents:
 
@@ -131,6 +146,8 @@ Managing Services
 You will need the following services enabled and running:
 * gratia-probes-cron
 * condor
+* fetch-crl-cron
+* fetch-crl-boot
 
 The following table gives the commands needed to start, stop, enable, and disable a service:
 
@@ -154,10 +171,11 @@ what users should know; the "Choosing Resources for Jobs" and "Data Management" 
 
 ### Specifying a project
 OSG will only run jobs that have a registered *project* associated with them.
-To register a project, users must follow the
+Users must follow the
 [instructions for starting a project in OSG-Connect](https://support.opensciencegrid.org/support/solutions/articles/5000634360-start-or-join-a-project-in-osg-connect)
+to register a project.
 
-A project is associated with a job by adding a ProjectName line to the submit file.
+A project is associated with a job by adding a ProjectName line to the user's submit file.
 For example:
 
 ```file
