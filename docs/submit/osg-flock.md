@@ -114,7 +114,8 @@ we provide a recommended configuration for flocking.
         :::xml
         ProbeName="condor:<HOSTNAME>"
         
-1. Fill in the value for `SiteName` with the Resource Name you registered in Topology (see instructions above).
+1. Fill in the value for `SiteName` with the Resource Name you registered in Topology (see
+   [instructions above](#register-your-submit-host-in-osg-topology)).
    For example:
    
         :::xml
