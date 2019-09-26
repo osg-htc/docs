@@ -69,7 +69,7 @@ Initial Steps
 ### Register your submit host in OSG Topology
 To be part of OSG, your submit host should be registered with the OSG.
 You will need information like the hostname, and the administrative and security contacts.
-Follow the [general registration instructions](/docs/common/registration#new-resources).
+Follow the [general registration instructions](/common/registration#new-resources).
 The service type is `Submit Node`.
 
 
