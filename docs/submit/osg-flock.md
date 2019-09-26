@@ -161,24 +161,10 @@ For example:
 The double quotes are necessary.
 
 In addition, the project must be registered in OSG Topology.
-To register a project, the user should email <help@opensciencegrid.org> with the following information:
+To register a project, follow the
+[instructions for starting a project in OSG-Connect](https://support.opensciencegrid.org/support/solutions/articles/5000634360-start-or-join-a-project-in-osg-connect)
 
-- Name
-- Email Address
-- Project Name
-- Field of Science
-- PI Name
-- PI Email
-- PI Organization
-- PI Department
-- Project Contact Name
-- Project Contact Email
-- Project Contact Telephone Number
-- Project Description
-
-<!-- ^ C&Ped from https://support.opensciencegrid.org/support/solutions/articles/5000634360-start-or-join-a-project-in-osg-connect -->
 
 Get Help
----------------
-
+--------
 If you need help with setup or troubleshooting, see our [help procedure](/common/help).
