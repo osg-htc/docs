@@ -16,7 +16,7 @@ To begin the process to distribute software on OASIS using the service hosted by
 
 -   [Obtain a personal grid certificate](../security/user-certs), if you don't have one already.
 -   Register yourself as a contact in [OSG Topology](/common/registration#registering-contacts)
--   Be associated with a [VO registered in OIM](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations).
+-   Request to be associated with a [VO registered in Topology](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations).
 
 How to use OASIS
 ----------------
