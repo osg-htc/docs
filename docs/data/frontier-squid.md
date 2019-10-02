@@ -80,9 +80,7 @@ To configure the Frontier Squid service itself:
 1.  Follow the
     [Configuration section of the upstream Frontier Squid documentation](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Configuration).
 2.  Enable, start, and test the service (as described below).
-3.  [Register the squid](#registering-frontier-squid).
-4.  If your site is part of the WLCG, enable WLCG monitoring as described in the
-    [upstream documentation on enabling monitoring](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring).
+3.  Register the squid (also as described [below](#registering-frontier-squid)).
 
 !!! Note
     An important difference between the standard Squid software and
@@ -175,6 +173,10 @@ monitoring, that can be indicated by setting `Monitored: false` in a
 important for the sake of excluding squids from worker node failover
 monitors.  The default if `Details:` `Monitored:` is not set is
 `true`.
+
+4. If you set Monitored to true, also enable monitoring as described in 
+the [upstream documentation on enabling monitoring](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring).
+
 
 A few hours after a squid is registered and marked `Active` (and not
 marked `Monitored: false`), 
