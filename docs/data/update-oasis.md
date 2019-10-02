@@ -15,8 +15,7 @@ Requirements
 To begin the process to distribute software on OASIS using the service hosted by OSG Operations, you must:
 
 -   [Obtain a personal grid certificate](../security/user-certs), if you don't have one already.
--   Register yourself in the OSG Information Management System (OIM) by sending an email to
-    <mailto:help@opensciencegrid.org>
+-   Register yourself as a contact in [OSG Topology](/common/registration#registering-contacts)
 -   Be associated with a [VO registered in OIM](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations).
 
 How to use OASIS
