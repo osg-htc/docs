@@ -190,3 +190,9 @@ It is also important to keep your software and data (e.g., CA and VO client) up-
 [latest OSG release](/release/notes).
 To stay abreast of software releases, we recommend subscribing to the <mailto:osg-sites@opensciencegrid.org> mailing
 list.
+
+Get Help
+--------
+If you need help with your site, or need to report a security incident,
+follow the [contact instructions](/common/help).
+
