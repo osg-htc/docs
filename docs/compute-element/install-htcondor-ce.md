@@ -196,6 +196,7 @@ If you do not need any of the following special configurations, skip to
 -   [Accounting with multiple CEs or local user jobs](#accounting-with-multiple-ces-or-local-user-jobs)
 -   [HTCondor accounting groups](#htcondor-accounting-groups)
 -   [HTCondor-CE monitoring web interface](#install-and-run-the-htcondor-ce-view)
+-   [Enable job retries](#enable-job-retries)
 
 #### Transforming and filtering jobs
 
@@ -335,6 +336,17 @@ The HTCondor-CE View is an optional web interface to the status of your CE. To r
 
 The website is served on port 80 by default. To change this default, edit the value of `HTCONDORCE_VIEW_PORT` in
 `/etc/condor-ce/config.d/05-ce-view.conf`.
+
+### Enable job retries ###
+
+In HTCondor-CE 4+, batch system job retries are disabled by default.
+This is because most jobs submitted through HTCondor-CEs are actually resource requests (i.e. pilot jobs) instead of
+jobs containing user payloads.
+Therefore, it's preferred to prevent these jobs from retrying and instead wait for additional resource requests to be
+submitted.
+To re-enable job retries, set the following in your configuration:
+
+    ENABLE_JOB_RETRIES = True
 
 Using HTCondor-CE
 -----------------
