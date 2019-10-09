@@ -157,30 +157,30 @@ To update your HTCondor-CE host(s), perform the following steps:
 
 1. Merge any `*.rpmnew` files in `/etc/condor-ce/config.d/`
 
+1. Additionally, you may wish to make one or more of the following optional changes:
+
+    - HTCondor-CE now disables batch system job retries by default.
+      To re-enable job retries, set the following configuration in `/etc/condor-ce/config.d/99-local.conf`:
+
+            ENABLE_JOB_RETRIES = True
+
+    - For non-HTCondor sites that use [remote CE requirements](/compute-element/job-router-recipes/#setting-batch-system-directives),
+      the new version of HTCondor-CE accepts a simplified format.
+      For example, a snippet from an example job route in the old format:
+
+            set_default_remote_cerequirements = strcat("Walltime == 3600 && AccountingGroup =="", x509UserProxyFirstFQAN, "\"");
+
+        May be rewritten as the following:
+
+            set_WallTime = 3600;
+            set_AccountingGroup = x509UserProxyFirstFQAN;
+            set_default_CERequirements = "Walltime,AccountingGroup";
+
 1. Reload and restart the HTCondor-CE daemons:
 
         :::console
         root@host # systemctl daemon-reload
         root@host # systemctl restart condor-ce
-
-Additionally, you may wish to make the following optional changes:
-
-- HTCondor-CE now disables batch system job retries by default.
-  To re-enable job retries, set the following configuration in `/etc/condor-ce/config.d/99-local.conf`:
-
-        ENABLE_JOB_RETRIES = True
-
-- For non-HTCondor sites that use [remote CE requirements](/compute-element/job-router-recipes/#setting-batch-system-directives),
-  the new version of HTCondor-CE accepts a simplified format.
-  For example, a snippet from an example job route in the old format:
-
-        set_default_remote_cerequirements = strcat("Walltime == 3600 && AccountingGroup =="", x509UserProxyFirstFQAN, "\"");
-
-    May be rewritten as the following:
-
-        set_WallTime = 3600;
-        set_AccountingGroup = x509UserProxyFirstFQAN;
-        set_default_CERequirements = "Walltime,AccountingGroup";
 
 ### Updating to HTCondor 8.8.x ###
 
