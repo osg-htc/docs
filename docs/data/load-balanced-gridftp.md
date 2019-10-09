@@ -100,7 +100,7 @@ XRootD requires that the certificate's [common name](https://en.wikipedia.org/wi
 
 1.  Submit a batch request for the per-GridFTP server certificates:
 
-        ::: console
+        :::console
         user@host $ osg-gridadmin-cert-request -f load-balanced-hosts.txt
 
 1.  Copy the resulting certificates and keys to their corresponding GridFTP servers in `/etc/grid-security/hostcert.pem` and `/etc/grid-security/hostkey.pem`, respectively.
