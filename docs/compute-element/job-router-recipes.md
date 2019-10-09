@@ -533,16 +533,15 @@ ClassAd attributes can be passed from the routed job to the local submit attribu
 methods, depending on your version of HTCondor-CE:
 
 
-- **For HTCondor-CE >= 4**, use the `default_CERequirements` attribute, which can take a comma-separated list of other
-  attributes:
+- **For HTCondor-CE >= 4:** use `set_default_CERequirements`, which takes a comma-separated list of other attributes:
 
         set_foo = 42;
         set_bar = "baz";
         set_default_CERequirements = "foo,bar";
 
-- **For HTCondor-CE < 4**, set  the `default_remote_cerequirements` attribute, which can take the following form:
+- **For HTCondor-CE < 4:** use `set_default_remote_cerequirements`, which takes the following form:
 
-        default_remote_cerequirements = "foo == 42 && bar == \"baz\" && ..."
+        set_default_remote_cerequirements = "foo == 42 && bar == \"baz\" && ..."
 
     Note that escaped double-quotes are required for string values.
 
