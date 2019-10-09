@@ -42,6 +42,7 @@ pages:
     - 'Install XRootD SE': 'data/xrootd/install-storage-element.md'
     - 'Configure Authorization': 'data/xrootd/xrootd-authorization.md'
     - 'Using XRootD': 'data/xrootd/install-client.md'
+    - 'Install CMS Xcache': 'data/xrootd/install-cms-xcache.md'
   - StashCache:
     - 'StashCache Overview': 'data/stashcache/overview.md'
     - 'Install StashCache Cache': 'data/stashcache/install-cache.md'
