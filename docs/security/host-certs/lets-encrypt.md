@@ -12,6 +12,7 @@ Let's Encrypt uses an automated script named [certbot](https://certbot.eff.org) 
 (such as [HTCondor-CE View service](https://opensciencegrid.github.io/docs/compute-element/install-htcondor-ce/#install-and-run-the-htcondor-ce-view))
 must be temporarily stopped before running `certbot`.
 In addition, port 80 must be open to the world while `certbot` is running.
+If this is a problem, see the [alternate renewal methods](#alternate-renewal-methods) section below.
 Let's Encrypt host certs expire every three months so it is important to set up automated renewal.
 
 EL7 and Newer
@@ -160,6 +161,24 @@ ExecStart=/usr/bin/certbot renew --quiet --agree-tos \
              --post-hook /root/bin/certbot-post.sh
 ```
 
+
+### Alternate renewal methods
+
+There are some cases in which you might need an alternative to running `certbot` as above.
+For example:
+
+- you have a web server running on port 80 that you do not want to shut down during renewal
+- you cannot open up port 80 during renewal
+- you want a wildcard certificate
+- you want to run the renewal on a different machine than where the cert will be used
+
+[Certbot plugins](https://certbot.eff.org/docs/using.html#getting-certificates-and-choosing-plugins) may help in these
+cases.
+
+- The Apache, Nginx, and Webroot plugins integrate with an already running web server to allow renewal
+without shutting the webserver down.
+- One of the DNS plugins can be used to avoid using port 80, run on a different machine, or obtain a wildcard cert.
+- If all else fails, the manual plugin can be used for manual renewal.
 
 
 References
