@@ -134,7 +134,7 @@ As a reminder, here are common service commands (all run as `root`) for EL7:
 | Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`  |
 | Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>` |
 
-### Public cache services
+### CMS Xcache services
 
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
@@ -144,9 +144,9 @@ As a reminder, here are common service commands (all run as `root`) for EL7:
 |  | `xrootd-renew-proxy.timer` | Trigger daily proxy renewal |
 
 
-### Authenticated cache services (optional)
+### CMS Xcache cmsd (optional)
 
-In addition to the public cache services, there are three systemd units specific to the authenticated cache.
+In addition to the cache services if your cache is composed of several hosts then you need to run the service`cmsd`
 
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
@@ -156,47 +156,24 @@ In addition to the public cache services, there are three systemd units specific
 Validating the Cache
 ---------------------
 
-The cache server functions as a normal HTTP server and can interact with typical HTTP clients, such as `curl`.
+The cache server functions as a normal CMS Xrootd server so use first a personal CMS X509 voms proxy like this
 
+```
+=== VO cms extension information ===
+VO        : cms
+subject   : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=efajardo/CN=722781/CN=Edgar Fajardo Hernandez
+issuer    : /DC=ch/DC=cern/OU=computers/CN=lcg-voms2.cern.ch
+attribute : /cms/Role=NULL/Capability=NULL
+attribute : /cms/uscms/Role=NULL/Capability=NULL
+timeleft  : 71:59:46
+uri       : lcg-voms2.cern.ch:15002
+```
+
+Then test using xrdcp directly in your cache
 
 ```console
-user@host $ curl -O http://cache_host:8000/user/dweitzel/public/blast/queries/query1
+user@host $ xrdcp -vf -d 1 root://cache_host:1094//store/data/Run2017B/SingleElectron/MINIAOD/31Mar2018-v1/60000/9E0F8458-EA37-E811-93F1-008CFAC919F0.root /dev/null
 ```
-
-`curl` may not correctly report a failure, so verify that the contents of the file are:
-```
->Derek's first query!
-MPVSDSGFDNSSKTMKDDTIPTEDYEEITKESEMGDATKITSKIDANVIEKKDTDSENNITIAQDDEKVSWLQRVVEFFE
-```
-
-### Test cache server reporting to the central collector
-
-To verify the cache is reporting to the central collector, run the following command from the cache server:
-
-```console
-user@host $ condor_status -any -pool collector.opensciencegrid.org:9619 \
-                          -l -const "Name==\"xrootd@`hostname`\""
-```
-
-The output of the above command should detail what the collector knows about the status of your cache.
-Here is an example snippet of the output:
-```
-AuthenticatedIdentity = "sc-cache.chtc.wisc.edu@daemon.opensciencegrid.org"
-AuthenticationMethod = "GSI"
-free_cache_bytes = 868104454144
-free_cache_fraction = 0.8022261674321525
-LastHeardFrom = 1552002482
-most_recent_access_time = 1551997049
-MyType = "Machine"
-Name = "xrootd@sc-cache.chtc.wisc.edu"
-ping_elapsed_time = 0.00763392448425293
-ping_response_code = 0
-ping_response_message = "[SUCCESS] "
-ping_response_status = "ok"
-STASHCACHE_DaemonVersion = "1.0.0"
-...
-```
-
 
 
 Getting Help
