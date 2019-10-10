@@ -7,16 +7,24 @@ for more details.
 Let's Encrypt can be used to obtain host certificates as an alternative to InCommon if your institution does not have
 an InCommon subscription.
 
+Let's Encrypt uses an automated script named [certbot](https://certbot.eff.org) for requesting and renewing host certs.
+`certbot` binds to port 80 when running, so services running on port 80
+(such as [HTCondor-CE View service](https://opensciencegrid.github.io/docs/compute-element/install-htcondor-ce/#install-and-run-the-htcondor-ce-view))
+must be temporarily stopped before running `certbot`.
+Let's Encrypt host certs expire every three months so it is important to set up automated renewal.
+
+EL7 and Newer
+-------------
+This section contains instructions for EL7 and newer systems, using systemd timers and `certbot` from an RPM.
+
+### Installation and Obtaining the Initial Certificate
+
 1. Install the `certbot` package (available from the EPEL 7 repository):
 
         :::console
         root@host # yum install certbot
 
-1. If you have any service running on port 80, you will have to disable it temporarily to obtain certificates, as Let's
-   Encrypt needs to bind on it temporarily in order to verify the host.
-   For instance, if you already have an HTCondor-CE set up with the
-   [HTCondor-CE View service](https://opensciencegrid.github.io/docs/compute-element/install-htcondor-ce/#install-and-run-the-htcondor-ce-view)
-   running, stop the HTCondor-CE View service, as it listens on port 80.
+1. Stop services running on port 80 if there are any.
 
 1. Run the following command to obtain the host certificate with Let's Encrypt:
 
@@ -26,42 +34,31 @@ an InCommon subscription.
 1. Set up hostcert/hostkey links:
 
         :::console
-        root@host # ln -s /etc/letsencrypt/live/*/cert.pem /etc/grid-security/hostcert.pem
-        root@host # ln -s /etc/letsencrypt/live/*/privkey.pem /etc/grid-security/hostkey.pem
+        root@host # ln -sf /etc/letsencrypt/live/*/cert.pem /etc/grid-security/hostcert.pem
+        root@host # ln -sf /etc/letsencrypt/live/*/privkey.pem /etc/grid-security/hostkey.pem
         root@host # chmod 0600 /etc/letsencrypt/archive/*/privkey*.pem
 
+1. Restart services running on port 80 if there were any.
 
-Renewing Let's Encrypt host certificates
-----------------------------------------
 
-Before the host certificate expires, you can renew it with the following command:
+### Renewing Let's Encrypt host certificates
+
+You can manually renew with the following command:
 
 ``` console
 root@host # certbot renew
 ```
 
+The certificate will be renewed if it is close to expiring.
+ 
 !!!note
-   Renewing a certificate requires you to temporarily disable services running on port 80 so that
-   certbot can bind to it to verify the host.
+   Just like with obtaining a new certificate, renewing a certificate requires you to temporarily disable
+   services running on port 80 so that `certbot` can verify the host.
+ 
 
-To automate the renewal process, you need to choose between using a cron job (SL6 and SL7 hosts) and a systemd timer
-(SL7 hosts only).
-The two sections below outline both methods for automatically renewing your certificate.
+#### Automating renewals using systemd timers
 
-
-Automating renewals using cron
-------------------------------
-
-To automate a monthly renewal with a cron job; you can create `/etc/cron.d/certbot-renew` with the following
-contents:
-
-``` console
-* * 1 * * root certbot renew
-```
-
-### Automating renewals using systemd timers
-
-To automate a monthly  renewal using systemd, you'll need to create two files.
+To automate renewal using systemd, you'll need to create two files:
 The first is a service file that tells systemd how to invoke certbot.
 The second is to generate a timer file that tells systemd how often to run the service.
 The steps to setup the timer are as follows:
@@ -81,7 +78,7 @@ The steps to setup the timer are as follows:
 
         :::file
         [Unit]
-        Description=Twice daily renewal of Let's Encrypt's certificates
+        Description=Let's Encrypt renewal timer
 
         [Timer]
         OnCalendar=0/12:00:00
@@ -96,13 +93,10 @@ The steps to setup the timer are as follows:
         :::console
         root@host # systemctl daemon-reload
 
-1. Start and enable the certbot service and timer:
+1. Start and enable the certbot timer:
 
         :::console
-        root@host # systemctl start certbot.service
-        root@host # systemctl enable certbot.service
-        root@host # systemctl start certbot.timer
-        root@host # systemctl enable certbot.timer
+        root@host # systemctl enable --now certbot.timer
 
 You can verify that the timer is active by running `systemctl list-timers`.
 
@@ -111,12 +105,68 @@ You can verify that the timer is active by running `systemctl list-timers`.
     without warnings if the service does not run correctly.
 
 
+### Pre- and post-renewal hooks
+
+Sometimes you want to run commands before and after cert renewal.
+Some uses of this are:
+
+- copy the renewed certificate so it can be used for a separate service (such as xrootd)
+- shut down and restart a service running on port 80
+
+To do this, call `certbot` with `--pre-hook <COMMAND>` for a command or script to run before renewal,
+and `--post-hook <COMMAND>` for a command or script to run after renewal.
+The command(s) will only be run if the certificate is actually renewed.
+
+
+#### Example
+
+This example is for a host running HTTPD and XRootD standalone;
+HTTPD needs to be stopped so it doesn't block port 80, and XRootD needs the cert in a separate location.
+
+Create the following scripts:
+
+**/root/bin/certbot-pre.sh**
+```bash
+#!/bin/bash
+systemctl stop httpd
+```
+
+**/root/bin/certbot-post.sh**
+```bash
+#!/bin/bash
+cd /etc/grid-security
+cp -f hostcert.pem xrd/xrdcert.pem
+cp -f hostkey.pem xrd/xrdkey.pem
+chown -R xrootd:xrootd xrd
+systemctl start httpd
+systemctl restart xrootd@standalone
+```
+
+Then call `certbot` as follows:
+
+```console
+root@host # certbot renew --pre-hook /root/bin/certbot-pre.sh \
+                          --post-hook /root/bin/certbot-post.sh
+```
+
+For automated renewal, edit the `certbot.service` file and add the `--pre-hook <COMMAND>`
+and `--post-hook <COMMAND>` arguments to the `ExecStart` line:
+
+```ini
+ExecStart=/usr/bin/certbot renew --quiet --agree-tos \
+             --pre-hook /root/bin/certbot-pre.sh \
+             --post-hook /root/bin/certbot-post.sh
+```
+
+
+
 References
-------------
+----------
 
--   [Useful OpenSSL commands (from NCSA)](http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html) - e.g. how to convert the format of your certificate.
+-   [Useful OpenSSL commands (from NCSA)](http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html) -
+    e.g. how to convert the format of your certificate.
 
--   [Official Let's Encrypt setup guide](https://letsencrypt.org/getting-started/)
+-   [Official Let's Encrypt setup guide](https://letsencrypt.org/getting-started/).
 
--   Another [Let's Encrypt setup reference](https://github.com/cilogon/letsencrypt-certificates)
+-   Another [Let's Encrypt setup reference](https://github.com/cilogon/letsencrypt-certificates).
     Under Getting your host certificate, we follow the first "Setting up" section.
