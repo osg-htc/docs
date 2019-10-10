@@ -1994,6 +1994,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#updating-to-htcondor-ce-4x" title="Updating to HTCondor-CE 4.x" class="md-nav__link">
+    Updating to HTCondor-CE 4.x
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#updating-to-htcondor-88x" title="Updating to HTCondor 8.8.x" class="md-nav__link">
     Updating to HTCondor 8.8.x
   </a>
@@ -2205,6 +2212,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#updating-to-htcondor-ce-4x" title="Updating to HTCondor-CE 4.x" class="md-nav__link">
+    Updating to HTCondor-CE 4.x
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#updating-to-htcondor-88x" title="Updating to HTCondor 8.8.x" class="md-nav__link">
     Updating to HTCondor 8.8.x
   </a>
@@ -2392,6 +2406,71 @@ No Packages marked for removal
 <p>If you are not having the expected result or having problems with Yum please see the
 <a href="../../release/yum-basics#troubleshooting">Yum troubleshooting guide</a></p>
 </div>
+<h3 id="updating-to-htcondor-ce-4x">Updating to HTCondor-CE 4.x<a class="headerlink" href="#updating-to-htcondor-ce-4x" title="Permanent link">&para;</a></h3>
+<p>The OSG 3.5 release series contains HTCondor-CE 4, a major version upgrade from the previously released versions in the OSG.
+See the HTCondor-CE 4.0.0 <a href="https://github.com/htcondor/htcondor-ce/releases/tag/v4.0.0">release notes</a> for an overview
+of the changes.
+In particular, this version includes a major reorganization of the default configuration so updates will require manual
+intervention.
+To update your HTCondor-CE host(s), perform the following steps:</p>
+<ol>
+<li>
+<p>Update all CE packages:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum update htcondor-ce <span class="s1">&#39;osg-ce*&#39;</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>The new default <code>condor_mapfile</code> is sufficient since HTCondor-CE no longer relies on GSI authentication between
+   its daemons.
+   If <code>/etc/condor-ce/condor_mapfile.rpmnew</code> exists, replace your old <code>condor_mapfile</code> with the <code>.rpmnew</code> version:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> mv /etc/condor-ce/condor_mapfile.rpmnew /etc/condor-ce/condor_mapfile
+</pre></div>
+
+
+</li>
+<li>
+<p>Merge any <code>*.rpmnew</code> files in <code>/etc/condor-ce/config.d/</code></p>
+</li>
+<li>
+<p>Additionally, you may wish to make one or more of the following optional changes:</p>
+<ul>
+<li>
+<p>HTCondor-CE now disables batch system job retries by default.
+  To re-enable job retries, set the following configuration in <code>/etc/condor-ce/config.d/99-local.conf</code>:</p>
+<div class="codehilite"><pre><span></span>ENABLE_JOB_RETRIES = True
+</pre></div>
+
+
+</li>
+<li>
+<p>For non-HTCondor sites that use <a href="../../compute-element/job-router-recipes/#setting-batch-system-directives">remote CE requirements</a>,
+  the new version of HTCondor-CE accepts a simplified format.
+  For example, a snippet from an example job route in the old format:</p>
+<div class="codehilite"><pre><span></span>set_default_remote_cerequirements = strcat(&quot;Walltime == 3600 &amp;&amp; AccountingGroup ==&quot;&quot;, x509UserProxyFirstFQAN, &quot;\&quot;&quot;);
+</pre></div>
+
+
+<p>May be rewritten as the following:</p>
+<div class="codehilite"><pre><span></span>set_WallTime = 3600;
+set_AccountingGroup = x509UserProxyFirstFQAN;
+set_default_CERequirements = &quot;Walltime,AccountingGroup&quot;;
+</pre></div>
+
+
+</li>
+</ul>
+</li>
+<li>
+<p>Reload and restart the HTCondor-CE daemons:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl daemon-reload
+<span class="gp">root@host #</span> systemctl restart condor-ce
+</pre></div>
+
+
+</li>
+</ol>
 <h3 id="updating-to-htcondor-88x">Updating to HTCondor 8.8.x<a class="headerlink" href="#updating-to-htcondor-88x" title="Permanent link">&para;</a></h3>
 <p>The OSG 3.5 release series contains HTCondor 8.8, a major version upgrade from the previously released versions in the OSG.
 See the HTCondor 8.8 manual for an overview of the

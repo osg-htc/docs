@@ -450,6 +450,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#enable-job-retries" title="Enable job retries" class="md-nav__link">
+    Enable job retries
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2457,6 +2464,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#enable-job-retries" title="Enable job retries" class="md-nav__link">
+    Enable job retries
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2808,6 +2822,7 @@ If you do not need any of the following special configurations, skip to
 <li><a href="#accounting-with-multiple-ces-or-local-user-jobs">Accounting with multiple CEs or local user jobs</a></li>
 <li><a href="#htcondor-accounting-groups">HTCondor accounting groups</a></li>
 <li><a href="#install-and-run-the-htcondor-ce-view">HTCondor-CE monitoring web interface</a></li>
+<li><a href="#enable-job-retries">Enable job retries</a></li>
 </ul>
 <h4 id="transforming-and-filtering-jobs">Transforming and filtering jobs<a class="headerlink" href="#transforming-and-filtering-jobs" title="Permanent link">&para;</a></h4>
 <p>If you need to modify or filter jobs, more information can be found in the <a href="../job-router-recipes">Job Router Recipes</a>
@@ -2985,6 +3000,17 @@ both files.</p>
 </ol>
 <p>The website is served on port 80 by default. To change this default, edit the value of <code>HTCONDORCE_VIEW_PORT</code> in
 <code>/etc/condor-ce/config.d/05-ce-view.conf</code>.</p>
+<h3 id="enable-job-retries">Enable job retries<a class="headerlink" href="#enable-job-retries" title="Permanent link">&para;</a></h3>
+<p>In HTCondor-CE 4+, batch system job retries are disabled by default.
+This is because most jobs submitted through HTCondor-CEs are actually resource requests (i.e. pilot jobs) instead of
+jobs containing user payloads.
+Therefore, it's preferred to prevent these jobs from retrying and instead wait for additional resource requests to be
+submitted.
+To re-enable job retries, set the following in your configuration:</p>
+<div class="codehilite"><pre><span></span>ENABLE_JOB_RETRIES = True
+</pre></div>
+
+
 <h2 id="using-htcondor-ce">Using HTCondor-CE<a class="headerlink" href="#using-htcondor-ce" title="Permanent link">&para;</a></h2>
 <p>As a site administrator, there are a few ways to use the HTCondor-CE:</p>
 <ul>

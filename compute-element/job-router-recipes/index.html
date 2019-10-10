@@ -3309,15 +3309,55 @@ MERGE_JOB_ROUTER_DEFAULT_ADS=True
 
 
 <h3 id="setting-batch-system-directives">Setting batch system directives<a class="headerlink" href="#setting-batch-system-directives" title="Permanent link">&para;</a></h3>
-<p>To write batch system directives that are not supported in the route examples above, you will need to edit the job submit script for your local batch system in <code>/etc/blahp/</code> (e.g., if your local batch system is PBS, edit <code>/etc/blahp/pbs_local_submit_attributes.sh</code>). This file is sourced during submit time and anything printed to stdout is appended to the batch system job submit script. ClassAd attributes can be passed from the routed job to the local submit attributes script via the <code>default_remote_cerequirements</code> attribute, which can take the following form:</p>
-<div class="codehilite"><pre><span></span>default_remote_cerequirements = &quot;foo == X &amp;&amp; bar == \&quot;Y\&quot; &amp;&amp; ...&quot;
+<p>To write batch system directives that are not supported in the route examples above, you will need to edit the job
+submit script for your local batch system in <code>/etc/blahp/</code> (e.g., if your local batch system is PBS, edit
+<code>/etc/blahp/pbs_local_submit_attributes.sh</code>).
+This file is sourced during submit time and anything printed to stdout is appended to the batch system job submit
+script.
+ClassAd attributes can be passed from the routed job to the local submit attributes script through one of the following
+methods, depending on your version of HTCondor-CE:</p>
+<ul>
+<li>
+<p><strong>For HTCondor-CE &gt;= 4:</strong> use <code>set_default_CERequirements</code>, which takes a comma-separated list of other attributes:</p>
+<div class="codehilite"><pre><span></span>set_foo = 42;
+set_bar = &quot;baz&quot;;
+set_default_CERequirements = &quot;foo,bar&quot;;
 </pre></div>
 
 
-<p>This sets <code>foo</code> to value <code>X</code> and <code>bar</code> to the string <code>Y</code> (escaped double-quotes are required for string values) in the environment of the local submit attributes script. The following example sets the maximum walltime to 1 hour and the accounting group to the <code>x509UserProxyFirstFQAN</code> attribute of the job submitted to a PBS batch system</p>
+</li>
+<li>
+<p><strong>For HTCondor-CE &lt; 4:</strong> use <code>set_default_remote_cerequirements</code>, which takes the following form:</p>
+<div class="codehilite"><pre><span></span>set_default_remote_cerequirements = &quot;foo == 42 &amp;&amp; bar == \&quot;baz\&quot; &amp;&amp; ...&quot;
+</pre></div>
+
+
+<p>Note that escaped double-quotes are required for string values.</p>
+</li>
+</ul>
+<p>Both of the examples above set <code>foo</code> to value <code>42</code> and <code>bar</code> to the string <code>baz</code> in the environment of the local submit
+attributes script.
+The following examples set the maximum walltime to 1 hour and the accounting group to the <code>x509UserProxyFirstFQAN</code>
+attribute of the job submitted to a PBS batch system:</p>
+<ul>
+<li>
+<p><strong>For HTCondor-CE &gt;= 4</strong>:</p>
 <div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre [
      GridResource = &quot;batch pbs&quot;;
-     TargetUniverse = 9;
+     name = &quot;Setting job submit variables&quot;;
+<span class="hll">     set_Walltime = 3600;
+</span><span class="hll">     set_AccountingGroup = x509UserProxyFirstFQAN;
+</span><span class="hll">     set_default_remote_CERequirements = &quot;Walltime,AccountingGroup&quot;;
+</span>]
+@jre
+</pre></div>
+
+
+</li>
+<li>
+<p><strong>For HTCondor-CE &lt; 4</strong>:</p>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre [
+     GridResource = &quot;batch pbs&quot;;
      name = &quot;Setting job submit variables&quot;;
 <span class="hll">     set_default_remote_cerequirements = strcat(&quot;Walltime == 3600 &amp;&amp; AccountingGroup ==&quot;&quot;, x509UserProxyFirstFQAN, &quot;\&quot;&quot;);
 </span>]
@@ -3325,6 +3365,8 @@ MERGE_JOB_ROUTER_DEFAULT_ADS=True
 </pre></div>
 
 
+</li>
+</ul>
 <p>With <code>/etc/blahp/pbs_local_submit_attributes.sh</code> containing.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
