@@ -12,12 +12,12 @@ Let's Encrypt uses an automated script named [certbot](https://certbot.eff.org) 
 (such as [HTCondor-CE View service](https://opensciencegrid.github.io/docs/compute-element/install-htcondor-ce/#install-and-run-the-htcondor-ce-view))
 must be temporarily stopped before running `certbot`.
 In addition, port 80 must be open to the world while `certbot` is running.
-If this is a problem, see the [alternate renewal methods](#alternate-renewal-methods) section below.
+If this does not work for your host, see the [alternate renewal methods](#alternate-renewal-methods) section below.
 Let's Encrypt host certs expire every three months so it is important to set up automated renewal.
 
-EL7 and Newer
+Enterprise Linux 7+
 -------------
-This section contains instructions for EL7 and newer systems, using systemd timers and `certbot` from an RPM.
+This section contains instructions for Enterprise Linux 7 and newer operating systems, using systemd timers and `certbot` from an RPM.
 
 ### Installation and Obtaining the Initial Certificate
 
@@ -45,7 +45,7 @@ This section contains instructions for EL7 and newer systems, using systemd time
 
 ### Renewing Let's Encrypt host certificates
 
-You can manually renew with the following command:
+You can manually renew your certificate with the following command:
 
 ``` console
 root@host # certbot renew
@@ -53,7 +53,7 @@ root@host # certbot renew
 
 The certificate will be renewed if it is close to expiring.
  
-!!!note
+!!!note "Disable services listening on port 80"
    Just like with obtaining a new certificate, renewing a certificate requires you to temporarily disable
    services running on port 80 so that `certbot` can verify the host.
  
@@ -109,12 +109,12 @@ You can verify that the timer is active by running `systemctl list-timers`.
 
 ### Pre- and post-renewal hooks
 
-Sometimes you want to run commands before and after cert renewal.
-Some uses of this are:
+`certbot` provides the ability to run scripts before and/or after certificate renewal via command hooks.
+Common uses for these hooks include:
 
-- copy the renewed certificate so it can be used for a separate service (such as xrootd)
-- shut down and restart a service running on port 80
-- temporarily open up a firewall
+- Copying the renewed certificate so that it can be used for a separate service (such as XRootD)
+- Shutting down and restarting a service running on port 80
+- Temporarily opening up the firewall
 
 To do this, call `certbot` with `--pre-hook <COMMAND>` for a command or script to run before renewal,
 and `--post-hook <COMMAND>` for a command or script to run after renewal.
@@ -124,7 +124,7 @@ The command(s) will only be run if the certificate is actually renewed.
 #### Example
 
 This example is for a host running CEView and XRootD standalone;
-CEView needs to be stopped so it doesn't block port 80, and XRootD needs the cert in a separate location.
+CEView needs to be stopped so it doesn't block port 80, and XRootD needs its certificate in a separate location.
 
 Create the following scripts:
 
@@ -152,7 +152,7 @@ root@host # certbot renew --pre-hook /root/bin/certbot-pre.sh \
                           --post-hook /root/bin/certbot-post.sh
 ```
 
-For automated renewal, edit the `certbot.service` file and add the `--pre-hook <COMMAND>`
+For automated renewal, edit the `certbot.service` file that you created [above](#automating-renewals-using-systemd-timers) and add the `--pre-hook <COMMAND>`
 and `--post-hook <COMMAND>` arguments to the `ExecStart` line:
 
 ```ini
@@ -167,10 +167,10 @@ ExecStart=/usr/bin/certbot renew --quiet --agree-tos \
 There are some cases in which you might need an alternative to running `certbot` as above.
 For example:
 
-- you have a web server running on port 80 that you do not want to shut down during renewal
-- you cannot open up port 80 during renewal
-- you want a wildcard certificate
-- you want to run the renewal on a different machine than where the cert will be used
+- You have a web server running on port 80 that you do not want to shut down during renewal
+- You cannot open port 80 during renewal
+- You want a wildcard certificate
+- You want to run the renewal on a different machine than where the certificate will be used
 
 [Certbot plugins](https://certbot.eff.org/docs/using.html#getting-certificates-and-choosing-plugins) may help in these
 cases.
