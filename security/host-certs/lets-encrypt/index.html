@@ -1002,15 +1002,23 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#renewing-lets-encrypt-host-certificates" title="Renewing Let's Encrypt host certificates" class="md-nav__link">
-    Renewing Let's Encrypt host certificates
+  <a href="#enterprise-linux-7" title="Enterprise Linux 7+" class="md-nav__link">
+    Enterprise Linux 7+
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation-and-obtaining-the-initial-certificate" title="Installation and Obtaining the Initial Certificate" class="md-nav__link">
+    Installation and Obtaining the Initial Certificate
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#automating-renewals-using-cron" title="Automating renewals using cron" class="md-nav__link">
-    Automating renewals using cron
+        
+          <li class="md-nav__item">
+  <a href="#renewing-lets-encrypt-host-certificates" title="Renewing Let's Encrypt host certificates" class="md-nav__link">
+    Renewing Let's Encrypt host certificates
   </a>
   
     <nav class="md-nav">
@@ -1019,6 +1027,38 @@
           <li class="md-nav__item">
   <a href="#automating-renewals-using-systemd-timers" title="Automating renewals using systemd timers" class="md-nav__link">
     Automating renewals using systemd timers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pre-and-post-renewal-hooks" title="Pre- and post-renewal hooks" class="md-nav__link">
+    Pre- and post-renewal hooks
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" title="Example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternate-renewal-methods" title="Alternate renewal methods" class="md-nav__link">
+    Alternate renewal methods
   </a>
   
 </li>
@@ -2217,15 +2257,23 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#renewing-lets-encrypt-host-certificates" title="Renewing Let's Encrypt host certificates" class="md-nav__link">
-    Renewing Let's Encrypt host certificates
+  <a href="#enterprise-linux-7" title="Enterprise Linux 7+" class="md-nav__link">
+    Enterprise Linux 7+
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation-and-obtaining-the-initial-certificate" title="Installation and Obtaining the Initial Certificate" class="md-nav__link">
+    Installation and Obtaining the Initial Certificate
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#automating-renewals-using-cron" title="Automating renewals using cron" class="md-nav__link">
-    Automating renewals using cron
+        
+          <li class="md-nav__item">
+  <a href="#renewing-lets-encrypt-host-certificates" title="Renewing Let's Encrypt host certificates" class="md-nav__link">
+    Renewing Let's Encrypt host certificates
   </a>
   
     <nav class="md-nav">
@@ -2234,6 +2282,38 @@
           <li class="md-nav__item">
   <a href="#automating-renewals-using-systemd-timers" title="Automating renewals using systemd timers" class="md-nav__link">
     Automating renewals using systemd timers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pre-and-post-renewal-hooks" title="Pre- and post-renewal hooks" class="md-nav__link">
+    Pre- and post-renewal hooks
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" title="Example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternate-renewal-methods" title="Alternate renewal methods" class="md-nav__link">
+    Alternate renewal methods
   </a>
   
 </li>
@@ -2275,6 +2355,16 @@ see the <a href="https://opensciencegrid.github.io/security/LetsEncryptOSGCAbund
 for more details.
 Let's Encrypt can be used to obtain host certificates as an alternative to InCommon if your institution does not have
 an InCommon subscription.</p>
+<p>Let's Encrypt uses an automated script named <a href="https://certbot.eff.org">certbot</a> for requesting and renewing host certs.
+<code>certbot</code> binds to port 80 when running, so services running on port 80
+(such as <a href="https://opensciencegrid.github.io/docs/compute-element/install-htcondor-ce/#install-and-run-the-htcondor-ce-view">HTCondor-CE View service</a>)
+must be temporarily stopped before running <code>certbot</code>.
+In addition, port 80 must be open to the world while <code>certbot</code> is running.
+If this does not work for your host, see the <a href="#alternate-renewal-methods">alternate renewal methods</a> section below.
+Let's Encrypt host certs expire every three months so it is important to set up automated renewal.</p>
+<h2 id="enterprise-linux-7">Enterprise Linux 7+<a class="headerlink" href="#enterprise-linux-7" title="Permanent link">&para;</a></h2>
+<p>This section contains instructions for Enterprise Linux 7 and newer operating systems, using systemd timers and <code>certbot</code> from an RPM.</p>
+<h3 id="installation-and-obtaining-the-initial-certificate">Installation and Obtaining the Initial Certificate<a class="headerlink" href="#installation-and-obtaining-the-initial-certificate" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
 <p>Install the <code>certbot</code> package (available from the EPEL 7 repository):</p>
@@ -2284,11 +2374,7 @@ an InCommon subscription.</p>
 
 </li>
 <li>
-<p>If you have any service running on port 80, you will have to disable it temporarily to obtain certificates, as Let's
-   Encrypt needs to bind on it temporarily in order to verify the host.
-   For instance, if you already have an HTCondor-CE set up with the
-   <a href="https://opensciencegrid.github.io/docs/compute-element/install-htcondor-ce/#install-and-run-the-htcondor-ce-view">HTCondor-CE View service</a>
-   running, stop the HTCondor-CE View service, as it listens on port 80.</p>
+<p>Stop services running on port 80 if there are any.</p>
 </li>
 <li>
 <p>Run the following command to obtain the host certificate with Let's Encrypt:</p>
@@ -2299,37 +2385,31 @@ an InCommon subscription.</p>
 </li>
 <li>
 <p>Set up hostcert/hostkey links:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> ln -s /etc/letsencrypt/live/*/cert.pem /etc/grid-security/hostcert.pem
-<span class="gp">root@host #</span> ln -s /etc/letsencrypt/live/*/privkey.pem /etc/grid-security/hostkey.pem
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> ln -sf /etc/letsencrypt/live/*/cert.pem /etc/grid-security/hostcert.pem
+<span class="gp">root@host #</span> ln -sf /etc/letsencrypt/live/*/privkey.pem /etc/grid-security/hostkey.pem
 <span class="gp">root@host #</span> chmod <span class="m">0600</span> /etc/letsencrypt/archive/*/privkey*.pem
 </pre></div>
 
 
 </li>
+<li>
+<p>Restart services running on port 80 if there were any.</p>
+</li>
 </ol>
-<h2 id="renewing-lets-encrypt-host-certificates">Renewing Let's Encrypt host certificates<a class="headerlink" href="#renewing-lets-encrypt-host-certificates" title="Permanent link">&para;</a></h2>
-<p>Before the host certificate expires, you can renew it with the following command:</p>
+<h3 id="renewing-lets-encrypt-host-certificates">Renewing Let's Encrypt host certificates<a class="headerlink" href="#renewing-lets-encrypt-host-certificates" title="Permanent link">&para;</a></h3>
+<p>You can manually renew your certificate with the following command:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> certbot renew
 </pre></div>
 
 
+<p>The certificate will be renewed if it is close to expiring.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
+<p class="admonition-title">Disable services listening on port 80</p>
 </div>
-<p>Renewing a certificate requires you to temporarily disable services running on port 80 so that
-   certbot can bind to it to verify the host.</p>
-<p>To automate the renewal process, you need to choose between using a cron job (SL6 and SL7 hosts) and a systemd timer
-(SL7 hosts only).
-The two sections below outline both methods for automatically renewing your certificate.</p>
-<h2 id="automating-renewals-using-cron">Automating renewals using cron<a class="headerlink" href="#automating-renewals-using-cron" title="Permanent link">&para;</a></h2>
-<p>To automate a monthly renewal with a cron job; you can create <code>/etc/cron.d/certbot-renew</code> with the following
-contents:</p>
-<div class="codehilite"><pre><span></span><span class="go">* * 1 * * root certbot renew</span>
-</pre></div>
-
-
-<h3 id="automating-renewals-using-systemd-timers">Automating renewals using systemd timers<a class="headerlink" href="#automating-renewals-using-systemd-timers" title="Permanent link">&para;</a></h3>
-<p>To automate a monthly  renewal using systemd, you'll need to create two files.
+<p>Just like with obtaining a new certificate, renewing a certificate requires you to temporarily disable
+   services running on port 80 so that <code>certbot</code> can verify the host.</p>
+<h4 id="automating-renewals-using-systemd-timers">Automating renewals using systemd timers<a class="headerlink" href="#automating-renewals-using-systemd-timers" title="Permanent link">&para;</a></h4>
+<p>To automate renewal using systemd, you'll need to create two files:
 The first is a service file that tells systemd how to invoke certbot.
 The second is to generate a timer file that tells systemd how often to run the service.
 The steps to setup the timer are as follows:</p>
@@ -2350,7 +2430,7 @@ ExecStart=/usr/bin/certbot renew --quiet --agree-tos
 <p>Once the certbot service is working correctly, you will need to create the timer file.
    Create the timer file at <code>/etc/systemd/system/certbot.timer</code>) with the following contents:</p>
 <div class="codehilite"><pre><span></span>[Unit]
-Description=Twice daily renewal of Let&#39;s Encrypt&#39;s certificates
+Description=Let&#39;s Encrypt renewal timer
 
 [Timer]
 OnCalendar=0/12:00:00
@@ -2371,11 +2451,8 @@ WantedBy=timers.target
 
 </li>
 <li>
-<p>Start and enable the certbot service and timer:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl start certbot.service
-<span class="gp">root@host #</span> systemctl <span class="nb">enable</span> certbot.service
-<span class="gp">root@host #</span> systemctl start certbot.timer
-<span class="gp">root@host #</span> systemctl <span class="nb">enable</span> certbot.timer
+<p>Start and enable the certbot timer:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl <span class="nb">enable</span> --now certbot.timer
 </pre></div>
 
 
@@ -2387,16 +2464,80 @@ WantedBy=timers.target
 <p>Verify that the service has started correctly by running <code>systemctl status certbot.service</code>. The timer may fail
 without warnings if the service does not run correctly.</p>
 </div>
+<h3 id="pre-and-post-renewal-hooks">Pre- and post-renewal hooks<a class="headerlink" href="#pre-and-post-renewal-hooks" title="Permanent link">&para;</a></h3>
+<p><code>certbot</code> provides the ability to run scripts before and/or after certificate renewal via command hooks.
+Common uses for these hooks include:</p>
+<ul>
+<li>Copying the renewed certificate so that it can be used for a separate service (such as XRootD)</li>
+<li>Shutting down and restarting a service running on port 80</li>
+<li>Temporarily opening up the firewall</li>
+</ul>
+<p>To do this, call <code>certbot</code> with <code>--pre-hook &lt;COMMAND&gt;</code> for a command or script to run before renewal,
+and <code>--post-hook &lt;COMMAND&gt;</code> for a command or script to run after renewal.
+The command(s) will only be run if the certificate is actually renewed.</p>
+<h4 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h4>
+<p>This example is for a host running CEView and XRootD standalone;
+CEView needs to be stopped so it doesn't block port 80, and XRootD needs its certificate in a separate location.</p>
+<p>Create the following scripts:</p>
+<p><strong>/root/bin/certbot-pre.sh</strong></p>
+<div class="codehilite"><pre><span></span><span class="ch">#!/bin/bash</span>
+condor_ce_off -daemon CEVIEW
+</pre></div>
+
+
+<p><strong>/root/bin/certbot-post.sh</strong></p>
+<div class="codehilite"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nb">cd</span> /etc/grid-security
+cp -f hostcert.pem xrd/xrdcert.pem
+cp -f hostkey.pem xrd/xrdkey.pem
+chown -R xrootd:xrootd xrd
+condor_ce_on -daemon CEVIEW
+systemctl restart xrootd@standalone
+</pre></div>
+
+
+<p>Then call <code>certbot</code> as follows:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> certbot renew --pre-hook /root/bin/certbot-pre.sh <span class="se">\</span>
+                          --post-hook /root/bin/certbot-post.sh
+</pre></div>
+
+
+<p>For automated renewal, edit the <code>certbot.service</code> file that you created <a href="#automating-renewals-using-systemd-timers">above</a> and add the <code>--pre-hook &lt;COMMAND&gt;</code>
+and <code>--post-hook &lt;COMMAND&gt;</code> arguments to the <code>ExecStart</code> line:</p>
+<div class="codehilite"><pre><span></span><span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/bin/certbot renew --quiet --agree-tos \</span>
+<span class="s">             --pre-hook /root/bin/certbot-pre.sh \</span>
+<span class="s">             --post-hook /root/bin/certbot-post.sh</span>
+</pre></div>
+
+
+<h3 id="alternate-renewal-methods">Alternate renewal methods<a class="headerlink" href="#alternate-renewal-methods" title="Permanent link">&para;</a></h3>
+<p>There are some cases in which you might need an alternative to running <code>certbot</code> as above.
+For example:</p>
+<ul>
+<li>You have a web server running on port 80 that you do not want to shut down during renewal</li>
+<li>You cannot open port 80 during renewal</li>
+<li>You want a wildcard certificate</li>
+<li>You want to run the renewal on a different machine than where the certificate will be used</li>
+</ul>
+<p><a href="https://certbot.eff.org/docs/using.html#getting-certificates-and-choosing-plugins">Certbot plugins</a> may help in these
+cases.</p>
+<ul>
+<li>The Apache, Nginx, and Webroot plugins integrate with an already running web server to allow renewal
+without shutting the webserver down.</li>
+<li>One of the DNS plugins can be used to avoid using port 80, run on a different machine, or obtain a wildcard cert.</li>
+<li>If all else fails, the manual plugin can be used for manual renewal.</li>
+</ul>
 <h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
-<p><a href="http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html">Useful OpenSSL commands (from NCSA)</a> - e.g. how to convert the format of your certificate.</p>
+<p><a href="http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html">Useful OpenSSL commands (from NCSA)</a> -
+    e.g. how to convert the format of your certificate.</p>
 </li>
 <li>
-<p><a href="https://letsencrypt.org/getting-started/">Official Let's Encrypt setup guide</a></p>
+<p><a href="https://letsencrypt.org/getting-started/">Official Let's Encrypt setup guide</a>.</p>
 </li>
 <li>
-<p>Another <a href="https://github.com/cilogon/letsencrypt-certificates">Let's Encrypt setup reference</a>
+<p>Another <a href="https://github.com/cilogon/letsencrypt-certificates">Let's Encrypt setup reference</a>.
     Under Getting your host certificate, we follow the first "Setting up" section.</p>
 </li>
 </ul>
