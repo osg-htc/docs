@@ -10,13 +10,13 @@ Summary of changes
 This release contains:
 
 -   HTCondor-CE 4.0.1
+    -   [Some manual adjustments are required](/release/release_series#updating-to-htcondor-ce-4x)
     -   4.0.0: [Major feature update](https://github.com/htcondor/htcondor-ce/releases/tag/v4.0.0)
         -   SciTokens support
         -   Disabled job retries
         -   Simplified remote CE requirements format for non-HTCondor batch systems
         -   Major configuration reorganization
     -   4.0.1: [bug fix](https://github.com/htcondor/htcondor-ce/releases/tag/v4.0.1)
-    -   [Some manual adjustments are requiread](/release/release_series#updating-to-htcondor-ce-4x)
 -   OSG CE 3.5-2: Carries OSG specific CE configurations
 -   [CVMFS 2.6.3](https://cvmfs.readthedocs.io/en/2.6/cpt-releasenotes.html): Bug fix release
 -   [Frontier-Squid 4.8-2](http://frontier.cern.ch/dist/frontier-squid-releasenotes.txt): Add support for shoal-agent
