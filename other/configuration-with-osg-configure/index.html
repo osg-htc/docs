@@ -3462,9 +3462,12 @@ description and <a href="../../site-planning">Site Planning</a> discussions for 
 </tbody>
 </table>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>All of these can be defined in terms of an environment variable
-(e.g. <code>$FOO</code>) that will be evaluated on the worker node.</p>
+<p class="admonition-title">Dynamic worker node paths</p>
+<p>The above variables may be set to an environment variable that is set on your site's worker nodes.
+For example, if each of your worker nodes has a different location for its scratch directory specified by
+<code>LOCAL_SCRATCH_DIR</code>, set the following configuration:</p>
+<p><code>[Storage]
+worker_node_temp = $LOCAL_SCRATCH_DIR</code></p>
 </div>
 <p><strong>grid_dir</strong>:<br/>
 If you have installed the worker node client via RPM (the normal case) it
