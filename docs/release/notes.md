@@ -20,6 +20,7 @@ To update to the OSG 3.5 series, please consult the page on
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.5.2](/release/3.5/release-3-5-2)       | 2019-10-10 | HTCondor-CE 4.0.1, OSG CE 3.5-2, CVMFS 2.6.3, Frontier-Squid 4.8-2, CCTools 7.0.18, VO Package v96 |
 | [3.5.1](/release/3.5/release-3-5-1)       | 2019-09-19 | High Priority Release: MyProxy 6.2.6, GSI-OpenSSH, Globus GridFTP Server|
 | [3.5.0](/release/3.5/release-3-5-0)       | 2019-08-30 | CVMFS 2.6.2, HTCondor 8.8.4, XCache 1.1.1, OSG XRootD 3.5, OSG Configure 3.0.0, XRootD LCMAPS 1.7.4, XRootD HDFS 2.1.6; Upcoming: HTCondor 8.9.2 |
 
@@ -34,6 +35,7 @@ regular support will end in **February 2020** and critical bug/security support 
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.36](/release/3.4/release-3-4-36)     | 2019-10-10 | CVMFS 2.6.3, Frontier-Squid 4.8-2, CCTools 7.0.18, Singularity 3.4.1, LCMAPS 1.6.6-1.9, VO Package v96 |
 | [3.4.35](/release/3.4/release-3-4-35)     | 2019-09-19 | High Priority Release: MyProxy 6.2.6, GSI-OpenSSH, Globus GridFTP Server, Singularity 3.4.0, GlideinWMS 3.4.6 |
 | [3.4.34](/release/3.4/release-3-4-34)     | 2019-08-29 | XCache 1.1.1, osg-configure 2.4.1, osg-xrootd 3.4.4, xrootd-hdfs 2.1.6, xrootd-lcmaps 1.7.4, MyProxy 6.2.4, CCTools 7.0.14, osg-system-profiler 1.4.3 |
 | [3.4.33](/release/3.4/release-3-4-33)     | 2019-08-01 | Frontier Squid 4.8, XRootD 4.10.0, cvmfs-x509-helper 2.0                |
