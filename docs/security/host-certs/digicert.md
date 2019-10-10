@@ -8,11 +8,10 @@ DigiCert IGTF Host Certificates
 This document describes how to purchase individual IGTF-accredited host certificates from [DigiCert](https://www.digicert.com/).
 Before purchasing individual certificates, consider the following alternatives:
 
-1. Support a VO that requires IGTF-accredited certificates (e.g. `ATLAS` or `CMS`).
-   If you don't support such a VO, we recommend requesting a [Let's Encrypt certificate](/security/host-certs/lets-encrypt.md)
-1. Don't have access to an InCommon subscription.
-   If your institution does have an InCommon subscription, we recommend requesting an
-   [InCommon certificate](/security/host-certs/incommon.md).
+1. Request a [Let's Encrypt certificate](/security/host-certs/lets-encrypt.md)
+   if you don't support any VOs that require IGTF-accredited certificates (e.g. `ATLAS` or `CMS`).
+1. Request an [InCommon certificate](/security/host-certs/incommon.md)
+   if your institution has an InCommon subscription.
 
 Before Starting
 ---------------
