@@ -162,9 +162,113 @@ ExecStart=/usr/bin/certbot renew --quiet --agree-tos \
 ```
 
 
-### Alternate renewal methods
+Enterprise Linux 6
+------------------
+This section contains instructions for Enterprise Linux 6 and newer operating systems,
+using cron and the `certbot-auto` script.
 
-There are some cases in which you might need an alternative to running `certbot` as above.
+### Installation and Obtaining the Initial Certificate
+
+1. Download and install certbot-auto as described in the
+   [install instructions](https://certbot.eff.org/docs/install.html#certbot-auto).
+
+1. Stop services running on port 80 if there are any.
+
+1. Run the following command to obtain the host certificate with Let's Encrypt:
+
+        :::console
+        root@host # certbot-auto certonly --standalone --email <ADMIN_EMAIL> -d <HOST>
+
+1. Set up hostcert/hostkey links:
+
+        :::console
+        root@host # ln -sf /etc/letsencrypt/live/*/cert.pem /etc/grid-security/hostcert.pem
+        root@host # ln -sf /etc/letsencrypt/live/*/privkey.pem /etc/grid-security/hostkey.pem
+        root@host # chmod 0600 /etc/letsencrypt/archive/*/privkey*.pem
+
+1. Restart services running on port 80 if there were any.
+
+
+### Renewing Let's Encrypt host certificates
+
+You can manually renew your certificate with the following command:
+
+``` console
+root@host # certbot-auto renew
+```
+
+The certificate will be renewed if it is close to expiring.
+ 
+!!!note "Disable services listening on port 80"
+   Just like with obtaining a new certificate, renewing a certificate requires you to temporarily disable
+   services running on port 80 so that `certbot-auto` can verify the host.
+ 
+
+#### Automating renewals using cron
+
+To automate renewal using cron, create a cron job in `/etc/cron.d/certbot-renew` with the following contents:
+```file
+* */2 * * * root /usr/local/bin/certbot-auto renew --quiet --agree-tos --no-self-upgrade
+```
+The certificate will only be renewed if it is close to expiring.
+
+
+### Pre- and post-renewal hooks
+
+`certbot-auto` provides the ability to run scripts before and/or after certificate renewal via command hooks.
+Common uses for these hooks include:
+
+- Copying the renewed certificate so that it can be used for a separate service (such as XRootD)
+- Shutting down and restarting a service running on port 80
+- Temporarily opening up the firewall
+
+To do this, call `certbot-auto` with `--pre-hook <COMMAND>` for a command or script to run before renewal,
+and `--post-hook <COMMAND>` for a command or script to run after renewal.
+The command(s) will only be run if the certificate is actually renewed.
+
+
+#### Example
+
+This example is for a host running CEView and XRootD standalone;
+CEView needs to be stopped so it doesn't block port 80, and XRootD needs its certificate in a separate location.
+
+Create the following scripts:
+
+**/root/bin/certbot-pre.sh**
+```bash
+#!/bin/bash
+condor_ce_off -daemon CEVIEW
+```
+
+**/root/bin/certbot-post.sh**
+```bash
+#!/bin/bash
+cd /etc/grid-security
+cp -f hostcert.pem xrd/xrdcert.pem
+cp -f hostkey.pem xrd/xrdkey.pem
+chown -R xrootd:xrootd xrd
+condor_ce_on -daemon CEVIEW
+systemctl restart xrootd@standalone
+```
+
+Then call `certbot-auto` as follows:
+
+```console
+root@host # certbot-auto renew --pre-hook /root/bin/certbot-pre.sh \
+                               --post-hook /root/bin/certbot-post.sh
+```
+
+For automated renewal, edit the `/etc/cron.d/certbot-renew` file that you created [above](#automating-renewals-using-cron)
+and add the `--pre-hook <COMMAND>` and `--post-hook <COMMAND>` arguments:
+```file
+* */2 * * * root /usr/local/bin/certbot-auto renew --quiet --agree-tos --no-self-upgrade --pre-hook /root/bin/certbot-pre.sh --post-hook /root/bin/certbot-post.sh
+```
+
+
+Alternate renewal methods
+-------------------------
+
+There are some cases in which you might need an alternative to running `certbot` or `certbot-auto` as above.
 For example:
 
 - You have a web server running on port 80 that you do not want to shut down during renewal
@@ -179,6 +283,11 @@ cases.
 without shutting the webserver down.
 - One of the DNS plugins can be used to avoid using port 80, run on a different machine, or obtain a wildcard cert.
 - If all else fails, the manual plugin can be used for manual renewal.
+
+!!!note
+   The DNS plugins do not work with `certbot-auto`.
+   You will need to use one of the [Docker containers](https://hub.docker.com/u/certbot) if you are using
+   Enterprise Linux 6.
 
 
 References
