@@ -68,26 +68,7 @@ under `/etc/xrootd/config.d/` as follows:
 
 1.  Append the following configuration to the end of `/etc/xrootd/xrootd-standalone.cfg`
 
-        xrd.port 1094
         all.role server
-
-        cms.allow host *
-        # Logging verbosity
-        xrootd.trace emsg login stall redirect
-        ofs.trace -all
-        xrd.trace conn
-        cms.trace all
-
-        xrd.report xrd-report.osgstorage.org:9931
-        xrootd.monitor all \
-                       auth \
-                       flush 30s \
-                       window 5s fstat 60 lfn ops xfr 5 \
-                       dest redir fstat info user xrd-report.osgstorage.org:9930 \
-                       dest fstat info user xrd-mon.osgstorage.org:9930
-
-        xrd.network keepalive kaparms 10m,1m,5
-        xrd.timeout idle 60m
 
 1.  On EL 6, set the default options to use the standalone configuration in the `/etc/sysconfig/xrootd` file.
 
