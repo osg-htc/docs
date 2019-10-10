@@ -4,7 +4,7 @@ OSG Software Release 3.5.2
 **Release Date:** 2019-10-10
 **Supported OS Versions:** EL7
 
-Summary of changes
+Summary of Changes
 ------------------
 
 This release contains:
@@ -28,12 +28,25 @@ These
 [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.5.2%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC)
 were addressed in this release.
 
+The [Worker node containers](/worker-node/using-wn-containers/) have been updated to this release.
+
 Known Issues
 ------------
 
 - OSG System Profiler verifies all installed packages, which may result in
 [excessively long run times](https://opensciencegrid.atlassian.net/browse/SOFTWARE-3804).
 
+
+Containers
+----------
+
+Several containers are available and tagged as `stable` in accordance with our
+[Container Release Policy](https://opensciencegrid.org/technology/policy/container-release/)
+
+-   [ATLAS XCache](https://hub.docker.com/r/opensciencegrid/atlas-xcache/)
+-   [CMS XCache](https://hub.docker.com/r/opensciencegrid/cms-xcache/)
+-   [Frontier Squid](https://hub.docker.com/r/opensciencegrid/frontier-squid/)
+-   [Stash Cache](https://hub.docker.com/r/opensciencegrid/stash-cache/)
 
 Updating to the New Release
 ---------------------------
