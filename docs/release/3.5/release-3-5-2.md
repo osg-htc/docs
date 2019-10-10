@@ -40,7 +40,7 @@ Known Issues
 Containers
 ----------
 
-Several containers are available and tagged as `stable` in accordance with our
+Several containers are available and have been tagged as `stable` in accordance with our
 [Container Release Policy](https://opensciencegrid.org/technology/policy/container-release/)
 
 -   [ATLAS XCache](https://hub.docker.com/r/opensciencegrid/atlas-xcache/)
