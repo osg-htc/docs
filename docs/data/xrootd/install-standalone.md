@@ -55,16 +55,16 @@ under `/etc/xrootd/config.d/` as follows:
         The directories specified this way are writable by default.
         Access controls should be managed via [authorization configuration](#configuring-authorization).
 
-1. Add an `all.sitename` directive set to the [resource name](/common/registration/#registering-resources) of your
-   XRootD service.
+1. In `/etc/xrootd/config.d/10-common-site-local.cfg`, add a line to set the `resourcename` variable to the
+   [resource name](/common/registration/#registering-resources) of your XRootD service.
    For example, the XRootD service registered at the
    [FermiGrid site](https://github.com/opensciencegrid/topology/blob/master/topology/Fermi%20National%20Accelerator%20Laboratory/FermiGrid/FNAL_PUBLIC_DCACHE.yaml#L6)
    should set the following configuration:
 
-        all.sitename   Fermilab Public DCache
+        set resourcename = Fermilab Public DCache
 
     !!! note
-        CMS sites should follow CMS policy for `all.sitename`
+        CMS sites should follow CMS policy for `resourcename`
 
 1.  Append the following configuration to the end of `/etc/xrootd/xrootd-standalone.cfg`
 
