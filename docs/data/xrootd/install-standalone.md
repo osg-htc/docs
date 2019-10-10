@@ -39,9 +39,13 @@ root@xrootd-standalone # yum install osg-xrootd-standalone
 Configuring XRootD
 ------------------
 
-To configure XRootD as a standalone server, replace the contents of `/etc/xrootd/xrootd-standalone.cfg` as follows:
+To configure XRootD as a standalone server, you will modify `/etc/xrootd/xrootd-standalone.cfg` and the config files
+under `/etc/xrootd/config.d/` as follows:
 
-1.  Add an `all.export` directive for each directory that you wish to serve via XRootD.
+1.  Comment out the `all.export /tmp` directive in `/etc/xrootd/xrootd-standalone.cfg`.
+
+1.  Comment out the `all.export /` directive in `/etc/xrootd/config.d/90-osg-standalone-paths.cfg`,
+    and add an `all.export` directive for each directory that you wish to serve via XRootD.
     For example, to serve the contents of `/store` and `/public`:
 
         all.export /store/
