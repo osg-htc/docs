@@ -18,6 +18,8 @@ This release contains:
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.36%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
+The [Worker node containers](/worker-node/using-wn-containers/) have been updated to this release.
+
 Notes
 -----
 
