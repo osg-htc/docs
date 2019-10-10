@@ -166,17 +166,32 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://opensciencegrid.github.io/docs/security/host-certs/</loc>
-     <lastmod>2019-10-10</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
      <loc>https://opensciencegrid.github.io/docs/security/user-certs/</loc>
      <lastmod>2019-10-10</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/security/certificate-management/</loc>
+     <lastmod>2019-10-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/security/host-certs/</loc>
+     <lastmod>2019-10-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/security/host-certs/overview/</loc>
+     <lastmod>2019-10-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/security/host-certs/incommon/</loc>
+     <lastmod>2019-10-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/security/host-certs/lets-encrypt/</loc>
      <lastmod>2019-10-10</lastmod>
      <changefreq>daily</changefreq>
     </url>
