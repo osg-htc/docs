@@ -473,9 +473,15 @@ This section is contained in `/etc/osg/config.d/10-storage.ini` which is provide
 | site_write       | String          | This setting should be the location or url to a directory that can be write to stage out data via the variable `$OSG_SITE_WRITE`. This is an url if you are using a SE. If not set, the default is UNAVAILABLE |
 
 
-!!! note
-    All of these can be defined in terms of an environment variable
-    (e.g. `$FOO`) that will be evaluated on the worker node.
+!!! note "Dynamic worker node paths"
+    The above variables may be set to an environment variable that is set on your site's worker nodes.
+    For example, if each of your worker nodes has a different location for its scratch directory specified by
+    `LOCAL_SCRATCH_DIR`, set the following configuration:
+
+    ```
+    [Storage]
+    worker_node_temp = $LOCAL_SCRATCH_DIR
+    ```
 
 **grid_dir**:<br/>
 If you have installed the worker node client via RPM (the normal case) it
