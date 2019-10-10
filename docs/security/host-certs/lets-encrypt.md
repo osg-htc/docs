@@ -11,6 +11,7 @@ Let's Encrypt uses an automated script named [certbot](https://certbot.eff.org) 
 `certbot` binds to port 80 when running, so services running on port 80
 (such as [HTCondor-CE View service](https://opensciencegrid.github.io/docs/compute-element/install-htcondor-ce/#install-and-run-the-htcondor-ce-view))
 must be temporarily stopped before running `certbot`.
+In addition, port 80 must be open to the world while `certbot` is running.
 Let's Encrypt host certs expire every three months so it is important to set up automated renewal.
 
 EL7 and Newer
@@ -112,6 +113,7 @@ Some uses of this are:
 
 - copy the renewed certificate so it can be used for a separate service (such as xrootd)
 - shut down and restart a service running on port 80
+- temporarily open up a firewall
 
 To do this, call `certbot` with `--pre-hook <COMMAND>` for a command or script to run before renewal,
 and `--post-hook <COMMAND>` for a command or script to run after renewal.
