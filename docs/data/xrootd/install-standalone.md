@@ -30,10 +30,10 @@ As with all OSG software installations, there are some one-time (per host) steps
 Installing XRootD
 -----------------
 
-To install XRootD, run the following Yum command:
+To install the XRootD Standalone server, run the following Yum command:
 
 ``` console
-root@xrootd-standalone # yum install xrootd
+root@xrootd-standalone # yum install osg-xrootd-standalone
 ```
 
 Configuring XRootD
