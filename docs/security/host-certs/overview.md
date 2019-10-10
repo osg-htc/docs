@@ -29,6 +29,10 @@ We recommend requesting host certificates from one of the following CAs:
   for more details.
   Let's Encrypt is not IGTF-accredited so their certificates are not suitable for WLCG services.
 
+- [DigiCert IGTF](/security/host-certs/digicert):
+  an IGTF-accredited CA for services that interact with the WLCG;
+  individual certificates are available for purchase without a subscription.
+
 If neither of the above options work for your site, the OSG also accepts all
 [IGTF-accredited CAs](https://repo.opensciencegrid.org/cadist/).
 
