@@ -62,6 +62,7 @@ pages:
     - 'Overview': 'security/host-certs/overview.md'
     - 'Using InCommon': 'security/host-certs/incommon.md'
     - "Using Let's Encrypt": 'security/host-certs/lets-encrypt.md'
+    - 'Using DigiCert': 'security/host-certs/digicert.md'
 - Common:
   - 'CA Certificates': 'common/ca.md'
   - 'OSG Yum Repos': 'common/yum.md'
