@@ -198,6 +198,7 @@ root@host # systemctl start xrootd@standalone
 | Service/Process | Configuration File                  | Description               |
 |:----------------|:------------------------------------|:--------------------------|
 | `xrootd`        | `/etc/xrootd/xrootd-standalone.cfg` | Main XRootD configuration |
+|                 | `/etc/xrootd/config.d/`             | Drop-in configuration dir |
 |                 | `/etc/xrootd/auth_file`             | Authorized users file     |
 
 | Service/Process          | Log File                                | Description                                 |
