@@ -120,15 +120,15 @@ The command(s) will only be run if the certificate is actually renewed.
 
 #### Example
 
-This example is for a host running HTTPD and XRootD standalone;
-HTTPD needs to be stopped so it doesn't block port 80, and XRootD needs the cert in a separate location.
+This example is for a host running CEView and XRootD standalone;
+CEView needs to be stopped so it doesn't block port 80, and XRootD needs the cert in a separate location.
 
 Create the following scripts:
 
 **/root/bin/certbot-pre.sh**
 ```bash
 #!/bin/bash
-systemctl stop httpd
+condor_ce_off -daemon CEVIEW
 ```
 
 **/root/bin/certbot-post.sh**
@@ -138,7 +138,7 @@ cd /etc/grid-security
 cp -f hostcert.pem xrd/xrdcert.pem
 cp -f hostkey.pem xrd/xrdkey.pem
 chown -R xrootd:xrootd xrd
-systemctl start httpd
+condor_ce_on -daemon CEVIEW
 systemctl restart xrootd@standalone
 ```
 
