@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://opensciencegrid.org/docs/security/host-certs/incommon/">
+        <link rel="canonical" href="https://opensciencegrid.org/docs/security/host-certs/digicert/">
       
       
       
@@ -38,7 +38,7 @@
     
     
       
-        <title>Using InCommon - OSG Documentation</title>
+        <title>Using DigiCert - OSG Documentation</title>
       
     
     
@@ -94,7 +94,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#requesting-incommon-igtf-host-certificates" tabindex="1" class="md-skip">
+      <a href="#digicert-igtf-host-certificates" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -120,7 +120,7 @@
                 OSG Documentation
               </span>
               <span class="md-header-nav__topic">
-                Using InCommon
+                Using DigiCert
               </span>
             
           
@@ -961,63 +961,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Using InCommon
-      </label>
-    
-    <a href="./" title="Using InCommon" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../incommon/" title="Using InCommon" class="md-nav__link">
       Using InCommon
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#requesting-certificates-from-a-registration-authority" title="Requesting certificates from a registration authority" class="md-nav__link">
-    Requesting certificates from a registration authority
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#requesting-certificates-as-a-registration-authority" title="Requesting certificates as a registration authority" class="md-nav__link">
-    Requesting certificates as a registration authority
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#references" title="References" class="md-nav__link">
-    References
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -1037,11 +985,63 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../digicert/" title="Using DigiCert" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Using DigiCert
+      </label>
+    
+    <a href="./" title="Using DigiCert" class="md-nav__link md-nav__link--active">
       Using DigiCert
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#before-starting" title="Before Starting" class="md-nav__link">
+    Before Starting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-digicert-account" title="Create a DigiCert Account" class="md-nav__link">
+    Create a DigiCert Account
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requesting-digicert-igtf-host-certificates" title="Requesting DigiCert IGTF Host Certificates" class="md-nav__link">
+    Requesting DigiCert IGTF Host Certificates
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -2240,22 +2240,22 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#requesting-certificates-from-a-registration-authority" title="Requesting certificates from a registration authority" class="md-nav__link">
-    Requesting certificates from a registration authority
+  <a href="#before-starting" title="Before Starting" class="md-nav__link">
+    Before Starting
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#requesting-certificates-as-a-registration-authority" title="Requesting certificates as a registration authority" class="md-nav__link">
-    Requesting certificates as a registration authority
+  <a href="#create-a-digicert-account" title="Create a DigiCert Account" class="md-nav__link">
+    Create a DigiCert Account
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#references" title="References" class="md-nav__link">
-    References
+  <a href="#requesting-digicert-igtf-host-certificates" title="Requesting DigiCert IGTF Host Certificates" class="md-nav__link">
+    Requesting DigiCert IGTF Host Certificates
   </a>
   
 </li>
@@ -2276,38 +2276,74 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/security/host-certs/incommon.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/security/host-certs/digicert.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="requesting-incommon-igtf-host-certificates">Requesting InCommon IGTF Host Certificates<a class="headerlink" href="#requesting-incommon-igtf-host-certificates" title="Permanent link">&para;</a></h1>
-<p>Many institutions in the United States already subscribe to InCommon and offer IGTF certificate services.
-If your institution is in the list of <a href="https://www.incommon.org/federation/incommon-federation-participants/">InCommon subscribers</a>,
-continue with the instructions below.
-If your institution is not in the list, Let's Encrypt certificates do not meet your needs, and you do not have access to
-another IGTF CA subscription, please <a href="../../../common/help/">contact us</a>.</p>
-<p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
+                <h1 id="digicert-igtf-host-certificates">DigiCert IGTF Host Certificates<a class="headerlink" href="#digicert-igtf-host-certificates" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This document describes how to get <strong>host</strong> certificates.
+For instructions on how to get <strong>user</strong> certificates, see the <a href="../../../security/user-certs">User Certificates document</a>.</p>
+</div>
+<p>This document describes how to purchase individual IGTF-accredited host certificates from <a href="https://www.digicert.com/">DigiCert</a>.
+Before purchasing individual certificates, consider the following alternatives:</p>
+<ol>
+<li>Request a <a href="../lets-encrypt/">Let's Encrypt certificate</a>
+   if you don't support any VOs that require IGTF-accredited certificates (e.g. <code>ATLAS</code> or <code>CMS</code>).</li>
+<li>Request an <a href="../incommon/">InCommon certificate</a>
+   if your institution has an InCommon subscription.</li>
+</ol>
+<h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
+<p>Before requesting a new host certificate, use <code>openssl</code> to check if your host already has a valid certificate, i.e. the
+present is between <code>notBefore</code> and <code>notAfter</code> dates and times.
+If so, you may safely skip this document:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> openssl x509 -in /etc/grid-security/hostcert.pem -subject -issuer -dates -noout
+<span class="go">subject= /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=host.opensciencegrid.org</span>
+<span class="go">issuer=/DC=org/DC=cilogon/C=US/O=CILogon/CN=CILogon OSG CA 1</span>
+<span class="go">notBefore=Jan  4 21:08:09 2010 GMT</span>
+<span class="go">notAfter=Jan  4 21:08:09 2011 GMT</span>
+</pre></div>
+
+
+<p>If you do not have a valid certificate, the OSG offers a command-line tool to generate certificate signing requests (CSR)
+to assist in acquiring a grid host certificate.
+As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
 <ul>
 <li>Ensure the host has <a href="../../../release/supported_platforms">a supported operating system</a></li>
 <li>Obtain root access to the host</li>
 <li>Prepare the <a href="../../../common/yum">required Yum repositories</a></li>
 </ul>
-<p>From a host that meets the above requirements, there are two options to get InCommon IGTF-accredited host certificates:</p>
+<h2 id="create-a-digicert-account">Create a DigiCert Account<a class="headerlink" href="#create-a-digicert-account" title="Permanent link">&para;</a></h2>
+<p>Before requesting a certificate, you must create a DigiCert account with permission to request grid certificates:</p>
 <ol>
-<li><a href="#requesting-certificates-from-a-registration-authority">Requesting certificates from a Registration Authority (RA)</a>:
-   This requires a Certificate Signing Request (CSR), which can be generated with the <code>osg-cert-request</code> tool.</li>
-<li><a href="#requesting-certificates-as-a-registration-authority">Requesting certificates as an RA</a>:
-   As an RA, you can request, approve, and retrieve certificates yourself through the InCommon REST API using the
-   <code>osg-incommon-cert-request</code> tool .</li>
+<li>
+<p>Navigate to the <a href="https://www.digicert.com/account/signup/">DigiCert sign up page</a> and create an account</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>It is very important to use your institution's main address and other contact information.
+Departmental addresses will not pass DigiCert's verification process.</p>
+</div>
+</li>
+<li>
+<p>Submit a support request to allow you to order grid host certificates, referencing support ticket <code>#01336672</code></p>
+</li>
+<li>
+<p>After your request has been approved, verify that the <code>Grid Host SSL</code> option is available to you from your account's
+   order page:</p>
+</li>
 </ol>
-<p>Install the <code>osg-pki-tools</code> where both command line tools are available:</p>
+<p><img alt="DigiCert Order Menu" src="../../../img/digicert-order-menu.png" /></p>
+<h2 id="requesting-digicert-igtf-host-certificates">Requesting DigiCert IGTF Host Certificates<a class="headerlink" href="#requesting-digicert-igtf-host-certificates" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Install the <code>osg-pki-tools</code>:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install osg-pki-tools
 </pre></div>
 
 
-<h2 id="requesting-certificates-from-a-registration-authority">Requesting certificates from a registration authority<a class="headerlink" href="#requesting-certificates-from-a-registration-authority" title="Permanent link">&para;</a></h2>
-<ol>
+</li>
 <li>
-<p>Generate a Certificate Signing Request (CSR) and private key using the <code>osg-cert-request</code> tool:</p>
+<p>Generate a CSR and private key using the <code>osg-cert-request</code> tool:</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-cert-request --hostname &lt;HOSTNAME&gt; <span class="se">\</span>
              --country &lt;COUNTRY&gt; <span class="se">\</span>
              --state &lt;STATE&gt; <span class="se">\</span>
@@ -2334,16 +2370,27 @@ For example, the following generates a CSR for <code>test.opensciencegrid.org</c
 Additional options and descriptions can be found <a href="https://github.com/opensciencegrid/osg-pki-tools#options">here</a>.</p>
 </li>
 <li>
-<p>Find your institution-specific InCommon contact
-   (e.g. <a href="https://it.wisc.edu/about/division-of-information-technology/strategic-operations-departments-people/cybersecurity/security-tools-software/server-certificates">UW-Madison InCommon contact</a>)
-   submit the CSR that you generated above, and request a 1-year <code>IGTF Server Certificate</code> for <code>OTHER</code> server software.</p>
-</li>
-<li>After the certificate has been issued by your institution, download the host certificate only (not the full chain) to
-   its intended host and copy over the key you generated above.</li>
+<p>Submit an order using DigiCert's grid certificate <a href="https://www.digicert.com/secure/requests/ssl_certificate/grid_host_ssl">order page</a>:</p>
+<ol>
 <li>
-<p>Verify that the issuer <code>CN</code> field is <code>InCommon IGTF Server CA</code>:</p>
+<p>Login to your <a href="#create-a-digicert-account">DigiCert account</a></p>
+</li>
+<li>
+<p>Attach the CSR that you generated above</p>
+</li>
+<li>
+<p>Pay for your certificate and await approval</p>
+</li>
+</ol>
+</li>
+<li>
+<p>After the certificate has been issued by DigiCert, download the host certificate only (not the full chain) to
+   its intended host and copy over the key you generated above.</p>
+</li>
+<li>
+<p>Verify that the issuer <code>CN</code> field is <code>DigiCert Grid Trust CA G2</code>:</p>
 <div class="codehilite"><pre><span></span><span class="gp">$</span> openssl x509 -in &lt;PATH TO CERTIFICATE&gt; -noout -issuer
-<span class="go">issuer= /C=US/O=Internet2/OU=InCommon/CN=InCommon IGTF Server CA</span>
+<span class="go">issuer= /C=US/O=DigiCert Grid/OU=www.digicert.com/CN=DigiCert Grid Trust CA G2</span>
 </pre></div>
 
 
@@ -2361,90 +2408,6 @@ Additional options and descriptions can be found <a href="https://github.com/ope
 <p>Where <code>&lt;PATH TO KEY&gt;</code> is the ".key" file you created in the first step</p>
 </li>
 </ol>
-<h2 id="requesting-certificates-as-a-registration-authority">Requesting certificates as a registration authority<a class="headerlink" href="#requesting-certificates-as-a-registration-authority" title="Permanent link">&para;</a></h2>
-<p>If you are a Registration Authority for your institution, skip ahead to <a href="#osg-incommon-cert-request">this section</a>.
-If you are not already a Registration Authority (RA) for your institution, you must request to be made one:</p>
-<ol>
-<li>Find your institution-specific InCommon contact
-   (e.g. <a href="https://it.wisc.edu/about/division-of-information-technology/strategic-operations-departments-people/cybersecurity/security-tools-software/server-certificates">UW-Madison InCommon contact</a>),</li>
-<li>
-<p>Request a Department Registration Authority user with SSL auto-approve enabled and a client certificate:</p>
-<ul>
-<li>If they do not grant your request, you will not be able to request, approve, and retrieve certificates yourself.
-  Instead, you must <a href="#requesting-certificates-from-a-registration-authority">request certificates from your RA</a>.</li>
-<li>If they grant your request, you will receive an email with instructions for requesting your client certificate.
-  Download the <code>.p12</code> file and extract the certificate and key:<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> openssl pkcs12 -in incommon_file.p12 -nocerts -out ~/path_to_dir/incommon_user_key.pem
-<span class="gp">user@host $</span> openssl pkcs12 -in incommon_file.p12 -nokeys -out ~/path_to_dir/incommon_user_cert.pem
-</pre></div>
-
-
-</li>
-</ul>
-</li>
-<li>
-<p>Find your institution-specific organization and department codes at the InCommon Cert Manager (https://cert-manager.com/customer/InCommon).
-   These are numeric codes that should be specified through the command line using the -O/--orgcode ORG,DEPT option:</p>
-<ul>
-<li>Organization code is shown as OrgID under Settings &gt; Organizations &gt; Edit</li>
-<li>Department code is shown as OrgID under Settings &gt; Organizations &gt; Departments &gt; Edit</li>
-</ul>
-</li>
-</ol>
-<p>Once you have RA privileges, you may request, approve, and retrieve host certificates using <code>osg-incommon-cert-request</code>:</p>
-<p><a name="osg-incommon-cert-request"></a></p>
-<ul>
-<li>
-<p>Requesting a certificate with a single hostname <code>&lt;HOSTNAME&gt;</code>:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-incommon-cert-request --username &lt;INCOMMON_LOGIN&gt; <span class="se">\</span>
-            --cert ~/path_to_dir/incommon_user_cert.pem <span class="se">\</span>
-            --pkey ~/path_to_dir/incommon_user_key.pem <span class="se">\</span>
-            --hostname &lt;HOSTNAME&gt;
-<span class="go">            [--orgcode &lt;ORG,DEPT&gt;]</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>Requesting a certificate with Subject Alternative Names (SANs):</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-incommon-cert-request --username &lt;INCOMMON_LOGIN&gt; <span class="se">\</span>
-            --cert ~/path_to_dir/incommon_user_cert.pem <span class="se">\</span>
-            --pkey ~/path_to_dir/incommon_user_key.pem <span class="se">\</span>
-            --hostname &lt;HOSTNAME&gt; <span class="se">\</span>
-            --altname &lt;ALTNAME&gt; <span class="se">\</span>
-            --altname &lt;ALTNAME2&gt;
-<span class="go">            [--orgcode &lt;ORG,DEPT&gt;]</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>Requesting certificates in bulk using a hostfile name:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-incommon-cert-request --username &lt;INCOMMON_LOGIN&gt; <span class="se">\</span>
-            --cert ~/path_to_dir/incommon_user_cert.pem <span class="se">\</span>
-            --pkey ~/path_to_dir/incommon_user_key.pem <span class="se">\</span>
-            --hostfile ~/path_to_file/hostfile.txt <span class="se">\</span>
-            <span class="o">[</span>--orgcode &lt;ORG,DEPT&gt;<span class="o">]</span>
-</pre></div>
-
-
-<p>Where the contents of <code>hostfile.txt</code> contain one hostname and any number of SANs per line:</p>
-<div class="codehilite"><pre><span></span><span class="go">hostname01.yourdomain</span>
-<span class="go">hostname02.yourdomain hostnamealias.yourdomain hostname03.yourdomain</span>
-<span class="go">hostname04.yourdomain hostname05.yourdomain</span>
-</pre></div>
-
-
-</li>
-</ul>
-<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
-<ul>
-<li>
-<p><a href="http://www.cilogon.org/globus-with-incommon-ca">CILogon documentation for requesting InCommon certificates</a></p>
-</li>
-<li>
-<p><a href="http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html">Useful OpenSSL commands (from NCSA)</a> - e.g. how to convert the format of your certificate.</p>
-</li>
-</ul>
                 
                   
                 
@@ -2465,7 +2428,7 @@ If you are not already a Registration Authority (RA) for your institution, you m
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../overview/" title="Overview" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../lets-encrypt/" title="Using Let's Encrypt" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -2474,19 +2437,19 @@ If you are not already a Registration Authority (RA) for your institution, you m
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Overview
+                Using Let's Encrypt
               </span>
             </div>
           </a>
         
         
-          <a href="../lets-encrypt/" title="Using Let's Encrypt" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../../common/ca/" title="CA Certificates" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Using Let's Encrypt
+                CA Certificates
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
