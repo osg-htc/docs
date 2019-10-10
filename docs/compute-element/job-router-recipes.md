@@ -524,23 +524,54 @@ JOB_ROUTER_ENTRIES @=jre
 
 ### Setting batch system directives
 
-To write batch system directives that are not supported in the route examples above, you will need to edit the job submit script for your local batch system in `/etc/blahp/` (e.g., if your local batch system is PBS, edit `/etc/blahp/pbs_local_submit_attributes.sh`). This file is sourced during submit time and anything printed to stdout is appended to the batch system job submit script. ClassAd attributes can be passed from the routed job to the local submit attributes script via the `default_remote_cerequirements` attribute, which can take the following form:
+To write batch system directives that are not supported in the route examples above, you will need to edit the job
+submit script for your local batch system in `/etc/blahp/` (e.g., if your local batch system is PBS, edit
+`/etc/blahp/pbs_local_submit_attributes.sh`).
+This file is sourced during submit time and anything printed to stdout is appended to the batch system job submit
+script.
+ClassAd attributes can be passed from the routed job to the local submit attributes script through one of the following
+methods, depending on your version of HTCondor-CE:
 
-```
-default_remote_cerequirements = "foo == X && bar == \"Y\" && ..."
-```
 
-This sets `foo` to value `X` and `bar` to the string `Y` (escaped double-quotes are required for string values) in the environment of the local submit attributes script. The following example sets the maximum walltime to 1 hour and the accounting group to the `x509UserProxyFirstFQAN` attribute of the job submitted to a PBS batch system
+- **For HTCondor-CE >= 4:** use `set_default_CERequirements`, which takes a comma-separated list of other attributes:
 
-```hl_lines="5"
-JOB_ROUTER_ENTRIES @=jre [
-     GridResource = "batch pbs";
-     TargetUniverse = 9;
-     name = "Setting job submit variables";
-     set_default_remote_cerequirements = strcat("Walltime == 3600 && AccountingGroup =="", x509UserProxyFirstFQAN, "\"");
-]
-@jre
-```
+        set_foo = 42;
+        set_bar = "baz";
+        set_default_CERequirements = "foo,bar";
+
+- **For HTCondor-CE < 4:** use `set_default_remote_cerequirements`, which takes the following form:
+
+        set_default_remote_cerequirements = "foo == 42 && bar == \"baz\" && ..."
+
+    Note that escaped double-quotes are required for string values.
+
+Both of the examples above set `foo` to value `42` and `bar` to the string `baz` in the environment of the local submit
+attributes script.
+The following examples set the maximum walltime to 1 hour and the accounting group to the `x509UserProxyFirstFQAN`
+attribute of the job submitted to a PBS batch system:
+
+- **For HTCondor-CE >= 4**:
+
+        :::config hl_lines="4 5 6"
+        JOB_ROUTER_ENTRIES @=jre [
+             GridResource = "batch pbs";
+             name = "Setting job submit variables";
+             set_Walltime = 3600;
+             set_AccountingGroup = x509UserProxyFirstFQAN;
+             set_default_remote_CERequirements = "Walltime,AccountingGroup";
+        ]
+        @jre
+
+
+- **For HTCondor-CE < 4**:
+
+        :::config hl_lines="4"
+        JOB_ROUTER_ENTRIES @=jre [
+             GridResource = "batch pbs";
+             name = "Setting job submit variables";
+             set_default_remote_cerequirements = strcat("Walltime == 3600 && AccountingGroup =="", x509UserProxyFirstFQAN, "\"");
+        ]
+        @jre
 
 With `/etc/blahp/pbs_local_submit_attributes.sh` containing.
 

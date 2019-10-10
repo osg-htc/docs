@@ -134,6 +134,54 @@ and want to upgrade to 3.5 (the *new series*), we recommend the following proced
     If you are not having the expected result or having problems with Yum please see the
     [Yum troubleshooting guide](/release/yum-basics#troubleshooting)
 
+### Updating to HTCondor-CE 4.x ###
+
+The OSG 3.5 release series contains HTCondor-CE 4, a major version upgrade from the previously released versions in the OSG.
+See the HTCondor-CE 4.0.0 [release notes](https://github.com/htcondor/htcondor-ce/releases/tag/v4.0.0) for an overview
+of the changes.
+In particular, this version includes a major reorganization of the default configuration so updates will require manual
+intervention.
+To update your HTCondor-CE host(s), perform the following steps:
+
+1. Update all CE packages:
+
+        :::console
+        root@host # yum update htcondor-ce 'osg-ce*'
+
+1. The new default `condor_mapfile` is sufficient since HTCondor-CE no longer relies on GSI authentication between
+   its daemons.
+   If `/etc/condor-ce/condor_mapfile.rpmnew` exists, replace your old `condor_mapfile` with the `.rpmnew` version:
+
+        :::console
+        root@host # mv /etc/condor-ce/condor_mapfile.rpmnew /etc/condor-ce/condor_mapfile
+
+1. Merge any `*.rpmnew` files in `/etc/condor-ce/config.d/`
+
+1. Additionally, you may wish to make one or more of the following optional changes:
+
+    - HTCondor-CE now disables batch system job retries by default.
+      To re-enable job retries, set the following configuration in `/etc/condor-ce/config.d/99-local.conf`:
+
+            ENABLE_JOB_RETRIES = True
+
+    - For non-HTCondor sites that use [remote CE requirements](/compute-element/job-router-recipes/#setting-batch-system-directives),
+      the new version of HTCondor-CE accepts a simplified format.
+      For example, a snippet from an example job route in the old format:
+
+            set_default_remote_cerequirements = strcat("Walltime == 3600 && AccountingGroup =="", x509UserProxyFirstFQAN, "\"");
+
+        May be rewritten as the following:
+
+            set_WallTime = 3600;
+            set_AccountingGroup = x509UserProxyFirstFQAN;
+            set_default_CERequirements = "Walltime,AccountingGroup";
+
+1. Reload and restart the HTCondor-CE daemons:
+
+        :::console
+        root@host # systemctl daemon-reload
+        root@host # systemctl restart condor-ce
+
 ### Updating to HTCondor 8.8.x ###
 
 The OSG 3.5 release series contains HTCondor 8.8, a major version upgrade from the previously released versions in the OSG.
