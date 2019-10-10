@@ -275,12 +275,6 @@ XRootD can be accessed using the HTTP protocol. To do that:
 
 1. Configure [LCMAPS authorization](/data/xrootd/xrootd-authorization).
 
-1.   Create robots.txt. Add file `/etc/xrootd/robots.txt` with these contents:
-
-        :::file
-           User-agent: *
-           Disallow: / 
-
 1.   Testing the configuration
     
      From the terminal, generate a proxy and attempt to use davix-get to copy from your XRootD host (the XRootD service needs running; see the [services section](#managing-xrootd-services)).  For example, if your server has a file named `/store/user/test.root`:
