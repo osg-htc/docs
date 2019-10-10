@@ -5,7 +5,7 @@ DigiCert IGTF Host Certificates
     This document describes how to get **host** certificates.
     For instructions on how to get **user** certificates, see the [User Certificates document](/security/user-certs).
 
-This document describes how to purchase individual IGTF-accredited host certificates from DigiCert[DigiCert](https://www.digicert.com/).
+This document describes how to purchase individual IGTF-accredited host certificates from [DigiCert](https://www.digicert.com/).
 Before purchasing individual certificates, consider the following alternatives:
 
 1. Support a VO that requires IGTF-accredited certificates (e.g. `ATLAS` or `CMS`).
