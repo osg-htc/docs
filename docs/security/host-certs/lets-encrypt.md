@@ -164,10 +164,10 @@ ExecStart=/usr/bin/certbot renew --quiet --agree-tos \
 
 Enterprise Linux 6
 ------------------
-This section contains instructions for Enterprise Linux 6 and newer operating systems,
+This section contains instructions for Enterprise Linux 6,
 using cron and the `certbot-auto` script.
 
-### Installation and Obtaining the Initial Certificate
+### Installation and obtaining the initial certificate
 
 1. Download and install certbot-auto as described in the
    [install instructions](https://certbot.eff.org/docs/install.html#certbot-auto).
