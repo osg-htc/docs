@@ -51,7 +51,7 @@ Before adding your GridFTP hosts to the load-balanced system, each host requires
 
 ### Acquiring host certificate(s)
 
-When authenticating with a GridFTP server, clients verify that the server's host certificate matches the hostname of the server. In the case of a load-balanced GridFTP system, clients contact the GridFTP server through the virtual hostname, so the GridFTP server will have to present a certificate containing the virtual hostname as well as the GridFTP server's hostname. Use the [OSG host certificate reference](/security/host-certs) for more information on how to request these types of certificates.
+When authenticating with a GridFTP server, clients verify that the server's host certificate matches the hostname of the server. In the case of a load-balanced GridFTP system, clients contact the GridFTP server through the virtual hostname, so the GridFTP server will have to present a certificate containing the virtual hostname as well as the GridFTP server's hostname. Use the [OSG host certificate reference](/security/host-certs) for more information on how to request these types of certificates.  Additionally, a special procedure is available to acquire [Let's Encrypt certificates](#with-lets-encrypt) with the load balanced gridftp.
 
 If your GridFTP servers are also running XRootD, you will need unique certificates for each GridFTP server. Otherwise, you can request a single certificate that can be shared among the GridFTP servers.
 
@@ -104,6 +104,59 @@ XRootD requires that the certificate's [common name](https://en.wikipedia.org/wi
         user@host $ osg-gridadmin-cert-request -f load-balanced-hosts.txt
 
 1.  Copy the resulting certificates and keys to their corresponding GridFTP servers in `/etc/grid-security/hostcert.pem` and `/etc/grid-security/hostkey.pem`, respectively.
+
+#### With Let's Encrypt
+
+The certificate provided to the clients needs to have the virtual host address of the load balancer, as well as the hostname of each of the worker nodes.  Additionally, LetsEncrypt contacts the requested domains to verify ownership.  Therefore, each domain requested must be available to respond to HTTP requests at the same time.  The easiest method for this is to use a shared directory for Let's Encrypt's `certbot` to install the secrets.
+
+The procedure to acquire Let's Encrypt certificates for multiple hosts is as follows:
+
+1. Create or use a shared directory that each of the data transfer nodes can read, for example a simple NFS share.  The steps in creating a NFS shared directory is outside the scope of this guide.  In this guide, the shared directory will be referred as `/mnt/nfsshare` . 
+
+2. Install `httpd` on each of the data transfer nodes:
+
+        :::console
+        root@host $ yum install httpd
+
+    Create a webroot directory within the shared directory on one of the nodes:
+
+        :::console
+        root@host $ mkdir /mnt/nfsshare/webroot
+
+3. Configure `httpd` to export the same webroot on each of the data transfer nodes:
+
+        <VirtualHost *:80>
+            DocumentRoot "/mnt/nfsshare/webroot"
+            <Directory "/mnt/nfsshare/webroot">
+                Require all granted
+            </Directory>
+        </VirtualHost>
+
+
+4. Configure `keepalived` to virtualize port 80 to at least one of your data transfer nodes.
+    Add to your configuration:
+
+
+        virtual_server <VIRTUAL-IP-ADDRESS> 80 {
+            delay_loop 10
+            lb_algo wlc
+            lb_kind DR
+            protocol tcp
+
+            real_server <GRIDFTP-SERVER-#1-IP ADDRESS> {
+                TCP_CHECK {
+                    connect_timeout 3
+                    connect_port 80
+                }
+            }
+        }
+
+
+5. Run `certbot` with the webroot options on only 1 of the data nodes.  The first domain in the command line should be the virtual hostname:
+
+        root@host $ certbot certonly -w /mnt/nfsshare/webroot -d <VIRTUAL_HOSTNAME> -d <DATANODE_1> -d <DATANODE_N>...
+
+For XRootD certificates, the real hostname of the XRootD node is required to be the first hostname in the `certbot` command.  You may run the `certbot` command several times on the same host, replacing the `VIRTUAL_HOSTNAME` with the real hostname of the XRootD servers, and placing the `VIRTUAL_HOSTNAME` in in the list of other domains in the certificate.
 
 ### Installing GridFTP
 
