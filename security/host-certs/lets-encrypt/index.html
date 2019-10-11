@@ -1056,15 +1056,75 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enterprise-linux-6" title="Enterprise Linux 6" class="md-nav__link">
+    Enterprise Linux 6
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
-  <a href="#alternate-renewal-methods" title="Alternate renewal methods" class="md-nav__link">
-    Alternate renewal methods
+  <a href="#installation-and-obtaining-the-initial-certificate_1" title="Installation and obtaining the initial certificate" class="md-nav__link">
+    Installation and obtaining the initial certificate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#renewing-lets-encrypt-host-certificates_1" title="Renewing Let's Encrypt host certificates" class="md-nav__link">
+    Renewing Let's Encrypt host certificates
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#automating-renewals-using-cron" title="Automating renewals using cron" class="md-nav__link">
+    Automating renewals using cron
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pre-and-post-renewal-hooks_1" title="Pre- and post-renewal hooks" class="md-nav__link">
+    Pre- and post-renewal hooks
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_1" title="Example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternate-renewal-methods" title="Alternate renewal methods" class="md-nav__link">
+    Alternate renewal methods
+  </a>
   
 </li>
       
@@ -2347,15 +2407,75 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enterprise-linux-6" title="Enterprise Linux 6" class="md-nav__link">
+    Enterprise Linux 6
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
-  <a href="#alternate-renewal-methods" title="Alternate renewal methods" class="md-nav__link">
-    Alternate renewal methods
+  <a href="#installation-and-obtaining-the-initial-certificate_1" title="Installation and obtaining the initial certificate" class="md-nav__link">
+    Installation and obtaining the initial certificate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#renewing-lets-encrypt-host-certificates_1" title="Renewing Let's Encrypt host certificates" class="md-nav__link">
+    Renewing Let's Encrypt host certificates
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#automating-renewals-using-cron" title="Automating renewals using cron" class="md-nav__link">
+    Automating renewals using cron
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pre-and-post-renewal-hooks_1" title="Pre- and post-renewal hooks" class="md-nav__link">
+    Pre- and post-renewal hooks
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_1" title="Example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternate-renewal-methods" title="Alternate renewal methods" class="md-nav__link">
+    Alternate renewal methods
+  </a>
   
 </li>
       
@@ -2546,8 +2666,103 @@ and <code>--post-hook &lt;COMMAND&gt;</code> arguments to the <code>ExecStart</c
 </pre></div>
 
 
-<h3 id="alternate-renewal-methods">Alternate renewal methods<a class="headerlink" href="#alternate-renewal-methods" title="Permanent link">&para;</a></h3>
-<p>There are some cases in which you might need an alternative to running <code>certbot</code> as above.
+<h2 id="enterprise-linux-6">Enterprise Linux 6<a class="headerlink" href="#enterprise-linux-6" title="Permanent link">&para;</a></h2>
+<p>This section contains instructions for Enterprise Linux 6,
+using cron and the <code>certbot-auto</code> script.</p>
+<h3 id="installation-and-obtaining-the-initial-certificate_1">Installation and obtaining the initial certificate<a class="headerlink" href="#installation-and-obtaining-the-initial-certificate_1" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Download and install certbot-auto as described in the
+   <a href="https://certbot.eff.org/docs/install.html#certbot-auto">install instructions</a>.</p>
+</li>
+<li>
+<p>Stop services running on port 80 if there are any.</p>
+</li>
+<li>
+<p>Run the following command to obtain the host certificate with Let's Encrypt:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> certbot-auto certonly --standalone --email &lt;ADMIN_EMAIL&gt; -d &lt;HOST&gt;
+</pre></div>
+
+
+</li>
+<li>
+<p>Set up hostcert/hostkey links:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> ln -sf /etc/letsencrypt/live/*/cert.pem /etc/grid-security/hostcert.pem
+<span class="gp">root@host #</span> ln -sf /etc/letsencrypt/live/*/privkey.pem /etc/grid-security/hostkey.pem
+<span class="gp">root@host #</span> chmod <span class="m">0600</span> /etc/letsencrypt/archive/*/privkey*.pem
+</pre></div>
+
+
+</li>
+<li>
+<p>Restart services running on port 80 if there were any.</p>
+</li>
+</ol>
+<h3 id="renewing-lets-encrypt-host-certificates_1">Renewing Let's Encrypt host certificates<a class="headerlink" href="#renewing-lets-encrypt-host-certificates_1" title="Permanent link">&para;</a></h3>
+<p>You can manually renew your certificate with the following command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> certbot-auto renew
+</pre></div>
+
+
+<p>The certificate will be renewed if it is close to expiring.</p>
+<div class="admonition note">
+<p class="admonition-title">Disable services listening on port 80</p>
+</div>
+<p>Just like with obtaining a new certificate, renewing a certificate requires you to temporarily disable
+   services running on port 80 so that <code>certbot-auto</code> can verify the host.</p>
+<h4 id="automating-renewals-using-cron">Automating renewals using cron<a class="headerlink" href="#automating-renewals-using-cron" title="Permanent link">&para;</a></h4>
+<p>To automate renewal using cron, create a cron job in <code>/etc/cron.d/certbot-renew</code> with the following contents:</p>
+<div class="codehilite"><pre><span></span>* */2 * * * root /usr/local/bin/certbot-auto renew --quiet --agree-tos --no-self-upgrade
+</pre></div>
+
+
+<p>The certificate will only be renewed if it is close to expiring.</p>
+<h3 id="pre-and-post-renewal-hooks_1">Pre- and post-renewal hooks<a class="headerlink" href="#pre-and-post-renewal-hooks_1" title="Permanent link">&para;</a></h3>
+<p><code>certbot-auto</code> provides the ability to run scripts before and/or after certificate renewal via command hooks.
+Common uses for these hooks include:</p>
+<ul>
+<li>Copying the renewed certificate so that it can be used for a separate service (such as XRootD)</li>
+<li>Shutting down and restarting a service running on port 80</li>
+<li>Temporarily opening up the firewall</li>
+</ul>
+<p>To do this, call <code>certbot-auto</code> with <code>--pre-hook &lt;COMMAND&gt;</code> for a command or script to run before renewal,
+and <code>--post-hook &lt;COMMAND&gt;</code> for a command or script to run after renewal.
+The command(s) will only be run if the certificate is actually renewed.</p>
+<h4 id="example_1">Example<a class="headerlink" href="#example_1" title="Permanent link">&para;</a></h4>
+<p>This example is for a host running CEView and XRootD standalone;
+CEView needs to be stopped so it doesn't block port 80, and XRootD needs its certificate in a separate location.</p>
+<p>Create the following scripts:</p>
+<p><strong>/root/bin/certbot-pre.sh</strong></p>
+<div class="codehilite"><pre><span></span><span class="ch">#!/bin/bash</span>
+condor_ce_off -daemon CEVIEW
+</pre></div>
+
+
+<p><strong>/root/bin/certbot-post.sh</strong></p>
+<div class="codehilite"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nb">cd</span> /etc/grid-security
+cp -f hostcert.pem xrd/xrdcert.pem
+cp -f hostkey.pem xrd/xrdkey.pem
+chown -R xrootd:xrootd xrd
+condor_ce_on -daemon CEVIEW
+systemctl restart xrootd@standalone
+</pre></div>
+
+
+<p>Then call <code>certbot-auto</code> as follows:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> certbot-auto renew --pre-hook /root/bin/certbot-pre.sh <span class="se">\</span>
+                               --post-hook /root/bin/certbot-post.sh
+</pre></div>
+
+
+<p>For automated renewal, edit the <code>/etc/cron.d/certbot-renew</code> file that you created <a href="#automating-renewals-using-cron">above</a>
+and add the <code>--pre-hook &lt;COMMAND&gt;</code> and <code>--post-hook &lt;COMMAND&gt;</code> arguments:</p>
+<div class="codehilite"><pre><span></span>* */2 * * * root /usr/local/bin/certbot-auto renew --quiet --agree-tos --no-self-upgrade --pre-hook /root/bin/certbot-pre.sh --post-hook /root/bin/certbot-post.sh
+</pre></div>
+
+
+<h2 id="alternate-renewal-methods">Alternate renewal methods<a class="headerlink" href="#alternate-renewal-methods" title="Permanent link">&para;</a></h2>
+<p>There are some cases in which you might need an alternative to running <code>certbot</code> or <code>certbot-auto</code> as above.
 For example:</p>
 <ul>
 <li>You have a web server running on port 80 that you do not want to shut down during renewal</li>
@@ -2563,6 +2778,12 @@ without shutting the webserver down.</li>
 <li>One of the DNS plugins can be used to avoid using port 80, run on a different machine, or obtain a wildcard cert.</li>
 <li>If all else fails, the manual plugin can be used for manual renewal.</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+</div>
+<p>The DNS plugins do not work with <code>certbot-auto</code>.
+   You will need to use one of the <a href="https://hub.docker.com/u/certbot">Docker containers</a> if you are using
+   Enterprise Linux 6.</p>
 <h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
