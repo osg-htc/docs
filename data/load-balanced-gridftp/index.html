@@ -682,6 +682,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#with-lets-encrypt" title="With Let's Encrypt" class="md-nav__link">
+    With Let's Encrypt
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2504,6 +2511,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#with-lets-encrypt" title="With Let's Encrypt" class="md-nav__link">
+    With Let's Encrypt
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2690,7 +2704,7 @@
 <li>Load-balancing configuration</li>
 </ul>
 <h3 id="acquiring-host-certificates">Acquiring host certificate(s)<a class="headerlink" href="#acquiring-host-certificates" title="Permanent link">&para;</a></h3>
-<p>When authenticating with a GridFTP server, clients verify that the server's host certificate matches the hostname of the server. In the case of a load-balanced GridFTP system, clients contact the GridFTP server through the virtual hostname, so the GridFTP server will have to present a certificate containing the virtual hostname as well as the GridFTP server's hostname. Use the <a href="../../security/host-certs">OSG host certificate reference</a> for more information on how to request these types of certificates.</p>
+<p>When authenticating with a GridFTP server, clients verify that the server's host certificate matches the hostname of the server. In the case of a load-balanced GridFTP system, clients contact the GridFTP server through the virtual hostname, so the GridFTP server will have to present a certificate containing the virtual hostname as well as the GridFTP server's hostname. Use the <a href="../../security/host-certs">OSG host certificate reference</a> for more information on how to request these types of certificates.  Additionally, a special procedure is available to acquire <a href="#with-lets-encrypt">Let's Encrypt certificates</a> with the load balanced gridftp.</p>
 <p>If your GridFTP servers are also running XRootD, you will need unique certificates for each GridFTP server. Otherwise, you can request a single certificate that can be shared among the GridFTP servers.</p>
 <h4 id="without-xrootd">Without XRootD<a class="headerlink" href="#without-xrootd" title="Permanent link">&para;</a></h4>
 <p>The single shared certificate must have the hostname associated with the load-balanced GridFTP system as its <a href="https://en.wikipedia.org/wiki/X.509_attribute_certificate">common name</a> and each GridFTP servers hostname listed as <a href="https://en.wikipedia.org/wiki/Subject_Alternative_Name">subject alternative names</a>.</p>
@@ -2759,6 +2773,66 @@ export X509_USER_KEY=/etc/grid-security/gridftp/gridftp-hostkey.pem
 <p>Copy the resulting certificates and keys to their corresponding GridFTP servers in <code>/etc/grid-security/hostcert.pem</code> and <code>/etc/grid-security/hostkey.pem</code>, respectively.</p>
 </li>
 </ol>
+<h4 id="with-lets-encrypt">With Let's Encrypt<a class="headerlink" href="#with-lets-encrypt" title="Permanent link">&para;</a></h4>
+<p>The certificate provided to the clients needs to have the virtual host address of the load balancer, as well as the hostname of each of the worker nodes.  Additionally, LetsEncrypt contacts the requested domains to verify ownership.  Therefore, each domain requested must be available to respond to HTTP requests at the same time.  The easiest method for this is to use a shared directory for Let's Encrypt's <code>certbot</code> to install the secrets.</p>
+<p>The procedure to acquire Let's Encrypt certificates for multiple hosts is as follows:</p>
+<ol>
+<li>
+<p>Create or use a shared directory that each of the data transfer nodes can read, for example a simple NFS share.  The steps in creating a NFS shared directory is outside the scope of this guide.  In this guide, the shared directory will be referred as <code>/mnt/nfsshare</code> . </p>
+</li>
+<li>
+<p>Install <code>httpd</code> on each of the data transfer nodes:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host $</span> yum install httpd
+</pre></div>
+
+
+<p>Create a webroot directory within the shared directory on one of the nodes:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host $</span> mkdir /mnt/nfsshare/webroot
+</pre></div>
+
+
+</li>
+<li>
+<p>Configure <code>httpd</code> to export the same webroot on each of the data transfer nodes:</p>
+<div class="codehilite"><pre><span></span>&lt;VirtualHost *:80&gt;
+    DocumentRoot &quot;/mnt/nfsshare/webroot&quot;
+    &lt;Directory &quot;/mnt/nfsshare/webroot&quot;&gt;
+        Require all granted
+    &lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+</pre></div>
+
+
+</li>
+<li>
+<p>Configure <code>keepalived</code> to virtualize port 80 to at least one of your data transfer nodes.
+    Add to your configuration:</p>
+<div class="codehilite"><pre><span></span>virtual_server &lt;VIRTUAL-IP-ADDRESS&gt; 80 {
+    delay_loop 10
+    lb_algo wlc
+    lb_kind DR
+    protocol tcp
+
+    real_server &lt;GRIDFTP-SERVER-#1-IP ADDRESS&gt; {
+        TCP_CHECK {
+            connect_timeout 3
+            connect_port 80
+        }
+    }
+}
+</pre></div>
+
+
+</li>
+<li>
+<p>Run <code>certbot</code> with the webroot options on only 1 of the data nodes.  The first domain in the command line should be the virtual hostname:</p>
+<div class="codehilite"><pre><span></span>root@host $ certbot certonly -w /mnt/nfsshare/webroot -d &lt;VIRTUAL_HOSTNAME&gt; -d &lt;DATANODE_1&gt; -d &lt;DATANODE_N&gt;...
+</pre></div>
+
+
+</li>
+</ol>
+<p>For XRootD certificates, the real hostname of the XRootD node is required to be the first hostname in the <code>certbot</code> command.  You may run the <code>certbot</code> command several times on the same host, replacing the <code>VIRTUAL_HOSTNAME</code> with the real hostname of the XRootD servers, and placing the <code>VIRTUAL_HOSTNAME</code> in in the list of other domains in the certificate.</p>
 <h3 id="installing-gridftp">Installing GridFTP<a class="headerlink" href="#installing-gridftp" title="Permanent link">&para;</a></h3>
 <p>Whether you are starting from scratch or adding more GridFTP servers to your load-balanced GridFTP system, follow the documentation for <a href="../gridftp">installing a standalone GridFTP server</a> for each of your intended GridFTP servers (skip section 2.2, requesting a certificate). For hosts with GridFTP already installed, skip this section.</p>
 <h3 id="configuring-your-gridftp-servers">Configuring your GridFTP servers<a class="headerlink" href="#configuring-your-gridftp-servers" title="Permanent link">&para;</a></h3>
