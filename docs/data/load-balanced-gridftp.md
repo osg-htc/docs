@@ -51,7 +51,7 @@ Before adding your GridFTP hosts to the load-balanced system, each host requires
 
 ### Acquiring host certificate(s)
 
-When authenticating with a GridFTP server, clients verify that the server's host certificate matches the hostname of the server. In the case of a load-balanced GridFTP system, clients contact the GridFTP server through the virtual hostname, so the GridFTP server will have to present a certificate containing the virtual hostname as well as the GridFTP server's hostname. Use the [OSG host certificate reference](/security/host-certs) for more information on how to request these types of certificates.  Additionally, a special procedure is available to acquire [LetsEncrypt certificates](#with-letsencrypt) with the load balanced gridftp.
+When authenticating with a GridFTP server, clients verify that the server's host certificate matches the hostname of the server. In the case of a load-balanced GridFTP system, clients contact the GridFTP server through the virtual hostname, so the GridFTP server will have to present a certificate containing the virtual hostname as well as the GridFTP server's hostname. Use the [OSG host certificate reference](/security/host-certs) for more information on how to request these types of certificates.  Additionally, a special procedure is available to acquire [Let's Encrypt certificates](#with-lets-encrypt) with the load balanced gridftp.
 
 If your GridFTP servers are also running XRootD, you will need unique certificates for each GridFTP server. Otherwise, you can request a single certificate that can be shared among the GridFTP servers.
 
