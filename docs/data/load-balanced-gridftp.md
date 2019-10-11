@@ -113,7 +113,7 @@ The procedure to acquire Let's Encrypt certificates for multiple hosts is as fol
 
 1. Create or use a shared directory between the data transfer nodes
 2. Install `httpd` on each of the data transfer nodes
-3. Configure httpd to use the shared directory as the “webroot”
+3. Configure `httpd` to use the shared directory as the `webroot`
 4. Configure `keepalived` to use virtualize port 80 to at least 1 of your data transfer nodes.
 5. Run certbot with the webroot option, as well as the multiple hostnames of the data transfer nodes.
 
