@@ -127,7 +127,7 @@ Create a webroot directory within the shared directory on one of the nodes:
     :::console
     root@host $ mkdir /mnt/nfsshare/webroot
 
-Configure httpd to export the same webroot on each of the data transfer nodes:
+Configure `httpd` to export the same webroot on each of the data transfer nodes:
 
 ``` file
 <VirtualHost *:80>
