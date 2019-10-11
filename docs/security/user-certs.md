@@ -9,9 +9,14 @@ Getting a User Certificate
 --------------------------
 
 This section describes how to get and set up a personal certificate to use on OSG.
-You need a user certificate if you are going to interact directly with OSG resources or infrastructure. 
-Examples of this would be tasks like managing OASIS, directly running jobs on OSG resources, interacting directly with 
-OSG storage elements, or to get private contact information from OSG systems.
+You need a user certificate if you are going to interact directly with OSG resources or infrastructure,
+including activities such as:
+
+- Managing OASIS
+- Directly running jobs on OSG resources
+- Directly interacting with OSG storage elements
+- Obtaining private contact information from OSG systems
+
 Currently, you can get a user certificate from CILogon.
 You may also be able to user other CAs to get a certificate; if your virtual organization (VO) requires that you get a
 certificate from a different CA, [contact your VO Support Center](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations) for
