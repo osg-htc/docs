@@ -111,55 +111,50 @@ The certificate provided to the clients needs to have the virtual host address o
 
 The procedure to acquire Let's Encrypt certificates for multiple hosts is as follows:
 
-1. Create or use a shared directory between the data transfer nodes
-2. Install `httpd` on each of the data transfer nodes
-3. Configure `httpd` to use the shared directory as the `webroot`
-4. Configure `keepalived` to use virtualize port 80 to at least 1 of your data transfer nodes.
-5. Run `certbot` with the `--webroot` option, as well as the multiple hostnames of the data transfer nodes.
+1. Create or use a shared directory that each of the data transfer nodes can read, for example a simple NFS share.  The steps in creating a NFS shared directory is outside the scope of this guide.  In this guide, the shared directory will be referred as `/mnt/nfsshare` . 
 
-Create a shared directory that each of the data transfer nodes can read, for example a simple NFS share.  The steps in creating a NFS shared directory is outside the scope of this guide.  In this guide, the shared directory will be referred as `/mnt/nfsshare` . Next, install `httpd` on each of the data transfer nodes:
+2. Install `httpd` on each of the data transfer nodes:
 
-    :::console
-    root@host $ yum install httpd
+        :::console
+        root@host $ yum install httpd
 
-Create a webroot directory within the shared directory on one of the nodes:
+    Create a webroot directory within the shared directory on one of the nodes:
 
-    :::console
-    root@host $ mkdir /mnt/nfsshare/webroot
+        :::console
+        root@host $ mkdir /mnt/nfsshare/webroot
 
-Configure `httpd` to export the same webroot on each of the data transfer nodes:
+3. Configure `httpd` to export the same webroot on each of the data transfer nodes:
 
-``` file
-<VirtualHost *:80>
-    DocumentRoot "/mnt/nfsshare/webroot"
-    <Directory "/mnt/nfsshare/webroot">
-        Require all granted
-    </Directory>
-</VirtualHost>
-```
+        <VirtualHost *:80>
+            DocumentRoot "/mnt/nfsshare/webroot"
+            <Directory "/mnt/nfsshare/webroot">
+                Require all granted
+            </Directory>
+        </VirtualHost>
 
-Configure `keepalived` to virtualize port 80 to at least one of your data transfer nodes.
-Add to your configuration:
 
-``` file
-virtual_server <VIRTUAL-IP-ADDRESS> 80 {
-    delay_loop 10
-    lb_algo wlc
-    lb_kind DR
-    protocol tcp
+4. Configure `keepalived` to virtualize port 80 to at least one of your data transfer nodes.
+    Add to your configuration:
 
-    real_server <GRIDFTP-SERVER-#1-IP ADDRESS> {
-        TCP_CHECK {
-            connect_timeout 3
-            connect_port 80
+
+        virtual_server <VIRTUAL-IP-ADDRESS> 80 {
+            delay_loop 10
+            lb_algo wlc
+            lb_kind DR
+            protocol tcp
+
+            real_server <GRIDFTP-SERVER-#1-IP ADDRESS> {
+                TCP_CHECK {
+                    connect_timeout 3
+                    connect_port 80
+                }
+            }
         }
-    }
-}
-```
 
-Run `certbot` with the webroot options on only 1 of the data nodes.  The first domain in the command line should be the virtual hostname:
 
-    root@host $ certbot certonly -w /mnt/nfsshare/webroot -d <VIRTUAL_HOSTNAME> -d <DATANODE_1> -d <DATANODE_N>...
+5. Run `certbot` with the webroot options on only 1 of the data nodes.  The first domain in the command line should be the virtual hostname:
+
+        root@host $ certbot certonly -w /mnt/nfsshare/webroot -d <VIRTUAL_HOSTNAME> -d <DATANODE_1> -d <DATANODE_N>...
 
 For XRootD certificates, the real hostname of the XRootD node is required to be the first hostname in the `certbot` command.  You may run the `certbot` command several times on the same host, replacing the `VIRTUAL_HOSTNAME` with the real hostname of the XRootD servers, and placing the `VIRTUAL_HOSTNAME` in in the list of other domains in the certificate.
 
