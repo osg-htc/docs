@@ -105,7 +105,7 @@ XRootD requires that the certificate's [common name](https://en.wikipedia.org/wi
 
 1.  Copy the resulting certificates and keys to their corresponding GridFTP servers in `/etc/grid-security/hostcert.pem` and `/etc/grid-security/hostkey.pem`, respectively.
 
-#### With LetsEncrypt
+#### With Let's Encrypt
 
 The certificate provided to the clients needs to have the virtual host address of the load balancer, as well as the hostname of each of the worker nodes.  Additionally, LetsEncrypt contacts the requested domains to verify ownership.  Therefore, each domain requested must be available to respond to HTTP requests at the same time.  The easiest method for this is to use a shared directory for LetsEncrypt's `certbot` to install the secrets.
 
