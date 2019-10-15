@@ -120,7 +120,7 @@ Remote debugging should only be enabled for as long as you need assistance.
 As soon as your issue has been resolved, revert any changes you have made to `/etc/xrootd/digauth.cfg`.
 
 
-Managing StashCache and associated services
+Managing CMS XCache and associated services
 -------------------------------------------
 
 These services must be managed by `systemctl` and may start additional services as dependencies.
