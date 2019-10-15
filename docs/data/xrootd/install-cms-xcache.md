@@ -168,7 +168,7 @@ timeleft  : 71:59:46
 uri       : lcg-voms2.cern.ch:15002
 ```
 
-Then test using xrdcp directly in your cache
+Then test using `xrdcp` directly in your cache:
 
 ```console
 user@host $ xrdcp -vf -d 1 root://cache_host:1094//store/data/Run2017B/SingleElectron/MINIAOD/31Mar2018-v1/60000/9E0F8458-EA37-E811-93F1-008CFAC919F0.root /dev/null
