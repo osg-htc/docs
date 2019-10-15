@@ -155,7 +155,7 @@ In addition to the cache services if your cache is composed of several hosts the
 Validating the Cache
 ---------------------
 
-The cache server functions as a normal CMS Xrootd server so use first a personal CMS X509 voms proxy like this
+The cache server functions as a normal CMS XRootD server so first verify it with a personal CMS X.509 proxy: 
 
 ```
 === VO cms extension information ===
