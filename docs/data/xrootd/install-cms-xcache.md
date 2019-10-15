@@ -133,7 +133,7 @@ As a reminder, here are common service commands (all run as `root`) for EL7:
 | Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`  |
 | Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>` |
 
-### CMS Xcache services
+### CMS XCache services
 
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
