@@ -145,7 +145,7 @@ As a reminder, here are common service commands (all run as `root`) for EL7:
 
 ### CMS Xcache cmsd (optional)
 
-In addition to the cache services if your cache is composed of several hosts then you need to run the service`cmsd`
+In addition to the cache services if your cache is composed of several hosts then you need to run the service `cmsd`
 
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
