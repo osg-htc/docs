@@ -14,7 +14,6 @@ Before starting the installation process, consider the following requirements:
 * __Operating system:__ A RHEL 7 or compatible operating systems.
 * __User IDs:__ If they do not exist already, the installation will create the Linux user IDs `xrootd`
 * __Host certificate:__ Required for client authentication and authentication with CMS VOMS Server
-  Authenticated StashCache is an optional feature.
   See our [documentation](/security/host-certs.md) for instructions on how to request and install host certificates.
 * __Network ports:__ The cache service requires the following ports open:
     * Inbound TCP port 1094 for file access via the XRootD protocol
