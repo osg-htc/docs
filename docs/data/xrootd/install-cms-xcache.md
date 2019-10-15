@@ -66,7 +66,7 @@ The mandatory variables to configure are:
 
 ### Ensure the xrootd service has a certificate
 
-The service will need a certificate for reporting and to authenticate to StashCache origins.
+The service will need a certificate for reporting and to authenticate to CMS AAA.
 The easiest solution for this is to use your host certificate and key as follows:
 
 1. Copy the host certificate to `/etc/grid-security/xrd/xrd{cert,key}.pem`
