@@ -61,7 +61,7 @@ The mandatory variables to configure are:
 - `set resourcename = YOUR_RESOURCE_NAME`: the resource name registered with the OSG for example ("T2_US_UCSD")
 
 !!! note
-    Xrootd can manage a set of independent disk for the cache. So you can modify file `90-cms-xcache-disks.cfg` and add the disks there then `/mnt/stash` just becomes a place to hold symlinks.
+    XRootD can manage a set of independent disk for the cache. So you can modify file `90-cms-xcache-disks.cfg` and add the disks there then `rootdir` just becomes a place to hold symlinks.
 
 
 ### Ensure the xrootd service has a certificate
