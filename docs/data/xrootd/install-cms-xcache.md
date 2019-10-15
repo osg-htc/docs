@@ -2,7 +2,7 @@ Installing the CMS XCache
 ===============================
 
 This document describes how to install a CMS XCache.  This service allows a site or regional
-network to cache data frequently used in CMS, reducing data transfer over the wide-area network and
+network to cache data frequently used by the [CMS experiment](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/CMS.yaml), reducing data transfer over the wide-area network and
 decreasing access latency.
 
 
