@@ -16,6 +16,9 @@ This release contains:
 -   [scitokens-cpp 0.3.4](https://github.com/scitokens/scitokens-cpp/pull/14): Add support for Identity and Access Management (IAM)
 -   [XRootD 4.10.1](https://github.com/xrootd/xrootd/blob/bced78a4a3f4a1ea34ffd8684cec1d99107b588a/docs/ReleaseNotes.txt): Make third party client check bogus-response proof
 -   [HTCondor 8.8.5](https://www-auth.cs.wisc.edu/lists/htcondor-world/2019/msg00017.shtml)
+    -   Major upgrade from version 8.6.13
+        -   [OSG Upgrade Instructions](https://opensciencegrid.org/docs/release/release_series/#updating-to-htcondor-88x)
+        -   [HTCondor Upgrade Release Notes](https://htcondor.readthedocs.io/en/stable/version-history/upgrading-from-86-to-88-series.html)
     -   Enhanced security with default configuration added by OSG
     -   `bosco_cluster` pulls tarball via HTTPS
     -   Added support for customizations to remote BOSCO installations
@@ -37,6 +40,9 @@ This release contains:
 These
 [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.5.3%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC)
 were addressed in this release.
+
+Containers
+----------
 
 The [Worker node containers](/worker-node/using-wn-containers/) have been updated to this release.
 
