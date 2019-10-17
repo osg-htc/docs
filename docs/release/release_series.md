@@ -127,7 +127,7 @@ and want to upgrade to 3.5 (the *new series*), we recommend the following proced
         No Match for argument: xacml
         No Packages marked for removal
 
-1. If you are updating an HTCondor-CE host, please consult the manual [HTCondor](#updating-to-htcondor-8.8.x) and
+1. If you are updating an HTCondor-CE host, please consult the manual [HTCondor](#updating-to-htcondor-88x_1) and
 [OSG Configure](#updating-to-osg-configure-3) instructions below.
 
 !!! tip "Running into issues?"
