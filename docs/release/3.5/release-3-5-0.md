@@ -33,7 +33,7 @@ In addition to the packages that were carried over from [OSG 3.4.33](/release/3.
 this release contains the following package updates:
 
 -   HTCondor 8.8.4: The current HTCondor [stable release](https://htcondor.readthedocs.io/en/v8_8_4/version-history/stable-release-series-88.html).
-    See the [manual update instructions](/release/release_series#updating-to-htcondor-8.8.x) before
+    See the [manual update instructions](/release/release_series#updating-to-htcondor-88x_1) before
     updating to this version.
     Some highlights from the 8.8 release series include:
     -   Automatically add AWS resources to your pool using HTCondor Annex
