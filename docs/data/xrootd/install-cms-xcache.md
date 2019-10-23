@@ -79,7 +79,7 @@ The easiest solution for this is to use your host certificate and key as follows
     You must repeat the above steps whenever you renew your host certificate.
     If you automate certificate renewal, you should automate copying as well.
     For example, if you are using Certbot for Let's Encrypt, you should write a "deploy hook" as documented
-    [on the Certbot site](https://certbot.eff.org/docs/using.html#renewing-certificates).
+    [here](/security/host-certs/lets-encrypt/#pre-and-post-renewal-hooks).
 
 !!! note
     You must also register this certificate with the [CMS VOMS](https://voms24.cern.ch:8443/voms/cms/)
