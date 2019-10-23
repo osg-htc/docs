@@ -100,6 +100,20 @@ The two values correspond to the low and high usage water marks, respectively.
 When usage goes above the high water mark,
 the XRootD service will delete cached files until usage goes below the low water mark.
 
+### Modify the storage access settings at a site
+
+In order for CMSSW jobs to use the cache at your site you need to modify the `storage.xml` and create the following rules
+
+```
+# Portions of /store in xcache
+  <lfn-to-pfn protocol="direct" destination-match=".*"
+    path-match="/+store/(data/.*/.*/NANOAOD/.*)"
+    result="root://yourlocalcache:2040//store/$1"/>
+  <lfn-to-pfn protocol="direct" destination-match=".*"
+    path-match="/+store/(mc/.*/.*/NANOAODSIM/.*)"
+    result="root://yourlocalcache:2040//store/$1"/>
+```
+
 
 ### Enable remote debugging
 
@@ -143,13 +157,51 @@ As a reminder, here are common service commands (all run as `root`) for EL7:
 |  | `xrootd-renew-proxy.timer` | Trigger daily proxy renewal |
 
 
-### CMS Xcache cmsd (optional)
+### Scaling horizontally (optional)
 
-In addition to the cache services if your cache is composed of several hosts then you need to run the service `cmsd`
+Some sites would like to have a single logical cache composed of several nodes as show bellow:
+
+![XRootD cluster](/img/xrootd.jpg)
+
+This can be achieved by following the next steps
+
+#### Setup an XCache redirector (optional)
+
+This can be a simple lightweight virtual machine and will be the single point of contact from jobs to the caches. 
+
+1. Install the redirector package
+    
+        :::console
+        root@host # yum install cms-xcache-redir --enablerepo=osg-development
+
+
+1. Create file named `/etc/xrootd/config.d/04-local-redir.cfg' with contents
+
+        :::file
+        all.manager yourlocalredir:2041
+         
+1. Start the cmsd and xrootd proccess
+
+| **Software** | **Service name** | **Notes** |
+|--------------|------------------|-----------|
+| XRootD | `cmsd@cms-xcache-redir.service` | The cmsd daemon that interact with the different xrootd servers |
+| XRootD | `xrootd@cms-xcache-redir.service` | The xrootd daemon which performs authenticated data transfers |
+
+#### CMS Xcache cmsd (optional)
+
+In addition to the cache services if your cache is composed of several hosts then you need to:
+
+1. Create a config file in your cache `/etc/xrootd/config.d/94-xrootd-manager.cfg` with the following contents:
+
+      :::file
+      all.manager yourlocalredir:2041
+
+1. Run the service `cmsd`
 
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
 | XRootD | `cmsd@cms-xcache.service` | The xrootd daemon which performs authenticated data transfers |
+
 
 
 Validating the Cache
