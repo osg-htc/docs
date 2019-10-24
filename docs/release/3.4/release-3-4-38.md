@@ -50,7 +50,7 @@ Detailed changes are below. All of the documentation can be found [here](/index.
 1. Upgrades from <= 3.4.0 may require merging `/etc/condor/config.d/*.rpmnew` files and restarting HTCondor.
 
 1. GlideinWMS >= 3.4.5 uses shared port, requiring only port 9618.
-   To ease the transition to shared port, the User Collector secondary collectors and CCBs support both shared and
+   To ease the transition to shared port, the User Collector, secondary collectors, and CCBs support both shared and
    separate, individual ports.
    To start using shared port, change the secondary collectors lines and the CCBs lines (if any) in
    `/etc/gwms-frontend/frontend.xml`, changing the address to include the shared port sinful string:
