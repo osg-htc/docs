@@ -9,7 +9,7 @@ Summary of changes
 
 This release contains:
 
--   [StashCache-Client 5.5.0](https://github.com/opensciencegrid/StashCache/releases/tag/v5.5.0): Can be installed as a Python package
+-   [StashCache-Client 5.5.0](https://github.com/opensciencegrid/StashCache/releases/tag/v5.5.0): Bugfixes and improved SciTokens support
 -   Updated CA certificates based on [IGTF 1.102](http://dist.eugridpma.info/distribution/igtf/current/CHANGES):
     -   Added CESNET-CA-4 ICA accredited classic CA for issuer roll-over (CZ)
 -   [VO Package v97](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-97): Added CLAS12 VO for Jefferson Lab
