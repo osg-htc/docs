@@ -28,7 +28,7 @@ This section describes important upgrade notes and/or caveats for packages avail
 Detailed changes are below. All of the documentation can be found [here](/index.md).
 
 -   OSG 3.4 contains only 64-bit components.
--   StashCache is only supported on EL7
+-   The StashCache service is only supported on EL7
 
 ### GlideinWMS ###
 
