@@ -47,7 +47,7 @@ Detailed changes are below. All of the documentation can be found [here](/index.
     - <https://glideinwms.fnal.gov/doc.prd/factory/configuration.html#singularity>
     - <https://glideinwms.fnal.gov/doc.prd/factory/custom_vars.html#singularity_vars>
 
-1. Upgrades from <= 3.4.0 may require merging `/etc/condor/config.d/*.rpmnew` files and a restart of HTCondor.
+1. Upgrades from <= 3.4.0 may require merging `/etc/condor/config.d/*.rpmnew` files and restarting HTCondor.
 
 1. GlideinWMS >= 3.4.5 uses shared port, requiring only port 9618.
    To ease the transition to shared port, the User Collector secondary collectors and CCBs support both shared and
