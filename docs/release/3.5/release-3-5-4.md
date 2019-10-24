@@ -10,7 +10,7 @@ Summary of Changes
 This release contains:
 
 -   HTCondor 8.8.5-1.7: Addressed issue when updating from OSG 3.4
--   [StashCache-Client 5.5.0](https://github.com/opensciencegrid/StashCache/releases/tag/v5.5.0): Can be installed as a Python package
+-   [StashCache-Client 5.5.0](https://github.com/opensciencegrid/StashCache/releases): Update from 5.2.0: Improved SciTokens support plus bug fixes
 -   Updated CA certificates based on [IGTF 1.102](http://dist.eugridpma.info/distribution/igtf/current/CHANGES):
     -   Added CESNET-CA-4 ICA accredited classic CA for issuer roll-over (CZ)
 -   [VO Package v97](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-97): Added CLAS12 VO for Jefferson Lab
