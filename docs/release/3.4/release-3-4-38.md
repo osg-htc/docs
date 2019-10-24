@@ -57,7 +57,7 @@ Detailed changes are below. All of the documentation can be found [here](/index.
 
         <collector DN="/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=gwms-frontend.domain" group="default" node="gwms-frontend.domain:9618?sock=collector0-40" secondary="True"/>
 
-   Replacing `gwms-frontend-domain` with the hostname of your GlideinWMS frontend.
+   Replace `gwms-frontend-domain` above with the hostname of your GlideinWMS frontend.
    See the [GlideinWMS documentation](https://glideinwms.fnal.gov/doc.prd/components/condor.html#collectors ) for details.
 
 Known Issues
