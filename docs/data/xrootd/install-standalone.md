@@ -73,10 +73,6 @@ under `/etc/xrootd/config.d/` as follows:
     !!! note
         CMS sites should follow CMS policy for `resourcename`
 
-1.  Append the following configuration to the end of `/etc/xrootd/xrootd-standalone.cfg`
-
-        all.role server
-
 1.  On EL 6, set the default options to use the standalone configuration in the `/etc/sysconfig/xrootd` file.
 
         XROOTD_DEFAULT_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-standalone.cfg -k fifo"
