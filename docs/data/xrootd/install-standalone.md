@@ -44,9 +44,16 @@ under `/etc/xrootd/config.d/` as follows:
 
 1.  Comment out the `all.export /tmp` directive in `/etc/xrootd/xrootd-standalone.cfg`.
 
-1.  Comment out the `all.export /` directive in `/etc/xrootd/config.d/90-osg-standalone-paths.cfg`,
-    and add an `all.export` directive for each directory that you wish to serve via XRootD.
-    For example, to serve the contents of `/store` and `/public`:
+1.  Configure a `rootdir` in `/etc/xrootd/config.d/10-common-site-local.cfg`, to point to the top of the directory
+    hierarchy which you wish to serve via XRootD.
+    For example, to serve `/data`:
+
+        set rootdir = /data
+
+1.  To limit the sub-directories to serve under your configured `rootdir`, comment out the `all.export /` directive in
+    `/etc/xrootd/config.d/90-osg-standalone-paths.cfg`, and add an `all.export` directive for each directory under
+    `rootdir` that you wish to serve via XRootD.
+    For example, to serve the contents of `/data/store` and `/data/public` (with `rootdir` configured to `/data`):
 
         all.export /store/
         all.export /public/
