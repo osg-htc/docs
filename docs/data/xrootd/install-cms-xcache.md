@@ -153,11 +153,18 @@ As a reminder, here are common service commands (all run as `root`) for EL7:
 |--------------|------------------|-----------|
 | XRootD | `xrootd@cms-xcache.service` | The XRootD daemon, which performs the data transfers |
 | XRootD (Optional)| `cmsd@xcache-redirector.service` | The cmsd daemon that interact with the different xrootd servers |
-| XRootD (Optional)| `xrootd@xcache-redirector.service` | The xrootd daemon which performs authenticated data transfers |
-| XRootD (Optional)| `cmsd@cms-xcache.service` | The xrootd daemon which performs authenticated data transfers |
 | Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | Required to authenticate monitoring services.  See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
 |  |`xrootd-renew-proxy.service` | Renew a proxy for downloads to the cache |
 |  | `xrootd-renew-proxy.timer` | Trigger daily proxy renewal |
+
+#### XCache redirector services (Optional)
+
+In the node where the cache redirector is installed these are the list of services:
+
+| **Software** | **Service name** | **Notes** |
+|--------------|------------------|-----------|
+| XRootD (Optional)| `xrootd@xcache-redirector.service` | The xrootd daemon which performs authenticated data transfers |
+| XRootD (Optional)| `cmsd@cms-xcache.service` | The xrootd daemon which performs authenticated data transfers |
 
 
 ## Creating a multinode cache (optional)
@@ -183,14 +190,14 @@ This can be a simple lightweight virtual machine and will be the single point of
         :::file
         all.manager yourlocalredir:2041
          
-1. Start the cmsd and xrootd proccess
+1. Start the cmsd and xrootd proccess:
 
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
 | XRootD | `cmsd@xcache-redirector.service` | The cmsd daemon that interact with the different xrootd servers |
 | XRootD | `xrootd@xcache-redirector.service` | The xrootd daemon which performs authenticated data transfers |
 
-1. Create a config file in your cache `/etc/xrootd/config.d/94-xrootd-manager.cfg` with the following contents:
+1. Create a config file in the nodes where you installed your caches `/etc/xrootd/config.d/94-xrootd-manager.cfg` with the following contents:
 
       :::file
       all.manager yourlocalredir:2041
