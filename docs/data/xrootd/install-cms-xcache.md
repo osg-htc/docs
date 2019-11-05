@@ -136,7 +136,7 @@ See [the XRootD manual](http://xrootd.org/doc/dev48/xrd_config.htm#_Toc496911334
 Remote debugging should only be enabled for as long as you need assistance.
 As soon as your issue has been resolved, revert any changes you have made to `/etc/xrootd/digauth.cfg`.
 
-## Installing a multinode cache (optional)
+## Installing a Multinode Cache (optional)
 
 Some sites would like to have a single logical cache composed of several nodes as shown below:
 
@@ -144,7 +144,7 @@ Some sites would like to have a single logical cache composed of several nodes a
 
 This can be achieved by following the next steps
 
-### Setup an XCache redirector
+### Install an XCache redirector
 
 This can be a simple lightweight virtual machine and will be the single point of contact from jobs to the caches.
 
@@ -159,19 +159,21 @@ This can be a simple lightweight virtual machine and will be the single point of
         :::file
         all.manager yourlocalredir:2041
 
-1. Start the cmsd and xrootd proccess:
+1. Start and enable the `cmsd` and `xrootd` proccess:
 
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
 | XRootD | `cmsd@xcache-redirector.service` | The cmsd daemon that interact with the different xrootd servers |
 | XRootD | `xrootd@xcache-redirector.service` | The xrootd daemon which performs authenticated data transfers |
 
+### Configuring each of your cache nodes
+
 1. Create a config file in the nodes where you installed your caches `/etc/xrootd/config.d/94-xrootd-manager.cfg` with the following contents:
 
       :::file
       all.manager yourlocalredir:2041
 
-1. Run the service `cmsd`
+1. Start and enable the `cmsd` service:
 
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
