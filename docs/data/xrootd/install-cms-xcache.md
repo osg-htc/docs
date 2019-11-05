@@ -108,12 +108,15 @@ In order for CMSSW jobs to use the cache at your site you need to modify the `st
 # Portions of /store in xcache
   <lfn-to-pfn protocol="direct" destination-match=".*"
     path-match="/+store/(data/.*/.*/NANOAOD/.*)"
-    result="root://yourlocalcache:2040//store/$1"/>
+    result="root://yourlocalcache:1094//store/$1"/>
   <lfn-to-pfn protocol="direct" destination-match=".*"
     path-match="/+store/(mc/.*/.*/NANOAODSIM/.*)"
-    result="root://yourlocalcache:2040//store/$1"/>
+    result="root://yourlocalcache:1094//store/$1"/>
 ```
 
+
+!!! note
+    If your are installing a multinode cache then instead of `yourlocalcache:1094` url should be changed for `yourcacheredirector:2040`
 
 ### Enable remote debugging
 
