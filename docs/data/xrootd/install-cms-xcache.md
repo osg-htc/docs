@@ -3,7 +3,7 @@ Installing the CMS XCache
 
 This document describes how to install a CMS XCache.  This service allows a site or regional
 network to cache data frequently used by the [CMS experiment](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/CMS.yaml), reducing data transfer over the wide-area network and
-decreasing access latency.
+decreasing access latency. The are two kinds of installations in this document: single or multinode cache. The difference might be based on the total disk that your cache needs.
 
 
 Before Starting
@@ -116,7 +116,7 @@ In order for CMSSW jobs to use the cache at your site you need to modify the `st
 
 
 !!! note
-    If your are installing a multinode cache then instead of `yourlocalcache:1094` url should be changed for `yourcacheredirector:2040`
+    If you are installing a [multinode cache](#installing-a-multinode-cache) then instead of `yourlocalcache:1094` url should be changed for `yourcacheredirector:2040`
 
 ### Enable remote debugging
 
@@ -135,6 +135,47 @@ See [the XRootD manual](http://xrootd.org/doc/dev48/xrd_config.htm#_Toc496911334
 
 Remote debugging should only be enabled for as long as you need assistance.
 As soon as your issue has been resolved, revert any changes you have made to `/etc/xrootd/digauth.cfg`.
+
+## Installing a multinode cache (optional)
+
+Some sites would like to have a single logical cache composed of several nodes as shown below:
+
+![XRootD cluster](/img/xrootd.jpg)
+
+This can be achieved by following the next steps
+
+### Setup an XCache redirector
+
+This can be a simple lightweight virtual machine and will be the single point of contact from jobs to the caches.
+
+1. Install the redirector package
+
+        :::console
+        root@host # yum install xcache-redirector --enablerepo=osg-development
+
+
+1. Create file named `/etc/xrootd/config.d/04-local-redir.cfg` with contents
+
+        :::file
+        all.manager yourlocalredir:2041
+
+1. Start the cmsd and xrootd proccess:
+
+| **Software** | **Service name** | **Notes** |
+|--------------|------------------|-----------|
+| XRootD | `cmsd@xcache-redirector.service` | The cmsd daemon that interact with the different xrootd servers |
+| XRootD | `xrootd@xcache-redirector.service` | The xrootd daemon which performs authenticated data transfers |
+
+1. Create a config file in the nodes where you installed your caches `/etc/xrootd/config.d/94-xrootd-manager.cfg` with the following contents:
+
+      :::file
+      all.manager yourlocalredir:2041
+
+1. Run the service `cmsd`
+
+| **Software** | **Service name** | **Notes** |
+|--------------|------------------|-----------|
+| XRootD | `cmsd@cms-xcache.service` | The xrootd daemon which performs authenticated data transfers |
 
 
 Managing CMS XCache and associated services
@@ -155,7 +196,7 @@ As a reminder, here are common service commands (all run as `root`) for EL7:
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
 | XRootD | `xrootd@cms-xcache.service` | The XRootD daemon, which performs the data transfers |
-| XRootD (Optional)| `cmsd@xcache-redirector.service` | The cmsd daemon that interact with the different xrootd servers |
+| XRootD (Optional)| `cmsd@cms-xcache.service` | The cmsd daemon that interact with the different xrootd servers |
 | Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | Required to authenticate monitoring services.  See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
 |  |`xrootd-renew-proxy.service` | Renew a proxy for downloads to the cache |
 |  | `xrootd-renew-proxy.timer` | Trigger daily proxy renewal |
@@ -167,51 +208,7 @@ In the node where the cache redirector is installed these are the list of servic
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
 | XRootD (Optional)| `xrootd@xcache-redirector.service` | The xrootd daemon which performs authenticated data transfers |
-| XRootD (Optional)| `cmsd@cms-xcache.service` | The xrootd daemon which performs authenticated data transfers |
-
-
-## Creating a multinode cache (optional)
-
-Some sites would like to have a single logical cache composed of several nodes as shown bellow:
-
-![XRootD cluster](/img/xrootd.jpg)
-
-This can be achieved by following the next steps
-
-### Setup an XCache redirector
-
-This can be a simple lightweight virtual machine and will be the single point of contact from jobs to the caches. 
-
-1. Install the redirector package
-    
-        :::console
-        root@host # yum install xcache-redirector --enablerepo=osg-development
-
-
-1. Create file named `/etc/xrootd/config.d/04-local-redir.cfg` with contents
-
-        :::file
-        all.manager yourlocalredir:2041
-         
-1. Start the cmsd and xrootd proccess:
-
-| **Software** | **Service name** | **Notes** |
-|--------------|------------------|-----------|
-| XRootD | `cmsd@xcache-redirector.service` | The cmsd daemon that interact with the different xrootd servers |
-| XRootD | `xrootd@xcache-redirector.service` | The xrootd daemon which performs authenticated data transfers |
-
-1. Create a config file in the nodes where you installed your caches `/etc/xrootd/config.d/94-xrootd-manager.cfg` with the following contents:
-
-      :::file
-      all.manager yourlocalredir:2041
-
-1. Run the service `cmsd`
-
-| **Software** | **Service name** | **Notes** |
-|--------------|------------------|-----------|
-| XRootD | `cmsd@cms-xcache.service` | The xrootd daemon which performs authenticated data transfers |
-
-
+| XRootD (Optional)| `cmsd@xcache-redirector.service` | The xrootd daemon which performs authenticated data transfers |
 
 Validating the Cache
 ---------------------
