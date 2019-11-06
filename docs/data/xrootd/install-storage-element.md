@@ -280,7 +280,7 @@ XRootD can be accessed using the HTTP protocol. To do that:
         :::file
         set EnableLcmaps = 1
 
-1. Add the following line to `/etc/xrootd/config.d/10-common-site-local.cfg`:
+1. Additionally, add the following line to the same file:
 
         :::file
         set EnableHttp = 1
