@@ -38,7 +38,7 @@ An installation of the XRootD server consists of the server itself and its depen
 Install these with Yum:
 
 ``` console
-root@host # yum install xrootd
+root@host # yum install osg-xrootd
 ```
 
 Configuring an XRootD Server
