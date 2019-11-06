@@ -87,11 +87,6 @@ The following configuration steps are optional and will likely not be required f
 If you do not need any of the following special configurations, skip to
 [the section on using XRootD](#using-xrootd).
 
-#### Enabling HTTP support
-
-In order to enable XRootD HTTP support please follow the instructions
-[here](/data/xrootd/install-storage-element#optional-enabling-xrootd-over-http)
-
 #### Enabling Hadoop support (EL 7 Only)
 
 For documentation on how to export your Hadoop storage using XRootD please see
