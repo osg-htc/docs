@@ -704,6 +704,12 @@ operating system (run as `root`):
 | Enterprise Linux 7             | `systemctl reload gwms-frontend` |
 | Enterprise Linux 6             | `service gwms-frontend reconfig`  |
 
+!!! note
+    Notice that, in the case of Enterprise Linux 7 `systemctl reload gwms-frontend` will work only if:
+    - gwms-frontend service is running
+    - gwms-frontend service was started with systemctl
+
+
 ### Upgrading GlideinWMS FrontEnd###
 
 After upgrading the GlideinWMS RPM, you must issue an upgrade command to GlideinWMS:
