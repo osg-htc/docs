@@ -34,7 +34,7 @@ privileged.
     OSG Security considers the non-setuid, kernel-based method to have a
     lower security risk.
 
-The document is intended for system administrators that wish to install
+This document is intended for system administrators that wish to install
 and/or configure singularity.
 
 Before Starting
@@ -155,7 +155,7 @@ unprivileged user and verify that singularity in OASIS works:
 ```console
 user@host $ /cvmfs/oasis.opensciencegrid.org/mis/singularity/bin/singularity \
                 exec --contain --ipc --pid --bind /cvmfs \
-                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 \
+                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el6:latest \
                 ps -ef
 WARNING: Container does not have an exec helper script, calling 'ps' directly
 UID        PID  PPID  C STIME TTY          TIME CMD
@@ -188,41 +188,25 @@ before installing the required packages:
 
     This command will update **all** packages
 
-1. The singularity packages are split into two parts, choose the command
-that corresponds to your situation:
-    - If you are installing singularity on a worker node, where images
-      do not need to be created or manipulated, install just the smaller
-      part to limit the amount of setuid-root code that is installed:
+1. Install Singularity
 
-            :::console
-            root@host # yum install singularity-runtime
-
-    - If you want a full singularity installation, run the following command:
-
-            :::console
-            root@host # yum install singularity
-
-!!! tip
-    In most cases, only `singularity-runtime` is needed on the worker node;
-    installing only this smaller package reduces risk of potential security
-    exploits, especially when running in privileged mode.
+        :::console
+        root@host # yum install singularity
 
 ### Configuring Singularity ###
 
-The OSG distribution of singularity includes an option called
-`underlay` that enables using bind mount points that do not exist in
-the container image.
-It is not enabled by default but recommended because it is less
-vulnerable to security problems than the similar default `overlay`
-option.
-In addition, the `overlay` option does not work on RHEL6, does not
-work correctly on RHEL7 when container images are distributed by CVMFS,
-and does not work in unprivileged mode.
+singularity includes an option called `underlay` that enables using bind
+mount points that do not exist in the container image.
+By default it is enabled, but only if the similar `overlay` option cannot
+be used, such as on RHEL6 where kernel support for overlayfs is missing
+or when running in unprivileged mode.  On RHEL7 it is recommended to
+completely disable `overlay`, because it is more vulnerable to security
+problems than `underlay` and because it does not work correctly when
+container images are distributed by CVMFS.
 
-Set these options in `/etc/singularity/singularity.conf`:
+Set this option in `/etc/singularity/singularity.conf`:
 
         enable overlay = no
-        enable underlay = yes
 
 !!! warning
     If you modify `/etc/singularity/singularity.conf`, be careful with
@@ -279,7 +263,7 @@ command to verify it:
 
 ```console
 user@host $ singularity exec --contain --ipc --pid --bind /cvmfs \
-                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 \
+                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el6:latest \
                 ps -ef
 WARNING: Container does not have an exec helper script, calling 'ps' directly
 UID        PID  PPID  C STIME TTY          TIME CMD
@@ -295,5 +279,5 @@ singularity has no services to start or stop.
 References
 ----------
 - [Singularity Documentation](https://www.sylabs.io/docs/)
-- [Singularity Support](https://www.sylabs.io/singularity/support/)
+- [Singularity Support](https://sylabs.io/resources/support)
 - [Additional guidance for CMS sites](https://twiki.cern.ch/twiki/bin/view/Main/CmsSingularity)

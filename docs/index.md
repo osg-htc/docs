@@ -68,7 +68,7 @@ The general steps to installing an OSG site are:
 -   [Security information for OSG signed RPMs](release/signing)
 -   [Using Yum and RPM](release/yum-basics)
 -   [Install the OSG Yum repositories](/common/yum)
--   [OSG Software release series](release/release_series) - look here to upgrade between releases 3.1, 3.2, 3.3, and 3.4.
+-   [OSG Software release series](release/release_series) - look here to upgrade to OSG 3.5
 
 ### Installing and Managing Certificates for Site Security ###
 
@@ -190,3 +190,9 @@ It is also important to keep your software and data (e.g., CA and VO client) up-
 [latest OSG release](/release/notes).
 To stay abreast of software releases, we recommend subscribing to the <mailto:osg-sites@opensciencegrid.org> mailing
 list.
+
+Get Help
+--------
+If you need help with your site, or need to report a security incident,
+follow the [contact instructions](/common/help).
+

@@ -1,5 +1,10 @@
+
 Install XRootD Standalone
 =========================
+
+!!!bug "EL7 version compatibility"
+    There is an incompatibility with EL7 < 7.5 due to an issue with the `globus-gsi-proxy-core` package
+
 
 [XRootD](http://xrootd.org/) is a hierarchical storage system that can be used in a variety of ways to access data,
 typically distributed among actual storage resources. In this document we focus on using XRootD as a simple layer
@@ -181,9 +186,9 @@ To get assistance. please use the [Help Procedure](/common/help/) page.
 Reference
 ---------
 
-- [XRootD documentation](http://xrootd.slac.stanford.edu/doc)
-- [Export directive](http://xrootd.org/doc/dev48/ofs_config.htm#_Toc401930729) in the XRootD configuration and
-  [relevant options](http://xrootd.org/doc/dev48/ofs_config.htm#_Toc401930728)
+- [XRootD documentation](https://xrootd.slac.stanford.edu/docs.html)
+- [Export directive](https://xrootd.slac.stanford.edu/doc/dev49/ofs_config.htm#_Toc522916544) in the XRootD
+  configuration and [relevant options](https://xrootd.slac.stanford.edu/doc/dev49/ofs_config.htm#_defaults)
 
 
 ### Service Configuration
@@ -193,14 +198,14 @@ On EL 6, which config to use is set in the file `/etc/sysconfig/xrootd`.
 To use the standalone config, you would use:
 
 ``` file
-XROOTD_DEFAULT_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-%RED%standalone%ENDCOLOR%.cfg -k fifo"
+XROOTD_DEFAULT_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-standalone.cfg -k fifo"
 ```
 
 On EL 7, which config to use is determined by the service name given to `systemctl`.
 To use the standalone config, you would use:
 
 ``` console
-root@host # systemctl start xrootd@%RED%standalone%ENDCOLOR%
+root@host # systemctl start xrootd@standalone
 ```
 
 ### File locations

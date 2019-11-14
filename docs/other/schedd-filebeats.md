@@ -27,10 +27,10 @@ Configuration
 
 The configuration of filebeats revolves around this file `/etc/filebeat/filebeat.yml`. Bellow are the steps to modify the different sections of this file
 
-1. The `Filebeat Prospectors` section, the input should look like this:
+1. The `Filebeat Inputs` section, the input should look like this:
 
         :::file
-        filebeat.prospectors:
+        filebeat.inputs:
         - type: log
           enabled: true
           paths:
@@ -45,7 +45,7 @@ The configuration of filebeats revolves around this file `/etc/filebeat/filebeat
           hosts: ["gracc.opensciencegrid.org:6938"]
           # Optional SSL. By default is off. 
           # List of root certificates for HTTPS server verifications
-          ssl.certificate_authorities: ["/etc/grid-security/certificates/cilogon-osg.pem"]
+          ssl.certificate_authorities: ["/etc/grid-security/certificates/InCommon-IGTF-Server-CA.pem"]
           #  Certificate for SSL client authentication
           ssl.certificate: "/etc/grid-security/hostcert.pem"
           # Client Certificate Key
@@ -64,11 +64,11 @@ The configuration of filebeats revolves around this file `/etc/filebeat/filebeat
         #username: "elastic"
         #password: "changeme"
 
-1. The general section should look like this, where `hostname` should be replaced by the hostname of the machine you are installing filebeats on.
+1. The general section should look like this, where `<HOSTNAME>` should be replaced by the hostname of the machine you are installing filebeats on.
 
         :::file
         #================================ General =====================================
-        name: %RED%<hostname>%ENDCOLOR%
+        name: <HOSTNAME>
         tags: ["xfer-log"]
 
 1. Test that the configuration is correct by running:

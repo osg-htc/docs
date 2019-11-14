@@ -53,7 +53,7 @@ the default mappings, or migrate from edg-mkgridmap or GUMS.
 1.  Consult the default VO mappings in `/usr/share/osg/voms-mapfile-default` to determine the mapped Unix account names.
     Each of the mapfiles has the following format:
 
-        "%RED%<VO, VO role, VO group or user>%ENDCOLOR%" %RED%<Unix account>%ENDCOLOR%
+        "<VO, VO role, VO group or user>" <Unix account>
 
 
 1.  Create Unix accounts for each VO, VO role, VO group, and user that you wish to support.
@@ -160,7 +160,7 @@ To migrate from edg-mkgridmap to the LCMAPS VOMS plugin, perform the following p
     !!! warning
         In the output from this command, yum should **not** list other packages than the one.
         If it lists other packages, cancel the erase operation, make sure the other packages are updated to their latest
-        OSG 3.4 versions (they should have ".osg34" in their versions), and try again.
+        OSG 3.5 versions (they should have ".osg35" in their versions), and try again.
 
 #### Migrating from GUMS
 
@@ -308,7 +308,7 @@ To validate the LCMAPS VOMS plugin by itself, use the following procedure to tes
 1.  As an unprivileged user, create a VOMS proxy (filling in `<YOUR_VO>` with a VO you are a member of):
 
         :::console
-        user@host $ voms-proxy-init -voms %RED%<YOUR_VO>%ENDCOLOR%
+        user@host $ voms-proxy-init -voms <YOUR_VO>
 
 1.  Verify that your credentials are mapped as expected:
 
@@ -363,12 +363,15 @@ If you are troubleshooting an XRootD host, follow these instructions to raise th
     | Standalone mode                 | `/etc/xrootd/xrootd-standalone.cfg` |
     | Clustered mode                  | `/etc/xrootd/xrootd-clustered.cfg`  |
 
-1. Set `--loglevel,5` under the `-authzfunparms` of the `sec.protocol /usr/lib64 gsi` line. For example:
+1. Set `--loglevel=5` under the `-authzfunparms` of the `sec.protocol /usr/lib64 gsi` line. For example:
 
+        :::file hl_lines="6"
         sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
                     -cert:/etc/grid-security/xrootd/xrootdcert.pem \
-                    -key:/etc/grid-security/xrootd/xrootdkey.pem -crl:1 \
-                    -authzfun:libXrdLcmaps.so -authzfunparms:%RED%--loglevel,5%ENDCOLOR% \
+                    -key:/etc/grid-security/xrootd/xrootdkey.pem \
+                    -crl:1 \
+                    -authzfun:libXrdLcmaps.so \
+                    -authzfunparms:--lcmapscfg=/etc/xrootd/lcmaps.cfg,--loglevel=5,--policy=authorize_only \
                     -gmapopt:10 -gmapto:0
 
 1. Restart the [xrootd](/data/xrootd/install-storage-element#managing-xrootd-services) service

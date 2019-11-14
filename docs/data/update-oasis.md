@@ -15,9 +15,8 @@ Requirements
 To begin the process to distribute software on OASIS using the service hosted by OSG Operations, you must:
 
 -   [Obtain a personal grid certificate](../security/user-certs), if you don't have one already.
--   Register yourself in the OSG Information Management System (OIM) by sending an email to
-    <mailto:help@opensciencegrid.org>
--   Be associated with a [VO registered in OIM](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations).
+-   Register yourself as a contact in [OSG Topology](/common/registration#registering-contacts)
+-   Request to be associated with a [VO registered in Topology](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations).
 
 How to use OASIS
 ----------------
@@ -40,8 +39,10 @@ user@host $ gsissh -o GSSAPIDelegateCredentials=yes oasis-login.opensciencegrid.
 In case the user can be mapped to more than one account, specify it explicitly in a command like this
 
 ``` console
-user@host $ gsissh -o GSSAPIDelegateCredentials=yes ouser.%RED%VO%ENDCOLOR%@oasis-login.opensciencegrid.org
+user@host $ gsissh -o GSSAPIDelegateCredentials=yes ouser.<VO>%@oasis-login.opensciencegrid.org
 ```
+
+Change `<VO>` for the name of the Virtual Organization you are trying to access.
 
 Instead of putting `-o GSSAPIDelegateCredentials=yes` on the command line, you can put it in your `~/.ssh/config` like this:
 

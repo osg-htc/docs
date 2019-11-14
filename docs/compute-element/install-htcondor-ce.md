@@ -84,8 +84,9 @@ To simplify installation, OSG provides convenience RPMs that install all require
 1. Install the CE software:
 
         :::console
-        root@host # yum install %RED%<PACKAGE>%ENDCOLOR%
+        root@host # yum install <PACKAGE>
 
+    Where `<PACKAGE>` is the package you selected in the above step.
 
 Configuring HTCondor-CE
 -----------------------
@@ -195,6 +196,7 @@ If you do not need any of the following special configurations, skip to
 -   [Accounting with multiple CEs or local user jobs](#accounting-with-multiple-ces-or-local-user-jobs)
 -   [HTCondor accounting groups](#htcondor-accounting-groups)
 -   [HTCondor-CE monitoring web interface](#install-and-run-the-htcondor-ce-view)
+-   [Enable job retries](#enable-job-retries)
 
 #### Transforming and filtering jobs
 
@@ -212,8 +214,8 @@ Set `NETWORK_HOSTNAME` and `NETWORK_INTERFACE` to the hostname and IP address of
 `/etc/condor-ce/config.d/99-local.conf` directory with the line:
 
 ``` file
-NETWORK_HOSTNAME = %RED%condorce.example.com%ENDCOLOR%
-NETWORK_INTERFACE = %RED%127.0.0.1%ENDCOLOR%
+NETWORK_HOSTNAME = condorce.example.com
+NETWORK_INTERFACE = 127.0.0.1
 ```
 
 Replacing `condorce.example.com` text with your public interface’s hostname and `127.0.0.1` with your public interface’s
@@ -233,14 +235,18 @@ configuring them in unison.
 - **To change the default limit** on the number of locally run jobs (the current default is 20), add the following to
   `/etc/condor-ce/config.d/99-local.conf`:
 
-        START_LOCAL_UNIVERSE = TotalLocalJobsRunning + TotalSchedulerJobsRunning < %RED%<JOB-LIMIT>%ENDCOLOR%
+        START_LOCAL_UNIVERSE = TotalLocalJobsRunning + TotalSchedulerJobsRunning < <JOB-LIMIT>
         START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
+
+    Where `<JOB-LIMIT>` is the maximum number of jobs allowed to run locally
 
 - **To only allow a specific user** to start locally run jobs, add the following to
   `/etc/condor-ce/config.d/99-local.conf`:
 
-        START_LOCAL_UNIVERSE = target.Owner =?= "%RED%<USERNAME>%ENDCOLOR%"
+        START_LOCAL_UNIVERSE = target.Owner =?= "<USERNAME>"
         START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
+
+   Change `<USERNAME>` for the username allowed to run jobs locally
 
 - **To disable** locally run jobs, add the following to `/etc/condor-ce/config.d/99-local.conf`:
 
@@ -295,9 +301,9 @@ UID, their DN, or their VOMS attributes.
 -   **To map DNs or VOMS attributes to an accounting group,** add lines to `/etc/osg/extattr_table.txt` with the
     following form:
 
-        %RED%SubjectOrAttribute%ENDCOLOR% GroupName
+        SubjectOrAttribute GroupName
 
-    The %RED%SubjectOrAttribute%ENDCOLOR% can be a Perl regular expression. The following is an example `extattr_table.txt`:
+    The `SubjectOrAttribute` can be a Perl regular expression. The following is an example `extattr_table.txt`:
 
         cmsprio cms.other.prio
         cms\/Role=production cms.prod
@@ -330,6 +336,17 @@ The HTCondor-CE View is an optional web interface to the status of your CE. To r
 
 The website is served on port 80 by default. To change this default, edit the value of `HTCONDORCE_VIEW_PORT` in
 `/etc/condor-ce/config.d/05-ce-view.conf`.
+
+### Enable job retries ###
+
+In HTCondor-CE 4+, batch system job retries are disabled by default.
+This is because most jobs submitted through HTCondor-CEs are actually resource requests (i.e. pilot jobs) instead of
+jobs containing user payloads.
+Therefore, it's preferred to prevent these jobs from retrying and instead wait for additional resource requests to be
+submitted.
+To re-enable job retries, set the following in your configuration:
+
+    ENABLE_JOB_RETRIES = True
 
 Using HTCondor-CE
 -----------------

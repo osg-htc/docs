@@ -682,19 +682,21 @@ root@host # condor_ce_job_router_info -match-jobs -ignore-prior-routing -jobads 
         Route Matches: Local_PBS
         Route Matches: Condor_Test
 
-    To troubleshoot why this is occuring, look at the combined Requirements expressions for all routes and compare it to the job’s ClassAd provided. The combined Requirements expression is %RED%highlighted below%ENDCOLOR%:
+    To troubleshoot why this is occuring, look at the combined Requirements expressions for all routes and compare it to the job’s ClassAd provided. The combined Requirements expression is highlighted below:
 
+        ::::file hl_lines="5"
         Umbrella constraint: ((target.x509userproxysubject =!= UNDEFINED) &&
         (target.x509UserProxyExpiration =!= UNDEFINED) &&
         (time() < target.x509UserProxyExpiration) &&
         (target.JobUniverse =?= 5 || target.JobUniverse =?= 1)) &&
-        %RED%( (target.osgTestPBS is true) || (true) )%ENDCOLOR% &&
+        ( (target.osgTestPBS is true) || (true) ) &&
         (target.ProcId >= 0 && target.JobStatus == 1 &&
         (target.StageInStart is undefined || target.StageInFinish isnt undefined) &&
         target.Managed isnt "ScheddDone" &&
         target.Managed isnt "Extenal" &&
         target.Owner isnt Undefined &&
         target.RoutedBy isnt "htcondor-ce")
+
 
     Both routes evaluate to `true` for the job’s ClassAd because it contained `osgTestPBS = true`. Make sure your routes are mutually exclusive, otherwise you may have jobs routed incorrectly! See the [job route configuration page](job-router-recipes) for more details.
 

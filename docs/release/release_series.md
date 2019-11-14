@@ -1,29 +1,58 @@
 **OSG Release Series**
 ======================
 
-An OSG release series is a sequence of OSG software releases that are intended to provide a painless upgrade path. For example, the 3.2 release series contains OSG software 3.2.0, 3.2.1, 3.2.2, and so forth. A release series corresponds to a set of Yum software repositories, including ones for development, testing, and production use. The Yum repositories for one release series are completely distinct from the repositories for a different release series, even though they share many common packages.  A particular release within a series is a snapshot of packages and their exact versions at one point in time. When you install software from a release series, say 3.2, you get the most current versions of software packages within that series, regardless of the current release version.
+An OSG release series is a sequence of OSG software releases that are intended to provide a painless upgrade path.
+For example, the 3.2 release series contains OSG software 3.2.0, 3.2.1, 3.2.2, and so forth.
+A release series corresponds to a set of Yum software repositories, including ones for development, testing, and
+production use.
+The Yum repositories for one release series are completely distinct from the repositories for a different release
+series, even though they share many common packages.
+A particular release within a series is a snapshot of packages and their exact versions at one point in time.
+When you install software from a release series, say 3.2, you get the most current versions of software packages within
+that series, regardless of the current release version.
 
-When a new series is released, it is an opportunity for the OSG Technology area to add major new software packages, make substantial updates to existing packages, and remove obsolete packages. When a new series is initially released, most packages are identical to the previous release, but two adjacent series will diverge over time.
+When a new series is released, it is an opportunity for the OSG Technology area to add major new software packages, make
+substantial updates to existing packages, and remove obsolete packages.
+When a new series is initially released, most packages are identical to the previous release, but two adjacent series
+will diverge over time.
 
-Our goal is, within a series, that one may upgrade their OSG services via `yum update` cleanly and without any necessary config file changes or excessive downtime.
+Our goal is, within a series, that one may upgrade their OSG services via `yum update` cleanly and without any necessary
+config file changes or excessive downtime.
 
 OSG Release Series
 ------------------
 
 Since the start of the RPM-based OSG software stack, we have offered the following release series:
 
--   **OSG 3.1** started in April 2012, and was end-of-lifed in April 2015. While the files have not been removed, it is strongly recommended that it not be installed anymore. Historically, there were 3.0.x releases as well, but there was no separate release series for 3.0 and 3.1; we simply went from 3.0.10 to 3.1.0 in the same repositories.
+-   **OSG 3.5** started August 2019.
+    The main differences between it and 3.4 were the introduction of the HTCondor 8.8 and 8.9 series;
+    also the RSV monitoring probes, EL6 support, and CREAM support were all dropped.
 
--   **OSG 3.2** started in November 2013, and was end-of-lifed in August 2016. While the files have not been removed, it is strongly recommended that it not be installed anymore. The main differences between it and 3.1 were the introduction of glideinWMS 3.2, HTCondor 8.0, and Hadoop/HDFS 2.0; also the gLite CE Monitor system was dropped in favor of osg-info-services.
+-   **OSG 3.4** started June 2017 and will reach its end-of-life in November 2020.
+    The main differences between it and 3.3 are the removal of edg-mkgridmap, GUMS, BeStMan, and VOMS Admin Server
+    packages.
 
--   **OSG 3.3** started in August 2015 and was end-of-lifed in May 2018. While the files have not been removed, it is strongly recommended that it not be installed anymore. The main differences between 3.3 and 3.2 are the dropping of EL5 support, the addition of EL7 support, and the dropping of Globus GRAM support.
+-   **OSG 3.3** started in August 2015 and was end-of-lifed in May 2018.
+    While the files have not been removed, it is strongly recommended that it not be installed anymore.
+    The main differences between 3.3 and 3.2 are the dropping of EL5 support, the addition of EL7 support, and the
+    dropping of Globus GRAM support.
 
--   **OSG 3.4** started June 2017. The main differences between it and 3.3 are the removal of edg-mkgridmap, GUMS, BeStMan, and VOMS Admin Server packages.
+-   **OSG 3.2** started in November 2013, and was end-of-lifed in August 2016.
+    The main differences between it and 3.1 were the introduction of glideinWMS 3.2, HTCondor 8.0, and Hadoop/HDFS 2.0;
+    also the gLite CE Monitor system was dropped in favor of osg-info-services.
+
+-   **OSG 3.1** started in April 2012, and was end-of-lifed in April 2015.
+    Historically, there were 3.0.x releases as well, but there was no separate release series for 3.0 and 3.1;
+    we simply went from 3.0.10 to 3.1.0 in the same repositories.
 
 OSG Upcoming
 ------------
 
-There is one more OSG Series called "upcoming" which contains major updates planned for a future release series. The yum repositories for upcoming (`osg-upcoming` and `osg-upcoming-testing`) are available from all OSG 3.x series, and individual packages can be installed from Upcoming without needing to update entirely to a new series. Note, however, that packages in the "upcoming" repositories are tested against the most recent OSG series.  As of the time of writing, `osg-upcoming` is meant to work with OSG 3.4.
+There is one more OSG Series called "upcoming" which contains major updates planned for a future release series.
+The yum repositories for upcoming (`osg-upcoming` and `osg-upcoming-testing`) are available from all OSG 3.x series, and
+individual packages can be installed from Upcoming without needing to update entirely to a new series.
+Note, however, that packages in the "upcoming" repositories are tested against the most recent OSG series.
+As of the time of writing, `osg-upcoming` is meant to work with OSG 3.5.
 
 Installing an OSG Release Series
 --------------------------------
@@ -32,28 +61,29 @@ See the [yum repositories document](/common/yum) for instructions on installing 
 
 <a name="updating-from-old"></a>
 
-Updating from OSG 3.1, 3.2, 3.3 to 3.4
---------------------------------------
+Updating to OSG 3.5
+-------------------
 
-1.  If you have an existing installation based on OSG 3.1, 3.2, or 3.3 (which will be referred to as the *old series*), and want to upgrade to 3.4 (the *new series*), we recommend the following procedure:
+!!! note "OS Version Support"
+    OSG 3.5 only supports EL7
 
-    First, remove the old series yum repositories:
+If you have an existing installation based on OSG release version <= 3.4 (which will be referred to as the *old series*),
+and want to upgrade to 3.5 (the *new series*), we recommend the following procedure:
+
+1.  First, remove the old series yum repositories:
 
         :::console
         root@host # rpm -e osg-release
 
-    This step ensures that any local modifications to `*.repo` files will not prevent installing the new series repos. Any modified `*.repo` files should appear under `/etc/yum.repos.d/` with the `*.rpmsave` extension. After installing the new OSG repositories (the next step) you may want to apply any changes made in the `*.rpmsave` files to the new `*.repo` files.
+    This step ensures that any local modifications to `*.repo` files will not prevent installing the new series repos.
+    Any modified `*.repo` files should appear under `/etc/yum.repos.d/` with the `*.rpmsave` extension.
+    After installing the new OSG repositories (the next step) you may want to apply any changes made in the `*.rpmsave`
+    files to the new `*.repo` files.
 
 2.  Install the OSG repositories:
 
         :::console
-        root@host # rpm -Uvh <URL>
-
-    where `<URL>` is one of the following:
-
-    | Series                    | EL6 URL (for RHEL6, CentOS6, or SL6)                             | EL7 URL (for RHEL7, CentOS7, or SL7)                             |
-    |:--------------------------|:-----------------------------------------------------------------|:-----------------------------------------------------------------|
-    | **OSG 3.4**               | `http://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm` | `http://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm` |
+        root@host # yum install https://repo.opensciencegrid.org/osg/3.5/osg-3.5-el7-release-latest.rpm
 
 3.  Clean yum cache:
 
@@ -65,175 +95,157 @@ Updating from OSG 3.1, 3.2, 3.3 to 3.4
         :::console
         root@host # yum update
 
-    This command will update **all** packages on your system.
+    !!! info
+        -   Please be aware that running `yum update` may also update other RPMs.
+            You can exclude packages from being updated using the `--exclude=[package-name or glob]` option for the
+            `yum` command.
+        -   Watch the yum update carefully for any messages about a `.rpmnew` file being created.
+            That means that a configuration file had been edited, and a new default version was to be installed.
+            In that case, RPM does not overwrite the edited configuration file but instead installs the new version with
+            a `.rpmnew` extension.
+            You will need to merge any edits that have made into the `.rpmnew` file and then move the merged version
+            into place (that is, without the `.rpmnew` extension).
+            Watch especially for `/etc/lcmaps.db`, which every site is expected to edit.
 
-**Troubleshooting** If you are not having the expected result or having problems with Yum please see the [Yum troubleshooting guide](../release/yum-basics#troubleshooting)
-
-Retiring Your VOMS Server
--------------------------
-
-Due to the [end of OSG 3.3 support](https://opensciencegrid.org/technology/policy/release-series/), VOMS Admin server is
-no longer supported in the OSG as of May 2018.
-Please see [this policy document](https://opensciencegrid.org/technology/policy/voms-admin-retire/) for details on the
-VOMS Admin retirement.
-
-This section describes how to gracefully retire your VOMS host.
-
-### Disabling the VOMS Admin service ###
-
-The VOMS Admin service provides a web interface to manage membership of your virtual organization (VO).
-It also handles queries for the list of VO members, which may have
-[General Data Protection Regulation](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation) implications.
-Therefore, the VOMS Admin service should be disabled immediately.
-
-1. Choose the service name based on your OS version for subsequent steps:
-
-    | If your host OS is... | Then the service name is... |
-    |-----------------------|-----------------------------|
-    | EL6                   | `tomcat6`                   |
-    | EL7                   | `tomcat`                    |
-
-1. Turn off and disable the VOMS Admin server webapp:
+1. Remove any deprecated packages that were previously installed:
 
         :::console
-        root@voms # service %RED%<SERVICE NAME>%ENDCOLOR% stop
-        root@voms # chkconfig disable %RED%<SERVICE NAME>%ENDCOLOR%
+        root@host # yum remove osg-version \
+                               osg-control \
+                               'rsv*' \
+                               glite-ce-cream-client-api-c \
+                               glite-lbjp-common-gsoap-plugin \
+                               xacml
 
-### Disabling the VOMS service ###
+    If you did not have any of the above packages installed, Yum will not remove any packages:
 
-The VOMS service accepts requests from clients to sign the VOMS attributes of their proxies.
-These VOMS attributes can then be used to authorize job submissions and file transfers in the OSG.
+        No Match for argument: osg-version
+        No Match for argument: osg-control
+        No Match for argument: rsv*
+        No Match for argument: glite-ce-cream-client-api-c
+        No Match for argument: glite-lbjp-common-gsoap-plugin
+        No Match for argument: xacml
+        No Packages marked for removal
 
-Before turning off the VOMS service, it is important to migrate any clients to avoid disruption of your VO's workflows.
+1. If you are updating an HTCondor-CE host, please consult the manual [HTCondor](#updating-to-htcondor-88x_1) and
+[OSG Configure](#updating-to-osg-configure-3) instructions below.
 
-#### Identifying VOMS clients ####
+!!! tip "Running into issues?"
+    If you are not having the expected result or having problems with Yum please see the
+    [Yum troubleshooting guide](/release/yum-basics#troubleshooting)
 
-To find all clients requesting VOMS attribute signatures, run the following command:
+### Updating to HTCondor-CE 4.x ###
 
-``` console
-root@voms # awk -F ':' '/Received request from/ {print $11}' \
-    /var/log/voms/voms.%RED%<VO>%ENDCOLOR% \
-    /var/log/voms/voms.%RED%<VO>%ENDCOLOR%.[0-9] | sort | uniq -c
-```
+The OSG 3.5 release series contains HTCondor-CE 4, a major version upgrade from the previously released versions in the OSG.
+See the HTCondor-CE 4.0.0 [release notes](https://github.com/htcondor/htcondor-ce/releases/tag/v4.0.0) for an overview
+of the changes.
+In particular, this version includes a major reorganization of the default configuration so updates will require manual
+intervention.
+To update your HTCondor-CE host(s), perform the following steps:
 
-- If there are any GlideinWMS frontends requesting VOMS attribute signatures:
-
-    1. Securely copy the VOMS certificate and key to the frontend host(s)
-    1. Configure the GlideinWMS frontend to directly sign the VOMS attributes of the pilot proxies using the
-    instructions in [this section](/other/install-gwms-frontend#proxy-configuration).
-
-- If there are any VO users requesting VOMS attribute signatures: contact them to tell them that they will need to
-  generate proxies differently after the VOMS server retirement using one of the following commands:
-
-    - `user@host $ voms-proxy-init`
-    - `user@host$ grid-proxy-init`
-
-#### Finalizing the VOMS retirement ####
-
-When you have migrated all clients off of your VOMS server, it is safe to turn off and disable the VOMS service:
-
-``` console
-root@voms # service voms stop
-root@voms # chkconfig disable voms
-```
-
-Migrating from edg-mkgridmap to LCMAPS VOMS Plugin
---------------------------------------------------
-
-After following the update instructions above, perform the migration process documented [here](../security/lcmaps-voms-authentication#migrating-from-edg-mkgridmap).
-
-Updating from Frontier Squid 2.7 to Frontier Squid 3.5 (upgrading from OSG 3.3)
--------------------------------------------------------------------------------
-
-The program `frontier-squid` received a major version upgrade (versions 2.7 to 3.5) between OSG 3.3 and OSG 3.4. Follow the [upstream upgrade documentation](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Upgrading) when transitioning your squid server to OSG 3.4.
-
-Uninstalling BeStMan2 from the Storage Element (upgrading to OSG 3.4)
----------------------------------------------------------------------
-
-The program BeStMan2 is no longer available in OSG 3.4 and its functionality has been replaced by [load-balanced GridFTP](../data/load-balanced-gridftp). To update your storage element to OSG 3.4, you must perform the following procedure:
-
-1.  Ensure that OSG BeStMan packages are installed:
+1. Update all CE packages:
 
         :::console
-        root@host # rpm -q osg-se-bestman
+        root@host # yum update htcondor-ce 'osg-ce*'
 
-2.  Stop the `bestman2` service:
-
-        :::console
-        root@host # service bestman2 stop
-
-3.  Uninstall the software:
+1. The new default `condor_mapfile` is sufficient since HTCondor-CE no longer relies on GSI authentication between
+   its daemons.
+   If `/etc/condor-ce/condor_mapfile.rpmnew` exists, replace your old `condor_mapfile` with the `.rpmnew` version:
 
         :::console
-        root@host # yum erase bestman2-tester-libs bestman2-common-libs \
-                                    bestman2-server-libs bestman2-server-dep-libs \
-                                    bestman2-client-libs bestman2-tester bestman2-client \
-                                    bestman2-server osg-se-bestman
+        root@host # mv /etc/condor-ce/condor_mapfile.rpmnew /etc/condor-ce/condor_mapfile
 
-!!! note
-    In the output from this command, yum should **not** list other packages than those nine. If it lists other packages, cancel the erase operation, make sure the other packages are updated to their latest OSG 3.3 versions, and try again.
+1. Merge any `*.rpmnew` files in `/etc/condor-ce/config.d/`
 
-After successfully removing BeStMan2, continue updating your host to OSG 3.4 by following the instructions above.
+1. Additionally, you may wish to make one or more of the following optional changes:
 
-Uninstalling OSG Info Services from the Compute Element (upgrading from OSG 3.3 or 3.2)
----------------------------------------------------------------------------------------
+    - HTCondor-CE now disables batch system job retries by default.
+      To re-enable job retries, set the following configuration in `/etc/condor-ce/config.d/99-local.conf`:
 
-The program OSG Info Services is no longer required on OSG 3.3, and is no longer available starting in OSG 3.4. This is because the service that OSG Info Services reported to, named BDII, has been retired and is no longer functional.
+            ENABLE_JOB_RETRIES = True
 
-To cleanly uninstall OSG Info Services from your CE, perform the following procedure (after following the main update instructions above):
+    - For non-HTCondor sites that use [remote CE requirements](/compute-element/job-router-recipes/#setting-batch-system-directives),
+      the new version of HTCondor-CE accepts a simplified format.
+      For example, a snippet from an example job route in the old format:
 
-1.  Ensure that you are using a sufficiently new version of the `osg-ce` metapackages:
+            set_default_remote_cerequirements = strcat("Walltime == 3600 && AccountingGroup =="", x509UserProxyFirstFQAN, "\"");
 
-        :::console
-        root@host # rpm -q osg-ce
+        May be rewritten as the following:
 
-    should be at least 3.4-1 (OSG 3.4).  If not, update them:
+            set_WallTime = 3600;
+            set_AccountingGroup = x509UserProxyFirstFQAN;
+            set_default_CERequirements = "Walltime,AccountingGroup";
 
-        :::console
-        root@host # yum update osg-ce
-
-2.  Stop the `osg-info-services` service:
+1. Reload and restart the HTCondor-CE daemons:
 
         :::console
-        root@host # service osg-info-services stop
+        root@host # systemctl daemon-reload
+        root@host # systemctl restart condor-ce
 
-3.  Uninstall the software:
+### Updating to HTCondor 8.8.x ###
+
+The OSG 3.5 release series contains HTCondor 8.8, a major version upgrade from the previously released versions in the OSG.
+See the detailed [update instructions below](#updating-to-htcondor-88x_1) to update to HTCondor 8.8.
+
+### Updating to OSG Configure 3 ###
+
+The OSG 3.5 release series contains OSG-Configure 3, a major version upgrade from the previously released versions in the OSG.
+See the OSG Configure release notes for an overview of the
+[changes](https://github.com/opensciencegrid/osg-configure/releases/tag/v3.0.0).
+To update OSG Configure on your HTCondor-CE, perform the following steps:
+
+1. If you haven't already, [update to OSG 3.5](#updating-to-osg-35).
+
+1. If you have `site_name` set in `/etc/osg/config.d/40-siteinfo.ini`, delete it and specify `resource` instead.
+   `resource` should match the resource name that's registered in
+   [OSG Topology](/common/registration/#registering-resources).
+
+1.  Set `resource_group` in `/etc/osg/config.d/40-siteinfo.ini` to the resource group registered in
+    [OSG Topology](/common/registration/#registering-resources),
+    i.e. the name of the `.yaml` file in OSG Topology that contains the registered resouce above.
+
+1.  Set `host_name` to the host name that is registered in [OSG Topology](/common/registration/#registering-resources).
+    This may be different from the FQDN of the host if you're using a DNS alias, for example.
+
+1.  OSG Configure will warn about config options that it does not recognize;
+    delete these options from the config to get rid of the warnings.
+
+Updating to HTCondor 8.8.x
+--------------------------
+
+The OSG 3.5 and 3.4 release series contain HTCondor 8.8, a major version upgrade from the previously released versions
+in the OSG.
+See the HTCondor 8.8 manual for an overview of the
+[changes](https://htcondor.readthedocs.io/en/v8_8_4/version-history/upgrading-from-86-to-88-series.html).
+To update HTCondor on your HTCondor-CE and/or HTCondor pool hosts, perform the following steps:
+
+1. Update all HTCondor packages:
 
         :::console
-        root@host # yum erase gip osg-info-services
+        root@host # yum update 'condor*'
 
-!!! note
-    In the output from this command, yum should **not** list other packages than those two. If it lists other packages, cancel the erase operation, make sure the other packages are updated to their latest OSG 3.4 versions, and try again.
+1. **HTCondor pools only:** The default authentication, `DAEMON_LIST`, and `CONDOR_HOST` configuration changed in
+   HTCondor 8.8 in OSG 3.5.
+   Similarly, the `DAEMON_LIST` and `CONDOR_HOST` configuration changed in OSG 3.4.
+   If you are experiencing issues with communication between hosts in your pool after the upgrade,
+   the default OSG configuration is listed in `/etc/condor/config.d/00-osg_default_*.config`:
+   ensure that any default configuration is overriden with your own `DAEMON_LIST`, `CONDOR_HOST`, and/or
+   [security](https://htcondor.readthedocs.io/en/v8_8_4/admin-manual/security.html) configuration in subsequent files.
 
-Uninstalling CEMon from the Compute Element (upgrading from OSG 3.1)
---------------------------------------------------------------------
+1. **HTCondor-CE hosts only:** The HTCondor 8.8 series changed the default job route matching order
+   [from round-robin to first matching route](/compute-element/job-router-recipes#how-jobs-match-to-job-routes).
+   To use the old round-robin matching order, add the following configuration to `/etc/condor-ce/config.d/99-local.conf`:
 
-The program CEMon (found in the package `glite-ce-monitor`) is no longer available starting in OSG 3.2. Its functionality is no longer required because the service that CEMon reported to has been retired and is no longer functional.
+        JOB_ROUTER_ROUND_ROBIN_SELECTION = True
 
-To cleanly uninstall CEMon from your CE, perform the following procedure (after following the main update instructions above):
-
-1.  Ensure that you are using a sufficiently new version of the `osg-ce` metapackages:
-
-        :::console
-        root@host # rpm -q osg-ce
-
-    should be at least 3.4-1 (OSG 3.4). If not, update them:
-
-        :::console
-        root@host # yum update osg-ce
-
-2.  If there is a CEMon configuration file at `/etc/osg/config.d/30-cemon.ini`, remove it.
-3.  Remove CEMon and related packages:
+1. Clean-up deprecated packages:
 
         :::console
-        root@host # yum erase glite-ce-monitor glite-ce-osg-ce-plugin osg-configure-cemon
-
-!!! note
-    In the output from this command, yum should **not** list other packages than those three. If it lists other packages, cancel the erase operation, make sure the other packages are updated to their OSG 3.4 versions (they should have `.osg34` in their versions), and try again.
+        root@host # yum remove 'rsv*' glite-ce-cream-client-api-c
 
 References
 ----------
 
--   [Yum repositories](../common/yum)
--   [Basic use of Yum](../release/yum-basics)
+-   [Yum repositories](/common/yum)
+-   [Basic use of Yum](/release/yum-basics)
 

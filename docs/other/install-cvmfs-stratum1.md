@@ -210,11 +210,10 @@ root@host # yum -y install iptables-services
 root@host # systemctl enable iptables
 ```
 
-Forward port 80 to port 8000 (first command is for external, second command for localhost):
+Forward port 80 to port 8000:
 
 ```console
 root@host # iptables -t nat -A PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8000 
-root@host # iptables -t nat -A OUTPUT -o lo -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8000 
 root@host # service iptables save
 ```
 
@@ -222,7 +221,6 @@ On EL7 also set up the the same port forwarding for IPv6 (unfortunately it is no
 
 ```console
 root@host # ip6tables -t nat -A PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8000
-root@host # ip6tables -t nat -A OUTPUT -o lo -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8000
 root@host # service ip6tables save
 ```
 

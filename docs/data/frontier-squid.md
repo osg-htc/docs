@@ -12,7 +12,7 @@ This document is intended for System Administrators who are installing
 `frontier-squid`, the OSG distribution of the Frontier Squid software.
 
 !!! note "Applicable versions"
-    This document applies to software from the OSG 3.4 Release Series.
+    This document applies to software from the OSG 3.5 and 3.4 Release Series.
     The version of frontier-squid installed should be >= 3.5.24-3.1.
     When using OSG software from a previous Release Series (eg, OSG 3.3)
     and a frontier-squid version in the 2.7STABLE9 series, refer to the
@@ -80,9 +80,7 @@ To configure the Frontier Squid service itself:
 1.  Follow the
     [Configuration section of the upstream Frontier Squid documentation](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Configuration).
 2.  Enable, start, and test the service (as described below).
-3.  [Register the squid](#registering-frontier-squid).
-4.  If your site is part of the WLCG, enable WLCG monitoring as described in the
-    [upstream documentation on enabling monitoring](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring).
+3.  Register the squid (also as described [below](#registering-frontier-squid)).
 
 !!! Note
     An important difference between the standard Squid software and
@@ -121,15 +119,15 @@ Start the frontier-squid service and enable it to start at boot time. As a remin
 ## Validating Frontier Squid
 
 As any user on another computer, do the following (where
-`%RED%my.squid.host.edu%ENDCOLOR%` is the fully qualified domain name of your
+`<MY.SQUID.HOST.EDU>` is the fully qualified domain name of your
 squid server):
 
-``` console
-user@host $ export http_proxy=http://%RED%my.squid.host.edu%ENDCOLOR%:3128
+``` console hl_lines="1"
+user@host $ export http_proxy=http://`<MY.SQUID.HOST.EDU>`:3128
 user@host $ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep X-Cache
-X-Cache: MISS from %RED%my.squid.host.edu%ENDCOLOR%
+X-Cache: MISS from `<MY.SQUID.HOST.EDU>`
 user@host $ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep X-Cache
-X-Cache: HIT from %RED%my.squid.host.edu%ENDCOLOR%
+X-Cache: HIT from `<MY.SQUID.HOST.EDU>`
 ```
 
 If the grep doesn't print anything, try removing it from the pipeline
@@ -167,8 +165,21 @@ To register your Frontier Squid host, follow the general registration instructio
 2.  If you are setting up a new resource, set `Active: false`.
     Only set `Active: true` for a resource when it is accepting requests and ready for production.
 
-If you are running a WLCG site, a few hours after a squid is registered
-and marked `Active`, 
+3.  Normally registered squids will be monitored by WLCG.  This is
+strongly recommended even for non-WLCG sites so operations experts can
+help with diagnosing problems.  However, if a site declines
+monitoring, that can be indicated by setting `Monitored: false` in a
+`Details:` section below `Description:`.  Registration is still
+important for the sake of excluding squids from worker node failover
+monitors.  The default if `Details:` `Monitored:` is not set is
+`true`.
+
+4. If you set Monitored to true, also enable monitoring as described in 
+the [upstream documentation on enabling monitoring](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring).
+
+
+A few hours after a squid is registered and marked `Active` (and not
+marked `Monitored: false`), 
 [verify that it is monitored by WLCG](https://twiki.cern.ch/twiki/bin/view/LCG/WLCGSquidRegistration#Verify_monitor).
 
 ## Reference

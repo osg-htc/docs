@@ -160,8 +160,8 @@ The output should list the hostname of your origin server.
 To verify that the directories you are exporting are visible from the redirector,
 run the following command from the origin server:
 
-```console
-[user@server ~]$ xrdmapc -r --verify --list s redirector.osgstorage.org:1094 %RED%<exported dir>%ENDCOLOR%
+```console hl_lines="1"
+[user@server ~]$ xrdmapc -r --verify --list s redirector.osgstorage.org:1094 <EXPORTED DIR>
 0*rv* redirector.osgstorage.org:1094
   >+  Srv ceph-gridftp1.grid.uchicago.edu:1094
    ?  Srv stashcache.fnal.gov:1094 [not authorized]
@@ -169,19 +169,19 @@ run the following command from the origin server:
    -  Srv origin.ligo.caltech.edu:1094
    ?  Srv csiu.grid.iu.edu:1094 [connect error]
 ```
-
+Change `<EXPORTED_DIR>` for the directory the service is suppose to export.
 Your server should be marked with a `>+` to indicate that it contains the given path and the path was accessible.
 
 
 ### Testing file access
 
 To verify that you can download a file from the origin server, use the `stashcp` tool.
-Place a test file in the exported dir.
-`stashcp` is available in the `stashcache-client` RPM.
+Place a `<TEST FILE>` in `<EXPORTED DIR>`. Where `<TEST FILE>` can be any file. The
+`stashcp` tool is available in the `stashcache-client` RPM.
 Run the following command:
 
 ```console
-[user@host]$ stashcp %RED%<test file>%ENDCOLOR% /tmp/testfile
+[user@host]$ stashcp <TEST FILE> /tmp/testfile
 ```
 <!-- ^ note the unicode space ' ' between "test" and "file" to fix syntax highlighting
        (because it thinks "test" is a keyword)
@@ -190,6 +190,12 @@ Run the following command:
 If successful, there should be a file at `/tmp/testfile` with the contents of the test file on your origin server.
 If unsuccessful, you can pass the `-d` flag to `stashcp` for debug info.
 
+You can also test directly downloading from the origin via `xrdcp`, which is available in the `xrootd-client` RPM.
+Run the following command:
+
+```console
+[user@host]$ xrdcp xroot://<origin server>:1094/<TEST FILE> /tmp/testfile
+```
 
 Registering the Origin
 ----------------------

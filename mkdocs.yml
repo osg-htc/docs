@@ -1,5 +1,5 @@
 site_name: OSG Documentation
-site_url: https://opensciencegrid.github.io/docs/
+site_url: https://opensciencegrid.org/docs/
 repo_url: https://github.com/opensciencegrid/docs/
 google_analytics: ['UA-69012-29', 'opensciencegrid.github.io']
 theme:
@@ -42,6 +42,7 @@ pages:
     - 'Install XRootD SE': 'data/xrootd/install-storage-element.md'
     - 'Configure Authorization': 'data/xrootd/xrootd-authorization.md'
     - 'Using XRootD': 'data/xrootd/install-client.md'
+    - 'Install CMS Xcache': 'data/xrootd/install-cms-xcache.md'
   - StashCache:
     - 'StashCache Overview': 'data/stashcache/overview.md'
     - 'Install StashCache Cache': 'data/stashcache/install-cache.md'
@@ -55,9 +56,14 @@ pages:
     - 'Flock to OSG': 'submit/osg-flock.md'
 - Security:
   - 'LCMAPS VOMS authentication': 'security/lcmaps-voms-authentication.md'
-  - 'Host Certificates': 'security/host-certs.md'
   - 'User Certificates': 'security/user-certs.md'
   - 'Certificate Management Reference': 'security/certificate-management.md'
+  - 'Host Certificates':
+    - 'Host Certs': 'security/host-certs.md'
+    - 'Overview': 'security/host-certs/overview.md'
+    - 'Using InCommon': 'security/host-certs/incommon.md'
+    - "Using Let's Encrypt": 'security/host-certs/lets-encrypt.md'
+    - 'Using DigiCert': 'security/host-certs/digicert.md'
 - Common:
   - 'CA Certificates': 'common/ca.md'
   - 'OSG Yum Repos': 'common/yum.md'
@@ -72,7 +78,22 @@ pages:
   - 'Install Transfer Log Filebeats': 'other/schedd-filebeats.md'
 - Release Information:
   - 'Release Note Overview': 'release/notes.md'
+  - 3.5 Release Notes:
+    - 'OSG Release 3.5.4': 'release/3.5/release-3-5-4.md'
+    - 'OSG Release 3.5.3': 'release/3.5/release-3-5-3.md'
+    - 'OSG Release 3.5.2': 'release/3.5/release-3-5-2.md'
+    - 'OSG Release 3.5.1': 'release/3.5/release-3-5-1.md'
+    - 'OSG Release 3.5.0': 'release/3.5/release-3-5-0.md'
   - 3.4 Release Notes:
+    - 'OSG Release 3.4.38': 'release/3.4/release-3-4-38.md'
+    - 'OSG Release 3.4.37': 'release/3.4/release-3-4-37.md'
+    - 'OSG Release 3.4.36': 'release/3.4/release-3-4-36.md'
+    - 'OSG Release 3.4.35': 'release/3.4/release-3-4-35.md'
+    - 'OSG Release 3.4.34': 'release/3.4/release-3-4-34.md'
+    - 'OSG Release 3.4.33': 'release/3.4/release-3-4-33.md'
+    - 'OSG Release 3.4.32': 'release/3.4/release-3-4-32.md'
+    - 'OSG Release 3.4.31-2': 'release/3.4/release-3-4-31-2.md'
+    - 'OSG Release 3.4.31': 'release/3.4/release-3-4-31.md'
     - 'OSG Release 3.4.30-2': 'release/3.4/release-3-4-30-2.md'
     - 'OSG Release 3.4.30': 'release/3.4/release-3-4-30.md'
     - 'OSG Release 3.4.29-2': 'release/3.4/release-3-4-29-2.md'
@@ -132,7 +153,7 @@ pages:
   - 'Supported Platforms': 'release/supported_platforms.md'
   - 'Yum Basics': 'release/yum-basics.md'
   - 'RPM Signing': 'release/signing.md'
-- Monitoring:
+- Deprecated:
   - 'Install RSV': 'monitoring/install-rsv.md'
   - 'Advanced RSV Configuration': 'monitoring/advanced-rsv-configuration.md'
   - 'Manage RSV via rsv-control': 'monitoring/rsv-control.md'
@@ -141,7 +162,7 @@ pages:
 
 markdown_extensions:
   - admonition
-  - codehilite
+  - codehilite:
+      guess_lang: False
   - toc:
-     permalink: True
-  - osg_markdown.colors
+      permalink: True

@@ -35,6 +35,8 @@ Before preparing your cluster for OSG jobs, consider the following requirements:
     there must be a shared file system between the submit server and the compute nodes.
     See [this section](#providing-the-osg-worker-node-client-htcondor-batch-systems-only) for details.
 
+-   [Temporary scratch space](/worker-node/using-wn#for-site-administrators) on each worker node
+
 
 Which Science Communities and Institutions am I Supporting?
 -----------------------------------------------------------
@@ -44,6 +46,19 @@ Below is an example of the monitoring views that will be available for your clus
 
 ![monitoring graphs](/compute-element/img/monitoring_graphs.png)
 
+Each community in the OSG utilizing the hosted CEs is mapped to your site as a fixed, specific account; we request
+the account names are of the form `osg01` through `osg20`.
+
+The mappings from Unix username to community is as follows:
+
+| User | VO(s) | Description |
+| ---- | ----- | ----- |
+| osg01 | OSG | Projects (primarily single PI, such as OSG-Connect) supported directly by the OSG organization. |
+| osg02 | GLOW | Projects coming from the Center for High Throughput Computing at the University of Wisconsin-Madison. |
+| osg03 | HCC | Projects coming from the Holland Computing Center at the University of Nebraska - Lincoln. |
+| osg04 - osg20 | - | Unassigned. |
+
+So, for example, the activities in your batch system corresponding to the user `osg02` will always be associated with the GLOW organization.  Note these mappings are the same for each site.  As more communities participate in the program, this table will be updated.
 
 Security
 --------

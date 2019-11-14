@@ -2,7 +2,7 @@ Registering in the OSG
 ======================
 
 The OSG keeps a registry containing active projects, virtual organizations (VOs), resources, and resource
-downtimes stored as as [YAML files](https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html)
+downtimes stored as [YAML files](https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html)
 in the [topology GitHub repository](https://github.com/opensciencegrid/topology/).
 This registry is used for [accounting data](https://gracc.opensciencegrid.org), contact information, and resource
 availability, particularly if your site is part of the [World LHC Computing Grid](http://wlcg.web.cern.ch/) (WLCG).
@@ -55,7 +55,7 @@ OSG resources are stored under a hierarchy of facilities, sites, and resource gr
 |----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Facility       | The institution or company where your resource is located, e.g. `University of Wisconsin`                                                                                     |
 | Site           | Smaller than a facility; typically represents an academic department, research group, or a computing center, e.g. `CHTC` for the Center for High Throughput Computing.        |
-| Resource Group | A logical grouping of resources at a site. Production and testing resources should be placed into separate Resource Groups.                                                   |
+| Resource Group | A logical grouping of resources at a site. Production and testing resources must be placed into separate Resource Groups.                                                     |
 | Resource       | A host belonging to a resource group that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts. A resource may provide more than one service. |
 
 OSG resources are stored in the GitHub repository as YAML files under a directory structure that reflects the above
@@ -77,8 +77,12 @@ host to avoid any duplicate registrations:
     - **If the search doesn't return any results**, skip to [these instructions](#new-resources) for registering a new
       resource.
     - **If the search returns a single YAML file**, open the link to the YAML file and skip to
-      [these instructions](#modifying-existing-resources) for modifying an existing resources.
+      [these instructions](#modifying-existing-resources) for modifying existing resources.
     - **If the search returns more than one YAML file**, please [contact us](#getting-help).
+
+    !!! note
+        If you are adding a new service to a host which is already registered as a resource,
+        follow the [instructions](#modifying-existing-resources) for modifying existing resources.
 
 ### New resources ###
 
@@ -139,6 +143,9 @@ To modify an existing resource, follow these instructions:
    as a guide.
    You may leave any `ID` or `GroupID` fields blank.
    Make sure that the formatting and indentation of the modified entry does not change.
+
+   If you are adding a new service to a host that is already registered as a resource,
+   add the new service to the existing resource; do not create a new resource for the same host.
 
     !!! note ""You're editing a file in a project you don't have write access to.""
         If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write

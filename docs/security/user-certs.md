@@ -9,9 +9,14 @@ Getting a User Certificate
 --------------------------
 
 This section describes how to get and set up a personal certificate to use on OSG.
-You need a user certificate if you are going to interact directly with OSG resources or infrastructure. 
-Examples of this would be tasks like managing OASIS, directly running jobs on OSG resources, interacting directly with 
-OSG storage elements, or to get private contact information from OSG systems.
+You need a user certificate if you are going to interact directly with OSG resources or infrastructure,
+including activities such as:
+
+- Managing OASIS
+- Directly running jobs on OSG resources
+- Directly interacting with OSG storage elements
+- Obtaining private contact information from OSG systems
+
 Currently, you can get a user certificate from CILogon.
 You may also be able to user other CAs to get a certificate; if your virtual organization (VO) requires that you get a
 certificate from a different CA, [contact your VO Support Center](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations) for
@@ -34,15 +39,12 @@ Follow the steps below to get an user certificate:
 1. Open the CILogon page, <https://cilogon.org>, in your browser of choice
 1. First, either search for your institution and select it or scroll through list and do the same.
 
-    If your institution is not on the list, please contact your institution's IT support to see if they can support
-    CILogon.
-
     ![Institution Selection](/img/cilogon_select_idp.png).
 
-    !!! note
-        Make sure to select your educational institution from CILogon's list.
-        For instance, do not use OpenID (e.g. Google, Github, etc.) as a provider since not all OSG resources support
-        certificates using an OpenID provider.
+    !!! warning
+        Do not use Google, GitHub, or ORCID as providers since they are not widely supported in the OSG.
+        If your institution is not on the list, please contact your institution's IT support to see if they can support
+        CILogon.
 
 1. Click the `Log On` button and enter your instutional credentials if prompted.
 1. Upon successfully entering your credentials, you'll get a page asking for you to enter a password.
@@ -152,7 +154,7 @@ Push notifications using the Duo Mobile app are required.
 
 Once you have set all those up, run `cigetcert` as follows:
 ```console
-user@host $ cigetcert -u %RED%<USERNAME>%ENDCOLOR% -i XSEDE
+user@host $ cigetcert -u <USERNAME> -i XSEDE
 ```
 `<USERNAME>` is your username at portal.xsede.org.
 You will get prompted to "Enter XSEDE Kerberos Password."
