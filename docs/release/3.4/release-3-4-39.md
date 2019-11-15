@@ -25,7 +25,7 @@ This release contains:
         -   Detect and handle Slurm jobs in the TIMEOUT state
         -   Explicitly specify `/bin/bash` for shell scripts rather than `/bin/sh`
         -   Minor python bug fixes for comparing variables against None
-        -   Support multiple Slurm clusters. The batch queue job parameter to the BLAHP now accepts an optional @clustername suffix. The job id generated for the BLAHP will include the cluster name to allow subsequent actions to target the specified cluster.
+        -   Support multiple Slurm clusters. The batch queue job parameter to the BLAHP now accepts an optional `@<CLUSTER NAME>` suffix. The job id generated for the BLAHP will include the cluster name to allow subsequent actions to target the specified cluster.
 -   scitokens-credmon 0.4.2: Provide configuration files in examples directory
 -   scitokens-cpp 0.3.5: Fixed Elliptic-curve public key handling
 -   [Singularity 3.4.2](https://github.com/sylabs/singularity/releases/tag/v3.4.2): Bug fix release
