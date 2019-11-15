@@ -709,6 +709,11 @@ operating system (run as `root`):
     - gwms-frontend service is running
     - gwms-frontend service was started with systemctl
 
+    Otherwise, you will get the following error in any of the cases:
+    ``` console
+    # systemctl reload gwms-frontend
+    Job for gwms-frontend.service invalid.
+    ```
 
 ### Upgrading GlideinWMS FrontEnd###
 
