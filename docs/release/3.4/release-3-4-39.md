@@ -15,7 +15,7 @@ This release contains:
 -   [XRootD 4.11.0](https://github.com/xrootd/xrootd/blob/v4.11.0/docs/ReleaseNotes.txt): Support for multi-VO credentials
 -   [BLAHP 1.18.45](https://github.com/htcondor/BLAH/releases/tag/v1.18.44)
     -   Add SystemCpu accounting when Slurm jobs complete
-    -   Add support for decimal seconds fields from sacct
+    -   Add support for decimal seconds fields from Slurm
     -   Move local submit attributes scripts from spec to sources
     -   Pull in various updates to Slurm scripts from HTCondor's BLAHP
         -   Remove superfluous debugging statements
