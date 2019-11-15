@@ -3973,6 +3973,18 @@ operating system (run as <code>root</code>):</p>
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Notice that, in the case of Enterprise Linux 7 <code>systemctl reload gwms-frontend</code> will work only if:
+- gwms-frontend service is running
+- gwms-frontend service was started with systemctl</p>
+<p>Otherwise, you will get the following error in any of the cases:</p>
+<div class="codehilite"><pre><span></span><span class="gp">#</span> systemctl reload gwms-frontend
+<span class="go">Job for gwms-frontend.service invalid.</span>
+</pre></div>
+
+
+</div>
 <h3 id="upgrading-glideinwms-frontend">Upgrading GlideinWMS FrontEnd<a class="headerlink" href="#upgrading-glideinwms-frontend" title="Permanent link">&para;</a></h3>
 <p>After upgrading the GlideinWMS RPM, you must issue an upgrade command to GlideinWMS:</p>
 <ul>
