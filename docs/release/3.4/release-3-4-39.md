@@ -14,7 +14,7 @@ This release contains:
     -   [Multiple issues in URI processing](http://www.squid-cache.org/Advisories/SQUID-2019_8.txt)
 -   [XRootD 4.11.0](https://github.com/xrootd/xrootd/blob/v4.11.0/docs/ReleaseNotes.txt): Support for multi-VO credentials
 -   [BLAHP 1.18.45](https://github.com/htcondor/BLAH/releases/tag/v1.18.44)
-    -   Add Slurm SystemCpu accounting when job completes
+    -   Add SystemCpu accounting when Slurm jobs complete
     -   Add support for decimal seconds fields from sacct
     -   Move local submit attributes scripts from spec to sources
     -   Pull in various updates to Slurm scripts from HTCondor's BLAHP
