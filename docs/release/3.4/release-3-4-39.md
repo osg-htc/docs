@@ -23,7 +23,7 @@ This release contains:
         -   BatchProject is a string that's used with the project or allocation option of the batch system's submission interface.
         -   BatchRuntime is an integer that limits the job's wall-clock execution time, expressed in seconds.
         -   Detect and handle Slurm jobs in the TIMEOUT state
-        -   Explicitly specify /bin/bash for shell scripts rather than /bin/sh
+        -   Explicitly specify `/bin/bash` for shell scripts rather than `/bin/sh`
         -   Minor python bug fixes for comparing variables against None
         -   Support multiple Slurm clusters. The batch queue job parameter to the BLAHP now accepts an optional @clustername suffix. The job id generated for the BLAHP will include the cluster name to allow subsequent actions to target the specified cluster.
 -   scitokens-credmon 0.4.2: Provide configuration files in examples directory
