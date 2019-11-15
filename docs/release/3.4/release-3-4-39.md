@@ -12,16 +12,15 @@ This release contains:
 -   [Frontier-Squid 4.9-2.1](http://frontier.cern.ch/dist/rpms/frontier-squidRELEASE_NOTES): [Fixed security vulnerabilities](https://opensciencegrid.org/security/vulns/OSG-SEC-2019-11-11-Vulnerability-in-Squid-UPDATE/)
     -   [Heap Overflow issue in URN processing](http://www.squid-cache.org/Advisories/SQUID-2019_7.txt)
     -   [Multiple issues in URI processing](http://www.squid-cache.org/Advisories/SQUID-2019_8.txt)
--   [XRootD 4.11.0](https://github.com/xrootd/xrootd/blob/v4.11.0/docs/ReleaseNotes.txt): Support for multi-VO credentials
+-   [XRootD 4.11.0](https://github.com/xrootd/xrootd/blob/v4.11.0/docs/ReleaseNotes.txt): New feature release
 -   [BLAHP 1.18.45](https://github.com/htcondor/BLAH/releases/tag/v1.18.44)
     -   Add SystemCpu accounting when Slurm jobs complete
     -   Add support for decimal seconds fields from Slurm
     -   Move local submit attributes scripts from spec to sources
     -   Pull in various updates to Slurm scripts from HTCondor's BLAHP
-        -   Remove superfluous debugging statements
         -   Add BLAHP options for project name (-A, BatchProject) and runtime limit (-t, BatchRuntime).
-        -   BatchProject is a string that's used with the project or allocation option of the batch system's submission interface.
-        -   BatchRuntime is an integer that limits the job's wall-clock execution time, expressed in seconds.
+            -   The `BatchProject` HTCondor job attribute is a string that's used with the project or allocation option of the batch system's submission interface.
+            -   The `BatchRuntime` HTCondor job attribute is an integer that limits the job's wall-clock execution time, expressed in seconds.
         -   Detect and handle Slurm jobs in the TIMEOUT state
         -   Explicitly specify `/bin/bash` for shell scripts rather than `/bin/sh`
         -   Minor python bug fixes for comparing variables against None
