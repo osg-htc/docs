@@ -1,5 +1,5 @@
-OSG Site Administrator Documentation
-====================================
+OSG Site Documentation
+======================
 
 Welcome to the home of the Open Science Grid (OSG) Site Administrator documentation!  This documentation aims to
 provide OSG site admins with the necessary information to install, configure, and operate site services.
