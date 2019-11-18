@@ -12,6 +12,7 @@ extra_css:
 
 pages:
 - Home: 'index.md'
+- Detailed Overview: 'detailed-overview.md'
 - Site Planning: 'site-planning.md'
 - Compute Element:
   - 'HTCondor-CE Overview': 'compute-element/htcondor-ce-overview.md'
