@@ -82,7 +82,7 @@ The easiest solution for this is to use your host certificate and key as follows
     [here](/security/host-certs/lets-encrypt/#pre-and-post-renewal-hooks).
 
 !!! note
-    You must also register this certificate with the [CMS VOMS](https://voms24.cern.ch:8443/voms/cms/)
+    You must also register this certificate with the CMS VOMS (https://voms2.cern.ch:8443/voms/cms/)
 
 Configuring Optional Features
 -----------------------------
