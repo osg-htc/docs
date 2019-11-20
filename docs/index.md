@@ -29,7 +29,7 @@ In both of these cases, your site must meet the following requirements:
   [LSF](https://www.ibm.com/us-en/marketplace/hpc-workload-management),
   [PBS Pro](https://www.pbsworks.com/PBSProduct.aspx?n=Altair-PBS-Professional&c=Overview-and-Capabilities)/[Torque](http://www.adaptivecomputing.com/products/torque/),
   or [Slurm](https://slurm.schedmd.com/).
-- Outbound network connectivty from your cluster's worker nodes
+- Outbound network connectivity from your cluster's worker nodes
 - [Temporary scratch space](/worker-node/using-wn#for-site-administrators) on each worker node
 
 ### OSG-hosted services ###
