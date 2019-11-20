@@ -1,198 +1,53 @@
-OSG Site Administrator Documentation
-====================================
+OSG Site Documentation
+======================
 
-Welcome to the home of the Open Science Grid (OSG) Site Administrator documentation!  This documentation aims to
-provide OSG site admins with the necessary information to install, configure, and operate site services.
+!!!tip "User documentation"
+    If you are a **researcher** interested in accessing OSG resources, please consult our
+    [user documentation](https://support.opensciencegrid.org/support/home) instead.
 
-If you are not a site adminstrator:
+The [Open Science Grid](https://www.opensciencegrid.org) (OSG) provides common service and support for resource
+providers and scientific institutions (i.e., "sites") using a [distributed fabric](https://map.opensciencegrid.org) of
+high throughput computational services.
+The OSG does not own resources but provides software and services to users and resource providers alike to enable the
+opportunistic usage and sharing of resources.
 
-- If you are a **researcher** interested in using OSG resources, you may want to view our
-  [user documentation](https://support.opensciencegrid.org/support/home).
-- If you'd like to learn more about the OSG and our mission, visit the OSG consortium's
-  [homepage](https://www.opensciencegrid.org/).
+This documentation aims to provide HTC/HPC system administrators with the necessary information to contribute resources
+to the OSG.
 
-This document outlines the overall installation process for an OSG site and provides many links into detailed
-installation, configuration, troubleshooting, and similar pages. If you do not see software-related technical
-documentation listed here, try the search bar at the top or contacting us at
-[help@opensciencegrid.org](mailto:help@opensciencegrid.org).
+Contributing to the OSG
+-----------------------
 
-Plan the Site
--------------
+We offer two models for sites to contribute resources to OSG users:
+one where the [OSG hosts and maintains](#osg-hosted-services) the services to submit batch work to your site;
+and the traditional model where the [site](#self-hosted-services) hosts and maintains these same services.
+In both of these cases, the following will be needed:
 
-If you have not done so already, [plan the overall architecture of your OSG site](site-planning).
-It is recommended that your plan be sufficiently detailed to include the OSG hosts that are needed and the main software
-components for each host.
-Be sure to consider [the operating systems that OSG supports](release/supported_platforms). For example, a basic site might include:
+- An existing compute cluster running on a [supported operating system](/release/supported_platforms) with a supported
+  batch system:
+  [Grid Engine](http://www.univa.com/products/),
+  [HTCondor](https://research.cs.wisc.edu/htcondor/),
+  [LSF](https://www.ibm.com/us-en/marketplace/hpc-workload-management),
+  [PBS Pro](https://www.pbsworks.com/PBSProduct.aspx?n=Altair-PBS-Professional&c=Overview-and-Capabilities)/[Torque](http://www.adaptivecomputing.com/products/torque/),
+  or [Slurm](https://slurm.schedmd.com/).
+- Outbound network connectivity from your cluster's worker nodes
+- [Temporary scratch space](/worker-node/using-wn#for-site-administrators) on each worker node
 
-| Purpose              | Host                                | Major Software                                           |
-|:---------------------|:------------------------------------|:---------------------------------------------------------|
-| Compute Element (CE) | `osg-ce.example.edu`                | OSG CE, HTCondor Central Manager, etc. (`osg-ce-condor`) |
-| Worker Nodes         | `wNNN.cluster.example.edu`          | OSG worker node client (`osg-wn-client`)                 |
+!!!info "Don't meet the requirements?"
+    If your site does not meet the above conditions, please [contact us](mailto:help@opensciencegrid.org) to discuss
+    your options for contributing to the OSG.
 
-Prepare the Batch System
-------------------------
+### OSG-hosted services ###
 
-The assumption is that you have an existing batch system at your site.
-Currently, we support [HTCondor](http://research.cs.wisc.edu/htcondor/),
-[LSF](https://www.ibm.com/us-en/marketplace/hpc-workload-management), [PBS](http://www.pbsworks.com) and
-[TORQUE](http://www.adaptivecomputing.com/products/open-source/torque/),
-[SGE](http://en.wikipedia.org/wiki/Oracle_Grid_Engine), and [Slurm](http://slurm.schedmd.com) batch systems.
+To contribute computational resources with OSG-hosted services, your site will also need the following:
 
-For smaller sites (less than 50 worker nodes), the most common way to add a site to OSG is to install the OSG Compute
-Element (CE) on the central host of your batch system.
-At such a site - especially if you have minimal time to maintain a CE - you may want to contact
-<mailto:help@opensciencegrid.org> to ask about using an OSG-hosted CE instead of running your own.
-Before proceeding with an install, be sure that you can submit and successfully run a job from your OSG CE host into
-your batch system.
+- Allow SSH access to your local cluster's submit node from a known IP address
+- Shared home directories on each cluster node
 
-Add OSG Software
-----------------
+!!!success "Next steps"
+    If you are interested in OSG-hosted services, please [contact us](mailto:help@opensciencegrid.org) for a
+    consultation, even if your site does not meet the conditions as outlined above!
 
-If necessary, provision all OSG hosts that are in your site plan that do not exist yet.
-The general steps to installing an OSG site are:
+### Self-hosted services ###
 
-1. Install [OSG Yum Repos](/common/yum) and the [Compute Element software](#installing-and-configuring-the-compute-element)
-   on your CE host
-1. Install the [Worker Node client](#adding-osg-software-to-worker-nodes) on your worker nodes.
-1. Install [optional software](#installing-and-configuring-other-services) to increase the capabilities of your site.
-
-!!! note
-    For sites with more than a handful of worker nodes, it is recommended to use some sort of configuration management
-    tool to install, configure, and maintain your site.
-    While beyond the scope of OSG’s documentation to explain how to select and use such a system, some popular
-    configuration management tools are [Puppet](http://puppetlabs.com), [Chef](https://www.chef.io),
-    [Ansible](https://www.ansible.com), and [CFEngine](http://cfengine.com).
-
-### General Installation Instructions ###
-
--   [Security information for OSG signed RPMs](release/signing)
--   [Using Yum and RPM](release/yum-basics)
--   [Install the OSG Yum repositories](/common/yum)
--   [OSG Software release series](release/release_series) - look here to upgrade to OSG 3.5
-
-### Installing and Managing Certificates for Site Security ###
-
--   [Installing the grid certificate authorities (CAs)](common/ca)
--   [How do I get X.509 host certificates?](security/host-certs)
--   [Automatically updating the grid certificate authorities (CAs)](security/certificate-management)
--   [OSG PKI command line client reference](security/certificate-management)
-
-### Installing and Configuring the Compute Element ###
-
--   Install the compute element (HTCondor-CE and other software):
-    -   [Overview and architecture](compute-element/htcondor-ce-overview)
-    -   [Request a Hosted CE](/compute-element/hosted-ce)
-    -   [Install HTCondor-CE](compute-element/install-htcondor-ce)
-    -   [Configure the HTCondor-CE job router](compute-element/job-router-recipes), including common recipes
-    -   [Troubleshooting HTCondor-CE installations](compute-element/troubleshoot-htcondor-ce)
-    -   [Submitting jobs to HTCondor-CE](compute-element/submit-htcondor-ce)
--   [`osg-configure` Reference](other/configuration-with-osg-configure)
-
-### Adding OSG Software to Worker Nodes ###
-
--   [Worker Node (WN) Client Overview](worker-node/using-wn)
--   Install the WN client software on every worker node – pick a method:
-    -   [Using RPMs](worker-node/install-wn) – useful when managing your worker nodes with a tool (e.g., Puppet, Chef)
-    -   [Using a tarball](worker-node/install-wn-tarball) – useful for installation onto a shared filesystem (does not
-        require root access)
-    -   [Using OASIS](worker-node/install-wn-oasis) – useful when [CVMFS](worker-node/install-cvmfs) is already mounted
-        on your worker nodes
--   (optional) [Install the CernVM-FS client](worker-node/install-cvmfs) to make it easy for user jobs to use needed
-    software from OSG's OASIS repositories
--   (optional) [Install singularity on the OSG worker node](worker-node/install-singularity), to allow pilot jobs to
-    isolate user jobs.
-
-
-### Installing and Configuring Other Services ###
-
-All of these node types and their services are optional, although OSG requires an HTTP caching service if you have
-installed [CVMFS](worker-node/install-cvmfs) on your worker nodes.
-
--   [Install Frontier Squid](data/frontier-squid), an HTTP caching proxy service.
--   Storage element:
-    -   Existing POSIX-based systems (such as NFS, Lustre, or GPFS):
-        -   [Install standalone OSG GridFTP](data/gridftp): GridFTP server
-        -   (optional) [Install load-balanced OSG GridFTP](data/load-balanced-gridftp): when a single GridFTP server
-            isn't enough
-    -   Hadoop Distributed File System (HDFS):
-        -   [Hadoop Overview](data/hadoop-overview): HDFS information, planning, and guides
-    -   XRootD:
-        -   [XRootd Overview](/data/xrootd/overview): XRootD information, planning, and guides
-        -   [Install XRootD Server](/data/xrootd/install-storage-element): XRootD redirector installation
--   RSV monitoring to monitor and report to OSG on the health of your site
-    -   [Install RSV](monitoring/install-rsv)
--   [Install the GlideinWMS VO Frontend](other/install-gwms-frontend) if your want your users' jobs to run on the OSG
-    -   [Install the RSV GlideinWMS Tester](monitoring/install-rsv-gwms-tester) if you want to test your front-end's
-        ability to submit jobs to sites in the OSG
-
-Verify OSG Software
--------------------
-
-Before receiving real OSG work, your site needs to successfully run test jobs from our
-[GlideinWMS](http://glideinwms.fnal.gov/) factory and report usage to the [GRACC](https://gracc.opensciencegrid.org).
-
-
-If you haven't already, [register](/common/registration.md) any publicly facing resources with OSG software installed,
-including HTCondor-CE, Frontier Squid, GridFTP, and/or XRootD.
-
-### Test locally ###
-
-It is useful to test *manual* submission of jobs from inside and outside of your site through your CE to your batch
-system.
-If this process does not work manually, it will probably not work for the GlideinWMS pilot factory either.
-
--   [Test job submission into an HTCondor-CE](compute-element/submit-htcondor-ce)
-
-### Get test jobs ####
-
-To begin running pilots at your site, e-mail <osg-gfactory-support@physics.ucsd.edu> and ask for test pilots.
-Please provide them with the following information:
-
--   The fully qualified domain name of the CE
--   Resource name
--   Supported OS version of your worker nodes (e.g., EL6, EL7, or both)
--   Support for multicore jobs
--   Maximum job walltime
--   Maximum job memory usage
-
-Once the factory team has enough information, they will start submitting pilots from the test factory to your CE.
-Initially, this will be one pilot at a time but once the factory verifies that pilot jobs are running successfully, that
-number will be ramped up to 10, then 100.
-
-### Verify reporting and monitoring ###
-
-To verify that your site is correctly reporting to the OSG, check
-[OSG's Accounting Portal](https://gracc.opensciencegrid.org/dashboard/db/site-summary) for records of your site reports
-(select your site from the drop-down box). If you have enabled the OSG VO, you can also check
-<http://flock.opensciencegrid.org/monitoring/condor/sites/all_1day.html>.
-
-Scale Up to Full Production
----------------------------
-
-After successfully running all the pilot jobs that are submitted by the test factory and verifying your site reports,
-your site will be deemed production ready.
-No action is required on your end, factory operations will start submitting pilot jobs from the production factory.
-
-Maintain the Site
------------------
-
-To avoid potential issues with OSG job submissions, please [notify us](mailto:help@opensciencegrid.org) of major changes
-to your site, including:
-
-- Major OS version changes on the worker nodes (e.g., upgraded from EL 6 to EL 7)
-- Adding or removing [container support](/worker-node/install-singularity)
-- Policy changes regarding maximum walltime or memory usage
-- Scheduled or unscheduled [downtimes](/common/registration#how-to-register-downtime)
-- [Site topology changes](/common/registration) such as additions, modifications, or retirements
-- Changes to site contacts, such as administrative or security staff
-
-It is also important to keep your software and data (e.g., CA and VO client) up-to-date with the
-[latest OSG release](/release/notes).
-To stay abreast of software releases, we recommend subscribing to the <mailto:osg-sites@opensciencegrid.org> mailing
-list.
-
-Get Help
---------
-If you need help with your site, or need to report a security incident,
-follow the [contact instructions](/common/help).
-
+If you are interested in contributing resources by hosting your own OSG services, please continue with the
+[detailed overview](/detailed-overview) page.
