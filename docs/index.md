@@ -1,7 +1,7 @@
 OSG Site Documentation
 ======================
 
-!!!tip "User Documentation"
+!!!tip "User documentation"
     If you are a **researcher** interested in accessing OSG resources, please consult our
     [user documentation](https://support.opensciencegrid.org/support/home) instead.
 
@@ -20,7 +20,7 @@ Contributing to the OSG
 We offer two models for sites to contribute resources to OSG users:
 one where the [OSG hosts and maintains](#osg-hosted-services) the services to submit batch work to your site;
 and the traditional model where the [site](#self-hosted-services) hosts and maintains these same services.
-In both of these cases, your site must meet the following requirements:
+In both of these cases, the following will be needed:
 
 - An existing compute cluster running on a [supported operating system](/release/supported_platforms) with a supported
   batch system:
@@ -32,15 +32,20 @@ In both of these cases, your site must meet the following requirements:
 - Outbound network connectivity from your cluster's worker nodes
 - [Temporary scratch space](/worker-node/using-wn#for-site-administrators) on each worker node
 
+!!!info "Don't meet the requirements?"
+    If your site does not meet the above conditions, please [contact us](mailto:help@opensciencegrid.org) to discuss
+    your options for contributing to the OSG.
+
 ### OSG-hosted services ###
 
-To contribute computational resources with OSG-hosted services, your site must additionally provide the following:
+To contribute computational resources with OSG-hosted services, your site will also need the following:
 
 - Allow SSH access to your local cluster's submit node from a known IP address
 - Shared home directories on each cluster node
 
-If you are interested in OSG-hosted services, please [contact us](mailto:help@opensciencegrid.org), whether or not your
-site meets the above requirements!
+!!!success "Next steps"
+    If you are interested in OSG-hosted services, please [contact us](mailto:help@opensciencegrid.org) for a
+    consultation, even if your site does not meet the conditions as outlined above!
 
 ### Self-hosted services ###
 
