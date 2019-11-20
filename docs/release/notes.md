@@ -6,6 +6,18 @@ This page contains links to detailed notes for release in the currently supporte
 For our policy on release series support, please consult
 [this page](https://opensciencegrid.org/technology/policy/release-series/).
 
+!!!tip "Want faster access to production-ready software?"
+    OSG 3.5 and 3.4 offer a rolling release repository where packages are added as soon as they pass acceptance testing.
+    To install packages from this repository, enable `[osg-rolling]` in `/etc/yum.repos.d/osg-rolling.repo`:
+
+        [osg-rolling]
+        ...
+        enabled=1
+
+    Or for one-time installations, append the following to your `yum` command:
+
+        --enablerepo=osg-rolling
+
 OSG 3.5
 -------
 
