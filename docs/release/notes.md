@@ -7,12 +7,13 @@ For our policy on release series support, please consult
 [this page](https://opensciencegrid.org/technology/policy/release-series/).
 
 Release announcements are sent out to the administrative contacts registered
-in [Topology](https://topology.opensciencegrid.org). In addition, the announcements are also sent
-to the following mailing lists:
-    -   [osg-general@opensciencegrid.org](https://listserv.fnal.gov/scripts/wa.exe?A0=OSG-GENERAL)
-    -   [osg-operations@opensciencegrid.org](https://listserv.fnal.gov/scripts/wa.exe?A0=OSG-OPERATIONS)
-    -   [osg-sites@opensciencegrid.org](https://listserv.fnal.gov/scripts/wa.exe?A0=OSG-SITES)
-    -   [vdt-discuss@opensciencegrid.org](https://listserv.fnal.gov/scripts/wa.exe?A0=vdt-discuss)
+in [Topology](https://topology.opensciencegrid.org).
+In addition, the announcements are also sent to the following mailing lists:
+
+-   [osg-general@opensciencegrid.org](https://listserv.fnal.gov/scripts/wa.exe?A0=OSG-GENERAL)
+-   [osg-operations@opensciencegrid.org](https://listserv.fnal.gov/scripts/wa.exe?A0=OSG-OPERATIONS)
+-   [osg-sites@opensciencegrid.org](https://listserv.fnal.gov/scripts/wa.exe?A0=OSG-SITES)
+-   [vdt-discuss@opensciencegrid.org](https://listserv.fnal.gov/scripts/wa.exe?A0=vdt-discuss)
 
 !!!tip "Want faster access to production-ready software?"
     OSG 3.5 and 3.4 offer a rolling release repository where packages are added as soon as they pass acceptance testing.
