@@ -235,8 +235,8 @@ To update HTCondor on your HTCondor-CE and/or HTCondor pool hosts, perform the f
 
     - As of HTCondor 8.8, `MOUNT_UNDER_SCRATCH` has default values of `/tmp` and `/var/tmp`
       (https://htcondor.readthedocs.io/en/stable/admin-manual/configuration-macros.html#condor-startd-configuration-file-macros).
-      If the partition containing your execute directories is large enough, we recommend setting your
-      [OSG\_WN\_TMP](/worker-node/using-wn#the-worker-node-environment) to `/tmp` or `/var/tmp`.
+      If the partition containing your execute directories is [large enough](/worker-node/using-wn/#hardware-recommendations),
+      we recommend setting your [OSG\_WN\_TMP](/worker-node/using-wn#the-worker-node-environment) to `/tmp` or `/var/tmp`.
       If that partition is not large enough, we recommend setting your `OSG\_WN\_TMP` variable to a directory outside of
       `/tmp` or `/var/tmp`.
 
