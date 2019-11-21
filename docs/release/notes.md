@@ -6,6 +6,14 @@ This page contains links to detailed notes for release in the currently supporte
 For our policy on release series support, please consult
 [this page](https://opensciencegrid.org/technology/policy/release-series/).
 
+Release announcements are sent out to the administrative contacts registered
+in the topology repository. In addition, the announcements are also sent
+to the following mailing lists:
+    -   `osg-general@opensciencegrid.org`
+    -   `osg-operations@opensciencegrid.org`
+    -   `osg-sites@opensciencegrid.org`
+    -   `vdt-discuss@opensciencegrid.org`
+
 !!!tip "Want faster access to production-ready software?"
     OSG 3.5 and 3.4 offer a rolling release repository where packages are added as soon as they pass acceptance testing.
     To install packages from this repository, enable `[osg-rolling]` in `/etc/yum.repos.d/osg-rolling.repo`:
