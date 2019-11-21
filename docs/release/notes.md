@@ -7,7 +7,7 @@ For our policy on release series support, please consult
 [this page](https://opensciencegrid.org/technology/policy/release-series/).
 
 Release announcements are sent out to the administrative contacts registered
-in [Topology](topology.opensciencegrid.org). In addition, the announcements are also sent
+in [Topology](https://topology.opensciencegrid.org). In addition, the announcements are also sent
 to the following mailing lists:
     -   `osg-general@opensciencegrid.org`
     -   `osg-operations@opensciencegrid.org`
