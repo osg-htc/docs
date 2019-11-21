@@ -18,7 +18,7 @@ Contributing to the OSG
 -----------------------
 
 We offer two models for sites to contribute resources to OSG users:
-one where the [OSG hosts and maintains](#osg-hosted-services) the services to submit batch work to your site;
+one where the [OSG hosts and maintains](#osg-hosted-services) resource provisioning services for OSG users;
 and the traditional model where the [site](#self-hosted-services) hosts and maintains these same services.
 In both of these cases, the following will be needed:
 
