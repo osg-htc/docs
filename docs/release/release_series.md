@@ -226,14 +226,14 @@ To update HTCondor on your HTCondor-CE and/or HTCondor pool hosts, perform the f
 
 1. **HTCondor pools only:**
 
-    - The default authentication, `DAEMON_LIST`, and `CONDOR_HOST` configuration changed in HTCondor 8.8 in OSG 3.5.
-      Similarly, the `DAEMON_LIST` and `CONDOR_HOST` configuration changed in OSG 3.4.
+    - The `DAEMON_LIST`, and `CONDOR_HOST` configuration changed in HTCondor 8.8.
+      Additionally in OSG 3.5, the default security was changed to use FS and pool password.
       If you are experiencing issues with communication between hosts in your pool after the upgrade,
       the default OSG configuration is listed in `/etc/condor/config.d/00-osg_default_*.config`:
       ensure that any default configuration is overriden with your own `DAEMON_LIST`, `CONDOR_HOST`, and/or
       [security](https://htcondor.readthedocs.io/en/v8_8_4/admin-manual/security.html) configuration in subsequent files.
 
-    - `MOUNT_UNDER_SCRATCH` now has default values of `/tmp` and `/var/tmp`
+    - As of HTCondor 8.8, `MOUNT_UNDER_SCRATCH` has default values of `/tmp` and `/var/tmp`
       (https://htcondor.readthedocs.io/en/stable/admin-manual/configuration-macros.html#condor-startd-configuration-file-macros).
       If the partition containing your execute directories is large enough, we recommend setting your
       [OSG\_WN\_TMP](/worker-node/using-wn#the-worker-node-evnironment) to `/tmp` or `/var/tmp`.
