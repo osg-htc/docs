@@ -224,13 +224,22 @@ To update HTCondor on your HTCondor-CE and/or HTCondor pool hosts, perform the f
         :::console
         root@host # yum update 'condor*'
 
-1. **HTCondor pools only:** The default authentication, `DAEMON_LIST`, and `CONDOR_HOST` configuration changed in
-   HTCondor 8.8 in OSG 3.5.
-   Similarly, the `DAEMON_LIST` and `CONDOR_HOST` configuration changed in OSG 3.4.
-   If you are experiencing issues with communication between hosts in your pool after the upgrade,
-   the default OSG configuration is listed in `/etc/condor/config.d/00-osg_default_*.config`:
-   ensure that any default configuration is overriden with your own `DAEMON_LIST`, `CONDOR_HOST`, and/or
-   [security](https://htcondor.readthedocs.io/en/v8_8_4/admin-manual/security.html) configuration in subsequent files.
+1. **HTCondor pools only:**
+
+    - The `DAEMON_LIST`, and `CONDOR_HOST` configuration changed in HTCondor 8.8.
+      Additionally in OSG 3.5, the default security was changed to use FS and pool password.
+      If you are experiencing issues with communication between hosts in your pool after the upgrade,
+      the default OSG configuration is listed in `/etc/condor/config.d/00-osg_default_*.config`:
+      ensure that any default configuration is overriden with your own `DAEMON_LIST`, `CONDOR_HOST`, and/or
+      [security](https://htcondor.readthedocs.io/en/v8_8_4/admin-manual/security.html) configuration in subsequent files.
+
+    - As of HTCondor 8.8, [MOUNT_UNDER_SCRATCH](https://htcondor.readthedocs.io/en/stable/admin-manual/configuration-macros.html#condor-startd-configuration-file-macros)
+      has default values of `/tmp` and `/var/tmp`, which may cause issues if your
+      [OSG\_WN\_TMP](/worker-node/using-wn#the-worker-node-environment) is a subdirectory of either of these directories.
+      If the partition containing your execute directories is [large enough](/worker-node/using-wn/#hardware-recommendations),
+      we recommend setting your `OSG_WN_TMP` to `/tmp` or `/var/tmp`.
+      If that partition is not large enough, we recommend setting your `OSG_WN_TMP` variable to a directory outside of
+      `/tmp` or `/var/tmp`.
 
 1. **HTCondor-CE hosts only:** The HTCondor 8.8 series changed the default job route matching order
    [from round-robin to first matching route](/compute-element/job-router-recipes#how-jobs-match-to-job-routes).
