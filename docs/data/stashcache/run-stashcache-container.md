@@ -1,0 +1,184 @@
+Running Stashcache in a Container
+=================================
+
+The OSG operates the [StashCache data federation](../stashcache/overview/), which
+provides organizations with a method to distribute their data in a scalable manner to thousands of jobs without needing
+to pre-stage data across sites or operate their own scalable infrastructure.
+
+[Stash Caches](../install-cache/) transfer data to clients such as jobs or users. A set of caches are operated across the OSG for the benefit of nearby sites;
+in addition, each site may run its own cache in order to reduce the amount of data transferred over the WAN. This documents how to run stashcache in a Docker container.
+
+Overview
+--------
+
+The minimal decisions when running a stashcache are:
+
+1. A port  XrootD will use to listen for incomming connections (over HTTP) (default 8000)
+1. In which partition of the host it will store the data
+
+
+Running a Container
+-------------------
+
+To run the container, use `docker run` with the following options, replacing the text within angle brackets with your
+own values:
+
+```console
+user@host $ docker run --rm --publish <HOST PORT>:8000 \
+             opensciencegrid/stash-cache:fresh \
+             --volume <HOST PARTITION>:/tmp
+```
+
+The `HOST PORT` is the port on your computer which will accept caching requests and <HOST PARTITION> will be the mount where to store
+the cached files.
+
+
+You can verify that it worked with the command:
+
+```console
+user@host $ curl http://localhost:8212/user/dweitzel/public/blast/queries/query1
+```
+
+Which should output:
+
+```
+>Derek's first query!
+MPVSDSGFDNSSKTMKDDTIPTEDYEEITKESEMGDATKITSKIDANVIEKKDTDSENNITIAQDDEKVSWLQRVVEFFE
+```
+
+Readying for Production
+------------------------
+
+Additional configuration is needed to make StashCache production-ready.
+
+1. Add environment variables to set the name of the cache and the directory of the persistant cache.  It is important to remember that the directory set in the environment variable points to the directory **inside** the container.  It is later mapped to a host directory with the `--volume` option.
+
+An example final `docker run` command:
+```console
+user@host $ docker run --rm --publish <HOST PORT>:8000 \
+             --volume <HOST PARTITION>:/cache \
+             --env-file=/opt/xcache/.env \
+             opensciencegrid/stash-cache:fresh
+```
+
+Where the environment file on the docker host, `/opt/xcache/.env`, has the following contents:
+```file
+XC_RESOURCENAME=ProductionCache
+XC_ROOTDIR=/cache
+```
+
+It is recommended to use a container orchestration service such as [docker-compose](https://docs.docker.com/compose/) or [kubernetes](https://kubernetes.io/), or start the XCache container with systemd.
+
+An example systemd service file for xcache.  This will require creating the environment file in the directory `/opt/xcache/.env`. 
+
+!!! note
+    This example systemd file assumes <HOST PORT> is `8000` and  <HOST PARTITION> is `/srv/cache`.
+
+```file
+[Unit]
+Description=XCache Container
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+ExecStartPre=-/usr/bin/docker stop %n
+ExecStartPre=-/usr/bin/docker rm %n
+ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-cache:fresh
+ExecStart=/usr/bin/docker run --rm --name %n --publish 8000:8000 --volume /srv/cache:/cache --env-file /opt/xcache/.env opensciencegrid/stash-cache:fresh
+
+[Install]
+WantedBy=multi-user.target
+```
+
+This systemd file can be saved to `/etc/systemd/system/docker.stash-cache.service` and started with:
+
+```console
+root@host $ systemctl enable docker.stash-cache
+root@host $ systemctl start docker.stash-cache
+```
+
+!!! warning
+    [Register](../stashcache/install-cache/#registering-the-cache) the cache before considering it a production service.
+
+Additional Configuration (Optional)
+-----------------------------------
+
+In addition to the configuration avove before starting the container, write the following configuration on your docker host:
+
+1. Write in same file as above(`/opt/xcache/.env`) containing the following required environment  variables and values for your XCache:
+
+    - `XC_SPACE_HIGH_WM`: High watermark for disk usage;
+      when usage goes above the high watermark, the cache deletes until it hits the low watermark
+    - `XC_SPACE_LOW_WM`: Low watermark for disk usage;
+      when usage goes above the high watermark, the cache deletes until it hits the low watermark
+    - `XC_PORT`: TCP port that XCache listens on
+    - `XC_RAMSIZE`: Amount of memory to use for storing blocks before writting them to disk. (Use higher for slower disks).
+    - `XC_BLOCKSIZE`: The size of the blocks in the cache
+    - `XC_PREFETCH`: Number of blocks to prefetch from a file at once. 
+       This is a value of how aggressive the cache is to request portions of a file. Set to `0` to disable
+
+### Optimizing Stashcache ###
+
+#### Memory Optimization ####
+
+Stashcache uses the hosts memory in two ways:
+
+1. Uses the own linux kernel as a way to cache files read from disk
+1. As a buffer for writting blocks of files first in memory and then in disk (to account for slow disks).
+
+An easy way to increase the performance of stashcache is to assign it more memory. You can use the [docker option](https://docs.docker.com/config/containers/resource_constraints/#limit-a-containers-access-to-memory) `--memory` and set it up to at least twice of `XC_RAMSIZE`.
+
+```console
+user@host $ docker run --rm --publish <HOST PORT>:8000 \
+             --memory=64g \
+             --volume <HOST PARTITION>:/cache \
+             --env-file=/opt/xcache/.env \
+             opensciencegrid/stash-cache:fresh
+```
+
+
+#### Multiple Disks ####
+
+For caches that store over `10 TB` or that have assigned space for storing the cached files over multiple partitions (`/partition1, /partition2, ...`) we recommend the following.
+
+1. Create a config file `90-my-stash-cache-disks.cfg` with the following contents
+
+        :::file
+        pfc.spaces data
+        oss.space data /data1
+        oss.space data /data2
+        .
+        .
+        .
+
+1. Run the container with the following options:
+
+        :::console
+        user@host $ docker run --rm --publish <HOST PORT>:8000 \
+             --volume <HOST PARTITION>:/cache \
+             --volume /partition1:/data1 \
+             --volume /partition2:/data2 \
+             --volume /opt/xcache/90-my-stash-cache-disks.cfg:/etc/xrootd/config.d/90-stash-cache-disks.cfg \
+             --env-file=/opt/xcache/.env \
+             opensciencegrid/stash-cache:fresh
+
+!!! note
+    Under this configuration the `<HOST PARTITION>` is not used to store the files rather to store symlinks to the files in `/partition1` and `/partition2`
+
+!!! warning
+    For over 100 TB of assigned space we highly encourage to use this setup and mount `<HOST PARTITION>` in solid state disks or NVME.
+
+### Disabling OSG monitoring ###
+
+By default, XCache reports to the OSG so that OSG staff can monitor the health of data federations.
+If you would like to report monitoring information to another destination, you can disable the OSG monitoring by setting
+the following in your environment variable configuration:
+
+```file
+DISABLE_OSG_MONITORING = true
+```
+
+!!! warning
+    Do not disable OSG monitoring in any service that is to be used for any other than testing
