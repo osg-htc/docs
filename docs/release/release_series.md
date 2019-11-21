@@ -233,11 +233,12 @@ To update HTCondor on your HTCondor-CE and/or HTCondor pool hosts, perform the f
       ensure that any default configuration is overriden with your own `DAEMON_LIST`, `CONDOR_HOST`, and/or
       [security](https://htcondor.readthedocs.io/en/v8_8_4/admin-manual/security.html) configuration in subsequent files.
 
-    - As of HTCondor 8.8, `MOUNT_UNDER_SCRATCH` has default values of `/tmp` and `/var/tmp`
-      (https://htcondor.readthedocs.io/en/stable/admin-manual/configuration-macros.html#condor-startd-configuration-file-macros).
+    - As of HTCondor 8.8, [MOUNT_UNDER_SCRATCH](https://htcondor.readthedocs.io/en/stable/admin-manual/configuration-macros.html#condor-startd-configuration-file-macros)
+      has default values of `/tmp` and `/var/tmp`, which may cause issues if your
+      [OSG\_WN\_TMP](/worker-node/using-wn#the-worker-node-environment) is a subdirectory of either of these directories.
       If the partition containing your execute directories is [large enough](/worker-node/using-wn/#hardware-recommendations),
-      we recommend setting your [OSG\_WN\_TMP](/worker-node/using-wn#the-worker-node-environment) to `/tmp` or `/var/tmp`.
-      If that partition is not large enough, we recommend setting your `OSG\_WN\_TMP` variable to a directory outside of
+      we recommend setting your `OSG_WN_TMP` to `/tmp` or `/var/tmp`.
+      If that partition is not large enough, we recommend setting your `OSG_WN_TMP` variable to a directory outside of
       `/tmp` or `/var/tmp`.
 
 1. **HTCondor-CE hosts only:** The HTCondor 8.8 series changed the default job route matching order
