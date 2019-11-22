@@ -15,6 +15,7 @@ Before Starting
 Before starting the installation process, consider the following points:
 
 1. Docker should be running in the host you plan to install the cache
+1. User: `user` should be in the `docker` linux group.
 1. A port for XRootD to listen for incoming connections (over HTTP) (default 8000)
 1. A partition on the host to store cached data
 
