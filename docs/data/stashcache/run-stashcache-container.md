@@ -9,14 +9,14 @@ to pre-stage data across sites or operate their own scalable infrastructure.
 in addition, each site may run its own cache in order to reduce the amount of data transferred over the WAN.
 This document outlines how to run StashCache in a Docker container.
 
-Overview
---------
+Before Starting
+---------------
 
 Before starting the installation process, consider the following points:
 
 1. Docker should be running in the host you plan to install the cache
 1. A port for XRootD to listen for incoming connections (over HTTP) (default 8000)
-1. In which partition of the host it will store the data
+1. A partition on the host to store cached data
 
 
 Running a Container
@@ -27,12 +27,11 @@ own values:
 
 ```console
 user@host $ docker run --rm --publish <HOST PORT>:8000 \
-             opensciencegrid/stash-cache:fresh \
+             opensciencegrid/stash-cache:stable \
              --volume <HOST PARTITION>:/tmp
 ```
 
-The `HOST PORT` is the port on your computer which will accept caching requests and <HOST PARTITION> will be the mount where to store
-the cached files.
+The `<HOST PORT>` is the port on your server which will accept caching requests and `<HOST PARTITION>` will be the mount where to store
 
 For example, if you've chosen `8212` as your host port, you can verify that it worked with the command:
 
@@ -59,7 +58,7 @@ An example final `docker run` command:
 user@host $ docker run --rm --publish <HOST PORT>:8000 \
              --volume <HOST PARTITION>:/cache \
              --env-file=/opt/xcache/.env \
-             opensciencegrid/stash-cache:fresh
+             opensciencegrid/stash-cache:stable
 ```
 
 Where the environment file on the docker host, `/opt/xcache/.env`, has the following contents:
@@ -86,8 +85,8 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
-ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-cache:fresh
-ExecStart=/usr/bin/docker run --rm --name %n --publish 8000:8000 --volume /srv/cache:/cache --env-file /opt/xcache/.env opensciencegrid/stash-cache:fresh
+ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-cache:stable
+ExecStart=/usr/bin/docker run --rm --name %n --publish 8000:8000 --volume /srv/cache:/cache --env-file /opt/xcache/.env opensciencegrid/stash-cache:stable
 
 [Install]
 WantedBy=multi-user.target
@@ -129,7 +128,7 @@ user@host $ docker run --rm  \
              --network="host" \
              --volume <HOST PARTITION>:/cache \
              --env-file=/opt/xcache/.env \
-             opensciencegrid/stash-cache:fresh
+             opensciencegrid/stash-cache:stable
 ```
 
 #### Memory Optimization ####
@@ -146,7 +145,7 @@ user@host $ docker run --rm --publish <HOST PORT>:8000 \
              --memory=64g \
              --volume <HOST PARTITION>:/cache \
              --env-file=/opt/xcache/.env \
-             opensciencegrid/stash-cache:fresh
+             opensciencegrid/stash-cache:stable
 ```
 
 
@@ -173,7 +172,7 @@ For caches that store over `10 TB` or that have assigned space for storing the c
              --volume /partition2:/data2 \
              --volume /opt/xcache/90-my-stash-cache-disks.cfg:/etc/xrootd/config.d/90-stash-cache-disks.cfg \
              --env-file=/opt/xcache/.env \
-             opensciencegrid/stash-cache:fresh
+             opensciencegrid/stash-cache:stable
 
 !!! note
     Under this configuration the `<HOST PARTITION>` is not used to store the files rather to store symlinks to the files in `/partition1` and `/partition2`
