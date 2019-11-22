@@ -1,19 +1,21 @@
 Running Stashcache in a Container
 =================================
 
-The OSG operates the [StashCache data federation](../stashcache/overview/), which
+The OSG operates the [StashCache data federation](/data/stashcache/overview), which
 provides organizations with a method to distribute their data in a scalable manner to thousands of jobs without needing
 to pre-stage data across sites or operate their own scalable infrastructure.
 
-[Stash Caches](../install-cache/) transfer data to clients such as jobs or users. A set of caches are operated across the OSG for the benefit of nearby sites;
-in addition, each site may run its own cache in order to reduce the amount of data transferred over the WAN. This documents how to run stashcache in a Docker container.
+[Stash Caches](/data/stashcache/install-cache) transfer data to clients such as jobs or users. A set of caches are operated across the OSG for the benefit of nearby sites;
+in addition, each site may run its own cache in order to reduce the amount of data transferred over the WAN.
+This document outlines how to run StashCache in a Docker container.
 
 Overview
 --------
 
-The minimal decisions when running a stashcache are:
+Before starting the installation process, consider the following points:
 
-1. A port  XrootD will use to listen for incomming connections (over HTTP) (default 8000)
+1. Docker should be running in the host you plan to install the cache
+1. A port for XRootD to listen for incoming connections (over HTTP) (default 8000)
 1. In which partition of the host it will store the data
 
 
@@ -32,8 +34,7 @@ user@host $ docker run --rm --publish <HOST PORT>:8000 \
 The `HOST PORT` is the port on your computer which will accept caching requests and <HOST PARTITION> will be the mount where to store
 the cached files.
 
-
-You can verify that it worked with the command:
+For example, if you've chosen `8212` as your host port, you can verify that it worked with the command:
 
 ```console
 user@host $ curl http://localhost:8212/user/dweitzel/public/blast/queries/query1
@@ -51,7 +52,7 @@ Readying for Production
 
 Additional configuration is needed to make StashCache production-ready.
 
-1. Add environment variables to set the name of the cache and the directory of the persistant cache.  It is important to remember that the directory set in the environment variable points to the directory **inside** the container.  It is later mapped to a host directory with the `--volume` option.
+1. Add environment variables to set the name of the cache and the directory of the persistent cache.  It is important to remember that the directory set in the environment variable points to the directory **inside** the container.  It is later mapped to a host directory with the `--volume` option.
 
 An example final `docker run` command:
 ```console
@@ -100,26 +101,36 @@ root@host $ systemctl start docker.stash-cache
 ```
 
 !!! warning
-    [Register](../stashcache/install-cache/#registering-the-cache) the cache before considering it a production service.
+    You must [register](/stashcache/install-cache/#registering-the-cache) the cache before considering it a production service.
 
 Additional Configuration (Optional)
 -----------------------------------
 
-In addition to the configuration avove before starting the container, write the following configuration on your docker host:
+In addition to the required configuration above, you may also configure the behavior of your cache with the following variables in your environment file:
 
-1. Write in same file as above(`/opt/xcache/.env`) containing the following required environment  variables and values for your XCache:
-
-    - `XC_SPACE_HIGH_WM`: High watermark for disk usage;
+- `XC_SPACE_HIGH_WM`: High watermark for disk usage;
       when usage goes above the high watermark, the cache deletes until it hits the low watermark
-    - `XC_SPACE_LOW_WM`: Low watermark for disk usage;
+- `XC_SPACE_LOW_WM`: Low watermark for disk usage;
       when usage goes above the high watermark, the cache deletes until it hits the low watermark
-    - `XC_PORT`: TCP port that XCache listens on
-    - `XC_RAMSIZE`: Amount of memory to use for storing blocks before writting them to disk. (Use higher for slower disks).
-    - `XC_BLOCKSIZE`: The size of the blocks in the cache
-    - `XC_PREFETCH`: Number of blocks to prefetch from a file at once. 
+- `XC_PORT`: TCP port that XCache listens on
+- `XC_RAMSIZE`: Amount of memory to use for storing blocks before writting them to disk. (Use higher for slower disks).
+- `XC_BLOCKSIZE`: The size of the blocks in the cache
+- `XC_PREFETCH`: Number of blocks to prefetch from a file at once. 
        This is a value of how aggressive the cache is to request portions of a file. Set to `0` to disable
 
 ### Optimizing Stashcache ###
+
+#### Network Optimization ####
+
+For caches that are connected to NIC's over `40Gbps` we recommend to disable the virtualized network and "bind" the container to the host network:
+
+```console
+user@host $ docker run --rm  \
+             --network="host" \
+             --volume <HOST PARTITION>:/cache \
+             --env-file=/opt/xcache/.env \
+             opensciencegrid/stash-cache:fresh
+```
 
 #### Memory Optimization ####
 
