@@ -52,8 +52,7 @@ To configure which virtual organizations and users are allowed to use your GridF
 ### Set port ranges
 As mentioned above, GridFTP uses port 2811 for control communication as well as a range of ports for the data transfer.
 This range of ports has to defined by setting the variable `GLOBUS_TCP_PORT_RANGE` within the configuration file:
-`/etc/sysconfig/globus-gridftp-server`.
-As it is shown in the next example. This range has to be open within your firewall for inboud communication.
+`/etc/sysconfig/globus-gridftp-server` as it is shown in the next example. This range has to be open within your firewall for inboud communication.
 
     :::file
     $GLOBUS_TCP_PORT_RANGE 50000,51000
@@ -82,8 +81,8 @@ The GridFTP service can be validated by using `globus-url-copy`, you can get thi
 
 You will need to run `grid-proxy-init` or `voms-proxy-init` in order to get a valid user proxy in order to get
 authenticated in the GridFTP server.
-Make sure that the your proxy has a VO extension of a VO that is allowed in the GridFTP Server, this is, it is listed
-in the file `/usr/share/osg/voms-mapfile-default` and that this VO has a unix account on the server.
+Make sure that the your proxy has a VO extension of a VO that is allowed in the GridFTP Server, i.e. it is listed
+in the file `/usr/share/osg/voms-mapfile-default` and it has a unix account on the server.
 
 ```console
 voms-proxy-init -voms cms
