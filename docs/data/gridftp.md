@@ -4,13 +4,13 @@ Installing and Maintaining a GridFTP Server
 About This Guide
 ----------------
 
-This page explains how to install the stand-alone Globus GridFTP server.
+This page explains how to install the stand-alone Globus GridFTP server which is an extension of the File Transfer Protocol (FTP) for grid computing. The aim of GridFTP is to provide a more reliable and high performance file transfer.
 
-The GridFTP package contains components necessary to set up a stand-alone gsiftp server and tools used to monitor and report its performance. A stand-alone GridFTP server might be used under the following circumstances:
+The osg-gridftp package contains components necessary to set up a stand-alone GridFTP server and tools used to monitor and report its performance. A stand-alone GridFTP server might be used under the following circumstances:
 
 -   You are serving VOs that use storage heavily (CMS, ATLAS, CDF, and D0) and your site has more than 250 cores
 -   Your site will be managing more than 50 TB of disk space
--   A simple front-end to a filesystem allowing access over WAN - for example NFS.
+-   You want a simple front-end to a filesystem allowing access over WAN - for example NFS.
 
 !!! note
     This document is for a standalone GridFTP server on top of POSIX storage.  We have two specialized documents
@@ -29,7 +29,7 @@ Before starting the installation process you will need to fulfill these prerequi
 -   Obtain root access to the host
 -   Prepare [the required Yum repositories](/common/yum.md)
 -   Install [CA certificates](/common/ca.md)
--   Service certificate: The GridFTP service uses a host certificate at `/etc/grid-security/hostcert.pem` and an accompanying key at `/etc/grid-security/hostkey.pem`
+-   Certificate: The GridFTP service uses a host certificate at `/etc/grid-security/hostcert.pem` and an accompanying key at `/etc/grid-security/hostkey.pem`
 -   Network ports: GridFTP listens on TCP port 2811 and the list of ports configured by the `GLOBUS_TCP_SOURCE_RANGE` environment variable.
 
 Installing GridFTP
@@ -49,10 +49,69 @@ Configuring GridFTP
 To configure which virtual organizations and users are allowed to use your GridFTP server, follow the instructions in
 [the LCMAPS VOMS plugin document](/security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin).
 
+### Set port ranges
+As mentioned above, GridFTP uses port 2811 for control communication as well as a range of ports for the data transfer.
+This range of ports has to defined by setting the variable `GLOBUS_TCP_PORT_RANGE` within the configuration file:
+`/etc/sysconfig/globus-gridftp-server`.
+As it is shown in the next example. This range has to be open within your firewall for inboud communication.
+
+    :::file
+    $GLOBUS_TCP_PORT_RANGE 50000,51000
+
+
+Starting the service
+------------------
+Once you have finished configuring the service and have set the port range, it is time to start the service.
+
+for CentOS 7:
+
+```console
+systemctl start globus-gridftp-server
+```
+
+for CentOS 6:
+```console
+service globus-gridftp-server start
+```
+
+Validating GridFTP
+------------------
+
+The GridFTP service can be validated by using `globus-url-copy`, you can get this tool by installing the package
+```globus-gass-copy-progs```
+
+You will need to run `grid-proxy-init` or `voms-proxy-init` in order to get a valid user proxy in order to get
+authenticated in the GridFTP server.
+Make sure that the your proxy has a VO extension of a VO that is allowed in the GridFTP Server, this is, it is listed
+in the file `/usr/share/osg/voms-mapfile-default` and that this VO has a unix account on the server.
+
+```console
+voms-proxy-init -voms cms
+```
+Having created a valid proxy, the result of the following command should be to have the file "zero.source", which
+exists on /tmp in the machine where you are executing the command into the GridFTP server on /tmp/zero
+
+```console
+root@host # globus-url-copy file:///tmp/zero.source gsiftp://yourhost.yourdomain/tmp/zero
+root@host # echo $?
+0
+```
+
+To verify that the authentication is working, we could remove our proxy `voms-proxy-destroy` and execute the same
+command again, this time it should fail. Keep in mind that when invoked as root, `globus-url-copy` will attempt to use
+the host certificate instead of your user certificate, which could produce confusing results.
+
+
+
+Monitoring
+-------------------
+
 ### Enabling GridFTP transfer probe
 
-The Gratia probe requires the file `user-vo-map` to exist and be up to date.
-Assuming you installed GridFTP using the `osg-se-hadoop-gridftp` rpm, the Gratia Transfer Probe will already be installed.
+The OSG monitoring of GridFTP is carried out by the GridFTP Gratia Probe which is installed by the package:
+`gratia-probe-gridftp-transfer`
+Assuming you installed GridFTP using the `osg-gridftp` or `osg-se-hadoop-gridftp` rpm, this package will
+already be installed.
 
 Here are the most relevant file and directory locations:
 
@@ -71,7 +130,7 @@ This is usually one XML node spread over multiple lines. Note that comments (\#)
 
 | Attribute                       | Needs Editing                                                                              | Value                                                                                                                                      |
 |---------------------------------|--------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| ProbeName                       | Maybe                                                                                      | This should be set to "gridftp-transfer:<hostname>", where <hostname> is the fully-qualified domain name of your gridftp host. |
+| ProbeName                       | Maybe                                                                                      | This should be set to "gridftp-transfer:`<HOSTNAME>`", where `<HOSTNAME>` is the fully-qualified domain name of your gridftp host. |
 | CollectorHost                   | Maybe                                                                                      | Set to the hostname and port of the central collector. By default it sends to the OSG collector. See below.                                |
 | SiteName                        | Yes                                                                                        | Set to the resource group name of your site as registered in OIM.                                                                          |
 | GridftpLogDir                   | Yes                                                                                        | Set to /var/log, or wherever your current gridftp logs are located                                                                         |
@@ -83,22 +142,38 @@ This is usually one XML node spread over multiple lines. Note that comments (\#)
 
 #### Selecting a collector host ####
 
-The collector is the central server which logs the GridFTP transfers into a database. There are usually three options:
+The collector is the central server which logs the GridFTP transfers into a database. There are usually two options:
 
 1. **OSG Transfer Collector**: This is the primary collector for transfers in the OSG. Use `CollectorHost="gratia-osg-prod.opensciencegrid.org:80"`.
 1. **OSG-ITB Transfer Collector**: This is the test collector for transfers in the OSG. Use `CollectorHost=" gratia-osg-itb.opensciencegrid.org:80"`.
 
-#### Validation ####
+### Starting the service
+Once the configuration file is edited, as described above, we will proceed to start the service.
+
+for CentOS 7:
+
+```console
+systemctl start gratia-probes-cron
+```
+
+for CentOS 6:
+```console
+service gratia-probes-cron start
+```
+
+### Validation
 
 Run the Gratia probe once by hand to check for functionality:
 
 ``` console
-root@host # /usr/share/gratia/gridftp-transfer/GridftpTransferProbeDriver
+root@host # /usr/share/gratia/gridftp-transfer/gridftp-transfer_meter
 ```
 
 Look for any abnormal termination and report it if it is a non-trivial site issue. Look in the log files in `/var/log/gratia/<date>.log` and make sure there are no error messages printed.
 
-### Optional configuration
+Optional configuration
+-------------------
+
 
 #### Setting transfer limits for GridFTP-HDFS
 
@@ -174,19 +249,6 @@ In addition to the GridFTP service itself, there are a number of supporting serv
 | GridFTP   | `globus-gridftp-server`               |                                                                                        |
 
 
-Validating GridFTP
-------------------
-
-The GridFTP service can be validated by using globus-url-copy. You will need to run `grid-proxy-init` or `voms-proxy-init` in order to get a valid user proxy in order to communicate with the GridFTP server.
-
-```console
-root@host # globus-url-copy file:///tmp/zero.source gsiftp://yourhost.yourdomain/tmp/zero
-root@host # echo $?
-0
-```
-
-Run the validation as an unprivileged user; when invoked as root, `globus-url-copy` will attempt to use the host certificate instead of your user certificate, with confusing results.
-
 Getting Help
 ------------
 
@@ -221,7 +283,7 @@ Reference
 
 [Instructions](/security/host-certs.md) to request a service certificate.
 
-You will also need a copy of CA certificates.
+Make sure you have installed the [CA certificates](/common/ca.md)
 
 ### Users
 
