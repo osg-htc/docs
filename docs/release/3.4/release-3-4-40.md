@@ -1,8 +1,20 @@
 OSG Software Release 3.4.40
 ===========================
 
-**Release Date**: 2019-11-26
+**Release Date**: 2019-11-26    
 **Supported OS Versions:** EL7, EL6
+
+!!!tip "Want faster access to production-ready software?"
+    OSG 3.5 and 3.4 offer a rolling release repository where packages are added as soon as they pass acceptance testing.
+    To install packages from this repository, enable `[osg-rolling]` in `/etc/yum.repos.d/osg-rolling.repo`:
+
+        [osg-rolling]
+        ...
+        enabled=1
+
+    Or for one-time installations, append the following to your `yum` command:
+
+        --enablerepo=osg-rolling
 
 Summary of changes
 ------------------
@@ -16,18 +28,6 @@ This release contains:
 -   osg-release 3.4-9: Updated development server host name to `koji.opensciencegrid.org`
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.40%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
-
-!!!tip "Want faster access to production-ready software?"
-    OSG 3.5 and 3.4 offer a rolling release repository where packages are added as soon as they pass acceptance testing.
-    To install packages from this repository, enable `[osg-rolling]` in `/etc/yum.repos.d/osg-rolling.repo`:
-
-        [osg-rolling]
-        ...
-        enabled=1
-
-    Or for one-time installations, append the following to your `yum` command:
-
-        --enablerepo=osg-rolling
 
 Containers
 ----------

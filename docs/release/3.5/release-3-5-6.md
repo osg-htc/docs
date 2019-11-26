@@ -1,23 +1,8 @@
 OSG Software Release 3.5.6
 ===========================
 
-**Release Date:** 2019-11-26
+**Release Date:** 2019-11-26    
 **Supported OS Versions:** EL7
-
-Summary of Changes
-------------------
-
-This release contains:
-
--   XCache 1.2
-    -   Added support for multi-node caches
-    -   Fixed problem with StashCache working with authenticated origins
--   [CCTools 7.0.21](https://groups.google.com/forum/#!topic/cctools-nd/BTaG_o_qeSg): Minor bug fix release
--   osg-release 3.5-3: Updated development server host name to `koji.opensciencegrid.org`
-
-These
-[JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.5.6%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC)
-were addressed in this release.
 
 !!!tip "Want faster access to production-ready software?"
     OSG 3.5 and 3.4 offer a rolling release repository where packages are added as soon as they pass acceptance testing.
@@ -31,8 +16,26 @@ were addressed in this release.
 
         --enablerepo=osg-rolling
 
+Summary of Changes
+------------------
+
+This release contains:
+
+-   XCache 1.2:
+    -   Added support for multi-node caches
+    -   Fixed problem with StashCache working with authenticated origins
+-   [CCTools 7.0.21](https://groups.google.com/forum/#!topic/cctools-nd/BTaG_o_qeSg): Minor bug fix release
+-   osg-release 3.5-3: Updated development server host name to `koji.opensciencegrid.org`
+
+These
+[JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.5.6%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC)
+were addressed in this release.
+
 Containers
 ----------
+
+The [Stash Cache](https://hub.docker.com/r/opensciencegrid/stash-cache/) container has been tagged as `stable` in accordance with our
+[Container Release Policy](https://opensciencegrid.org/technology/policy/container-release/)
 
 The [Worker node containers](/worker-node/using-wn-containers/) have been updated to this release.
 
