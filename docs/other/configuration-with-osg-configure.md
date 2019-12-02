@@ -478,10 +478,8 @@ This section is contained in `/etc/osg/config.d/10-storage.ini` which is provide
     For example, if each of your worker nodes has a different location for its scratch directory specified by
     `LOCAL_SCRATCH_DIR`, set the following configuration:
 
-    ```
-    [Storage]
-    worker_node_temp = $LOCAL_SCRATCH_DIR
-    ```
+        [Storage]
+        worker_node_temp = $LOCAL_SCRATCH_DIR
 
 **grid_dir**:<br/>
 If you have installed the worker node client via RPM (the normal case) it
