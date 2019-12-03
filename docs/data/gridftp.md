@@ -79,7 +79,7 @@ service globus-gridftp-server start
 Validating GridFTP
 ------------------
 
-The GridFTP service can be validated by using `globus-url-copy`, you can get this tool by installing the package
+The GridFTP service can be validated through `globus-url-copy`, which is available via the `globus-gass-copy-progs` package:
 ```globus-gass-copy-progs```
 
 You will need to run `grid-proxy-init` or `voms-proxy-init` in order to get a valid user proxy in order to get
