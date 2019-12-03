@@ -112,7 +112,7 @@ Monitoring
 
 The OSG monitoring of GridFTP is carried out by the GridFTP Gratia Probe which is installed by the package:
 `gratia-probe-gridftp-transfer`
-Assuming you installed GridFTP using the `osg-gridftp` or `osg-se-hadoop-gridftp` rpm, this package will
+Assuming you installed GridFTP using the `osg-gridftp` or `osg-se-hadoop-gridftp` RPM, this package will
 already be installed.
 
 Here are the most relevant file and directory locations:
