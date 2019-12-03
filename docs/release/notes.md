@@ -41,6 +41,7 @@ To update to the OSG 3.5 series, please consult the page on
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.5.6](/release/3.5/release-3-5-6)       | 2019-11-26 | XCache 1.2, CCTools 7.0.21, osg-release 3.5-3                           |
 | [3.5.5](/release/3.5/release-3-5-5)       | 2019-11-14 | High Priority Release: Frontier Squid 4.9, XRootD 4.11.0, BLAHP 1.81.45, scitokens-credmon 0.4.2, scitokens-cpp 0.3.5 |
 | [3.5.4](/release/3.5/release-3-5-4)       | 2019-10-23 | HTCondor 8.8.5-1.7, StashCache-Client 5.5.0, IGTF 1.102, VO Package v97 |
 | [3.5.3](/release/3.5/release-3-5-3)       | 2019-10-17 | GlideinWMS 3.6, oidc-agent 3.2.6, scitokens-cpp 0.3.4, XRootD 4.10.1, HTCondor 8.8.5, osg-configure 3.1.0, gratia-probe 1.20.11; Upcoming: HTCondor 8.9.3 |
@@ -59,6 +60,7 @@ regular support will end in **February 2020** and critical bug/security support 
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.40](/release/3.4/release-3-4-40)     | 2019-11-26 | XCache 1.2, CCTools 7.0.21, osg-release 3.4-9                           |
 | [3.4.39](/release/3.4/release-3-4-39)     | 2019-11-14 | High Priority Release: Frontier Squid 4.9, XRootD 4.11.0, BLAHP 1.81.45, scitokens-credmon 0.4.2, scitokens-cpp 0.3.5, Singularity 3.4.2 |
 | [3.4.38](/release/3.4/release-3-4-38)     | 2019-10-23 | StashCache-Client 5.5.0, IGTF 1.102, VO Package v97                     |
 | [3.4.37](/release/3.4/release-3-4-37)     | 2019-10-17 | GlideinWMS 3.6, oidc-agent 3.2.6, scitokens-cpp 0.3.4, XRootD 4.10.1, HTCondor 8.8.5, osg-configure 2.5.0, gratia-probe 1.20.11 |
