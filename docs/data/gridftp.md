@@ -61,6 +61,71 @@ This range has to be open within your firewall for inbound communication.
     $GLOBUS_TCP_PORT_RANGE 50000,51000
 
 
+### Optional configuration
+
+#### Setting transfer limits for GridFTP-HDFS
+
+To set a limit on the total or per-user number of transfers, create `/etc/sysconfig/gridftp-hdfs` and set the following configuration:
+
+    :::file hl_lines="3"
+    export GRIDFTP_TRANSFER_LIMIT="80"
+    export GRIDFTP_DEFAULT_USER_TRANSFER_LIMIT="50"
+    export GRIDFTP_<UNIX USERNAME>_USER_TRANSFER_LIMIT="40"
+
+In the above configuration:
+
+- There would be no more than 80 transfers going at a time, across all users.
+- By default, any single user can have no more than 50 transfers at a time.
+- The `<UNIX USERNAME>` user has a more stringent limit of 40 transfers at a time.
+
+
+!!!note
+    This limits are per gridftp server. If you have several gridftp servers you may want to have this limits divided by the number of gridftp servers at your site.
+
+#### Modifying the environment
+
+Environment variables are stored in `/etc/sysconfig/globus-gridftp-server` which is sourced on service startup.  If you want to change LCMAPS log levels, or GridFTP port ranges, you can edit them there.
+
+```shell
+#Uncomment and modify for firewalls
+#export GLOBUS_TCP_PORT_RANGE=min,max
+#export GLOBUS_TCP_SOURCE_RANGE=min,max
+```
+
+Note that the variables `GLOBUS_TCP_PORT_RANGE` and `GLOBUS_TCP_SOURCE_RANGE` can be set here to allow GridFTP to navigate around firewall rules (these affect the inbound and outbound ports, respectively).
+
+To troubleshoot LCMAPS authorization, you can add the following to `/etc/sysconfig/globus-gridftp-server` and choose a higher debug level:
+
+``` file
+# level 0: no messages, 1: errors, 2: also warnings, 3: also notices,
+#  4: also info, 5: maximum debug
+LCMAPS_DEBUG_LEVEL=2
+```
+
+Output goes to `/var/log/messages` by default. Do not set logging to 5 on any production systems as that may cause systems to slow down significantly or become unresponsive.
+
+#### Configuring a multi-homed server
+
+The GridFTP uses control connections, data connections and IPC connections. By default it listens in all interfaces but this can be changed by editing the configuration file `/etc/gridftp.conf`.
+
+To use a single interface you can set `hostname` to the Hostname or IP address to use:
+
+```text
+hostname IP-TO-USE
+```
+
+You can also set separately the `control_interface`, `data_interface` and `ipc_interface`.  On systems that have multiple network interfaces, you may want to associate data transfers with the fastest possible NIC available. This can be done in the GridFTP server by setting `data_interface`:
+
+```text
+control_interface IP-TO-USE
+data_interface IP-TO-USE
+ipc_interface IP-TO-USE
+```
+
+For more options available for the GridFTP server, read the comments in the configuration file (`/etc/gridftp.conf`) or
+see the [GridFTP manual](https://gridcf.org/gct-docs/latest/gridftp/admin/index.html).
+
+
 Starting the service
 ------------------
 Once you have finished configuring the service and have set the port range, it is time to start the service.
@@ -79,8 +144,7 @@ service globus-gridftp-server start
 Validating GridFTP
 ------------------
 
-The GridFTP service can be validated through `globus-url-copy`, which is available via the `globus-gass-copy-progs` package:
-```globus-gass-copy-progs```
+The GridFTP service can be validated through `globus-url-copy`, which is available via the `globus-gass-copy-progs` package
 
 You will need to run `grid-proxy-init` or `voms-proxy-init` in order to get a valid user proxy in order to get
 authenticated in the GridFTP server.
@@ -172,72 +236,6 @@ root@host # /usr/share/gratia/gridftp-transfer/gridftp-transfer_meter
 ```
 
 Look for any abnormal termination and report it if it is a non-trivial site issue. Look in the log files in `/var/log/gratia/<date>.log` and make sure there are no error messages printed.
-
-Optional configuration
--------------------
-
-
-#### Setting transfer limits for GridFTP-HDFS
-
-To set a limit on the total or per-user number of transfers, create `/etc/sysconfig/gridftp-hdfs` and set the following configuration:
-
-    :::file hl_lines="3"
-    export GRIDFTP_TRANSFER_LIMIT="80"
-    export GRIDFTP_DEFAULT_USER_TRANSFER_LIMIT="50"
-    export GRIDFTP_<UNIX USERNAME>_USER_TRANSFER_LIMIT="40"
-
-In the above configuration:
-
-- There would be no more than 80 transfers going at a time, across all users.
-- By default, any single user can have no more than 50 transfers at a time.
-- The `<UNIX USERNAME>` user has a more stringent limit of 40 transfers at a time.
-
-
-!!!note
-    This limits are per gridftp server. If you have several gridftp servers you may want to have this limits divided by the number of gridftp servers at your site.
-
-#### Modifying the environment
-
-Environment variables are stored in `/etc/sysconfig/globus-gridftp-server` which is sourced on service startup.  If you want to change LCMAPS log levels, or GridFTP port ranges, you can edit them there.
-
-```shell
-#Uncomment and modify for firewalls
-#export GLOBUS_TCP_PORT_RANGE=min,max
-#export GLOBUS_TCP_SOURCE_RANGE=min,max
-```
-
-Note that the variables `GLOBUS_TCP_PORT_RANGE` and `GLOBUS_TCP_SOURCE_RANGE` can be set here to allow GridFTP to navigate around firewall rules (these affect the inbound and outbound ports, respectively).
-
-To troubleshoot LCMAPS authorization, you can add the following to `/etc/sysconfig/globus-gridftp-server` and choose a higher debug level:
-
-``` file
-# level 0: no messages, 1: errors, 2: also warnings, 3: also notices,
-#  4: also info, 5: maximum debug
-LCMAPS_DEBUG_LEVEL=2
-```
-
-Output goes to `/var/log/messages` by default. Do not set logging to 5 on any production systems as that may cause systems to slow down significantly or become unresponsive.
-
-#### Configuring a multi-homed server
-
-The GridFTP uses control connections, data connections and IPC connections. By default it listens in all interfaces but this can be changed by editing the configuration file `/etc/gridftp.conf`.
-
-To use a single interface you can set `hostname` to the Hostname or IP address to use:
-
-```text
-hostname IP-TO-USE
-```
-
-You can also set separately the `control_interface`, `data_interface` and `ipc_interface`.  On systems that have multiple network interfaces, you may want to associate data transfers with the fastest possible NIC available. This can be done in the GridFTP server by setting `data_interface`:
-
-```text
-control_interface IP-TO-USE
-data_interface IP-TO-USE
-ipc_interface IP-TO-USE
-```
-
-For more options available for the GridFTP server, read the comments in the configuration file (`/etc/gridftp.conf`) or
-see the [GridFTP manual](https://gridcf.org/gct-docs/latest/gridftp/admin/index.html).
 
 Managing GridFTP
 ----------------
