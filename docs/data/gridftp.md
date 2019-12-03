@@ -4,7 +4,8 @@ Installing and Maintaining a GridFTP Server
 About This Guide
 ----------------
 
-This page explains how to install the stand-alone Globus GridFTP server which is an extension of the File Transfer Protocol (FTP) for grid computing. The aim of GridFTP is to provide a more reliable and high performance file transfer.
+This page explains how to install the stand-alone Globus GridFTP server which is an extension of the File Transfer Protocol (FTP) for grid computing.
+The aim of GridFTP is to provide a more reliable and high performance file transfer.
 
 The osg-gridftp package contains components necessary to set up a stand-alone GridFTP server and tools used to monitor and report its performance. A stand-alone GridFTP server might be used under the following circumstances:
 
