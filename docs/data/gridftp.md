@@ -54,7 +54,8 @@ To configure which virtual organizations and users are allowed to use your GridF
 ### Set port ranges
 As mentioned above, GridFTP uses port 2811 for control communication as well as a range of ports for the data transfer.
 This range of ports has to defined by setting the variable `GLOBUS_TCP_PORT_RANGE` within the configuration file:
-`/etc/sysconfig/globus-gridftp-server` as it is shown in the next example. This range has to be open within your firewall for inboud communication.
+`/etc/sysconfig/globus-gridftp-server` as it is shown in the next example.
+This range has to be open within your firewall for inbound communication.
 
     :::file
     $GLOBUS_TCP_PORT_RANGE 50000,51000
