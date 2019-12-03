@@ -3682,8 +3682,11 @@ description and <a href="../../site-planning">Site Planning</a> discussions for 
 <p>The above variables may be set to an environment variable that is set on your site's worker nodes.
 For example, if each of your worker nodes has a different location for its scratch directory specified by
 <code>LOCAL_SCRATCH_DIR</code>, set the following configuration:</p>
-<p><code>[Storage]
-worker_node_temp = $LOCAL_SCRATCH_DIR</code></p>
+<div class="codehilite"><pre><span></span>[Storage]
+worker_node_temp = $LOCAL_SCRATCH_DIR
+</pre></div>
+
+
 </div>
 <p><strong>grid_dir</strong>:<br/>
 If you have installed the worker node client via RPM (the normal case) it
