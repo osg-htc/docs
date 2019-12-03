@@ -30,7 +30,7 @@ Before starting the installation process you will need to fulfill these prerequi
 -   Obtain root access to the host
 -   Prepare [the required Yum repositories](/common/yum.md)
 -   Install [CA certificates](/common/ca.md)
--   Certificate: The GridFTP service uses a host certificate at `/etc/grid-security/hostcert.pem` and an accompanying key at `/etc/grid-security/hostkey.pem`
+-   SSL Certificate: The GridFTP service uses a host certificate at `/etc/grid-security/hostcert.pem` and an accompanying key at `/etc/grid-security/hostkey.pem`
 -   Network ports: GridFTP listens on TCP port 2811 and the list of ports configured by the `GLOBUS_TCP_SOURCE_RANGE` environment variable.
 
 Installing GridFTP
