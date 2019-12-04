@@ -63,7 +63,7 @@ Administrators may provide additional configuration by placing files in `/etc/xr
 of the form `/etc/xrootd/config.d/1*.cfg` (for directives that need to be processed BEFORE the OSG configuration)
 or `/etc/xrootd/config.d/9*.cfg` (for directives that are processed AFTER the OSG configuration).
 
-You _must_ configure every variable in `/etc/xrootd/10-common-site-local.cfg` and `/etc/xrootd/10-origin-site-local.cfg`.
+You _must_ configure every variable in `/etc/xrootd/config.d/10-common-site-local.cfg` and `/etc/xrootd/config.d/10-origin-site-local.cfg`.
 
 The mandatory variables to configure are:
 
