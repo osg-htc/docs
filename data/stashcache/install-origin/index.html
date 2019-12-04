@@ -2564,7 +2564,7 @@ and owned by the <code>xrootd:xrootd</code> user.</p>
 Administrators may provide additional configuration by placing files in <code>/etc/xrootd/config.d</code>
 of the form <code>/etc/xrootd/config.d/1*.cfg</code> (for directives that need to be processed BEFORE the OSG configuration)
 or <code>/etc/xrootd/config.d/9*.cfg</code> (for directives that are processed AFTER the OSG configuration).</p>
-<p>You <em>must</em> configure every variable in <code>/etc/xrootd/10-common-site-local.cfg</code> and <code>/etc/xrootd/10-origin-site-local.cfg</code>.</p>
+<p>You <em>must</em> configure every variable in <code>/etc/xrootd/config.d/10-common-site-local.cfg</code> and <code>/etc/xrootd/config.d/10-origin-site-local.cfg</code>.</p>
 <p>The mandatory variables to configure are:</p>
 <table>
 <thead>
