@@ -104,7 +104,7 @@ root@host $ systemctl start docker.stash-cache
 ```
 
 !!! warning
-    You must [register](/stashcache/install-cache/#registering-the-cache) the cache before considering it a production service.
+    You must [register](/data/stashcache/install-cache/#registering-the-cache) the cache before considering it a production service.
 
 
 
