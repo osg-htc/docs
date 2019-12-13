@@ -32,7 +32,7 @@ To update to the OSG 3.5 release series, please consult the page on
 In addition to the packages that were carried over from [OSG 3.4.33](/release/3.4/release-3-4-33#),
 this release contains the following package updates:
 
--   HTCondor 8.8.4: The current HTCondor [stable release](https://htcondor.readthedocs.io/en/v8_8_4/version-history/stable-release-series-88.html).
+-   HTCondor 8.8.4: The current HTCondor [stable release](https://htcondor.readthedocs.io/en/stable/version-history/stable-release-series-88.html#version-8-8-4).
     See the [manual update instructions](/release/release_series#updating-to-htcondor-88x_1) before
     updating to this version.
     Some highlights from the 8.8 release series include:
@@ -74,7 +74,7 @@ this release contains the following package updates:
 -   OSG System Profiler 1.4.3: Remove collection of obsolete information
     See the known issue with this version [below](#known-issues).
 -   HTCondor 8.9.2 (upcoming): The current HTCondor
-    [development release](https://htcondor.readthedocs.io/en/v8_9_2/version-history/development-release-series-89.html).
+    [development release](https://htcondor.readthedocs.io/en/latest/version-history/development-release-series-89.html#version-8-9-2).
     Some highlights from the 8.9 release series include:
     -   New TOKEN authentication method enables fine-grained authorization control
     -   All HTCondor daemons run under a condor\_master share a security session
