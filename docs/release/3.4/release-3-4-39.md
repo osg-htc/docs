@@ -10,8 +10,8 @@ Summary of changes
 This release contains:
 
 -   [Frontier-Squid 4.9-2.1](http://frontier.cern.ch/dist/rpms/frontier-squidRELEASE_NOTES): [Fixed security vulnerabilities](https://opensciencegrid.org/security/vulns/OSG-SEC-2019-11-11-Vulnerability-in-Squid-UPDATE/)
-    -   [Heap Overflow issue in URN processing](http://www.squid-cache.org/Advisories/SQUID-2019_7.txt)
-    -   [Multiple issues in URI processing](http://www.squid-cache.org/Advisories/SQUID-2019_8.txt)
+    -   Heap Overflow issue in URN processing
+    -   Multiple issues in URI processing
 -   [XRootD 4.11.0](https://github.com/xrootd/xrootd/blob/v4.11.0/docs/ReleaseNotes.txt): New feature release
 -   [BLAHP 1.18.45](https://github.com/htcondor/BLAH/releases/tag/v1.18.44)
     -   Add SystemCpu accounting when Slurm jobs complete
