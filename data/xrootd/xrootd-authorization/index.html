@@ -2458,7 +2458,7 @@ only by the xrootd user, optionally readable by others.</p>
 <a href="http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606592"><code>acc.authdb</code></a> parameter in your xrootd config.)</p>
 <p>Here is an example <code>/etc/xrootd/auth_file</code> :</p>
 <div class="codehilite"><pre><span></span># This means that all the users have read access to the datasets, _except_ under /private
-<span class="hll">u * -rl &lt;STORAGE PATH&gt;/private /data/xrootdfs rl
+<span class="hll">u * &lt;STORAGE PATH&gt;/private -rl &lt;STORAGE PATH&gt; rl
 </span>
 # Or the following, without a restricted /private dir
 <span class="hll"># u * &lt;STORAGE PATH&gt; rl
