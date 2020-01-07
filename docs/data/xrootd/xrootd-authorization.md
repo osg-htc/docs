@@ -28,7 +28,7 @@ Here is an example `/etc/xrootd/auth_file` :
 
 ```file hl_lines="2 5 8 13 16"
 # This means that all the users have read access to the datasets, _except_ under /private
-u * -rl <STORAGE PATH>/private /data/xrootdfs rl
+u * <STORAGE PATH>/private -rl <STORAGE PATH> rl
 
 # Or the following, without a restricted /private dir
 # u * <STORAGE PATH> rl
