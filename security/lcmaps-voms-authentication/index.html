@@ -3214,13 +3214,13 @@ VOMS authentication as well as common LCMAPS VOMS authentication issues.</p>
 </table>
 </li>
 <li>
-<p>Set <code>--loglevel=5</code> under the <code>-authzfunparms</code> of the <code>sec.protocol /usr/lib64 gsi</code> line. For example:</p>
+<p>Set <code>loglevel=5</code> under the <code>-authzfunparms</code> of the <code>sec.protocol /usr/lib64 gsi</code> line. For example:</p>
 <div class="codehilite"><pre><span></span>sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
             -cert:/etc/grid-security/xrootd/xrootdcert.pem \
             -key:/etc/grid-security/xrootd/xrootdkey.pem \
             -crl:1 \
             -authzfun:libXrdLcmaps.so \
-<span class="hll">            -authzfunparms:--lcmapscfg=/etc/xrootd/lcmaps.cfg,--loglevel=5,--policy=authorize_only \
+<span class="hll">            -authzfunparms:lcmapscfg=/etc/xrootd/lcmaps.cfg,loglevel=5,policy=authorize_only \
 </span>            -gmapopt:10 -gmapto:0
 </pre></div>
 
