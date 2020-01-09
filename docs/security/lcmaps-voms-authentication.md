@@ -363,7 +363,7 @@ If you are troubleshooting an XRootD host, follow these instructions to raise th
     | Standalone mode                 | `/etc/xrootd/xrootd-standalone.cfg` |
     | Clustered mode                  | `/etc/xrootd/xrootd-clustered.cfg`  |
 
-1. Set `--loglevel=5` under the `-authzfunparms` of the `sec.protocol /usr/lib64 gsi` line. For example:
+1. Set `loglevel=5` under the `-authzfunparms` of the `sec.protocol /usr/lib64 gsi` line. For example:
 
         :::file hl_lines="6"
         sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
@@ -371,7 +371,7 @@ If you are troubleshooting an XRootD host, follow these instructions to raise th
                     -key:/etc/grid-security/xrootd/xrootdkey.pem \
                     -crl:1 \
                     -authzfun:libXrdLcmaps.so \
-                    -authzfunparms:--lcmapscfg=/etc/xrootd/lcmaps.cfg,--loglevel=5,--policy=authorize_only \
+                    -authzfunparms:lcmapscfg=/etc/xrootd/lcmaps.cfg,loglevel=5,policy=authorize_only \
                     -gmapopt:10 -gmapto:0
 
 1. Restart the [xrootd](/data/xrootd/install-storage-element#managing-xrootd-services) service
