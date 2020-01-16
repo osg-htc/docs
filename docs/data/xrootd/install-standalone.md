@@ -30,19 +30,28 @@ As with all OSG software installations, there are some one-time (per host) steps
 Installing XRootD
 -----------------
 
-To install XRootD, run the following Yum command:
+To install the XRootD Standalone server, run the following Yum command:
 
 ``` console
-root@xrootd-standalone # yum install xrootd
+root@xrootd-standalone # yum install osg-xrootd-standalone
 ```
 
 Configuring XRootD
 ------------------
 
-To configure XRootD as a standalone server, replace the contents of `/etc/xrootd/xrootd-standalone.cfg` as follows:
+To configure XRootD as a standalone server, you will modify `/etc/xrootd/xrootd-standalone.cfg` and the config files
+under `/etc/xrootd/config.d/` as follows:
 
-1.  Add an `all.export` directive for each directory that you wish to serve via XRootD.
-    For example, to serve the contents of `/store` and `/public`:
+1.  Configure a `rootdir` in `/etc/xrootd/config.d/10-common-site-local.cfg`, to point to the top of the directory
+    hierarchy which you wish to serve via XRootD.
+    For example, to serve `/data`:
+
+        set rootdir = /data
+
+1.  To limit the sub-directories to serve under your configured `rootdir`, comment out the `all.export /` directive in
+    `/etc/xrootd/config.d/90-osg-standalone-paths.cfg`, and add an `all.export` directive for each directory under
+    `rootdir` that you wish to serve via XRootD.
+    For example, to serve the contents of `/data/store` and `/data/public` (with `rootdir` configured to `/data`):
 
         all.export /store/
         all.export /public/
@@ -51,39 +60,16 @@ To configure XRootD as a standalone server, replace the contents of `/etc/xrootd
         The directories specified this way are writable by default.
         Access controls should be managed via [authorization configuration](#configuring-authorization).
 
-1. Add an `all.sitename` directive set to the [resource name](/common/registration/#registering-resources) of your
-   XRootD service.
+1. In `/etc/xrootd/config.d/10-common-site-local.cfg`, add a line to set the `resourcename` variable to the
+   [resource name](/common/registration/#registering-resources) of your XRootD service.
    For example, the XRootD service registered at the
    [FermiGrid site](https://github.com/opensciencegrid/topology/blob/master/topology/Fermi%20National%20Accelerator%20Laboratory/FermiGrid/FNAL_PUBLIC_DCACHE.yaml#L6)
    should set the following configuration:
 
-        all.sitename   Fermilab Public DCache
+        set resourcename = Fermilab Public DCache
 
     !!! note
-        CMS sites should follow CMS policy for `all.sitename`
-
-1.  Append the following configuration to the end of `/etc/xrootd/xrootd-standalone.cfg`
-
-        xrd.port 1094
-        all.role server
-
-        cms.allow host *
-        # Logging verbosity
-        xrootd.trace emsg login stall redirect
-        ofs.trace -all
-        xrd.trace conn
-        cms.trace all
-
-        xrd.report xrd-report.osgstorage.org:9931
-        xrootd.monitor all \
-                       auth \
-                       flush 30s \
-                       window 5s fstat 60 lfn ops xfr 5 \
-                       dest redir fstat info user xrd-report.osgstorage.org:9930 \
-                       dest fstat info user xrd-mon.osgstorage.org:9930
-
-        xrd.network keepalive kaparms 10m,1m,5
-        xrd.timeout idle 60m
+        CMS sites should follow CMS policy for `resourcename`
 
 1.  On EL 6, set the default options to use the standalone configuration in the `/etc/sysconfig/xrootd` file.
 
@@ -98,11 +84,6 @@ To configure XRootD authorization please follow the documentation [here](/data/x
 The following configuration steps are optional and will likely not be required for setting up a small site.
 If you do not need any of the following special configurations, skip to
 [the section on using XRootD](#using-xrootd).
-
-#### Enabling HTTP support
-
-In order to enable XRootD HTTP support please follow the instructions
-[here](/data/xrootd/install-storage-element#optional-enabling-xrootd-over-http)
 
 #### Enabling Hadoop support (EL 7 Only)
 
@@ -213,6 +194,7 @@ root@host # systemctl start xrootd@standalone
 | Service/Process | Configuration File                  | Description               |
 |:----------------|:------------------------------------|:--------------------------|
 | `xrootd`        | `/etc/xrootd/xrootd-standalone.cfg` | Main XRootD configuration |
+|                 | `/etc/xrootd/config.d/`             | Drop-in configuration dir |
 |                 | `/etc/xrootd/auth_file`             | Authorized users file     |
 
 | Service/Process          | Log File                                | Description                                 |

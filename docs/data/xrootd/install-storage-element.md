@@ -38,7 +38,7 @@ An installation of the XRootD server consists of the server itself and its depen
 Install these with Yum:
 
 ``` console
-root@host # yum install xrootd
+root@host # yum install osg-xrootd
 ```
 
 Configuring an XRootD Server
@@ -273,27 +273,17 @@ fermicloud054.fnal.gov complete inventory as of Tue Apr 12 07:38:29 2011 /data/x
 
 XRootD can be accessed using the HTTP protocol. To do that:
 
-1.  Modify `/etc/xrootd/xrootd-clustered.cfg` and add the following lines.
+1. Configure [LCMAPS authorization](/data/xrootd/xrootd-authorization).
+
+1. Uncomment the following line in `/etc/xrootd/config.d/10-xrootd-lcmaps.cfg`:
 
         :::file
-           if exec xrootd
-            xrd.protocol http:1094 libXrdHttp.so
-            http.cadir /etc/grid-security/certificates
-            http.cert /etc/grid-security/xrd/xrdcert.pem
-            http.key /etc/grid-security/xrd/xrdkey.pem
-            http.secxtractor /usr/lib64/libXrdLcmaps.so
-            http.listingdeny yes
-            http.staticpreload http://static/robots.txt /etc/xrootd/robots.txt
-            http.desthttps yes
-           fi
+        set EnableLcmaps = 1
 
-1. Add [LCMAPS authorization](/data/xrootd/xrootd-authorization) configuration to `/etc/xrootd/xrootd-clustered.cfg`.
-
-1.   Create robots.txt. Add file `/etc/xrootd/robots.txt` with these contents:
+1. Additionally, add the following line to the same file:
 
         :::file
-           User-agent: *
-           Disallow: / 
+        set EnableHttp = 1
 
 1.   Testing the configuration
     

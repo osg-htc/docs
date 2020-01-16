@@ -100,28 +100,6 @@ on all data nodes:
 
 1. Configure access rights for mapped users by creating and modifying the XRootD [authorization file](#authorization-file)
 
-1. Modify your XRootD configuration:
-
-    1. Choose the configuration file to edit based on the following table:
-
-        | If you are running XRootD in... | Then modify the following file...   |
-        |:--------------------------------|:------------------------------------|
-        | Standalone mode                 | `/etc/xrootd/xrootd-standalone.cfg` |
-        | Clustered mode                  | `/etc/xrootd/xrootd-clustered.cfg`  |
-
-    1. Add the following lines to the configuration that you chose above:
-
-            xrootd.seclib /usr/lib64/libXrdSec-4.so
-            sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
-                                -cert:/etc/grid-security/xrd/xrdcert.pem \
-                                -key:/etc/grid-security/xrd/xrdkey.pem \
-                                -crl:1 \
-                                -authzfun:libXrdLcmaps.so \
-                                -authzfunparms:lcmapscfg=/etc/lcmaps.db,loglevel=0,policy=authorize_only \
-                                -gmapopt:10 -gmapto:0
-            acc.authdb /etc/xrootd/auth_file
-            ofs.authorize
-
 1. Restart the [relevant services](/data/xrootd/install-standalone/#using-xrootd)
 
 Verifying XRootD Authorization
