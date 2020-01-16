@@ -2553,48 +2553,6 @@ on all data nodes:</p>
 <p>Configure access rights for mapped users by creating and modifying the XRootD <a href="#authorization-file">authorization file</a></p>
 </li>
 <li>
-<p>Modify your XRootD configuration:</p>
-<ol>
-<li>
-<p>Choose the configuration file to edit based on the following table:</p>
-<table>
-<thead>
-<tr>
-<th align="left">If you are running XRootD in...</th>
-<th align="left">Then modify the following file...</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">Standalone mode</td>
-<td align="left"><code>/etc/xrootd/xrootd-standalone.cfg</code></td>
-</tr>
-<tr>
-<td align="left">Clustered mode</td>
-<td align="left"><code>/etc/xrootd/xrootd-clustered.cfg</code></td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>Add the following lines to the configuration that you chose above:</p>
-<div class="codehilite"><pre><span></span>xrootd.seclib /usr/lib64/libXrdSec-4.so
-sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
-                    -cert:/etc/grid-security/xrd/xrdcert.pem \
-                    -key:/etc/grid-security/xrd/xrdkey.pem \
-                    -crl:1 \
-                    -authzfun:libXrdLcmaps.so \
-                    -authzfunparms:lcmapscfg=/etc/lcmaps.db,loglevel=0,policy=authorize_only \
-                    -gmapopt:10 -gmapto:0
-acc.authdb /etc/xrootd/auth_file
-ofs.authorize
-</pre></div>
-
-
-</li>
-</ol>
-</li>
-<li>
 <p>Restart the <a href="../../../data/xrootd/install-standalone/#using-xrootd">relevant services</a></p>
 </li>
 </ol>

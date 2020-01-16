@@ -703,13 +703,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#enabling-http-support" title="Enabling HTTP support" class="md-nav__link">
-    Enabling HTTP support
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#enabling-hadoop-support-el-7-only" title="Enabling Hadoop support (EL 7 Only)" class="md-nav__link">
     Enabling Hadoop support (EL 7 Only)
   </a>
@@ -2528,13 +2521,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#enabling-http-support" title="Enabling HTTP support" class="md-nav__link">
-    Enabling HTTP support
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#enabling-hadoop-support-el-7-only" title="Enabling Hadoop support (EL 7 Only)" class="md-nav__link">
     Enabling Hadoop support (EL 7 Only)
   </a>
@@ -2649,17 +2635,29 @@ exporting an underlying storage system (e.g., <a href="../../install-hadoop/">HD
 <li>Install <a href="../../../common/ca">CA certificates</a></li>
 </ul>
 <h2 id="installing-xrootd">Installing XRootD<a class="headerlink" href="#installing-xrootd" title="Permanent link">&para;</a></h2>
-<p>To install XRootD, run the following Yum command:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@xrootd-standalone #</span> yum install xrootd
+<p>To install the XRootD Standalone server, run the following Yum command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@xrootd-standalone #</span> yum install osg-xrootd-standalone
 </pre></div>
 
 
 <h2 id="configuring-xrootd">Configuring XRootD<a class="headerlink" href="#configuring-xrootd" title="Permanent link">&para;</a></h2>
-<p>To configure XRootD as a standalone server, replace the contents of <code>/etc/xrootd/xrootd-standalone.cfg</code> as follows:</p>
+<p>To configure XRootD as a standalone server, you will modify <code>/etc/xrootd/xrootd-standalone.cfg</code> and the config files
+under <code>/etc/xrootd/config.d/</code> as follows:</p>
 <ol>
 <li>
-<p>Add an <code>all.export</code> directive for each directory that you wish to serve via XRootD.
-    For example, to serve the contents of <code>/store</code> and <code>/public</code>:</p>
+<p>Configure a <code>rootdir</code> in <code>/etc/xrootd/config.d/10-common-site-local.cfg</code>, to point to the top of the directory
+    hierarchy which you wish to serve via XRootD.
+    For example, to serve <code>/data</code>:</p>
+<div class="codehilite"><pre><span></span>set rootdir = /data
+</pre></div>
+
+
+</li>
+<li>
+<p>To limit the sub-directories to serve under your configured <code>rootdir</code>, comment out the <code>all.export /</code> directive in
+    <code>/etc/xrootd/config.d/90-osg-standalone-paths.cfg</code>, and add an <code>all.export</code> directive for each directory under
+    <code>rootdir</code> that you wish to serve via XRootD.
+    For example, to serve the contents of <code>/data/store</code> and <code>/data/public</code> (with <code>rootdir</code> configured to <code>/data</code>):</p>
 <div class="codehilite"><pre><span></span>all.export /store/
 all.export /public/
 </pre></div>
@@ -2672,45 +2670,19 @@ Access controls should be managed via <a href="#configuring-authorization">autho
 </div>
 </li>
 <li>
-<p>Add an <code>all.sitename</code> directive set to the <a href="../../../common/registration/#registering-resources">resource name</a> of your
-   XRootD service.
+<p>In <code>/etc/xrootd/config.d/10-common-site-local.cfg</code>, add a line to set the <code>resourcename</code> variable to the
+   <a href="../../../common/registration/#registering-resources">resource name</a> of your XRootD service.
    For example, the XRootD service registered at the
    <a href="https://github.com/opensciencegrid/topology/blob/master/topology/Fermi%20National%20Accelerator%20Laboratory/FermiGrid/FNAL_PUBLIC_DCACHE.yaml#L6">FermiGrid site</a>
    should set the following configuration:</p>
-<div class="codehilite"><pre><span></span>all.sitename   Fermilab Public DCache
+<div class="codehilite"><pre><span></span>set resourcename = Fermilab Public DCache
 </pre></div>
 
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>CMS sites should follow CMS policy for <code>all.sitename</code></p>
+<p>CMS sites should follow CMS policy for <code>resourcename</code></p>
 </div>
-</li>
-<li>
-<p>Append the following configuration to the end of <code>/etc/xrootd/xrootd-standalone.cfg</code></p>
-<div class="codehilite"><pre><span></span>xrd.port 1094
-all.role server
-
-cms.allow host *
-# Logging verbosity
-xrootd.trace emsg login stall redirect
-ofs.trace -all
-xrd.trace conn
-cms.trace all
-
-xrd.report xrd-report.osgstorage.org:9931
-xrootd.monitor all \
-               auth \
-               flush 30s \
-               window 5s fstat 60 lfn ops xfr 5 \
-               dest redir fstat info user xrd-report.osgstorage.org:9930 \
-               dest fstat info user xrd-mon.osgstorage.org:9930
-
-xrd.network keepalive kaparms 10m,1m,5
-xrd.timeout idle 60m
-</pre></div>
-
-
 </li>
 <li>
 <p>On EL 6, set the default options to use the standalone configuration in the <code>/etc/sysconfig/xrootd</code> file.</p>
@@ -2726,9 +2698,6 @@ xrd.timeout idle 60m
 <p>The following configuration steps are optional and will likely not be required for setting up a small site.
 If you do not need any of the following special configurations, skip to
 <a href="#using-xrootd">the section on using XRootD</a>.</p>
-<h4 id="enabling-http-support">Enabling HTTP support<a class="headerlink" href="#enabling-http-support" title="Permanent link">&para;</a></h4>
-<p>In order to enable XRootD HTTP support please follow the instructions
-<a href="../../../data/xrootd/install-storage-element#optional-enabling-xrootd-over-http">here</a></p>
 <h4 id="enabling-hadoop-support-el-7-only">Enabling Hadoop support (EL 7 Only)<a class="headerlink" href="#enabling-hadoop-support-el-7-only" title="Permanent link">&para;</a></h4>
 <p>For documentation on how to export your Hadoop storage using XRootD please see
 <a href="../../../data/xrootd/install-storage-element#optional-adding-hadoop-support-to-xrootd">this documentation</a></p>
@@ -2887,6 +2856,11 @@ To use the standalone config, you would use:</p>
 <td align="left"><code>xrootd</code></td>
 <td align="left"><code>/etc/xrootd/xrootd-standalone.cfg</code></td>
 <td align="left">Main XRootD configuration</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>/etc/xrootd/config.d/</code></td>
+<td align="left">Drop-in configuration dir</td>
 </tr>
 <tr>
 <td align="left"></td>

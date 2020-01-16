@@ -2871,7 +2871,7 @@ part of a global namespace.</p>
 <h2 id="installing-an-xrootd-server">Installing an XRootD Server<a class="headerlink" href="#installing-an-xrootd-server" title="Permanent link">&para;</a></h2>
 <p>An installation of the XRootD server consists of the server itself and its dependencies. 
 Install these with Yum:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install xrootd
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install osg-xrootd
 </pre></div>
 
 
@@ -3095,28 +3095,18 @@ This section is the procedure for EL 7.</p>
 <p>XRootD can be accessed using the HTTP protocol. To do that:</p>
 <ol>
 <li>
-<p>Modify <code>/etc/xrootd/xrootd-clustered.cfg</code> and add the following lines.</p>
-<div class="codehilite"><pre><span></span>   if exec xrootd
-    xrd.protocol http:1094 libXrdHttp.so
-    http.cadir /etc/grid-security/certificates
-    http.cert /etc/grid-security/xrd/xrdcert.pem
-    http.key /etc/grid-security/xrd/xrdkey.pem
-    http.secxtractor /usr/lib64/libXrdLcmaps.so
-    http.listingdeny yes
-    http.staticpreload http://static/robots.txt /etc/xrootd/robots.txt
-    http.desthttps yes
-   fi
+<p>Configure <a href="../../../data/xrootd/xrootd-authorization">LCMAPS authorization</a>.</p>
+</li>
+<li>
+<p>Uncomment the following line in <code>/etc/xrootd/config.d/10-xrootd-lcmaps.cfg</code>:</p>
+<div class="codehilite"><pre><span></span>set EnableLcmaps = 1
 </pre></div>
 
 
 </li>
 <li>
-<p>Add <a href="../../../data/xrootd/xrootd-authorization">LCMAPS authorization</a> configuration to <code>/etc/xrootd/xrootd-clustered.cfg</code>.</p>
-</li>
-<li>
-<p>Create robots.txt. Add file <code>/etc/xrootd/robots.txt</code> with these contents:</p>
-<div class="codehilite"><pre><span></span>   User-agent: *
-   Disallow: /
+<p>Additionally, add the following line to the same file:</p>
+<div class="codehilite"><pre><span></span>set EnableHttp = 1
 </pre></div>
 
 
