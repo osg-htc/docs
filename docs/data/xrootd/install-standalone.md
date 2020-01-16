@@ -42,8 +42,6 @@ Configuring XRootD
 To configure XRootD as a standalone server, you will modify `/etc/xrootd/xrootd-standalone.cfg` and the config files
 under `/etc/xrootd/config.d/` as follows:
 
-1.  Comment out the `all.export /tmp` directive in `/etc/xrootd/xrootd-standalone.cfg`.
-
 1.  Configure a `rootdir` in `/etc/xrootd/config.d/10-common-site-local.cfg`, to point to the top of the directory
     hierarchy which you wish to serve via XRootD.
     For example, to serve `/data`:
