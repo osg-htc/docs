@@ -126,49 +126,6 @@ For more options available for the GridFTP server, read the comments in the conf
 see the [GridFTP manual](https://gridcf.org/gct-docs/latest/gridftp/admin/index.html).
 
 
-Starting the service
-------------------
-Once you have finished configuring the service and have set the port range, it is time to start the service.
-
-for CentOS 7:
-
-```console
-systemctl start globus-gridftp-server
-```
-
-for CentOS 6:
-```console
-service globus-gridftp-server start
-```
-
-Validating GridFTP
-------------------
-
-The GridFTP service can be validated through `globus-url-copy`, which is available via the `globus-gass-copy-progs` package
-
-You will need to run `grid-proxy-init` or `voms-proxy-init` in order to get a valid user proxy in order to get
-authenticated in the GridFTP server.
-Make sure that the your proxy has a VO extension of a VO that is allowed in the GridFTP Server, i.e. it is listed
-in the file `/usr/share/osg/voms-mapfile-default` and it has a unix account on the server.
-
-```console
-voms-proxy-init -voms cms
-```
-Having created a valid proxy, the result of the following command should be to have the file "zero.source", which
-exists on /tmp in the machine where you are executing the command into the GridFTP server on /tmp/zero
-
-```console
-root@host # globus-url-copy file:///tmp/zero.source gsiftp://yourhost.yourdomain/tmp/zero
-root@host # echo $?
-0
-```
-
-To verify that the authentication is working, we could remove our proxy `voms-proxy-destroy` and execute the same
-command again, this time it should fail. Keep in mind that when invoked as root, `globus-url-copy` will attempt to use
-the host certificate instead of your user certificate, which could produce confusing results.
-
-
-
 Monitoring
 -------------------
 
@@ -213,29 +170,6 @@ The collector is the central server which logs the GridFTP transfers into a data
 1. **OSG Transfer Collector**: This is the primary collector for transfers in the OSG. Use `CollectorHost="gratia-osg-prod.opensciencegrid.org:80"`.
 1. **OSG-ITB Transfer Collector**: This is the test collector for transfers in the OSG. Use `CollectorHost=" gratia-osg-itb.opensciencegrid.org:80"`.
 
-### Starting the service
-Once the configuration file is edited, as described above, we will proceed to start the service.
-
-for CentOS 7:
-
-```console
-systemctl start gratia-probes-cron
-```
-
-for CentOS 6:
-```console
-service gratia-probes-cron start
-```
-
-### Validation
-
-Run the Gratia probe once by hand to check for functionality:
-
-``` console
-root@host # /usr/share/gratia/gridftp-transfer/gridftp-transfer_meter
-```
-
-Look for any abnormal termination and report it if it is a non-trivial site issue. Look in the log files in `/var/log/gratia/<date>.log` and make sure there are no error messages printed.
 
 Managing GridFTP
 ----------------
@@ -247,6 +181,73 @@ In addition to the GridFTP service itself, there are a number of supporting serv
 | Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](/common/ca/#startstop-fetch-crl-a-quick-guide) for more info |
 | Gratia    | `gratia-probes-cron`                  | Accounting software                                                                    |
 | GridFTP   | `globus-gridftp-server`               |                                                                                        |
+
+
+Start the services in the order listed and stop them in reverse order. As a reminder, here are common service commands (all run as `root`):
+
+| To...                                   | On EL6, run the command...                  | On EL7, run the command...                      |
+| :-------------------------------------- | :----------------------------------------   | :--------------------------------------------   |
+| Start a service                         | `service <SERVICE-NAME> start` | `systemctl start <SERVICE-NAME>`   |
+| Stop a  service                         | `service <SERVICE-NAME> stop`  | `systemctl stop <SERVICE-NAME>`    |
+| Enable a service to start on boot       | `chkconfig <SERVICE-NAME> on`  | `systemctl enable <SERVICE-NAME>`  |
+| Disable a service from starting on boot | `chkconfig <SERVICE-NAME> off` | `systemctl disable <SERVICE-NAME>` |
+
+
+Validation
+------------------
+
+### GridFtp
+
+
+1. Acquire a user certificate [opensciencegrid.org/docs/security/user-certs](http://opensciencegrid.org/docs/security/user-certs/)
+1. Find your subject DN
+
+        :::console
+        user@host # openssl x509 -in <CERITIFICATE_FILE.pem> -noout -subject
+
+1. Add your DN to `/etc/grid-security/grid-mapfile` and map it to a non-root user, see:
+[/opensciencegrid.org/docs/security/lcmaps-voms-authentication/#mapping-users]( https://opensciencegrid.org/docs/security/lcmaps-voms-authentication/#mapping-users)
+1. As the non-root user, generate your proxy
+
+        :::console
+        user@host # voms-proxy-init
+
+1. Create a test file to be transfered
+
+        :::console
+        user@host # echo "Hello World!" > /tmp/hello_world
+
+1. Transfer the file we just created
+
+        :::console
+        user@host # globus-url-copy file:///tmp/hello_world gsiftp://yourhost.yourdomain/tmp/hello_world
+
+1. To verify that the authentication is working, we could remove our proxy and execute the last command again, this time it should fail.
+
+        :::console
+        user@host # voms-proxy-destroy
+        user@host # globus-url-copy file:///tmp/hello_world gsiftp://yourhost.yourdomain/tmp/hello_world
+
+!!!note
+     Keep in mind that when invoked as root, `globus-url-copy` will attempt to use the host certificate instead of your user certificate, which could produce confusing results.
+
+
+!!!note
+    if the binary `globus-url-copy` is not available in your system, you can get it by installing `globus-gass-copy-progs`
+    e.g. `yum install globus-gass-copy-progs`
+
+
+### Gratia Probe
+
+1. Run the Gratia probe once by hand to check for functionality:
+
+        :::console
+        root@host # /usr/share/gratia/gridftp-transfer/gridftp-transfer_meter
+
+
+1. Look in the log files in `/var/log/gratia/<date>.log` and make sure there are no error messages printed.
+1. Look for any abnormal termination and report it if it is a non-trivial site issue.
+
 
 
 Getting Help
