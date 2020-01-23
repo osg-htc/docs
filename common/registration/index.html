@@ -1147,6 +1147,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#new-site" title="New site" class="md-nav__link">
+    New site
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#searching-for-resources" title="Searching for resources" class="md-nav__link">
     Searching for resources
   </a>
@@ -2522,6 +2529,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#new-site" title="New site" class="md-nav__link">
+    New site
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#searching-for-resources" title="Searching for resources" class="md-nav__link">
     Searching for resources
   </a>
@@ -2681,7 +2695,7 @@ See the full list of services that should be registered in the OSG topology
 </tr>
 <tr>
 <td>Site</td>
-<td>Smaller than a facility; typically represents an academic department, research group, or a computing center, e.g. <code>CHTC</code> for the Center for High Throughput Computing.</td>
+<td>Smaller than a facility; typically represents a computing center or an academic department, e.g. <code>UW-CHTC</code> for the Center for High Throughput Computing.</td>
 </tr>
 <tr>
 <td>Resource Group</td>
@@ -2696,6 +2710,35 @@ See the full list of services that should be registered in the OSG topology
 <p>OSG resources are stored in the GitHub repository as YAML files under a directory structure that reflects the above
 hierarchy, i.e. <code>topology/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCE GROUP&gt;.yaml</code> from the
 <a href="https://github.com/opensciencegrid/topology/tree/master/">root of the topology repository</a>.</p>
+<h3 id="new-site">New site<a class="headerlink" href="#new-site" title="Permanent link">&para;</a></h3>
+<p>To register a site, first choose a name for it.
+We recommend one of the following patterns:</p>
+<ol>
+<li><code>&lt;Organization acronym&gt;-&lt;Cluster name&gt;</code> e.g. <code>TCNJ-Elsa</code></li>
+<li><code>&lt;Organization short name&gt; - &lt;Cluster name&gt;</code> e.g. <code>New Mexico State - AggieGrid</code></li>
+</ol>
+<p>Site names must be globally unique and may be used throughout the OSG,
+such as on the <a href="https://gracc.opensciencegrid.org/dashboard/db/site-summary?orgId=1">GRACC site dashboard</a>.</p>
+<p>Once you have chosen a site name, open the following in your browser:</p>
+<div class="codehilite"><pre><span></span>https://github.com/opensciencegrid/topology/new/master?filename=topology/&lt;FACILITY&gt;/&lt;SITE&gt;/SITE.yaml
+</pre></div>
+
+
+<p>(replacing <code>&lt;FACILITY&gt;</code> and <code>&lt;SITE&gt;</code> with the facility and the site name you chose).</p>
+<div class="admonition note">
+<p class="admonition-title">"You're editing a file in a project you don't have write access to."</p>
+<p>If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
+access to the OSG copy of the topology data, which is why you are creating a pull request.</p>
+</div>
+<p>Make changes with the <a href="https://help.github.com/articles/editing-files-in-your-repository/">GitHub file editor</a> using
+the <a href="https://github.com/opensciencegrid/topology/blob/master/template-SITE.yaml">site template</a> as a guide.
+You may leave the <code>ID</code> field blank.
+When adding new entries, make sure that the formatting and indentation of your entry matches that of the template.</p>
+<p>Submit your changes as a pull request, providing a descriptive commit message. For example:</p>
+<div class="codehilite"><pre><span></span>Adding AggieGrid cluster for New Mexico State
+</pre></div>
+
+
 <h3 id="searching-for-resources">Searching for resources<a class="headerlink" href="#searching-for-resources" title="Permanent link">&para;</a></h3>
 <p>Whether you are registering a new resource or modifying an existing resource, start by searching for the FQDN of your
 host to avoid any duplicate registrations:</p>
@@ -2722,16 +2765,27 @@ follow the <a href="#modifying-existing-resources">instructions</a> for modifyin
 </li>
 </ol>
 <h3 id="new-resources">New resources<a class="headerlink" href="#new-resources" title="Permanent link">&para;</a></h3>
+<p>Before registering a new resource, make sure that its FQDN is not <a href="#searching for resources">already registered</a>.</p>
 <p>To register a new resource, follow the instructions below:</p>
 <ol>
 <li>
-<p>If you haven't already, verify that the FQDN of your resource is not <a href="#searching-for-resources">already registered</a></p>
+<p>Find the facility, site, and resource group for your resource in the <a href="https://github.com/opensciencegrid/topology/tree/master/">topology repository</a>
+   under this directory structure: 
+   <code>topology/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCE GROUP&gt;.yaml</code>.
+   When searching for these, keep in mind that case and spaces matter.</p>
+<ul>
+<li>If you do not have a facility, contact <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> for help.</li>
+<li>If you have a facility but not a site, first follow the instructions
+  for <a href="#registering-a-site">registering a site</a> below.</li>
+<li>If you have a facility and a site but not a resource group, pick a resource group name;
+  we recommend using the site name with a <code>-production</code> or <code>-testing</code> suffix.
+  Resource group names must be globally unique.</li>
+</ul>
 </li>
 <li>
-<p>Choose the names of your facility, site, and resource group, ensuring that the names match any pre-existing
-   facilities, sites, or resource groups (including case and spaces).
-   Follow the instructions below, replacing instances of <code>&lt;FACILITY&gt;</code>, <code>&lt;SITE&gt;</code>, and <code>&lt;RESOURCE GROUP&gt;</code> with the
-   corresponding names that you chose above:</p>
+<p>Once you have your facility, site, and resource group, follow the instructions below,
+   replacing instances of <code>&lt;FACILITY&gt;</code>, <code>&lt;SITE&gt;</code>, and <code>&lt;RESOURCE GROUP&gt;</code>
+   with the corresponding names that you chose above:</p>
 <ul>
 <li>
 <p>If your resource group already exists under your facility and site, open the following URL in your browser:</p>
@@ -2747,7 +2801,7 @@ Wisconsin</code>, open the following URL:</p>
 
 </li>
 <li>
-<p>If any of your facility, site, or resource group do not exist, open the following URL in your browser:</p>
+<p>If your resource group does not exist, open the following URL in your browser:</p>
 <div class="codehilite"><pre><span></span>https://github.com/opensciencegrid/topology/new/master?filename=topology/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCE GROUP&gt;.yaml
 </pre></div>
 
