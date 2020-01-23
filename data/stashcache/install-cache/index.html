@@ -869,6 +869,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#manually-setting-the-fqdn-optional" title="Manually Setting the FQDN (optional)" class="md-nav__link">
+    Manually Setting the FQDN (optional)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#managing-stashcache-and-associated-services" title="Managing StashCache and associated services" class="md-nav__link">
     Managing StashCache and associated services
   </a>
@@ -2643,6 +2650,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#manually-setting-the-fqdn-optional" title="Manually Setting the FQDN (optional)" class="md-nav__link">
+    Manually Setting the FQDN (optional)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#managing-stashcache-and-associated-services" title="Managing StashCache and associated services" class="md-nav__link">
     Managing StashCache and associated services
   </a>
@@ -2893,6 +2907,20 @@ if named stash-cache
   http.key /etc/grid-security/xrd/xrdkey.pem
   http.secxtractor /usr/lib64/libXrdLcmaps.so
 fi
+</pre></div>
+
+
+</li>
+</ol>
+<h2 id="manually-setting-the-fqdn-optional">Manually Setting the FQDN (optional)<a class="headerlink" href="#manually-setting-the-fqdn-optional" title="Permanent link">&para;</a></h2>
+<p>The FQDN of the cache server that you registered in <a href="#registering-the-cache">Topology</a> may be different than its internal hostname
+(as reported by <code>hostname -f</code>).
+For example, this may be the case if your cache is behind a load balancer such as LVS or MetalLB.
+In this case, you must manually tell the cache services which FQDN to use for topology lookups.</p>
+<ol>
+<li>Create the file <code>/etc/systemd/system/stash-cache-authfile.service.d/override.conf</code>
+    with the following contents:<div class="codehilite"><pre><span></span><span class="k">[Service]</span>
+<span class="na">Environment</span><span class="o">=</span><span class="s">CACHE_FQDN=&lt;Topology-registered FQDN&gt;</span>
 </pre></div>
 
 

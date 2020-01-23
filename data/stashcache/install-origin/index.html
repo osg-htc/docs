@@ -807,6 +807,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#manually-setting-the-fqdn-optional" title="Manually Setting the FQDN (optional)" class="md-nav__link">
+    Manually Setting the FQDN (optional)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#managing-the-origin-service" title="Managing the Origin Service" class="md-nav__link">
     Managing the Origin Service
   </a>
@@ -2496,6 +2503,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#manually-setting-the-fqdn-optional" title="Manually Setting the FQDN (optional)" class="md-nav__link">
+    Manually Setting the FQDN (optional)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#managing-the-origin-service" title="Managing the Origin Service" class="md-nav__link">
     Managing the Origin Service
   </a>
@@ -2680,6 +2694,20 @@ This requirement will be removed in a future version of StashCache.</p>
 Directories you export <strong>must not</strong> collide with directories provided by other origin servers; this is
 why the explicit registration is required.</p>
 </div>
+<h2 id="manually-setting-the-fqdn-optional">Manually Setting the FQDN (optional)<a class="headerlink" href="#manually-setting-the-fqdn-optional" title="Permanent link">&para;</a></h2>
+<p>The FQDN of the origin server that you registered in <a href="#registering-the-cache">Topology</a> may be different than its internal hostname
+(as reported by <code>hostname -f</code>).
+For example, this may be the case if your origin is behind a load balancer such as LVS or MetalLB.
+In this case, you must manually tell the origin services which FQDN to use for topology lookups.</p>
+<ol>
+<li>Create the file <code>/etc/systemd/system/stash-origin-authfile.service.d/override.conf</code>
+    with the following contents:<div class="codehilite"><pre><span></span><span class="k">[Service]</span>
+<span class="na">Environment</span><span class="o">=</span><span class="s">ORIGIN_FQDN=&lt;Topology-registered FQDN&gt;</span>
+</pre></div>
+
+
+</li>
+</ol>
 <h2 id="managing-the-origin-service">Managing the Origin Service<a class="headerlink" href="#managing-the-origin-service" title="Permanent link">&para;</a></h2>
 <p>The origin service consists of the following SystemD units that you must directly manage:</p>
 <table>
