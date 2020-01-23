@@ -62,6 +62,38 @@ OSG resources are stored in the GitHub repository as YAML files under a director
 hierarchy, i.e. `topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml` from the
 [root of the topology repository](https://github.com/opensciencegrid/topology/tree/master/).
 
+
+### New site
+
+To register a site, first choose a name for it.
+We recommend one of the following patterns:
+   
+1. `<Organization acronym>-<Cluster name>` e.g. `TCNJ-Elsa`
+1. `<Organization short name> - <Cluster name>` e.g. `New Mexico State - AggieGrid`
+
+Site names must be globally unique and may be used throughout the OSG,
+such as on the [GRACC site dashboard](https://gracc.opensciencegrid.org/dashboard/db/site-summary?orgId=1).
+
+Once you have chosen a site name, open the following in your browser:
+
+    https://github.com/opensciencegrid/topology/new/master?filename=topology/<FACILITY>/<SITE>/SITE.yaml
+
+(replacing `<FACILITY>` and `<SITE>` with the facility and the site name you chose).
+   
+!!! note ""You're editing a file in a project you don't have write access to.""
+    If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
+    access to the OSG copy of the topology data, which is why you are creating a pull request.
+   
+Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
+the [site template](https://github.com/opensciencegrid/topology/blob/master/template-SITE.yaml) as a guide.
+You may leave the `ID` field blank.
+When adding new entries, make sure that the formatting and indentation of your entry matches that of the template.
+
+Submit your changes as a pull request, providing a descriptive commit message. For example:
+
+    Adding AggieGrid cluster for New Mexico State
+
+
 ### Searching for resources ###
 
 Whether you are registering a new resource or modifying an existing resource, start by searching for the FQDN of your
@@ -186,38 +218,6 @@ Resources:
 
 If the `Active` attribute does not already exist within the resource definition, add it.
 If your resource becomes available again, set `Active: true`.
-
-
-### New site
-
-To register a site, first choose a name for it.
-We recommend one of the following patterns:
-   
-1. `<Organization acronym>-<Cluster name>` e.g. `TCNJ-Elsa`
-1. `<Organization short name> - <Cluster name>` e.g. `New Mexico State - AggieGrid`
-
-Site names must be globally unique and may be used throughout the OSG,
-such as on the [GRACC site dashboard](https://gracc.opensciencegrid.org/dashboard/db/site-summary?orgId=1).
-
-Once you have chosen a site name, open the following in your browser:
-
-    https://github.com/opensciencegrid/topology/new/master?filename=topology/<FACILITY>/<SITE>/SITE.yaml
-
-(replacing `<FACILITY>` and `<SITE>` with the facility and the site name you chose).
-   
-!!! note ""You're editing a file in a project you don't have write access to.""
-    If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
-    access to the OSG copy of the topology data, which is why you are creating a pull request.
-   
-Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
-the [site template](https://github.com/opensciencegrid/topology/blob/master/template-SITE.yaml) as a guide.
-You may leave the `ID` field blank.
-When adding new entries, make sure that the formatting and indentation of your entry matches that of the template.
-
-Submit your changes as a pull request, providing a descriptive commit message. For example:
-
-    Adding AggieGrid cluster for New Mexico State
-
 
 
 Registering Resource Downtimes
