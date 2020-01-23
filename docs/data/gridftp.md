@@ -232,7 +232,7 @@ Validation
 
 
 !!!note
-    if the binary `globus-url-copy` is not available in your system, you can get it by installing `globus-gass-copy-progs`
+    If the binary `globus-url-copy` is not available on your system, you can get it by installing `globus-gass-copy-progs`:
     e.g. `yum install globus-gass-copy-progs`
 
 
