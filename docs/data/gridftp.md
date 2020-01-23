@@ -199,7 +199,7 @@ Validation
 ### GridFtP
 
 
-1. Acquire a user certificate [opensciencegrid.org/docs/security/user-certs](http://opensciencegrid.org/docs/security/user-certs/)
+1. Acquire a [user certificate](/security/user-certs)
 1. Find your subject DN
 
         :::console
