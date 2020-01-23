@@ -213,17 +213,17 @@ To use HTTPS:
 
 Manually Setting the FQDN (optional)
 ------------------------------------
-The FQDN of the cache server that you registered in topology may be different than its internal hostname
+The FQDN of the cache server that you registered in [Topology](#registering-the-cache) may be different than its internal hostname
 (as reported by `hostname -f`).
-This can happen if you are using a load balancer such as LVS or MetalLB.
-In this case, you must manually tell the cache services what FQDN to use for topology lookups.
+For example, this may be the case if your cache is behind a load balancer such as LVS or MetalLB.
+In this case, you must manually tell the cache services which FQDN to use for topology lookups.
 
 1.  Create the file `/etc/systemd/system/stash-cache-authfile.service.d/override.conf`
     with the following contents:
    
         :::ini
         [Service]
-        Environment=CACHE_FQDN=<the FQDN registered in topology>
+        Environment=CACHE_FQDN=<Topology-registered FQDN>
 
 
 Managing StashCache and associated services
