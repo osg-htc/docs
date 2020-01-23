@@ -163,7 +163,7 @@ This is usually one XML node spread over multiple lines. Note that comments (\#)
 | SuppressNoDNRecords             | Maybe                                                                                      | Set to 1 to suppress records that can't be matched to a DN; 0 is strongly recommended.                                                     |
 | EnableProbe                     | Yes                                                                                        | Set to 1 to enable the probe.                                                                                                              |
 
-#### Selecting a collector host ####
+### Selecting a collector host ###
 
 The collector is the central server which logs the GridFTP transfers into a database. There are usually two options:
 
