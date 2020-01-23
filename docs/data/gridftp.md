@@ -205,7 +205,7 @@ Validation
         :::console
         user@host # openssl x509 -in <CERITIFICATE_FILE.pem> -noout -subject
 
-1. Add your DN to `/etc/grid-security/grid-mapfile` and map it to a non-root user, see:
+1. [Map your DN](/security/lcmaps-voms-authentication/#mapping-users) to a non-root user.
 1. As the non-root user, generate your proxy
 
         :::console
