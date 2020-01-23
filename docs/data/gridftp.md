@@ -206,7 +206,6 @@ Validation
         user@host # openssl x509 -in <CERITIFICATE_FILE.pem> -noout -subject
 
 1. Add your DN to `/etc/grid-security/grid-mapfile` and map it to a non-root user, see:
-[/opensciencegrid.org/docs/security/lcmaps-voms-authentication/#mapping-users]( https://opensciencegrid.org/docs/security/lcmaps-voms-authentication/#mapping-users)
 1. As the non-root user, generate your proxy
 
         :::console
