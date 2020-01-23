@@ -102,6 +102,21 @@ With this configuration, the data under `/mnt/stash/hcc/bio/datasets` would be a
     why the explicit registration is required.
 
 
+Manually Setting the FQDN (optional)
+------------------------------------
+The FQDN of the origin server that you registered in [Topology](#registering-the-cache) may be different than its internal hostname
+(as reported by `hostname -f`).
+For example, this may be the case if your origin is behind a load balancer such as LVS or MetalLB.
+In this case, you must manually tell the origin services which FQDN to use for topology lookups.
+
+1.  Create the file `/etc/systemd/system/stash-origin-authfile.service.d/override.conf`
+    with the following contents:
+   
+        :::ini
+        [Service]
+        Environment=ORIGIN_FQDN=<Topology-registered FQDN>
+
+
 Managing the Origin Service
 ---------------------------
 The origin service consists of the following SystemD units that you must directly manage:
