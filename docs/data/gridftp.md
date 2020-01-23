@@ -245,7 +245,7 @@ Validation
 
 
 1. Look in the log files in `/var/log/gratia/<date>.log` and make sure there are no error messages printed.
-1. Look for any abnormal termination and report it if it is a non-trivial site issue.
+Look for any abnormal termination and [report it](#getting-help) if it is a non-trivial site issue.
 
 
 
