@@ -196,7 +196,7 @@ Start the services in the order listed and stop them in reverse order. As a remi
 Validation
 ------------------
 
-### GridFtp
+### GridFtP
 
 
 1. Acquire a user certificate [opensciencegrid.org/docs/security/user-certs](http://opensciencegrid.org/docs/security/user-certs/)
