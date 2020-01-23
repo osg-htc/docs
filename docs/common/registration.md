@@ -54,13 +54,45 @@ OSG resources are stored under a hierarchy of facilities, sites, and resource gr
 | Level          | Definition                                                                                                                                                                    |
 |----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Facility       | The institution or company where your resource is located, e.g. `University of Wisconsin`                                                                                     |
-| Site           | Smaller than a facility; typically represents an academic department, research group, or a computing center, e.g. `CHTC` for the Center for High Throughput Computing.        |
+| Site           | Smaller than a facility; typically represents a computing center or an academic department, e.g. `UW-CHTC` for the Center for High Throughput Computing.                         |
 | Resource Group | A logical grouping of resources at a site. Production and testing resources must be placed into separate Resource Groups.                                                     |
 | Resource       | A host belonging to a resource group that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts. A resource may provide more than one service. |
 
 OSG resources are stored in the GitHub repository as YAML files under a directory structure that reflects the above
 hierarchy, i.e. `topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml` from the
 [root of the topology repository](https://github.com/opensciencegrid/topology/tree/master/).
+
+
+### New site
+
+To register a site, first choose a name for it.
+We recommend one of the following patterns:
+   
+1. `<Organization acronym>-<Cluster name>` e.g. `TCNJ-Elsa`
+1. `<Organization short name> - <Cluster name>` e.g. `New Mexico State - AggieGrid`
+
+Site names must be globally unique and may be used throughout the OSG,
+such as on the [GRACC site dashboard](https://gracc.opensciencegrid.org/dashboard/db/site-summary?orgId=1).
+
+Once you have chosen a site name, open the following in your browser:
+
+    https://github.com/opensciencegrid/topology/new/master?filename=topology/<FACILITY>/<SITE>/SITE.yaml
+
+(replacing `<FACILITY>` and `<SITE>` with the facility and the site name you chose).
+   
+!!! note ""You're editing a file in a project you don't have write access to.""
+    If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
+    access to the OSG copy of the topology data, which is why you are creating a pull request.
+   
+Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
+the [site template](https://github.com/opensciencegrid/topology/blob/master/template-SITE.yaml) as a guide.
+You may leave the `ID` field blank.
+When adding new entries, make sure that the formatting and indentation of your entry matches that of the template.
+
+Submit your changes as a pull request, providing a descriptive commit message. For example:
+
+    Adding AggieGrid cluster for New Mexico State
+
 
 ### Searching for resources ###
 
@@ -86,14 +118,25 @@ host to avoid any duplicate registrations:
 
 ### New resources ###
 
+Before registering a new resource, make sure that its FQDN is not [already registered](#searching for resources).
+
 To register a new resource, follow the instructions below:
 
-1. If you haven't already, verify that the FQDN of your resource is not [already registered](#searching-for-resources)
+1. Find the facility, site, and resource group for your resource in the [topology repository](https://github.com/opensciencegrid/topology/tree/master/)
+   under this directory structure: 
+   `topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml`.
+   When searching for these, keep in mind that case and spaces matter.
 
-1. Choose the names of your facility, site, and resource group, ensuring that the names match any pre-existing
-   facilities, sites, or resource groups (including case and spaces).
-   Follow the instructions below, replacing instances of `<FACILITY>`, `<SITE>`, and `<RESOURCE GROUP>` with the
-   corresponding names that you chose above:
+    - If you do not have a facility, contact <mailto:help@opensciencegrid.org> for help.
+    - If you have a facility but not a site, first follow the instructions
+      for [registering a site](#registering-a-site) below.
+    - If you have a facility and a site but not a resource group, pick a resource group name;
+      we recommend using the site name with a `-production` or `-testing` suffix.
+      Resource group names must be globally unique.
+
+1. Once you have your facility, site, and resource group, follow the instructions below,
+   replacing instances of `<FACILITY>`, `<SITE>`, and `<RESOURCE GROUP>`
+   with the corresponding names that you chose above:
 
     - If your resource group already exists under your facility and site, open the following URL in your browser:
 
@@ -104,7 +147,7 @@ To register a new resource, follow the instructions below:
 
             https://github.com/opensciencegrid/topology/edit/master/topology/University of Wisconsin/CHTC/CHTC.yaml
 
-    - If any of your facility, site, or resource group do not exist, open the following URL in your browser:
+    - If your resource group does not exist, open the following URL in your browser:
 
             https://github.com/opensciencegrid/topology/new/master?filename=topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml
 
@@ -175,6 +218,7 @@ Resources:
 
 If the `Active` attribute does not already exist within the resource definition, add it.
 If your resource becomes available again, set `Active: true`.
+
 
 Registering Resource Downtimes
 ------------------------------
