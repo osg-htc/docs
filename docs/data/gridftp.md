@@ -200,7 +200,7 @@ Validation
 
 
 1. Acquire a [user certificate](/security/user-certs)
-1. Find your subject DN
+1. Find your subject DN:
 
         :::console
         user@host # openssl x509 -in <CERITIFICATE_FILE.pem> -noout -subject
