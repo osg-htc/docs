@@ -90,7 +90,9 @@ Before registering a new resource, make sure that its FQDN is not [already regis
 
 To register a new resource, follow the instructions below:
 
-1. Find the facility, site, and resource group for your resource.
+1. Find the facility, site, and resource group for your resource in the [topology repository](https://github.com/opensciencegrid/topology/tree/master/)
+   under this directory structure: 
+   `topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml`.
    When searching for these, keep in mind that case and spaces matter.
 
     - If you do not have a facility, contact <mailto:help@opensciencegrid.org> for help.
