@@ -54,7 +54,7 @@ OSG resources are stored under a hierarchy of facilities, sites, and resource gr
 | Level          | Definition                                                                                                                                                                    |
 |----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Facility       | The institution or company where your resource is located, e.g. `University of Wisconsin`                                                                                     |
-| Site           | Smaller than a facility; typically represents a computing center or an academic department, e.g. `CHTC` for the Center for High Throughput Computing.                         |
+| Site           | Smaller than a facility; typically represents a computing center or an academic department, e.g. `UW-CHTC` for the Center for High Throughput Computing.                         |
 | Resource Group | A logical grouping of resources at a site. Production and testing resources must be placed into separate Resource Groups.                                                     |
 | Resource       | A host belonging to a resource group that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts. A resource may provide more than one service. |
 
@@ -188,7 +188,7 @@ If the `Active` attribute does not already exist within the resource definition,
 If your resource becomes available again, set `Active: true`.
 
 
-### Registering a site
+### New site
 
 To register a site, first choose a name for it.
 We recommend one of the following patterns:
