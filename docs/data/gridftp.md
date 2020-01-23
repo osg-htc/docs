@@ -227,7 +227,7 @@ Validation
         user@host # voms-proxy-destroy
         user@host # globus-url-copy file:///tmp/hello_world gsiftp://yourhost.yourdomain/tmp/hello_world
 
-!!!note
+!!! warning
      Keep in mind that when invoked as root, `globus-url-copy` will attempt to use the host certificate instead of your user certificate, which could produce confusing results.
 
 
