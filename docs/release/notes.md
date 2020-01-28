@@ -41,6 +41,7 @@ To update to the OSG 3.5 series, please consult the page on
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.5.8-2](/release/3.5/release-3-5-8-2)   | 2020-01-28 | IGTF 1.103                                                              |
 | [3.5.8](/release/3.5/release-3-5-8)       | 2020-01-16 | XRootD 4.11.1, VOMS 2.0.14-15, HTCondor 8.8.7, gratia-probe 1.20.12, osg-xrootd, host-ce-tools 0.5-2, scitokens-cpp 0.4.0, osg-ce, gsi-openssh, globus-gridftp-server, Upcoming: HTCondor 8.9.5 |
 | [3.5.7](/release/3.5/release-3-5-7)       | 2019-12-19 | HTCondor-CE 4.1.0, CVMFS 2.7.0, GlideinWMS 3.6.1, HTCondor 8.8.6; Upcoming: HTCondor 8.9.4 |
 | [3.5.6](/release/3.5/release-3-5-6)       | 2019-11-26 | XCache 1.2, CCTools 7.0.21, osg-release 3.5-3                           |
@@ -62,6 +63,7 @@ regular support will end in **February 2020** and critical bug/security support 
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.42-2](/release/3.4/release-3-4-42-2) | 2020-01-28 | IGTF 1.103                                                              |
 | [3.4.42](/release/3.4/release-3-4-42)     | 2020-01-16 | XRootD 4.11.1, VOMS 2.0.14-15, HTCondor 8.8.7, gratia-probe 1.20.12, osg-xrootd, host-ce-tools 0.5-2, scitokens-cpp 0.4.0, osg-ce |
 | [3.4.41](/release/3.4/release-3-4-41)     | 2019-12-19 | Singularity 3.5.2, HTCondor-CE 3.4.0, CVMFS 2.7.0, GlideinWMS 3.6.1, HTCondor 8.8.6 |
 | [3.4.40](/release/3.4/release-3-4-40)     | 2019-11-26 | XCache 1.2, CCTools 7.0.21, osg-release 3.4-9                           |
