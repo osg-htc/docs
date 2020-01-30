@@ -41,6 +41,7 @@ To update to the OSG 3.5 series, please consult the page on
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.5.8-4](/release/3.5/release-3-5-8-4)   | 2020-01-30 | High Priority Release: IGTF 1.104                                                             |
 | [3.5.8-3](/release/3.5/release-3-5-8-3)   | 2020-01-29 | High Priority Release: OSG CA certs based on IGTF 1.104 pre-release                           |
 | [3.5.8-2](/release/3.5/release-3-5-8-2)   | 2020-01-28 | IGTF 1.103                                                              |
 | [3.5.8](/release/3.5/release-3-5-8)       | 2020-01-16 | XRootD 4.11.1, VOMS 2.0.14-15, HTCondor 8.8.7, gratia-probe 1.20.12, osg-xrootd, host-ce-tools 0.5-2, scitokens-cpp 0.4.0, osg-ce, gsi-openssh, globus-gridftp-server, Upcoming: HTCondor 8.9.5 |
@@ -64,6 +65,7 @@ regular support will end in **February 2020** and critical bug/security support 
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.42-4](/release/3.4/release-3-4-42-4) | 2020-01-30 | High Priority Release: IGTF 1.104                                                             |
 | [3.4.42-3](/release/3.4/release-3-4-42-3) | 2020-01-29 | High Priority Release: OSG CA certs based on IGTF 1.104 pre-release                           |
 | [3.4.42-2](/release/3.4/release-3-4-42-2) | 2020-01-28 | IGTF 1.103                                                              |
 | [3.4.42](/release/3.4/release-3-4-42)     | 2020-01-16 | XRootD 4.11.1, VOMS 2.0.14-15, HTCondor 8.8.7, gratia-probe 1.20.12, osg-xrootd, host-ce-tools 0.5-2, scitokens-cpp 0.4.0, osg-ce |
