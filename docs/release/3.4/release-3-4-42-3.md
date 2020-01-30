@@ -21,7 +21,7 @@ Summary of changes
 
 This release contains:
 
-CA Certificates based on [IGTF 1.104](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+CA Certificates based on [IGTF 1.104](http://dist.eugridpma.info/distribution/igtf/current/CHANGES) pre-release
 
 -   Reinstated AddTrust External CA Root in parallel to Comodo RSA CA to ease transitionary period (US)
 
@@ -66,32 +66,28 @@ We added or updated the following packages to the production OSG yum repository.
 
 #### Enterprise Linux 6
 
--   [igtf-ca-certs-1.103-1.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.103-1.osg34.el6)
 -   [osg-ca-certs-1.85-1.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.85-1.osg34.el6)
 
 #### Enterprise Linux 7
 
--   [igtf-ca-certs-1.103-1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.103-1.osg34.el7)
 -   [osg-ca-certs-1.85-1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.85-1.osg34.el7)
 
 ### RPMs
 
 If you wish to manually update your system, you can run yum update against the following packages:
 
-    igtf-ca-certs osg-ca-certs
+    osg-ca-certs
 
 If you wish to only update the RPMs that changed, the set of RPMs is:
 
 #### Enterprise Linux 6
 
 ``` file
-igtf-ca-certs-1.103-1.osg34.el6
 osg-ca-certs-1.85-1.osg34.el6
 ```
 
 #### Enterprise Linux 7
 
 ``` file
-igtf-ca-certs-1.103-1.osg34.el7
 osg-ca-certs-1.85-1.osg34.el7
 ```
