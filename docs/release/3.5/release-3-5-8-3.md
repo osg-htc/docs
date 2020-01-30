@@ -60,7 +60,7 @@ We added or updated the following packages to the production OSG yum repository.
 Note that in some cases, there are multiple RPMs for each package.
 You can click on any given package to see the set of RPMs or see the complete list [below](#rpms).
 
--   [osg-ca-certs-1.85-1.osg35.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.85-1.osg35.el7)
+-   [osg-ca-certs-1.86-1.osg35.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.86-1.osg35.el7)
 
 ### RPMs
 
@@ -71,5 +71,5 @@ If you wish to manually update your system, you can run yum update against the f
 If you wish to only update the RPMs that changed, the set of RPMs is:
 
 ``` file
-osg-ca-certs-1.85-1.osg35.el7
+osg-ca-certs-1.86-1.osg35.el7
 ```

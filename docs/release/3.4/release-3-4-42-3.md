@@ -66,11 +66,11 @@ We added or updated the following packages to the production OSG yum repository.
 
 #### Enterprise Linux 6
 
--   [osg-ca-certs-1.85-1.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.85-1.osg34.el6)
+-   [osg-ca-certs-1.86-1.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.86-1.osg34.el6)
 
 #### Enterprise Linux 7
 
--   [osg-ca-certs-1.85-1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.85-1.osg34.el7)
+-   [osg-ca-certs-1.86-1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.86-1.osg34.el7)
 
 ### RPMs
 
@@ -83,11 +83,11 @@ If you wish to only update the RPMs that changed, the set of RPMs is:
 #### Enterprise Linux 6
 
 ``` file
-osg-ca-certs-1.85-1.osg34.el6
+osg-ca-certs-1.86-1.osg34.el6
 ```
 
 #### Enterprise Linux 7
 
 ``` file
-osg-ca-certs-1.85-1.osg34.el7
+osg-ca-certs-1.86-1.osg34.el7
 ```
