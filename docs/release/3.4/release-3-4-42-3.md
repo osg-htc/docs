@@ -23,7 +23,7 @@ This release contains:
 
 CA Certificates based on [IGTF 1.104](http://dist.eugridpma.info/distribution/igtf/current/CHANGES) pre-release
 
--   Reinstated AddTrust External CA Root in parallel to Comodo RSA CA to ease transitionary period (US)
+-   Reinstated AddTrust External CA Root in parallel to Comodo RSA CA to ease transition period for sites using InCommon IGTF certs (US)
 
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.42-3%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
