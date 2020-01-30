@@ -19,6 +19,9 @@ OSG Data Release 3.4.42-4
 Summary of changes
 ------------------
 
+This release of IGTF CA Certificate bundle matches the changes made in the
+OSG CA Certificate bundle yesterday.
+
 This release contains:
 
 CA Certificates based on [IGTF 1.104](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
