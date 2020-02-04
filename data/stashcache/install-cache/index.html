@@ -3084,13 +3084,12 @@ As a reminder, here are common service commands (all run as <code>root</code>) f
 </table>
 <h2 id="validating-the-cache">Validating the Cache<a class="headerlink" href="#validating-the-cache" title="Permanent link">&para;</a></h2>
 <p>The cache server functions as a normal HTTP server and can interact with typical HTTP clients, such as <code>curl</code>.</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> curl -O http://cache_host:8000/user/dweitzel/public/blast/queries/query1
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> curl -O http://cache_host:8000/osgconnect/public/rynge/test.data
 </pre></div>
 
 
 <p><code>curl</code> may not correctly report a failure, so verify that the contents of the file are:</p>
-<div class="codehilite"><pre><span></span>&gt;Derek&#39;s first query!
-MPVSDSGFDNSSKTMKDDTIPTEDYEEITKESEMGDATKITSKIDANVIEKKDTDSENNITIAQDDEKVSWLQRVVEFFE
+<div class="codehilite"><pre><span></span>hello world!
 </pre></div>
 
 
