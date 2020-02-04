@@ -266,13 +266,12 @@ The cache server functions as a normal HTTP server and can interact with typical
 
 
 ```console
-user@host $ curl -O http://cache_host:8000/user/dweitzel/public/blast/queries/query1
+user@host $ curl -O http://cache_host:8000/osgconnect/public/rynge/test.data
 ```
 
 `curl` may not correctly report a failure, so verify that the contents of the file are:
 ```
->Derek's first query!
-MPVSDSGFDNSSKTMKDDTIPTEDYEEITKESEMGDATKITSKIDANVIEKKDTDSENNITIAQDDEKVSWLQRVVEFFE
+hello world!
 ```
 
 ### Test cache server reporting to the central collector
