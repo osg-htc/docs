@@ -254,9 +254,11 @@ In addition to the public cache services, there are three systemd units specific
 
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
-| XRootD | `xrootd@stash-cache-auth.service` | The xrootd daemon which performs authenticated data transfers |
-|  | `xrootd-renew-proxy.service` | Renew a proxy for authenticated downloads to the cache |
+| XRootD | `xrootd-renew-proxy.service` | Renew a proxy for authenticated downloads to the cache |
+|  | `xrootd@stash-cache-auth.service` | The xrootd daemon which performs authenticated data transfers |
 |  | `xrootd-renew-proxy.timer` | Trigger daily proxy renewal |
+|  | `stash-cache-authfile.service` | Generate the Authentication configuration file for XRootD |
+|  | `stash-cache-authfile.timer` | Periodically generate the Authentication configuration file for XRootD |
 
 
 Validating the Cache
