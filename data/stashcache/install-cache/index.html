@@ -2938,7 +2938,7 @@ with at least 1 TB of storage available.</p>
 </div>
 <p>The <code>stash-cache</code> package provides default configuration files in <code>/etc/xrootd/xrootd-stash-cache.cfg</code> and <code>/etc/xrootd/config.d/</code>.
 Administrators may provide additional configuration by placing files in <code>/etc/xrootd/config.d/1*.cfg</code> (for files that need to be processed BEFORE the OSG configuration) or <code>/etc/xrootd/config.d/9*.cfg</code> (for files that need to be processed AFTER the OSG configuration).</p>
-<p>You <em>must</em> configure every variable in <code>/etc/xrootd/10-common-site-local.cfg</code>.</p>
+<p>You <em>must</em> configure every variable in <code>/etc/xrootd/config.d/10-common-site-local.cfg</code>.</p>
 <p>The mandatory variables to configure are:</p>
 <ul>
 <li><code>set rootdir = /mnt/stash</code>: the mounted filesystem path to export.  This document refers to this as <code>/mnt/stash</code>.</li>
