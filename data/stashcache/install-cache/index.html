@@ -3091,18 +3091,28 @@ As a reminder, here are common service commands (all run as <code>root</code>) f
 <tbody>
 <tr>
 <td>XRootD</td>
-<td><code>xrootd@stash-cache-auth.service</code></td>
-<td>The xrootd daemon which performs authenticated data transfers</td>
-</tr>
-<tr>
-<td></td>
 <td><code>xrootd-renew-proxy.service</code></td>
 <td>Renew a proxy for authenticated downloads to the cache</td>
 </tr>
 <tr>
 <td></td>
+<td><code>xrootd@stash-cache-auth.service</code></td>
+<td>The xrootd daemon which performs authenticated data transfers</td>
+</tr>
+<tr>
+<td></td>
 <td><code>xrootd-renew-proxy.timer</code></td>
 <td>Trigger daily proxy renewal</td>
+</tr>
+<tr>
+<td></td>
+<td><code>stash-cache-authfile.service</code></td>
+<td>Generate the Authentication configuration file for XRootD</td>
+</tr>
+<tr>
+<td></td>
+<td><code>stash-cache-authfile.timer</code></td>
+<td>Periodically generate the Authentication configuration file for XRootD</td>
 </tr>
 </tbody>
 </table>
