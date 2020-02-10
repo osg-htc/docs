@@ -131,7 +131,7 @@ with at least 1 TB of storage available.
 The `stash-cache` package provides default configuration files in `/etc/xrootd/xrootd-stash-cache.cfg` and `/etc/xrootd/config.d/`.
 Administrators may provide additional configuration by placing files in `/etc/xrootd/config.d/1*.cfg` (for files that need to be processed BEFORE the OSG configuration) or `/etc/xrootd/config.d/9*.cfg` (for files that need to be processed AFTER the OSG configuration).
 
-You _must_ configure every variable in `/etc/xrootd/10-common-site-local.cfg`.
+You _must_ configure every variable in `/etc/xrootd/config.d/10-common-site-local.cfg`.
 
 The mandatory variables to configure are:
 
