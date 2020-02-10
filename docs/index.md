@@ -27,7 +27,7 @@ In both of these cases, the following will be needed:
   [Grid Engine](http://www.univa.com/products/),
   [HTCondor](https://research.cs.wisc.edu/htcondor/),
   [LSF](https://www.ibm.com/us-en/marketplace/hpc-workload-management),
-  [PBS Pro](https://www.pbsworks.com/PBSProduct.aspx?n=Altair-PBS-Professional&c=Overview-and-Capabilities)/[Torque](http://www.adaptivecomputing.com/products/torque/),
+  [PBS Pro](https://www.pbsworks.com/PBSProduct.aspx?n=Altair-PBS-Professional&c=Overview-and-Capabilities)/[Torque](https://adaptivecomputing.com/cherry-services/torque-resource-manager/),
   or [Slurm](https://slurm.schedmd.com/).
 - Outbound network connectivity from your cluster's worker nodes
 - [Temporary scratch space](/worker-node/using-wn#for-site-administrators) on each worker node
