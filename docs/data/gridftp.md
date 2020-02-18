@@ -196,7 +196,7 @@ Start the services in the order listed and stop them in reverse order. As a remi
 Validation
 ------------------
 
-### GridFtP
+### GridFTP
 
 
 1. Acquire a [user certificate](/security/user-certs)
