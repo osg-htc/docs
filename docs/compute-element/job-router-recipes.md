@@ -558,7 +558,7 @@ attribute of the job submitted to a PBS batch system:
              name = "Setting job submit variables";
              set_Walltime = 3600;
              set_AccountingGroup = x509UserProxyFirstFQAN;
-             set_default_remote_CERequirements = "Walltime,AccountingGroup";
+             set_default_CERequirements = "Walltime,AccountingGroup";
         ]
         @jre
 
