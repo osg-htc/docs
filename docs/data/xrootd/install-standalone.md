@@ -140,8 +140,7 @@ To validate an XRootD installation, perform the following verification steps:
             root@xrootd-standalone # ls -l /tmp/first_test
             -rw-r--r-- 1 xrootd xrootd 801512 Apr 11 10:48 /tmp/first_test
 
-1. If you have enabled [HTTP support](#enabling-http-support), verify file transfer over HTTP using GFAL2 client
-   tools:
+1. Verify file transfer over HTTP using GFAL2 client tools:
 
     1. Install the GFAL2 client tools:
 
