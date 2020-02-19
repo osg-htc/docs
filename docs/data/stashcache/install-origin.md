@@ -143,7 +143,6 @@ In addition, the origin service automatically uses the following SystemD units:
 | `cmsd@stash-origin.service` | Integrates the origin into the data federation (unauthenticated instance) |
 | `cmsd@stash-origin-auth.service` | Integrates the origin into the data federation (authenticated instance) |
 | `stash-origin-authfile.timer` | Updates the authorization files periodically |
-| `xrootd-renew-proxy.timer` | Renews grid proxy periodically |
 
 Verifying the Origin Server
 ---------------------------
