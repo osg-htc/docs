@@ -49,39 +49,8 @@ Detailed changes are below. All of the documentation can be found [here](/index.
 -   OSG 3.4 contains only 64-bit components.
 -   The StashCache service is only supported on EL7
 
-### GlideinWMS ###
-
-1. GlideinWMS 3.4.6 is the last release supporting Globus GRAM (a.k.a. GT2/GT5).
-
-1. For new Singularity features introduced in GlideinWMS 3.4.1, all factories and frontends need to be >= 3.4.1.
-
-    !!! note
-        OSG GlideinWMS factories are running at least 3.4.1
-
-    If some of the connected Factories are <= 3.4.1 you will see an error during reconfig/upgrade if you try to use
-    features that require a newer Factory.
-    To start using Singularity via GlideinWMS, see:
-
-    - <https://glideinwms.fnal.gov/doc.prd/frontend/configuration.html#singularity>
-    - <https://glideinwms.fnal.gov/doc.prd/factory/configuration.html#singularity>
-    - <https://glideinwms.fnal.gov/doc.prd/factory/custom_vars.html#singularity_vars>
-
-1. Upgrades from <= 3.4.0 may require merging `/etc/condor/config.d/*.rpmnew` files and restarting HTCondor.
-
-1. GlideinWMS >= 3.4.5 uses shared port, requiring only port 9618.
-   To ease the transition to shared port, the User Collector, secondary collectors, and CCBs support both shared and
-   separate, individual ports.
-   To start using shared port, change the secondary collectors lines and the CCBs lines (if any) in
-   `/etc/gwms-frontend/frontend.xml`, changing the address to include the shared port sinful string:
-
-        <collector DN="/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=gwms-frontend.domain" group="default" node="gwms-frontend.domain:9618?sock=collector0-40" secondary="True"/>
-
-    Replace `gwms-frontend-domain` above with the hostname of your GlideinWMS frontend.
-    See the [GlideinWMS documentation](https://glideinwms.fnal.gov/doc.prd/components/condor.html#collectors ) for details.
-
 Updating to the new release
 ---------------------------
-
 
 ### Update Repositories
 
