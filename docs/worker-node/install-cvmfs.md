@@ -132,14 +132,19 @@ and try them all before continuing. A semicolon between proxies means
 to try that one only after the previous ones have failed. For example:
 
 ```
-CVMFS_HTTP_PROXY="http://squid1.example.com:3128|http://squid2.example.com:3128;http://old-squid.example.com:3128"
+CVMFS_HTTP_PROXY="http://squid1.example.com:3128|http://squid2.example.com:3128;http://backup-squid.example.com:3128"
 ```
 
-A special proxy called DIRECT can be placed last in the list to indicate
-directly connecting to servers if all other proxies fail. A DIRECT
-proxy is acceptable for small sites but discouraged for large sites
-because of the potential load that could be put upon globally shared
-servers.
+If no squid is available, it is acceptable for very small sites and
+laptops to set `CVMFS_HTTP_PROXY="DIRECT"`.  In that case, the OSG
+configuration sets the servers to be contacted through
+[globally distributed caches](https://openhtc.io).
+This is strongly discouraged for large sites because of the performance
+impact and because of the potential impact on the global caches.  When
+there is at least one local proxy defined, the OSG configuration instead
+adds fallback proxies at Fermilab and CERN.  Those fallback proxies are
+monitored by a WLCG team that will contact your site when your local
+proxy is failing and help you fix it.
 
 Set up the cache limit in `CVMFS_QUOTA_LIMIT` (in Megabytes). The
 recommended value for most applications is `20000` MB. This is the
