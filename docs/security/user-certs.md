@@ -84,7 +84,7 @@ To convert a PKCS12 file to  PEM files, do the following.
         Enter PEM pass phrase:
         Verifying - Enter PEM pass phrase:
 
-Revoking your user certificate
+Revoking Your User Certificate
 ------------------------------
 
 If the security of your certificate or private key has been compromised, you have a responsibility to revoke the certificate.
