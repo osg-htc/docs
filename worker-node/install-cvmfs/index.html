@@ -2860,15 +2860,20 @@ the instructions to <a href="../../data/frontier-squid">install squid from OSG</
 Vertical bars separating proxies means to load balance between them
 and try them all before continuing. A semicolon between proxies means
 to try that one only after the previous ones have failed. For example:</p>
-<div class="codehilite"><pre><span></span>CVMFS_HTTP_PROXY=&quot;http://squid1.example.com:3128|http://squid2.example.com:3128;http://old-squid.example.com:3128&quot;
+<div class="codehilite"><pre><span></span>CVMFS_HTTP_PROXY=&quot;http://squid1.example.com:3128|http://squid2.example.com:3128;http://backup-squid.example.com:3128&quot;
 </pre></div>
 
 
-<p>A special proxy called DIRECT can be placed last in the list to indicate
-directly connecting to servers if all other proxies fail. A DIRECT
-proxy is acceptable for small sites but discouraged for large sites
-because of the potential load that could be put upon globally shared
-servers.</p>
+<p>If no squid is available, it is acceptable for very small sites and
+laptops to set <code>CVMFS_HTTP_PROXY="DIRECT"</code>.  In that case, the OSG
+configuration sets the servers to be contacted through
+<a href="https://openhtc.io">globally distributed caches</a>.
+This is strongly discouraged for large sites because of the performance
+impact and because of the potential impact on the global caches.  When
+there is at least one local proxy defined, the OSG configuration instead
+adds fallback proxies at Fermilab and CERN.  Those fallback proxies are
+monitored by a WLCG team that will contact your site when your local
+proxy is failing and help you fix it.</p>
 <p>Set up the cache limit in <code>CVMFS_QUOTA_LIMIT</code> (in Megabytes). The
 recommended value for most applications is <code>20000</code> MB. This is the
 combined limit for all but the osgstorage.org repositories. This cache
