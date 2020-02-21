@@ -209,8 +209,8 @@ In the node where the cache redirector is installed these are the list of servic
 
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
-| XRootD (Optional)| `xrootd@xcache-redirector.service` | The xrootd daemon which performs authenticated data transfers |
-| XRootD (Optional)| `cmsd@xcache-redirector.service` | The xrootd daemon which performs authenticated data transfers |
+| XRootD (Optional)| `xrootd@xcache-redir.service` | The xrootd daemon which performs authenticated data transfers |
+| XRootD (Optional)| `cmsd@xcache-redir.service` | The xrootd daemon which performs authenticated data transfers |
 
 Validating the Cache
 ---------------------
