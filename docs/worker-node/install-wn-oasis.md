@@ -64,7 +64,7 @@ If you must log onto a worker node and use the Worker Node Client software direc
 | EL 6 (64-bit)  | `source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.4/current/el6-x86_64/setup.sh` |
 | EL 7 (64-bit)  | `source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.5/current/el7-x86_64/setup.sh` |
 
-How to get Help?
-----------------
+Getting Help
+------------
 
-To get assistance please use this [Help Procedure](/common/help.md).
+To get assistance, please use [this page](/common/help.md).
