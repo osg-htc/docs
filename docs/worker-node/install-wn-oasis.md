@@ -32,9 +32,8 @@ Determine the OASIS path to the Worker Node Client software for your worker node
 
 | Worker Node OS | Use…                                                                                 |
 |:---------------|:-------------------------------------------------------------------------------------|
-| EL 6 (32-bit)  | `/cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.3/current/el6-i386`   |
-| EL 6 (64-bit)  | `/cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.3/current/el6-x86_64` |
-| EL 7 (64-bit)  | `/cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.3/current/el7-x86_64` |
+| EL 6 (64-bit)  | `/cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.4/current/el6-x86_64` |
+| EL 7 (64-bit)  | `/cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.5/current/el7-x86_64` |
 
 On the CE, in the `/etc/osg/config.d/10-storage.ini` file, set the `grid_dir` configuration setting to the path from the previous step.
 
@@ -62,28 +61,10 @@ If you must log onto a worker node and use the Worker Node Client software direc
 
 | Worker Node OS | Run the following command…                                                                           |
 |:---------------|:-----------------------------------------------------------------------------------------------------|
-| EL 6 (32-bit)  | `source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.3/current/el6-i386/setup.sh`   |
-| EL 6 (64-bit)  | `source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.3/current/el6-x86_64/setup.sh` |
-| EL 7 (64-bit)  | `source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.3/current/el7-x86_64/setup.sh` |
+| EL 6 (64-bit)  | `source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.4/current/el6-x86_64/setup.sh` |
+| EL 7 (64-bit)  | `source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.5/current/el7-x86_64/setup.sh` |
 
-Troubleshooting
----------------
+Getting Help
+------------
 
-Some possible issues that may come up:
-
-- A missing softlink to the CA certs directory. To check this, run:
-
-        :::console
-        user@host $ ls -l /cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.3/current/el6-x86_64/etc/grid-security/
-
-    and check that `certificates` is linked to somewhere. The fix is to yum update the `oasis-config` package to version 4 or higher. A known workaround is to run:
-
-        :::console
-        user@host $ export X509_CERT_DIR=/cvmfs/oasis.opensciencegrid.org/mis/certificates
-
-    before any commands.
-
-How to get Help?
-----------------
-
-To get assistance please use this [Help Procedure](/common/help.md).
+To get assistance, please use [this page](/common/help.md).
