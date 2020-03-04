@@ -41,7 +41,7 @@ To update to the OSG 3.5 series, please consult the page on
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
-| [3.5.10-2](/release/3.5/release-3-5-10-2) | 2020-03-03 | VO Package v100                                                         |
+| [3.5.10-2](/release/3.5/release-3-5-10-2) | 2020-03-04 | VO Package v100                                                         |
 | [3.5.10](/release/3.5/release-3-5-10)     | 2020-02-20 | XRootD 4.11.2, XCache 1.2.1, VO Package v99, UberFTP 2.8-3, osg-configure 3.1.1, osg-system-profiler 1.5.0 |
 | [3.5.9](/release/3.5/release-3-5-9)       | 2020-02-06 | High Priority Release: Frontier Squid 4.10                              |
 | [3.5.8-4](/release/3.5/release-3-5-8-4)   | 2020-01-30 | High Priority Release: IGTF 1.104                                       |
@@ -68,7 +68,7 @@ regular support will end in **February 2020** and critical bug/security support 
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
-| [3.4.44-2](/release/3.4/release-3-4-44-2) | 2020-03-03 | VO Package v100                                                         |
+| [3.4.44-2](/release/3.4/release-3-4-44-2) | 2020-03-04 | VO Package v100                                                         |
 | [3.4.44](/release/3.4/release-3-4-44)     | 2020-02-20 | XRootD 4.11.2, XCache 1.2.1, VO Package v99, UberFTP 2.8-3, osg-configure 2.5.1, osg-system-profiler 1.5.0 |
 | [3.4.43](/release/3.4/release-3-4-43)     | 2020-02-06 | High Priority Release: Frontier Squid 4.10                              |
 | [3.4.42-4](/release/3.4/release-3-4-42-4) | 2020-01-30 | High Priority Release: IGTF 1.104                                       |
