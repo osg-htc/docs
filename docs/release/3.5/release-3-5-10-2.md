@@ -33,7 +33,9 @@ These [JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%2
 Containers
 ----------
 
-The [Worker Node containers](/worker-node/using-wn-containers/) have been updated to this release.
+- The latest `stable` [Hosted CE container](https://hub.docker.com/r/opensciencegrid/hosted-ce) has been updated to this
+  release.
+- [Worker Node containers](/worker-node/using-wn-containers/) have been updated to this release.
 
 Updating to the New Release
 ---------------------------
