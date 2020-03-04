@@ -21,7 +21,7 @@ Summary of changes
 
 This release contains [VO Package v100](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-100):
 
-- New cert for GLOW (SOFTWARE-4006)
+- Add new cert for GLOW (SOFTWARE-4006)
 - Replace one of the certs for OSG (SOFTWARE-4007)
 - Update voms2.fnal.gov DN for DES, DUNE, Fermilab (SOFTWARE-4012)
 - Map FQANs from Fermilab VO subgroups to the same user as the VO-wide target (SOFTWARE-4005)
