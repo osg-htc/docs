@@ -4501,6 +4501,51 @@
             "title": "OSG 3.4"
         }, 
         {
+            "location": "/release/3.5/release-3-5-10-2/", 
+            "text": "OSG Data Release 3.5.10-2\n\n\nRelease Date:\n 2020-03-04  \n\n\nSupported OS Versions:\n EL7\n\n\n\n\nWant faster access to production-ready software?\n\n\nOSG 3.5 and 3.4 offer a rolling release repository where packages are added as soon as they pass acceptance testing.\nTo install packages from this repository, enable \n[osg-rolling]\n in \n/etc/yum.repos.d/osg-rolling.repo\n:\n\n\n[osg-rolling]\n...\nenabled=1\n\n\n\n\n\nOr for one-time installations, append the following to your \nyum\n command:\n\n\n--enablerepo=osg-rolling\n\n\n\n\n\n\n\nSummary of Changes\n\n\nThis release contains \nVO Package v100\n:\n\n\n\n\nAdd new cert for GLOW (SOFTWARE-4006)\n\n\nReplace one of the certs for OSG (SOFTWARE-4007)\n\n\nUpdate voms2.fnal.gov DN for DES, DUNE, Fermilab (SOFTWARE-4012)\n\n\nMap FQANs from Fermilab VO subgroups to the same user as the VO-wide target (SOFTWARE-4005)\n\n\nDrop CDF (SOFTWARE-4012)\n\n\nDrop MIS VO (SOFTWARE-3575)\n\n\n\n\nThese \nJIRA tickets\n were addressed in this release.\n\n\nContainers\n\n\n\n\nThe latest \nstable\n \nHosted CE container\n has been updated to this\n  release.\n\n\nWorker Node containers\n have been updated to this release.\n\n\n\n\nUpdating to the New Release\n\n\nTo update to the OSG 3.5 series from an earlier release series, please consult the page on\n\nupdating between release series\n.\n\n\nFor sites using non-RPM worker node client installations, new \ntarballs\n and\n\ncontainer images\n are available:\n\n\n\n\nTarball: \nhttps://repo.opensciencegrid.org/tarball-install/3.5/osg-wn-client-latest.el7.x86_64.tar.gz\n\n\nContainer Images: \nhttps://hub.docker.com/r/opensciencegrid/osg-wn/\n\n\n\n\nNeed Help?\n\n\nDo you need help with this release? \nContact us for help\n.\n\n\nDetailed Changes in This Release\n\n\nPackages\n\n\nWe added or updated the following packages to the production OSG yum repository.\nNote that in some cases, there are multiple RPMs for each package.\nYou can click on any given package to see the set of RPMs or see the complete list \nbelow\n.\n\n\n\n\nvo-client-100-1.osg35.el7\n\n\n\n\nRPMs\n\n\nIf you wish to manually update your system, you can run yum update against the following packages:\n\n\nvo-client vo-client-dcache vo-client-lcmaps-voms\n\n\n\n\n\nIf you wish to only update the RPMs that changed, the set of RPMs is:\n\n\nvo-client-100-1.osg35.el7\nvo-client-dcache-100-1.osg35.el7\nvo-client-lcmaps-voms-100-1.osg35.el7", 
+            "title": "OSG Release 3.5.10-2"
+        }, 
+        {
+            "location": "/release/3.5/release-3-5-10-2/#osg-data-release-3510-2", 
+            "text": "Release Date:  2020-03-04    Supported OS Versions:  EL7   Want faster access to production-ready software?  OSG 3.5 and 3.4 offer a rolling release repository where packages are added as soon as they pass acceptance testing.\nTo install packages from this repository, enable  [osg-rolling]  in  /etc/yum.repos.d/osg-rolling.repo :  [osg-rolling]\n...\nenabled=1  Or for one-time installations, append the following to your  yum  command:  --enablerepo=osg-rolling", 
+            "title": "OSG Data Release 3.5.10-2"
+        }, 
+        {
+            "location": "/release/3.5/release-3-5-10-2/#summary-of-changes", 
+            "text": "This release contains  VO Package v100 :   Add new cert for GLOW (SOFTWARE-4006)  Replace one of the certs for OSG (SOFTWARE-4007)  Update voms2.fnal.gov DN for DES, DUNE, Fermilab (SOFTWARE-4012)  Map FQANs from Fermilab VO subgroups to the same user as the VO-wide target (SOFTWARE-4005)  Drop CDF (SOFTWARE-4012)  Drop MIS VO (SOFTWARE-3575)   These  JIRA tickets  were addressed in this release.", 
+            "title": "Summary of Changes"
+        }, 
+        {
+            "location": "/release/3.5/release-3-5-10-2/#containers", 
+            "text": "The latest  stable   Hosted CE container  has been updated to this\n  release.  Worker Node containers  have been updated to this release.", 
+            "title": "Containers"
+        }, 
+        {
+            "location": "/release/3.5/release-3-5-10-2/#updating-to-the-new-release", 
+            "text": "To update to the OSG 3.5 series from an earlier release series, please consult the page on updating between release series .  For sites using non-RPM worker node client installations, new  tarballs  and container images  are available:   Tarball:  https://repo.opensciencegrid.org/tarball-install/3.5/osg-wn-client-latest.el7.x86_64.tar.gz  Container Images:  https://hub.docker.com/r/opensciencegrid/osg-wn/", 
+            "title": "Updating to the New Release"
+        }, 
+        {
+            "location": "/release/3.5/release-3-5-10-2/#need-help", 
+            "text": "Do you need help with this release?  Contact us for help .", 
+            "title": "Need Help?"
+        }, 
+        {
+            "location": "/release/3.5/release-3-5-10-2/#detailed-changes-in-this-release", 
+            "text": "", 
+            "title": "Detailed Changes in This Release"
+        }, 
+        {
+            "location": "/release/3.5/release-3-5-10-2/#packages", 
+            "text": "We added or updated the following packages to the production OSG yum repository.\nNote that in some cases, there are multiple RPMs for each package.\nYou can click on any given package to see the set of RPMs or see the complete list  below .   vo-client-100-1.osg35.el7", 
+            "title": "Packages"
+        }, 
+        {
+            "location": "/release/3.5/release-3-5-10-2/#rpms", 
+            "text": "If you wish to manually update your system, you can run yum update against the following packages:  vo-client vo-client-dcache vo-client-lcmaps-voms  If you wish to only update the RPMs that changed, the set of RPMs is:  vo-client-100-1.osg35.el7\nvo-client-dcache-100-1.osg35.el7\nvo-client-lcmaps-voms-100-1.osg35.el7", 
+            "title": "RPMs"
+        }, 
+        {
             "location": "/release/3.5/release-3-5-10/", 
             "text": "OSG Software Release 3.5.10\n\n\nRelease Date:\n 2020-02-20  \n\n\nSupported OS Versions:\n EL7\n\n\n\n\nWant faster access to production-ready software?\n\n\nOSG 3.5 and 3.4 offer a rolling release repository where packages are added as soon as they pass acceptance testing.\nTo install packages from this repository, enable \n[osg-rolling]\n in \n/etc/yum.repos.d/osg-rolling.repo\n:\n\n\n[osg-rolling]\n...\nenabled=1\n\n\n\n\n\nOr for one-time installations, append the following to your \nyum\n command:\n\n\n--enablerepo=osg-rolling\n\n\n\n\n\n\n\nSummary of Changes\n\n\nThis release contains:\n\n\n\n\nXRootD 4.11.2\n: Bug fix release\n\n\nXCache 1.2.1: Fixed problem where plugins were applied to redirectors\n\n\nVO Package v99\n: New certificate DN for HCC VOMS\n\n\nUberFTP 2.8-3: OSG fixes incorporated upstream\n\n\nosg-configure 3.1.1: Minor fixes\n\n\nosg-system-profiler 1.5.0:\n\n\nReport XRootD configuration\n\n\nElide kernel RPM checks\n\n\n\n\n\n\n\n\nThese\n\nJIRA tickets\n\nwere addressed in this release.\n\n\nContainers\n\n\nThe StashCache container is available and has been tagged as \nstable\n in accordance with our\n\nContainer Release Policy\n\n\n\n\nStashCache\n\n\n\n\nUpdating to the New Release\n\n\nTo update to the OSG 3.5 series, please consult the page on\n\nupdating between release series\n.\n\n\nFor sites using non-RPM worker node client installations, new \ntarballs\n and\n\ncontainer images\n are available:\n\n\n\n\nTarball: \nhttps://repo.opensciencegrid.org/tarball-install/3.5/osg-wn-client-latest.el7.x86_64.tar.gz\n\n\nContainer Images: \nhttps://hub.docker.com/r/opensciencegrid/osg-wn/\n\n\n\n\nNeed Help?\n\n\nDo you need help with this release? \nContact us for help\n.\n\n\nDetailed Changes in This Release\n\n\nPackages\n\n\nWe added or updated the following packages to the production OSG yum repository.\nNote that in some cases, there are multiple RPMs for each package.\nYou can click on any given package to see the set of RPMs or see the complete list \nbelow\n.\n\n\n\n\nosg-configure-3.1.1-1.osg35.el7\n\n\nosg-system-profiler-1.5.0-1.osg35.el7\n\n\nuberftp-2.8-3.osg35.el7\n\n\nvo-client-99-1.osg35.el7\n\n\nxcache-1.2.1-1.osg35.el7\n\n\nxrootd-4.11.2-1.osg35.el7\n\n\n\n\nRPMs\n\n\nIf you wish to manually update your system, you can run yum update against the following packages:\n\n\natlas-xcache cms-xcache osg-configure osg-configure-bosco osg-configure-ce osg-configure-condor osg-configure-gateway osg-configure-gip osg-configure-gratia osg-configure-infoservices osg-configure-lsf osg-configure-misc osg-configure-pbs osg-configure-rsv osg-configure-sge osg-configure-siteinfo osg-configure-slurm osg-configure-squid osg-configure-tests osg-system-profiler osg-system-profiler-viewer python2-xrootd stash-cache stash-origin uberftp uberftp-debuginfo vo-client vo-client-dcache vo-client-lcmaps-voms xcache xcache-redirector xrootd xrootd-client xrootd-client-devel xrootd-client-libs xrootd-debuginfo xrootd-devel xrootd-doc xrootd-fuse xrootd-libs xrootd-private-devel xrootd-selinux xrootd-server xrootd-server-devel xrootd-server-libs\n\n\n\n\n\nIf you wish to only update the RPMs that changed, the set of RPMs is:\n\n\natlas-xcache-1.2.1-1.osg35.el7\ncms-xcache-1.2.1-1.osg35.el7\nosg-configure-3.1.1-1.osg35.el7\nosg-configure-bosco-3.1.1-1.osg35.el7\nosg-configure-ce-3.1.1-1.osg35.el7\nosg-configure-condor-3.1.1-1.osg35.el7\nosg-configure-gateway-3.1.1-1.osg35.el7\nosg-configure-gip-3.1.1-1.osg35.el7\nosg-configure-gratia-3.1.1-1.osg35.el7\nosg-configure-infoservices-3.1.1-1.osg35.el7\nosg-configure-lsf-3.1.1-1.osg35.el7\nosg-configure-misc-3.1.1-1.osg35.el7\nosg-configure-pbs-3.1.1-1.osg35.el7\nosg-configure-rsv-3.1.1-1.osg35.el7\nosg-configure-sge-3.1.1-1.osg35.el7\nosg-configure-siteinfo-3.1.1-1.osg35.el7\nosg-configure-slurm-3.1.1-1.osg35.el7\nosg-configure-squid-3.1.1-1.osg35.el7\nosg-configure-tests-3.1.1-1.osg35.el7\nosg-system-profiler-1.5.0-1.osg35.el7\nosg-system-profiler-viewer-1.5.0-1.osg35.el7\npython2-xrootd-4.11.2-1.osg35.el7\nstash-cache-1.2.1-1.osg35.el7\nstash-origin-1.2.1-1.osg35.el7\nuberftp-2.8-3.osg35.el7\nuberftp-debuginfo-2.8-3.osg35.el7\nvo-client-99-1.osg35.el7\nvo-client-dcache-99-1.osg35.el7\nvo-client-lcmaps-voms-99-1.osg35.el7\nxcache-1.2.1-1.osg35.el7\nxcache-redirector-1.2.1-1.osg35.el7\nxrootd-4.11.2-1.osg35.el7\nxrootd-client-4.11.2-1.osg35.el7\nxrootd-client-devel-4.11.2-1.osg35.el7\nxrootd-client-libs-4.11.2-1.osg35.el7\nxrootd-debuginfo-4.11.2-1.osg35.el7\nxrootd-devel-4.11.2-1.osg35.el7\nxrootd-doc-4.11.2-1.osg35.el7\nxrootd-fuse-4.11.2-1.osg35.el7\nxrootd-libs-4.11.2-1.osg35.el7\nxrootd-private-devel-4.11.2-1.osg35.el7\nxrootd-selinux-4.11.2-1.osg35.el7\nxrootd-server-4.11.2-1.osg35.el7\nxrootd-server-devel-4.11.2-1.osg35.el7\nxrootd-server-libs-4.11.2-1.osg35.el7", 
             "title": "OSG Release 3.5.10"
@@ -5229,6 +5274,81 @@
             "location": "/release/3.5/release-3-5-0/#upcoming-rpms", 
             "text": "If you wish to manually update your system, you can run yum update against the following packages:  blahp blahp-debuginfo condor condor-all condor-annex-ec2 condor-bosco condor-classads condor-classads-devel condor-debuginfo condor-kbdd condor-procd condor-test condor-vm-gahp glite-ce-cream-client-api-c glite-ce-cream-client-devel minicondor osg-gridftp osg-gridftp-hdfs osg-gridftp-xrootd python2-condor  If you wish to only update the RPMs that changed, the set of RPMs is:  blahp-1.18.41.bosco-2.osgup.el7\nblahp-debuginfo-1.18.41.bosco-2.osgup.el7\ncondor-8.9.2-1.4.osgup.el7\ncondor-all-8.9.2-1.4.osgup.el7\ncondor-annex-ec2-8.9.2-1.4.osgup.el7\ncondor-bosco-8.9.2-1.4.osgup.el7\ncondor-classads-8.9.2-1.4.osgup.el7\ncondor-classads-devel-8.9.2-1.4.osgup.el7\ncondor-debuginfo-8.9.2-1.4.osgup.el7\ncondor-kbdd-8.9.2-1.4.osgup.el7\ncondor-procd-8.9.2-1.4.osgup.el7\ncondor-test-8.9.2-1.4.osgup.el7\ncondor-vm-gahp-8.9.2-1.4.osgup.el7\nminicondor-8.9.2-1.4.osgup.el7\npython2-condor-8.9.2-1.4.osgup.el7", 
             "title": "Upcoming RPMs"
+        }, 
+        {
+            "location": "/release/3.4/release-3-4-44-2/", 
+            "text": "OSG Data Release 3.4.44-2\n\n\nRelease Date:\n 2020-03-04  \n\n\nSupported OS Versions:\n EL7, EL6\n\n\n\n\nWant faster access to production-ready software?\n\n\nOSG 3.5 and 3.4 offer a rolling release repository where packages are added as soon as they pass acceptance testing.\nTo install packages from this repository, enable \n[osg-rolling]\n in \n/etc/yum.repos.d/osg-rolling.repo\n:\n\n\n[osg-rolling]\n...\nenabled=1\n\n\n\n\n\nOr for one-time installations, append the following to your \nyum\n command:\n\n\n--enablerepo=osg-rolling\n\n\n\n\n\n\n\nSummary of changes\n\n\nThis release contains \nVO Package v100\n:\n\n\n\n\nAdd new cert for GLOW (SOFTWARE-4006)\n\n\nReplace one of the certs for OSG (SOFTWARE-4007)\n\n\nUpdate voms2.fnal.gov DN for DES, DUNE, Fermilab (SOFTWARE-4012)\n\n\nMap FQANs from Fermilab VO subgroups to the same user as the VO-wide target (SOFTWARE-4005)\n\n\nDrop CDF (SOFTWARE-4012)\n\n\nDrop MIS VO (SOFTWARE-3575)\n\n\n\n\nThese \nJIRA tickets\n were addressed in this release.\n\n\nContainers\n\n\nThe \nWorker node containers\n have been updated to this release.\n\n\nUpdating to the new release\n\n\nUpdate Repositories\n\n\nTo update to this series, you need to \ninstall the current OSG repositories\n.\n\n\nUpdate Software\n\n\nOnce the new repositories are installed, you can update to this new release with:\n\n\nroot@host #\n yum update\n\n\n\n\n\n\n\nNotes\n\n\n\n\nPlease be aware that running \nyum update\n may also update other RPMs. You can exclude packages from being updated using the \n--exclude=[package-name or glob]\n option for the \nyum\n command.\n\n\nWatch the yum update carefully for any messages about a \n.rpmnew\n file being created. That means that a configuration file had been edited, and a new default version was to be installed. In that case, RPM does not overwrite the edited configuration file but instead installs the new version with a \n.rpmnew\n extension. You will need to merge any edits that have made into the \n.rpmnew\n file and then move the merged version into place (that is, without the \n.rpmnew\n extension). Watch especially for \n/etc/lcmaps.db\n, which every site is expected to edit.\n\n\n\n\n\n\nNeed help?\n\n\nDo you need help with this release? \nContact us for help\n.\n\n\nDetailed changes in this release\n\n\nPackages\n\n\nWe added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.\n\n\nEnterprise Linux 6\n\n\n\n\nvo-client-100-1.osg34.el6\n\n\n\n\nEnterprise Linux 7\n\n\n\n\nvo-client-100-1.osg34.el7\n\n\n\n\nRPMs\n\n\nIf you wish to manually update your system, you can run yum update against the following packages:\n\n\nvo-client vo-client-dcache vo-client-lcmaps-voms\n\n\n\n\n\nIf you wish to only update the RPMs that changed, the set of RPMs is:\n\n\nEnterprise Linux 6\n\n\nvo-client-100-1.osg34.el6\nvo-client-dcache-100-1.osg34.el6\nvo-client-lcmaps-voms-100-1.osg34.el6\n\n\n\n\n\nEnterprise Linux 7\n\n\nvo-client-100-1.osg34.el7\nvo-client-dcache-100-1.osg34.el7\nvo-client-lcmaps-voms-100-1.osg34.el7", 
+            "title": "OSG Release 3.4.44-2"
+        }, 
+        {
+            "location": "/release/3.4/release-3-4-44-2/#osg-data-release-3444-2", 
+            "text": "Release Date:  2020-03-04    Supported OS Versions:  EL7, EL6   Want faster access to production-ready software?  OSG 3.5 and 3.4 offer a rolling release repository where packages are added as soon as they pass acceptance testing.\nTo install packages from this repository, enable  [osg-rolling]  in  /etc/yum.repos.d/osg-rolling.repo :  [osg-rolling]\n...\nenabled=1  Or for one-time installations, append the following to your  yum  command:  --enablerepo=osg-rolling", 
+            "title": "OSG Data Release 3.4.44-2"
+        }, 
+        {
+            "location": "/release/3.4/release-3-4-44-2/#summary-of-changes", 
+            "text": "This release contains  VO Package v100 :   Add new cert for GLOW (SOFTWARE-4006)  Replace one of the certs for OSG (SOFTWARE-4007)  Update voms2.fnal.gov DN for DES, DUNE, Fermilab (SOFTWARE-4012)  Map FQANs from Fermilab VO subgroups to the same user as the VO-wide target (SOFTWARE-4005)  Drop CDF (SOFTWARE-4012)  Drop MIS VO (SOFTWARE-3575)   These  JIRA tickets  were addressed in this release.", 
+            "title": "Summary of changes"
+        }, 
+        {
+            "location": "/release/3.4/release-3-4-44-2/#containers", 
+            "text": "The  Worker node containers  have been updated to this release.", 
+            "title": "Containers"
+        }, 
+        {
+            "location": "/release/3.4/release-3-4-44-2/#updating-to-the-new-release", 
+            "text": "", 
+            "title": "Updating to the new release"
+        }, 
+        {
+            "location": "/release/3.4/release-3-4-44-2/#update-repositories", 
+            "text": "To update to this series, you need to  install the current OSG repositories .", 
+            "title": "Update Repositories"
+        }, 
+        {
+            "location": "/release/3.4/release-3-4-44-2/#update-software", 
+            "text": "Once the new repositories are installed, you can update to this new release with:  root@host #  yum update   Notes   Please be aware that running  yum update  may also update other RPMs. You can exclude packages from being updated using the  --exclude=[package-name or glob]  option for the  yum  command.  Watch the yum update carefully for any messages about a  .rpmnew  file being created. That means that a configuration file had been edited, and a new default version was to be installed. In that case, RPM does not overwrite the edited configuration file but instead installs the new version with a  .rpmnew  extension. You will need to merge any edits that have made into the  .rpmnew  file and then move the merged version into place (that is, without the  .rpmnew  extension). Watch especially for  /etc/lcmaps.db , which every site is expected to edit.", 
+            "title": "Update Software"
+        }, 
+        {
+            "location": "/release/3.4/release-3-4-44-2/#need-help", 
+            "text": "Do you need help with this release?  Contact us for help .", 
+            "title": "Need help?"
+        }, 
+        {
+            "location": "/release/3.4/release-3-4-44-2/#detailed-changes-in-this-release", 
+            "text": "", 
+            "title": "Detailed changes in this release"
+        }, 
+        {
+            "location": "/release/3.4/release-3-4-44-2/#packages", 
+            "text": "We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.", 
+            "title": "Packages"
+        }, 
+        {
+            "location": "/release/3.4/release-3-4-44-2/#enterprise-linux-6", 
+            "text": "vo-client-100-1.osg34.el6", 
+            "title": "Enterprise Linux 6"
+        }, 
+        {
+            "location": "/release/3.4/release-3-4-44-2/#enterprise-linux-7", 
+            "text": "vo-client-100-1.osg34.el7", 
+            "title": "Enterprise Linux 7"
+        }, 
+        {
+            "location": "/release/3.4/release-3-4-44-2/#rpms", 
+            "text": "If you wish to manually update your system, you can run yum update against the following packages:  vo-client vo-client-dcache vo-client-lcmaps-voms  If you wish to only update the RPMs that changed, the set of RPMs is:", 
+            "title": "RPMs"
+        }, 
+        {
+            "location": "/release/3.4/release-3-4-44-2/#enterprise-linux-6_1", 
+            "text": "vo-client-100-1.osg34.el6\nvo-client-dcache-100-1.osg34.el6\nvo-client-lcmaps-voms-100-1.osg34.el6", 
+            "title": "Enterprise Linux 6"
+        }, 
+        {
+            "location": "/release/3.4/release-3-4-44-2/#enterprise-linux-7_1", 
+            "text": "vo-client-100-1.osg34.el7\nvo-client-dcache-100-1.osg34.el7\nvo-client-lcmaps-voms-100-1.osg34.el7", 
+            "title": "Enterprise Linux 7"
         }, 
         {
             "location": "/release/3.4/release-3-4-44/", 
