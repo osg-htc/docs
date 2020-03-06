@@ -74,7 +74,7 @@ The configuration of filebeats revolves around this file `/etc/filebeat/filebeat
 1. Test that the configuration is correct by running:
  
         :::console
-        root@host # filebeat -configtest -e
+        root@host # filebeat test config
 
 1. Start the filebeats services:
 
