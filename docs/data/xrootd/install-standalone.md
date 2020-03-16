@@ -127,6 +127,14 @@ Validating XRootD
 
 To validate an XRootD installation, perform the following verification steps:
 
+!!! note
+    If you have configured authentication/authorization for XRootD,
+    be sure you have given yourself the necessary permissions to run these tests.
+    For example, if you are using a grid proxy,
+    make sure your DN is mapped to a user in `/etc/grid-security/grid-mapfile`,
+    and make sure you have a valid proxy on your local machine.
+    Also make sure that the Authfile on the XRootD server gives write access to the Unix user you will get mapped to.
+
 1. Verify file transfer over the XRootD protocol using XRootD client tools:
 
     1. Install the client tools:
