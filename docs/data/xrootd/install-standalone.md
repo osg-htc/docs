@@ -172,6 +172,28 @@ To validate an XRootD installation, perform the following verification steps:
             root@xrootd-standalone # ls -l /tmp/first_test
             -rw-r--r-- 1 xrootd xrootd 801512 Apr 11 10:48 /tmp/first_test
 
+Registering an XRootD Standalone Server
+---------------------------------------
+
+To register your XRootD server, follow the general registration instructions
+[here](/common/registration#new-resources) with the following XRootD-specific details:
+
+1.  Add an `XRootD component:` section to the `Services:` list, with any relevant fields for that service.
+    This is a partial example:
+
+        :::console
+        ...
+        FQDN: <FULLY QUALIFIED DOMAIN NAME>
+        Services:
+          XRootD component:
+            Description: Standalone XRootD server
+        ...
+
+    Replacing `<FULLY QUALIFIED DOMAIN NAME>` with your XRootD server's DNS entry.
+
+2.  If you are setting up a new resource, set `Active: false`.
+    Only set `Active: true` for a resource when it is accepting requests and ready for production.
+
 Getting Help
 ------------
 
