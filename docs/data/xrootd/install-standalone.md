@@ -44,17 +44,23 @@ under `/etc/xrootd/config.d/` as follows:
 
 1.  Configure a `rootdir` in `/etc/xrootd/config.d/10-common-site-local.cfg`, to point to the top of the directory
     hierarchy which you wish to serve via XRootD.
-    For example, to serve `/data`:
 
-        set rootdir = /data
+        set rootdir = <DIRECTORY>
 
-1.  To limit the sub-directories to serve under your configured `rootdir`, comment out the `all.export /` directive in
-    `/etc/xrootd/config.d/90-osg-standalone-paths.cfg`, and add an `all.export` directive for each directory under
-    `rootdir` that you wish to serve via XRootD.
+1.  If you want to limit the sub-directories to serve under your configured `rootdir`,
+    comment out the `all.export /` directive in
+    `/etc/xrootd/config.d/90-osg-standalone-paths.cfg`,
+    and add an `all.export` directive for each directory under `rootdir` that you wish to serve via XRootD.
+    
+    This is useful if you have a mixture of files under your `rootdir`, for example from multiple users,
+    but only want to expose a subset of them to the world.
+    
     For example, to serve the contents of `/data/store` and `/data/public` (with `rootdir` configured to `/data`):
 
         all.export /store/
         all.export /public/
+
+    If you want to serve everything under your configured `rootdir`, you don't have to change anything.
 
     !!! note
         The directories specified this way are writable by default.
@@ -63,10 +69,10 @@ under `/etc/xrootd/config.d/` as follows:
 1. In `/etc/xrootd/config.d/10-common-site-local.cfg`, add a line to set the `resourcename` variable to the
    [resource name](/common/registration/#registering-resources) of your XRootD service.
    For example, the XRootD service registered at the
-   [FermiGrid site](https://github.com/opensciencegrid/topology/blob/master/topology/Fermi%20National%20Accelerator%20Laboratory/FermiGrid/FNAL_PUBLIC_DCACHE.yaml#L6)
+   [University of Florida site](https://github.com/opensciencegrid/topology/blob/master/topology/University%20of%20Florida/UF%20HPC/UFlorida-HPC.yaml#L250)
    should set the following configuration:
 
-        set resourcename = Fermilab Public DCache
+        set resourcename = UFlorida-XRD
 
     !!! note
         CMS sites should follow CMS policy for `resourcename`
