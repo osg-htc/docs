@@ -47,6 +47,10 @@ under `/etc/xrootd/config.d/` as follows:
 
         set rootdir = <DIRECTORY>
 
+    !!! warning
+        Do not set `rootdir` to `/`.
+        This might result in serving private information.
+
 1.  If you want to limit the sub-directories to serve under your configured `rootdir`,
     comment out the `all.export /` directive in
     `/etc/xrootd/config.d/90-osg-standalone-paths.cfg`,
