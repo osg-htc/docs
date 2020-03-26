@@ -55,9 +55,14 @@ OSG 3.4
 
 **Supported OS Versions:** EL7, EL6
 
-With the release of OSG 3.5.0 in August 2019, the end-of-life dates have been set for OSG 3.4 per our
-[policy](https://opensciencegrid.org/technology/policy/release-series/):
-regular support will end in **February 2020** and critical bug/security support will end in **November 2020**.
+!!!warning "OSG 3.4 End-of-Life Approaching"
+    According to our
+    [OSG Software Release Series Support Policy](https://opensciencegrid.org/technology/policy/release-series/),
+    the OSG 3.4 series is due to reach
+    [end-of-life](https://opensciencegrid.org/technology/policy/release-series/#life-cycle-dates) in **November 2020**.
+    Please [upgrade to OSG 3.5](https://opensciencegrid.org/docs/release/release_series/#updating-to-osg-35)
+    at your earliest convenience.
+
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|

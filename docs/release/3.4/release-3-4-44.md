@@ -4,17 +4,13 @@ OSG Software Release 3.4.44
 **Release Date**: 2020-02-20    
 **Supported OS Versions:** EL7, EL6
 
-!!!tip "Want faster access to production-ready software?"
-    OSG 3.5 and 3.4 offer a rolling release repository where packages are added as soon as they pass acceptance testing.
-    To install packages from this repository, enable `[osg-rolling]` in `/etc/yum.repos.d/osg-rolling.repo`:
-
-        [osg-rolling]
-        ...
-        enabled=1
-
-    Or for one-time installations, append the following to your `yum` command:
-
-        --enablerepo=osg-rolling
+!!!warning "OSG 3.4 End-of-Life Approaching"
+    According to our
+    [OSG Software Release Series Support Policy](https://opensciencegrid.org/technology/policy/release-series/),
+    the OSG 3.4 series is due to reach
+    [end-of-life](https://opensciencegrid.org/technology/policy/release-series/#life-cycle-dates) in **November 2020**.
+    Please [upgrade to OSG 3.5](https://opensciencegrid.org/docs/release/release_series/#updating-to-osg-35)
+    at your earliest convenience.
 
 Summary of changes
 ------------------
