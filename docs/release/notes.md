@@ -6,15 +6,6 @@ This page contains links to detailed notes for release in the currently supporte
 For our policy on release series support, please consult
 [this page](https://opensciencegrid.org/technology/policy/release-series/).
 
-Release announcements are sent out to the administrative contacts registered
-in [Topology](https://topology.opensciencegrid.org).
-In addition, the announcements are also sent to the following mailing lists:
-
--   [osg-general@opensciencegrid.org](https://listserv.fnal.gov/scripts/wa.exe?A0=OSG-GENERAL)
--   [osg-operations@opensciencegrid.org](https://listserv.fnal.gov/scripts/wa.exe?A0=OSG-OPERATIONS)
--   [osg-sites@opensciencegrid.org](https://listserv.fnal.gov/scripts/wa.exe?A0=OSG-SITES)
--   [vdt-discuss@opensciencegrid.org](https://listserv.fnal.gov/scripts/wa.exe?A0=vdt-discuss)
-
 !!!tip "Want faster access to production-ready software?"
     OSG 3.5 and 3.4 offer a rolling release repository where packages are added as soon as they pass acceptance testing.
     To install packages from this repository, enable `[osg-rolling]` in `/etc/yum.repos.d/osg-rolling.repo`:
@@ -146,3 +137,14 @@ regular support will end in **February 2020** and critical bug/security support 
 | [3.4.1](/release/3.4/release-3-4-1)       | 2017-07-12 | lcmaps-plugins-verify-proxy 1.5.9-1.2, osg-configure 2.1.0, BLAHP 1.18.30, HTCondor-CE 2.2.1, Gratia probes 1.18.1, CVMFS 2.3.5, globus-gridftp-server 11.8, gridftp-dsi-posix 1.4, HTCondor 8.6.4; Upcoming: HTCondor 8.7.2 |
 | [3.4.0-2](/release/3.4/release-3-4-0-2)   | 2017-06-15 | IGTF 1.83, VO Package v74                                               |
 | [3.4.0](/release/3.4/release-3-4-0)       | 2017-06-14 | HTCondor 8.6.3, Frontier-squid 3.5.24-3.1, lcmaps-plugins-voms 1.7.1, XRootD 4.6.1, GlideinWMS 3.2.19, HTCondor CE 2.2.0, voms-admin-server 1.7.0-1.22, osg-configure 2.0.0, osg-ca-scripts 1.1.6; Upcoming: GlideinWMS 3.3.2 |
+
+Announcements
+-------------
+
+OSG releases are also announced by mail and are sent to the following recipients and lists:
+
+-   [Registered administrative contacts](/common/registration#register-resources)
+-   [osg-general@opensciencegrid.org](https://listserv.fnal.gov/scripts/wa.exe?A0=OSG-GENERAL)
+-   [osg-operations@opensciencegrid.org](https://listserv.fnal.gov/scripts/wa.exe?A0=OSG-OPERATIONS)
+-   [osg-sites@opensciencegrid.org](https://listserv.fnal.gov/scripts/wa.exe?A0=OSG-SITES)
+-   [vdt-discuss@opensciencegrid.org](https://listserv.fnal.gov/scripts/wa.exe?A0=vdt-discuss)
