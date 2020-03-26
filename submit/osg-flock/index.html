@@ -2850,7 +2850,7 @@ to the batch system for completion.
 For the HTCondor batch system, we say that users log on to a submit host to submit their jobs to HTCondor,
 where the jobs wait ("are queued") until computing resources are available to run them.
 In a purely local HTCondor system, there are one to a few submit hosts and many computing resources.</p>
-<p>An HTCondor submit host can also be configured to forward excess jobs to an OSG-managed submit host.
+<p>An HTCondor submit host can also be configured to forward excess jobs to an OSG-managed pool.
 This process is called <a href="https://htcondor.readthedocs.io/en/stable/grid-computing/connecting-pools-with-flocking.html">flocking</a>.
 If you already have an HTCondor pool, we recommend that you install this software
 on top of one of your existing HTCondor submit hosts.
@@ -2936,6 +2936,22 @@ we provide a recommended configuration for flocking.</p>
 
 
 </li>
+<li>
+<p>Enable the Gratia Probe.</p>
+<div class="codehilite"><pre><span></span>EnableProbe=1
+</pre></div>
+
+
+</li>
+<li>
+<p>Under the section <code>Title2</code> make sure to set the following (if not already there):</p>
+<div class="codehilite"><pre><span></span>MapUnknownToGroup=&quot;1&quot;
+MapGroupToRole=&quot;1&quot;
+VOOverride=&quot;OSG&quot;
+</pre></div>
+
+
+</li>
 </ol>
 <h2 id="configuring-authentication">Configuring Authentication<a class="headerlink" href="#configuring-authentication" title="Permanent link">&para;</a></h2>
 <p>If you have obtained a host certificate according to the <a href="../../security/host-certs/">instructions</a>,
@@ -2960,11 +2976,33 @@ you do not need to do any additional configuration and may <a href="#managing-se
 </li>
 </ol>
 <h2 id="managing-services">Managing Services<a class="headerlink" href="#managing-services" title="Permanent link">&para;</a></h2>
-<p>You will need the following services enabled and running:
-<em> gratia-probes-cron
-</em> condor
-<em> fetch-crl-cron
-</em> fetch-crl-boot</p>
+<p>In addition to the HTCondor service itself, there are a number of supporting services in your installation. The specific services are:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Software</th>
+<th align="left">Service name</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Fetch CRL</td>
+<td align="left"><code>fetch-crl-boot</code> and <code>fetch-crl-cron</code></td>
+<td align="left">See <a href="../../common/ca#managing-fetch-crl-services">CA documentation</a> for more info</td>
+</tr>
+<tr>
+<td align="left">Gratia</td>
+<td align="left"><code>gratia-probes-cron</code></td>
+<td align="left">Accounting software</td>
+</tr>
+<tr>
+<td align="left">HTcondor</td>
+<td align="left"><code>condor</code></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
 <p>The following table gives the commands needed to start, stop, enable, and disable a service:</p>
 <table>
 <thead>
