@@ -155,11 +155,7 @@ If you cannot obtain a host certificate, then configure pool password authentica
 
 Managing Services
 -----------------
-You will need the following services enabled and running:
-* gratia-probes-cron
-* condor
-* fetch-crl-cron
-* fetch-crl-boot
+In addition to the HTCondor service itself, there are a number of supporting services in your installation. The specific services are:
 
 | Software          | Service name                          | Notes                                                                                  |
 |:------------------|:--------------------------------------|:---------------------------------------------------------------------------------------|
