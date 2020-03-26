@@ -183,6 +183,8 @@ Optional Configuration
 For production services, we suggest only changing software versions during controlled downtime.
 Therefore we recommend security-only automatic updates or disabling automatic updates entirely.
 
+!!! warning
+    CentOS does not support security-only automatic updates.
 
 To enable only security related automatic updates:
 
