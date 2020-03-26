@@ -25,7 +25,7 @@ For the HTCondor batch system, we say that users log on to a submit host to subm
 where the jobs wait ("are queued") until computing resources are available to run them.
 In a purely local HTCondor system, there are one to a few submit hosts and many computing resources.
 
-An HTCondor submit host can also be configured to forward excess jobs to an OSG-managed submit host.
+An HTCondor submit host can also be configured to forward excess jobs to an OSG-managed pool.
 This process is called [flocking](https://htcondor.readthedocs.io/en/stable/grid-computing/connecting-pools-with-flocking.html).
 If you already have an HTCondor pool, we recommend that you install this software
 on top of one of your existing HTCondor submit hosts.
@@ -121,6 +121,17 @@ we provide a recommended configuration for flocking.
         :::xml
         SiteName="OSG_US_EXAMPLE_SUBMIT"
 
+1. Enable the Gratia Probe.
+
+        :::xml
+        EnableProbe=1
+
+1. Under the section `Title2` make sure to set the following (if not already there):
+  
+        :::xml
+        MapUnknownToGroup="1"
+        MapGroupToRole="1"
+        VOOverride="OSG"
 
 Configuring Authentication
 --------------------------
@@ -149,6 +160,12 @@ You will need the following services enabled and running:
 * condor
 * fetch-crl-cron
 * fetch-crl-boot
+
+| Software          | Service name                          | Notes                                                                                  |
+|:------------------|:--------------------------------------|:---------------------------------------------------------------------------------------|
+| Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info           |
+| Gratia            | `gratia-probes-cron`                  | Accounting software                                                                    |
+| HTcondor          | `condor`                              |                                                                                        |
 
 The following table gives the commands needed to start, stop, enable, and disable a service:
 
