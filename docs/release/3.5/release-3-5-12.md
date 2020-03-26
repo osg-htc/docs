@@ -21,7 +21,7 @@ Summary of Changes
 
 This release contains:
 
--   [XRootD-SciTokens 1.2.0](https://github.com/scitokens/xrootd-scitokens/releases/tag/v1.2.0): Fixes authorization logic error
+-   [XRootD-SciTokens 1.2.0](https://github.com/scitokens/xrootd-scitokens/releases/tag/v1.2.0): Fixes authorization logic error ([Security announcement](https://opensciencegrid.org/security/vulns/OSG-SEC-2020-03-26-Vulnerability-in-xrootd-scitokens-plugin/))
 
 These
 [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.5.12%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC)
