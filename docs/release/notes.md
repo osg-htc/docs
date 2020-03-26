@@ -41,6 +41,7 @@ To update to the OSG 3.5 series, please consult the page on
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.5.12](/release/3.5/release-3-5-12)     | 2020-03-26 | High Priority Release: XRootD-SciTokens 1.2.0                           |
 | [3.5.11](/release/3.5/release-3-5-11)     | 2020-03-11 | CVMFS 2.7.1, oidc-agent 3.3.1, CCTools 7.0.22, GSI-OpenSSH 7.4p1-5, VO Package v101 |
 | [3.5.10-2](/release/3.5/release-3-5-10-2) | 2020-03-04 | VO Package v100                                                         |
 | [3.5.10](/release/3.5/release-3-5-10)     | 2020-02-20 | XRootD 4.11.2, XCache 1.2.1, VO Package v99, UberFTP 2.8-3, osg-configure 3.1.1, osg-system-profiler 1.5.0 |
@@ -69,6 +70,7 @@ regular support will end in **February 2020** and critical bug/security support 
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.46](/release/3.4/release-3-4-46)     | 2020-03-26 | High Priority Release: XRootD-SciTokens 1.2.0                           |
 | [3.4.45](/release/3.4/release-3-4-45)     | 2020-03-11 | Singularity 3.5.3, VO Package v101                                      |
 | [3.4.44-2](/release/3.4/release-3-4-44-2) | 2020-03-04 | VO Package v100                                                         |
 | [3.4.44](/release/3.4/release-3-4-44)     | 2020-02-20 | XRootD 4.11.2, XCache 1.2.1, VO Package v99, UberFTP 2.8-3, osg-configure 2.5.1, osg-system-profiler 1.5.0 |
