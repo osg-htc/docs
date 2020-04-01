@@ -70,7 +70,7 @@ JOB_ROUTER_ENTRIES @=jre
 ```
 
 To verify jobs are being routed appropriately,
-[one may examine pilots](compute-element/troubleshoot-htcondor-ce/#condor_ce_router_q)
+[one may examine pilots](/compute-element/troubleshoot-htcondor-ce/#condor_ce_router_q)
 with `condor_ce_router_q`.
 
 !!! note "Additional considerations for older CEs"
