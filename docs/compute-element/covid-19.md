@@ -51,7 +51,7 @@ JOB_ROUTER_ENTRIES @=jre
 To add a new route for COVID-19 pilots, append a new route
 prior to the existing one:
 
-```
+```hl_lines="2 3 4 5 6 7 8"
 JOB_ROUTER_ENTRIES @=jre
 [
  name = "OSG COVID-19 Jobs";
