@@ -77,7 +77,7 @@ To verify jobs are being routed appropriately,
 with `condor_ce_router_q`.
 
 !!! note "Additional considerations for older CEs"
-    Prior to HTCondor 8.8.8 or 8.9.5, HTCondor-CE had separate rules for handling
+    Prior to HTCondor 8.8.7 or 8.9.5, HTCondor-CE had separate rules for handling
     multiple routes; see the
     [job router recipes](/compute-element/job-router-recipes#how-jobs-match-to-job-routes) for more
     details.
