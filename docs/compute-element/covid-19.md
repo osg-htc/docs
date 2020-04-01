@@ -41,7 +41,7 @@ system:
 ```
 JOB_ROUTER_ENTRIES @=jre
 [
- name = "OSG_Jobs";
+ name = "Local_Slurm";
  GridResource = "batch slurm";
  TargetUniverse = 9;
  queue = "osg";
@@ -61,7 +61,7 @@ JOB_ROUTER_ENTRIES @=jre
  Requirements = (TARGET.IsCOVID19 =?= true);
 ]
 [
- name = "OSG_Jobs";
+ name = "Local_Slurm";
  GridResource = "batch slurm";
  TargetUniverse = 9;
  queue = "osg";
@@ -69,7 +69,7 @@ JOB_ROUTER_ENTRIES @=jre
 @jre
 
 # Specify the order of the routes
-JOB_ROUTER_ROUTE_NAMES = OSG_COVID-19_Jobs, OSG_Jobs
+JOB_ROUTER_ROUTE_NAMES = OSG_COVID-19_Jobs, Local_Slurm
 ```
 
 To verify jobs are being routed appropriately,
@@ -94,14 +94,14 @@ JOB_ROUTER_ENTRIES @=jre
  Requirements = (TARGET.IsCOVID19 =?= true);
 ]
 [
- name = "OSG_Jobs";
+ name = "Local_Condor";
  TargetUniverse = 5;
  set_AcctGroup = "osg";
 ]
 @jre
 
 # Specify the order of the routes
-JOB_ROUTER_ROUTE_NAMES = OSG_COVID-19_Jobs, OSG_Jobs
+JOB_ROUTER_ROUTE_NAMES = OSG_COVID-19_Jobs, Local_Condor
 ```
 
 Only Supporting COVID-19
