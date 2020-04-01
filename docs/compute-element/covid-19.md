@@ -35,13 +35,13 @@ group.
 Job routes are controlled by the `JOB_ROUTER_ENTRIES` configuration variable
 in HTCondor-CE (customizations may be placed in `/etc/condor-ce/config.d/`).
 
-For example, consider the following route for a CE submitting to a SLURM batch
+For example, consider the following route for a CE submitting to a Slurm batch
 system:
 
 ```
 JOB_ROUTER_ENTRIES @=jre
 [
- name = "OSG_Jobs";
+ name = "Local_Slurm";
  GridResource = "batch slurm";
  TargetUniverse = 9;
  queue = "osg";
@@ -54,14 +54,14 @@ prior to the existing one and specify their order:
 ```hl_lines="2 3 4 5 6 7 8 17 18"
 JOB_ROUTER_ENTRIES @=jre
 [
- name = "OSG_COVID-19_Jobs";
+ name = "OSG_COVID19_Jobs";
  GridResource = "batch slurm";
  TargetUniverse = 9;
  queue = "covid19";
  Requirements = (TARGET.IsCOVID19 =?= true);
 ]
 [
- name = "OSG_Jobs";
+ name = "Local_Slurm";
  GridResource = "batch slurm";
  TargetUniverse = 9;
  queue = "osg";
@@ -69,7 +69,7 @@ JOB_ROUTER_ENTRIES @=jre
 @jre
 
 # Specify the order of the routes
-JOB_ROUTER_ROUTE_NAMES = OSG_COVID-19_Jobs, OSG_Jobs
+JOB_ROUTER_ROUTE_NAMES = OSG_COVID19_Jobs, Local_Slurm
 ```
 
 To verify jobs are being routed appropriately,
@@ -88,20 +88,20 @@ separate accounting group by providing the `set_AcctGroup` attribute:
 ```hl_lines="5 11"
 JOB_ROUTER_ENTRIES @=jre
 [
- name = "OSG_COVID-19_Jobs";
+ name = "OSG_COVID19_Jobs";
  TargetUniverse = 5;
  set_AcctGroup = "covid19";
  Requirements = (TARGET.IsCOVID19 =?= true);
 ]
 [
- name = "OSG_Jobs";
+ name = "Local_Condor";
  TargetUniverse = 5;
  set_AcctGroup = "osg";
 ]
 @jre
 
 # Specify the order of the routes
-JOB_ROUTER_ROUTE_NAMES = OSG_COVID-19_Jobs, OSG_Jobs
+JOB_ROUTER_ROUTE_NAMES = OSG_COVID19_Jobs, Local_Condor
 ```
 
 Only Supporting COVID-19
@@ -109,7 +109,7 @@ Only Supporting COVID-19
 
 If your resource _only_ wants to support COVID-19 research, then you need
 to [enable the OSG VO](/security/lcmaps-voms-authentication/#configuring-the-lcmaps-voms-plugin)
-but only provide the `OSG_COVID-19_Jobs` job route above.  As long as the
+but only provide the `OSG_COVID19_Jobs` job route above.  As long as the
 `Requirements` expression for your job route includes
 `(TARGET.IsCOVID19 =?= true)`, then non-COVID pilots will not be routed
 to the batch system.
