@@ -16,7 +16,8 @@ instance or asking OSG to [host the CE](/compute-element/hosted-ce/) on your
 behalf.  If neither solution is viable, please send email to
 <help@opensciencegrid.org> and we can provide consulting services to determine
 a better approach.
-2. Enable the OSG VO and setup a job route specific to COVID-19 pilot jobs.
+2. [Enable the OSG VO](/security/lcmaps-voms-authentication/#configuring-the-lcmaps-voms-plugin)
+and setup a job route specific to COVID-19 pilot jobs.
 This process is documented below.  This enables you to prioritize these jobs
 according to your local policy.
 3. Send email to <help@opensciencegrid.org> requesting that your CE receive
@@ -53,7 +54,7 @@ prior to the existing one:
 ```
 JOB_ROUTER_ENTRIES @=jre
 [
- name = "OSG Jobs";
+ name = "OSG COVID-19 Jobs";
  GridResource = "batch slurm";
  TargetUniverse = 9;
  queue = "covid19";
@@ -84,7 +85,7 @@ separate accounting group by providing the `set_AcctGroup` attribute:
 ```hl_lines="6"
 JOB_ROUTER_ENTRIES @=jre
 [
- name = "OSG Jobs";
+ name = "OSG COVID-19 Jobs";
  GridResource = "batch slurm";
  TargetUniverse = 9;
  set_AcctGroup = "covid19";
@@ -97,6 +98,19 @@ JOB_ROUTER_ENTRIES @=jre
 ]
 @jre
 ```
+
+Only Supporting COVID-19
+------------------------
+
+If your resource _only_ wants to support COVID-19 research, then you need
+to [enable the OSG VO](/security/lcmaps-voms-authentication/#configuring-the-lcmaps-voms-plugin)
+but only provide the "OSG COVID-19 Jobs" job route above.  As long as the
+`Requirements` expression for your job route includes
+`(TARGET.IsCOVID19 =?= true)`, then non-COVID pilots will not be routed
+to the batch system.
+
+When you contact <help@opensciencegrid.org> to receive COVID-19 pilots,
+please note that you _only_ want to support these jobs.
 
 Getting Help
 ------------
