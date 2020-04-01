@@ -744,6 +744,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../covid-19/" title="Supporting COVID-19 Research" class="md-nav__link">
+      Supporting COVID-19 Research
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -3381,11 +3393,22 @@ If the job meets the requirements of multiple routes,  the route that is chosen 
 <td><strong>Round-robin</strong> between all matching routes. In this case, we recommend making each route's requirements mutually exclusive.</td>
 </tr>
 <tr>
-<td>&gt;= 8.7.1</td>
-<td><strong>First matching route</strong> where routes are considered in the same order that they are configured</td>
+<td>&gt;= 8.7.1 and &lt; 8.8.7, &gt;= 8.9.0 and &lt; 8.9.5</td>
+<td><strong>First matching route</strong> where routes are considered in hash-table order. In this case, we recommend making each route's requirements mutually exclusive.</td>
+</tr>
+<tr>
+<td>&gt;= 8.8.7, &gt;= 8.9.5</td>
+<td><strong>First matching route</strong> where routes are considered in the order specified by <a href="https://htcondor.readthedocs.io/en/latest/admin-manual/configuration-macros.html#JOB_ROUTER_ROUTE_NAMES">JOB_ROUTER_ROUTE_NAMES</a></td>
 </tr>
 </tbody>
 </table>
+<div class="admonition bug">
+<p class="admonition-title">Job Route Order</p>
+<p>For HTCondor versions &lt; 8.8.7 (as well as versions &gt;= 8.9.0 and &lt; 8.9.5) the order of job routes does not match the
+order in which they are configured.
+As a result, we recommend updating to at least HTCondor 8.9.5 (or 8.8.6) and specifying the names of your routes in
+<code>JOB_ROUTER_ROUTE_NAMES</code> in the order that you'd like them considered.</p>
+</div>
 <p>If you're using HTCondor &gt;= 8.7.1 and would like to use round-robin matching, add the following text to a file in
 <code>/etc/condor-ce/config.d/</code>:</p>
 <div class="codehilite"><pre><span></span>JOB_ROUTER_ROUND_ROBIN_SELECTION = True
