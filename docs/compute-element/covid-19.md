@@ -32,8 +32,9 @@ will have the attribute `IsCOVID19 = true`.  They do not require mapping to
 a distinct Unix account but can be sent to a prioritized queue or accounting
 group.
 
-Job routes are controlled by the `JOB_ROUTER_ENTRIES` configuration variable
-in HTCondor-CE (customizations may be placed in `/etc/condor-ce/config.d/`).
+Job routes are controlled by the `JOB_ROUTER_ENTRIES` configuration variable in HTCondor-CE.
+Customizations may be placed in `/etc/condor-ce/config.d/` where files are parsed in lexicographical order, e.g.
+`JOB_ROUTER_ENTRIES` specified in `50-covid-routes.conf` will override `JOB_ROUTER_ENTRIES` in `02-local-slurm.conf`.
 
 For example, consider the following route for a CE submitting to a Slurm batch
 system:
@@ -46,12 +47,17 @@ JOB_ROUTER_ENTRIES @=jre
  TargetUniverse = 9;
  queue = "osg";
 ]
+@jre
+
+# Specify the routes to in the job routing table and the order in which
+# they're considered
+JOB_ROUTER_ROUTE_NAMES = Local_Slurm
 ```
 
-To add a new route for COVID-19 pilots, append a new route
-prior to the existing one and specify their order:
+To add a new route for COVID-19 pilots, add the following configuration to a file in `/etc/condor-ce/config.d/` (files
+are parsed in lexicographical order):
 
-```hl_lines="2 3 4 5 6 7 8 17 18"
+```
 JOB_ROUTER_ENTRIES @=jre
 [
  name = "OSG_COVID19_Jobs";
@@ -60,32 +66,31 @@ JOB_ROUTER_ENTRIES @=jre
  queue = "covid19";
  Requirements = (TARGET.IsCOVID19 =?= true);
 ]
-[
- name = "Local_Slurm";
- GridResource = "batch slurm";
- TargetUniverse = 9;
- queue = "osg";
-]
+$(JOB_ROUTER_ENTRIES)
 @jre
 
-# Specify the order of the routes
-JOB_ROUTER_ROUTE_NAMES = OSG_COVID19_Jobs, Local_Slurm
+# Specify the routes to in the job routing table and the order in which
+# they're considered
+JOB_ROUTER_ROUTE_NAMES = OSG_COVID19_Jobs, $(JOB_ROUTER_ROUTE_NAMES)
 ```
 
-To verify jobs are being routed appropriately,
-[one may examine pilots](/compute-element/troubleshoot-htcondor-ce/#condor_ce_router_q)
-with `condor_ce_router_q`.
-
-!!! note "Additional considerations for older CEs"
+!!! warning "Additional considerations for older CEs"
     Prior to HTCondor 8.8.7 or 8.9.5, HTCondor-CE had separate rules for handling
     multiple routes; see the
     [job router recipes](/compute-element/job-router-recipes#how-jobs-match-to-job-routes) for more
     details.
 
-Similarly, at a HTCondor site, one can place these jobs into a
-separate accounting group by providing the `set_AcctGroup` attribute:
+To verify jobs are being routed appropriately,
+[one may examine pilots](/compute-element/troubleshoot-htcondor-ce/#condor_ce_router_q)
+with `condor_ce_router_q`.
+If you do not see all of your expected job routes from this command, verify that all of your routes appear in the output
+of `condor_ce_config_val -verbose JOB_ROUTER_ROUTE_NAMES` and `condor_ce_config_val -verbose JOB_ROUTER_ENTRIES`.
 
-```hl_lines="5 11"
+Similarly, at an HTCondor site, one can place these jobs into a separate accounting group by providing the
+`set_AcctGroup` attribute by adding the following configuration to a file in `/etc/condor-ce/config.d/` (files are
+parsed in lexicographical order):
+
+```hl_lines="5"
 JOB_ROUTER_ENTRIES @=jre
 [
  name = "OSG_COVID19_Jobs";
@@ -93,15 +98,12 @@ JOB_ROUTER_ENTRIES @=jre
  set_AcctGroup = "covid19";
  Requirements = (TARGET.IsCOVID19 =?= true);
 ]
-[
- name = "Local_Condor";
- TargetUniverse = 5;
- set_AcctGroup = "osg";
-]
+$(JOB_ROUTER_ENTRIES)
 @jre
 
-# Specify the order of the routes
-JOB_ROUTER_ROUTE_NAMES = OSG_COVID19_Jobs, Local_Condor
+# Specify the routes to in the job routing table and the order in which
+# they're considered
+JOB_ROUTER_ROUTE_NAMES = OSG_COVID19_Jobs, $(JOB_ROUTER_ROUTE_NAMES)
 ```
 
 Only Supporting COVID-19
