@@ -82,19 +82,18 @@ with `condor_ce_router_q`.
 Similarly, at a HTCondor site, one can place these jobs into a
 separate accounting group by providing the `set_AcctGroup` attribute:
 
-```hl_lines="6"
+```hl_lines="5 11"
 JOB_ROUTER_ENTRIES @=jre
 [
  name = "OSG COVID-19 Jobs";
- GridResource = "batch slurm";
- TargetUniverse = 9;
+ TargetUniverse = 5;
  set_AcctGroup = "covid19";
  Requirements = (TARGET.IsCOVID19 =?= true);
 ]
 [
  name = "OSG Jobs";
  TargetUniverse = 5;
- queue = "osg";
+ set_AcctGroup = "osg";
 ]
 @jre
 ```
