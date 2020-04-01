@@ -35,7 +35,7 @@ group.
 Job routes are controlled by the `JOB_ROUTER_ENTRIES` configuration variable
 in HTCondor-CE (customizations may be placed in `/etc/condor-ce/config.d/`).
 
-For example, consider the following route for a CE submitting to a SLURM batch
+For example, consider the following route for a CE submitting to a Slurm batch
 system:
 
 ```
