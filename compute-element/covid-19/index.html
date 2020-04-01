@@ -2690,11 +2690,11 @@ a distinct Unix account but can be sent to a prioritized queue or accounting
 group.</p>
 <p>Job routes are controlled by the <code>JOB_ROUTER_ENTRIES</code> configuration variable
 in HTCondor-CE (customizations may be placed in <code>/etc/condor-ce/config.d/</code>).</p>
-<p>For example, consider the following route for a CE submitting to a SLURM batch
+<p>For example, consider the following route for a CE submitting to a Slurm batch
 system:</p>
 <div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
 [
- name = &quot;OSG_Jobs&quot;;
+ name = &quot;Local_Slurm&quot;;
  GridResource = &quot;batch slurm&quot;;
  TargetUniverse = 9;
  queue = &quot;osg&quot;;
@@ -2706,14 +2706,14 @@ system:</p>
 prior to the existing one and specify their order:</p>
 <div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
 <span class="hll">[
-</span><span class="hll"> name = &quot;OSG_COVID-19_Jobs&quot;;
+</span><span class="hll"> name = &quot;OSG_COVID19_Jobs&quot;;
 </span><span class="hll"> GridResource = &quot;batch slurm&quot;;
 </span><span class="hll"> TargetUniverse = 9;
 </span><span class="hll"> queue = &quot;covid19&quot;;
 </span><span class="hll"> Requirements = (TARGET.IsCOVID19 =?= true);
 </span><span class="hll">]
 </span>[
- name = &quot;OSG_Jobs&quot;;
+ name = &quot;Local_Slurm&quot;;
  GridResource = &quot;batch slurm&quot;;
  TargetUniverse = 9;
  queue = &quot;osg&quot;;
@@ -2721,7 +2721,7 @@ prior to the existing one and specify their order:</p>
 @jre
 
 <span class="hll"># Specify the order of the routes
-</span><span class="hll">JOB_ROUTER_ROUTE_NAMES = OSG_COVID-19_Jobs, OSG_Jobs
+</span><span class="hll">JOB_ROUTER_ROUTE_NAMES = OSG_COVID19_Jobs, Local_Slurm
 </span></pre></div>
 
 
@@ -2739,27 +2739,27 @@ details.</p>
 separate accounting group by providing the <code>set_AcctGroup</code> attribute:</p>
 <div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
 [
- name = &quot;OSG_COVID-19_Jobs&quot;;
+ name = &quot;OSG_COVID19_Jobs&quot;;
  TargetUniverse = 5;
 <span class="hll"> set_AcctGroup = &quot;covid19&quot;;
 </span> Requirements = (TARGET.IsCOVID19 =?= true);
 ]
 [
- name = &quot;OSG_Jobs&quot;;
+ name = &quot;Local_Condor&quot;;
  TargetUniverse = 5;
 <span class="hll"> set_AcctGroup = &quot;osg&quot;;
 </span>]
 @jre
 
 # Specify the order of the routes
-JOB_ROUTER_ROUTE_NAMES = OSG_COVID-19_Jobs, OSG_Jobs
+JOB_ROUTER_ROUTE_NAMES = OSG_COVID19_Jobs, Local_Condor
 </pre></div>
 
 
 <h2 id="only-supporting-covid-19">Only Supporting COVID-19<a class="headerlink" href="#only-supporting-covid-19" title="Permanent link">&para;</a></h2>
 <p>If your resource <em>only</em> wants to support COVID-19 research, then you need
 to <a href="../../security/lcmaps-voms-authentication/#configuring-the-lcmaps-voms-plugin">enable the OSG VO</a>
-but only provide the <code>OSG_COVID-19_Jobs</code> job route above.  As long as the
+but only provide the <code>OSG_COVID19_Jobs</code> job route above.  As long as the
 <code>Requirements</code> expression for your job route includes
 <code>(TARGET.IsCOVID19 =?= true)</code>, then non-COVID pilots will not be routed
 to the batch system.</p>
