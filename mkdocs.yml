@@ -21,6 +21,7 @@ pages:
   - 'Job Router Recipes': 'compute-element/job-router-recipes.md'
   - 'Troubleshooting HTCondor-CE': 'compute-element/troubleshoot-htcondor-ce.md'
   - 'Submitting to HTCondor-CE': 'compute-element/submit-htcondor-ce.md'
+  - 'Supporting COVID-19 Research': 'compute-element/covid-19.md'
 - Worker Node:
   - 'Overview': 'worker-node/using-wn.md'
   - 'Install from RPM': 'worker-node/install-wn.md'
