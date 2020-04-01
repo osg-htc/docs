@@ -28,7 +28,7 @@ Setting up a COVID-19 Job Route
 -------------------------------
 
 By default, COVID-19 pilots will look identical to OSG pilots _except_ they
-will have the attribute =IsCOVID19 = true=.  They do not require mapping to
+will have the attribute `IsCOVID19 = true`.  They do not require mapping to
 a distinct Unix account but can be sent to a prioritized queue or accounting
 group.
 
