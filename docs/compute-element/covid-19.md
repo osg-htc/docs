@@ -79,7 +79,7 @@ with `condor_ce_router_q`.
 !!! note "Additional considerations for older CEs"
     Prior to HTCondor 8.8.8 or 8.9.5, HTCondor-CE had separate rules for handling
     multiple routes; see the
-    [job router recipes](/compute-element/job-router-recipes#how_jobs_match_to_job_routes) for more
+    [job router recipes](/compute-element/job-router-recipes#how-jobs-match-to-job-routes) for more
     details.
 
 Similarly, at a HTCondor site, one can place these jobs into a
