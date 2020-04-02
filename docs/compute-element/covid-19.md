@@ -2,22 +2,23 @@
 Supporting COVID-19 Research on the OSG
 =======================================
 
-There are a number of options available for sites wanting to support the
-important and urgent work of COVID-19 researchers using the OSG.  The OSG VO
-provides sites with the opportunity to accept pilots that _exclusively_ run
-jobs relating to COVID-19 research and account for this usage separately
-from other OSG activity.
+There a few options available for sites with computing resources who want to support the
+important and urgent work of COVID-19 researchers using the OSG. As we're
+currently routing such projects through the OSG VO, your site can be configured
+to accept pilots that _exclusively_ run OSG VO jobs relating to COVID-19 research
+(among other pilots you support), allowing you to prioritize these pilots and account
+for this usage separately from other OSG activity.
 
-To support this work, one must:
+To support COVID-19 work, the overall process includes the following:
 
-1. Make the site computing resources available through a HTCondor-CE.
-   This can be done through an [on-premise](/compute-element/install-htcondor-ce/) instance or asking OSG to
+1. Make the site computing resources available through a HTCondor-CE if you have not already done so.
+   You can install a [locally-managed](/compute-element/install-htcondor-ce/) instance or ask OSG to
    [host the CE](/compute-element/hosted-ce/) on your behalf.
-   If neither solution is viable, please send email to <help@opensciencegrid.org> and we can provide consulting
-   services to determine a better approach.
+   If neither solution is viable, or you'd like to discuss the options, please send email to <help@opensciencegrid.org>
+   and we'll work with you to arrive at the best solution.
 1. [Enable the OSG VO](/security/lcmaps-voms-authentication/#configuring-the-lcmaps-voms-plugin) on your HTCondor-CE.
 1. Setup a job route specific to COVID-19 pilot jobs (documented below).
-   This enables you to prioritize these jobs according to your local policy.
+   The job route will allow you to prioritize these jobs using local policy in your site's cluster.
 1. Send email to <help@opensciencegrid.org> requesting that your CE receive COVID-19 pilots.
    We will need to know the CE hostname and any special restrictions that might apply to these pilots.
 
@@ -209,4 +210,4 @@ Contact <help@opensciencegrid.org> with the following information to receive COV
 Getting Help
 ------------
 
-To get assistance, please use the [this page](/common/help).
+To get assistance, please use [this page](/common/help).
