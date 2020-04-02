@@ -105,7 +105,7 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:
 ### For HTCondor batch systems
 
 Similarly, at an HTCondor site, one can place these jobs into a separate accounting group by providing the
-`set_AcctGroup` attribute in a new job route.
+`set_AcctGroup` and `eval_set_AccountingGroup` attributes in a new job route.
 To add a new route for COVID-19 pilots for non-HTCondor batch systems:
 
 1.  Note the names of your currently configured routes:
@@ -115,16 +115,20 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:
 
 1.  Add the following configuration to a file in `/etc/condor-ce/config.d/` (files are parsed in lexicographical order):
 
-        :::config hl_lines="5"
+        :::config hl_lines="5 6"
         JOB_ROUTER_ENTRIES @=jre
         [
          name = "OSG_COVID19_Jobs";
          TargetUniverse = 5;
          set_AcctGroup = "covid19";
+         eval_set_AccountingGroup = strcat(AcctGroup, ".", Owner);
          Requirements = (TARGET.IsCOVID19 =?= true);
         ]
         $(JOB_ROUTER_ENTRIES)
         @jre
+
+    Replacing `covid19` in `set_AcctGroup` with the name of the accounting group that you would like to use for COVID-19
+    jobs.
 
 1.  Ensure that COVID-19 jobs match to the new route.
     Choose one of the options below depending on your HTCondor version (`condor_version`):
