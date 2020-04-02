@@ -116,7 +116,7 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:
 
 1.  Add the following configuration to a file in `/etc/condor-ce/config.d/` (files are parsed in lexicographical order):
 
-        :::config hl_lines="5 6"
+        :::config hl_lines="5 6 7"
         JOB_ROUTER_ENTRIES @=jre
         [
          name = "OSG_COVID19_Jobs";
