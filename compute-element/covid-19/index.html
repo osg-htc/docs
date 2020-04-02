@@ -2871,8 +2871,8 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:</p>
  TargetUniverse = 5;
 <span class="hll"> set_AcctGroup = &quot;covid19&quot;;
 </span><span class="hll"> eval_set_AccountingGroup = strcat(AcctGroup, &quot;.&quot;, Owner);
-</span> Requirements = (TARGET.IsCOVID19 =?= true);
-]
+</span><span class="hll"> Requirements = (TARGET.IsCOVID19 =?= true);
+</span>]
 $(JOB_ROUTER_ENTRIES)
 @jre
 </pre></div>
