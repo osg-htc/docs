@@ -56,7 +56,8 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:
         $(JOB_ROUTER_ENTRIES)
         @jre
 
-    Replacing `slurm` in the `GridResource` attribute with the appropriate value for your batch system (`pbs`, `sge`, or `lsf`);
+    Replacing `slurm` in the `GridResource` attribute with the appropriate value for your batch system (e.g., `pbs`,
+    `sge`, or `lsf`);
     and the value of `queue` with the name of the partition or queue of your local batch system dedicated to COVID-19 work.
 
 1.  Ensure that COVID-19 jobs match to the new route.
