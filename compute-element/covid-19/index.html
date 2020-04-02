@@ -397,11 +397,38 @@
     Setting up a COVID-19 Job Route
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-non-htcondor-batch-systems" title="For Non-HTCondor batch systems" class="md-nav__link">
+    For Non-HTCondor batch systems
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-htcondor-batch-systems" title="For HTCondor batch systems" class="md-nav__link">
+    For HTCondor batch systems
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#only-supporting-covid-19" title="Only Supporting COVID-19" class="md-nav__link">
-    Only Supporting COVID-19
+  <a href="#verifying-the-covid-19-job-route" title="Verifying the COVID-19 Job Route" class="md-nav__link">
+    Verifying the COVID-19 Job Route
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requesting-covid-19-jobs" title="Requesting COVID-19 Jobs" class="md-nav__link">
+    Requesting COVID-19 Jobs
   </a>
   
 </li>
@@ -2626,11 +2653,38 @@
     Setting up a COVID-19 Job Route
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-non-htcondor-batch-systems" title="For Non-HTCondor batch systems" class="md-nav__link">
+    For Non-HTCondor batch systems
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-htcondor-batch-systems" title="For HTCondor batch systems" class="md-nav__link">
+    For HTCondor batch systems
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#only-supporting-covid-19" title="Only Supporting COVID-19" class="md-nav__link">
-    Only Supporting COVID-19
+  <a href="#verifying-the-covid-19-job-route" title="Verifying the COVID-19 Job Route" class="md-nav__link">
+    Verifying the COVID-19 Job Route
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requesting-covid-19-jobs" title="Requesting COVID-19 Jobs" class="md-nav__link">
+    Requesting COVID-19 Jobs
   </a>
   
 </li>
@@ -2662,111 +2716,249 @@
                 
                 
                 <h1 id="supporting-covid-19-research-on-the-osg">Supporting COVID-19 Research on the OSG<a class="headerlink" href="#supporting-covid-19-research-on-the-osg" title="Permanent link">&para;</a></h1>
-<p>There are a number of options available for sites wanting to support the
-important and urgent work of COVID-19 researchers using the OSG.  The OSG VO
-provides sites with the opportunity to accept pilots that <em>exclusively</em> run
-jobs relating to COVID-19 research and account for this usage separately
-from other OSG activity.</p>
-<p>To support this work, one must:</p>
+<p>There a few options available for sites with computing resources who want to support the
+important and urgent work of COVID-19 researchers using the OSG. As we're
+currently routing such projects through the OSG VO, your site can be configured
+to accept pilots that <em>exclusively</em> run OSG VO jobs relating to COVID-19 research
+(among other pilots you support), allowing you to prioritize these pilots and account
+for this usage separately from other OSG activity.</p>
+<p>To support COVID-19 work, the overall process includes the following:</p>
 <ol>
-<li>Make the site computing resources available through a HTCondor-CE.  This
-can be done through an <a href="../../compute-element/install-htcondor-ce/">on-premise</a>
-instance or asking OSG to <a href="../../compute-element/hosted-ce/">host the CE</a> on your
-behalf.  If neither solution is viable, please send email to
-<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> and we can provide consulting services to determine
-a better approach.</li>
-<li><a href="../../security/lcmaps-voms-authentication/#configuring-the-lcmaps-voms-plugin">Enable the OSG VO</a>
-and setup a job route specific to COVID-19 pilot jobs.
-This process is documented below.  This enables you to prioritize these jobs
-according to your local policy.</li>
-<li>Send email to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> requesting that your CE receive
-COVID-19 pilots.  We will need to know the CE hostname and any special
-restrictions that might apply to these pilots.</li>
+<li>Make the site computing resources available through a HTCondor-CE if you have not already done so.
+   You can install a <a href="../../compute-element/install-htcondor-ce/">locally-managed</a> instance or ask OSG to
+   <a href="../../compute-element/hosted-ce/">host the CE</a> on your behalf.
+   If neither solution is viable, or you'd like to discuss the options, please send email to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a>
+   and we'll work with you to arrive at the best solution.</li>
+<li><a href="../../security/lcmaps-voms-authentication/#configuring-the-lcmaps-voms-plugin">Enable the OSG VO</a> on your HTCondor-CE.</li>
+<li>Setup a job route specific to COVID-19 pilot jobs (documented below).
+   The job route will allow you to prioritize these jobs using local policy in your site's cluster.</li>
+<li>Send email to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> requesting that your CE receive COVID-19 pilots.
+   We will need to know the CE hostname and any special restrictions that might apply to these pilots.</li>
 </ol>
 <h2 id="setting-up-a-covid-19-job-route">Setting up a COVID-19 Job Route<a class="headerlink" href="#setting-up-a-covid-19-job-route" title="Permanent link">&para;</a></h2>
 <p>By default, COVID-19 pilots will look identical to OSG pilots <em>except</em> they
 will have the attribute <code>IsCOVID19 = true</code>.  They do not require mapping to
 a distinct Unix account but can be sent to a prioritized queue or accounting
 group.</p>
-<p>Job routes are controlled by the <code>JOB_ROUTER_ENTRIES</code> configuration variable
-in HTCondor-CE (customizations may be placed in <code>/etc/condor-ce/config.d/</code>).</p>
-<p>For example, consider the following route for a CE submitting to a Slurm batch
-system:</p>
-<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
-[
- name = &quot;Local_Slurm&quot;;
- GridResource = &quot;batch slurm&quot;;
- TargetUniverse = 9;
- queue = &quot;osg&quot;;
-]
+<p>Job routes are controlled by the <code>JOB_ROUTER_ENTRIES</code> configuration variable in HTCondor-CE.
+Customizations may be placed in <code>/etc/condor-ce/config.d/</code> where files are parsed in lexicographical order, e.g.
+<code>JOB_ROUTER_ENTRIES</code> specified in <code>50-covid-routes.conf</code> will override <code>JOB_ROUTER_ENTRIES</code> in <code>02-local-slurm.conf</code>.</p>
+<h3 id="for-non-htcondor-batch-systems">For Non-HTCondor batch systems<a class="headerlink" href="#for-non-htcondor-batch-systems" title="Permanent link">&para;</a></h3>
+<p>To add a new route for COVID-19 pilots for non-HTCondor batch systems:</p>
+<ol>
+<li>
+<p>Note the names of your currently enabled routes:</p>
+<div class="codehilite"><pre><span></span>condor_ce_job_router_info -config
 </pre></div>
 
 
-<p>To add a new route for COVID-19 pilots, append a new route
-prior to the existing one and specify their order:</p>
+</li>
+<li>
+<p>Add the following configuration to a file in <code>/etc/condor-ce/config.d/</code> (files are parsed in lexicographical order):</p>
 <div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
-<span class="hll">[
-</span><span class="hll"> name = &quot;OSG_COVID19_Jobs&quot;;
-</span><span class="hll"> GridResource = &quot;batch slurm&quot;;
-</span><span class="hll"> TargetUniverse = 9;
-</span><span class="hll"> queue = &quot;covid19&quot;;
-</span><span class="hll"> Requirements = (TARGET.IsCOVID19 =?= true);
-</span><span class="hll">]
-</span>[
- name = &quot;Local_Slurm&quot;;
+[
+ name = &quot;OSG_COVID19_Jobs&quot;;
  GridResource = &quot;batch slurm&quot;;
  TargetUniverse = 9;
- queue = &quot;osg&quot;;
-]
+<span class="hll"> queue = &quot;covid19&quot;;
+</span><span class="hll"> Requirements = (TARGET.IsCOVID19 =?= true);
+</span>]
+$(JOB_ROUTER_ENTRIES)
 @jre
-
-<span class="hll"># Specify the order of the routes
-</span><span class="hll">JOB_ROUTER_ROUTE_NAMES = OSG_COVID19_Jobs, Local_Slurm
-</span></pre></div>
+</pre></div>
 
 
-<p>To verify jobs are being routed appropriately,
-<a href="../../compute-element/troubleshoot-htcondor-ce/#condor_ce_router_q">one may examine pilots</a>
-with <code>condor_ce_router_q</code>.</p>
-<div class="admonition note">
-<p class="admonition-title">Additional considerations for older CEs</p>
-<p>Prior to HTCondor 8.8.7 or 8.9.5, HTCondor-CE had separate rules for handling
-multiple routes; see the
-<a href="../../compute-element/job-router-recipes#how-jobs-match-to-job-routes">job router recipes</a> for more
-details.</p>
-</div>
-<p>Similarly, at a HTCondor site, one can place these jobs into a
-separate accounting group by providing the <code>set_AcctGroup</code> attribute:</p>
+<p>Replacing <code>slurm</code> in the <code>GridResource</code> attribute with the appropriate value for your batch system (e.g., <code>lsf</code>,
+<code>pbs</code>, <code>sge</code>, or <code>slurm</code>);
+and the value of <code>queue</code> with the name of the partition or queue of your local batch system dedicated to COVID-19 work.</p>
+</li>
+<li>
+<p>Ensure that COVID-19 jobs match to the new route.
+    Choose one of the options below depending on your HTCondor version (<code>condor_version</code>):</p>
+<ul>
+<li>
+<p><strong>For versions of HTCondor &gt;= 8.8.7 and &lt; 8.9.0; or HTCondor &gt;= 8.9.6:</strong>
+    specify the routes considered by the job router and the order in which they're considered by adding the
+    following configuration to a file in <code>/etc/condor-ce/config.d/</code>:</p>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ROUTE_NAMES = OSG_COVID19_Jobs, $(JOB_ROUTER_ROUTE_NAMES)
+</pre></div>
+
+
+</li>
+<li>
+<p><strong>For older versions of HTCondor:</strong> add <code>(TARGET.IsCOVID19 =!= true)</code> to the <code>Requirements</code> of any existing routes.
+    For example, the following job route:</p>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+[
+ name = &quot;Local_Slurm&quot;
+ GridResource = &quot;batch slurm&quot;;
+ TargetUniverse = 9;
+ queue = &quot;atlas;
+<span class="hll"> Requirements = (TARGET.queue =!= &quot;osg&quot;);
+</span>]
+@jre
+</pre></div>
+
+
+<p>Should be updated as follows:</p>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+[
+ name = &quot;Local_Slurm&quot;
+ GridResource = &quot;batch slurm&quot;;
+ TargetUniverse = 9;
+ queue = &quot;atlas;
+<span class="hll"> Requirements = (TARGET.queue =!= &quot;osg&quot;) &amp;&amp; (TARGET.IsCOVID19 =!= true);
+</span>]
+@jre
+</pre></div>
+
+
+</li>
+</ul>
+</li>
+<li>
+<p>Reconfigure your HTCondor-CE:</p>
+<div class="codehilite"><pre><span></span><span class="go">condor_ce_reconfig</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Continue onto <a href="#verifying-covid-19-job-routes">this section</a> to verify your configuration</p>
+</li>
+</ol>
+<h3 id="for-htcondor-batch-systems">For HTCondor batch systems<a class="headerlink" href="#for-htcondor-batch-systems" title="Permanent link">&para;</a></h3>
+<p>Similarly, at an HTCondor site, one can place these jobs into a separate accounting group by providing the
+<code>set_AcctGroup</code> and <code>eval_set_AccountingGroup</code> attributes in a new job route.
+To add a new route for COVID-19 pilots for non-HTCondor batch systems:</p>
+<ol>
+<li>
+<p>Note the names of your currently enabled routes:</p>
+<div class="codehilite"><pre><span></span><span class="go">condor_ce_job_router_info -config</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Add the following configuration to a file in <code>/etc/condor-ce/config.d/</code> (files are parsed in lexicographical order):</p>
 <div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
 [
  name = &quot;OSG_COVID19_Jobs&quot;;
  TargetUniverse = 5;
 <span class="hll"> set_AcctGroup = &quot;covid19&quot;;
+</span><span class="hll"> eval_set_AccountingGroup = strcat(AcctGroup, &quot;.&quot;, Owner);
 </span> Requirements = (TARGET.IsCOVID19 =?= true);
 ]
-[
- name = &quot;Local_Condor&quot;;
- TargetUniverse = 5;
-<span class="hll"> set_AcctGroup = &quot;osg&quot;;
-</span>]
+$(JOB_ROUTER_ENTRIES)
 @jre
-
-# Specify the order of the routes
-JOB_ROUTER_ROUTE_NAMES = OSG_COVID19_Jobs, Local_Condor
 </pre></div>
 
 
-<h2 id="only-supporting-covid-19">Only Supporting COVID-19<a class="headerlink" href="#only-supporting-covid-19" title="Permanent link">&para;</a></h2>
-<p>If your resource <em>only</em> wants to support COVID-19 research, then you need
-to <a href="../../security/lcmaps-voms-authentication/#configuring-the-lcmaps-voms-plugin">enable the OSG VO</a>
-but only provide the <code>OSG_COVID19_Jobs</code> job route above.  As long as the
-<code>Requirements</code> expression for your job route includes
-<code>(TARGET.IsCOVID19 =?= true)</code>, then non-COVID pilots will not be routed
-to the batch system.</p>
-<p>When you contact <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> to receive COVID-19 pilots,
-please note that you <em>only</em> want to support these jobs.</p>
+<p>Replacing <code>covid19</code> in <code>set_AcctGroup</code> with the name of the accounting group that you would like to use for COVID-19
+jobs.</p>
+</li>
+<li>
+<p>Ensure that COVID-19 jobs match to the new route.
+    Choose one of the options below depending on your HTCondor version (<code>condor_version</code>):</p>
+<ul>
+<li>
+<p><strong>For versions of HTCondor &gt;= 8.8.7 and &lt; 8.9.0; or HTCondor &gt;= 8.9.6:</strong>
+    specify the routes considered by the job router and the order in which they're considered by adding the
+    following configuration to a file in <code>/etc/condor-ce/config.d/</code>:</p>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ROUTE_NAMES = OSG_COVID19_Jobs, $(JOB_ROUTER_ROUTE_NAMES)
+</pre></div>
+
+
+</li>
+<li>
+<p><strong>For older versions of HTCondor:</strong> add <code>(TARGET.IsCOVID19 =!= true)</code> to the <code>Requirements</code> of any existing routes.
+    For example, the following job route:</p>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+[
+ name = &quot;Local_Condor&quot;
+ TargetUniverse = 5;
+ queue = &quot;atlas;
+<span class="hll"> Requirements = (TARGET.queue =!= &quot;osg&quot;);
+</span>]
+@jre
+</pre></div>
+
+
+<p>Should be updated as follows:</p>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
+[
+ name = &quot;Local_Condor&quot;
+ TargetUniverse = 5;
+ queue = &quot;atlas;
+<span class="hll"> Requirements = (TARGET.queue =!= &quot;atlas&quot;) &amp;&amp; (TARGET.IsCOVID19 =!= true);
+</span>]
+@jre
+</pre></div>
+
+
+</li>
+</ul>
+</li>
+<li>
+<p>Reconfigure your HTCondor-CE:</p>
+<div class="codehilite"><pre><span></span><span class="go">condor_ce_reconfig</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Continue onto <a href="#verifying-covid-19-job-routes">this section</a> to verify your configuration</p>
+</li>
+</ol>
+<h2 id="verifying-the-covid-19-job-route">Verifying the COVID-19 Job Route<a class="headerlink" href="#verifying-the-covid-19-job-route" title="Permanent link">&para;</a></h2>
+<p>To verify that your HTCondor-CE is configured to support COVID-19 jobs, perform the following steps:</p>
+<ol>
+<li>
+<p>Ensure that the <code>OSG_COVID19_Jobs</code> route appears with all of your other previously enabled routes:</p>
+<div class="codehilite"><pre><span></span><span class="go">condor_ce_job_router_info -config</span>
+</pre></div>
+
+
+<div class="admonition bug">
+<p class="admonition-title">Known issue: removing old routes</p>
+<p>If your HTCondor-CE has jobs associated with a route that is removed from your configuration, this will result
+in a crashing Job Router.
+If you accidentally remove an old route, restore the route or remove all jobs associated with said route.</p>
+</div>
+</li>
+<li>
+<p>Ensure that COVID-19 jobs will match to your new job route:</p>
+<ul>
+<li>
+<p><strong>For versions of HTCondor &gt;= 8.8.7 and &lt; 8.9.0; or HTCondor &gt;= 8.9.6:</strong>
+    <code>OSG_COVID19_Jobs</code> should be the first route in the routing table:</p>
+<div class="codehilite"><pre><span></span><span class="go">condor_ce_config_val -verbose JOB_ROUTER_ROUTE_NAMES</span>
+</pre></div>
+
+
+</li>
+<li>
+<p><strong>For older versions of HTCondor:</strong>
+    the <code>Requirements</code> expresison of your <code>OSG_COVID19_Jobs</code> route must contain <code>(TARGET.IsCOVID19 =?= true)</code> and
+    all other routes must contain <code>(TARGET.IsCOVID19 =!= true)</code> in their <code>Requirements</code> expression.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>After <a href="#requesting-covid-19-jobs">requesting COVID-19 jobs</a>, verify that jobs are being routed appropriately,
+    <a href="../../compute-element/troubleshoot-htcondor-ce/#condor_ce_router_q">by examining pilots</a> with <code>condor_ce_router_q</code>.</p>
+</li>
+</ol>
+<h2 id="requesting-covid-19-jobs">Requesting COVID-19 Jobs<a class="headerlink" href="#requesting-covid-19-jobs" title="Permanent link">&para;</a></h2>
+<p>To receive COVID-19 pilot jobs, send an email to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> with the subject <code>Requesting COVID-19 pilots</code>
+and the following information:</p>
+<ul>
+<li>Whether you want to receive <em>only</em> COVID-19 jobs, or if you want to accept COVID-19 and other OSG jobs</li>
+<li>The hostname(s) of your HTCondor-CE(s)</li>
+<li>Any other restrictions that may apply to these jobs (e.g. number of available cores)</li>
+</ul>
 <h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
-<p>To get assistance, please use the <a href="../../common/help">this page</a>.</p>
+<p>To get assistance, please use <a href="../../common/help">this page</a>.</p>
                 
                   
                 
