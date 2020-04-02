@@ -40,7 +40,7 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:
 
 1.  Note the names of your currently configured routes:
 
-        condor_ce_job_router_info -config | awk '/^Name/ {print $3}
+        condor_ce_job_router_info -config
 
 1.  Add the following configuration to a file in `/etc/condor-ce/config.d/` (files are parsed in lexicographical order):
 
@@ -111,7 +111,7 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:
 1.  Note the names of your currently configured routes:
 
         :::console
-        condor_ce_job_router_info -config | awk '/^Name/ {print $3}
+        condor_ce_job_router_info -config
 
 1.  Add the following configuration to a file in `/etc/condor-ce/config.d/` (files are parsed in lexicographical order):
 
@@ -175,7 +175,7 @@ To verify that your HTCondor-CE is configured to support COVID-19 jobs, perform 
 1.  Ensure that the `OSG_COVID19_Jobs` route appears with all of your other previously configured routes:
 
         :::console
-        condor_ce_job_router_info -config | awk '/^Name/ {print $3}
+        condor_ce_job_router_info -config
 
 
     !!! bug "Known issue: removing old routes"
