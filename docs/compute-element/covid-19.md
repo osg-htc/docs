@@ -38,7 +38,7 @@ Customizations may be placed in `/etc/condor-ce/config.d/` where files are parse
 
 To add a new route for COVID-19 pilots for non-HTCondor batch systems:
 
-1.  Note the names of your currently configured routes:
+1.  Note the names of your currently enabled routes:
 
         condor_ce_job_router_info -config
 
@@ -109,7 +109,7 @@ Similarly, at an HTCondor site, one can place these jobs into a separate account
 `set_AcctGroup` and `eval_set_AccountingGroup` attributes in a new job route.
 To add a new route for COVID-19 pilots for non-HTCondor batch systems:
 
-1.  Note the names of your currently configured routes:
+1.  Note the names of your currently enabled routes:
 
         :::console
         condor_ce_job_router_info -config
@@ -177,7 +177,7 @@ Verifying the COVID-19 Job Route
 
 To verify that your HTCondor-CE is configured to support COVID-19 jobs, perform the following steps:
 
-1.  Ensure that the `OSG_COVID19_Jobs` route appears with all of your other previously configured routes:
+1.  Ensure that the `OSG_COVID19_Jobs` route appears with all of your other previously enabled routes:
 
         :::console
         condor_ce_job_router_info -config
