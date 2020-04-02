@@ -201,7 +201,8 @@ To verify that your HTCondor-CE is configured to support COVID-19 jobs, perform 
 Requesting COVID-19 Jobs
 ------------------------
 
-Contact <help@opensciencegrid.org> with the following information to receive COVID-19 pilot jobs:
+To receive COVID-19 pilot jobs, send an email to <help@opensciencegrid.org> with the subject `Requesting COVID-19 pilots`
+and the following information:
 
 -  Whether you want to receive _only_ COVID-19 jobs, or if you want to accept COVID-19 and other OSG jobs
 -  The hostname(s) of your HTCondor-CE(s)
