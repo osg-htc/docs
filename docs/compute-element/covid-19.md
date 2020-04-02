@@ -33,88 +33,178 @@ Job routes are controlled by the `JOB_ROUTER_ENTRIES` configuration variable in 
 Customizations may be placed in `/etc/condor-ce/config.d/` where files are parsed in lexicographical order, e.g.
 `JOB_ROUTER_ENTRIES` specified in `50-covid-routes.conf` will override `JOB_ROUTER_ENTRIES` in `02-local-slurm.conf`.
 
-For example, consider the following route for a CE submitting to a Slurm batch
-system:
+### For Non-HTCondor batch systems
 
-```
-JOB_ROUTER_ENTRIES @=jre
-[
- name = "Local_Slurm";
- GridResource = "batch slurm";
- TargetUniverse = 9;
- queue = "osg";
-]
-@jre
+To add a new route for COVID-19 pilots for non-HTCondor batch systems:
 
-# Specify the routes to in the job routing table and the order in which
-# they're considered
-JOB_ROUTER_ROUTE_NAMES = Local_Slurm
-```
+1.  Note the names of your currently configured routes:
 
-To add a new route for COVID-19 pilots, add the following configuration to a file in `/etc/condor-ce/config.d/` (files
-are parsed in lexicographical order):
+        condor_ce_job_router_info -config | awk '/^Name/ {print $3}
 
-```
-JOB_ROUTER_ENTRIES @=jre
-[
- name = "OSG_COVID19_Jobs";
- GridResource = "batch slurm";
- TargetUniverse = 9;
- queue = "covid19";
- Requirements = (TARGET.IsCOVID19 =?= true);
-]
-$(JOB_ROUTER_ENTRIES)
-@jre
+1.  Add the following configuration to a file in `/etc/condor-ce/config.d/` (files are parsed in lexicographical order):
 
-# Specify the routes to in the job routing table and the order in which
-# they're considered
-JOB_ROUTER_ROUTE_NAMES = OSG_COVID19_Jobs, $(JOB_ROUTER_ROUTE_NAMES)
-```
+        :::config hl_lines="6 7"
+        JOB_ROUTER_ENTRIES @=jre
+        [
+         name = "OSG_COVID19_Jobs";
+         GridResource = "batch slurm";
+         TargetUniverse = 9;
+         queue = "covid19";
+         Requirements = (TARGET.IsCOVID19 =?= true);
+        ]
+        $(JOB_ROUTER_ENTRIES)
+        @jre
 
-!!! warning "Additional considerations for older CEs"
-    Prior to HTCondor 8.8.7 or 8.9.5, HTCondor-CE had separate rules for handling
-    multiple routes; see the
-    [job router recipes](/compute-element/job-router-recipes#how-jobs-match-to-job-routes) for more
-    details.
+    Replacing `slurm` in the `GridResource` attribute with the appropriate value for your batch system (`pbs`, `sge`, or `lsf`);
+    and the value of `queue` with the name of the partition or queue of your local batch system dedicated to COVID-19 work.
 
-To verify jobs are being routed appropriately,
-[one may examine pilots](/compute-element/troubleshoot-htcondor-ce/#condor_ce_router_q)
-with `condor_ce_router_q`.
-If you do not see all of your expected job routes from this command, verify that all of your routes appear in the output
-of `condor_ce_config_val -verbose JOB_ROUTER_ROUTE_NAMES` and `condor_ce_config_val -verbose JOB_ROUTER_ENTRIES`.
+1.  Ensure that COVID-19 jobs match to the new route.
+    Choose one of the options below depending on your HTCondor version (`condor_version`):
+
+    -   **For versions of HTCondor >= 8.8.7 and < 8.9.0; or HTCondor >= 8.9.6:**
+        specify the routes considered by the job router and the order in which they're considered by adding the
+        following configuration to a file in `/etc/condor-ce/config.d/`:
+
+            JOB_ROUTER_ROUTE_NAMES = OSG_COVID19_Jobs, $(JOB_ROUTER_ROUTE_NAMES)
+
+    -   **For older versions of HTCondor:** add `(TARGET.IsCOVID19 =!= true)` to the `Requirements` of any existing routes.
+        For example, the following job route:
+
+            :::config hl_lines="7"
+            JOB_ROUTER_ENTRIES @=jre
+            [
+             name = "Local_Slurm"
+             GridResource = "batch slurm";
+             TargetUniverse = 9;
+             queue = "atlas;
+             Requirements = (TARGET.queue =!= "osg");
+            ]
+            @jre
+
+        Should be updated as follows:
+
+            :::config hl_lines="7"
+            JOB_ROUTER_ENTRIES @=jre
+            [
+             name = "Local_Slurm"
+             GridResource = "batch slurm";
+             TargetUniverse = 9;
+             queue = "atlas;
+             Requirements = (TARGET.queue =!= "osg") && (TARGET.IsCOVID19 =!= true);
+            ]
+            @jre
+
+1.  Reconfigure your HTCondor-CE:
+
+        :::console
+        condor_ce_reconfig
+
+1.  Continue onto [this section](#verifying-covid-19-job-routes) to verify your configuration
+
+### For HTCondor batch systems
 
 Similarly, at an HTCondor site, one can place these jobs into a separate accounting group by providing the
-`set_AcctGroup` attribute by adding the following configuration to a file in `/etc/condor-ce/config.d/` (files are
-parsed in lexicographical order):
+`set_AcctGroup` attribute in a new job route.
+To add a new route for COVID-19 pilots for non-HTCondor batch systems:
 
-```hl_lines="5"
-JOB_ROUTER_ENTRIES @=jre
-[
- name = "OSG_COVID19_Jobs";
- TargetUniverse = 5;
- set_AcctGroup = "covid19";
- Requirements = (TARGET.IsCOVID19 =?= true);
-]
-$(JOB_ROUTER_ENTRIES)
-@jre
+1.  Note the names of your currently configured routes:
 
-# Specify the routes to in the job routing table and the order in which
-# they're considered
-JOB_ROUTER_ROUTE_NAMES = OSG_COVID19_Jobs, $(JOB_ROUTER_ROUTE_NAMES)
-```
+        :::console
+        condor_ce_job_router_info -config | awk '/^Name/ {print $3}
 
-Only Supporting COVID-19
+1.  Add the following configuration to a file in `/etc/condor-ce/config.d/` (files are parsed in lexicographical order):
+
+        :::config hl_lines="5"
+        JOB_ROUTER_ENTRIES @=jre
+        [
+         name = "OSG_COVID19_Jobs";
+         TargetUniverse = 5;
+         set_AcctGroup = "covid19";
+         Requirements = (TARGET.IsCOVID19 =?= true);
+        ]
+        $(JOB_ROUTER_ENTRIES)
+        @jre
+
+1.  Ensure that COVID-19 jobs match to the new route.
+    Choose one of the options below depending on your HTCondor version (`condor_version`):
+
+    -   **For versions of HTCondor >= 8.8.7 and < 8.9.0; or HTCondor >= 8.9.6:**
+        specify the routes considered by the job router and the order in which they're considered by adding the
+        following configuration to a file in `/etc/condor-ce/config.d/`:
+
+            JOB_ROUTER_ROUTE_NAMES = OSG_COVID19_Jobs, $(JOB_ROUTER_ROUTE_NAMES)
+
+    -   **For older versions of HTCondor:** add `(TARGET.IsCOVID19 =!= true)` to the `Requirements` of any existing routes.
+        For example, the following job route:
+
+            :::config hl_lines="6"
+            JOB_ROUTER_ENTRIES @=jre
+            [
+             name = "Local_Condor"
+             TargetUniverse = 5;
+             queue = "atlas;
+             Requirements = (TARGET.queue =!= "osg");
+            ]
+            @jre
+
+        Should be updated as follows:
+
+            :::config hl_lines="6"
+            JOB_ROUTER_ENTRIES @=jre
+            [
+             name = "Local_Condor"
+             TargetUniverse = 5;
+             queue = "atlas;
+             Requirements = (TARGET.queue =!= "atlas") && (TARGET.IsCOVID19 =!= true);
+            ]
+            @jre
+
+1.  Reconfigure your HTCondor-CE:
+
+        :::console
+        condor_ce_reconfig
+
+1.  Continue onto [this section](#verifying-covid-19-job-routes) to verify your configuration
+
+Verifying the COVID-19 Job Route
+--------------------------------
+
+To verify that your HTCondor-CE is configured to support COVID-19 jobs, perform the following steps:
+
+1.  Ensure that the `OSG_COVID19_Jobs` route appears with all of your other previously configured routes:
+
+        :::console
+        condor_ce_job_router_info -config | awk '/^Name/ {print $3}
+
+
+    !!! bug "Known issue: removing old routes"
+        If your HTCondor-CE has jobs associated with a route that is removed from your configuration, this will result
+        in a crashing Job Router.
+        If you accidentally remove an old route, restore the route or remove all jobs associated with said route.
+
+1.  Ensure that COVID-19 jobs will match to your new job route:
+
+    -   **For versions of HTCondor >= 8.8.7 and < 8.9.0; or HTCondor >= 8.9.6:**
+        `OSG_COVID19_Jobs` should be the first route in the routing table:
+
+            :::console
+            condor_ce_config_val -verbose JOB_ROUTER_ROUTE_NAMES
+
+    -   **For older versions of HTCondor:**
+        the `Requirements` expresison of your `OSG_COVID19_Jobs` route must contain `(TARGET.IsCOVID19 =?= true)` and
+        all other routes must contain `(TARGET.IsCOVID19 =!= true)` in their `Requirements` expression.
+        
+1.  After [requesting COVID-19 jobs](#requesting-covid-19-jobs), verify that jobs are being routed appropriately,
+    [by examining pilots](/compute-element/troubleshoot-htcondor-ce/#condor_ce_router_q) with `condor_ce_router_q`.
+
+Requesting COVID-19 Jobs
 ------------------------
 
-If your resource _only_ wants to support COVID-19 research, then you need
-to [enable the OSG VO](/security/lcmaps-voms-authentication/#configuring-the-lcmaps-voms-plugin)
-but only provide the `OSG_COVID19_Jobs` job route above.  As long as the
-`Requirements` expression for your job route includes
-`(TARGET.IsCOVID19 =?= true)`, then non-COVID pilots will not be routed
-to the batch system.
+Contact <help@opensciencegrid.org> with the following information to receive COVID-19 pilot jobs:
 
-When you contact <help@opensciencegrid.org> to receive COVID-19 pilots,
-please note that you _only_ want to support these jobs.
+-  Whether you want to receive _only_ COVID-19 jobs, or if you want to accept COVID-19 and other OSG jobs
+-  The hostname(s) of your HTCondor-CE(s)
+-  Any other restrictions that may apply to these jobs (e.g. number of available cores)
 
 Getting Help
 ------------
