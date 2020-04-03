@@ -2748,11 +2748,14 @@ to accept pilots that <em>exclusively</em> run OSG VO jobs relating to COVID-19 
 for this usage separately from other OSG activity.</p>
 <p>To support COVID-19 work, the overall process includes the following:</p>
 <ol>
-<li>Make the site computing resources available through a HTCondor-CE if you have not already done so.
-   You can install a <a href="../../compute-element/install-htcondor-ce/">locally-managed</a> instance or ask OSG to
+<li>Make the site computing resources available through a HTCondor-CE if you have not already done so.<ul>
+<li>You can install a <a href="../../compute-element/install-htcondor-ce/">locally-managed</a> instance or ask OSG to
    <a href="../../compute-element/hosted-ce/">host the CE</a> on your behalf.
-   If neither solution is viable, or you'd like to discuss the options, please send email to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a>
-   and we'll work with you to arrive at the best solution.</li>
+   If neither solution is viable, or you'd like to discuss the options, please send email to
+   <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> and we'll work with you to arrive at the best solution.</li>
+<li>If you already provide resources through an OSG Hosted CE, skip to <a href="#requesting-covid-19-jobs">this section</a>.</li>
+</ul>
+</li>
 <li><a href="../../security/lcmaps-voms-authentication/#configuring-the-lcmaps-voms-plugin">Enable the OSG VO</a> on your HTCondor-CE.</li>
 <li>Setup a job route specific to COVID-19 pilot jobs (documented below).
    The job route will allow you to prioritize these jobs using local policy in your site's cluster.</li>
