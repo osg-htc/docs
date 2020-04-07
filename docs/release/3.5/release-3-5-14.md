@@ -32,6 +32,12 @@ This release contains:
     -   [HTCONDOR-2020-0003](http://htcondor.org/security/vulnerabilities/HTCONDOR-2020-0003.html)
     -   [HTCONDOR-2020-0004](http://htcondor.org/security/vulnerabilities/HTCONDOR-2020-0004.html)
 
+!!!note "Affected nodes"
+    These updates affect submit and execute hosts. Please update your submit host first and then your execute nodes.
+    Don't forget to update your HTCondor CE.
+    If you are upgrading from HTCondor 8.6.x, please note that configuration changes may be necessary when
+    [updating to HTCondor 8.8.8](https://opensciencegrid.org/docs/release/release_series/#updating-to-htcondor-88x)
+
 These
 [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.5.14%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC)
 were addressed in this release.
