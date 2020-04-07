@@ -32,6 +32,7 @@ To update to the OSG 3.5 series, please consult the page on
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.5.14](/release/3.5/release-3-5-14)     | 2020-04-07 | High Priority Release: HTCondor 8.8.8; Upcoming: HTCondor 8.9.6         |
 | [3.5.13](/release/3.5/release-3-5-13)     | 2020-04-02 | GlideinWMS 3.6.2, IGTF 1.105, HTCondor-CE 4.2.1, Pegasus 4.9.3, LCMAPS 1.6.6-1.12, globus-gridftp-server 13.20-1.1, scitokens-cpp 0.5.0 |
 | [3.5.12](/release/3.5/release-3-5-12)     | 2020-03-26 | High Priority Release: XRootD-SciTokens 1.2.0                           |
 | [3.5.11](/release/3.5/release-3-5-11)     | 2020-03-11 | CVMFS 2.7.1, oidc-agent 3.3.1, CCTools 7.0.22, GSI-OpenSSH 7.4p1-5, VO Package v101 |
@@ -67,6 +68,7 @@ OSG 3.4
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.48](/release/3.4/release-3-4-48)     | 2020-04-07 | High Priority Release: HTCondor 8.8.8                                   |
 | [3.4.47](/release/3.4/release-3-4-47)     | 2020-04-02 | GlideinWMS 3.6.2, IGTF 1.105                                            |
 | [3.4.46](/release/3.4/release-3-4-46)     | 2020-03-26 | High Priority Release: XRootD-SciTokens 1.2.0                           |
 | [3.4.45](/release/3.4/release-3-4-45)     | 2020-03-11 | Singularity 3.5.3, VO Package v101                                      |
