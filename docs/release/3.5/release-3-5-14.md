@@ -105,7 +105,7 @@ We added or updated the following packages to the **upcoming** OSG yum repositor
 
 If you wish to manually update your system, you can run yum update against the following packages:
 
-    blahp blahp-debuginfo condor condor-all condor-annex-ec2 condor-bosco condor-classads condor-classads-devel condor-debuginfo condor-kbdd condor-procd condor-test condor-vm-gahp GenericError: Invalid tagInfo:
+    condor condor-all condor-annex-ec2 condor-bosco condor-classads condor-classads-devel condor-debuginfo condor-kbdd condor-procd condor-test condor-vm-gahp
 
 If you wish to only update the RPMs that changed, the set of RPMs is:
 
