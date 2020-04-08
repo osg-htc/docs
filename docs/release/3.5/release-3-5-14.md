@@ -94,3 +94,34 @@ minicondor-8.8.8-1.osg35.el7
 python2-condor-8.8.8-1.osg35.el7
 python3-condor-8.8.8-1.osg35.el7
 ```
+
+### Upcoming Packages
+
+We added or updated the following packages to the **upcoming** OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+
+-   [condor-8.9.6-1.osgup.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=condor-8.9.6-1.osgup.el7)
+
+### Upcoming RPMs
+
+If you wish to manually update your system, you can run yum update against the following packages:
+
+    condor condor-all condor-annex-ec2 condor-bosco condor-classads condor-classads-devel condor-debuginfo condor-kbdd condor-procd condor-test condor-vm-gahp
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+``` file
+condor-8.9.6-1.osgup.el7
+condor-all-8.9.6-1.osgup.el7
+condor-annex-ec2-8.9.6-1.osgup.el7
+condor-bosco-8.9.6-1.osgup.el7
+condor-classads-8.9.6-1.osgup.el7
+condor-classads-devel-8.9.6-1.osgup.el7
+condor-debuginfo-8.9.6-1.osgup.el7
+condor-kbdd-8.9.6-1.osgup.el7
+condor-procd-8.9.6-1.osgup.el7
+condor-test-8.9.6-1.osgup.el7
+condor-vm-gahp-8.9.6-1.osgup.el7
+minicondor-8.9.6-1.osgup.el7
+python2-condor-8.9.6-1.osgup.el7
+python3-condor-8.9.6-1.osgup.el7
+```
