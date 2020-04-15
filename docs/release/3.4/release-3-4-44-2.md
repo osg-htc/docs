@@ -1,7 +1,7 @@
 OSG Data Release 3.4.44-2
 =========================
 
-**Release Date:** 2020-04-15    
+**Release Date:** 2020-03-04    
 **Supported OS Versions:** EL7, EL6
 
 !!!warning "OSG 3.4 End-of-Life Approaching"
