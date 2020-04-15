@@ -1,4 +1,4 @@
-OSG Data Release 3.4.44-2
+OSG Data Release 3.4.49-2
 =========================
 
 **Release Date:** 2020-04-15    
@@ -15,16 +15,11 @@ OSG Data Release 3.4.44-2
 Summary of changes
 ------------------
 
-This release contains [VO Package v100](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-100):
+This release contains [VO Package v104](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-104):
 
-- Add new cert for GLOW (SOFTWARE-4006)
-- Replace one of the certs for OSG (SOFTWARE-4007)
-- Update voms2.fnal.gov DN for DES, DUNE, Fermilab (SOFTWARE-4012)
-- Map FQANs from Fermilab VO subgroups to the same user as the VO-wide target (SOFTWARE-4005)
-- Drop CDF (SOFTWARE-4012)
-- Drop MIS VO (SOFTWARE-3575)
+- Update to the new certificate for GlueX VOMS
 
-These [JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.10-2%2C%203.4.44-2)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
+These [JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.10-2%2C%203.4.49-2)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
 Containers
 ----------
@@ -64,11 +59,11 @@ We added or updated the following packages to the production OSG yum repository.
 
 #### Enterprise Linux 6
 
--   [vo-client-100-1.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=vo-client-100-1.osg34.el6)
+-   [vo-client-104-1.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=vo-client-104-1.osg34.el6)
 
 #### Enterprise Linux 7
 
--   [vo-client-100-1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=vo-client-100-1.osg34.el7)
+-   [vo-client-104-1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=vo-client-104-1.osg34.el7)
 
 ### RPMs
 
@@ -81,15 +76,15 @@ If you wish to only update the RPMs that changed, the set of RPMs is:
 #### Enterprise Linux 6
 
 ``` file
-vo-client-100-1.osg34.el6
-vo-client-dcache-100-1.osg34.el6
-vo-client-lcmaps-voms-100-1.osg34.el6
+vo-client-104-1.osg34.el6
+vo-client-dcache-104-1.osg34.el6
+vo-client-lcmaps-voms-104-1.osg34.el6
 ```
 
 #### Enterprise Linux 7
 
 ``` file
-vo-client-100-1.osg34.el7
-vo-client-dcache-100-1.osg34.el7
-vo-client-lcmaps-voms-100-1.osg34.el7
+vo-client-104-1.osg34.el7
+vo-client-dcache-104-1.osg34.el7
+vo-client-lcmaps-voms-104-1.osg34.el7
 ```
