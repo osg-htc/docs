@@ -24,7 +24,7 @@ This release contains [VO Package v100](https://github.com/opensciencegrid/osg-v
 - Drop CDF (SOFTWARE-4012)
 - Drop MIS VO (SOFTWARE-3575)
 
-These [JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.10-2%2C%203.4.44-2)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
+These [JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.44-2%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
 Containers
 ----------
