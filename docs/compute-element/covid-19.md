@@ -71,7 +71,8 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:
             JOB_ROUTER_ROUTE_NAMES = OSG_COVID19_Jobs, $(JOB_ROUTER_ROUTE_NAMES)
             
         If your configuration does not already define `JOB_ROUTER_ROUTE_NAMES`, you need to add the name of all previous
-        routes to it, leaving `OSG_COVID19_Jobs` at the start of the list
+        routes to it, leaving `OSG_COVID19_Jobs` at the start of the list.
+        For example:
         
             JOB_ROUTER_ROUTE_NAMES = OSG_COVID19_Jobs, Local_Condor, $(JOB_ROUTER_ROUTE_NAMES)
 
