@@ -2883,6 +2883,13 @@ and the value of <code>queue</code> with the name of the partition or queue of y
 </pre></div>
 
 
+<p>If your configuration does not already define <code>JOB_ROUTER_ROUTE_NAMES</code>, you need to add the name of all previous
+routes to it, leaving <code>OSG_COVID19_Jobs</code> at the start of the list.
+For example:</p>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ROUTE_NAMES = OSG_COVID19_Jobs, Local_Condor, $(JOB_ROUTER_ROUTE_NAMES)
+</pre></div>
+
+
 </li>
 <li>
 <p><strong>For older versions of HTCondor:</strong> add <code>(TARGET.IsCOVID19 =!= true)</code> to the <code>Requirements</code> of any existing routes.
