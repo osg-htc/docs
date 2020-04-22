@@ -79,7 +79,7 @@ Applying for an OSG Hosted CE
 
 Before making any system changes, you should do the following steps:
 
--   Fill out the [cluster integration questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSf_pJ3Xlf2N9v5I1GK9oA9HVIxNeRikEq_T1GY0ijaUMy9cIA/viewform)
+-   Fill out the [cluster integration questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSel9xaYxOqsTXJKIget4DWfCwkxXtpEIZ-vrNW-VojqYJwCsQ/viewform?usp=sf_link)
     so that the OSG team has basic information about your cluster
 
 -   Email [help@opensciencegrid.org](mailto:help@opensciencegrid.org)
