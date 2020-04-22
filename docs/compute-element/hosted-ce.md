@@ -25,14 +25,14 @@ Before preparing your cluster for OSG jobs, consider the following requirements:
 -   An existing compute cluster with a [supported batch system](/index.md#prepare-the-batch-system)
     running on a [supported operating system](/release/supported_platforms)
 
--   Outbound network connectivity from the compute nodes (they can be behind NAT)
+-   Outbound network connectivity from the worker nodes (they can be behind NAT)
 
 -   A Unix account on your cluster's submit server, accessible via an SSH key.
     The Hosted CE will use this account to automatically submit jobs,
     so it must also have permissions to submit jobs to the batch system
 
 -   If your batch system is not HTCondor,
-    there must be a shared file system between the submit server and the compute nodes.
+    there must be a shared file system between the submit server and the worker nodes.
     See [this section](#providing-the-osg-worker-node-client-htcondor-batch-systems-only) for details.
 
 -   [Temporary scratch space](/worker-node/using-wn#for-site-administrators) on each worker node
@@ -139,7 +139,7 @@ In order to provide OASIS at your site, you will need the following:
 -   A local OASIS cache per worker node (10 GB minimum, 20 GB recommended)
 
 After setting up the Frontier Squid proxy and local caches on each worker node,
-[install OASIS](/worker-node/install-cvmfs) on each compute node.
+[install OASIS](/worker-node/install-cvmfs) on each worker node.
 
 How to Get Help
 ---------------
