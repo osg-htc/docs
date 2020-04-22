@@ -51,7 +51,7 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:
          name = "OSG_COVID19_Jobs";
          GridResource = "batch slurm";
          TargetUniverse = 9;
-         queue = "covid19";
+         set_default_queue = "covid19";
          Requirements = (TARGET.IsCOVID19 =?= true);
         ]
         $(JOB_ROUTER_ENTRIES)
@@ -59,7 +59,8 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:
 
     Replacing `slurm` in the `GridResource` attribute with the appropriate value for your batch system (e.g., `lsf`,
     `pbs`, `sge`, or `slurm`);
-    and the value of `queue` with the name of the partition or queue of your local batch system dedicated to COVID-19 work.
+    and the value of `set_default_queue` with the name of the partition or queue of your local batch system dedicated to
+    COVID-19 work.
 
 1.  Ensure that COVID-19 jobs match to the new route.
     Choose one of the options below depending on your HTCondor version (`condor_version`):
@@ -85,8 +86,8 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:
              name = "Local_Slurm"
              GridResource = "batch slurm";
              TargetUniverse = 9;
-             queue = "atlas;
-             Requirements = (TARGET.queue =!= "osg");
+             set_default_queue = "atlas;
+             Requirements = (TARGET.Owner =!= "osg");
             ]
             @jre
 
@@ -98,8 +99,8 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:
              name = "Local_Slurm"
              GridResource = "batch slurm";
              TargetUniverse = 9;
-             queue = "atlas;
-             Requirements = (TARGET.queue =!= "osg") && (TARGET.IsCOVID19 =!= true);
+             set_default_queue = "atlas;
+             Requirements = (TARGET.Owner =!= "osg") && (TARGET.IsCOVID19 =!= true);
             ]
             @jre
 
@@ -155,8 +156,7 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:
             [
              name = "Local_Condor"
              TargetUniverse = 5;
-             queue = "atlas;
-             Requirements = (TARGET.queue =!= "osg");
+             Requirements = (TARGET.Owner =!= "osg");
             ]
             @jre
 
@@ -167,8 +167,7 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:
             [
              name = "Local_Condor"
              TargetUniverse = 5;
-             queue = "atlas;
-             Requirements = (TARGET.queue =!= "atlas") && (TARGET.IsCOVID19 =!= true);
+             Requirements = (TARGET.Owner =!= "atlas") && (TARGET.IsCOVID19 =!= true);
             ]
             @jre
 
