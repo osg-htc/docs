@@ -2859,7 +2859,7 @@ Customizations may be placed in <code>/etc/condor-ce/config.d/</code> where file
  name = &quot;OSG_COVID19_Jobs&quot;;
  GridResource = &quot;batch slurm&quot;;
  TargetUniverse = 9;
-<span class="hll"> queue = &quot;covid19&quot;;
+<span class="hll"> set_default_queue = &quot;covid19&quot;;
 </span><span class="hll"> Requirements = (TARGET.IsCOVID19 =?= true);
 </span>]
 $(JOB_ROUTER_ENTRIES)
@@ -2869,7 +2869,8 @@ $(JOB_ROUTER_ENTRIES)
 
 <p>Replacing <code>slurm</code> in the <code>GridResource</code> attribute with the appropriate value for your batch system (e.g., <code>lsf</code>,
 <code>pbs</code>, <code>sge</code>, or <code>slurm</code>);
-and the value of <code>queue</code> with the name of the partition or queue of your local batch system dedicated to COVID-19 work.</p>
+and the value of <code>set_default_queue</code> with the name of the partition or queue of your local batch system dedicated to
+COVID-19 work.</p>
 </li>
 <li>
 <p>Ensure that COVID-19 jobs match to the new route.
@@ -2899,8 +2900,8 @@ For example:</p>
  name = &quot;Local_Slurm&quot;
  GridResource = &quot;batch slurm&quot;;
  TargetUniverse = 9;
- queue = &quot;atlas;
-<span class="hll"> Requirements = (TARGET.queue =!= &quot;osg&quot;);
+ set_default_queue = &quot;atlas;
+<span class="hll"> Requirements = (TARGET.Owner =!= &quot;osg&quot;);
 </span>]
 @jre
 </pre></div>
@@ -2912,8 +2913,8 @@ For example:</p>
  name = &quot;Local_Slurm&quot;
  GridResource = &quot;batch slurm&quot;;
  TargetUniverse = 9;
- queue = &quot;atlas;
-<span class="hll"> Requirements = (TARGET.queue =!= &quot;osg&quot;) &amp;&amp; (TARGET.IsCOVID19 =!= true);
+ set_default_queue = &quot;atlas;
+<span class="hll"> Requirements = (TARGET.Owner =!= &quot;osg&quot;) &amp;&amp; (TARGET.IsCOVID19 =!= true);
 </span>]
 @jre
 </pre></div>
@@ -2983,10 +2984,9 @@ jobs.</p>
 [
  name = &quot;Local_Condor&quot;
  TargetUniverse = 5;
- queue = &quot;atlas;
-<span class="hll"> Requirements = (TARGET.queue =!= &quot;osg&quot;);
-</span>]
-@jre
+ Requirements = (TARGET.Owner =!= &quot;osg&quot;);
+<span class="hll">]
+</span>@jre
 </pre></div>
 
 
@@ -2995,10 +2995,9 @@ jobs.</p>
 [
  name = &quot;Local_Condor&quot;
  TargetUniverse = 5;
- queue = &quot;atlas;
-<span class="hll"> Requirements = (TARGET.queue =!= &quot;atlas&quot;) &amp;&amp; (TARGET.IsCOVID19 =!= true);
-</span>]
-@jre
+ Requirements = (TARGET.Owner =!= &quot;atlas&quot;) &amp;&amp; (TARGET.IsCOVID19 =!= true);
+<span class="hll">]
+</span>@jre
 </pre></div>
 
 
