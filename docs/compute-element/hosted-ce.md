@@ -46,7 +46,7 @@ Below is an example of the monitoring views that will be available for your clus
 
 ![monitoring graphs](/compute-element/img/monitoring_graphs.png)
 
-Each community in the OSG utilizing the hosted CEs is mapped to your site as a fixed, specific account; we request
+Each community in the OSG utilizing the Hosted CEs is mapped to your site as a fixed, specific account; we request
 the account names are of the form `osg01` through `osg20`.
 
 The mappings from Unix username to community is as follows:
