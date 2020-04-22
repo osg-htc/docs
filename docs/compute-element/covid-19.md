@@ -219,6 +219,12 @@ and the following information:
 -  The hostname(s) of your HTCondor-CE(s)
 -  Any other restrictions that may apply to these jobs (e.g. number of available cores)
 
+Viewing COVID-19 Contributions
+------------------------------
+
+You can view how many hours that COVID-19 projects have consumed at your site with this
+[GRACC dashboard](https://gracc.opensciencegrid.org/dashboard/db/covid-19-research?orgId=1&refresh=5m&from=now-7d&to=now).
+
 Getting Help
 ------------
 
