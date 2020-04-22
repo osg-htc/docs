@@ -126,25 +126,20 @@ set up and maintain shared file system, you have the following options:
 **Optional**: Providing Access to Application Software Using OASIS
 ------------------------------------------------------------------
 
-Many OSG communities use software modules provided by their collaborations or by the OSG User Support team.
-In order to support these communities, without requiring specific application software on your cluster,
-OSG sites use a distributed software repository system called OASIS,
-built on top of a file system called CVMFS.
+Many OSG jobs make of use software modules provided by their collaborations or by the OSG User Support team.
+In order to support these jobs without having to install specific software modules on your cluster,
+OSG sites may provide a distributed software repository system called OASIS, built on top of
+[CVMFS](https://cernvm.cern.ch/portal/filesystem).
 
-In order to use OASIS, you will need the following:
+In order to provide OASIS at your site, you will need the following:
 
--   A cluster-wide Squid proxy service with at least 50GB of cache space;
-    we recommend using the Frontier Squid software provided in the OSG repositories
+-   A cluster-wide Frontier Squid proxy service with at least 50GB of cache space;
+    installation instructions for Frontier Squid are [provided here](/data/frontier-squid).
 
--   A local scratch area on each compute node; typical recommendations are 10 GB per job,
-    plus an additional 20GB for caching OASIS data
+-   A local OASIS cache per worker node (10 GB minimum, 20 GB recommended)
 
-Installation instructions for Frontier Squid are [provided here](/data/frontier-squid).
-
-After setting up the Squid proxy, you will need to install the CVMFS software and the OASIS configuration
-on each compute node.
-Installation instructions for CVMFS and OASIS are [provided here](/worker-node/install-cvmfs).
-
+After setting up the Frontier Squid proxy and local caches on each worker node,
+[install OASIS](/worker-node/install-cvmfs) on each compute node.
 
 How to Get Help
 ---------------
