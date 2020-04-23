@@ -25,14 +25,14 @@ Before preparing your cluster for OSG jobs, consider the following requirements:
 -   An existing compute cluster with a [supported batch system](/index.md#prepare-the-batch-system)
     running on a [supported operating system](/release/supported_platforms)
 
--   Outbound network connectivity from the compute nodes (they can be behind NAT)
+-   Outbound network connectivity from the worker nodes (they can be behind NAT)
 
 -   A Unix account on your cluster's submit server, accessible via an SSH key.
     The Hosted CE will use this account to automatically submit jobs,
     so it must also have permissions to submit jobs to the batch system
 
 -   If your batch system is not HTCondor,
-    there must be a shared file system between the submit server and the compute nodes.
+    there must be a shared file system between the submit server and the worker nodes.
     See [this section](#providing-the-osg-worker-node-client-htcondor-batch-systems-only) for details.
 
 -   [Temporary scratch space](/worker-node/using-wn#for-site-administrators) on each worker node
@@ -46,7 +46,7 @@ Below is an example of the monitoring views that will be available for your clus
 
 ![monitoring graphs](/compute-element/img/monitoring_graphs.png)
 
-Each community in the OSG utilizing the hosted CEs is mapped to your site as a fixed, specific account; we request
+Each community in the OSG utilizing the Hosted CEs is mapped to your site as a fixed, specific account; we request
 the account names are of the form `osg01` through `osg20`.
 
 The mappings from Unix username to community is as follows:
@@ -79,7 +79,7 @@ Applying for an OSG Hosted CE
 
 Before making any system changes, you should do the following steps:
 
--   Fill out the [cluster integration questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSf_pJ3Xlf2N9v5I1GK9oA9HVIxNeRikEq_T1GY0ijaUMy9cIA/viewform)
+-   Fill out the [cluster integration questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSel9xaYxOqsTXJKIget4DWfCwkxXtpEIZ-vrNW-VojqYJwCsQ/viewform?usp=sf_link)
     so that the OSG team has basic information about your cluster
 
 -   Email [help@opensciencegrid.org](mailto:help@opensciencegrid.org)
@@ -126,25 +126,20 @@ set up and maintain shared file system, you have the following options:
 **Optional**: Providing Access to Application Software Using OASIS
 ------------------------------------------------------------------
 
-Many OSG communities use software modules provided by their collaborations or by the OSG User Support team.
-In order to support these communities, without requiring specific application software on your cluster,
-OSG sites use a distributed software repository system called OASIS,
-built on top of a file system called CVMFS.
+Many OSG jobs make of use software modules provided by their collaborations or by the OSG User Support team.
+In order to support these jobs without having to install specific software modules on your cluster,
+OSG sites may provide a distributed software repository system called OASIS, built on top of
+[CVMFS](https://cernvm.cern.ch/portal/filesystem).
 
-In order to use OASIS, you will need the following:
+In order to provide OASIS at your site, you will need the following:
 
--   A cluster-wide Squid proxy service with at least 50GB of cache space;
-    we recommend using the Frontier Squid software provided in the OSG repositories
+-   A cluster-wide Frontier Squid proxy service with at least 50GB of cache space;
+    installation instructions for Frontier Squid are [provided here](/data/frontier-squid).
 
--   A local scratch area on each compute node; typical recommendations are 10 GB per job,
-    plus an additional 20GB for caching OASIS data
+-   A local OASIS cache per worker node (10 GB minimum, 20 GB recommended)
 
-Installation instructions for Frontier Squid are [provided here](/data/frontier-squid).
-
-After setting up the Squid proxy, you will need to install the CVMFS software and the OASIS configuration
-on each compute node.
-Installation instructions for CVMFS and OASIS are [provided here](/worker-node/install-cvmfs).
-
+After setting up the Frontier Squid proxy and local caches on each worker node,
+[install OASIS](/worker-node/install-cvmfs) on each worker node.
 
 How to Get Help
 ---------------

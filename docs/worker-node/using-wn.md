@@ -15,8 +15,8 @@ Hardware Recommendations
 |:-----------------------|:--------|:----------------------|:--------------------------------------------------|
 |Core per pilot                   |  1      |8                      | Depends on the supported VOs. The total core count on every node in the cluster must be divisible by core per pilot.|
 |Memory per core                 | 1024MB  | 2048MB                  | Memory per core times core per pilot needs to be less than the total memory on every node. Do not overcommit. |
-|Scratch disk per core ([OSG_WN_TMP](#osg_wn_tmp))| 2GB    | 10 GB                  | This can be overcommitted if a mix of different VO jobs is expected.|
-|CVMFS [Cache](/worker-node/install-cvmfs/#before-starting) (optional)| 10 GB | 20 GB | This is a value per node and not per core.|
+|Scratch disk per core ([OSG_WN_TMP](#osg_wn_tmp))| 2 GB    | 10 GB                  | This can be overcommitted if a mix of different VO jobs is expected.|
+|CVMFS [Cache](/worker-node/install-cvmfs/#before-starting) per node (optional) | 10 GB | 20 GB | |
 
 
 Common Software Available on Worker Nodes
@@ -67,7 +67,8 @@ pilot jobs to use as temporary scratch space.
 
 #### For site administrators  ####
 
-Site administrators are responsible for cleaning up the contents of `$OSG_WN_TMP`.
+Site administrators are responsible for cleaning up the contents of `$OSG_WN_TMP`
+(see[table above](#hardware-recommendations) for size recommendations).
 We recommend one of the following solutions:
 
 - **(Recommended)** Use batch-system capabilities to create directories in the job scratch directory and bind mount
