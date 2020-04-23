@@ -2853,15 +2853,15 @@
 </tr>
 <tr>
 <td align="left">Scratch disk per core (<a href="#osg_wn_tmp">OSG_WN_TMP</a>)</td>
-<td align="left">2GB</td>
+<td align="left">2 GB</td>
 <td align="left">10 GB</td>
 <td align="left">This can be overcommitted if a mix of different VO jobs is expected.</td>
 </tr>
 <tr>
-<td align="left">CVMFS <a href="../../worker-node/install-cvmfs/#before-starting">Cache</a> (optional)</td>
+<td align="left">CVMFS <a href="../../worker-node/install-cvmfs/#before-starting">Cache</a> per node (optional)</td>
 <td align="left">10 GB</td>
 <td align="left">20 GB</td>
-<td align="left">This is a value per node and not per core.</td>
+<td align="left"></td>
 </tr>
 </tbody>
 </table>
@@ -2946,7 +2946,8 @@ Custom variables and those that aren't listed may be defined in the <a href="../
 <p>As <a href="#the-worker-node-environment">described above</a> <code>OSG_WN_TMP</code> is a temporary storage area on each worker node for
 pilot jobs to use as temporary scratch space.</p>
 <h4 id="for-site-administrators">For site administrators<a class="headerlink" href="#for-site-administrators" title="Permanent link">&para;</a></h4>
-<p>Site administrators are responsible for cleaning up the contents of <code>$OSG_WN_TMP</code>.
+<p>Site administrators are responsible for cleaning up the contents of <code>$OSG_WN_TMP</code>
+(see<a href="#hardware-recommendations">table above</a> for size recommendations).
 We recommend one of the following solutions:</p>
 <ul>
 <li>
