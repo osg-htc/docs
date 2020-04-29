@@ -9,33 +9,33 @@ jobs from the pilot's files and processes and from other users' files
 and processes.  It also supplies a chroot environment in order to run
 user jobs in different operating system images under one Linux kernel.
 
-Kernels with a version 3.10.0-957 or newer include a feature that allows
-singularity to run completely unprivileged. This kernel version is the
-default for RHEL/CentOS/Scientific Linux 7.6 and is available as a
-security update for previous 7.x releases.  Although the feature is
-available, it needs to be enabled to be usable (instructions below).
-This kernel version is not available for RHEL 6 and derivatives.
+Kernels with a version 3.10.0-957 or newer include a feature called
+unprivileged user namespaces that allows singularity to run completely
+unprivileged.  This kernel version is the default for
+RHEL/CentOS/Scientific Linux 7.6 and is available for previous 7.x
+releases.  Although the feature is available, it needs to be enabled to
+be usable (instructions below) on RHEL 7.  The feature is enabled by
+default on RHEL 8, but not available at all on RHEL 6.
 
-Without this kernel version, singularity must be installed and run with
-setuid-root executables. Singularity keeps the privileged code to a
-[minimum](https://www.sylabs.io/guides/2.6/user-guide/introduction.html#security-and-privilege-escalation)
+Without unprivileged user namespaces, singularity must be installed and run
+with setuid-root executables. Singularity keeps the privileged code to a
+[minimum](https://sylabs.io/guides/3.5/user-guide/security.html#singularity-runtime-user-privilege)
 in order to reduce the potential for vulnerabilities.
 
 The OSG has installed singularity in [OASIS](/worker-node/install-cvmfs),
-so many sites will eventually (after it is supported by VOs) not need to
-install singularity locally if they enable it to run unprivileged.
-Meanwhile an RPM installation can be configured to be unprivileged or
-privileged.
+so most sites will not need to install singularity locally if they
+enable it to run unprivileged.  An RPM installation can be configured to
+be unprivileged or privileged.
 
 !!! danger "Kernel vs. Userspace Security"
     Enabling unprivileged user namespaces increases the risk to the
-    kernel. However, the kernel is more widely reviewed than singularity and
-    the additional capability given to users is more limited.
+    kernel. However, the kernel is much more widely reviewed than singularity
+    and the additional capability given to users is more limited.
     OSG Security considers the non-setuid, kernel-based method to have a
     lower security risk.
 
-This document is intended for system administrators that wish to install
-and/or configure singularity.
+This document is intended for system administrators that wish to enable,
+install, and/or configure singularity.
 
 Before Starting
 ---------------
@@ -59,22 +59,18 @@ There are two sets of instructions on this page:
 - [Enabling Unprivileged Singularity](#enabling-unprivileged-singularity)
 - [Singularity via RPM](#singularity-via-rpm)
 
-OSG VOs are working to support running singularity directly from OASIS,
+OSG VOs all support running singularity directly from OASIS,
 the OSG Software [CVMFS distribution](install-cvmfs), when unprivileged
-singularity is enabled.  At that point sites will not have to install
-the singularity RPM themselves.  As of April 2019, no VO in the OSG is
-yet ready to do this, but OSG recommends that all RHEL 7.x installations
-enable support for unprivileged singularity and for now also install the
-RPM.  Sites may also choose to configure their RHEL 7.x RPM
-installations to run unprivileged.  RHEL 6.x installations have no
-option for unprivileged singularity so there the RPM has to be installed
-and left configured as privileged.
+singularity is enabled.  OSG recommends that all RHEL 7.x installations
+enable support for unprivileged singularity instead of installing the
+RPM when possible.  Sites that do install the RPM may choose to
+configure their RHEL 7.x RPM installations to run unprivileged.  RHEL
+6.x installations have no option for unprivileged singularity so there
+the RPM has to be installed and left configured as privileged.
 
 In addition to improved security, unprivileged singularity enables
 `condor_ssh_to_job` to enter a container namespace without itself
-needing privileges.  Also, unprivileged singularity enables nesting
-containers within another container (when the outer container is started
-by singularity 3.x, which is currently in the osg-upcoming repository).
+needing privileges. 
 
 On the other hand, there are a few rare use cases that require
 singularity to run privileged:
@@ -85,10 +81,10 @@ singularity to run privileged:
     in a single file (as opposed to an unpacked directory) may be
     needed.
 
-    However, known images from OSG VOs are directory-based, and we
-    [recommend disabling this feature](#limiting-image-types) on
-    privileged installations in order to avoid potential kernel
-    exploits.
+    However, OSG VO container images are usually directory-based in
+    CVMFS, and when possible we [recommend disabling this
+    feature](#limiting-image-types) on privileged installations in order
+    to avoid potential kernel exploits.
 
 1. **The overlay feature.**  The "overlay" feature of singularity uses
     overlayfs to add bind mounts where mount points don't exist in the
@@ -100,15 +96,11 @@ singularity to run privileged:
     privileges, and the overlay feature has been a source of security
     vulnerabilities in the past.  For these reasons, [we recommend
     replacing overlay with underlay](#configuring-singularity) even on
-    privileged installations.
+    privileged installations.  
 
-1. **Allocating new pseudo-tty devices.**  Support for allocating
-    pseudo-tty devices was accidentally left out of the user namespace
-    support in the RHEL 7.6 kernel.
-
-    However, this feature is only required for a small number of
-    applications, and singularity 3.x works around the limitation for
-    most of them without needing privileges.
+    overlayfs is also used to make the appearance of writable images
+    when building containers, so it may be needed on some systems for
+    that purpose.
 
 
 Enabling Unprivileged Singularity
@@ -140,24 +132,27 @@ steps:
     namespaces.
 
     Network namespaces are, however, utilized by other software,
-    such as Docker.  Disabling network namespaces may break
-    other software, or limit its capabilities (such as
-    requiring the `--net=host` option in Docker).
-
-1. If you haven't yet installed [CVMFS](install-cvmfs), do so.
-
+    such as Docker.  Disabling network namespaces may break other
+    software, or limit its capabilities (such as requiring the
+    `--net=host` option in Docker).
 
 ### Validating Unprivileged Singularity ###
 
-Once you have the host configured properly, log in as an ordinary
-unprivileged user and verify that singularity in OASIS works:
+If you haven't yet installed [CVMFS](install-cvmfs), please do so.
+Alternatively, use the
+[cvmfsexec package](https://github.com/cvmfs-contrib/cvmfsexec)
+configured for osg as an unprivileged user and mount the
+oasis.opensciencegrid.org and singularity.opensciencegrid.org
+repositories.
+
+As an unprivileged user verify that singularity in OASIS works with this
+command:
 
 ```console
 user@host $ /cvmfs/oasis.opensciencegrid.org/mis/singularity/bin/singularity \
                 exec --contain --ipc --pid --bind /cvmfs \
                 /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el6:latest \
                 ps -ef
-WARNING: Container does not have an exec helper script, calling 'ps' directly
 UID        PID  PPID  C STIME TTY          TIME CMD
 user         1     0  2 21:27 ?        00:00:00 shim-init
 user         2     1  0 21:27 ?        00:00:00 ps -ef
