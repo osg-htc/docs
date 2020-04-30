@@ -60,9 +60,9 @@ There are two sets of instructions on this page:
 - [Singularity via RPM](#singularity-via-rpm)
 
 OSG VOs all support running singularity directly from CVMFS when unprivileged
-singularity is enabled.  OSG recommends that all RHEL 7.x installations
-enable support for unprivileged singularity instead of installing the
-RPM when possible.  Sites that do install the RPM may choose to
+singularity is enabled.  OSG recommends that system administrators
+enable unprivileged singularity on RHEL 7.x worker nodes and not install the
+singularity RPM when possible.  Sites that do install the RPM may choose to
 configure their RHEL 7.x RPM installations to run unprivileged.  RHEL
 6.x installations have no option for unprivileged singularity so there
 the RPM has to be installed and left configured as privileged.
