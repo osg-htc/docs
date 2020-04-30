@@ -136,6 +136,13 @@ steps:
     software, or limit its capabilities (such as requiring the
     `--net=host` option in Docker).
 
+1. If docker is being used to run jobs, the following options are 
+    recommended to allow unprivileged singularity to run (it does not
+    need `--privileged` or any added capabilities):
+
+        ::console
+        --security-opt seccomp=unconfined --security-opt systempaths=unconfined
+
 ### Validating Unprivileged Singularity ###
 
 If you haven't yet installed [CVMFS](install-cvmfs), please do so.
