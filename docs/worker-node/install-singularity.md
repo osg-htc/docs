@@ -59,8 +59,7 @@ There are two sets of instructions on this page:
 - [Enabling Unprivileged Singularity](#enabling-unprivileged-singularity)
 - [Singularity via RPM](#singularity-via-rpm)
 
-OSG VOs all support running singularity directly from OASIS,
-the OSG Software [CVMFS distribution](install-cvmfs), when unprivileged
+OSG VOs all support running singularity directly from CVMFS when unprivileged
 singularity is enabled.  OSG recommends that all RHEL 7.x installations
 enable support for unprivileged singularity instead of installing the
 RPM when possible.  Sites that do install the RPM may choose to
