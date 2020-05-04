@@ -511,6 +511,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#configuring-unprivileged-singularity" title="Configuring Unprivileged Singularity" class="md-nav__link">
+    Configuring Unprivileged Singularity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#validating-unprivileged-singularity" title="Validating Unprivileged Singularity" class="md-nav__link">
     Validating Unprivileged Singularity
   </a>
@@ -538,8 +545,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#configuring-singularity" title="Configuring Singularity" class="md-nav__link">
-    Configuring Singularity
+  <a href="#configuring-singularity-rpm" title="Configuring Singularity RPM" class="md-nav__link">
+    Configuring Singularity RPM
   </a>
   
     <nav class="md-nav">
@@ -2821,6 +2828,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#configuring-unprivileged-singularity" title="Configuring Unprivileged Singularity" class="md-nav__link">
+    Configuring Unprivileged Singularity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#validating-unprivileged-singularity" title="Validating Unprivileged Singularity" class="md-nav__link">
     Validating Unprivileged Singularity
   </a>
@@ -2848,8 +2862,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#configuring-singularity" title="Configuring Singularity" class="md-nav__link">
-    Configuring Singularity
+  <a href="#configuring-singularity-rpm" title="Configuring Singularity RPM" class="md-nav__link">
+    Configuring Singularity RPM
   </a>
   
     <nav class="md-nav">
@@ -3052,6 +3066,23 @@ software, or limit its capabilities (such as requiring the
 
 </li>
 </ol>
+<h3 id="configuring-unprivileged-singularity">Configuring Unprivileged Singularity<a class="headerlink" href="#configuring-unprivileged-singularity" title="Permanent link">&para;</a></h3>
+<p>When unprivileged singularity is enabled and VOs run singularity from
+CVMFS, the singularity configuration file also comes from CVMFS so local
+sites have no control over changing the configuration.  However, the
+most common local configuration change to the singularity RPM is to add
+additional local "bind path" options to map extra local file paths into
+containers.  This can instead be accomplished by setting the
+<code>SINGULARITY_BINDPATH</code> variable in the environment of jobs, for
+example through
+<a href="../../other/configuration-with-osg-configure/#local-settings">configuration</a>
+on your compute element.  This is a
+comma-separated list of paths to bind, following the syntax of the
+<code>singularity exec --bind</code> option.</p>
+<p>There are also other environment variables that can affect singularity
+operation; see the
+<a href="https://sylabs.io/guides/3.5/user-guide/appendix.html">singularity documentation</a>
+for details.</p>
 <h3 id="validating-unprivileged-singularity">Validating Unprivileged Singularity<a class="headerlink" href="#validating-unprivileged-singularity" title="Permanent link">&para;</a></h3>
 <p>If you haven't yet installed <a href="../install-cvmfs">CVMFS</a>, please do so.
 Alternatively, use the
@@ -3102,7 +3133,7 @@ before installing the required packages:</p>
 
 </li>
 </ol>
-<h3 id="configuring-singularity">Configuring Singularity<a class="headerlink" href="#configuring-singularity" title="Permanent link">&para;</a></h3>
+<h3 id="configuring-singularity-rpm">Configuring Singularity RPM<a class="headerlink" href="#configuring-singularity-rpm" title="Permanent link">&para;</a></h3>
 <p>singularity includes an option called <code>underlay</code> that enables using bind
 mount points that do not exist in the container image.
 By default it is enabled, but only if the similar <code>overlay</code> option cannot
