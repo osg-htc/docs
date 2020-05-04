@@ -151,7 +151,9 @@ sites have no control over changing the configuration.  However, the
 most common local configuration change to the singularity RPM is to add
 additional local "bind path" options to map extra local file paths into
 containers.  This can instead be accomplished by setting the
-`SINGULARITY_BINDPATH` variable in the environment of jobs.  This is a
+`SINGULARITY_BINDPATH` variable in the environment of jobs through
+[configuration](/other/configuration-with-osg-configure/#local-settings)
+on your compute element.  This is a
 comma-separated list of paths to bind, following the syntax of the
 `singularity exec --bind` option.
 
