@@ -142,6 +142,24 @@ steps:
         ::console
         --security-opt seccomp=unconfined --security-opt systempaths=unconfined
 
+
+### Configuring Unprivileged Singularity ###
+
+When unprivileged singularity is enabled and VOs run singularity from
+CVMFS, the singularity configuration file also comes from CVMFS so local
+sites have no control over changing the configuration.  However, the
+most common local configuration change to the singularity RPM is to add
+additional local "bind path" options to map extra local file paths into
+containers.  This can instead be accomplished by setting the
+`SINGULARITY_BINDPATH` variable in the environment of jobs.  This is a
+comma-separated list of paths to bind, following the syntax of the
+`singularity exec --bind` option.
+
+There are also other environment variables that can affect singularity
+operation; see the
+[singularity documentation](https://sylabs.io/guides/3.5/user-guide/appendix.html)
+for details.
+
 ### Validating Unprivileged Singularity ###
 
 If you haven't yet installed [CVMFS](install-cvmfs), please do so.
@@ -194,7 +212,7 @@ before installing the required packages:
         :::console
         root@host # yum install singularity
 
-### Configuring Singularity ###
+### Configuring Singularity RPM ###
 
 singularity includes an option called `underlay` that enables using bind
 mount points that do not exist in the container image.
