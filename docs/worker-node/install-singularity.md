@@ -142,6 +142,11 @@ steps:
         ::console
         --security-opt seccomp=unconfined --security-opt systempaths=unconfined
 
+    In addition, the following option is recommended for allowing
+    unprivileged fuse mounts on kernels that support that (RHEL >= 7.8):
+
+        ::console
+        --device=/dev/fuse
 
 ### Configuring Unprivileged Singularity ###
 
