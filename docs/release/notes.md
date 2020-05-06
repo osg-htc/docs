@@ -32,6 +32,7 @@ To update to the OSG 3.5 series, please consult the page on
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.5.15-3](/release/3.5/release-3-5-15-3) | 2020-05-06 | IGTF 1.106                                                              |
 | [3.5.15-2](/release/3.5/release-3-5-15-2) | 2020-04-15 | VO Package v104                                                         |
 | [3.5.15](/release/3.5/release-3-5-15)     | 2020-04-08 | Frontier Squid 4.10.3, VO Package v103, XRootD 4.11.3, osg-xrootd 3.5-12|
 | [3.5.14](/release/3.5/release-3-5-14)     | 2020-04-07 | High Priority Release: HTCondor 8.8.8; Upcoming: HTCondor 8.9.6         |
@@ -70,6 +71,7 @@ OSG 3.4
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.49-3](/release/3.4/release-3-4-49-3) | 2020-05-06 | IGTF 1.106                                                              |
 | [3.4.49-2](/release/3.4/release-3-4-49-2) | 2020-04-15 | VO Package v104                                                         |
 | [3.4.49](/release/3.4/release-3-4-49)     | 2020-04-08 | Frontier Squid 4.10.3, VO Package v103                                  |
 | [3.4.48](/release/3.4/release-3-4-48)     | 2020-04-07 | High Priority Release: HTCondor 8.8.8                                   |
