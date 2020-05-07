@@ -15,7 +15,7 @@ Before starting the installation process, consider the following points:
 
 1. **Docker:** For the purpose of this guide, the host must have a running docker service and you must have the ability to start containers (i.e., belong to the `docker` Unix group).
 1. **Network ports:** The Stash Origin listens for incoming HTTP/S and XRootD connections on ports 1094 and 1095 (by default).
-1. **File Systems:** Stash Cache needs a partition on the host to store cached data
+1. **File Systems:** Stash Origin needs a partition on the host to store user data.
 
 Configuring Stashcache
 ----------------------
