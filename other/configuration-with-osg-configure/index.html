@@ -3588,11 +3588,6 @@ Legal values for <code>probe_type</code> are:</p>
 <td>This option lists the serviceURI of the HTCondor-CE-based CEs that the RSV HTCondor-CE probes should check. This should be a list of serviceURIs (<code>hostname[:port/service]</code>) separated by a comma (e.g. <code>my.host,my.host2,my.host3:2812</code>).</td>
 </tr>
 <tr>
-<td>gums_hosts</td>
-<td>String</td>
-<td>This option lists the serviceURI or FQDN of the CEs or SEs, using GUMS for authentication, that the RSV GUMS probes should check.  This should be a list of <em>CE</em> or <em>SE</em> FQDNs (and <em>not a GUMS server FQDN</em>) separated by a comma (e.g. <code>my.host,my.host2,my.host3</code>).</td>
-</tr>
-<tr>
 <td>gridftp_hosts</td>
 <td>String</td>
 <td>This option lists the serviceURI of the GridFTP servers that the RSV GridFTP probes should check.  This should be a list of serviceURIs (<code>hostname[:port/service]</code>) separated by a comma (e.g. <code>my.host.iu.edu:2812,my.host2,my.host3</code>).</td>
@@ -3859,16 +3854,6 @@ SE.</p>
 </thead>
 <tbody>
 <tr>
-<td>glexec_location</td>
-<td>String</td>
-<td>This gives the location of the glExec installation on the worker nodes, if it is present. Can be defined in terms of an environment variable (e.g. <code>$FOO</code>) that will be evaluated on the worker node. If it is not installed, set this to <code>UNAVAILABLE</code>. glExec does not work with the <code>vomsmap</code> authorization method on OSG 3.3 and <strong>is entirely unsupported starting in OSG 3.4</strong></td>
-</tr>
-<tr>
-<td><strong>gums_host</strong></td>
-<td>String</td>
-<td>This setting is used to indicate the hostname of the GUMS host that should be used for authentication, if the authorization method below is set to <code>xacml</code>. If GUMS is not used, this should be set to <code>UNAVAILABLE</code>. <strong>GUMS is deprecated in OSG 3.4</strong></td>
-</tr>
-<tr>
 <td><strong>authorization_method</strong></td>
 <td><code>gridmap</code>, <code>xacml</code>, <code>local-gridmap</code>, <code>vomsmap</code></td>
 <td>This indicates which authorization method your site uses. <strong><code>xacml</code></strong> <strong>is deprecated in OSG 3.4</strong></td>
@@ -3883,16 +3868,10 @@ SE.</p>
 <td><code>True</code>, <code>False</code></td>
 <td>(Optional, default False) If true, vomsmap auth will use all VOMS FQANs of a proxy for mapping -- see <a href="../../security/lcmaps-voms-authentication#mapping-using-all-fqans">documentation</a></td>
 </tr>
-<tr>
-<td>copy_host_cert_for_service_certs</td>
-<td><code>True</code>, <code>False</code></td>
-<td>(Optional, default False) If true, osg-configure will create a copy or copies of your host cert and key as service certs for RSV and (on OSG 3.3) GUMS</td>
-</tr>
 </tbody>
 </table>
 <p><strong>OSG 3.4 changes:</strong></p>
 <ul>
-<li><code>glexec_location</code> must be <code>UNAVAILABLE</code> or unset</li>
 <li><code>authorization_method</code> defaults to <code>vomsmap</code></li>
 <li><code>authorization_method</code> will raise a warning if set to <code>xacml</code></li>
 </ul>

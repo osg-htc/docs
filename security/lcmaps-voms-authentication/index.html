@@ -994,20 +994,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#migrating-from-edg-mkgridmap" title="Migrating from edg-mkgridmap" class="md-nav__link">
-    Migrating from edg-mkgridmap
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#migrating-from-gums" title="Migrating from GUMS" class="md-nav__link">
-    Migrating from GUMS
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#mapping-vos" title="Mapping VOs" class="md-nav__link">
     Mapping VOs
   </a>
@@ -2956,20 +2942,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#migrating-from-edg-mkgridmap" title="Migrating from edg-mkgridmap" class="md-nav__link">
-    Migrating from edg-mkgridmap
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#migrating-from-gums" title="Migrating from GUMS" class="md-nav__link">
-    Migrating from GUMS
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#mapping-vos" title="Mapping VOs" class="md-nav__link">
     Mapping VOs
   </a>
@@ -3140,8 +3112,7 @@
 <a href="../../data/xrootd/install-storage-element">XRootD</a> hosts for mapping grid certificates of incoming connections to specific
 Unix accounts.
 The LCMAPS VOMS plugin enables LCMAPS to make mapping decisions based on the VOMS attributes of grid certificates, e.g.
-<code>/cms/Role=production/Capability=NULL</code>.
-In OSG 3.4, the LCMAPS VOMS plugin replaced GUMS and edg-mkgridmap as the authentication method at OSG sites.</p>
+<code>/cms/Role=production/Capability=NULL</code>.</p>
 <p>The OSG provides a default set of mappings from VOMS attributes to Unix accounts.
 By configuring LCMAPS, you can override these mappings, including changing the Unix account that a VO is mapped to;
 adding custom mappings for specific users and VOMS attributes; and/or banning specific users and VOMS attributes.</p>
@@ -3176,7 +3147,7 @@ resources on a per-VO basis.</p>
 <h2 id="configuring-the-lcmaps-voms-plugin">Configuring the LCMAPS VOMS Plugin<a class="headerlink" href="#configuring-the-lcmaps-voms-plugin" title="Permanent link">&para;</a></h2>
 <p>The following section describes the steps required to configure the LCMAPS VOMS plugin for authentication.
 Additionally, there are <a href="#optional-configuration">optional configuration</a> instructions if you need to make changes to
-the default mappings, or migrate from edg-mkgridmap or GUMS.</p>
+the default mappings.</p>
 <h3 id="supporting-mapped-vos-and-users">Supporting mapped VOs and users<a class="headerlink" href="#supporting-mapped-vos-and-users" title="Permanent link">&para;</a></h3>
 <p>Ensure Unix accounts exist for each VO, VO role, VO group, or user you choose to support in the <a href="#configuration-files">mapfiles</a>:</p>
 <ol>
@@ -3272,110 +3243,17 @@ You may need to configure other software that is installed on your host, too.</p
 </li>
 </ol>
 <h3 id="optional-configuration">Optional configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h3>
-<p>The following subsections contain information on migration from <code>edg-mkgridmap</code>, mapping or banning users by their
+<p>The following subsections contain information on mapping or banning users by their
 certificates' Distinguished Names (DNs) or by their proxies' VOMS attributes.
 Any optional configuration is to be performed after the installation and configuration sections above.</p>
 <p>For a table of the configuration files and their order of evaluation, consult the <a href="#configuration-files">reference section</a>.</p>
 <ul>
-<li><a href="#migrating-from-edg-mkgridmap">Migrating from edg-mkgridmap</a></li>
-<li><a href="#migrating-from-gums">Migrating from GUMS</a></li>
 <li><a href="#mapping-vos">Mapping VOs</a></li>
 <li><a href="#mapping-users">Mapping users</a></li>
 <li><a href="#banning-vos">Banning VOs</a></li>
 <li><a href="#banning-users">Banning users</a></li>
 <li><a href="#mapping-using-all-fqans">Mapping using all FQANs</a></li>
 </ul>
-<h4 id="migrating-from-edg-mkgridmap">Migrating from edg-mkgridmap<a class="headerlink" href="#migrating-from-edg-mkgridmap" title="Permanent link">&para;</a></h4>
-<p>The program edg-mkgridmap (found in the package <code>edg-mkgridmap</code>), used for authentication on HTCondor-CE, GridFTP, and
-XRootD hosts, is no longer supported by the OSG.
-The LCMAPS VOMS plugin (package <code>lcmaps-plugins-voms</code>) now provides the same functionality.
-To migrate from edg-mkgridmap to the LCMAPS VOMS plugin, perform the following procedure:</p>
-<ol>
-<li>
-<p>Configure user DN mappings:</p>
-<ol>
-<li>Remove <code>/etc/grid-security/grid-mapfile</code></li>
-<li>
-<p>Check if you have a local grid mapfile:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> grep gmf_local /etc/edg-mkgridmap.conf
-</pre></div>
-
-
-</li>
-<li>
-<p>If the above command returns a file that exists and has contents, move it to <code>/etc/grid-security/grid-mapfile</code>.</p>
-</li>
-</ol>
-</li>
-<li>
-<p>If you are converting an HTCondor-CE host, remove the HTCondor-CE <code>GRIDMAP</code> configuration. Otherwise, skip to the
-    next step.</p>
-<ol>
-<li>
-<p>Find where <code>GRIDMAP</code> is set:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> condor_ce_config_val -v GRIDMAP
-</pre></div>
-
-
-</li>
-<li>
-<p>If the above command returns a file, remove the <code>GRIDMAP</code> configuration from that file.
-   Repeat this until the command returns <code>Not defined: GRIDMAP</code>.</p>
-</li>
-<li>Reconfigure HTCondor-CE:<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> condor_ce_reconfig
-</pre></div>
-
-
-</li>
-</ol>
-</li>
-<li>
-<p>Remove edg-mkgridmap and related packages:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum erase edg-mkgridmap
-</pre></div>
-
-
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>In the output from this command, yum should <strong>not</strong> list other packages than the one.
-If it lists other packages, cancel the erase operation, make sure the other packages are updated to their latest
-OSG 3.5 versions (they should have ".osg35" in their versions), and try again.</p>
-</div>
-</li>
-</ol>
-<h4 id="migrating-from-gums">Migrating from GUMS<a class="headerlink" href="#migrating-from-gums" title="Permanent link">&para;</a></h4>
-<p>GUMS is no longer supported by the OSG and has been replaced by the LCMAPS VOMS plugin.
-Note that unlike GUMS, which runs on a central host, the LCMAPS VOMS plugin will run on your GUMS clients (e.g.
-HTCondor-CE, GridFTP, and XRootD).
-To migrate any custom authentication configuration from GUMS to the LCMAPS VOMS plugin, perform the following procedure:</p>
-<ol>
-<li>
-<p>On your GUMS host, retrieve the conversion helper script and run it:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@gums-host #</span> wget https://raw.githubusercontent.com/opensciencegrid/osg-vo-config/mapfile-generator-0.2/bin/manual-mapfile-from-gumsdb.py
-<span class="gp">root@gums-host #</span> python manual-mapfile-from-gumsdb.py
-</pre></div>
-
-
-</li>
-<li>
-<p>Verify that the contents of <code>ban-mapfile.additions</code>, <code>grid-mapfile.additions</code>, and <code>voms-mapfile.additions</code> include
-   any custom banned users, user mappings, and VO mappings, respectively.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The above files will not include all VO mappings; the OSG provides default VO mappings in
-<code>/usr/share/osg/voms-mapfile-default</code></p>
-</div>
-</li>
-<li>
-<p>On each of your client hosts (e.g. HTCondor-CE, GridFTP, XRootD), perform the following:</p>
-<ol>
-<li>If you have not done so already, <a href="#installing-the-lcmaps-voms-plugin">install</a> and
-   <a href="#configuring-the-lcmaps-voms-plugin">configure</a> the LCMAPS VOMS plugin</li>
-<li>Append each <code>.additions</code> file to its corresponding file in <code>/etc/grid-security/</code> (creating those files if they do
-   not exist)</li>
-</ol>
-</li>
-</ol>
 <h4 id="mapping-vos">Mapping VOs<a class="headerlink" href="#mapping-vos" title="Permanent link">&para;</a></h4>
 <p>To map VOs, VO roles, or VO groups to Unix accounts based on their VOMS attributes, create <code>/etc/grid-security/voms-mapfile</code>.
 An example of the format of a <code>voms-mapfile</code> follows:</p>
