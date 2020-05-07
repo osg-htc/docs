@@ -75,14 +75,9 @@ hierarchy, i.e. `topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml` from the
 
 ### New site
 
-To register a site, first choose a name for it.
-We recommend one of the following patterns:
-   
-1. `<Organization acronym>-<Cluster name>` e.g. `TCNJ-Elsa`
-1. `<Organization short name> - <Cluster name>` e.g. `New Mexico State - AggieGrid`
-
-Site names must be globally unique and may be used throughout the OSG,
-such as on the [GRACC site dashboard](https://gracc.opensciencegrid.org/dashboard/db/site-summary?orgId=1).
+To register a site, first choose a name for it (see the [naming conventions table above](#registering-resources))
+The site name will appear in OSG accounting in places such as the
+[GRACC site dashboard](https://gracc.opensciencegrid.org/dashboard/db/site-summary?orgId=1).
 
 Once you have chosen a site name, open the following in your browser:
 
