@@ -44,17 +44,27 @@ under `/etc/xrootd/config.d/` as follows:
 
 1.  Configure a `rootdir` in `/etc/xrootd/config.d/10-common-site-local.cfg`, to point to the top of the directory
     hierarchy which you wish to serve via XRootD.
-    For example, to serve `/data`:
 
-        set rootdir = /data
+        set rootdir = <DIRECTORY>
 
-1.  To limit the sub-directories to serve under your configured `rootdir`, comment out the `all.export /` directive in
-    `/etc/xrootd/config.d/90-osg-standalone-paths.cfg`, and add an `all.export` directive for each directory under
-    `rootdir` that you wish to serve via XRootD.
+    !!! warning
+        Do not set `rootdir` to `/`.
+        This might result in serving private information.
+
+1.  If you want to limit the sub-directories to serve under your configured `rootdir`,
+    comment out the `all.export /` directive in
+    `/etc/xrootd/config.d/90-osg-standalone-paths.cfg`,
+    and add an `all.export` directive for each directory under `rootdir` that you wish to serve via XRootD.
+    
+    This is useful if you have a mixture of files under your `rootdir`, for example from multiple users,
+    but only want to expose a subset of them to the world.
+    
     For example, to serve the contents of `/data/store` and `/data/public` (with `rootdir` configured to `/data`):
 
         all.export /store/
         all.export /public/
+
+    If you want to serve everything under your configured `rootdir`, you don't have to change anything.
 
     !!! note
         The directories specified this way are writable by default.
@@ -63,10 +73,10 @@ under `/etc/xrootd/config.d/` as follows:
 1. In `/etc/xrootd/config.d/10-common-site-local.cfg`, add a line to set the `resourcename` variable to the
    [resource name](/common/registration/#registering-resources) of your XRootD service.
    For example, the XRootD service registered at the
-   [FermiGrid site](https://github.com/opensciencegrid/topology/blob/master/topology/Fermi%20National%20Accelerator%20Laboratory/FermiGrid/FNAL_PUBLIC_DCACHE.yaml#L6)
+   [University of Florida site](https://github.com/opensciencegrid/topology/blob/b14218d6e9d9df013a42e4d8538b2eeea615514c/topology/University%20of%20Florida/UF%20HPC/UFlorida-HPC.yaml#L250)
    should set the following configuration:
 
-        set resourcename = Fermilab Public DCache
+        set resourcename = UFlorida-XRD
 
     !!! note
         CMS sites should follow CMS policy for `resourcename`
@@ -121,6 +131,14 @@ Validating XRootD
 
 To validate an XRootD installation, perform the following verification steps:
 
+!!! note
+    If you have configured authentication/authorization for XRootD,
+    be sure you have given yourself the necessary permissions to run these tests.
+    For example, if you are using a grid proxy,
+    make sure your DN is mapped to a user in [/etc/grid-security/grid-mapfile](/security/lcmaps-voms-authentication#mapping-users),
+    and make sure you have a valid proxy on your local machine.
+    Also, ensure that the [Authfile](/data/xrootd/xrootd-authorization#authorization-file) on the XRootD server gives write access to the Unix user you will get mapped to.
+
 1. Verify file transfer over the XRootD protocol using XRootD client tools:
 
     1. Install the client tools:
@@ -157,6 +175,28 @@ To validate an XRootD installation, perform the following verification steps:
             :::console
             root@xrootd-standalone # ls -l /tmp/first_test
             -rw-r--r-- 1 xrootd xrootd 801512 Apr 11 10:48 /tmp/first_test
+
+Registering an XRootD Standalone Server
+---------------------------------------
+
+To register your XRootD server, follow the general registration instructions
+[here](/common/registration#new-resources) with the following XRootD-specific details:
+
+1.  Add an `XRootD component:` section to the `Services:` list, with any relevant fields for that service.
+    This is a partial example:
+
+        :::console
+        ...
+        FQDN: <FULLY QUALIFIED DOMAIN NAME>
+        Services:
+          XRootD component:
+            Description: Standalone XRootD server
+        ...
+
+    Replacing `<FULLY QUALIFIED DOMAIN NAME>` with your XRootD server's DNS entry.
+
+2.  If you are setting up a new resource, set `Active: false`.
+    Only set `Active: true` for a resource when it is accepting requests and ready for production.
 
 Getting Help
 ------------
@@ -200,4 +240,3 @@ root@host # systemctl start xrootd@standalone
 |:-------------------------|:----------------------------------------|:--------------------------------------------|
 | `xrootd`                 | `/var/log/xrootd/server/xrootd.log`     | XRootD server daemon log                    |
 | `cmsd`                   | `/var/log/xrootd/server/cmsd.log`       | Cluster management log                      |
-
