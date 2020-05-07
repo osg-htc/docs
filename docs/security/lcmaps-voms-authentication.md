@@ -6,7 +6,6 @@ LCMAPS is a software library used on [HTCondor-CE](/compute-element/install-htco
 Unix accounts.
 The LCMAPS VOMS plugin enables LCMAPS to make mapping decisions based on the VOMS attributes of grid certificates, e.g.
 `/cms/Role=production/Capability=NULL`.
-In OSG 3.4, the LCMAPS VOMS plugin replaced GUMS and edg-mkgridmap as the authentication method at OSG sites.
 
 The OSG provides a default set of mappings from VOMS attributes to Unix accounts.
 By configuring LCMAPS, you can override these mappings, including changing the Unix account that a VO is mapped to;
@@ -44,7 +43,7 @@ Configuring the LCMAPS VOMS Plugin
 
 The following section describes the steps required to configure the LCMAPS VOMS plugin for authentication.
 Additionally, there are [optional configuration](#optional-configuration) instructions if you need to make changes to
-the default mappings, or migrate from edg-mkgridmap or GUMS.
+the default mappings.
 
 ### Supporting mapped VOs and users
 
@@ -105,89 +104,17 @@ If instead you wish to manage the LCMAPS VOMS plugin configuration yourself, ski
 
 ### Optional configuration
 
-The following subsections contain information on migration from `edg-mkgridmap`, mapping or banning users by their
+The following subsections contain information on mapping or banning users by their
 certificates' Distinguished Names (DNs) or by their proxies' VOMS attributes.
 Any optional configuration is to be performed after the installation and configuration sections above.
 
 For a table of the configuration files and their order of evaluation, consult the [reference section](#configuration-files).
 
--   [Migrating from edg-mkgridmap](#migrating-from-edg-mkgridmap)
--   [Migrating from GUMS](#migrating-from-gums)
 -   [Mapping VOs](#mapping-vos)
 -   [Mapping users](#mapping-users)
 -   [Banning VOs](#banning-vos)
 -   [Banning users](#banning-users)
 -   [Mapping using all FQANs](#mapping-using-all-fqans)
-
-
-#### Migrating from edg-mkgridmap
-
-The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authentication on HTCondor-CE, GridFTP, and
-XRootD hosts, is no longer supported by the OSG.
-The LCMAPS VOMS plugin (package `lcmaps-plugins-voms`) now provides the same functionality.
-To migrate from edg-mkgridmap to the LCMAPS VOMS plugin, perform the following procedure:
-
-1.  Configure user DN mappings:
-
-    1. Remove `/etc/grid-security/grid-mapfile`
-    1. Check if you have a local grid mapfile:
-
-            :::console
-            root@host # grep gmf_local /etc/edg-mkgridmap.conf
-
-    1. If the above command returns a file that exists and has contents, move it to `/etc/grid-security/grid-mapfile`.
-
-1.  If you are converting an HTCondor-CE host, remove the HTCondor-CE `GRIDMAP` configuration. Otherwise, skip to the
-    next step.
-
-    1. Find where `GRIDMAP` is set:
-
-            :::console
-            root@host # condor_ce_config_val -v GRIDMAP
-
-    1. If the above command returns a file, remove the `GRIDMAP` configuration from that file.
-       Repeat this until the command returns `Not defined: GRIDMAP`.
-    1. Reconfigure HTCondor-CE:
-
-            :::console
-            root@host # condor_ce_reconfig
-
-1. Remove edg-mkgridmap and related packages:
-
-        :::console
-        root@host # yum erase edg-mkgridmap
-
-    !!! warning
-        In the output from this command, yum should **not** list other packages than the one.
-        If it lists other packages, cancel the erase operation, make sure the other packages are updated to their latest
-        OSG 3.5 versions (they should have ".osg35" in their versions), and try again.
-
-#### Migrating from GUMS
-
-GUMS is no longer supported by the OSG and has been replaced by the LCMAPS VOMS plugin.
-Note that unlike GUMS, which runs on a central host, the LCMAPS VOMS plugin will run on your GUMS clients (e.g.
-HTCondor-CE, GridFTP, and XRootD).
-To migrate any custom authentication configuration from GUMS to the LCMAPS VOMS plugin, perform the following procedure:
-
-1. On your GUMS host, retrieve the conversion helper script and run it:
-
-        :::console
-        root@gums-host # wget https://raw.githubusercontent.com/opensciencegrid/osg-vo-config/mapfile-generator-0.2/bin/manual-mapfile-from-gumsdb.py
-        root@gums-host # python manual-mapfile-from-gumsdb.py
-
-1. Verify that the contents of `ban-mapfile.additions`, `grid-mapfile.additions`, and `voms-mapfile.additions` include
-   any custom banned users, user mappings, and VO mappings, respectively.
-
-    !!! note
-        The above files will not include all VO mappings; the OSG provides default VO mappings in
-        `/usr/share/osg/voms-mapfile-default`
-
-1. On each of your client hosts (e.g. HTCondor-CE, GridFTP, XRootD), perform the following:
-
-    1. If you have not done so already, [install](#installing-the-lcmaps-voms-plugin) and
-       [configure](#configuring-the-lcmaps-voms-plugin) the LCMAPS VOMS plugin
-    1. Append each `.additions` file to its corresponding file in `/etc/grid-security/` (creating those files if they do
-       not exist)
 
 #### Mapping VOs
 
