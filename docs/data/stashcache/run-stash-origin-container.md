@@ -83,7 +83,7 @@ This will require creating the environment file in the directory `/opt/xcache/.e
 
 ```file
 [Unit]
-Description=StashOrigin Container
+Description=Stash Origin Container
 After=docker.service
 Requires=docker.service
 
