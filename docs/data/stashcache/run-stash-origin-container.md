@@ -17,8 +17,8 @@ Before starting the installation process, consider the following points:
 1. **Network ports:** The Stash Origin listens for incoming HTTP/S and XRootD connections on ports 1094 and 1095 (by default).
 1. **File Systems:** Stash Origin needs a partition on the host to store user data.
 
-Configuring Stashcache
-----------------------
+Configuring Stash Origin
+------------------------
 
 In addition to the required configuration above (ports and file systems), you may also configure the behavior of your cache with the following variables using an enviroment variable file:
 
