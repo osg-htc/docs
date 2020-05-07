@@ -753,6 +753,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#registering-an-xrootd-standalone-server" title="Registering an XRootD Standalone Server" class="md-nav__link">
+    Registering an XRootD Standalone Server
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#getting-help" title="Getting Help" class="md-nav__link">
     Getting Help
   </a>
@@ -2907,6 +2914,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#registering-an-xrootd-standalone-server" title="Registering an XRootD Standalone Server" class="md-nav__link">
+    Registering an XRootD Standalone Server
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#getting-help" title="Getting Help" class="md-nav__link">
     Getting Help
   </a>
@@ -2994,23 +3008,31 @@ under <code>/etc/xrootd/config.d/</code> as follows:</p>
 <ol>
 <li>
 <p>Configure a <code>rootdir</code> in <code>/etc/xrootd/config.d/10-common-site-local.cfg</code>, to point to the top of the directory
-    hierarchy which you wish to serve via XRootD.
-    For example, to serve <code>/data</code>:</p>
-<div class="codehilite"><pre><span></span>set rootdir = /data
+    hierarchy which you wish to serve via XRootD.</p>
+<div class="codehilite"><pre><span></span>set rootdir = &lt;DIRECTORY&gt;
 </pre></div>
 
 
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not set <code>rootdir</code> to <code>/</code>.
+This might result in serving private information.</p>
+</div>
 </li>
 <li>
-<p>To limit the sub-directories to serve under your configured <code>rootdir</code>, comment out the <code>all.export /</code> directive in
-    <code>/etc/xrootd/config.d/90-osg-standalone-paths.cfg</code>, and add an <code>all.export</code> directive for each directory under
-    <code>rootdir</code> that you wish to serve via XRootD.
-    For example, to serve the contents of <code>/data/store</code> and <code>/data/public</code> (with <code>rootdir</code> configured to <code>/data</code>):</p>
+<p>If you want to limit the sub-directories to serve under your configured <code>rootdir</code>,
+    comment out the <code>all.export /</code> directive in
+    <code>/etc/xrootd/config.d/90-osg-standalone-paths.cfg</code>,
+    and add an <code>all.export</code> directive for each directory under <code>rootdir</code> that you wish to serve via XRootD.</p>
+<p>This is useful if you have a mixture of files under your <code>rootdir</code>, for example from multiple users,
+but only want to expose a subset of them to the world.</p>
+<p>For example, to serve the contents of <code>/data/store</code> and <code>/data/public</code> (with <code>rootdir</code> configured to <code>/data</code>):</p>
 <div class="codehilite"><pre><span></span>all.export /store/
 all.export /public/
 </pre></div>
 
 
+<p>If you want to serve everything under your configured <code>rootdir</code>, you don't have to change anything.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The directories specified this way are writable by default.
@@ -3021,9 +3043,9 @@ Access controls should be managed via <a href="#configuring-authorization">autho
 <p>In <code>/etc/xrootd/config.d/10-common-site-local.cfg</code>, add a line to set the <code>resourcename</code> variable to the
    <a href="../../../common/registration/#registering-resources">resource name</a> of your XRootD service.
    For example, the XRootD service registered at the
-   <a href="https://github.com/opensciencegrid/topology/blob/master/topology/Fermi%20National%20Accelerator%20Laboratory/FermiGrid/FNAL_PUBLIC_DCACHE.yaml#L6">FermiGrid site</a>
+   <a href="https://github.com/opensciencegrid/topology/blob/b14218d6e9d9df013a42e4d8538b2eeea615514c/topology/University%20of%20Florida/UF%20HPC/UFlorida-HPC.yaml#L250">University of Florida site</a>
    should set the following configuration:</p>
-<div class="codehilite"><pre><span></span>set resourcename = Fermilab Public DCache
+<div class="codehilite"><pre><span></span>set resourcename = UFlorida-XRD
 </pre></div>
 
 
@@ -3111,6 +3133,15 @@ As a reminder, here are common service commands (all run as <code>root</code>):<
 </table>
 <h2 id="validating-xrootd">Validating XRootD<a class="headerlink" href="#validating-xrootd" title="Permanent link">&para;</a></h2>
 <p>To validate an XRootD installation, perform the following verification steps:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have configured authentication/authorization for XRootD,
+be sure you have given yourself the necessary permissions to run these tests.
+For example, if you are using a grid proxy,
+make sure your DN is mapped to a user in <a href="../../../security/lcmaps-voms-authentication#mapping-users">/etc/grid-security/grid-mapfile</a>,
+and make sure you have a valid proxy on your local machine.
+Also, ensure that the <a href="../../../data/xrootd/xrootd-authorization#authorization-file">Authfile</a> on the XRootD server gives write access to the Unix user you will get mapped to.</p>
+</div>
 <ol>
 <li>
 <p>Verify file transfer over the XRootD protocol using XRootD client tools:</p>
@@ -3166,6 +3197,29 @@ As a reminder, here are common service commands (all run as <code>root</code>):<
 
 </li>
 </ol>
+</li>
+</ol>
+<h2 id="registering-an-xrootd-standalone-server">Registering an XRootD Standalone Server<a class="headerlink" href="#registering-an-xrootd-standalone-server" title="Permanent link">&para;</a></h2>
+<p>To register your XRootD server, follow the general registration instructions
+<a href="../../../common/registration#new-resources">here</a> with the following XRootD-specific details:</p>
+<ol>
+<li>
+<p>Add an <code>XRootD component:</code> section to the <code>Services:</code> list, with any relevant fields for that service.
+    This is a partial example:</p>
+<div class="codehilite"><pre><span></span><span class="go">...</span>
+<span class="go">FQDN: &lt;FULLY QUALIFIED DOMAIN NAME&gt;</span>
+<span class="go">Services:</span>
+<span class="go">  XRootD component:</span>
+<span class="go">    Description: Standalone XRootD server</span>
+<span class="go">...</span>
+</pre></div>
+
+
+<p>Replacing <code>&lt;FULLY QUALIFIED DOMAIN NAME&gt;</code> with your XRootD server's DNS entry.</p>
+</li>
+<li>
+<p>If you are setting up a new resource, set <code>Active: false</code>.
+    Only set <code>Active: true</code> for a resource when it is accepting requests and ready for production.</p>
 </li>
 </ol>
 <h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>

@@ -2791,9 +2791,13 @@
 <p>There are several authorization options in XRootD available through its security plugins.
 In this document, we will cover the <a href="#enabling-xrootd-lcmaps-authorization"><code>xrootd-lcmaps</code></a> security option supported
 in the OSG.</p>
+<p>The XRootD LCMAPS authorization method depends on configuring
+<a href="../../../security/lcmaps-voms-authentication">LCMAPS with the VOMS plugin</a>.
+LCMAPS maps an incoming user's grid credentials to a Unix account name;
+the permissions listed in the <a href="#authorization-file">authorization file</a> all reference Unix account names. </p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>On the data nodes, the files will actually be owned by unix user <code>xrootd</code> (or other daemon user), not as the user
+<p>On the data nodes, the files will actually be owned by Unix user <code>xrootd</code> (or other daemon user), not as the user
 authenticated to, under most circumstances.
 XRootD will verify the permissions and authorization based on the user that the security plugin authenticates you
 to, but, internally, the data node files will be owned by the <code>xrootd</code> user.</p>
