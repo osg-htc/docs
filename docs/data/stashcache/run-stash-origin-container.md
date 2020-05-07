@@ -5,7 +5,7 @@ The OSG operates the [StashCache data federation](/data/stashcache/overview), wh
 provides organizations with a method to distribute their data in a scalable manner to thousands of jobs without needing
 to pre-stage data across sites or operate their own scalable infrastructure.
 
-[Stash Origins](/data/stashcache/install-origin) stores a copy of users data. Each community (or experiment) needs to run one origin to export its data via the stashcache federation.
+[Stash Origins](/data/stashcache/install-origin) store copies of users' data. Each community (or experiment) needs to run one origin to export its data via the StashCache federation.
 This document outlines how to run such an origin in a Docker container.
 
 Before Starting
@@ -120,4 +120,3 @@ Getting Help
 ------------
 
 To get assistance, please use the [this page](/common/help) or contact <help@opensciencegrid.org> directly.
-
