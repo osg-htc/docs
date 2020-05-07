@@ -73,7 +73,7 @@ under `/etc/xrootd/config.d/` as follows:
 1. In `/etc/xrootd/config.d/10-common-site-local.cfg`, add a line to set the `resourcename` variable to the
    [resource name](/common/registration/#registering-resources) of your XRootD service.
    For example, the XRootD service registered at the
-   [University of Florida site](https://github.com/opensciencegrid/topology/blob/master/topology/University%20of%20Florida/UF%20HPC/UFlorida-HPC.yaml#L250)
+   [University of Florida site](https://github.com/opensciencegrid/topology/blob/b14218d6e9d9df013a42e4d8538b2eeea615514c/topology/University%20of%20Florida/UF%20HPC/UFlorida-HPC.yaml#L250)
    should set the following configuration:
 
         set resourcename = UFlorida-XRD
@@ -135,9 +135,9 @@ To validate an XRootD installation, perform the following verification steps:
     If you have configured authentication/authorization for XRootD,
     be sure you have given yourself the necessary permissions to run these tests.
     For example, if you are using a grid proxy,
-    make sure your DN is mapped to a user in `/etc/grid-security/grid-mapfile`,
+    make sure your DN is mapped to a user in [/etc/grid-security/grid-mapfile](/security/lcmaps-voms-authentication#mapping-users),
     and make sure you have a valid proxy on your local machine.
-    Also make sure that the Authfile on the XRootD server gives write access to the Unix user you will get mapped to.
+    Also, ensure that the [Authfile](/data/xrootd/xrootd-authorization#authorization-file) on the XRootD server gives write access to the Unix user you will get mapped to.
 
 1. Verify file transfer over the XRootD protocol using XRootD client tools:
 
@@ -240,4 +240,3 @@ root@host # systemctl start xrootd@standalone
 |:-------------------------|:----------------------------------------|:--------------------------------------------|
 | `xrootd`                 | `/var/log/xrootd/server/xrootd.log`     | XRootD server daemon log                    |
 | `cmsd`                   | `/var/log/xrootd/server/cmsd.log`       | Cluster management log                      |
-
