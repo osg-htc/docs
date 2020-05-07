@@ -76,7 +76,7 @@ It is recommended to use a container orchestration service such as [docker-compo
 ### Running Stashcache on container with systemd
 
 An example systemd service file for StashCache.
-This will require creating the environment file in the directory `/opt/xcache/.env`. 
+This will require creating the environment file in the directory `/opt/origin/.env`. 
 
 !!! note
     This example systemd file assumes `<HOST PARTITION>` is `/srv/origin`.
