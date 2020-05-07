@@ -71,7 +71,7 @@ user@host $ docker run --rm --publish 1094:1094 \
              opensciencegrid/stash-origin:stable
 ```
 
-It is recommended to use a container orchestration service such as [docker-compose](https://docs.docker.com/compose/) or [kubernetes](https://kubernetes.io/), or start the StashCache container with systemd.
+It is recommended to use a container orchestration service such as [docker-compose](https://docs.docker.com/compose/) or [kubernetes](https://kubernetes.io/), or start the stash origin container with systemd.
 
 ### Running Stashcache on container with systemd
 
