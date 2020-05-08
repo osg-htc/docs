@@ -3005,29 +3005,40 @@ privacy.</p>
 See the full list of services that should be registered in the OSG topology
 <a href="https://github.com/opensciencegrid/topology/blob/master/topology/services.yaml">here</a>.</p>
 <p>OSG resources are stored under a hierarchy of facilities, sites, and resource groups, defined as follows:</p>
+<ul>
+<li><strong>Facility</strong>: The institution or company name where your resource is located.</li>
+<li><strong>Site</strong>: Smaller than a facility; typically represents a computing cluster.
+    Frequently used as the display name for <a href="http://gracc.opensciencegrid.org">accounting dashboards</a>.</li>
+<li><strong>Resource Group</strong>: A logical grouping of resources at a site.
+    Production and testing resources must be placed into separate Resource Groups.</li>
+<li><strong>Resource</strong>: A host that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts.</li>
+</ul>
+<p>Throughout this document, you will be asked to substitute your own facility, site, resource group, and resource names
+when registering with the OSG.
+If you don't already know the relevant names for your resource, using the following naming conventions:</p>
 <table>
 <thead>
 <tr>
 <th>Level</th>
-<th>Definition</th>
+<th>Naming convention</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Facility</td>
-<td>The institution or company where your resource is located, e.g. <code>University of Wisconsin</code></td>
+<td>Unabbreviated institution or company name, e.g. <code>University of Wisconsin - Madison</code></td>
 </tr>
 <tr>
 <td>Site</td>
-<td>Smaller than a facility; typically represents a computing center or an academic department, e.g. <code>UW-CHTC</code> for the Center for High Throughput Computing.</td>
+<td>Abbreviated facility and cluster name, e.g. <code>TCNJ-ELSA</code>, or <code>New Mexico State - AggieGrid</code></td>
 </tr>
 <tr>
 <td>Resource Group</td>
-<td>A logical grouping of resources at a site. Production and testing resources must be placed into separate Resource Groups.</td>
+<td>Same as the site name. Resource groups used for testintg purposes should have an <code>-ITB</code> or <code>- ITB</code> suffix, e.g. <code>TCNJ-ELSA-ITB</code></td>
 </tr>
 <tr>
 <td>Resource</td>
-<td>A host belonging to a resource group that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts. A resource may provide more than one service.</td>
+<td>In all capital letters, <code>&lt;ABBREV FACILTY&gt;-&lt;CLUSTER&gt;-&lt;RESOURCE TYPE&gt;</code>, for example:<br><code>TCNJ-ELSA-CE</code> or <code>NMSU-AGGIE-GRID-SQUID</code><br>If you don't know which VO to use, pick <code>OSG</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -3035,20 +3046,15 @@ See the full list of services that should be registered in the OSG topology
 hierarchy, i.e. <code>topology/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCE GROUP&gt;.yaml</code> from the
 <a href="https://github.com/opensciencegrid/topology/tree/master/">root of the topology repository</a>.</p>
 <h3 id="new-site">New site<a class="headerlink" href="#new-site" title="Permanent link">&para;</a></h3>
-<p>To register a site, first choose a name for it.
-We recommend one of the following patterns:</p>
-<ol>
-<li><code>&lt;Organization acronym&gt;-&lt;Cluster name&gt;</code> e.g. <code>TCNJ-Elsa</code></li>
-<li><code>&lt;Organization short name&gt; - &lt;Cluster name&gt;</code> e.g. <code>New Mexico State - AggieGrid</code></li>
-</ol>
-<p>Site names must be globally unique and may be used throughout the OSG,
-such as on the <a href="https://gracc.opensciencegrid.org/dashboard/db/site-summary?orgId=1">GRACC site dashboard</a>.</p>
+<p>To register a site, first choose a name for it (see the <a href="#registering-resources">naming conventions table above</a>)
+The site name will appear in OSG accounting in places such as the
+<a href="https://gracc.opensciencegrid.org/dashboard/db/site-summary?orgId=1">GRACC site dashboard</a>.</p>
 <p>Once you have chosen a site name, open the following in your browser:</p>
 <div class="codehilite"><pre><span></span>https://github.com/opensciencegrid/topology/new/master?filename=topology/&lt;FACILITY&gt;/&lt;SITE&gt;/SITE.yaml
 </pre></div>
 
 
-<p>(replacing <code>&lt;FACILITY&gt;</code> and <code>&lt;SITE&gt;</code> with the facility and the site name you chose).</p>
+<p>(replacing <code>&lt;FACILITY&gt;</code> and <code>&lt;SITE&gt;</code> with the facility and the site <a href="#registering-resources">name that you chose</a>).</p>
 <div class="admonition note">
 <p class="admonition-title">"You're editing a file in a project you don't have write access to."</p>
 <p>If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
@@ -3100,16 +3106,14 @@ follow the <a href="#modifying-existing-resources">instructions</a> for modifyin
 <ul>
 <li>If you do not have a facility, contact <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> for help.</li>
 <li>If you have a facility but not a site, first follow the instructions
-  for <a href="#registering-a-site">registering a site</a> below.</li>
-<li>If you have a facility and a site but not a resource group, pick a resource group name;
-  we recommend using the site name with a <code>-production</code> or <code>-testing</code> suffix.
-  Resource group names must be globally unique.</li>
+  for <a href="#new-site">registering a site</a> above.</li>
+<li>If you have a facility and a site but not a resource group, pick a <a href="#registering-resources">resource group name</a>.</li>
 </ul>
 </li>
 <li>
 <p>Once you have your facility, site, and resource group, follow the instructions below,
    replacing instances of <code>&lt;FACILITY&gt;</code>, <code>&lt;SITE&gt;</code>, and <code>&lt;RESOURCE GROUP&gt;</code>
-   with the corresponding names that you chose above:</p>
+   with the corresponding <a href="#registering-resources">names that you chose above</a>:</p>
 <ul>
 <li>
 <p>If your resource group already exists under your facility and site, open the following URL in your browser:</p>
