@@ -20,7 +20,7 @@ Before starting the installation process, consider the following points:
 Configuring Stash Origin
 ------------------------
 
-In addition to the required configuration above (ports and file systems), you may also configure the behavior of your cache with the following variables using an enviroment variable file:
+In addition to the required configuration above (ports and file systems), you may also configure the behavior of your origin with the following variables using an environment variable file:
 
 Where the environment file on the docker host, `/opt/origin/.env`, has (at least)the following contents:
 ```file
