@@ -53,6 +53,7 @@ OSG resources are stored under a hierarchy of facilities, sites, and resource gr
 
 -   **Facility**: The institution or company name where your resource is located.
 -   **Site**: Smaller than a facility; typically represents a computing cluster.
+    Frequently used as the display name for [accounting dashboards](http://gracc.opensciencegrid.org).
 -   **Resource Group**: A logical grouping of resources at a site.
     Production and testing resources must be placed into separate Resource Groups.
 -   **Resource**: A host that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts.
