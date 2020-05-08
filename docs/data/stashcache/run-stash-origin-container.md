@@ -46,7 +46,7 @@ set StashOriginPublicAuthfile = /etc/xrootd/public-origin-authfile
 ### Disabling OSG monitoring ###
 
 By default, XCache reports to the OSG so that OSG staff can monitor the health of data federations.
-If you would like to report monitoring information to another destination, you can disable the OSG monitoring by setting
+To disable OSG monitoring (for example so you can report monitoring information to another destination), set
 the following in your environment variable configuration:
 
 ```file
