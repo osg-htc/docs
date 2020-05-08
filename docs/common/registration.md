@@ -67,7 +67,7 @@ If you don't already know the relevant names for your resource, using the follow
 | Facility       | Unabbreviated institution or company name, e.g. `University of Wisconsin - Madison`                                                                                                 |
 | Site           | Abbreviated facility and cluster name, e.g. `TCNJ-ELSA`, or `New Mexico State - AggieGrid`                                                                                          |
 | Resource Group | Same as the site name. Resource groups used for testintg purposes should have an `-ITB` or `- ITB` suffix, e.g. `TCNJ-ELSA-ITB`                                                     |
-| Resource       | In all capital letters, `<ABBREV FACILTY>-<CLUSTER>-<RESOURCE TYPE>`, for example:</br>`TCNJ-ELSA-CE` or `NMSU-AGGIE-GRID-SQUID`</br>If you don't know which VO to use, pick `OSG`. |
+| Resource       | In all capital letters, `<ABBREV FACILTY>-<CLUSTER>-<RESOURCE TYPE>`, for example:<br>`TCNJ-ELSA-CE` or `NMSU-AGGIE-GRID-SQUID`<br>If you don't know which VO to use, pick `OSG`. |
 
 OSG resources are stored in the GitHub repository as YAML files under a directory structure that reflects the above
 hierarchy, i.e. `topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml` from the
