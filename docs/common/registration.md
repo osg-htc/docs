@@ -51,12 +51,23 @@ See the full list of services that should be registered in the OSG topology
 
 OSG resources are stored under a hierarchy of facilities, sites, and resource groups, defined as follows:
 
-| Level          | Definition                                                                                                                                                                    |
-|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Facility       | The institution or company where your resource is located, e.g. `University of Wisconsin`                                                                                     |
-| Site           | Smaller than a facility; typically represents a computing center or an academic department, e.g. `UW-CHTC` for the Center for High Throughput Computing.                         |
-| Resource Group | A logical grouping of resources at a site. Production and testing resources must be placed into separate Resource Groups.                                                     |
-| Resource       | A host belonging to a resource group that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts. A resource may provide more than one service. |
+-   **Facility**: The institution or company name where your resource is located.
+-   **Site**: Smaller than a facility; typically represents a computing cluster.
+    Frequently used as the display name for [accounting dashboards](http://gracc.opensciencegrid.org).
+-   **Resource Group**: A logical grouping of resources at a site.
+    Production and testing resources must be placed into separate Resource Groups.
+-   **Resource**: A host that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts.
+
+Throughout this document, you will be asked to substitute your own facility, site, resource group, and resource names
+when registering with the OSG.
+If you don't already know the relevant names for your resource, using the following naming conventions:
+
+| Level          | Naming convention                                                                                                                                                                   |
+|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Facility       | Unabbreviated institution or company name, e.g. `University of Wisconsin - Madison`                                                                                                 |
+| Site           | Abbreviated facility and cluster name, e.g. `TCNJ-ELSA`, or `New Mexico State - AggieGrid`                                                                                          |
+| Resource Group | Same as the site name. Resource groups used for testintg purposes should have an `-ITB` or `- ITB` suffix, e.g. `TCNJ-ELSA-ITB`                                                     |
+| Resource       | In all capital letters, `<ABBREV FACILTY>-<CLUSTER>-<RESOURCE TYPE>`, for example:<br>`TCNJ-ELSA-CE` or `NMSU-AGGIE-GRID-SQUID`<br>If you don't know which VO to use, pick `OSG`. |
 
 OSG resources are stored in the GitHub repository as YAML files under a directory structure that reflects the above
 hierarchy, i.e. `topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml` from the
@@ -65,20 +76,15 @@ hierarchy, i.e. `topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml` from the
 
 ### New site
 
-To register a site, first choose a name for it.
-We recommend one of the following patterns:
-   
-1. `<Organization acronym>-<Cluster name>` e.g. `TCNJ-Elsa`
-1. `<Organization short name> - <Cluster name>` e.g. `New Mexico State - AggieGrid`
-
-Site names must be globally unique and may be used throughout the OSG,
-such as on the [GRACC site dashboard](https://gracc.opensciencegrid.org/dashboard/db/site-summary?orgId=1).
+To register a site, first choose a name for it (see the [naming conventions table above](#registering-resources))
+The site name will appear in OSG accounting in places such as the
+[GRACC site dashboard](https://gracc.opensciencegrid.org/dashboard/db/site-summary?orgId=1).
 
 Once you have chosen a site name, open the following in your browser:
 
     https://github.com/opensciencegrid/topology/new/master?filename=topology/<FACILITY>/<SITE>/SITE.yaml
 
-(replacing `<FACILITY>` and `<SITE>` with the facility and the site name you chose).
+(replacing `<FACILITY>` and `<SITE>` with the facility and the site [name that you chose](#registering-resources)).
    
 !!! note ""You're editing a file in a project you don't have write access to.""
     If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
@@ -129,14 +135,12 @@ To register a new resource, follow the instructions below:
 
     - If you do not have a facility, contact <mailto:help@opensciencegrid.org> for help.
     - If you have a facility but not a site, first follow the instructions
-      for [registering a site](#registering-a-site) below.
-    - If you have a facility and a site but not a resource group, pick a resource group name;
-      we recommend using the site name with a `-production` or `-testing` suffix.
-      Resource group names must be globally unique.
+      for [registering a site](#new-site) above.
+    - If you have a facility and a site but not a resource group, pick a [resource group name](#registering-resources).
 
 1. Once you have your facility, site, and resource group, follow the instructions below,
    replacing instances of `<FACILITY>`, `<SITE>`, and `<RESOURCE GROUP>`
-   with the corresponding names that you chose above:
+   with the corresponding [names that you chose above](#registering-resources):
 
     - If your resource group already exists under your facility and site, open the following URL in your browser:
 
