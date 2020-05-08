@@ -84,7 +84,7 @@ Once you have chosen a site name, open the following in your browser:
 
     https://github.com/opensciencegrid/topology/new/master?filename=topology/<FACILITY>/<SITE>/SITE.yaml
 
-(replacing `<FACILITY>` and `<SITE>` with the facility and the site name you chose).
+(replacing `<FACILITY>` and `<SITE>` with the facility and the site [name that you chose](#registering-resources)).
    
 !!! note ""You're editing a file in a project you don't have write access to.""
     If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
@@ -135,14 +135,12 @@ To register a new resource, follow the instructions below:
 
     - If you do not have a facility, contact <mailto:help@opensciencegrid.org> for help.
     - If you have a facility but not a site, first follow the instructions
-      for [registering a site](#registering-a-site) below.
-    - If you have a facility and a site but not a resource group, pick a resource group name;
-      we recommend using the site name with a `-production` or `-testing` suffix.
-      Resource group names must be globally unique.
+      for [registering a site](#new-site) above.
+    - If you have a facility and a site but not a resource group, pick a [resource group name](#registering-resources).
 
 1. Once you have your facility, site, and resource group, follow the instructions below,
    replacing instances of `<FACILITY>`, `<SITE>`, and `<RESOURCE GROUP>`
-   with the corresponding names that you chose above:
+   with the corresponding [names that you chose above](#registering-resources):
 
     - If your resource group already exists under your facility and site, open the following URL in your browser:
 
