@@ -54,7 +54,7 @@ DISABLE_OSG_MONITORING = true
 ```
 
 !!! warning
-    Do not disable OSG monitoring in any service that is to be used for any other than testing
+    Only disable OSG monitoring on services that are solely used for testing.
 
 Running an Origin
 -----------------
