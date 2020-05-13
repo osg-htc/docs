@@ -22,7 +22,7 @@ Configuring Stash Origin
 
 In addition to the required configuration above (ports and file systems), you may also configure the behavior of your origin with the following variables using an environment variable file:
 
-Where the environment file on the docker host, `/opt/origin/.env`, has (at least) the following contents (replace "YOUR_SITE_NAME" with the name of your site as [registered in Topology](/stashcache/install-origin/#registering-the-origin):
+Where the environment file on the docker host, `/opt/origin/.env`, has (at least) the following contents (replace "YOUR_SITE_NAME" with the name of your site as [registered in Topology](/data/stashcache/install-origin/#registering-the-origin):
 ```file
 XC_ORIGINEXPORT=/origin
 XC_RESOURCENAME = YOUR_SITE_NAME
