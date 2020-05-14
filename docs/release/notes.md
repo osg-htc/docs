@@ -32,6 +32,7 @@ To update to the OSG 3.5 series, please consult the page on
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.5.16](/release/3.5/release-3-5-16)     | 2020-05-14 | CVMFS 2.7.2, Frontier Squid 4.11-2.1, osg-ce 3.5-5, hosted-ce-tools 0.7, CCTools 7.1.5, VO Package v105 |
 | [3.5.15-3](/release/3.5/release-3-5-15-3) | 2020-05-06 | IGTF 1.106                                                              |
 | [3.5.15-2](/release/3.5/release-3-5-15-2) | 2020-04-15 | VO Package v104                                                         |
 | [3.5.15](/release/3.5/release-3-5-15)     | 2020-04-08 | Frontier Squid 4.10.3, VO Package v103, XRootD 4.11.3, osg-xrootd 3.5-12|
@@ -71,6 +72,7 @@ OSG 3.4
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.50](/release/3.4/release-3-4-50)     | 2020-05-14 | XRootD 4.11.3, VO Package v105                                          |
 | [3.4.49-3](/release/3.4/release-3-4-49-3) | 2020-05-06 | IGTF 1.106                                                              |
 | [3.4.49-2](/release/3.4/release-3-4-49-2) | 2020-04-15 | VO Package v104                                                         |
 | [3.4.49](/release/3.4/release-3-4-49)     | 2020-04-08 | Frontier Squid 4.10.3, VO Package v103                                  |
