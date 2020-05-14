@@ -25,7 +25,7 @@ This release contains:
     -   Optimizes loading of nested catalogs
     -   Improves logging when switching hosts
 -   [Frontier Squid 4.11-2.1](http://frontier.cern.ch/dist/frontier-squid-releasenotes.txt)
-    -   Fixed a bug that caused capiral 'L's from appearing at the beginning of log lines under heavy load
+    -   Fixed a bug that caused capital 'L's from appearing at the beginning of log lines under heavy load
 -   osg-ce 3.5-5: Fixed Hosted CE Gratia schedd cron
 -   hosted-ce-tools 0.7: Added worker node client update timeout to prevent hangs
 -   [CCTools 7.1.5](https://cclnd.blogspot.com/2020/05/cctools-version-715-released.html): Update from 7.0.22 (minor features and bug fixes)
