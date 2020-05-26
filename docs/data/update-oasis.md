@@ -25,7 +25,7 @@ How to use OASIS
 
 When you are ready to distribute your software with OASIS, submit a [support ticket](https://support.opensciencegrid.org/helpdesk/tickets/new) with a request to enable OASIS for your VO. In your request, please specify your VO and provide a list of people who will install and administer the VO software in OASIS.
 
-OSG Operations will set `UseOASIS` to true for your VO in [OSG topology](https://github.com/opensciencegrid/topology#topology) and add your list of administrators to the "OASIS Managers" list (which is near the bottom of the page of information about each VO in OIM). oasis-login will then grant access to the people who are listed as OASIS managers. Any time the list is to be modified, submit another ticket.
+OSG Operations will set `UseOASIS` to true for your VO in [OSG topology](https://github.com/opensciencegrid/topology#topology) and add your list of administrators to the "OASIS Managers" list (which is near the bottom of the page of information about each VO in Topology). oasis-login will then grant access to the people who are listed as OASIS managers. Any time the list is to be modified, submit another ticket.
 
 ### Log in with GSISSH ###
 
