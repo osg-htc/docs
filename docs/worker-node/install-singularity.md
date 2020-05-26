@@ -142,6 +142,19 @@ steps:
         ::console
         --security-opt seccomp=unconfined --security-opt systempaths=unconfined
 
+    The first option enables unshare to be called (which is needed to
+    create namespaces), and the second option allows /proc to be mounted
+    in an unprivileged process namespace (as done by singularity exec -p).
+    The options are secure as long as the system administrator controls
+    the images and does not allow user code to run as root, and are
+    generally more secure than adding capabilities.  If at this point no
+    setuid programs needs to be run within the container, adding the
+    following option will add security by preventing any privilege
+    escalation (singularity uses the same feature on its containers):
+
+        ::console
+        --security-opt no-new-privileges
+
     In addition, the following option is recommended for allowing
     unprivileged fuse mounts on kernels that support that (RHEL >= 7.8):
 
