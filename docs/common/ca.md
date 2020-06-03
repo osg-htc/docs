@@ -101,8 +101,8 @@ In addition to the above CAs, you can install other CAs via RPM. These only work
 |:---------------|:-----------------------|:-------------------------------------|
 | [cilogon-openid](https://ca.cilogon.org/policy/openid) | cilogon-openid-ca-cert | `yum install cilogon-openid-ca-cert` |
 
-Verifying CA Certificate
-------------------------
+Verifying CA Certificates
+-------------------------
 
 After installing or updating the CA certificates, they can be verified with the following command:
 
