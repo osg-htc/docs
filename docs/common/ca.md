@@ -126,7 +126,7 @@ versions and the method by which your CA certificates have been installed:
         -   If neither package is installed, continue onto step 2b.
 
         -   If the version is older than the corresponding version from step 1, continue onto
-            [this section](option-1-install-an-rpm-for-a-specific-set-of-ca-certificates) to upgrade your current
+            [this section](#option-1-install-an-rpm-for-a-specific-set-of-ca-certificates) to upgrade your current
             installation and keep your installation up-to-date.
 
         -   If the version matches the version of the corresponding bundle from step 1, your CA certificates are
