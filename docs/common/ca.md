@@ -101,10 +101,39 @@ In addition to the above CAs, you can install other CAs via RPM. These only work
 |:---------------|:-----------------------|:-------------------------------------|
 | [cilogon-openid](https://ca.cilogon.org/policy/openid) | cilogon-openid-ca-cert | `yum install cilogon-openid-ca-cert` |
 
-Verifying CA Certificates
--------------------------
+Verifying CA Certificate
+------------------------
 
-### Are up-to-date ###
+After installing or updating the CA certificates, they can be verified with the following command:
+
+```console
+root@host # curl --cacert <CA FILE> \
+              --capath <CA DIRECTORY> \
+              -o /dev/null \
+              https://gracc.opensciencegrid.org \
+              && echo "CA certificate installation verified"
+```
+
+Where `<CA FILE>` is the path to a valid X.509 CA certificate and `<CA DIRECTORY>` is the path to the directory
+containing the installed CA certificates.
+For example, the following command can be used to verify a default OSG CA certificate installation:
+
+```console
+root@host # curl --cacert /etc/grid-security/certificates/cilogon-osg.pem \
+              --capath /etc/grid-security/certificates/ \
+              -o /dev/null \
+              https://gracc.opensciencegrid.org \
+              && echo "CA certificate installation verified"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 22005    0 22005    0     0  86633      0 --:--:-- --:--:-- --:--:--  499k
+CA certificate installation verified
+```
+
+If you do not see `CA certificate installation verified` this means that your CA certificate installation is broken.
+First, ensure that your CA installation is up-to-date and if you continue to see issues please [contact us](#getting-help).
+
+### Keeping CA Certificates Up-to-date ###
 
 It is important to keep CA certificates up-to-date for grid services and their clients to maintain integrity of
 the production grid.
@@ -143,37 +172,6 @@ versions and the method by which your CA certificates have been installed:
             outlined in [option 3](#option-3-site-managed-cas).
 
     -   **If none of the packages are installed**, your host likely does not need CA certificates and you are done.
-
-### Post-installation ###
-
-After installing or updating the CA certificates, they can be verified with the following command:
-
-```console
-root@host # curl --cacert <CA FILE> \
-              --capath <CA DIRECTORY> \
-              -o /dev/null \
-              https://gracc.opensciencegrid.org \
-              && echo "CA certificate installation verified"
-```
-
-Where `<CA FILE>` is the path to a valid X.509 CA certificate and `<CA DIRECTORY>` is the path to the directory
-containing the installed CA certificates.
-For example, the following command can be used to verify a default OSG CA certificate installation:
-
-```console
-root@host # curl --cacert /etc/grid-security/certificates/cilogon-osg.pem \
-              --capath /etc/grid-security/certificates/ \
-              -o /dev/null \
-              https://gracc.opensciencegrid.org \
-              && echo "CA certificate installation verified"
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100 22005    0 22005    0     0  86633      0 --:--:-- --:--:-- --:--:--  499k
-CA certificate installation verified
-```
-
-If you do not see `CA certificate installation verified` this means that your CA certificate installation is broken.
-First, ensure that your CA installation is up-to-date and if you continue to see issues please [contact us](#getting-help).
 
 Managing Certificate Revocation Lists
 -------------------------------------
