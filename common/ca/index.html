@@ -1158,6 +1158,19 @@
     Verifying CA Certificates
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#keeping-ca-certificates-up-to-date" title="Keeping CA Certificates Up-to-date" class="md-nav__link">
+    Keeping CA Certificates Up-to-date
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2931,6 +2944,19 @@
     Verifying CA Certificates
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#keeping-ca-certificates-up-to-date" title="Keeping CA Certificates Up-to-date" class="md-nav__link">
+    Keeping CA Certificates Up-to-date
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -3195,7 +3221,7 @@ RPM dependencies while not actually installing any CAs. To install this RPM, run
 </tbody>
 </table>
 <h2 id="verifying-ca-certificates">Verifying CA Certificates<a class="headerlink" href="#verifying-ca-certificates" title="Permanent link">&para;</a></h2>
-<p>After installing the CA certificates, they can be verified with the following command:</p>
+<p>After installing or updating the CA certificates, they can be verified with the following command:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> curl --cacert &lt;CA FILE&gt; <span class="se">\</span>
               --capath &lt;CA DIRECTORY&gt; <span class="se">\</span>
               -o /dev/null <span class="se">\</span>
@@ -3221,6 +3247,60 @@ For example, the following command can be used to verify a default OSG CA certif
 
 <p>If you do not see <code>CA certificate installation verified</code> this means that your CA certificate installation is broken.
 First, ensure that your CA installation is up-to-date and if you continue to see issues please <a href="#getting-help">contact us</a>.</p>
+<h3 id="keeping-ca-certificates-up-to-date">Keeping CA Certificates Up-to-date<a class="headerlink" href="#keeping-ca-certificates-up-to-date" title="Permanent link">&para;</a></h3>
+<p>It is important to keep CA certificates up-to-date for grid services and their clients to maintain integrity of
+the production grid.
+To verify that your CA certificates are on the latest version on a given host, determine the most recently released
+versions and the method by which your CA certificates have been installed:</p>
+<ol>
+<li>
+<p>Retrieve the versions of the most recently released
+    <a href="https://repo.opensciencegrid.org/cadist/index.html">IGTF CA certificates</a> and
+    <a href="https://repo.opensciencegrid.org/cadist/index-new.html">OSG CA certificates</a></p>
+</li>
+<li>
+<p>Determine which of the three CA certificate installation methods you are using:</p>
+<div class="codehilite"><pre><span></span><span class="gp">#</span> rpm -q igtf-ca-certs osg-ca-certs osg-ca-scripts empty-ca-certs
+</pre></div>
+
+
+</li>
+<li>
+<p>Based on which package is installed from the output in the previous step, choose one of the following options:</p>
+<ul>
+<li>
+<p><strong>If <code>igtf-ca-certs</code> or <code>osg-ca-certs</code> is installed</strong>, compare the installed version from step 2 to the
+    corresponding version from step 1.</p>
+<ul>
+<li>
+<p>If the version is older than the corresponding version from step 1, continue onto 
+    <a href="#option-1-install-an-rpm-for-a-specific-set-of-ca-certificates">option 1</a> to upgrade your current
+    installation and keep your installation up-to-date.</p>
+</li>
+<li>
+<p>If the versions match, your CA certificates are up-to-date!</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>If <code>osg-ca-scripts</code> is installed</strong>, run the following command to update your CA certificates:</p>
+<div class="codehilite"><pre><span></span><span class="gp">#</span> osg-ca-manage refreshCA
+</pre></div>
+
+
+<p>And continue to the instructions in <a href="#option-2-install-osg-ca-scripts">option 2</a> to enable automatic
+updates of your CA certificates.</p>
+</li>
+<li>
+<p><strong>If <code>empty-ca-scripts</code> is installed</strong>, then you are responsible for maintaining your own CA certificates as
+        outlined in <a href="#option-3-site-managed-cas">option 3</a>.</p>
+</li>
+<li>
+<p><strong>If none of the packages are installed</strong>, your host likely does not need CA certificates and you are done.</p>
+</li>
+</ul>
+</li>
+</ol>
 <h2 id="managing-certificate-revocation-lists">Managing Certificate Revocation Lists<a class="headerlink" href="#managing-certificate-revocation-lists" title="Permanent link">&para;</a></h2>
 <p>In addition to CA certificates, you must have updated Certificate Revocation Lists (CRLs). CRLs contain certificate blacklists that OSG software uses to ensure that your hosts are only talking to valid clients or servers. To maintain up to date CAs, you will need to run the <code>fetch-crl</code> services. </p>
 <div class="admonition note">
