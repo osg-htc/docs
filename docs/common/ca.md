@@ -117,47 +117,32 @@ versions and the method by which your CA certificates have been installed:
 
 1.  Determine which of the three CA certificate installation methods you are using:
 
-    1.  Check for an existing RPM installation (only one of the following RPM packages may be installed at a time):
+        :::console
+        # rpm -q igtf-ca-certs osg-ca-certs osg-ca-scripts empty-ca-certs
 
-            :::console
-            # rpm -q igtf-ca-certs osg-ca-certs
+1.  Based on which package is installed from the output in the previous step, choose one of the following options:
 
+    -   **If `igtf-ca-certs` or `osg-ca-certs` is installed**, compare the installed version from step 2 to the
+        corresponding version from step 1.
 
-        -   If neither package is installed, continue onto step 2b.
-
-        -   If the version is older than the corresponding version from step 1, continue onto
-            [this section](#option-1-install-an-rpm-for-a-specific-set-of-ca-certificates) to upgrade your current
+        -   If the version is older than the corresponding version from step 1, continue onto 
+            [option1](#option-1-install-an-rpm-for-a-specific-set-of-ca-certificates) to upgrade your current
             installation and keep your installation up-to-date.
 
-        -   If the version matches the version of the corresponding bundle from step 1, your CA certificates are
-            up-to-date!
+        -  If the versions match, your CA certificates are up-to-date!
 
-    1.  Check for an installation managed by the `osg-ca-manage` tool:
-
-            :::console
-            # osg-ca-manage showCAURL
-
-        -   If the `osg-ca-manage` tool doesn't exist on your host or returns `No CA certificate directory was found`,
-            continue onto step 2c.
-
-        -   If the above command returns an `osg-pki-tools` version, run the following command to update your
-            CA certificates:
-
-                :::console
-                # osg-ca-manage refreshCA
-
-            And continue to the instructions in [this section](#option-2-install-osg-ca-scripts) to enable automatic
-            updates of your CA certificates.
-
-    1.  Check for manually installed certificates:
+    -   **If `osg-ca-scripts` is installed**, run the following command to update your CA certificates:
 
             :::console
-            # rpm -q empty-ca-certs
+            # osg-ca-manage refreshCA
 
-        -   If the package is installed, then you are responsible for maintaining your own CA certificates as outlined
-            in [this section](#option-3-site-managed-cas).
+        And continue to the instructions in [option 2](#option-2-install-osg-ca-scripts) to enable automatic
+        updates of your CA certificates.
 
-        -   If the package is not installed, your host likely does not need CA certificates and you are done.
+    -   **If `empty-ca-scripts` is installed**, then you are responsible for maintaining your own CA certificates as
+            outlined in [option 3](#option-3-site-managed-cas).
+
+    -   **If none of the packages are installed**, your host likely does not need CA certificates and you are done.
 
 ### Post-installation ###
 
