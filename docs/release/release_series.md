@@ -266,7 +266,7 @@ Otherwise, follow these steps for a seamless update to HTCondor 8.9.7+:
         :::console
         # yum -y upgrade python2-scitokens-credmon condor
 
-1.  Restart Apache:
+1.  If you are running Apache on this host, reload the Apache configuration:
 
         :::console
         # systemctl reload httpd.service
