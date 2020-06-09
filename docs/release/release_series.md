@@ -289,7 +289,12 @@ Otherwise, follow these steps for a seamless update to HTCondor 8.9.7+:
         SEC_CREDENTIAL_MONITOR = /usr/bin/scitokens_credmon
         SEC_CREDENTIAL_MONITOR_LOG = $(LOG)/CredMonLog
 
-    You may also remove the entire `if version < 8.9.7` block that you added in step 2.
+1.  To allow for seamless HTCondor downgrades, update the `if version < 8.9.7` block that you added in step 2.
+
+        if version < 8.9.7
+          CREDMON_OAUTH = /usr/bin/scitokens_credmon
+          SEC_CREDENTIAL_DIRECTORY = $(SEC_CREDENTIAL_DIRECTORY_OAUTH)
+        endif
 
 1.  Remove the symlink to the old credential directory that you created in step 5.
     This is whatever you had set `SEC_CREDENTIAL_DIRECTORY` to before.
