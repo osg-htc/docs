@@ -32,6 +32,7 @@ To update to the OSG 3.5 series, please consult the page on
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.5.18](/release/3.5/release-3-5-18)     | 2020-06-11 | Frontier Squid 4.11-3.1, VOMS 2.0.14-6, XCache 1.4, stashcache-client 5.6.1 |
 | [3.5.17](/release/3.5/release-3-5-17)     | 2020-06-04 | BLAHP 1.18.46, HTCondor 8.8.9, gratia-probe 1.20.13, VO Package v106; Upcoming: GlideinWMS 3.7, HTCondor 8.9.7 |
 | [3.5.16](/release/3.5/release-3-5-16)     | 2020-05-14 | CVMFS 2.7.2, Frontier Squid 4.11-2.1, osg-ce 3.5-5, hosted-ce-tools 0.7, CCTools 7.1.5, VO Package v105 |
 | [3.5.15-3](/release/3.5/release-3-5-15-3) | 2020-05-06 | IGTF 1.106                                                              |
@@ -73,6 +74,7 @@ OSG 3.4
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.52](/release/3.4/release-3-4-52)     | 2020-06-11 | Frontier Squid 4.11-3.1, VOMS 2.0.14-6                                  |
 | [3.4.51](/release/3.4/release-3-4-51)     | 2020-06-04 | gratia-probe 1.20.13, VO Package v106                                   |
 | [3.4.50](/release/3.4/release-3-4-50)     | 2020-05-14 | XRootD 4.11.3, VO Package v105                                          |
 | [3.4.49-3](/release/3.4/release-3-4-49-3) | 2020-05-06 | IGTF 1.106                                                              |
