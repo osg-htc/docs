@@ -944,11 +944,6 @@ Common causes of problems could be:
 - If the Frontend http server is down in the glidein logs in the Factory there will be errors like "Failed to load file 'description.dbceCN.cfg' from `http://FRONTEND_HOST/vofrontend/stage`."
     - check that the http server is running and you can reach the URL (`http://FRONTEND_HOST/vofrontend/stage/description.dbceCN.cfg`)
 
-Advanced Configurations
------------------------
-
-- [GlideinWMS Frontend on a Campus Grid](https://github.com/opensciencegrid/docs/blob/master/archive/GlideinWMSCampusGrid)
-
 
 Getting Help
 ------------
