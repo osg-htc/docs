@@ -4092,7 +4092,6 @@ attribute of the job submitted to a PBS batch system:</p>
 <li>Setting various HTCondor-specific attributes like <code>Rank</code>, <code>AccountingGroup</code>, <code>JobPrio</code> and <code>Periodic_Remove</code> (see the <a href="http://research.cs.wisc.edu/htcondor/manual/v8.6/12_Appendix_A.html">HTCondor manual</a> for more). Some of these are site-specific like <code>LastandFrac</code>, <code>IdleMP8Pressure</code>, <code>localQue</code>, <code>IsAnalyJob</code> and <code>JobMemoryLimit</code>.</li>
 <li>There is a difference between <code>Requirements</code> and <code>set_requirements</code>. The <code>Requirements</code> attribute matches jobs to specific routes while the <code>set_requirements</code> sets the <code>Requirements</code> attribute on the <em>routed</em> job, which confines which machines that the routed job can land on.</li>
 </ul>
-<p>Source: <a href="https://www.aglt2.org/wiki/bin/view/AGLT2/CondorCE#The_JobRouter_configuration_file_content">https://www.aglt2.org/wiki/bin/view/AGLT2/CondorCE#The_JobRouter_configuration_file_content</a></p>
 <div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES @=jre
 # Still to do on all routes, get job requirements and add them here
 # Route no 1
