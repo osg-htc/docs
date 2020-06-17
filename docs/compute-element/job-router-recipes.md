@@ -614,8 +614,6 @@ Atlas AGLT2 is using an HTCondor batch system. Here are some things to note abou
 -   Setting various HTCondor-specific attributes like `Rank`, `AccountingGroup`, `JobPrio` and `Periodic_Remove` (see the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/12_Appendix_A.html) for more). Some of these are site-specific like `LastandFrac`, `IdleMP8Pressure`, `localQue`, `IsAnalyJob` and `JobMemoryLimit`.
 -   There is a difference between `Requirements` and `set_requirements`. The `Requirements` attribute matches jobs to specific routes while the `set_requirements` sets the `Requirements` attribute on the *routed* job, which confines which machines that the routed job can land on.
 
-Source: <https://www.aglt2.org/wiki/bin/view/AGLT2/CondorCE#The_JobRouter_configuration_file_content>
-
 ```
 JOB_ROUTER_ENTRIES @=jre
 # Still to do on all routes, get job requirements and add them here
