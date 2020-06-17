@@ -1,5 +1,5 @@
-Running Stash Origin in a Container
-===================================
+Running StashCache Origin in a Container
+========================================
 
 The OSG operates the [StashCache data federation](/data/stashcache/overview), which
 provides organizations with a method to distribute their data in a scalable manner to thousands of jobs without needing
