@@ -38,7 +38,7 @@ root@host # yum install osg-pki-tools
 Usage
 -----
 
-Documentation for usage of the osg-pki-tools can be found [here](https://github.com/opensciencegrid/osg-pki-tools/blob/master/README.txt)
+Documentation for usage of the osg-pki-tools can be found [here](https://github.com/opensciencegrid/osg-pki-tools/blob/master/README.md)
 
 
 OSG CA Certificates Updater
