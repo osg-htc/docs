@@ -47,10 +47,10 @@ pages:
     - 'Install CMS Xcache': 'data/xrootd/install-cms-xcache.md'
   - StashCache:
     - 'StashCache Overview': 'data/stashcache/overview.md'
-    - 'Running StashCache Cache in a container': 'data/stashcache/run-stashcache-container.md'
-    - 'Running StashCache Origin in a container': 'data/stashcache/run-stash-origin-container.md'
-    - 'Install StashCache Cache': 'data/stashcache/install-cache.md'
-    - 'Install StashCache Origin': 'data/stashcache/install-origin.md'
+    - 'Running a Cache in a container': 'data/stashcache/run-stashcache-container.md'
+    - 'Running an Origin in a container': 'data/stashcache/run-stash-origin-container.md'
+    - 'Install a Cache': 'data/stashcache/install-cache.md'
+    - 'Install an Origin': 'data/stashcache/install-origin.md'
     - 'Getting VO data into StashCache': 'data/stashcache/vo-data.md'
   - HDFS:
     - 'HDFS Overview': 'data/hadoop-overview.md'
