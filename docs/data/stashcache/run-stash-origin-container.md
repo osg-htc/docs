@@ -28,7 +28,7 @@ XC_ORIGINEXPORT=/origin
 XC_RESOURCENAME=YOUR_SITE_NAME
 ```
 
-### Creating an Auth file ###
+### Creating an Auth File ###
 
 XrootD needs an authorization file ([AuthFile](/data/xrootd/xrootd-authorization/)) to control access to different parts of the namespace in your origin. You can create a simple authfile named `/opt/origin/auth_file` as follows:
 
@@ -43,7 +43,7 @@ set StashOriginPublicAuthfile = /etc/xrootd/public-origin-authfile
 ```
 
 
-### Disabling OSG monitoring ###
+### Disabling OSG Monitoring ###
 
 By default, XCache reports to the OSG so that OSG staff can monitor the health of data federations.
 To disable OSG monitoring (for example so you can report monitoring information to another destination), set
