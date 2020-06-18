@@ -81,6 +81,8 @@ This will require creating the environment file in the directory `/opt/origin/.e
 !!! note
     This example systemd file assumes `<HOST PARTITION>` is `/srv/origin`.
 
+Create the systemd service file `/etc/systemd/system/docker.stash-origin.service` as follows:
+
 ```file
 [Unit]
 Description=Stash Origin Container
@@ -99,7 +101,7 @@ ExecStart=/usr/bin/docker run --rm --name %n -p 1094:1094 -p 1095:1095 -v /srv/o
 WantedBy=multi-user.target
 ```
 
-This systemd file can be saved to `/etc/systemd/system/docker.stash-origin.service` and started with:
+Enable and start the service with:
 
 ```console
 root@host $ systemctl enable docker.stash-origin
