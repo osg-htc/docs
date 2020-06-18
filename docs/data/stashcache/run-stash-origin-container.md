@@ -114,7 +114,7 @@ root@host $ systemctl start docker.stash-origin
 Validating Origin
 -----------------
 
-To validate the origin please follow the [validating-origin instructions](/data/stashcache/install-origin/#verifying-the-origin-server)
+To validate the origin please follow the [validating-origin instructions](/data/stashcache/install-origin/#verifying-the-origin-server).
 
 Getting Help
 ------------
