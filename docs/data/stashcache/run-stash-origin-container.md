@@ -119,7 +119,7 @@ root@host $ systemctl start docker.stash-origin
 ```
 
 !!! warning
-    You must [register](/data/stashcache/install-origin/#registering-the-origin) the cache before considering it a
+    You must [register](/data/stashcache/install-origin/#registering-the-origin) the origin before considering it a
     production service.
 
 
