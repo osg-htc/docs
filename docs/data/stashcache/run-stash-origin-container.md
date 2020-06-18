@@ -5,9 +5,9 @@ The OSG operates the [StashCache data federation](/data/stashcache/overview), wh
 provides organizations with a method to distribute their data in a scalable manner to thousands of jobs without needing
 to pre-stage data across sites or operate their own scalable infrastructure.
 
-[Stash Origins](/data/stashcache/install-origin) store copies of users' data. Each community (or experiment) needs to
-run one origin to export its data via the StashCache federation.  This document outlines how to run such an origin in a
-Docker container.
+[Stash Origins](/data/stashcache/install-origin) store copies of users' data.
+Each community (or experiment) needs to run one origin to export its data via the StashCache federation.
+This document outlines how to run such an origin in a Docker container.
 
 Before Starting
 ---------------
@@ -38,13 +38,15 @@ XC_RESOURCENAME=YOUR_SITE_NAME
 ### Creating an Auth File ###
 
 XRootD needs an authorization file ([AuthFile](/data/xrootd/xrootd-authorization/)) to control access to different parts
-of the namespace in your origin. You can create a simple authfile named `/opt/origin/auth_file` as follows:
+of the namespace in your origin.
+You can create a simple authfile named `/opt/origin/auth_file` as follows:
 
 ```file
 u * /origin rl
 ```
 
-Create a configuration file for XrootD to find your authfile. Create a file `/opt/origin/10-origin-authfile.cfg`:
+Create a configuration file for XrootD to find your authfile.
+Create a file `/opt/origin/10-origin-authfile.cfg`:
 
 ```
 set StashOriginPublicAuthfile = /etc/xrootd/public-origin-authfile
@@ -86,7 +88,7 @@ It is recommended to use a container orchestration service such as [docker-compo
 ### Running Stashcache on container with systemd
 
 An example systemd service file for StashCache.
-This will require creating the environment file in the directory `/opt/origin/.env`. 
+This will require creating the environment file in the directory `/opt/origin/.env`.
 
 !!! note
     This example systemd file assumes `<HOST PARTITION>` is `/srv/origin`.
