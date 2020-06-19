@@ -129,20 +129,15 @@ user@host $ docker run --rm  \
 
 ### Memory optimization ###
 
-Stashcache uses the hosts memory in two ways:
+The cache uses the host's memory for two purposes:
 
-1. Uses the own linux kernel as a way to cache files read from disk
-1. As a buffer for writting blocks of files first in memory and then in disk (to account for slow disks).
+1. Caching files recently read from disk (via the kernel page cache).
+1. Buffering files recently received from the network before writing them to disk (to compensate for slow disks).
 
-An easy way to increase the performance of stashcache is to assign it more memory. You can use the [docker option](https://docs.docker.com/config/containers/resource_constraints/#limit-a-containers-access-to-memory) `--memory` and set it up to at least twice of `XC_RAMSIZE`.
+An easy way to increase the performance of the cache is to assign it more memory.
+If you set a limit on the container's memory usage via the docker option `--memory` or Kubernetes resource limits,
+make sure it is at least twice the value of `XC_RAMSIZE`.
 
-```console
-user@host $ docker run --rm --publish <HOST PORT>:8000 \
-             --memory=64g \
-             --volume <HOST PARTITION>:/cache \
-             --env-file=/opt/xcache/.env \
-             opensciencegrid/stash-cache:stable
-```
 
 ### Multiple disks ###
 
