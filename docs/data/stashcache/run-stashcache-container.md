@@ -59,7 +59,8 @@ To disable OSG monitoring (for testing purposes), set the following in your envi
 DISABLE_OSG_MONITORING = true
 ```
 
-------------------
+Running a Cache
+---------------
 
 To run the container, use `docker run` with the following options, replacing the text within angle brackets
 with your own values:
@@ -82,6 +83,8 @@ This will require creating the environment file in the directory `/opt/xcache/.e
 !!! note
     This example systemd file assumes `<HOST PORT>` is `8000` and  `<HOST PARTITION>` is `/srv/cache`.
 
+Create the systemd service file `/etc/systemd/system/docker.stash-cache.service` as follows:
+
 ```file
 [Unit]
 Description=Stash Cache Container
@@ -100,7 +103,7 @@ ExecStart=/usr/bin/docker run --rm --name %n --publish 8000:8000 --volume /srv/c
 WantedBy=multi-user.target
 ```
 
-This systemd file can be saved to `/etc/systemd/system/docker.stash-cache.service` and started with:
+Enable and start the service with:
 
 ```console
 root@host $ systemctl enable docker.stash-cache
