@@ -53,19 +53,6 @@ set StashOriginPublicAuthfile = /etc/xrootd/public-origin-authfile
 ```
 
 
-### Disabling OSG monitoring (testing only) ###
-
-!!! warning
-    Only disable OSG monitoring on services that are solely used for testing.
-
-By default, XCache reports to the OSG so that OSG staff can monitor the health of data federations.
-To disable OSG monitoring (for testing purposes), set the following in your environment variable configuration
-(`/opt/origin/.env`):
-
-```file
-DISABLE_OSG_MONITORING=true
-```
-
 Running an Origin
 -----------------
 
