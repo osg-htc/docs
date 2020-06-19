@@ -45,7 +45,7 @@ You can create a simple authfile named `/opt/origin/auth_file` as follows:
 u * /origin rl
 ```
 
-Create a configuration file for XrootD to find your authfile.
+Create a configuration file for XRootD to find your authfile.
 Create a file `/opt/origin/10-origin-authfile.cfg`:
 
 ```
