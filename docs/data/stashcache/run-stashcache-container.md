@@ -46,20 +46,19 @@ Further behavior of the cache can be configured by setting the following in the 
 - `XC_PREFETCH`: Number of blocks to prefetch from a file at once.
        This controls how aggressive the cache is to request portions of a file. Set to `0` to disable.
 
-### Disabling OSG monitoring ###
+### Disabling OSG monitoring (testing only) ###
+
+!!! warning
+    Only disable OSG monitoring on services that are solely used for testing.
 
 By default, XCache reports to the OSG so that OSG staff can monitor the health of data federations.
-If you would like to report monitoring information to another destination, you can disable the OSG monitoring by setting
-the following in your environment variable configuration:
+To disable OSG monitoring (for testing purposes), set the following in your environment variable configuration
+(`/opt/xcache/.env`):
 
 ```file
 DISABLE_OSG_MONITORING = true
 ```
 
-!!! warning
-    Do not disable OSG monitoring in any service that is to be used for any other than testing
-
-Running Stashcache
 ------------------
 
 To run the container, use `docker run` with the following options, replacing the text within angle brackets
