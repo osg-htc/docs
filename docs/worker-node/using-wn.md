@@ -68,7 +68,7 @@ pilot jobs to use as temporary scratch space.
 #### For site administrators  ####
 
 Site administrators are responsible for cleaning up the contents of `$OSG_WN_TMP`
-(see[table above](#hardware-recommendations) for size recommendations).
+ (see[table above](#hardware-recommendations) for size recommendations).
 We recommend one of the following solutions:
 
 - **(Recommended)** Use batch-system capabilities to create directories in the job scratch directory and bind mount
