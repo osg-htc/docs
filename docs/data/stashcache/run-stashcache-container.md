@@ -38,15 +38,13 @@ XC_ROOTDIR=/cache
 
 Further behavior of the cache can be configured by setting the following in the environment variable file:
 
-- `XC_SPACE_HIGH_WM`: High watermark for disk usage;
-      when usage goes above the high watermark, the cache deletes until it hits the low watermark
-- `XC_SPACE_LOW_WM`: Low watermark for disk usage;
-      when usage goes above the high watermark, the cache deletes until it hits the low watermark
+- `XC_SPACE_HIGH_WM`, `XC_SPACE_LOW_WM`: High-water and low-water marks for disk usage;
+      when usage goes above the high-water mark, the cache will delete files until it hits the low-water mark.
 - `XC_PORT`: TCP port that XCache listens on
 - `XC_RAMSIZE`: Amount of memory to use for storing blocks before writting them to disk. (Use higher for slower disks).
-- `XC_BLOCKSIZE`: The size of the blocks in the cache
+- `XC_BLOCKSIZE`: Size of the blocks in the cache.
 - `XC_PREFETCH`: Number of blocks to prefetch from a file at once.
-       This is a value of how aggressive the cache is to request portions of a file. Set to `0` to disable
+       This controls how aggressive the cache is to request portions of a file. Set to `0` to disable.
 
 ### Disabling OSG monitoring ###
 
