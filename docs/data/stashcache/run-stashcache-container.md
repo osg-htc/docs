@@ -178,20 +178,19 @@ For caches that store over 10 TB or that have assigned space for storing the cac
     For over 100 TB of assigned space we highly encourage to use this setup and mount `<HOST PARTITION>` in solid state disks or NVME.
 
 
-Validating StashCache
+Validating the Cache
 ---------------------
 
-For example, if you've chosen `8212` as your host port, you can verify that it worked with the command:
+The cache server functions as a normal HTTP server and can interact with typical HTTP clients, such as `curl`.
+
 
 ```console
-user@host $ curl http://localhost:8212/user/dweitzel/public/blast/queries/query1
+user@host $ curl -O http://cache_host:8000/osgconnect/public/rynge/test.data
 ```
 
-Which should output:
-
+`curl` may not correctly report a failure, so verify that the contents of the file are:
 ```
->Derek's first query!
-MPVSDSGFDNSSKTMKDDTIPTEDYEEITKESEMGDATKITSKIDANVIEKKDTDSENNITIAQDDEKVSWLQRVVEFFE
+hello world!
 ```
 
 Getting Help
