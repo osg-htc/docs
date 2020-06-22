@@ -44,7 +44,8 @@ Further behavior of the cache can be configured by setting the following in the 
 - `XC_RAMSIZE`: Amount of memory to use for storing blocks before writting them to disk. (Use higher for slower disks).
 - `XC_BLOCKSIZE`: Size of the blocks in the cache.
 - `XC_PREFETCH`: Number of blocks to prefetch from a file at once.
-       This controls how aggressive the cache is to request portions of a file. Set to `0` to disable.
+       This controls how aggressive the cache is to request portions of a file.
+       If you set it to `0`, prefetching will be disabled, but that is not recommended.
 
 
 Running a Cache
