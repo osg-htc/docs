@@ -21,6 +21,8 @@ to start containers (i.e., belong to the `docker` Unix group).
 1. **Network ports:** The Stash Origin listens for incoming HTTP/S and XRootD connections on ports 1094 and 1095 (by
 default).
 1. **File Systems:** Stash Origin needs a partition on the host to store user data.
+1. **Registration:** Before deploying an origin, you must
+   [registered the service](/data/stashcache/install-origin/#registering-the-origin) in the OSG Topology
 
 Configuring Stash Origin
 ------------------------
@@ -34,23 +36,6 @@ Where the environment file on the docker host, `/opt/origin/.env`, has (at least
 
 ```file
 XC_RESOURCENAME=YOUR_SITE_NAME
-```
-
-### Creating an Auth File ###
-
-XRootD needs an authorization file ([AuthFile](/data/xrootd/xrootd-authorization/)) to control access to different parts
-of the namespace in your origin.
-You can create a simple authfile named `/opt/origin/auth_file` as follows:
-
-```file
-u * /origin rl
-```
-
-Create a configuration file for XRootD to find your authfile.
-Create a file `/opt/origin/10-origin-authfile.cfg`:
-
-```
-set StashOriginPublicAuthfile = /etc/xrootd/public-origin-authfile
 ```
 
 Running an Origin
