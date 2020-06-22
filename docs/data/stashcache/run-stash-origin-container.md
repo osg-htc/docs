@@ -69,6 +69,9 @@ user@host $ docker run --rm --publish 1094:1094 \
              opensciencegrid/stash-origin:stable
 ```
 
+!!!warning
+    A container deployed this way will serve the entire contents of `<HOST PARTITION>`.
+
 It is recommended to use a container orchestration service such as [docker-compose](https://docs.docker.com/compose/) or
 [kubernetes](https://kubernetes.io/), or start the stash origin container with systemd.
 
