@@ -801,15 +801,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#creating-an-auth-file" title="Creating an Auth file" class="md-nav__link">
-    Creating an Auth file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#disabling-osg-monitoring" title="Disabling OSG monitoring" class="md-nav__link">
-    Disabling OSG monitoring
+  <a href="#creating-an-auth-file" title="Creating an Auth File" class="md-nav__link">
+    Creating an Auth File
   </a>
   
 </li>
@@ -2890,15 +2883,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#creating-an-auth-file" title="Creating an Auth file" class="md-nav__link">
-    Creating an Auth file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#disabling-osg-monitoring" title="Disabling OSG monitoring" class="md-nav__link">
-    Disabling OSG monitoring
+  <a href="#creating-an-auth-file" title="Creating an Auth File" class="md-nav__link">
+    Creating an Auth File
   </a>
   
 </li>
@@ -2965,48 +2951,46 @@
 <p>The OSG operates the <a href="../../../data/stashcache/overview">StashCache data federation</a>, which
 provides organizations with a method to distribute their data in a scalable manner to thousands of jobs without needing
 to pre-stage data across sites or operate their own scalable infrastructure.</p>
-<p><a href="../../../data/stashcache/install-origin">Stash Origins</a> store copies of users' data. Each community (or experiment) needs to run one origin to export its data via the StashCache federation.
+<p><a href="../../../data/stashcache/install-origin">Stash Origins</a> store copies of users' data.
+Each community (or experiment) needs to run one origin to export its data via the StashCache federation.
 This document outlines how to run such an origin in a Docker container.</p>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following points:</p>
 <ol>
-<li><strong>Docker:</strong> For the purpose of this guide, the host must have a running docker service and you must have the ability to start containers (i.e., belong to the <code>docker</code> Unix group).</li>
-<li><strong>Network ports:</strong> The Stash Origin listens for incoming HTTP/S and XRootD connections on ports 1094 and 1095 (by default).</li>
+<li><strong>Docker:</strong> For the purpose of this guide, the host must have a running docker service and you must have the ability
+to start containers (i.e., belong to the <code>docker</code> Unix group).</li>
+<li><strong>Network ports:</strong> The Stash Origin listens for incoming HTTP/S and XRootD connections on ports 1094 and 1095 (by
+default).</li>
 <li><strong>File Systems:</strong> Stash Origin needs a partition on the host to store user data.</li>
 </ol>
 <h2 id="configuring-stash-origin">Configuring Stash Origin<a class="headerlink" href="#configuring-stash-origin" title="Permanent link">&para;</a></h2>
-<p>In addition to the required configuration above (ports and file systems), you may also configure the behavior of your origin with the following variables using an environment variable file:</p>
-<p>Where the environment file on the docker host, <code>/opt/origin/.env</code>, has (at least) the following contents (replace "YOUR_SITE_NAME" with the name of your site as <a href="../../../data/stashcache/install-origin/#registering-the-origin">registered in Topology</a>:</p>
+<p>In addition to the required configuration above (ports and file systems), you may also configure the behavior of your
+origin with the following variables using an environment variable file:</p>
+<p>Where the environment file on the docker host, <code>/opt/origin/.env</code>, has (at least) the following contents (replace
+<code>YOUR_SITE_NAME</code> with the name of your site as
+<a href="../../../data/stashcache/install-origin/#registering-the-origin">registered in Topology</a>):</p>
 <div class="codehilite"><pre><span></span>XC_ORIGINEXPORT=/origin
-XC_RESOURCENAME = YOUR_SITE_NAME
+XC_RESOURCENAME=YOUR_SITE_NAME
 </pre></div>
 
 
-<h3 id="creating-an-auth-file">Creating an Auth file<a class="headerlink" href="#creating-an-auth-file" title="Permanent link">&para;</a></h3>
-<p>XrootD needs an authorization file <a href="../../../data/xrootd/xrootd-authorization/">(AuthFile)</a> to control access to different parts of the namespace in your origin. You can create a simple authfile named <code>/opt/origin/auth_file</code> as follows:</p>
+<h3 id="creating-an-auth-file">Creating an Auth File<a class="headerlink" href="#creating-an-auth-file" title="Permanent link">&para;</a></h3>
+<p>XRootD needs an authorization file (<a href="../../../data/xrootd/xrootd-authorization/">AuthFile</a>) to control access to different parts
+of the namespace in your origin.
+You can create a simple authfile named <code>/opt/origin/auth_file</code> as follows:</p>
 <div class="codehilite"><pre><span></span>u * /origin rl
 </pre></div>
 
 
-<p>Create a configuration file for XrootD to find your authfile. Create a file <code>/opt/origin/10-origin-authfile.cfg</code>:</p>
+<p>Create a configuration file for XRootD to find your authfile.
+Create a file <code>/opt/origin/10-origin-authfile.cfg</code>:</p>
 <div class="codehilite"><pre><span></span>set StashOriginPublicAuthfile = /etc/xrootd/public-origin-authfile
 </pre></div>
 
 
-<h3 id="disabling-osg-monitoring">Disabling OSG monitoring<a class="headerlink" href="#disabling-osg-monitoring" title="Permanent link">&para;</a></h3>
-<p>By default, XCache reports to the OSG so that OSG staff can monitor the health of data federations.
-To disable OSG monitoring (for example so you can report monitoring information to another destination), set
-the following in your environment variable configuration:</p>
-<div class="codehilite"><pre><span></span>DISABLE_OSG_MONITORING = true
-</pre></div>
-
-
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Only disable OSG monitoring on services that are solely used for testing.</p>
-</div>
 <h2 id="running-an-origin">Running an Origin<a class="headerlink" href="#running-an-origin" title="Permanent link">&para;</a></h2>
-<p>To run the container, use docker run with the following options, replacing the text within angle brackets with your own values:</p>
+<p>To run the container, use docker run with the following options, replacing the text within angle brackets with your own
+values:</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@host $</span> docker run --rm --publish <span class="m">1094</span>:1094 <span class="se">\</span>
          --publish <span class="m">1095</span>:1095 <span class="se">\</span>
              --volume &lt;HOST PARTITION&gt;:/origin <span class="se">\</span>
@@ -3017,14 +3001,16 @@ the following in your environment variable configuration:</p>
 </pre></div>
 
 
-<p>It is recommended to use a container orchestration service such as <a href="https://docs.docker.com/compose/">docker-compose</a> or <a href="https://kubernetes.io/">kubernetes</a>, or start the stash origin container with systemd.</p>
+<p>It is recommended to use a container orchestration service such as <a href="https://docs.docker.com/compose/">docker-compose</a> or
+<a href="https://kubernetes.io/">kubernetes</a>, or start the stash origin container with systemd.</p>
 <h3 id="running-stashcache-on-container-with-systemd">Running Stashcache on container with systemd<a class="headerlink" href="#running-stashcache-on-container-with-systemd" title="Permanent link">&para;</a></h3>
 <p>An example systemd service file for StashCache.
-This will require creating the environment file in the directory <code>/opt/origin/.env</code>. </p>
+This will require creating the environment file in the directory <code>/opt/origin/.env</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This example systemd file assumes <code>&lt;HOST PARTITION&gt;</code> is <code>/srv/origin</code>.</p>
 </div>
+<p>Create the systemd service file <code>/etc/systemd/system/docker.stash-origin.service</code> as follows:</p>
 <div class="codehilite"><pre><span></span>[Unit]
 Description=Stash Origin Container
 After=docker.service
@@ -3043,7 +3029,7 @@ WantedBy=multi-user.target
 </pre></div>
 
 
-<p>This systemd file can be saved to <code>/etc/systemd/system/docker.stash-origin.service</code> and started with:</p>
+<p>Enable and start the service with:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host $</span> systemctl <span class="nb">enable</span> docker.stash-origin
 <span class="gp">root@host $</span> systemctl start docker.stash-origin
 </pre></div>
@@ -3051,10 +3037,12 @@ WantedBy=multi-user.target
 
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>You must <a href="../../../data/stashcache/install-origin/#registering-the-origin">register</a> the cache before considering it a production service.</p>
+<p>You must <a href="../../../data/stashcache/install-origin/#registering-the-origin">register</a> the origin before considering it a
+production service.</p>
 </div>
 <h2 id="validating-origin">Validating Origin<a class="headerlink" href="#validating-origin" title="Permanent link">&para;</a></h2>
-<p>To validate the origin please follow the <a href="../../../data/stashcache/install-origin/#verifying-the-origin-server">validating-origin instructions</a></p>
+<p>To validate the origin please follow the
+<a href="../../../data/stashcache/install-origin/#verifying-the-origin-server">validating origin instructions</a>.</p>
 <h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
 <p>To get assistance, please use the <a href="../../../common/help">this page</a> or contact <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> directly.</p>
                 
