@@ -33,7 +33,6 @@ Where the environment file on the docker host, `/opt/origin/.env`, has (at least
 [registered in Topology](/data/stashcache/install-origin/#registering-the-origin)):
 
 ```file
-XC_ORIGINEXPORT=/origin
 XC_RESOURCENAME=YOUR_SITE_NAME
 ```
 
@@ -53,7 +52,6 @@ Create a file `/opt/origin/10-origin-authfile.cfg`:
 ```
 set StashOriginPublicAuthfile = /etc/xrootd/public-origin-authfile
 ```
-
 
 Running an Origin
 -----------------
