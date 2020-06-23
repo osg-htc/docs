@@ -210,6 +210,100 @@ To update OSG Configure on your HTCondor-CE, perform the following steps:
 1.  OSG Configure will warn about config options that it does not recognize;
     delete these options from the config to get rid of the warnings.
 
+Updating to HTCondor 8.9.7+
+---------------------------
+
+!!!tip "Where to find HTCondor 8.9"
+    The HTCondor [development series](https://htcondor.readthedocs.io/en/latest/version-history/introduction-version-history.html#the-development-release-series)
+    is available through the [OSG upcoming](#osg-upcoming) repository.
+
+For HTCondor hosts < 8.9.7 using the SciTokens CredMon, updates to HTCondor 8.9.7+ require manual intervention and a
+corresponding update to `python2-scitokens-credmon`, available in the OSG 3.5 release repository.
+If you do not have the `python2-scitokens-credmon` package installed, you may skip these instructions.
+Otherwise, follow these steps for a seamless update to HTCondor 8.9.7+:
+
+1.  Determine if your HTCondor installation is configured to use the SciTokens CredMon:
+
+        :::console
+        # condor_config_val -v DAEMON_LIST
+
+    If `CREDD` and `SEC_CREDENTIAL_MONITOR` are in the output of the above command, continue onto the next step.
+    Otherwise, your installation is not configured to use SciTokens CredMon and you should skip the rest of these
+    instructions.
+
+1.  Add the following to a file in `/etc/condor/config.d/`:
+
+        SEC_CREDENTIAL_DIRECTORY_OAUTH = /var/lib/condor/oauth_credentials
+        CREDMON_OAUTH = /usr/bin/condor_credmon_oauth
+        SEC_CREDENTIAL_MONITOR_OAUTH_LOG = $(LOG)/CredMonOAuthLog
+
+        if version < 8.9.7
+          CREDMON_OAUTH = /usr/bin/scitokens_credmon
+        endif
+
+1.  Update your `DAEMON_LIST` configuration from:
+
+        DAEMON_LIST = $(DAEMON_LIST), CREDD, SEC_CREDENTIAL_MONITOR
+
+    to
+
+        DAEMON_LIST = $(DAEMON_LIST), CREDD, CREDMON_OAUTH
+
+1.  Turn off the SchedD and CredMon daemons:
+
+        :::console
+        # condor_off -daemon SCHEDD
+        # condor_off -daemon SEC_CREDENTIAL_MONITOR
+        # condor_off -daemon CREDMON_OAUTH
+
+1.  Move the existing credential directory and set up a temporary symlink:
+
+        # mv $(condor_config_val SEC_CREDENTIAL_DIRECTORY) $(condor_config_val SEC_CREDENTIAL_DIRECTORY_OAUTH)
+        # ln -s $(condor_config_val SEC_CREDENTIAL_DIRECTORY_OAUTH) $(condor_config_val SEC_CREDENTIAL_DIRECTORY)
+
+1.  Update HTCondor and SciTokens CredMon packages:
+
+        :::console
+        # yum -y upgrade python2-scitokens-credmon condor
+
+1.  If you are running Apache on this host, reload the Apache configuration:
+
+        :::console
+        # systemctl reload httpd.service
+
+1.  Reconfigure HTCondor:
+
+        :::console
+        # condor_reconfig
+
+1.  Turn the SchedD and CredMon daemons back on:
+
+        :::console
+        # condor_on -daemon CREDMON_OAUTH
+        # condor_on -daemon SCHEDD
+
+1.  Clean up old CredMon configuration.
+    Remove the following entries from your HTCondor configuration:
+
+        SEC_CREDENTIAL_DIRECTORY = /var/lib/condor/credentials
+        SEC_CREDENTIAL_MONITOR = /usr/bin/scitokens_credmon
+        SEC_CREDENTIAL_MONITOR_LOG = $(LOG)/CredMonLog
+
+1.  To allow for seamless HTCondor downgrades, update the `if version < 8.9.7` block that you added in step 2.
+
+        if version < 8.9.7
+          CREDMON_OAUTH = /usr/bin/scitokens_credmon
+          SEC_CREDENTIAL_DIRECTORY = $(SEC_CREDENTIAL_DIRECTORY_OAUTH)
+        endif
+
+1.  Remove the symlink to the old credential directory that you created in step 5.
+    This is whatever you had set `SEC_CREDENTIAL_DIRECTORY` to before.
+    For example:
+
+        :::console
+        # rm /var/lib/condor/credentials
+
+
 Updating to HTCondor 8.8.x
 --------------------------
 
