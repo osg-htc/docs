@@ -797,19 +797,6 @@
     Configuring Stash Origin
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#creating-an-auth-file" title="Creating an Auth File" class="md-nav__link">
-    Creating an Auth File
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -2879,19 +2866,6 @@
     Configuring Stash Origin
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#creating-an-auth-file" title="Creating an Auth File" class="md-nav__link">
-    Creating an Auth File
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -2962,6 +2936,8 @@ to start containers (i.e., belong to the <code>docker</code> Unix group).</li>
 <li><strong>Network ports:</strong> The Stash Origin listens for incoming HTTP/S and XRootD connections on ports 1094 and 1095 (by
 default).</li>
 <li><strong>File Systems:</strong> Stash Origin needs a partition on the host to store user data.</li>
+<li><strong>Registration:</strong> Before deploying an origin, you must
+   <a href="../../../data/stashcache/install-origin/#registering-the-origin">registered the service</a> in the OSG Topology</li>
 </ol>
 <h2 id="configuring-stash-origin">Configuring Stash Origin<a class="headerlink" href="#configuring-stash-origin" title="Permanent link">&para;</a></h2>
 <p>In addition to the required configuration above (ports and file systems), you may also configure the behavior of your
@@ -2969,22 +2945,7 @@ origin with the following variables using an environment variable file:</p>
 <p>Where the environment file on the docker host, <code>/opt/origin/.env</code>, has (at least) the following contents (replace
 <code>YOUR_SITE_NAME</code> with the name of your site as
 <a href="../../../data/stashcache/install-origin/#registering-the-origin">registered in Topology</a>):</p>
-<div class="codehilite"><pre><span></span>XC_ORIGINEXPORT=/origin
-XC_RESOURCENAME=YOUR_SITE_NAME
-</pre></div>
-
-
-<h3 id="creating-an-auth-file">Creating an Auth File<a class="headerlink" href="#creating-an-auth-file" title="Permanent link">&para;</a></h3>
-<p>XRootD needs an authorization file (<a href="../../../data/xrootd/xrootd-authorization/">AuthFile</a>) to control access to different parts
-of the namespace in your origin.
-You can create a simple authfile named <code>/opt/origin/auth_file</code> as follows:</p>
-<div class="codehilite"><pre><span></span>u * /origin rl
-</pre></div>
-
-
-<p>Create a configuration file for XRootD to find your authfile.
-Create a file <code>/opt/origin/10-origin-authfile.cfg</code>:</p>
-<div class="codehilite"><pre><span></span>set StashOriginPublicAuthfile = /etc/xrootd/public-origin-authfile
+<div class="codehilite"><pre><span></span>XC_RESOURCENAME=YOUR_SITE_NAME
 </pre></div>
 
 
@@ -3001,6 +2962,10 @@ values:</p>
 </pre></div>
 
 
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>A container deployed this way will serve the entire contents of <code>&lt;HOST PARTITION&gt;</code>.</p>
+</div>
 <p>It is recommended to use a container orchestration service such as <a href="https://docs.docker.com/compose/">docker-compose</a> or
 <a href="https://kubernetes.io/">kubernetes</a>, or start the stash origin container with systemd.</p>
 <h3 id="running-stashcache-on-container-with-systemd">Running Stashcache on container with systemd<a class="headerlink" href="#running-stashcache-on-container-with-systemd" title="Permanent link">&para;</a></h3>
