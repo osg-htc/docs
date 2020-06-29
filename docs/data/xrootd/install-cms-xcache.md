@@ -151,7 +151,7 @@ This can be a simple lightweight virtual machine and will be the single point of
 1. Install the redirector package
 
         :::console
-        root@host # yum install xcache-redirector --enablerepo=osg-development
+        root@host # yum install xcache-redirector
 
 
 1. Create file named `/etc/xrootd/config.d/04-local-redir.cfg` with contents
