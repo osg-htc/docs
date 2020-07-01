@@ -83,6 +83,7 @@ pages:
 - Release Information:
   - 'Release Note Overview': 'release/notes.md'
   - 3.5 Release Notes:
+    - 'OSG Release 3.5.19': 'release/3.5/release-3-5-19.md'
     - 'OSG Release 3.5.18': 'release/3.5/release-3-5-18.md'
     - 'OSG Release 3.5.17': 'release/3.5/release-3-5-17.md'
     - 'OSG Release 3.5.16': 'release/3.5/release-3-5-16.md'
@@ -109,6 +110,7 @@ pages:
     - 'OSG Release 3.5.1': 'release/3.5/release-3-5-1.md'
     - 'OSG Release 3.5.0': 'release/3.5/release-3-5-0.md'
   - 3.4 Release Notes:
+    - 'OSG Release 3.4.53': 'release/3.4/release-3-4-53.md'
     - 'OSG Release 3.4.52': 'release/3.4/release-3-4-52.md'
     - 'OSG Release 3.4.51': 'release/3.4/release-3-4-51.md'
     - 'OSG Release 3.4.50': 'release/3.4/release-3-4-50.md'
