@@ -38,13 +38,14 @@ This release contains:
     -   Emits error message when local issuer private key is not found
     -   Adds a lookup table for common OAuth providers' user information endpoints
     -   Adds a lookup table to set how often tokens are refreshed for common OAuth providers
-    -   The main condor\_credmon\_oauth script now uses multiprocessing processes and queue to prevent credmon threads from stalling -   Upcoming: [HTCondor 8.9.7](https://www-auth.cs.wisc.edu/lists/htcondor-world/2020/msg00010.shtml): New feature release
+    -   The main condor\_credmon\_oauth script now uses multiprocessing processes and queue to prevent credmon threads from stalling
+-   Upcoming: [HTCondor 8.9.7](https://www-auth.cs.wisc.edu/lists/htcondor-world/2020/msg00010.shtml): New feature release
     -    Multiple enhancements in the file transfer code
     -    Support for more regions in s3:// URLs
     -    Much more flexible job router language
     -    Jobs may now specify cuda\_version to match equally-capable GPUs
     -    TOKENS are now called IDTOKENS to differentiate from SCITOKENS
-    -    Added the ability to blacklist TOKENS via an expression
+    -    Added the ability to blacklist IDTOKENS via an expression
     -    Can simultaneously handle Kerberos and OAUTH credentials
     -    The startd supports a remote history query similar to the schedd
     -    condor\_q -submitters now works with accounting groups
