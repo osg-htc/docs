@@ -53,7 +53,7 @@ with at least 1 TB of storage available.
 The `cms-xcache` package provides default configuration files in `/etc/xrootd/xrootd-cms-xcache.cfg` and `/etc/xrootd/config.d/`.
 Administrators may provide additional configuration by placing files in `/etc/xrootd/config.d/1*.cfg` (for files that need to be processed BEFORE the OSG configuration) or `/etc/xrootd/config.d/9*.cfg` (for files that need to be processed AFTER the OSG configuration).
 
-You _must_ configure every variable in `/etc/xrootd/10-common-site-local.cfg`.
+You _must_ configure every variable in `/etc/xrootd/config.d/10-common-site-local.cfg`.
 
 The mandatory variables to configure are:
 
@@ -154,24 +154,29 @@ This can be a simple lightweight virtual machine and will be the single point of
         root@host # yum install xcache-redirector
 
 
-1. Create file named `/etc/xrootd/config.d/04-local-redir.cfg` with contents
+1. Create file named `/etc/xrootd/config.d/04-local-redir.cfg` with contents:
 
         :::file
         all.manager yourlocalredir:2041
+
+1. You _must_ configure every variable in `/etc/xrootd/config.d/10-common-site-local.cfg`. The mandatory variables to configure are:
+
+    - `set rootdir = /mnt/stash`: the mounted filesystem path to export.  This document refers to this as `/mnt/stash`.
+    - `set resourcename = YOUR_RESOURCE_NAME`: the resource name registered with the OSG for example ("T2_US_UCSD")
 
 1. Start and enable the `cmsd` and `xrootd` proccess:
 
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
-| XRootD | `cmsd@xcache-redirector.service` | The cmsd daemon that interact with the different xrootd servers |
-| XRootD | `xrootd@xcache-redirector.service` | The xrootd daemon which performs authenticated data transfers |
+| XRootD | `cmsd@xcache-redir.service` | The cmsd daemon that interact with the different xrootd servers |
+| XRootD | `xrootd@xcache-redir.service` | The xrootd daemon which performs authenticated data transfers |
 
 ### Configuring each of your cache nodes
 
 1. Create a config file in the nodes where you installed your caches `/etc/xrootd/config.d/94-xrootd-manager.cfg` with the following contents:
 
-      :::file
-      all.manager yourlocalredir:2041
+        :::file
+        all.manager yourlocalredir:2041
 
 1. Start and enable the `cmsd` service:
 
