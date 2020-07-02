@@ -3177,7 +3177,7 @@ with at least 1 TB of storage available.</p>
 </div>
 <p>The <code>cms-xcache</code> package provides default configuration files in <code>/etc/xrootd/xrootd-cms-xcache.cfg</code> and <code>/etc/xrootd/config.d/</code>.
 Administrators may provide additional configuration by placing files in <code>/etc/xrootd/config.d/1*.cfg</code> (for files that need to be processed BEFORE the OSG configuration) or <code>/etc/xrootd/config.d/9*.cfg</code> (for files that need to be processed AFTER the OSG configuration).</p>
-<p>You <em>must</em> configure every variable in <code>/etc/xrootd/10-common-site-local.cfg</code>.</p>
+<p>You <em>must</em> configure every variable in <code>/etc/xrootd/config.d/10-common-site-local.cfg</code>.</p>
 <p>The mandatory variables to configure are:</p>
 <ul>
 <li><code>set rootdir = /mnt/stash</code>: the mounted filesystem path to export.  This document refers to this as <code>/mnt/stash</code>.</li>
@@ -3265,11 +3265,18 @@ As soon as your issue has been resolved, revert any changes you have made to <co
 
 </li>
 <li>
-<p>Create file named <code>/etc/xrootd/config.d/04-local-redir.cfg</code> with contents</p>
+<p>Create file named <code>/etc/xrootd/config.d/04-local-redir.cfg</code> with contents:</p>
 <div class="codehilite"><pre><span></span>all.manager yourlocalredir:2041
 </pre></div>
 
 
+</li>
+<li>
+<p>You <em>must</em> configure every variable in <code>/etc/xrootd/config.d/10-common-site-local.cfg</code>. The mandatory variables to configure are:</p>
+<ul>
+<li><code>set rootdir = /mnt/stash</code>: the mounted filesystem path to export.  This document refers to this as <code>/mnt/stash</code>.</li>
+<li><code>set resourcename = YOUR_RESOURCE_NAME</code>: the resource name registered with the OSG for example ("T2_US_UCSD")</li>
+</ul>
 </li>
 <li>
 <p>Start and enable the <code>cmsd</code> and <code>xrootd</code> proccess:</p>
@@ -3286,12 +3293,12 @@ As soon as your issue has been resolved, revert any changes you have made to <co
 <tbody>
 <tr>
 <td>XRootD</td>
-<td><code>cmsd@xcache-redirector.service</code></td>
+<td><code>cmsd@xcache-redir.service</code></td>
 <td>The cmsd daemon that interact with the different xrootd servers</td>
 </tr>
 <tr>
 <td>XRootD</td>
-<td><code>xrootd@xcache-redirector.service</code></td>
+<td><code>xrootd@xcache-redir.service</code></td>
 <td>The xrootd daemon which performs authenticated data transfers</td>
 </tr>
 </tbody>
@@ -3300,8 +3307,10 @@ As soon as your issue has been resolved, revert any changes you have made to <co
 <ol>
 <li>
 <p>Create a config file in the nodes where you installed your caches <code>/etc/xrootd/config.d/94-xrootd-manager.cfg</code> with the following contents:</p>
-<p>:::file
-  all.manager yourlocalredir:2041</p>
+<div class="codehilite"><pre><span></span>all.manager yourlocalredir:2041
+</pre></div>
+
+
 </li>
 <li>
 <p>Start and enable the <code>cmsd</code> service:</p>
