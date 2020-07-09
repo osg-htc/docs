@@ -168,10 +168,11 @@ Validating the Cache
 ---------------------
 
 The cache server functions as a normal HTTP server and can interact with typical HTTP clients, such as `curl`.
+Here, `<HOST PORT>` is the port chosen in the `docker run` command, `8000` by default.
 
 
 ```console
-user@host $ curl -O http://cache_host:8000/osgconnect/public/rynge/test.data
+user@host $ curl -O http://cache_host:<HOST PORT>/osgconnect/public/rynge/test.data
 ```
 
 `curl` may not correctly report a failure, so verify that the contents of the file are:
