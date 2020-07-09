@@ -781,23 +781,16 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuring-stashcache" title="Configuring Stashcache" class="md-nav__link">
-    Configuring Stashcache
+  <a href="#configuring-stash-cache" title="Configuring Stash Cache" class="md-nav__link">
+    Configuring Stash Cache
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#optional-configuration" title="Optional Configuration" class="md-nav__link">
-    Optional Configuration
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#disabling-osg-monitoring" title="Disabling OSG monitoring" class="md-nav__link">
-    Disabling OSG monitoring
+  <a href="#optional-configuration" title="Optional configuration" class="md-nav__link">
+    Optional configuration
   </a>
   
 </li>
@@ -808,16 +801,16 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#running-stashcache" title="Running Stashcache" class="md-nav__link">
-    Running Stashcache
+  <a href="#running-a-cache" title="Running a Cache" class="md-nav__link">
+    Running a Cache
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#running-stashcache-on-container-with-systemd" title="Running Stashcache on container with systemd" class="md-nav__link">
-    Running Stashcache on container with systemd
+  <a href="#running-stash-cache-on-container-with-systemd" title="Running Stash Cache on container with systemd" class="md-nav__link">
+    Running Stash Cache on container with systemd
   </a>
   
 </li>
@@ -830,15 +823,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#memory-optimization" title="Memory Optimization" class="md-nav__link">
-    Memory Optimization
+  <a href="#memory-optimization" title="Memory optimization" class="md-nav__link">
+    Memory optimization
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#multiple-disks" title="Multiple Disks" class="md-nav__link">
-    Multiple Disks
+  <a href="#multiple-disks" title="Multiple disks" class="md-nav__link">
+    Multiple disks
   </a>
   
 </li>
@@ -849,8 +842,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validating-stashcache" title="Validating StashCache" class="md-nav__link">
-    Validating StashCache
+  <a href="#validating-the-cache" title="Validating the Cache" class="md-nav__link">
+    Validating the Cache
   </a>
   
 </li>
@@ -2927,23 +2920,16 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuring-stashcache" title="Configuring Stashcache" class="md-nav__link">
-    Configuring Stashcache
+  <a href="#configuring-stash-cache" title="Configuring Stash Cache" class="md-nav__link">
+    Configuring Stash Cache
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#optional-configuration" title="Optional Configuration" class="md-nav__link">
-    Optional Configuration
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#disabling-osg-monitoring" title="Disabling OSG monitoring" class="md-nav__link">
-    Disabling OSG monitoring
+  <a href="#optional-configuration" title="Optional configuration" class="md-nav__link">
+    Optional configuration
   </a>
   
 </li>
@@ -2954,16 +2940,16 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#running-stashcache" title="Running Stashcache" class="md-nav__link">
-    Running Stashcache
+  <a href="#running-a-cache" title="Running a Cache" class="md-nav__link">
+    Running a Cache
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#running-stashcache-on-container-with-systemd" title="Running Stashcache on container with systemd" class="md-nav__link">
-    Running Stashcache on container with systemd
+  <a href="#running-stash-cache-on-container-with-systemd" title="Running Stash Cache on container with systemd" class="md-nav__link">
+    Running Stash Cache on container with systemd
   </a>
   
 </li>
@@ -2976,15 +2962,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#memory-optimization" title="Memory Optimization" class="md-nav__link">
-    Memory Optimization
+  <a href="#memory-optimization" title="Memory optimization" class="md-nav__link">
+    Memory optimization
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#multiple-disks" title="Multiple Disks" class="md-nav__link">
-    Multiple Disks
+  <a href="#multiple-disks" title="Multiple disks" class="md-nav__link">
+    Multiple disks
   </a>
   
 </li>
@@ -2995,8 +2981,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validating-stashcache" title="Validating StashCache" class="md-nav__link">
-    Validating StashCache
+  <a href="#validating-the-cache" title="Validating the Cache" class="md-nav__link">
+    Validating the Cache
   </a>
   
 </li>
@@ -3031,51 +3017,44 @@
 <p>The OSG operates the <a href="../../../data/stashcache/overview">StashCache data federation</a>, which
 provides organizations with a method to distribute their data in a scalable manner to thousands of jobs without needing
 to pre-stage data across sites or operate their own scalable infrastructure.</p>
-<p><a href="../../../data/stashcache/install-cache">Stash Caches</a> transfer data to clients such as jobs or users. A set of caches are operated across the OSG for the benefit of nearby sites;
+<p><a href="../../../data/stashcache/install-cache">Stash Caches</a> transfer data to clients such as jobs or users.
+A set of caches are operated across the OSG for the benefit of nearby sites;
 in addition, each site may run its own cache in order to reduce the amount of data transferred over the WAN.
 This document outlines how to run StashCache in a Docker container.</p>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following points:</p>
 <ol>
-<li><strong>Docker:</strong> For the purpose of this guide, the host must have a running docker service and you must have the ability to start containers (i.e., belong to the <code>docker</code> Unix group).</li>
+<li><strong>Docker:</strong> For the purpose of this guide, the host must have a running docker service
+   and you must have the ability to start containers (i.e., belong to the <code>docker</code> Unix group).</li>
 <li><strong>Network ports:</strong> Stash Cache listens for incoming HTTP/S connections on port 8000 (by default)</li>
 <li><strong>File Systems:</strong> Stash Cache needs a partition on the host to store cached data</li>
 </ol>
-<h2 id="configuring-stashcache">Configuring Stashcache<a class="headerlink" href="#configuring-stashcache" title="Permanent link">&para;</a></h2>
-<p>In addition to the required configuration above (ports and file systems), you may also configure the behavior of your cache with the following variables using an enviroment variable file:</p>
-<p>Where the environment file on the docker host, <code>/opt/xcache/.env</code>, has (at least)the following contents:</p>
-<div class="codehilite"><pre><span></span>XC_RESOURCENAME=ProductionCache
+<h2 id="configuring-stash-cache">Configuring Stash Cache<a class="headerlink" href="#configuring-stash-cache" title="Permanent link">&para;</a></h2>
+<p>In addition to the required configuration above (ports and file systems),
+you may also configure the behavior of your cache with the following variables using an environment variable file:</p>
+<p>Where the environment file on the docker host, <code>/opt/xcache/.env</code>, has (at least) the following contents
+(replace <code>YOUR_SITE_NAME</code> with the name of your site as
+<a href="../../../data/stashcache/install-cache#registering-the-cache">registered in Topology</a>):</p>
+<div class="codehilite"><pre><span></span>XC_RESOURCENAME=YOUR_SITE_NAME
 XC_ROOTDIR=/cache
 </pre></div>
 
 
-<h3 id="optional-configuration">Optional Configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h3>
-<p>Further behaviour of the stashcache can be cofigured by setting the followin in the enviroment variable file</p>
+<h3 id="optional-configuration">Optional configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h3>
+<p>Further behavior of the cache can be configured by setting the following in the environment variable file:</p>
 <ul>
-<li><code>XC_SPACE_HIGH_WM</code>: High watermark for disk usage;
-      when usage goes above the high watermark, the cache deletes until it hits the low watermark</li>
-<li><code>XC_SPACE_LOW_WM</code>: Low watermark for disk usage;
-      when usage goes above the high watermark, the cache deletes until it hits the low watermark</li>
+<li><code>XC_SPACE_HIGH_WM</code>, <code>XC_SPACE_LOW_WM</code>: High-water and low-water marks for disk usage;
+      when usage goes above the high-water mark, the cache will delete files until it hits the low-water mark.</li>
 <li><code>XC_PORT</code>: TCP port that XCache listens on</li>
 <li><code>XC_RAMSIZE</code>: Amount of memory to use for storing blocks before writting them to disk. (Use higher for slower disks).</li>
-<li><code>XC_BLOCKSIZE</code>: The size of the blocks in the cache</li>
+<li><code>XC_BLOCKSIZE</code>: Size of the blocks in the cache.</li>
 <li><code>XC_PREFETCH</code>: Number of blocks to prefetch from a file at once.
-       This is a value of how aggressive the cache is to request portions of a file. Set to <code>0</code> to disable</li>
+       This controls how aggressive the cache is to request portions of a file.
+       If you set it to <code>0</code>, prefetching will be disabled, but that is not recommended.</li>
 </ul>
-<h3 id="disabling-osg-monitoring">Disabling OSG monitoring<a class="headerlink" href="#disabling-osg-monitoring" title="Permanent link">&para;</a></h3>
-<p>By default, XCache reports to the OSG so that OSG staff can monitor the health of data federations.
-If you would like to report monitoring information to another destination, you can disable the OSG monitoring by setting
-the following in your environment variable configuration:</p>
-<div class="codehilite"><pre><span></span>DISABLE_OSG_MONITORING = true
-</pre></div>
-
-
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Do not disable OSG monitoring in any service that is to be used for any other than testing</p>
-</div>
-<h2 id="running-stashcache">Running Stashcache<a class="headerlink" href="#running-stashcache" title="Permanent link">&para;</a></h2>
-<p>To run the container, use docker run with the following options, replacing the text within angle brackets with your own values:</p>
+<h2 id="running-a-cache">Running a Cache<a class="headerlink" href="#running-a-cache" title="Permanent link">&para;</a></h2>
+<p>To run the container, use <code>docker run</code> with the following options, replacing the text within angle brackets
+with your own values:</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@host $</span> docker run --rm --publish &lt;HOST PORT&gt;:8000 <span class="se">\</span>
              --volume &lt;HOST PARTITION&gt;:/cache <span class="se">\</span>
              --env-file<span class="o">=</span>/opt/xcache/.env <span class="se">\</span>
@@ -3083,16 +3062,18 @@ the following in your environment variable configuration:</p>
 </pre></div>
 
 
-<p>It is recommended to use a container orchestration service such as <a href="https://docs.docker.com/compose/">docker-compose</a> or <a href="https://kubernetes.io/">kubernetes</a>, or start the StashCache container with systemd.</p>
-<h3 id="running-stashcache-on-container-with-systemd">Running Stashcache on container with systemd<a class="headerlink" href="#running-stashcache-on-container-with-systemd" title="Permanent link">&para;</a></h3>
-<p>An example systemd service file for StashCache.
+<p>It is recommended to use a container orchestration service such as <a href="https://docs.docker.com/compose/">docker-compose</a>
+or <a href="https://kubernetes.io/">kubernetes</a>, or start the stash cache container with systemd.</p>
+<h3 id="running-stash-cache-on-container-with-systemd">Running Stash Cache on container with systemd<a class="headerlink" href="#running-stash-cache-on-container-with-systemd" title="Permanent link">&para;</a></h3>
+<p>An example systemd service file for Stash Cache.
 This will require creating the environment file in the directory <code>/opt/xcache/.env</code>. </p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This example systemd file assumes <code>&lt;HOST PORT&gt;</code> is <code>8000</code> and  <code>&lt;HOST PARTITION&gt;</code> is <code>/srv/cache</code>.</p>
 </div>
+<p>Create the systemd service file <code>/etc/systemd/system/docker.stash-cache.service</code> as follows:</p>
 <div class="codehilite"><pre><span></span>[Unit]
-Description=StashCache Container
+Description=Stash Cache Container
 After=docker.service
 Requires=docker.service
 
@@ -3109,7 +3090,7 @@ WantedBy=multi-user.target
 </pre></div>
 
 
-<p>This systemd file can be saved to <code>/etc/systemd/system/docker.stash-cache.service</code> and started with:</p>
+<p>Enable and start the service with:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host $</span> systemctl <span class="nb">enable</span> docker.stash-cache
 <span class="gp">root@host $</span> systemctl start docker.stash-cache
 </pre></div>
@@ -3129,26 +3110,21 @@ WantedBy=multi-user.target
 </pre></div>
 
 
-<h3 id="memory-optimization">Memory Optimization<a class="headerlink" href="#memory-optimization" title="Permanent link">&para;</a></h3>
-<p>Stashcache uses the hosts memory in two ways:</p>
+<h3 id="memory-optimization">Memory optimization<a class="headerlink" href="#memory-optimization" title="Permanent link">&para;</a></h3>
+<p>The cache uses the host's memory for two purposes:</p>
 <ol>
-<li>Uses the own linux kernel as a way to cache files read from disk</li>
-<li>As a buffer for writting blocks of files first in memory and then in disk (to account for slow disks).</li>
+<li>Caching files recently read from disk (via the kernel page cache).</li>
+<li>Buffering files recently received from the network before writing them to disk (to compensate for slow disks).</li>
 </ol>
-<p>An easy way to increase the performance of stashcache is to assign it more memory. You can use the <a href="https://docs.docker.com/config/containers/resource_constraints/#limit-a-containers-access-to-memory">docker option</a> <code>--memory</code> and set it up to at least twice of <code>XC_RAMSIZE</code>.</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> docker run --rm --publish &lt;HOST PORT&gt;:8000 <span class="se">\</span>
-             --memory<span class="o">=</span>64g <span class="se">\</span>
-             --volume &lt;HOST PARTITION&gt;:/cache <span class="se">\</span>
-             --env-file<span class="o">=</span>/opt/xcache/.env <span class="se">\</span>
-             opensciencegrid/stash-cache:stable
-</pre></div>
-
-
-<h3 id="multiple-disks">Multiple Disks<a class="headerlink" href="#multiple-disks" title="Permanent link">&para;</a></h3>
-<p>For caches that store over <code>10 TB</code> or that have assigned space for storing the cached files over multiple partitions (<code>/partition1, /partition2, ...</code>) we recommend the following.</p>
+<p>An easy way to increase the performance of the cache is to assign it more memory.
+If you set a limit on the container's memory usage via the docker option <code>--memory</code> or Kubernetes resource limits,
+make sure it is at least twice the value of <code>XC_RAMSIZE</code>.</p>
+<h3 id="multiple-disks">Multiple disks<a class="headerlink" href="#multiple-disks" title="Permanent link">&para;</a></h3>
+<p>For caches that store over 10 TB or that have assigned space for storing the cached files over multiple partitions
+(e.g. <code>/partition1, /partition2, ...</code>) we recommend the following:</p>
 <ol>
 <li>
-<p>Create a config file <code>90-my-stash-cache-disks.cfg</code> with the following contents</p>
+<p>Create a config file <code>90-my-stash-cache-disks.cfg</code> with the following contents:</p>
 <div class="codehilite"><pre><span></span>pfc.spaces data
 oss.space data /data1
 oss.space data /data2
@@ -3175,21 +3151,22 @@ oss.space data /data2
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Under this configuration the <code>&lt;HOST PARTITION&gt;</code> is not used to store the files rather to store symlinks to the files in <code>/partition1</code> and <code>/partition2</code></p>
+<p>Under this configuration the <code>&lt;HOST PARTITION&gt;</code> is not used to store the files.
+Instead, the host partition stores symlinks to the files in <code>/partition1</code> and <code>/partition2</code>.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>For over 100 TB of assigned space we highly encourage to use this setup and mount <code>&lt;HOST PARTITION&gt;</code> in solid state disks or NVME.</p>
 </div>
-<h2 id="validating-stashcache">Validating StashCache<a class="headerlink" href="#validating-stashcache" title="Permanent link">&para;</a></h2>
-<p>For example, if you've chosen <code>8212</code> as your host port, you can verify that it worked with the command:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> curl http://localhost:8212/user/dweitzel/public/blast/queries/query1
+<h2 id="validating-the-cache">Validating the Cache<a class="headerlink" href="#validating-the-cache" title="Permanent link">&para;</a></h2>
+<p>The cache server functions as a normal HTTP server and can interact with typical HTTP clients, such as <code>curl</code>.
+Here, <code>&lt;HOST PORT&gt;</code> is the port chosen in the <code>docker run</code> command, <code>8000</code> by default.</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> curl -O http://cache_host:&lt;HOST PORT&gt;/osgconnect/public/rynge/test.data
 </pre></div>
 
 
-<p>Which should output:</p>
-<div class="codehilite"><pre><span></span>&gt;Derek&#39;s first query!
-MPVSDSGFDNSSKTMKDDTIPTEDYEEITKESEMGDATKITSKIDANVIEKKDTDSENNITIAQDDEKVSWLQRVVEFFE
+<p><code>curl</code> may not correctly report a failure, so verify that the contents of the file are:</p>
+<div class="codehilite"><pre><span></span>hello world!
 </pre></div>
 
 
