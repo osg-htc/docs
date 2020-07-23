@@ -47,13 +47,10 @@ Follow the steps below to get an user certificate:
         CILogon.
 
 1. Click the `Log On` button and enter your instutional credentials if prompted.
-1. Upon successfully entering your credentials, you'll get a page asking for you to enter a password.
-   Enter a password that is at least 12 characters long and then click on the `Get New Certificate` button.
-
-    ![Password entry](/img/cilogon_cert_password.png)
-
-1. The web page will generate a `usercred.p12` file and prompt you to download it.
-   The certificate will be protected using the password you entered in the prior step.
+1. After successfully entering your credentials, click on the "Create Password-Protected Certificate" link
+1. Enter a password that is at least 12 characters long and then click on the `Get New Certificate` button.
+1. Click the `Download Your Certificate` button to download your certificate in `.p12` format.
+   The certificate will be protected using the password you entered in the previous step.
 
 
 ### Certificate formats
