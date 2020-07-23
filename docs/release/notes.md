@@ -32,6 +32,7 @@ To update to the OSG 3.5 series, please consult the page on
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.5.20](/release/3.5/release-3-5-19)     | 2020-07-23 | HTCondor-CE 4.4.0, CVMFS 2.7.3, Frontier Squid 4.12-2.1, scitokens-cpp 0.5.1 |
 | [3.5.19](/release/3.5/release-3-5-19)     | 2020-07-01 | XRoodD 4.12.3, xrootd-lcmaps 1.7.7, scitokens-credmon 0.7; Upcoming: HTCondor 8.9.7 |
 | [3.5.18](/release/3.5/release-3-5-18)     | 2020-06-11 | Frontier Squid 4.11-3.1, VOMS 2.0.14-6, XCache 1.4, stashcache-client 5.6.1 |
 | [3.5.17](/release/3.5/release-3-5-17)     | 2020-06-04 | BLAHP 1.18.46, HTCondor 8.8.9, gratia-probe 1.20.13, VO Package v106; Upcoming: GlideinWMS 3.7, HTCondor 8.9.7 |
