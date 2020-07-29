@@ -22,7 +22,11 @@ intended for public use:
 OSG's RPM packages also rely on external packages provided by supported OSes and EPEL.
 You must have the following repositories available and enabled:
 
--   OS repositories (SL 6/7, CentOS 6/7, or RHEL 6/7 repositories, including "extras" repositories)
+-   OS repositories, including the following ones that aren't enabled by default:
+    -   `extras` (SL 6/7, CentOS 6/7/8)
+    -   `Server-Extras` (RHEL 6/7)
+    -   `PowerTools` (CentOS 8)
+    -   `CodeReady Builder` (RHEL 8)
 -   EPEL repositories
 -   OSG repositories
 
@@ -66,6 +70,7 @@ supported by the OSG.
 
 The definitive list of software in the contrib repository can be found here:
 
+-   [OSG 3.5 EL8 contrib software repository](https://repo.opensciencegrid.org/osg/3.5/el8/contrib/x86_64/)
 -   [OSG 3.5 EL7 contrib software repository](https://repo.opensciencegrid.org/osg/3.5/el7/contrib/x86_64/)
 -   [OSG 3.4 EL7 contrib software repository](https://repo.opensciencegrid.org/osg/3.4/el7/contrib/x86_64/)
 -   [OSG 3.4 EL6 contrib software repository](https://repo.opensciencegrid.org/osg/3.4/el6/contrib/x86_64/)
@@ -76,11 +81,13 @@ description of your software, what users it serves, and relevant RPM packaging.
 Installing Yum Repositories
 ---------------------------
 
-### Install the Yum priorities plugin
+### Install the Yum priorities plugin (EL6, EL7)
 
 The Yum priorities plugin is used to tell Yum to prefer OSG packages over EPEL or OS packages.
 It is important to install and enable the Yum priorities plugin before installing grid software to ensure that you are
 getting the OSG-supported versions.
+
+This plugin is built into Yum on EL8 distributions.
 
 1.  Install the Yum priorities package:
 
@@ -92,24 +99,38 @@ getting the OSG-supported versions.
         :::file
         plugins=1
 
-### Enable the "extras" OS repositories
+### Enable additional OS repositories
 
-Some packages depend on packages in the "extras" repositories of your OS,
-so you must ensure that those repositories are enabled.
-
-The instructions for this vary based on your OS:
-
-- On Scientific Linux, install the `yum-conf-extras` RPM package,
-  and ensure that the `sl-extras` repo in `/etc/yum.repos.d/sl-extras.repo` is enabled.
-  
-- On CentOS, ensure that the `extras` repo in `/etc/yum.repos.d/CentOS-Base.repo` is enabled.
-
-- On Red Hat Enterprise Linux, ensure that the `Server-Extras` channel is enabled.
+Some packages depend on packages that are in OS repositories not enabled by default.
+The repositories to enable, as well as the instructions to enable them, are OS-dependent.
 
 !!! note
     A repository is enabled if it has `enabled=1` in its definition,
     or if the `enabled` line is missing
     (i.e. it is enabled unless specified otherwise.)
+
+#### SL 6 and 7
+
+-   Install the `yum-conf-extras` RPM package.
+-   Ensure that the `sl-extras` repo in `/etc/yum.repos.d/sl-extras.repo` is enabled.
+
+#### CentOS 6 and 7
+
+-   Ensure that the `extras` repo in `/etc/yum.repos.d/CentOS-Base.repo` is enabled.
+
+#### CentOS 8
+
+-   Ensure that the `extras` repo in `/etc/yum.repos.d/CentOS-Extras.repo` is enabled.
+-   Ensure that the `PowerTools` repo in `/etc/yum.repos.d/CentOS-PowerTools.repo` is enabled.
+
+#### RHEL 6 and 7
+
+-   Ensure that the `Server-Extras` channel is enabled.
+
+#### RHEL 8
+
+-   Ensure that the `CodeReady Linux Builder` channel is enabled.
+    See [Red Hat's instructions](https://access.redhat.com/articles/4348511#enable) on how to enable this repo.
 
 ### Install the EPEL repositories
 
@@ -123,6 +144,8 @@ You must install and enable these first.
         root@host # yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
         ## EPEL 7 (For RHEL 7, CentOS 7, and SL 7)
         root@host # yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+        ## EPEL 8 (For RHEL 8 and CentOS 8)
+        root@host # yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 
 -   Verify that `/etc/yum.repos.d/epel.repo` exists; the `[epel]` section should contain:
 
@@ -144,6 +167,11 @@ For instructions on upgrading from one OSG series to another, see the
 
 1. Install the OSG repository for your OS version and the [OSG release series](/release/release_series) that you wish to
    use:
+
+    - OSG 3.5 EL8:
+
+            :::console
+            root@host # yum install https://repo.opensciencegrid.org/osg/3.5/osg-3.5-el8-release-latest.rpm
 
     - OSG 3.5 EL7:
 
@@ -183,24 +211,33 @@ Optional Configuration
 For production services, we suggest only changing software versions during controlled downtime.
 Therefore we recommend security-only automatic updates or disabling automatic updates entirely.
 
-!!! warning
-    CentOS does not support security-only automatic updates.
+!!! note
+    RHEL/CentOS 8 automatic updates are provided in the `dnf-automatic` RPM, which is not installed by default.
 
 To enable only security related automatic updates:
 
--   On Enterprise Linux 6, edit `/etc/sysconfig/yum-autoupdate` and set `USE_YUMSEC="true"`
+-   On RHEL 6/SL 6, edit `/etc/sysconfig/yum-autoupdate` and set `USE_YUMSEC="true"`
 
--   On Enterprise Linux 7, edit `/etc/yum/yum-cron.conf` and set `update_cmd = security`
+-   On RHEL 7/SL 7, edit `/etc/yum/yum-cron.conf` and set `update_cmd = security`
 
+-   On RHEL 8, edit `/etc/dnf/automatic.conf` and set `upgrade_type = security`
+
+CentOS 6/7/8 does not support security-only automatic updates;
+doing any of the above steps will prevent automatic updates from happening at all.
 
 To disable automatic updates entirely:
 
--   On Enterprise Linux 6, edit `/etc/sysconfig/yum-autoupdate` and set `ENABLED="false"`
+-   On EL6, edit `/etc/sysconfig/yum-autoupdate` and set `ENABLED="false"`
 
--   On Enterprise Linux 7, run:
+-   On EL7, run:
 
         :::console
         root@host # service yum-cron stop
+
+-   On EL8, run:
+
+        :::console
+        root@host # systemctl disable --now dnf-automatic.timer
 
 ### Configuring Spacewalk priorities ###
 
