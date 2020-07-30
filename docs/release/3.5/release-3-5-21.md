@@ -36,7 +36,7 @@ These
 were addressed in this release.
 
 !!!note 
-    To enable OSG repositories on Enterprise Linux 8, follow the OSG repository [instructions](https://opensciencegrid.org/docs/common/yum/#enable-additional-os-repositories).
+    To enable OSG repositories on Enterprise Linux 8, follow the OSG repository [instructions](/common/yum/#enable-additional-os-repositories).
 
 Containers
 ----------
