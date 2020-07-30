@@ -15,6 +15,7 @@ Available tags include:
   As of August 2019, this is OSG 3.5 and RHEL7.
 * `3.5`: The OSG 3.5 release series on top of the most recent supported OS.  As of August 2019, this is RHEL7.
 * `3.5-el7`: The OSG 3.5 release series on top of a RHEL7 environment.
+* `3.5-el8`: The OSG 3.5 release series on top of a RHEL8 environment.
 * `3.4`: The OSG 3.4 release series on top of the most recent supported OS.  As of August 2019, this is RHEL7.
 * `3.4-el7`: The OSG 3.4 release series on top of a RHEL7 environment.
 * `3.4-el6`: The OSG 3.4 release series on top of a RHEL6 environment.
