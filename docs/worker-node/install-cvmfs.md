@@ -84,8 +84,6 @@ CVMFS uses automount, and the steps to configure it are different on EL6 vs EL7.
         :::console
         root@host # service autofs restart
 
-
-<a name="for-el7-hosts"></a>
 ### For EL7 and EL8 hosts
 
 1. If automount is not yet in use on the system, do the following:
