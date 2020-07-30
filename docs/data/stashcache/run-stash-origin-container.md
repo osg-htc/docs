@@ -65,7 +65,7 @@ user@host $ docker run --rm --publish 1094:1094 \
              ...
              --volume <HDD DATA PARTITION N>:/xcache/dataN
              --env-file=/opt/origin/.env \
-             opensciencegrid/stash-origin:stable
+             opensciencegrid/stash-origin:fresh
 ```
 
 ### Single host partition ###
@@ -77,7 +77,7 @@ user@host $ docker run --rm --publish 1094:1094 \
              --publish 1095:1095 \
              --volume <HOST PARTITION>:/xcache \
              --env-file=/opt/origin/.env \
-             opensciencegrid/stash-origin:stable
+             opensciencegrid/stash-origin:fresh
 ```
 
 !!!warning
@@ -107,8 +107,8 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
-ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin:stable
-ExecStart=/usr/bin/docker run --rm --name %n -p 1094:1094 -p 1095:1095 -v /srv/origin:/xcache --env-file /opt/origin/.env opensciencegrid/stash-origin:stable
+ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin:fresh
+ExecStart=/usr/bin/docker run --rm --name %n -p 1094:1094 -p 1095:1095 -v /srv/origin:/xcache --env-file /opt/origin/.env opensciencegrid/stash-origin:fresh
 
 [Install] 
 WantedBy=multi-user.target
