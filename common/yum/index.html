@@ -1160,16 +1160,57 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-the-yum-priorities-plugin" title="Install the Yum priorities plugin" class="md-nav__link">
-    Install the Yum priorities plugin
+  <a href="#install-the-yum-priorities-plugin-el6-el7" title="Install the Yum priorities plugin (EL6, EL7)" class="md-nav__link">
+    Install the Yum priorities plugin (EL6, EL7)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#enable-the-extras-os-repositories" title="Enable the "extras" OS repositories" class="md-nav__link">
-    Enable the "extras" OS repositories
+  <a href="#enable-additional-os-repositories" title="Enable additional OS repositories" class="md-nav__link">
+    Enable additional OS repositories
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sl-6-and-7" title="SL 6 and 7" class="md-nav__link">
+    SL 6 and 7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#centos-6-and-7" title="CentOS 6 and 7" class="md-nav__link">
+    CentOS 6 and 7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#centos-8" title="CentOS 8" class="md-nav__link">
+    CentOS 8
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rhel-6-and-7" title="RHEL 6 and 7" class="md-nav__link">
+    RHEL 6 and 7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rhel-8" title="RHEL 8" class="md-nav__link">
+    RHEL 8
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2985,16 +3026,57 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-the-yum-priorities-plugin" title="Install the Yum priorities plugin" class="md-nav__link">
-    Install the Yum priorities plugin
+  <a href="#install-the-yum-priorities-plugin-el6-el7" title="Install the Yum priorities plugin (EL6, EL7)" class="md-nav__link">
+    Install the Yum priorities plugin (EL6, EL7)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#enable-the-extras-os-repositories" title="Enable the "extras" OS repositories" class="md-nav__link">
-    Enable the "extras" OS repositories
+  <a href="#enable-additional-os-repositories" title="Enable additional OS repositories" class="md-nav__link">
+    Enable additional OS repositories
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sl-6-and-7" title="SL 6 and 7" class="md-nav__link">
+    SL 6 and 7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#centos-6-and-7" title="CentOS 6 and 7" class="md-nav__link">
+    CentOS 6 and 7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#centos-8" title="CentOS 8" class="md-nav__link">
+    CentOS 8
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rhel-6-and-7" title="RHEL 6 and 7" class="md-nav__link">
+    RHEL 6 and 7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rhel-8" title="RHEL 8" class="md-nav__link">
+    RHEL 8
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -3120,7 +3202,13 @@ intended for public use:</p>
 <p>OSG's RPM packages also rely on external packages provided by supported OSes and EPEL.
 You must have the following repositories available and enabled:</p>
 <ul>
-<li>OS repositories (SL 6/7, CentOS 6/7, or RHEL 6/7 repositories, including "extras" repositories)</li>
+<li>OS repositories, including the following ones that aren't enabled by default:<ul>
+<li><code>extras</code> (SL 6/7, CentOS 6/7/8)</li>
+<li><code>Server-Extras</code> (RHEL 6/7)</li>
+<li><code>PowerTools</code> (CentOS 8)</li>
+<li><code>CodeReady Builder</code> (RHEL 8)</li>
+</ul>
+</li>
 <li>EPEL repositories</li>
 <li>OSG repositories</li>
 </ul>
@@ -3156,6 +3244,7 @@ Particularly, contrib software is not guaranteed to be compatible with the rest 
 supported by the OSG.</p>
 <p>The definitive list of software in the contrib repository can be found here:</p>
 <ul>
+<li><a href="https://repo.opensciencegrid.org/osg/3.5/el8/contrib/x86_64/">OSG 3.5 EL8 contrib software repository</a></li>
 <li><a href="https://repo.opensciencegrid.org/osg/3.5/el7/contrib/x86_64/">OSG 3.5 EL7 contrib software repository</a></li>
 <li><a href="https://repo.opensciencegrid.org/osg/3.4/el7/contrib/x86_64/">OSG 3.4 EL7 contrib software repository</a></li>
 <li><a href="https://repo.opensciencegrid.org/osg/3.4/el6/contrib/x86_64/">OSG 3.4 EL6 contrib software repository</a></li>
@@ -3163,10 +3252,11 @@ supported by the OSG.</p>
 <p>If you would like to distribute your software in the OSG <code>contrib</code> repository, please <a href="../../common/help">contact us</a> with a
 description of your software, what users it serves, and relevant RPM packaging.</p>
 <h2 id="installing-yum-repositories">Installing Yum Repositories<a class="headerlink" href="#installing-yum-repositories" title="Permanent link">&para;</a></h2>
-<h3 id="install-the-yum-priorities-plugin">Install the Yum priorities plugin<a class="headerlink" href="#install-the-yum-priorities-plugin" title="Permanent link">&para;</a></h3>
+<h3 id="install-the-yum-priorities-plugin-el6-el7">Install the Yum priorities plugin (EL6, EL7)<a class="headerlink" href="#install-the-yum-priorities-plugin-el6-el7" title="Permanent link">&para;</a></h3>
 <p>The Yum priorities plugin is used to tell Yum to prefer OSG packages over EPEL or OS packages.
 It is important to install and enable the Yum priorities plugin before installing grid software to ensure that you are
 getting the OSG-supported versions.</p>
+<p>This plugin is built into Yum on EL8 distributions.</p>
 <ol>
 <li>
 <p>Install the Yum priorities package:</p>
@@ -3183,28 +3273,38 @@ getting the OSG-supported versions.</p>
 
 </li>
 </ol>
-<h3 id="enable-the-extras-os-repositories">Enable the "extras" OS repositories<a class="headerlink" href="#enable-the-extras-os-repositories" title="Permanent link">&para;</a></h3>
-<p>Some packages depend on packages in the "extras" repositories of your OS,
-so you must ensure that those repositories are enabled.</p>
-<p>The instructions for this vary based on your OS:</p>
-<ul>
-<li>
-<p>On Scientific Linux, install the <code>yum-conf-extras</code> RPM package,
-  and ensure that the <code>sl-extras</code> repo in <code>/etc/yum.repos.d/sl-extras.repo</code> is enabled.</p>
-</li>
-<li>
-<p>On CentOS, ensure that the <code>extras</code> repo in <code>/etc/yum.repos.d/CentOS-Base.repo</code> is enabled.</p>
-</li>
-<li>
-<p>On Red Hat Enterprise Linux, ensure that the <code>Server-Extras</code> channel is enabled.</p>
-</li>
-</ul>
+<h3 id="enable-additional-os-repositories">Enable additional OS repositories<a class="headerlink" href="#enable-additional-os-repositories" title="Permanent link">&para;</a></h3>
+<p>Some packages depend on packages that are in OS repositories not enabled by default.
+The repositories to enable, as well as the instructions to enable them, are OS-dependent.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>A repository is enabled if it has <code>enabled=1</code> in its definition,
 or if the <code>enabled</code> line is missing
 (i.e. it is enabled unless specified otherwise.)</p>
 </div>
+<h4 id="sl-6-and-7">SL 6 and 7<a class="headerlink" href="#sl-6-and-7" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install the <code>yum-conf-extras</code> RPM package.</li>
+<li>Ensure that the <code>sl-extras</code> repo in <code>/etc/yum.repos.d/sl-extras.repo</code> is enabled.</li>
+</ul>
+<h4 id="centos-6-and-7">CentOS 6 and 7<a class="headerlink" href="#centos-6-and-7" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Ensure that the <code>extras</code> repo in <code>/etc/yum.repos.d/CentOS-Base.repo</code> is enabled.</li>
+</ul>
+<h4 id="centos-8">CentOS 8<a class="headerlink" href="#centos-8" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Ensure that the <code>extras</code> repo in <code>/etc/yum.repos.d/CentOS-Extras.repo</code> is enabled.</li>
+<li>Ensure that the <code>PowerTools</code> repo in <code>/etc/yum.repos.d/CentOS-PowerTools.repo</code> is enabled.</li>
+</ul>
+<h4 id="rhel-6-and-7">RHEL 6 and 7<a class="headerlink" href="#rhel-6-and-7" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Ensure that the <code>Server-Extras</code> channel is enabled.</li>
+</ul>
+<h4 id="rhel-8">RHEL 8<a class="headerlink" href="#rhel-8" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Ensure that the <code>CodeReady Linux Builder</code> channel is enabled.
+    See <a href="https://access.redhat.com/articles/4348511#enable">Red Hat's instructions</a> on how to enable this repo.</li>
+</ul>
 <h3 id="install-the-epel-repositories">Install the EPEL repositories<a class="headerlink" href="#install-the-epel-repositories" title="Permanent link">&para;</a></h3>
 <p>OSG software depends on packages distributed via the <a href="https://fedoraproject.org/wiki/EPEL">EPEL</a> repositories.
 You must install and enable these first.</p>
@@ -3215,6 +3315,8 @@ You must install and enable these first.</p>
 <span class="gp">root@host #</span> yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
 <span class="gp">#</span><span class="c1"># EPEL 7 (For RHEL 7, CentOS 7, and SL 7)</span>
 <span class="gp">root@host #</span> yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+<span class="gp">#</span><span class="c1"># EPEL 8 (For RHEL 8 and CentOS 8)</span>
+<span class="gp">root@host #</span> yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 </pre></div>
 
 
@@ -3247,6 +3349,13 @@ For instructions on upgrading from one OSG series to another, see the
 <p>Install the OSG repository for your OS version and the <a href="../../release/release_series">OSG release series</a> that you wish to
    use:</p>
 <ul>
+<li>
+<p>OSG 3.5 EL8:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install https://repo.opensciencegrid.org/osg/3.5/osg-3.5-el8-release-latest.rpm
+</pre></div>
+
+
+</li>
 <li>
 <p>OSG 3.5 EL7:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install https://repo.opensciencegrid.org/osg/3.5/osg-3.5-el7-release-latest.rpm
@@ -3292,27 +3401,39 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
 <h3 id="enable-automatic-security-updates">Enable automatic security updates<a class="headerlink" href="#enable-automatic-security-updates" title="Permanent link">&para;</a></h3>
 <p>For production services, we suggest only changing software versions during controlled downtime.
 Therefore we recommend security-only automatic updates or disabling automatic updates entirely.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>CentOS does not support security-only automatic updates.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>RHEL/CentOS 8 automatic updates are provided in the <code>dnf-automatic</code> RPM, which is not installed by default.</p>
 </div>
 <p>To enable only security related automatic updates:</p>
 <ul>
 <li>
-<p>On Enterprise Linux 6, edit <code>/etc/sysconfig/yum-autoupdate</code> and set <code>USE_YUMSEC="true"</code></p>
+<p>On RHEL 6/SL 6, edit <code>/etc/sysconfig/yum-autoupdate</code> and set <code>USE_YUMSEC="true"</code></p>
 </li>
 <li>
-<p>On Enterprise Linux 7, edit <code>/etc/yum/yum-cron.conf</code> and set <code>update_cmd = security</code></p>
+<p>On RHEL 7/SL 7, edit <code>/etc/yum/yum-cron.conf</code> and set <code>update_cmd = security</code></p>
+</li>
+<li>
+<p>On RHEL 8, edit <code>/etc/dnf/automatic.conf</code> and set <code>upgrade_type = security</code></p>
 </li>
 </ul>
+<p>CentOS 6/7/8 does not support security-only automatic updates;
+doing any of the above steps will prevent automatic updates from happening at all.</p>
 <p>To disable automatic updates entirely:</p>
 <ul>
 <li>
-<p>On Enterprise Linux 6, edit <code>/etc/sysconfig/yum-autoupdate</code> and set <code>ENABLED="false"</code></p>
+<p>On EL6, edit <code>/etc/sysconfig/yum-autoupdate</code> and set <code>ENABLED="false"</code></p>
 </li>
 <li>
-<p>On Enterprise Linux 7, run:</p>
+<p>On EL7, run:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service yum-cron stop
+</pre></div>
+
+
+</li>
+<li>
+<p>On EL8, run:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl disable --now dnf-automatic.timer
 </pre></div>
 
 
