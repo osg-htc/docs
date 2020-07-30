@@ -65,7 +65,7 @@ The following will install CVMFS from the OSG yum repository. It will also insta
 CVMFS uses automount, and the steps to configure it are different on EL6 vs EL7. Follow the section that is appropriate for your host's OS:
 
 * [For EL6 hosts](#for-el6-hosts)
-* [For EL7 hosts](#for-el7-hosts)
+* [For EL7 and EL8 hosts](#for-el7-and-el8-hosts)
 
 ### For EL6 hosts
 
@@ -84,7 +84,7 @@ CVMFS uses automount, and the steps to configure it are different on EL6 vs EL7.
         :::console
         root@host # service autofs restart
 
-### For EL7 hosts
+### For EL7 and EL8 hosts
 
 1. If automount is not yet in use on the system, do the following:
 

@@ -25,6 +25,7 @@ Please pick the `osg-wn-client` tarball that is appropriate for your distributio
 
 - For OSG 3.5:
     -   [Binaries for RHEL7](https://repo.opensciencegrid.org/tarball-install/3.5/osg-wn-client-latest.el7.x86_64.tar.gz)
+    -   [Binaries for RHEL8](https://repo.opensciencegrid.org/tarball-install/3.5/osg-wn-client-latest.el8.x86_64.tar.gz)
 - For OSG 3.4:
     -   [Binaries for 64-bit RHEL6](https://repo.opensciencegrid.org/tarball-install/3.4/osg-wn-client-latest.el6.x86_64.tar.gz)
     -   [Binaries for RHEL7](https://repo.opensciencegrid.org/tarball-install/3.4/osg-wn-client-latest.el7.x86_64.tar.gz)
@@ -39,21 +40,25 @@ Install the WN Client
 5.  Download and set up CA certificates using **`osg-ca-manage`** (See the [CA management documentation](/security/certificate-management) for the available options).
 6.  Download CRLs using **`fetch-crl`**.
 
+!!! note
+    The WN client requires a Perl interpreter to be available in `/usr/bin/perl`.
+    If not present, install by running `yum install perl` as root.
+
 !!! warning
     Once `osg-post-install` is run to relocate the install, it cannot be run again.  You will need to unpack a fresh copy.
 
 Example installation (in `/home/user/test-install`, the **`<PATH_TO_CLIENT>/`** is `/home/user/test-install/osg-wn-client` ):
 
 ```console
-root@host # mkdir /home/user/test-install
-root@host # cd /home/user/test-install
-root@host # wget http://repo.opensciencegrid.org/tarball-install/3.4/osg-wn-client-latest.el6.x86_64.tar.gz
-root@host # tar xzf osg-wn-client-latest.el6.x86_64.tar.gz
-root@host # cd osg-wn-client
-root@host # ./osg/osg-post-install
-root@host # source setup.sh
-root@host # osg-ca-manage setupCA --url osg
-root@host # fetch-crl
+user@host $ mkdir /home/user/test-install
+user@host $ cd /home/user/test-install
+user@host $ wget http://repo.opensciencegrid.org/tarball-install/3.4/osg-wn-client-latest.el6.x86_64.tar.gz
+user@host $ tar xzf osg-wn-client-latest.el6.x86_64.tar.gz
+user@host $ cd osg-wn-client
+user@host $ ./osg/osg-post-install
+user@host $ source setup.sh
+user@host $ osg-ca-manage setupCA --url osg
+user@host $ fetch-crl
 ```
 
 Configure the CE
