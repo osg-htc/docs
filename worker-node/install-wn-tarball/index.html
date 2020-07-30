@@ -3017,6 +3017,7 @@ may install and use the client.</p>
 <ul>
 <li>For OSG 3.5:<ul>
 <li><a href="https://repo.opensciencegrid.org/tarball-install/3.5/osg-wn-client-latest.el7.x86_64.tar.gz">Binaries for RHEL7</a></li>
+<li><a href="https://repo.opensciencegrid.org/tarball-install/3.5/osg-wn-client-latest.el8.x86_64.tar.gz">Binaries for RHEL8</a></li>
 </ul>
 </li>
 <li>For OSG 3.4:<ul>
@@ -3034,20 +3035,25 @@ may install and use the client.</p>
 <li>Download and set up CA certificates using <strong><code>osg-ca-manage</code></strong> (See the <a href="../../security/certificate-management">CA management documentation</a> for the available options).</li>
 <li>Download CRLs using <strong><code>fetch-crl</code></strong>.</li>
 </ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The WN client requires a Perl interpreter to be available in <code>/usr/bin/perl</code>.
+If not present, install by running <code>yum install perl</code> as root.</p>
+</div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Once <code>osg-post-install</code> is run to relocate the install, it cannot be run again.  You will need to unpack a fresh copy.</p>
 </div>
 <p>Example installation (in <code>/home/user/test-install</code>, the <strong><code>&lt;PATH_TO_CLIENT&gt;/</code></strong> is <code>/home/user/test-install/osg-wn-client</code> ):</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> mkdir /home/user/test-install
-<span class="gp">root@host #</span> <span class="nb">cd</span> /home/user/test-install
-<span class="gp">root@host #</span> wget http://repo.opensciencegrid.org/tarball-install/3.4/osg-wn-client-latest.el6.x86_64.tar.gz
-<span class="gp">root@host #</span> tar xzf osg-wn-client-latest.el6.x86_64.tar.gz
-<span class="gp">root@host #</span> <span class="nb">cd</span> osg-wn-client
-<span class="gp">root@host #</span> ./osg/osg-post-install
-<span class="gp">root@host #</span> <span class="nb">source</span> setup.sh
-<span class="gp">root@host #</span> osg-ca-manage setupCA --url osg
-<span class="gp">root@host #</span> fetch-crl
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> mkdir /home/user/test-install
+<span class="gp">user@host $</span> <span class="nb">cd</span> /home/user/test-install
+<span class="gp">user@host $</span> wget http://repo.opensciencegrid.org/tarball-install/3.4/osg-wn-client-latest.el6.x86_64.tar.gz
+<span class="gp">user@host $</span> tar xzf osg-wn-client-latest.el6.x86_64.tar.gz
+<span class="gp">user@host $</span> <span class="nb">cd</span> osg-wn-client
+<span class="gp">user@host $</span> ./osg/osg-post-install
+<span class="gp">user@host $</span> <span class="nb">source</span> setup.sh
+<span class="gp">user@host $</span> osg-ca-manage setupCA --url osg
+<span class="gp">user@host $</span> fetch-crl
 </pre></div>
 
 
