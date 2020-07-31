@@ -808,8 +808,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#running-stashcache-on-container-with-systemd" title="Running Stashcache on container with systemd" class="md-nav__link">
-    Running Stashcache on container with systemd
+  <a href="#multiple-host-partitions-recommended" title="Multiple host partitions (recommended)" class="md-nav__link">
+    Multiple host partitions (recommended)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single-host-partition" title="Single host partition" class="md-nav__link">
+    Single host partition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-on-origin-container-with-systemd" title="Running on origin container with systemd" class="md-nav__link">
+    Running on origin container with systemd
   </a>
   
 </li>
@@ -2925,8 +2939,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#running-stashcache-on-container-with-systemd" title="Running Stashcache on container with systemd" class="md-nav__link">
-    Running Stashcache on container with systemd
+  <a href="#multiple-host-partitions-recommended" title="Multiple host partitions (recommended)" class="md-nav__link">
+    Multiple host partitions (recommended)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single-host-partition" title="Single host partition" class="md-nav__link">
+    Single host partition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-on-origin-container-with-systemd" title="Running on origin container with systemd" class="md-nav__link">
+    Running on origin container with systemd
   </a>
   
 </li>
@@ -2983,7 +3011,9 @@ This document outlines how to run such an origin in a Docker container.</p>
 to start containers (i.e., belong to the <code>docker</code> Unix group).</li>
 <li><strong>Network ports:</strong> The Stash Origin listens for incoming HTTP/S and XRootD connections on ports 1094 and 1095 (by
 default).</li>
-<li><strong>File Systems:</strong> Stash Origin needs a partition on the host to store user data.</li>
+<li><strong>File Systems:</strong> Stash Origin needs host partitions to store user data.
+   For improved performance and storage, we recommend multiple partitions for handling namespaces (HDD), data (HDDs),
+   and metadata (SSDs).</li>
 <li><strong>Registration:</strong> Before deploying an origin, you must
    <a href="../../../data/stashcache/install-origin/#registering-the-origin">registered the service</a> in the OSG Topology</li>
 </ol>
@@ -2998,15 +3028,36 @@ origin with the following variables using an environment variable file:</p>
 
 
 <h2 id="running-an-origin">Running an Origin<a class="headerlink" href="#running-an-origin" title="Permanent link">&para;</a></h2>
-<p>To run the container, use docker run with the following options, replacing the text within angle brackets with your own
-values:</p>
+<p>StashCache origin containers may be run with either multiple mounted host partitions (recommended) or a single host
+partition.</p>
+<div class="admonition important">
+<p class="admonition-title">Partition ownership</p>
+<p>Host partitions mounted into the StashCache origin container must be owned <code>10940:10940</code></p>
+</div>
+<h3 id="multiple-host-partitions-recommended">Multiple host partitions (recommended)<a class="headerlink" href="#multiple-host-partitions-recommended" title="Permanent link">&para;</a></h3>
+<p>For improved performance and storage, we recommend multiple partitions for handling namespaces (HDD), data (HDDs),
+and metadata (SSDs).</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@host $</span> docker run --rm --publish <span class="m">1094</span>:1094 <span class="se">\</span>
-         --publish <span class="m">1095</span>:1095 <span class="se">\</span>
-             --volume &lt;HOST PARTITION&gt;:/origin <span class="se">\</span>
-             --volume /opt/origin/10-origin-authfile.cfg:/etc/xrootd/config.d/10-origin-authfile.cfg <span class="se">\</span>
-             --volume /opt/origin/auth_file:/etc/xrootd/public-origin-authfile <span class="se">\</span>
+             --publish <span class="m">1095</span>:1095 <span class="se">\</span>
+             --volume &lt;HDD NAMESPACE PARTITION&gt;:/xcache/namespace <span class="se">\</span>
+             --volume &lt;SSD METADATA PARTITION <span class="m">1</span>&gt;:/xcache/meta1
+<span class="go">             ...</span>
+<span class="go">             --volume &lt;SSD METADATA PARTITION N&gt;:/xcache/metaN</span>
+<span class="go">             --volume &lt;HDD DATA PARTITION 1&gt;:/xcache/data1</span>
+<span class="go">             ...</span>
+<span class="go">             --volume &lt;HDD DATA PARTITION N&gt;:/xcache/dataN</span>
+<span class="go">             --env-file=/opt/origin/.env \</span>
+<span class="go">             opensciencegrid/stash-origin:fresh</span>
+</pre></div>
+
+
+<h3 id="single-host-partition">Single host partition<a class="headerlink" href="#single-host-partition" title="Permanent link">&para;</a></h3>
+<p>For a simpler installation, you may use a single host partition mounted to <code>/xcache/</code>:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> docker run --rm --publish <span class="m">1094</span>:1094 <span class="se">\</span>
+             --publish <span class="m">1095</span>:1095 <span class="se">\</span>
+             --volume &lt;HOST PARTITION&gt;:/xcache <span class="se">\</span>
              --env-file<span class="o">=</span>/opt/origin/.env <span class="se">\</span>
-             opensciencegrid/stash-origin:stable
+             opensciencegrid/stash-origin:fresh
 </pre></div>
 
 
@@ -3016,7 +3067,7 @@ values:</p>
 </div>
 <p>It is recommended to use a container orchestration service such as <a href="https://docs.docker.com/compose/">docker-compose</a> or
 <a href="https://kubernetes.io/">kubernetes</a>, or start the stash origin container with systemd.</p>
-<h3 id="running-stashcache-on-container-with-systemd">Running Stashcache on container with systemd<a class="headerlink" href="#running-stashcache-on-container-with-systemd" title="Permanent link">&para;</a></h3>
+<h3 id="running-on-origin-container-with-systemd">Running on origin container with systemd<a class="headerlink" href="#running-on-origin-container-with-systemd" title="Permanent link">&para;</a></h3>
 <p>An example systemd service file for StashCache.
 This will require creating the environment file in the directory <code>/opt/origin/.env</code>.</p>
 <div class="admonition note">
@@ -3034,8 +3085,8 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
-ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin:stable
-ExecStart=/usr/bin/docker run --rm --name %n -p 1094:1094 -p 1095:1095 -v /srv/origin:/origin -v /opt/origin/10-origin-authfile.cfg:/etc/xrootd/config.d/10-origin-authfile.cfg -v /opt/origin/auth_file:/etc/xrootd/public-origin-authfile --env-file /opt/origin/.env opensciencegrid/stash-origin:stable
+ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin:fresh
+ExecStart=/usr/bin/docker run --rm --name %n -p 1094:1094 -p 1095:1095 -v /srv/origin:/xcache --env-file /opt/origin/.env opensciencegrid/stash-origin:fresh
 
 [Install] 
 WantedBy=multi-user.target
