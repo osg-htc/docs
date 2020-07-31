@@ -20,7 +20,9 @@ Before starting the installation process, consider the following points:
 to start containers (i.e., belong to the `docker` Unix group).
 1. **Network ports:** The Stash Origin listens for incoming HTTP/S and XRootD connections on ports 1094 and 1095 (by
 default).
-1. **File Systems:** Stash Origin needs a partition on the host to store user data.
+1. **File Systems:** Stash Origin needs host partitions to store user data.
+   For improved performance and storage, we recommend multiple partitions for handling namespaces (HDD), data (HDDs),
+   and metadata (SSDs).
 1. **Registration:** Before deploying an origin, you must
    [registered the service](/data/stashcache/install-origin/#registering-the-origin) in the OSG Topology
 
@@ -41,17 +43,41 @@ XC_RESOURCENAME=YOUR_SITE_NAME
 Running an Origin
 -----------------
 
-To run the container, use docker run with the following options, replacing the text within angle brackets with your own
-values:
+StashCache origin containers may be run with either multiple mounted host partitions (recommended) or a single host
+partition.
+
+!!!important "Partition ownership"
+    Host partitions mounted into the StashCache origin container must be owned `10940:10940`
+
+### Multiple host partitions (recommended) ###
+
+For improved performance and storage, we recommend multiple partitions for handling namespaces (HDD), data (HDDs),
+and metadata (SSDs).
 
 ```console
 user@host $ docker run --rm --publish 1094:1094 \
-	     --publish 1095:1095 \
-             --volume <HOST PARTITION>:/origin \
-             --volume /opt/origin/10-origin-authfile.cfg:/etc/xrootd/config.d/10-origin-authfile.cfg \
-             --volume /opt/origin/auth_file:/etc/xrootd/public-origin-authfile \
+             --publish 1095:1095 \
+             --volume <HDD NAMESPACE PARTITION>:/xcache/namespace \
+             --volume <SSD METADATA PARTITION 1>:/xcache/meta1
+             ...
+             --volume <SSD METADATA PARTITION N>:/xcache/metaN
+             --volume <HDD DATA PARTITION 1>:/xcache/data1
+             ...
+             --volume <HDD DATA PARTITION N>:/xcache/dataN
              --env-file=/opt/origin/.env \
-             opensciencegrid/stash-origin:stable
+             opensciencegrid/stash-origin:fresh
+```
+
+### Single host partition ###
+
+For a simpler installation, you may use a single host partition mounted to `/xcache/`:
+
+```console
+user@host $ docker run --rm --publish 1094:1094 \
+             --publish 1095:1095 \
+             --volume <HOST PARTITION>:/xcache \
+             --env-file=/opt/origin/.env \
+             opensciencegrid/stash-origin:fresh
 ```
 
 !!!warning
@@ -60,7 +86,7 @@ user@host $ docker run --rm --publish 1094:1094 \
 It is recommended to use a container orchestration service such as [docker-compose](https://docs.docker.com/compose/) or
 [kubernetes](https://kubernetes.io/), or start the stash origin container with systemd.
 
-### Running Stashcache on container with systemd
+### Running on origin container with systemd
 
 An example systemd service file for StashCache.
 This will require creating the environment file in the directory `/opt/origin/.env`.
@@ -81,8 +107,8 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
-ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin:stable
-ExecStart=/usr/bin/docker run --rm --name %n -p 1094:1094 -p 1095:1095 -v /srv/origin:/origin -v /opt/origin/10-origin-authfile.cfg:/etc/xrootd/config.d/10-origin-authfile.cfg -v /opt/origin/auth_file:/etc/xrootd/public-origin-authfile --env-file /opt/origin/.env opensciencegrid/stash-origin:stable
+ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin:fresh
+ExecStart=/usr/bin/docker run --rm --name %n -p 1094:1094 -p 1095:1095 -v /srv/origin:/xcache --env-file /opt/origin/.env opensciencegrid/stash-origin:fresh
 
 [Install] 
 WantedBy=multi-user.target
