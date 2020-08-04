@@ -19,7 +19,7 @@ default on RHEL 8, but not available at all on RHEL 6.
 
 Without unprivileged user namespaces, singularity must be installed and run
 with setuid-root executables. Singularity keeps the privileged code to a
-[minimum](https://sylabs.io/guides/3.5/user-guide/security.html#singularity-runtime-user-privilege)
+[minimum](https://sylabs.io/guides/3.6/user-guide/security.html#singularity-runtime-user-privilege)
 in order to reduce the potential for vulnerabilities.
 
 The OSG has installed singularity in [OASIS](/worker-node/install-cvmfs),
@@ -45,7 +45,11 @@ steps to prepare in advance:
 
 - Ensure the host has [a supported operating system](/release/supported_platforms)
 - Obtain root access to the host
-- Prepare the [required Yum repositories](/common/yum)
+- Prepare the [required Yum repositories](/common/yum). 
+  Note that with OSG 3.5 and later, the singularity RPM comes from the
+  EPEL yum repository.  OSG validates that distribution, and detailed
+  instructions are still here.  With unprivileged singularity, no yum
+  repository is needed.
 
 In addition, this is highly recommended for image distribution:
 
@@ -60,18 +64,20 @@ There are two sets of instructions on this page:
 - [Singularity via RPM](#singularity-via-rpm)
 
 OSG VOs all support running singularity directly from CVMFS when unprivileged
-singularity is enabled.  OSG recommends that system administrators
-enable unprivileged singularity on RHEL 7.x worker nodes and not install the
-singularity RPM when possible.  Sites that do install the RPM may choose to
-configure their RHEL 7.x RPM installations to run unprivileged.  RHEL
-6.x installations have no option for unprivileged singularity so there
-the RPM has to be installed and left configured as privileged.
+singularity is enabled.  Unprivileged singularity is enabled by default
+on RHEL 8, and OSG recommends that system administrators enable it on
+RHEL 7 worker nodes.  When unprivileged singularity is enabled, OSG
+recommends that sites not install the singularity RPM unless they have
+non-OSG users that require it.  Sites that do install the RPM may choose
+to configure their RHEL 7 or later RPM installations to run unprivileged.
+RHEL 6 installations have no option for unprivileged singularity so
+there the RPM has to be installed and left configured as privileged.
 
 In addition to improved security, unprivileged singularity enables
 `condor_ssh_to_job` to enter a container namespace without itself
 needing privileges. 
 
-On the other hand, there are a few rare use cases that require
+On the other hand, there are some rare use cases that require
 singularity to run privileged:
 
 1. **Using single-file container images.**  Some systems, especially
@@ -86,12 +92,11 @@ singularity to run privileged:
     to avoid potential kernel exploits.
 
 1. **The overlay feature.**  The "overlay" feature of singularity uses
-    overlayfs to add bind mounts where mount points don't exist in the
-    underlying image.
+    the kernel overlayfs module to add bind mounts where mount points
+    don't exist in the underlying image.
 
-    However, this feature doesn't work if the image is a directory
-    distributed in CVMFS, singularity has an "underlay" feature that is
-    equivalent which does work with CVMFS and does not require
+    However, singularity has an "underlay" feature that is
+    equivalent which does not require
     privileges, and the overlay feature has been a source of security
     vulnerabilities in the past.  For these reasons, [we recommend
     replacing overlay with underlay](#configuring-singularity) even on
@@ -108,11 +113,12 @@ Enabling Unprivileged Singularity
 The instructions in this section are for enabling singularity to run
 unprivileged.
 
-If the operating system is an EL 7 variant and has been updated to the EL
-7.6 kernel or later, enable unprivileged singularity with the following
-steps:
+1. Enable user namespaces via `sysctl` on EL 7:
 
-1. Enable user namespaces via `sysctl`:
+    If the operating system is an EL 7 variant and has been updated to
+    the EL 7.6 kernel or later, enable unprivileged singularity with the
+    following steps.  This step is not needed on EL 8 because it is
+    enabled by default.
 
         :::console
         root@host # echo "user.max_user_namespaces = 15000" \
@@ -178,7 +184,7 @@ comma-separated list of paths to bind, following the syntax of the
 
 There are also other environment variables that can affect singularity
 operation; see the
-[singularity documentation](https://sylabs.io/guides/3.5/user-guide/appendix.html)
+[singularity documentation](https://sylabs.io/guides/3.6/user-guide/appendix.html)
 for details.
 
 ### Validating Unprivileged Singularity ###
@@ -238,11 +244,10 @@ before installing the required packages:
 singularity includes an option called `underlay` that enables using bind
 mount points that do not exist in the container image.
 By default it is enabled, but only if the similar `overlay` option cannot
-be used, such as on RHEL6 where kernel support for overlayfs is missing
-or when running in unprivileged mode.  On RHEL7 it is recommended to
+be used, such as on RHEL 6 where kernel support for overlayfs is missing
+or when running in unprivileged mode.  On RHEL 7 and RHEL 8 is recommended to
 completely disable `overlay`, because it is more vulnerable to security
-problems than `underlay` and because it does not work correctly when
-container images are distributed by CVMFS.
+problems than `underlay`.
 
 Set this option in `/etc/singularity/singularity.conf`:
 
