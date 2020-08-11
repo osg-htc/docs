@@ -1425,6 +1425,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../release/3.5/release-3-5-21-2/" title="OSG Release 3.5.21-2" class="md-nav__link">
+      OSG Release 3.5.21-2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../release/3.5/release-3-5-21/" title="OSG Release 3.5.21" class="md-nav__link">
       OSG Release 3.5.21
     </a>
@@ -1778,6 +1790,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release/3.4/release-3-4-53-2/" title="OSG Release 3.4.53-2" class="md-nav__link">
+      OSG Release 3.4.53-2
+    </a>
+  </li>
+
         
           
           
@@ -3106,7 +3130,7 @@ be usable (instructions below) on RHEL 7.  The feature is enabled by
 default on RHEL 8, but not available at all on RHEL 6.</p>
 <p>Without unprivileged user namespaces, singularity must be installed and run
 with setuid-root executables. Singularity keeps the privileged code to a
-<a href="https://sylabs.io/guides/3.5/user-guide/security.html#singularity-runtime-user-privilege">minimum</a>
+<a href="https://sylabs.io/guides/3.6/user-guide/security.html#singularity-runtime-user-privilege">minimum</a>
 in order to reduce the potential for vulnerabilities.</p>
 <p>The OSG has installed singularity in <a href="../../worker-node/install-cvmfs">OASIS</a>,
 so most sites will not need to install singularity locally if they
@@ -3128,7 +3152,11 @@ steps to prepare in advance:</p>
 <ul>
 <li>Ensure the host has <a href="../../release/supported_platforms">a supported operating system</a></li>
 <li>Obtain root access to the host</li>
-<li>Prepare the <a href="../../common/yum">required Yum repositories</a></li>
+<li>Prepare the <a href="../../common/yum">required Yum repositories</a>. 
+  Note that with OSG 3.5 and later, the singularity RPM comes from the
+  EPEL yum repository.  OSG validates that distribution, and detailed
+  instructions are still here.  With unprivileged singularity, no yum
+  repository is needed.</li>
 </ul>
 <p>In addition, this is highly recommended for image distribution:</p>
 <ul>
@@ -3141,16 +3169,18 @@ steps to prepare in advance:</p>
 <li><a href="#singularity-via-rpm">Singularity via RPM</a></li>
 </ul>
 <p>OSG VOs all support running singularity directly from CVMFS when unprivileged
-singularity is enabled.  OSG recommends that system administrators
-enable unprivileged singularity on RHEL 7.x worker nodes and not install the
-singularity RPM when possible.  Sites that do install the RPM may choose to
-configure their RHEL 7.x RPM installations to run unprivileged.  RHEL
-6.x installations have no option for unprivileged singularity so there
-the RPM has to be installed and left configured as privileged.</p>
+singularity is enabled.  Unprivileged singularity is enabled by default
+on RHEL 8, and OSG recommends that system administrators enable it on
+RHEL 7 worker nodes.  When unprivileged singularity is enabled, OSG
+recommends that sites not install the singularity RPM unless they have
+non-OSG users that require it.  Sites that do install the RPM may choose
+to configure their RHEL 7 or later RPM installations to run unprivileged.
+RHEL 6 installations have no option for unprivileged singularity so
+there the RPM has to be installed and left configured as privileged.</p>
 <p>In addition to improved security, unprivileged singularity enables
 <code>condor_ssh_to_job</code> to enter a container namespace without itself
 needing privileges. </p>
-<p>On the other hand, there are a few rare use cases that require
+<p>On the other hand, there are some rare use cases that require
 singularity to run privileged:</p>
 <ol>
 <li>
@@ -3166,11 +3196,10 @@ to avoid potential kernel exploits.</p>
 </li>
 <li>
 <p><strong>The overlay feature.</strong>  The "overlay" feature of singularity uses
-    overlayfs to add bind mounts where mount points don't exist in the
-    underlying image.</p>
-<p>However, this feature doesn't work if the image is a directory
-distributed in CVMFS, singularity has an "underlay" feature that is
-equivalent which does work with CVMFS and does not require
+    the kernel overlayfs module to add bind mounts where mount points
+    don't exist in the underlying image.</p>
+<p>However, singularity has an "underlay" feature that is
+equivalent which does not require
 privileges, and the overlay feature has been a source of security
 vulnerabilities in the past.  For these reasons, <a href="#configuring-singularity">we recommend
 replacing overlay with underlay</a> even on
@@ -3183,12 +3212,13 @@ that purpose.</p>
 <h2 id="enabling-unprivileged-singularity">Enabling Unprivileged Singularity<a class="headerlink" href="#enabling-unprivileged-singularity" title="Permanent link">&para;</a></h2>
 <p>The instructions in this section are for enabling singularity to run
 unprivileged.</p>
-<p>If the operating system is an EL 7 variant and has been updated to the EL
-7.6 kernel or later, enable unprivileged singularity with the following
-steps:</p>
 <ol>
 <li>
-<p>Enable user namespaces via <code>sysctl</code>:</p>
+<p>Enable user namespaces via <code>sysctl</code> on EL 7:</p>
+<p>If the operating system is an EL 7 variant and has been updated to
+the EL 7.6 kernel or later, enable unprivileged singularity with the
+following steps.  This step is not needed on EL 8 because it is
+enabled by default.</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;user.max_user_namespaces = 15000&quot;</span> <span class="se">\</span>
     &gt; /etc/sysctl.d/90-max_user_namespaces.conf
 <span class="gp">root@host #</span> sysctl -p /etc/sysctl.d/90-max_user_namespaces.conf
@@ -3256,7 +3286,7 @@ comma-separated list of paths to bind, following the syntax of the
 <code>singularity exec --bind</code> option.</p>
 <p>There are also other environment variables that can affect singularity
 operation; see the
-<a href="https://sylabs.io/guides/3.5/user-guide/appendix.html">singularity documentation</a>
+<a href="https://sylabs.io/guides/3.6/user-guide/appendix.html">singularity documentation</a>
 for details.</p>
 <h3 id="validating-unprivileged-singularity">Validating Unprivileged Singularity<a class="headerlink" href="#validating-unprivileged-singularity" title="Permanent link">&para;</a></h3>
 <p>If you haven't yet installed <a href="../install-cvmfs">CVMFS</a>, please do so.
@@ -3312,11 +3342,10 @@ before installing the required packages:</p>
 <p>singularity includes an option called <code>underlay</code> that enables using bind
 mount points that do not exist in the container image.
 By default it is enabled, but only if the similar <code>overlay</code> option cannot
-be used, such as on RHEL6 where kernel support for overlayfs is missing
-or when running in unprivileged mode.  On RHEL7 it is recommended to
+be used, such as on RHEL 6 where kernel support for overlayfs is missing
+or when running in unprivileged mode.  On RHEL 7 and RHEL 8 is recommended to
 completely disable <code>overlay</code>, because it is more vulnerable to security
-problems than <code>underlay</code> and because it does not work correctly when
-container images are distributed by CVMFS.</p>
+problems than <code>underlay</code>.</p>
 <p>Set this option in <code>/etc/singularity/singularity.conf</code>:</p>
 <div class="codehilite"><pre><span></span>    enable overlay = no
 </pre></div>
