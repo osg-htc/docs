@@ -72,6 +72,6 @@ If you wish to manually update your system, you can run yum update against the f
 If you wish to only update the RPMs that changed, the set of RPMs is:
 
 ``` file
-```
 igtf-ca-certs-1.106-1.osg35.el7
 osg-ca-certs-1.88-1.osg35.el7
+```
