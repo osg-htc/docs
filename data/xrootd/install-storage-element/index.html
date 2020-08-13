@@ -3753,17 +3753,21 @@ the <a href="../../../data/gridftp">basic GridFTP install</a>.</p>
 <h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
 <p>For information on how to configure authentication for your GridFTP installation, please refer to the <a href="../../../data/gridftp#configuring-authentication">configuring
 authentication section of the GridFTP guide</a>.</p>
-<p>Edit <code>/etc/sysconfig/xrootd-dsi</code> to set <code>XROOTD_VMP</code> to use your XRootD redirector.</p>
+<p>Edit <code>/etc/sysconfig/globus-gridftp-server</code> to set <code>XROOTD_VMP</code> to use your XRootD redirector.</p>
 <div class="codehilite"><pre><span></span><span class="nb">export</span> <span class="nv">XROOTD_VMP</span><span class="o">=</span><span class="s2">&quot;redirector:1094:/local_path=/remote_path&quot;</span>
 </pre></div>
 
 
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For EL6 modify the file <code>/etc/sysconfig/xrootd-dsi</code> to add the export directive</p>
+</div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The syntax of <code>XROOTD_VMP</code> is tricky; make sure to use the following guidance:</p>
 <ul>
 <li><strong>Redirector</strong>: The hostname and domain of the local XRootD redirector server.</li>
-<li><strong>local_path</strong>: The path exported by the GridFTP server.</li>
+<li><strong>local_path</strong>: The full local path exported by the GridFTP server. For example <code>/mystorage/export/data/store</code></li>
 <li><strong>remote_path</strong>: The XRootD path that will be mounted at <strong>local_path</strong>.</li>
 </ul>
 </div>
