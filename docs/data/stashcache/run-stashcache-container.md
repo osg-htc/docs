@@ -140,13 +140,15 @@ root@host $ systemctl start docker.stash-cache
 ```
 
 !!! warning
-    You must [register](/data/stashcache/install-cache/#registering-the-cache) the cache before considering it a production service.
+    You must [register](/data/stashcache/install-cache/#registering-the-cache) the cache before considering it a
+    production service.
 
 
 
-### Network Optimization ###
+### Network optimization ###
 
-For caches that are connected to NIC's over `40Gbps` we recommend to disable the virtualized network and "bind" the container to the host network:
+For caches that are connected to NIC's over `40Gbps` we recommend to disable the virtualized network and "bind" the
+container to the host network:
 
 ```console
 user@host $ docker run --rm  \
