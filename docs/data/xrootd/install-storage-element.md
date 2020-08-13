@@ -436,16 +436,19 @@ root@host # yum install osg-gridftp-xrootd
 For information on how to configure authentication for your GridFTP installation, please refer to the [configuring
 authentication section of the GridFTP guide](/data/gridftp#configuring-authentication).
 
-Edit `/etc/sysconfig/xrootd-dsi` to set `XROOTD_VMP` to use your XRootD redirector.
+Edit `/etc/sysconfig/globus-gridftp-server` to set `XROOTD_VMP` to use your XRootD redirector.
 
     :::bash
     export XROOTD_VMP="redirector:1094:/local_path=/remote_path"
+
+!!! note
+    For EL6 modify the file `/etc/sysconfig/xrootd-dsi` to add the export directive
 
 !!! warning
     The syntax of `XROOTD_VMP` is tricky; make sure to use the following guidance:
 
     - **Redirector**: The hostname and domain of the local XRootD redirector server.
-    - **local_path**: The path exported by the GridFTP server.
+    - **local_path**: The full local path exported by the GridFTP server. For example `/mystorage/export/data/store`
     - **remote_path**: The XRootD path that will be mounted at **local_path**.
 
 When `xrootd-dsi` is enabled, GridFTP configuration changes should go into `/etc/xrootd-dsi/gridftp-xrootd.conf`, not
