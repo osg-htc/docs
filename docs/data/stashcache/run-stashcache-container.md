@@ -20,7 +20,9 @@ Before starting the installation process, consider the following points:
 1. **Docker:** For the purpose of this guide, the host must have a running docker service
    and you must have the ability to start containers (i.e., belong to the `docker` Unix group).
 1. **Network ports:** Stash Cache listens for incoming HTTP/S connections on port 8000 (by default)
-1. **File Systems:** Stash Cache needs a partition on the host to store cached data
+1. **File Systems:** Stash Origin needs host partitions to store user data.
+   For improved performance and storage, we recommend multiple partitions for handling namespaces (HDD), data (HDDs),
+   and metadata (SSDs).
 
 Configuring Stash Cache
 -----------------------
@@ -31,9 +33,9 @@ you may also configure the behavior of your cache with the following variables u
 Where the environment file on the docker host, `/opt/xcache/.env`, has (at least) the following contents
 (replace `YOUR_SITE_NAME` with the name of your site as
 [registered in Topology](/data/stashcache/install-cache#registering-the-cache)):
+
 ```file
 XC_RESOURCENAME=YOUR_SITE_NAME
-XC_ROOTDIR=/cache
 ```
 
 ### Optional configuration ###
@@ -53,18 +55,54 @@ Further behavior of the cache can be configured by setting the following in the 
 Running a Cache
 ---------------
 
-To run the container, use `docker run` with the following options, replacing the text within angle brackets
-with your own values:
+StashCache cache containers  may be run with either multiple mounted host partitions (recommended) or a single host
+partition.
+
+!!!important "Partition ownership"
+    Host partitions mounted into the StashCache origin container must be owned `10940:10940`
+
+It is recommended to use a container orchestration service such as [docker-compose](https://docs.docker.com/compose/)
+or [kubernetes](https://kubernetes.io/) whose details are beyond the scope of this document.
+The following sections provide examples for starting cache containers from the command-line as well as a more
+production-appropriate method using systemd.
+
+### Multiple host partitions (recommended) ###
+
+For improved performance and storage,
+especially if your cache is serving over 10 TB of data,
+we recommend multiple partitions for handling namespaces (HDD, SSD, or NVME), data (HDDs), and metadata (SSDs or NVME).
+
+!!! note
+    Under this configuration the `<NAMESPACE PARTITION>` is not used to store the files.
+    Instead, the partition stores symlinks to the files in the metadata and data partitions.
 
 ```console
 user@host $ docker run --rm --publish <HOST PORT>:8000 \
-             --volume <HOST PARTITION>:/cache \
+             --volume <NAMESPACE PARTITION>:/xcache/namespace \
+             --volume <METADATA PARTITION 1>:/xcache/meta1
+             ...
+             --volume <METADATA PARTITION N>:/xcache/metaN
+             --volume <DATA PARTITION 1>:/xcache/data1
+             ...
+             --volume <DATA PARTITION N>:/xcache/dataN
              --env-file=/opt/xcache/.env \
              opensciencegrid/stash-cache:stable
 ```
 
-It is recommended to use a container orchestration service such as [docker-compose](https://docs.docker.com/compose/)
-or [kubernetes](https://kubernetes.io/), or start the stash cache container with systemd.
+!!! warning
+    For over 100 TB of assigned space we highly encourage to use this setup and mount `<NAMESPACE PARTITION>` in
+    solid state disks or NVME.
+
+### Single host partition ###
+
+For a simpler installation, you may use a single host partition mounted to `/xcache/`:
+
+```console
+user@host $ docker run --rm --publish <HOST PORT>:8000 \
+             --volume <HOST PARTITION>:/xcache \
+             --env-file=/opt/xcache/.env \
+             opensciencegrid/stash-cache:stable
+```
 
 ### Running Stash Cache on container with systemd
 
@@ -88,7 +126,7 @@ Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
 ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-cache:stable
-ExecStart=/usr/bin/docker run --rm --name %n --publish 8000:8000 --volume /srv/cache:/cache --env-file /opt/xcache/.env opensciencegrid/stash-cache:stable
+ExecStart=/usr/bin/docker run --rm --name %n --publish 8000:8000 --volume /srv/cache:/xcache --env-file /opt/xcache/.env opensciencegrid/stash-cache:stable
 
 [Install]
 WantedBy=multi-user.target
@@ -128,41 +166,6 @@ The cache uses the host's memory for two purposes:
 An easy way to increase the performance of the cache is to assign it more memory.
 If you set a limit on the container's memory usage via the docker option `--memory` or Kubernetes resource limits,
 make sure it is at least twice the value of `XC_RAMSIZE`.
-
-
-### Multiple disks ###
-
-For caches that store over 10 TB or that have assigned space for storing the cached files over multiple partitions
-(e.g. `/partition1, /partition2, ...`) we recommend the following:
-
-1. Create a config file `90-my-stash-cache-disks.cfg` with the following contents:
-
-        :::file
-        pfc.spaces data
-        oss.space data /data1
-        oss.space data /data2
-        .
-        .
-        .
-
-1. Run the container with the following options:
-
-        :::console
-        user@host $ docker run --rm --publish <HOST PORT>:8000 \
-             --volume <HOST PARTITION>:/cache \
-             --volume /partition1:/data1 \
-             --volume /partition2:/data2 \
-             --volume /opt/xcache/90-my-stash-cache-disks.cfg:/etc/xrootd/config.d/90-stash-cache-disks.cfg \
-             --env-file=/opt/xcache/.env \
-             opensciencegrid/stash-cache:stable
-
-!!! note
-    Under this configuration the `<HOST PARTITION>` is not used to store the files.
-    Instead, the host partition stores symlinks to the files in `/partition1` and `/partition2`.
-
-!!! warning
-    For over 100 TB of assigned space we highly encourage to use this setup and mount `<HOST PARTITION>` in solid state disks or NVME.
-
 
 Validating the Cache
 ---------------------
