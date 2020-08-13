@@ -81,7 +81,7 @@ To convert a PKCS12 file to  PEM files, do the following.
         Enter PEM pass phrase:
         Verifying - Enter PEM pass phrase:
 
-Using your User Certificate
+Using Your User Certificate
 ---------------------------
 
 1. The standard location to place user certificates is in the users certificate home directory in the `.globus` directory:
