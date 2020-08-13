@@ -1015,6 +1015,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#using-your-user-certificate" title="Using Your User Certificate" class="md-nav__link">
+    Using Your User Certificate
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#revoking-your-user-certificate" title="Revoking Your User Certificate" class="md-nav__link">
     Revoking Your User Certificate
   </a>
@@ -2986,6 +2993,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#using-your-user-certificate" title="Using Your User Certificate" class="md-nav__link">
+    Using Your User Certificate
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#revoking-your-user-certificate" title="Revoking Your User Certificate" class="md-nav__link">
     Revoking Your User Certificate
   </a>
@@ -3125,6 +3139,44 @@ Most OSG user tools will work with both but will try to use PEM files first.   <
 
 </li>
 </ol>
+<h2 id="using-your-user-certificate">Using Your User Certificate<a class="headerlink" href="#using-your-user-certificate" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>The standard location to place user certificates is in the users certificate home directory in the <code>.globus</code> directory:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> cp mkdir ~/.globus
+<span class="gp">user@host $</span> cp userkey.pem ~/.globus/
+<span class="gp">user@host $</span> cp userhost.pem ~/.globus/
+<span class="gp">user@host $</span> cp usecred.p12 ~/.globus/
+</pre></div>
+
+
+</li>
+<li>
+<p>To generate a proxy use the command <code>voms-proxy-init</code>. </p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> voms-proxy-init
+</pre></div>
+
+
+</li>
+<li>
+<p>(Optional) If user certificates are not in the <code>.globus</code> then the path has to be passed to <code>voms-proxy-init</code></p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> voms-proxy-init --cert /&lt;PATH TO&gt;/usercert.pem --key /&lt;PATH TO&gt;/userkey.pem
+</pre></div>
+
+
+</li>
+<li>
+<p>In order to find the Distinguised Name (DN), issuer and lifetime of a certificate:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> openssl x509 -in /&lt;PATH TO&gt;/usercert.pem -noout -subject -issuer -enddate
+</pre></div>
+
+
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For admins trying to validate a service add your user DN to the <a href="../../security/lcmaps-voms-authentication/#mapping-users">grid-map file</a> of the service.</p>
+</div>
 <h2 id="revoking-your-user-certificate">Revoking Your User Certificate<a class="headerlink" href="#revoking-your-user-certificate" title="Permanent link">&para;</a></h2>
 <p>If the security of your certificate or private key has been compromised, you have a responsibility to revoke the certificate.
 In addition, if your name or email address changes, you must revoke your certificate and get a new one with the correct
