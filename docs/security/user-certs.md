@@ -100,7 +100,7 @@ Using Your User Certificate
 1. (Optional) If user certificates are not in the `.globus` then the path has to be passed to `voms-proxy-init`
 
         :::console
-        user@host $ voms-proxy-init --cert /pathtto/usercert.pem --key /pathtto/userkey.pem
+        user@host $ voms-proxy-init --cert /<PATH TO>/usercert.pem --key /<PATH TO>/userkey.pem
 
 1. In order to find the Distinguised Name (DN), issuer and lifetime of a certificate:
 
