@@ -105,7 +105,7 @@ Using Your User Certificate
 1. In order to find the Distinguised Name (DN), issuer and lifetime of a certificate:
 
         :::console
-        user@host $ openssl x509 -in /pathtto/usercert.pem -noout -subject -issuer -enddate
+        user@host $ openssl x509 -in /<PATH TO>/usercert.pem -noout -subject -issuer -enddate
 
 !!! note
     For admins trying to validate a service add your user DN to the [grid-map file](/security/lcmaps-voms-authentication/#mapping-users) of the service.
