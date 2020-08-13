@@ -46,27 +46,38 @@ Running an Origin
 StashCache origin containers may be run with either multiple mounted host partitions (recommended) or a single host
 partition.
 
+It is recommended to use a container orchestration service such as [docker-compose](https://docs.docker.com/compose/)
+or [kubernetes](https://kubernetes.io/) whose details are beyond the scope of this document.
+The following sections provide examples for starting origin containers from the command-line as well as a more
+production-appropriate method using systemd.
+
+
 !!!important "Partition ownership"
     Host partitions mounted into the StashCache origin container must be owned `10940:10940`
 
 ### Multiple host partitions (recommended) ###
 
-For improved performance and storage, we recommend multiple partitions for handling namespaces (HDD), data (HDDs),
-and metadata (SSDs).
+For improved performance and storage,
+especially if your origin is serving over 10 TB of data,
+we recommend multiple partitions for handling namespaces (HDD, SSD, or NVME), data (HDDs), and metadata (SSDs or NVME).
 
 ```console
 user@host $ docker run --rm --publish 1094:1094 \
              --publish 1095:1095 \
-             --volume <HDD NAMESPACE PARTITION>:/xcache/namespace \
-             --volume <SSD METADATA PARTITION 1>:/xcache/meta1
+             --volume <NAMESPACE PARTITION>:/xcache/namespace \
+             --volume <METADATA PARTITION 1>:/xcache/meta1
              ...
-             --volume <SSD METADATA PARTITION N>:/xcache/metaN
-             --volume <HDD DATA PARTITION 1>:/xcache/data1
+             --volume <METADATA PARTITION N>:/xcache/metaN
+             --volume <DATA PARTITION 1>:/xcache/data1
              ...
-             --volume <HDD DATA PARTITION N>:/xcache/dataN
+             --volume <DATA PARTITION N>:/xcache/dataN
              --env-file=/opt/origin/.env \
              opensciencegrid/stash-origin:fresh
 ```
+
+!!! warning
+    For over 100 TB of assigned space we highly encourage to use this setup and mount `<NAMESPACE PARTITION>` in
+    solid state disks or NVME.
 
 ### Single host partition ###
 
@@ -82,9 +93,6 @@ user@host $ docker run --rm --publish 1094:1094 \
 
 !!!warning
     A container deployed this way will serve the entire contents of `<HOST PARTITION>`.
-
-It is recommended to use a container orchestration service such as [docker-compose](https://docs.docker.com/compose/) or
-[kubernetes](https://kubernetes.io/), or start the stash origin container with systemd.
 
 ### Running on origin container with systemd
 
