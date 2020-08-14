@@ -58,9 +58,6 @@ Running a Cache
 StashCache cache containers  may be run with either multiple mounted host partitions (recommended) or a single host
 partition.
 
-!!!important "Partition ownership"
-    Host partitions mounted into the StashCache origin container must be owned `10940:10940`
-
 It is recommended to use a container orchestration service such as [docker-compose](https://docs.docker.com/compose/)
 or [kubernetes](https://kubernetes.io/) whose details are beyond the scope of this document.
 The following sections provide examples for starting cache containers from the command-line as well as a more

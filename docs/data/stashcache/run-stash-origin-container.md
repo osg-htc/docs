@@ -51,10 +51,6 @@ or [kubernetes](https://kubernetes.io/) whose details are beyond the scope of th
 The following sections provide examples for starting origin containers from the command-line as well as a more
 production-appropriate method using systemd.
 
-
-!!!important "Partition ownership"
-    Host partitions mounted into the StashCache origin container must be owned `10940:10940`
-
 ### Multiple host partitions (recommended) ###
 
 For improved performance and storage,
