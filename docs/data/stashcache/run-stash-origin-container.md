@@ -38,6 +38,20 @@ Where the environment file on the docker host, `/opt/origin/.env`, has (at least
 XC_RESOURCENAME=YOUR_SITE_NAME
 ```
 
+Populating Origin Data
+----------------------
+
+The Stash Cache data federation namespace is shared by multiple VOs so you must
+[choose a namespace](/data/stashcache/vo-data#choosing-namespace) for your own VO's data.
+When running an origin container, your chosen namespace must be reflected in your host partition.
+For example, if your host partition is `/srv/origin` and the name of your VO is `ASTRO`, you should create the following
+directories:
+
+- `/srv/origin/astro/PUBLIC`
+- `/srv/origin/astro/PROTECTED`
+
+When starting container, you will mount `/srv/origin/` into the container.
+
 Running an Origin
 -----------------
 
