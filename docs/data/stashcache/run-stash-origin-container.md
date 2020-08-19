@@ -20,9 +20,7 @@ Before starting the installation process, consider the following points:
 to start containers (i.e., belong to the `docker` Unix group).
 1. **Network ports:** The Stash Origin listens for incoming HTTP/S and XRootD connections on ports 1094 and 1095 (by
 default).
-1. **File Systems:** Stash Origin needs host partitions to store user data.
-   For improved performance and storage, we recommend multiple partitions for handling namespaces (HDD), data (HDDs),
-   and metadata (SSDs).
+1. **File Systems:** Stash Origin needs a host partition to store user data.
 1. **Registration:** Before deploying an origin, you must
    [registered the service](/data/stashcache/install-origin/#registering-the-origin) in the OSG Topology
 
@@ -43,41 +41,10 @@ XC_RESOURCENAME=YOUR_SITE_NAME
 Running an Origin
 -----------------
 
-StashCache origin containers may be run with either multiple mounted host partitions (recommended) or a single host
-partition.
-
 It is recommended to use a container orchestration service such as [docker-compose](https://docs.docker.com/compose/)
 or [kubernetes](https://kubernetes.io/) whose details are beyond the scope of this document.
 The following sections provide examples for starting origin containers from the command-line as well as a more
 production-appropriate method using systemd.
-
-### Multiple host partitions (recommended) ###
-
-For improved performance and storage,
-especially if your origin is serving over 10 TB of data,
-we recommend multiple partitions for handling namespaces (HDD, SSD, or NVME), data (HDDs), and metadata (SSDs or NVME).
-
-```console
-user@host $ docker run --rm --publish 1094:1094 \
-             --publish 1095:1095 \
-             --volume <NAMESPACE PARTITION>:/xcache/namespace \
-             --volume <METADATA PARTITION 1>:/xcache/meta1
-             ...
-             --volume <METADATA PARTITION N>:/xcache/metaN
-             --volume <DATA PARTITION 1>:/xcache/data1
-             ...
-             --volume <DATA PARTITION N>:/xcache/dataN
-             --env-file=/opt/origin/.env \
-             opensciencegrid/stash-origin:fresh
-```
-
-!!! warning
-    For over 100 TB of assigned space we highly encourage to use this setup and mount `<NAMESPACE PARTITION>` in
-    solid state disks or NVME.
-
-### Single host partition ###
-
-For a simpler installation, you may use a single host partition mounted to `/xcache/`:
 
 ```console
 user@host $ docker run --rm --publish 1094:1094 \
