@@ -24,8 +24,8 @@ default).
 1. **Registration:** Before deploying an origin, you must
    [registered the service](/data/stashcache/install-origin/#registering-the-origin) in the OSG Topology
 
-Configuring Stash Origin
-------------------------
+Configuring the Origin
+----------------------
 
 In addition to the required configuration above (ports and file systems), you may also configure the behavior of your
 origin with the following variables using an environment variable file:
@@ -52,8 +52,8 @@ directories:
 
 When starting container, you will mount `/srv/origin/` into the container.
 
-Running an Origin
------------------
+Running the Origin
+------------------
 
 It is recommended to use a container orchestration service such as [docker-compose](https://docs.docker.com/compose/)
 or [kubernetes](https://kubernetes.io/) whose details are beyond the scope of this document.
