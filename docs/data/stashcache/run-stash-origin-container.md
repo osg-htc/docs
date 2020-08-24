@@ -63,7 +63,7 @@ production-appropriate method using systemd.
 ```console
 user@host $ docker run --rm --publish 1094:1094 \
              --publish 1095:1095 \
-             --volume <HOST PARTITION>:/xcache \
+             --volume <HOST PARTITION>:/xcache/namespace \
              --env-file=/opt/origin/.env \
              opensciencegrid/stash-origin:fresh
 ```
@@ -93,7 +93,7 @@ Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
 ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin:fresh
-ExecStart=/usr/bin/docker run --rm --name %n -p 1094:1094 -p 1095:1095 -v /srv/origin:/xcache --env-file /opt/origin/.env opensciencegrid/stash-origin:fresh
+ExecStart=/usr/bin/docker run --rm --name %n -p 1094:1094 -p 1095:1095 -v /srv/origin:/xcache/namespace --env-file /opt/origin/.env opensciencegrid/stash-origin:fresh
 
 [Install] 
 WantedBy=multi-user.target
