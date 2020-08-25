@@ -20,7 +20,7 @@ Before starting the installation process, consider the following points:
 1. **Docker:** For the purpose of this guide, the host must have a running docker service
    and you must have the ability to start containers (i.e., belong to the `docker` Unix group).
 1. **Network ports:** Stash Cache listens for incoming HTTP/S connections on port 8000 (by default)
-1. **File Systems:** Stash Origin needs host partitions to store user data.
+1. **File Systems:** Stash Cache needs host partitions to store user data.
    For improved performance and storage, we recommend multiple partitions for handling namespaces (HDD), data (HDDs),
    and metadata (SSDs).
 
@@ -186,4 +186,3 @@ Getting Help
 ------------
 
 To get assistance, please use the [this page](/common/help) or contact <help@opensciencegrid.org> directly.
-
