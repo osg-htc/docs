@@ -3238,7 +3238,13 @@ The VO responsible manager will be &lt;OASIS MANAGER&gt;.
     you are done.</p>
 </li>
 <li>
-<p>One you are told in the ticket to proceed to the next step, execute the following commands:</p>
+<p>When you are told in the ticket to proceed to the next step, first if
+    the repository might be in a transaction abort it:</p>
+<div class="codehilite"><pre><span></span><span class="hll"><span class="gp">root@host #</span> su &lt;LIBRARIAN&gt; -c <span class="s2">&quot;cvmfs_server abort &lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;&quot;</span>
+</span></pre></div>
+
+
+<p>Then execute the following commands:</p>
 <div class="codehilite"><pre><span></span><span class="hll"><span class="gp">root@host #</span> wget -O /srv/cvmfs/&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;/.cvmfswhitelist <span class="se">\</span>
 </span><span class="hll">            http://oasis.opensciencegrid.org/cvmfs/&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;/.cvmfswhitelist
 </span><span class="gp">root@host #</span> cp /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub <span class="se">\</span>
@@ -3246,7 +3252,8 @@ The VO responsible manager will be &lt;OASIS MANAGER&gt;.
 </span></pre></div>
 
 
-<p>Replace <code>&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;</code> as appropriate.</p>
+<p>Replace <code>&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;</code> as appropriate.
+If the cp command prompts about overwriting an existing file, type 'y'.</p>
 </li>
 <li>
 <p>Verify that publishing operation succeeds:</p>
