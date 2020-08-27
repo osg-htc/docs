@@ -41,7 +41,7 @@ were addressed in this release.
 Containers
 ----------
 
-The `Frontier Squid` container is available and has been tagged as `stable` in accordance with our
+The `Hosted CE` container is available and has been tagged as `stable` in accordance with our
 [Container Release Policy](https://opensciencegrid.org/technology/policy/container-release/)
 
 -   [Hosted CE](https://hub.docker.com/r/opensciencegrid/hosted-ce/)
