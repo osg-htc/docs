@@ -179,7 +179,9 @@ In order to host a repository on OASIS, perform the following steps:
     representative before continuing with the remaining instructions; for all other repositories (such as `*.egi.eu`),
     you are done.
 
-1. One you are told in the ticket to proceed to the next step, execute the following commands:
+1. When you are told in the ticket to proceed to the next step, make sure that
+    the repository is not in a transaction (use `cvmfs_server abort` if not
+    sure) and execute the following commands:
 
         :::console hl_lines="1 2 4"
         root@host # wget -O /srv/cvmfs/<EXAMPLE.OPENSCIENCEGRID.ORG>/.cvmfswhitelist \
@@ -188,6 +190,7 @@ In order to host a repository on OASIS, perform the following steps:
                     /etc/cvmfs/keys/<EXAMPLE.OPENSCIENCEGRID.ORG>.pub
 
     Replace `<EXAMPLE.OPENSCIENCEGRID.ORG>` as appropriate.
+    If the cp command prompts about overwriting an existing file, type 'y'.
     
 1. Verify that publishing operation succeeds:
 
