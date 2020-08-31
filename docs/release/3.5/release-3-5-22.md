@@ -168,3 +168,35 @@ xrootd-scitokens-debuginfo-1.2.2-1.osg35.el7
 
 ``` file
 ```
+
+### Upcoming Packages
+
+We added or updated the following packages to the **upcoming** OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+
+#### Enterprise Linux 7
+
+-   [blahp-1.18.47-2.osgup.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=blahp-1.18.47-2.osgup.el7)
+
+#### Enterprise Linux 8
+
+-   None
+
+### Upcoming RPMs
+
+If you wish to manually update your system, you can run yum update against the following packages:
+
+    blahp blahp-debuginfo
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+#### Enterprise Linux 7
+
+``` file
+blahp-1.18.47-2.osgup.el7
+blahp-debuginfo-1.18.47-2.osgup.el7
+```
+
+#### Enterprise Linux 8
+
+``` file
+```
