@@ -169,6 +169,7 @@ In order to host a repository on OASIS, perform the following steps:
 
 1.  Create a [support ticket](https://support.opensciencegrid.org/helpdesk/tickets/new) using the following template:
 
+        :::console hl_lines="1 2 3"
         Please add a new CVMFS repository to OASIS for VO <VO NAME> using the URL
             http://<FQDN>:8000/cvmfs/<OASIS REPOSITORY>
         The VO responsible manager will be <OASIS MANAGER>.
@@ -207,7 +208,7 @@ In order to host a repository on OASIS, perform the following steps:
     On success, make sure the whitelist update happens daily by creating `/etc/cron.d/fetch-cvmfs-whitelist` with the
     following contents:
         
-        :::hl_lines="1"
+        :::console hl_lines="1"
         5 4 * * * <LIBRARIAN> cd /srv/cvmfs/<EXAMPLE.OPENSCIENCEGRID.ORG> && wget -qO .cvmfswhitelist.new http://oasis.opensciencegrid.org/cvmfs/<EXAMPLE.OPENSCIENCEGRID.ORG>/.cvmfswhitelist && mv .cvmfswhitelist.new .cvmfswhitelist
 
     !!! note
