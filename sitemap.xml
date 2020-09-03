@@ -281,6 +281,11 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://opensciencegrid.org/docs/release/3.5/release-3-5-23/</loc>
+     <lastmod>2020-09-03</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://opensciencegrid.org/docs/release/3.5/release-3-5-22/</loc>
      <lastmod>2020-09-03</lastmod>
      <changefreq>daily</changefreq>
