@@ -3248,10 +3248,10 @@ always convenient.</p>
 </li>
 <li>
 <p>Create a <a href="https://support.opensciencegrid.org/helpdesk/tickets/new">support ticket</a> using the following template:</p>
-<div class="codehilite"><pre><span></span>Please add a new CVMFS repository to OASIS for VO &lt;VO NAME&gt; using the URL
-    http://&lt;FQDN&gt;:8000/cvmfs/&lt;OASIS REPOSITORY&gt;
-The VO responsible manager will be &lt;OASIS MANAGER&gt;.
-</pre></div>
+<div class="codehilite"><pre><span></span><span class="hll"><span class="go">Please add a new CVMFS repository to OASIS for VO &lt;VO NAME&gt; using the URL</span>
+</span><span class="hll"><span class="go">    http://&lt;FQDN&gt;:8000/cvmfs/&lt;OASIS REPOSITORY&gt;</span>
+</span><span class="hll"><span class="go">The VO responsible manager will be &lt;OASIS MANAGER&gt;.</span>
+</span></pre></div>
 
 
 <p>Replace the <code>&lt;ANGLE BRACKET TEXT&gt;</code> items with the appropriate values.</p>
@@ -3289,8 +3289,8 @@ If the cp command prompts about overwriting an existing file, type 'y'.</p>
 <p>Within an hour, the repository updates should appear at the OSG Operations and FNAL Stratum-1 servers.</p>
 <p>On success, make sure the whitelist update happens daily by creating <code>/etc/cron.d/fetch-cvmfs-whitelist</code> with the
 following contents:</p>
-<div class="codehilite"><pre><span></span>5 4 * * * &lt;LIBRARIAN&gt; cd /srv/cvmfs/&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt; &amp;&amp; wget -qO .cvmfswhitelist.new http://oasis.opensciencegrid.org/cvmfs/&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;/.cvmfswhitelist &amp;&amp; mv .cvmfswhitelist.new .cvmfswhitelist
-</pre></div>
+<div class="codehilite"><pre><span></span><span class="hll"><span class="go">5 4 * * * &lt;LIBRARIAN&gt; cd /srv/cvmfs/&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt; &amp;&amp; wget -qO .cvmfswhitelist.new http://oasis.opensciencegrid.org/cvmfs/&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;/.cvmfswhitelist &amp;&amp; mv .cvmfswhitelist.new .cvmfswhitelist</span>
+</span></pre></div>
 
 
 <div class="admonition note">
