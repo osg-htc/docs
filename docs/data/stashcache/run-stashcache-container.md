@@ -144,7 +144,7 @@ root@host $ systemctl start docker.stash-cache
 
 ### Network optimization ###
 
-For caches that are connected to NIC's over `40Gbps` we recommend to disable the virtualized network and "bind" the
+For caches that are connected to NIC's over `40Gbps` we recommend that you disable the virtualized network and "bind" the
 container to the host network:
 
 ```console
