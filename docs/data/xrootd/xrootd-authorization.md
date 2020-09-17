@@ -18,7 +18,8 @@ the permissions listed in the [authorization file](#authorization-file) all refe
     On the data nodes, the files will actually be owned by Unix user `xrootd` (or other daemon user), not as the user
     authenticated to, under most circumstances.
     XRootD will verify the permissions and authorization based on the user that the security plugin authenticates you
-    to, but, internally, the data node files will be owned by the `xrootd` user.
+    to, but, internally, the data node files will be owned by the `xrootd` user. If this behaviour is not desired, enable
+    [XRootD Multi user support](/data/xrootd/install-storage-element/#optional-adding-multiuser-support-for-an-xrootd-cluster). 
 
 #### Authorization file
 

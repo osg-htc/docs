@@ -367,6 +367,27 @@ Hadoop File System (HDFS) based sites should utilize the `xrootd-hdfs` plugin to
 
 For more information, see [the HDFS installation documents](/data/install-hadoop).
 
+### (Optional) Adding Multi user support for an XRootd server
+
+By default XRootd servers write files on the storage system ad the Unix user `xrootd`, not as the user [authenticated](data/xrootd/xrootd-authorization) as.
+The `xrootd-multiuser` plugins changes this behaviour:
+
+1. Install the XRootd Multiuser plugin:
+
+        :::console
+        root@host # yum install xrootd-multiuser
+
+1. Create configuration file `/etc/xrootd/config.d/50-enable-multiuser.cfg`:
+
+        :::file
+        xrootd.fslib libXrdMultiuser.so default
+
+1. Start the XRootd process in privileged mode:
+
+        :::console
+        root@host # systemctl xrootd-privileged@standalone
+
+
 ### (Optional) Adding File Residency Manager (FRM) to an XRootd cluster
 
 If you have a multi-tiered storage system (e.g. some data is stored on SSDs and some on disks or tapes), then install

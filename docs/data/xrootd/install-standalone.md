@@ -100,6 +100,11 @@ If you do not need any of the following special configurations, skip to
 For documentation on how to export your Hadoop storage using XRootD please see
 [this documentation](/data/xrootd/install-storage-element#optional-adding-hadoop-support-to-xrootd)
 
+#### Enabling Multi user support
+
+For documentation how to enable Multi User support using XRootD see
+[this documentation](/data/xrootd/install-storage-element/#optional-adding-multiuser-support-for-an-xrootd-cluster).
+
 #### Enabling CMS TFC support (CMS sites only)
 
 For CMS users, there is a package available to integrate rule-based name lookup using a `storage.xml` file.
