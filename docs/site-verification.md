@@ -8,8 +8,11 @@ you will need to perform some verification steps before your site can
 Verify OSG Software
 -------------------
 
-To verify your site's installation of OSG Software, submit local test jobs, contact the OSG for end-to-end
-tests of pilot job submission, and check that OSG usage is reported to the [GRACC](https://gracc.opensciencegrid.org).
+To verify your site's installation of OSG Software, you will need to:
+
+-   Submit local test jobs
+-   Contact the OSG for end-to-end tests of pilot job submission
+-   Check that OSG usage is reported to the [GRACC](https://gracc.opensciencegrid.org)
 
 ### Local verification ###
 
