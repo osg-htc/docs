@@ -16,6 +16,16 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://opensciencegrid.org/docs/site-verification/</loc>
+     <lastmod>2020-09-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://opensciencegrid.org/docs/site-responsibilities/</loc>
+     <lastmod>2020-09-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://opensciencegrid.org/docs/compute-element/htcondor-ce-overview/</loc>
      <lastmod>2020-09-17</lastmod>
      <changefreq>daily</changefreq>
