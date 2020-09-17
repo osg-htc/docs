@@ -16,8 +16,8 @@ Before continuing with the overview, make sure that you are familiar with the fo
 What is a Compute Entrypoint?
 --------------------------
 
-An OSG Compute Entrypoint (CE) is the entry point for the OSG to your local resources: a layer of software that you install
-on a machine that can submit jobs into your local batch system.
+An OSG Compute Entrypoint (CE) is the door for remote organizations to submit requests to temporarily allocate local
+compute resources.
 At the heart of the CE is the *job gateway* software, which is responsible for handling incoming jobs, authenticating
 and authorizing them, and delegating them to your batch system for execution.
 
