@@ -151,7 +151,7 @@ unprivileged.
     The first option enables unshare to be called (which is needed to
     create namespaces), and the second option allows /proc to be mounted
     in an unprivileged process namespace (as done by singularity exec -p).
-    The second option requires Docker 19.03 or later.
+    `--security-opt systempaths=unconfined` requires Docker 19.03 or later.
     The options are secure as long as the system administrator controls
     the images and does not allow user code to run as root, and are
     generally more secure than adding capabilities.  If at this point no
