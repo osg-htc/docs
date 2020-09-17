@@ -19,7 +19,7 @@ OSG PKI Command Line Clients
 
 ### Overview
 
-The OSG PKI Command Line Clients provide a command-line interface for requesting and issuing host certificates from the OSG PKI. They complement the [OIM Web Interface](https://oim.opensciencegrid.org/oim/certificateuser).
+The OSG PKI Command Line Clients provide a command-line interface for creating certificate signing requests (CSRs). 
 
 ### Prerequisites
 
