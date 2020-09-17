@@ -163,24 +163,6 @@ After successfully running all the pilot jobs that are submitted by the test fac
 your site will be deemed production ready.
 No action is required on your end, factory operations will start submitting pilot jobs from the production factory.
 
-Maintain the Site
------------------
-
-To avoid potential issues with OSG job submissions, please [notify us](mailto:help@opensciencegrid.org) of major changes
-to your site, including:
-
-- Major OS version changes on the worker nodes (e.g., upgraded from EL 6 to EL 7)
-- Adding or removing [container support](/worker-node/install-singularity)
-- Policy changes regarding maximum walltime or memory usage
-- Scheduled or unscheduled [downtimes](/common/registration#how-to-register-downtime)
-- [Site topology changes](/common/registration) such as additions, modifications, or retirements
-- Changes to site contacts, such as administrative or security staff
-
-It is also important to keep your software and data (e.g., CA and VO client) up-to-date with the
-[latest OSG release](/release/notes).
-To stay abreast of software releases, we recommend subscribing to the <mailto:osg-sites@opensciencegrid.org> mailing
-list.
-
 Get Help
 --------
 If you need help with your site, or need to report a security incident,
