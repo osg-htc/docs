@@ -41,7 +41,7 @@ Add OSG Software
 If necessary, provision all OSG hosts that are in your site plan that do not exist yet.
 The general steps to installing an OSG site are:
 
-1. Install [OSG Yum Repos](/common/yum) and the [Compute Element software](#installing-and-configuring-the-compute-element)
+1. Install [OSG Yum Repos](/common/yum) and the [Compute Element software](#installing-and-configuring-the-compute-entrypoint)
    on your CE host
 1. Install the [Worker Node client](#adding-osg-software-to-worker-nodes) on your worker nodes.
 1. Install [optional software](#installing-and-configuring-other-services) to increase the capabilities of your site.
@@ -70,12 +70,12 @@ The general steps to installing an OSG site are:
 ### Installing and Configuring the Compute Element ###
 
 -   Install the compute element (HTCondor-CE and other software):
-    -   [Overview and architecture](compute-element/htcondor-ce-overview)
-    -   [Request a Hosted CE](/compute-element/hosted-ce)
-    -   [Install HTCondor-CE](compute-element/install-htcondor-ce)
-    -   [Configure the HTCondor-CE job router](compute-element/job-router-recipes), including common recipes
-    -   [Troubleshooting HTCondor-CE installations](compute-element/troubleshoot-htcondor-ce)
-    -   [Submitting jobs to HTCondor-CE](compute-element/submit-htcondor-ce)
+    -   [Overview and architecture](compute-entrypoint/htcondor-ce-overview)
+    -   [Request a Hosted CE](/compute-entrypoint/hosted-ce)
+    -   [Install HTCondor-CE](compute-entrypoint/install-htcondor-ce)
+    -   [Configure the HTCondor-CE job router](compute-entrypoint/job-router-recipes), including common recipes
+    -   [Troubleshooting HTCondor-CE installations](compute-entrypoint/troubleshoot-htcondor-ce)
+    -   [Submitting jobs to HTCondor-CE](compute-entrypoint/submit-htcondor-ce)
 -   [`osg-configure` Reference](other/configuration-with-osg-configure)
 
 ### Adding OSG Software to Worker Nodes ###
@@ -131,7 +131,7 @@ It is useful to test *manual* submission of jobs from inside and outside of your
 system.
 If this process does not work manually, it will probably not work for the GlideinWMS pilot factory either.
 
--   [Test job submission into an HTCondor-CE](compute-element/submit-htcondor-ce)
+-   [Test job submission into an HTCondor-CE](compute-entrypoint/submit-htcondor-ce)
 
 ### Get test jobs ####
 

@@ -9,7 +9,7 @@ an InCommon subscription.
 
 Let's Encrypt uses an automated script named [certbot](https://certbot.eff.org) for requesting and renewing host certs.
 `certbot` binds to port 80 when running, so services running on port 80
-(such as [HTCondor-CE View service](https://opensciencegrid.github.io/docs/compute-element/install-htcondor-ce/#install-and-run-the-htcondor-ce-view))
+(such as [HTCondor-CE View service](https://opensciencegrid.github.io/docs/compute-entrypoint/install-htcondor-ce/#install-and-run-the-htcondor-ce-view))
 must be temporarily stopped before running `certbot`.
 In addition, port 80 must be open to the world while `certbot` is running.
 If this does not work for your host, see the [alternate renewal methods](#alternate-renewal-methods) section below.

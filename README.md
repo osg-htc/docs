@@ -10,7 +10,7 @@ power opportunistically to the grid.
 
 Our most common software products include:
 
-* [HTCondor CE Installation](docs/compute-element/HTCondor_CE.md): Provides a _gateway_
+* [HTCondor CE Installation](docs/compute-entrypoint/HTCondor_CE.md): Provides a _gateway_
   between the grid and your batch system.
 * [HTTP Proxy](docs/data/frontier-squid.md): Caches the most commonly-used files at your
   site to preserve bandwidth (a custom packaging of the venerable `squid` software).

@@ -59,7 +59,7 @@ However, today, there are two options for accepting pilot jobs at your site:
    Contact <mailto:help@opensciencegrid.org> for more information on the hosted CE.
 - **OSG CE**: The traditional option where the site installs and operates a HTCondor-based CE on a dedicated host.
    This provides the best scalability and flexibility, but may require an ongoing time investment from the site.
-   The OSG CE install and operation is covered in [this documentation page](compute-element/install-htcondor-ce.md).
+   The OSG CE install and operation is covered in [this documentation page](compute-entrypoint/install-htcondor-ce.md).
 
 ### Runtime environment
 
