@@ -100,7 +100,7 @@ If you do not need any of the following special configurations, skip to
 For documentation on how to export your Hadoop storage using XRootD please see
 [this documentation](/data/xrootd/install-storage-element#optional-adding-hadoop-support-to-xrootd)
 
-#### Enabling Multi user support
+#### Enabling multi-user support
 
 For documentation how to enable Multi User support using XRootD see
 [this documentation](/data/xrootd/install-storage-element/#optional-adding-multiuser-support-for-an-xrootd-cluster).
