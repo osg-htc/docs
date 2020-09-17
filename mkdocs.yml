@@ -14,6 +14,7 @@ pages:
 - Home: 'index.md'
 - Detailed Overview: 'detailed-overview.md'
 - Site Planning: 'site-planning.md'
+- Site Verification: 'site-verification.md'
 - Site Responsibilities: 'site-responsibilities.md'
 - Compute Element:
   - 'HTCondor-CE Overview': 'compute-element/htcondor-ce-overview.md'
