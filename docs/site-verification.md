@@ -23,7 +23,7 @@ instructions on how to test job submission.
 ### Verify end-to-end pilot job submission ####
 
 Once you have validated job submission from within your site, request test pilot jobs from
-[OSG Operations](mailto:osg-gfactory-support@physics.ucsd.edu) and provide the following information:
+[OSG Factory Operations](mailto:osg-gfactory-support@physics.ucsd.edu) and provide the following information:
 
 -   The fully qualified domain name of the CE
 -   Registered OSG resource name
@@ -33,7 +33,7 @@ Once you have validated job submission from within your site, request test pilot
 -   Maximum job walltime
 -   Maximum job memory usage
 
-Once the Operations team has enough information, they will start submitting pilots to your CE.
+Once the Factory Operations team has enough information, they will start submitting pilots to your CE.
 Initially, this will be a handful of pilots at a time but once the factory verifies that pilot jobs are running
 successfully, that number will be ramped up.
 
@@ -49,7 +49,7 @@ Scale Up to Full Production
 ---------------------------
 
 After verifying end-to-end pilot job submission and usage reporting, your site is ready for production!
-In the same OSG Operations ticket that you opened [above](#verify-end-to-end-job-submission),
+In the same OSG Factory Operations ticket that you opened [above](#verify-end-to-end-job-submission),
 let OSG staff know when you are ready to accept production pilots.
 
 After requesting production pilots, review the [responsibilities of an OSG site](site-responsibilities.md).
