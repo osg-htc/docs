@@ -148,7 +148,7 @@ unprivileged.
         ::console
         --security-opt seccomp=unconfined --security-opt systempaths=unconfined
 
-    The first option enables unshare to be called (which is needed to
+    `--security-opt seccomp=unconfined` enables unshare to be called (which is needed to
     create namespaces), and the second option allows /proc to be mounted
     in an unprivileged process namespace (as done by singularity exec -p).
     `--security-opt systempaths=unconfined` requires Docker 19.03 or later.
