@@ -991,7 +991,7 @@ To get assistance, please use the [this page](/common/help).
 References
 ----------
 
--   [Using Hadoop as a Grid Storage Element](http://www.iop.org/EJ/article/1742-6596/180/1/012047/jpconf9_180_012047.pdf), *Journal of Physics Conference Series, 2009*.
+-   [Using Hadoop as a Grid Storage Element](https://iopscience.iop.org/article/10.1088/1742-6596/180/1/012047), *Journal of Physics Conference Series, 2009*.
 -   [Hadoop Distributed File System for the Grid](http://osg-docdb.opensciencegrid.org/0009/000911/001/Hadoop.pdf), *IEEE Nuclear Science Symposium, 2009*.
 
 ### Users ###
