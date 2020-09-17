@@ -12,8 +12,8 @@ for this usage separately from other OSG activity.
 To support COVID-19 work, the overall process includes the following:
 
 1. Make the site computing resources available through a HTCondor-CE if you have not already done so.
-    -  You can install a [locally-managed](/compute-entrypoint/install-htcondor-ce/) instance or ask OSG to
-       [host the CE](/compute-entrypoint/hosted-ce/) on your behalf.
+    -  You can install a [locally-managed](/compute-element/install-htcondor-ce/) instance or ask OSG to
+       [host the CE](/compute-element/hosted-ce/) on your behalf.
        If neither solution is viable, or you'd like to discuss the options, please send email to
        <help@opensciencegrid.org> and we'll work with you to arrive at the best solution.
     -  If you already provide resources through an OSG Hosted CE, skip to [this section](#requesting-covid-19-jobs).
@@ -207,7 +207,7 @@ To verify that your HTCondor-CE is configured to support COVID-19 jobs, perform 
         all other routes must contain `(TARGET.IsCOVID19 =!= true)` in their `Requirements` expression.
         
 1.  After [requesting COVID-19 jobs](#requesting-covid-19-jobs), verify that jobs are being routed appropriately,
-    [by examining pilots](/compute-entrypoint/troubleshoot-htcondor-ce/#condor_ce_router_q) with `condor_ce_router_q`.
+    [by examining pilots](/compute-element/troubleshoot-htcondor-ce/#condor_ce_router_q) with `condor_ce_router_q`.
 
 Requesting COVID-19 Jobs
 ------------------------

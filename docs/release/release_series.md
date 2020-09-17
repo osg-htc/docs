@@ -164,7 +164,7 @@ To update your HTCondor-CE host(s), perform the following steps:
 
             ENABLE_JOB_RETRIES = True
 
-    - For non-HTCondor sites that use [remote CE requirements](/compute-entrypoint/job-router-recipes/#setting-batch-system-directives),
+    - For non-HTCondor sites that use [remote CE requirements](/compute-element/job-router-recipes/#setting-batch-system-directives),
       the new version of HTCondor-CE accepts a simplified format.
       For example, a snippet from an example job route in the old format:
 
@@ -336,7 +336,7 @@ To update HTCondor on your HTCondor-CE and/or HTCondor pool hosts, perform the f
       `/tmp` or `/var/tmp`.
 
 1. **HTCondor-CE hosts only:** The HTCondor 8.8 series changed the default job route matching order
-   [from round-robin to first matching route](/compute-entrypoint/job-router-recipes#how-jobs-match-to-job-routes).
+   [from round-robin to first matching route](/compute-element/job-router-recipes#how-jobs-match-to-job-routes).
    To use the old round-robin matching order, add the following configuration to `/etc/condor-ce/config.d/99-local.conf`:
 
         JOB_ROUTER_ROUND_ROBIN_SELECTION = True

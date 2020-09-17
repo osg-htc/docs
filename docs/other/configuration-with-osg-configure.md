@@ -390,7 +390,7 @@ This section handles the configuration of services that do not have a dedicated 
 
 This section is contained in `/etc/osg/config.d/10-misc.ini` which is provided by the `osg-configure-misc` RPM.
 
-This section primarily deals with authentication/authorization. For information on suggested settings for your CE, see the [authentication section of the HTCondor-CE install documents](../compute-entrypoint/install-htcondor-ce#configuring-authentication).
+This section primarily deals with authentication/authorization. For information on suggested settings for your CE, see the [authentication section of the HTCondor-CE install documents](../compute-element/install-htcondor-ce#configuring-authentication).
 
 | Option                                | Values Accepted                                | Explanation                                                                                                                                                                                                                                                                                                                                                                          |
 |---------------------------------------|------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

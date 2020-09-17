@@ -45,7 +45,7 @@ Each job route’s [ClassAd](http://research.cs.wisc.edu/htcondor/manual/v8.6/4_
 How Jobs Match to Job Routes
 ----------------------------
 
-The job router considers jobs in the queue ([condor_ce_q](/compute-entrypoint/troubleshoot-htcondor-ce#condor_ce_q)) that
+The job router considers jobs in the queue ([condor_ce_q](/compute-element/troubleshoot-htcondor-ce#condor_ce_q)) that
 meet the following constraints:
 
 - The job has not already been considered by the job router
@@ -53,7 +53,7 @@ meet the following constraints:
 - The job's universe is standard or vanilla
 
 If the job meets the above constraints, then the job's ClassAd is compared against each
-[route's requirements](/compute-entrypoint/job-router-recipes/#filtering-jobs-based-on).
+[route's requirements](/compute-element/job-router-recipes/#filtering-jobs-based-on).
 If the job only meets one route's requirements, the job is matched to that route.
 If the job meets the requirements of multiple routes,  the route that is chosen depends on your version of HTCondor
 (`condor_version`):
@@ -117,7 +117,7 @@ JOB_ROUTER_ENTRIES @=jre
 @jre
 ```
 
-The name of the route will be useful in debugging since it shows up in the output of [condor\_ce\_job\_router\_info](/compute-entrypoint/troubleshoot-htcondor-ce#condor_ce_job_router_info), the [JobRouterLog](/compute-entrypoint/troubleshoot-htcondor-ce#jobrouterlog), and in the ClassAd of the routed job, which can be viewed with [condor\_ce\_q](/compute-entrypoint/troubleshoot-htcondor-ce#condor_ce_q) or [condor\_ce\_history](/compute-entrypoint/troubleshoot-htcondor-ce#condor_ce_history).
+The name of the route will be useful in debugging since it shows up in the output of [condor\_ce\_job\_router\_info](/compute-element/troubleshoot-htcondor-ce#condor_ce_job_router_info), the [JobRouterLog](/compute-element/troubleshoot-htcondor-ce#jobrouterlog), and in the ClassAd of the routed job, which can be viewed with [condor\_ce\_q](/compute-element/troubleshoot-htcondor-ce#condor_ce_q) or [condor\_ce\_history](/compute-element/troubleshoot-htcondor-ce#condor_ce_history).
 
 ### Writing multiple routes
 
@@ -176,7 +176,7 @@ JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) [set_Periodic_Hold = (NumJobStarts 
 
 ### Filtering jobs based on…
 
-To filter jobs, use the `Requirements` attribute. Jobs will evaluate against the ClassAd expression set in the `Requirements` and if the expression evaluates to `TRUE`, the route will match. More information on the syntax of ClassAd's can be found in the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/4_1HTCondor_s_ClassAd.html). For an example on how incoming jobs interact with filtering in job routes, consult [this document](/compute-entrypoint/submit-htcondor-ce).
+To filter jobs, use the `Requirements` attribute. Jobs will evaluate against the ClassAd expression set in the `Requirements` and if the expression evaluates to `TRUE`, the route will match. More information on the syntax of ClassAd's can be found in the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/4_1HTCondor_s_ClassAd.html). For an example on how incoming jobs interact with filtering in job routes, consult [this document](/compute-element/submit-htcondor-ce).
 
 When setting requirements, you need to prefix job attributes that you are filtering with `TARGET.` so that the job route knows to compare the attribute of the incoming job rather than the route’s own attribute. For example, if an incoming job has a `queue = "analy"` attribute, then the following job route will not match:
 
@@ -507,7 +507,7 @@ JOB_ROUTER_ENTRIES @=jre
 
 ### Setting accounting groups
 
-To assign jobs to an HTCondor accounting group to manage fair share on your local batch system, we recommend using [UID and ExtAttr tables](/compute-entrypoint/install-htcondor-ce#htcondor-accounting-groups).
+To assign jobs to an HTCondor accounting group to manage fair share on your local batch system, we recommend using [UID and ExtAttr tables](/compute-element/install-htcondor-ce#htcondor-accounting-groups).
 
 Routes for non-HTCondor Batch Systems
 -------------------------------------

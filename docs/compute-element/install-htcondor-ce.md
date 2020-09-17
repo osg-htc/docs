@@ -392,13 +392,13 @@ To validate an HTCondor-CE, perform the following verification steps:
    `scontrol` and `sacct`.
 
 1. Verify that all the necessary daemons are running with
-   [condor\_ce\_status -any](/compute-entrypoint/troubleshoot-htcondor-ce#condor_ce_status).
+   [condor\_ce\_status -any](/compute-element/troubleshoot-htcondor-ce#condor_ce_status).
 
 1. Verify the CE's network configuration using
-   [condor\_ce\_host\_network\_check](/compute-entrypoint/troubleshoot-htcondor-ce#condor_ce_host_network_check).
+   [condor\_ce\_host\_network\_check](/compute-element/troubleshoot-htcondor-ce#condor_ce_host_network_check).
 
 1. Verify that jobs can complete successfully using
-   [condor\_ce\_trace](/compute-entrypoint/troubleshoot-htcondor-ce#condor_ce_trace).
+   [condor\_ce\_trace](/compute-element/troubleshoot-htcondor-ce#condor_ce_trace).
 
 Troubleshooting HTCondor-CE
 ---------------------------

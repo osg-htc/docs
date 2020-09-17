@@ -12,9 +12,9 @@ The Hosted CE can support thousands of concurrent job submissions.
 
 This document explains the requirements and the procedure for obtaining a Hosted CE.
 If you wish to run your own local compute entrypoint or expect to support more than 10,000 concurrently running OSG jobs,
-see [this page](/compute-entrypoint/install-htcondor-ce) for installing the HTCondor-CE.
+see [this page](/compute-element/install-htcondor-ce) for installing the HTCondor-CE.
 
-![managed services diagram](/compute-entrypoint/img/managed_services_diagram.png)
+![managed services diagram](/compute-element/img/managed_services_diagram.png)
 
 
 Before Starting
@@ -44,7 +44,7 @@ Which Science Communities and Institutions am I Supporting?
 The OSG provides monitoring to view which communities are accessing your site, their fields of science, and home institution.
 Below is an example of the monitoring views that will be available for your cluster.
 
-![monitoring graphs](/compute-entrypoint/img/monitoring_graphs.png)
+![monitoring graphs](/compute-element/img/monitoring_graphs.png)
 
 Each community in the OSG utilizing the Hosted CEs is mapped to your site as a fixed, specific account; we request
 the account names are of the form `osg01` through `osg20`.

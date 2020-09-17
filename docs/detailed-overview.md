@@ -70,12 +70,12 @@ The general steps to installing an OSG site are:
 ### Installing and Configuring the Compute Entrypoint ###
 
 -   Install the compute entrypoint (HTCondor-CE and other software):
-    -   [Overview and architecture](compute-entrypoint/htcondor-ce-overview)
-    -   [Request a Hosted CE](/compute-entrypoint/hosted-ce)
-    -   [Install HTCondor-CE](compute-entrypoint/install-htcondor-ce)
-    -   [Configure the HTCondor-CE job router](compute-entrypoint/job-router-recipes), including common recipes
-    -   [Troubleshooting HTCondor-CE installations](compute-entrypoint/troubleshoot-htcondor-ce)
-    -   [Submitting jobs to HTCondor-CE](compute-entrypoint/submit-htcondor-ce)
+    -   [Overview and architecture](compute-element/htcondor-ce-overview)
+    -   [Request a Hosted CE](/compute-element/hosted-ce)
+    -   [Install HTCondor-CE](compute-element/install-htcondor-ce)
+    -   [Configure the HTCondor-CE job router](compute-element/job-router-recipes), including common recipes
+    -   [Troubleshooting HTCondor-CE installations](compute-element/troubleshoot-htcondor-ce)
+    -   [Submitting jobs to HTCondor-CE](compute-element/submit-htcondor-ce)
 -   [`osg-configure` Reference](other/configuration-with-osg-configure)
 
 ### Adding OSG Software to Worker Nodes ###
