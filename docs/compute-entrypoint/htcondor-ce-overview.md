@@ -27,6 +27,9 @@ Successful pilot jobs create and make available an environment for actual end-us
 within the pilot job container.
 Eventually pilot jobs remove themselves, typically after a period of inactivity.
 
+!!! note
+    The Compute Entrypoint was previously known as the "Compute Element".
+
 What is HTCondor-CE?
 --------------------
 
