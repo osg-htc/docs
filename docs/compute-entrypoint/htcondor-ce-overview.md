@@ -13,10 +13,10 @@ Before continuing with the overview, make sure that you are familiar with the fo
 -   Pilot jobs, frontends, and factories (i.e., [GlideinWMS](http://glideinwms.fnal.gov/doc.prd/index.html),
     AutoPyFactory)
 
-What is a Compute Element?
+What is a Compute Entrypoint?
 --------------------------
 
-An OSG Compute Element (CE) is the entry point for the OSG to your local resources: a layer of software that you install
+An OSG Compute Entrypoint (CE) is the entry point for the OSG to your local resources: a layer of software that you install
 on a machine that can submit jobs into your local batch system.
 At the heart of the CE is the *job gateway* software, which is responsible for handling incoming jobs, authenticating
 and authorizing them, and delegating them to your batch system for execution.

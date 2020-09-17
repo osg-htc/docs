@@ -1,17 +1,17 @@
 Requesting an OSG Hosted CE
 ===========================
 
-An OSG Hosted Compute Element (CE) is the entry point for jobs coming from the OSG;
+An OSG Hosted Compute Entrypoint (CE) is the entry point for jobs coming from the OSG;
 it handles authorization and delegation of jobs to your existing campus HPC/HTC cluster.
 
-Many sites set up their compute element locally.
+Many sites set up their compute entrypoint locally.
 As an alternative, OSG offers a Hosted CE option
-wherein the OSG team will host and operate the HTCondor compute element,
+wherein the OSG team will host and operate the HTCondor compute entrypoint,
 and configure it for the science communities that you choose to support.
 The Hosted CE can support thousands of concurrent job submissions.
 
 This document explains the requirements and the procedure for obtaining a Hosted CE.
-If you wish to run your own local compute element or expect to support more than 10,000 concurrently running OSG jobs,
+If you wish to run your own local compute entrypoint or expect to support more than 10,000 concurrently running OSG jobs,
 see [this page](/compute-entrypoint/install-htcondor-ce) for installing the HTCondor-CE.
 
 ![managed services diagram](/compute-entrypoint/img/managed_services_diagram.png)

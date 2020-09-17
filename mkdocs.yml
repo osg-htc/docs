@@ -14,7 +14,7 @@ pages:
 - Home: 'index.md'
 - Detailed Overview: 'detailed-overview.md'
 - Site Planning: 'site-planning.md'
-- Compute Element:
+- Compute Entrypoint:
   - 'HTCondor-CE Overview': 'compute-entrypoint/htcondor-ce-overview.md'
   - 'Request a Hosted CE': 'compute-entrypoint/hosted-ce.md'
   - 'Install HTCondor-CE': 'compute-entrypoint/install-htcondor-ce.md'

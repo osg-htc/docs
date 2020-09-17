@@ -16,7 +16,7 @@ Be sure to consider [the operating systems that OSG supports](release/supported_
 
 | Purpose              | Host                                | Major Software                                           |
 |:---------------------|:------------------------------------|:---------------------------------------------------------|
-| Compute Element (CE) | `osg-ce.example.edu`                | OSG CE, HTCondor Central Manager, etc. (`osg-ce-condor`) |
+| Compute Entrypoint (CE) | `osg-ce.example.edu`                | OSG CE, HTCondor Central Manager, etc. (`osg-ce-condor`) |
 | Worker Nodes         | `wNNN.cluster.example.edu`          | OSG worker node client (`osg-wn-client`)                 |
 
 Prepare the Batch System
@@ -41,7 +41,7 @@ Add OSG Software
 If necessary, provision all OSG hosts that are in your site plan that do not exist yet.
 The general steps to installing an OSG site are:
 
-1. Install [OSG Yum Repos](/common/yum) and the [Compute Element software](#installing-and-configuring-the-compute-entrypoint)
+1. Install [OSG Yum Repos](/common/yum) and the [Compute Entrypoint software](#installing-and-configuring-the-compute-entrypoint)
    on your CE host
 1. Install the [Worker Node client](#adding-osg-software-to-worker-nodes) on your worker nodes.
 1. Install [optional software](#installing-and-configuring-other-services) to increase the capabilities of your site.
@@ -67,9 +67,9 @@ The general steps to installing an OSG site are:
 -   [Automatically updating the grid certificate authorities (CAs)](security/certificate-management)
 -   [OSG PKI command line client reference](security/certificate-management)
 
-### Installing and Configuring the Compute Element ###
+### Installing and Configuring the Compute Entrypoint ###
 
--   Install the compute element (HTCondor-CE and other software):
+-   Install the compute entrypoint (HTCondor-CE and other software):
     -   [Overview and architecture](compute-entrypoint/htcondor-ce-overview)
     -   [Request a Hosted CE](/compute-entrypoint/hosted-ce)
     -   [Install HTCondor-CE](compute-entrypoint/install-htcondor-ce)
