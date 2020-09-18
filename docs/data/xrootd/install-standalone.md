@@ -122,7 +122,7 @@ The `xrootd-multiuser` plugins changes this behaviour:
         :::console
         root@host # yum install xrootd-multiuser
 
-1. Create configuration file `/etc/xrootd/config.d/50-enable-multiuser.cfg`:
+1. Create configuration file `/etc/xrootd/config.d/50-enable-multiuser.cfg` with the following contents:
 
         :::file
         xrootd.fslib libXrdMultiuser.so default
