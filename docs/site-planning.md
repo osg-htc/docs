@@ -47,7 +47,7 @@ There are multiple approaches for each item, depending on the VOs you support, a
 
 ### Pilot Jobs
 
-Traditionally, an OSG *Compute Element* (CE) provides remote access for VOs to submit pilot jobs to your
+Traditionally, an OSG *Compute Entrypoint* (CE) provides remote access for VOs to submit pilot jobs to your
 [local batch system](/index.md#prepare-the-batch-system).
 However, today, there are two options for accepting pilot jobs at your site:
 

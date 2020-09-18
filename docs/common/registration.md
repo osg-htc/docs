@@ -45,7 +45,7 @@ To register as an OSG contact or add your GitHub ID to your pre-existing contact
 Registering Resources
 ---------------------
 
-An OSG resource is a host that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts.
+An OSG resource is a host that provides grid services, e.g. Compute Entrypoints, storage endpoints, or perfSonar hosts.
 See the full list of services that should be registered in the OSG topology
 [here](https://github.com/opensciencegrid/topology/blob/master/topology/services.yaml).
 
@@ -56,7 +56,7 @@ OSG resources are stored under a hierarchy of facilities, sites, and resource gr
     Frequently used as the display name for [accounting dashboards](http://gracc.opensciencegrid.org).
 -   **Resource Group**: A logical grouping of resources at a site.
     Production and testing resources must be placed into separate Resource Groups.
--   **Resource**: A host that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts.
+-   **Resource**: A host that provides grid services, e.g. Compute Entrypoints, storage endpoints, or perfSonar hosts.
 
 Throughout this document, you will be asked to substitute your own facility, site, resource group, and resource names
 when registering with the OSG.
@@ -172,7 +172,7 @@ To register a new resource, follow the instructions below:
 
 1. Submit your changes as a pull request, providing a descriptive commit message. For example:
 
-        Adding a new compute element to the CHTC
+        Adding a new compute entrypoint to the CHTC
 
 ### Modifying existing resources ###
 
@@ -215,7 +215,7 @@ Resources:
     ...
     Services:
       CE:
-        Description: Compute Element
+        Description: Compute Entrypoint
         Details:
           hidden: false
 ```

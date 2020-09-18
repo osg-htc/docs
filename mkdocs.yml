@@ -16,7 +16,7 @@ pages:
 - Site Planning: 'site-planning.md'
 - Site Verification: 'site-verification.md'
 - Site Responsibilities: 'site-responsibilities.md'
-- Compute Element:
+- Compute Entrypoint:
   - 'HTCondor-CE Overview': 'compute-element/htcondor-ce-overview.md'
   - 'Request a Hosted CE': 'compute-element/hosted-ce.md'
   - 'Install HTCondor-CE': 'compute-element/install-htcondor-ce.md'

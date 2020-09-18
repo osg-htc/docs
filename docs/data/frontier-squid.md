@@ -89,7 +89,7 @@ To configure the Frontier Squid service itself:
 
 ### Configuring the OSG CE
 
-To configure the OSG Compute Element (CE) to know about your Frontier Squid service:
+To configure the OSG Compute Entrypoint (CE) to know about your Frontier Squid service:
 
 1.  On your CE host (which may be different than your Frontier Squid host), edit `/etc/osg/config.d/01-squid.ini`
     -   Make sure that `enabled` is set to `True`

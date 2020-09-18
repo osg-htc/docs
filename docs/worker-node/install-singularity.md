@@ -179,8 +179,8 @@ containers.  This can instead be accomplished by setting the
 `SINGULARITY_BINDPATH` variable in the environment of jobs, for
 example through
 [configuration](/other/configuration-with-osg-configure/#local-settings)
-on your compute element.  This is a
-comma-separated list of paths to bind, following the syntax of the
+on your compute entrypoint.
+This is a comma-separated list of paths to bind, following the syntax of the
 `singularity exec --bind` option.
 
 There are also other environment variables that can affect singularity
