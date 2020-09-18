@@ -329,43 +329,18 @@ For information on how to configure xrootd-lcmaps authorization, please refer to
 
 ### (Optional) Adding CMS TFC support to XRootD (CMS sites only)
 
-For CMS users, there is a package available to integrate rule-based name lookup using a `storage.xml` file. 
-If you are not setting up a CMS site, you can skip this section.
-
-``` console
-yum install --enablerepo=osg-contrib xrootd-cmstfc
-```
-
-You will need to add your `storage.xml` to `/etc/xrootd/storage.xml` and then add the following line to your XRootD
-configuration:
-
-``` file
-# Integrate with CMS TFC, placed in /etc/xrootd/storage.xml
-oss.namelib /usr/lib64/libXrdCmsTfc.so file:/etc/xrootd/storage.xml?protocol=hadoop
-```
-
-Add the orange text only if you are running hadoop (see below).
-
-See the CMS TWiki for more information:
-
--   <https://twiki.cern.ch/twiki/bin/view/Main/XrootdTfcChanges>
--   <https://twiki.cern.ch/twiki/bin/view/Main/HdfsXrootdInstall>
+For CMS users, there is a package available to integrate rule-based name lookup using a `storage.xml` file.
+See [this documentation](install-standalone/#enabling-cms-tfc-support-cms-sites-only).
 
 ### (Optional) Adding Hadoop support to XRootD
 
-Hadoop File System (HDFS) based sites should utilize the `xrootd-hdfs` plugin to allow XRootD to access their storage:
+For documentation on how to export your Hadoop storage using XRootD please see
+[this documentation](install-standalone/#enabling-hadoop-support-el-7-only)
 
-1. Install the XRootD HDFS plugin package:
+### (Optional) Adding Multi user support for an XRootd server
 
-        :::console
-        root@host # yum install xrootd-hdfs
-
-1. Add the following configuration to `/etc/xrootd/xrootd-clustered.cfg`:
-
-        :::file
-        ofs.osslib /usr/lib64/libXrdHdfs.so
-
-For more information, see [the HDFS installation documents](/data/install-hadoop).
+For documentation how to enable multi-user support using XRootD see
+[this documentation](install-standalone/#enabling-multi-user-support).
 
 ### (Optional) Adding File Residency Manager (FRM) to an XRootd cluster
 
@@ -501,11 +476,12 @@ root@host # systemctl start xrootd@standalone
 The services are:
 
 
-| Service                    | EL 6 service name | EL 7 service name   |
-|:---------------------------|:------------------|:--------------------|
-| XRootD (standalone config) | `xrootd`          | `xrootd@standalone` |
-| XRootD (clustered config)  | `xrootd`          | `xrootd@clustered`  |
-| CMSD (clustered config)    | `cmsd`            | `cmsd@clustered`    |
+| Service                    | EL 6 service name | EL 7 service name            |
+|:---------------------------|:------------------|:-----------------------------|
+| XRootD (standalone config) | `xrootd`          | `xrootd@standalone`          |
+| XRootD (clustered config)  | `xrootd`          | `xrootd@clustered`           |
+| XRootD (multiuser)         |                   | `xrootd-privileged@clustered`|
+| CMSD (clustered config)    | `cmsd`            | `cmsd@clustered`             |
 
 As a reminder, here are common service commands (all run as `root`):
 
@@ -547,5 +523,4 @@ Links
 -----
 
 -   [XRootD documentation](https://xrootd.slac.stanford.edu/docs.html)
-
 

@@ -18,7 +18,8 @@ the permissions listed in the [authorization file](#authorization-file) all refe
     On the data nodes, the files will actually be owned by Unix user `xrootd` (or other daemon user), not as the user
     authenticated to, under most circumstances.
     XRootD will verify the permissions and authorization based on the user that the security plugin authenticates you
-    to, but, internally, the data node files will be owned by the `xrootd` user.
+    to, but, internally, the data node files will be owned by the `xrootd` user. If this behaviour is not desired, enable
+    [XRootD multi-user support](install-standalone/#enabling-multi-user-support). 
 
 #### Authorization file
 
@@ -137,4 +138,3 @@ To verify the LCMAPS security, run the following commands from a machine with yo
         [938.1kB/938.1kB][100%][==================================================][938.1kB/s]
 
     If your transfer does not succeed, run the previous command with `--debug 2` for more information.
-

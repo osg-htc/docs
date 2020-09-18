@@ -97,13 +97,64 @@ If you do not need any of the following special configurations, skip to
 
 #### Enabling Hadoop support (EL 7 Only)
 
-For documentation on how to export your Hadoop storage using XRootD please see
-[this documentation](/data/xrootd/install-storage-element#optional-adding-hadoop-support-to-xrootd)
+Hadoop File System (HDFS) based sites should utilize the `xrootd-hdfs` plugin to allow XRootD to access their storage:
+
+1. Install the XRootD HDFS plugin package:
+
+        :::console
+        root@host # yum install xrootd-hdfs
+
+1. Add the following configuration to `/etc/xrootd/xrootd-clustered.cfg`:
+
+        :::file
+        ofs.osslib /usr/lib64/libXrdHdfs.so
+
+For more information, see [the HDFS installation documents](/data/install-hadoop).
+
+
+#### Enabling multi-user support
+
+By default XRootD servers write files on the storage system aa the Unix user `xrootd` instead of the [authenticated](xrootd-authorization) user.
+The `xrootd-multiuser` plugins changes this behaviour:
+
+1. Install the XRootD multi-user plugin:
+
+        :::console
+        root@host # yum install xrootd-multiuser
+
+1. Create configuration file `/etc/xrootd/config.d/50-enable-multiuser.cfg` with the following contents:
+
+        :::file
+        xrootd.fslib libXrdMultiuser.so default
+
+1. Start the XRootD process in privileged mode:
+
+        :::console
+        root@host # systemctl xrootd-privileged@standalone
 
 #### Enabling CMS TFC support (CMS sites only)
 
 For CMS users, there is a package available to integrate rule-based name lookup using a `storage.xml` file.
-See [this documentation](/data/xrootd/install-storage-element#optional-adding-cms-tfc-support-to-xrootd-cms-sites-only).
+If you are not setting up a CMS site, you can skip this section.
+
+``` console
+yum install --enablerepo=osg-contrib xrootd-cmstfc
+```
+
+You will need to add your `storage.xml` to `/etc/xrootd/storage.xml` and then add the following line to your XRootD
+configuration:
+
+``` file
+# Integrate with CMS TFC, placed in /etc/xrootd/storage.xml
+oss.namelib /usr/lib64/libXrdCmsTfc.so file:/etc/xrootd/storage.xml?protocol=hadoop
+```
+
+Add the orange text only if you are running hadoop (see below).
+
+See the CMS TWiki for more information:
+
+-   <https://twiki.cern.ch/twiki/bin/view/Main/XrootdTfcChanges>
+-   <https://twiki.cern.ch/twiki/bin/view/Main/HdfsXrootdInstall>
 
 Using XRootD
 ------------
@@ -111,10 +162,11 @@ Using XRootD
 In addition to the XRootD service itself, there are a number of supporting services in your installation.
 The specific services are:
 
-| Software  | Service Name                            | Notes                                                                        |
-|:----------|:----------------------------------------|:-----------------------------------------------------------------------------|
-| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron`   | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
-| XRootD    | EL 7:`xrootd@standalone`, EL 6:`xrootd` |                                                                              |
+| Software         | Service Name                            | Notes                                                                        |
+|:-----------------|:----------------------------------------|:-----------------------------------------------------------------------------|
+| Fetch CRL        | `fetch-crl-boot` and `fetch-crl-cron`   | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
+| XRootD           | EL 7:`xrootd@standalone`, EL 6:`xrootd` |                                                                              |
+| XRootD Multiuser | EL 7:`xrootd-privileged@standalone`     | See [XRootD multiuser](#enabling-multi-user-support) for more info           |
 
 Start the services in the order listed and stop them in reverse order.
 As a reminder, here are common service commands (all run as `root`):
