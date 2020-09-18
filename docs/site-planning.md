@@ -107,9 +107,7 @@ You may need to preempt those jobs when higher priority jobs come around.
 The end-users using the OSG generally prefer having access to your site subject to preemption over having no access
 at all.
 
-<!-- TODO: these figures were all garbage.  Redraw
-## Example Configurations
-This section contains a few example that illustrate how the different elements contributing to an OSG site can be
-combined. Each gray box represents a physical resource or virtual machine that is required in the
-example.
--->
+Getting Help
+------------
+
+If you need help with planning your site, follow the [contact instructions](common/help.md).
