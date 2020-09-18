@@ -127,7 +127,7 @@ The `xrootd-multiuser` plugins changes this behaviour:
         :::file
         xrootd.fslib libXrdMultiuser.so default
 
-1. Start the XRootd process in privileged mode:
+1. Start the XRootD process in privileged mode:
 
         :::console
         root@host # systemctl xrootd-privileged@standalone
