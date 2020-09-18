@@ -303,11 +303,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
     
     <label class="md-nav__link" for="nav-6">
-      Compute Element
+      Compute Entrypoint
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
       <label class="md-nav__title" for="nav-6">
-        Compute Element
+        Compute Entrypoint
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -345,8 +345,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-is-a-compute-element" title="What is a Compute Element?" class="md-nav__link">
-    What is a Compute Element?
+  <a href="#what-is-a-compute-entrypoint" title="What is a Compute Entrypoint?" class="md-nav__link">
+    What is a Compute Entrypoint?
   </a>
   
 </li>
@@ -3030,8 +3030,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-is-a-compute-element" title="What is a Compute Element?" class="md-nav__link">
-    What is a Compute Element?
+  <a href="#what-is-a-compute-entrypoint" title="What is a Compute Entrypoint?" class="md-nav__link">
+    What is a Compute Entrypoint?
   </a>
   
 </li>
@@ -3132,9 +3132,9 @@ Before continuing with the overview, make sure that you are familiar with the fo
 <li>Pilot jobs, frontends, and factories (i.e., <a href="http://glideinwms.fnal.gov/doc.prd/index.html">GlideinWMS</a>,
     AutoPyFactory)</li>
 </ul>
-<h2 id="what-is-a-compute-element">What is a Compute Element?<a class="headerlink" href="#what-is-a-compute-element" title="Permanent link">&para;</a></h2>
-<p>An OSG Compute Element (CE) is the entry point for the OSG to your local resources: a layer of software that you install
-on a machine that can submit jobs into your local batch system.
+<h2 id="what-is-a-compute-entrypoint">What is a Compute Entrypoint?<a class="headerlink" href="#what-is-a-compute-entrypoint" title="Permanent link">&para;</a></h2>
+<p>An OSG Compute Entrypoint (CE) is the door for remote organizations to submit requests to temporarily allocate local
+compute resources.
 At the heart of the CE is the <em>job gateway</em> software, which is responsible for handling incoming jobs, authenticating
 and authorizing them, and delegating them to your batch system for execution.</p>
 <p>Today in the OSG, most jobs that arrive at a CE (called <em>grid jobs</em>) are <strong>not</strong> end-user jobs, but rather pilot jobs
@@ -3142,6 +3142,10 @@ submitted from factories.
 Successful pilot jobs create and make available an environment for actual end-user jobs to match and ultimately run
 within the pilot job container.
 Eventually pilot jobs remove themselves, typically after a period of inactivity.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Compute Entrypoint was previously known as the "Compute Element".</p>
+</div>
 <h2 id="what-is-htcondor-ce">What is HTCondor-CE?<a class="headerlink" href="#what-is-htcondor-ce" title="Permanent link">&para;</a></h2>
 <p>HTCondor-CE is a special configuration of the HTCondor software designed to be a job gateway solution for the OSG.
 It is configured to use the <a href="http://research.cs.wisc.edu/htcondor/manual/v8.6/5_4HTCondor_Job.html">JobRouter daemon</a> to

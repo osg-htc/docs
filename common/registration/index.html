@@ -301,11 +301,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
     <label class="md-nav__link" for="nav-6">
-      Compute Element
+      Compute Entrypoint
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
       <label class="md-nav__title" for="nav-6">
-        Compute Element
+        Compute Entrypoint
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -3241,7 +3241,7 @@ privacy.</p>
 </li>
 </ul>
 <h2 id="registering-resources">Registering Resources<a class="headerlink" href="#registering-resources" title="Permanent link">&para;</a></h2>
-<p>An OSG resource is a host that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts.
+<p>An OSG resource is a host that provides grid services, e.g. Compute Entrypoints, storage endpoints, or perfSonar hosts.
 See the full list of services that should be registered in the OSG topology
 <a href="https://github.com/opensciencegrid/topology/blob/master/topology/services.yaml">here</a>.</p>
 <p>OSG resources are stored under a hierarchy of facilities, sites, and resource groups, defined as follows:</p>
@@ -3251,7 +3251,7 @@ See the full list of services that should be registered in the OSG topology
     Frequently used as the display name for <a href="http://gracc.opensciencegrid.org">accounting dashboards</a>.</li>
 <li><strong>Resource Group</strong>: A logical grouping of resources at a site.
     Production and testing resources must be placed into separate Resource Groups.</li>
-<li><strong>Resource</strong>: A host that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts.</li>
+<li><strong>Resource</strong>: A host that provides grid services, e.g. Compute Entrypoints, storage endpoints, or perfSonar hosts.</li>
 </ul>
 <p>Throughout this document, you will be asked to substitute your own facility, site, resource group, and resource names
 when registering with the OSG.
@@ -3397,7 +3397,7 @@ access to the OSG copy of the topology data, which is why you are creating a pul
 </li>
 <li>
 <p>Submit your changes as a pull request, providing a descriptive commit message. For example:</p>
-<div class="codehilite"><pre><span></span>Adding a new compute element to the CHTC
+<div class="codehilite"><pre><span></span>Adding a new compute entrypoint to the CHTC
 </pre></div>
 
 
@@ -3447,7 +3447,7 @@ Resources:
 </span>    ...
     Services:
       CE:
-        Description: Compute Element
+        Description: Compute Entrypoint
         Details:
           hidden: false
 </pre></div>
