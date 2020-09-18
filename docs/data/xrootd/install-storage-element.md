@@ -339,7 +339,7 @@ For documentation on how to export your Hadoop storage using XRootD please see
 
 ### (Optional) Adding Multi user support for an XRootd server
 
-For documentation how to enable Multi User support using XRootD see
+For documentation how to enable multi-user support using XRootD see
 [this documentation](install-standalone/#enabling-multi-user-support).
 
 ### (Optional) Adding File Residency Manager (FRM) to an XRootd cluster
@@ -522,5 +522,4 @@ Links
 -----
 
 -   [XRootD documentation](https://xrootd.slac.stanford.edu/docs.html)
-
 
