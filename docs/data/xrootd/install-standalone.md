@@ -117,7 +117,7 @@ For more information, see [the HDFS installation documents](/data/install-hadoop
 By default XRootD servers write files on the storage system aa the Unix user `xrootd` instead of the [authenticated](xrootd-authorization) user.
 The `xrootd-multiuser` plugins changes this behaviour:
 
-1. Install the XRootd Multiuser plugin:
+1. Install the XRootD multi-user plugin:
 
         :::console
         root@host # yum install xrootd-multiuser
