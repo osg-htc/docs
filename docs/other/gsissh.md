@@ -3,20 +3,20 @@ Installing and Maintaining GSI OpenSSH
 
 **LINKING TEST**
 
- | **link**                                                                   | **goes to (rel. to osg.org/docs-itb)**               | **tl;dr**    |
+ | **link**                                                                   | **goes to (rel. to osg.org)**               | **tl;dr**    |
  |:---------------------------------------------------------------------------|:-----------------------------------------------------|:-------------|
-  | [schedd-filebeats](schedd-filebeats)                               | /other/gsissh/schedd-filebeats                 |  | 
-  | [schedd-filebeats/](schedd-filebeats/)                             | /other/gsissh/schedd-filebeats/                |  | 
-  | [schedd-filebeats.md](schedd-filebeats.md)                         | /other/schedd-filebeats/                       |  | 
-  | [./schedd-filebeats](./schedd-filebeats)                           | /other/gsissh/schedd-filebeats                 |  | 
-  | [./schedd-filebeats/](./schedd-filebeats/)                         | /other/gsissh/schedd-filebeats/                |  | 
-  | [./schedd-filebeats.md](./schedd-filebeats.md)                     | /other/schedd-filebeats/                       |  | 
-  | [../other/schedd-filebeats](../other/schedd-filebeats)             | /documentation/documentation/schedd-filebeats  |  | 
-  | [../other/schedd-filebeats/](../other/schedd-filebeats/)           | /documentation/documentation/schedd-filebeats/ |  | 
-  | [../other/schedd-filebeats.md](../other/schedd-filebeats.md)       | /documentation/schedd-filebeats/               |  | 
-  | [../../other/schedd-filebeats](../../other/schedd-filebeats)       | /documentation/schedd-filebeats                |  | 
-  | [../../other/schedd-filebeats/](../../other/schedd-filebeats/)     | /documentation/schedd-filebeats/               |  | 
-  | [../../other/schedd-filebeats.md](../../other/schedd-filebeats.md) | /documentation/schedd-filebeats.md             |  | 
+   | [schedd-filebeats](schedd-filebeats)                               | /docs-itb/other/schedd-filebeats    | ok     | 
+   | [schedd-filebeats/](schedd-filebeats/)                             | /docs-itb/other/schedd-filebeats/   | ok     | 
+   | [schedd-filebeats.md](schedd-filebeats.md)                         | /docs-itb/other/schedd-filebeats/   | ok     | 
+   | [./schedd-filebeats](./schedd-filebeats)                           | /docs-itb/other/schedd-filebeats    | ok     | 
+   | [./schedd-filebeats/](./schedd-filebeats/)                         | /docs-itb/other/schedd-filebeats/   | ok     | 
+   | [./schedd-filebeats.md](./schedd-filebeats.md)                     | /docs-itb/other/schedd-filebeats/   | ok     | 
+   | [../other/schedd-filebeats](../other/schedd-filebeats)             | /docs-itb/other/schedd-filebeats    | ok     | 
+   | [../other/schedd-filebeats/](../other/schedd-filebeats/)           | /docs-itb/other/schedd-filebeats/   | ok     | 
+   | [../other/schedd-filebeats.md](../other/schedd-filebeats.md)       | /docs-itb/other/schedd-filebeats/   | ok     | 
+   | [../../other/schedd-filebeats](../../other/schedd-filebeats)       | /other/schedd-filebeats             | BUSTED | 
+   | [../../other/schedd-filebeats/](../../other/schedd-filebeats/)     | /other/schedd-filebeats/            | BUSTED | 
+   | [../../other/schedd-filebeats.md](../../other/schedd-filebeats.md) | /docs-itb/other/schedd-filebeats.md | BUSTED | 
 
 This document contains instructions to install and configure the GSI OpenSSH server available in the OSG repository for
 use on your cluster.
