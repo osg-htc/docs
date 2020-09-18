@@ -85,8 +85,7 @@ Requesting certificates as a registration authority
 If you are a Registration Authority for your institution, skip ahead to [this section](#osg-incommon-cert-request).
 If you are not already a Registration Authority (RA) for your institution, you must request to be made one:
 
-1. Find your institution-specific InCommon contact
-   (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/division-of-information-technology/enterprise-information-security-services/cybersecurity/security-tools-software/server-certificates/)),
+1. Find your institution-specific InCommon contact (e.g. campus central IT)
 1. Request a Department Registration Authority user with SSL auto-approve enabled and a client certificate:
     - If they do not grant your request, you will not be able to request, approve, and retrieve certificates yourself.
       Instead, you must [request certificates from your RA](#requesting-certificates-from-a-registration-authority).
