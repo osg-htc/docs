@@ -3040,7 +3040,8 @@ the permissions listed in the <a href="#authorization-file">authorization file</
 <p>On the data nodes, the files will actually be owned by Unix user <code>xrootd</code> (or other daemon user), not as the user
 authenticated to, under most circumstances.
 XRootD will verify the permissions and authorization based on the user that the security plugin authenticates you
-to, but, internally, the data node files will be owned by the <code>xrootd</code> user.</p>
+to, but, internally, the data node files will be owned by the <code>xrootd</code> user. If this behaviour is not desired, enable
+<a href="../install-standalone/#enabling-multi-user-support">XRootD multi-user support</a>. </p>
 </div>
 <h4 id="authorization-file">Authorization file<a class="headerlink" href="#authorization-file" title="Permanent link">&para;</a></h4>
 <p>XRootD allows configuring fine-grained file access permissions based on usernames and paths.

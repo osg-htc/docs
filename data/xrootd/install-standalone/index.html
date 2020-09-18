@@ -746,6 +746,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#enabling-multi-user-support" title="Enabling multi-user support" class="md-nav__link">
+    Enabling multi-user support
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#enabling-cms-tfc-support-cms-sites-only" title="Enabling CMS TFC support (CMS sites only)" class="md-nav__link">
     Enabling CMS TFC support (CMS sites only)
   </a>
@@ -3123,6 +3130,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#enabling-multi-user-support" title="Enabling multi-user support" class="md-nav__link">
+    Enabling multi-user support
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#enabling-cms-tfc-support-cms-sites-only" title="Enabling CMS TFC support (CMS sites only)" class="md-nav__link">
     Enabling CMS TFC support (CMS sites only)
   </a>
@@ -3309,11 +3323,70 @@ Access controls should be managed via <a href="#configuring-authorization">autho
 If you do not need any of the following special configurations, skip to
 <a href="#using-xrootd">the section on using XRootD</a>.</p>
 <h4 id="enabling-hadoop-support-el-7-only">Enabling Hadoop support (EL 7 Only)<a class="headerlink" href="#enabling-hadoop-support-el-7-only" title="Permanent link">&para;</a></h4>
-<p>For documentation on how to export your Hadoop storage using XRootD please see
-<a href="../../../data/xrootd/install-storage-element#optional-adding-hadoop-support-to-xrootd">this documentation</a></p>
+<p>Hadoop File System (HDFS) based sites should utilize the <code>xrootd-hdfs</code> plugin to allow XRootD to access their storage:</p>
+<ol>
+<li>
+<p>Install the XRootD HDFS plugin package:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install xrootd-hdfs
+</pre></div>
+
+
+</li>
+<li>
+<p>Add the following configuration to <code>/etc/xrootd/xrootd-clustered.cfg</code>:</p>
+<div class="codehilite"><pre><span></span>ofs.osslib /usr/lib64/libXrdHdfs.so
+</pre></div>
+
+
+</li>
+</ol>
+<p>For more information, see <a href="../../../data/install-hadoop">the HDFS installation documents</a>.</p>
+<h4 id="enabling-multi-user-support">Enabling multi-user support<a class="headerlink" href="#enabling-multi-user-support" title="Permanent link">&para;</a></h4>
+<p>By default XRootD servers write files on the storage system aa the Unix user <code>xrootd</code> instead of the <a href="../xrootd-authorization">authenticated</a> user.
+The <code>xrootd-multiuser</code> plugins changes this behaviour:</p>
+<ol>
+<li>
+<p>Install the XRootD multi-user plugin:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install xrootd-multiuser
+</pre></div>
+
+
+</li>
+<li>
+<p>Create configuration file <code>/etc/xrootd/config.d/50-enable-multiuser.cfg</code> with the following contents:</p>
+<div class="codehilite"><pre><span></span>xrootd.fslib libXrdMultiuser.so default
+</pre></div>
+
+
+</li>
+<li>
+<p>Start the XRootD process in privileged mode:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl xrootd-privileged@standalone
+</pre></div>
+
+
+</li>
+</ol>
 <h4 id="enabling-cms-tfc-support-cms-sites-only">Enabling CMS TFC support (CMS sites only)<a class="headerlink" href="#enabling-cms-tfc-support-cms-sites-only" title="Permanent link">&para;</a></h4>
 <p>For CMS users, there is a package available to integrate rule-based name lookup using a <code>storage.xml</code> file.
-See <a href="../../../data/xrootd/install-storage-element#optional-adding-cms-tfc-support-to-xrootd-cms-sites-only">this documentation</a>.</p>
+If you are not setting up a CMS site, you can skip this section.</p>
+<div class="codehilite"><pre><span></span><span class="go">yum install --enablerepo=osg-contrib xrootd-cmstfc</span>
+</pre></div>
+
+
+<p>You will need to add your <code>storage.xml</code> to <code>/etc/xrootd/storage.xml</code> and then add the following line to your XRootD
+configuration:</p>
+<div class="codehilite"><pre><span></span># Integrate with CMS TFC, placed in /etc/xrootd/storage.xml
+oss.namelib /usr/lib64/libXrdCmsTfc.so file:/etc/xrootd/storage.xml?protocol=hadoop
+</pre></div>
+
+
+<p>Add the orange text only if you are running hadoop (see below).</p>
+<p>See the CMS TWiki for more information:</p>
+<ul>
+<li><a href="https://twiki.cern.ch/twiki/bin/view/Main/XrootdTfcChanges">https://twiki.cern.ch/twiki/bin/view/Main/XrootdTfcChanges</a></li>
+<li><a href="https://twiki.cern.ch/twiki/bin/view/Main/HdfsXrootdInstall">https://twiki.cern.ch/twiki/bin/view/Main/HdfsXrootdInstall</a></li>
+</ul>
 <h2 id="using-xrootd">Using XRootD<a class="headerlink" href="#using-xrootd" title="Permanent link">&para;</a></h2>
 <p>In addition to the XRootD service itself, there are a number of supporting services in your installation.
 The specific services are:</p>
@@ -3335,6 +3408,11 @@ The specific services are:</p>
 <td align="left">XRootD</td>
 <td align="left">EL 7:<code>xrootd@standalone</code>, EL 6:<code>xrootd</code></td>
 <td align="left"></td>
+</tr>
+<tr>
+<td align="left">XRootD Multiuser</td>
+<td align="left">EL 7:<code>xrootd-privileged@standalone</code></td>
+<td align="left">See <a href="#enabling-multi-user-support">XRootD multiuser</a> for more info</td>
 </tr>
 </tbody>
 </table>
