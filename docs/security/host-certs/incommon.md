@@ -56,9 +56,8 @@ Requesting certificates from a registration authority
     If successful, the CSR will be named `<HOSTNAME>.req` and the private key will be named `<HOSTNAME>-key.pem`.
     Additional options and descriptions can be found [here](https://github.com/opensciencegrid/osg-pki-tools#options).
 
-1. Find your institution-specific InCommon contact
-   (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/division-of-information-technology/enterprise-information-security-services/cybersecurity/security-tools-software/server-certificates/)
-   submit the CSR that you generated above, and request a 1-year `IGTF Server Certificate` for `OTHER` server software.
+1. Find your institution-specific InCommon contact and  submit the CSR that you generated above.
+   Make sure to request a 1-year `IGTF Server Certificate` for `OTHER` server software.
 1. After the certificate has been issued by your institution, download the host certificate only (not the full chain) to
    its intended host and copy over the key you generated above.
 1. Verify that the issuer `CN` field is ` InCommon IGTF Server CA`:
