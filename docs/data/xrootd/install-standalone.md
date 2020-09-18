@@ -114,7 +114,7 @@ For more information, see [the HDFS installation documents](/data/install-hadoop
 
 #### Enabling multi-user support
 
-By default XRootd servers write files on the storage system ad the Unix user `xrootd`, not as the user [authenticated](data/xrootd/xrootd-authorization) as.
+By default XRootD servers write files on the storage system aa the Unix user `xrootd` instead of the [authenticated](xrootd-authorization) user.
 The `xrootd-multiuser` plugins changes this behaviour:
 
 1. Install the XRootd Multiuser plugin:
