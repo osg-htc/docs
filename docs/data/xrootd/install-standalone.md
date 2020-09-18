@@ -162,10 +162,11 @@ Using XRootD
 In addition to the XRootD service itself, there are a number of supporting services in your installation.
 The specific services are:
 
-| Software  | Service Name                            | Notes                                                                        |
-|:----------|:----------------------------------------|:-----------------------------------------------------------------------------|
-| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron`   | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
-| XRootD    | EL 7:`xrootd@standalone`, EL 6:`xrootd` |                                                                              |
+| Software         | Service Name                            | Notes                                                                        |
+|:-----------------|:----------------------------------------|:-----------------------------------------------------------------------------|
+| Fetch CRL        | `fetch-crl-boot` and `fetch-crl-cron`   | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
+| XRootD           | EL 7:`xrootd@standalone`, EL 6:`xrootd` |                                                                              |
+| XRootD Multiuser | EL 7:`xrootd-privileged@standalone`     | See [XRootD multiuser](#enabling-multi-user-support) for more info           |
 
 Start the services in the order listed and stop them in reverse order.
 As a reminder, here are common service commands (all run as `root`):

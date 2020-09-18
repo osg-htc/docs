@@ -476,11 +476,12 @@ root@host # systemctl start xrootd@standalone
 The services are:
 
 
-| Service                    | EL 6 service name | EL 7 service name   |
-|:---------------------------|:------------------|:--------------------|
-| XRootD (standalone config) | `xrootd`          | `xrootd@standalone` |
-| XRootD (clustered config)  | `xrootd`          | `xrootd@clustered`  |
-| CMSD (clustered config)    | `cmsd`            | `cmsd@clustered`    |
+| Service                    | EL 6 service name | EL 7 service name            |
+|:---------------------------|:------------------|:-----------------------------|
+| XRootD (standalone config) | `xrootd`          | `xrootd@standalone`          |
+| XRootD (clustered config)  | `xrootd`          | `xrootd@clustered`           |
+| XRootD (multiuser)         |                   | `xrootd-privileged@clustered`|
+| CMSD (clustered config)    | `cmsd`            | `cmsd@clustered`             |
 
 As a reminder, here are common service commands (all run as `root`):
 
