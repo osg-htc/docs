@@ -73,6 +73,15 @@ usage of resources:
 -   OSG staff are readily contactable in case of an emergency,
     through email at <mailto:help@opensciencegrid.org>
 
+Site Responsibilities
+---------------------
+
+As an OSG resource provider, we require that you keep the OSG up-to-date with [any relevant](../site-responsibilities.md)
+changes to your site.
+
+!!! important "Site downtimes"
+    For an improved turnaround time regarding an outage or downtime at your site, contact us at
+    <mailto:help@opensciencegrid.org> and include `downtime` in the subject or body of the email.
 
 Applying for an OSG Hosted CE
 -----------------------------
