@@ -833,6 +833,20 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#multiple-host-partitions-recommended" title="Multiple host partitions (recommended)" class="md-nav__link">
+    Multiple host partitions (recommended)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single-host-partition" title="Single host partition" class="md-nav__link">
+    Single host partition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#running-stash-cache-on-container-with-systemd" title="Running Stash Cache on container with systemd" class="md-nav__link">
     Running Stash Cache on container with systemd
   </a>
@@ -840,8 +854,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#network-optimization" title="Network Optimization" class="md-nav__link">
-    Network Optimization
+  <a href="#network-optimization" title="Network optimization" class="md-nav__link">
+    Network optimization
   </a>
   
 </li>
@@ -849,13 +863,6 @@
           <li class="md-nav__item">
   <a href="#memory-optimization" title="Memory optimization" class="md-nav__link">
     Memory optimization
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#multiple-disks" title="Multiple disks" class="md-nav__link">
-    Multiple disks
   </a>
   
 </li>
@@ -3080,6 +3087,20 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#multiple-host-partitions-recommended" title="Multiple host partitions (recommended)" class="md-nav__link">
+    Multiple host partitions (recommended)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single-host-partition" title="Single host partition" class="md-nav__link">
+    Single host partition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#running-stash-cache-on-container-with-systemd" title="Running Stash Cache on container with systemd" class="md-nav__link">
     Running Stash Cache on container with systemd
   </a>
@@ -3087,8 +3108,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#network-optimization" title="Network Optimization" class="md-nav__link">
-    Network Optimization
+  <a href="#network-optimization" title="Network optimization" class="md-nav__link">
+    Network optimization
   </a>
   
 </li>
@@ -3096,13 +3117,6 @@
           <li class="md-nav__item">
   <a href="#memory-optimization" title="Memory optimization" class="md-nav__link">
     Memory optimization
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#multiple-disks" title="Multiple disks" class="md-nav__link">
-    Multiple disks
   </a>
   
 </li>
@@ -3159,7 +3173,9 @@ This document outlines how to run StashCache in a Docker container.</p>
 <li><strong>Docker:</strong> For the purpose of this guide, the host must have a running docker service
    and you must have the ability to start containers (i.e., belong to the <code>docker</code> Unix group).</li>
 <li><strong>Network ports:</strong> Stash Cache listens for incoming HTTP/S connections on port 8000 (by default)</li>
-<li><strong>File Systems:</strong> Stash Cache needs a partition on the host to store cached data</li>
+<li><strong>File Systems:</strong> Stash Cache needs host partitions to store user data.
+   For improved performance and storage, we recommend multiple partitions for handling namespaces (HDD), data (HDDs),
+   and metadata (SSDs).</li>
 </ol>
 <h2 id="configuring-stash-cache">Configuring Stash Cache<a class="headerlink" href="#configuring-stash-cache" title="Permanent link">&para;</a></h2>
 <p>In addition to the required configuration above (ports and file systems),
@@ -3168,7 +3184,6 @@ you may also configure the behavior of your cache with the following variables u
 (replace <code>YOUR_SITE_NAME</code> with the name of your site as
 <a href="../../../data/stashcache/install-cache#registering-the-cache">registered in Topology</a>):</p>
 <div class="codehilite"><pre><span></span>XC_RESOURCENAME=YOUR_SITE_NAME
-XC_ROOTDIR=/cache
 </pre></div>
 
 
@@ -3185,17 +3200,48 @@ XC_ROOTDIR=/cache
        If you set it to <code>0</code>, prefetching will be disabled, but that is not recommended.</li>
 </ul>
 <h2 id="running-a-cache">Running a Cache<a class="headerlink" href="#running-a-cache" title="Permanent link">&para;</a></h2>
-<p>To run the container, use <code>docker run</code> with the following options, replacing the text within angle brackets
-with your own values:</p>
+<p>StashCache cache containers  may be run with either multiple mounted host partitions (recommended) or a single host
+partition.</p>
+<p>It is recommended to use a container orchestration service such as <a href="https://docs.docker.com/compose/">docker-compose</a>
+or <a href="https://kubernetes.io/">kubernetes</a> whose details are beyond the scope of this document.
+The following sections provide examples for starting cache containers from the command-line as well as a more
+production-appropriate method using systemd.</p>
+<h3 id="multiple-host-partitions-recommended">Multiple host partitions (recommended)<a class="headerlink" href="#multiple-host-partitions-recommended" title="Permanent link">&para;</a></h3>
+<p>For improved performance and storage,
+especially if your cache is serving over 10 TB of data,
+we recommend multiple partitions for handling namespaces (HDD, SSD, or NVME), data (HDDs), and metadata (SSDs or NVME).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Under this configuration the <code>&lt;NAMESPACE PARTITION&gt;</code> is not used to store the files.
+Instead, the partition stores symlinks to the files in the metadata and data partitions.</p>
+</div>
 <div class="codehilite"><pre><span></span><span class="gp">user@host $</span> docker run --rm --publish &lt;HOST PORT&gt;:8000 <span class="se">\</span>
-             --volume &lt;HOST PARTITION&gt;:/cache <span class="se">\</span>
+             --volume &lt;NAMESPACE PARTITION&gt;:/xcache/namespace <span class="se">\</span>
+             --volume &lt;METADATA PARTITION <span class="m">1</span>&gt;:/xcache/meta1
+<span class="go">             ...</span>
+<span class="go">             --volume &lt;METADATA PARTITION N&gt;:/xcache/metaN</span>
+<span class="go">             --volume &lt;DATA PARTITION 1&gt;:/xcache/data1</span>
+<span class="go">             ...</span>
+<span class="go">             --volume &lt;DATA PARTITION N&gt;:/xcache/dataN</span>
+<span class="go">             --env-file=/opt/xcache/.env \</span>
+<span class="go">             opensciencegrid/stash-cache:stable</span>
+</pre></div>
+
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>For over 100 TB of assigned space we highly encourage to use this setup and mount <code>&lt;NAMESPACE PARTITION&gt;</code> in
+solid state disks or NVME.</p>
+</div>
+<h3 id="single-host-partition">Single host partition<a class="headerlink" href="#single-host-partition" title="Permanent link">&para;</a></h3>
+<p>For a simpler installation, you may use a single host partition mounted to <code>/xcache/</code>:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> docker run --rm --publish &lt;HOST PORT&gt;:8000 <span class="se">\</span>
+             --volume &lt;HOST PARTITION&gt;:/xcache <span class="se">\</span>
              --env-file<span class="o">=</span>/opt/xcache/.env <span class="se">\</span>
              opensciencegrid/stash-cache:stable
 </pre></div>
 
 
-<p>It is recommended to use a container orchestration service such as <a href="https://docs.docker.com/compose/">docker-compose</a>
-or <a href="https://kubernetes.io/">kubernetes</a>, or start the stash cache container with systemd.</p>
 <h3 id="running-stash-cache-on-container-with-systemd">Running Stash Cache on container with systemd<a class="headerlink" href="#running-stash-cache-on-container-with-systemd" title="Permanent link">&para;</a></h3>
 <p>An example systemd service file for Stash Cache.
 This will require creating the environment file in the directory <code>/opt/xcache/.env</code>. </p>
@@ -3215,7 +3261,7 @@ Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
 ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-cache:stable
-ExecStart=/usr/bin/docker run --rm --name %n --publish 8000:8000 --volume /srv/cache:/cache --env-file /opt/xcache/.env opensciencegrid/stash-cache:stable
+ExecStart=/usr/bin/docker run --rm --name %n --publish 8000:8000 --volume /srv/cache:/xcache --env-file /opt/xcache/.env opensciencegrid/stash-cache:stable
 
 [Install]
 WantedBy=multi-user.target
@@ -3230,10 +3276,12 @@ WantedBy=multi-user.target
 
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>You must <a href="../../../data/stashcache/install-cache/#registering-the-cache">register</a> the cache before considering it a production service.</p>
+<p>You must <a href="../../../data/stashcache/install-cache/#registering-the-cache">register</a> the cache before considering it a
+production service.</p>
 </div>
-<h3 id="network-optimization">Network Optimization<a class="headerlink" href="#network-optimization" title="Permanent link">&para;</a></h3>
-<p>For caches that are connected to NIC's over <code>40Gbps</code> we recommend to disable the virtualized network and "bind" the container to the host network:</p>
+<h3 id="network-optimization">Network optimization<a class="headerlink" href="#network-optimization" title="Permanent link">&para;</a></h3>
+<p>For caches that are connected to NIC's over <code>40Gbps</code> we recommend that you disable the virtualized network and "bind" the
+container to the host network:</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@host $</span> docker run --rm  <span class="se">\</span>
              --network<span class="o">=</span><span class="s2">&quot;host&quot;</span> <span class="se">\</span>
              --volume &lt;HOST PARTITION&gt;:/cache <span class="se">\</span>
@@ -3251,45 +3299,6 @@ WantedBy=multi-user.target
 <p>An easy way to increase the performance of the cache is to assign it more memory.
 If you set a limit on the container's memory usage via the docker option <code>--memory</code> or Kubernetes resource limits,
 make sure it is at least twice the value of <code>XC_RAMSIZE</code>.</p>
-<h3 id="multiple-disks">Multiple disks<a class="headerlink" href="#multiple-disks" title="Permanent link">&para;</a></h3>
-<p>For caches that store over 10 TB or that have assigned space for storing the cached files over multiple partitions
-(e.g. <code>/partition1, /partition2, ...</code>) we recommend the following:</p>
-<ol>
-<li>
-<p>Create a config file <code>90-my-stash-cache-disks.cfg</code> with the following contents:</p>
-<div class="codehilite"><pre><span></span>pfc.spaces data
-oss.space data /data1
-oss.space data /data2
-.
-.
-.
-</pre></div>
-
-
-</li>
-<li>
-<p>Run the container with the following options:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> docker run --rm --publish &lt;HOST PORT&gt;:8000 <span class="se">\</span>
-     --volume &lt;HOST PARTITION&gt;:/cache <span class="se">\</span>
-     --volume /partition1:/data1 <span class="se">\</span>
-     --volume /partition2:/data2 <span class="se">\</span>
-     --volume /opt/xcache/90-my-stash-cache-disks.cfg:/etc/xrootd/config.d/90-stash-cache-disks.cfg <span class="se">\</span>
-     --env-file<span class="o">=</span>/opt/xcache/.env <span class="se">\</span>
-     opensciencegrid/stash-cache:stable
-</pre></div>
-
-
-</li>
-</ol>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Under this configuration the <code>&lt;HOST PARTITION&gt;</code> is not used to store the files.
-Instead, the host partition stores symlinks to the files in <code>/partition1</code> and <code>/partition2</code>.</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>For over 100 TB of assigned space we highly encourage to use this setup and mount <code>&lt;HOST PARTITION&gt;</code> in solid state disks or NVME.</p>
-</div>
 <h2 id="validating-the-cache">Validating the Cache<a class="headerlink" href="#validating-the-cache" title="Permanent link">&para;</a></h2>
 <p>The cache server functions as a normal HTTP server and can interact with typical HTTP clients, such as <code>curl</code>.
 Here, <code>&lt;HOST PORT&gt;</code> is the port chosen in the <code>docker run</code> command, <code>8000</code> by default.</p>
