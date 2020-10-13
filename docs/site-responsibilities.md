@@ -6,7 +6,7 @@ to your site, including:
 
 - Major OS version changes on the worker nodes (e.g., upgraded from EL 6 to EL 7)
 - Adding or removing [container support](worker-node/install-singularity.md)
-- Policy changes regarding OSG resource requests (e.g., number of cores, memory usage, or maximum walltime
+- Policy changes regarding OSG resource requests (e.g., number of cores or GPUs, memory usage, or maximum walltime)
 - Scheduled or unscheduled [downtimes](common/registration.md#how-to-register-downtime)
 - [Site topology changes](common/registration.md) such as additions, modifications, or retirements
 - Changes to site contacts, such as administrative or security staff
