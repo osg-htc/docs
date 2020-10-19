@@ -132,6 +132,9 @@ The `xrootd-multiuser` plugins changes this behaviour:
         :::console
         root@host # systemctl xrootd-privileged@standalone
 
+!!! bug
+    The multiuser support is incompatible with checksums.
+
 #### Enabling CMS TFC support (CMS sites only)
 
 For CMS users, there is a package available to integrate rule-based name lookup using a `storage.xml` file.
