@@ -7,7 +7,7 @@ it handles authorization and delegation of jobs to your existing campus HPC/HTC 
 Many sites set up their compute entrypoint locally.
 As an alternative, OSG offers a Hosted CE option
 wherein the OSG team will host and operate the HTCondor compute entrypoint,
-and configure it for the science communities that you choose to support.
+and configure it for the communities that you choose to support.
 The Hosted CE can support thousands of concurrent job submissions.
 
 This document explains the requirements and the procedure for obtaining a Hosted CE.
@@ -38,8 +38,8 @@ Before preparing your cluster for OSG jobs, consider the following requirements:
 -   [Temporary scratch space](/worker-node/using-wn#for-site-administrators) on each worker node
 
 
-Which Science Communities and Institutions am I Supporting?
------------------------------------------------------------
+Which Communities and Institutions am I Supporting?
+---------------------------------------------------
 
 The OSG provides monitoring to view which communities are accessing your site, their fields of science, and home institution.
 Below is an example of the monitoring views that will be available for your cluster.
@@ -95,7 +95,7 @@ Before making any system changes, you should do the following steps:
     to set up a consultation call with the OSG team,
     in order to discuss how you would like to contribute to the OSG;
     for example, the number of OSG jobs that should run, what resource limits you have,
-    or which science communities you support
+    or which communities you support
 
 After the consultation, do the following:
 
