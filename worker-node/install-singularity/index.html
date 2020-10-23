@@ -3349,6 +3349,26 @@ namespaces.</p>
 such as Docker.  Disabling network namespaces may break other
 software, or limit its capabilities (such as requiring the
 <code>--net=host</code> option in Docker).</p>
+<p>Disabling network namespaces blocks the systemd PrivateNetwork
+feature, which is a feature that is used by some EL 8 services.
+It is also configured for some EL 7 services but they are all
+disabled by default.  To check them all, look for PrivateNetwork in
+<code>/lib/systemd/system/*.service</code> and see which of those services are
+enabled but failed to start.  The only default such service on EL 8
+is systemd-hostnamed, and a popular non-default such service is
+mlocate-updatedb.  The PrivateNetwork feature can be turned off for
+a service without modifying an RPM-installed file through a
+<code>&lt;service&gt;.d/*.conf</code> file, for example for systemd-hostnamed:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">cd</span> /etc/systemd/system
+<span class="gp">root@host #</span> mkdir -p systemd-hostnamed.service.d
+<span class="gp">root@host #</span> <span class="o">(</span><span class="nb">echo</span> <span class="s2">&quot;[Service]&quot;</span><span class="p">;</span> <span class="nb">echo</span> <span class="s2">&quot;PrivateNetwork=no&quot;</span><span class="o">)</span> <span class="se">\</span>
+        &gt;systemd-hostnamed.service.d/no-private-network.conf
+<span class="gp">root@host #</span> systemctl daemon-reload
+<span class="gp">root@host #</span> systemctl start systemd-hostnamed
+<span class="gp">root@host #</span> systemctl status systemd-hostnamed
+</pre></div>
+
+
 </li>
 <li>
 <p>If docker is being used to run jobs, the following options are 
