@@ -152,7 +152,7 @@ unprivileged.
     `<service>.d/*.conf` file, for example for systemd-hostnamed:
 
         :::console
-        root@host # cd /lib/systemd/system
+        root@host # cd /etc/systemd/system
         root@host # mkdir -p systemd-hostnamed.service.d
         root@host # (echo "[Service]"; echo "PrivateNetwork=no") \
                 >systemd-hostnamed.service.d/no-private-network.conf
