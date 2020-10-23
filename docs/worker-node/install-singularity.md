@@ -157,6 +157,7 @@ unprivileged.
         root@host # mkdir -p systemd-hostnamed.service.d
         root@host # (echo "[Service]"; echo "PrivateNetwork=no") \
                 >systemd-hostnamed.service.d/no-private-network.conf
+        root@host # systemctl daemon-reload
         root@host # systemctl start systemd-hostnamed
         root@host # systemctl status systemd-hostnamed
 
