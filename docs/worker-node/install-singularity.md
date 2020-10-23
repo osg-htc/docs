@@ -142,8 +142,9 @@ unprivileged.
     `--net=host` option in Docker).
     
     Disabling network namespaces blocks the systemd PrivateNetwork
-    feature, which no default enabled EL 7 services depend on but some
-    EL 8 services do.  To check them all, look for PrivateNetwork in
+    feature, which is a feature that is used by some EL 8 services.
+    It is also configured for some EL 7 services but they are all
+    disabled by default.  To check them all, look for PrivateNetwork in
     `/lib/systemd/system/*.service` and see which of those services are
     enabled but failed to start.  The only default such service on EL 8
     is systemd-hostnamed, and a popular non-default such service is
