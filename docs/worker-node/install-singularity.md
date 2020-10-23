@@ -140,6 +140,26 @@ unprivileged.
     such as Docker.  Disabling network namespaces may break other
     software, or limit its capabilities (such as requiring the
     `--net=host` option in Docker).
+    
+    Disabling network namespaces blocks the systemd PrivateNetwork
+    feature, which is a feature that is used by some EL 8 services.
+    It is also configured for some EL 7 services but they are all
+    disabled by default.  To check them all, look for PrivateNetwork in
+    `/lib/systemd/system/*.service` and see which of those services are
+    enabled but failed to start.  The only default such service on EL 8
+    is systemd-hostnamed, and a popular non-default such service is
+    mlocate-updatedb.  The PrivateNetwork feature can be turned off for
+    a service without modifying an RPM-installed file through a
+    `<service>.d/*.conf` file, for example for systemd-hostnamed:
+
+        :::console
+        root@host # cd /etc/systemd/system
+        root@host # mkdir -p systemd-hostnamed.service.d
+        root@host # (echo "[Service]"; echo "PrivateNetwork=no") \
+                >systemd-hostnamed.service.d/no-private-network.conf
+        root@host # systemctl daemon-reload
+        root@host # systemctl start systemd-hostnamed
+        root@host # systemctl status systemd-hostnamed
 
 1. If docker is being used to run jobs, the following options are 
     recommended to allow unprivileged singularity to run (it does not
