@@ -148,7 +148,7 @@ unprivileged.
     enabled but failed to start.  The only default such service on EL 8
     is systemd-hostnamed, and a popular non-default such service is
     mlocate-updatedb.  The PrivateNetwork feature can be turned off for
-    a service without modifying an rpm-installed file through a
+    a service without modifying an RPM-installed file through a
     `<service>.d/*.conf` file, for example for systemd-hostnamed:
 
         :::console
