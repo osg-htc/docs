@@ -177,7 +177,15 @@ If the pattern matches, that user will be unable to access your resources.
 
 !!!danger
     When banning VOs, you must restart the services using LCMAPS VOMS authentication (e.g. `condor-ce`,
-    `globus-gridftp-server`, etc.) to clear any authentication caches.
+    `globus-gridftp-server`, `xrootd`, etc.) to clear any authentication caches. In the case of XRootD
+    when the service is not restarted the change could take up to 12hrs to take effect. This can be
+    modified by defining the `authzto` option in the `sec.protocol` configuration attribute, e.g.:
+
+        sec.protocol /usr/lib64 gsi \
+            -certdir:/etc/grid-security/certificates \
+            -cert:/etc/grid-security/xrd/xrdcert.pem \
+            ...
+            -authzto:3600
 
 !!!warning
     `/etc/grid-security/ban-voms-mapfile` *must* exist, even if you are not banning any VOs.
@@ -196,7 +204,15 @@ certificates' DNs. An example of the format of a `ban-mapfile` follows:
 
 !!!danger
     When banning users, you must restart the services using LCMAPS VOMS authentication (e.g. `condor-ce`,
-    `globus-gridftp-server`, etc.) to clear any authentication caches.
+    `globus-gridftp-server`, `xrootd`, etc.) to clear any authentication caches. In the case of XRootD
+    when the service is not restarted the change could take up to 12hrs to take effect. This can be
+    modified by defining the `authzto` option in the `sec.protocol` configuration attribute, e.g.:
+
+        sec.protocol /usr/lib64 gsi \
+            -certdir:/etc/grid-security/certificates \
+            -cert:/etc/grid-security/xrd/xrdcert.pem \
+            ...
+            -authzto:3600
 
 !!!warning
     `/etc/grid-security/ban-mapfile` *must* exist, even if you are not banning any users.
@@ -323,6 +339,21 @@ If you are troubleshooting a GridFTP host, follow these instructions to raise th
     After you've completed troubleshooting, remember to revert the changes above and restart services!
 
 ### Common issues
+
+#### A user/VO keeps having access to my XRootD server even after I added to the ban-gridmapfile/ban-voms-mapfile
+The easiest way to get a user/VO banned immediately is to restart the XRootD server after adding the DN to the corresponding ban file.
+If the above is not possible, the the lifetime of the lcmaps cache for XRootD can be controlled by setting the parameter `authzto`
+within the `sec.protocol` configuration attribute, e.g.:
+
+    sec.protocol /usr/lib64 gsi \
+    -certdir:/etc/grid-security/certificates \
+    -cert:/etc/grid-security/xrd/xrdcert.pem \
+    ...
+    -authzto:3600
+
+The default value for this parameter it is 12hrs.
+
+
 
 #### Wrong version of GridFTP
 
