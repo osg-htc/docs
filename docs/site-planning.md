@@ -82,8 +82,8 @@ OSG supports the use of the [Singularity](http://singularity.lbl.gov/) container
 
 Whether accessed through CVMFS or command-line software like `curl`, the majority of software is moved via HTTP in
 cache-friendly patterns.
-All sites are highly encouraged to use an [HTTP proxy](/data/frontier-squid) to reduce the load on the WAN from the
-cluster.
+All sites are highly encouraged to use an [HTTP proxy](/data/run-frontier-squid-container) to reduce the load on the
+WAN from the cluster.
 
 Depending on the VOs you want to support, additional data services may be necessary:
 
