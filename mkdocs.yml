@@ -10,7 +10,7 @@ theme:
 extra_css:
   - css/extra.css
 
-pages:
+nav:
 - Home: 'index.md'
 - Detailed Overview: 'detailed-overview.md'
 - Site Planning: 'site-planning.md'
