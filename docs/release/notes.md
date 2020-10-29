@@ -32,8 +32,9 @@ To update to the OSG 3.5 series, please consult the page on
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.5.25-2](/release/3.5/release-3-5-25-2) | 2020-10-29 | VO Package v109                                                         |
 | [3.5.25](/release/3.5/release-3-5-25)     | 2020-10-08 | GlideinWMS 3.6.5, BLAHP 1.18.48; Upcoming: BLAHP 1.18.48                |
-| [3.5.24](/release/3.5/release-3-5-24)     | 2020-09-17 | CVMFS 2.7.4, stashcache-client 6.1.0, hosted-ce-tools 0.8.2, CCTools 7.1.7 |
+| [3.5.24](/release/3.5/release-3-5-24)     | 2020-09-17 | CVMFS 2.7.4, stashcache-client 6.1.0, hosted-ce-tools 0.8.2, CCTools 7.1.7, VO Package v108 |
 | [3.5.23](/release/3.5/release-3-5-23)     | 2020-09-03 | xrootd-hdfs 2.1.8, osg-release 3.5-4; Upcoming: HTCondor 8.9.8, XRootD 5.0.1 and associated plugins |
 | [3.5.22](/release/3.5/release-3-5-22)     | 2020-08-27 | HTCondor 8.8.10, Frontier Squid 4.13-1.1, XCache 1.5.2, xrootd-scitokens 1.2.2, gratia-probe 1.20.14, BLAHP 1.18.47, oidc-agent 3.3.3, XRootD plugins |
 | [3.5.21-2](/release/3.5/release-3-5-21-2) | 2020-08-10 | IGTF 1.107, VO Package v107                                             |
@@ -82,6 +83,7 @@ OSG 3.4
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.55-2](/release/3.4/release-3-4-55-2) | 2020-10-29 | VO Package v109                                                         |
 | [3.4.55](/release/3.4/release-3-4-55)     | 2020-10-08 | Singularity 3.6.3, GlideinWMS 3.6.5 (EL7 Only)                          |
 | [3.4.54-2](/release/3.4/release-3-4-54-2) | 2020-09-17 | VO Package v108                                                         |
 | [3.4.54](/release/3.4/release-3-4-54)     | 2020-08-27 | HTCondor 8.8.10, Frontier Squid 4.13-1.1                                |
