@@ -5,7 +5,7 @@ This document describes the steps required to manage a VO's role
 in the StashCache Data Federation including selecting a namespace, registration,
 and selecting which resources are allowed to host or cache your data.
 
-For general information about StashCache, see the [overview document](/data/stashcache/overview/).
+For general information about StashCache, see the [overview document](../../data/stashcache/overview.md).
 
 Site admins should work together with VO managers in order to perform these steps.
 
@@ -22,7 +22,7 @@ Requirements
 ------------
 
 In order for a Virtual Organization to join the StashCache Federation, the VO must already be registered in OSG Topology.
-See the [registration document](/common/registration/#registering-virtual-organizations).
+See the [registration document](../../common/registration.md#registering-virtual-organizations).
 
 
 
@@ -58,7 +58,7 @@ Registering Data Federation Information
 
 The VO must allow one or more StashCache origins to host their data.
 An origin will typically be hosted on a site owned by the VO.
-For information about setting up an origin, see the [installation document](/data/stashcache/install-origin/).
+For information about setting up an origin, see the [installation document](../../data/stashcache/install-origin.md).
 
 In order to declare your VO's role in the StashCache federation,
 you must add StashCache information to your VO's YAML file in the OSG Topology repository.
@@ -111,7 +111,7 @@ The VO must allow one or more StashCache Caches to cache their data.
 The more places a VO's data can be cached in, the bigger the data transfer benefit for the VO.
 The majority of caches across OSG will automatically cache all "public" VO data.
 Caching "protected" VO data will often be done on a site owned by the VO.
-For information about setting up a cache, see the [installation document](/data/stashcache/install-cache/).
+For information about setting up a cache, see the [installation document](../../data/stashcache/install-cache.md).
 
 AllowedCaches is a list of which caches are allowed to host copies of your data.
 There are two cases:

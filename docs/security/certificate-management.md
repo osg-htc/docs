@@ -10,7 +10,7 @@ reference guide for several of these tools:
 
 !!! note
     This is a reference document and not introduction on how to install CA certificates or request
-    host / user certificates.  Most users will want the [CA overview](/common/ca.md),
+    host / user certificates.  Most users will want the [CA overview](../common/ca.md),
     [host certificate overview](host-certs.md), or [user certificate overview](user-certs.md) documents.
 
 
@@ -23,7 +23,7 @@ The OSG PKI Command Line Clients provide a command-line interface for requesting
 
 ### Prerequisites
 
-If you have not already done so, you need to [configure the OSG software repositories](/common/yum.md).
+If you have not already done so, you need to [configure the OSG software repositories](../common/yum.md).
 
 ### Installation
 
@@ -51,10 +51,10 @@ CA certificates.
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-- Ensure the host has [a supported operating system](/release/supported_platforms)
+- Ensure the host has [a supported operating system](../release/supported_platforms.md)
 - Obtain root access to the host
-- Prepare the [required Yum repositories](/common/yum)
-- Install [CA certificates](/common/ca)
+- Prepare the [required Yum repositories](../common/yum.md)
+- Install [CA certificates](../common/ca.md)
 
 ### Install instructions
 
@@ -327,5 +327,5 @@ Logs and configuration:
 References
 ----------
 
--   [Installing the Certificate Authorities Certificates and the related RPMs](/common/ca)
+-   [Installing the Certificate Authorities Certificates and the related RPMs](../common/ca.md)
 

@@ -8,14 +8,14 @@ Summary of changes
 ------------------
 
 This initial release of the OSG 3.5 release series is based on the packages available in
-[OSG 3.4.33](/release/3.4/release-3-4-33#) with some [additions](#package-updates) and [subtractions](#package-removals).
-Additionally, the contents of the [upcoming repository](/release/release_series#osg-upcoming) have been emptied
+[OSG 3.4.33](../../release/3.4/release-3-4-33.md#) with some [additions](#package-updates) and [subtractions](#package-removals).
+Additionally, the contents of the [upcoming repository](../../release/release_series.md#osg-upcoming) have been emptied
 of packages related to OSG 3.4 and replaced with packages for OSG 3.5.
 Other notable changes in this release series include dropping support for Enterprise Linux 6 and
 [CREAM CEs](https://opensciencegrid.org/technology/policy/cream-support/).
 
 To update to the OSG 3.5 release series, please consult the page on
-[updating between release series](/release/release_series#updating-to-osg-35).
+[updating between release series](../../release/release_series.md#updating-to-osg-35).
 
 !!! question "Where are GlideinWMS and HTCondor-CE?"
     HTCondor-CE (including `osg-ce` metapackages) and GlideinWMS are both absent in OSG 3.5.0:
@@ -29,11 +29,11 @@ To update to the OSG 3.5 release series, please consult the page on
 
 ### Package updates ###
 
-In addition to the packages that were carried over from [OSG 3.4.33](/release/3.4/release-3-4-33#),
+In addition to the packages that were carried over from [OSG 3.4.33](../../release/3.4/release-3-4-33.md#),
 this release contains the following package updates:
 
 -   HTCondor 8.8.4: The current HTCondor [stable release](https://htcondor.readthedocs.io/en/stable/version-history/stable-release-series-88.html#version-8-8-4).
-    See the [manual update instructions](/release/release_series#updating-to-htcondor-88x_1) before
+    See the [manual update instructions](../../release/release_series.md#updating-to-htcondor-88x_1) before
     updating to this version.
     Some highlights from the 8.8 release series include:
     -   Automatically add AWS resources to your pool using HTCondor Annex
@@ -61,10 +61,10 @@ this release contains the following package updates:
 -   XCache 1.1.1: This release includes packages for ATLAS and CMS XCaches as well as Stash Origin HTTP/S support.
 -   OSG Configure 3.0.0: A [major version release](https://github.com/opensciencegrid/osg-configure/releases/tag/v3.0.0),
     including changes from the OSG Configure 2.4 series and dropping some deprecated features.
-    See the [manual update instructions](/release/release_series#updating-to-osg-configure-3) before updating to this
+    See the [manual update instructions](../../release/release_series.md#updating-to-osg-configure-3) before updating to this
     version.
--   OSG XRootD 3.5: A meta-package including common configuration across [standalone](/data/xrootd/install-standalone),
-    [storage element](/data/xrootd/install-storage-element), and [caching](/data/stashcache/overview) installations of
+-   OSG XRootD 3.5: A meta-package including common configuration across [standalone](../../data/xrootd/install-standalone.md),
+    [storage element](../../data/xrootd/install-storage-element.md), and [caching](../../data/stashcache/overview.md) installations of
     XRootD.
 -   XRootD LCMAPS 1.7.4: includes default authorization configuration in `/etc/xrootd/config.d/40-xrootd-lcmaps.cfg`.
     To use the default configuration, uncomment the `# set EnableLcmaps = 1` line in `/etc/xrootd/config.d/10-xrootd-lcmaps.cfg`.
@@ -93,15 +93,15 @@ were addressed in this release.
 
 ### Package removals ###
 
-A new [OSG release series](/release/release_series/), gives us the opportunity to clean up our
-[Yum repositories](/common/yum#repositories):
+A new [OSG release series](../../release/release_series.md), gives us the opportunity to clean up our
+[Yum repositories](../../common/yum.md#repositories):
 either removing packages that are the same version of those available in EPEL;
 or removing pacakges that are now obsolete in the OSG Software stack.
 Below, you will find a list of packages that were in OSG 3.4 but have been removed in OSG 3.5.
-If you believe any of the following packages have been removed in error, please [contact us](/common/help).
+If you believe any of the following packages have been removed in error, please [contact us](../../common/help.md).
 
 The following packages were removed from the OSG 3.5 Yum repositories but are available via
-[EPEL repositories](/common/yum#install-the-epel-repositories):
+[EPEL repositories](../../common/yum.md#install-the-epel-repositories):
 
 - singularity
 - globus-ftp-client
@@ -140,10 +140,10 @@ Updating to the New Release
 ---------------------------
 
 To update to the OSG 3.5 series, please consult the page on
-[updating between release series](/release/release_series#updating-to-osg-35).
+[updating between release series](../../release/release_series.md#updating-to-osg-35).
 
-For sites using non-RPM worker node client installations, new [tarballs](/worker-node/install-wn-tarball) and
-[container images](/worker-node/using-wn-containers) are available:
+For sites using non-RPM worker node client installations, new [tarballs](../../worker-node/install-wn-tarball.md) and
+[container images](../../worker-node/using-wn-containers.md) are available:
 
 - Tarball: <https://repo.opensciencegrid.org/tarball-install/3.5/osg-wn-client-latest.el7.x86_64.tar.gz>
 - Container Images: <https://hub.docker.com/r/opensciencegrid/osg-wn/>
@@ -151,7 +151,7 @@ For sites using non-RPM worker node client installations, new [tarballs](/worker
 Need Help?
 ----------
 
-Do you need help with this release? [Contact us for help](/common/help).
+Do you need help with this release? [Contact us for help](../../common/help.md).
 
 Detailed Changes in This Release
 --------------------------------

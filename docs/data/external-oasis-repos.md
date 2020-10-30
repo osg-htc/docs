@@ -6,7 +6,7 @@ OASIS (the **OSG** **A**pplication **S**oftware **I**nstallation **S**ervice) is
 an OASIS repository, the goal is to make it available across about 90% of the OSG within an hour.
 
 OASIS consists of keysigning infrastructure, a content distribution network (CDN), and a shared CVMFS repository that
-is hosted by the OSG.  Many use cases will be covered by utilizing the [shared repository](update-oasis); this document
+is hosted by the OSG.  Many use cases will be covered by utilizing the [shared repository](update-oasis.md); this document
 covers how to install, configure, and host your own CVMFS _repository server_.  This server will distribute software
 via OASIS, but will be hosted and operated externally from the OSG project.
 
@@ -33,7 +33,7 @@ Additionally,
     and one uncompressed. `/srv/cvmfs` will hold all the published data (compressed and de-deuplicated).  The
     `/var/spool/cvmfs` directory will contain all the data in all current transactions (uncompressed).
 -   **Root access** will be needed to install.  Software install will be done as an unprivileged user.
--   **Yum** will need to be [configured to use the OSG repositories](../common/yum).
+-   **Yum** will need to be [configured to use the OSG repositories](../common/yum.md).
 
 !!! warning "Overlay-FS limitations"
     CVMFS on RHEL7 only supports Overlay-FS if the underlying filesystem is `ext3` or `ext4`; make sure

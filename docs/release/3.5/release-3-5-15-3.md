@@ -32,16 +32,16 @@ These [JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%2
 Containers
 ----------
 
-- [Worker Node containers](/worker-node/using-wn-containers/) have been updated to this release.
+- [Worker Node containers](../../worker-node/using-wn-containers.md) have been updated to this release.
 
 Updating to the New Release
 ---------------------------
 
 To update to the OSG 3.5 series from an earlier release series, please consult the page on
-[updating between release series](/release/release_series#updating-to-osg-35).
+[updating between release series](../../release/release_series.md#updating-to-osg-35).
 
-For sites using non-RPM worker node client installations, new [tarballs](/worker-node/install-wn-tarball) and
-[container images](/worker-node/using-wn-containers) are available:
+For sites using non-RPM worker node client installations, new [tarballs](../../worker-node/install-wn-tarball.md) and
+[container images](../../worker-node/using-wn-containers.md) are available:
 
 - Tarball: <https://repo.opensciencegrid.org/tarball-install/3.5/osg-wn-client-latest.el7.x86_64.tar.gz>
 - Container Images: <https://hub.docker.com/r/opensciencegrid/osg-wn/>
@@ -49,7 +49,7 @@ For sites using non-RPM worker node client installations, new [tarballs](/worker
 Need Help?
 ----------
 
-Do you need help with this release? [Contact us for help](/common/help).
+Do you need help with this release? [Contact us for help](../../common/help.md).
 
 Detailed Changes in This Release
 --------------------------------

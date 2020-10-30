@@ -3,14 +3,14 @@ DigiCert IGTF Host Certificates
 
 !!! note
     This document describes how to get **host** certificates.
-    For instructions on how to get **user** certificates, see the [User Certificates document](/security/user-certs).
+    For instructions on how to get **user** certificates, see the [User Certificates document](../../security/user-certs.md).
 
 This document describes how to purchase individual IGTF-accredited host certificates from [DigiCert](https://www.digicert.com/).
 Before purchasing individual certificates, consider the following alternatives:
 
-1. Request a [Let's Encrypt certificate](/security/host-certs/lets-encrypt.md)
+1. Request a [Let's Encrypt certificate](../../security/host-certs/lets-encrypt.md)
    if you don't support any VOs that require IGTF-accredited certificates (e.g. `ATLAS` or `CMS`).
-1. Request an [InCommon certificate](/security/host-certs/incommon.md)
+1. Request an [InCommon certificate](../../security/host-certs/incommon.md)
    if your institution has an InCommon subscription.
 
 Before Starting
@@ -32,9 +32,9 @@ If you do not have a valid certificate, the OSG offers a command-line tool to ge
 to assist in acquiring a grid host certificate.
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-- Ensure the host has [a supported operating system](/release/supported_platforms)
+- Ensure the host has [a supported operating system](../../release/supported_platforms.md)
 - Obtain root access to the host
-- Prepare the [required Yum repositories](/common/yum)
+- Prepare the [required Yum repositories](../../common/yum.md)
 
 Create a DigiCert Account
 -------------------------

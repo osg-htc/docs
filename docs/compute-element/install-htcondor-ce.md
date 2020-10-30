@@ -1,11 +1,11 @@
 Installing and Maintaining HTCondor-CE
 ======================================
 
-The [HTCondor-CE](htcondor-ce-overview) software is a *job gateway* for an OSG Compute Element (CE).
+The [HTCondor-CE](htcondor-ce-overview.md) software is a *job gateway* for an OSG Compute Element (CE).
 As such, HTCondor-CE is the entry point for jobs coming from the OSG — it handles authorization and delegation of jobs
 to your local batch system.
 In OSG today, most CEs accept *pilot jobs* from a factory, which in turn are able to accept and run end-user jobs.
-See the [HTCondor-CE Overview](htcondor-ce-overview) for a much more detailed introduction.
+See the [HTCondor-CE Overview](htcondor-ce-overview.md) for a much more detailed introduction.
 
 Use this page to learn how to install, configure, run, test, and troubleshoot HTCondor-CE from the OSG software
 repositories.
@@ -32,10 +32,10 @@ Before starting the installation process, consider the following points
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-- Ensure the host has [a supported operating system](/release/supported_platforms)
+- Ensure the host has [a supported operating system](../release/supported_platforms.md)
 - Obtain root access to the host
-- Prepare the [required Yum repositories](/common/yum)
-- Install [CA certificates](/common/ca)
+- Prepare the [required Yum repositories](../common/yum.md)
+- Install [CA certificates](../common/ca.md)
 
 Installing HTCondor-CE
 ----------------------
@@ -140,7 +140,7 @@ SPOOL = /home/condor
 ### Configuring authorization
 
 To configure which virtual organizations and users are authorized to submit jobs to your, follow the instructions in
-[the LCMAPS VOMS plugin document](/security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin).
+[the LCMAPS VOMS plugin document](../security/lcmaps-voms-authentication.md#configuring-the-lcmaps-voms-plugin).
 
 !!! note
     If your local batch system is HTCondor, it will attempt to utilize the LCMAPS callouts if enabled in the
@@ -154,7 +154,7 @@ collector.
 The job factories then query the central collector for idle resources and submit pilot jobs to the available sites.
 To advertise your site, you will need to enter some information about the worker nodes of your clusters.
 
-Please see the [Subcluster / Resource Entry configuration document](/other/configuration-with-osg-configure#subcluster-resource-entry)
+Please see the [Subcluster / Resource Entry configuration document](../other/configuration-with-osg-configure.md#subcluster-resource-entry)
 about configuring the data that will be uploaded to the central collector.
 
 ### Applying configuration settings
@@ -163,7 +163,7 @@ Making changes to the OSG configuration files in the `/etc/osg/config.d` directo
 software automatically.
 Settings that are made outside of the OSG directory take effect immediately or at least when the relevant service is
 restarted.
-For the OSG settings, use the [osg-configure](/other/configuration-with-osg-configure) tool to validate (to a limited
+For the OSG settings, use the [osg-configure](../other/configuration-with-osg-configure.md) tool to validate (to a limited
 extent) and apply the settings to the relevant software components.
 The `osg-configure` software is included automatically in an HTCondor-CE installation.
 
@@ -200,7 +200,7 @@ If you do not need any of the following special configurations, skip to
 
 #### Transforming and filtering jobs
 
-If you need to modify or filter jobs, more information can be found in the [Job Router Recipes](job-router-recipes)
+If you need to modify or filter jobs, more information can be found in the [Job Router Recipes](job-router-recipes.md)
 document.
 
 !!! note
@@ -364,7 +364,7 @@ The specific services are:
 
 | Software          | Service name                          | Notes                                                                                  |
 |:------------------|:--------------------------------------|:---------------------------------------------------------------------------------------|
-| Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
+| Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca.md#managing-fetch-crl-services) for more info |
 | Gratia            | `gratia-probes-cron`                  | Accounting software                                                                    |
 | Your batch system | `condor` or `pbs_server` or …         |                                                                                        |
 | HTCondor-CE       | `condor-ce`                           |                                                                                        |
@@ -380,7 +380,7 @@ Start the services in the order listed and stop them in reverse order. As a remi
 
 ### Using HTCondor-CE tools
 
-Some of the HTCondor-CE administrative and user tools are documented in [the HTCondor-CE troubleshooting guide](troubleshoot-htcondor-ce).
+Some of the HTCondor-CE administrative and user tools are documented in [the HTCondor-CE troubleshooting guide](troubleshoot-htcondor-ce.md).
 
 Validating HTCondor-CE
 ----------------------
@@ -392,19 +392,19 @@ To validate an HTCondor-CE, perform the following verification steps:
    `scontrol` and `sacct`.
 
 1. Verify that all the necessary daemons are running with
-   [condor\_ce\_status -any](/compute-element/troubleshoot-htcondor-ce#condor_ce_status).
+   [condor\_ce\_status -any](../compute-element/troubleshoot-htcondor-ce.md#condor_ce_status).
 
 1. Verify the CE's network configuration using
-   [condor\_ce\_host\_network\_check](/compute-element/troubleshoot-htcondor-ce#condor_ce_host_network_check).
+   [condor\_ce\_host\_network\_check](../compute-element/troubleshoot-htcondor-ce.md#condor_ce_host_network_check).
 
 1. Verify that jobs can complete successfully using
-   [condor\_ce\_trace](/compute-element/troubleshoot-htcondor-ce#condor_ce_trace).
+   [condor\_ce\_trace](../compute-element/troubleshoot-htcondor-ce.md#condor_ce_trace).
 
 Troubleshooting HTCondor-CE
 ---------------------------
 
 For information on how to troubleshoot your HTCondor-CE, please refer to
-[the HTCondor-CE troubleshooting guide](troubleshoot-htcondor-ce).
+[the HTCondor-CE troubleshooting guide](troubleshoot-htcondor-ce.md).
 
 Registering the CE
 ------------------
@@ -429,17 +429,17 @@ To register your resource:
 Getting Help
 ------------
 
-To get assistance, please use the [this page](/common/help).
+To get assistance, please use the [this page](../common/help.md).
 
 Reference
 ---------
 
 Here are some other HTCondor-CE documents that might be helpful:
 
--   [HTCondor-CE overview and architecture](htcondor-ce-overview)
--   [Configuring HTCondor-CE job routes](job-router-recipes)
--   [The HTCondor-CE troubleshooting guide](troubleshoot-htcondor-ce)
--   [Submitting jobs to HTCondor-CE](submit-htcondor-ce)
+-   [HTCondor-CE overview and architecture](htcondor-ce-overview.md)
+-   [Configuring HTCondor-CE job routes](job-router-recipes.md)
+-   [The HTCondor-CE troubleshooting guide](troubleshoot-htcondor-ce.md)
+-   [Submitting jobs to HTCondor-CE](submit-htcondor-ce.md)
 
 ### Configuration
 
@@ -474,7 +474,7 @@ The following users are needed by HTCondor-CE at all sites:
 | Host certificate | `root`                     | `/etc/grid-security/hostcert.pem` |
 | Host key         | `root`                     | `/grid-security/hostkey.pem`  |
 
-Find instructions to request a host certificate [here](/security/host-certs).
+Find instructions to request a host certificate [here](../security/host-certs).
 
 ### Networking
 

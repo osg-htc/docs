@@ -10,7 +10,7 @@ In this document, we will cover the [`xrootd-lcmaps`](#enabling-xrootd-lcmaps-au
 in the OSG.
 
 The XRootD LCMAPS authorization method depends on configuring
-[LCMAPS with the VOMS plugin](/security/lcmaps-voms-authentication).
+[LCMAPS with the VOMS plugin](../../security/lcmaps-voms-authentication.md).
 LCMAPS maps an incoming user's grid credentials to a Unix account name;
 the permissions listed in the [authorization file](#authorization-file) all reference Unix account names. 
 
@@ -86,17 +86,17 @@ root@host # chmod 0640 /etc/xrootd/auth_file  # or 0644
 
 #### Enabling xrootd-lcmaps authorization
 
-The xrootd-lcmaps security plugin uses the `lcmaps` library and the [LCMAPS VOMS plugin](/security/lcmaps-voms-authentication)
+The xrootd-lcmaps security plugin uses the `lcmaps` library and the [LCMAPS VOMS plugin](../../security/lcmaps-voms-authentication.md)
 to authenticate and authorize users based on X509 certificates and VOMS attributes. Perform the following instructions
 on all data nodes:
 
-1. Install [CA certificates](/common/ca#installing-ca-certificates) and [manage CRLs](/common/ca#installing-ca-certificates#managing-certificate-revocation-lists)
+1. Install [CA certificates](../../common/ca.md#installing-ca-certificates) and [manage CRLs](../../common/ca.md#installing-ca-certificates#managing-certificate-revocation-lists)
 
-1. Follow the instructions for requesting a [service certificate](/security/host-certs#requesting-service-certificates),
+1. Follow the instructions for requesting a [service certificate](../../security/host-certs#requesting-service-certificates),
    using `xrootd` for both the `<SERVICE>` and `<OWNER>`, resulting in a certificate and key in `/etc/grid-security/xrd/xrdcert.pem`
    and `/etc/grid-security/xrd/xrdkey.pem`, respectively.
 
-1. Install and configure the [LCMAPS VOMS plugin](/security/lcmaps-voms-authentication)
+1. Install and configure the [LCMAPS VOMS plugin](../../security/lcmaps-voms-authentication.md)
 
 1. Install `xrootd-lcmaps` and necessary configuration:
 
@@ -105,7 +105,7 @@ on all data nodes:
 
 1. Configure access rights for mapped users by creating and modifying the XRootD [authorization file](#authorization-file)
 
-1. Restart the [relevant services](/data/xrootd/install-standalone/#using-xrootd)
+1. Restart the [relevant services](../../data/xrootd/install-standalone.md#using-xrootd)
 
 Verifying XRootD Authorization
 ------------------------------
@@ -122,11 +122,11 @@ To verify the LCMAPS security, run the following commands from a machine with yo
         [0B/0B][100%][==================================================][0B/s]
         Run: [FATAL] Auth failed
 
-1. On the XRootD host, add your DN to [/etc/grid-security/grid-mapfile](/security/lcmaps-voms-authentication#mapping-users)
+1. On the XRootD host, add your DN to [/etc/grid-security/grid-mapfile](../../security/lcmaps-voms-authentication.md#mapping-users)
 
 1. Add a line to `/etc/xrootd/auth_file` to ensure the mapped user can write to `<DESTINATION PATH>`
 
-1. Restart the xrootd service. (See [this section](/data/xrootd/install-standalone/#using-xrootd) for more information
+1. Restart the xrootd service. (See [this section](../../data/xrootd/install-standalone.md#using-xrootd) for more information
    of managing XRootD services.)
 
 1. Generate your proxy and verify that you can successfully transfer files:

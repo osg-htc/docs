@@ -403,4 +403,4 @@ To modify a VO's information or register a new VO, follow the instructions below
 Getting Help
 ------------
 
-To get assistance, please use the [this page](/common/help).
+To get assistance, please use the [this page](../common/help.md).

@@ -22,7 +22,7 @@ with setuid-root executables. Singularity keeps the privileged code to a
 [minimum](https://sylabs.io/guides/3.5/user-guide/security.html#singularity-runtime-user-privilege)
 in order to reduce the potential for vulnerabilities.
 
-The OSG has installed singularity in [OASIS](/worker-node/install-cvmfs),
+The OSG has installed singularity in [OASIS](../worker-node/install-cvmfs.md),
 so most sites will not need to install singularity locally if they
 enable it to run unprivileged.  An RPM installation can be configured to
 be unprivileged or privileged.
@@ -43,13 +43,13 @@ Before Starting
 As with all OSG software installations, there are some one-time (per host)
 steps to prepare in advance:
 
-- Ensure the host has [a supported operating system](/release/supported_platforms)
+- Ensure the host has [a supported operating system](../release/supported_platforms.md)
 - Obtain root access to the host
-- Prepare the [required Yum repositories](/common/yum)
+- Prepare the [required Yum repositories](../common/yum.md)
 
 In addition, this is highly recommended for image distribution:
 
-- Install [CVMFS](/worker-node/install-cvmfs)
+- Install [CVMFS](../worker-node/install-cvmfs.md)
 
 Choosing Unprivileged vs Privileged Singularity
 -----------------------------------------------
@@ -171,7 +171,7 @@ additional local "bind path" options to map extra local file paths into
 containers.  This can instead be accomplished by setting the
 `SINGULARITY_BINDPATH` variable in the environment of jobs, for
 example through
-[configuration](/other/configuration-with-osg-configure/#local-settings)
+[configuration](../other/configuration-with-osg-configure.md#local-settings)
 on your compute element.  This is a
 comma-separated list of paths to bind, following the syntax of the
 `singularity exec --bind` option.
@@ -183,7 +183,7 @@ for details.
 
 ### Validating Unprivileged Singularity ###
 
-If you haven't yet installed [CVMFS](install-cvmfs), please do so.
+If you haven't yet installed [CVMFS](install-cvmfs.md), please do so.
 Alternatively, use the
 [cvmfsexec package](https://github.com/cvmfs-contrib/cvmfsexec)
 configured for osg as an unprivileged user and mount the

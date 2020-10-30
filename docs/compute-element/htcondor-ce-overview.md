@@ -37,7 +37,7 @@ delegate jobs by transforming and submitting them to the site’s batch system.
 Benefits of running the HTCondor-CE:
 
 -   **Scalability:** HTCondor-CE is capable of supporting job workloads of large sites
--   **Debugging tools:** HTCondor-CE offers [many tools to help troubleshoot](/compute-element/troubleshoot-htcondor-ce)
+-   **Debugging tools:** HTCondor-CE offers [many tools to help troubleshoot](../compute-element/troubleshoot-htcondor-ce.md)
     issues with jobs
 -   **Routing as configuration:** HTCondor-CE’s mechanism to transform and submit jobs is customized via configuration
     variables, which means that customizations will persist across upgrades and will not involve modification of
@@ -62,10 +62,10 @@ It provides a simple starting point for opportunistic resource owners that want 
 minimal effort: an organization will be able to accept OSG jobs by allowing SSH access to a submit node in their cluster.
 
 If your site intends to run over 10,000 concurrent OSG jobs, you will need to host your own
-[HTCondor-CE](/compute-element/install-htcondor-ce) because the Hosted CE has not yet been optimized for such
+[HTCondor-CE](../compute-element/install-htcondor-ce.md) because the Hosted CE has not yet been optimized for such
 loads.
 
-If you are interested in a Hosted CE solution, please follow the instructions on [this page](/compute-element/hosted-ce).
+If you are interested in a Hosted CE solution, please follow the instructions on [this page](../compute-element/hosted-ce.md).
 
 ![HTCondor-CE-Bosco](/img/HTCondorCEBosco.png)
 
@@ -110,14 +110,14 @@ directory must be exported to a shared file system that is mounted on the batch 
 How the CE is Customized
 ------------------------
 
-Aside from the [basic configuration](/compute-element/install-htcondor-ce#configuring-htcondor-ce) required in the CE
+Aside from the [basic configuration](../compute-element/install-htcondor-ce.md#configuring-htcondor-ce) required in the CE
 installation, there are two main ways to customize your CE (if you decide any customization is required at all):
 
 -   **Deciding which VOs are allowed to run at your site:** The recommended method of authorizing VOs at your site is
-    based on the [LCMAPS framework](/security/lcmaps-voms-authentication)
+    based on the [LCMAPS framework](../security/lcmaps-voms-authentication.md)
 -   **How to filter and transform the grid jobs to be run on your batch system:** Filtering and transforming grid jobs
     (i.e., setting site-specific attributes or resource limits), requires configuration of your site’s job routes.
-    For examples of common job routes, consult the [JobRouter recipes](/compute-element/job-router-recipes) page.
+    For examples of common job routes, consult the [JobRouter recipes](../compute-element/job-router-recipes.md) page.
 
 !!! note
     If you are running HTCondor as your batch system, you will have two HTCondor configurations side-by-side (one
@@ -133,7 +133,7 @@ When these clients and hosts wish to communicate with each other, the identities
 cross-checking their certificates with the signing CA and establishing trust.
 
 In its default configuration, HTCondor-CE uses GSI-based authentication and authorization to verify the certificate
-chain, which will work with [LCMAPS VOMS authentication](/security/lcmaps-voms-authentication).
+chain, which will work with [LCMAPS VOMS authentication](../security/lcmaps-voms-authentication.md).
 Additionally, it can be reconfigured to provide alternate authentication mechanisms such as Kerberos, SSL, shared
 secret, or even IP-based authentication.
 More information about authorization methods can be found
@@ -144,8 +144,8 @@ Next steps
 
 Once the basic installation is done, additional activities include:
 
--   [Setting up job routes to customize incoming jobs](/compute-element/job-router-recipes)
--   [Submitting jobs to a HTCondor-CE](/compute-element/submit-htcondor-ce) 
--   [Troubleshooting the HTCondor-CE](/compute-element/troubleshoot-htcondor-ce)
--   [Register the CE](/compute-element/install-htcondor-ce#registering-the-ce)
+-   [Setting up job routes to customize incoming jobs](../compute-element/job-router-recipes.md)
+-   [Submitting jobs to a HTCondor-CE](../compute-element/submit-htcondor-ce.md) 
+-   [Troubleshooting the HTCondor-CE](../compute-element/troubleshoot-htcondor-ce.md)
+-   [Register the CE](../compute-element/install-htcondor-ce.md#registering-the-ce)
 -   Register with the OSG GlideinWMS factories and/or the ATLAS AutoPyFactory

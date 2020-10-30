@@ -9,10 +9,10 @@ documentation listed here, try the search bar at the top or contacting us at
 Plan the Site
 -------------
 
-If you have not done so already, [plan the overall architecture of your OSG site](site-planning).
+If you have not done so already, [plan the overall architecture of your OSG site](site-planning.md).
 It is recommended that your plan be sufficiently detailed to include the OSG hosts that are needed and the main software
 components for each host.
-Be sure to consider [the operating systems that OSG supports](release/supported_platforms). For example, a basic site might include:
+Be sure to consider [the operating systems that OSG supports](release/supported_platforms.md). For example, a basic site might include:
 
 | Purpose              | Host                                | Major Software                                           |
 |:---------------------|:------------------------------------|:---------------------------------------------------------|
@@ -41,7 +41,7 @@ Add OSG Software
 If necessary, provision all OSG hosts that are in your site plan that do not exist yet.
 The general steps to installing an OSG site are:
 
-1. Install [OSG Yum Repos](/common/yum) and the [Compute Element software](#installing-and-configuring-the-compute-element)
+1. Install [OSG Yum Repos](./common/yum.md) and the [Compute Element software](#installing-and-configuring-the-compute-element)
    on your CE host
 1. Install the [Worker Node client](#adding-osg-software-to-worker-nodes) on your worker nodes.
 1. Install [optional software](#installing-and-configuring-other-services) to increase the capabilities of your site.
@@ -55,64 +55,64 @@ The general steps to installing an OSG site are:
 
 ### General Installation Instructions ###
 
--   [Security information for OSG signed RPMs](release/signing)
--   [Using Yum and RPM](release/yum-basics)
--   [Install the OSG Yum repositories](/common/yum)
--   [OSG Software release series](release/release_series) - look here to upgrade to OSG 3.5
+-   [Security information for OSG signed RPMs](release/signing.md)
+-   [Using Yum and RPM](release/yum-basics.md)
+-   [Install the OSG Yum repositories](./common/yum.md)
+-   [OSG Software release series](release/release_series.md) - look here to upgrade to OSG 3.5
 
 ### Installing and Managing Certificates for Site Security ###
 
--   [Installing the grid certificate authorities (CAs)](common/ca)
+-   [Installing the grid certificate authorities (CAs)](common/ca.md)
 -   [How do I get X.509 host certificates?](security/host-certs)
--   [Automatically updating the grid certificate authorities (CAs)](security/certificate-management)
--   [OSG PKI command line client reference](security/certificate-management)
+-   [Automatically updating the grid certificate authorities (CAs)](security/certificate-management.md)
+-   [OSG PKI command line client reference](security/certificate-management.md)
 
 ### Installing and Configuring the Compute Element ###
 
 -   Install the compute element (HTCondor-CE and other software):
-    -   [Overview and architecture](compute-element/htcondor-ce-overview)
-    -   [Request a Hosted CE](/compute-element/hosted-ce)
-    -   [Install HTCondor-CE](compute-element/install-htcondor-ce)
-    -   [Configure the HTCondor-CE job router](compute-element/job-router-recipes), including common recipes
-    -   [Troubleshooting HTCondor-CE installations](compute-element/troubleshoot-htcondor-ce)
-    -   [Submitting jobs to HTCondor-CE](compute-element/submit-htcondor-ce)
--   [`osg-configure` Reference](other/configuration-with-osg-configure)
+    -   [Overview and architecture](compute-element/htcondor-ce-overview.md)
+    -   [Request a Hosted CE](./compute-element/hosted-ce.md)
+    -   [Install HTCondor-CE](compute-element/install-htcondor-ce.md)
+    -   [Configure the HTCondor-CE job router](compute-element/job-router-recipes.md), including common recipes
+    -   [Troubleshooting HTCondor-CE installations](compute-element/troubleshoot-htcondor-ce.md)
+    -   [Submitting jobs to HTCondor-CE](compute-element/submit-htcondor-ce.md)
+-   [`osg-configure` Reference](other/configuration-with-osg-configure.md)
 
 ### Adding OSG Software to Worker Nodes ###
 
--   [Worker Node (WN) Client Overview](worker-node/using-wn)
+-   [Worker Node (WN) Client Overview](worker-node/using-wn.md)
 -   Install the WN client software on every worker node – pick a method:
-    -   [Using RPMs](worker-node/install-wn) – useful when managing your worker nodes with a tool (e.g., Puppet, Chef)
-    -   [Using a tarball](worker-node/install-wn-tarball) – useful for installation onto a shared filesystem (does not
+    -   [Using RPMs](worker-node/install-wn.md) – useful when managing your worker nodes with a tool (e.g., Puppet, Chef)
+    -   [Using a tarball](worker-node/install-wn-tarball.md) – useful for installation onto a shared filesystem (does not
         require root access)
-    -   [Using OASIS](worker-node/install-wn-oasis) – useful when [CVMFS](worker-node/install-cvmfs) is already mounted
+    -   [Using OASIS](worker-node/install-wn-oasis.md) – useful when [CVMFS](worker-node/install-cvmfs.md) is already mounted
         on your worker nodes
--   (optional) [Install the CernVM-FS client](worker-node/install-cvmfs) to make it easy for user jobs to use needed
+-   (optional) [Install the CernVM-FS client](worker-node/install-cvmfs.md) to make it easy for user jobs to use needed
     software from OSG's OASIS repositories
--   (optional) [Install singularity on the OSG worker node](worker-node/install-singularity), to allow pilot jobs to
+-   (optional) [Install singularity on the OSG worker node](worker-node/install-singularity.md), to allow pilot jobs to
     isolate user jobs.
 
 
 ### Installing and Configuring Other Services ###
 
 All of these node types and their services are optional, although OSG requires an HTTP caching service if you have
-installed [CVMFS](worker-node/install-cvmfs) on your worker nodes.
+installed [CVMFS](worker-node/install-cvmfs.md) on your worker nodes.
 
--   [Install Frontier Squid](data/frontier-squid), an HTTP caching proxy service.
+-   [Install Frontier Squid](data/frontier-squid.md), an HTTP caching proxy service.
 -   Storage element:
     -   Existing POSIX-based systems (such as NFS, Lustre, or GPFS):
-        -   [Install standalone OSG GridFTP](data/gridftp): GridFTP server
-        -   (optional) [Install load-balanced OSG GridFTP](data/load-balanced-gridftp): when a single GridFTP server
+        -   [Install standalone OSG GridFTP](data/gridftp.md): GridFTP server
+        -   (optional) [Install load-balanced OSG GridFTP](data/load-balanced-gridftp.md): when a single GridFTP server
             isn't enough
     -   Hadoop Distributed File System (HDFS):
-        -   [Hadoop Overview](data/hadoop-overview): HDFS information, planning, and guides
+        -   [Hadoop Overview](data/hadoop-overview.md): HDFS information, planning, and guides
     -   XRootD:
-        -   [XRootd Overview](/data/xrootd/overview): XRootD information, planning, and guides
-        -   [Install XRootD Server](/data/xrootd/install-storage-element): XRootD redirector installation
+        -   [XRootd Overview](./data/xrootd/overview.md): XRootD information, planning, and guides
+        -   [Install XRootD Server](./data/xrootd/install-storage-element.md): XRootD redirector installation
 -   RSV monitoring to monitor and report to OSG on the health of your site
-    -   [Install RSV](monitoring/install-rsv)
--   [Install the GlideinWMS VO Frontend](other/install-gwms-frontend) if your want your users' jobs to run on the OSG
-    -   [Install the RSV GlideinWMS Tester](monitoring/install-rsv-gwms-tester) if you want to test your front-end's
+    -   [Install RSV](monitoring/install-rsv.md)
+-   [Install the GlideinWMS VO Frontend](other/install-gwms-frontend.md) if your want your users' jobs to run on the OSG
+    -   [Install the RSV GlideinWMS Tester](monitoring/install-rsv-gwms-tester.md) if you want to test your front-end's
         ability to submit jobs to sites in the OSG
 
 Verify OSG Software
@@ -122,7 +122,7 @@ Before receiving real OSG work, your site needs to successfully run test jobs fr
 [GlideinWMS](http://glideinwms.fnal.gov/) factory and report usage to the [GRACC](https://gracc.opensciencegrid.org).
 
 
-If you haven't already, [register](/common/registration.md) any publicly facing resources with OSG software installed,
+If you haven't already, [register](./common/registration.md) any publicly facing resources with OSG software installed,
 including HTCondor-CE, Frontier Squid, GridFTP, and/or XRootD.
 
 ### Test locally ###
@@ -131,7 +131,7 @@ It is useful to test *manual* submission of jobs from inside and outside of your
 system.
 If this process does not work manually, it will probably not work for the GlideinWMS pilot factory either.
 
--   [Test job submission into an HTCondor-CE](compute-element/submit-htcondor-ce)
+-   [Test job submission into an HTCondor-CE](compute-element/submit-htcondor-ce.md)
 
 ### Get test jobs ####
 
@@ -170,19 +170,19 @@ To avoid potential issues with OSG job submissions, please [notify us](mailto:he
 to your site, including:
 
 - Major OS version changes on the worker nodes (e.g., upgraded from EL 6 to EL 7)
-- Adding or removing [container support](/worker-node/install-singularity)
+- Adding or removing [container support](./worker-node/install-singularity.md)
 - Policy changes regarding maximum walltime or memory usage
-- Scheduled or unscheduled [downtimes](/common/registration#how-to-register-downtime)
-- [Site topology changes](/common/registration) such as additions, modifications, or retirements
+- Scheduled or unscheduled [downtimes](./common/registration.md#how-to-register-downtime)
+- [Site topology changes](./common/registration.md) such as additions, modifications, or retirements
 - Changes to site contacts, such as administrative or security staff
 
 It is also important to keep your software and data (e.g., CA and VO client) up-to-date with the
-[latest OSG release](/release/notes).
+[latest OSG release](./release/notes.md).
 To stay abreast of software releases, we recommend subscribing to the <mailto:osg-sites@opensciencegrid.org> mailing
 list.
 
 Get Help
 --------
 If you need help with your site, or need to report a security incident,
-follow the [contact instructions](/common/help).
+follow the [contact instructions](./common/help.md).
 

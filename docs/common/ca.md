@@ -13,7 +13,7 @@ We provide three options for installing CA certificates that offer varying level
 3.  Install an RPM that doesn't install **any** CAs.
     This is useful if you'd like to manage CAs yourself while satisfying RPM dependencies.
 
-Prior to following the instructions on this page, you must enable our [yum repositories](/common/yum.md)
+Prior to following the instructions on this page, you must enable our [yum repositories](../common/yum.md)
 
 Installing CA Certificates
 --------------------------
@@ -38,7 +38,7 @@ See [this page](https://opensciencegrid.org/security/CaDistribution/) for detail
 | OSG CA certificates  | `yum install osg-ca-certs`            |
 | IGTF CA certificates | `yum install igtf-ca-certs`           |
 
-To automatically keep your RPM installation of CAs up to date, we recommend the [OSG CA certificates updater](/security/certificate-management#osg-ca-certificates-updater) service.
+To automatically keep your RPM installation of CAs up to date, we recommend the [OSG CA certificates updater](../security/certificate-management.md#osg-ca-certificates-updater) service.
 
 ### Option 2: Install osg-ca-scripts ###
 
@@ -78,7 +78,7 @@ See [this page](https://opensciencegrid.org/security/CaDistribution/) for detail
 
         osg-ca-manage remove --hash <CA-HASH>
 
-A complete set of options available though `osg-ca-manage` command, can be found in the [osg-ca-manage documentation](/security/certificate-management#managing-cas)
+A complete set of options available though `osg-ca-manage` command, can be found in the [osg-ca-manage documentation](../security/certificate-management.md#managing-cas)
 
 ### Option 3: Site-managed CAs ###
 
@@ -232,7 +232,7 @@ Start the services in the order listed and stop them in reverse order. As a remi
 Getting Help
 ------------
 
-To get assistance, please use the [this page](/common/help).
+To get assistance, please use the [this page](../common/help.md).
 
 References
 ----------
@@ -251,8 +251,8 @@ Verifying certificates:
 
 Related software:
 
--   [osg-ca-manage](/security/certificate-management#managing-cas)
--   [osg-ca-certs-updater](/security/certificate-management#osg-ca-certificates-updater)
+-   [osg-ca-manage](../security/certificate-management.md#managing-cas)
+-   [osg-ca-certs-updater](../security/certificate-management.md#osg-ca-certificates-updater)
 
 ### Configuration files ###
 

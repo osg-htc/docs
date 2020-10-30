@@ -9,7 +9,7 @@ Summary of changes
 This release contains:
 
 -   OSG 3.3.21
-    -   osg-configure 1.6.1: [Additional support](/other/configuration-with-osg-configure#subcluster-resource-entry) for ATLAS AGIS in osg-configure
+    -   osg-configure 1.6.1: [Additional support](../../other/configuration-with-osg-configure.md#subcluster-resource-entry) for ATLAS AGIS in osg-configure
     -   [glideinWMS 3.2.17](http://glideinwms.fnal.gov/doc.v3_2_17/history.html)
         -   See known issues below
     -   Important bug fixes for CVMFS server
@@ -38,7 +38,7 @@ This release contains:
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.3.21%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
-Detailed changes are below. All of the documentation can be found [here](/index.md)
+Detailed changes are below. All of the documentation can be found [here](../../index.md)
 
 Known Issues
 ------------
@@ -61,7 +61,7 @@ Updating to the new release
 
 ### Update Repositories
 
-To update to this series, you need to [install the current OSG repositories](/common/yum#install-osg-repositories).
+To update to this series, you need to [install the current OSG repositories](../../common/yum.md#install-osg-repositories).
 
 ### Update Software
 
@@ -78,7 +78,7 @@ root@host # yum update
 Need help?
 ----------
 
-Do you need help with this release? [Contact us for help](/common/help).
+Do you need help with this release? [Contact us for help](../../common/help.md).
 
 Detailed changes in this release
 --------------------------------

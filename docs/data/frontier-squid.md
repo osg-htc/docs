@@ -46,9 +46,9 @@ Before starting the installation process, consider the following points (consult
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-- Ensure the host has [a supported operating system](../release/supported_platforms)
+- Ensure the host has [a supported operating system](../release/supported_platforms.md)
 - Obtain root access to the host
-- Prepare the [required Yum repositories](../common/yum)
+- Prepare the [required Yum repositories](../common/yum.md)
 
 ### Installing Frontier Squid
 
@@ -143,7 +143,7 @@ good to do the test in the
 ## Registering Frontier Squid
 
 To register your Frontier Squid host, follow the general registration instructions
-[here](/common/registration#new-resources) with the following Frontier Squid-specific details:
+[here](../common/registration.md#new-resources) with the following Frontier Squid-specific details:
 
 1.  Add a `Squid:` section to the `Services:` list, with any relevant fields for that service.
     This is a partial example:

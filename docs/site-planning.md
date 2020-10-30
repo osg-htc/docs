@@ -48,7 +48,7 @@ There are multiple approaches for each item, depending on the VOs you support, a
 ### Pilot Jobs
 
 Traditionally, an OSG *Compute Element* (CE) provides remote access for VOs to submit pilot jobs to your
-[local batch system](/index.md#prepare-the-batch-system).
+[local batch system](./index.md#prepare-the-batch-system).
 However, today, there are two options for accepting pilot jobs at your site:
 
 - **Hosted CE**: OSG will run and operate the CE services; the site only needs to provide a SSH pubkey-based
@@ -63,15 +63,15 @@ However, today, there are two options for accepting pilot jobs at your site:
 
 ### Runtime environment
 
-The OSG requires a very minimal runtime environment that can be deployed via [tarball](/worker-node/install-wn-tarball),
-[RPM](/worker-node/install-wn), or through a [global filesystem](/worker-node/install-wn-oasis) on your cluster's worker
+The OSG requires a very minimal runtime environment that can be deployed via [tarball](./worker-node/install-wn-tarball.md),
+[RPM](./worker-node/install-wn.md), or through a [global filesystem](./worker-node/install-wn-oasis.md) on your cluster's worker
 nodes.
 
 We believe that all research applications should be portable and self-contained, with no OS dependencies.
 This provides access to the most resources and minimizes the presence at sites.
 However, this ideal is often difficult to achieve in practice.
 For sites that want to support a uniform runtime environment, we provide a global filesystem called
-[CVMFS](/worker-node/install-cvmfs) that VOs can use to distribute their own software dependencies.
+[CVMFS](./worker-node/install-cvmfs.md) that VOs can use to distribute their own software dependencies.
 
 Finally, many researchers use applications that require a specific OS environment - not just individual dependencies -
 that is distributed as a container.
@@ -82,7 +82,7 @@ OSG supports the use of the [Singularity](http://singularity.lbl.gov/) container
 
 Whether accessed through CVMFS or command-line software like `curl`, the majority of software is moved via HTTP in
 cache-friendly patterns.
-All sites are highly encouraged to use an [HTTP proxy](/data/frontier-squid) to reduce the load on the WAN from the
+All sites are highly encouraged to use an [HTTP proxy](./data/frontier-squid.md) to reduce the load on the WAN from the
 cluster.
 
 Depending on the VOs you want to support, additional data services may be necessary:

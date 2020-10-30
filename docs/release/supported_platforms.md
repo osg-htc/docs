@@ -1,13 +1,13 @@
 Supported Platforms
 ===================
 
-The OSG [release series](/release/release_series) are supported on Red Hat Enterprise Linux (RHEL) compatible platforms
+The OSG [release series](../release/release_series.md) are supported on Red Hat Enterprise Linux (RHEL) compatible platforms
 for 64-bit Intel architectures according to the following table:
 
 !!! note
     As of July 2020, only of a subset of the software stack is supported on RHEL 8-compatible platforms.
     The full software stack will be supported by the end of 2020.
-    You can track packages released for EL8 through our [release notes](/release/notes).
+    You can track packages released for EL8 through our [release notes](../release/notes.md).
 
 | Platform                   | OSG 3.5  | OSG 3.4  |
 |----------------------------|----------|----------|

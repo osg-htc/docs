@@ -19,13 +19,13 @@ These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%
 Containers
 ----------
 
-The [Worker node containers](/worker-node/using-wn-containers/) have been updated to this release.
+The [Worker node containers](../../worker-node/using-wn-containers.md) have been updated to this release.
 
 Notes
 -----
 
 This section describes important upgrade notes and/or caveats for packages available in the OSG release repositories.
-Detailed changes are below. All of the documentation can be found [here](/index.md).
+Detailed changes are below. All of the documentation can be found [here](../../index.md).
 
 -   OSG 3.4 contains only 64-bit components.
 -   The StashCache service is only supported on EL7
@@ -72,7 +72,7 @@ Updating to the new release
 
 ### Update Repositories
 
-To update to this series, you need to [install the current OSG repositories](/common/yum#install-osg-repositories).
+To update to this series, you need to [install the current OSG repositories](../../common/yum.md#install-osg-repositories).
 
 ### Update Software
 
@@ -89,7 +89,7 @@ root@host # yum update
 Need help?
 ----------
 
-Do you need help with this release? [Contact us for help](/common/help).
+Do you need help with this release? [Contact us for help](../../common/help.md).
 
 Detailed changes in this release
 --------------------------------

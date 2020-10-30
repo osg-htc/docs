@@ -3,11 +3,11 @@ DateReviewed: 2020-06-22
 Running StashCache Cache in a Container
 =======================================
 
-The OSG operates the [StashCache data federation](/data/stashcache/overview), which
+The OSG operates the [StashCache data federation](../../data/stashcache/overview.md), which
 provides organizations with a method to distribute their data in a scalable manner to thousands of jobs without needing
 to pre-stage data across sites or operate their own scalable infrastructure.
 
-[Stash Caches](/data/stashcache/install-cache) transfer data to clients such as jobs or users.
+[Stash Caches](../../data/stashcache/install-cache.md) transfer data to clients such as jobs or users.
 A set of caches are operated across the OSG for the benefit of nearby sites;
 in addition, each site may run its own cache in order to reduce the amount of data transferred over the WAN.
 This document outlines how to run StashCache in a Docker container.
@@ -30,7 +30,7 @@ you may also configure the behavior of your cache with the following variables u
 
 Where the environment file on the docker host, `/opt/xcache/.env`, has (at least) the following contents
 (replace `YOUR_SITE_NAME` with the name of your site as
-[registered in Topology](/data/stashcache/install-cache#registering-the-cache)):
+[registered in Topology](../../data/stashcache/install-cache.md#registering-the-cache)):
 ```file
 XC_RESOURCENAME=YOUR_SITE_NAME
 XC_ROOTDIR=/cache
@@ -102,7 +102,7 @@ root@host $ systemctl start docker.stash-cache
 ```
 
 !!! warning
-    You must [register](/data/stashcache/install-cache/#registering-the-cache) the cache before considering it a production service.
+    You must [register](../../data/stashcache/install-cache.md#registering-the-cache) the cache before considering it a production service.
 
 
 
@@ -183,5 +183,5 @@ hello world!
 Getting Help
 ------------
 
-To get assistance, please use the [this page](/common/help) or contact <help@opensciencegrid.org> directly.
+To get assistance, please use the [this page](../../common/help.md) or contact <help@opensciencegrid.org> directly.
 

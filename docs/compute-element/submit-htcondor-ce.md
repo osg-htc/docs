@@ -19,7 +19,7 @@ user@host $ voms-proxy-init
 
 ### Using HTCondor-CE tools
 
-There are two HTCondor-CE tools that allow users to test the functionality of their HTCondor-CE: [condor\_ce\_trace](troubleshoot-htcondor-ce#condor_ce_trace) and [condor\_ce\_run](troubleshoot-htcondor-ce#condor_ce_run). The former is the preferred tool as it provides useful feedback if failure occurs while the latter is simply an automated submission tool. These commands may be run from any host that has `htcondor-ce-client` installed, which you may wish to do if you are testing availability of your CE from an external source.
+There are two HTCondor-CE tools that allow users to test the functionality of their HTCondor-CE: [condor\_ce\_trace](troubleshoot-htcondor-ce.md#condor_ce_trace) and [condor\_ce\_run](troubleshoot-htcondor-ce.md#condor_ce_run). The former is the preferred tool as it provides useful feedback if failure occurs while the latter is simply an automated submission tool. These commands may be run from any host that has `htcondor-ce-client` installed, which you may wish to do if you are testing availability of your CE from an external source.
 
 #### condor_ce_trace
 
@@ -29,7 +29,7 @@ There are two HTCondor-CE tools that allow users to test the functionality of th
 user@host $ condor_ce_trace --debug condorce.example.com
 ```
 
-Replacing `condorce.example.com` with the hostname of the CE you wish to test. On success, you will see `Job status: Completed` and the environment of the job on the worker node it landed on. If you do not get the expected output, refer to the [troubleshooting guide](troubleshoot-htcondor-ce#condor_ce_trace).
+Replacing `condorce.example.com` with the hostname of the CE you wish to test. On success, you will see `Job status: Completed` and the environment of the job on the worker node it landed on. If you do not get the expected output, refer to the [troubleshooting guide](troubleshoot-htcondor-ce.md#condor_ce_trace).
 
 ##### Requesting resources
 
@@ -48,7 +48,7 @@ user@host $ condor_ce_trace --debug --attribute='+xcount=4' --attribute='+maxMem
 For a list of other attributes that can be set with the `--attribute` option, consult the [job attributes](#job-attributes) section.
 
 !!! note
-    Non HTCondor batch systems may need additional configuration to support these job attributes.  See the [job router recipes](/compute-element/job-router-recipes/#setting-batch-system-directives) for details on how to support them.
+    Non HTCondor batch systems may need additional configuration to support these job attributes.  See the [job router recipes](../compute-element/job-router-recipes.md#setting-batch-system-directives) for details on how to support them.
 
 #### condor_ce_run
 
@@ -58,7 +58,7 @@ For a list of other attributes that can be set with the `--attribute` option, co
 user@host $ condor_ce_run -r condorce.example.com:9619 /bin/env
 ```
 
-Replacing `condorce.example.com` with the hostname of the CE you wish to test. The command will not return any output until it completes: When it does you will see the environment of the job on the worker noded it landed on. If you do not get the expected output, refer to the [troubleshooting guide](troubleshoot-htcondor-ce#condor_ce_run).
+Replacing `condorce.example.com` with the hostname of the CE you wish to test. The command will not return any output until it completes: When it does you will see the environment of the job on the worker noded it landed on. If you do not get the expected output, refer to the [troubleshooting guide](troubleshoot-htcondor-ce.md#condor_ce_run).
 
 ### Using a submit file...
 
@@ -206,7 +206,7 @@ Upon successful submission of your job, the Job Router takes control of your job
 
 ### Matching
 
-See [this section](/compute-element/job-router-recipes#how-jobs-match-to-job-routes) for details on how jobs are matched
+See [this section](../compute-element/job-router-recipes.md#how-jobs-match-to-job-routes) for details on how jobs are matched
 to job routes.
 
 **Examples**
@@ -242,7 +242,7 @@ If a user submitted their job with `+foo = bar` in their submit file, the job wo
 
 ### Route defaults
 
-[Route defaults](job-router-recipes#setting-a-default) can be set for batch system queue, maximum memory, number of cores to request, and maximum walltime. The submitting user can override any of these by setting the corresponding [attribute](#job-attributes) in their job.
+[Route defaults](job-router-recipes.md#setting-a-default) can be set for batch system queue, maximum memory, number of cores to request, and maximum walltime. The submitting user can override any of these by setting the corresponding [attribute](#job-attributes) in their job.
 
 **Examples**
 
@@ -294,17 +294,17 @@ If there are issues contacting the CE, you will see error messages about a 'Down
     GridResource: condor condorce.example.com condorce.example.com:9619
 ```
 
-This indicates a communication issue with your CE that can be diagnosed with [condor\_ce\_ping](troubleshoot-htcondor-ce#condor_ce_ping).
+This indicates a communication issue with your CE that can be diagnosed with [condor\_ce\_ping](troubleshoot-htcondor-ce.md#condor_ce_ping).
 
 Reference
 ---------
 
 Here are some other HTCondor-CE documents that might be helpful:
 
--   [HTCondor-CE overview and architecture](htcondor-ce-overview)
--   [Installing HTCondor-CE](install-htcondor-ce)
--   [Configuring HTCondor-CE job routes](job-router-recipes)
--   [The HTCondor-CE troubleshooting guide](troubleshoot-htcondor-ce)
+-   [HTCondor-CE overview and architecture](htcondor-ce-overview.md)
+-   [Installing HTCondor-CE](install-htcondor-ce.md)
+-   [Configuring HTCondor-CE job routes](job-router-recipes.md)
+-   [The HTCondor-CE troubleshooting guide](troubleshoot-htcondor-ce.md)
 
 ### Job attributes
 

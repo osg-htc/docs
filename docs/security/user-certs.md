@@ -161,7 +161,7 @@ You should then get a 2FA authentication request with Duo Mobile; once you accep
 Getting Help
 ------------
 
-To get assistance, please use the [this page](/common/help).
+To get assistance, please use the [this page](../common/help.md).
 
 
 References
