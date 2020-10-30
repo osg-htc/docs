@@ -351,7 +351,7 @@ within the `sec.protocol` configuration attribute, e.g.:
     ...
     -authzto:3600
 
-The default value for this parameter it is 12hrs.
+The default value for this parameter is 12hrs.
 
 
 
