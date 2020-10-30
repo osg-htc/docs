@@ -340,7 +340,7 @@ If you are troubleshooting a GridFTP host, follow these instructions to raise th
 
 ### Common issues
 
-#### A user/VO keeps having access to my XRootD server even after I added to the ban-gridmapfile/ban-voms-mapfile
+#### A user/VO still has access to my XRootD server after adding them to the ban files
 The easiest way to get a user/VO banned immediately is to restart the XRootD server after adding the DN to the corresponding ban file.
 If the above is not possible, the the lifetime of the lcmaps cache for XRootD can be controlled by setting the parameter `authzto`
 within the `sec.protocol` configuration attribute, e.g.:
@@ -453,4 +453,3 @@ be present in your existing `/etc/lcmaps.db` file.
 1.  Edit `/etc/grid-security/gsi-authz.conf` and ensure that it contains the following line with a newline at the end:
 
         globus_mapping liblcas_lcmaps_gt4_mapping.so lcmaps_callout
-
