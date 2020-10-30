@@ -3277,7 +3277,7 @@ If using HTCondor, this will be the partition containing the path defined by the
 variable.</p>
 </li>
 <li>
-<p>Use batch-system capabilities to create a temporary, per-job directory that is cleaned up after each job is run.</p>
+<p>Use batch-system capabilities to create a temporary, per-job directory that is cleaned up after each job is run.  For SLURM, we recommend the Lua plugin <a href="https://github.com/unlhcc/slurm-tmpdir/">Slurm-tmpdir</a>.  It will create per job <code>/scratch</code> and <code>/tmp</code> directories which will be cleaned up after the job completes.</p>
 </li>
 <li>Periodically purge the directory (e.g. <code>tmpwatch</code>).</li>
 </ul>
