@@ -32,6 +32,7 @@ pages:
   - 'Install CVMFS': 'worker-node/install-cvmfs.md'
   - 'Install Singularity': 'worker-node/install-singularity.md'
   - 'Using WN Containers': 'worker-node/using-wn-containers.md'
+  - 'Run OS Pool Backfill Containers': 'worker-node/os-backfill-containers.md'
 - Data:
   - HTTP & OASIS:
     - 'Install Squid HTTP Cache': 'data/frontier-squid.md'
