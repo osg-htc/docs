@@ -341,7 +341,7 @@ If you are troubleshooting a GridFTP host, follow these instructions to raise th
 ### Common issues
 
 #### A user/VO still has access to my XRootD server after adding them to the ban files
-The easiest way to get a user/VO banned immediately is to restart the XRootD server after adding the DN to the corresponding ban file.
+The best way to ensure that a user/VO is immediately banned is to restart the XRootD server after adding the DN or VOMS attributes to the corresponding ban file.
 If the above is not possible, the the lifetime of the LCMAPS cache for XRootD can be controlled by setting the parameter `authzto`
 within the `sec.protocol` configuration attribute, e.g.:
 
