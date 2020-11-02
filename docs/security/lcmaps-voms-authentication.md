@@ -187,6 +187,8 @@ If the pattern matches, that user will be unable to access your resources.
             ...
             -authzto:3600
 
+    The units of `authzto` are in seconds which means that the above will set the lcmpas cache lifetime to 1hr.
+
 !!!warning
     `/etc/grid-security/ban-voms-mapfile` *must* exist, even if you are not banning any VOs.
     In that case, the file should not contain any entries. If the file does not exist, LCMAPS will ban every user.
