@@ -216,6 +216,8 @@ certificates' DNs. An example of the format of a `ban-mapfile` follows:
             ...
             -authzto:3600
 
+    The units of `-authzto` are in seconds which means that the above will set the LCMAPS cache lifetime to 1hr.
+
 !!!warning
     `/etc/grid-security/ban-mapfile` *must* exist, even if you are not banning any users.
     In that case, the file should be blank. If the file does not exist, LCMAPS will ban every user.
