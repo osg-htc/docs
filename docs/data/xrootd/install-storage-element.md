@@ -398,8 +398,8 @@ or
 
 depending on wheter you are deploying an XRootD cluster or a single standalone XRootD server.
 
-!!! note "Notice"
-    This is not useful when XRootD is used for read-only.
+!!! note
+    This is not necessary when XRootD is used for read-only access
 
 (Optional) Installing a GridFTP Server
 --------------------------------------
