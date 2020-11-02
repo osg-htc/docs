@@ -383,7 +383,7 @@ root@host # service frm_purged start
 
 ### (Optional) Enabling xrootd-multiuser
 
-The `xrootd-multiuser` plugin makes the files written through XRootD to be owned by the writting user instaead of the `xrootd` user(default).
+The `xrootd-multiuser` plugin makes the files written through XRootD to be owned by the writing user instead of the `xrootd` user (default).
 For the above to work, it is necessary to install the `xrootd-multiuser` package:
 
     yum install xrootd-multiuser
@@ -544,4 +544,3 @@ Links
 -----
 
 -   [XRootD documentation](https://xrootd.slac.stanford.edu/docs.html)
-
