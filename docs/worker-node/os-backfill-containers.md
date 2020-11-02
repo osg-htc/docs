@@ -3,8 +3,23 @@ Running Open Science Pool Backfill Containers
 
 A Docker container build emulating a worker node for the OSG VO, using token authentication.
 
+<!-- Explain the idea of backfill here -->
+
 This container embeds an OSG pilot and, if provided with valid credentials, connects to the OSG
 flock pool.
+
+Before Starting
+---------------
+
+In order to successfully start payload jobs:
+
+1. Configure authentication. OSGVO administrators can provide the token, which you can then pass to the container via
+   the `TOKEN` environment variable.
+2. Set `GLIDEIN_Site` and `GLIDEIN_ResourceName` so that you get credit for the shared cycles.
+3. Set the `OSG_SQUID_LOCATION` environment variable to the HTTP address to a valid Squid location.
+
+Running the Container
+---------------------
 
 In order to successfully start payload jobs:
 
@@ -32,6 +47,7 @@ docker run -it --rm --user osg \
        opensciencegrid/osgvo-docker-pilot:latest
 ```
 
+<!-- Make this a sub-section of running the container? -->
 Singularity / Bring Your Own Resources
 --------------------------------------
 
@@ -75,3 +91,7 @@ For example:
 ```
 $ singularity build osgvo-pilot.sif docker://opensciencegrid/osgvo-docker-pilot
 ```
+
+<!-- Make this a sub-section of running the container? -->
+Insert CVMFS Stuff here
+-----------------------
