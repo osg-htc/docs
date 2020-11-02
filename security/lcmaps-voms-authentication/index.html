@@ -1126,6 +1126,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#a-uservo-still-has-access-to-my-xrootd-server-after-adding-them-to-the-ban-files" title="A user/VO still has access to my XRootD server after adding them to the ban files" class="md-nav__link">
+    A user/VO still has access to my XRootD server after adding them to the ban files
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#wrong-version-of-gridftp" title="Wrong version of GridFTP" class="md-nav__link">
     Wrong version of GridFTP
   </a>
@@ -3326,6 +3333,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#a-uservo-still-has-access-to-my-xrootd-server-after-adding-them-to-the-ban-files" title="A user/VO still has access to my XRootD server after adding them to the ban files" class="md-nav__link">
+    A user/VO still has access to my XRootD server after adding them to the ban files
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#wrong-version-of-gridftp" title="Wrong version of GridFTP" class="md-nav__link">
     Wrong version of GridFTP
   </a>
@@ -3595,7 +3609,18 @@ If the pattern matches, that user will be unable to access your resources.</p>
 <div class="admonition danger">
 <p class="admonition-title">Danger</p>
 <p>When banning VOs, you must restart the services using LCMAPS VOMS authentication (e.g. <code>condor-ce</code>,
-<code>globus-gridftp-server</code>, etc.) to clear any authentication caches.</p>
+<code>globus-gridftp-server</code>, <code>xrootd</code>, etc.) to clear any authentication caches. In the case of XRootD
+when the service is not restarted the change could take up to 12hrs to take effect. This can be
+modified by defining the <code>authzto</code> option in the <code>sec.protocol</code> configuration attribute, e.g.:</p>
+<div class="codehilite"><pre><span></span>sec.protocol /usr/lib64 gsi \
+    -certdir:/etc/grid-security/certificates \
+    -cert:/etc/grid-security/xrd/xrdcert.pem \
+    ...
+    -authzto:3600
+</pre></div>
+
+
+<p>The units of <code>-authzto</code> are in seconds which means that the above will set the LCMAPS cache lifetime to 1hr.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -3613,7 +3638,18 @@ certificates' DNs. An example of the format of a <code>ban-mapfile</code> follow
 <div class="admonition danger">
 <p class="admonition-title">Danger</p>
 <p>When banning users, you must restart the services using LCMAPS VOMS authentication (e.g. <code>condor-ce</code>,
-<code>globus-gridftp-server</code>, etc.) to clear any authentication caches.</p>
+<code>globus-gridftp-server</code>, <code>xrootd</code>, etc.) to clear any authentication caches. In the case of XRootD
+when the service is not restarted the change could take up to 12hrs to take effect. This can be
+modified by defining the <code>authzto</code> option in the <code>sec.protocol</code> configuration attribute, e.g.:</p>
+<div class="codehilite"><pre><span></span>sec.protocol /usr/lib64 gsi \
+    -certdir:/etc/grid-security/certificates \
+    -cert:/etc/grid-security/xrd/xrdcert.pem \
+    ...
+    -authzto:3600
+</pre></div>
+
+
+<p>The units of <code>-authzto</code> are in seconds which means that the above will set the LCMAPS cache lifetime to 1hr.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -3769,6 +3805,20 @@ VOMS authentication as well as common LCMAPS VOMS authentication issues.</p>
 <p>After you've completed troubleshooting, remember to revert the changes above and restart services!</p>
 </div>
 <h3 id="common-issues">Common issues<a class="headerlink" href="#common-issues" title="Permanent link">&para;</a></h3>
+<h4 id="a-uservo-still-has-access-to-my-xrootd-server-after-adding-them-to-the-ban-files">A user/VO still has access to my XRootD server after adding them to the ban files<a class="headerlink" href="#a-uservo-still-has-access-to-my-xrootd-server-after-adding-them-to-the-ban-files" title="Permanent link">&para;</a></h4>
+<p>The best way to ensure that a user/VO is immediately banned is to restart the XRootD server after adding the DN or VOMS attributes to the corresponding ban file.
+If the above is not possible, the the lifetime of the LCMAPS cache for XRootD can be controlled by setting the parameter <code>authzto</code>
+within the <code>sec.protocol</code> configuration attribute, e.g.:</p>
+<div class="codehilite"><pre><span></span>sec.protocol /usr/lib64 gsi \
+-certdir:/etc/grid-security/certificates \
+-cert:/etc/grid-security/xrd/xrdcert.pem \
+...
+-authzto:3600
+</pre></div>
+
+
+<p>The units of <code>-authzto</code> are in seconds which means that the above will set the LCMAPS cache lifetime to 1hr.
+The default value for this parameter is 12hrs.</p>
 <h4 id="wrong-version-of-gridftp">Wrong version of GridFTP<a class="headerlink" href="#wrong-version-of-gridftp" title="Permanent link">&para;</a></h4>
 <p>If you have the EPEL version of the GridFTP server, you may see error messages in <code>journalctl</code> (EL7),
 <code>var/log/messages</code> (EL6), or the location specified by <code>LCMAPS_LOG_FILE</code>.</p>
