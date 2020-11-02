@@ -353,6 +353,7 @@ within the `sec.protocol` configuration attribute, e.g.:
     ...
     -authzto:3600
 
+The units of `-authzto` are in seconds which means that the above will set the LCMAPS cache lifetime to 1hr.
 The default value for this parameter is 12hrs.
 
 
