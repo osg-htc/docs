@@ -16,6 +16,10 @@ pages:
 - Site Planning: 'site-planning.md'
 - Site Verification: 'site-verification.md'
 - Site Responsibilities: 'site-responsibilities.md'
+- Resource Sharing:
+  - 'Overview': 'resource-sharing/overview.md'
+  - 'Site Backfill': 'resource-sharing/os-backfill-containers.md'
+  - 'User Allocations': 'resource-sharing/os-allocations.md'
 - Compute Entrypoint:
   - 'HTCondor-CE Overview': 'compute-element/htcondor-ce-overview.md'
   - 'Request a Hosted CE': 'compute-element/hosted-ce.md'
@@ -32,7 +36,6 @@ pages:
   - 'Install CVMFS': 'worker-node/install-cvmfs.md'
   - 'Install Singularity': 'worker-node/install-singularity.md'
   - 'Using WN Containers': 'worker-node/using-wn-containers.md'
-  - 'Run OS Pool Backfill Containers': 'worker-node/os-backfill-containers.md'
 - Data:
   - HTTP & OASIS:
     - 'Install Squid HTTP Cache': 'data/frontier-squid.md'
