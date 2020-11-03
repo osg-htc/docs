@@ -49,7 +49,7 @@ There are multiple approaches for each item, depending on the VOs you support, a
 
 Traditionally, an OSG *Compute Entrypoint* (CE) provides remote access for VOs to submit pilot jobs to your
 [local batch system](/detailed-overview.md#prepare-the-batch-system).
-However, today, there are two options for accepting pilot jobs at your site:
+There are two options for accepting pilot jobs at your site:
 
 - **Hosted CE**: OSG will run and operate the CE services; the site only needs to provide a SSH pubkey-based
    authentication access to the central OSG host.
@@ -60,6 +60,10 @@ However, today, there are two options for accepting pilot jobs at your site:
 - **OSG CE**: The traditional option where the site installs and operates a HTCondor-based CE on a dedicated host.
    This provides the best scalability and flexibility, but may require an ongoing time investment from the site.
    The OSG CE install and operation is covered in [this documentation page](compute-element/install-htcondor-ce.md).
+
+There are additional ways that pilots can be started at a site (either by the
+site administrator or an end-user); see
+[resource sharing](resource-sharing/overview.md) for more details.
 
 ### Runtime environment
 
