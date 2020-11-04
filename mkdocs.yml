@@ -76,10 +76,8 @@ pages:
   - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
   - 'Registration': 'common/registration.md'
 - Other:
-  - 'Install GSI-enabled SSH': 'other/gsissh.md'
   - 'Install GlideinWMS Frontend': 'other/install-gwms-frontend.md'
   - 'Install a CVMFS Stratum 1': 'other/install-cvmfs-stratum1.md'
-  - 'Install the Network Performance Toolkit': 'other/network-performance-toolkit.md'
   - 'Troubleshooting Gratia': 'other/troubleshooting-gratia.md'
   - 'Install Transfer Log Filebeats': 'other/schedd-filebeats.md'
 - Release Information:
@@ -215,6 +213,8 @@ pages:
   - 'Yum Basics': 'release/yum-basics.md'
   - 'RPM Signing': 'release/signing.md'
 - Deprecated:
+  - 'Install GSI-enabled SSH': 'other/gsissh.md'
+  - 'Install the Network Performance Toolkit': 'other/network-performance-toolkit.md'
   - 'Install RSV': 'monitoring/install-rsv.md'
   - 'Advanced RSV Configuration': 'monitoring/advanced-rsv-configuration.md'
   - 'Manage RSV via rsv-control': 'monitoring/rsv-control.md'
