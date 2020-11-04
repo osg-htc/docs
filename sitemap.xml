@@ -26,6 +26,21 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://opensciencegrid.org/docs/resource-sharing/overview/</loc>
+     <lastmod>2020-11-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://opensciencegrid.org/docs/resource-sharing/os-backfill-containers/</loc>
+     <lastmod>2020-11-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://opensciencegrid.org/docs/resource-sharing/user-containers/</loc>
+     <lastmod>2020-11-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://opensciencegrid.org/docs/compute-element/htcondor-ce-overview/</loc>
      <lastmod>2020-11-04</lastmod>
      <changefreq>daily</changefreq>
