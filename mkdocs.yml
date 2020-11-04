@@ -16,6 +16,10 @@ pages:
 - Site Planning: 'site-planning.md'
 - Site Verification: 'site-verification.md'
 - Site Responsibilities: 'site-responsibilities.md'
+- Resource Sharing:
+  - 'Overview': 'resource-sharing/overview.md'
+  - 'Site Backfill': 'resource-sharing/os-backfill-containers.md'
+  - 'User Allocations': 'resource-sharing/user-containers.md'
 - Compute Entrypoint:
   - 'HTCondor-CE Overview': 'compute-element/htcondor-ce-overview.md'
   - 'Request a Hosted CE': 'compute-element/hosted-ce.md'
