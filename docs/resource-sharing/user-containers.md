@@ -1,32 +1,28 @@
 User-launched containers with Singularity
 =========================================
 
-The (OSG pilot container)[resource-sharing/os-backfill-containers.md] can be
-launched by users in order to run jobs on resources they have access to.  The
-most common use case, documented here, is to start the pilot container inside
-a SLURM batch job that is launched by the user.
+The (OSG pilot container)[resource-sharing/os-backfill-containers.md] can be launched by users in order to run jobs on
+resources they have access to.
+The most common use case, documented here, is to start the pilot container inside a SLURM batch job that is launched by
+the user.
 
-This is a great way to add personal resources to the Open Science Pool to
-increase throughput for a specific workflow.
+This is a great way to add personal resources to the Open Science Pool to increase throughput for a specific workflow.
 
 Before Starting
 ---------------
 
 In order to configure the container, you will need:
 
-1. A [registered resource](common/registration.md) in OSG Topology; resource
-   registration allows OSG to do proper usage accounting and maintain contacts
-   in case of security incidents.
-2. An authentication token from the OSG.  Please contact
-   [OSG support](mailto:support@opensciencegrid.org) to request a token for your
-   user.
+1. A [registered resource](common/registration.md) in OSG Topology;
+   resource registration allows OSG to do proper usage accounting and maintain contacts in case of security incidents.
+2. An authentication token from the OSG.
+   Please contact [OSG support](mailto:support@opensciencegrid.org) to request a token for your user.
 
 Launching inside SLURM
 ----------------------
 
-To launch inside SLURM, one needs to write a small job control script; the
-details will vary from site-to-site and the followingg is given as an example
-for running on compute hosts with 24 cores:
+To launch inside SLURM, one needs to write a small job control script; the details will vary from site-to-site and the
+followingg is given as an example for running on compute hosts with 24 cores:
 
 ```
 #!/bin/bash
@@ -53,9 +49,9 @@ singularity run --contain --bind /cvmfs docker://opensciencegrid/osgvo-docker-pi
 
 ```
 
-The above example rebuilds the Docker container on each host.  If you plan
-to run large numbers of these jobs,  you can download the Docker container once
-and create a local Singularity image:
+The above example rebuilds the Docker container on each host.
+If you plan to run large numbers of these jobs, you can download the Docker container once and create a local
+Singularity image:
 
 ```
 $ singularity build osgvo-pilot.sif docker://opensciencegrid/osgvo-docker-pilot
@@ -67,6 +63,5 @@ In this case, the `singularity run` command should be changed to:
 singularity run --contain --bind /cvmfs osgvo-pilot.sif
 ```
 
-Note, unlike the
-(site-launched container)[resource-sharing/os-backfill-containers.md], the
-Singularity container above _cannot_ run payloads inside a separate image.
+Note, unlike the (site-launched container)[resource-sharing/os-backfill-containers.md], the Singularity container above
+_cannot_ run payloads inside a separate image.
