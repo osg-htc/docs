@@ -7,7 +7,7 @@ This document will help you troubleshoot problems with the Gratia Accounting, pa
 Gratia/GRACC: The Big Picture
 -----------------------
 
-Gratia is software used in OSG to gather accounting information. The information is collected from individual resources at a site, such as a Compute Element or a a submission host. The program that collects the data is called a "Gratia probe". The information is transferred to a GRACC server. Most sites will choose to send the accounting data to the central OSG Gratia server, but you can also use a Gratia server at your site (which can send forward the data to the central OSG Gratia server). Here is a diagram:
+Gratia is software used in OSG to gather accounting information. The information is collected from individual resources at a site, such as a Compute Entrypoint or a a submission host. The program that collects the data is called a "Gratia probe". The information is transferred to a GRACC server. Most sites will choose to send the accounting data to the central OSG Gratia server, but you can also use a Gratia server at your site (which can send forward the data to the central OSG Gratia server). Here is a diagram:
 
 !!! note "Difference between Gratia and GRACC"
     Gratia is the legacy name of the OSG Accounting system.  GRACC is the new name of the server and hosted components of the accounting system.  When we refer to Gratia, we mean either the data or the probes on the resources.  If we mention GRACC, we are referring to the hosted components that the OSG maintains.
@@ -34,13 +34,13 @@ However, the cron jobs will only do anything if you have enabled them. You enabl
 
     :::console
     root@host # service gratia-probes-cron start
-    Enabling gratia probes cron:                               [  %GREEN%OK%ENDCOLOR%  ]
+    Enabling gratia probes cron:                               [  OK  ]
 
 To disable them:
 
     :::console
     root@host # service gratia-probes-cron stop
-    Disabling gratia probes cron:                               [  %GREEN%OK%ENDCOLOR%  ]
+    Disabling gratia probes cron:                               [  OK  ]
 
 You also need to enable individual probes, usually via `osg-configure`.  Documentation on using `osg-configure` with Gratia [documented elsewhere](configuration-with-osg-configure#gratia).
 
@@ -48,7 +48,7 @@ You also need to enable individual probes, usually via `osg-configure`.  Documen
 
 When the cron jobs are enabled and run, they go through the following process, with minor changes between different Gratia probes:
 
-1.  The probe is invoked. It reads its configuration from `/etc/gratia/%RED%PROBE-NAME%ENDCOLOR%/ProbeConfig`.
+1.  The probe is invoked. It reads its configuration from `/etc/gratia/PROBE-NAME/ProbeConfig`.
 2.  It collects the accounting information from the underlying system. For example, the Condor probe will read it from the `PER_JOB_HISTORY_DIR`, which is usually `/var/lib/gratia/data`.
 3.  It transforms the data into Gratia records and saves them into `/var/lib/gratia/tmp/gratiafiles/`
 4.  When there are sufficient Gratia records, or when sufficient time has passed, it uploads sets of records in batches to the GRACC server, then removes them from the `gratiafiles` directory.
@@ -62,7 +62,7 @@ When the cron jobs are enabled and run, they go through the following process, w
 
 In normal cases, `osg-configure` does the editing of the probe configuration files, at least on the CE. The configuration is found in `/etc/osg/config.d/30-gratia.ini` and [documented elsewhere](configuration-with-osg-configure#gratia).
 
-If there are problems or special configuration, you might need to edit the Gratia configuration files yourself. Each probe has a separate configuration file found in `/etc/gratia/%RED%PROBE-NAME%ENDCOLOR%/ProbeConfig`.
+If there are problems or special configuration, you might need to edit the Gratia configuration files yourself. Each probe has a separate configuration file found in `/etc/gratia/PROBE-NAME/ProbeConfig`.
 
 The ProbeConfig files have many details. A few options that you might need to edit are shown before. This is **not** a complete file, but only shows a subset of the options.
 
@@ -212,8 +212,9 @@ Unlike many Condor settings, a **condor\_reconfig** is not sufficient - you must
 
 The HTCondor Gratia probe will not publish accounting information about jobs without `PER_JOB_HISTORY_DIR`. You can have Gratia read the Condor history file and publish data that way. If you know the time period of the missing data, you should specify a start and end times. This reduces the load on the Gratia collector. To do so:
 
-    :::console
-    %BLUE%Preferred method using start and end times%ENDCOLOR%
+**Preferred method using start and end times**
+
+    :::console hl_lines="1"
     root@host # /usr/share/gratia/condor/condor_meter --history --start-time="2014-06-01" --end-time="2014-06-02" --verbose
     2014-06-03 10:00:36 CDT Gratia: RUNNING condor_meter MANUALLY using HTCondor history from 2014-06-01 to 2014-06-02
     2014-06-03 10:00:36 CDT Gratia: RUNNING: condor_history -l -constraint '((JobCurrentStartDate > 1401598800) && (JobCurrentStartDate < 1401685200))'
@@ -221,7 +222,9 @@ The HTCondor Gratia probe will not publish accounting information about jobs wit
     2014-06-03 10:00:49 CDT Gratia: condor_meter --history: Usage records found: 400
     2014-06-03 10:00:49 CDT Gratia: RUNNING condor_meter MANUALLY Finished
 
-    %BLUE% or if you need to go back to the beginning of time%ENDCOLOR%
+**or if you need to go back to the beginning of time**
+
+    :::console hl_lines="1"
     root@host # /usr/share/gratia/condor/condor_meter --history --verbose
     2014-06-03 10:06:19 CDT Gratia: RUNNING condor_meter MANUALLY using all HTCondor history
     2014-06-03 10:06:19 CDT Gratia: RUNNING: condor_history -l
@@ -266,11 +269,15 @@ This is an example problem where the configuration was bad: there was an incorre
     :::console
     root@host # cd /var/log/gratia/
     root@host # cat 2012-04-03.log 
-    ...
-    %RED%You can see that Gratia is using the correct configuration file:%ENDCOLOR%
+
+You can see that Gratia is using the correct configuration file:
+
+    :::console
     15:06:55 CDT Gratia: Using config file: /etc/gratia/condor/ProbeConfig
 
-    %RED%Here Gratia is removing a file from the Condor PER_JOB_HISTORY_DIR and creating a Gratia accounting record for it%ENDCOLOR%
+Here Gratia is removing a file from the Condor PER_JOB_HISTORY_DIR and creating a Gratia accounting record for it
+
+    :::console hl_lines="4 7"
     15:06:55 CDT Gratia: Creating a UsageRecord 2012-04-03T20:06:55Z
     15:06:55 CDT Gratia: Registering transient input file: /var/lib/gratia/data/history.37.0
     15:06:55 CDT Gratia: ***********************************************************
@@ -279,7 +286,9 @@ This is an example problem where the configuration was bad: there was an incorre
         outbox/r.30604.condor_fermicloud084.fnal.gov_ggratia-osg-itb.opensciencegrid.org_80.gratia.xml__wfIgi30606
     15:06:55 CDT Gratia: Deleting transient input file: /var/lib/gratia/data/history.37.0
 
-    %RED%Later, Gratia failed to connect to the server due to a bad hostname%ENDCOLOR%
+Later, Gratia failed to connect to the server due to a bad hostname
+
+    :::console hl_lines="1"
     15:06:55 CDT Gratia: Failed to send xml to web service due to an error of type "socket.gaierror": (-2, 'Name or service not known')
     ...
     15:06:55 CDT Gratia: Response indicates failure, the following files will not be deleted:
@@ -292,12 +301,12 @@ If you accidentally had a bad Gratia hostname, you probably want to recover your
 
 This can be done, though it's not simple. There are a few things you need to do. But first, you need to understand exactly where Gratia stores files.
 
-When a Gratia extracts accounting information, it creates one file per record and stores it in a directory. The directory is a long name that contains the type of the probe (such as `condor`), the name of the host you're running on, and the name of the GRACC host you're sending the information to. For simplicity, lets call that name *probe-records*, but you'll see what it really looks like below. Within this directory, you'll see some subdirectories:
+When a Gratia extracts accounting information, it creates one file per record and stores it in a directory. The directory is a long name that contains the type of the probe (such as `condor`), the name of the host you're running on, and the name of the GRACC host you're sending the information to. For simplicity, lets call that name `<PROBE-RECORDS>`, but you'll see what it really looks like below. Within this directory, you'll see some subdirectories:
 
 |  Directory                                                                | Purpose                                       |
 |:--------------------------------------------------------------------------|:----------------------------------------------|
-| /var/lib/gratia/tmp/grataifiles/%RED%probe-records%ENDCOLOR%/outbox       | The usual location for the accounting records |
-| /var/lib/gratia/tmp/grataifiles/%RED%probe-records%ENDCOLOR%/staged/store | An overflow location when there are problems  |
+| /var/lib/gratia/tmp/grataifiles/`<PROBE-RECORDS>`/outbox       | The usual location for the accounting records |
+| /var/lib/gratia/tmp/grataifiles/`<PROBE-RECORDS>`/staged/store | An overflow location when there are problems  |
 
 When you recover old records, you need to:
 
@@ -320,14 +329,16 @@ In the examples below, the hostname for gratia was "accidentally" spelled backwa
         :::console
         root@host # /share/gratia/condor/condor\_meter
 
-3. Find the Gratia records that can be easily uploaded. They are located in a a directory with an unwieldly name that includes your hostname and the incorrect name of the Gratia host. You can see the directory name in the Gratia log: the misspelled name is noted in red below, but *it will be different on your computer*.
+3. Find the Gratia records that can be easily uploaded. They are located in a a directory with an unwieldly name that
+includes your hostname and the incorrect name of the Gratia host. You can see the directory name in the Gratia log: the
+misspelled name is between angled brackets and capital letters below, but *it will be different on your computer*.
 
         :::console
         user@host $ less /var/log/gratia/2012-04-06
         ...
         16:04:29 CDT Gratia: Response indicates failure, the following files will not be deleted:
         16:04:29 CDT Gratia:    /var/lib/gratia/tmp/gratiafiles/
-            subdir.condor_fermicloud084.fnal.gov_%RED%aitarg%ENDCOLOR%-osg-itb.opensciencegrid.org_80/
+            subdir.condor_fermicloud084.fnal.gov_<AITARG>-osg-itb.opensciencegrid.org_80/
             outbox/r.916.condor_fermicloud084.fnal.gov_aitarg-osg-itb.opensciencegrid.org_80.gratia.xml__JDlHbNb918
 
     (The filename was wrapped for legibility.)
@@ -335,21 +346,21 @@ In the examples below, the hostname for gratia was "accidentally" spelled backwa
     You can simply copy these to the correct directory. Wait for the Gratia cron job to run, or force it to run.
 
         :::console
-        root@host # cd /var/lib/gratia/tmp/gratiafiles/subdir.condor_fermicloud084.fnal.gov_%RED%aitarg%ENDCOLOR%-osg-itb.opensciencegrid.org_80/outbox/.
-        root@host # mv * /var/lib/gratia/tmp/gratiafiles/subdir.condor_fermicloud084.fnal.gov_%RED%gratia%ENDCOLOR%-osg-itb.opensciencegrid.org_80/outbox/.
+        root@host # cd /var/lib/gratia/tmp/gratiafiles/subdir.condor_fermicloud084.fnal.gov_<AITARG>-osg-itb.opensciencegrid.org_80/outbox/.
+        root@host # mv * /var/lib/gratia/tmp/gratiafiles/subdir.condor_fermicloud084.fnal.gov_gratia-osg-itb.opensciencegrid.org_80/outbox/.
 
 
 4. If this has been a persistent problem, you might have many records. After a while, they are put into a compressed files in another directory. You can move those files, then uncompress them. This is a long name: note that the path ends in "staged/store" instead of "outbox" as above:
 
         :::console
-        %RED%# Find the old files%ENDCOLOR%
-        root@host # cd /var/lib/gratia/tmp/gratiafiles/subdir.condor_fermicloud084.fnal.gov_%RED%aitarg%ENDCOLOR%-osg-itb.opensciencegrid.org_80/staged/store
+        # Find the old files
+        root@host # cd /var/lib/gratia/tmp/gratiafiles/subdir.condor_fermicloud084.fnal.gov_<AITARG>-osg-itb.opensciencegrid.org_80/staged/store
 
-        %RED%# Move them to the correct directory%ENDCOLOR%
-        root@host # mv tz* /var/lib/gratia/tmp/gratiafiles/subdir.condor_fermicloud084.fnal.gov_%RED%gratia%ENDCOLOR%-osg-itb.opensciencegrid.org_80/outbox/.
+        # Move them to the correct directory
+        root@host # mv tz* /var/lib/gratia/tmp/gratiafiles/subdir.condor_fermicloud084.fnal.gov_gratia-osg-itb.opensciencegrid.org_80/outbox/.
         root@host # cd !$
 
-        %RED%# For each tz file:%ENDCOLOR%
+        # For each tz file:
         root@host # tar xf tz.1223.... [name shortened for legibility]
         root@host # rm tz.1223....
 
@@ -363,11 +374,11 @@ If you need to look for more data, you can look at log files for the various ser
 
 | File                                                | Purpose                                                                                                                                                                            |
 |:----------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `/var/log/gratia/%RED%DATE%ENDCOLOR%.log`           | Log file that records information about processing and uploading of Gratia accounting data                                                                                         |
+| `/var/log/gratia/<DATE>.log`                        | Log file that records information about processing and uploading of Gratia accounting data                                                                                         |
 | `/var/log/gratia/gridftpTransfer.log`               | Log file specific to the Gratia GridFTP probe                                                                                                                                      |
 | `/var/lib/gratia/data`                              | Location for Condor and PBS job data before being processed by Gratia<br>Condor's `PER_JOB_HISTORY_DIR` should be set to this location                                       |
 | `/var/lib/gratia/tmp/gratiafiles`                   | Location for temporary Gratia data as it is being processed, usually empty.<br>If you have files that are more than 30 minutes old in this directory, there may be a problem |
-| `/etc/gratia/%RED%PROBE-NAME%ENDCOLOR%/ProbeConfig` | Configuration for Gratia probes, one per probe type</br>Normally you don't need to edit this                                                                                 |
+| `/etc/gratia/<PROBE-NAME>/ProbeConfig`              | Configuration for Gratia probes, one per probe type</br>Normally you don't need to edit this                                                                                 |
 
 Not all RPMs will be on all hosts.  Instead, only the `gratia-probe-common` and the one RPM specific to that host will be installed. The most common RPMs you will see are:
 

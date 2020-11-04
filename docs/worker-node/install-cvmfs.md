@@ -1,5 +1,9 @@
 # Installing and Maintaining the CernVM File System Client
 
+!!!bug "EL7 version compatibility"
+    There is an incompatibility with EL7 < 7.5 due to an old version of the `selinux-policy` package
+
+
 The CernVM File System ([CVMFS](http://cernvm.cern.ch/portal/filesystem)) is an HTTP-based file distribution service
 used to provide data and software for jobs.
 By installing CVMFS, you have access to an alternative installation method for required worker node software and your
@@ -61,7 +65,7 @@ The following will install CVMFS from the OSG yum repository. It will also insta
 CVMFS uses automount, and the steps to configure it are different on EL6 vs EL7. Follow the section that is appropriate for your host's OS:
 
 * [For EL6 hosts](#for-el6-hosts)
-* [For EL7 hosts](#for-el7-hosts)
+* [For EL7 and EL8 hosts](#for-el7-and-el8-hosts)
 
 ### For EL6 hosts
 
@@ -80,7 +84,7 @@ CVMFS uses automount, and the steps to configure it are different on EL6 vs EL7.
         :::console
         root@host # service autofs restart
 
-### For EL7 hosts
+### For EL7 and EL8 hosts
 
 1. If automount is not yet in use on the system, do the following:
 
@@ -102,14 +106,14 @@ CVMFS uses automount, and the steps to configure it are different on EL6 vs EL7.
 
 Create or edit `/etc/cvmfs/default.local`, a file that controls the
 CVMFS configuration. Below is a sample configuration, but please note
-that you will need to **edit the parts in %RED%red%ENDCOLOR%**. In
+that you will need to **edit the parts in angle brackets**. In
 particular, the `CVMFS_HTTP_PROXY` line below must be edited for your
 site.
 
 ```
 CVMFS_REPOSITORIES="`echo $((echo oasis.opensciencegrid.org;echo cms.cern.ch;ls /cvmfs)|sort -u)|tr ' ' ,`"
-CVMFS_QUOTA_LIMIT=%RED%20000%ENDCOLOR%
-CVMFS_HTTP_PROXY=%RED%"http://squid.example.com:3128"%ENDCOLOR%
+CVMFS_QUOTA_LIMIT=<QUOTA LIMIT>
+CVMFS_HTTP_PROXY="<SQUID URL>:<SQUID PORT>"
 ```
 
 CVMFS by default allows any repository to be mounted, no matter what
@@ -125,15 +129,25 @@ Set up a list of CVMFS HTTP proxies to retrieve from in
 the instructions to [install squid from OSG](../data/frontier-squid).
 Vertical bars separating proxies means to load balance between them
 and try them all before continuing. A semicolon between proxies means
-to try that one only after the previous ones have failed. A special
-proxy called DIRECT can be placed last in the list to indicate
-directly connecting to servers if all other proxies fail. A DIRECT
-proxy is acceptable for small sites but discouraged for large sites
-because of the potential load that could be put upon globally shared
-servers.
+to try that one only after the previous ones have failed. For example:
+
+```
+CVMFS_HTTP_PROXY="http://squid1.example.com:3128|http://squid2.example.com:3128;http://backup-squid.example.com:3128"
+```
+
+If no squid is available, it is acceptable for very small sites and
+laptops to set `CVMFS_HTTP_PROXY="DIRECT"`.  In that case, the OSG
+configuration sets the servers to be contacted through
+[globally distributed caches](https://openhtc.io).
+This is strongly discouraged for large sites because of the performance
+impact and because of the potential impact on the global caches.  When
+there is at least one local proxy defined, the OSG configuration instead
+adds fallback proxies at Fermilab and CERN.  Those fallback proxies are
+monitored by a WLCG team that will contact your site when your local
+proxy is failing and help you fix it.
 
 Set up the cache limit in `CVMFS_QUOTA_LIMIT` (in Megabytes). The
-recommended value for most applications is 20000 MB. This is the
+recommended value for most applications is `20000` MB. This is the
 combined limit for all but the osgstorage.org repositories. This cache
 will be stored in `/var/lib/cvmfs` by default; to override the
 location, set `CVMFS_CACHE_BASE` in `/etc/cvmfs/default.local`. Note
@@ -152,7 +166,7 @@ it.
     `cvmfs_cache_t`. This can be done by executing the following command:
 
         :::console
-        user@host $ chcon -R -t cvmfs_cache_t %RED%$CVMFS_CACHE_BASE%ENDCOLOR%
+        user@host $ chcon -R -t cvmfs_cache_t <CVMFS_CACHE_BASE>
 
 ## Validating CVMFS
 

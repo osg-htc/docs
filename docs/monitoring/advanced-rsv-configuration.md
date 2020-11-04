@@ -79,10 +79,10 @@ Each consumer has a configuration file in `/etc/rsv/consumers` named after it. T
 ### Sending RSV records to Nagios
 
 1.  Edit your `/etc/rsv/rsv-nagios.conf` file and fill in the appropriate information. The path of the configuration file is specified in `/etc/rsv/consumers/nagios-consumer.conf`.
-2.  If your Nagios config file contains password information you will want to lock down the permissions. Here is a suggested way to do this (replace %RED%rsvuser%ENDCOLOR% with the group of your RSV user (`rsvuser` by default)):
+2.  If your Nagios config file contains password information you will want to lock down the permissions. Here is a suggested way to do this (replace `<RSVUSER>` with the group of your RSV user (`rsvuser` by default)):
 
         :::console
-        root@host# chown root:%RED%rsvuser%ENDCOLOR% /etc/rsv/rsv-nagios.conf
+        root@host# chown root:<RSVUSER> /etc/rsv/rsv-nagios.conf
         root@host# chmod 0440 /etc/rsv/rsv-nagios.conf
 
 3.  In the configuration file at `/etc/rsv/consumers/nagios-consumer.conf`, check the following two settings:

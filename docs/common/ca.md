@@ -104,7 +104,7 @@ In addition to the above CAs, you can install other CAs via RPM. These only work
 Verifying CA Certificates
 -------------------------
 
-After installing the CA certificates, they can be verified with the following command:
+After installing or updating the CA certificates, they can be verified with the following command:
 
 ```console
 root@host # curl --cacert <CA FILE> \
@@ -132,6 +132,46 @@ CA certificate installation verified
 
 If you do not see `CA certificate installation verified` this means that your CA certificate installation is broken.
 First, ensure that your CA installation is up-to-date and if you continue to see issues please [contact us](#getting-help).
+
+### Keeping CA Certificates Up-to-date ###
+
+It is important to keep CA certificates up-to-date for grid services and their clients to maintain integrity of
+the production grid.
+To verify that your CA certificates are on the latest version on a given host, determine the most recently released
+versions and the method by which your CA certificates have been installed:
+
+1.  Retrieve the versions of the most recently released
+    [IGTF CA certificates](https://repo.opensciencegrid.org/cadist/index.html) and
+    [OSG CA certificates](https://repo.opensciencegrid.org/cadist/index-new.html)
+
+1.  Determine which of the three CA certificate installation methods you are using:
+
+        :::console
+        # rpm -q igtf-ca-certs osg-ca-certs osg-ca-scripts empty-ca-certs
+
+1.  Based on which package is installed from the output in the previous step, choose one of the following options:
+
+    -   **If `igtf-ca-certs` or `osg-ca-certs` is installed**, compare the installed version from step 2 to the
+        corresponding version from step 1.
+
+        -   If the version is older than the corresponding version from step 1, continue onto 
+            [option 1](#option-1-install-an-rpm-for-a-specific-set-of-ca-certificates) to upgrade your current
+            installation and keep your installation up-to-date.
+
+        -  If the versions match, your CA certificates are up-to-date!
+
+    -   **If `osg-ca-scripts` is installed**, run the following command to update your CA certificates:
+
+            :::console
+            # osg-ca-manage refreshCA
+
+        And continue to the instructions in [option 2](#option-2-install-osg-ca-scripts) to enable automatic
+        updates of your CA certificates.
+
+    -   **If `empty-ca-scripts` is installed**, then you are responsible for maintaining your own CA certificates as
+            outlined in [option 3](#option-3-site-managed-cas).
+
+    -   **If none of the packages are installed**, your host likely does not need CA certificates and you are done.
 
 Managing Certificate Revocation Lists
 -------------------------------------

@@ -47,8 +47,8 @@ There are multiple approaches for each item, depending on the VOs you support, a
 
 ### Pilot Jobs
 
-Traditionally, an OSG *Compute Element* (CE) provides remote access for VOs to submit pilot jobs to your
-[local batch system](/index.md#prepare-the-batch-system).
+Traditionally, an OSG *Compute Entrypoint* (CE) provides remote access for VOs to submit pilot jobs to your
+[local batch system](/detailed-overview.md#prepare-the-batch-system).
 However, today, there are two options for accepting pilot jobs at your site:
 
 - **Hosted CE**: OSG will run and operate the CE services; the site only needs to provide a SSH pubkey-based
@@ -59,7 +59,7 @@ However, today, there are two options for accepting pilot jobs at your site:
    Contact <mailto:help@opensciencegrid.org> for more information on the hosted CE.
 - **OSG CE**: The traditional option where the site installs and operates a HTCondor-based CE on a dedicated host.
    This provides the best scalability and flexibility, but may require an ongoing time investment from the site.
-   The OSG CE install and operation is covered in this documentation page.
+   The OSG CE install and operation is covered in [this documentation page](compute-element/install-htcondor-ce.md).
 
 ### Runtime environment
 
@@ -107,9 +107,7 @@ You may need to preempt those jobs when higher priority jobs come around.
 The end-users using the OSG generally prefer having access to your site subject to preemption over having no access
 at all.
 
-<!-- TODO: these figures were all garbage.  Redraw
-## Example Configurations
-This section contains a few example that illustrate how the different elements contributing to an OSG site can be
-combined. Each %GRAY%gray%ENDCOLOR% box represents a physical resource or virtual machine that is required in the
-example.
--->
+Getting Help
+------------
+
+If you need help with planning your site, follow the [contact instructions](common/help.md).

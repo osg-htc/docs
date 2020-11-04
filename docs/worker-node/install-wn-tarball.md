@@ -23,10 +23,12 @@ Download the WN Client
 
 Please pick the `osg-wn-client` tarball that is appropriate for your distribution and architecture. You will find them in <https://repo.opensciencegrid.org/tarball-install/> .
 
-For OSG 3.4:
-
--   [Binaries for 64-bit RHEL6](https://repo.opensciencegrid.org/tarball-install/3.4/osg-wn-client-latest.el6.x86_64.tar.gz)
--   [Binaries for RHEL7](https://repo.opensciencegrid.org/tarball-install/3.4/osg-wn-client-latest.el7.x86_64.tar.gz)
+- For OSG 3.5:
+    -   [Binaries for RHEL7](https://repo.opensciencegrid.org/tarball-install/3.5/osg-wn-client-latest.el7.x86_64.tar.gz)
+    -   [Binaries for RHEL8](https://repo.opensciencegrid.org/tarball-install/3.5/osg-wn-client-latest.el8.x86_64.tar.gz)
+- For OSG 3.4:
+    -   [Binaries for 64-bit RHEL6](https://repo.opensciencegrid.org/tarball-install/3.4/osg-wn-client-latest.el6.x86_64.tar.gz)
+    -   [Binaries for RHEL7](https://repo.opensciencegrid.org/tarball-install/3.4/osg-wn-client-latest.el7.x86_64.tar.gz)
 
 Install the WN Client
 ---------------------
@@ -38,27 +40,31 @@ Install the WN Client
 5.  Download and set up CA certificates using **`osg-ca-manage`** (See the [CA management documentation](/security/certificate-management) for the available options).
 6.  Download CRLs using **`fetch-crl`**.
 
+!!! note
+    The WN client requires a Perl interpreter to be available in `/usr/bin/perl`.
+    If not present, install by running `yum install perl` as root.
+
 !!! warning
     Once `osg-post-install` is run to relocate the install, it cannot be run again.  You will need to unpack a fresh copy.
 
 Example installation (in `/home/user/test-install`, the **`<PATH_TO_CLIENT>/`** is `/home/user/test-install/osg-wn-client` ):
 
 ```console
-root@host # mkdir /home/user/test-install
-root@host # cd /home/user/test-install
-root@host # wget http://repo.opensciencegrid.org/tarball-install/3.4/osg-wn-client-latest.el6.x86_64.tar.gz
-root@host # tar xzf osg-wn-client-latest.el6.x86_64.tar.gz
-root@host # cd osg-wn-client
-root@host # ./osg/osg-post-install
-root@host # source setup.sh
-root@host # osg-ca-manage setupCA --url osg
-root@host # fetch-crl
+user@host $ mkdir /home/user/test-install
+user@host $ cd /home/user/test-install
+user@host $ wget http://repo.opensciencegrid.org/tarball-install/3.4/osg-wn-client-latest.el6.x86_64.tar.gz
+user@host $ tar xzf osg-wn-client-latest.el6.x86_64.tar.gz
+user@host $ cd osg-wn-client
+user@host $ ./osg/osg-post-install
+user@host $ source setup.sh
+user@host $ osg-ca-manage setupCA --url osg
+user@host $ fetch-crl
 ```
 
 Configure the CE
 ----------------
 
-Using the wn-client software installed from the tarball will require a few changes on the compute element so that the resource's configuration can be correctly reported.
+Using the wn-client software installed from the tarball will require a few changes on the compute entrypoint so that the resource's configuration can be correctly reported.
 
 Set `grid_dir` in the `Storage` section of your OSG-Configure configs: [CE configuration instructions](/other/configuration-with-osg-configure#storage). `grid_dir` is used as the `$OSG_GRID` environment variable in running jobs - see the [worker node environment document](/worker-node/using-wn.md). Pilot jobs source `$OSG_GRID/setup.sh` before performing any work. The value set for `grid_dir` must be the path of the wn-client installation directory. This is the path returned by **`echo $OSG_LOCATION`** once you source the setup file created by this installation.
 

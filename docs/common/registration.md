@@ -2,7 +2,7 @@ Registering in the OSG
 ======================
 
 The OSG keeps a registry containing active projects, virtual organizations (VOs), resources, and resource
-downtimes stored as as [YAML files](https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html)
+downtimes stored as [YAML files](https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html)
 in the [topology GitHub repository](https://github.com/opensciencegrid/topology/).
 This registry is used for [accounting data](https://gracc.opensciencegrid.org), contact information, and resource
 availability, particularly if your site is part of the [World LHC Computing Grid](http://wlcg.web.cern.ch/) (WLCG).
@@ -45,22 +45,60 @@ To register as an OSG contact or add your GitHub ID to your pre-existing contact
 Registering Resources
 ---------------------
 
-An OSG resource is a host that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts.
+An OSG resource is a host that provides grid services, e.g. Compute Entrypoints, storage endpoints, or perfSonar hosts.
 See the full list of services that should be registered in the OSG topology
 [here](https://github.com/opensciencegrid/topology/blob/master/topology/services.yaml).
 
 OSG resources are stored under a hierarchy of facilities, sites, and resource groups, defined as follows:
 
-| Level          | Definition                                                                                                                                                             |
-|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Facility       | The institution or company where your resource is located, e.g. `University of Wisconsin`                                                                              |
-| Site           | Smaller than a facility; typically represents an academic department, research group, or a computing center, e.g. `CHTC` for the Center for High Throughput Computing. |
-| Resource Group | A logical grouping of resources, e.g. you may group together resources that serve your Slurm cluster under a resource group named `CHTC-Slurm-HPC`                     |
-| Resource       | A host that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts. A resource may provide more than one service.                        |
+-   **Facility**: The institution or company name where your resource is located.
+-   **Site**: Smaller than a facility; typically represents a computing cluster.
+    Frequently used as the display name for [accounting dashboards](http://gracc.opensciencegrid.org).
+-   **Resource Group**: A logical grouping of resources at a site.
+    Production and testing resources must be placed into separate Resource Groups.
+-   **Resource**: A host that provides grid services, e.g. Compute Entrypoints, storage endpoints, or perfSonar hosts.
+
+Throughout this document, you will be asked to substitute your own facility, site, resource group, and resource names
+when registering with the OSG.
+If you don't already know the relevant names for your resource, using the following naming conventions:
+
+| Level          | Naming convention                                                                                                                                                                   |
+|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Facility       | Unabbreviated institution or company name, e.g. `University of Wisconsin - Madison`                                                                                                 |
+| Site           | Abbreviated facility and cluster name, e.g. `TCNJ-ELSA`, or `New Mexico State - AggieGrid`                                                                                          |
+| Resource Group | Same as the site name. Resource groups used for testintg purposes should have an `-ITB` or `- ITB` suffix, e.g. `TCNJ-ELSA-ITB`                                                     |
+| Resource       | In all capital letters, `<ABBREV FACILTY>-<CLUSTER>-<RESOURCE TYPE>`, for example:<br>`TCNJ-ELSA-CE` or `NMSU-AGGIE-GRID-SQUID`<br>If you don't know which VO to use, pick `OSG`. |
 
 OSG resources are stored in the GitHub repository as YAML files under a directory structure that reflects the above
 hierarchy, i.e. `topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml` from the
 [root of the topology repository](https://github.com/opensciencegrid/topology/tree/master/).
+
+
+### New site
+
+To register a site, first choose a name for it (see the [naming conventions table above](#registering-resources))
+The site name will appear in OSG accounting in places such as the
+[GRACC site dashboard](https://gracc.opensciencegrid.org/dashboard/db/site-summary?orgId=1).
+
+Once you have chosen a site name, open the following in your browser:
+
+    https://github.com/opensciencegrid/topology/new/master?filename=topology/<FACILITY>/<SITE>/SITE.yaml
+
+(replacing `<FACILITY>` and `<SITE>` with the facility and the site [name that you chose](#registering-resources)).
+   
+!!! note ""You're editing a file in a project you don't have write access to.""
+    If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
+    access to the OSG copy of the topology data, which is why you are creating a pull request.
+   
+Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
+the [site template](https://github.com/opensciencegrid/topology/blob/master/template-SITE.yaml) as a guide.
+You may leave the `ID` field blank.
+When adding new entries, make sure that the formatting and indentation of your entry matches that of the template.
+
+Submit your changes as a pull request, providing a descriptive commit message. For example:
+
+    Adding AggieGrid cluster for New Mexico State
+
 
 ### Searching for resources ###
 
@@ -77,19 +115,32 @@ host to avoid any duplicate registrations:
     - **If the search doesn't return any results**, skip to [these instructions](#new-resources) for registering a new
       resource.
     - **If the search returns a single YAML file**, open the link to the YAML file and skip to
-      [these instructions](#modifying-existing-resources) for modifying an existing resources.
+      [these instructions](#modifying-existing-resources) for modifying existing resources.
     - **If the search returns more than one YAML file**, please [contact us](#getting-help).
+
+    !!! note
+        If you are adding a new service to a host which is already registered as a resource,
+        follow the [instructions](#modifying-existing-resources) for modifying existing resources.
 
 ### New resources ###
 
+Before registering a new resource, make sure that its FQDN is not [already registered](#searching for resources).
+
 To register a new resource, follow the instructions below:
 
-1. If you haven't already, verify that the FQDN of your resource is not [already registered](#searching-for-resources)
+1. Find the facility, site, and resource group for your resource in the [topology repository](https://github.com/opensciencegrid/topology/tree/master/)
+   under this directory structure: 
+   `topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml`.
+   When searching for these, keep in mind that case and spaces matter.
 
-1. Choose the names of your facility, site, and resource group, ensuring that the names match any pre-existing
-   facilities, sites, or resource groups (including case and spaces).
-   Follow the instructions below, replacing instances of `<FACILITY>`, `<SITE>`, and `<RESOURCE GROUP>` with the
-   corresponding names that you chose above:
+    - If you do not have a facility, contact <mailto:help@opensciencegrid.org> for help.
+    - If you have a facility but not a site, first follow the instructions
+      for [registering a site](#new-site) above.
+    - If you have a facility and a site but not a resource group, pick a [resource group name](#registering-resources).
+
+1. Once you have your facility, site, and resource group, follow the instructions below,
+   replacing instances of `<FACILITY>`, `<SITE>`, and `<RESOURCE GROUP>`
+   with the corresponding [names that you chose above](#registering-resources):
 
     - If your resource group already exists under your facility and site, open the following URL in your browser:
 
@@ -100,7 +151,7 @@ To register a new resource, follow the instructions below:
 
             https://github.com/opensciencegrid/topology/edit/master/topology/University of Wisconsin/CHTC/CHTC.yaml
 
-    - If any of your facility, site, or resource group do not exist, open the following URL in your browser:
+    - If your resource group does not exist, open the following URL in your browser:
 
             https://github.com/opensciencegrid/topology/new/master?filename=topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml
 
@@ -121,7 +172,7 @@ To register a new resource, follow the instructions below:
 
 1. Submit your changes as a pull request, providing a descriptive commit message. For example:
 
-        Adding a new compute element to the CHTC
+        Adding a new compute entrypoint to the CHTC
 
 ### Modifying existing resources ###
 
@@ -140,6 +191,9 @@ To modify an existing resource, follow these instructions:
    You may leave any `ID` or `GroupID` fields blank.
    Make sure that the formatting and indentation of the modified entry does not change.
 
+   If you are adding a new service to a host that is already registered as a resource,
+   add the new service to the existing resource; do not create a new resource for the same host.
+
     !!! note ""You're editing a file in a project you don't have write access to.""
         If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
         access to the OSG copy of the topology data, which is why you are creating a pull request.
@@ -150,30 +204,24 @@ To modify an existing resource, follow these instructions:
 
 ### Retiring resources ###
 
-To retire an already registered resource, choose one of the following, depending on the resource's service(s):
+To retire an already registered resource, set `Active: false`. For example:
 
-- If the resource contains a `CE` (Compute Element) or `Submit Node` (GlideinWMS frontend) service, set `Active: false`
-  within resource group's YAML file.
-  For example, to remove the resource GLOW, edit the file `topology/University of Wisconsin/GLOW/GLOW.yaml`, setting
-  `Active: false`:
+``` hl_lines="5"
+...
+Production: true
+Resources:
+  GLOW:
+    Active: false
+    ...
+    Services:
+      CE:
+        Description: Compute Entrypoint
+        Details:
+          hidden: false
+```
 
-        ...
-        Production: true
-        Resources:
-          GLOW:
-            Active: %RED%false%ENDCOLOR%
-            ...
-            Services:
-              CE:
-                Description: Compute Element
-                Details:
-                  hidden: false
-
-    You may have to add the `Active` attribute it if does not already exist within the resource definition.
-
-- If the resource does not contain a `CE` (Compute Element) or OSG submitter service, you may remove the resource
-  completely.
-  If there are no more resources in the resource group, you may remove the entire resource group file.
+If the `Active` attribute does not already exist within the resource definition, add it.
+If your resource becomes available again, set `Active: true`.
 
 
 Registering Resource Downtimes
@@ -182,9 +230,9 @@ Registering Resource Downtimes
 Resource downtime is a finite period of time for which one or more of the grid services of a registered resource are
 unavailable.
 
-!!! note
-    If your registered resource is expected to be in downtime for an undetermined amount of time, set `Active: False`
-    in the resource instead.
+!!! warning
+    If you expect your resource to be indefinitely unavailable, [retire the resource](#retiring-resources) instead of
+    registering a downtime.
 
 Downtimes are stored in YAML files alongside the resource group YAML files as described [here](#registering-resources).
 
@@ -193,7 +241,7 @@ Wisconsin` can be found and registered in the following file, relative to the
 [root of the topology repository](https://github.com/opensciencegrid/topology/tree/master/):
 
 ```
-topology/University of Wisconsin/CHTC/CHTC-Slurm-HPC_downtime.yaml`
+topology/University of Wisconsin/CHTC/CHTC-Slurm-HPC_downtime.yaml
 ```
 
 !!! note 

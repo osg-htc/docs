@@ -42,17 +42,22 @@ To see a list of modules, including whether they can be run separately, run:
 ``` console
 [root@server] osg-configure -l
 ```
-If the module can be run separately, specify it with the `-m %RED%<MODULE>%ENDCOLOR%` option:
+If the module can be run separately, specify it with the `-m <MODULE>` option, where `<MODULE>` is one of the items
+of the output of the previous command.
+
 ``` console
-[root@server] osg-configure -c -m %RED%<MODULE>%ENDCOLOR%
+[root@server] osg-configure -c -m <MODULE>
 ```
 
 Options may be specified in multiple INI files, which may make it hard to determine which value OSG-Configure uses.
 You may query the final value of an option via one of these methods:
 ``` console
-[root@server] osg-configure -o %RED%<OPTION>%ENDCOLOR%
-[root@server] osg-configure -o %RED%<SECTION>%ENDCOLOR%.%RED%<OPTION>%ENDCOLOR%
+[root@server] osg-configure -q -o <OPTION>
+[root@server] osg-configure -q -o <SECTION>.<OPTION>
 ```
+
+Where `<OPTION>` is the variable from which we want to know the value and `<SECTION>` refers to a section in any of the INI
+files, i.e. any name between brackets e.g. `[Squid]`.
 
 Logs are written to `/var/log/osg/osg-configure.log`.
 If something goes wrong, specify the `-d` flag to add more verbose output to `osg-configure.log`.
@@ -260,7 +265,6 @@ This section is contained in `/etc/osg/config.d/30-rsv.ini` which is provided by
 | **gratia_probes**    | String                    | This settings indicates which rsv gratia probes should be used.  It is a list of probes separated by a comma.  Valid probes are metric, condor, pbs, lsf, sge, managedfork, hadoop-transfer, and gridftp-transfer                                                      |
 | ce_hosts             | String                    | This option lists the serviceURI of the CEs that generic RSV CE probes should check.  This should be a list of serviceURIs (`hostname[:port/service]`) separated by a comma (e.g. `my.host,my.host2,my.host3:2812`).                                                   |
 | htcondor_ce_hosts    | String                    | This option lists the serviceURI of the HTCondor-CE-based CEs that the RSV HTCondor-CE probes should check. This should be a list of serviceURIs (`hostname[:port/service]`) separated by a comma (e.g. `my.host,my.host2,my.host3:2812`). |                           |
-| gums_hosts           | String                    | This option lists the serviceURI or FQDN of the CEs or SEs, using GUMS for authentication, that the RSV GUMS probes should check.  This should be a list of *CE* or *SE* FQDNs (and _not a GUMS server FQDN_) separated by a comma (e.g. `my.host,my.host2,my.host3`). |
 | gridftp_hosts        | String                    | This option lists the serviceURI of the GridFTP servers that the RSV GridFTP probes should check.  This should be a list of serviceURIs (`hostname[:port/service]`) separated by a comma (e.g. `my.host.iu.edu:2812,my.host2,my.host3`).                               |
 | gridftp_dir          | String                    | This should be the directory that the GridFTP probes should use during testing.  This defaults to `/tmp` if left blank or set to `UNAVAILABLE`.                                                                                                                        |
 | **srm_hosts**        | String                    | This option lists the serviceURI of the srm servers that the RSV srm probes should check.  This should be a list of serviceURIs (`hostname[:port/service]`) separated by a comma (e.g. `my.host,my.host2,my.host3:8444`).                                              |
@@ -390,16 +394,12 @@ This section primarily deals with authentication/authorization. For information 
 
 | Option                                | Values Accepted                                | Explanation                                                                                                                                                                                                                                                                                                                                                                          |
 |---------------------------------------|------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| glexec\_location                      | String                                         | This gives the location of the glExec installation on the worker nodes, if it is present. Can be defined in terms of an environment variable (e.g. `$FOO`) that will be evaluated on the worker node. If it is not installed, set this to `UNAVAILABLE`. glExec does not work with the `vomsmap` authorization method on OSG 3.3 and **is entirely unsupported starting in OSG 3.4** |
-| **gums\_host**                        | String                                         | This setting is used to indicate the hostname of the GUMS host that should be used for authentication, if the authorization method below is set to `xacml`. If GUMS is not used, this should be set to `UNAVAILABLE`. **GUMS is deprecated in OSG 3.4**                                                                                                                              |
 | **authorization\_method**             | `gridmap`, `xacml`, `local-gridmap`, `vomsmap` | This indicates which authorization method your site uses. **`xacml`** **is deprecated in OSG 3.4**                                                                                                                                                                                                                                                                                   |
 | edit\_lcmaps\_db                      | `True`, `False`                                | (Optional, default True) If true, osg-configure will overwrite `/etc/lcmaps.db` to set your authorization method. The previous version will be backed up to `/etc/lcmaps.db.pre-configure`                                                                                                                                                                                           |
 | all\_fqans                            | `True`, `False`                                | (Optional, default False) If true, vomsmap auth will use all VOMS FQANs of a proxy for mapping -- see [documentation](../security/lcmaps-voms-authentication#mapping-using-all-fqans)                                                                                                                                                                                                |
-| copy\_host\_cert\_for\_service\_certs | `True`, `False`                                | (Optional, default False) If true, osg-configure will create a copy or copies of your host cert and key as service certs for RSV and (on OSG 3.3) GUMS                                                                                                                                                                                                                               |
 
 **OSG 3.4 changes:**
 
--   `glexec_location` must be `UNAVAILABLE` or unset
 -   `authorization_method` defaults to `vomsmap`
 -   `authorization_method` will raise a warning if set to `xacml`
 
@@ -468,9 +468,13 @@ This section is contained in `/etc/osg/config.d/10-storage.ini` which is provide
 | site_write       | String          | This setting should be the location or url to a directory that can be write to stage out data via the variable `$OSG_SITE_WRITE`. This is an url if you are using a SE. If not set, the default is UNAVAILABLE |
 
 
-!!! note
-    All of these can be defined in terms of an environment variable
-    (e.g. `$FOO`) that will be evaluated on the worker node.
+!!! note "Dynamic worker node paths"
+    The above variables may be set to an environment variable that is set on your site's worker nodes.
+    For example, if each of your worker nodes has a different location for its scratch directory specified by
+    `LOCAL_SCRATCH_DIR`, set the following configuration:
+
+        [Storage]
+        worker_node_temp = $LOCAL_SCRATCH_DIR
 
 **grid_dir**:<br/>
 If you have installed the worker node client via RPM (the normal case) it

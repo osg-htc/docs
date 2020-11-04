@@ -10,7 +10,7 @@ This document describes how to install a CVMFS Stratum 1. There are many differe
 Before starting the installation process, consider the following points:
 
 - **User IDs and Group IDs:** If your machine is also going to be a repository server like OSG Operations, the installation will create the same user and group IDs as the [cvmfs client](../worker-node/install-cvmfs).  If you are installing frontier-squid, the installation will also create the same user id as [frontier-squid](../data/frontier-squid).
--  **Network ports:** This installation will host the stratum 1 on ports 80 and 8000 and, if squid is installed, it will host the uncached apache on port 8081.
+-  **Network ports:** This installation will host the stratum 1 on ports 80, 8000 and 8080, and if squid is installed it will host the uncached apache on port 8081.  Port 80 is default but sometimes runs into operational problems, port 8000 is the alternate for most production use, and port 8080 is for Cloudflare (https://openhtc.io).
 - **Host choice:** -  Make sure there is adequate disk space for the repositories that will be served, at `/srv/cvmfs`. Do not use xfs as the filesystem type on operating systems older than EL7, because it has been demonstrated to perform poorly for CVMFS repositories; instead use ext3 or ext4. About 10GB should be reserved for apache and squid logs under /var/log on a production server, although they normally will not get that large. A Stratum 1 that is also a repository server should have at least 5GB available at `/var/cache`.
 - **SELinux** - Ensure SELinux is disabled
 
@@ -103,6 +103,7 @@ If you are not installing frontier-squid, instead put the following lines into t
 
 ```
 Listen 8000 KeepAlive On
+Listen 8080 KeepAlive On
 ```
 
 If you will be serving opensciencegrid.org repositories, you have to allow for old client configurations that access repositories without the domain name added. For that reason, you will need to remove each `/etc/httpd/conf.d/cvmfs.<repositoryname>.conf` that adding a replica creates (this is included in the [add_osg_repository script](https://github.com/opensciencegrid/oasis-server/blob/master/goc/bin/add_osg_repository)), and instead add the following to `/etc/httpd/conf.d/cvmfs.conf`:
@@ -177,10 +178,11 @@ awk --file `dirname $0`/customhelps.awk --source '{
 
 # cache only api calls 
 insertline("^http_access deny all", "acl CVMFSAPI urlpath_regex ^/cvmfs/[^/]*/api/")
-insertline("^http_access deny all", "cache deny CVMFSAPI")
+insertline("^http_access deny all", "cache deny !CVMFSAPI")
 
 # port 80 is also supported, through an iptables redirect 
 setoption("http_port", "8000 accel defaultsite=localhost:8081 no-vhost")
+insertline("TAG: http_port","http_port 8080 accel defaultsite=localhost:8081 no-vhost")
 setoption("cache_peer", "localhost parent 8081 0 no-query originserver")
 
 # allow incoming http accesses from anywhere
@@ -210,11 +212,10 @@ root@host # yum -y install iptables-services
 root@host # systemctl enable iptables
 ```
 
-Forward port 80 to port 8000 (first command is for external, second command for localhost):
+Forward port 80 to port 8000:
 
 ```console
 root@host # iptables -t nat -A PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8000 
-root@host # iptables -t nat -A OUTPUT -o lo -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8000 
 root@host # service iptables save
 ```
 
@@ -222,7 +223,6 @@ On EL7 also set up the the same port forwarding for IPv6 (unfortunately it is no
 
 ```console
 root@host # ip6tables -t nat -A PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8000
-root@host # ip6tables -t nat -A OUTPUT -o lo -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8000
 root@host # service ip6tables save
 ```
 

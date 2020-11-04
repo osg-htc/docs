@@ -84,7 +84,7 @@ from OSG 3.4.
 The upgrade process occurs in several steps:
 
 1. [Preparing for the upgrade](#preparing-for-the-upgrade)
-1. [Updating to OSG 3.4](#updating-to-osg-34)
+1. [Updating to OSG 3.5 or 3.4](#updating-to-osg-35-or-34)
 1. [Upgrading the Primary NameNode](#upgrading-the-primary-namenode)
 1. [Upgrading the DataNodes](#upgrading-the-datanodes)
 1. [Upgrading the Secondary NameNode](#upgrading-the-secondary-namenode)
@@ -131,7 +131,7 @@ Before upgrading, backup your configuration data and HDFS metadata.
    If more than one directory appears in the list (as in the example above), choose the most convenient directory.
    All of the directories in the list will have the same contents.
 
-### Updating to OSG 3.4 ###
+### Updating to OSG 3.5 or 3.4 ###
 
 Once your HDFS services have been turned off and the HDFS metadata has been backed up, update each node to OSG 3.4 by
 following the instructions in [this section](/release/release_series/#updating-from-old).
@@ -252,7 +252,7 @@ See <http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/hdfs-d
 
 #### Special NameNode instructions for brand new installs
 
-If this is a new installation (%RED%and only if this is a brand new installation%ENDCOLOR%), you should run the following command as the `hdfs` user. (Otherwise, be sure to `chown` your storage directory to hdfs after running):
+If this is a new installation (**and only if this is a brand new installation**), you should run the following command as the `hdfs` user. (Otherwise, be sure to `chown` your storage directory to hdfs after running):
 
 ``` console
 hadoop namenode -format
@@ -269,10 +269,10 @@ FUSE is typically installed as part of this installation, but, if you are runnin
 You can add the FUSE to be mounted at boot time by adding the following line to `/etc/fstab`:
 
 ``` file
-hadoop-fuse-dfs# %RED%/mnt/hadoop%ENDCOLOR% fuse server=%RED%namenode.host%ENDCOLOR%,port=9000,rdbuffer=131072,allow_other 0 0
+hadoop-fuse-dfs# </MNT/HADOOP> fuse server=<NAMENODE.HOST>,port=9000,rdbuffer=131072,allow_other 0 0
 ```
 
-Be sure to change the `/mnt/hadoop` mount point and `namenode.host` to match your local configuration. To match the help documents, we recommend using `/mnt/hadoop` as your mountpoint.
+Be sure to change the `</MNT/HADOOP>` mount point and `<NAMENODE.HOST>` to match your local configuration. To match the help documents, we recommend using `</MNT/HADOOP>` as your mountpoint.
 
 Once your `/etc/fstab` is updated, to mount FUSE run:
 
@@ -419,7 +419,7 @@ This file controls which paths in HDFS should be monitored. This is in the Windo
 **Note: for the current version of the storage.cfg, there is an error, and you may need to delete the "probe/" subdirectory for the ProbeConfig location**
 
 ``` file
-ProbeConfig = /etc/gratia/%RED%probe/%ENDCOLOR%hadoop-storage/ProbeConfig
+ProbeConfig = /etc/gratia/probe/hadoop-storage/ProbeConfig
 ```
 
 For each logical "area" (arbitrarily defined by you), specify both a given name and a list of paths that belong to that area. Unix globs are accepted.
@@ -495,10 +495,11 @@ Validation
 The first thing you may want to do after installing and starting your primary NameNode is to verify that the web interface works. In your web browser go to:
 
 ``` file
-http://%RED%namenode.hostname%ENDCOLOR%:50070/dfshealth.jsp
+http://<NAMENODE.HOSTNAME>:50070/dfshealth.jsp
 ```
 
-Get familiar with Hadoop commands. Run hadoop with no arguments to see the list of commands.
+Change `<NAMENODE.HOSTNAME>` for the hostname of your Primary NameNode. Get familiar with Hadoop commands.
+Run hadoop with no arguments to see the list of commands.
 
 <details>
   <summary>Show detailed ouput</summary>
@@ -642,10 +643,11 @@ Troubleshooting
 To view all of the currently configured settings of Hadoop from the web interface, enter the following url in your browser:
 
 ``` file
-http://%RED%namenode.hostname%ENDCOLOR%:50070/conf
+http://<NAMENODE.HOSTNAME>:50070/conf
 ```
 
-You will see the entire configuration in XML format, for example:
+Change `<NAMENODE.HOSTNAME>` for the hostname of your Primary NameNode. You will see the entire configuration in XML
+format, for example:
 
 <details>
   <summary>Expand XML configuration</summary>
@@ -868,7 +870,7 @@ You will see the entire configuration in XML format, for example:
 </p>
 </details>
 
-Please refer to the [Apache Hadoop FAQ webpage](http://wiki.apache.org/hadoop/FAQ) for answers to common questions/concerns
+Please refer to the [Apache Hadoop documentation](https://hadoop.apache.org/docs/r2.6.0/) for answers to common questions/concerns
 
 ### FUSE ###
 
@@ -881,10 +883,11 @@ If you are running a custom kernel, then be sure to enable the `fuse` module wit
 To start the FUSE mount in debug mode, you can run the FUSE mount command by hand:
 
 ``` console
-root@host #  /usr/bin/hadoop-fuse-dfs  /mnt/hadoop -o rw,server=%RED%namenode.host%ENDCOLOR%,port=9000,rdbuffer=131072,allow_other -d
+root@host #  /usr/bin/hadoop-fuse-dfs  /mnt/hadoop -o rw,server=<NAMENODE.HOST>,port=9000,rdbuffer=131072,allow_other -d
 ```
 
-Debug output will be printed to stderr, which you will probably want to redirect to a file. Most FUSE-related problems can be tackled by reading through the stderr and looking for error messages.
+Change `<NAMENODE.HOSTNAME>` for the hostname of your Primary NameNode. Debug output will be printed to stderr, which
+you will probably want to redirect to a file. Most FUSE-related problems can be tackled by reading through the stderr and looking for error messages.
 
 #### GridFTP ####
 
@@ -988,7 +991,7 @@ To get assistance, please use the [this page](/common/help).
 References
 ----------
 
--   [Using Hadoop as a Grid Storage Element](http://www.iop.org/EJ/article/1742-6596/180/1/012047/jpconf9_180_012047.pdf), *Journal of Physics Conference Series, 2009*.
+-   [Using Hadoop as a Grid Storage Element](https://iopscience.iop.org/article/10.1088/1742-6596/180/1/012047), *Journal of Physics Conference Series, 2009*.
 -   [Hadoop Distributed File System for the Grid](http://osg-docdb.opensciencegrid.org/0009/000911/001/Hadoop.pdf), *IEEE Nuclear Science Symposium, 2009*.
 
 ### Users ###

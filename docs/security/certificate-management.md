@@ -19,7 +19,7 @@ OSG PKI Command Line Clients
 
 ### Overview
 
-The OSG PKI Command Line Clients provide a command-line interface for requesting and issuing host certificates from the OSG PKI. They complement the [OIM Web Interface](https://oim.opensciencegrid.org/oim/certificateuser).
+The OSG PKI Command Line Clients provide a command-line interface for creating certificate signing requests (CSRs). 
 
 ### Prerequisites
 
@@ -38,7 +38,7 @@ root@host # yum install osg-pki-tools
 Usage
 -----
 
-Documentation for usage of the osg-pki-tools can be found [here](https://github.com/opensciencegrid/osg-pki-tools/blob/master/README.txt)
+Documentation for usage of the osg-pki-tools can be found [here](https://github.com/opensciencegrid/osg-pki-tools/blob/master/README.md)
 
 
 OSG CA Certificates Updater
@@ -174,7 +174,7 @@ Next decide at what location to install the Certificate Authority Package:
 The Certificate Authority Package is preferably be used by grid users without root privileges *or* if the CA certificates will not be shared by other installations on the same host.
 
 ``` console
-root@host # osg-ca-manage setupca --location %RED%root%ENDCOLOR% --url osg
+root@host # osg-ca-manage setupca --location root --url osg
 Setting CA Certificates for at '/etc/grid-security/certificates'
 
 Setup completed successfully.
@@ -185,7 +185,7 @@ After a successful installation the certificates will be installed in (`/etc/gri
 If you need to need to install it with out root privileges use
 
 ``` console
-user@host $ osg-ca-manage setupca --location %RED%$HOME/certificates%ENDCOLOR% --url osg
+user@host $ osg-ca-manage setupca --location $HOME/certificates --url osg
 Setting CA Certificates for at '$HOME/certificates'
 
 Setup completed successfully.
