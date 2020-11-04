@@ -30,12 +30,14 @@ Configuring the Origin
 In addition to the required configuration above (ports and file systems), you may also configure the behavior of your
 origin with the following variables using an environment variable file:
 
-Where the environment file on the docker host, `/opt/origin/.env`, has (at least) the following contents (replace
-`YOUR_SITE_NAME` with the name of your site as
-[registered in Topology](/data/stashcache/install-origin/#registering-the-origin)):
+Where the environment file on the docker host, `/opt/origin/.env`, has (at least) the following contents,
+replacing `<YOUR_RESOURCE_NAME>` with the resource name of your origin as
+[registered in Topology](install-origin.md#registering-the-origin)
+and `<FQDN>` with the public DNS name that should be used to contact your origin:
 
 ```file
 XC_RESOURCENAME=YOUR_SITE_NAME
+ORIGIN_FQDN=<FQDN>
 ```
 
 Populating Origin Data
@@ -68,6 +70,9 @@ user@host $ docker run --rm --publish 1094:1094 \
              opensciencegrid/stash-origin:fresh
 ```
 
+Replacing `<HOST PARTITION>` with the host directory containing data that your origin should serve.
+See [this section](#populating-origin-data) for details.
+
 !!!warning
     A container deployed this way will serve the entire contents of `<HOST PARTITION>`.
 
@@ -77,7 +82,7 @@ An example systemd service file for StashCache.
 This will require creating the environment file in the directory `/opt/origin/.env`.
 
 !!! note
-    This example systemd file assumes `<HOST PARTITION>` is `/srv/origin`.
+    This example systemd file assumes `<HOST PARTITION>` is `/srv/origin-public`.
 
 Create the systemd service file `/etc/systemd/system/docker.stash-origin.service` as follows:
 
@@ -93,7 +98,7 @@ Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
 ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin:fresh
-ExecStart=/usr/bin/docker run --rm --name %n -p 1094:1094 -p 1095:1095 -v /srv/origin:/xcache/namespace --env-file /opt/origin/.env opensciencegrid/stash-origin:fresh
+ExecStart=/usr/bin/docker run --rm --name %n -p 1094:1094 -p 1095:1095 -v /srv/origin-public:/xcache/namespace --env-file /opt/origin/.env opensciencegrid/stash-origin:fresh
 
 [Install] 
 WantedBy=multi-user.target
