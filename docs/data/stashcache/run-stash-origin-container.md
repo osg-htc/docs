@@ -3,6 +3,12 @@ DateReviewed: 2020-06-22
 Running StashCache Origin in a Container
 ========================================
 
+!!! warning
+    If you want to run origins for authenticated and unauthenticated data,
+    you **must** run them on separate hosts.
+    This requires registering a resource for each host.
+    This requirement will be removed in a future version of StashCache.
+
 The OSG operates the [StashCache data federation](/data/stashcache/overview), which
 provides organizations with a method to distribute their data in a scalable manner to thousands of jobs without needing
 to pre-stage data across sites or operate their own scalable infrastructure.
