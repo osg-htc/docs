@@ -1,9 +1,9 @@
-User-launched containers with Singularity
+User-launched Containers with Singularity
 =========================================
 
 The [OSG pilot container](os-backfill-containers.md) can be launched by users in order to run jobs on resources they
 have access to.
-The most common use case, documented here, is to start the pilot container inside a SLURM batch job that is launched by
+The most common use case, documented here, is to start the pilot container inside a Slurm batch job that is launched by
 the user.
 
 This is a great way to add personal resources to the Open Science Pool to increase throughput for a specific workflow.
@@ -18,10 +18,10 @@ In order to configure the container, you will need:
 2. An authentication token from the OSG.
    Please contact [OSG support](mailto:support@opensciencegrid.org) to request a token for your user.
 
-Launching inside SLURM
+Launching Inside Slurm
 ----------------------
 
-To launch inside SLURM, one needs to write a small job control script; the details will vary from site-to-site and the
+To launch inside Slurm, one needs to write a small job control script; the details will vary from site-to-site and the
 followingg is given as an example for running on compute hosts with 24 cores:
 
 ```
