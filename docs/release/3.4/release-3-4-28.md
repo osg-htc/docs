@@ -62,16 +62,16 @@ Detailed changes are below. All of the documentation can be found [here](/index.
 
 1. Upgrades from <= 3.4.0 may require merging `/etc/condor/config.d/*.rpmnew` files and a restart of HTCondor.
 
-1. GlideinWMS >= 3.4.5 uses shared port, requiring only port 9618.
+1. GlideinWMS >= 3.4.5 can use shared port. If you do so, it requires only port 9618.
    To ease the transition to shared port, the User Collector secondary collectors and CCBs support both shared and
    separate, individual ports.
-   To start using shared port, change the secondary collectors lines and the CCBs lines (if any) in
-   `/etc/gwms-frontend/frontend.xml`, changing the address to include the shared port sinful string:
 
+   -  The HTCondor configuration should be changed as suggested in the new HTCondor config files included in the RPMs, to allow the support of shared port: check the `.rpmnew` files or apply the same changes if you configure your daemons manually.
+   -  Port 9818 should be open also on standalone schedds (that earlier used only 9615).
+   -  To start using shared port, change the secondary collectors lines and the CCBs lines (if any) in `/etc/gwms-frontend/frontend.xml`, changing the address to include the shared port sinful string:
         <collector DN="/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=gwms-frontend.domain" group="default" node="gwms-frontend.domain:9618?sock=collector0-40" secondary="True"/>
-
-    Replacing `gwms-frontend-domain` with the hostname of your GlideinWMS frontend.
-    See the [GlideinWMS documentation](https://glideinwms.fnal.gov/doc.prd/components/condor.html#collectors ) for details.
+      Replacing `gwms-frontend-domain` with the hostname of your GlideinWMS frontend.
+      See the [GlideinWMS documentation](https://glideinwms.fnal.gov/doc.prd/components/condor.html#collectors ) for details. 
 
 Known Issues
 ------------
