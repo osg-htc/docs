@@ -1,7 +1,7 @@
 Open Science Pool Containers
 ============================
 
-In order to [share compute resources](resource-sharing/overview.md) with the Open Science pool,
+In order to [share compute resources](overview.md) with the Open Science pool,
 sites can launch pilot jobs directly by starting an OSG-provided Docker container.
 The container includes a simple worker node environment and an embedded pilot;
 when combined with an OSG-provided authentication token (not included in the container),
@@ -18,7 +18,7 @@ Before Starting
 
 In order to configure the container, you will need:
 
-1. A [registered resource](common/registration.md) in OSG Topology;
+1. A [registered resource](../common/registration.md) in OSG Topology;
    resource registration allows OSG to do proper usage accounting and maintain contacts in case of security incidents.
 2. An authentication token from the OSG.  Please contact [OSG support](mailto:support@opensciencegrid.org) to request a
    token for your site.

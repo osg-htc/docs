@@ -1,8 +1,8 @@
 User-launched containers with Singularity
 =========================================
 
-The (OSG pilot container)[resource-sharing/os-backfill-containers.md] can be launched by users in order to run jobs on
-resources they have access to.
+The [OSG pilot container](os-backfill-containers.md) can be launched by users in order to run jobs on resources they
+have access to.
 The most common use case, documented here, is to start the pilot container inside a SLURM batch job that is launched by
 the user.
 
@@ -13,7 +13,7 @@ Before Starting
 
 In order to configure the container, you will need:
 
-1. A [registered resource](common/registration.md) in OSG Topology;
+1. A [registered resource](../common/registration.md) in OSG Topology;
    resource registration allows OSG to do proper usage accounting and maintain contacts in case of security incidents.
 2. An authentication token from the OSG.
    Please contact [OSG support](mailto:support@opensciencegrid.org) to request a token for your user.
@@ -63,5 +63,5 @@ In this case, the `singularity run` command should be changed to:
 singularity run --contain --bind /cvmfs osgvo-pilot.sif
 ```
 
-Note, unlike the (site-launched container)[resource-sharing/os-backfill-containers.md], the Singularity container above
+Note, unlike the [site-launched container](os-backfill-containers.md], the Singularity container above
 _cannot_ run payloads inside a separate image.

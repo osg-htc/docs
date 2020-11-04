@@ -14,10 +14,10 @@ itself.
 
 There are several ways pilots can join a resource pool:
 
-* Submitted to a batch system through a [*compute entrypoint*](compute-element/htcondor-ce-overview).
+* Submitted to a batch system through a [*compute entrypoint*](../compute-element/htcondor-ce-overview.md).
   These jobs are submitted by an external entity, a *pilot factory* based on observed demand in the pool.
-* Sites can launch [*pilot containers*](resource-sharing/os-backfill-containers.md) for a specific pool when they have
-  resources they would like to contribute directly.
+* Sites can launch [*pilot containers*](os-backfill-containers.md) for a specific pool when they have resources they
+  would like to contribute directly.
 * Users can launch *personal pilot containers* within a site's batch system so they can use an existing share or
   allocation at a site through the open science pool.
 
