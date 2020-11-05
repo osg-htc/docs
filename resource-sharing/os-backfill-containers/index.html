@@ -3153,6 +3153,7 @@ number of environment variables to be set in order to function appropriately:</p
 <div class="codehilite"><pre><span></span>docker run -it --rm --user osg \
        --cap-add=DAC_OVERRIDE --cap-add=SETUID --cap-add=SETGID \
        --cap-add=SYS_ADMIN --cap-add=SYS_CHROOT --cap-add=SYS_PTRACE \
+       --cap-add=CAP_DAC_READ_SEARCH \
        -v /cvmfs:/cvmfs \
        -e TOKEN=&quot;...&quot; \
        -e GLIDEIN_Site=&quot;...&quot; \
