@@ -32,6 +32,7 @@ To update to the OSG 3.5 series, please consult the page on
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.5.26](/release/3.5/release-3-5-26)     | 2020-11-05 | gfal2 2.18.1, HTCondor 8.8.11, CVMFS 2.7.5, osg-flock 1.2, python-scitokens 1.2.4-3, scitokens-credmon 0.8.1; Upcoming: XRootD 5.0.2 |
 | [3.5.25-2](/release/3.5/release-3-5-25-2) | 2020-10-29 | VO Package v109                                                         |
 | [3.5.25](/release/3.5/release-3-5-25)     | 2020-10-08 | GlideinWMS 3.6.5, BLAHP 1.18.48; Upcoming: BLAHP 1.18.48                |
 | [3.5.24](/release/3.5/release-3-5-24)     | 2020-09-17 | CVMFS 2.7.4, stashcache-client 6.1.0, hosted-ce-tools 0.8.2, CCTools 7.1.7, VO Package v108 |
@@ -83,6 +84,7 @@ OSG 3.4
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.56](/release/3.4/release-3-4-56)     | 2020-11-05 | gfal2 2.18.1                                                            |
 | [3.4.55-2](/release/3.4/release-3-4-55-2) | 2020-10-29 | VO Package v109                                                         |
 | [3.4.55](/release/3.4/release-3-4-55)     | 2020-10-08 | Singularity 3.6.3, GlideinWMS 3.6.5 (EL7 Only)                          |
 | [3.4.54-2](/release/3.4/release-3-4-54-2) | 2020-09-17 | VO Package v108                                                         |
