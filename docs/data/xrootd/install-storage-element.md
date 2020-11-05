@@ -380,27 +380,6 @@ root@host # service frm_xfrd start
 root@host # service frm_purged start
 ```
 
-
-### (Optional) Enabling xrootd-multiuser
-
-The `xrootd-multiuser` plugin makes the files written through XRootD to be owned by the writing user instead of the `xrootd` user (default).
-For the above to work, it is necessary to install the `xrootd-multiuser` package:
-
-    yum install xrootd-multiuser
-
-and start the `xrootd` server in privileged mode as follows:
-
-    systemctl start xrootd-privileged@clustered
-
-or
-
-    systemctl start xrootd-privileged@standalone
-
-depending on wheter you are deploying an XRootD cluster or a single standalone XRootD server.
-
-!!! note
-    This is not necessary when XRootD is used for read-only access
-
 (Optional) Installing a GridFTP Server
 --------------------------------------
 

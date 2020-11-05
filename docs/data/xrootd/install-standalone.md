@@ -122,11 +122,6 @@ The `xrootd-multiuser` plugins changes this behaviour:
         :::console
         root@host # yum install xrootd-multiuser
 
-1. Create configuration file `/etc/xrootd/config.d/50-enable-multiuser.cfg` with the following contents:
-
-        :::file
-        xrootd.fslib libXrdMultiuser.so default
-
 1. Start the XRootD process in privileged mode:
 
         :::console
@@ -134,6 +129,10 @@ The `xrootd-multiuser` plugins changes this behaviour:
 
 !!! bug
     The multiuser support is incompatible with checksums.
+
+!!! note
+    This is not necessary when XRootD is used for read-only access
+
 
 #### Enabling CMS TFC support (CMS sites only)
 
