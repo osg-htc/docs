@@ -3461,13 +3461,6 @@ The <code>xrootd-multiuser</code> plugins changes this behaviour:</p>
 
 </li>
 <li>
-<p>Create configuration file <code>/etc/xrootd/config.d/50-enable-multiuser.cfg</code> with the following contents:</p>
-<div class="codehilite"><pre><span></span>xrootd.fslib libXrdMultiuser.so default
-</pre></div>
-
-
-</li>
-<li>
 <p>Start the XRootD process in privileged mode:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl xrootd-privileged@standalone
 </pre></div>
@@ -3478,6 +3471,10 @@ The <code>xrootd-multiuser</code> plugins changes this behaviour:</p>
 <div class="admonition bug">
 <p class="admonition-title">Bug</p>
 <p>The multiuser support is incompatible with checksums.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is not necessary when XRootD is used for read-only access</p>
 </div>
 <h4 id="enabling-cms-tfc-support-cms-sites-only">Enabling CMS TFC support (CMS sites only)<a class="headerlink" href="#enabling-cms-tfc-support-cms-sites-only" title="Permanent link">&para;</a></h4>
 <p>For CMS users, there is a package available to integrate rule-based name lookup using a <code>storage.xml</code> file.
