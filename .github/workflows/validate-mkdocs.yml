@@ -21,7 +21,7 @@ jobs:
           args: >-
             --allow-hash-href
             --check-html
-            --http-status-ignore 302
+            --http-status-ignore 302,429
             --file-ignore ./site/404.html
             --url-ignore "https://fonts.gstatic.com,/github.com\/opensciencegrid\/${GITHUB_REPOSITORY#*\/}\/edit/,/opensciencegrid.org\/${GITHUB_REPOSITORY#*\/}/"
             ./site
