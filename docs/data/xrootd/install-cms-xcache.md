@@ -116,7 +116,7 @@ In order for CMSSW jobs to use the cache at your site you need to modify the `st
 
 
 !!! note
-    If you are installing a [multinode cache](#installing-a-multinode-cache) then instead of `yourlocalcache:1094` url should be changed for `yourcacheredirector:2040`
+    If you are installing a [multinode cache](#installing-a-multinode-cache-optional) then instead of `yourlocalcache:1094` url should be changed for `yourcacheredirector:2040`
 
 ### Enable remote debugging
 

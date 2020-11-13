@@ -144,7 +144,7 @@ In addition to the RSV service itself, there are a number of supporting services
 
 | Software      | Service name                                   | Notes                   |
 |:--------------|:-----------------------------------------------|------------------------ |
-| Fetch CRL     | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca.md#startstop-fetch-crl-a-quick-guide)|
+| Fetch CRL     | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca.md#managing-certificate-revocation-lists)|
 | Apache        | httpd                                          |                         |
 | HTCondor-Cron | condor-cron                                    |                         |
 | RSV           | rsv                                            |                         |
@@ -301,6 +301,9 @@ OSG-RSV Profiler
 Analyzing...
 Making tarball (rsv-profiler.tar.gz)
 ```
+
+Reference
+---------
 
 ### Users
 

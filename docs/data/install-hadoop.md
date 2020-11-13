@@ -14,7 +14,7 @@ The OSG supports a patched version HDFS from Cloudera's CDH5 distribution of HDF
 Before Starting
 ---------------
 
-Before starting the installation process, consider the following points (consulting [the Reference section below](#reference) as needed):
+Before starting the installation process, consider the following points (consulting [the Reference section below](#references) as needed):
 
 -   **User IDs:** If they do not exist already, the installation will create the Linux users `hdfs` and `zookeeper` on all nodes
     as well as `hadoop` and `mapred` on the NameNodes
@@ -214,7 +214,7 @@ Once the Primary NameNode has exited safe mode, start the process of upgrading y
 
 ### Finalizing the upgrade ###
 
-1. Verify that the HDFS cluster is running correctly by following the instructions in [this section](#validation_1).
+1. Verify that the HDFS cluster is running correctly by following the instructions in [this section](#validation).
 
 1. Finalize the upgrade from the Primary NameNode:
 

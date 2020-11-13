@@ -64,7 +64,7 @@ There are extra requirements for serving non-public data:
   See the page on [getting your VO's data into StashCache](vo-data.md).
 - There must be an authenticated XRootD instance on the cache server.
 - There must be a `DN` attribute in the resource registration
-  with the [subject DN](../../security/host-certs#before-starting) of the host certificate
+  with the [subject DN](../../security/host-certs/overview.md#before-starting) of the host certificate
 
 This is an example registration for a cache server that serves all public data:
 ```yaml

@@ -109,7 +109,7 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:
         :::console
         condor_ce_reconfig
 
-1.  Continue onto [this section](#verifying-covid-19-job-routes) to verify your configuration
+1.  Continue onto [this section](#verifying-the-covid-19-job-route) to verify your configuration
 
 ### For HTCondor batch systems
 
@@ -176,7 +176,7 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:
         :::console
         condor_ce_reconfig
 
-1.  Continue onto [this section](#verifying-covid-19-job-routes) to verify your configuration
+1.  Continue onto [this section](#verifying-the-covid-19-job-route) to verify your configuration
 
 Verifying the COVID-19 Job Route
 --------------------------------

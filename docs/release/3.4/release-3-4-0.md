@@ -10,8 +10,6 @@ The OSG 3.4.0 software stack features a more streamlined and consolidated packag
 
 See [install the LCMAPS VOMS plugin](../../security/lcmaps-voms-authentication.md) to replace GUMS + edg-mkgridmap.
 
-See [migrating from edg-mkgridmap to lcmaps VOMS plugin](../../security/lcmaps-voms-authentication.md#migrating-from-edg-mkgridmap) to transistion from edg-mkgridmap.
-
 In 3.4.0, we dropped HDFS 2.x with the intention of adding HDFS 3.x in a subsequent OSG 3.4 release when it becomes available upstream.
 
 In addition to GUMS, edg-mkgridmap, and HDFS 2.x, we dropped packages related to the following software:
@@ -22,7 +20,7 @@ In addition to GUMS, edg-mkgridmap, and HDFS 2.x, we dropped packages related to
 -   Globus GRAM available from EPEL
 -   GIP and OSG Info Services BDII servers retired
 
-The aforementioned packages are still be available in OSG 3.3 and will receive regular support until December 2017 and security updates until June 2018 per our [release policy](https://opensciencegrid.org/technology/policy/release-series/). See [this section](#PackagesRemoved) for the complete list of packages removed from OSG 3.4.
+The aforementioned packages are still be available in OSG 3.3 and will receive regular support until December 2017 and security updates until June 2018 per our [release policy](https://opensciencegrid.org/technology/policy/release-series/). See [this section](#packages-removed-from-osg-3-4) for the complete list of packages removed from OSG 3.4.
 
 !!! note "Notes"
     -   OSG 3.4 contains only 64-bit components.
@@ -91,7 +89,7 @@ Updating to the new release
 
 ### Update Repositories
 
-To update to this series, you need to to [install the current OSG repositories](../../common/yum.md#install-osg-repositories).
+To update to this series, you need to to [install the current OSG repositories](../../common/yum.md#install-the-osg-repositories).
 
 ### Update Software
 
@@ -255,8 +253,6 @@ We added or updated the following packages to the production OSG yum repository.
 -   [xrootd-dsi-3.0.4-22.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=xrootd-dsi-3.0.4-22.osg34.el7)
 -   [xrootd-lcmaps-1.3.3-3.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=xrootd-lcmaps-1.3.3-3.osg34.el7)
 -   [xrootd-voms-plugin-0.4.0-1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=xrootd-voms-plugin-0.4.0-1.osg34.el7)
-
-\#PackagesRemoved
 
 ### Packages Removed from OSG 3.4
 

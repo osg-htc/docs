@@ -124,7 +124,7 @@ host to avoid any duplicate registrations:
 
 ### New resources ###
 
-Before registering a new resource, make sure that its FQDN is not [already registered](#searching for resources).
+Before registering a new resource, make sure that its FQDN is not [already registered](#searching-for-resources).
 
 To register a new resource, follow the instructions below:
 

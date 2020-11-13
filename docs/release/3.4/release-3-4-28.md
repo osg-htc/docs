@@ -69,7 +69,9 @@ Detailed changes are below. All of the documentation can be found [here](../../i
    -  The HTCondor configuration should be changed as suggested in the new HTCondor config files included in the RPMs, to allow the support of shared port: check the `.rpmnew` files or apply the same changes if you configure your daemons manually.
    -  Port 9818 should be open also on standalone schedds (that earlier used only 9615).
    -  To start using shared port, change the secondary collectors lines and the CCBs lines (if any) in `/etc/gwms-frontend/frontend.xml`, changing the address to include the shared port sinful string:
-        <collector DN="/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=gwms-frontend.domain" group="default" node="gwms-frontend.domain:9618?sock=collector0-40" secondary="True"/>
+
+            <collector DN="/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=gwms-frontend.domain" group="default" node="gwms-frontend.domain:9618?sock=collector0-40" secondary="True"/>
+
       Replacing `gwms-frontend-domain` with the hostname of your GlideinWMS frontend.
       See the [GlideinWMS documentation](https://glideinwms.fnal.gov/doc.prd/components/condor.html#collectors ) for details. 
 
@@ -95,7 +97,7 @@ Updating to the new release
 
 ### Update Repositories
 
-To update to this series, you need to [install the current OSG repositories](../../common/yum.md#install-osg-repositories).
+To update to this series, you need to [install the current OSG repositories](../../common/yum.md#install-the-osg-repositories).
 
 ### Update Software
 

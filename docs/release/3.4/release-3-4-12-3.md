@@ -20,7 +20,7 @@ Updating to the new release
 
 ### Update Repositories
 
-To update to this series, you need to [install the current OSG repositories](../../common/yum.md#install-osg-repositories).
+To update to this series, you need to [install the current OSG repositories](../../common/yum.md#install-the-osg-repositories).
 
 ### Update Software
 

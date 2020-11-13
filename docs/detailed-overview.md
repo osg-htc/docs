@@ -63,7 +63,7 @@ The general steps to installing an OSG site are:
 ### Installing and Managing Certificates for Site Security ###
 
 -   [Installing the grid certificate authorities (CAs)](common/ca.md)
--   [How do I get X.509 host certificates?](security/host-certs)
+-   [How do I get X.509 host certificates?](security/host-certs/overview.md)
 -   [Automatically updating the grid certificate authorities (CAs)](security/certificate-management.md)
 -   [OSG PKI command line client reference](security/certificate-management.md)
 

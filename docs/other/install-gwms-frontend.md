@@ -28,7 +28,7 @@ significant, large host, we have been able to scale the single-host install to
 Before Starting
 ---------------
 
-Before starting the installation process, consider the following points (consulting [the Reference section below](#reference) as needed):
+Before starting the installation process, consider the following points (consulting [the Reference section below](#references) as needed):
 
 -   **User IDs:** If they do not exist already, the installation will create the Linux users `apache` (UID 48), `condor`, `frontend`, and `gratia`
 -   **Network:** The VO frontend must have reliable network connectivity and be on the public internet (i.e. no NAT).
@@ -585,10 +585,9 @@ By default the probe reports to the OSG GRACC. To change that you must edit the 
 
 The following configuration steps are optional and will likely not be required
 for setting up a small site. If you do not need any of the following special
-configurations, skip to [the section on service
-activation/deactivation](#service-activation-and-deactivation).
+configurations, skip to [the section on using GlideinWMS](#using-glideinwms).
 
-- [Allow users to specify where their jobs run](#allow-users-to-specify-where-their-jobs-run)
+- [Allow users to specify where their jobs run](#allowing-users-to-specify-where-their-jobs-run)
 - [Creating a group to test configuration changes](#creating-a-group-for-testing-configuration-changes)
 
 #### Allowing users to specify where their jobs run

@@ -18,7 +18,7 @@ A stand-alone GridFTP server might be used under the following circumstances:
     This document is for a standalone GridFTP server on top of POSIX storage.  We have two specialized documents
     for Hadoop Distributed File System (HDFS) and XRootD based storage:
 
-    -   [Install and configure a GridFTP server on top of HDFS.](install-hadoop.md#standalone-gridftp-node-installation)
+    -   [Install and configure a GridFTP server on top of HDFS.](install-hadoop.md#gridftp-configuration)
     -   [Install and configure a GridFTP server on top of XRootD.](xrootd/install-storage-element.md#optional-installing-a-gridftp-server)
 
 Before Starting
@@ -178,7 +178,7 @@ In addition to the GridFTP service itself, there are a number of supporting serv
 
 | Software  | Service name                          | Notes                                                                                  |
 |:----------|:--------------------------------------|:---------------------------------------------------------------------------------------|
-| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca.md#startstop-fetch-crl-a-quick-guide) for more info |
+| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca.md#managing-certificate-revocation-lists) for more info |
 | Gratia    | `gratia-probes-cron`                  | Accounting software                                                                    |
 | GridFTP   | `globus-gridftp-server`               |                                                                                        |
 

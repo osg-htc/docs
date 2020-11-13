@@ -91,11 +91,10 @@ The xrootd-lcmaps security plugin uses the `lcmaps` library and the [LCMAPS VOMS
 to authenticate and authorize users based on X509 certificates and VOMS attributes. Perform the following instructions
 on all data nodes:
 
-1. Install [CA certificates](../../common/ca.md#installing-ca-certificates) and [manage CRLs](../../common/ca.md#installing-ca-certificates#managing-certificate-revocation-lists)
+1. Install [CA certificates](../../common/ca.md#installing-ca-certificates) and [manage CRLs](../../common/ca.md#managing-certificate-revocation-lists)
 
-1. Follow the instructions for requesting a [service certificate](../../security/host-certs#requesting-service-certificates),
-   using `xrootd` for both the `<SERVICE>` and `<OWNER>`, resulting in a certificate and key in `/etc/grid-security/xrd/xrdcert.pem`
-   and `/etc/grid-security/xrd/xrdkey.pem`, respectively.
+1. Copy your host certificate and key to `/etc/grid-security/xrd/xrdcert.pem` and `/etc/grid-security/xrd/xrdkey.pem`,
+   respectively.
 
 1. Install and configure the [LCMAPS VOMS plugin](../../security/lcmaps-voms-authentication.md)
 

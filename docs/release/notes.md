@@ -183,7 +183,7 @@ Announcements
 
 OSG releases are also announced by mail and are sent to the following recipients and lists:
 
--   [Registered administrative contacts](../common/registration.md#register-resources)
+-   [Registered administrative contacts](../common/registration.md#registering-resources)
 -   [osg-general@opensciencegrid.org](https://listserv.fnal.gov/scripts/wa.exe?A0=OSG-GENERAL)
 -   [osg-operations@opensciencegrid.org](https://listserv.fnal.gov/scripts/wa.exe?A0=OSG-OPERATIONS)
 -   [osg-sites@opensciencegrid.org](https://listserv.fnal.gov/scripts/wa.exe?A0=OSG-SITES)

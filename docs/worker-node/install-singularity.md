@@ -98,9 +98,9 @@ singularity to run privileged:
     However, singularity has an "underlay" feature that is
     equivalent which does not require
     privileges, and the overlay feature has been a source of security
-    vulnerabilities in the past.  For these reasons, [we recommend
-    replacing overlay with underlay](#configuring-singularity) even on
-    privileged installations.  
+    vulnerabilities in the past.  For these reasons,
+    [we recommend replacing overlay with underlay](#configuring-singularity-rpm)
+    even on privileged installations.
 
     overlayfs is also used to make the appearance of writable images
     when building containers, so it may be needed on some systems for

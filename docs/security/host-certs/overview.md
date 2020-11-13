@@ -79,7 +79,7 @@ qualified domain name.
 
 ### How do I renew a host certificate? 
 
-For Let's Encrypt certificates, see [this section](#renewing-lets-encrypt-host-certificates)
+For Let's Encrypt certificates, see [this section](lets-encrypt.md#renewing-lets-encrypt-host-certificates)
 
 For other certificates, there is no separate renewal procedure.
 Instead, request a new certificate using one of the methods above.

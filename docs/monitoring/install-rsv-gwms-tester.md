@@ -12,10 +12,10 @@ Use this page to learn how to install, configure, and use the Tester for your VO
 Before Starting
 ---------------
 
-Before starting the installation process, consider the following points (consulting [the Reference section below](#ReferenceSection) as needed):
+Before starting the installation process, consider the following points (consulting [the Reference section below](#reference) as needed):
 
 - **Software:** You must have [a GlideinWMS Front-end](../other/install-gwms-frontend.md) installed
-- **Configuration:** The GlideinWMS Front-end must be configured (a) [to have at least one group that matches pilots to sites using DESIRED_SITES](../other/install-gwms-frontend.md#allow-users-to-specify-where-their-jobs-run), and (b) [to support the is_itb user job attribute](../other/install-gwms-frontend.md#creating-a-group-for-testing-configuration-changes)
+- **Configuration:** The GlideinWMS Front-end must be configured (a) [to have at least one group that matches pilots to sites using DESIRED\_SITES](../other/install-gwms-frontend.md#allowing-users-to-specify-where-their-jobs-run), and (b) [to support the is_itb user job attribute](../other/install-gwms-frontend.md#creating-a-group-for-testing-configuration-changes)
 - **Host choice:** The Tester should be installed on its own host; a small Virtual Machine (VM) is ideal
 - **Service certificate:** The Tester requires a host certificate at `/etc/grid-security/hostcert.pem` and an accompanying key at `/etc/grid-security/hostkey.pem`
 - **Network ports:** Test jobs must be able to contact the tester using the HTCondor Shared Port on port 9615 (TCP), and you must be able to contact a web server on port 80 (TCP) to view test results.

@@ -380,7 +380,7 @@ Apr 11 13:51:41 atlas-hub globus-gridftp-server: You are still root after the LC
         :::console
         user@host $ rpm -qa 'globus-gridftp*'
 
-1. Verify that the [priority](../common/yum.md#installing-and-configuring-repositories) of the OSG repositories are set
+1. Verify that the [priority](../common/yum.md#install-the-yum-priorities-plugin-el6-el7) of the OSG repositories are set
    properly
 
 1. Clean your yum cache

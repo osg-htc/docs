@@ -103,8 +103,8 @@ Further information can be found at <https://xrootd.slac.stanford.edu/docs.html>
 
 #### Verifying the clustered config
 
-Start both `xrootd` and `cmsd` on all nodes according to the instructions in the [managing services
-section](#ManagingServices).
+Start both `xrootd` and `cmsd` on all nodes according to the instructions in the
+[Using XRootD  section](#using-xrootd).
 
 Verify that you can copy a file such as `/bin/sh` to `/mnt/xrootd` on the server data via the redirector:
 
@@ -241,7 +241,7 @@ This section is the procedure for EL 7.
 root@host # ln -s /etc/xrootd/xrootd-clustered.cfg /etc/xrootd/xrootd-cns.cfg
 ```
 
-1.  Start an instance of the `xrootd` service named `cns` using the syntax in the [managing services section](#ManagingServices):
+1.  Start an instance of the `xrootd` service named `cns` using the syntax in the [managing services section](#using-xrootd):
 
 ```console
 root@host # systemctl start xrootd@cns
@@ -300,7 +300,7 @@ XRootD can be accessed using the HTTP protocol. To do that:
 
 #### (Optional) Enable HTTP based Writes
 
-No changes to the HTTP module is needed to enable HTTP-based writes.  The HTTP protocol uses the same authorization setup as the XRootD protocol.  For example, you may need to provide `a` (all) style authorizations to allow users authorization to write. See the [Authentication File section](##authorization-file) for more details.
+No changes to the HTTP module is needed to enable HTTP-based writes.  The HTTP protocol uses the same authorization setup as the XRootD protocol.  For example, you may need to provide `a` (all) style authorizations to allow users authorization to write. See the [Authentication File section](#optional-authorization) for more details.
 
 ### (Optional) Enabling a FUSE mount
 

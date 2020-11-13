@@ -49,7 +49,7 @@ Scale Up to Full Production
 ---------------------------
 
 After verifying end-to-end pilot job submission and usage reporting, your site is ready for production!
-In the same OSG Factory Operations ticket that you opened [above](#verify-end-to-end-job-submission),
+In the same OSG Factory Operations ticket that you opened [above](#verify-end-to-end-pilot-job-submission),
 let OSG staff know when you are ready to accept production pilots.
 
 After requesting production pilots, review the [responsibilities of an OSG site](site-responsibilities.md).

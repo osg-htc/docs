@@ -104,7 +104,7 @@ With this configuration, the data under `/mnt/stash/hcc/bio/datasets` would be a
 
 Manually Setting the FQDN (optional)
 ------------------------------------
-The FQDN of the origin server that you registered in [Topology](#registering-the-cache) may be different than its internal hostname
+The FQDN of the origin server that you registered in [Topology](#registering-the-origin) may be different than its internal hostname
 (as reported by `hostname -f`).
 For example, this may be the case if your origin is behind a load balancer such as LVS or MetalLB.
 In this case, you must manually tell the origin services which FQDN to use for topology lookups.

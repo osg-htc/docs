@@ -42,7 +42,7 @@ Populating Origin Data
 ----------------------
 
 The Stash Cache data federation namespace is shared by multiple VOs so you must
-[choose a namespace](vo-data.md#choosing-namespace) for your own VO's data.
+[choose a namespace](vo-data.md#choosing-namespaces) for your own VO's data.
 When running an origin container, your chosen namespace must be reflected in your host partition.
 For example, if your host partition is `/srv/origin` and the name of your VO is `ASTRO`, you should create the following
 directories:

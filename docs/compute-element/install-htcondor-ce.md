@@ -474,7 +474,7 @@ The following users are needed by HTCondor-CE at all sites:
 | Host certificate | `root`                     | `/etc/grid-security/hostcert.pem` |
 | Host key         | `root`                     | `/grid-security/hostkey.pem`  |
 
-Find instructions to request a host certificate [here](../security/host-certs).
+Find instructions to request a host certificate [here](../security/host-certs/overview.md).
 
 ### Networking
 
