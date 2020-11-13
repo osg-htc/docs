@@ -5,13 +5,13 @@ Many institutions in the United States already subscribe to InCommon and offer I
 If your institution is in the list of [InCommon subscribers](https://www.incommon.org/federation/incommon-federation-participants/),
 continue with the instructions below.
 If your institution is not in the list, Let's Encrypt certificates do not meet your needs, and you do not have access to
-another IGTF CA subscription, please [contact us](/common/help.md).
+another IGTF CA subscription, please [contact us](../../common/help.md).
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-- Ensure the host has [a supported operating system](/release/supported_platforms)
+- Ensure the host has [a supported operating system](../../release/supported_platforms.md)
 - Obtain root access to the host
-- Prepare the [required Yum repositories](/common/yum)
+- Prepare the [required Yum repositories](../../common/yum.md)
 
 From a host that meets the above requirements, there are two options to get InCommon IGTF-accredited host certificates:
 

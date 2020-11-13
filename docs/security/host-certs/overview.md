@@ -3,7 +3,7 @@ Host Certificates
 
 !!! note
     This document describes how to get **host** certificates.
-    For instructions on how to get **user** certificates, see the [User Certificates document](/security/user-certs).
+    For instructions on how to get **user** certificates, see the [User Certificates document](../user-certs.md).
 
 Host certificates are [X.509 certificates](https://en.wikipedia.org/wiki/X.509) that are used to securely identify
 servers and to establish encrypted connections between services and clients.
@@ -14,7 +14,7 @@ you are interested in installing.
 To acquire a host certificate, you must submit a request to a Certificate Authority (CA).
 We recommend requesting host certificates from one of the following CAs:
 
-- [InCommon IGTF](/security/host-certs/incommon):
+- [InCommon IGTF](incommon.md):
   an IGTF-accredited CA for services that interact with the WLCG;
   requires a subscription, generally held by an institution
 
@@ -23,13 +23,13 @@ We recommend requesting host certificates from one of the following CAs:
         [IGTF CA](https://spaces.at.internet2.edu/display/ICCS/InCommon+Cert+Types#InCommonCertTypes-IGTFServerCertificates)
         and not the InCommon RSA CA.
 
-- [Let's Encrypt](/security/host-certs/lets-encrypt):
+- [Let's Encrypt](lets-encrypt.md):
   a free, automated, and open CA frequently used for web services;
   see the [security team's position on Let's Encrypt](https://opensciencegrid.org/security/LetsEncryptOSGCAbundle/)
   for more details.
   Let's Encrypt is not IGTF-accredited so their certificates are not suitable for WLCG services.
 
-- [DigiCert IGTF](/security/host-certs/digicert):
+- [DigiCert IGTF](digicert.md):
   an IGTF-accredited CA for services that interact with the WLCG;
   individual certificates are available for purchase without a subscription.
 
@@ -79,7 +79,7 @@ qualified domain name.
 
 ### How do I renew a host certificate? 
 
-For Let's Encrypt certificates, see [this section](#renewing-lets-encrypt-host-certificates)
+For Let's Encrypt certificates, see [this section](lets-encrypt.md#renewing-lets-encrypt-host-certificates)
 
 For other certificates, there is no separate renewal procedure.
 Instead, request a new certificate using one of the methods above.

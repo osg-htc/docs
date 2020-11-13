@@ -8,21 +8,19 @@ What's New in OSG 3.4
 
 The OSG 3.4.0 software stack features a more streamlined and consolidated package list. Specifically, the varied authentication solutions proved to be good candidates for consolidation and a new piece of software, the LCMAPS VOMS plugin, has been designed to replace both edg-mkgridmap and GUMS.
 
-See [install the LCMAPS VOMS plugin](/security/lcmaps-voms-authentication) to replace GUMS + edg-mkgridmap.
-
-See [migrating from edg-mkgridmap to lcmaps VOMS plugin](/security/lcmaps-voms-authentication#migrating-from-edg-mkgridmap) to transistion from edg-mkgridmap.
+See [install the LCMAPS VOMS plugin](../../security/lcmaps-voms-authentication.md) to replace GUMS + edg-mkgridmap.
 
 In 3.4.0, we dropped HDFS 2.x with the intention of adding HDFS 3.x in a subsequent OSG 3.4 release when it becomes available upstream.
 
 In addition to GUMS, edg-mkgridmap, and HDFS 2.x, we dropped packages related to the following software:
 
 -   VOMS Admin Server - [Retirement Policy](https://opensciencegrid.org/technology/policy/voms-admin-retire/)
--   BeStMan - replaced by [Load Balanced GridFTP](/data/load-balanced-gridftp)
+-   BeStMan - replaced by [Load Balanced GridFTP](../../data/load-balanced-gridftp.md)
 -   GLExec - replaced by [Singularty](http://singularity.lbl.gov/)
 -   Globus GRAM available from EPEL
 -   GIP and OSG Info Services BDII servers retired
 
-The aforementioned packages are still be available in OSG 3.3 and will receive regular support until December 2017 and security updates until June 2018 per our [release policy](https://opensciencegrid.org/technology/policy/release-series/). See [this section](#PackagesRemoved) for the complete list of packages removed from OSG 3.4.
+The aforementioned packages are still be available in OSG 3.3 and will receive regular support until December 2017 and security updates until June 2018 per our [release policy](https://opensciencegrid.org/technology/policy/release-series/). See [this section](#packages-removed-from-osg-3-4) for the complete list of packages removed from OSG 3.4.
 
 !!! note "Notes"
     -   OSG 3.4 contains only 64-bit components.
@@ -73,7 +71,7 @@ This release contains:
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.0%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
-Detailed changes are below. All of the documentation can be found [here](/index.md)
+Detailed changes are below. All of the documentation can be found [here](../../index.md)
 
 Known Issues
 ------------
@@ -91,7 +89,7 @@ Updating to the new release
 
 ### Update Repositories
 
-To update to this series, you need to to [install the current OSG repositories](/common/yum#install-osg-repositories).
+To update to this series, you need to to [install the current OSG repositories](../../common/yum.md#install-the-osg-repositories).
 
 ### Update Software
 
@@ -108,7 +106,7 @@ root@host # yum update
 Need help?
 ----------
 
-Do you need help with this release? [Contact us for help](/common/help).
+Do you need help with this release? [Contact us for help](../../common/help.md).
 
 Detailed changes in this release
 --------------------------------
@@ -255,8 +253,6 @@ We added or updated the following packages to the production OSG yum repository.
 -   [xrootd-dsi-3.0.4-22.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=xrootd-dsi-3.0.4-22.osg34.el7)
 -   [xrootd-lcmaps-1.3.3-3.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=xrootd-lcmaps-1.3.3-3.osg34.el7)
 -   [xrootd-voms-plugin-0.4.0-1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=xrootd-voms-plugin-0.4.0-1.osg34.el7)
-
-\#PackagesRemoved
 
 ### Packages Removed from OSG 3.4
 

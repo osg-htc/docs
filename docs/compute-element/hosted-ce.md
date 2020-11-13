@@ -12,7 +12,7 @@ The Hosted CE can support thousands of concurrent job submissions.
 
 This document explains the requirements and the procedure for obtaining a Hosted CE.
 If you wish to run your own local compute entrypoint or expect to support more than 10,000 concurrently running OSG jobs,
-see [this page](/compute-element/install-htcondor-ce) for installing the HTCondor-CE.
+see [this page](../compute-element/install-htcondor-ce.md) for installing the HTCondor-CE.
 
 ![managed services diagram](/compute-element/img/managed_services_diagram.png)
 
@@ -22,8 +22,8 @@ Before Starting
 
 Before preparing your cluster for OSG jobs, consider the following requirements:
 
--   An existing compute cluster with a [supported batch system](/detailed-overview.md#prepare-the-batch-system)
-    running on a [supported operating system](/release/supported_platforms)
+-   An existing compute cluster with a [supported batch system](../detailed-overview.md#prepare-the-batch-system)
+    running on a [supported operating system](../release/supported_platforms.md)
 
 -   Outbound network connectivity from the worker nodes (they can be behind NAT)
 
@@ -35,7 +35,7 @@ Before preparing your cluster for OSG jobs, consider the following requirements:
     there must be a shared file system between the submit server and the worker nodes.
     See [this section](#providing-the-osg-worker-node-client-htcondor-batch-systems-only) for details.
 
--   [Temporary scratch space](/worker-node/using-wn#for-site-administrators) on each worker node
+-   [Temporary scratch space](../worker-node/using-wn.md#for-site-administrators) on each worker node
 
 
 Which Communities and Institutions am I Supporting?
@@ -127,9 +127,9 @@ However, for sites with an HTCondor batch system, often there is no shared files
 If you run an HTCondor site and it is easier to install and maintain the Worker Node Client on each worker node than to
 set up and maintain shared file system, you have the following options:
 
--   Install the [Worker Node Client from RPM](/worker-node/install-wn)
--   Install the [Worker Node Client from tarball](/worker-node/install-wn-tarball)
--   Install the Worker Node Client from [OASIS](/worker-node/install-wn-oasis)
+-   Install the [Worker Node Client from RPM](../worker-node/install-wn.md)
+-   Install the [Worker Node Client from tarball](../worker-node/install-wn-tarball.md)
+-   Install the Worker Node Client from [OASIS](../worker-node/install-wn-oasis.md)
 
 
 **Optional**: Providing Access to Application Software Using OASIS
@@ -143,15 +143,15 @@ OSG sites may provide a distributed software repository system called OASIS, bui
 In order to provide OASIS at your site, you will need the following:
 
 -   A cluster-wide Frontier Squid proxy service with at least 50GB of cache space;
-    installation instructions for Frontier Squid are [provided here](/data/frontier-squid).
+    installation instructions for Frontier Squid are [provided here](../data/frontier-squid.md).
 
 -   A local OASIS cache per worker node (10 GB minimum, 20 GB recommended)
 
 After setting up the Frontier Squid proxy and local caches on each worker node,
-[install OASIS](/worker-node/install-cvmfs) on each worker node.
+[install OASIS](../worker-node/install-cvmfs.md) on each worker node.
 
 How to Get Help
 ---------------
 
-If you need help with setup or troubleshooting, see our [help procedure](/common/help).
+If you need help with setup or troubleshooting, see our [help procedure](../common/help.md).
 

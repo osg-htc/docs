@@ -26,10 +26,10 @@ Before starting the installation process, consider the following points:
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
--   Ensure the host has [a supported operating system](/release/supported_platforms)
+-   Ensure the host has [a supported operating system](../../release/supported_platforms.md)
 -   Obtain root access to the host
--   Prepare [the required Yum repositories](/common/yum)
--   Install [CA certificates](/common/ca)
+-   Prepare [the required Yum repositories](../../common/yum.md)
+-   Install [CA certificates](../../common/ca.md)
 
 Installing an XRootD Server
 ---------------------------
@@ -103,8 +103,8 @@ Further information can be found at <https://xrootd.slac.stanford.edu/docs.html>
 
 #### Verifying the clustered config
 
-Start both `xrootd` and `cmsd` on all nodes according to the instructions in the [managing services
-section](#ManagingServices).
+Start both `xrootd` and `cmsd` on all nodes according to the instructions in the
+[Using XRootD  section](#using-xrootd).
 
 Verify that you can copy a file such as `/bin/sh` to `/mnt/xrootd` on the server data via the redirector:
 
@@ -241,7 +241,7 @@ This section is the procedure for EL 7.
 root@host # ln -s /etc/xrootd/xrootd-clustered.cfg /etc/xrootd/xrootd-cns.cfg
 ```
 
-1.  Start an instance of the `xrootd` service named `cns` using the syntax in the [managing services section](#ManagingServices):
+1.  Start an instance of the `xrootd` service named `cns` using the syntax in the [managing services section](#using-xrootd):
 
 ```console
 root@host # systemctl start xrootd@cns
@@ -273,7 +273,7 @@ fermicloud054.fnal.gov complete inventory as of Tue Apr 12 07:38:29 2011 /data/x
 
 XRootD can be accessed using the HTTP protocol. To do that:
 
-1. Configure [LCMAPS authorization](/data/xrootd/xrootd-authorization).
+1. Configure [LCMAPS authorization](xrootd-authorization.md).
 
 1. Uncomment the following line in `/etc/xrootd/config.d/10-xrootd-lcmaps.cfg`:
 
@@ -300,7 +300,7 @@ XRootD can be accessed using the HTTP protocol. To do that:
 
 #### (Optional) Enable HTTP based Writes
 
-No changes to the HTTP module is needed to enable HTTP-based writes.  The HTTP protocol uses the same authorization setup as the XRootD protocol.  For example, you may need to provide `a` (all) style authorizations to allow users authorization to write. See the [Authentication File section](##authorization-file) for more details.
+No changes to the HTTP module is needed to enable HTTP-based writes.  The HTTP protocol uses the same authorization setup as the XRootD protocol.  For example, you may need to provide `a` (all) style authorizations to allow users authorization to write. See the [Authentication File section](#optional-authorization) for more details.
 
 ### (Optional) Enabling a FUSE mount
 
@@ -325,22 +325,22 @@ You should now be able to run UNIX commands such as `ls /mnt/xrootd` to see the 
 ### (Optional) Authorization
 
 For information on how to configure xrootd-lcmaps authorization, please refer to the
-[Configuring XRootD Authorization guide](xrootd-authorization).
+[Configuring XRootD Authorization guide](xrootd-authorization.md).
 
 ### (Optional) Adding CMS TFC support to XRootD (CMS sites only)
 
 For CMS users, there is a package available to integrate rule-based name lookup using a `storage.xml` file.
-See [this documentation](install-standalone/#enabling-cms-tfc-support-cms-sites-only).
+See [this documentation](install-standalone.md#enabling-cms-tfc-support-cms-sites-only).
 
 ### (Optional) Adding Hadoop support to XRootD
 
 For documentation on how to export your Hadoop storage using XRootD please see
-[this documentation](install-standalone/#enabling-hadoop-support-el-7-only)
+[this documentation](install-standalone.md#enabling-hadoop-support-el-7-only)
 
 ### (Optional) Adding Multi user support for an XRootd server
 
 For documentation how to enable multi-user support using XRootD see
-[this documentation](install-standalone/#enabling-multi-user-support).
+[this documentation](install-standalone.md#enabling-multi-user-support).
 
 ### (Optional) Adding File Residency Manager (FRM) to an XRootd cluster
 
@@ -391,12 +391,12 @@ storage.
     abbreviated version documenting the special steps needed for XRootD integration.
     You may also find the following useful:
 
-    -   [Basic GridFTP Install](/data/gridftp).  Additionally covers service planning topics.
-    -   [Load-balanced GridFTP Install](/data/load-balanced-gridftp).  Covers the creation of
+    -   [Basic GridFTP Install](../gridftp.md).  Additionally covers service planning topics.
+    -   [Load-balanced GridFTP Install](../load-balanced-gridftp.md).  Covers the creation of
         a load-balanced GridFTP service using multiple servers.
 
 Prior to following this installation guide, verify the host certificates and networking is configured correctly as in
-the [basic GridFTP install](/data/gridftp).
+the [basic GridFTP install](../gridftp.md).
 
 ### Installation
 
@@ -433,7 +433,7 @@ Sites should review any customizations made in the latter and copy them as neces
 You can use the FUSE mount in order to test POSIX access to xrootd in the GridFTP server.
 You should be able to run Unix commands such as `ls /mnt/xrootd` and see the contents of the XRootD server.
 
-For log / config file locations and system services to run, see the [basic GridFTP install](/data/gridftp).
+For log / config file locations and system services to run, see the [basic GridFTP install](../gridftp.md).
 
 Using XRootD
 ------------
@@ -496,7 +496,7 @@ As a reminder, here are common service commands (all run as `root`):
 Getting Help
 ------------
 
-To get assistance. please use the [Help Procedure](/common/help/) page.
+To get assistance. please use the [Help Procedure](../../common/help.md) page.
 
 Reference
 ---------

@@ -30,7 +30,7 @@ The OSG Packaging Signing Key
 |              |                                                        |
 |--------------|--------------------------------------------------------|
 | Location     | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG`                     |
-| Download     | [UW-Madison](https://vdt.cs.wisc.edu/RPM-GPG-KEY-OSG), [GitHub](RPM-GPG-KEY-OSG)  |
+| Download     | [UW-Madison](https://vdt.cs.wisc.edu/RPM-GPG-KEY-OSG), [GitHub](https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG)  |
 | Fingerprint  | `6459 !D9D2 AAA9 AB67 A251  FB44 2110 !B1C8 824B 8603` |
 | Key ID       | `824b8603`                                             |
 
