@@ -46,7 +46,7 @@ Follow the steps below to get an user certificate:
         If your institution is not on the list, please contact your institution's IT support to see if they can support
         CILogon.
 
-1. Click the `Log On` button and enter your instutional credentials if prompted.
+1. Click the `Log On` button and enter your institutional credentials if prompted.
 1. After successfully entering your credentials, click on the "Create Password-Protected Certificate" link
 1. Enter a password that is at least 12 characters long and then click on the `Get New Certificate` button.
 1. Click the `Download Your Certificate` button to download your certificate in `.p12` format.
@@ -55,7 +55,7 @@ Follow the steps below to get an user certificate:
 
 ### Certificate formats
 
-Your user certficate can be stored in a few different formats.
+Your user certificate can be stored in a few different formats.
 The two most common formats used in OSG are the [PKCS12](https://en.wikipedia.org/wiki/PKCS_12) and
 [PEM](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail) formats.
 In the PEM format, your user certificate is stored in two separate files: one for the certificate and another for the
@@ -72,7 +72,7 @@ To convert a PKCS12 file to  PEM files, do the following.
         Enter Import Password:
         MAC verified OK
    
-1. Second, extract the private key by running the following command. You'll be prompted for two different passwords.  The first prompt will be for the password that you used to create the certficate.  The second prompt will be for the password that will encrypt the PEM certificate that will be created.  As before, the invocation assumes that your PKCS12 certificate is located in `usercred.p12`. After running, the PEM certificate with your private key will be written to `userkey.pem`.
+1. Second, extract the private key by running the following command. You'll be prompted for two different passwords.  The first prompt will be for the password that you used to create the certificate.  The second prompt will be for the password that will encrypt the PEM certificate that will be created.  As before, the invocation assumes that your PKCS12 certificate is located in `usercred.p12`. After running, the PEM certificate with your private key will be written to `userkey.pem`.
 
         :::console 
         user@host $ openssl pkcs12 -in usercred.p12 -out userkey.pem  -nocerts
@@ -89,8 +89,8 @@ Using Your User Certificate
         :::console
         user@host $ cp mkdir ~/.globus
         user@host $ cp userkey.pem ~/.globus/
-        user@host $ cp userhost.pem ~/.globus/
-        user@host $ cp usecred.p12 ~/.globus/
+        user@host $ cp usercert.pem ~/.globus/
+        user@host $ cp usercred.p12 ~/.globus/
 
 1. To generate a proxy use the command `voms-proxy-init`. 
 
@@ -102,7 +102,7 @@ Using Your User Certificate
         :::console
         user@host $ voms-proxy-init --cert /<PATH TO>/usercert.pem --key /<PATH TO>/userkey.pem
 
-1. In order to find the Distinguised Name (DN), issuer and lifetime of a certificate:
+1. In order to find the Distinguished Name (DN), issuer and lifetime of a certificate:
 
         :::console
         user@host $ openssl x509 -in /<PATH TO>/usercert.pem -noout -subject -issuer -enddate
@@ -119,7 +119,7 @@ In addition, if your name or email address changes, you must revoke your certifi
 information.
 
 If you have a CILogon issued certificate, contact [ca@cilogon.org](mailto:ca@cilogon.org) in order revoke your certificate.
-If you received a certificate from another CA, please contact the CA to intiate a certificate revocation.
+If you received a certificate from another CA, please contact the CA to initiate a certificate revocation.
 
 
 Getting a Certificate from a Service Provider with cigetcert
@@ -162,7 +162,7 @@ You may specify default arguments in the `CIGETCERTOPTS` environment variable.
 This can save you from having to type in the entire institution name every time you want a cert.
 For example, to always use FNAL as the institution, put this in your `.bashrc`:
 ```bash
-export CIGETCERTOPTS="-i 'Fermi National Accelerator Laboratory'"
+export CIGETCERTOPTS="-i 'Fermi National Accelerator Laboratory"
 ```
 
 Your VO may also provide specific instructions for how to best use this tool.
