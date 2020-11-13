@@ -17,7 +17,7 @@ To verify your site's installation of OSG Software, you will need to:
 ### Local verification ###
 
 It is useful to submit jobs from within your site to verify CE's ability to submit jobs to your local batch system.
-Consult the document for [submitting jobs into an HTCondor-CE](compute-element/submit-htcondor-ce) for detailed
+Consult the document for [submitting jobs into an HTCondor-CE](compute-element/submit-htcondor-ce.md) for detailed
 instructions on how to test job submission.
 
 ### Verify end-to-end pilot job submission ####
@@ -57,4 +57,4 @@ After requesting production pilots, review the [responsibilities of an OSG site]
 Getting Help
 ------------
 
-If you need help with your site, or need to report a security incident, follow the [contact instructions](common/help).
+If you need help with your site, or need to report a security incident, follow the [contact instructions](common/help.md).

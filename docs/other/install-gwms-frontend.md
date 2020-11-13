@@ -63,10 +63,10 @@ Before starting the installation process, consider the following points (consult
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-- Ensure the host has a [supported operating system](/release/supported_platforms)
+- Ensure the host has a [supported operating system](../release/supported_platforms.md)
 - Obtain root access to the host
-- Prepare the [required Yum repositories](/common/yum)
-- Install [CA certificates](/common/ca)
+- Prepare the [required Yum repositories](../common/yum.md)
+- Install [CA certificates](../common/ca.md)
 
 ### Credentials and Proxies
 
@@ -677,7 +677,7 @@ In addition to the GlideinWMS service itself, there are a number of supporting s
 
 | Software   | Service name                             | Notes                                                                        |
 |:-----------|:-----------------------------------------|:-----------------------------------------------------------------------------|
-| Fetch CRL  | `fetch-crl-boot` and `fetch-crl-cron`    | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
+| Fetch CRL  | `fetch-crl-boot` and `fetch-crl-cron`    | See [CA documentation](../common/ca.md#managing-fetch-crl-services) for more info |
 | Gratia     | `gratia-probes-cron`                     | Accounting software                                                          |
 | HTCondor   | `condor`                                 |                                                                              |
 | HTTPD      | `httpd`                                  | GlideinWMS monitoring and staging                                 |
@@ -948,7 +948,7 @@ Common causes of problems could be:
 Getting Help
 ------------
 
-To get assistance about the OSG software please use [this page](/common/help).
+To get assistance about the OSG software please use [this page](../common/help.md).
 
 For specific questions about the Frontend configuration (and how to add it in your HTCondor infrastructure) you can email the glideinWMS support <glideinwms-support@fnal.gov>
 
@@ -990,7 +990,7 @@ proxies.
 | Host certificate | `root`                     | `/etc/grid-security/hostcert.pem` |
 | Host key         | `root`                     | `/etc/grid-security/hostkey.pem`  |
 
-[Here](/security/host-certs.md) are instructions to request a host certificate.
+[Here](../security/host-certs.md) are instructions to request a host certificate.
 
 ### Networking
 

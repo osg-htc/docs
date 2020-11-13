@@ -51,7 +51,7 @@ Also consider the following technical requirements:
 * __Operating system:__ A RHEL 6 or 7 compatible operating system.
 * __User IDs:__ If it does not exist already, the installation will create the Linux user ID `condor`.
 * __Host certificate:__ Recommended for authentication to OSG infrastructure.
-  See our [documentation](/security/host-certs.md) for instructions on how to request and install host certificates.
+  See our [documentation](../security/host-certs.md) for instructions on how to request and install host certificates.
 * __Network:__ 
     * Inbound TCP port 9618 must be open.
     * The submit host must have a public IP address with both forward and reverse DNS configured.
@@ -59,8 +59,8 @@ Also consider the following technical requirements:
 As with all OSG software installations, there are some one-time steps to prepare in advance:
 
 * Obtain root access to the host
-* Prepare [the required Yum repositories](/common/yum.md)
-* Install [CA certificates](/common/ca.md)
+* Prepare [the required Yum repositories](../common/yum.md)
+* Install [CA certificates](../common/ca.md)
 
 
 Initial Steps
@@ -69,14 +69,14 @@ Initial Steps
 ### Register your submit host in OSG Topology
 To be part of OSG, your submit host should be registered with the OSG.
 You will need information like the hostname, and the administrative and security contacts.
-Follow the [general registration instructions](/common/registration#new-resources).
+Follow the [general registration instructions](../common/registration.md#new-resources).
 The service type is `Submit Node`.
 
 
 ### Choose your authentication method
 There are two options for authentication of your submit host to the OSG: GSI and pool password.
 Of these, GSI is the recommended method, but it will require obtaining a host certificate for your submit host.
-See our [documentation](/security/host-certs.md) for instructions on how to request and install host certificates.
+See our [documentation](../security/host-certs.md) for instructions on how to request and install host certificates.
 
 If you are unable to obtain a host certificate, use the "pool password" authentication method,
 [described in the Configuring Authentication section](#configuring-authentication).
@@ -135,7 +135,7 @@ we provide a recommended configuration for flocking.
 
 Configuring Authentication
 --------------------------
-If you have obtained a host certificate according to the [instructions](/security/host-certs.md),
+If you have obtained a host certificate according to the [instructions](../security/host-certs.md),
 you do not need to do any additional configuration and may [continue to the next section](#managing-services).
 
 If you cannot obtain a host certificate, then configure pool password authentication via the following instructions:
@@ -159,7 +159,7 @@ In addition to the HTCondor service itself, there are a number of supporting ser
 
 | Software          | Service name                          | Notes                                                                                  |
 |:------------------|:--------------------------------------|:---------------------------------------------------------------------------------------|
-| Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info           |
+| Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca.md#managing-fetch-crl-services) for more info           |
 | Gratia            | `gratia-probes-cron`                  | Accounting software                                                                    |
 | HTcondor          | `condor`                              |                                                                                        |
 
@@ -200,4 +200,4 @@ The double quotes are necessary.
 
 Get Help
 --------
-If you need help with setup or troubleshooting, see our [help procedure](/common/help).
+If you need help with setup or troubleshooting, see our [help procedure](../common/help.md).

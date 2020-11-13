@@ -16,7 +16,7 @@ Before starting the installation process, consider the following requirements:
   `xrootd`
 * __Host certificate:__ Required for reporting and authenticated StashCache.
   Authenticated StashCache is an optional feature.
-  See our [documentation](/security/host-certs.md) for instructions on how to request and install host certificates.
+  See our [documentation](../../security/host-certs.md) for instructions on how to request and install host certificates.
 * __Network ports:__ The cache service requires the following ports open:
     * Inbound TCP port 1094 for file access via the XRootD protocol
     * Inbound TCP port 8000 for file access via HTTP
@@ -28,8 +28,8 @@ Before starting the installation process, consider the following requirements:
 As with all OSG software installations, there are some one-time steps to prepare in advance:
 
 * Obtain root access to the host
-* Prepare [the required Yum repositories](/common/yum.md)
-* Install [CA certificates](/common/ca.md)
+* Prepare [the required Yum repositories](../../common/yum.md)
+* Install [CA certificates](../../common/ca.md)
 
 
 Registering the Cache
@@ -61,10 +61,10 @@ There are extra requirements for serving non-public data:
 
 - In addition to the cache allowing a VO in the `AllowedVOs` list,
   that VO must also allow the cache in its `AllowedCaches` list.
-  See the page on [getting your VO's data into StashCache](/data/stashcache/vo-data).
+  See the page on [getting your VO's data into StashCache](vo-data.md).
 - There must be an authenticated XRootD instance on the cache server.
 - There must be a `DN` attribute in the resource registration
-  with the [subject DN](/security/host-certs#before-starting) of the host certificate
+  with the [subject DN](../../security/host-certs#before-starting) of the host certificate
 
 This is an example registration for a cache server that serves all public data:
 ```yaml
@@ -245,7 +245,7 @@ As a reminder, here are common service commands (all run as `root`) for EL7:
 |--------------|------------------|-----------|
 | XRootD | `xrootd@stash-cache.service` | The XRootD daemon, which performs the data transfers |
 | XCache | `xcache-reporter.timer` | Reports usage information to collector.opensciencegrid.org |
-| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | Required to authenticate monitoring services.  See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
+| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | Required to authenticate monitoring services.  See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info |
 
 
 ### Authenticated cache services (optional)
@@ -309,4 +309,4 @@ STASHCACHE_DaemonVersion = "1.0.0"
 Getting Help
 ------------
 
-To get assistance, please use the [this page](/common/help) or contact <help@opensciencegrid.org> directly.
+To get assistance, please use the [this page](../../common/help.md) or contact <help@opensciencegrid.org> directly.

@@ -26,7 +26,7 @@ These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%
     -   xrootd-lcmaps will remain at 1.2.1-2 on EL6.
     -   OSG PKI tools now create service certificate files where the service tag is separated from the hostname with an underscore (`_`). This new format first appeared in OSG PKI tools version 2.1.2.
 
-Detailed changes are below. All of the documentation can be found [here](/index.md).
+Detailed changes are below. All of the documentation can be found [here](../../index.md).
 
 Known Issues
 ------------
@@ -36,7 +36,7 @@ Updating to the new release
 
 ### Update Repositories
 
-To update to this series, you need to [install the current OSG repositories](/common/yum#install-osg-repositories).
+To update to this series, you need to [install the current OSG repositories](../../common/yum.md#install-osg-repositories).
 
 ### Update Software
 
@@ -53,7 +53,7 @@ root@host # yum update
 Need help?
 ----------
 
-Do you need help with this release? [Contact us for help](/common/help).
+Do you need help with this release? [Contact us for help](../../common/help.md).
 
 Detailed changes in this release
 --------------------------------

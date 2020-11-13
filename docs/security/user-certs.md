@@ -108,7 +108,7 @@ Using Your User Certificate
         user@host $ openssl x509 -in /<PATH TO>/usercert.pem -noout -subject -issuer -enddate
 
 !!! note
-    For admins trying to validate a service add your user DN to the [grid-map file](/security/lcmaps-voms-authentication/#mapping-users) of the service.
+    For admins trying to validate a service add your user DN to the [grid-map file](lcmaps-voms-authentication.md#mapping-users) of the service.
   
 
 Revoking Your User Certificate
@@ -191,7 +191,7 @@ You should then get a 2FA authentication request with Duo Mobile; once you accep
 Getting Help
 ------------
 
-To get assistance, please use the [this page](/common/help).
+To get assistance, please use the [this page](../common/help.md).
 
 
 References

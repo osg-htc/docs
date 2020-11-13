@@ -42,7 +42,7 @@ To disable them:
     root@host # service gratia-probes-cron stop
     Disabling gratia probes cron:                               [  OK  ]
 
-You also need to enable individual probes, usually via `osg-configure`.  Documentation on using `osg-configure` with Gratia [documented elsewhere](configuration-with-osg-configure#gratia).
+You also need to enable individual probes, usually via `osg-configure`.  Documentation on using `osg-configure` with Gratia [documented elsewhere](configuration-with-osg-configure.md#gratia).
 
 ### Running Gratia Probes
 
@@ -60,7 +60,7 @@ When the cron jobs are enabled and run, they go through the following process, w
 
 ### Gratia Probe Configuration
 
-In normal cases, `osg-configure` does the editing of the probe configuration files, at least on the CE. The configuration is found in `/etc/osg/config.d/30-gratia.ini` and [documented elsewhere](configuration-with-osg-configure#gratia).
+In normal cases, `osg-configure` does the editing of the probe configuration files, at least on the CE. The configuration is found in `/etc/osg/config.d/30-gratia.ini` and [documented elsewhere](configuration-with-osg-configure.md#gratia).
 
 If there are problems or special configuration, you might need to edit the Gratia configuration files yourself. Each probe has a separate configuration file found in `/etc/gratia/PROBE-NAME/ProbeConfig`.
 

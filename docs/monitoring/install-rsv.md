@@ -36,7 +36,7 @@ As with all OSG software installations, there are some one-time (per host) steps
 - Ensure the RSV host has [a supported operating system](../common/yum.md)
 - Obtain root access to the host
 - Prepare [the required Yum repositories](../common/yum.md)
-- Install [CA certificates](../common/ca)
+- Install [CA certificates](../common/ca.md)
 
 Installing RSV
 --------------
@@ -81,7 +81,7 @@ After installation, there are some one-time configuration steps to tell RSV how 
 
 The following configuration steps are optional and will likely not be required for setting up a small or typical site. If you do not need any of the following special configurations, skip to [the section on using RSV](#using-rsv).
 
-Generally speaking, read the [ConfigureRsv](advanced-rsv-configuration) page for more advanced configuration options.
+Generally speaking, read the [ConfigureRsv](advanced-rsv-configuration.md) page for more advanced configuration options.
 
 #### Configuring RSV to run probes using a remote server
 
@@ -91,7 +91,7 @@ In this case, remember to:
 
 - Add the RSV user `rsv` on all the systems where the probes may run, and
 - Map the RSV service certificate to the user you intend to use for RSV. This should be a local user used exclusively for RSV and not belonging to an institutional VO to avoid for the RSV probes to be accounted as regular VO jobs in Gratia. 
-This can be done in the configuration of the [LCMAPS VOMS plugin](/security/lcmaps-voms-authentication) on your CE.
+This can be done in the configuration of the [LCMAPS VOMS plugin](../security/lcmaps-voms-authentication.md) on your CE.
 
 #### Configuring the RSV web server to use HTTPS instead of HTTP
 
@@ -144,7 +144,7 @@ In addition to the RSV service itself, there are a number of supporting services
 
 | Software      | Service name                                   | Notes                   |
 |:--------------|:-----------------------------------------------|------------------------ |
-| Fetch CRL     | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca/#startstop-fetch-crl-a-quick-guide)|
+| Fetch CRL     | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca.md#startstop-fetch-crl-a-quick-guide)|
 | Apache        | httpd                                          |                         |
 | HTCondor-Cron | condor-cron                                    |                         |
 | RSV           | rsv                                            |                         |
@@ -171,12 +171,12 @@ root@host # rsv-control --run --all-enabled
 
 If successful, results will be available from your local RSV web server (e.g., `http://localhost/rsv`) and, if enabled (which is the default) on [MyOSG](http://my.opensciencegrid.org/).
 
-You can also run the metrics individually or pass special parameters as explained in the [rsv-control document](rsv-control).
+You can also run the metrics individually or pass special parameters as explained in the [rsv-control document](rsv-control.md).
 
 Troubleshooting RSV
 -------------------
 
-To get assistance, use the [help procedure](../common/help).
+To get assistance, use the [help procedure](../common/help.md).
 
 RSV has a tool to collect information useful for troubleshooting into a tarball that can be shared with the developers and support staff.
 To use it:
@@ -189,7 +189,7 @@ Analyzing...
 Making tarball (rsv-profiler.tar.gz)
 ```
 
-You can find more information on troubleshooting RSV in the [rsv-control documentation](rsv-control).
+You can find more information on troubleshooting RSV in the [rsv-control documentation](rsv-control.md).
 
 !!! note
     If you are getting assistance via the trouble ticket system, you must add a `.txt` extension to the tarball so it can be uploaded:

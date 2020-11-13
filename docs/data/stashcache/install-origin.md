@@ -24,7 +24,7 @@ Before starting the installation process, consider the following points:
 * __User IDs:__ If they do not exist already, the installation will create the Linux user IDs `condor` and `xrootd`;
   only the `xrootd` user is utilized for the running daemons.
 * __Host certificate:__ The origin service uses a host certificate to authenticate with the caches it serves.
-  The [host certificate documentation](/security/host-certs.md) provides more information on setting up host
+  The [host certificate documentation](../../security/host-certs.md) provides more information on setting up host
   certificates.
 * __Network ports:__ The origin service requires the following ports open:
   * Inbound TCP port 1094 for file access via the XRootD protocol
@@ -37,8 +37,8 @@ Before starting the installation process, consider the following points:
 As with all OSG software installations, there are some one-time steps to prepare in advance:
 
 * Obtain root access to the host
-* Prepare [the required Yum repositories](/common/yum.md)
-* Install [CA certificates](/common/ca.md)
+* Prepare [the required Yum repositories](../../common/yum.md)
+* Install [CA certificates](../../common/ca.md)
 
 Installing the Origin
 ---------------------
@@ -213,7 +213,7 @@ Run the following command:
 Registering the Origin
 ----------------------
 To be part of the OSG StashCache Federation, your origin must be
-[registered with the OSG](/common/registration.md).  The service type is `XRootD origin server`.
+[registered with the OSG](../../common/registration.md).  The service type is `XRootD origin server`.
 
 The resource must also specify which VOs it will serve data from.
 To do this, add an `AllowedVOs` list, with each line specifying a VO whose StashCache data the resource is willing to host.
@@ -230,9 +230,9 @@ You can use the special value `ANY` to indicate that the origin will serve data 
 
 In addition to the origin allowing a VOs via the `AllowedVOs` list,
 that VO must also allow the origin in its `DataFederations/StashCache/AllowedOrigins` list.
-See the page on [getting your VO's data into StashCache](/data/stashcache/vo-data).
+See the page on [getting your VO's data into StashCache](vo-data.md).
 
 Getting Help
 ------------
 
-To get assistance, please use the [this page](/common/help) or contact <help@opensciencegrid.org> directly.
+To get assistance, please use the [this page](../../common/help.md) or contact <help@opensciencegrid.org> directly.

@@ -26,7 +26,7 @@ This release contains:
 -   Fixed load-balancing in Globus GridFTP when using IPv6 addresses
 -   Added the HTCondor CREAM GAHP for EL7 platforms
 -   Completed porting components of OSG Software Stack to EL7
--   Added [RSV GlideinWMS Tester](/monitoring/install-rsv-gwms-tester) for VO Front-ends to test site support
+-   Added [RSV GlideinWMS Tester](../../monitoring/install-rsv-gwms-tester.md) for VO Front-ends to test site support
 -   Updated to [VO Package v68](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-68-3): Added project8 VO
 -   [osg-pki-tools 1.2.19](https://github.com/opensciencegrid/osg-pki-tools/releases/tag/1.2.19)
     -   Reword 'bad VO info' error from osg-\*cert-request
@@ -40,7 +40,7 @@ This release contains:
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.3.16%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
-Detailed changes are below. All of the documentation can be found [here](/index.md)
+Detailed changes are below. All of the documentation can be found [here](../../index.md)
 
 Known Issues
 ------------
@@ -52,7 +52,7 @@ Updating to the new release
 
 ### Update Repositories
 
-To update to this series, you need to [install the current OSG repositories](/common/yum#install-osg-repositories).
+To update to this series, you need to [install the current OSG repositories](../../common/yum.md#install-osg-repositories).
 
 ### Update Software
 
@@ -69,7 +69,7 @@ root@host # yum update
 Need help?
 ----------
 
-Do you need help with this release? [Contact us for help](/common/help).
+Do you need help with this release? [Contact us for help](../../common/help.md).
 
 Detailed changes in this release
 --------------------------------

@@ -390,13 +390,13 @@ This section handles the configuration of services that do not have a dedicated 
 
 This section is contained in `/etc/osg/config.d/10-misc.ini` which is provided by the `osg-configure-misc` RPM.
 
-This section primarily deals with authentication/authorization. For information on suggested settings for your CE, see the [authentication section of the HTCondor-CE install documents](../compute-element/install-htcondor-ce#configuring-authentication).
+This section primarily deals with authentication/authorization. For information on suggested settings for your CE, see the [authentication section of the HTCondor-CE install documents](../compute-element/install-htcondor-ce.md#configuring-authentication).
 
 | Option                                | Values Accepted                                | Explanation                                                                                                                                                                                                                                                                                                                                                                          |
 |---------------------------------------|------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **authorization\_method**             | `gridmap`, `xacml`, `local-gridmap`, `vomsmap` | This indicates which authorization method your site uses. **`xacml`** **is deprecated in OSG 3.4**                                                                                                                                                                                                                                                                                   |
 | edit\_lcmaps\_db                      | `True`, `False`                                | (Optional, default True) If true, osg-configure will overwrite `/etc/lcmaps.db` to set your authorization method. The previous version will be backed up to `/etc/lcmaps.db.pre-configure`                                                                                                                                                                                           |
-| all\_fqans                            | `True`, `False`                                | (Optional, default False) If true, vomsmap auth will use all VOMS FQANs of a proxy for mapping -- see [documentation](../security/lcmaps-voms-authentication#mapping-using-all-fqans)                                                                                                                                                                                                |
+| all\_fqans                            | `True`, `False`                                | (Optional, default False) If true, vomsmap auth will use all VOMS FQANs of a proxy for mapping -- see [documentation](../security/lcmaps-voms-authentication.md#mapping-using-all-fqans)                                                                                                                                                                                                |
 
 **OSG 3.4 changes:**
 
@@ -452,7 +452,7 @@ This section gives information about the options in the Storage section of the c
 Several of these values are constrained and need to be set in a way that is consistent with one of the OSG storage models.
 Please review the Storage Related Parameters section of the
 [Environment Variables](../worker-node/using-wn.md)
-description and [Site Planning](../site-planning) discussions for explanations of the various storage models and the requirements for them.
+description and [Site Planning](../site-planning.md) discussions for explanations of the various storage models and the requirements for them.
 
 This section is contained in `/etc/osg/config.d/10-storage.ini` which is provided by the `osg-configure-ce` RPM.
 

@@ -8,7 +8,7 @@ Install XRootD Standalone
 
 [XRootD](http://xrootd.org/) is a hierarchical storage system that can be used in a variety of ways to access data,
 typically distributed among actual storage resources. In this document we focus on using XRootD as a simple layer
-exporting an underlying storage system (e.g., [HDFS](/data/install-hadoop.md)) to the outside world.
+exporting an underlying storage system (e.g., [HDFS](../install-hadoop.md)) to the outside world.
 
 Before Starting
 ---------------
@@ -22,10 +22,10 @@ Before starting the installation process, consider the following points:
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
--   Ensure the host has [a supported operating system](/release/supported_platforms)
+-   Ensure the host has [a supported operating system](../../release/supported_platforms.md)
 -   Obtain root access to the host
--   Prepare [the required Yum repositories](/common/yum)
--   Install [CA certificates](/common/ca)
+-   Prepare [the required Yum repositories](../../common/yum.md)
+-   Install [CA certificates](../../common/ca.md)
 
 Installing XRootD
 -----------------
@@ -71,7 +71,7 @@ under `/etc/xrootd/config.d/` as follows:
         Access controls should be managed via [authorization configuration](#configuring-authorization).
 
 1. In `/etc/xrootd/config.d/10-common-site-local.cfg`, add a line to set the `resourcename` variable to the
-   [resource name](/common/registration/#registering-resources) of your XRootD service.
+   [resource name](../../common/registration.md#registering-resources) of your XRootD service.
    For example, the XRootD service registered at the
    [University of Florida site](https://github.com/opensciencegrid/topology/blob/b14218d6e9d9df013a42e4d8538b2eeea615514c/topology/University%20of%20Florida/UF%20HPC/UFlorida-HPC.yaml#L250)
    should set the following configuration:
@@ -87,7 +87,7 @@ under `/etc/xrootd/config.d/` as follows:
 
 ### Configuring authorization
 
-To configure XRootD authorization please follow the documentation [here](/data/xrootd/xrootd-authorization).
+To configure XRootD authorization please follow the documentation [here](xrootd-authorization.md).
 
 ### Optional configuration
 
@@ -109,12 +109,12 @@ Hadoop File System (HDFS) based sites should utilize the `xrootd-hdfs` plugin to
         :::file
         ofs.osslib /usr/lib64/libXrdHdfs.so
 
-For more information, see [the HDFS installation documents](/data/install-hadoop).
+For more information, see [the HDFS installation documents](../install-hadoop.md).
 
 
 #### Enabling multi-user support
 
-By default XRootD servers write files on the storage system aa the Unix user `xrootd` instead of the [authenticated](xrootd-authorization) user.
+By default XRootD servers write files on the storage system aa the Unix user `xrootd` instead of the [authenticated](xrootd-authorization.md) user.
 The `xrootd-multiuser` plugins changes this behaviour:
 
 1. Install the XRootD multi-user plugin:
@@ -166,7 +166,7 @@ The specific services are:
 
 | Software         | Service Name                            | Notes                                                                        |
 |:-----------------|:----------------------------------------|:-----------------------------------------------------------------------------|
-| Fetch CRL        | `fetch-crl-boot` and `fetch-crl-cron`   | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
+| Fetch CRL        | `fetch-crl-boot` and `fetch-crl-cron`   | See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info |
 | XRootD           | EL 7:`xrootd@standalone`, EL 6:`xrootd` |                                                                              |
 | XRootD Multiuser | EL 7:`xrootd-privileged@standalone`     | See [XRootD multiuser](#enabling-multi-user-support) for more info           |
 
@@ -189,9 +189,9 @@ To validate an XRootD installation, perform the following verification steps:
     If you have configured authentication/authorization for XRootD,
     be sure you have given yourself the necessary permissions to run these tests.
     For example, if you are using a grid proxy,
-    make sure your DN is mapped to a user in [/etc/grid-security/grid-mapfile](/security/lcmaps-voms-authentication#mapping-users),
+    make sure your DN is mapped to a user in [/etc/grid-security/grid-mapfile](../../security/lcmaps-voms-authentication.md#mapping-users),
     and make sure you have a valid proxy on your local machine.
-    Also, ensure that the [Authfile](/data/xrootd/xrootd-authorization#authorization-file) on the XRootD server gives write access to the Unix user you will get mapped to.
+    Also, ensure that the [Authfile](xrootd-authorization.md#authorization-file) on the XRootD server gives write access to the Unix user you will get mapped to.
 
 1. Verify file transfer over the XRootD protocol using XRootD client tools:
 
@@ -234,7 +234,7 @@ Registering an XRootD Standalone Server
 ---------------------------------------
 
 To register your XRootD server, follow the general registration instructions
-[here](/common/registration#new-resources) with the following XRootD-specific details:
+[here](../../common/registration.md#new-resources) with the following XRootD-specific details:
 
 1.  Add an `XRootD component:` section to the `Services:` list, with any relevant fields for that service.
     This is a partial example:
@@ -255,7 +255,7 @@ To register your XRootD server, follow the general registration instructions
 Getting Help
 ------------
 
-To get assistance. please use the [Help Procedure](/common/help/) page.
+To get assistance. please use the [Help Procedure](../../common/help.md) page.
 
 Reference
 ---------
