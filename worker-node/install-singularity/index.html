@@ -1,40 +1,18 @@
 
-
-
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="no-js">
   <head>
     
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
-      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
       
       
         <link rel="canonical" href="https://opensciencegrid.org/docs/worker-node/install-singularity/">
       
       
-      
-        <meta name="lang:clipboard.copy" content="Copy to clipboard">
-      
-        <meta name="lang:clipboard.copied" content="Copied to clipboard">
-      
-        <meta name="lang:search.language" content="en">
-      
-        <meta name="lang:search.pipeline.stopwords" content="True">
-      
-        <meta name="lang:search.pipeline.trimmer" content="True">
-      
-        <meta name="lang:search.result.none" content="No matching documents">
-      
-        <meta name="lang:search.result.one" content="1 matching document">
-      
-        <meta name="lang:search.result.other" content="# matching documents">
-      
-        <meta name="lang:search.tokenizer" content="[\s\-]+">
-      
       <link rel="shortcut icon" href="../../img/favicon.ico">
-      <meta name="generator" content="mkdocs-0.17.5, mkdocs-material-2.9.4">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.4">
     
     
       
@@ -42,110 +20,110 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.358818c7.min.css">
       
-      
-    
-    
-      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
-    
-    
-      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-      
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
-        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.f0267088.min.css">
+        
       
     
-    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
     
       <link rel="stylesheet" href="../../css/extra.css">
     
     
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-69012-29","opensciencegrid.github.io"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
   </head>
   
-    <body dir="ltr">
   
-    <svg class="md-svg">
-      <defs>
-        
-        
-          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
-    viewBox="0 0 416 448" id="__github">
-  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
-        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
-        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
-        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
-        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
-        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
-        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
-        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
-        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
-        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
-        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
-        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
-        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
-        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
-        99.5z" />
-</svg>
-        
-      </defs>
-    </svg>
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
-    
-      <a href="#install-singularity" tabindex="1" class="md-skip">
-        Skip to content
-      </a>
-    
-    
-      <header class="md-header" data-md-component="header">
-  <nav class="md-header-nav md-grid">
-    <div class="md-flex">
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://opensciencegrid.org/docs/" title="OSG Site Documentation" class="md-header-nav__button md-logo">
-          
-            <i class="md-icon"></i>
-          
-        </a>
-      </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
-      </div>
-      <div class="md-flex__cell md-flex__cell--stretch">
-        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
-          
-            
-              <span class="md-header-nav__topic">
-                OSG Site Documentation
-              </span>
-              <span class="md-header-nav__topic">
-                Install Singularity
-              </span>
-            
-          
-        </div>
-      </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
         
-          
-            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+        <a href="#install-singularity" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://opensciencegrid.org/docs/" title="OSG Site Documentation" class="md-header-nav__button md-logo" aria-label="OSG Site Documentation">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            OSG Site Documentation
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
             
+              Install Singularity
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
 <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
-      <label class="md-icon md-search__icon" for="__search"></label>
-      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
-        &#xE5CD;
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
       </button>
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="result">
+        <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
-            Type to start searching
+            Initializing search
           </div>
           <ol class="md-search-result__list"></ol>
         </div>
@@ -153,80 +131,60 @@
     </div>
   </div>
 </div>
-          
+    
+    
+      <div class="md-header-nav__source">
         
-      </div>
-      
-        <div class="md-flex__cell md-flex__cell--shrink">
-          <div class="md-header-nav__source">
-            
-
-
-  
-
-
-  <a href="https://github.com/opensciencegrid/docs/" title="Go to repository" class="md-source" data-md-source="github">
+<a href="https://github.com/opensciencegrid/docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
     
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
       </div>
     
-    <div class="md-source__repository">
-      GitHub
-    </div>
-  </a>
-
-          </div>
-        </div>
-      
-    </div>
   </nav>
 </header>
     
-    <div class="md-container">
+    <div class="md-container" data-md-component="container">
+      
       
         
       
-      
-      <main class="md-main">
-        <div class="md-main__inner md-grid" data-md-component="container">
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
           
             
               <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
-                    <nav class="md-nav md-nav--primary" data-md-level="0">
-  <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="https://opensciencegrid.org/docs/" title="OSG Site Documentation" class="md-nav__button md-logo">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://opensciencegrid.org/docs/" title="OSG Site Documentation" class="md-nav__button md-logo" aria-label="OSG Site Documentation">
       
-        <i class="md-icon"></i>
-      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
     </a>
     OSG Site Documentation
   </label>
   
     <div class="md-nav__source">
       
-
-
-  
-
-
-  <a href="https://github.com/opensciencegrid/docs/" title="Go to repository" class="md-source" data-md-source="github">
+<a href="https://github.com/opensciencegrid/docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
     
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
-    
-    <div class="md-source__repository">
-      GitHub
-    </div>
-  </a>
-
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
     </div>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -237,7 +195,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../.." title="Home" class="md-nav__link">
+    <a href="../.." class="md-nav__link">
       Home
     </a>
   </li>
@@ -249,7 +207,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../detailed-overview/" title="Detailed Overview" class="md-nav__link">
+    <a href="../../detailed-overview/" class="md-nav__link">
       Detailed Overview
     </a>
   </li>
@@ -261,7 +219,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../site-planning/" title="Site Planning" class="md-nav__link">
+    <a href="../../site-planning/" class="md-nav__link">
       Site Planning
     </a>
   </li>
@@ -273,7 +231,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../site-verification/" title="Site Verification" class="md-nav__link">
+    <a href="../../site-verification/" class="md-nav__link">
       Site Verification
     </a>
   </li>
@@ -285,7 +243,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../site-responsibilities/" title="Site Responsibilities" class="md-nav__link">
+    <a href="../../site-responsibilities/" class="md-nav__link">
       Site Responsibilities
     </a>
   </li>
@@ -298,13 +256,15 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
     <label class="md-nav__link" for="nav-6">
       Resource Sharing
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+    <nav class="md-nav" aria-label="Resource Sharing" data-md-level="1">
       <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon"></span>
         Resource Sharing
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -316,7 +276,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../resource-sharing/overview/" title="Overview" class="md-nav__link">
+    <a href="../../resource-sharing/overview/" class="md-nav__link">
       Overview
     </a>
   </li>
@@ -328,7 +288,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../resource-sharing/os-backfill-containers/" title="Site Backfill" class="md-nav__link">
+    <a href="../../resource-sharing/os-backfill-containers/" class="md-nav__link">
       Site Backfill
     </a>
   </li>
@@ -340,7 +300,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../resource-sharing/user-containers/" title="User Allocations" class="md-nav__link">
+    <a href="../../resource-sharing/user-containers/" class="md-nav__link">
       User Allocations
     </a>
   </li>
@@ -358,13 +318,15 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
     
     <label class="md-nav__link" for="nav-7">
       Compute Entrypoint
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+    <nav class="md-nav" aria-label="Compute Entrypoint" data-md-level="1">
       <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon"></span>
         Compute Entrypoint
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -376,7 +338,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../compute-element/htcondor-ce-overview/" title="HTCondor-CE Overview" class="md-nav__link">
+    <a href="../../compute-element/htcondor-ce-overview/" class="md-nav__link">
       HTCondor-CE Overview
     </a>
   </li>
@@ -388,7 +350,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../compute-element/hosted-ce/" title="Request a Hosted CE" class="md-nav__link">
+    <a href="../../compute-element/hosted-ce/" class="md-nav__link">
       Request a Hosted CE
     </a>
   </li>
@@ -400,7 +362,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../compute-element/install-htcondor-ce/" title="Install HTCondor-CE" class="md-nav__link">
+    <a href="../../compute-element/install-htcondor-ce/" class="md-nav__link">
       Install HTCondor-CE
     </a>
   </li>
@@ -412,7 +374,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../compute-element/job-router-recipes/" title="Job Router Recipes" class="md-nav__link">
+    <a href="../../compute-element/job-router-recipes/" class="md-nav__link">
       Job Router Recipes
     </a>
   </li>
@@ -424,7 +386,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../compute-element/troubleshoot-htcondor-ce/" title="Troubleshooting HTCondor-CE" class="md-nav__link">
+    <a href="../../compute-element/troubleshoot-htcondor-ce/" class="md-nav__link">
       Troubleshooting HTCondor-CE
     </a>
   </li>
@@ -436,7 +398,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../compute-element/submit-htcondor-ce/" title="Submitting to HTCondor-CE" class="md-nav__link">
+    <a href="../../compute-element/submit-htcondor-ce/" class="md-nav__link">
       Submitting to HTCondor-CE
     </a>
   </li>
@@ -448,7 +410,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../compute-element/covid-19/" title="Supporting COVID-19 Research" class="md-nav__link">
+    <a href="../../compute-element/covid-19/" class="md-nav__link">
       Supporting COVID-19 Research
     </a>
   </li>
@@ -468,13 +430,15 @@
 
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8" checked>
     
     <label class="md-nav__link" for="nav-8">
       Worker Node
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+    <nav class="md-nav" aria-label="Worker Node" data-md-level="1">
       <label class="md-nav__title" for="nav-8">
+        <span class="md-nav__icon md-icon"></span>
         Worker Node
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -486,7 +450,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../using-wn/" title="Overview" class="md-nav__link">
+    <a href="../using-wn/" class="md-nav__link">
       Overview
     </a>
   </li>
@@ -498,7 +462,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../install-wn/" title="Install from RPM" class="md-nav__link">
+    <a href="../install-wn/" class="md-nav__link">
       Install from RPM
     </a>
   </li>
@@ -510,7 +474,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../install-wn-tarball/" title="Install from Tarball" class="md-nav__link">
+    <a href="../install-wn-tarball/" class="md-nav__link">
       Install from Tarball
     </a>
   </li>
@@ -522,7 +486,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../install-wn-oasis/" title="Install from OASIS" class="md-nav__link">
+    <a href="../install-wn-oasis/" class="md-nav__link">
       Install from OASIS
     </a>
   </li>
@@ -534,7 +498,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../install-cvmfs/" title="Install CVMFS" class="md-nav__link">
+    <a href="../install-cvmfs/" class="md-nav__link">
       Install CVMFS
     </a>
   </li>
@@ -549,60 +513,64 @@
 
   <li class="md-nav__item md-nav__item--active">
     
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
       
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
         Install Singularity
+        <span class="md-nav__icon md-icon"></span>
       </label>
     
-    <a href="./" title="Install Singularity" class="md-nav__link md-nav__link--active">
+    <a href="./" class="md-nav__link md-nav__link--active">
       Install Singularity
     </a>
     
       
-<nav class="md-nav md-nav--secondary">
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
     
   
   
-    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#before-starting" title="Before Starting" class="md-nav__link">
+  <a href="#before-starting" class="md-nav__link">
     Before Starting
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#choosing-unprivileged-vs-privileged-singularity" title="Choosing Unprivileged vs Privileged Singularity" class="md-nav__link">
+  <a href="#choosing-unprivileged-vs-privileged-singularity" class="md-nav__link">
     Choosing Unprivileged vs Privileged Singularity
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#enabling-unprivileged-singularity" title="Enabling Unprivileged Singularity" class="md-nav__link">
+  <a href="#enabling-unprivileged-singularity" class="md-nav__link">
     Enabling Unprivileged Singularity
   </a>
   
-    <nav class="md-nav">
+    <nav class="md-nav" aria-label="Enabling Unprivileged Singularity">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#configuring-unprivileged-singularity" title="Configuring Unprivileged Singularity" class="md-nav__link">
+  <a href="#configuring-unprivileged-singularity" class="md-nav__link">
     Configuring Unprivileged Singularity
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#validating-unprivileged-singularity" title="Validating Unprivileged Singularity" class="md-nav__link">
+  <a href="#validating-unprivileged-singularity" class="md-nav__link">
     Validating Unprivileged Singularity
   </a>
   
@@ -614,37 +582,37 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#singularity-via-rpm" title="Singularity via RPM" class="md-nav__link">
+  <a href="#singularity-via-rpm" class="md-nav__link">
     Singularity via RPM
   </a>
   
-    <nav class="md-nav">
+    <nav class="md-nav" aria-label="Singularity via RPM">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#installing-singularity-via-rpm" title="Installing Singularity via RPM" class="md-nav__link">
+  <a href="#installing-singularity-via-rpm" class="md-nav__link">
     Installing Singularity via RPM
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#configuring-singularity-rpm" title="Configuring Singularity RPM" class="md-nav__link">
+  <a href="#configuring-singularity-rpm" class="md-nav__link">
     Configuring Singularity RPM
   </a>
   
-    <nav class="md-nav">
+    <nav class="md-nav" aria-label="Configuring Singularity RPM">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#configuring-the-rpm-to-be-unprivileged" title="Configuring the RPM to be Unprivileged" class="md-nav__link">
+  <a href="#configuring-the-rpm-to-be-unprivileged" class="md-nav__link">
     Configuring the RPM to be Unprivileged
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#limiting-image-types" title="Limiting Image Types" class="md-nav__link">
+  <a href="#limiting-image-types" class="md-nav__link">
     Limiting Image Types
   </a>
   
@@ -656,7 +624,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#validating-singularity-rpm" title="Validating Singularity RPM" class="md-nav__link">
+  <a href="#validating-singularity-rpm" class="md-nav__link">
     Validating Singularity RPM
   </a>
   
@@ -668,22 +636,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#starting-and-stopping-services" title="Starting and Stopping Services" class="md-nav__link">
+  <a href="#starting-and-stopping-services" class="md-nav__link">
     Starting and Stopping Services
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#references" title="References" class="md-nav__link">
+  <a href="#references" class="md-nav__link">
     References
   </a>
   
 </li>
-      
-      
-      
-      
       
     </ul>
   
@@ -698,7 +662,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../using-wn-containers/" title="Using WN Containers" class="md-nav__link">
+    <a href="../using-wn-containers/" class="md-nav__link">
       Using WN Containers
     </a>
   </li>
@@ -716,13 +680,15 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
     
     <label class="md-nav__link" for="nav-9">
       Data
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+    <nav class="md-nav" aria-label="Data" data-md-level="1">
       <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon"></span>
         Data
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -735,13 +701,15 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-1" type="checkbox" id="nav-9-1">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9-1" type="checkbox" id="nav-9-1">
     
     <label class="md-nav__link" for="nav-9-1">
       HTTP & OASIS
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+    <nav class="md-nav" aria-label="HTTP & OASIS" data-md-level="2">
       <label class="md-nav__title" for="nav-9-1">
+        <span class="md-nav__icon md-icon"></span>
         HTTP & OASIS
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -753,7 +721,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/frontier-squid/" title="Install Squid HTTP Cache" class="md-nav__link">
+    <a href="../../data/frontier-squid/" class="md-nav__link">
       Install Squid HTTP Cache
     </a>
   </li>
@@ -765,7 +733,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/update-oasis/" title="Update OASIS Shared Repo" class="md-nav__link">
+    <a href="../../data/update-oasis/" class="md-nav__link">
       Update OASIS Shared Repo
     </a>
   </li>
@@ -777,7 +745,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/external-oasis-repos/" title="Install an OASIS Repo" class="md-nav__link">
+    <a href="../../data/external-oasis-repos/" class="md-nav__link">
       Install an OASIS Repo
     </a>
   </li>
@@ -795,13 +763,15 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-2" type="checkbox" id="nav-9-2">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9-2" type="checkbox" id="nav-9-2">
     
     <label class="md-nav__link" for="nav-9-2">
       POSIX Storage
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+    <nav class="md-nav" aria-label="POSIX Storage" data-md-level="2">
       <label class="md-nav__title" for="nav-9-2">
+        <span class="md-nav__icon md-icon"></span>
         POSIX Storage
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -813,7 +783,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/gridftp/" title="Install GridFTP Server" class="md-nav__link">
+    <a href="../../data/gridftp/" class="md-nav__link">
       Install GridFTP Server
     </a>
   </li>
@@ -825,7 +795,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/load-balanced-gridftp/" title="Install Load Balanced GridFTP" class="md-nav__link">
+    <a href="../../data/load-balanced-gridftp/" class="md-nav__link">
       Install Load Balanced GridFTP
     </a>
   </li>
@@ -843,13 +813,15 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-3" type="checkbox" id="nav-9-3">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9-3" type="checkbox" id="nav-9-3">
     
     <label class="md-nav__link" for="nav-9-3">
       XRootD
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+    <nav class="md-nav" aria-label="XRootD" data-md-level="2">
       <label class="md-nav__title" for="nav-9-3">
+        <span class="md-nav__icon md-icon"></span>
         XRootD
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -861,7 +833,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/xrootd/overview/" title="XRootD Overview" class="md-nav__link">
+    <a href="../../data/xrootd/overview/" class="md-nav__link">
       XRootD Overview
     </a>
   </li>
@@ -873,7 +845,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/xrootd/install-standalone/" title="Install XRootD Standalone" class="md-nav__link">
+    <a href="../../data/xrootd/install-standalone/" class="md-nav__link">
       Install XRootD Standalone
     </a>
   </li>
@@ -885,7 +857,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/xrootd/install-storage-element/" title="Install XRootD SE" class="md-nav__link">
+    <a href="../../data/xrootd/install-storage-element/" class="md-nav__link">
       Install XRootD SE
     </a>
   </li>
@@ -897,7 +869,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/xrootd/xrootd-authorization/" title="Configure Authorization" class="md-nav__link">
+    <a href="../../data/xrootd/xrootd-authorization/" class="md-nav__link">
       Configure Authorization
     </a>
   </li>
@@ -909,7 +881,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/xrootd/install-client/" title="Using XRootD" class="md-nav__link">
+    <a href="../../data/xrootd/install-client/" class="md-nav__link">
       Using XRootD
     </a>
   </li>
@@ -921,7 +893,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/xrootd/install-cms-xcache/" title="Install CMS XCache" class="md-nav__link">
+    <a href="../../data/xrootd/install-cms-xcache/" class="md-nav__link">
       Install CMS XCache
     </a>
   </li>
@@ -939,13 +911,15 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-4" type="checkbox" id="nav-9-4">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9-4" type="checkbox" id="nav-9-4">
     
     <label class="md-nav__link" for="nav-9-4">
       StashCache
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+    <nav class="md-nav" aria-label="StashCache" data-md-level="2">
       <label class="md-nav__title" for="nav-9-4">
+        <span class="md-nav__icon md-icon"></span>
         StashCache
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -957,7 +931,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/stashcache/overview/" title="StashCache Overview" class="md-nav__link">
+    <a href="../../data/stashcache/overview/" class="md-nav__link">
       StashCache Overview
     </a>
   </li>
@@ -969,7 +943,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/stashcache/run-stashcache-container/" title="Running a Cache in a container" class="md-nav__link">
+    <a href="../../data/stashcache/run-stashcache-container/" class="md-nav__link">
       Running a Cache in a container
     </a>
   </li>
@@ -981,7 +955,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/stashcache/run-stash-origin-container/" title="Running an Origin in a container" class="md-nav__link">
+    <a href="../../data/stashcache/run-stash-origin-container/" class="md-nav__link">
       Running an Origin in a container
     </a>
   </li>
@@ -993,7 +967,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/stashcache/install-cache/" title="Install a Cache" class="md-nav__link">
+    <a href="../../data/stashcache/install-cache/" class="md-nav__link">
       Install a Cache
     </a>
   </li>
@@ -1005,7 +979,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/stashcache/install-origin/" title="Install an Origin" class="md-nav__link">
+    <a href="../../data/stashcache/install-origin/" class="md-nav__link">
       Install an Origin
     </a>
   </li>
@@ -1017,7 +991,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/stashcache/vo-data/" title="Getting VO data into StashCache" class="md-nav__link">
+    <a href="../../data/stashcache/vo-data/" class="md-nav__link">
       Getting VO data into StashCache
     </a>
   </li>
@@ -1035,13 +1009,15 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-5" type="checkbox" id="nav-9-5">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9-5" type="checkbox" id="nav-9-5">
     
     <label class="md-nav__link" for="nav-9-5">
       HDFS
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+    <nav class="md-nav" aria-label="HDFS" data-md-level="2">
       <label class="md-nav__title" for="nav-9-5">
+        <span class="md-nav__icon md-icon"></span>
         HDFS
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1053,7 +1029,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/hadoop-overview/" title="HDFS Overview" class="md-nav__link">
+    <a href="../../data/hadoop-overview/" class="md-nav__link">
       HDFS Overview
     </a>
   </li>
@@ -1065,7 +1041,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/install-hadoop/" title="Install HDFS" class="md-nav__link">
+    <a href="../../data/install-hadoop/" class="md-nav__link">
       Install HDFS
     </a>
   </li>
@@ -1088,13 +1064,15 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
     
     <label class="md-nav__link" for="nav-10">
       Submit
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+    <nav class="md-nav" aria-label="Submit" data-md-level="1">
       <label class="md-nav__title" for="nav-10">
+        <span class="md-nav__icon md-icon"></span>
         Submit
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1107,13 +1085,15 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-1" type="checkbox" id="nav-10-1">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10-1" type="checkbox" id="nav-10-1">
     
     <label class="md-nav__link" for="nav-10-1">
       Flocking
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+    <nav class="md-nav" aria-label="Flocking" data-md-level="2">
       <label class="md-nav__title" for="nav-10-1">
+        <span class="md-nav__icon md-icon"></span>
         Flocking
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1125,7 +1105,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../submit/osg-flock/" title="Flock to OSG" class="md-nav__link">
+    <a href="../../submit/osg-flock/" class="md-nav__link">
       Flock to OSG
     </a>
   </li>
@@ -1148,13 +1128,15 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
     
     <label class="md-nav__link" for="nav-11">
       Security
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+    <nav class="md-nav" aria-label="Security" data-md-level="1">
       <label class="md-nav__title" for="nav-11">
+        <span class="md-nav__icon md-icon"></span>
         Security
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1166,7 +1148,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../security/lcmaps-voms-authentication/" title="LCMAPS VOMS authentication" class="md-nav__link">
+    <a href="../../security/lcmaps-voms-authentication/" class="md-nav__link">
       LCMAPS VOMS authentication
     </a>
   </li>
@@ -1178,7 +1160,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../security/user-certs/" title="User Certificates" class="md-nav__link">
+    <a href="../../security/user-certs/" class="md-nav__link">
       User Certificates
     </a>
   </li>
@@ -1190,7 +1172,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../security/certificate-management/" title="Certificate Management Reference" class="md-nav__link">
+    <a href="../../security/certificate-management/" class="md-nav__link">
       Certificate Management Reference
     </a>
   </li>
@@ -1203,13 +1185,15 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-4" type="checkbox" id="nav-11-4">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11-4" type="checkbox" id="nav-11-4">
     
     <label class="md-nav__link" for="nav-11-4">
       Host Certificates
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+    <nav class="md-nav" aria-label="Host Certificates" data-md-level="2">
       <label class="md-nav__title" for="nav-11-4">
+        <span class="md-nav__icon md-icon"></span>
         Host Certificates
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1221,19 +1205,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../security/host-certs/" title="Host Certs" class="md-nav__link">
-      Host Certs
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../security/host-certs/overview/" title="Overview" class="md-nav__link">
+    <a href="../../security/host-certs/overview/" class="md-nav__link">
       Overview
     </a>
   </li>
@@ -1245,7 +1217,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../security/host-certs/incommon/" title="Using InCommon" class="md-nav__link">
+    <a href="../../security/host-certs/incommon/" class="md-nav__link">
       Using InCommon
     </a>
   </li>
@@ -1257,7 +1229,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../security/host-certs/lets-encrypt/" title="Using Let's Encrypt" class="md-nav__link">
+    <a href="../../security/host-certs/lets-encrypt/" class="md-nav__link">
       Using Let's Encrypt
     </a>
   </li>
@@ -1269,7 +1241,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../security/host-certs/digicert/" title="Using DigiCert" class="md-nav__link">
+    <a href="../../security/host-certs/digicert/" class="md-nav__link">
       Using DigiCert
     </a>
   </li>
@@ -1292,13 +1264,15 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12">
     
     <label class="md-nav__link" for="nav-12">
       Common
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+    <nav class="md-nav" aria-label="Common" data-md-level="1">
       <label class="md-nav__title" for="nav-12">
+        <span class="md-nav__icon md-icon"></span>
         Common
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1310,7 +1284,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../common/ca/" title="CA Certificates" class="md-nav__link">
+    <a href="../../common/ca/" class="md-nav__link">
       CA Certificates
     </a>
   </li>
@@ -1322,7 +1296,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../common/yum/" title="OSG Yum Repos" class="md-nav__link">
+    <a href="../../common/yum/" class="md-nav__link">
       OSG Yum Repos
     </a>
   </li>
@@ -1334,7 +1308,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../other/configuration-with-osg-configure/" title="Configuration with OSG-Configure" class="md-nav__link">
+    <a href="../../other/configuration-with-osg-configure/" class="md-nav__link">
       Configuration with OSG-Configure
     </a>
   </li>
@@ -1346,7 +1320,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../common/registration/" title="Registration" class="md-nav__link">
+    <a href="../../common/registration/" class="md-nav__link">
       Registration
     </a>
   </li>
@@ -1364,13 +1338,15 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13">
     
     <label class="md-nav__link" for="nav-13">
       Other
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+    <nav class="md-nav" aria-label="Other" data-md-level="1">
       <label class="md-nav__title" for="nav-13">
+        <span class="md-nav__icon md-icon"></span>
         Other
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1382,7 +1358,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../other/install-gwms-frontend/" title="Install GlideinWMS Frontend" class="md-nav__link">
+    <a href="../../other/install-gwms-frontend/" class="md-nav__link">
       Install GlideinWMS Frontend
     </a>
   </li>
@@ -1394,7 +1370,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../other/install-cvmfs-stratum1/" title="Install a CVMFS Stratum 1" class="md-nav__link">
+    <a href="../../other/install-cvmfs-stratum1/" class="md-nav__link">
       Install a CVMFS Stratum 1
     </a>
   </li>
@@ -1406,7 +1382,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../other/troubleshooting-gratia/" title="Troubleshooting Gratia" class="md-nav__link">
+    <a href="../../other/troubleshooting-gratia/" class="md-nav__link">
       Troubleshooting Gratia
     </a>
   </li>
@@ -1418,7 +1394,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../other/schedd-filebeats/" title="Install Transfer Log Filebeats" class="md-nav__link">
+    <a href="../../other/schedd-filebeats/" class="md-nav__link">
       Install Transfer Log Filebeats
     </a>
   </li>
@@ -1436,13 +1412,15 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14">
     
     <label class="md-nav__link" for="nav-14">
       Release Information
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+    <nav class="md-nav" aria-label="Release Information" data-md-level="1">
       <label class="md-nav__title" for="nav-14">
+        <span class="md-nav__icon md-icon"></span>
         Release Information
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1454,7 +1432,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/notes/" title="Release Note Overview" class="md-nav__link">
+    <a href="../../release/notes/" class="md-nav__link">
       Release Note Overview
     </a>
   </li>
@@ -1467,13 +1445,15 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14-2" type="checkbox" id="nav-14-2">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-14-2" type="checkbox" id="nav-14-2">
     
     <label class="md-nav__link" for="nav-14-2">
       3.5 Release Notes
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+    <nav class="md-nav" aria-label="3.5 Release Notes" data-md-level="2">
       <label class="md-nav__title" for="nav-14-2">
+        <span class="md-nav__icon md-icon"></span>
         3.5 Release Notes
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1485,7 +1465,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-27/" title="OSG Release 3.5.27" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-27/" class="md-nav__link">
       OSG Release 3.5.27
     </a>
   </li>
@@ -1497,7 +1477,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-26/" title="OSG Release 3.5.26" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-26/" class="md-nav__link">
       OSG Release 3.5.26
     </a>
   </li>
@@ -1509,7 +1489,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-25-2/" title="OSG Release 3.5.25-2" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-25-2/" class="md-nav__link">
       OSG Release 3.5.25-2
     </a>
   </li>
@@ -1521,7 +1501,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-25/" title="OSG Release 3.5.25" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-25/" class="md-nav__link">
       OSG Release 3.5.25
     </a>
   </li>
@@ -1533,7 +1513,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-24/" title="OSG Release 3.5.24" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-24/" class="md-nav__link">
       OSG Release 3.5.24
     </a>
   </li>
@@ -1545,7 +1525,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-23/" title="OSG Release 3.5.23" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-23/" class="md-nav__link">
       OSG Release 3.5.23
     </a>
   </li>
@@ -1557,7 +1537,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-22/" title="OSG Release 3.5.22" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-22/" class="md-nav__link">
       OSG Release 3.5.22
     </a>
   </li>
@@ -1569,7 +1549,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-21-2/" title="OSG Release 3.5.21-2" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-21-2/" class="md-nav__link">
       OSG Release 3.5.21-2
     </a>
   </li>
@@ -1581,7 +1561,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-21/" title="OSG Release 3.5.21" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-21/" class="md-nav__link">
       OSG Release 3.5.21
     </a>
   </li>
@@ -1593,7 +1573,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-20/" title="OSG Release 3.5.20" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-20/" class="md-nav__link">
       OSG Release 3.5.20
     </a>
   </li>
@@ -1605,7 +1585,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-19/" title="OSG Release 3.5.19" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-19/" class="md-nav__link">
       OSG Release 3.5.19
     </a>
   </li>
@@ -1617,7 +1597,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-18/" title="OSG Release 3.5.18" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-18/" class="md-nav__link">
       OSG Release 3.5.18
     </a>
   </li>
@@ -1629,7 +1609,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-17/" title="OSG Release 3.5.17" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-17/" class="md-nav__link">
       OSG Release 3.5.17
     </a>
   </li>
@@ -1641,7 +1621,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-16/" title="OSG Release 3.5.16" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-16/" class="md-nav__link">
       OSG Release 3.5.16
     </a>
   </li>
@@ -1653,7 +1633,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-15-3/" title="OSG Release 3.5.15-3" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-15-3/" class="md-nav__link">
       OSG Release 3.5.15-3
     </a>
   </li>
@@ -1665,7 +1645,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-15-2/" title="OSG Release 3.5.15-2" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-15-2/" class="md-nav__link">
       OSG Release 3.5.15-2
     </a>
   </li>
@@ -1677,7 +1657,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-15/" title="OSG Release 3.5.15" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-15/" class="md-nav__link">
       OSG Release 3.5.15
     </a>
   </li>
@@ -1689,7 +1669,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-14/" title="OSG Release 3.5.14" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-14/" class="md-nav__link">
       OSG Release 3.5.14
     </a>
   </li>
@@ -1701,7 +1681,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-13/" title="OSG Release 3.5.13" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-13/" class="md-nav__link">
       OSG Release 3.5.13
     </a>
   </li>
@@ -1713,7 +1693,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-12/" title="OSG Release 3.5.12" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-12/" class="md-nav__link">
       OSG Release 3.5.12
     </a>
   </li>
@@ -1725,7 +1705,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-11/" title="OSG Release 3.5.11" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-11/" class="md-nav__link">
       OSG Release 3.5.11
     </a>
   </li>
@@ -1737,7 +1717,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-10-2/" title="OSG Release 3.5.10-2" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-10-2/" class="md-nav__link">
       OSG Release 3.5.10-2
     </a>
   </li>
@@ -1749,7 +1729,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-10/" title="OSG Release 3.5.10" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-10/" class="md-nav__link">
       OSG Release 3.5.10
     </a>
   </li>
@@ -1761,7 +1741,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-9/" title="OSG Release 3.5.9" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-9/" class="md-nav__link">
       OSG Release 3.5.9
     </a>
   </li>
@@ -1773,7 +1753,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-8-4/" title="OSG Release 3.5.8-4" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-8-4/" class="md-nav__link">
       OSG Release 3.5.8-4
     </a>
   </li>
@@ -1785,7 +1765,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-8-3/" title="OSG Release 3.5.8-3" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-8-3/" class="md-nav__link">
       OSG Release 3.5.8-3
     </a>
   </li>
@@ -1797,7 +1777,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-8-2/" title="OSG Release 3.5.8-2" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-8-2/" class="md-nav__link">
       OSG Release 3.5.8-2
     </a>
   </li>
@@ -1809,7 +1789,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-8/" title="OSG Release 3.5.8" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-8/" class="md-nav__link">
       OSG Release 3.5.8
     </a>
   </li>
@@ -1821,7 +1801,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-7/" title="OSG Release 3.5.7" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-7/" class="md-nav__link">
       OSG Release 3.5.7
     </a>
   </li>
@@ -1833,7 +1813,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-6/" title="OSG Release 3.5.6" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-6/" class="md-nav__link">
       OSG Release 3.5.6
     </a>
   </li>
@@ -1845,7 +1825,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-5/" title="OSG Release 3.5.5" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-5/" class="md-nav__link">
       OSG Release 3.5.5
     </a>
   </li>
@@ -1857,7 +1837,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-4/" title="OSG Release 3.5.4" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-4/" class="md-nav__link">
       OSG Release 3.5.4
     </a>
   </li>
@@ -1869,7 +1849,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-3/" title="OSG Release 3.5.3" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-3/" class="md-nav__link">
       OSG Release 3.5.3
     </a>
   </li>
@@ -1881,7 +1861,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-2/" title="OSG Release 3.5.2" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-2/" class="md-nav__link">
       OSG Release 3.5.2
     </a>
   </li>
@@ -1893,7 +1873,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-1/" title="OSG Release 3.5.1" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-1/" class="md-nav__link">
       OSG Release 3.5.1
     </a>
   </li>
@@ -1905,7 +1885,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.5/release-3-5-0/" title="OSG Release 3.5.0" class="md-nav__link">
+    <a href="../../release/3.5/release-3-5-0/" class="md-nav__link">
       OSG Release 3.5.0
     </a>
   </li>
@@ -1923,13 +1903,15 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14-3" type="checkbox" id="nav-14-3">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-14-3" type="checkbox" id="nav-14-3">
     
     <label class="md-nav__link" for="nav-14-3">
       3.4 Release Notes
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+    <nav class="md-nav" aria-label="3.4 Release Notes" data-md-level="2">
       <label class="md-nav__title" for="nav-14-3">
+        <span class="md-nav__icon md-icon"></span>
         3.4 Release Notes
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1941,7 +1923,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-57/" title="OSG Release 3.4.57" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-57/" class="md-nav__link">
       OSG Release 3.4.57
     </a>
   </li>
@@ -1953,7 +1935,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-56/" title="OSG Release 3.4.56" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-56/" class="md-nav__link">
       OSG Release 3.4.56
     </a>
   </li>
@@ -1965,7 +1947,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-55-2/" title="OSG Release 3.4.55-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-55-2/" class="md-nav__link">
       OSG Release 3.4.55-2
     </a>
   </li>
@@ -1977,7 +1959,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-55/" title="OSG Release 3.4.55" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-55/" class="md-nav__link">
       OSG Release 3.4.55
     </a>
   </li>
@@ -1989,7 +1971,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-54-2/" title="OSG Release 3.4.54-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-54-2/" class="md-nav__link">
       OSG Release 3.4.54-2
     </a>
   </li>
@@ -2001,7 +1983,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-54/" title="OSG Release 3.4.54" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-54/" class="md-nav__link">
       OSG Release 3.4.54
     </a>
   </li>
@@ -2013,7 +1995,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-53-2/" title="OSG Release 3.4.53-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-53-2/" class="md-nav__link">
       OSG Release 3.4.53-2
     </a>
   </li>
@@ -2025,7 +2007,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-53/" title="OSG Release 3.4.53" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-53/" class="md-nav__link">
       OSG Release 3.4.53
     </a>
   </li>
@@ -2037,7 +2019,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-52/" title="OSG Release 3.4.52" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-52/" class="md-nav__link">
       OSG Release 3.4.52
     </a>
   </li>
@@ -2049,7 +2031,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-51/" title="OSG Release 3.4.51" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-51/" class="md-nav__link">
       OSG Release 3.4.51
     </a>
   </li>
@@ -2061,7 +2043,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-50/" title="OSG Release 3.4.50" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-50/" class="md-nav__link">
       OSG Release 3.4.50
     </a>
   </li>
@@ -2073,7 +2055,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-49-3/" title="OSG Release 3.4.49-3" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-49-3/" class="md-nav__link">
       OSG Release 3.4.49-3
     </a>
   </li>
@@ -2085,7 +2067,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-49-2/" title="OSG Release 3.4.49-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-49-2/" class="md-nav__link">
       OSG Release 3.4.49-2
     </a>
   </li>
@@ -2097,7 +2079,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-49/" title="OSG Release 3.4.49" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-49/" class="md-nav__link">
       OSG Release 3.4.49
     </a>
   </li>
@@ -2109,7 +2091,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-48/" title="OSG Release 3.4.48" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-48/" class="md-nav__link">
       OSG Release 3.4.48
     </a>
   </li>
@@ -2121,7 +2103,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-47/" title="OSG Release 3.4.47" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-47/" class="md-nav__link">
       OSG Release 3.4.47
     </a>
   </li>
@@ -2133,7 +2115,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-46/" title="OSG Release 3.4.46" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-46/" class="md-nav__link">
       OSG Release 3.4.46
     </a>
   </li>
@@ -2145,7 +2127,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-45/" title="OSG Release 3.4.45" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-45/" class="md-nav__link">
       OSG Release 3.4.45
     </a>
   </li>
@@ -2157,7 +2139,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-44-2/" title="OSG Release 3.4.44-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-44-2/" class="md-nav__link">
       OSG Release 3.4.44-2
     </a>
   </li>
@@ -2169,7 +2151,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-44/" title="OSG Release 3.4.44" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-44/" class="md-nav__link">
       OSG Release 3.4.44
     </a>
   </li>
@@ -2181,7 +2163,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-43/" title="OSG Release 3.4.43" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-43/" class="md-nav__link">
       OSG Release 3.4.43
     </a>
   </li>
@@ -2193,7 +2175,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-42-4/" title="OSG Release 3.4.42-4" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-42-4/" class="md-nav__link">
       OSG Release 3.4.42-4
     </a>
   </li>
@@ -2205,7 +2187,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-42-3/" title="OSG Release 3.4.42-3" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-42-3/" class="md-nav__link">
       OSG Release 3.4.42-3
     </a>
   </li>
@@ -2217,7 +2199,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-42-2/" title="OSG Release 3.4.42-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-42-2/" class="md-nav__link">
       OSG Release 3.4.42-2
     </a>
   </li>
@@ -2229,7 +2211,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-42/" title="OSG Release 3.4.42" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-42/" class="md-nav__link">
       OSG Release 3.4.42
     </a>
   </li>
@@ -2241,7 +2223,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-41/" title="OSG Release 3.4.41" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-41/" class="md-nav__link">
       OSG Release 3.4.41
     </a>
   </li>
@@ -2253,7 +2235,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-40/" title="OSG Release 3.4.40" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-40/" class="md-nav__link">
       OSG Release 3.4.40
     </a>
   </li>
@@ -2265,7 +2247,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-39/" title="OSG Release 3.4.39" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-39/" class="md-nav__link">
       OSG Release 3.4.39
     </a>
   </li>
@@ -2277,7 +2259,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-38/" title="OSG Release 3.4.38" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-38/" class="md-nav__link">
       OSG Release 3.4.38
     </a>
   </li>
@@ -2289,7 +2271,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-37/" title="OSG Release 3.4.37" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-37/" class="md-nav__link">
       OSG Release 3.4.37
     </a>
   </li>
@@ -2301,7 +2283,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-36/" title="OSG Release 3.4.36" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-36/" class="md-nav__link">
       OSG Release 3.4.36
     </a>
   </li>
@@ -2313,7 +2295,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-35/" title="OSG Release 3.4.35" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-35/" class="md-nav__link">
       OSG Release 3.4.35
     </a>
   </li>
@@ -2325,7 +2307,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-34/" title="OSG Release 3.4.34" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-34/" class="md-nav__link">
       OSG Release 3.4.34
     </a>
   </li>
@@ -2337,7 +2319,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-33/" title="OSG Release 3.4.33" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-33/" class="md-nav__link">
       OSG Release 3.4.33
     </a>
   </li>
@@ -2349,7 +2331,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-32/" title="OSG Release 3.4.32" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-32/" class="md-nav__link">
       OSG Release 3.4.32
     </a>
   </li>
@@ -2361,7 +2343,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-31-2/" title="OSG Release 3.4.31-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-31-2/" class="md-nav__link">
       OSG Release 3.4.31-2
     </a>
   </li>
@@ -2373,7 +2355,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-31/" title="OSG Release 3.4.31" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-31/" class="md-nav__link">
       OSG Release 3.4.31
     </a>
   </li>
@@ -2385,7 +2367,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-30-2/" title="OSG Release 3.4.30-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-30-2/" class="md-nav__link">
       OSG Release 3.4.30-2
     </a>
   </li>
@@ -2397,7 +2379,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-30/" title="OSG Release 3.4.30" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-30/" class="md-nav__link">
       OSG Release 3.4.30
     </a>
   </li>
@@ -2409,7 +2391,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-29-2/" title="OSG Release 3.4.29-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-29-2/" class="md-nav__link">
       OSG Release 3.4.29-2
     </a>
   </li>
@@ -2421,7 +2403,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-29/" title="OSG Release 3.4.29" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-29/" class="md-nav__link">
       OSG Release 3.4.29
     </a>
   </li>
@@ -2433,7 +2415,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-28-2/" title="OSG Release 3.4.28-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-28-2/" class="md-nav__link">
       OSG Release 3.4.28-2
     </a>
   </li>
@@ -2445,7 +2427,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-28/" title="OSG Release 3.4.28" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-28/" class="md-nav__link">
       OSG Release 3.4.28
     </a>
   </li>
@@ -2457,7 +2439,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-27-2/" title="OSG Release 3.4.27-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-27-2/" class="md-nav__link">
       OSG Release 3.4.27-2
     </a>
   </li>
@@ -2469,7 +2451,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-27/" title="OSG Release 3.4.27" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-27/" class="md-nav__link">
       OSG Release 3.4.27
     </a>
   </li>
@@ -2481,7 +2463,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-26-2/" title="OSG Release 3.4.26-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-26-2/" class="md-nav__link">
       OSG Release 3.4.26-2
     </a>
   </li>
@@ -2493,7 +2475,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-26/" title="OSG Release 3.4.26" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-26/" class="md-nav__link">
       OSG Release 3.4.26
     </a>
   </li>
@@ -2505,7 +2487,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-25/" title="OSG Release 3.4.25" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-25/" class="md-nav__link">
       OSG Release 3.4.25
     </a>
   </li>
@@ -2517,7 +2499,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-24-2/" title="OSG Release 3.4.24-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-24-2/" class="md-nav__link">
       OSG Release 3.4.24-2
     </a>
   </li>
@@ -2529,7 +2511,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-24/" title="OSG Release 3.4.24" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-24/" class="md-nav__link">
       OSG Release 3.4.24
     </a>
   </li>
@@ -2541,7 +2523,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-23/" title="OSG Release 3.4.23" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-23/" class="md-nav__link">
       OSG Release 3.4.23
     </a>
   </li>
@@ -2553,7 +2535,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-22-2/" title="OSG Release 3.4.22-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-22-2/" class="md-nav__link">
       OSG Release 3.4.22-2
     </a>
   </li>
@@ -2565,7 +2547,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-22/" title="OSG Release 3.4.22" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-22/" class="md-nav__link">
       OSG Release 3.4.22
     </a>
   </li>
@@ -2577,7 +2559,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-21/" title="OSG Release 3.4.21" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-21/" class="md-nav__link">
       OSG Release 3.4.21
     </a>
   </li>
@@ -2589,7 +2571,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-20/" title="OSG Release 3.4.20" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-20/" class="md-nav__link">
       OSG Release 3.4.20
     </a>
   </li>
@@ -2601,7 +2583,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-19/" title="OSG Release 3.4.19" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-19/" class="md-nav__link">
       OSG Release 3.4.19
     </a>
   </li>
@@ -2613,7 +2595,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-18-2/" title="OSG Release 3.4.18-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-18-2/" class="md-nav__link">
       OSG Release 3.4.18-2
     </a>
   </li>
@@ -2625,7 +2607,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-18/" title="OSG Release 3.4.18" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-18/" class="md-nav__link">
       OSG Release 3.4.18
     </a>
   </li>
@@ -2637,7 +2619,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-17-3/" title="OSG Release 3.4.17-3" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-17-3/" class="md-nav__link">
       OSG Release 3.4.17-3
     </a>
   </li>
@@ -2649,7 +2631,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-17-2/" title="OSG Release 3.4.17-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-17-2/" class="md-nav__link">
       OSG Release 3.4.17-2
     </a>
   </li>
@@ -2661,7 +2643,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-17/" title="OSG Release 3.4.17" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-17/" class="md-nav__link">
       OSG Release 3.4.17
     </a>
   </li>
@@ -2673,7 +2655,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-16-2/" title="OSG Release 3.4.16-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-16-2/" class="md-nav__link">
       OSG Release 3.4.16-2
     </a>
   </li>
@@ -2685,7 +2667,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-16/" title="OSG Release 3.4.16" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-16/" class="md-nav__link">
       OSG Release 3.4.16
     </a>
   </li>
@@ -2697,7 +2679,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-15/" title="OSG Release 3.4.15" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-15/" class="md-nav__link">
       OSG Release 3.4.15
     </a>
   </li>
@@ -2709,7 +2691,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-14-2/" title="OSG Release 3.4.14-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-14-2/" class="md-nav__link">
       OSG Release 3.4.14-2
     </a>
   </li>
@@ -2721,7 +2703,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-14/" title="OSG Release 3.4.14" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-14/" class="md-nav__link">
       OSG Release 3.4.14
     </a>
   </li>
@@ -2733,7 +2715,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-13/" title="OSG Release 3.4.13" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-13/" class="md-nav__link">
       OSG Release 3.4.13
     </a>
   </li>
@@ -2745,7 +2727,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-12-3/" title="OSG Release 3.4.12-3" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-12-3/" class="md-nav__link">
       OSG Release 3.4.12-3
     </a>
   </li>
@@ -2757,7 +2739,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-12-2/" title="OSG Release 3.4.12-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-12-2/" class="md-nav__link">
       OSG Release 3.4.12-2
     </a>
   </li>
@@ -2769,7 +2751,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-12/" title="OSG Release 3.4.12" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-12/" class="md-nav__link">
       OSG Release 3.4.12
     </a>
   </li>
@@ -2781,7 +2763,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-11/" title="OSG Release 3.4.11" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-11/" class="md-nav__link">
       OSG Release 3.4.11
     </a>
   </li>
@@ -2793,7 +2775,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-10/" title="OSG Release 3.4.10" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-10/" class="md-nav__link">
       OSG Release 3.4.10
     </a>
   </li>
@@ -2805,7 +2787,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-9-2/" title="OSG Release 3.4.9-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-9-2/" class="md-nav__link">
       OSG Release 3.4.9-2
     </a>
   </li>
@@ -2817,7 +2799,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-9/" title="OSG Release 3.4.9" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-9/" class="md-nav__link">
       OSG Release 3.4.9
     </a>
   </li>
@@ -2829,7 +2811,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-8/" title="OSG Release 3.4.8" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-8/" class="md-nav__link">
       OSG Release 3.4.8
     </a>
   </li>
@@ -2841,7 +2823,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-7/" title="OSG Release 3.4.7" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-7/" class="md-nav__link">
       OSG Release 3.4.7
     </a>
   </li>
@@ -2853,7 +2835,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-6-2/" title="OSG Release 3.4.6-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-6-2/" class="md-nav__link">
       OSG Release 3.4.6-2
     </a>
   </li>
@@ -2865,7 +2847,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-6/" title="OSG Release 3.4.6" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-6/" class="md-nav__link">
       OSG Release 3.4.6
     </a>
   </li>
@@ -2877,7 +2859,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-5-4/" title="OSG Release 3.4.5-4" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-5-4/" class="md-nav__link">
       OSG Release 3.4.5-4
     </a>
   </li>
@@ -2889,7 +2871,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-5-3/" title="OSG Release 3.4.5-3" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-5-3/" class="md-nav__link">
       OSG Release 3.4.5-3
     </a>
   </li>
@@ -2901,7 +2883,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-5-2/" title="OSG Release 3.4.5-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-5-2/" class="md-nav__link">
       OSG Release 3.4.5-2
     </a>
   </li>
@@ -2913,7 +2895,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-5/" title="OSG Release 3.4.5" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-5/" class="md-nav__link">
       OSG Release 3.4.5
     </a>
   </li>
@@ -2925,7 +2907,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-4-3/" title="OSG Release 3.4.4-3" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-4-3/" class="md-nav__link">
       OSG Release 3.4.4-3
     </a>
   </li>
@@ -2937,7 +2919,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-4-2/" title="OSG Release 3.4.4-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-4-2/" class="md-nav__link">
       OSG Release 3.4.4-2
     </a>
   </li>
@@ -2949,7 +2931,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-4/" title="OSG Release 3.4.4" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-4/" class="md-nav__link">
       OSG Release 3.4.4
     </a>
   </li>
@@ -2961,7 +2943,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-3/" title="OSG Release 3.4.3" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-3/" class="md-nav__link">
       OSG Release 3.4.3
     </a>
   </li>
@@ -2973,7 +2955,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-2-2/" title="OSG Release 3.4.2-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-2-2/" class="md-nav__link">
       OSG Release 3.4.2-2
     </a>
   </li>
@@ -2985,7 +2967,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-2/" title="OSG Release 3.4.2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-2/" class="md-nav__link">
       OSG Release 3.4.2
     </a>
   </li>
@@ -2997,7 +2979,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-1-2/" title="OSG Release 3.4.1-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-1-2/" class="md-nav__link">
       OSG Release 3.4.1-2
     </a>
   </li>
@@ -3009,7 +2991,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-1/" title="OSG Release 3.4.1" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-1/" class="md-nav__link">
       OSG Release 3.4.1
     </a>
   </li>
@@ -3021,7 +3003,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-0-2/" title="OSG Release 3.4.0-2" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-0-2/" class="md-nav__link">
       OSG Release 3.4.0-2
     </a>
   </li>
@@ -3033,7 +3015,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-0/" title="OSG Release 3.4.0" class="md-nav__link">
+    <a href="../../release/3.4/release-3-4-0/" class="md-nav__link">
       OSG Release 3.4.0
     </a>
   </li>
@@ -3050,7 +3032,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/release_series/" title="OSG Release Series" class="md-nav__link">
+    <a href="../../release/release_series/" class="md-nav__link">
       OSG Release Series
     </a>
   </li>
@@ -3062,7 +3044,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/supported_platforms/" title="Supported Platforms" class="md-nav__link">
+    <a href="../../release/supported_platforms/" class="md-nav__link">
       Supported Platforms
     </a>
   </li>
@@ -3074,7 +3056,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/yum-basics/" title="Yum Basics" class="md-nav__link">
+    <a href="../../release/yum-basics/" class="md-nav__link">
       Yum Basics
     </a>
   </li>
@@ -3086,7 +3068,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/signing/" title="RPM Signing" class="md-nav__link">
+    <a href="../../release/signing/" class="md-nav__link">
       RPM Signing
     </a>
   </li>
@@ -3104,13 +3086,15 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-15" type="checkbox" id="nav-15">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15" type="checkbox" id="nav-15">
     
     <label class="md-nav__link" for="nav-15">
       Deprecated
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+    <nav class="md-nav" aria-label="Deprecated" data-md-level="1">
       <label class="md-nav__title" for="nav-15">
+        <span class="md-nav__icon md-icon"></span>
         Deprecated
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -3122,7 +3106,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../other/gsissh/" title="Install GSI-enabled SSH" class="md-nav__link">
+    <a href="../../other/gsissh/" class="md-nav__link">
       Install GSI-enabled SSH
     </a>
   </li>
@@ -3134,7 +3118,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../other/network-performance-toolkit/" title="Install the Network Performance Toolkit" class="md-nav__link">
+    <a href="../../other/network-performance-toolkit/" class="md-nav__link">
       Install the Network Performance Toolkit
     </a>
   </li>
@@ -3146,7 +3130,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../monitoring/install-rsv/" title="Install RSV" class="md-nav__link">
+    <a href="../../monitoring/install-rsv/" class="md-nav__link">
       Install RSV
     </a>
   </li>
@@ -3158,7 +3142,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../monitoring/advanced-rsv-configuration/" title="Advanced RSV Configuration" class="md-nav__link">
+    <a href="../../monitoring/advanced-rsv-configuration/" class="md-nav__link">
       Advanced RSV Configuration
     </a>
   </li>
@@ -3170,7 +3154,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../monitoring/rsv-control/" title="Manage RSV via rsv-control" class="md-nav__link">
+    <a href="../../monitoring/rsv-control/" class="md-nav__link">
       Manage RSV via rsv-control
     </a>
   </li>
@@ -3182,7 +3166,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../monitoring/install-rsv-gwms-tester/" title="RSV GlideinWMS Tester" class="md-nav__link">
+    <a href="../../monitoring/install-rsv-gwms-tester/" class="md-nav__link">
       RSV GlideinWMS Tester
     </a>
   </li>
@@ -3199,7 +3183,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../common/help/" title="Get Help" class="md-nav__link">
+    <a href="../../common/help/" class="md-nav__link">
       Get Help
     </a>
   </li>
@@ -3216,46 +3200,49 @@
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
-<nav class="md-nav md-nav--secondary">
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
     
   
   
-    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#before-starting" title="Before Starting" class="md-nav__link">
+  <a href="#before-starting" class="md-nav__link">
     Before Starting
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#choosing-unprivileged-vs-privileged-singularity" title="Choosing Unprivileged vs Privileged Singularity" class="md-nav__link">
+  <a href="#choosing-unprivileged-vs-privileged-singularity" class="md-nav__link">
     Choosing Unprivileged vs Privileged Singularity
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#enabling-unprivileged-singularity" title="Enabling Unprivileged Singularity" class="md-nav__link">
+  <a href="#enabling-unprivileged-singularity" class="md-nav__link">
     Enabling Unprivileged Singularity
   </a>
   
-    <nav class="md-nav">
+    <nav class="md-nav" aria-label="Enabling Unprivileged Singularity">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#configuring-unprivileged-singularity" title="Configuring Unprivileged Singularity" class="md-nav__link">
+  <a href="#configuring-unprivileged-singularity" class="md-nav__link">
     Configuring Unprivileged Singularity
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#validating-unprivileged-singularity" title="Validating Unprivileged Singularity" class="md-nav__link">
+  <a href="#validating-unprivileged-singularity" class="md-nav__link">
     Validating Unprivileged Singularity
   </a>
   
@@ -3267,37 +3254,37 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#singularity-via-rpm" title="Singularity via RPM" class="md-nav__link">
+  <a href="#singularity-via-rpm" class="md-nav__link">
     Singularity via RPM
   </a>
   
-    <nav class="md-nav">
+    <nav class="md-nav" aria-label="Singularity via RPM">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#installing-singularity-via-rpm" title="Installing Singularity via RPM" class="md-nav__link">
+  <a href="#installing-singularity-via-rpm" class="md-nav__link">
     Installing Singularity via RPM
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#configuring-singularity-rpm" title="Configuring Singularity RPM" class="md-nav__link">
+  <a href="#configuring-singularity-rpm" class="md-nav__link">
     Configuring Singularity RPM
   </a>
   
-    <nav class="md-nav">
+    <nav class="md-nav" aria-label="Configuring Singularity RPM">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#configuring-the-rpm-to-be-unprivileged" title="Configuring the RPM to be Unprivileged" class="md-nav__link">
+  <a href="#configuring-the-rpm-to-be-unprivileged" class="md-nav__link">
     Configuring the RPM to be Unprivileged
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#limiting-image-types" title="Limiting Image Types" class="md-nav__link">
+  <a href="#limiting-image-types" class="md-nav__link">
     Limiting Image Types
   </a>
   
@@ -3309,7 +3296,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#validating-singularity-rpm" title="Validating Singularity RPM" class="md-nav__link">
+  <a href="#validating-singularity-rpm" class="md-nav__link">
     Validating Singularity RPM
   </a>
   
@@ -3321,22 +3308,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#starting-and-stopping-services" title="Starting and Stopping Services" class="md-nav__link">
+  <a href="#starting-and-stopping-services" class="md-nav__link">
     Starting and Stopping Services
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#references" title="References" class="md-nav__link">
+  <a href="#references" class="md-nav__link">
     References
   </a>
   
 </li>
-      
-      
-      
-      
       
     </ul>
   
@@ -3350,7 +3333,9 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/worker-node/install-singularity.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/worker-node/install-singularity.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
                 
                 
                 <h1 id="install-singularity">Install Singularity<a class="headerlink" href="#install-singularity" title="Permanent link">&para;</a></h1>
@@ -3372,7 +3357,7 @@ default on RHEL 8, but not available at all on RHEL 6.</p>
 with setuid-root executables. Singularity keeps the privileged code to a
 <a href="https://sylabs.io/guides/3.6/user-guide/security.html#singularity-runtime-user-privilege">minimum</a>
 in order to reduce the potential for vulnerabilities.</p>
-<p>The OSG has installed singularity in <a href="../../worker-node/install-cvmfs">OASIS</a>,
+<p>The OSG has installed singularity in <a href="../install-cvmfs/">OASIS</a>,
 so most sites will not need to install singularity locally if they
 enable it to run unprivileged.  An RPM installation can be configured to
 be unprivileged or privileged.</p>
@@ -3390,9 +3375,9 @@ install, and/or configure singularity.</p>
 <p>As with all OSG software installations, there are some one-time (per host)
 steps to prepare in advance:</p>
 <ul>
-<li>Ensure the host has <a href="../../release/supported_platforms">a supported operating system</a></li>
+<li>Ensure the host has <a href="../../release/supported_platforms/">a supported operating system</a></li>
 <li>Obtain root access to the host</li>
-<li>Prepare the <a href="../../common/yum">required Yum repositories</a>. 
+<li>Prepare the <a href="../../common/yum/">required Yum repositories</a>. 
   Note that with OSG 3.5 and later, the singularity RPM comes from the
   EPEL yum repository.  OSG validates that distribution, and detailed
   instructions are still here.  With unprivileged singularity, no yum
@@ -3400,7 +3385,7 @@ steps to prepare in advance:</p>
 </ul>
 <p>In addition, this is highly recommended for image distribution:</p>
 <ul>
-<li>Install <a href="../../worker-node/install-cvmfs">CVMFS</a></li>
+<li>Install <a href="../install-cvmfs/">CVMFS</a></li>
 </ul>
 <h2 id="choosing-unprivileged-vs-privileged-singularity">Choosing Unprivileged vs Privileged Singularity<a class="headerlink" href="#choosing-unprivileged-vs-privileged-singularity" title="Permanent link">&para;</a></h2>
 <p>There are two sets of instructions on this page:</p>
@@ -3441,9 +3426,9 @@ to avoid potential kernel exploits.</p>
 <p>However, singularity has an "underlay" feature that is
 equivalent which does not require
 privileges, and the overlay feature has been a source of security
-vulnerabilities in the past.  For these reasons, <a href="#configuring-singularity">we recommend
-replacing overlay with underlay</a> even on
-privileged installations.  </p>
+vulnerabilities in the past.  For these reasons,
+<a href="#configuring-singularity-rpm">we recommend replacing overlay with underlay</a>
+even on privileged installations.</p>
 <p>overlayfs is also used to make the appearance of writable images
 when building containers, so it may be needed on some systems for
 that purpose.</p>
@@ -3459,20 +3444,18 @@ unprivileged.</p>
 the EL 7.6 kernel or later, enable unprivileged singularity with the
 following steps.  This step is not needed on EL 8 because it is
 enabled by default.</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;user.max_user_namespaces = 15000&quot;</span> <span class="se">\</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;user.max_user_namespaces = 15000&quot;</span> <span class="se">\</span>
     &gt; /etc/sysctl.d/90-max_user_namespaces.conf
 <span class="gp">root@host #</span> sysctl -p /etc/sysctl.d/90-max_user_namespaces.conf
-</pre></div>
-
+</code></pre></div>
 
 </li>
 <li>
 <p>(Optional) Disable network namespaces:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;user.max_net_namespaces = 0&quot;</span> <span class="se">\</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;user.max_net_namespaces = 0&quot;</span> <span class="se">\</span>
     &gt; /etc/sysctl.d/90-max_net_namespaces.conf
 <span class="gp">root@host #</span> sysctl -p /etc/sysctl.d/90-max_net_namespaces.conf
-</pre></div>
-
+</code></pre></div>
 
 <p>OSG VOs do not need network namespaces with singularity, and
 disabling them reduces the risk profile of enabling user
@@ -3491,24 +3474,22 @@ is systemd-hostnamed, and a popular non-default such service is
 mlocate-updatedb.  The PrivateNetwork feature can be turned off for
 a service without modifying an RPM-installed file through a
 <code>&lt;service&gt;.d/*.conf</code> file, for example for systemd-hostnamed:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">cd</span> /etc/systemd/system
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> <span class="nb">cd</span> /etc/systemd/system
 <span class="gp">root@host #</span> mkdir -p systemd-hostnamed.service.d
 <span class="gp">root@host #</span> <span class="o">(</span><span class="nb">echo</span> <span class="s2">&quot;[Service]&quot;</span><span class="p">;</span> <span class="nb">echo</span> <span class="s2">&quot;PrivateNetwork=no&quot;</span><span class="o">)</span> <span class="se">\</span>
         &gt;systemd-hostnamed.service.d/no-private-network.conf
 <span class="gp">root@host #</span> systemctl daemon-reload
 <span class="gp">root@host #</span> systemctl start systemd-hostnamed
 <span class="gp">root@host #</span> systemctl status systemd-hostnamed
-</pre></div>
-
+</code></pre></div>
 
 </li>
 <li>
 <p>If docker is being used to run jobs, the following options are 
     recommended to allow unprivileged singularity to run (it does not
     need <code>--privileged</code> or any added capabilities):</p>
-<div class="codehilite"><pre><span></span><span class="go">--security-opt seccomp=unconfined --security-opt systempaths=unconfined</span>
-</pre></div>
-
+<div class="codehilite"><pre><span></span><code><span class="go">--security-opt seccomp=unconfined --security-opt systempaths=unconfined</span>
+</code></pre></div>
 
 <p><code>--security-opt seccomp=unconfined</code> enables unshare to be called (which is needed to
 create namespaces), and <code>--security-opt systempaths=unconfined</code> allows /proc to be mounted
@@ -3520,15 +3501,13 @@ generally more secure than adding capabilities.  If at this point no
 setuid programs needs to be run within the container, adding the
 following option will add security by preventing any privilege
 escalation (singularity uses the same feature on its containers):</p>
-<div class="codehilite"><pre><span></span><span class="go">--security-opt no-new-privileges</span>
-</pre></div>
-
+<div class="codehilite"><pre><span></span><code><span class="go">--security-opt no-new-privileges</span>
+</code></pre></div>
 
 <p>In addition, the following option is recommended for allowing
 unprivileged fuse mounts on kernels that support that (RHEL &gt;= 7.8):</p>
-<div class="codehilite"><pre><span></span><span class="go">--device=/dev/fuse</span>
-</pre></div>
-
+<div class="codehilite"><pre><span></span><code><span class="go">--device=/dev/fuse</span>
+</code></pre></div>
 
 </li>
 </ol>
@@ -3550,7 +3529,7 @@ operation; see the
 <a href="https://sylabs.io/guides/3.6/user-guide/appendix.html">singularity documentation</a>
 for details.</p>
 <h3 id="validating-unprivileged-singularity">Validating Unprivileged Singularity<a class="headerlink" href="#validating-unprivileged-singularity" title="Permanent link">&para;</a></h3>
-<p>If you haven't yet installed <a href="../install-cvmfs">CVMFS</a>, please do so.
+<p>If you haven't yet installed <a href="../install-cvmfs/">CVMFS</a>, please do so.
 Alternatively, use the
 <a href="https://github.com/cvmfs-contrib/cvmfsexec">cvmfsexec package</a>
 configured for osg as an unprivileged user and mount the
@@ -3558,15 +3537,14 @@ oasis.opensciencegrid.org and singularity.opensciencegrid.org
 repositories.</p>
 <p>As an unprivileged user verify that singularity in OASIS works with this
 command:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> /cvmfs/oasis.opensciencegrid.org/mis/singularity/bin/singularity <span class="se">\</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">user@host $</span> /cvmfs/oasis.opensciencegrid.org/mis/singularity/bin/singularity <span class="se">\</span>
                 <span class="nb">exec</span> --contain --ipc --pid --bind /cvmfs <span class="se">\</span>
                 /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el6:latest <span class="se">\</span>
                 ps -ef
 <span class="go">UID        PID  PPID  C STIME TTY          TIME CMD</span>
 <span class="go">user         1     0  2 21:27 ?        00:00:00 shim-init</span>
 <span class="go">user         2     1  0 21:27 ?        00:00:00 ps -ef</span>
-</pre></div>
-
+</code></pre></div>
 
 <h2 id="singularity-via-rpm">Singularity via RPM<a class="headerlink" href="#singularity-via-rpm" title="Permanent link">&para;</a></h2>
 <p>The instructions in this section are for the singularity RPM, which 
@@ -3578,24 +3556,21 @@ before installing the required packages:</p>
 <ol>
 <li>
 <p>Clean yum cache:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum clean all --enablerepo<span class="o">=</span>*
-</pre></div>
-
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> yum clean all --enablerepo<span class="o">=</span>*
+</code></pre></div>
 
 </li>
 <li>
 <p>Update software:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum update
-</pre></div>
-
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> yum update
+</code></pre></div>
 
 <p>This command will update <strong>all</strong> packages</p>
 </li>
 <li>
 <p>Install Singularity</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install singularity
-</pre></div>
-
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> yum install singularity
+</code></pre></div>
 
 </li>
 </ol>
@@ -3608,9 +3583,8 @@ or when running in unprivileged mode.  On RHEL 7 and RHEL 8 is recommended to
 completely disable <code>overlay</code>, because it is more vulnerable to security
 problems than <code>underlay</code>.</p>
 <p>Set this option in <code>/etc/singularity/singularity.conf</code>:</p>
-<div class="codehilite"><pre><span></span>    enable overlay = no
-</pre></div>
-
+<div class="codehilite"><pre><span></span><code>    enable overlay = no
+</code></pre></div>
 
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -3628,9 +3602,8 @@ changes to the defaults.</p>
 <a href="#enabling-unprivileged-singularity">enabling unprivileged singularity</a>,
 change the line in <code>/etc/singularity/singularity.conf</code> that says
 <code>allow setuid = yes</code> to</p>
-<div class="codehilite"><pre><span></span>    allow setuid = no
-</pre></div>
-
+<div class="codehilite"><pre><span></span><code>    allow setuid = no
+</code></pre></div>
 
 <p>Note that the setuid-root executables stay installed, but they will exit
 very early if invoked when the configuration file disallows setuid, so
@@ -3649,9 +3622,8 @@ users and are common at sites with direct user logins.  However (as of April
 2019) we are only aware of directory-based images being used by OSG VOs.
 Hence, it is reasonable to disable the loopback-based images by setting
 the following option in <code>/etc/singularity/singularity.conf</code>:</p>
-<div class="codehilite"><pre><span></span>    max loop devices = 0
-</pre></div>
-
+<div class="codehilite"><pre><span></span><code>    max loop devices = 0
+</code></pre></div>
 
 <p>While reasonable for some sites, this is not required as there are currently
 no public kernel exploits for this issue; any exploits are patched by
@@ -3659,15 +3631,14 @@ Red Hat when they are discovered.</p>
 <h3 id="validating-singularity-rpm">Validating Singularity RPM<a class="headerlink" href="#validating-singularity-rpm" title="Permanent link">&para;</a></h3>
 <p>After singularity is installed, as an ordinary user run the following
 command to verify it:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> singularity <span class="nb">exec</span> --contain --ipc --pid --bind /cvmfs <span class="se">\</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">user@host $</span> singularity <span class="nb">exec</span> --contain --ipc --pid --bind /cvmfs <span class="se">\</span>
                 /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el6:latest <span class="se">\</span>
                 ps -ef
 <span class="go">WARNING: Container does not have an exec helper script, calling &#39;ps&#39; directly</span>
 <span class="go">UID        PID  PPID  C STIME TTY          TIME CMD</span>
 <span class="go">user         1     0  1 21:41 ?        00:00:00 shim-init</span>
 <span class="go">user         2     1  0 21:41 ?        00:00:00 ps -ef</span>
-</pre></div>
-
+</code></pre></div>
 
 <h2 id="starting-and-stopping-services">Starting and Stopping Services<a class="headerlink" href="#starting-and-stopping-services" title="Permanent link">&para;</a></h2>
 <p>singularity has no services to start or stop.</p>
@@ -3677,8 +3648,6 @@ command to verify it:</p>
 <li><a href="https://sylabs.io/resources/support">Singularity Support</a></li>
 <li><a href="https://twiki.cern.ch/twiki/bin/view/Main/CmsSingularity">Additional guidance for CMS sites</a></li>
 </ul>
-                
-                  
                 
               
               
@@ -3692,71 +3661,79 @@ command to verify it:</p>
       </main>
       
         
-
-<div class="md-footer-nav">
-  <nav class="md-footer-nav__inner md-grid">
-    
-    <a href="../install-cvmfs/" title="Install CVMFS" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-      </div>
-      <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-        <span class="md-flex__ellipsis">
-          <span class="md-footer-nav__direction">
-            Previous
-          </span>
-          Install CVMFS
-        </span>
-      </div>
-    </a>
-    
-    
-    <a href="../using-wn-containers/" title="Using WN Containers" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-      <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-        <span class="md-flex__ellipsis">
-          <span class="md-footer-nav__direction">
-            Next
-          </span>
-          Using WN Containers
-        </span>
-      </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-      </div>
-    </a>
-    
-  </nav>
-</div>
-
-<div class="md-footer-meta md-typeset">
-  <div class="md-footer-meta__inner md-grid">
-    <div class="md-footer-copyright">
-      
-      This material is based upon work supported by the
-      <a href="https://nsf.gov">National Science Foundation</a>
-      under Grant Nos.
-      <a href=https://www.nsf.gov/awardsearch/showAward?AWD_ID=1148698>1148698</a>
-      and
-      <a href=https://www.nsf.gov/awardsearch/showAward?AWD_ID=1836650>1836650</a>
-      . Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../install-cvmfs/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Install CVMFS
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../using-wn-containers/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Using WN Containers
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     </div>
-    
-    
-    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        This material is based upon work supported by the
+        <a href="https://nsf.gov">National Science Foundation</a>
+        under Grant Nos.
+        <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1148698">1148698</a>
+        and
+        <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1836650">1836650</a>
+        . Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+
+      </div>
+      
+    </div>
   </div>
-</div>
-
+</footer>
       
     </div>
     
-      <script src="../../assets/javascripts/application.30f6b8b1.js"></script>
+      <script src="../../assets/javascripts/vendor.7e0ee788.min.js"></script>
+      <script src="../../assets/javascripts/bundle.b3a72adc.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
-      <script>app.initialize({version:"0.17.5",url:{base:"../.."}})</script>
-      
-    
-    
-      
-        <script>!function(e,a,t,n,o,c,i){e.GoogleAnalyticsObject=o,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),i=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",i.parentNode.insertBefore(c,i)}(window,document,"script",0,"ga"),ga("create","UA-69012-29","opensciencegrid.github.io"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");if(Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var a=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",a,e.href)})}),document.forms.search){var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}</script>
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
       
     
   </body>
