@@ -1,3 +1,0 @@
-[submodule "ci"]
-	path = ci
-	url = https://www.github.com/opensciencegrid/doc-ci-scripts.git

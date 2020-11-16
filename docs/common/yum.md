@@ -2,7 +2,7 @@ OSG Yum Repositories
 ====================
 
 This document introduces Yum repositories and how they are used in the OSG.
-If you are unfamiliar with Yum, see the [documentation on using Yum and RPM](/release/yum-basics).
+If you are unfamiliar with Yum, see the [documentation on using Yum and RPM](../release/yum-basics.md).
 
 Repositories
 ------------
@@ -57,7 +57,7 @@ Both the main `osg` and the `osg-upcoming` repositories will need to be enabled 
 Because of this, interoperability will be maintained between the main `osg` and `osg-upcoming`.
 
 Depending on test results from sites, some packages in `osg-upcoming` may eventually end up in the main `osg` branch.
-The rest of the packages will eventually form the basis of the next [OSG release series](/release/release_series)
+The rest of the packages will eventually form the basis of the next [OSG release series](../release/release_series.md)
 (e.g. "OSG 3.5").
 
 ### Contrib Software
@@ -75,7 +75,7 @@ The definitive list of software in the contrib repository can be found here:
 -   [OSG 3.4 EL7 contrib software repository](https://repo.opensciencegrid.org/osg/3.4/el7/contrib/x86_64/)
 -   [OSG 3.4 EL6 contrib software repository](https://repo.opensciencegrid.org/osg/3.4/el6/contrib/x86_64/)
 
-If you would like to distribute your software in the OSG `contrib` repository, please [contact us](/common/help) with a
+If you would like to distribute your software in the OSG `contrib` repository, please [contact us](../common/help.md) with a
 description of your software, what users it serves, and relevant RPM packaging.
 
 Installing Yum Repositories
@@ -163,9 +163,9 @@ You must install and enable these first.
 
 This document assumes a fresh install.
 For instructions on upgrading from one OSG series to another, see the
-[release series document](/release/release_series#updating-from-old).
+[release series document](../release/release_series.md#updating-from-old).
 
-1. Install the OSG repository for your OS version and the [OSG release series](/release/release_series) that you wish to
+1. Install the OSG repository for your OS version and the [OSG release series](../release/release_series.md) that you wish to
    use:
 
     - OSG 3.5 EL8:
@@ -279,5 +279,5 @@ If you are interested in having your mirror be part of the OSG's default set of 
 Reference
 ---------
 
--   [Basic use of Yum](/release/yum-basics.md)
+-   [Basic use of Yum](../release/yum-basics.md)
 

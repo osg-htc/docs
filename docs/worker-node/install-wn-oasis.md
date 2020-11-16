@@ -3,12 +3,12 @@ Installing the Worker Node Client via OASIS
 
 The **OSG Worker Node Client** is a collection of software components that is expected to be added to every worker node
 that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect
-to use. Contents of the worker node client can be found [here](/worker-node/install-wn.md#worker-node-contents).
+to use. Contents of the worker node client can be found [here](../worker-node/install-wn.md#worker-node-contents).
 
 !!! note
     It is possible to install the Worker Node Client software in a variety of ways, depending on your local site:
 
-    -   Use from OASIS (this guide) - useful when [CVMFS](install-cvmfs) is already mounted on your worker nodes
+    -   Use from OASIS (this guide) - useful when [CVMFS](install-cvmfs.md) is already mounted on your worker nodes
     -   [Install using a tarball](install-wn-tarball.md) - useful when installing onto a shared filesystem for distribution to worker nodes
     -   [Install using RPMs and Yum](install-wn.md) - useful when managing your worker nodes with a tool (e.g., Puppet, Chef) that can automate RPM installs
 
@@ -19,7 +19,7 @@ Before Starting
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
--   Ensure the host has [a supported operating system](/release/supported_platforms.md)
+-   Ensure the host has [a supported operating system](../release/supported_platforms.md)
 -   On every worker node, [install and configure CVMFS](install-cvmfs.md)
 
 Once configured to use OASIS, grid jobs will download the worker-node software on demand (into the local disk cache).
@@ -45,15 +45,15 @@ root@host # osg-configure -v
 root@host # osg-configure -c
 ```
 
-For more information, see the [OSG worker node environment documentation](/worker-node/using-wn.md) and the
-[CE configuration instructions](/other/configuration-with-osg-configure#storage).
+For more information, see the [OSG worker node environment documentation](../worker-node/using-wn.md) and the
+[CE configuration instructions](../other/configuration-with-osg-configure.md#storage).
 
 Validating the Worker Node Client
 ---------------------------------
 
 To verify functionality of the worker node client, you will need to submit a test job against your CE and verify the job's output.
 
-1.  Submit a job that executes the `env` command (e.g. Run [condor\_ce\_trace](/compute-element/troubleshoot-htcondor-ce#condor_ce_trace) with the `-d` flag from your HTCondor CE)
+1.  Submit a job that executes the `env` command (e.g. Run [condor\_ce\_trace](../compute-element/troubleshoot-htcondor-ce.md#condor_ce_trace) with the `-d` flag from your HTCondor CE)
 2.  Verify that the value of `OSG_GRID` is set to the directory of your WN Client installation
 
 ### Manually Using the Worker Node Client From OASIS
@@ -69,4 +69,4 @@ If you must log onto a worker node and use the Worker Node Client software direc
 Getting Help
 ------------
 
-To get assistance, please use [this page](/common/help.md).
+To get assistance, please use [this page](../common/help.md).

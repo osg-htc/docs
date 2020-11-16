@@ -16,7 +16,7 @@ Hardware Recommendations
 |Core per pilot                   |  1      |8                      | Depends on the supported VOs. The total core count on every node in the cluster must be divisible by core per pilot.|
 |Memory per core                 | 1024MB  | 2048MB                  | Memory per core times core per pilot needs to be less than the total memory on every node. Do not overcommit. |
 |Scratch disk per core ([OSG_WN_TMP](#osg_wn_tmp))| 2 GB    | 10 GB                  | This can be overcommitted if a mix of different VO jobs is expected.|
-|CVMFS [Cache](/worker-node/install-cvmfs/#before-starting) per node (optional) | 10 GB | 20 GB | |
+|CVMFS [Cache](install-cvmfs.md#before-starting) per node (optional) | 10 GB | 20 GB | |
 
 
 Common Software Available on Worker Nodes
@@ -50,7 +50,7 @@ The Worker Node Environment
 The following table outlines the various important directories and information in the worker node environment.
 A job running on an OSG worker node can refer to each directory using the corresponding environment variable.
 Several of them are defined as options in your OSG-Configure `.ini` files in `/etc/osg/config.d`.
-Custom variables and those that aren't listed may be defined in the [Local Settings section](/other/configuration-with-osg-configure/#local-settings).
+Custom variables and those that aren't listed may be defined in the [Local Settings section](../other/configuration-with-osg-configure.md#local-settings).
 
 | Environment Variable   | OSG-Configure section/option      | Purpose                                                    | Notes                                                                                                                         |
 |:-----------------------|:------------------------------|:-----------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------|

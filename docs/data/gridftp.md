@@ -18,8 +18,8 @@ A stand-alone GridFTP server might be used under the following circumstances:
     This document is for a standalone GridFTP server on top of POSIX storage.  We have two specialized documents
     for Hadoop Distributed File System (HDFS) and XRootD based storage:
 
-    -   [Install and configure a GridFTP server on top of HDFS.](install-hadoop#standalone-gridftp-node-installation)
-    -   [Install and configure a GridFTP server on top of XRootD.](/data/xrootd/install-storage-element#optional-installing-a-gridftp-server)
+    -   [Install and configure a GridFTP server on top of HDFS.](install-hadoop.md#gridftp-configuration)
+    -   [Install and configure a GridFTP server on top of XRootD.](xrootd/install-storage-element.md#optional-installing-a-gridftp-server)
 
 Before Starting
 ---------------
@@ -27,10 +27,10 @@ Before Starting
 Before starting the installation process you will need to fulfill these prerequisites.
 
 
--   Ensure the host has [a supported operating system](/release/supported_platforms.md)
+-   Ensure the host has [a supported operating system](../release/supported_platforms.md)
 -   Obtain root access to the host
--   Prepare [the required Yum repositories](/common/yum.md)
--   Install [CA certificates](/common/ca.md)
+-   Prepare [the required Yum repositories](../common/yum.md)
+-   Install [CA certificates](../common/ca.md)
 -   SSL Certificate: The GridFTP service uses a host certificate at `/etc/grid-security/hostcert.pem` and an accompanying key at `/etc/grid-security/hostkey.pem`
 -   Network ports: GridFTP listens on TCP port 2811 and the list of ports configured by the `GLOBUS_TCP_SOURCE_RANGE` environment variable.
 
@@ -49,7 +49,7 @@ Configuring GridFTP
 ### Configuring authentication
 
 To configure which virtual organizations and users are allowed to use your GridFTP server, follow the instructions in
-[the LCMAPS VOMS plugin document](/security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin).
+[the LCMAPS VOMS plugin document](../security/lcmaps-voms-authentication.md#configuring-the-lcmaps-voms-plugin).
 
 ### Set port ranges
 As mentioned above, GridFTP uses port 2811 for control communication as well as a range of ports for the data transfer.
@@ -178,7 +178,7 @@ In addition to the GridFTP service itself, there are a number of supporting serv
 
 | Software  | Service name                          | Notes                                                                                  |
 |:----------|:--------------------------------------|:---------------------------------------------------------------------------------------|
-| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](/common/ca/#startstop-fetch-crl-a-quick-guide) for more info |
+| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca.md#managing-certificate-revocation-lists) for more info |
 | Gratia    | `gratia-probes-cron`                  | Accounting software                                                                    |
 | GridFTP   | `globus-gridftp-server`               |                                                                                        |
 
@@ -199,13 +199,13 @@ Validation
 ### GridFTP
 
 
-1. Acquire a [user certificate](/security/user-certs)
+1. Acquire a [user certificate](../security/user-certs.md)
 1. Find your subject DN:
 
         :::console
         user@host # openssl x509 -in <CERITIFICATE_FILE.pem> -noout -subject
 
-1. [Map your DN](/security/lcmaps-voms-authentication/#mapping-users) to a non-root user.
+1. [Map your DN](../security/lcmaps-voms-authentication.md#mapping-users) to a non-root user.
 1. As the non-root user, generate your proxy
 
         :::console
@@ -254,7 +254,7 @@ Look for any abnormal termination and [report it](#getting-help) if it is a non-
 Getting Help
 ------------
 
-For assistance, please use [this page](/common/help).
+For assistance, please use [this page](../common/help.md).
 
 Reference
 ---------
@@ -283,9 +283,9 @@ Reference
 |:-----------------|:---------------------------|:------------------------------------------------------------------------------|
 | Host certificate | `root`                     | `/etc/grid-security/hostcert.pem` and `/etc/grid-security/hostkey.pem` |
 
-[Instructions](/security/host-certs.md) to request a service certificate.
+[Instructions](../security/host-certs.md) to request a service certificate.
 
-Make sure you have installed the [CA certificates](/common/ca.md)
+Make sure you have installed the [CA certificates](../common/ca.md)
 
 ### Users
 

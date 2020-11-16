@@ -10,10 +10,10 @@ By installing CVMFS, you have access to an alternative installation method for r
 site you will be able to support a wider range of user jobs.
 For example, CVMFS provides easy access to the following:
 
-- The [worker node client](/worker-node/install-wn-oasis)
+- The [worker node client](install-wn-oasis.md)
 - CA and VO security data
 - Software used by VOs
-- Data stored in [StashCache](/data/stashcache/overview).
+- Data stored in [StashCache](../data/stashcache/overview.md).
 
 Use this page to learn how to install, configure, run, test, and troubleshoot the CVMFS client from the OSG software
 repositories.
@@ -35,9 +35,9 @@ Before starting the installation process, consider the following points (consult
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-- Ensure the host has [a supported operating system](../release/supported_platforms)
+- Ensure the host has [a supported operating system](../release/supported_platforms.md)
 - Obtain root access to the host
-- Prepare the [required Yum repositories](../common/yum)
+- Prepare the [required Yum repositories](../common/yum.md)
 
 ## Installing CVMFS
 
@@ -126,7 +126,7 @@ set of always-known repositories.
 
 Set up a list of CVMFS HTTP proxies to retrieve from in
 `CVMFS_HTTP_PROXY`. If you do not have any squid at your site follow
-the instructions to [install squid from OSG](../data/frontier-squid).
+the instructions to [install squid from OSG](../data/frontier-squid.md).
 Vertical bars separating proxies means to load balance between them
 and try them all before continuing. A semicolon between proxies means
 to try that one only after the previous ones have failed. For example:
@@ -246,7 +246,7 @@ Unmounting /cvmfs/nova.osgstorage.org: OK
 
 If you cannot resolve the problem, there are several ways to receive help:
 
-- For bug reporting and OSG-specific issues, see our [help procedure](../common/help)
+- For bug reporting and OSG-specific issues, see our [help procedure](../common/help.md)
 - For community support and best-effort software team support contact
    <osg-cvmfs@opensciencegrid.org>.
 - For general CernVM File System support contact <cernvm.support@cern.ch>.

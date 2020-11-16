@@ -17,7 +17,7 @@ As a user you have three different ways to interact with XRootD:
 
 1. [Using the XRootD clients](#using-the-xrootd-client-software)
 1. [Using a XRootDFS FUSE mount to access a local XRootD data store](#using-xrootdfs-fuse-mount)
-1. [Using LD\_PRELOAD to use XRootD libraries with Unix tools](#using-ld95preload-to-access-xrootd)
+1. [Using LD\_PRELOAD to use XRootD libraries with Unix tools](#using-ld_preload-to-access-xrootd)
 
 We'll show how to install the XRootD client software and use all three mechanisms to access data.
 
@@ -30,10 +30,10 @@ Before Starting
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-- Ensure the host has [a supported operating system](/release/supported_platforms)
+- Ensure the host has [a supported operating system](../../release/supported_platforms.md)
 - Obtain root access to the host
-- Prepare the [required Yum repositories](/common/yum)
-- Install [CA certificates](/common/ca)
+- Prepare the [required Yum repositories](../../common/yum.md)
+- Install [CA certificates](../../common/ca.md)
 
 If you are using the FUSE mount, you should also consider the following requirement:
 
@@ -141,7 +141,7 @@ If you are planning on using a FUSE mount, you'll need to install the xrootd-fus
 ### Configuring the FUSE Mount 
 
 Once the appropriate rpms are installed, the FUSE setup will need further configuration.
-See [this](/data/xrootd/install-storage-element#optional-enabling-a-fuse-mount) for instructions on updating your
+See [this](install-storage-element.md#optional-enabling-a-fuse-mount) for instructions on updating your
 `fstab` file.
 
 ### Using the XRootDFS FUSE Mount
@@ -232,5 +232,5 @@ How to get Help?
 ----------------
 
 If you cannot resolve the problem, the best way to get help is by contacting <osg-software@opensciencegrid.org>.
-For a full set of help options, see [Help Procedure](/common/help).
+For a full set of help options, see [Help Procedure](../../common/help.md).
 
