@@ -3233,6 +3233,12 @@
                 
                 
                 <h1 id="running-stashcache-origin-in-a-container">Running StashCache Origin in a Container<a class="headerlink" href="#running-stashcache-origin-in-a-container" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently, the StashCache Origin container only supports distribution of public data.
+If you would like to distribute private data requiring authentication,
+see <a href="../install-origin/">the RPM installation guide</a>.</p>
+</div>
 <p>The OSG operates the <a href="../overview/">StashCache data federation</a>, which
 provides organizations with a method to distribute their data in a scalable manner to thousands of jobs without needing
 to pre-stage data across sites or operate their own scalable infrastructure.</p>
@@ -3253,23 +3259,21 @@ default).</li>
 <h2 id="configuring-the-origin">Configuring the Origin<a class="headerlink" href="#configuring-the-origin" title="Permanent link">&para;</a></h2>
 <p>In addition to the required configuration above (ports and file systems), you may also configure the behavior of your
 origin with the following variables using an environment variable file:</p>
-<p>Where the environment file on the docker host, <code>/opt/origin/.env</code>, has (at least) the following contents (replace
-<code>YOUR_SITE_NAME</code> with the name of your site as
-<a href="../install-origin/#registering-the-origin">registered in Topology</a>):</p>
+<p>Where the environment file on the docker host, <code>/opt/origin/.env</code>, has (at least) the following contents,
+replacing <code>&lt;YOUR_RESOURCE_NAME&gt;</code> with the resource name of your origin as
+<a href="../install-origin/#registering-the-origin">registered in Topology</a>
+and <code>&lt;FQDN&gt;</code> with the public DNS name that should be used to contact your origin:</p>
 <div class="codehilite"><pre><span></span><code>XC_RESOURCENAME=YOUR_SITE_NAME
+ORIGIN_FQDN=&lt;FQDN&gt;
 </code></pre></div>
 
 <h2 id="populating-origin-data">Populating Origin Data<a class="headerlink" href="#populating-origin-data" title="Permanent link">&para;</a></h2>
 <p>The Stash Cache data federation namespace is shared by multiple VOs so you must
 <a href="../vo-data/#choosing-namespaces">choose a namespace</a> for your own VO's data.
-When running an origin container, your chosen namespace must be reflected in your host partition.
-For example, if your host partition is <code>/srv/origin</code> and the name of your VO is <code>ASTRO</code>, you should create the following
-directories:</p>
-<ul>
-<li><code>/srv/origin/astro/PUBLIC</code></li>
-<li><code>/srv/origin/astro/PROTECTED</code></li>
-</ul>
-<p>When starting container, you will mount <code>/srv/origin/</code> into the container.</p>
+When running an origin container, your chosen namespace must be reflected in your host partition.</p>
+<p>For example, if your host partition is <code>/srv/origin-puliic</code> and the name of your VO is <code>ASTRO,
+you should store the Astro VO's public data in</code>/srv/origin-public/astro/<code>.
+Then, when starting container, you will mount</code>/srv/origin-public/<code>into</code>/xcache/namespace` in the container.</p>
 <h2 id="running-the-origin">Running the Origin<a class="headerlink" href="#running-the-origin" title="Permanent link">&para;</a></h2>
 <p>It is recommended to use a container orchestration service such as <a href="https://docs.docker.com/compose/">docker-compose</a>
 or <a href="https://kubernetes.io/">kubernetes</a> whose details are beyond the scope of this document.
@@ -3282,6 +3286,8 @@ production-appropriate method using systemd.</p>
              opensciencegrid/stash-origin:fresh
 </code></pre></div>
 
+<p>Replacing <code>&lt;HOST PARTITION&gt;</code> with the host directory containing data that your origin should serve.
+See <a href="#populating-origin-data">this section</a> for details.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>A container deployed this way will serve the entire contents of <code>&lt;HOST PARTITION&gt;</code>.</p>
@@ -3291,7 +3297,7 @@ production-appropriate method using systemd.</p>
 This will require creating the environment file in the directory <code>/opt/origin/.env</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This example systemd file assumes <code>&lt;HOST PARTITION&gt;</code> is <code>/srv/origin</code>.</p>
+<p>This example systemd file assumes <code>&lt;HOST PARTITION&gt;</code> is <code>/srv/origin-public</code>.</p>
 </div>
 <p>Create the systemd service file <code>/etc/systemd/system/docker.stash-origin.service</code> as follows:</p>
 <div class="codehilite"><pre><span></span><code>[Unit]
@@ -3305,7 +3311,7 @@ Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
 ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin:fresh
-ExecStart=/usr/bin/docker run --rm --name %n -p 1094:1094 -p 1095:1095 -v /srv/origin:/xcache/namespace --env-file /opt/origin/.env opensciencegrid/stash-origin:fresh
+ExecStart=/usr/bin/docker run --rm --name %n -p 1094:1094 -p 1095:1095 -v /srv/origin-public:/xcache/namespace --env-file /opt/origin/.env opensciencegrid/stash-origin:fresh
 
 [Install] 
 WantedBy=multi-user.target

@@ -3321,10 +3321,12 @@ This document outlines how to run StashCache in a Docker container.</p>
 <h2 id="configuring-stash-cache">Configuring Stash Cache<a class="headerlink" href="#configuring-stash-cache" title="Permanent link">&para;</a></h2>
 <p>In addition to the required configuration above (ports and file systems),
 you may also configure the behavior of your cache with the following variables using an environment variable file:</p>
-<p>Where the environment file on the docker host, <code>/opt/xcache/.env</code>, has (at least) the following contents
-(replace <code>YOUR_SITE_NAME</code> with the name of your site as
-<a href="../install-cache/#registering-the-cache">registered in Topology</a>):</p>
-<div class="codehilite"><pre><span></span><code>XC_RESOURCENAME=YOUR_SITE_NAME
+<p>Where the environment file on the docker host, <code>/opt/xcache/.env</code>, has (at least) the following contents,
+replacing <code>&lt;YOUR_RESOURCE_NAME&gt;</code> with the name of your resource as
+<a href="../install-cache/#registering-the-cache">registered in Topology</a>
+and <code>&lt;FQDN&gt;</code> with the public DNS name that should be used to contact your cache:</p>
+<div class="codehilite"><pre><span></span><code>XC_RESOURCENAME=&lt;YOUR_RESOURCE_NAME&gt;
+CACHE_FQDN=&lt;FQDN&gt;
 </code></pre></div>
 
 <h3 id="optional-configuration">Optional configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h3>
