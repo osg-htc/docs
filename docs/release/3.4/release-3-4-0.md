@@ -20,7 +20,7 @@ In addition to GUMS, edg-mkgridmap, and HDFS 2.x, we dropped packages related to
 -   Globus GRAM available from EPEL
 -   GIP and OSG Info Services BDII servers retired
 
-The aforementioned packages are still be available in OSG 3.3 and will receive regular support until December 2017 and security updates until June 2018 per our [release policy](https://opensciencegrid.org/technology/policy/release-series/). See [this section](#packages-removed-from-osg-3-4) for the complete list of packages removed from OSG 3.4.
+The aforementioned packages are still be available in OSG 3.3 and will receive regular support until December 2017 and security updates until June 2018 per our [release policy](https://opensciencegrid.org/technology/policy/release-series/). See [this section](#packages-removed-from-osg-34) for the complete list of packages removed from OSG 3.4.
 
 !!! note "Notes"
     -   OSG 3.4 contains only 64-bit components.
