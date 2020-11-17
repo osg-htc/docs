@@ -30,12 +30,14 @@ Configuring Stash Cache
 In addition to the required configuration above (ports and file systems),
 you may also configure the behavior of your cache with the following variables using an environment variable file:
 
-Where the environment file on the docker host, `/opt/xcache/.env`, has (at least) the following contents
-(replace `YOUR_SITE_NAME` with the name of your site as
-[registered in Topology](install-cache.md#registering-the-cache)):
+Where the environment file on the docker host, `/opt/xcache/.env`, has (at least) the following contents,
+replacing `<YOUR_RESOURCE_NAME>` with the name of your resource as
+[registered in Topology](install-cache.md#registering-the-cache)
+and `<FQDN>` with the public DNS name that should be used to contact your cache:
 
 ```file
-XC_RESOURCENAME=YOUR_SITE_NAME
+XC_RESOURCENAME=<YOUR_RESOURCE_NAME>
+CACHE_FQDN=<FQDN>
 ```
 
 ### Optional configuration ###
