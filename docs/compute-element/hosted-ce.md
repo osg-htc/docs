@@ -14,7 +14,7 @@ This document explains the requirements and the procedure for obtaining a Hosted
 If you wish to run your own local compute entrypoint or expect to support more than 10,000 concurrently running OSG jobs,
 see [this page](../compute-element/install-htcondor-ce.md) for installing the HTCondor-CE.
 
-![managed services diagram](/compute-element/img/managed_services_diagram.png)
+![managed services diagram](img/managed_services_diagram.png)
 
 
 Before Starting
