@@ -3622,7 +3622,7 @@ Install these with Yum:</p>
 set up is working before moving on to the next component. 
 We have included validation instructions after each component below.</p>
 <h3 id="creating-an-xrootd-cluster">Creating an XRootD cluster<a class="headerlink" href="#creating-an-xrootd-cluster" title="Permanent link">&para;</a></h3>
-<p><img alt="XRootD cluster" src="/img/xrootd.jpg" /></p>
+<p><img alt="XRootD cluster" src="../../../img/xrootd.jpg" /></p>
 <p>If your storage is spread out over multiple hosts, you will need to set up an XRootD <em>cluster</em>. 
 The cluster uses one "redirector" node as a frontend for user accesses, and multiple data nodes that have the data that
 users request. 
@@ -3938,8 +3938,8 @@ the <a href="../../gridftp/">basic GridFTP install</a>.</p>
 </code></pre></div>
 
 <h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
-<p>For information on how to configure authentication for your GridFTP installation, please refer to the <a href="/data/gridftp#configuring-authentication">configuring
-authentication section of the GridFTP guide</a>.</p>
+<p>For information on how to configure authentication for your GridFTP installation, please refer to the
+<a href="../../gridftp/#configuring-authentication">configuring authentication section of the GridFTP guide</a>.</p>
 <p>Edit <code>/etc/sysconfig/globus-gridftp-server</code> to set <code>XROOTD_VMP</code> to use your XRootD redirector.</p>
 <div class="codehilite"><pre><span></span><code><span class="nb">export</span> <span class="nv">XROOTD_VMP</span><span class="o">=</span><span class="s2">&quot;redirector:1094:/local_path=/remote_path&quot;</span>
 </code></pre></div>
