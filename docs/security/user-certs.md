@@ -39,7 +39,7 @@ Follow the steps below to get an user certificate:
 1. Open the CILogon page, <https://cilogon.org>, in your browser of choice
 1. First, either search for your institution and select it or scroll through list and do the same.
 
-    ![Institution Selection](/img/cilogon_select_idp.png).
+    ![Institution Selection](..//img/cilogon_select_idp.png).
 
     !!! warning
         Do not use Google, GitHub, or ORCID as providers since they are not widely supported in the OSG.

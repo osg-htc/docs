@@ -52,7 +52,7 @@ Before requesting a certificate, you must create a DigiCert account with permiss
 1. After your request has been approved, verify that the `Grid Host SSL` option is available to you from your account's
    order page:
 
-![DigiCert Order Menu](/img/digicert-order-menu.png)
+![DigiCert Order Menu](../../img/digicert-order-menu.png)
 
 Requesting DigiCert IGTF Host Certificates
 ------------------------------------------

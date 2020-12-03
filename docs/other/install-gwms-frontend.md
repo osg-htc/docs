@@ -22,7 +22,7 @@ designed for small to medium VOs (see the Hardware Requirements below). Given a
 significant, large host, we have been able to scale the single-host install to
 20,000 running jobs.
 
-![GlideinWMS Architecture](/img/simple_diagram.png)
+![GlideinWMS Architecture](../img/simple_diagram.png)
 
 
 Before Starting
