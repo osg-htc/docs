@@ -70,7 +70,7 @@ loads.
 
 If you are interested in a Hosted CE solution, please follow the instructions on [this page](hosted-ce.md).
 
-![HTCondor-CE-Bosco](/img/HTCondorCEBosco.png)
+![HTCondor-CE-Bosco](../img/HTCondorCEBosco.png)
 
 ### On HTCondor batch systems
 
@@ -83,7 +83,7 @@ Thus, there are three representations of your job, each with its own ID (see dia
 -   HTCondor-CE: the incoming grid job’s ID
 -   HTCondor batch system: the routed job’s ID
 
-![HTCondor-CE with an HTCondor batch system](/img/ce_condorbatchsystem.png)
+![HTCondor-CE with an HTCondor batch system](../img/ce_condorbatchsystem.png)
 
 In an HTCondor-CE/HTCondor setup, files are transferred from HTCondor-CE’s spool directory to the batch system’s spool
 directory using internal HTCondor protocols.
@@ -105,7 +105,7 @@ Thus, there are four representations of your job, each with its own ID (see diag
 
 Although the following figure specifies the PBS case, it applies to all non-HTCondor batch systems:
 
-![HTCondor-CE with other batch systems](/img/ce_otherbatchsystem.png)
+![HTCondor-CE with other batch systems](../img/ce_otherbatchsystem.png)
 
 With non-HTCondor batch systems, HTCondor-CE cannot use internal HTCondor protocols to transfer files so its spool
 directory must be exported to a shared file system that is mounted on the batch system’s worker nodes.

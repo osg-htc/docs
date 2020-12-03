@@ -12,7 +12,7 @@ Gratia is software used in OSG to gather accounting information. The information
 !!! note "Difference between Gratia and GRACC"
     Gratia is the legacy name of the OSG Accounting system.  GRACC is the new name of the server and hosted components of the accounting system.  When we refer to Gratia, we mean either the data or the probes on the resources.  If we mention GRACC, we are referring to the hosted components that the OSG maintains.
 
-![Gratia Basics](/img/gratia-overview.png)
+![Gratia Basics](../img/gratia-overview.png)
 
 These are the definitions of the major elements in the above figure.
 

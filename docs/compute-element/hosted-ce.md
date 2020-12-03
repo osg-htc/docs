@@ -44,7 +44,7 @@ Which Communities and Institutions am I Supporting?
 The OSG provides monitoring to view which communities are accessing your site, their fields of science, and home institution.
 Below is an example of the monitoring views that will be available for your cluster.
 
-![monitoring graphs](/compute-element/img/monitoring_graphs.png)
+![monitoring graphs](img/monitoring_graphs.png)
 
 Each community in the OSG utilizing the Hosted CEs is mapped to your site as a fixed, specific account; we request
 the account names are of the form `osg01` through `osg20`.

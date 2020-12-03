@@ -140,7 +140,7 @@ As soon as your issue has been resolved, revert any changes you have made to `/e
 
 Some sites would like to have a single logical cache composed of several nodes as shown below:
 
-![XRootD cluster](/img/xrootd.jpg)
+![XRootD cluster](../../img/xrootd.jpg)
 
 This can be achieved by following the next steps
 

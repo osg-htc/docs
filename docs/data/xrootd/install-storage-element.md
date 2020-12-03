@@ -50,7 +50,7 @@ We have included validation instructions after each component below.
 
 ### Creating an XRootD cluster
 
-![XRootD cluster](/img/xrootd.jpg)
+![XRootD cluster](../../img/xrootd.jpg)
 
 If your storage is spread out over multiple hosts, you will need to set up an XRootD *cluster*. 
 The cluster uses one "redirector" node as a frontend for user accesses, and multiple data nodes that have the data that
@@ -408,8 +408,8 @@ root@host # yum install osg-gridftp-xrootd
 
 ### Configuration
 
-For information on how to configure authentication for your GridFTP installation, please refer to the [configuring
-authentication section of the GridFTP guide](/data/gridftp#configuring-authentication).
+For information on how to configure authentication for your GridFTP installation, please refer to the
+[configuring authentication section of the GridFTP guide](../gridftp.md#configuring-authentication).
 
 Edit `/etc/sysconfig/globus-gridftp-server` to set `XROOTD_VMP` to use your XRootD redirector.
 
