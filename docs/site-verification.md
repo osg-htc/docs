@@ -17,7 +17,7 @@ To verify your site's installation of OSG Software, you will need to:
 ### Local verification ###
 
 It is useful to submit jobs from within your site to verify CE's ability to submit jobs to your local batch system.
-Consult the document for [submitting jobs into an HTCondor-CE](compute-element/submit-htcondor-ce) for detailed
+Consult the document for [submitting jobs into an HTCondor-CE](compute-element/submit-htcondor-ce.md) for detailed
 instructions on how to test job submission.
 
 ### Verify end-to-end pilot job submission ####
@@ -49,7 +49,7 @@ Scale Up to Full Production
 ---------------------------
 
 After verifying end-to-end pilot job submission and usage reporting, your site is ready for production!
-In the same OSG Factory Operations ticket that you opened [above](#verify-end-to-end-job-submission),
+In the same OSG Factory Operations ticket that you opened [above](#verify-end-to-end-pilot-job-submission),
 let OSG staff know when you are ready to accept production pilots.
 
 After requesting production pilots, review the [responsibilities of an OSG site](site-responsibilities.md).
@@ -57,4 +57,4 @@ After requesting production pilots, review the [responsibilities of an OSG site]
 Getting Help
 ------------
 
-If you need help with your site, or need to report a security incident, follow the [contact instructions](common/help).
+If you need help with your site, or need to report a security incident, follow the [contact instructions](common/help.md).

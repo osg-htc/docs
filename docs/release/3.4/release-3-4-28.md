@@ -38,7 +38,7 @@ Notes
 -----
 
 This section describes important upgrade notes and/or caveats for packages available in the OSG release repositories.
-Detailed changes are below. All of the documentation can be found [here](/index.md).
+Detailed changes are below. All of the documentation can be found [here](../../index.md).
 
 -   OSG 3.4 contains only 64-bit components.
 -   StashCache is only supported on EL7
@@ -69,7 +69,9 @@ Detailed changes are below. All of the documentation can be found [here](/index.
    -  The HTCondor configuration should be changed as suggested in the new HTCondor config files included in the RPMs, to allow the support of shared port: check the `.rpmnew` files or apply the same changes if you configure your daemons manually.
    -  Port 9818 should be open also on standalone schedds (that earlier used only 9615).
    -  To start using shared port, change the secondary collectors lines and the CCBs lines (if any) in `/etc/gwms-frontend/frontend.xml`, changing the address to include the shared port sinful string:
-        <collector DN="/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=gwms-frontend.domain" group="default" node="gwms-frontend.domain:9618?sock=collector0-40" secondary="True"/>
+
+            <collector DN="/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=gwms-frontend.domain" group="default" node="gwms-frontend.domain:9618?sock=collector0-40" secondary="True"/>
+
       Replacing `gwms-frontend-domain` with the hostname of your GlideinWMS frontend.
       See the [GlideinWMS documentation](https://glideinwms.fnal.gov/doc.prd/components/condor.html#collectors ) for details. 
 
@@ -95,7 +97,7 @@ Updating to the new release
 
 ### Update Repositories
 
-To update to this series, you need to [install the current OSG repositories](/common/yum#install-osg-repositories).
+To update to this series, you need to [install the current OSG repositories](../../common/yum.md#install-the-osg-repositories).
 
 ### Update Software
 
@@ -112,7 +114,7 @@ root@host # yum update
 Need help?
 ----------
 
-Do you need help with this release? [Contact us for help](/common/help).
+Do you need help with this release? [Contact us for help](../../common/help.md).
 
 Detailed changes in this release
 --------------------------------

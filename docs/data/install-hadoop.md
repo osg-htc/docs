@@ -14,7 +14,7 @@ The OSG supports a patched version HDFS from Cloudera's CDH5 distribution of HDF
 Before Starting
 ---------------
 
-Before starting the installation process, consider the following points (consulting [the Reference section below](#reference) as needed):
+Before starting the installation process, consider the following points (consulting [the Reference section below](#references) as needed):
 
 -   **User IDs:** If they do not exist already, the installation will create the Linux users `hdfs` and `zookeeper` on all nodes
     as well as `hadoop` and `mapred` on the NameNodes
@@ -24,9 +24,9 @@ Before starting the installation process, consider the following points (consult
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-- Ensure the host has [a supported operating system](/release/supported_platforms)
+- Ensure the host has [a supported operating system](../release/supported_platforms.md)
 - Obtain root access to the host
-- Prepare the [required Yum repositories](/common/yum)
+- Prepare the [required Yum repositories](../common/yum.md)
 
 Designing Your HDFS Cluster
 ---------------------------
@@ -134,7 +134,7 @@ Before upgrading, backup your configuration data and HDFS metadata.
 ### Updating to OSG 3.5 or 3.4 ###
 
 Once your HDFS services have been turned off and the HDFS metadata has been backed up, update each node to OSG 3.4 by
-following the instructions in [this section](/release/release_series/#updating-from-old).
+following the instructions in [this section](../release/release_series.md#updating-from-old).
 
 ### Upgrading the Primary NameNode ###
 
@@ -214,7 +214,7 @@ Once the Primary NameNode has exited safe mode, start the process of upgrading y
 
 ### Finalizing the upgrade ###
 
-1. Verify that the HDFS cluster is running correctly by following the instructions in [this section](#validation_1).
+1. Verify that the HDFS cluster is running correctly by following the instructions in [this section](#validation).
 
 1. Finalize the upgrade from the Primary NameNode:
 
@@ -373,14 +373,14 @@ Lastly, you will need to configure an authentication mechanism for GridFTP.
 
 #### Configuring authentication ####
 
-For information on how to configure authentication for your GridFTP installation, please refer to the [configuring authentication section of the GridFTP guide](gridftp#configuring-authentication).
+For information on how to configure authentication for your GridFTP installation, please refer to the [configuring authentication section of the GridFTP guide](gridftp.md#configuring-authentication).
 
 ### GridFTP Gratia Transfer Probe Configuration ###
 
 !!! note
     Needed by GridFTP node only.
 
-See the [GridFTP documentation](/data/gridftp#enabling-gridftp-transfer-probe) for configuration details.
+See the [GridFTP documentation](gridftp.md#enabling-gridftp-transfer-probe) for configuration details.
 
 ### Hadoop Storage Probe Configuration ###
 
@@ -986,7 +986,7 @@ Hadoop always requires this amount of disk space to be available for non-hdfs us
 Getting Help
 ------------
 
-To get assistance, please use the [this page](/common/help).
+To get assistance, please use the [this page](../common/help.md).
 
 References
 ----------

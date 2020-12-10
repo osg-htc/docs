@@ -12,7 +12,7 @@ Gratia is software used in OSG to gather accounting information. The information
 !!! note "Difference between Gratia and GRACC"
     Gratia is the legacy name of the OSG Accounting system.  GRACC is the new name of the server and hosted components of the accounting system.  When we refer to Gratia, we mean either the data or the probes on the resources.  If we mention GRACC, we are referring to the hosted components that the OSG maintains.
 
-![Gratia Basics](/img/gratia-overview.png)
+![Gratia Basics](../img/gratia-overview.png)
 
 These are the definitions of the major elements in the above figure.
 
@@ -42,7 +42,7 @@ To disable them:
     root@host # service gratia-probes-cron stop
     Disabling gratia probes cron:                               [  OK  ]
 
-You also need to enable individual probes, usually via `osg-configure`.  Documentation on using `osg-configure` with Gratia [documented elsewhere](configuration-with-osg-configure#gratia).
+You also need to enable individual probes, usually via `osg-configure`.  Documentation on using `osg-configure` with Gratia [documented elsewhere](configuration-with-osg-configure.md#gratia).
 
 ### Running Gratia Probes
 
@@ -60,7 +60,7 @@ When the cron jobs are enabled and run, they go through the following process, w
 
 ### Gratia Probe Configuration
 
-In normal cases, `osg-configure` does the editing of the probe configuration files, at least on the CE. The configuration is found in `/etc/osg/config.d/30-gratia.ini` and [documented elsewhere](configuration-with-osg-configure#gratia).
+In normal cases, `osg-configure` does the editing of the probe configuration files, at least on the CE. The configuration is found in `/etc/osg/config.d/30-gratia.ini` and [documented elsewhere](configuration-with-osg-configure.md#gratia).
 
 If there are problems or special configuration, you might need to edit the Gratia configuration files yourself. Each probe has a separate configuration file found in `/etc/gratia/PROBE-NAME/ProbeConfig`.
 

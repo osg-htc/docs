@@ -10,7 +10,7 @@ theme:
 extra_css:
   - css/extra.css
 
-pages:
+nav:
 - Home: 'index.md'
 - Detailed Overview: 'detailed-overview.md'
 - Site Planning: 'site-planning.md'
@@ -69,7 +69,6 @@ pages:
   - 'User Certificates': 'security/user-certs.md'
   - 'Certificate Management Reference': 'security/certificate-management.md'
   - 'Host Certificates':
-    - 'Host Certs': 'security/host-certs.md'
     - 'Overview': 'security/host-certs/overview.md'
     - 'Using InCommon': 'security/host-certs/incommon.md'
     - "Using Let's Encrypt": 'security/host-certs/lets-encrypt.md'

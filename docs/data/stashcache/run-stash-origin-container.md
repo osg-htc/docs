@@ -3,11 +3,16 @@ DateReviewed: 2020-06-22
 Running StashCache Origin in a Container
 ========================================
 
-The OSG operates the [StashCache data federation](/data/stashcache/overview), which
+!!! note
+    Currently, the StashCache Origin container only supports distribution of public data.
+    If you would like to distribute private data requiring authentication,
+    see [the RPM installation guide](install-origin.md).
+
+The OSG operates the [StashCache data federation](overview.md), which
 provides organizations with a method to distribute their data in a scalable manner to thousands of jobs without needing
 to pre-stage data across sites or operate their own scalable infrastructure.
 
-[Stash Origins](/data/stashcache/install-origin) store copies of users' data.
+[Stash Origins](install-origin.md) store copies of users' data.
 Each community (or experiment) needs to run one origin to export its data via the StashCache federation.
 This document outlines how to run such an origin in a Docker container.
 
@@ -22,7 +27,7 @@ to start containers (i.e., belong to the `docker` Unix group).
 default).
 1. **File Systems:** Stash Origin needs a host partition to store user data.
 1. **Registration:** Before deploying an origin, you must
-   [registered the service](/data/stashcache/install-origin/#registering-the-origin) in the OSG Topology
+   [registered the service](install-origin.md#registering-the-origin) in the OSG Topology
 
 Configuring the Origin
 ----------------------
@@ -30,27 +35,26 @@ Configuring the Origin
 In addition to the required configuration above (ports and file systems), you may also configure the behavior of your
 origin with the following variables using an environment variable file:
 
-Where the environment file on the docker host, `/opt/origin/.env`, has (at least) the following contents (replace
-`YOUR_SITE_NAME` with the name of your site as
-[registered in Topology](/data/stashcache/install-origin/#registering-the-origin)):
+Where the environment file on the docker host, `/opt/origin/.env`, has (at least) the following contents,
+replacing `<YOUR_RESOURCE_NAME>` with the resource name of your origin as
+[registered in Topology](install-origin.md#registering-the-origin)
+and `<FQDN>` with the public DNS name that should be used to contact your origin:
 
 ```file
 XC_RESOURCENAME=YOUR_SITE_NAME
+ORIGIN_FQDN=<FQDN>
 ```
 
 Populating Origin Data
 ----------------------
 
 The Stash Cache data federation namespace is shared by multiple VOs so you must
-[choose a namespace](/data/stashcache/vo-data#choosing-namespace) for your own VO's data.
+[choose a namespace](vo-data.md#choosing-namespaces) for your own VO's data.
 When running an origin container, your chosen namespace must be reflected in your host partition.
-For example, if your host partition is `/srv/origin` and the name of your VO is `ASTRO`, you should create the following
-directories:
 
-- `/srv/origin/astro/PUBLIC`
-- `/srv/origin/astro/PROTECTED`
-
-When starting container, you will mount `/srv/origin/` into the container.
+For example, if your host partition is `/srv/origin-puliic` and the name of your VO is `ASTRO,
+you should store the Astro VO's public data in `/srv/origin-public/astro/`.
+Then, when starting container, you will mount `/srv/origin-public/` into `/xcache/namespace` in the container.
 
 Running the Origin
 ------------------
@@ -68,6 +72,9 @@ user@host $ docker run --rm --publish 1094:1094 \
              opensciencegrid/stash-origin:fresh
 ```
 
+Replacing `<HOST PARTITION>` with the host directory containing data that your origin should serve.
+See [this section](#populating-origin-data) for details.
+
 !!!warning
     A container deployed this way will serve the entire contents of `<HOST PARTITION>`.
 
@@ -77,7 +84,7 @@ An example systemd service file for StashCache.
 This will require creating the environment file in the directory `/opt/origin/.env`.
 
 !!! note
-    This example systemd file assumes `<HOST PARTITION>` is `/srv/origin`.
+    This example systemd file assumes `<HOST PARTITION>` is `/srv/origin-public`.
 
 Create the systemd service file `/etc/systemd/system/docker.stash-origin.service` as follows:
 
@@ -93,7 +100,7 @@ Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
 ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin:fresh
-ExecStart=/usr/bin/docker run --rm --name %n -p 1094:1094 -p 1095:1095 -v /srv/origin:/xcache/namespace --env-file /opt/origin/.env opensciencegrid/stash-origin:fresh
+ExecStart=/usr/bin/docker run --rm --name %n -p 1094:1094 -p 1095:1095 -v /srv/origin-public:/xcache/namespace --env-file /opt/origin/.env opensciencegrid/stash-origin:fresh
 
 [Install] 
 WantedBy=multi-user.target
@@ -107,7 +114,7 @@ root@host $ systemctl start docker.stash-origin
 ```
 
 !!! warning
-    You must [register](/data/stashcache/install-origin/#registering-the-origin) the origin before considering it a
+    You must [register](install-origin.md#registering-the-origin) the origin before considering it a
     production service.
 
 
@@ -116,9 +123,9 @@ Validating Origin
 -----------------
 
 To validate the origin please follow the
-[validating origin instructions](/data/stashcache/install-origin/#verifying-the-origin-server).
+[validating origin instructions](install-origin.md#verifying-the-origin-server).
 
 Getting Help
 ------------
 
-To get assistance, please use the [this page](/common/help) or contact <help@opensciencegrid.org> directly.
+To get assistance, please use the [this page](../../common/help.md) or contact <help@opensciencegrid.org> directly.
