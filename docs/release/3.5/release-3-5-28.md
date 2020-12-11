@@ -23,7 +23,7 @@ This release contains:
 
 -   osg-ca-certs 1.90: Add new Let's Encrypt intermediate CAs (EL7 and EL8) (fixes issues with newly issued host certficates)
 -   htgettoken 1.0: get OIDC bearer tokens by interacting with Hashicorp vault
--   [XRootD 4.12.5](https://github.com/xrootd/xrootd/blob/v4.12.5/docs/ReleaseNotes.txt)(EL7 Only)
+-   [XRootD 4.12.5](https://github.com/xrootd/xrootd/blob/v4.12.5/docs/ReleaseNotes.txt) (EL7 Only)
     -   *[XrdCl]* Fix regression in recursive copy (introduced in f6723e00)
     -   *[VOMS]* Do not touch the Entity.name field; especially converting spaces
     -   *[VOMS]* Fix improper collection of multi-VO cert attributes
