@@ -86,6 +86,7 @@ nav:
 - Release Information:
   - 'Release Note Overview': 'release/notes.md'
   - 3.5 Release Notes:
+    - 'OSG Release 3.5.28-2': 'release/3.5/release-3-5-28-2.md'
     - 'OSG Release 3.5.28': 'release/3.5/release-3-5-28.md'
     - 'OSG Release 3.5.27': 'release/3.5/release-3-5-27.md'
     - 'OSG Release 3.5.26': 'release/3.5/release-3-5-26.md'
