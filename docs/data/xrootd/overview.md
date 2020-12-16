@@ -3,7 +3,7 @@ XRootD Overview
 
 [XRootD](http://xrootd.org) is a highly-configurable data server used by sites in the OSG to support VO-specific
 storage needs.
-The software can be used to create a export an existing file system through multiple protocols, participate in a data
+The software can be used to create an export of an existing file system through multiple protocols, participate in a data
 federation, or act as a caching service.
 XRootD data servers can stream data directly to client applications or support experiment-wide data management by
 performing bulk data transfer via "third-party-copy" between distinct sites.
