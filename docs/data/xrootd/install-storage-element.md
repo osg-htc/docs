@@ -115,6 +115,21 @@ root@host # xrdcp /bin/sh  root://<RDRNODE>:1094///mnt/xrootd/second_test
 
 Check that the `/mnt/xrootd/second_test` is located on data server `<DATANODE>`.
 
+### (Optional) Adding High Availability (HA) redirectors
+
+It is possible to have an XRootD clustered setup with more than one redirector to ensure high availability service. To do this:
+
+1. In the `/etc/xrootd/xrootd-clustered.cfg` on each data node follow the instructions in this [section](#modify-etcxrootdxrootd-clusteredcfg) with:
+
+        :::file
+        set xrdr1 = <RDRNODE1>
+        set xrdr2 = <RDRNODE2>
+        all.manager $(xrdr1):3121
+        all.manager $(xrdr2):3121
+
+1. Create DNS `ALIAS` records for `<RDRNODE>` pointing to `<RDNODE1>` and `<RDRNODE2>`
+1. Advertise the `<RDRNODE>` FQDN to users interacting with the XRootD cluster should be `<RDRNODE>`.
+
 ### (Optional) Adding Simple Server Inventory to your cluster
 
 The Simple Server Inventory (SSI) provide means to have an inventory for each data server. 
