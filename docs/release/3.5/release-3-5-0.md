@@ -7,8 +7,8 @@ OSG Software Release 3.5.0
 Summary of changes
 ------------------
 
-This initial release of the OSG 3.5 release series is based on the packages available in
-[OSG 3.4.33](../3.4/release-3-4-33.md#) with some [additions](#package-updates) and [subtractions](#package-removals).
+This initial release of the OSG 3.5 release series is based on the packages available in OSG 3.4.33 with some
+[additions](#package-updates) and [subtractions](#package-removals).
 Additionally, the contents of the [upcoming repository](../release_series.md#osg-upcoming) have been emptied
 of packages related to OSG 3.4 and replaced with packages for OSG 3.5.
 Other notable changes in this release series include dropping support for Enterprise Linux 6 and
@@ -29,8 +29,7 @@ To update to the OSG 3.5 release series, please consult the page on
 
 ### Package updates ###
 
-In addition to the packages that were carried over from [OSG 3.4.33](../3.4/release-3-4-33.md#),
-this release contains the following package updates:
+In addition to the packages that were carried over from OSG 3.4.33, this release contains the following package updates:
 
 -   HTCondor 8.8.4: The current HTCondor [stable release](https://htcondor.readthedocs.io/en/stable/version-history/stable-release-series-88.html#version-8-8-4).
     See the [manual update instructions](../release_series.md#updating-to-htcondor-88x_1) before
