@@ -127,7 +127,7 @@ It is possible to have an XRootD clustered setup with more than one redirector t
         all.manager $(xrdr1):3121
         all.manager $(xrdr2):3121
 
-1. Create a DNS record for `<RDRNODE>` with aliases to `<RDNODE1>` and `<RDRNODE2>`
+1. Create DNS `ALIAS` records for `<RDRNODE>` pointing to `<RDNODE1>` and `<RDRNODE2>`
 1. Advertise the `<RDRNODE>` FQDN to users interacting with the XRootD cluster should be `<RDRNODE>`.
 
 ### (Optional) Adding Simple Server Inventory to your cluster
