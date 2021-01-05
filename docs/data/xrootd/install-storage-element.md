@@ -119,7 +119,7 @@ Check that the `/mnt/xrootd/second_test` is located on data server `<DATANODE>`.
 
 It is possible to have an XRootD clustered setup with more than one redirector to ensure high availability service. To do this:
 
-1. In the `/etc/xrootd/xrootd-clustered.cfg` on each data node follow the instructions on this [section](#modify-etcxrootdxrootd-clusteredcfg) with:
+1. In the `/etc/xrootd/xrootd-clustered.cfg` on each data node follow the instructions in this [section](#modify-etcxrootdxrootd-clusteredcfg) with:
 
         :::file
         set xrdr1 = <RDRNODE1>
