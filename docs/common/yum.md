@@ -72,8 +72,6 @@ The definitive list of software in the contrib repository can be found here:
 
 -   [OSG 3.5 EL8 contrib software repository](https://repo.opensciencegrid.org/osg/3.5/el8/contrib/x86_64/)
 -   [OSG 3.5 EL7 contrib software repository](https://repo.opensciencegrid.org/osg/3.5/el7/contrib/x86_64/)
--   [OSG 3.4 EL7 contrib software repository](https://repo.opensciencegrid.org/osg/3.4/el7/contrib/x86_64/)
--   [OSG 3.4 EL6 contrib software repository](https://repo.opensciencegrid.org/osg/3.4/el6/contrib/x86_64/)
 
 If you would like to distribute your software in the OSG `contrib` repository, please [contact us](../common/help.md) with a
 description of your software, what users it serves, and relevant RPM packaging.
@@ -177,16 +175,6 @@ For instructions on upgrading from one OSG series to another, see the
 
             :::console
             root@host # yum install https://repo.opensciencegrid.org/osg/3.5/osg-3.5-el7-release-latest.rpm
-
-    - OSG 3.4 EL7:
-
-            :::console
-            root@host # yum install https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm
-
-    - OSG 3.4 EL6:
-
-            :::console
-            root@host # yum install https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm
 
 1. The only OSG repository enabled by default is the release one.
    If you want to [enable another one](#repositories) (e.g. `osg-testing`), then edit its file

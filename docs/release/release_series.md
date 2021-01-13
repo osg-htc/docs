@@ -28,7 +28,7 @@ Since the start of the RPM-based OSG software stack, we have offered the followi
     The main differences between it and 3.4 were the introduction of the HTCondor 8.8 and 8.9 series;
     also the RSV monitoring probes, EL6 support, and CREAM support were all dropped.
 
--   **OSG 3.4** started June 2017 and will reach its end-of-life in November 2020.
+-   **OSG 3.4** started June 2017 and was end-of-lifed in November 2020.
     The main differences between it and 3.3 are the removal of edg-mkgridmap, GUMS, BeStMan, and VOMS Admin Server
     packages.
 
@@ -307,7 +307,7 @@ Otherwise, follow these steps for a seamless update to HTCondor 8.9.7+:
 Updating to HTCondor 8.8.x
 --------------------------
 
-The OSG 3.5 and 3.4 release series contain HTCondor 8.8, a major version upgrade from the previously released versions
+The OSG 3.5 release series contains HTCondor 8.8, a major version upgrade from the previously released versions
 in the OSG.
 See the HTCondor 8.8 manual for an overview of the
 [changes](https://htcondor.readthedocs.io/en/stable/version-history/upgrading-from-86-to-88-series.html).
