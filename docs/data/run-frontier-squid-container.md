@@ -133,45 +133,8 @@ X-Cache: HIT from 797a56e426cf
 
 ## Registering Frontier Squid
 
-To register your Frontier Squid host, follow the general registration instructions
-[here](/common/registration#new-resources) with the following Frontier Squid-specific details:
-
-1.  Add a `Squid:` section to the `Services:` list, with any relevant fields for that service.
-    This is a partial example:
-
-        :::console
-        ...
-        FQDN: <FULLY QUALIFIED DOMAIN NAME>
-        Services:
-          Squid:
-            Description: Generic squid service
-        ...
-
-    Replacing `<FULLY QUALIFIED DOMAIN NAME>` with your Frontier Squid server's DNS entry or in the case of multiple
-    Frontier Squid servers for a single resource, the round-robin DNS entry.
-
-    See the [BNL_ATLAS_Frontier_Squid](https://github.com/opensciencegrid/topology/blob/80e482279b10c7b13fc7688c71833c14ebdc1b50/topology/Brookhaven%20National%20Laboratory/Brookhaven%20ATLAS%20Tier1/BNL-ATLAS.yaml#L298-L318) 
-    for a complete example.
-
-2.  If you are setting up a new resource, set `Active: false`.
-    Only set `Active: true` for a resource when it is accepting requests and ready for production.
-
-3.  Normally registered squids will be monitored by WLCG.  This is
-strongly recommended even for non-WLCG sites so operations experts can
-help with diagnosing problems.  However, if a site declines
-monitoring, that can be indicated by setting `Monitored: false` in a
-`Details:` section below `Description:`.  Registration is still
-important for the sake of excluding squids from worker node failover
-monitors.  The default if `Details:` `Monitored:` is not set is
-`true`.
-
-4. If you set Monitored to true, also enable monitoring as described in 
-the [upstream documentation on enabling monitoring](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring).
-
-
-A few hours after a squid is registered and marked `Active` (and not
-marked `Monitored: false`), 
-[verify that it is monitored by WLCG](https://twiki.cern.ch/twiki/bin/view/LCG/WLCGSquidRegistration#Verify_monitor).
+See the [Registering Frontier Squid](https://opensciencegrid.org/docs/data/frontier-squid/#registering-frontier-squid)
+instructions to register your Frontier Squid host.
 
 
 Getting Help
