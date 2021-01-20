@@ -33,15 +33,15 @@ Before starting the installation process, consider the following points (consult
 1. **Docker:** For the purpose of this guide, the host must have a running docker service
    and you must have the ability to start containers (i.e., belong to the `docker` Unix group).
 -   **User IDs:** If it does not exist already, the installation will create the `squid` Linux user
--   **Network ports:** Frontier squid communicates on ports 3128 (TCP) and 3401 (UDP)
--   **Host choice:** If you will be supporting the Frontier application at your site, review the
+1.   **Network ports:** Frontier squid communicates on ports 3128 (TCP) and 3401 (UDP)
+1.   **Host choice:** If you will be supporting the Frontier application at your site, review the
 [upstream documentation](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Hardware) to determine how to size your equipment.
 
 
 Configuring Squid
 -----------------
 
-### Environment variables ###
+### Environment variables (optional) ###
 
 In addition to the required configuration above (ports and file systems),
 you may also configure the behavior of your cache with the following variables using an environment variable file:
