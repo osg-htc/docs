@@ -9,20 +9,11 @@ over regular squid for common grid applications, especially Frontier
 and CVMFS. The OSG distribution of frontier-squid is a straight rebuild of the
 upstream frontier-squid package for the convenience of OSG users.
 
+!!! tip
+    OSG recommends that all sites run a caching proxy for HTTP and HTTPS to help reduce bandwidth and improve
+    throughput.
+
 This document outlines how to run Frontier Squid in a Docker container.
-
-## Frontier Squid Is Recommended
-
-OSG recommends that all sites run a caching proxy for HTTP and HTTPS
-to help reduce bandwidth and improve throughput. To that end, Compute
-Element (CE) installations include Frontier Squid automatically. We
-encourage all sites to configure and use this service, as described
-below.
-
-For large sites that expect heavy load on the proxy, it is best to run the proxy on its own host.
-If you are unsure if your site qualifies, we recommend initially running the proxy on your CE host and monitoring its
-bandwidth.
-If the network usage regularly peaks at over one third of the bandwidth capacity, move the proxy to a new host.
 
 
 Before Starting
