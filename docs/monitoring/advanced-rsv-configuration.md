@@ -5,7 +5,7 @@ Advanced RSV Configuration
 About This Document
 -------------------
 
-Most site administrators will be able to configure RSV by editing `/etc/osg/config.d/30-rsv.ini` and running osg-configure as described in [the RSV installation document](install-rsv#configuring-rsv).  This document provides instructions for configuration beyond what osg-configure is able to do.
+Most site administrators will be able to configure RSV by editing `/etc/osg/config.d/30-rsv.ini` and running osg-configure as described in [the RSV installation document](install-rsv.md#configuring-rsv).  This document provides instructions for configuration beyond what osg-configure is able to do.
 
 
 Configuring metrics

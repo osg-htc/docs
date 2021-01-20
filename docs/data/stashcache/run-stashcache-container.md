@@ -3,11 +3,11 @@ DateReviewed: 2020-06-22
 Running StashCache Cache in a Container
 =======================================
 
-The OSG operates the [StashCache data federation](/data/stashcache/overview), which
+The OSG operates the [StashCache data federation](overview.md), which
 provides organizations with a method to distribute their data in a scalable manner to thousands of jobs without needing
 to pre-stage data across sites or operate their own scalable infrastructure.
 
-[Stash Caches](/data/stashcache/install-cache) transfer data to clients such as jobs or users.
+[Stash Caches](install-cache.md) transfer data to clients such as jobs or users.
 A set of caches are operated across the OSG for the benefit of nearby sites;
 in addition, each site may run its own cache in order to reduce the amount of data transferred over the WAN.
 This document outlines how to run StashCache in a Docker container.
@@ -30,12 +30,14 @@ Configuring Stash Cache
 In addition to the required configuration above (ports and file systems),
 you may also configure the behavior of your cache with the following variables using an environment variable file:
 
-Where the environment file on the docker host, `/opt/xcache/.env`, has (at least) the following contents
-(replace `YOUR_SITE_NAME` with the name of your site as
-[registered in Topology](/data/stashcache/install-cache#registering-the-cache)):
+Where the environment file on the docker host, `/opt/xcache/.env`, has (at least) the following contents,
+replacing `<YOUR_RESOURCE_NAME>` with the name of your resource as
+[registered in Topology](install-cache.md#registering-the-cache)
+and `<FQDN>` with the public DNS name that should be used to contact your cache:
 
 ```file
-XC_RESOURCENAME=YOUR_SITE_NAME
+XC_RESOURCENAME=<YOUR_RESOURCE_NAME>
+CACHE_FQDN=<FQDN>
 ```
 
 ### Optional configuration ###
@@ -137,7 +139,7 @@ root@host $ systemctl start docker.stash-cache
 ```
 
 !!! warning
-    You must [register](/data/stashcache/install-cache/#registering-the-cache) the cache before considering it a
+    You must [register](install-cache.md#registering-the-cache) the cache before considering it a
     production service.
 
 
@@ -185,4 +187,4 @@ hello world!
 Getting Help
 ------------
 
-To get assistance, please use the [this page](/common/help) or contact <help@opensciencegrid.org> directly.
+To get assistance, please use the [this page](../../common/help.md) or contact <help@opensciencegrid.org> directly.

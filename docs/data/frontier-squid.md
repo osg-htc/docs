@@ -12,7 +12,7 @@ This document is intended for System Administrators who are installing
 `frontier-squid`, the OSG distribution of the Frontier Squid software.
 
 !!! note "Applicable versions"
-    This document applies to software from the OSG 3.5 and 3.4 Release Series.
+    This document applies to software from the OSG 3.5 Release Series.
     The version of frontier-squid installed should be >= 3.5.24-3.1.
     When using OSG software from a previous Release Series (eg, OSG 3.3)
     and a frontier-squid version in the 2.7STABLE9 series, refer to the
@@ -46,9 +46,9 @@ Before starting the installation process, consider the following points (consult
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-- Ensure the host has [a supported operating system](../release/supported_platforms)
+- Ensure the host has [a supported operating system](../release/supported_platforms.md)
 - Obtain root access to the host
-- Prepare the [required Yum repositories](../common/yum)
+- Prepare the [required Yum repositories](../common/yum.md)
 
 ### Installing Frontier Squid
 
@@ -143,7 +143,7 @@ good to do the test in the
 ## Registering Frontier Squid
 
 To register your Frontier Squid host, follow the general registration instructions
-[here](/common/registration#new-resources) with the following Frontier Squid-specific details:
+[here](../common/registration.md#new-resources) with the following Frontier Squid-specific details:
 
 1.  Add a `Squid:` section to the `Services:` list, with any relevant fields for that service.
     This is a partial example:

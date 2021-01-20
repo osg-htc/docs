@@ -28,7 +28,7 @@ Since the start of the RPM-based OSG software stack, we have offered the followi
     The main differences between it and 3.4 were the introduction of the HTCondor 8.8 and 8.9 series;
     also the RSV monitoring probes, EL6 support, and CREAM support were all dropped.
 
--   **OSG 3.4** started June 2017 and will reach its end-of-life in November 2020.
+-   **OSG 3.4** started June 2017 and was end-of-lifed in November 2020.
     The main differences between it and 3.3 are the removal of edg-mkgridmap, GUMS, BeStMan, and VOMS Admin Server
     packages.
 
@@ -57,7 +57,7 @@ As of the time of writing, `osg-upcoming` is meant to work with OSG 3.5.
 Installing an OSG Release Series
 --------------------------------
 
-See the [yum repositories document](/common/yum) for instructions on installing the OSG repositories.
+See the [yum repositories document](../common/yum.md) for instructions on installing the OSG repositories.
 
 <a name="updating-from-old"></a>
 
@@ -132,7 +132,7 @@ and want to upgrade to 3.5 (the *new series*), we recommend the following proced
 
 !!! tip "Running into issues?"
     If you are not having the expected result or having problems with Yum please see the
-    [Yum troubleshooting guide](/release/yum-basics#troubleshooting)
+    [Yum troubleshooting guide](yum-basics.md#troubleshooting)
 
 ### Updating to HTCondor-CE 4.x ###
 
@@ -164,7 +164,7 @@ To update your HTCondor-CE host(s), perform the following steps:
 
             ENABLE_JOB_RETRIES = True
 
-    - For non-HTCondor sites that use [remote CE requirements](/compute-element/job-router-recipes/#setting-batch-system-directives),
+    - For non-HTCondor sites that use [remote CE requirements](../compute-element/job-router-recipes.md#setting-batch-system-directives),
       the new version of HTCondor-CE accepts a simplified format.
       For example, a snippet from an example job route in the old format:
 
@@ -198,13 +198,13 @@ To update OSG Configure on your HTCondor-CE, perform the following steps:
 
 1. If you have `site_name` set in `/etc/osg/config.d/40-siteinfo.ini`, delete it and specify `resource` instead.
    `resource` should match the resource name that's registered in
-   [OSG Topology](/common/registration/#registering-resources).
+   [OSG Topology](../common/registration.md#registering-resources).
 
 1.  Set `resource_group` in `/etc/osg/config.d/40-siteinfo.ini` to the resource group registered in
-    [OSG Topology](/common/registration/#registering-resources),
+    [OSG Topology](../common/registration.md#registering-resources),
     i.e. the name of the `.yaml` file in OSG Topology that contains the registered resouce above.
 
-1.  Set `host_name` to the host name that is registered in [OSG Topology](/common/registration/#registering-resources).
+1.  Set `host_name` to the host name that is registered in [OSG Topology](../common/registration.md#registering-resources).
     This may be different from the FQDN of the host if you're using a DNS alias, for example.
 
 1.  OSG Configure will warn about config options that it does not recognize;
@@ -307,7 +307,7 @@ Otherwise, follow these steps for a seamless update to HTCondor 8.9.7+:
 Updating to HTCondor 8.8.x
 --------------------------
 
-The OSG 3.5 and 3.4 release series contain HTCondor 8.8, a major version upgrade from the previously released versions
+The OSG 3.5 release series contains HTCondor 8.8, a major version upgrade from the previously released versions
 in the OSG.
 See the HTCondor 8.8 manual for an overview of the
 [changes](https://htcondor.readthedocs.io/en/stable/version-history/upgrading-from-86-to-88-series.html).
@@ -329,14 +329,14 @@ To update HTCondor on your HTCondor-CE and/or HTCondor pool hosts, perform the f
 
     - As of HTCondor 8.8, [MOUNT\_UNDER\_SCRATCH](https://htcondor.readthedocs.io/en/stable/admin-manual/configuration-macros.html#condor-startd-configuration-file-macros)
       has default values of `/tmp` and `/var/tmp`, which may cause issues if your
-      [OSG\_WN\_TMP](/worker-node/using-wn#the-worker-node-environment) is a subdirectory of either of these directories.
-      If the partition containing your execute directories is [large enough](/worker-node/using-wn/#hardware-recommendations),
+      [OSG\_WN\_TMP](../worker-node/using-wn.md#the-worker-node-environment) is a subdirectory of either of these directories.
+      If the partition containing your execute directories is [large enough](../worker-node/using-wn.md#hardware-recommendations),
       we recommend setting your `OSG_WN_TMP` to `/tmp` or `/var/tmp`.
       If that partition is not large enough, we recommend setting your `OSG_WN_TMP` variable to a directory outside of
       `/tmp` or `/var/tmp`.
 
 1. **HTCondor-CE hosts only:** The HTCondor 8.8 series changed the default job route matching order
-   [from round-robin to first matching route](/compute-element/job-router-recipes#how-jobs-match-to-job-routes).
+   [from round-robin to first matching route](../compute-element/job-router-recipes.md#how-jobs-match-to-job-routes).
    To use the old round-robin matching order, add the following configuration to `/etc/condor-ce/config.d/99-local.conf`:
 
         JOB_ROUTER_ROUND_ROBIN_SELECTION = True
@@ -349,6 +349,6 @@ To update HTCondor on your HTCondor-CE and/or HTCondor pool hosts, perform the f
 References
 ----------
 
--   [Yum repositories](/common/yum)
--   [Basic use of Yum](/release/yum-basics)
+-   [Yum repositories](../common/yum.md)
+-   [Basic use of Yum](yum-basics.md)
 

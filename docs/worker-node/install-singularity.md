@@ -22,7 +22,7 @@ with setuid-root executables. Singularity keeps the privileged code to a
 [minimum](https://sylabs.io/guides/3.6/user-guide/security.html#singularity-runtime-user-privilege)
 in order to reduce the potential for vulnerabilities.
 
-The OSG has installed singularity in [OASIS](/worker-node/install-cvmfs),
+The OSG has installed singularity in [OASIS](install-cvmfs.md),
 so most sites will not need to install singularity locally if they
 enable it to run unprivileged.  An RPM installation can be configured to
 be unprivileged or privileged.
@@ -43,9 +43,9 @@ Before Starting
 As with all OSG software installations, there are some one-time (per host)
 steps to prepare in advance:
 
-- Ensure the host has [a supported operating system](/release/supported_platforms)
+- Ensure the host has [a supported operating system](../release/supported_platforms.md)
 - Obtain root access to the host
-- Prepare the [required Yum repositories](/common/yum). 
+- Prepare the [required Yum repositories](../common/yum.md). 
   Note that with OSG 3.5 and later, the singularity RPM comes from the
   EPEL yum repository.  OSG validates that distribution, and detailed
   instructions are still here.  With unprivileged singularity, no yum
@@ -53,7 +53,7 @@ steps to prepare in advance:
 
 In addition, this is highly recommended for image distribution:
 
-- Install [CVMFS](/worker-node/install-cvmfs)
+- Install [CVMFS](install-cvmfs.md)
 
 Choosing Unprivileged vs Privileged Singularity
 -----------------------------------------------
@@ -98,9 +98,9 @@ singularity to run privileged:
     However, singularity has an "underlay" feature that is
     equivalent which does not require
     privileges, and the overlay feature has been a source of security
-    vulnerabilities in the past.  For these reasons, [we recommend
-    replacing overlay with underlay](#configuring-singularity) even on
-    privileged installations.  
+    vulnerabilities in the past.  For these reasons,
+    [we recommend replacing overlay with underlay](#configuring-singularity-rpm)
+    even on privileged installations.
 
     overlayfs is also used to make the appearance of writable images
     when building containers, so it may be needed on some systems for
@@ -198,7 +198,7 @@ additional local "bind path" options to map extra local file paths into
 containers.  This can instead be accomplished by setting the
 `SINGULARITY_BINDPATH` variable in the environment of jobs, for
 example through
-[configuration](/other/configuration-with-osg-configure/#local-settings)
+[configuration](../other/configuration-with-osg-configure.md#local-settings)
 on your compute entrypoint.
 This is a comma-separated list of paths to bind, following the syntax of the
 `singularity exec --bind` option.
@@ -210,7 +210,7 @@ for details.
 
 ### Validating Unprivileged Singularity ###
 
-If you haven't yet installed [CVMFS](install-cvmfs), please do so.
+If you haven't yet installed [CVMFS](install-cvmfs.md), please do so.
 Alternatively, use the
 [cvmfsexec package](https://github.com/cvmfs-contrib/cvmfsexec)
 configured for osg as an unprivileged user and mount the

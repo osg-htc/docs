@@ -110,7 +110,7 @@ host to avoid any duplicate registrations:
 1. Search the repository for the FQDN of your resource wrapped in double-quotes using the GitHub search bar
    (e.g., `"glidein2.chtc.wisc.edu"`):
 
-    ![GitHub search](/img/registration/github-search.png)
+    ![GitHub search](../img/registration/github-search.png)
 
     - **If the search doesn't return any results**, skip to [these instructions](#new-resources) for registering a new
       resource.
@@ -124,7 +124,7 @@ host to avoid any duplicate registrations:
 
 ### New resources ###
 
-Before registering a new resource, make sure that its FQDN is not [already registered](#searching for resources).
+Before registering a new resource, make sure that its FQDN is not [already registered](#searching-for-resources).
 
 To register a new resource, follow the instructions below:
 
@@ -183,7 +183,7 @@ To modify an existing resource, follow these instructions:
 
 1. Click the branch selector button next to the file path and select the `master` branch.
 
-    ![GitHub branch selection](/img/registration/switch-branch.png)
+    ![GitHub branch selection](../img/registration/switch-branch.png)
 
 1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
    the [resource group template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
@@ -298,7 +298,7 @@ Follow the instructions below:
     search the repository for the FQDN of your resource wrapped in double-quotes using the GitHub search bar
     (e.g., `"glidein2.chtc.wisc.edu"`):
 
-    ![GitHub search](/img/registration/github-search.png)
+    ![GitHub search](../img/registration/github-search.png)
 
     - **If the search returns a single YAML file**,
       note the name of the facility, site, and resource group and continue to the next step.
@@ -349,7 +349,7 @@ To modify a VO's information or register a new VO, follow the instructions below
 1. If you see your VO in the list, open the file and continue to the next step.
    If you do not see your VO in the list, click `Create new file` button:
 
-    ![GitHub file creation](/img/registration/create-file.png)
+    ![GitHub file creation](../img/registration/create-file.png)
 
     In the new file dialog, enter `<VO>.yaml`, replacing `<VO>` with the name of your VO.
 
@@ -383,7 +383,7 @@ To modify a VO's information or register a new VO, follow the instructions below
 1. If you see your project in the list, open the file and continue to the next step.
    If you do not see your project in the list, click `Create new file` button:
 
-    ![GitHub file creation](/img/registration/create-file.png)
+    ![GitHub file creation](../img/registration/create-file.png)
 
     In the new file dialog, enter `<PROJECT>.yaml`, replacing `<PROJECT>` with the name of your project.
 
@@ -403,4 +403,4 @@ To modify a VO's information or register a new VO, follow the instructions below
 Getting Help
 ------------
 
-To get assistance, please use the [this page](/common/help).
+To get assistance, please use the [this page](../common/help.md).
