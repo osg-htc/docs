@@ -32,6 +32,7 @@ To update to the OSG 3.5 series, please consult the page on
 
 | Version                             | Date       | Summary                                                                       |
 |:------------------------------------|:-----------|:------------------------------------------------------------------------------|
+| [3.5.29](3.5/release-3-5-29.md)     | 2021-01-21 | IGTF 1.109, osg-configure 3.11.0, htgettoken 1.1, Upcoming: GlideinWMS 3.7.2  |
 | [3.5.28-2](3.5/release-3-5-28-2.md) | 2020-12-15 | IGTF 1.108                                                                    |
 | [3.5.28](3.5/release-3-5-28.md)     | 2020-12-10 | osg-ca-certs 1.90, htgettoken 1.0, XRootD 4.12.5, HTCondor 8.8.12; Upcoming: HTCondor 8.9.10 |
 | [3.5.27](3.5/release-3-5-27.md)     | 2020-11-12 | gfal2 2.18.1-1.1; Upcoming: HTCondor 8.9.9, GlideinWMS 3.7.1                  |
