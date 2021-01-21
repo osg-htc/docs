@@ -39,6 +39,7 @@ nav:
 - Data:
   - HTTP & OASIS:
     - 'Install Squid HTTP Cache': 'data/frontier-squid.md'
+    - 'Running Frontier Squid in a Container': 'data/run-frontier-squid-container.md'
     - 'Update OASIS Shared Repo': 'data/update-oasis.md'
     - 'Install an OASIS Repo': 'data/external-oasis-repos.md'
   - POSIX Storage:
