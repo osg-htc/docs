@@ -23,7 +23,10 @@ Before starting the installation process, consider the following points:
 
 1. **Docker:** For the purpose of this guide, the host must have a running docker service
    and you must have the ability to start containers (i.e., belong to the `docker` Unix group).
-1.   **Network ports:** Frontier squid communicates on ports 3128 (TCP) and 3401 (UDP)
+1.   **Network ports:** Frontier squid communicates on ports 3128 (TCP) and 3401 (UDP).
+     - We encourage sites to allow monitoring on port 3401 via UDP from CERN IP address ranges, 128.142.0.0/16,
+       188.184.128.0/17, 188.185.48.0/20 and 188.185.128.0/17.
+     - If utgoing connections are filtered, note that CVMFS always uses ports 8000, 80, or 8080.
 1.   **Host choice:** If you will be supporting the Frontier application at your site, review the
 [upstream documentation](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Hardware) to determine how to size your equipment.
 
