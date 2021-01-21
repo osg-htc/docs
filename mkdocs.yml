@@ -38,7 +38,8 @@ nav:
   - 'Using WN Containers': 'worker-node/using-wn-containers.md'
 - Data:
   - HTTP & OASIS:
-    - 'Install Squid HTTP Cache': 'data/frontier-squid.md'
+    - 'Running Frontier Squid in a Container': 'data/run-frontier-squid-container.md'
+    - 'Install Frontier Squid RPM': 'data/frontier-squid.md'
     - 'Update OASIS Shared Repo': 'data/update-oasis.md'
     - 'Install an OASIS Repo': 'data/external-oasis-repos.md'
   - POSIX Storage:
