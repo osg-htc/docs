@@ -2200,7 +2200,7 @@ and CVMFS. The OSG distribution of frontier-squid is a straight rebuild of the
 upstream frontier-squid package for the convenience of OSG users.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>OSG recommends that all sites run a caching proxy for HTTP and HTTPS to help reduce bandwidth and improve
+<p>OSG recommends that all sites run a caching proxy for HTTP to help reduce bandwidth and improve
 throughput.</p>
 </div>
 <p>This document outlines how to run Frontier Squid in a Docker container.</p>
@@ -2224,9 +2224,7 @@ throughput.</p>
 <h2 id="configuring-squid">Configuring Squid<a class="headerlink" href="#configuring-squid" title="Permanent link">&para;</a></h2>
 <h3 id="environment-variables-optional">Environment variables (optional)<a class="headerlink" href="#environment-variables-optional" title="Permanent link">&para;</a></h3>
 <p>In addition to the required configuration above (ports and file systems),
-you may also configure the behavior of your cache with the following variables using an environment variable file:</p>
-<p>Where the environment file on the docker host, <code>/etc/squid/.env</code>, has any of the following variables set in <code>KEY=VALUE</code>
-format:</p>
+you may also configure the behavior of your cache with the following environment variables:</p>
 <table>
 <thead>
 <tr>
@@ -2280,12 +2278,13 @@ format:</p>
 <h2 id="running-a-frontier-squid-container">Running a Frontier Squid Container<a class="headerlink" href="#running-a-frontier-squid-container" title="Permanent link">&para;</a></h2>
 <p>To run a Frontier Squid container with the defaults:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">user@host $</span> docker run --rm --name frontier-squid <span class="se">\</span>
-             --env-file<span class="o">=</span>/etc/squid/.env <span class="se">\</span>
              -v &lt;HOST CACHE PARTITION&gt;:/var/cache/squid <span class="se">\</span>
              -v &lt;HOST LOG PARTITION&gt;:/var/log/squid <span class="se">\</span>
              -p &lt;HOST PORT&gt;:3128 opensciencegrid/frontier-squid:stable
 </code></pre></div>
 
+<p>You may pass configuration variables in <code>KEY=VALUE</code> format with either
+docker <code>-e</code> options or in a file specified with <code>--env-file=&lt;FILENAME&gt;</code>.</p>
 <h3 id="running-a-frontier-squid-container-with-systemd">Running a Frontier Squid container with systemd<a class="headerlink" href="#running-a-frontier-squid-container-with-systemd" title="Permanent link">&para;</a></h3>
 <p>An example systemd service file for Frontier Squid.
 This will require creating the environment file in the directory <code>/opt/xcache/.env</code>. </p>
