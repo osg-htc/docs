@@ -10,7 +10,7 @@ and CVMFS. The OSG distribution of frontier-squid is a straight rebuild of the
 upstream frontier-squid package for the convenience of OSG users.
 
 !!! tip
-    OSG recommends that all sites run a caching proxy for HTTP and HTTPS to help reduce bandwidth and improve
+    OSG recommends that all sites run a caching proxy for HTTP to help reduce bandwidth and improve
     throughput.
 
 This document outlines how to run Frontier Squid in a Docker container.
@@ -40,10 +40,7 @@ Configuring Squid
 ### Environment variables (optional) ###
 
 In addition to the required configuration above (ports and file systems),
-you may also configure the behavior of your cache with the following variables using an environment variable file:
-
-Where the environment file on the docker host, `/etc/squid/.env`, has any of the following variables set in `KEY=VALUE`
-format:
+you may also configure the behavior of your cache with the following environment variables:
 
 Variable name       | Description                                                             | Defaults                                     |
 ---------------------|-------------------------------------------------------------------------|----------------------------------------------|
@@ -70,11 +67,13 @@ To run a Frontier Squid container with the defaults:
 
 ```console
 user@host $ docker run --rm --name frontier-squid \
-             --env-file=/etc/squid/.env \
              -v <HOST CACHE PARTITION>:/var/cache/squid \
              -v <HOST LOG PARTITION>:/var/log/squid \
              -p <HOST PORT>:3128 opensciencegrid/frontier-squid:stable
 ```
+
+You may pass configuration variables in `KEY=VALUE` format with either
+docker `-e` options or in a file specified with `--env-file=<FILENAME>`.
 
 ### Running a Frontier Squid container with systemd
 
