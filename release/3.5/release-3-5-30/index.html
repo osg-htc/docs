@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://opensciencegrid.org/docs/release/3.5/release-3-5-15/">
+        <link rel="canonical" href="https://opensciencegrid.org/docs/release/3.5/release-3-5-30/">
       
       
       <link rel="shortcut icon" href="../../../img/favicon.ico">
@@ -16,7 +16,7 @@
     
     
       
-        <title>OSG Release 3.5.15 - OSG Site Documentation</title>
+        <title>OSG Release 3.5.30 - OSG Site Documentation</title>
       
     
     
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#osg-software-release-3515" class="md-skip">
+        <a href="#osg-software-release-3530" class="md-skip">
           Skip to content
         </a>
       
@@ -95,7 +95,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              OSG Release 3.5.15
+              OSG Release 3.5.30
             
           </span>
         </div>
@@ -1337,11 +1337,184 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../release-3-5-30/" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        OSG Release 3.5.30
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
       OSG Release 3.5.30
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary-of-changes" class="md-nav__link">
+    Summary of Changes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-to-the-new-release" class="md-nav__link">
+    Updating to the New Release
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#need-help" class="md-nav__link">
+    Need Help?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detailed-changes-in-this-release" class="md-nav__link">
+    Detailed Changes in This Release
+  </a>
+  
+    <nav class="md-nav" aria-label="Detailed Changes in This Release">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#packages" class="md-nav__link">
+    Packages
+  </a>
+  
+    <nav class="md-nav" aria-label="Packages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-7" class="md-nav__link">
+    Enterprise Linux 7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-8" class="md-nav__link">
+    Enterprise Linux 8
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rpms" class="md-nav__link">
+    RPMs
+  </a>
+  
+    <nav class="md-nav" aria-label="RPMs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-7_1" class="md-nav__link">
+    Enterprise Linux 7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-8_1" class="md-nav__link">
+    Enterprise Linux 8
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upcoming-packages" class="md-nav__link">
+    Upcoming Packages
+  </a>
+  
+    <nav class="md-nav" aria-label="Upcoming Packages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-7_2" class="md-nav__link">
+    Enterprise Linux 7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-8_2" class="md-nav__link">
+    Enterprise Linux 8
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upcoming-rpms" class="md-nav__link">
+    Upcoming RPMs
+  </a>
+  
+    <nav class="md-nav" aria-label="Upcoming RPMs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-7_3" class="md-nav__link">
+    Enterprise Linux 7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-8_3" class="md-nav__link">
+    Enterprise Linux 8
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -1577,90 +1750,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        OSG Release 3.5.15
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../release-3-5-15/" class="md-nav__link">
       OSG Release 3.5.15
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#summary-of-changes" class="md-nav__link">
-    Summary of Changes
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#updating-to-the-new-release" class="md-nav__link">
-    Updating to the New Release
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#need-help" class="md-nav__link">
-    Need Help?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#detailed-changes-in-this-release" class="md-nav__link">
-    Detailed Changes in This Release
-  </a>
-  
-    <nav class="md-nav" aria-label="Detailed Changes in This Release">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#packages" class="md-nav__link">
-    Packages
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rpms" class="md-nav__link">
-    RPMs
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -2117,12 +2211,106 @@
     Packages
   </a>
   
+    <nav class="md-nav" aria-label="Packages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-7" class="md-nav__link">
+    Enterprise Linux 7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-8" class="md-nav__link">
+    Enterprise Linux 8
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
   <a href="#rpms" class="md-nav__link">
     RPMs
   </a>
+  
+    <nav class="md-nav" aria-label="RPMs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-7_1" class="md-nav__link">
+    Enterprise Linux 7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-8_1" class="md-nav__link">
+    Enterprise Linux 8
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upcoming-packages" class="md-nav__link">
+    Upcoming Packages
+  </a>
+  
+    <nav class="md-nav" aria-label="Upcoming Packages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-7_2" class="md-nav__link">
+    Enterprise Linux 7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-8_2" class="md-nav__link">
+    Enterprise Linux 8
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upcoming-rpms" class="md-nav__link">
+    Upcoming RPMs
+  </a>
+  
+    <nav class="md-nav" aria-label="Upcoming RPMs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-7_3" class="md-nav__link">
+    Enterprise Linux 7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-8_3" class="md-nav__link">
+    Enterprise Linux 8
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2143,17 +2331,17 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/release/3.5/release-3-5-15.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/release/3.5/release-3-5-30.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="osg-software-release-3515">OSG Software Release 3.5.15<a class="headerlink" href="#osg-software-release-3515" title="Permanent link">&para;</a></h1>
-<p><strong>Release Date:</strong> 2020-04-08  <br />
-<strong>Supported OS Versions:</strong> EL7</p>
+                <h1 id="osg-software-release-3530">OSG Software Release 3.5.30<a class="headerlink" href="#osg-software-release-3530" title="Permanent link">&para;</a></h1>
+<p><strong>Release Date:</strong> 2021-01-27  <br />
+<strong>Supported OS Versions:</strong> EL7, EL8</p>
 <div class="admonition tip">
 <p class="admonition-title">Want faster access to production-ready software?</p>
-<p>OSG 3.5 and 3.4 offer a rolling release repository where packages are added as soon as they pass acceptance testing.
+<p>OSG 3.5 offers a rolling release repository where packages are added as soon as they pass acceptance testing.
 To install packages from this repository, enable <code>[osg-rolling]</code> in <code>/etc/yum.repos.d/osg-rolling.repo</code>:</p>
 <div class="codehilite"><pre><span></span><code>[osg-rolling]
 ...
@@ -2168,17 +2356,14 @@ enabled=1
 <h2 id="summary-of-changes">Summary of Changes<a class="headerlink" href="#summary-of-changes" title="Permanent link">&para;</a></h2>
 <p>This release contains:</p>
 <ul>
-<li><a href="http://frontier.cern.ch/dist/frontier-squid-releasenotes.txt">Frontier Squid 4.10.3</a>: Bug fix for negative caching</li>
-<li><a href="https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-102">VO Package v103</a><ul>
-<li>Added WLCG VOMS</li>
-<li>Updated certificate for voms1.fnal.gov</li>
+<li>Upcoming Repository: HTCondor 8.9.11 Security Release. This release contains fixes for important security issues. More details on the security issues are in the vulnerability reports:<ul>
+<li><a href="http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0001.html">HTCONDOR-2021-0001</a></li>
+<li><a href="http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0002.html">HTCONDOR-2021-0002</a></li>
 </ul>
 </li>
-<li><a href="https://github.com/xrootd/xrootd/blob/v4.11.3/docs/ReleaseNotes.txt">XRootD 4.11.3</a>: Bug fix release</li>
-<li>osg-xrootd 3.5-12: The standalone configuration file only affects the standalone XRootD process</li>
 </ul>
 <p>These
-<a href="https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.5.15%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC">JIRA tickets</a>
+<a href="https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.30%2C%203.5.30-upcoming)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC">JIRA tickets</a>
 were addressed in this release.</p>
 <h2 id="updating-to-the-new-release">Updating to the New Release<a class="headerlink" href="#updating-to-the-new-release" title="Permanent link">&para;</a></h2>
 <p>To update to the OSG 3.5 series, please consult the page on
@@ -2196,40 +2381,64 @@ were addressed in this release.</p>
 <p>We added or updated the following packages to the production OSG yum repository.
 Note that in some cases, there are multiple RPMs for each package.
 You can click on any given package to see the set of RPMs or see the complete list <a href="#rpms">below</a>.</p>
+<h4 id="enterprise-linux-7">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7" title="Permanent link">&para;</a></h4>
 <ul>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=frontier-squid-4.10-3.1.osg35.el7">frontier-squid-4.10-3.1.osg35.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-xrootd-3.5-12.osg35.el7">osg-xrootd-3.5-12.osg35.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=vo-client-103-1.osg35.el7">vo-client-103-1.osg35.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=xrootd-4.11.3-1.2.osg35.el7">xrootd-4.11.3-1.2.osg35.el7</a></li>
+<li>None</li>
+</ul>
+<h4 id="enterprise-linux-8">Enterprise Linux 8<a class="headerlink" href="#enterprise-linux-8" title="Permanent link">&para;</a></h4>
+<ul>
+<li>None</li>
 </ul>
 <h3 id="rpms">RPMs<a class="headerlink" href="#rpms" title="Permanent link">&para;</a></h3>
 <p>If you wish to manually update your system, you can run yum update against the following packages:</p>
-<div class="codehilite"><pre><span></span><code>frontier-squid frontier-squid-debuginfo osg-xrootd osg-xrootd-standalone python2-xrootd vo-client vo-client-dcache vo-client-lcmaps-voms xrootd xrootd-client xrootd-client-devel xrootd-client-libs xrootd-debuginfo xrootd-devel xrootd-doc xrootd-fuse xrootd-libs xrootd-private-devel xrootd-selinux xrootd-server xrootd-server-devel xrootd-server-libs
+<div class="codehilite"><pre><span></span><code>None
 </code></pre></div>
 
 <p>If you wish to only update the RPMs that changed, the set of RPMs is:</p>
-<div class="codehilite"><pre><span></span><code>frontier-squid-4.10-3.1.osg35.el7
-frontier-squid-debuginfo-4.10-3.1.osg35.el7
-osg-xrootd-3.5-12.osg35.el7
-osg-xrootd-standalone-3.5-12.osg35.el7
-python2-xrootd-4.11.3-1.2.osg35.el7
-vo-client-103-1.osg35.el7
-vo-client-dcache-103-1.osg35.el7
-vo-client-lcmaps-voms-103-1.osg35.el7
-xrootd-4.11.3-1.2.osg35.el7
-xrootd-client-4.11.3-1.2.osg35.el7
-xrootd-client-devel-4.11.3-1.2.osg35.el7
-xrootd-client-libs-4.11.3-1.2.osg35.el7
-xrootd-debuginfo-4.11.3-1.2.osg35.el7
-xrootd-devel-4.11.3-1.2.osg35.el7
-xrootd-doc-4.11.3-1.2.osg35.el7
-xrootd-fuse-4.11.3-1.2.osg35.el7
-xrootd-libs-4.11.3-1.2.osg35.el7
-xrootd-private-devel-4.11.3-1.2.osg35.el7
-xrootd-selinux-4.11.3-1.2.osg35.el7
-xrootd-server-4.11.3-1.2.osg35.el7
-xrootd-server-devel-4.11.3-1.2.osg35.el7
-xrootd-server-libs-4.11.3-1.2.osg35.el7
+<h4 id="enterprise-linux-7_1">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>
+</code></pre></div>
+
+<h4 id="enterprise-linux-8_1">Enterprise Linux 8<a class="headerlink" href="#enterprise-linux-8_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>
+</code></pre></div>
+
+<h3 id="upcoming-packages">Upcoming Packages<a class="headerlink" href="#upcoming-packages" title="Permanent link">&para;</a></h3>
+<p>We added or updated the following packages to the <strong>upcoming</strong> OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.</p>
+<h4 id="enterprise-linux-7_2">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=condor-8.9.11-1.osgup.el7">condor-8.9.11-1.osgup.el7</a></li>
+</ul>
+<h4 id="enterprise-linux-8_2">Enterprise Linux 8<a class="headerlink" href="#enterprise-linux-8_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>None</li>
+</ul>
+<h3 id="upcoming-rpms">Upcoming RPMs<a class="headerlink" href="#upcoming-rpms" title="Permanent link">&para;</a></h3>
+<p>If you wish to manually update your system, you can run yum update against the following packages:</p>
+<div class="codehilite"><pre><span></span><code>condor condor-all condor-annex-ec2 condor-bosco condor-classads condor-classads-devel condor-credmon-oauth condor-debuginfo condor-kbdd condor-procd condor-test condor-vm-gahp minicondor python2-condor python3-condor
+</code></pre></div>
+
+<p>If you wish to only update the RPMs that changed, the set of RPMs is:</p>
+<h4 id="enterprise-linux-7_3">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7_3" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>condor-8.9.11-1.osgup.el7
+condor-all-8.9.11-1.osgup.el7
+condor-annex-ec2-8.9.11-1.osgup.el7
+condor-bosco-8.9.11-1.osgup.el7
+condor-classads-8.9.11-1.osgup.el7
+condor-classads-devel-8.9.11-1.osgup.el7
+condor-credmon-oauth-8.9.11-1.osgup.el7
+condor-debuginfo-8.9.11-1.osgup.el7
+condor-kbdd-8.9.11-1.osgup.el7
+condor-procd-8.9.11-1.osgup.el7
+condor-test-8.9.11-1.osgup.el7
+condor-vm-gahp-8.9.11-1.osgup.el7
+minicondor-8.9.11-1.osgup.el7
+python2-condor-8.9.11-1.osgup.el7
+python3-condor-8.9.11-1.osgup.el7
+</code></pre></div>
+
+<h4 id="enterprise-linux-8_3">Enterprise Linux 8<a class="headerlink" href="#enterprise-linux-8_3" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>
 </code></pre></div>
                 
               
@@ -2249,7 +2458,7 @@ xrootd-server-libs-4.11.3-1.2.osg35.el7
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../release-3-5-15-2/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../notes/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -2258,19 +2467,19 @@ xrootd-server-libs-4.11.3-1.2.osg35.el7
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                OSG Release 3.5.15-2
+                Release Note Overview
               </div>
             </div>
           </a>
         
         
-          <a href="../release-3-5-14/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../release-3-5-29/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                OSG Release 3.5.14
+                OSG Release 3.5.29
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
