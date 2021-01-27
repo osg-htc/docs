@@ -2,7 +2,7 @@ OSG Software Release 3.5.30
 ===========================
 
 **Release Date:** 2021-01-27    
-**Supported OS Versions:** EL7, EL8
+**Supported OS Versions:** EL7
 
 !!!tip "Want faster access to production-ready software?"
     OSG 3.5 offers a rolling release repository where packages are added as soon as they pass acceptance testing.
