@@ -134,7 +134,6 @@ nav:
     - 'LCMAPS VOMS authentication': 'security/lcmaps-voms-authentication.md'
     - 'User Certificates': 'security/user-certs.md'
   - 'Install GSI-enabled SSH': 'other/gsissh.md'
-  - 'Install the Network Performance Toolkit': 'other/network-performance-toolkit.md'
   - 'Install RSV': 'monitoring/install-rsv.md'
   - 'Advanced RSV Configuration': 'monitoring/advanced-rsv-configuration.md'
   - 'Manage RSV via rsv-control': 'monitoring/rsv-control.md'
