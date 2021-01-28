@@ -107,10 +107,8 @@ You should make sure the Gratia cron jobs are running. The simplest way is with 
 
 If it is not enabled, enable it as described above.
 
-A future release of Gratia will provide status on each of the individual probes, but right now this only ensures that
-the basic cron job is running.
-In the meantime, you can check if the individual Gratia probes are enabled.
-To do this, look at the `EnableProbe` option in the `ProbeConfig` file, as described above.
+This only ensures that the basic gratia-probe-cron "service" is running.
+To check if the individual Gratia probes are enabled, look at the `EnableProbe` option in the `ProbeConfig` file, as described above.
 A quick command to do this is shown here.
 Note that the Condor and GridFTP Transfer probes are enabled while the glexec probe is disabled:
 
