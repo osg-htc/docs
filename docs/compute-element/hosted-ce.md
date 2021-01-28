@@ -33,7 +33,8 @@ Before preparing your cluster for OSG resource requests, consider the following 
 -   One or more Unix accounts on your cluster's submit server, accessible via SSH key, with permissions to submit jobs
     to your local cluster.
 -   Shared user home directories between the submit server and the worker nodes.
-    HTCondor clusters : [this section](#providing-the-osg-worker-node-client-htcondor-batch-systems-only) for details.
+    Not required for HTCondor clusters:
+    see [this section](#htcondor-only-providing-the-osg-worker-node-client) for more details.
 -   [Temporary scratch space](../worker-node/using-wn.md#for-site-administrators) on each worker node
 
 For additional technical details, please consult the [reference](#reference) section below.
@@ -87,8 +88,8 @@ After setting up the Frontier Squid proxy and local caches on each worker node,
 ### (HTCondor-only) Providing the OSG Worker Node Client ###
 
 !!! tip "Skip this section if you have OASIS or shared home directories!"
-    If you have [OASIS](#recommended-providing-access-to-application-software-using-oasis) installed or shared home
-    directories on your worker nodes, you can skip manual installation of the OSG Worker Node Client.
+    If you have [OASIS](#recommended-providing-access-to-oasis) installed or shared home directories on your worker
+    nodes, you can skip manual installation of the OSG Worker Node Client.
 
 All OSG sites need to provide the OSG Worker Node Client on each worker node in their local cluster.
 This is normally handled by OSG staff for a Hosted CE but that requires shared home directories across the cluster.
