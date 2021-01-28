@@ -42,9 +42,6 @@ nav:
     - 'Install Frontier Squid RPM': 'data/frontier-squid.md'
     - 'Update OASIS Shared Repo': 'data/update-oasis.md'
     - 'Install an OASIS Repo': 'data/external-oasis-repos.md'
-  - POSIX Storage:
-    - 'Install GridFTP Server': 'data/gridftp.md'
-    - 'Install Load Balanced GridFTP': 'data/load-balanced-gridftp.md'
   - XRootD:
     - 'XRootD Overview': 'data/xrootd/overview.md'
     - 'Install XRootD Standalone': 'data/xrootd/install-standalone.md'
@@ -59,15 +56,10 @@ nav:
     - 'Install a Cache': 'data/stashcache/install-cache.md'
     - 'Install an Origin': 'data/stashcache/install-origin.md'
     - 'Getting VO data into StashCache': 'data/stashcache/vo-data.md'
-  - HDFS:
-    - 'HDFS Overview': 'data/hadoop-overview.md'
-    - 'Install HDFS': 'data/install-hadoop.md'
 - Submit:
   - Flocking:
     - 'Flock to OSG': 'submit/osg-flock.md'
 - Security:
-  - 'LCMAPS VOMS authentication': 'security/lcmaps-voms-authentication.md'
-  - 'User Certificates': 'security/user-certs.md'
   - 'Certificate Management Reference': 'security/certificate-management.md'
   - 'Host Certificates':
     - 'Overview': 'security/host-certs/overview.md'
@@ -132,8 +124,16 @@ nav:
   - 'Yum Basics': 'release/yum-basics.md'
   - 'RPM Signing': 'release/signing.md'
 - Deprecated:
+  - POSIX Storage:
+    - 'Install GridFTP Server': 'data/gridftp.md'
+    - 'Install Load Balanced GridFTP': 'data/load-balanced-gridftp.md'
+  - HDFS:
+    - 'HDFS Overview': 'data/hadoop-overview.md'
+    - 'Install HDFS': 'data/install-hadoop.md'
+  - Security:
+    - 'LCMAPS VOMS authentication': 'security/lcmaps-voms-authentication.md'
+    - 'User Certificates': 'security/user-certs.md'
   - 'Install GSI-enabled SSH': 'other/gsissh.md'
-  - 'Install the Network Performance Toolkit': 'other/network-performance-toolkit.md'
   - 'Install RSV': 'monitoring/install-rsv.md'
   - 'Advanced RSV Configuration': 'monitoring/advanced-rsv-configuration.md'
   - 'Manage RSV via rsv-control': 'monitoring/rsv-control.md'
