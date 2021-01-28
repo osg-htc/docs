@@ -39,7 +39,7 @@ If any of these repositories are missing, you may end up with installation issue
 
 !!! note
     If you upgrade from CentOS 8.0 through 8.2 to CentOS 8.3 or newer,
-    you may have to re-enable some repos as [described below](#centos-8-3-and-newer)
+    you may have to re-enable some repos as [described below](#centos-83-and-newer)
 
 ### Upcoming Software
 
