@@ -130,7 +130,8 @@ Correct the error and restart gratia.
 Have you configured the resource names correctly? 
 -------------------------------------------------
 
-Do the names of your resources match the names in [OIM](https://github.com/opensciencegrid/topology/tree/master/topology)?
+Do the names of your resources match the names in
+[OSG Topology](https://github.com/opensciencegrid/topology/tree/master/topology)?
 Gratia retrieves the resource name from the `Site Information` section of the `/etc/osg/config.d/40-siteinfo.ini`
 
 
@@ -167,7 +168,8 @@ resource_group = Tusker
 
 ```
 
-Do those names match the names that you registered with OIM? If not, edit the names, and rerun "osg-configure -c".
+Do those names match the names that you registered with OSG Topology?
+If not, edit the names, and rerun "osg-configure -c".
 
 Did the site name change?
 -------------------------
