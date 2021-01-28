@@ -10,9 +10,7 @@ Gratia/GRACC: The Big Picture
 Gratia is software used in OSG to gather accounting information.
 The information is collected from individual resources at a site, such as a Compute Entrypoint or a a submission host.
 The program that collects the data is called a "Gratia probe".
-The information is transferred to a GRACC server.
-Most sites will choose to send the accounting data to the central OSG Gratia server, but you can also use a Gratia
-server at your site (which can send forward the data to the central OSG Gratia server).
+The information is transferred to the central OSG GRACC server.
 Here is a diagram:
 
 !!! note "Difference between Gratia and GRACC"
