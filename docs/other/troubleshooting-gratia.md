@@ -141,30 +141,22 @@ Gratia retrieves the resource name from the `Site Information` section of the `/
 ;===================================================================
 
 [Site Information]
-; The group option indicates the group that the OSG site should be listed in,
-; for production sites this should be OSG, for vtb or itb testing it should be
-; OSG-ITB
+; Set "group" to "OSG" for a production site, or "OSG-ITB" for an ITB site.
 ; 
 ; YOU WILL NEED TO CHANGE THIS
 group = OSG
 
-; The host_name setting should give the host name of the CE  that is being 
-; configured, this setting must be a valid dns name that resolves
-; 
+; Set "host_name" to the host name of the CE being configured.
+; This should resolve in DNS; if DNS is not set up yet, enter an IPv4/v6 address instead.
+;
 ; YOU WILL NEED TO CHANGE THIS
 host_name = tusker-gw1.unl.edu
 
-; The resource setting should be set to the same value as used in the OIM 
-; registration at the goc 
+; Set "resource" to the name of the resource that you have registered
+; in the OSG topology repository at https://github.com/opensciencegrid/topology
 ; 
 ; YOU WILL NEED TO CHANGE THIS
 resource = Tusker-CE1
-
-; The resource_group setting should be set to the same value as used in the OIM 
-; registration at the goc 
-; 
-; YOU WILL NEED TO CHANGE THIS
-resource_group = Tusker
 
 ```
 
