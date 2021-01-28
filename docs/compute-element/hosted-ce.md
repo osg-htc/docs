@@ -22,7 +22,7 @@ Before Starting
 
 Before preparing your cluster for OSG jobs, consider the following requirements:
 
--   An existing compute cluster with a [supported batch system](../detailed-overview.md#prepare-the-batch-system)
+-   An existing compute cluster with a [supported batch system](../index.md#contributing-to-the-OSG)
     running on a [supported operating system](../release/supported_platforms.md)
 
 -   Outbound network connectivity from the worker nodes (they can be behind NAT)

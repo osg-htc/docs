@@ -14,7 +14,6 @@ extra_css:
 
 nav:
 - Home: 'index.md'
-- Detailed Overview: 'detailed-overview.md'
 - Site Planning: 'site-planning.md'
 - Site Verification: 'site-verification.md'
 - Site Responsibilities: 'site-responsibilities.md'
