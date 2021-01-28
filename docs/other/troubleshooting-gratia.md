@@ -91,7 +91,7 @@ The options you see here are:
 | SSLHost             | The GRACC server this probe reports to                                                |
 | SSLRegistrationHost | The GRACC server this probe reports to                                                |
 | ProbeName           | The unique name for this probe. Note that it includes the probe type and the host name |
-| SiteName            | The name of your site, as registered in OIM. If your site must be registered in OIM    |
+| SiteName            | The name of your Resource, as registered in [OSG Topology](/common/registration).      |
 | EnableProbe         | The probe will only run if this is "1"                                                 |
 
 Again, there are many more options in this file. Most of the time you won't need to touch them.
