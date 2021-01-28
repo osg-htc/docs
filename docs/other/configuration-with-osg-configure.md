@@ -77,12 +77,12 @@ In the tables below:
 Syntax and layout
 -----------------
 
-The configuration files used by `osg-configure` are the one supported by Python's [SafeConfigParser](http://docs.python.org/library/configparser.html), similar in format to the [INI configuration file](http://en.wikipedia.org/wiki/INI_file) used by MS Windows:
+The configuration files used by `osg-configure` are the one supported by Python's [SafeConfigParser](https://docs.python.org/library/configparser.html), similar in format to the [INI configuration file](https://en.wikipedia.org/wiki/INI_file) used by MS Windows:
 
 -   Config files are separated into sections, specified by a section name in square brackets (e.g. `[Section 1]`)
 -   Options should be set using `name = value` pairs
 -   Lines that begin with `;` or `#` are comments
--   Long lines can be split up using continutations: each white space character can be preceded by a newline to fold/continue the field on a new line (same syntax as specified in [email RFC 822](http://tools.ietf.org/html/rfc822.html))
+-   Long lines can be split up using continutations: each white space character can be preceded by a newline to fold/continue the field on a new line (same syntax as specified in [email RFC 822](https://tools.ietf.org/html/rfc822.html))
 -   Variable substitutions are supported -- [see below](#variable-substitution)
 
 `osg-configure` reads and uses all of the files in `/etc/osg/config.d` that have a ".ini" suffix. The files in this directory are ordered with a numeric prefix with higher numbers being applied later and thus having higher precedence (e.g. 00-foo.ini has a lower precedence than 99-local-site-settings.ini). Configuration sections and options can be specified multiple times in different files. E.g. a section called `[PBS]` can be given in `20-pbs.ini` as well as `99-local-site-settings.ini`.
