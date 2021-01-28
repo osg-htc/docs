@@ -264,9 +264,9 @@ Not much is printed to the screen, but you can see progress in the Gratia log fi
     Condor rotates history files, so you can only report what Condor has kept.
     Controlling the Condor history is documented in the Condor manual.
     In particular, see the options for
-    [MAX_HISTORY_LOG](https://research.cs.wisc.edu/htcondor/manual/v8.6/3_5Configuration_Macros.html#21780)
+    [MAX_HISTORY_LOG](https://htcondor.readthedocs.io/en/latest/admin-manual/configuration-macros.html#MAX_HISTORY_ROTATIONS)
     and
-    [MAX_HISTORY_ROTATIONS](https://research.cs.wisc.edu/htcondor/manual/v8.6/3_5Configuration_Macros.html#21785).
+    [MAX_HISTORY_ROTATIONS](https://htcondor.readthedocs.io/en/latest/admin-manual/configuration-macros.html#MAX_HISTORY_ROTATIONS).
 
 ### Bad Gratia hostname
 
