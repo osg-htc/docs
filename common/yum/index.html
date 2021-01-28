@@ -1139,8 +1139,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#centos-8" class="md-nav__link">
-    CentOS 8
+  <a href="#centos-80-to-82" class="md-nav__link">
+    CentOS 8.0 to 8.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#centos-83-and-newer" class="md-nav__link">
+    CentOS 8.3 and newer
   </a>
   
 </li>
@@ -2262,8 +2269,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#centos-8" class="md-nav__link">
-    CentOS 8
+  <a href="#centos-80-to-82" class="md-nav__link">
+    CentOS 8.0 to 8.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#centos-83-and-newer" class="md-nav__link">
+    CentOS 8.3 and newer
   </a>
   
 </li>
@@ -2410,7 +2424,8 @@ You must have the following repositories available and enabled:</p>
 <li>OS repositories, including the following ones that aren't enabled by default:<ul>
 <li><code>extras</code> (SL 6/7, CentOS 6/7/8)</li>
 <li><code>Server-Extras</code> (RHEL 6/7)</li>
-<li><code>PowerTools</code> (CentOS 8)</li>
+<li><code>PowerTools</code> (CentOS 8.0 through 8.2)</li>
+<li><code>powertools</code> (CentOS 8.3 and newer)</li>
 <li><code>CodeReady Builder</code> (RHEL 8)</li>
 </ul>
 </li>
@@ -2422,6 +2437,11 @@ You must have the following repositories available and enabled:</p>
 <p class="admonition-title">Danger</p>
 <p>Other repositories, such as <code>jpackage</code>, <code>dag</code>, or <code>rpmforge</code>, are not supported and you may encounter problems if
 you use them.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you upgrade from CentOS 8.0 through 8.2 to CentOS 8.3 or newer,
+you may have to re-enable some repos as <a href="#centos-83-and-newer">described below</a></p>
 </div>
 <h3 id="upcoming-software">Upcoming Software<a class="headerlink" href="#upcoming-software" title="Permanent link">&para;</a></h3>
 <p>Certain sites have requested new versions of software that would be considered "disruptive" or "experimental":
@@ -2492,10 +2512,15 @@ or if the <code>enabled</code> line is missing
 <ul>
 <li>Ensure that the <code>extras</code> repo in <code>/etc/yum.repos.d/CentOS-Base.repo</code> is enabled.</li>
 </ul>
-<h4 id="centos-8">CentOS 8<a class="headerlink" href="#centos-8" title="Permanent link">&para;</a></h4>
+<h4 id="centos-80-to-82">CentOS 8.0 to 8.2<a class="headerlink" href="#centos-80-to-82" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Ensure that the <code>extras</code> repo in <code>/etc/yum.repos.d/CentOS-Extras.repo</code> is enabled.</li>
 <li>Ensure that the <code>PowerTools</code> repo in <code>/etc/yum.repos.d/CentOS-PowerTools.repo</code> is enabled.</li>
+</ul>
+<h4 id="centos-83-and-newer">CentOS 8.3 and newer<a class="headerlink" href="#centos-83-and-newer" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Ensure that the <code>extras</code> repo in <code>/etc/yum.repos.d/CentOS-Linux-Extras.repo</code> is enabled.</li>
+<li>Ensure that the <code>powertools</code> repo in <code>/etc/yum.repos.d/CentOS-Linux-PowerTools.repo</code> is enabled.</li>
 </ul>
 <h4 id="rhel-6-and-7">RHEL 6 and 7<a class="headerlink" href="#rhel-6-and-7" title="Permanent link">&para;</a></h4>
 <ul>
