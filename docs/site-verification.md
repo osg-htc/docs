@@ -27,7 +27,7 @@ Once you have validated job submission from within your site, request test pilot
 
 -   The fully qualified domain name of the CE
 -   Registered OSG resource name
--   Supported OS version of your worker nodes (e.g., EL6, EL7, EL8, or a combination)
+-   Supported OS version of your worker nodes (e.g., EL7, EL8, or a combination)
 -   Support for multicore jobs
 -   Support for GPUs
 -   Maximum job walltime

@@ -15,7 +15,7 @@ unprivileged.  This kernel version is the default for
 RHEL/CentOS/Scientific Linux 7.6 and is available for previous 7.x
 releases.  Although the feature is available, it needs to be enabled to
 be usable (instructions below) on RHEL 7.  The feature is enabled by
-default on RHEL 8, but not available at all on RHEL 6.
+default on RHEL 8.
 
 Without unprivileged user namespaces, singularity must be installed and run
 with setuid-root executables. Singularity keeps the privileged code to a
@@ -70,8 +70,6 @@ RHEL 7 worker nodes.  When unprivileged singularity is enabled, OSG
 recommends that sites not install the singularity RPM unless they have
 non-OSG users that require it.  Sites that do install the RPM may choose
 to configure their RHEL 7 or later RPM installations to run unprivileged.
-RHEL 6 installations have no option for unprivileged singularity so
-there the RPM has to be installed and left configured as privileged.
 
 In addition to improved security, unprivileged singularity enables
 `condor_ssh_to_job` to enter a container namespace without itself
@@ -223,7 +221,7 @@ command:
 ```console
 user@host $ /cvmfs/oasis.opensciencegrid.org/mis/singularity/bin/singularity \
                 exec --contain --ipc --pid --bind /cvmfs \
-                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el6:latest \
+                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el7:latest \
                 ps -ef
 UID        PID  PPID  C STIME TTY          TIME CMD
 user         1     0  2 21:27 ?        00:00:00 shim-init
@@ -265,10 +263,9 @@ before installing the required packages:
 singularity includes an option called `underlay` that enables using bind
 mount points that do not exist in the container image.
 By default it is enabled, but only if the similar `overlay` option cannot
-be used, such as on RHEL 6 where kernel support for overlayfs is missing
-or when running in unprivileged mode.  On RHEL 7 and RHEL 8 is recommended to
-completely disable `overlay`, because it is more vulnerable to security
-problems than `underlay`.
+be used, such as when running in unprivileged mode. 
+On RHEL 7 and RHEL 8 is recommended to completely disable `overlay`,
+because it is more vulnerable to security problems than `underlay`.
 
 Set this option in `/etc/singularity/singularity.conf`:
 
@@ -329,7 +326,7 @@ command to verify it:
 
 ```console
 user@host $ singularity exec --contain --ipc --pid --bind /cvmfs \
-                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el6:latest \
+                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el7:latest \
                 ps -ef
 WARNING: Container does not have an exec helper script, calling 'ps' directly
 UID        PID  PPID  C STIME TTY          TIME CMD

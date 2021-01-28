@@ -74,12 +74,12 @@ Using GSI OpenSSH
 
 The following table gives the commands needed to start, stop, enable, and disable GSI OpenSSH.
 
-| To...                                   | On EL6, run the command...   | On EL7, run the command...                      |
-| :-------------------------------------- | :--------------------------- | :--------------------------------------------   |
-| Start  service                          | `service gsisshd start`      | `systemctl start gsisshd`   |
-| Stop a  service                         | `service gsisshd stop`       | `systemctl stop gsisshd`    |
-| Enable a service to start on boot       | `chkconfig gsisshd on`       | `systemctl enable gsisshd`  |
-| Disable a service from starting on boot | `chkconfig gsisshd off`      | `systemctl disable gsisshd` |
+| To...                                   | Run the command...            |
+| :-------------------------------------- | :---------------------------- |
+| Start  service                          | `systemctl start gsisshd`     |
+| Stop a  service                         | `systemctl stop gsisshd`      |
+| Enable a service to start on boot       | `systemctl enable gsisshd`    |
+| Disable a service from starting on boot | `systemctl disable gsisshd`   |
 
 
 Validating GSI OpenSSH

@@ -21,7 +21,6 @@ CVMFS repositories work at the kernel filesystem layer, which adds more stringen
 OSG install.  The host OS must meet ONE of the following:
 
 -   RHEL 7.3 (or equivalent) or later.  **This option is recommended**.
--   RHEL 6 with the aufs kernel module.
 
 Additionally,
 
@@ -45,22 +44,10 @@ Additionally,
 Installation
 ------------
 
-### RHEL7-based Systems
-
-For a RHEL7-based system, installation is a straightforward install via `yum`:
+Installation is a straightforward install via `yum`:
 
 ``` console
 root@host # yum install cvmfs-server osg-oasis 
-```
-
-### RHEL6-based Systems
-
-A RHEL6 host needs additional steps in order to add the AUFS2 kernel module.
-
-``` console
-root@host # rpm -i https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs-release-latest.noarch.rpm
-root@host # yum install --enablerepo=cernvm-kernel --disablerepo=cernvm kernel aufs2-util cvmfs-server.x86_64 osg-oasis
-root@host # reboot
 ```
 
 ### Apache and Repository Mounts

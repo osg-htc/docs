@@ -11,13 +11,10 @@ for 64-bit Intel architectures according to the following table:
 
 | Platform                   | OSG 3.5  | OSG 3.4  |
 |----------------------------|----------|----------|
-| CentOS 6                   | &#10060; | &#9989;  |
 | CentOS 7                   | &#9989;  | &#9989;  |
 | CentOS 8                   | &#9989;  | &#10060; |
-| Red Hat Enterprise Linux 6 | &#10060; | &#9989;  |
 | Red Hat Enterprise Linux 7 | &#9989;  | &#9989;  |
 | Red Hat Enterprise Linux 8 | &#9989;  | &#10060; |
-| Scientific Linux 6         | &#10060; | &#9989;  |
 | Scientifix Linux 7         | &#9989;  | &#9989;  |
 
 OSG builds and tests its RPMs on the latest releases of the relevant platforms (e.g., in 2018, the RHEL 7 builds were based on RHEL 7.5).

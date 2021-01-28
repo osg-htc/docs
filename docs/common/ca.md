@@ -63,12 +63,12 @@ See [this page](https://opensciencegrid.org/security/CaDistribution/) for detail
 
 1. Enable the `osg-update-certs-cron` service to enable periodic CA updates. As a reminder, here are common service commands (all run as `root`):
 
-    | To...                                   | On EL6, run the command...                  | On EL7, run the command...                      |
-    | :-------------------------------------- | :----------------------------------------   | :--------------------------------------------   |
-    | Start a service                         | `service <SERVICE-NAME> start` | `systemctl start <SERVICE-NAME>`   |
-    | Stop a  service                         | `service <SERVICE-NAME> stop`  | `systemctl stop <SERVICE-NAME>`    |
-    | Enable a service to start on boot       | `chkconfig <SERVICE-NAME> on`  | `systemctl enable <SERVICE-NAME>`  |
-    | Disable a service from starting on boot | `chkconfig <SERVICE-NAME> off` | `systemctl disable <SERVICE-NAME>` |
+    | To...                                   | Run the command...                            |
+    | :-------------------------------------- | :-------------------------------------------- |
+    | Start a service                         | `systemctl start <SERVICE-NAME>`              |
+    | Stop a  service                         | `systemctl stop <SERVICE-NAME>`               |
+    | Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`             |
+    | Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>`            |
 
 1. (Optional) To add a new CA:
 
@@ -222,12 +222,12 @@ To modify the times that `fetch-crl-cron` runs, edit `/etc/cron.d/fetch-crl`.
 
 Start the services in the order listed and stop them in reverse order. As a reminder, here are common service commands (all run as `root`):
 
-| To...                                   | On EL6, run the command...                | On EL7, run the command...                    |
-| :-------------------------------------- | :---------------------------------------- | :-------------------------------------------- |
-| Start a service                         | `service <SERVICE-NAME> start`            | `systemctl start <SERVICE-NAME>`              |
-| Stop a  service                         | `service <SERVICE-NAME> stop`             | `systemctl stop <SERVICE-NAME>`               |
-| Enable a service to start on boot       | `chkconfig <SERVICE-NAME> on`             | `systemctl enable <SERVICE-NAME>`             |
-| Disable a service from starting on boot | `chkconfig <SERVICE-NAME> off`            | `systemctl disable <SERVICE-NAME>`            |
+| To...                                   | Run the command...                            |
+| :-------------------------------------- | :-------------------------------------------- |
+| Start a service                         | `systemctl start <SERVICE-NAME>`              |
+| Stop a  service                         | `systemctl stop <SERVICE-NAME>`               |
+| Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`             |
+| Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>`            |
 
 Getting Help
 ------------

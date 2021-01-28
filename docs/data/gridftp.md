@@ -185,12 +185,12 @@ In addition to the GridFTP service itself, there are a number of supporting serv
 
 Start the services in the order listed and stop them in reverse order. As a reminder, here are common service commands (all run as `root`):
 
-| To...                                   | On EL6, run the command...                  | On EL7, run the command...                      |
-| :-------------------------------------- | :----------------------------------------   | :--------------------------------------------   |
-| Start a service                         | `service <SERVICE-NAME> start` | `systemctl start <SERVICE-NAME>`   |
-| Stop a  service                         | `service <SERVICE-NAME> stop`  | `systemctl stop <SERVICE-NAME>`    |
-| Enable a service to start on boot       | `chkconfig <SERVICE-NAME> on`  | `systemctl enable <SERVICE-NAME>`  |
-| Disable a service from starting on boot | `chkconfig <SERVICE-NAME> off` | `systemctl disable <SERVICE-NAME>` |
+| To...                                   | Run the command...                            |
+| :-------------------------------------- | :-------------------------------------------- |
+| Start a service                         | `systemctl start <SERVICE-NAME>`              |
+| Stop a  service                         | `systemctl stop <SERVICE-NAME>`               |
+| Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`             |
+| Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>`            |
 
 
 Validation

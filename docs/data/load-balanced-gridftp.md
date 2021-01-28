@@ -188,17 +188,10 @@ Use the virtual IP address of your load balancer(s) as the secondary IPs of each
 
 If your GridFTP servers and load balancer(s) are on the same network segment, you will have to disable ARP on the GridFTP servers to avoid [ARP race conditions](http://kb.linuxvirtualserver.org/wiki/ARP_Issues_in_LVS/DR_and_LVS/TUN_Clusters). Otherwise, skip to [the section on preparing keepalived](#preparing-keepalived-load-balancers).
 
-1. Select the appropriate RPM:
-
-    | **If your operating system version is...** | **Then use the following package(s)...** |
-    | ---------------------------------------- | ------------------------- |
-    | Enterprise Linux 6 | `arptables_jf` |
-    | Enterprise Linux 7 | `arptables` |
-
 1. Install the arptables software:
 
         :::console
-        root@host # yum install <PACKAGE>
+        root@host # yum install arptables
 
 1. Disable ARP:
 
@@ -334,23 +327,16 @@ Using Your Load Balanced GridFTP System
 
 ### Using GridFTP
 
-On the GridFTP servers, arptables is the only additional service required for running a load-balanced GridFTP system. The name of the arptables service depends on the version of your host OS:
-
-1. Select the appropriate RPM:
-
-    | **If your operating system version is...** | **Then use the following package(s)...** | 
-    | ---------------------------------------- | -------------------------------------- |
-    | Enterprise Linux 6 | `arptables_jf` | 
-    | Enterprise Linux 7 | `arptables` | 
+On the GridFTP servers, arptables is the only additional service required for running a load-balanced GridFTP system.
 
 1. Manage the service with the following commands:
 
     | **To ...** | **On EL 6, run the command...** | **On EL 7, run the command...** | 
     | -------- | ----------------------------- | ----------------------------- |
-    | Start a service | `service SERVICE-NAME start` | `systemctl start SERVICE-NAME` | 
-    | Stop a service | `service SERVICE-NAME stop` | `systemctl stop SERVICE-NAME` |
-    | Enable a service to start during boot | `chkconfig SERVICE-NAME on` | `systemctl enable SERVICE-NAME` | 
-    | Disable a service from starting during boot | `chkconfig SERVICE-NAME off` | `systemctl disable SERVICE-NAME` |
+    | Start the service | `service arptables start` | `systemctl start arptables` | 
+    | Stop atheservice | `service arptables stop` | `systemctl stop arptables` |
+    | Enable the service to start during boot | `chkconfig arptables on` | `systemctl enable arptables` | 
+    | Disable the service from starting during boot | `chkconfig arptables off` | `systemctl disable arptables` |
 
 For information on how to use your individual GridFTP servers, please refer to the [Managing GridFTP section](gridftp.md#managing-gridftp) of the GridFTP installation guide.
 
@@ -375,7 +361,6 @@ To get assistance with `keepalived` in front of OSG Software services, please us
 -   [Linux Virtual Server homepage](http://www.linuxvirtualserver.org/whatis.html)
 -   [Keepalived homepage](http://www.keepalived.org/index.html)
 -   [RHEL 7 Load Balancer Administration Guide](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Load_Balancer_Administration/index.html)
--   [RHEL 6 Load Balancer Administration Guide](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Load_Balancer_Administration/index.html)
 -   [T2 Nebraska LVS installation notes](https://github.com/gattebury/gridftp-with-lvs)
 
 

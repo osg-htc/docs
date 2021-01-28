@@ -193,62 +193,7 @@ The value of `oss.localroot` will be prepended to any file access.
 E.g. accessing `root://<RDRNODE>:1094//data/xrootdfs/test1` will actually go to
 `/local/xrootd/data/xrootdfs/test1`.
 
-#### Starting a second instance of XRootD on EL 6
-
-The procedure for starting a second instance differs between EL 6 and EL 7. 
-This section is the procedure for EL 6.
-
-Now, we have to change `/etc/sysconfig/xrootd` on the redirector node (`<HOST A>`) to run multiple instances
-of XRootD. 
-The second instance of XRootD will be named "cns" and will be used for SSI.
-
-```file hl_lines="3 4 5 6 7"
-XROOTD_USER=xrootd 
-XROOTD_GROUP=xrootd 
-XROOTD_DEFAULT_OPTIONS="-k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg"
-XROOTD_CNS_OPTIONS="-k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg"
-CMSD_DEFAULT_OPTIONS="-k 7 -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg"
-FRMD_DEFAULT_OPTIONS="-k 7 -l /var/log/xrootd/frmd.log -c /etc/xrootd/xrootd-clustered.cfg"
-XROOTD_INSTANCES="default cns"
-CMSD_INSTANCES="default" 
-FRMD_INSTANCES="default" 
-```
-
-Now, we can start XRootD cluster executing the following commands. 
-On redirector you will see:
-
-```console
-root@host # service xrootd start 
-Starting xrootd (xrootd, default): [ OK ]
-Starting xrootd (xrootd, cns): [ OK ]
-root@host # service cmsd start 
-Starting xrootd (cmsd, default): [ OK ]
-```
-
-On redirector node you should see two instances of xrootd running:
-
-```console
-root@host # ps auxww|grep xrootd
-xrootd 29036 0.0 0.0 44008 3172 ? Sl Apr11 0:00 /usr/bin/xrootd -k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-default.pid -n default
-xrootd 29108 0.0 0.0 43868 3016 ? Sl Apr11 0:00 /usr/bin/xrootd -k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-cns.pid -n cns
-xrootd 29196 0.0 0.0 51420 3692 ? Sl Apr11 0:00 /usr/bin/cmsd -k 7 -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/cmsd-default.pid -n default
-```
-!!! warning
-    The log file for second named instance of xrootd with be placed in `/var/log/xrootd/cns/xrootd.log`
-
-On data server node you should that XrdCnsd process has been started:
-
-```console
-root@host # ps auxww|grep xrootd
-xrootd 19156 0.0 0.0 48096 3256 ? Sl 07:37 0:00 /usr/bin/cmsd -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/cmsd-default.pid -n default
-xrootd 19880 0.0 0.0 46124 2916 ? Sl 08:33 0:00 /usr/bin/xrootd -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-default.pid -n default
-xrootd 19894 0.0 0.1 71164 6960 ? Sl 08:33 0:00 /usr/bin/XrdCnsd -d -D 2 -i 90 -b fermicloud053.fnal.gov:1095:/data/inventory
-```
-
-#### Starting a second instance of XRootD on EL 7
-
-The procedure for starting a second instance differs between EL 6 and EL 7. 
-This section is the procedure for EL 7.
+#### Starting a second instance of XRootD
 
 1.  Create a symlink pointing to `/etc/xrootd/xrootd-clustered.cfg` at `/etc/xrootd/xrootd-cns.cfg`:
 
@@ -431,9 +376,6 @@ Edit `/etc/sysconfig/globus-gridftp-server` to set `XROOTD_VMP` to use your XRoo
     :::bash
     export XROOTD_VMP="redirector:1094:/local_path=/remote_path"
 
-!!! note
-    For EL6 modify the file `/etc/sysconfig/xrootd-dsi` to add the export directive
-
 !!! warning
     The syntax of `XROOTD_VMP` is tricky; make sure to use the following guidance:
 
@@ -459,23 +401,7 @@ Start services on the redirector node before starting any services on the data n
 If you installed only XRootD itself, you will only need to start the `xrootd` service. 
 However, if you installed cluster management services, you will need to start `cmsd` as well.
 
-The instructions for starting and stopping an XRootD service depend on whether the service is installed on an EL 6 or EL
-7 machine, and whether you are using a standalone or clustered configuration.
-
-On EL 6, which config to use is set in the file `/etc/sysconfig/xrootd`. 
-For example, to have `xrootd` use the clustered config, you would have a line such as this:
-
-``` file
-XROOTD_DEFAULT_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -k fifo"
-```
-
-To use the standalone config instead, you would use:
-
-``` file
-XROOTD_DEFAULT_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-standalone.cfg -k fifo"
-```
-
-On EL 7, which config to use is determined by the service name given to `systemctl`. 
+XRootD determines which configuration to use based on the service name specified by `systemctl`.
 For example, to have `xrootd` use the clustered config, you would start up `xrootd` with this line:
 
 ``` console

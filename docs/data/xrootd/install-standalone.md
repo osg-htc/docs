@@ -81,10 +81,6 @@ under `/etc/xrootd/config.d/` as follows:
     !!! note
         CMS sites should follow CMS policy for `resourcename`
 
-1.  On EL 6, set the default options to use the standalone configuration in the `/etc/sysconfig/xrootd` file.
-
-        XROOTD_DEFAULT_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-standalone.cfg -k fifo"
-
 ### Configuring authorization
 
 To configure XRootD authorization please follow the documentation [here](xrootd-authorization.md).
@@ -167,18 +163,18 @@ The specific services are:
 | Software         | Service Name                            | Notes                                                                        |
 |:-----------------|:----------------------------------------|:-----------------------------------------------------------------------------|
 | Fetch CRL        | `fetch-crl-boot` and `fetch-crl-cron`   | See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info |
-| XRootD           | EL 7:`xrootd@standalone`, EL 6:`xrootd` |                                                                              |
+| XRootD           | EL 7:`xrootd@standalone` | |
 | XRootD Multiuser | EL 7:`xrootd-privileged@standalone`     | See [XRootD multiuser](#enabling-multi-user-support) for more info           |
 
 Start the services in the order listed and stop them in reverse order.
 As a reminder, here are common service commands (all run as `root`):
 
-| To …                                        | On EL 7, run the command…        | On EL 6, run the command…    |
-|:--------------------------------------------|:---------------------------------|:-----------------------------|
-| Start a service                             | `systemctl start SERVICE-NAME`   | `service SERVICE-NAME start` |
-| Stop a service                              | `systemctl stop SERVICE-NAME`    | `service SERVICE-NAME stop`  |
-| Enable a service to start during boot       | `systemctl enable SERVICE-NAME`  | `chkconfig SERVICE-NAME on`  |
-| Disable a service from starting during boot | `systemctl disable SERVICE-NAME` | `chkconfig SERVICE-NAME off` |
+| To …                                        | On EL 7, run the command…        |
+|:--------------------------------------------|:---------------------------------|
+| Start a service                             | `systemctl start SERVICE-NAME`   |
+| Stop a service                              | `systemctl stop SERVICE-NAME`    |
+| Enable a service to start during boot       | `systemctl enable SERVICE-NAME`  |
+| Disable a service from starting during boot | `systemctl disable SERVICE-NAME` |
 
 Validating XRootD
 -----------------
@@ -267,16 +263,8 @@ Reference
 
 ### Service Configuration
 
-On EL 6, which config to use is set in the file `/etc/sysconfig/xrootd`.
-
-To use the standalone config, you would use:
-
-``` file
-XROOTD_DEFAULT_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-standalone.cfg -k fifo"
-```
-
-On EL 7, which config to use is determined by the service name given to `systemctl`.
-To use the standalone config, you would use:
+The configuration that your XRootD service uses is determined by the service name given to `systemctl`.
+To use the standalone config, you would start XRootD with the following command:
 
 ``` console
 root@host # systemctl start xrootd@standalone

@@ -30,7 +30,7 @@ The OSG Operations Stratum 1 has to function as a repository server in addition 
 
 #### Installing a CVMFS stratum 1 that is also a repository server
 
-EL6 does not support a CVMFS repository server with the standard kernel, so use EL7.  EL7.2 cannot be reliably used as a repository server, because of bugs in the union filesystem OverlayFS. The bugs are fixed in EL7.3, so use EL7.3 or later.
+EL7.2 cannot be reliably used as a repository server, because of bugs in the union filesystem OverlayFS. The bugs are fixed in EL7.3, so use EL7.3 or later.
 
 ```console
 root@host # yum -y install cvmfs-server cvmfs mod_wsgi
@@ -38,7 +38,7 @@ root@host # yum -y install cvmfs-server cvmfs mod_wsgi
 
 #### Installing CVMFS stratum 1 that is not a repository server
 
-If you're not installing for OSG Operations or otherwise want to support serving repositories on the same machine as a Stratum 1, use this command on either EL6 or EL7:
+If you're not installing for OSG Operations or otherwise want to support serving repositories on the same machine as a Stratum 1, use this command:
 
 ```console
 root@host # yum -y install cvmfs-server cvmfs-config mod_wsgi
@@ -147,22 +147,10 @@ WSGIDaemonProcess cvmfs-api threads=64 display-name=%{GROUP} \
 WSGISocketPrefix /var/run/wsgi 
 ```
 
-!!! note
-    On EL6-based systems (Apache httpd 2.2) replace both instances of `Require all granted` above with the following:
-
-        Order allow, deny
-        Allow from all
-
 If you will be serving cern.ch repositories, it has the same problem; replace opensciencegrid.org above with cern.ch. If you need to serve both opensciencegrid.org and cern.ch contact Dave Dykstra to discuss the options.
 
-Then enable apache.  On EL6 do
+Then enable apache:
 
-```console
-root@host # chkconfig httpd on 
-root@host # service httpd start
-```
-
-or on EL7 do
 ```console
 root@host # systemctl enable httpd
 root@host # systemctl start httpd
@@ -219,21 +207,14 @@ root@host # iptables -t nat -A PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT -
 root@host # service iptables save
 ```
 
-On EL7 also set up the the same port forwarding for IPv6 (unfortunately it is not supported on EL6):
+On EL7 also set up the the same port forwarding for IPv6:
 
 ```console
 root@host # ip6tables -t nat -A PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8000
 root@host # service ip6tables save
 ```
 
-Enable frontier-squid.  On EL6 do:
-
-```console
-root@host # chkconfig frontier-squid on
-root@host # service frontier-squid start
-```
-
-or on EL7 do:
+Enable frontier-squid:
 
 ```console
 root@host # systemctl enable frontier-squid

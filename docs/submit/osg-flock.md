@@ -48,7 +48,7 @@ at both the OSG and at your site.
 
 Also consider the following technical requirements:
 
-* __Operating system:__ A RHEL 6 or 7 compatible operating system.
+* __Operating system:__ A RHEL 7 compatible operating system.
 * __User IDs:__ If it does not exist already, the installation will create the Linux user ID `condor`.
 * __Host certificate:__ Recommended for authentication to OSG infrastructure.
   See our [documentation](../security/host-certs.md) for instructions on how to request and install host certificates.
@@ -165,12 +165,12 @@ In addition to the HTCondor service itself, there are a number of supporting ser
 
 The following table gives the commands needed to start, stop, enable, and disable a service:
 
-To...                                       | On EL6, run the command...              | On EL7, run the command...         |
-:------------------------------------------ | :-------------------------------------- | :--------------------------------- |
-| Start a service                           | `service <SERVICE-NAME> start`          | `systemctl start <SERVICE-NAME>`   |
-| Stop a service                            | `service <SERVICE-NAME> stop`           | `systemctl stop <SERVICE-NAME>`    |
-| Enable a service to start on boot         | `chkconfig <SERVICE-NAME> on`           | `systemctl enable <SERVICE-NAME>`  |
-| Disable a service from starting on boot   | `chkconfig <SERVICE-NAME> off`          | `systemctl disable <SERVICE-NAME>` |
+| To...                                       | Run the command...                 |
+| :------------------------------------------ | :--------------------------------- |
+| Start a service                             | `systemctl start <SERVICE-NAME>`   |
+| Stop a service                              | `systemctl stop <SERVICE-NAME>`    |
+| Enable a service to start on boot           | `systemctl enable <SERVICE-NAME>`  |
+| Disable a service from starting on boot     | `systemctl disable <SERVICE-NAME>` |
 
 
 Usage
