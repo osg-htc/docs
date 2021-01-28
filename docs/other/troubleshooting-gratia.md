@@ -333,7 +333,7 @@ In the examples below, the hostname for gratia was "accidentally" spelled backwa
     As root (adjust for your batch system): 
 
         :::console
-        root@host # /share/gratia/condor/condor\_meter
+        root@host # /usr/share/gratia/condor/condor_meter
 
 3. Find the Gratia records that can be easily uploaded. They are located in a a directory with an unwieldly name that
 includes your hostname and the incorrect name of the Gratia host. You can see the directory name in the Gratia log: the
