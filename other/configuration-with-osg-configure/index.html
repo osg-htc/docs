@@ -2543,12 +2543,12 @@ If something goes wrong, specify the <code>-d</code> flag to add more verbose ou
 <li>Options that are not found in the default ini file are in <em>italics</em>.</li>
 </ul>
 <h2 id="syntax-and-layout">Syntax and layout<a class="headerlink" href="#syntax-and-layout" title="Permanent link">&para;</a></h2>
-<p>The configuration files used by <code>osg-configure</code> are the one supported by Python's <a href="http://docs.python.org/library/configparser.html">SafeConfigParser</a>, similar in format to the <a href="http://en.wikipedia.org/wiki/INI_file">INI configuration file</a> used by MS Windows:</p>
+<p>The configuration files used by <code>osg-configure</code> are the one supported by Python's <a href="https://docs.python.org/library/configparser.html">SafeConfigParser</a>, similar in format to the <a href="https://en.wikipedia.org/wiki/INI_file">INI configuration file</a> used by MS Windows:</p>
 <ul>
 <li>Config files are separated into sections, specified by a section name in square brackets (e.g. <code>[Section 1]</code>)</li>
 <li>Options should be set using <code>name = value</code> pairs</li>
 <li>Lines that begin with <code>;</code> or <code>#</code> are comments</li>
-<li>Long lines can be split up using continutations: each white space character can be preceded by a newline to fold/continue the field on a new line (same syntax as specified in <a href="http://tools.ietf.org/html/rfc822.html">email RFC 822</a>)</li>
+<li>Long lines can be split up using continutations: each white space character can be preceded by a newline to fold/continue the field on a new line (same syntax as specified in <a href="https://tools.ietf.org/html/rfc822.html">email RFC 822</a>)</li>
 <li>Variable substitutions are supported -- <a href="#variable-substitution">see below</a></li>
 </ul>
 <p><code>osg-configure</code> reads and uses all of the files in <code>/etc/osg/config.d</code> that have a ".ini" suffix. The files in this directory are ordered with a numeric prefix with higher numbers being applied later and thus having higher precedence (e.g. 00-foo.ini has a lower precedence than 99-local-site-settings.ini). Configuration sections and options can be specified multiple times in different files. E.g. a section called <code>[PBS]</code> can be given in <code>20-pbs.ini</code> as well as <code>99-local-site-settings.ini</code>.</p>
