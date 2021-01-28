@@ -19,66 +19,81 @@ nav:
 - Site Verification: 'site-verification.md'
 - Site Responsibilities: 'site-responsibilities.md'
 - Resource Sharing:
-  - 'Overview': 'resource-sharing/overview.md'
-  - 'Site Backfill': 'resource-sharing/os-backfill-containers.md'
-  - 'User Allocations': 'resource-sharing/user-containers.md'
-- Compute Entrypoint:
-  - 'HTCondor-CE Overview': 'compute-element/htcondor-ce-overview.md'
-  - 'Request a Hosted CE': 'compute-element/hosted-ce.md'
-  - 'Install HTCondor-CE': 'compute-element/install-htcondor-ce.md'
-  - 'Job Router Recipes': 'compute-element/job-router-recipes.md'
-  - 'Troubleshooting HTCondor-CE': 'compute-element/troubleshoot-htcondor-ce.md'
-  - 'Submitting to HTCondor-CE': 'compute-element/submit-htcondor-ce.md'
-  - 'Supporting COVID-19 Research': 'compute-element/covid-19.md'
-- Worker Node:
-  - 'Overview': 'worker-node/using-wn.md'
-  - 'Install from RPM': 'worker-node/install-wn.md'
-  - 'Install from Tarball': 'worker-node/install-wn-tarball.md'
-  - 'Install from OASIS': 'worker-node/install-wn-oasis.md'
-  - 'Install CVMFS': 'worker-node/install-cvmfs.md'
-  - 'Install Singularity': 'worker-node/install-singularity.md'
-  - 'Using WN Containers': 'worker-node/using-wn-containers.md'
-- Data:
-  - HTTP & OASIS:
-    - 'Running Frontier Squid in a Container': 'data/run-frontier-squid-container.md'
-    - 'Install Frontier Squid RPM': 'data/frontier-squid.md'
-    - 'Update OASIS Shared Repo': 'data/update-oasis.md'
-    - 'Install an OASIS Repo': 'data/external-oasis-repos.md'
-  - XRootD:
-    - 'XRootD Overview': 'data/xrootd/overview.md'
-    - 'Install XRootD Standalone': 'data/xrootd/install-standalone.md'
-    - 'Install XRootD SE': 'data/xrootd/install-storage-element.md'
-    - 'Configure Authorization': 'data/xrootd/xrootd-authorization.md'
-    - 'Using XRootD': 'data/xrootd/install-client.md'
-    - 'Install CMS XCache': 'data/xrootd/install-cms-xcache.md'
-  - StashCache:
-    - 'StashCache Overview': 'data/stashcache/overview.md'
-    - 'Running a Cache in a container': 'data/stashcache/run-stashcache-container.md'
-    - 'Running an Origin in a container': 'data/stashcache/run-stash-origin-container.md'
-    - 'Install a Cache': 'data/stashcache/install-cache.md'
-    - 'Install an Origin': 'data/stashcache/install-origin.md'
-    - 'Getting VO data into StashCache': 'data/stashcache/vo-data.md'
+  - Compute:
+    - 'Overview': 'resource-sharing/overview.md'
+    - 'Site Backfill': 'resource-sharing/os-backfill-containers.md'
+    - 'User Allocations': 'resource-sharing/user-containers.md'
+    - Compute Entrypoint:
+      - 'HTCondor-CE Overview': 'compute-element/htcondor-ce-overview.md'
+      - 'Request a Hosted CE': 'compute-element/hosted-ce.md'
+      - 'Install HTCondor-CE': 'compute-element/install-htcondor-ce.md'
+      - 'Job Router Recipes': 'compute-element/job-router-recipes.md'
+      - 'Troubleshooting HTCondor-CE': 'compute-element/troubleshoot-htcondor-ce.md'
+      - 'Submitting to HTCondor-CE': 'compute-element/submit-htcondor-ce.md'
+      - 'Supporting COVID-19 Research': 'compute-element/covid-19.md'
+    - Worker Node:
+        - 'Overview': 'worker-node/using-wn.md'
+        - 'Install from RPM': 'worker-node/install-wn.md'
+        - 'Install from Tarball': 'worker-node/install-wn-tarball.md'
+        - 'Install from OASIS': 'worker-node/install-wn-oasis.md'
+        - 'Install CVMFS': 'worker-node/install-cvmfs.md'
+        - 'Install Singularity': 'worker-node/install-singularity.md'
+        - 'Using WN Containers': 'worker-node/using-wn-containers.md'
+  - Data:
+    - HTTP & OASIS:
+      - 'Running Frontier Squid in a Container': 'data/run-frontier-squid-container.md'
+      - 'Install Frontier Squid RPM': 'data/frontier-squid.md'
+      - 'Update OASIS Shared Repo': 'data/update-oasis.md'
+      - 'Install an OASIS Repo': 'data/external-oasis-repos.md'
+    - XRootD:
+      - 'XRootD Overview': 'data/xrootd/overview.md'
+      - 'Install XRootD Standalone': 'data/xrootd/install-standalone.md'
+      - 'Install XRootD SE': 'data/xrootd/install-storage-element.md'
+      - 'Configure Authorization': 'data/xrootd/xrootd-authorization.md'
+      - 'Using XRootD': 'data/xrootd/install-client.md'
+      - 'Install CMS XCache': 'data/xrootd/install-cms-xcache.md'
+    - StashCache:
+      - 'StashCache Overview': 'data/stashcache/overview.md'
+      - 'Running a Cache in a container': 'data/stashcache/run-stashcache-container.md'
+      - 'Running an Origin in a container': 'data/stashcache/run-stash-origin-container.md'
+      - 'Install a Cache': 'data/stashcache/install-cache.md'
+      - 'Install an Origin': 'data/stashcache/install-origin.md'
+      - 'Getting VO data into StashCache': 'data/stashcache/vo-data.md'
+  - Other:
+    - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
+    - 'Install GlideinWMS Frontend': 'other/install-gwms-frontend.md'
+    - 'Install a CVMFS Stratum 1': 'other/install-cvmfs-stratum1.md'
+    - 'Troubleshooting Gratia': 'other/troubleshooting-gratia.md'
+    - 'Install Transfer Log Filebeats': 'other/schedd-filebeats.md'
+  - Deprecated:
+    - POSIX Storage:
+      - 'Install GridFTP Server': 'data/gridftp.md'
+      - 'Install Load Balanced GridFTP': 'data/load-balanced-gridftp.md'
+    - HDFS:
+      - 'HDFS Overview': 'data/hadoop-overview.md'
+      - 'Install HDFS': 'data/install-hadoop.md'
+    - Security:
+      - 'LCMAPS VOMS authentication': 'security/lcmaps-voms-authentication.md'
+      - 'User Certificates': 'security/user-certs.md'
+    - 'Install GSI-enabled SSH': 'other/gsissh.md'
+    - 'Install RSV': 'monitoring/install-rsv.md'
+    - 'Advanced RSV Configuration': 'monitoring/advanced-rsv-configuration.md'
+    - 'Manage RSV via rsv-control': 'monitoring/rsv-control.md'
+    - 'RSV GlideinWMS Tester': 'monitoring/install-rsv-gwms-tester.md'
 - Submit:
-  - Flocking:
-    - 'Flock to OSG': 'submit/osg-flock.md'
-- Security:
-  - 'Certificate Management Reference': 'security/certificate-management.md'
-  - 'Host Certificates':
-    - 'Overview': 'security/host-certs/overview.md'
-    - 'Using InCommon': 'security/host-certs/incommon.md'
-    - "Using Let's Encrypt": 'security/host-certs/lets-encrypt.md'
-    - 'Using DigiCert': 'security/host-certs/digicert.md'
+  - 'Flocking to OSG': 'submit/osg-flock.md'
 - Common:
-  - 'CA Certificates': 'common/ca.md'
+  - Security:
+    - 'CA Certificates': 'common/ca.md'
+    - 'Certificate Management Reference': 'security/certificate-management.md'
+    - 'Host Certificates':
+      - 'Overview': 'security/host-certs/overview.md'
+      - 'Using InCommon': 'security/host-certs/incommon.md'
+      - "Using Let's Encrypt": 'security/host-certs/lets-encrypt.md'
+      - 'Using DigiCert': 'security/host-certs/digicert.md'
   - 'OSG Yum Repos': 'common/yum.md'
-  - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
   - 'Registration': 'common/registration.md'
-- Other:
-  - 'Install GlideinWMS Frontend': 'other/install-gwms-frontend.md'
-  - 'Install a CVMFS Stratum 1': 'other/install-cvmfs-stratum1.md'
-  - 'Troubleshooting Gratia': 'other/troubleshooting-gratia.md'
-  - 'Install Transfer Log Filebeats': 'other/schedd-filebeats.md'
-- Release Information:
+- Releases:
   - 'Release Note Overview': 'release/notes.md'
   - 3.5 Release Notes:
     - 'OSG Release 3.5.30': 'release/3.5/release-3-5-30.md'
@@ -125,22 +140,8 @@ nav:
   - 'Supported Platforms': 'release/supported_platforms.md'
   - 'Yum Basics': 'release/yum-basics.md'
   - 'RPM Signing': 'release/signing.md'
-- Deprecated:
-  - POSIX Storage:
-    - 'Install GridFTP Server': 'data/gridftp.md'
-    - 'Install Load Balanced GridFTP': 'data/load-balanced-gridftp.md'
-  - HDFS:
-    - 'HDFS Overview': 'data/hadoop-overview.md'
-    - 'Install HDFS': 'data/install-hadoop.md'
-  - Security:
-    - 'LCMAPS VOMS authentication': 'security/lcmaps-voms-authentication.md'
-    - 'User Certificates': 'security/user-certs.md'
-  - 'Install GSI-enabled SSH': 'other/gsissh.md'
-  - 'Install RSV': 'monitoring/install-rsv.md'
-  - 'Advanced RSV Configuration': 'monitoring/advanced-rsv-configuration.md'
-  - 'Manage RSV via rsv-control': 'monitoring/rsv-control.md'
-  - 'RSV GlideinWMS Tester': 'monitoring/install-rsv-gwms-tester.md'
-- 'Get Help': 'common/help.md'
+- Help:
+  - 'Getting Help': 'common/help.md'
 
 markdown_extensions:
   - admonition
