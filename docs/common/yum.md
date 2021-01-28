@@ -25,7 +25,8 @@ You must have the following repositories available and enabled:
 -   OS repositories, including the following ones that aren't enabled by default:
     -   `extras` (SL 6/7, CentOS 6/7/8)
     -   `Server-Extras` (RHEL 6/7)
-    -   `PowerTools` (CentOS 8)
+    -   `PowerTools` (CentOS 8.0 through 8.2)
+    -   `powertools` (CentOS 8.3 and newer)
     -   `CodeReady Builder` (RHEL 8)
 -   EPEL repositories
 -   OSG repositories
@@ -35,6 +36,10 @@ If any of these repositories are missing, you may end up with installation issue
 !!! danger
     Other repositories, such as `jpackage`, `dag`, or `rpmforge`, are not supported and you may encounter problems if
     you use them.
+
+!!! note
+    If you upgrade from CentOS 8.0 through 8.2 to CentOS 8.3 or newer,
+    you may have to re-enable some repos as [described below](#centos-83-and-newer)
 
 ### Upcoming Software
 
@@ -116,10 +121,15 @@ The repositories to enable, as well as the instructions to enable them, are OS-d
 
 -   Ensure that the `extras` repo in `/etc/yum.repos.d/CentOS-Base.repo` is enabled.
 
-#### CentOS 8
+#### CentOS 8.0 to 8.2
 
 -   Ensure that the `extras` repo in `/etc/yum.repos.d/CentOS-Extras.repo` is enabled.
 -   Ensure that the `PowerTools` repo in `/etc/yum.repos.d/CentOS-PowerTools.repo` is enabled.
+
+#### CentOS 8.3 and newer
+
+-   Ensure that the `extras` repo in `/etc/yum.repos.d/CentOS-Linux-Extras.repo` is enabled.
+-   Ensure that the `powertools` repo in `/etc/yum.repos.d/CentOS-Linux-PowerTools.repo` is enabled.
 
 #### RHEL 6 and 7
 
