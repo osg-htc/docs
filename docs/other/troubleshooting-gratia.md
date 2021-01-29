@@ -53,7 +53,8 @@ You also need to enable individual probes, usually via `osg-configure`.  Documen
 When the cron jobs are enabled and run, they go through the following process, with minor changes between different Gratia probes:
 
 1.  The probe is invoked. It reads its configuration from `/etc/gratia/PROBE-NAME/ProbeConfig`.
-2.  It collects the accounting information from the underlying system. For example, the Condor probe will read it from the `PER_JOB_HISTORY_DIR`, which is usually `/var/lib/gratia/data`.
+2.  It collects the accounting information from the underlying system.
+    For example, the Condor probe will read it from the `PER_JOB_HISTORY_DIR`, which is usually `/var/lib/gratia/data`.
 3.  It transforms the data into Gratia records and saves them into `/var/lib/gratia/tmp/gratiafiles/`
 4.  When there are sufficient Gratia records, or when sufficient time has passed, it uploads sets of records in batches to the GRACC server, then removes them from the `gratiafiles` directory.
 5.  All progress is logged to `/var/log/gratia`.
@@ -192,9 +193,14 @@ HTCondor's Gratia Configuration
 !!! note 
     Only applicable to HTCondor batch sites, not SLURM, PBS, SGE or LSF sites
 
-Condor must be configured to put information about each job into a special directory.  Gratia will read and remove the files in order to collect the accounting information.
+Condor must be configured to put information about each job into a special directory.
+Gratia will read and remove the files in order to collect the accounting information.
 
-The configuration variable is called `PER_JOB_HISTORY_DIR`. If you install the OSG RPM for Condor, the Gratia probe will extend its configuration by adding a file to `/etc/condor/config.d`, and will set this variable to `/var/lib/gratia/data`. If you are using a different installation method, you may need to set the variable yourself. You can check if it's set by using `condor_config_val`, like this:
+The configuration variable is called `PER_JOB_HISTORY_DIR`.
+If you install the OSG RPM for Condor, the Gratia probe will extend its configuration by adding a file to
+`/etc/condor/config.d`, and will set this variable to `/var/lib/gratia/data`.
+If you are using a different installation method, you may need to set the variable yourself.
+You can check if it's set by using `condor_config_val`, like this:
 
     :::console
     user@host $ condor_config_val -v PER_JOB_HISTORY_DIR
@@ -211,7 +217,11 @@ Unlike many Condor settings, a **condor\_reconfig** is not sufficient - you must
 
 ### If you accidentally did not set `PER_JOB_HISTORY_DIR` (see above)
 
-The HTCondor Gratia probe will not publish accounting information about jobs without `PER_JOB_HISTORY_DIR`. You can have Gratia read the Condor history file and publish data that way. If you know the time period of the missing data, you should specify a start and end times. This reduces the load on the Gratia collector. To do so:
+The HTCondor Gratia probe will not publish accounting information about jobs without `PER_JOB_HISTORY_DIR`.
+You can have Gratia read the Condor history file and publish data that way.
+If you know the time period of the missing data, you should specify a start and end times.
+This reduces the load on the Gratia collector.
+To do so:
 
 **Preferred method using start and end times**
 
