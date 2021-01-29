@@ -8,7 +8,7 @@ Gratia/GRACC: The Big Picture
 -----------------------
 
 Gratia is software used in OSG to gather accounting information.
-The information is collected from individual resources at a site, such as a Compute Entrypoint or a a submission host.
+The information is collected from individual resources at a site, such as a Compute Entrypoint or a submission host.
 The program that collects the data is called a "Gratia probe".
 The information is transferred to the central OSG GRACC server.
 Here is a diagram:
@@ -91,7 +91,7 @@ The options you see here are:
 | SSLHost             | The GRACC server this probe reports to                                                |
 | SSLRegistrationHost | The GRACC server this probe reports to                                                |
 | ProbeName           | The unique name for this probe. Note that it includes the probe type and the host name |
-| SiteName            | The name of your Resource, as registered in [OSG Topology](/common/registration).      |
+| SiteName            | The name of your Resource, as registered in [OSG Topology](../common/registration.md).      |
 | EnableProbe         | The probe will only run if this is "1"                                                 |
 
 Again, there are many more options in this file. Most of the time you won't need to touch them.
@@ -397,5 +397,4 @@ Not all RPMs will be on all hosts.  Instead, only the `gratia-probe-common` and 
 | `gratia-probe-slurm`           | The probe that tracks SLURM usage                                         |
 | `gratia-probe-pbs-lsf`          | The probe that tracks PBS and/or LSF usage                                  |
 | `gratia-probe-gridftp-transfer` | The probe that tracks transfers done with GridFTP                                   |
-
 
