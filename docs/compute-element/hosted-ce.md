@@ -45,7 +45,7 @@ Before preparing your cluster for OSG resource requests, consider the following 
 For additional technical details, please consult the [reference](#reference) section below.
 
 !!! question "Don't meet the requirements?"
-    If your site does not meet the above conditions, please [contact us](mailto:help@opensciencegrid.org) to discuss
+    If your site does not meet these conditions, please [contact us](mailto:help@opensciencegrid.org) to discuss
     your options for contributing to the OSG.
 
 
