@@ -84,14 +84,13 @@ nav:
   - 'Flocking to OSG': 'submit/osg-flock.md'
 - Common:
   - 'Registration': 'common/registration.md'
-  - Security:
-    - 'CA Certificates': 'common/ca.md'
-    - 'Certificate Management Reference': 'security/certificate-management.md'
-    - 'Host Certificates':
-      - 'Overview': 'security/host-certs/overview.md'
-      - 'Using InCommon': 'security/host-certs/incommon.md'
-      - "Using Let's Encrypt": 'security/host-certs/lets-encrypt.md'
-      - 'Using DigiCert': 'security/host-certs/digicert.md'
+  - 'CA Certificates': 'common/ca.md'
+  - 'Certificate Management Reference': 'security/certificate-management.md'
+  - 'Host Certificates':
+    - 'Overview': 'security/host-certs/overview.md'
+    - 'Using InCommon': 'security/host-certs/incommon.md'
+    - "Using Let's Encrypt": 'security/host-certs/lets-encrypt.md'
+    - 'Using DigiCert': 'security/host-certs/digicert.md'
 - Releases:
   - 'Release Notes': 'release/notes.md'
   - 'OSG Release Series': 'release/release_series.md'
