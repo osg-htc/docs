@@ -49,8 +49,8 @@ For additional technical details, please consult the [reference](#reference) sec
     your options for contributing to the OSG.
 
 
-Scheduling a Consultation
--------------------------
+Scheduling a Planning Consultation
+----------------------------------
 
 Before participating in the OSG, either as a computational resource contributor or consumer,
 we ask that you [contact us](mailto:help@opensciencegrid.org) to set up a consultation.
@@ -90,7 +90,7 @@ After setting up the Frontier Squid proxy and local caches on each worker node,
 [install OASIS](../worker-node/install-cvmfs.md) on each worker node.
 
 
-### (HTCondor-only) Providing the OSG Worker Node Client ###
+### (HTCondor clusters only) Installing the OSG Worker Node Client ###
 
 !!! tip "Skip this section if you have OASIS or shared home directories!"
     If you have [OASIS](#recommended-providing-access-to-oasis) installed or shared home directories on your worker
@@ -107,8 +107,8 @@ install OASIS or maintain shared file system, you have the following options:
 -   Install the [Worker Node Client from tarball](../worker-node/install-wn-tarball.md)
 
 
-Applying for an OSG Hosted CE
------------------------------
+Requesting an OSG Hosted CE
+---------------------------
 
 After preparing your local cluster, apply for a Hosted CE by filling out the
 [cluster integration questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSexKMFho_TGJ8nOY-qLXJf_8neAnjDSJqrNbYIUvMcOfoZ6Uw/viewform?usp=sf_lin).
@@ -131,8 +131,7 @@ Once this is done, OSG staff will work with you and your team to begin submittin
 with some tests, then with a steady ramp-up to full production.
 
 
-Validating Contributions
-------------------------
+### Validating contributions ###
 
 In addition to any internal validation processes that you may have, the OSG provides monitoring to view which
 communities and projects within said communities are accessing your site, their fields of science, and home institution.
