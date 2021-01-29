@@ -36,6 +36,11 @@ Before preparing your cluster for OSG resource requests, consider the following 
     Not required for HTCondor clusters:
     see [this section](#htcondor-only-providing-the-osg-worker-node-client) for more details.
 -   [Temporary scratch space](../worker-node/using-wn.md#for-site-administrators) on each worker node
+-   OSG resource contributors must inform the OSG of [any relevant](../site-responsibilities.md) changes to their site.
+
+    !!! important "Site downtimes"
+        For an improved turnaround time regarding an outage or downtime at your site,
+        [contact us](mailto:help@opensciencegrid.org) and include `downtime` in the subject or body of the email.
 
 For additional technical details, please consult the [reference](#reference) section below.
 
@@ -138,17 +143,6 @@ Below is an example of the monitoring views that will be available for your clus
 To view your contributions, select your site from the `Facility` dropdown of the
 [Payload job summary](https://gracc.opensciencegrid.org/d/000000043/pilot-jobs-summary?orgId=1) dashboard.
 Note that accounting data may take up to 24 hours to display.
-
-
-Reviewing Responsibilities
---------------------------
-
-As an OSG resource contributor, we require that you keep the OSG up-to-date with
-[any relevant](../site-responsibilities.md) changes to your site.
-
-!!! important "Site downtimes"
-    For an improved turnaround time regarding an outage or downtime at your site,
-    [contact us](mailto:help@opensciencegrid.org) and include `downtime` in the subject or body of the email.
 
 
 Reference
