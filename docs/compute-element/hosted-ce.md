@@ -70,8 +70,9 @@ sections:
 
 ### (Recommended) Providing access to OASIS ###
 
-!!! tip "Required for GPU spport"
-    If you plan to contribute GPUs to the OSG, installation of OASIS is **required**.
+!!! tip "Maximize resource utilization; required for GPU support"
+    Installing OASIS on your cluster makes your resources more attractive to OSG user jobs!
+    Additionally, if you plan to contribute GPUs to the OSG, installation of OASIS is **required**.
 
 Many users in the OSG make of use software modules and/or containers provided by their collaborations or by the OSG
 Research Facilitation team.
