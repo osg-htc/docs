@@ -54,7 +54,8 @@ When the cron jobs are enabled and run, they go through the following process, w
 
 1.  The probe is invoked. It reads its configuration from `/etc/gratia/PROBE-NAME/ProbeConfig`.
 2.  It collects the accounting information from the underlying system.
-    For example, the Condor probe will read it from the `PER_JOB_HISTORY_DIR`, which is usually `/var/lib/gratia/data`.
+    For example, the HTCondor probe will read it from the `PER_JOB_HISTORY_DIR`, which is usually
+    `/var/lib/gratia/data`.
 3.  It transforms the data into Gratia records and saves them into `/var/lib/gratia/tmp/gratiafiles/`
 4.  When there are sufficient Gratia records, or when sufficient time has passed, it uploads sets of records in batches to the GRACC server, then removes them from the `gratiafiles` directory.
 5.  All progress is logged to `/var/log/gratia`.
@@ -111,7 +112,7 @@ If it is not enabled, enable it as described above.
 This only ensures that the basic gratia-probe-cron "service" is running.
 To check if the individual Gratia probes are enabled, look at the `EnableProbe` option in the `ProbeConfig` file, as described above.
 A quick command to do this is shown here.
-Note that the Condor and GridFTP Transfer probes are enabled while the glexec probe is disabled:
+Note that the HTCondor and GridFTP Transfer probes are enabled while the glexec probe is disabled:
 
     :::console
     root@host # cd /etc/gratia
@@ -193,11 +194,11 @@ HTCondor's Gratia Configuration
 !!! note 
     Only applicable to HTCondor batch sites, not SLURM, PBS, SGE or LSF sites
 
-Condor must be configured to put information about each job into a special directory.
+HTCondor must be configured to put information about each job into a special directory.
 Gratia will read and remove the files in order to collect the accounting information.
 
 The configuration variable is called `PER_JOB_HISTORY_DIR`.
-If you install the OSG RPM for Condor, the Gratia probe will extend its configuration by adding a file to
+If you install the OSG RPM for HTCondor, the Gratia probe will extend its configuration by adding a file to
 `/etc/condor/config.d`, and will set this variable to `/var/lib/gratia/data`.
 If you are using a different installation method, you may need to set the variable yourself.
 You can check if it's set by using `condor_config_val`, like this:
@@ -213,12 +214,12 @@ If you set this value, you need to restart condor:
     root@host # condor_restart
     Sent "Restart" command to local master
 
-Unlike many Condor settings, a **condor\_reconfig** is not sufficient - you must restart!
+Unlike many HTCondor settings, a **condor\_reconfig** is not sufficient - you must restart!
 
 ### If you accidentally did not set `PER_JOB_HISTORY_DIR` (see above)
 
 The HTCondor Gratia probe will not publish accounting information about jobs without `PER_JOB_HISTORY_DIR`.
-You can have Gratia read the Condor history file and publish data that way.
+You can have Gratia read the HTCondor history file and publish data that way.
 If you know the time period of the missing data, you should specify a start and end times.
 This reduces the load on the Gratia collector.
 To do so:
@@ -271,8 +272,8 @@ Not much is printed to the screen, but you can see progress in the Gratia log fi
 
 
 !!! note 
-    Condor rotates history files, so you can only report what Condor has kept.
-    Controlling the Condor history is documented in the Condor manual.
+    HTCondor rotates history files, so you can only report what HTCondor has kept.
+    Controlling the HTCondor history is documented in the HTCondor manual.
     In particular, see the options for
     [MAX_HISTORY_LOG](https://htcondor.readthedocs.io/en/latest/admin-manual/configuration-macros.html#MAX_HISTORY_LOG)
     and
@@ -291,7 +292,7 @@ You can see that Gratia is using the correct configuration file:
     :::console
     15:06:55 CDT Gratia: Using config file: /etc/gratia/condor/ProbeConfig
 
-Here Gratia is removing a file from the Condor PER_JOB_HISTORY_DIR and creating a Gratia accounting record for it
+Here Gratia is removing a file from the HTCondor PER_JOB_HISTORY_DIR and creating a Gratia accounting record for it
 
     :::console hl_lines="4 7"
     15:06:55 CDT Gratia: Creating a UsageRecord 2012-04-03T20:06:55Z
@@ -394,7 +395,7 @@ If you need to look for more data, you can look at log files for the various ser
 |:----------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `/var/log/gratia/<DATE>.log`                        | Log file that records information about processing and uploading of Gratia accounting data                                                                                         |
 | `/var/log/gratia/gridftpTransfer.log`               | Log file specific to the Gratia GridFTP probe                                                                                                                                      |
-| `/var/lib/gratia/data`                              | Location for Condor and PBS job data before being processed by Gratia<br>Condor's `PER_JOB_HISTORY_DIR` should be set to this location                                       |
+| `/var/lib/gratia/data`                              | Location for HTCondor and PBS job data before being processed by Gratia<br>HTCondor's `PER_JOB_HISTORY_DIR` should be set to this location                                       |
 | `/var/lib/gratia/tmp/gratiafiles`                   | Location for temporary Gratia data as it is being processed, usually empty.<br>If you have files that are more than 30 minutes old in this directory, there may be a problem |
 | `/etc/gratia/<PROBE-NAME>/ProbeConfig`              | Configuration for Gratia probes, one per probe type</br>Normally you don't need to edit this                                                                                 |
 
@@ -403,7 +404,7 @@ Not all RPMs will be on all hosts.  Instead, only the `gratia-probe-common` and 
 | RPM                             | Purpose                                                                             |
 |:--------------------------------|:------------------------------------------------------------------------------------|
 | `gratia-probe-common`           | Code shared between all Graita probes                                               |                            |
-| `gratia-probe-condor`           | The probe that tracks Condor usage                                         |
+| `gratia-probe-condor`           | The probe that tracks HTCondor usage                                         |
 | `gratia-probe-slurm`           | The probe that tracks SLURM usage                                         |
 | `gratia-probe-pbs-lsf`          | The probe that tracks PBS and/or LSF usage                                  |
 | `gratia-probe-gridftp-transfer` | The probe that tracks transfers done with GridFTP                                   |
