@@ -86,7 +86,7 @@ In order to provide OASIS at your site, you will need the following:
 
 -   A local OASIS cache per worker node (10 GB minimum, 20 GB recommended)
 
-After setting up the Frontier Squid proxy and local caches on each worker node,
+After setting up the Frontier Squid proxy and worker node local caches,
 [install OASIS](../worker-node/install-cvmfs.md) on each worker node.
 
 
