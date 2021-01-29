@@ -1231,13 +1231,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#if-you-accidentally-did-not-set-per_job_history_dir-see-above" class="md-nav__link">
-    If you accidentally did not set PER_JOB_HISTORY_DIR (see above)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#bad-gratia-hostname" class="md-nav__link">
     Bad Gratia hostname
   </a>
@@ -2214,13 +2207,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#if-you-accidentally-did-not-set-per_job_history_dir-see-above" class="md-nav__link">
-    If you accidentally did not set PER_JOB_HISTORY_DIR (see above)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#bad-gratia-hostname" class="md-nav__link">
     Bad Gratia hostname
   </a>
@@ -2259,7 +2245,11 @@
                 <h1 id="troubleshooting-gratia-accounting">Troubleshooting Gratia Accounting<a class="headerlink" href="#troubleshooting-gratia-accounting" title="Permanent link">&para;</a></h1>
 <p>This document will help you troubleshoot problems with the Gratia Accounting, particularly with problems in collecting and reporting accounting information to the central OSG accounting service.</p>
 <h2 id="gratiagracc-the-big-picture">Gratia/GRACC: The Big Picture<a class="headerlink" href="#gratiagracc-the-big-picture" title="Permanent link">&para;</a></h2>
-<p>Gratia is software used in OSG to gather accounting information. The information is collected from individual resources at a site, such as a Compute Entrypoint or a a submission host. The program that collects the data is called a "Gratia probe". The information is transferred to a GRACC server. Most sites will choose to send the accounting data to the central OSG Gratia server, but you can also use a Gratia server at your site (which can send forward the data to the central OSG Gratia server). Here is a diagram:</p>
+<p>Gratia is software used in OSG to gather accounting information for usage of computational resources.
+The information is collected from individual resources at a site, such as a Compute Entrypoint or a submission host.
+The program that collects the data is called a "Gratia probe".
+The information is transferred to the central OSG GRACC server.
+Here is a diagram:</p>
 <div class="admonition note">
 <p class="admonition-title">Difference between Gratia and GRACC</p>
 <p>Gratia is the legacy name of the OSG Accounting system.  GRACC is the new name of the server and hosted components of the accounting system.  When we refer to Gratia, we mean either the data or the probes on the resources.  If we mention GRACC, we are referring to the hosted components that the OSG maintains.</p>
@@ -2291,7 +2281,9 @@
 <p>When the cron jobs are enabled and run, they go through the following process, with minor changes between different Gratia probes:</p>
 <ol>
 <li>The probe is invoked. It reads its configuration from <code>/etc/gratia/PROBE-NAME/ProbeConfig</code>.</li>
-<li>It collects the accounting information from the underlying system. For example, the Condor probe will read it from the <code>PER_JOB_HISTORY_DIR</code>, which is usually <code>/var/lib/gratia/data</code>.</li>
+<li>It collects the accounting information from the underlying system.
+    For example, the HTCondor probe will read it from the <code>PER_JOB_HISTORY_DIR</code>, which is usually
+    <code>/var/lib/gratia/data</code>.</li>
 <li>It transforms the data into Gratia records and saves them into <code>/var/lib/gratia/tmp/gratiafiles/</code></li>
 <li>When there are sufficient Gratia records, or when sufficient time has passed, it uploads sets of records in batches to the GRACC server, then removes them from the <code>gratiafiles</code> directory.</li>
 <li>All progress is logged to <code>/var/log/gratia</code>.</li>
@@ -2345,7 +2337,7 @@
 </tr>
 <tr>
 <td align="left">SiteName</td>
-<td align="left">The name of your site, as registered in OIM. If your site must be registered in OIM</td>
+<td align="left">The name of your Resource, as registered in <a href="../../common/registration/">OSG Topology</a>.</td>
 </tr>
 <tr>
 <td align="left">EnableProbe</td>
@@ -2361,7 +2353,10 @@
 </code></pre></div>
 
 <p>If it is not enabled, enable it as described above.</p>
-<p>A future release of Gratia will provide status on each of the individual probes, but right now this only ensures that the basic cron job is running. In the meantime, you can check if the individual Gratia probes are enabled. To do this, look at the <code>EnableProbe</code> option in the <code>ProbeConfig</code> file, as described above. A quick command to do this is shown here. Note that the Condor and GridFTP Transfer probes are enabled while the glexec probe is disabled:</p>
+<p>This only ensures that the basic gratia-probe-cron "service" is running.
+To check if the individual Gratia probes are enabled, look at the <code>EnableProbe</code> option in the <code>ProbeConfig</code> file, as described above.
+A quick command to do this is shown here.
+Note that the HTCondor and GridFTP Transfer probes are enabled while the glexec probe is disabled:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> <span class="nb">cd</span> /etc/gratia
 <span class="gp">root@host #</span> grep -r EnableProbe *
 <span class="go">condor/ProbeConfig:    EnableProbe=&quot;1&quot;</span>
@@ -2376,40 +2371,34 @@
 
 <p>Correct the error and restart gratia.</p>
 <h2 id="have-you-configured-the-resource-names-correctly">Have you configured the resource names correctly?<a class="headerlink" href="#have-you-configured-the-resource-names-correctly" title="Permanent link">&para;</a></h2>
-<p>Do the names of your resources match the names in <a href="https://github.com/opensciencegrid/topology/tree/master/topology">OIM</a>?
+<p>Do the names of your resources match the names in
+<a href="https://github.com/opensciencegrid/topology/tree/master/topology">OSG Topology</a>?
 Gratia retrieves the resource name from the <code>Site Information</code> section of the <code>/etc/osg/config.d/40-siteinfo.ini</code></p>
 <div class="codehilite"><pre><span></span><code>;===================================================================
 ;                       Site Information
 ;===================================================================
 
 [Site Information]
-; The group option indicates the group that the OSG site should be listed in,
-; for production sites this should be OSG, for vtb or itb testing it should be
-; OSG-ITB
+; Set &quot;group&quot; to &quot;OSG&quot; for a production site, or &quot;OSG-ITB&quot; for an ITB site.
 ; 
 ; YOU WILL NEED TO CHANGE THIS
 group = OSG
 
-; The host_name setting should give the host name of the CE  that is being 
-; configured, this setting must be a valid dns name that resolves
-; 
+; Set &quot;host_name&quot; to the host name of the CE being configured.
+; This should resolve in DNS; if DNS is not set up yet, enter an IPv4/v6 address instead.
+;
 ; YOU WILL NEED TO CHANGE THIS
 host_name = tusker-gw1.unl.edu
 
-; The resource setting should be set to the same value as used in the OIM 
-; registration at the goc 
+; Set &quot;resource&quot; to the name of the resource that you have registered
+; in the OSG topology repository at https://github.com/opensciencegrid/topology
 ; 
 ; YOU WILL NEED TO CHANGE THIS
 resource = Tusker-CE1
-
-; The resource_group setting should be set to the same value as used in the OIM 
-; registration at the goc 
-; 
-; YOU WILL NEED TO CHANGE THIS
-resource_group = Tusker
 </code></pre></div>
 
-<p>Do those names match the names that you registered with OIM? If not, edit the names, and rerun "osg-configure -c".</p>
+<p>Do those names match the names that you registered with OSG Topology?
+If not, edit the names, and rerun "osg-configure -c".</p>
 <h2 id="did-the-site-name-change">Did the site name change?<a class="headerlink" href="#did-the-site-name-change" title="Permanent link">&para;</a></h2>
 <p>Was the site previously reporting data, but the site name (not host name, but site name) changed? When the site name changes, you need to ask the GRACC operations team to update the name of your site at the GRACC collector. To do this:</p>
 <ol>
@@ -2435,8 +2424,13 @@ Thanks, ...
 <p class="admonition-title">Note</p>
 <p>Only applicable to HTCondor batch sites, not SLURM, PBS, SGE or LSF sites</p>
 </div>
-<p>Condor must be configured to put information about each job into a special directory.  Gratia will read and remove the files in order to collect the accounting information.</p>
-<p>The configuration variable is called <code>PER_JOB_HISTORY_DIR</code>. If you install the OSG RPM for Condor, the Gratia probe will extend its configuration by adding a file to <code>/etc/condor/config.d</code>, and will set this variable to <code>/var/lib/gratia/data</code>. If you are using a different installation method, you may need to set the variable yourself. You can check if it's set by using <code>condor_config_val</code>, like this:</p>
+<p>HTCondor must be configured to put information about each job into a special directory.
+Gratia will read and remove the files in order to collect the accounting information.</p>
+<p>The configuration variable is called <code>PER_JOB_HISTORY_DIR</code>.
+If you install the OSG RPM for HTCondor, the Gratia probe will extend its configuration by adding a file to
+<code>/etc/condor/config.d</code>, and will set this variable to <code>/var/lib/gratia/data</code>.
+If you are using a different installation method, you may need to set the variable yourself.
+You can check if it's set by using <code>condor_config_val</code>, like this:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">user@host $</span> condor_config_val -v PER_JOB_HISTORY_DIR
 <span class="go">PER_JOB_HISTORY_DIR: /var/lib/gratia/data</span>
 <span class="go">    Defined in &#39;/etc/condor/config.d/99_gratia.conf&#39;, line 5.</span>
@@ -2447,55 +2441,7 @@ Thanks, ...
 <span class="go">Sent &quot;Restart&quot; command to local master</span>
 </code></pre></div>
 
-<p>Unlike many Condor settings, a <strong>condor_reconfig</strong> is not sufficient - you must restart!</p>
-<h3 id="if-you-accidentally-did-not-set-per_job_history_dir-see-above">If you accidentally did not set <code>PER_JOB_HISTORY_DIR</code> (see above)<a class="headerlink" href="#if-you-accidentally-did-not-set-per_job_history_dir-see-above" title="Permanent link">&para;</a></h3>
-<p>The HTCondor Gratia probe will not publish accounting information about jobs without <code>PER_JOB_HISTORY_DIR</code>. You can have Gratia read the Condor history file and publish data that way. If you know the time period of the missing data, you should specify a start and end times. This reduces the load on the Gratia collector. To do so:</p>
-<p><strong>Preferred method using start and end times</strong></p>
-<div class="codehilite"><pre><span></span><code><span class="hll"><span class="gp">root@host #</span> /usr/share/gratia/condor/condor_meter --history --start-time<span class="o">=</span><span class="s2">&quot;2014-06-01&quot;</span> --end-time<span class="o">=</span><span class="s2">&quot;2014-06-02&quot;</span> --verbose
-</span><span class="go">2014-06-03 10:00:36 CDT Gratia: RUNNING condor_meter MANUALLY using HTCondor history from 2014-06-01 to 2014-06-02</span>
-<span class="go">2014-06-03 10:00:36 CDT Gratia: RUNNING: condor_history -l -constraint &#39;((JobCurrentStartDate &gt; 1401598800) &amp;&amp; (JobCurrentStartDate &lt; 1401685200))&#39;</span>
-<span class="go">2014-06-03 10:00:49 CDT Gratia: condor_meter --history: Usage records submitted: 399</span>
-<span class="go">2014-06-03 10:00:49 CDT Gratia: condor_meter --history: Usage records found: 400</span>
-<span class="go">2014-06-03 10:00:49 CDT Gratia: RUNNING condor_meter MANUALLY Finished</span>
-</code></pre></div>
-
-<p><strong>or if you need to go back to the beginning of time</strong></p>
-<div class="codehilite"><pre><span></span><code><span class="hll"><span class="gp">root@host #</span> /usr/share/gratia/condor/condor_meter --history --verbose
-</span><span class="go">2014-06-03 10:06:19 CDT Gratia: RUNNING condor_meter MANUALLY using all HTCondor history</span>
-<span class="go">2014-06-03 10:06:19 CDT Gratia: RUNNING: condor_history -l</span>
-<span class="go">2014-06-03 10:11:38 CDT Gratia: condor_meter --history: Usage records submitted: 13026</span>
-<span class="go">2014-06-03 10:11:38 CDT Gratia: condor_meter --history: Usage records found: 13027</span>
-<span class="go">2014-06-03 10:11:38 CDT Gratia: RUNNING condor_meter MANUALLY Finished</span>
-</code></pre></div>
-
-<p>Not much is printed to the screen, but you can see progress in the Gratia log file:</p>
-<div class="codehilite"><pre><span></span><code>13:35:28 CDT Gratia: Initializing Gratia with /etc/gratia/condor/ProbeConfig
-13:35:28 CDT Gratia: Creating a ProbeDetails record 2012-04-04T18:35:28Z
-13:35:28 CDT Gratia: ***********************************************************
-13:35:28 CDT Gratia: OK - Handshake added to bundle (1/100)
-13:35:28 CDT Gratia: ***********************************************************
-13:35:28 CDT Gratia: List of backup directories: [u&#39;/var/lib/gratia/tmp&#39;]
-13:35:28 CDT Gratia: Reprocessing response: OK - Reprocessing 0 record(s) uploaded, 0 bundled, 0 failed
-13:35:28 CDT Gratia: After reprocessing: 0 in outbox 0 in staged outbox 0 tar files
-13:35:28 CDT Gratia: Creating a UsageRecord 2012-04-04T18:35:28Z
-...
-13:35:29 CDT Gratia: Processing bundle file: 
-13:35:29 CDT Gratia: Processing bundle file: /var/lib/gratia/tmp/gratiafiles/
-    subdir.condor_fermicloud084.fnal.gov_gratia-osg-itb.opensciencegrid.org_80/
-    outbox/r.18425.condor_fermicloud084.fnal.gov_gratia-osg-itb.opensciencegrid.org_80.gratia.xml__BSuXo18428
-...
-13:35:29 CDT Gratia: ***********************************************************
-13:35:29 CDT Gratia: Removing log files older than 31 days from /var/log/gratia
-13:35:29 CDT Gratia: /var/log/gratia uses 0.035% and there is 73% free
-13:35:29 CDT Gratia: Removing incomplete data files older than 31 days from /var/lib/gratia/data/
-13:35:29 CDT Gratia: /var/lib/gratia/data uses 0% and there is 73% free
-13:35:29 CDT Gratia: End of execution summary: new records sent successfully: 37
-</code></pre></div>
-
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Condor rotates history files, so you can only report what Condor has kept. Controlling the Condor history is documented in the Condor manual. In particular, see the options for <a href="https://research.cs.wisc.edu/htcondor/manual/v8.6/3_5Configuration_Macros.html#21780">MAX_HISTORY_LOG</a> and <a href="https://research.cs.wisc.edu/htcondor/manual/v8.6/3_5Configuration_Macros.html#21785">MAX_HISTORY_ROTATIONS</a>.</p>
-</div>
+<p>Unlike many HTCondor settings, a <strong>condor_reconfig</strong> is not sufficient - you must restart!</p>
 <h3 id="bad-gratia-hostname">Bad Gratia hostname<a class="headerlink" href="#bad-gratia-hostname" title="Permanent link">&para;</a></h3>
 <p>This is an example problem where the configuration was bad: there was an incorrect hostname for the Gratia server. The problem is clearly visible in the Gratia log file, which is located in <code>/var/log/gratia/</code>. There is one log file per day, labeled by the date:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> <span class="nb">cd</span> /var/log/gratia/
@@ -2506,7 +2452,7 @@ Thanks, ...
 <div class="codehilite"><pre><span></span><code><span class="go">15:06:55 CDT Gratia: Using config file: /etc/gratia/condor/ProbeConfig</span>
 </code></pre></div>
 
-<p>Here Gratia is removing a file from the Condor PER_JOB_HISTORY_DIR and creating a Gratia accounting record for it</p>
+<p>Here Gratia is removing a file from the HTCondor PER_JOB_HISTORY_DIR and creating a Gratia accounting record for it</p>
 <div class="codehilite"><pre><span></span><code><span class="go">15:06:55 CDT Gratia: Creating a UsageRecord 2012-04-03T20:06:55Z</span>
 <span class="go">15:06:55 CDT Gratia: Registering transient input file: /var/lib/gratia/data/history.37.0</span>
 <span class="go">15:06:55 CDT Gratia: ***********************************************************</span>
@@ -2563,14 +2509,16 @@ Thanks, ...
 </code></pre></div>
 
 <p>As root (adjust for your batch system): </p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> /share/gratia/condor/condor<span class="se">\_</span>meter
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> /usr/share/gratia/condor/condor_meter
 </code></pre></div>
 
 </li>
 <li>
-<p>Find the Gratia records that can be easily uploaded. They are located in a a directory with an unwieldly name that
-includes your hostname and the incorrect name of the Gratia host. You can see the directory name in the Gratia log: the
-misspelled name is between angled brackets and capital letters below, but <em>it will be different on your computer</em>.</p>
+<p>Find the Gratia records that can be easily uploaded.
+   They are located in a a directory with an unwieldy name that includes your hostname and the incorrect name of the
+   Gratia host.
+   You can see the directory name in the Gratia log: the misspelled name is between angled brackets and capital letters
+   below, but <em>it will be different on your computer</em>.</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">user@host $</span> less /var/log/gratia/2012-04-06
 <span class="go">...</span>
 <span class="go">16:04:29 CDT Gratia: Response indicates failure, the following files will not be deleted:</span>
@@ -2623,7 +2571,7 @@ misspelled name is between angled brackets and capital letters below, but <em>it
 </tr>
 <tr>
 <td align="left"><code>/var/lib/gratia/data</code></td>
-<td align="left">Location for Condor and PBS job data before being processed by Gratia<br>Condor's <code>PER_JOB_HISTORY_DIR</code> should be set to this location</td>
+<td align="left">Location for HTCondor and PBS job data before being processed by Gratia<br>HTCondor's <code>PER_JOB_HISTORY_DIR</code> should be set to this location</td>
 </tr>
 <tr>
 <td align="left"><code>/var/lib/gratia/tmp/gratiafiles</code></td>
@@ -2650,7 +2598,7 @@ misspelled name is between angled brackets and capital letters below, but <em>it
 </tr>
 <tr>
 <td align="left"><code>gratia-probe-condor</code></td>
-<td align="left">The probe that tracks Condor usage</td>
+<td align="left">The probe that tracks HTCondor usage</td>
 </tr>
 <tr>
 <td align="left"><code>gratia-probe-slurm</code></td>
@@ -2666,6 +2614,8 @@ misspelled name is between angled brackets and capital letters below, but <em>it
 </tr>
 </tbody>
 </table>
+                
+                  
                 
               
               
