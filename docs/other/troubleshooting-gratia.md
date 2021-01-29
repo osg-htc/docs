@@ -218,69 +218,6 @@ If you set this value, you need to restart condor:
 
 Unlike many HTCondor settings, a **condor\_reconfig** is not sufficient - you must restart!
 
-### If you accidentally did not set `PER_JOB_HISTORY_DIR` (see above)
-
-The HTCondor Gratia probe will not publish accounting information about jobs without `PER_JOB_HISTORY_DIR`.
-You can have Gratia read the HTCondor history file and publish data that way.
-If you know the time period of the missing data, you should specify a start and end times.
-This reduces the load on the Gratia collector.
-To do so:
-
-**Preferred method using start and end times**
-
-    :::console hl_lines="1"
-    root@host # /usr/share/gratia/condor/condor_meter --history --start-time="2014-06-01" --end-time="2014-06-02" --verbose
-    2014-06-03 10:00:36 CDT Gratia: RUNNING condor_meter MANUALLY using HTCondor history from 2014-06-01 to 2014-06-02
-    2014-06-03 10:00:36 CDT Gratia: RUNNING: condor_history -l -constraint '((JobCurrentStartDate > 1401598800) && (JobCurrentStartDate < 1401685200))'
-    2014-06-03 10:00:49 CDT Gratia: condor_meter --history: Usage records submitted: 399
-    2014-06-03 10:00:49 CDT Gratia: condor_meter --history: Usage records found: 400
-    2014-06-03 10:00:49 CDT Gratia: RUNNING condor_meter MANUALLY Finished
-
-**or if you need to go back to the beginning of time**
-
-    :::console hl_lines="1"
-    root@host # /usr/share/gratia/condor/condor_meter --history --verbose
-    2014-06-03 10:06:19 CDT Gratia: RUNNING condor_meter MANUALLY using all HTCondor history
-    2014-06-03 10:06:19 CDT Gratia: RUNNING: condor_history -l
-    2014-06-03 10:11:38 CDT Gratia: condor_meter --history: Usage records submitted: 13026
-    2014-06-03 10:11:38 CDT Gratia: condor_meter --history: Usage records found: 13027
-    2014-06-03 10:11:38 CDT Gratia: RUNNING condor_meter MANUALLY Finished
-
-
-Not much is printed to the screen, but you can see progress in the Gratia log file:
-
-    13:35:28 CDT Gratia: Initializing Gratia with /etc/gratia/condor/ProbeConfig
-    13:35:28 CDT Gratia: Creating a ProbeDetails record 2012-04-04T18:35:28Z
-    13:35:28 CDT Gratia: ***********************************************************
-    13:35:28 CDT Gratia: OK - Handshake added to bundle (1/100)
-    13:35:28 CDT Gratia: ***********************************************************
-    13:35:28 CDT Gratia: List of backup directories: [u'/var/lib/gratia/tmp']
-    13:35:28 CDT Gratia: Reprocessing response: OK - Reprocessing 0 record(s) uploaded, 0 bundled, 0 failed
-    13:35:28 CDT Gratia: After reprocessing: 0 in outbox 0 in staged outbox 0 tar files
-    13:35:28 CDT Gratia: Creating a UsageRecord 2012-04-04T18:35:28Z
-    ...
-    13:35:29 CDT Gratia: Processing bundle file: 
-    13:35:29 CDT Gratia: Processing bundle file: /var/lib/gratia/tmp/gratiafiles/
-        subdir.condor_fermicloud084.fnal.gov_gratia-osg-itb.opensciencegrid.org_80/
-        outbox/r.18425.condor_fermicloud084.fnal.gov_gratia-osg-itb.opensciencegrid.org_80.gratia.xml__BSuXo18428
-    ...
-    13:35:29 CDT Gratia: ***********************************************************
-    13:35:29 CDT Gratia: Removing log files older than 31 days from /var/log/gratia
-    13:35:29 CDT Gratia: /var/log/gratia uses 0.035% and there is 73% free
-    13:35:29 CDT Gratia: Removing incomplete data files older than 31 days from /var/lib/gratia/data/
-    13:35:29 CDT Gratia: /var/lib/gratia/data uses 0% and there is 73% free
-    13:35:29 CDT Gratia: End of execution summary: new records sent successfully: 37
-
-
-
-!!! note 
-    HTCondor rotates history files, so you can only report what HTCondor has kept.
-    Controlling the HTCondor history is documented in the HTCondor manual.
-    In particular, see the options for
-    [MAX_HISTORY_LOG](https://htcondor.readthedocs.io/en/latest/admin-manual/configuration-macros.html#MAX_HISTORY_LOG)
-    and
-    [MAX_HISTORY_ROTATIONS](https://htcondor.readthedocs.io/en/latest/admin-manual/configuration-macros.html#MAX_HISTORY_ROTATIONS).
-
 ### Bad Gratia hostname
 
 This is an example problem where the configuration was bad: there was an incorrect hostname for the Gratia server. The problem is clearly visible in the Gratia log file, which is located in `/var/log/gratia/`. There is one log file per day, labeled by the date:
