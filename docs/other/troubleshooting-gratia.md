@@ -9,7 +9,7 @@ This document will help you troubleshoot problems with the Gratia Accounting, pa
 Gratia/GRACC: The Big Picture
 -----------------------
 
-Gratia is software used in OSG to gather accounting information.
+Gratia is software used in OSG to gather accounting information for usage of computational resources.
 The information is collected from individual resources at a site, such as a Compute Entrypoint or a submission host.
 The program that collects the data is called a "Gratia probe".
 The information is transferred to the central OSG GRACC server.
