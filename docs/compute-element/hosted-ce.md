@@ -68,33 +68,33 @@ at your cluster.
 Additionally, OSG staff may have directed you to follow installation instructions from one or more of the following
 sections:
 
-### (Recommended) Providing access to OASIS ###
+### (Recommended) Providing access to CVMFS ###
 
 !!! tip "Maximize resource utilization; required for GPU support"
-    Installing OASIS on your cluster makes your resources more attractive to OSG user jobs!
-    Additionally, if you plan to contribute GPUs to the OSG, installation of OASIS is **required**.
+    Installing CVMFS on your cluster makes your resources more attractive to OSG user jobs!
+    Additionally, if you plan to contribute GPUs to the OSG, installation of CVMFS is **required**.
 
 Many users in the OSG make of use software modules and/or containers provided by their collaborations or by the OSG
 Research Facilitation team.
 In order to support these users without having to install specific software modules on your cluster,
-you may provide a distributed software repository system called OASIS, built on top of the
+you may provide a distributed software repository system called
 [CernVM File System](https://cernvm.cern.ch/portal/filesystem) (CVMFS).
 
-In order to provide OASIS at your site, you will need the following:
+In order to provide CVMFS at your site, you will need the following:
 
 -   A cluster-wide Frontier Squid proxy service with at least 50GB of cache space;
     installation instructions for Frontier Squid are [provided here](../data/run-frontier-squid-container.md).
 
--   A local OASIS cache per worker node (10 GB minimum, 20 GB recommended)
+-   A local CVMFS cache per worker node (10 GB minimum, 20 GB recommended)
 
 After setting up the Frontier Squid proxy and worker node local caches,
-[install OASIS](../worker-node/install-cvmfs.md) on each worker node.
+[install CVMFS](../worker-node/install-cvmfs.md) on each worker node.
 
 
 ### (HTCondor clusters only) Installing the OSG Worker Node Client ###
 
-!!! tip "Skip this section if you have OASIS or shared home directories!"
-    If you have [OASIS](#recommended-providing-access-to-oasis) installed or shared home directories on your worker
+!!! tip "Skip this section if you have CVMFS or shared home directories!"
+    If you have [CVMFS](#recommended-providing-access-to-cvmfs) installed or shared home directories on your worker
     nodes, you can skip manual installation of the OSG Worker Node Client.
 
 All OSG sites need to provide the OSG Worker Node Client on each worker node in their local cluster.
@@ -102,7 +102,7 @@ This is normally handled by OSG staff for a Hosted CE but that requires shared h
 
 However, for sites with an HTCondor batch system, often there is no shared filesystem set up.
 If you run an HTCondor site and it is easier to install and maintain the Worker Node Client on each worker node than to
-install OASIS or maintain shared file system, you have the following options:
+install CVMFS or maintain shared file system, you have the following options:
 
 -   Install the [Worker Node Client from RPM](../worker-node/install-wn.md)
 -   Install the [Worker Node Client from tarball](../worker-node/install-wn-tarball.md)
