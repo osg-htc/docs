@@ -16,8 +16,8 @@ This document explains the requirements and the procedure for requesting an OSG 
 
 ![managed services diagram](img/managed_services_diagram.png)
 
-!!! info "Running more than 10,000 resource resuts"
-    The Hosted CE can support thousands of concurrent resource request submissionss.
+!!! info "Running more than 10,000 resource requests"
+    The Hosted CE can support thousands of concurrent resource request submissions.
     If you wish to run your own local compute entrypoint or expect to support more than 10,000 concurrently running OSG
     resource requests, see [this page](../compute-element/install-htcondor-ce.md) for installing the HTCondor-CE.
 
