@@ -117,7 +117,7 @@ Your answers will help our operators submit resource requests to your local clus
 
 !!! question "Can I change my answers at a later date?"
     Yes! If you want the OSG to change the size (i.e. CPU, RAM), type (e.g., GPU requests), or number of resource requests,
-    [contact us](mailto:help@opensciencegrid.org) with the FQDN of yoru login host and the details of your changes.
+    [contact us](mailto:help@opensciencegrid.org) with the FQDN of your login host and the details of your changes.
 
 
 Finalizing Installation
@@ -183,4 +183,3 @@ How to Get Help
 ---------------
 
 If you need help with setup or troubleshooting, [contact us](mailto:help@opensciencegrid.org).
-
