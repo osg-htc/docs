@@ -156,12 +156,22 @@ the account names are of the form `osg01` through `osg20`.
 
 The mappings from Unix username to community is as follows:
 
-| User | VO(s) | Description |
-| ---- | ----- | ----- |
-| osg01 | OSG | Projects (primarily single PI, such as OSG-Connect) supported directly by the OSG organization. |
-| osg02 | GLOW | Projects coming from the Center for High Throughput Computing at the University of Wisconsin-Madison. |
-| osg03 | HCC | Projects coming from the Holland Computing Center at the University of Nebraska - Lincoln. |
-| osg04 - osg20 | - | Unassigned. |
+| User          | VO(s)    | Description                                                                                          |
+| ----          | -----    | -----                                                                                                |
+| osg01         | OSG      | Projects (primarily single PI, such as OSG-Connect) supported directly by the OSG organization       |
+| osg02         | GLOW     | Projects coming from the Center for High Throughput Computing at the University of Wisconsin-Madison |
+| osg03         | HCC      | Projects coming from the Holland Computing Center at the University of Nebraska - Lincoln            |
+| osg04         | CMS      | High-energy physics experiment from the Large Hadron Collider at CERN                                |
+| osg05         | Fermilab | Experiments from the Fermi National Accelerator Laboratory                                           |
+| osg06         | JLab     | Experiments from the Thomas Jefferson National Accelerator Facility                                  |
+| osg07         | IGWN     | Gravitational wave detection experiments                                                             |
+| osg08         | IGWN     | Gravitational wave detection experiments                                                             |
+| osg09         | ATLAS    | High-energy physics experiment from the Large Hadron Collider at CERN                                |
+| osg10         | GlueX    | Study of quark and gluon degrees of freedom in hadrons using high-energy photons                     |
+| osg11         | DUNE     | Experiment for neutrino science and proton decay studies                                             |
+| osg12         | IceCube  | Research based on data from the IceCube neutrino detector                                            |
+| osg13         | XENON    | Dark matter search experiment                                                                        |
+| osg14 - osg20 | -        | Unassigned                                                                                           |
 
 For example, the activities in your batch system corresponding to the user `osg02` will always be associated with the
 GLOW community.
