@@ -85,6 +85,9 @@ background-color: #343a40;
 .md-header {
 background-color: #343a40;
 }
+.md-tabs {
+background-color: #1f2326;
+}
 @media only screen and (max-width: 76.1875em) {
   html .md-nav--primary .md-nav__title--site {
     background-color: #343a40;

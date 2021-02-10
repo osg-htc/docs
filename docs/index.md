@@ -50,4 +50,4 @@ To contribute computational resources with OSG-hosted services, your site will a
 ### Self-hosted services ###
 
 If you are interested in contributing resources by hosting your own OSG services, please continue with the
-[detailed overview](./detailed-overview.md) page.
+[site planning](./site-planning.md) page.

@@ -27,7 +27,7 @@ Before Starting
 
 Before preparing your cluster for OSG resource requests, consider the following requirements:
 
--   An existing compute cluster with a [supported batch system](../detailed-overview.md#prepare-the-batch-system)
+-   An existing compute cluster with a [supported batch system](../index.md#contributing-to-the-osg)
     running on a [supported operating system](../release/supported_platforms.md)
 -   Outbound network connectivity from the worker nodes (they can be behind NAT)
 -   One or more Unix accounts on your cluster's submit server, accessible via SSH key, with permissions to submit jobs
