@@ -54,6 +54,7 @@ The following container is available and has been tagged as `stable` in accordan
 [Container Release Policy](https://opensciencegrid.org/technology/policy/container-release/)
 
 -   [CMS XCache](https://hub.docker.com/r/opensciencegrid/cms-xcache/)
+-   [Hosted CE](https://hub.docker.com/r/opensciencegrid/hosted-ce/)
 
 The [Worker node containers](../../worker-node/using-wn-containers.md) have been updated to this release.
 

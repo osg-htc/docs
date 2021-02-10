@@ -26,7 +26,7 @@ This release contains:
     -   [HTCONDOR-2021-0002](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0002.html)
 
 These
-[JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.30%2C%203.5.30-upcoming)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC)
+[JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.30-upcoming)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC)
 were addressed in this release.
 
 Updating to the New Release
