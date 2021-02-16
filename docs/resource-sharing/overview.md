@@ -14,9 +14,9 @@ itself.
 
 There are several ways pilots can join a resource pool:
 
-* Submitted to your local batch system by a [*compute entrypoint*](../compute-element/htcondor-ce-overview.md).
-  These jobs are created by an external entity, a *pilot factory* based on observed demand in the pool. The
-  *compute entrypoint* (CE) is the most common way pilots are created as it is highly automated and responsive
+* Submitted to your local batch system by a [*compute entrypoint*](../compute-element/htcondor-ce-overview.md) (CE).
+  These jobs are created by an external entity, a *pilot factory* based on observed demand in the pool.
+  The CE is the most common way to receive pilot jobs since they integrate with automated processes that are responsive
   to existing demand.
 * Sites can launch [*pilot containers*](os-backfill-containers.md) when they have local resources they
   would like to contribute directly to a specific OSG pool. The site-launched *pilot container* method is useful
@@ -24,5 +24,4 @@ There are several ways pilots can join a resource pool:
   because there is insufficient demand within the resource pool.
 * Users on your local cluster can launch *personal pilot containers* within the local batch system so that these
   receive their OSG user jobs.
-
 
