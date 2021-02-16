@@ -19,9 +19,8 @@ There are several ways pilots can join a resource pool:
   The CE is the most common way to receive pilot jobs since they integrate with automated processes that are responsive
   to existing demand.
 * Sites can launch [*pilot containers*](os-backfill-containers.md) when they have local resources they
-  would like to contribute directly to a specific OSG pool. The site-launched *pilot container* method is useful
-  for backfilling resources expected to be persistently idle; however, at times these pilots may stay idle
-  because there is insufficient demand within the resource pool.
+  would like to contribute directly to a specific OSG pool.
+  The site-launched *pilot container* method is useful for backfilling resources without the need for a batch system;
+  however, at times these pilots may stay idle because there is insufficient demand within the resource pool.
 * Users on your local cluster can launch *personal pilot containers* within the local batch system so that these
   receive their OSG user jobs.
-
