@@ -3,7 +3,7 @@ Compute Resource Sharing Overview
 =================================
 
 OSG uses a resource-overlay ("pilot") model to share resources from your local cluster:
-compute resources are added to a large central resource pool in OSG through the use of a bootstrap process, often called a
+compute resources are added to a large central resource pool in the OSG through the use of a bootstrap process, often called a
 _pilot_ or a _glidein_.
 These pilots, in turn, download and execute OSG user jobs (also known as "payloads") from the resource pool to run within the pilots.
 
