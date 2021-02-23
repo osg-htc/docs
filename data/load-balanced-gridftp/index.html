@@ -2289,29 +2289,8 @@ export X509_USER_KEY=/etc/grid-security/gridftp/gridftp-hostkey.pem
 <p>If your GridFTP servers and load balancer(s) are on the same network segment, you will have to disable ARP on the GridFTP servers to avoid <a href="http://kb.linuxvirtualserver.org/wiki/ARP_Issues_in_LVS/DR_and_LVS/TUN_Clusters">ARP race conditions</a>. Otherwise, skip to <a href="#preparing-keepalived-load-balancers">the section on preparing keepalived</a>.</p>
 <ol>
 <li>
-<p>Select the appropriate RPM:</p>
-<table>
-<thead>
-<tr>
-<th><strong>If your operating system version is...</strong></th>
-<th><strong>Then use the following package(s)...</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Enterprise Linux 6</td>
-<td><code>arptables_jf</code></td>
-</tr>
-<tr>
-<td>Enterprise Linux 7</td>
-<td><code>arptables</code></td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
 <p>Install the arptables software:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> yum install &lt;PACKAGE&gt;
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> yum install arptables
 </code></pre></div>
 
 </li>
@@ -2443,64 +2422,34 @@ router_id &lt;MACHINE-IDENTIFYING-STRING&gt;
 
 <h2 id="using-your-load-balanced-gridftp-system">Using Your Load Balanced GridFTP System<a class="headerlink" href="#using-your-load-balanced-gridftp-system" title="Permanent link">&para;</a></h2>
 <h3 id="using-gridftp">Using GridFTP<a class="headerlink" href="#using-gridftp" title="Permanent link">&para;</a></h3>
-<p>On the GridFTP servers, arptables is the only additional service required for running a load-balanced GridFTP system. The name of the arptables service depends on the version of your host OS:</p>
-<ol>
-<li>
-<p>Select the appropriate RPM:</p>
-<table>
-<thead>
-<tr>
-<th><strong>If your operating system version is...</strong></th>
-<th><strong>Then use the following package(s)...</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Enterprise Linux 6</td>
-<td><code>arptables_jf</code></td>
-</tr>
-<tr>
-<td>Enterprise Linux 7</td>
-<td><code>arptables</code></td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>Manage the service with the following commands:</p>
+<p>On the GridFTP servers, arptables is the only additional service required for running a load-balanced GridFTP system.
+Manage the service with the following commands:</p>
 <table>
 <thead>
 <tr>
 <th><strong>To ...</strong></th>
-<th><strong>On EL 6, run the command...</strong></th>
-<th><strong>On EL 7, run the command...</strong></th>
+<th><strong>Run the command...</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Start a service</td>
-<td><code>service SERVICE-NAME start</code></td>
-<td><code>systemctl start SERVICE-NAME</code></td>
+<td>Start the service</td>
+<td><code>systemctl start arptables</code></td>
 </tr>
 <tr>
-<td>Stop a service</td>
-<td><code>service SERVICE-NAME stop</code></td>
-<td><code>systemctl stop SERVICE-NAME</code></td>
+<td>Stop theservice</td>
+<td><code>systemctl stop arptables</code></td>
 </tr>
 <tr>
-<td>Enable a service to start during boot</td>
-<td><code>chkconfig SERVICE-NAME on</code></td>
-<td><code>systemctl enable SERVICE-NAME</code></td>
+<td>Enable the service to start during boot</td>
+<td><code>systemctl enable arptables</code></td>
 </tr>
 <tr>
-<td>Disable a service from starting during boot</td>
-<td><code>chkconfig SERVICE-NAME off</code></td>
-<td><code>systemctl disable SERVICE-NAME</code></td>
+<td>Disable the service from starting during boot</td>
+<td><code>systemctl disable arptables</code></td>
 </tr>
 </tbody>
 </table>
-</li>
-</ol>
 <p>For information on how to use your individual GridFTP servers, please refer to the <a href="../gridftp/#managing-gridftp">Managing GridFTP section</a> of the GridFTP installation guide.</p>
 <h3 id="using-keepalived">Using Keepalived<a class="headerlink" href="#using-keepalived" title="Permanent link">&para;</a></h3>
 <p>On the load balancer nodes, <code>keepalived</code> is the only additional service required for running a load-balanced GridFTP system. As a reminder, here are common service commands (all run as <code>root</code>):</p>
@@ -2508,29 +2457,24 @@ router_id &lt;MACHINE-IDENTIFYING-STRING&gt;
 <thead>
 <tr>
 <th align="left">To...</th>
-<th align="left">On EL 6, run the command...</th>
-<th align="left">On EL 7, run the command...</th>
+<th align="left">Run the command...</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td align="left">Start a service</td>
-<td align="left"><code>service keepalived start</code></td>
 <td align="left"><code>systemctl start keepalived</code></td>
 </tr>
 <tr>
 <td align="left">Stop a service</td>
-<td align="left"><code>service keepalived stop</code></td>
 <td align="left"><code>systemctl stop keepalived</code></td>
 </tr>
 <tr>
 <td align="left">Enable a service to start during boot</td>
-<td align="left"><code>chkconfig keepalived on</code></td>
 <td align="left"><code>systemctl enable keepalived</code></td>
 </tr>
 <tr>
 <td align="left">Disable a service from starting during boot</td>
-<td align="left"><code>chkconfig keepalived off</code></td>
 <td align="left"><code>systemctl disable keepalived</code></td>
 </tr>
 </tbody>
@@ -2542,7 +2486,6 @@ router_id &lt;MACHINE-IDENTIFYING-STRING&gt;
 <li><a href="http://www.linuxvirtualserver.org/whatis.html">Linux Virtual Server homepage</a></li>
 <li><a href="http://www.keepalived.org/index.html">Keepalived homepage</a></li>
 <li><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Load_Balancer_Administration/index.html">RHEL 7 Load Balancer Administration Guide</a></li>
-<li><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Load_Balancer_Administration/index.html">RHEL 6 Load Balancer Administration Guide</a></li>
 <li><a href="https://github.com/gattebury/gridftp-with-lvs">T2 Nebraska LVS installation notes</a></li>
 </ul>
                 

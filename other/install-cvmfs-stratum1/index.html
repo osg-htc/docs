@@ -1956,12 +1956,12 @@
 <h3 id="installing-cvmfs-server-and-httpd">Installing cvmfs-server and httpd<a class="headerlink" href="#installing-cvmfs-server-and-httpd" title="Permanent link">&para;</a></h3>
 <p>The OSG Operations Stratum 1 has to function as a repository server in addition to serving repository replications; most Stratum 1s serve only replications. Instructions are also provided for how to install cvmfs-server on Stratum 1s that do not have to be repository servers.  Choose the appropriate subsection.</p>
 <h4 id="installing-a-cvmfs-stratum-1-that-is-also-a-repository-server">Installing a CVMFS stratum 1 that is also a repository server<a class="headerlink" href="#installing-a-cvmfs-stratum-1-that-is-also-a-repository-server" title="Permanent link">&para;</a></h4>
-<p>EL6 does not support a CVMFS repository server with the standard kernel, so use EL7.  EL7.2 cannot be reliably used as a repository server, because of bugs in the union filesystem OverlayFS. The bugs are fixed in EL7.3, so use EL7.3 or later.</p>
+<p>EL7.2 cannot be reliably used as a repository server, because of bugs in the union filesystem OverlayFS. The bugs are fixed in EL7.3, so use EL7.3 or later.</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> yum -y install cvmfs-server cvmfs mod_wsgi
 </code></pre></div>
 
 <h4 id="installing-cvmfs-stratum-1-that-is-not-a-repository-server">Installing CVMFS stratum 1 that is not a repository server<a class="headerlink" href="#installing-cvmfs-stratum-1-that-is-not-a-repository-server" title="Permanent link">&para;</a></h4>
-<p>If you're not installing for OSG Operations or otherwise want to support serving repositories on the same machine as a Stratum 1, use this command on either EL6 or EL7:</p>
+<p>If you're not installing for OSG Operations or otherwise want to support serving repositories on the same machine as a Stratum 1, use this command:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> yum -y install cvmfs-server cvmfs-config mod_wsgi
 </code></pre></div>
 
@@ -2047,21 +2047,8 @@ WSGIDaemonProcess cvmfs-api threads=64 display-name=%{GROUP} \
 WSGISocketPrefix /var/run/wsgi 
 </code></pre></div>
 
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>On EL6-based systems (Apache httpd 2.2) replace both instances of <code>Require all granted</code> above with the following:</p>
-<div class="codehilite"><pre><span></span><code>Order allow, deny
-Allow from all
-</code></pre></div>
-
-</div>
 <p>If you will be serving cern.ch repositories, it has the same problem; replace opensciencegrid.org above with cern.ch. If you need to serve both opensciencegrid.org and cern.ch contact Dave Dykstra to discuss the options.</p>
-<p>Then enable apache.  On EL6 do</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> chkconfig httpd on 
-<span class="gp">root@host #</span> service httpd start
-</code></pre></div>
-
-<p>or on EL7 do</p>
+<p>Then enable apache:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> systemctl <span class="nb">enable</span> httpd
 <span class="gp">root@host #</span> systemctl start httpd
 </code></pre></div>
@@ -2109,17 +2096,12 @@ Allow from all
 <span class="gp">root@host #</span> service iptables save
 </code></pre></div>
 
-<p>On EL7 also set up the the same port forwarding for IPv6 (unfortunately it is not supported on EL6):</p>
+<p>On EL7 also set up the the same port forwarding for IPv6:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> ip6tables -t nat -A PREROUTING -p tcp -m tcp --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8000</span>
 <span class="gp">root@host #</span> service ip6tables save
 </code></pre></div>
 
-<p>Enable frontier-squid.  On EL6 do:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> chkconfig frontier-squid on
-<span class="gp">root@host #</span> service frontier-squid start
-</code></pre></div>
-
-<p>or on EL7 do:</p>
+<p>Enable frontier-squid:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> systemctl <span class="nb">enable</span> frontier-squid
 <span class="gp">root@host #</span> systemctl start frontier-squid
 </code></pre></div>

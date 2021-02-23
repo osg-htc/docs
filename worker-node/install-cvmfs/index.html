@@ -680,26 +680,6 @@
     Automount setup
   </a>
   
-    <nav class="md-nav" aria-label="Automount setup">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#for-el6-hosts" class="md-nav__link">
-    For EL6 hosts
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#for-el7-and-el8-hosts" class="md-nav__link">
-    For EL7 and EL8 hosts
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -1779,26 +1759,6 @@
     Automount setup
   </a>
   
-    <nav class="md-nav" aria-label="Automount setup">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#for-el6-hosts" class="md-nav__link">
-    For EL6 hosts
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#for-el7-and-el8-hosts" class="md-nav__link">
-    For EL7 and EL8 hosts
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -1941,34 +1901,6 @@ The version of CVMFS installed should be &gt;= 2.4.1</p>
 </li>
 </ol>
 <h2 id="automount-setup">Automount setup<a class="headerlink" href="#automount-setup" title="Permanent link">&para;</a></h2>
-<p>CVMFS uses automount, and the steps to configure it are different on EL6 vs EL7. Follow the section that is appropriate for your host's OS:</p>
-<ul>
-<li><a href="#for-el6-hosts">For EL6 hosts</a></li>
-<li><a href="#for-el7-and-el8-hosts">For EL7 and EL8 hosts</a></li>
-</ul>
-<h3 id="for-el6-hosts">For EL6 hosts<a class="headerlink" href="#for-el6-hosts" title="Permanent link">&para;</a></h3>
-<ol>
-<li>
-<p>If automount is not yet in use on the system, do the following:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> chkconfig autofs on
-<span class="gp">root@host #</span> service autofs start
-</code></pre></div>
-
-</li>
-<li>
-<p>Create or edit <code>/etc/auto.master</code> to have the following contents:</p>
-<div class="codehilite"><pre><span></span><code>/cvmfs /etc/auto.cvmfs
-</code></pre></div>
-
-</li>
-<li>
-<p>Restart autofs to make the change take effect:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> service autofs restart
-</code></pre></div>
-
-</li>
-</ol>
-<h3 id="for-el7-and-el8-hosts">For EL7 and EL8 hosts<a class="headerlink" href="#for-el7-and-el8-hosts" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
 <p>If automount is not yet in use on the system, do the following:</p>

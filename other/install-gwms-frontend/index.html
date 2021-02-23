@@ -3163,8 +3163,6 @@ groupwould only match jobs that have the <code>+is_itb=True</code> ClassAd.</p>
 <p>Reconfigure the Frontend (see the <a href="#reconfiguring-glideinwms">section below</a>):</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">#</span> on EL7 systems
 <span class="go">systemctl reload gwms-frontend</span>
-<span class="gp">#</span> on EL6 systems
-<span class="go">service gwms-frontend reconfig</span>
 </code></pre></div>
 
 </li>
@@ -3203,7 +3201,7 @@ groupwould only match jobs that have the <code>+is_itb=True</code> ClassAd.</p>
 </tr>
 <tr>
 <td align="left">GlideinWMS</td>
-<td align="left"><code>gwms-renew-proxies</code> (EL6) or <code>gwms-renew-proxies.timer</code> (EL7)</td>
+<td align="left"><code>gwms-renew-proxies.timer</code></td>
 <td align="left"><a href="#proxy-configuration">Automatic proxy renewal</a></td>
 </tr>
 <tr>
@@ -3223,57 +3221,36 @@ groupwould only match jobs that have the <code>+is_itb=True</code> ClassAd.</p>
 <thead>
 <tr>
 <th align="left">To...</th>
-<th align="left">On EL6, run the command...</th>
-<th align="left">On EL7, run the command...</th>
+<th align="left">Run the command...</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td align="left">Start a service</td>
-<td align="left"><code>service &lt;SERVICE-NAME&gt; start</code></td>
 <td align="left"><code>systemctl start &lt;SERVICE-NAME&gt;</code></td>
 </tr>
 <tr>
-<td align="left">Stop a  service</td>
-<td align="left"><code>service &lt;SERVICE-NAME&gt; stop</code></td>
+<td align="left">Stop a service</td>
 <td align="left"><code>systemctl stop &lt;SERVICE-NAME&gt;</code></td>
 </tr>
 <tr>
 <td align="left">Enable a service to start on boot</td>
-<td align="left"><code>chkconfig &lt;SERVICE-NAME&gt; on</code></td>
 <td align="left"><code>systemctl enable &lt;SERVICE-NAME&gt;</code></td>
 </tr>
 <tr>
 <td align="left">Disable a service from starting on boot</td>
-<td align="left"><code>chkconfig &lt;SERVICE-NAME&gt; off</code></td>
 <td align="left"><code>systemctl disable &lt;SERVICE-NAME&gt;</code></td>
 </tr>
 </tbody>
 </table>
 <h3 id="reconfiguring-glideinwms">Reconfiguring GlideinWMS<a class="headerlink" href="#reconfiguring-glideinwms" title="Permanent link">&para;</a></h3>
-<p>After changing the configuration of GlideinWMS, use the following table to find the appropriate command for your
-operating system (run as <code>root</code>):</p>
-<table>
-<thead>
-<tr>
-<th align="left">If your operating system is...</th>
-<th align="left">Run the following command...</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">Enterprise Linux 7</td>
-<td align="left"><code>systemctl reload gwms-frontend</code></td>
-</tr>
-<tr>
-<td align="left">Enterprise Linux 6</td>
-<td align="left"><code>service gwms-frontend reconfig</code></td>
-</tr>
-</tbody>
-</table>
+<p>After changing the configuration of GlideinWMS, run the following command as <code>root</code>:</p>
+<div class="codehilite"><pre><span></span><code>root@host # systemctl reload gwms-frontend
+</code></pre></div>
+
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Notice that, in the case of Enterprise Linux 7 <code>systemctl reload gwms-frontend</code> will work only if:
+<p>Note that <code>systemctl reload gwms-frontend</code> will work only if:
 - gwms-frontend service is running
 - gwms-frontend service was started with systemctl</p>
 <p>Otherwise, you will get the following error in any of the cases:</p>
@@ -3284,9 +3261,6 @@ operating system (run as <code>root</code>):</p>
 </div>
 <h3 id="upgrading-glideinwms-frontend">Upgrading GlideinWMS FrontEnd<a class="headerlink" href="#upgrading-glideinwms-frontend" title="Permanent link">&para;</a></h3>
 <p>After upgrading the GlideinWMS RPM, you must issue an upgrade command to GlideinWMS:</p>
-<ul>
-<li>
-<p><strong>If you are using Enterprise Linux 7</strong>:</p>
 <ol>
 <li>
 <p>Stop the <code>condor</code> and <code>gwms-frontend</code> services as specified in <a href="#managing-glideinwms-services">this section</a></p>
@@ -3301,22 +3275,6 @@ operating system (run as <code>root</code>):</p>
 <p>Start the <code>condor</code> and <code>gwms-frontend</code> services as specified in <a href="#managing-glideinwms-services">this section</a></p>
 </li>
 </ol>
-</li>
-<li>
-<p><strong>If you are using Enterprise Linux 6</strong>:</p>
-<ol>
-<li>
-<p>Upgrade the GlideinWMS Frontend:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> service gwms-frontend upgrade
-</code></pre></div>
-
-</li>
-<li>
-<p>Restart the <code>condor</code> service as specified in the <a href="#managing-glideinwms-services">managing GlideinWMS services section</a></p>
-</li>
-</ol>
-</li>
-</ul>
 <h2 id="validating-glideinwms-frontend">Validating GlideinWMS Frontend<a class="headerlink" href="#validating-glideinwms-frontend" title="Permanent link">&para;</a></h2>
 <p>The complete validation of the Frontend is the submission of actual jobs.
 However, there are a few things that can be checked prior to submitting user
@@ -3404,7 +3362,7 @@ made available on the Web:
 </tr>
 <tr>
 <td align="center">Startup script</td>
-<td align="center">/etc/init.d/gwms-frontend (on EL6) - /usr/bin/gwms-frontend (on EL7)</td>
+<td align="center">/usr/bin/gwms-frontend</td>
 </tr>
 <tr>
 <td align="center">Web Directory</td>

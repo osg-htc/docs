@@ -1593,8 +1593,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-the-yum-priorities-plugin-el6-el7" class="md-nav__link">
-    Install the Yum priorities plugin (EL6, EL7)
+  <a href="#install-the-yum-priorities-plugin-el7" class="md-nav__link">
+    Install the Yum priorities plugin (EL7)
   </a>
   
 </li>
@@ -1608,15 +1608,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#sl-6-and-7" class="md-nav__link">
-    SL 6 and 7
+  <a href="#sl-7" class="md-nav__link">
+    SL 7
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#centos-6-and-7" class="md-nav__link">
-    CentOS 6 and 7
+  <a href="#centos-7" class="md-nav__link">
+    CentOS 7
   </a>
   
 </li>
@@ -1636,8 +1636,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rhel-6-and-7" class="md-nav__link">
-    RHEL 6 and 7
+  <a href="#rhel-7" class="md-nav__link">
+    RHEL 7
   </a>
   
 </li>
@@ -1847,8 +1847,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-the-yum-priorities-plugin-el6-el7" class="md-nav__link">
-    Install the Yum priorities plugin (EL6, EL7)
+  <a href="#install-the-yum-priorities-plugin-el7" class="md-nav__link">
+    Install the Yum priorities plugin (EL7)
   </a>
   
 </li>
@@ -1862,15 +1862,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#sl-6-and-7" class="md-nav__link">
-    SL 6 and 7
+  <a href="#sl-7" class="md-nav__link">
+    SL 7
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#centos-6-and-7" class="md-nav__link">
-    CentOS 6 and 7
+  <a href="#centos-7" class="md-nav__link">
+    CentOS 7
   </a>
   
 </li>
@@ -1890,8 +1890,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rhel-6-and-7" class="md-nav__link">
-    RHEL 6 and 7
+  <a href="#rhel-7" class="md-nav__link">
+    RHEL 7
   </a>
   
 </li>
@@ -2029,8 +2029,8 @@ intended for public use:</p>
 You must have the following repositories available and enabled:</p>
 <ul>
 <li>OS repositories, including the following ones that aren't enabled by default:<ul>
-<li><code>extras</code> (SL 6/7, CentOS 6/7/8)</li>
-<li><code>Server-Extras</code> (RHEL 6/7)</li>
+<li><code>extras</code> (SL 7, CentOS 7/8)</li>
+<li><code>Server-Extras</code> (RHEL 7)</li>
 <li><code>PowerTools</code> (CentOS 8.0 through 8.2)</li>
 <li><code>powertools</code> (CentOS 8.3 and newer)</li>
 <li><code>CodeReady Builder</code> (RHEL 8)</li>
@@ -2082,7 +2082,7 @@ supported by the OSG.</p>
 <p>If you would like to distribute your software in the OSG <code>contrib</code> repository, please <a href="../help/">contact us</a> with a
 description of your software, what users it serves, and relevant RPM packaging.</p>
 <h2 id="installing-yum-repositories">Installing Yum Repositories<a class="headerlink" href="#installing-yum-repositories" title="Permanent link">&para;</a></h2>
-<h3 id="install-the-yum-priorities-plugin-el6-el7">Install the Yum priorities plugin (EL6, EL7)<a class="headerlink" href="#install-the-yum-priorities-plugin-el6-el7" title="Permanent link">&para;</a></h3>
+<h3 id="install-the-yum-priorities-plugin-el7">Install the Yum priorities plugin (EL7)<a class="headerlink" href="#install-the-yum-priorities-plugin-el7" title="Permanent link">&para;</a></h3>
 <p>The Yum priorities plugin is used to tell Yum to prefer OSG packages over EPEL or OS packages.
 It is important to install and enable the Yum priorities plugin before installing grid software to ensure that you are
 getting the OSG-supported versions.</p>
@@ -2110,12 +2110,12 @@ The repositories to enable, as well as the instructions to enable them, are OS-d
 or if the <code>enabled</code> line is missing
 (i.e. it is enabled unless specified otherwise.)</p>
 </div>
-<h4 id="sl-6-and-7">SL 6 and 7<a class="headerlink" href="#sl-6-and-7" title="Permanent link">&para;</a></h4>
+<h4 id="sl-7">SL 7<a class="headerlink" href="#sl-7" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Install the <code>yum-conf-extras</code> RPM package.</li>
 <li>Ensure that the <code>sl-extras</code> repo in <code>/etc/yum.repos.d/sl-extras.repo</code> is enabled.</li>
 </ul>
-<h4 id="centos-6-and-7">CentOS 6 and 7<a class="headerlink" href="#centos-6-and-7" title="Permanent link">&para;</a></h4>
+<h4 id="centos-7">CentOS 7<a class="headerlink" href="#centos-7" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Ensure that the <code>extras</code> repo in <code>/etc/yum.repos.d/CentOS-Base.repo</code> is enabled.</li>
 </ul>
@@ -2129,7 +2129,7 @@ or if the <code>enabled</code> line is missing
 <li>Ensure that the <code>extras</code> repo in <code>/etc/yum.repos.d/CentOS-Linux-Extras.repo</code> is enabled.</li>
 <li>Ensure that the <code>powertools</code> repo in <code>/etc/yum.repos.d/CentOS-Linux-PowerTools.repo</code> is enabled.</li>
 </ul>
-<h4 id="rhel-6-and-7">RHEL 6 and 7<a class="headerlink" href="#rhel-6-and-7" title="Permanent link">&para;</a></h4>
+<h4 id="rhel-7">RHEL 7<a class="headerlink" href="#rhel-7" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Ensure that the <code>Server-Extras</code> channel is enabled.</li>
 </ul>
@@ -2144,9 +2144,7 @@ You must install and enable these first.</p>
 <ul>
 <li>
 <p>Install the EPEL repository, if not already present.  Choose the right version to match your OS version.</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">#</span><span class="c1"># EPEL 6 (For RHEL 6, CentOS 6, and SL 6)</span>
-<span class="gp">root@host #</span> yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
-<span class="gp">#</span><span class="c1"># EPEL 7 (For RHEL 7, CentOS 7, and SL 7)</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">#</span><span class="c1"># EPEL 7 (For RHEL 7, CentOS 7, and SL 7)</span>
 <span class="gp">root@host #</span> yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 <span class="gp">#</span><span class="c1"># EPEL 8 (For RHEL 8 and CentOS 8)</span>
 <span class="gp">root@host #</span> yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
@@ -2223,22 +2221,16 @@ Therefore we recommend security-only automatic updates or disabling automatic up
 <p>To enable only security related automatic updates:</p>
 <ul>
 <li>
-<p>On RHEL 6/SL 6, edit <code>/etc/sysconfig/yum-autoupdate</code> and set <code>USE_YUMSEC="true"</code></p>
-</li>
-<li>
 <p>On RHEL 7/SL 7, edit <code>/etc/yum/yum-cron.conf</code> and set <code>update_cmd = security</code></p>
 </li>
 <li>
 <p>On RHEL 8, edit <code>/etc/dnf/automatic.conf</code> and set <code>upgrade_type = security</code></p>
 </li>
 </ul>
-<p>CentOS 6/7/8 does not support security-only automatic updates;
+<p>CentOS 7/8 does not support security-only automatic updates;
 doing any of the above steps will prevent automatic updates from happening at all.</p>
 <p>To disable automatic updates entirely:</p>
 <ul>
-<li>
-<p>On EL6, edit <code>/etc/sysconfig/yum-autoupdate</code> and set <code>ENABLED="false"</code></p>
-</li>
 <li>
 <p>On EL7, run:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> service yum-cron stop
@@ -2268,10 +2260,10 @@ A local Yum mirror allows you to reduce the amount of external bandwidth used wh
 </code></pre></div>
 
 <p>Or, to mirror only a single repository:</p>
-<div class="codehilite"><pre><span></span><code>&lt;RANDOM&gt; * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/&lt;OSG_RELEASE&gt;/el6/development /var/www/html/osg/&lt;OSG_RELEASE&gt;/el6
+<div class="codehilite"><pre><span></span><code>&lt;RANDOM&gt; * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/&lt;OSG_RELEASE&gt;/el7/development /var/www/html/osg/&lt;OSG_RELEASE&gt;/el7
 </code></pre></div>
 
-<p>Replace <code>&lt;OSG_RELEASE&gt;</code> with the OSG release you would like to use (e.g. <code>3.4</code>) and <code>&lt;RANDOM&gt;</code> with a number between 0
+<p>Replace <code>&lt;OSG_RELEASE&gt;</code> with the OSG release you would like to use (e.g. <code>3.5</code>) and <code>&lt;RANDOM&gt;</code> with a number between 0
 and 59.</p>
 <p>On your worker node, you can replace the <code>baseurl</code> line of <code>/etc/yum.repos.d/osg.repo</code> with the appropriate URL for your
 mirror.</p>

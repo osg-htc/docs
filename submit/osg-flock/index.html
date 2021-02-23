@@ -1931,7 +1931,7 @@ and we will consult with you about the proper solution for your site and what ne
 at both the OSG and at your site.</p>
 <p>Also consider the following technical requirements:</p>
 <ul>
-<li><strong>Operating system:</strong> A RHEL 6 or 7 compatible operating system.</li>
+<li><strong>Operating system:</strong> A RHEL 7 compatible operating system.</li>
 <li><strong>User IDs:</strong> If it does not exist already, the installation will create the Linux user ID <code>condor</code>.</li>
 <li><strong>Host certificate:</strong> Recommended for authentication to OSG infrastructure.
   See our <a href="../../security/host-certs/">documentation</a> for instructions on how to request and install host certificates.</li>
@@ -2063,29 +2063,24 @@ you do not need to do any additional configuration and may <a href="#managing-se
 <thead>
 <tr>
 <th align="left">To...</th>
-<th align="left">On EL6, run the command...</th>
-<th align="left">On EL7, run the command...</th>
+<th align="left">Run the command...</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td align="left">Start a service</td>
-<td align="left"><code>service &lt;SERVICE-NAME&gt; start</code></td>
 <td align="left"><code>systemctl start &lt;SERVICE-NAME&gt;</code></td>
 </tr>
 <tr>
 <td align="left">Stop a service</td>
-<td align="left"><code>service &lt;SERVICE-NAME&gt; stop</code></td>
 <td align="left"><code>systemctl stop &lt;SERVICE-NAME&gt;</code></td>
 </tr>
 <tr>
 <td align="left">Enable a service to start on boot</td>
-<td align="left"><code>chkconfig &lt;SERVICE-NAME&gt; on</code></td>
 <td align="left"><code>systemctl enable &lt;SERVICE-NAME&gt;</code></td>
 </tr>
 <tr>
 <td align="left">Disable a service from starting on boot</td>
-<td align="left"><code>chkconfig &lt;SERVICE-NAME&gt; off</code></td>
 <td align="left"><code>systemctl disable &lt;SERVICE-NAME&gt;</code></td>
 </tr>
 </tbody>

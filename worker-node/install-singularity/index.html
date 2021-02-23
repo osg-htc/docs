@@ -1907,7 +1907,7 @@ unprivileged.  This kernel version is the default for
 RHEL/CentOS/Scientific Linux 7.6 and is available for previous 7.x
 releases.  Although the feature is available, it needs to be enabled to
 be usable (instructions below) on RHEL 7.  The feature is enabled by
-default on RHEL 8, but not available at all on RHEL 6.</p>
+default on RHEL 8.</p>
 <p>Without unprivileged user namespaces, singularity must be installed and run
 with setuid-root executables. Singularity keeps the privileged code to a
 <a href="https://sylabs.io/guides/3.6/user-guide/security.html#singularity-runtime-user-privilege">minimum</a>
@@ -1954,9 +1954,7 @@ on RHEL 8, and OSG recommends that system administrators enable it on
 RHEL 7 worker nodes.  When unprivileged singularity is enabled, OSG
 recommends that sites not install the singularity RPM unless they have
 non-OSG users that require it.  Sites that do install the RPM may choose
-to configure their RHEL 7 or later RPM installations to run unprivileged.
-RHEL 6 installations have no option for unprivileged singularity so
-there the RPM has to be installed and left configured as privileged.</p>
+to configure their RHEL 7 or later RPM installations to run unprivileged.</p>
 <p>In addition to improved security, unprivileged singularity enables
 <code>condor_ssh_to_job</code> to enter a container namespace without itself
 needing privileges. </p>
@@ -2094,7 +2092,7 @@ repositories.</p>
 command:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">user@host $</span> /cvmfs/oasis.opensciencegrid.org/mis/singularity/bin/singularity <span class="se">\</span>
                 <span class="nb">exec</span> --contain --ipc --pid --bind /cvmfs <span class="se">\</span>
-                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el6:latest <span class="se">\</span>
+                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el7:latest <span class="se">\</span>
                 ps -ef
 <span class="go">UID        PID  PPID  C STIME TTY          TIME CMD</span>
 <span class="go">user         1     0  2 21:27 ?        00:00:00 shim-init</span>
@@ -2133,10 +2131,9 @@ before installing the required packages:</p>
 <p>singularity includes an option called <code>underlay</code> that enables using bind
 mount points that do not exist in the container image.
 By default it is enabled, but only if the similar <code>overlay</code> option cannot
-be used, such as on RHEL 6 where kernel support for overlayfs is missing
-or when running in unprivileged mode.  On RHEL 7 and RHEL 8 is recommended to
-completely disable <code>overlay</code>, because it is more vulnerable to security
-problems than <code>underlay</code>.</p>
+be used, such as when running in unprivileged mode. 
+It is recommended to completely disable <code>overlay</code>,
+because it is more vulnerable to security problems than <code>underlay</code>.</p>
 <p>Set this option in <code>/etc/singularity/singularity.conf</code>:</p>
 <div class="codehilite"><pre><span></span><code>    enable overlay = no
 </code></pre></div>
@@ -2187,7 +2184,7 @@ Red Hat when they are discovered.</p>
 <p>After singularity is installed, as an ordinary user run the following
 command to verify it:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">user@host $</span> singularity <span class="nb">exec</span> --contain --ipc --pid --bind /cvmfs <span class="se">\</span>
-                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el6:latest <span class="se">\</span>
+                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el7:latest <span class="se">\</span>
                 ps -ef
 <span class="go">WARNING: Container does not have an exec helper script, calling &#39;ps&#39; directly</span>
 <span class="go">UID        PID  PPID  C STIME TTY          TIME CMD</span>
