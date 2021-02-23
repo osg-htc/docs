@@ -23,5 +23,5 @@ There are several ways pilots can join a resource pool:
   would like to contribute directly to a specific OSG pool.
   The site-launched *pilot container* method is useful for backfilling resources without the need for a batch system;
   however, at times these pilots may stay idle because there is insufficient demand within the resource pool.
-* Users on your local cluster can launch *personal pilot containers* within the local batch system so that these
-  receive their OSG user jobs.
+* Users can launch *personal pilot containers* within a site's batch system so they can use an existing share or
+  allocation at a site through the open science pool.
