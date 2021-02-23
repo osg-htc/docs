@@ -23,8 +23,8 @@ OSG's RPM packages also rely on external packages provided by supported OSes and
 You must have the following repositories available and enabled:
 
 -   OS repositories, including the following ones that aren't enabled by default:
-    -   `extras` (SL 6/7, CentOS 6/7/8)
-    -   `Server-Extras` (RHEL 6/7)
+    -   `extras` (SL 7, CentOS 7/8)
+    -   `Server-Extras` (RHEL 7)
     -   `PowerTools` (CentOS 8.0 through 8.2)
     -   `powertools` (CentOS 8.3 and newer)
     -   `CodeReady Builder` (RHEL 8)
@@ -84,7 +84,7 @@ description of your software, what users it serves, and relevant RPM packaging.
 Installing Yum Repositories
 ---------------------------
 
-### Install the Yum priorities plugin (EL6, EL7)
+### Install the Yum priorities plugin (EL7)
 
 The Yum priorities plugin is used to tell Yum to prefer OSG packages over EPEL or OS packages.
 It is important to install and enable the Yum priorities plugin before installing grid software to ensure that you are
@@ -112,12 +112,12 @@ The repositories to enable, as well as the instructions to enable them, are OS-d
     or if the `enabled` line is missing
     (i.e. it is enabled unless specified otherwise.)
 
-#### SL 6 and 7
+#### SL 7
 
 -   Install the `yum-conf-extras` RPM package.
 -   Ensure that the `sl-extras` repo in `/etc/yum.repos.d/sl-extras.repo` is enabled.
 
-#### CentOS 6 and 7
+#### CentOS 7
 
 -   Ensure that the `extras` repo in `/etc/yum.repos.d/CentOS-Base.repo` is enabled.
 
@@ -131,7 +131,7 @@ The repositories to enable, as well as the instructions to enable them, are OS-d
 -   Ensure that the `extras` repo in `/etc/yum.repos.d/CentOS-Linux-Extras.repo` is enabled.
 -   Ensure that the `powertools` repo in `/etc/yum.repos.d/CentOS-Linux-PowerTools.repo` is enabled.
 
-#### RHEL 6 and 7
+#### RHEL 7
 
 -   Ensure that the `Server-Extras` channel is enabled.
 
@@ -148,8 +148,6 @@ You must install and enable these first.
 -   Install the EPEL repository, if not already present.  Choose the right version to match your OS version.
 
         :::console
-        ## EPEL 6 (For RHEL 6, CentOS 6, and SL 6)
-        root@host # yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
         ## EPEL 7 (For RHEL 7, CentOS 7, and SL 7)
         root@host # yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
         ## EPEL 8 (For RHEL 8 and CentOS 8)
@@ -214,18 +212,14 @@ Therefore we recommend security-only automatic updates or disabling automatic up
 
 To enable only security related automatic updates:
 
--   On RHEL 6/SL 6, edit `/etc/sysconfig/yum-autoupdate` and set `USE_YUMSEC="true"`
-
 -   On RHEL 7/SL 7, edit `/etc/yum/yum-cron.conf` and set `update_cmd = security`
 
 -   On RHEL 8, edit `/etc/dnf/automatic.conf` and set `upgrade_type = security`
 
-CentOS 6/7/8 does not support security-only automatic updates;
+CentOS 7/8 does not support security-only automatic updates;
 doing any of the above steps will prevent automatic updates from happening at all.
 
 To disable automatic updates entirely:
-
--   On EL6, edit `/etc/sysconfig/yum-autoupdate` and set `ENABLED="false"`
 
 -   On EL7, run:
 
@@ -262,10 +256,10 @@ Add the following to a file in `/etc/cron.d`:
 Or, to mirror only a single repository:
 
     :::file
-    <RANDOM> * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/<OSG_RELEASE>/el6/development /var/www/html/osg/<OSG_RELEASE>/el6
+    <RANDOM> * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/<OSG_RELEASE>/el7/development /var/www/html/osg/<OSG_RELEASE>/el7
 
 
-Replace `<OSG_RELEASE>` with the OSG release you would like to use (e.g. `3.4`) and `<RANDOM>` with a number between 0
+Replace `<OSG_RELEASE>` with the OSG release you would like to use (e.g. `3.5`) and `<RANDOM>` with a number between 0
 and 59.
 
 On your worker node, you can replace the `baseurl` line of `/etc/yum.repos.d/osg.repo` with the appropriate URL for your

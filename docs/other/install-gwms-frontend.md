@@ -663,9 +663,6 @@ groupwould only match jobs that have the `+is_itb=True` ClassAd.
         :::console
         # on EL7 systems
         systemctl reload gwms-frontend
-        # on EL6 systems
-        service gwms-frontend reconfig
-        
         
 Using GlideinWMS
 ----------------
@@ -674,37 +671,36 @@ Using GlideinWMS
 
 In addition to the GlideinWMS service itself, there are a number of supporting services in your installation. The specific services are:
 
-| Software   | Service name                             | Notes                                                                        |
-|:-----------|:-----------------------------------------|:-----------------------------------------------------------------------------|
-| Fetch CRL  | `fetch-crl-boot` and `fetch-crl-cron`    | See [CA documentation](../common/ca.md#managing-fetch-crl-services) for more info |
-| Gratia     | `gratia-probes-cron`                     | Accounting software                                                          |
-| HTCondor   | `condor`                                 |                                                                              |
-| HTTPD      | `httpd`                                  | GlideinWMS monitoring and staging                                 |
-| GlideinWMS | `gwms-renew-proxies` (EL6) or `gwms-renew-proxies.timer` (EL7) | [Automatic proxy renewal](#proxy-configuration)                              |
-|            | `gwms-frontend`                                                | The main GlideinWMS service
-|
+| Software   | Service name                          | Notes                                                                             |
+|:-----------|:--------------------------------------|:----------------------------------------------------------------------------------|
+| Fetch CRL  | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca.md#managing-fetch-crl-services) for more info |
+| Gratia     | `gratia-probes-cron`                  | Accounting software                                                               |
+| HTCondor   | `condor`                              |                                                                                   |
+| HTTPD      | `httpd`                               | GlideinWMS monitoring and staging                                                 |
+| GlideinWMS | `gwms-renew-proxies.timer`            | [Automatic proxy renewal](#proxy-configuration)                                   |
+|            | `gwms-frontend`                       | The main GlideinWMS service                                                       |
+|            |                                       |                                                                                   |
 
 Start the services in the order listed and stop them in reverse order. As a reminder, here are common service commands (all run as `root`):
 
-| To...                                   | On EL6, run the command...                  | On EL7, run the command...                      |
-| :-------------------------------------- | :----------------------------------------   | :--------------------------------------------   |
-| Start a service                         | `service <SERVICE-NAME> start` | `systemctl start <SERVICE-NAME>`   |
-| Stop a  service                         | `service <SERVICE-NAME> stop`  | `systemctl stop <SERVICE-NAME>`    |
-| Enable a service to start on boot       | `chkconfig <SERVICE-NAME> on`  | `systemctl enable <SERVICE-NAME>`  |
-| Disable a service from starting on boot | `chkconfig <SERVICE-NAME> off` | `systemctl disable <SERVICE-NAME>` |
+| To...                                   | Run the command...                 |
+| :-------------------------------------- | :--------------------------------  |
+| Start a service                         | `systemctl start <SERVICE-NAME>`   |
+| Stop a service                          | `systemctl stop <SERVICE-NAME>`    |
+| Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`  |
+| Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>` |
 
 ### Reconfiguring GlideinWMS ###
 
-After changing the configuration of GlideinWMS, use the following table to find the appropriate command for your
-operating system (run as `root`):
+After changing the configuration of GlideinWMS, run the following command as `root`:
 
-| If your operating system is... | Run the following command...                 |
-|:-------------------------------|:---------------------------------------------|
-| Enterprise Linux 7             | `systemctl reload gwms-frontend` |
-| Enterprise Linux 6             | `service gwms-frontend reconfig`  |
+
+```
+root@host # systemctl reload gwms-frontend
+```
 
 !!! note
-    Notice that, in the case of Enterprise Linux 7 `systemctl reload gwms-frontend` will work only if:
+    Note that `systemctl reload gwms-frontend` will work only if:
     - gwms-frontend service is running
     - gwms-frontend service was started with systemctl
 
@@ -718,25 +714,14 @@ operating system (run as `root`):
 
 After upgrading the GlideinWMS RPM, you must issue an upgrade command to GlideinWMS:
 
-- **If you are using Enterprise Linux 7**:
+1. Stop the `condor` and `gwms-frontend` services as specified in [this section](#managing-glideinwms-services)
 
-    1. Stop the `condor` and `gwms-frontend` services as specified in [this section](#managing-glideinwms-services)
+1. Issue the upgrade command:
 
-    1. Issue the upgrade command:
+        :::console
+        root@host # /usr/sbin/gwms-frontend upgrade
 
-            :::console
-            root@host # /usr/sbin/gwms-frontend upgrade
-
-    1. Start the `condor` and `gwms-frontend` services as specified in [this section](#managing-glideinwms-services)
-
-- **If you are using Enterprise Linux 6**:
-
-    1. Upgrade the GlideinWMS Frontend:
-
-            :::console
-            root@host # service gwms-frontend upgrade
-
-    1. Restart the `condor` service as specified in the [managing GlideinWMS services section](#managing-glideinwms-services)
+1. Start the `condor` and `gwms-frontend` services as specified in [this section](#managing-glideinwms-services)
 
 Validating GlideinWMS Frontend
 ------------------------------
@@ -821,17 +806,17 @@ Troubleshooting GlideinWMS
 
 ### File Locations
 
-|  File Description  |                                                             File Location                                                    |
-|:------------------:|:----------------------------------------------------------------------------------------------------------------------------:|
-| Configuration file |                                                    /etc/gwms-frontend/frontend.xml                                           |
-|        Logs        |                                                        /var/log/gwms-frontend/                                               |
-|   Startup script   |                                      /etc/init.d/gwms-frontend (on EL6) - /usr/bin/gwms-frontend (on EL7)                    |
-|    Web Directory   |                                                    /var/lib/gwms-frontend/web-area                                           |
-|      Web Base      |                                                    /var/lib/gwms-frontend/web-base                                           |
-|  Web configuration |                                                 /etc/httpd/conf.d/gwms-frontend.conf                                         |
-|  Working Directory |                                                  /var/lib/gwms-frontend/vofrontend/                                          |
-|     Lock files     |      /var/lib/gwms-frontend/vofrontend/lock/frontend.lock /var/lib/gwms-frontend/vofrontend/group\_\*/lock/frontend.lock     |
-|    Status files    |                               /var/lib/gwms-frontend/vofrontend/monitor/group\_\*/frontend\_status.xml                       |
+| File Description   | File Location                                                                                                       |
+|:------------------:|:-------------------------------------------------------------------------------------------------------------------:|
+| Configuration file | /etc/gwms-frontend/frontend.xml                                                                                     |
+| Logs               | /var/log/gwms-frontend/                                                                                             |
+| Startup script     | /usr/bin/gwms-frontend                                                                                              |
+| Web Directory      | /var/lib/gwms-frontend/web-area                                                                                     |
+| Web Base           | /var/lib/gwms-frontend/web-base                                                                                     |
+| Web configuration  | /etc/httpd/conf.d/gwms-frontend.conf                                                                                |
+| Working Directory  | /var/lib/gwms-frontend/vofrontend/                                                                                  |
+| Lock files         | /var/lib/gwms-frontend/vofrontend/lock/frontend.lock /var/lib/gwms-frontend/vofrontend/group\_\*/lock/frontend.lock |
+| Status files       | /var/lib/gwms-frontend/vofrontend/monitor/group\_\*/frontend\_status.xml                                            |
 
 
 !!! note

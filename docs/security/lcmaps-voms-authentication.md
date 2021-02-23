@@ -273,8 +273,8 @@ and make sure it matches one of the patterns in `/etc/grid-security/voms-mapfile
 Troubleshooting the LCMAPS VOMS Plugin
 --------------------------------------
 
-LCMAPS logs to `journalctl` (EL7) or `/var/log/messages` (EL6) and the verbosity of the logging can be increased by
-modifying the appropriate configuration and restarting the relevant service.
+LCMAPS logs to `journalctl` and the verbosity of the logging can be increased by modifying the appropriate
+configuration and restarting the relevant service.
 This section outlines the configuration necessary to raise the debug level for the different hosts that can use LCMAPS
 VOMS authentication as well as common LCMAPS VOMS authentication issues.
 
@@ -362,8 +362,8 @@ The default value for this parameter is 12hrs.
 
 #### Wrong version of GridFTP
 
-If you have the EPEL version of the GridFTP server, you may see error messages in `journalctl` (EL7),
-`var/log/messages` (EL6), or the location specified by `LCMAPS_LOG_FILE`.
+If you have the EPEL version of the GridFTP server, you may see error messages in `journalctl`
+or the location specified by `LCMAPS_LOG_FILE`.
 
 **Symptoms**
 
@@ -380,7 +380,7 @@ Apr 11 13:51:41 atlas-hub globus-gridftp-server: You are still root after the LC
         :::console
         user@host $ rpm -qa 'globus-gridftp*'
 
-1. Verify that the [priority](../common/yum.md#install-the-yum-priorities-plugin-el6-el7) of the OSG repositories are set
+1. Verify that the [priority](../common/yum.md#install-the-yum-priorities-plugin-el7) of the OSG repositories are set
    properly
 
 1. Clean your yum cache

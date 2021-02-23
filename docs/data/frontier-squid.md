@@ -109,12 +109,12 @@ To configure the OSG Compute Entrypoint (CE) to know about your Frontier Squid s
 
 Start the frontier-squid service and enable it to start at boot time. As a reminder, here are common service commands (all run as `root`):
 
-| To...                                   | On EL6, run the command...                  | On EL7, run the command...                      |
-| :-------------------------------------- | :----------------------------------------   | :--------------------------------------------   |
-| Start a service                         | `service frontier-squid start` | `systemctl start frontier-squid`   |
-| Stop a  service                         | `service frontier-squid stop`  | `systemctl stop frontier-squid`    |
-| Enable a service to start on boot       | `chkconfig frontier-squid on`  | `systemctl enable frontier-squid`  |
-| Disable a service from starting on boot | `chkconfig frontier-squid off` | `systemctl disable frontier-squid` |
+| To...                                   | Run the command...                            |
+| :-------------------------------------- | :-------------------------------------------- |
+| Start the service                         | `systemctl start frontier-squid`              |
+| Stop the service                          | `systemctl stop frontier-squid`               |
+| Enable the service to start on boot       | `systemctl enable frontier-squid`             |
+| Disable the service from starting on boot | `systemctl disable frontier-squid`            |
 
 ## Validating Frontier Squid
 

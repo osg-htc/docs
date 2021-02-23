@@ -114,10 +114,10 @@ While there is no configuration file, the behavior of the updater can be adjuste
 
 ##### Configuration file
 
-| Package              | File Description                                      | Location                                                       | Comment                                                                                       |
-|:---------------------|:------------------------------------------------------|:---------------------------------------------------------------|:----------------------------------------------------------------------------------------------|
-| osg-ca-certs-updater | Cron entry for periodically launching the updater     | `/etc/cron.d/osg-ca-certs-updater`                             | Command-line arguments to the updater can be specified here                                   |
-| osg-release          | Repo definition files for production OSG repositories | `/etc/yum.repos.d/osg.repo` or `/etc/yum.repos.d/osg-el6.repo` | Make sure these repositories are enabled and reachable from the host you are trying to update |
+| Package              | File Description                                      | Location                           | Comment                                                                                       |
+|:---------------------|:------------------------------------------------------|:-----------------------------------|:----------------------------------------------------------------------------------------------|
+| osg-ca-certs-updater | Cron entry for periodically launching the updater     | `/etc/cron.d/osg-ca-certs-updater` | Command-line arguments to the updater can be specified here                                   |
+| osg-release          | Repo definition files for production OSG repositories | `/etc/yum.repos.d/osg.repo`        | Make sure these repositories are enabled and reachable from the host you are trying to update |
 
 #### Log files
 
