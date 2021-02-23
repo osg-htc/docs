@@ -328,15 +328,14 @@ Using Your Load Balanced GridFTP System
 ### Using GridFTP
 
 On the GridFTP servers, arptables is the only additional service required for running a load-balanced GridFTP system.
+Manage the service with the following commands:
 
-1. Manage the service with the following commands:
-
-    | **To ...** | **On EL 6, run the command...** | **On EL 7, run the command...** | 
-    | -------- | ----------------------------- | ----------------------------- |
-    | Start the service | `service arptables start` | `systemctl start arptables` | 
-    | Stop atheservice | `service arptables stop` | `systemctl stop arptables` |
-    | Enable the service to start during boot | `chkconfig arptables on` | `systemctl enable arptables` | 
-    | Disable the service from starting during boot | `chkconfig arptables off` | `systemctl disable arptables` |
+| **To ...**                                    | **Run the command...**        |
+| --------                                      | ----------------------------- |
+| Start the service                             | `systemctl start arptables`   |
+| Stop theservice                               | `systemctl stop arptables`    |
+| Enable the service to start during boot       | `systemctl enable arptables`  |
+| Disable the service from starting during boot | `systemctl disable arptables` |
 
 For information on how to use your individual GridFTP servers, please refer to the [Managing GridFTP section](gridftp.md#managing-gridftp) of the GridFTP installation guide.
 
@@ -344,12 +343,12 @@ For information on how to use your individual GridFTP servers, please refer to t
 
 On the load balancer nodes, `keepalived` is the only additional service required for running a load-balanced GridFTP system. As a reminder, here are common service commands (all run as `root`):
 
-| To...                                       | On EL 6, run the command...  | On EL 7, run the command... |
-|:--------------------------------------------|:---------------------------|:-------------------------------|
-| Start a service                             | `service keepalived start` | `systemctl start keepalived`   |
-| Stop a service                              | `service keepalived stop`  | `systemctl stop keepalived`    |
-| Enable a service to start during boot       | `chkconfig keepalived on`  | `systemctl enable keepalived`  |
-| Disable a service from starting during boot | `chkconfig keepalived off` | `systemctl disable keepalived` |
+| To...                                       | Run the command...             |
+|:--------------------------------------------|:-------------------------------|
+| Start a service                             | `systemctl start keepalived`   |
+| Stop a service                              | `systemctl stop keepalived`    |
+| Enable a service to start during boot       | `systemctl enable keepalived`  |
+| Disable a service from starting during boot | `systemctl disable keepalived` |
 
 Getting Help
 ------------
