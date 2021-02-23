@@ -76,10 +76,10 @@ The following table gives the commands needed to start, stop, enable, and disabl
 
 | To...                                   | Run the command...            |
 | :-------------------------------------- | :---------------------------- |
-| Start  service                          | `systemctl start gsisshd`     |
-| Stop a  service                         | `systemctl stop gsisshd`      |
-| Enable a service to start on boot       | `systemctl enable gsisshd`    |
-| Disable a service from starting on boot | `systemctl disable gsisshd`   |
+| Start the service                         | `systemctl start gsisshd`     |
+| Stop the service                          | `systemctl stop gsisshd`      |
+| Enable the service to start on boot       | `systemctl enable gsisshd`    |
+| Disable the service from starting on boot | `systemctl disable gsisshd`   |
 
 
 Validating GSI OpenSSH
@@ -147,5 +147,4 @@ Other Files
 | gsisshd            | `/etc/grid-security/hostcert.pem` | Host certificate |
 | gsisshd            | `/etc/grid-security/hostkey.pem`  | X.509 host key   |
 | gsisshd            | `/etc/gsissh/ssh_host_rsa_key`    | RSA Host key     |
-
 

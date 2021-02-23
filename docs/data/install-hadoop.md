@@ -473,7 +473,7 @@ Start the services in the order listed and stop them in reverse order. As a remi
 | To...                                   | Run the command...                            |
 | :-------------------------------------- | :-------------------------------------------- |
 | Start a service                         | `systemctl start <SERVICE-NAME>`              |
-| Stop a  service                         | `systemctl stop <SERVICE-NAME>`               |
+| Stop a service                          | `systemctl stop <SERVICE-NAME>`               |
 | Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`             |
 | Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>`            |
 
@@ -1006,4 +1006,3 @@ This installation will create following users unless they are already created.
 | `zookeeper` |                                                   |
 
 For this package to function correctly, you will have to create the users needed for grid operation. Any user that can be authenticated should be created.
-

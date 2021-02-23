@@ -273,7 +273,7 @@ and make sure it matches one of the patterns in `/etc/grid-security/voms-mapfile
 Troubleshooting the LCMAPS VOMS Plugin
 --------------------------------------
 
-LCMAPS logs to `journalctl` (EL7) and the verbosity of the logging can be increased by modifying the appropriate
+LCMAPS logs to `journalctl` and the verbosity of the logging can be increased by modifying the appropriate
 configuration and restarting the relevant service.
 This section outlines the configuration necessary to raise the debug level for the different hosts that can use LCMAPS
 VOMS authentication as well as common LCMAPS VOMS authentication issues.
@@ -362,7 +362,7 @@ The default value for this parameter is 12hrs.
 
 #### Wrong version of GridFTP
 
-If you have the EPEL version of the GridFTP server, you may see error messages in `journalctl` (EL7)
+If you have the EPEL version of the GridFTP server, you may see error messages in `journalctl`
 or the location specified by `LCMAPS_LOG_FILE`.
 
 **Symptoms**

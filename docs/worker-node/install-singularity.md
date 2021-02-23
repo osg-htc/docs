@@ -264,7 +264,7 @@ singularity includes an option called `underlay` that enables using bind
 mount points that do not exist in the container image.
 By default it is enabled, but only if the similar `overlay` option cannot
 be used, such as when running in unprivileged mode. 
-On RHEL 7 and RHEL 8 is recommended to completely disable `overlay`,
+It is recommended to completely disable `overlay`,
 because it is more vulnerable to security problems than `underlay`.
 
 Set this option in `/etc/singularity/singularity.conf`:

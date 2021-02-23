@@ -111,10 +111,10 @@ Start the frontier-squid service and enable it to start at boot time. As a remin
 
 | To...                                   | Run the command...                            |
 | :-------------------------------------- | :-------------------------------------------- |
-| Start a service                         | `systemctl start frontier-squid`              |
-| Stop a  service                         | `systemctl stop frontier-squid`               |
-| Enable a service to start on boot       | `systemctl enable frontier-squid`             |
-| Disable a service from starting on boot | `systemctl disable frontier-squid`            |
+| Start the service                         | `systemctl start frontier-squid`              |
+| Stop the service                          | `systemctl stop frontier-squid`               |
+| Enable the service to start on boot       | `systemctl enable frontier-squid`             |
+| Disable the service from starting on boot | `systemctl disable frontier-squid`            |
 
 ## Validating Frontier Squid
 

@@ -686,7 +686,7 @@ Start the services in the order listed and stop them in reverse order. As a remi
 | To...                                   | Run the command...                 |
 | :-------------------------------------- | :--------------------------------  |
 | Start a service                         | `systemctl start <SERVICE-NAME>`   |
-| Stop a  service                         | `systemctl stop <SERVICE-NAME>`    |
+| Stop a service                          | `systemctl stop <SERVICE-NAME>`    |
 | Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`  |
 | Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>` |
 

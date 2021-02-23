@@ -163,13 +163,13 @@ The specific services are:
 | Software         | Service Name                            | Notes                                                                        |
 |:-----------------|:----------------------------------------|:-----------------------------------------------------------------------------|
 | Fetch CRL        | `fetch-crl-boot` and `fetch-crl-cron`   | See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info |
-| XRootD           | EL 7:`xrootd@standalone` | |
-| XRootD Multiuser | EL 7:`xrootd-privileged@standalone`     | See [XRootD multiuser](#enabling-multi-user-support) for more info           |
+| XRootD           | `xrootd@standalone` | |
+| XRootD Multiuser | `xrootd-privileged@standalone`     | See [XRootD multiuser](#enabling-multi-user-support) for more info           |
 
 Start the services in the order listed and stop them in reverse order.
 As a reminder, here are common service commands (all run as `root`):
 
-| To …                                        | On EL 7, run the command…        |
+| To …                                        | Run the command…                 |
 |:--------------------------------------------|:---------------------------------|
 | Start a service                             | `systemctl start SERVICE-NAME`   |
 | Stop a service                              | `systemctl stop SERVICE-NAME`    |
