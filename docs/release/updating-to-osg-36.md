@@ -31,11 +31,6 @@ the update from version 3 to version 4 will require some manual changes to your 
 
 To update OSG-Configure, perform the following steps:
 
-1.  Update the osg-configure packages:
-
-        :::console
-        root@host# yum update 'osg-configure*'
-
 1.  Merge any `*.rpmnew` files in `/etc/osg/config.d/`
 
 1.  Uninstall `osg-configure-gip` and `osg-configure-misc` if they are installed:
@@ -45,7 +40,8 @@ To update OSG-Configure, perform the following steps:
 
 1.  If `/etc/osg/config.d/30-gip.ini.rpmsave` exists, merge its contents into `31-cluster.ini`
 
-1. Edit the `Site Information` configuration section (in `40-siteinfo.ini`) and add:
+1.  Edit the `Site Information` configuration section (in `40-siteinfo.ini`).
+    If `resource_group` is not set, add:
 
         resource_group = <TOPOLOGY RESOURCE GROUP FOR THIS HOST>
 
