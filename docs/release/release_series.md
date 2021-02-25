@@ -1,5 +1,5 @@
-**OSG Release Series**
-======================
+**Release Series**
+==================
 
 An OSG release series is a sequence of OSG software releases that are intended to provide a painless upgrade path.
 For example, the 3.2 release series contains OSG software 3.2.0, 3.2.1, 3.2.2, and so forth.
@@ -19,8 +19,8 @@ will diverge over time.
 Our goal is, within a series, that one may upgrade their OSG services via `yum update` cleanly and without any necessary
 config file changes or excessive downtime.
 
-OSG Release Series
-------------------
+Series Overviews
+----------------
 
 Since the start of the RPM-based OSG software stack, we have offered the following release series:
 
