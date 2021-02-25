@@ -1880,7 +1880,7 @@ production-appropriate method using systemd.</p>
              --publish <span class="m">1095</span>:1095 <span class="se">\</span>
              --volume &lt;HOST PARTITION&gt;:/xcache/namespace <span class="se">\</span>
              --env-file<span class="o">=</span>/opt/origin/.env <span class="se">\</span>
-             opensciencegrid/stash-origin:fresh
+             opensciencegrid/stash-origin:release
 </code></pre></div>
 
 <p>Replacing <code>&lt;HOST PARTITION&gt;</code> with the host directory containing data that your origin should serve.
@@ -1907,8 +1907,8 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
-ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin:fresh
-ExecStart=/usr/bin/docker run --rm --name %n -p 1094:1094 -p 1095:1095 -v /srv/origin-public:/xcache/namespace --env-file /opt/origin/.env opensciencegrid/stash-origin:fresh
+ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin:release
+ExecStart=/usr/bin/docker run --rm --name %n -p 1094:1094 -p 1095:1095 -v /srv/origin-public:/xcache/namespace --env-file /opt/origin/.env opensciencegrid/stash-origin:release
 
 [Install] 
 WantedBy=multi-user.target

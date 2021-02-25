@@ -1959,7 +1959,7 @@ you may also configure the behavior of your cache with the following environment
 <div class="codehilite"><pre><span></span><code><span class="gp">user@host $</span> docker run --rm --name frontier-squid <span class="se">\</span>
              -v &lt;HOST CACHE PARTITION&gt;:/var/cache/squid <span class="se">\</span>
              -v &lt;HOST LOG PARTITION&gt;:/var/log/squid <span class="se">\</span>
-             -p &lt;HOST PORT&gt;:3128 opensciencegrid/frontier-squid:stable
+             -p &lt;HOST PORT&gt;:3128 opensciencegrid/frontier-squid:release
 </code></pre></div>
 
 <p>You may pass configuration variables in <code>KEY=VALUE</code> format with either
@@ -1983,8 +1983,8 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
-ExecStartPre=/usr/bin/docker pull opensciencegrid/frontier-squid:stable
-ExecStart=/usr/bin/docker run --rm --name %n --publish 3128:3128 -v /tmp/squid:/var/cache/squid -v /tmp/log:/var/log/squid --env-file /opt/xcache/.env opensciencegrid/frontier-squid:stable
+ExecStartPre=/usr/bin/docker pull opensciencegrid/frontier-squid:release
+ExecStart=/usr/bin/docker run --rm --name %n --publish 3128:3128 -v /tmp/squid:/var/cache/squid -v /tmp/log:/var/log/squid --env-file /opt/xcache/.env opensciencegrid/frontier-squid:release
 
 
 [Install]

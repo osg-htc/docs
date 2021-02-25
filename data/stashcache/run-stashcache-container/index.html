@@ -1963,7 +1963,7 @@ Instead, the partition stores symlinks to the files in the metadata and data par
 <span class="go">             ...</span>
 <span class="go">             --volume &lt;DATA PARTITION N&gt;:/xcache/dataN</span>
 <span class="go">             --env-file=/opt/xcache/.env \</span>
-<span class="go">             opensciencegrid/stash-cache:stable</span>
+<span class="go">             opensciencegrid/stash-cache:release</span>
 </code></pre></div>
 
 <div class="admonition warning">
@@ -1976,7 +1976,7 @@ solid state disks or NVME.</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">user@host $</span> docker run --rm --publish &lt;HOST PORT&gt;:8000 <span class="se">\</span>
              --volume &lt;HOST PARTITION&gt;:/xcache <span class="se">\</span>
              --env-file<span class="o">=</span>/opt/xcache/.env <span class="se">\</span>
-             opensciencegrid/stash-cache:stable
+             opensciencegrid/stash-cache:release
 </code></pre></div>
 
 <h3 id="running-stash-cache-on-container-with-systemd">Running Stash Cache on container with systemd<a class="headerlink" href="#running-stash-cache-on-container-with-systemd" title="Permanent link">&para;</a></h3>
@@ -1997,8 +1997,8 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
-ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-cache:stable
-ExecStart=/usr/bin/docker run --rm --name %n --publish 8000:8000 --volume /srv/cache:/xcache --env-file /opt/xcache/.env opensciencegrid/stash-cache:stable
+ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-cache:release
+ExecStart=/usr/bin/docker run --rm --name %n --publish 8000:8000 --volume /srv/cache:/xcache --env-file /opt/xcache/.env opensciencegrid/stash-cache:release
 
 [Install]
 WantedBy=multi-user.target
@@ -2021,7 +2021,7 @@ container to the host network:</p>
              --network<span class="o">=</span><span class="s2">&quot;host&quot;</span> <span class="se">\</span>
              --volume &lt;HOST PARTITION&gt;:/cache <span class="se">\</span>
              --env-file<span class="o">=</span>/opt/xcache/.env <span class="se">\</span>
-             opensciencegrid/stash-cache:stable
+             opensciencegrid/stash-cache:release
 </code></pre></div>
 
 <h3 id="memory-optimization">Memory optimization<a class="headerlink" href="#memory-optimization" title="Permanent link">&para;</a></h3>
