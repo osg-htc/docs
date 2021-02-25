@@ -37,7 +37,7 @@ Since the start of the RPM-based OSG software stack, we have offered the followi
     for more details.
     To support these new protocols, OSG 3.6 includes HTCondor 8.9, HTCondor-CE 5, and will include XRootD 5.1.
 
--   **OSG 3.5** started August 2019 and will reach its end-of-life in February 2022.
+-   **OSG 3.5** was started in August 2019 and will reach its end-of-life in February 2022.
     The main differences between it and 3.4 were the introduction of the HTCondor 8.8 and 8.9 series;
     also the RSV monitoring probes, EL6 support, and CREAM support were all dropped.
 
@@ -79,4 +79,3 @@ References
 
 -   [Yum repositories](../common/yum.md)
 -   [Basic use of Yum](yum-basics.md)
-
