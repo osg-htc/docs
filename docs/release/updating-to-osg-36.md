@@ -36,20 +36,20 @@ To update OSG-Configure, perform the following steps:
         :::console
         root@host# yum update 'osg-configure*'
 
-2.  Merge any `*.rpmnew` files in `/etc/osg/config.d/`
+1.  Merge any `*.rpmnew` files in `/etc/osg/config.d/`
 
-3.  Uninstall `osg-configure-gip` and `osg-configure-misc` if they are installed:
+1.  Uninstall `osg-configure-gip` and `osg-configure-misc` if they are installed:
 
         :::console
         root@host# yum erase osg-configure-gip osg-configure-misc
 
-4.  If `/etc/osg/config.d/30-gip.ini.rpmsave` exists, merge its contents into `31-cluster.ini`
+1.  If `/etc/osg/config.d/30-gip.ini.rpmsave` exists, merge its contents into `31-cluster.ini`
 
-5.  If you are on a CE, edit the `Site Information` configuration section (in `40-siteinfo.ini`) and add:
+1. Edit the `Site Information` configuration section (in `40-siteinfo.ini`) and add:
 
         resource_group = <TOPOLOGY RESOURCE GROUP FOR THIS HOST>
 
-6.  Run osg-configure to apply your changes:
+1.  Run osg-configure to apply your changes:
 
         osg-configure -dc
 
