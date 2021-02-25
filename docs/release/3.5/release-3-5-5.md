@@ -48,7 +48,7 @@ Updating to the New Release
 ---------------------------
 
 To update to the OSG 3.5 series, please consult the page on
-[updating between release series](../release_series.md#updating-to-osg-35).
+[updating between release series](../updating-to-osg-35.md).
 
 For sites using non-RPM worker node client installations, new [tarballs](../../worker-node/install-wn-tarball.md) and
 [container images](../../worker-node/using-wn-containers.md) are available:

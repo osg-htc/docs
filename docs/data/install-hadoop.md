@@ -134,7 +134,7 @@ Before upgrading, backup your configuration data and HDFS metadata.
 ### Updating to OSG 3.5 ###
 
 Once your HDFS services have been turned off and the HDFS metadata has been backed up, update each node to OSG 3.5 by
-following the instructions in [this section](../release/release_series.md#updating-from-old).
+following the instructions in [this section](../release/updating-to-osg-35.md).
 
 ### Upgrading the Primary NameNode ###
 

@@ -92,7 +92,12 @@ nav:
     - "Using Let's Encrypt": 'security/host-certs/lets-encrypt.md'
     - 'Using DigiCert': 'security/host-certs/digicert.md'
 - Releases:
-  - 'Release Notes': 'release/notes.md'
+  - OSG 3.5:
+      - 'Release Notes': 'release/notes.md'
+      - 'Updating to OSG 3.5': 'release/updating-to-osg-35.md'
+  # - OSG 3.6:
+  #     - 'Release Notes': 'release/osg-36.md
+  #     - 'Updating to OSG 3.6': 'release/updating-to-osg-36.md'
   - 'OSG Release Series': 'release/release_series.md'
   - 'Supported Platforms': 'release/supported_platforms.md'
   - 'OSG Yum Repos': 'common/yum.md'

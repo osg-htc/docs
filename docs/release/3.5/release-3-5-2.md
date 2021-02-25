@@ -10,7 +10,7 @@ Summary of Changes
 This release contains:
 
 -   HTCondor-CE 4.0.1
-    -   [Some manual adjustments are required](../release_series.md#updating-to-htcondor-ce-4x)
+    -   [Some manual adjustments are required](../updating-to-osg-35.md#updating-to-htcondor-ce-4x)
     -   4.0.0: [Major feature update](https://github.com/htcondor/htcondor-ce/releases/tag/v4.0.0)
         -   SciTokens support
         -   Disabled job retries
@@ -52,7 +52,7 @@ Updating to the New Release
 ---------------------------
 
 To update to the OSG 3.5 series, please consult the page on
-[updating between release series](../release_series.md#updating-to-osg-35).
+[updating between release series](../updating-to-osg-35.md).
 
 For sites using non-RPM worker node client installations, new [tarballs](../../worker-node/install-wn-tarball.md) and
 [container images](../../worker-node/using-wn-containers.md) are available:

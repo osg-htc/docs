@@ -58,7 +58,7 @@ The general steps to installing an OSG site are:
 -   [Security information for OSG signed RPMs](release/signing.md)
 -   [Using Yum and RPM](release/yum-basics.md)
 -   [Install the OSG Yum repositories](./common/yum.md)
--   [OSG Software release series](release/release_series.md) - look here to upgrade to OSG 3.5
+-   [OSG Software release series](release/updating-to-osg-35.md) - look here to upgrade to OSG 3.5
 
 ### Installing and Managing Certificates for Site Security ###
 
