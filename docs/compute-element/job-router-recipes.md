@@ -801,8 +801,6 @@ Atlas BNL T1, they are using an HTCondor batch system. Here are some things to n
 -   Jobs are split into different routes based on the [GlideIn](#glidein-queue) queue that they're in.
 -   There is a difference between `Requirements` and `set_requirements`. The `Requirements` attribute matches *incoming* jobs to specific routes while the `set_requirements` sets the `Requirements` attribute on the *routed* job, which confines which machines that the routed job can land on.
 
-Source: <http://www.usatlas.bnl.gov/twiki/bin/view/Admins/HTCondorCE.html>
-
 ```
 JOB_ROUTER_ENTRIES @=jre
    [

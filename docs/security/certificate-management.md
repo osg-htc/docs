@@ -135,11 +135,7 @@ Some guides on X.509 certificates:
 -   Install GSI authentication on a server: <http://security.ncsa.illinois.edu/research/wssec/gsihttps/>
 -   Certificates how-to: <http://www.nordugrid.org/documents/certificate_howto.html>
 
-Some examples about verifying the certificates:
-
--   <http://gagravarr.org/writing/openssl-certs/others.shtml>
--   <http://www.cyberciti.biz/faq/test-ssl-certificates-diagnosis-ssl-certificate/>
--   <http://www.cyberciti.biz/tips/debugging-ssl-communications-from-unix-shell-prompt.html>
+See [this page](http://gagravarr.org/writing/openssl-certs/others.shtml) for examples of verifying certificates.
 
 Managing CAs
 ------------

@@ -237,17 +237,14 @@ To get assistance, please use the [this page](help.md).
 References
 ----------
 
-x509 certificates:
+Some guides on X.509 certificates:
 
 -   Useful commands: <http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html>
 -   Install GSI authentication on a server: <http://security.ncsa.illinois.edu/research/wssec/gsihttps/>
 -   Certificates how-to: <http://www.nordugrid.org/documents/certificate_howto.html>
 
-Verifying certificates:
+See [this page](http://gagravarr.org/writing/openssl-certs/others.shtml) for examples of verifying certificates.
 
--   <http://gagravarr.org/writing/openssl-certs/others.shtml>
--   <http://www.cyberciti.biz/faq/test-ssl-certificates-diagnosis-ssl-certificate/>
--   <http://www.cyberciti.biz/tips/debugging-ssl-communications-from-unix-shell-prompt.html>
 
 Related software:
 

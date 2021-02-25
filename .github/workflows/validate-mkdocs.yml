@@ -29,5 +29,5 @@ jobs:
             --check-html
             --http-status-ignore 302
             --file-ignore ./site/404.html
-            --url-ignore "https://fonts.gstatic.com,/github.com\/opensciencegrid\/${{ steps.format-github-repo.outputs.repo-name }}\/edit/,/opensciencegrid.org\/${{ steps.format-github-repo.outputs.repo-name }}/"
+            --url-ignore "https://fonts.gstatic.com,/hypernews.cern.ch/,/github.com\/opensciencegrid\/${{ steps.format-github-repo.outputs.repo-name }}\/edit/,/opensciencegrid.org\/${{ steps.format-github-repo.outputs.repo-name }}/"
             ./site

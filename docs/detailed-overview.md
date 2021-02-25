@@ -24,7 +24,7 @@ Prepare the Batch System
 
 The assumption is that you have an existing batch system at your site.
 Currently, we support [HTCondor](http://research.cs.wisc.edu/htcondor/),
-[LSF](https://www.ibm.com/us-en/marketplace/hpc-workload-management), [PBS](http://www.pbsworks.com) and
+[LSF](https://www.ibm.com/us-en/marketplace/hpc-workload-management), PBS and
 [Torque](https://adaptivecomputing.com/cherry-services/torque-resource-manager/),
 [SGE](http://en.wikipedia.org/wiki/Oracle_Grid_Engine), and [Slurm](http://slurm.schedmd.com) batch systems.
 
