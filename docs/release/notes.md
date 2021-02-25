@@ -1,10 +1,14 @@
-Release Notes
-=============
+OSG 3.5 Release Notes
+=====================
 
-This page contains links to detailed notes for release in the currently supported
-[OSG release series](release_series.md).
-For our policy on release series support, please consult
-[this page](https://opensciencegrid.org/technology/policy/release-series/).
+**Supported OS Versions:** EL7
+
+The OSG 3.5 release series introduces HTCondor 8.8 and 8.9, available in `osg-release` and `osg-upcoming`, respectively.
+It also drops support for the RSV monitoring probes, CREAM CEs, and Enterprise Linux 6.
+See the initial [OSG 3.5.0 release notes](3.5/release-3-5-0.md) for additional details.
+
+To update to the OSG 3.5 series, please consult the page on
+[updating between release series](release_series.md#updating-to-osg-35).
 
 !!!tip "Want faster access to production-ready software?"
     OSG 3.5 offers a rolling release repository where packages are added as soon as they pass acceptance testing.
@@ -17,18 +21,6 @@ For our policy on release series support, please consult
     Or for one-time installations, append the following to your `yum` command:
 
         --enablerepo=osg-rolling
-
-OSG 3.5
--------
-
-**Supported OS Versions:** EL7
-
-The OSG 3.5 release series introduces HTCondor 8.8 and 8.9, available in `osg-release` and `osg-upcoming`, respectively.
-It also drops support for the RSV monitoring probes, CREAM CEs, and Enterprise Linux 6.
-See the initial [OSG 3.5.0 release notes](3.5/release-3-5-0.md) for additional details.
-
-To update to the OSG 3.5 series, please consult the page on
-[updating between release series](release_series.md#updating-to-osg-35).
 
 | Version                             | Date       | Summary                                                                       |
 |:------------------------------------|:-----------|:------------------------------------------------------------------------------|
