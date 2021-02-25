@@ -8,8 +8,27 @@ Updating Your OSG Compute Entrypoint
 
 ### Turning off CE services ###
 
-1.  Turn off CE/gratia services
-2.  AI (Carl): Document the Gratia command that admins can run to manually upload existing
+1.  Register a [downtime](../common/registration.md#registering-resource-downtimes)
+1.  During the update, turn off the following services on your HTCondor-CE host:
+
+        :::console
+        root@host # systemctl stop condor-ce
+        root@host # systemctl stop gratia-probes-cron
+
+1.  Run the command corresponding to your batch system to upload any remaining accounting records to the GRACC:
+
+    | If your batch system is... | Then run the following command...                 |
+    |:---------------------------|:--------------------------------------------------|
+    | HTCondor                   | `/usr/share/gratia/condor/condor_meter`           |
+    | LSF                        | `/usr/share/gratia/lsf/lsf`                       |
+    | PBS                        | `/usr/share/gratia/pbs-lsf/pbs-lsf_meter.cron.sh` |
+    | SGE                        | `/usr/share/gratia/sge/sge_meter.cron.sh`         |
+    | Slurm                      | `/usr/share/gratia/slurm/slurm_meter -c`          |
+
+1.  Disable the `gratia-probes-cron` service:
+
+        :::console
+        root@host # systemctl disable gratia-probes-cron
 
 ### Updating CE packages ###
 
