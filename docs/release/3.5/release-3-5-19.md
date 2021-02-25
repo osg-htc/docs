@@ -20,7 +20,7 @@ Summary of Changes
 ------------------
 
 !!! note
-    If using scitokens-credmon with HTCondor 8.9, [manual adjustments](../release_series.md#updating-to-htcondor-897) need to be made before upgrading.
+    If using scitokens-credmon with HTCondor 8.9, [manual adjustments](../updating-to-osg-35.md#updating-to-htcondor-897) need to be made before upgrading.
 
 This release contains:
 
@@ -72,7 +72,7 @@ Updating to the New Release
 ---------------------------
 
 To update to the OSG 3.5 series, please consult the page on
-[updating between release series](../release_series.md#updating-to-osg-35).
+[updating between release series](../updating-to-osg-35.md).
 
 For sites using non-RPM worker node client installations, new [tarballs](../../worker-node/install-wn-tarball.md) and
 [container images](../../worker-node/using-wn-containers.md) are available:
