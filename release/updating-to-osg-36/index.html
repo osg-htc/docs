@@ -1702,7 +1702,7 @@
         
           <li class="md-nav__item">
   <a href="#osg-configure" class="md-nav__link">
-    osg-configure
+    OSG-Configure
   </a>
   
 </li>
@@ -1767,8 +1767,40 @@
 <h3 id="updating-ce-configuration">Updating CE configuration<a class="headerlink" href="#updating-ce-configuration" title="Permanent link">&para;</a></h3>
 <h4 id="gratia-probe">gratia-probe<a class="headerlink" href="#gratia-probe" title="Permanent link">&para;</a></h4>
 <p>AI (Carl): https://opensciencegrid.atlassian.net/browse/SOFTWARE-4473</p>
-<h4 id="osg-configure">osg-configure<a class="headerlink" href="#osg-configure" title="Permanent link">&para;</a></h4>
-<p>AI (Mat): https://opensciencegrid.atlassian.net/browse/SOFTWARE-4496</p>
+<h4 id="osg-configure">OSG-Configure<a class="headerlink" href="#osg-configure" title="Permanent link">&para;</a></h4>
+<p>The OSG 3.6 release series contains OSG-Configure 4, a major version upgrade from the previously released versions in the OSG.
+See the <a href="https://github.com/opensciencegrid/osg-configure/releases/tag/v4.0.0">OSG-Configure 4.0.0 release notes</a>
+for an overview of the changes.
+Several configuration modules and options were removed or deprecated and CE configuration has been simplified;
+the update from version 3 to version 4 will require some manual changes to your configuration.</p>
+<p>To update OSG-Configure, perform the following steps:</p>
+<ol>
+<li>
+<p>Merge any <code>*.rpmnew</code> files in <code>/etc/osg/config.d/</code></p>
+</li>
+<li>
+<p>Uninstall <code>osg-configure-gip</code> and <code>osg-configure-misc</code> if they are installed:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host#</span> yum erase osg-configure-gip osg-configure-misc
+</code></pre></div>
+
+</li>
+<li>
+<p>If <code>/etc/osg/config.d/30-gip.ini.rpmsave</code> exists, merge its contents into <code>31-cluster.ini</code></p>
+</li>
+<li>
+<p>Edit the <code>Site Information</code> configuration section (in <code>40-siteinfo.ini</code>).
+    If <code>resource_group</code> is not set, add:</p>
+<div class="codehilite"><pre><span></span><code>resource_group = &lt;TOPOLOGY RESOURCE GROUP FOR THIS HOST&gt;
+</code></pre></div>
+
+</li>
+<li>
+<p>Run osg-configure to apply your changes:</p>
+<div class="codehilite"><pre><span></span><code>osg-configure -dc
+</code></pre></div>
+
+</li>
+</ol>
 <h4 id="htcondor-ce">HTCondor-CE<a class="headerlink" href="#htcondor-ce" title="Permanent link">&para;</a></h4>
 <p>AI (BrianL): https://opensciencegrid.atlassian.net/browse/SOFTWARE-4501
 HTCondor-CE in front of HTCondor CE, <a href="#updating-your-htcondor-hosts">see updating your HTCondor Hosts</a></p>
