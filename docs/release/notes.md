@@ -8,7 +8,7 @@ It also drops support for the RSV monitoring probes, CREAM CEs, and Enterprise L
 See the initial [OSG 3.5.0 release notes](3.5/release-3-5-0.md) for additional details.
 
 To update to the OSG 3.5 series, please consult the page on
-[updating between release series](release_series.md#updating-to-osg-35).
+[updating between release series](updating-to-osg-35.md).
 
 !!!tip "Want faster access to production-ready software?"
     OSG 3.5 offers a rolling release repository where packages are added as soon as they pass acceptance testing.
