@@ -3140,7 +3140,6 @@ attribute of the job submitted to a PBS batch system:</p>
 <li>Jobs are split into different routes based on the <a href="#glidein-queue">GlideIn</a> queue that they're in.</li>
 <li>There is a difference between <code>Requirements</code> and <code>set_requirements</code>. The <code>Requirements</code> attribute matches <em>incoming</em> jobs to specific routes while the <code>set_requirements</code> sets the <code>Requirements</code> attribute on the <em>routed</em> job, which confines which machines that the routed job can land on.</li>
 </ul>
-<p>Source: <a href="http://www.usatlas.bnl.gov/twiki/bin/view/Admins/HTCondorCE.html">http://www.usatlas.bnl.gov/twiki/bin/view/Admins/HTCondorCE.html</a></p>
 <div class="codehilite"><pre><span></span><code>JOB_ROUTER_ENTRIES @=jre
    [
      GridResource = &quot;condor localhost localhost&quot;;
