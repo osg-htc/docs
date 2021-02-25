@@ -223,6 +223,10 @@
         
   
   
+    
+    
+  
+  
     <li class="md-tabs__item">
       
         <a href="../../notes/" class="md-tabs__link">
@@ -230,6 +234,8 @@
         </a>
       
     </li>
+  
+
   
 
       
@@ -1486,10 +1492,48 @@
           
 
 
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8-1" type="checkbox" id="nav-8-1">
+    
+    <label class="md-nav__link" for="nav-8-1">
+      OSG 3.5
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="OSG 3.5" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-1">
+        <span class="md-nav__icon md-icon"></span>
+        OSG 3.5
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
   <li class="md-nav__item">
     <a href="../../notes/" class="md-nav__link">
       Release Notes
     </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../updating-to-osg-35/" class="md-nav__link">
+      Updating to OSG 3.5
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -1736,7 +1780,7 @@ of packages related to OSG 3.4 and replaced with packages for OSG 3.5.
 Other notable changes in this release series include dropping support for Enterprise Linux 6 and
 <a href="https://opensciencegrid.org/technology/policy/cream-support/">CREAM CEs</a>.</p>
 <p>To update to the OSG 3.5 release series, please consult the page on
-<a href="../../release_series/#updating-to-osg-35">updating between release series</a>.</p>
+<a href="../../updating-to-osg-35/">updating between release series</a>.</p>
 <div class="admonition question">
 <p class="admonition-title">Where are GlideinWMS and HTCondor-CE?</p>
 <p>HTCondor-CE (including <code>osg-ce</code> metapackages) and GlideinWMS are both absent in OSG 3.5.0:
@@ -1753,7 +1797,7 @@ regular support will end in <strong>February 2020</strong> and critical bug/secu
 <p>In addition to the packages that were carried over from OSG 3.4.33, this release contains the following package updates:</p>
 <ul>
 <li>HTCondor 8.8.4: The current HTCondor <a href="https://htcondor.readthedocs.io/en/stable/version-history/stable-release-series-88.html#version-8-8-4">stable release</a>.
-    See the <a href="../../release_series/#updating-to-htcondor-88x_1">manual update instructions</a> before
+    See the <a href="../../updating-to-osg-35/#updating-to-htcondor-88x_1">manual update instructions</a> before
     updating to this version.
     Some highlights from the 8.8 release series include:<ul>
 <li>Automatically add AWS resources to your pool using HTCondor Annex</li>
@@ -1785,7 +1829,7 @@ upgrading.</p>
 </li>
 <li>OSG Configure 3.0.0: A <a href="https://github.com/opensciencegrid/osg-configure/releases/tag/v3.0.0">major version release</a>,
     including changes from the OSG Configure 2.4 series and dropping some deprecated features.
-    See the <a href="../../release_series/#updating-to-osg-configure-3">manual update instructions</a> before updating to this
+    See the <a href="../../updating-to-osg-35/#updating-to-osg-configure-3">manual update instructions</a> before updating to this
     version.</li>
 <li>OSG XRootD 3.5: A meta-package including common configuration across <a href="../../../data/xrootd/install-standalone/">standalone</a>,
     <a href="../../../data/xrootd/install-storage-element/">storage element</a>, and <a href="../../../data/stashcache/overview/">caching</a> installations of
@@ -1862,7 +1906,7 @@ If you believe any of the following packages have been removed in error, please 
 </ul>
 <h2 id="updating-to-the-new-release">Updating to the New Release<a class="headerlink" href="#updating-to-the-new-release" title="Permanent link">&para;</a></h2>
 <p>To update to the OSG 3.5 series, please consult the page on
-<a href="../../release_series/#updating-to-osg-35">updating between release series</a>.</p>
+<a href="../../updating-to-osg-35/">updating between release series</a>.</p>
 <p>For sites using non-RPM worker node client installations, new <a href="../../../worker-node/install-wn-tarball/">tarballs</a> and
 <a href="../../../worker-node/using-wn-containers/">container images</a> are available:</p>
 <ul>
