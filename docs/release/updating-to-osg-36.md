@@ -1,7 +1,18 @@
+!!! danger "Before considering an upgrade to OSG 3.6&hellip;"
+    Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
+    authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
+    If you do not know which VOs you are currently supporting, contact us at <help@opensciencegrid.org>.
+
 Updating to OSG 3.6
 ===================
 
+[OSG 3.6](release_series.md#series-overviews) (the *new series*) is a major overhaul of the OSG software stack compared
+to OSG 3.5 (the *old series*) with changes to core protocols used for authentication and data transfer.
+Depending on the VO(s) that you support, updating to the new series could result in issues with your site receiving
+pilot jobs and/or issues with data transfer.
 
+If you have verified that your VO(s) support token-based pilot submission and HTTP-based data transfers,
+use this document to update your OSG software to OSG 3.6.
 
 Updating Your OSG Compute Entrypoint
 ------------------------------------
