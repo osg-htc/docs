@@ -15,7 +15,7 @@ Other notable changes in this release series include dropping support for Enterp
 [CREAM CEs](https://opensciencegrid.org/technology/policy/cream-support/).
 
 To update to the OSG 3.5 release series, please consult the page on
-[updating between release series](../release_series.md#updating-to-osg-35).
+[updating between release series](../updating-to-osg-35.md).
 
 !!! question "Where are GlideinWMS and HTCondor-CE?"
     HTCondor-CE (including `osg-ce` metapackages) and GlideinWMS are both absent in OSG 3.5.0:
@@ -32,7 +32,7 @@ To update to the OSG 3.5 release series, please consult the page on
 In addition to the packages that were carried over from OSG 3.4.33, this release contains the following package updates:
 
 -   HTCondor 8.8.4: The current HTCondor [stable release](https://htcondor.readthedocs.io/en/stable/version-history/stable-release-series-88.html#version-8-8-4).
-    See the [manual update instructions](../release_series.md#updating-to-htcondor-88x_1) before
+    See the [manual update instructions](../updating-to-osg-35.md#updating-to-htcondor-88x_1) before
     updating to this version.
     Some highlights from the 8.8 release series include:
     -   Automatically add AWS resources to your pool using HTCondor Annex
@@ -60,7 +60,7 @@ In addition to the packages that were carried over from OSG 3.4.33, this release
 -   XCache 1.1.1: This release includes packages for ATLAS and CMS XCaches as well as Stash Origin HTTP/S support.
 -   OSG Configure 3.0.0: A [major version release](https://github.com/opensciencegrid/osg-configure/releases/tag/v3.0.0),
     including changes from the OSG Configure 2.4 series and dropping some deprecated features.
-    See the [manual update instructions](../release_series.md#updating-to-osg-configure-3) before updating to this
+    See the [manual update instructions](../updating-to-osg-35.md#updating-to-osg-configure-3) before updating to this
     version.
 -   OSG XRootD 3.5: A meta-package including common configuration across [standalone](../../data/xrootd/install-standalone.md),
     [storage element](../../data/xrootd/install-storage-element.md), and [caching](../../data/stashcache/overview.md) installations of
@@ -139,7 +139,7 @@ Updating to the New Release
 ---------------------------
 
 To update to the OSG 3.5 series, please consult the page on
-[updating between release series](../release_series.md#updating-to-osg-35).
+[updating between release series](../updating-to-osg-35.md).
 
 For sites using non-RPM worker node client installations, new [tarballs](../../worker-node/install-wn-tarball.md) and
 [container images](../../worker-node/using-wn-containers.md) are available:
