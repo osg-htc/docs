@@ -45,15 +45,6 @@ Since the start of the RPM-based OSG software stack, we have offered the followi
     Historically, there were 3.0.x releases as well, but there was no separate release series for 3.0 and 3.1;
     we simply went from 3.0.10 to 3.1.0 in the same repositories.
 
-OSG Upcoming
-------------
-
-There is one more OSG Series called "upcoming" which contains major updates planned for a future release series.
-The yum repositories for upcoming (`osg-upcoming` and `osg-upcoming-testing`) are available from all OSG 3.x series, and
-individual packages can be installed from Upcoming without needing to update entirely to a new series.
-Note, however, that packages in the "upcoming" repositories are tested against the most recent OSG series.
-As of the time of writing, `osg-upcoming` is meant to work with OSG 3.5.
-
 Installing an OSG Release Series
 --------------------------------
 
