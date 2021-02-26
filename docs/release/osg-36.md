@@ -29,7 +29,10 @@ Here is a short list of the differences:
 -   HTCondor 8.9.11 (HTCondor 8.9.12 release was delayed)
 -   HTCondor 5.0.0
 -   [Gratia Probe 2.0.0](https://github.com/opensciencegrid/gratia-probe/releases/tag/v2.0.0-2): replace all batch system probes with the non-root HTCondor-CE probe
--   [OSG-Configure 4.0.0](https://github.com/opensciencegrid/osg-configure/releases/tag/v4.0.0): upgrade to support OSG 3.6
+-   [OSG-Configure 4.0.0](https://github.com/opensciencegrid/osg-configure/releases/tag/v4.0.0):
+    - Deprecated RSV
+    - Dropped unused configuration modules and attributes
+    - Reorganized some configuration (see [update instructions](updating-to-osg-36.md#osg-configure) for more details)
 
 In addition, we have updated our
 [Software Release Policy](https://opensciencegrid.org/technology/policy/software-release/) to follow a rolling
