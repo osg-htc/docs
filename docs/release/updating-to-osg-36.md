@@ -120,10 +120,20 @@ To update OSG-Configure, perform the following steps:
 
 1.  If `/etc/osg/config.d/30-gip.ini.rpmsave` exists, merge its contents into `31-cluster.ini`
 
-1.  Edit the `Site Information` configuration section (in `40-siteinfo.ini`).
-    If `resource_group` is not set, add:
+1.  Edit the `Site Information` configuration section (in `40-siteinfo.ini`):
+    -   If `resource_group` is not set, add:
 
-        resource_group = <TOPOLOGY RESOURCE GROUP FOR THIS HOST>
+                resource_group = <TOPOLOGY RESOURCE GROUP FOR THIS HOST>
+
+    -   Delete the following attributes:
+        -   sponsor
+        -   site_policy
+        -   contact
+        -   email
+        -   city
+        -   country
+        -   latitude
+        -   longitude
 
 1.  Run osg-configure to apply your changes:
 
