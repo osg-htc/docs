@@ -141,9 +141,10 @@ HTCondor-CE in front of HTCondor CE, [see updating your HTCondor Hosts](#updatin
 Updating Your HTCondor Hosts
 ----------------------------
 
-1.  The `ALLOW_DAEMON` permission no longer inherits from `ALLOW_WRITE`. Please ensure the `ALLOW_DAEMON` is properly
-    set. To revert to the old behavior you can add ``ALLOW_DAEMON = ALLOW_WRITE``. However, that means anyone that can
-    submit jobs can also manipulate your HTCondor daemons.
+1.  The `ALLOW_DAEMON` permission no longer inherits from `ALLOW_WRITE`.
+    To revert to the old behavior you can add ``ALLOW_DAEMON = ALLOW_WRITE``.
+    However this is not recommended, since re-enabling this configuration means anyone that can submit jobs can also
+    manipulate your HTCondor daemons.
 
 1.  The following OSG specific configuration was dropped in anticipation of HTCondor's new secure by default
     configuration coming in HTCondor version 9.0.
