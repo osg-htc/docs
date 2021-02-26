@@ -784,6 +784,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#configuration-customization-optional" class="md-nav__link">
+    Configuration customization (optional)
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1806,6 +1813,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#configuration-customization-optional" class="md-nav__link">
+    Configuration customization (optional)
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1954,6 +1968,13 @@ you may also configure the behavior of your cache with the following environment
 </tbody>
 </table>
 <p>For more details, see the <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Configuration">Frontier Squid documentation</a>.</p>
+<h3 id="configuration-customization-optional">Configuration customization (optional)<a class="headerlink" href="#configuration-customization-optional" title="Permanent link">&para;</a></h3>
+<p>More complicated configuration customization can be done by mounting <code>.sh</code> and <code>.awk</code> files into /etc/squid/customize.d.
+For details on the names and content of those files see the comments in the
+<a href="https://github.com/opensciencegrid/docker-frontier-squid/blob/master/squid-customize.sh">customization script</a> 
+and see the
+<a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Configuration">upstream documentation</a>
+on configuration customization.</p>
 <h2 id="running-a-frontier-squid-container">Running a Frontier Squid Container<a class="headerlink" href="#running-a-frontier-squid-container" title="Permanent link">&para;</a></h2>
 <p>To run a Frontier Squid container with the defaults:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">user@host $</span> docker run --rm --name frontier-squid <span class="se">\</span>
