@@ -141,4 +141,111 @@ HTCondor-CE in front of HTCondor CE, [see updating your HTCondor Hosts](#updatin
 Updating Your HTCondor Hosts
 ----------------------------
 
-TimT: Insert text for updates to HTCondor (https://opensciencegrid.atlassian.net/browse/SOFTWARE-4508)
+1.  The `ALLOW_DAEMON` permission no longer inherits from `ALLOW_WRITE`. Please ensure the `ALLOW_DAEMON` is properly
+    set. To revert to the old behavior you can add ``ALLOW_DAEMON = ALLOW_WRITE``. However, that means anyone that can
+    submit jobs can also manipulate your HTCondor daemons.
+
+1.  The following OSG specific configuration was dropped in anticipation of HTCondor's new secure by default
+    configuration coming in HTCondor version 9.0.
+
+``` file
+CONDOR_HOST = $(FULL_HOSTNAME)
+DAEMON_LIST = COLLECTOR, MASTER, NEGOTIATOR, SCHEDD, STARTD
+
+# require authentication and integrity for everything...
+SEC_DEFAULT_AUTHENTICATION=REQUIRED
+SEC_DEFAULT_INTEGRITY=REQUIRED
+
+# ...except read access...
+SEC_READ_AUTHENTICATION=OPTIONAL
+SEC_READ_INTEGRITY=OPTIONAL
+
+# ...and the outgoing (client side) connection since the server side will enforce its policy
+SEC_CLIENT_AUTHENTICATION=OPTIONAL
+SEC_CLIENT_INTEGRITY=OPTIONAL
+
+# this will required PASSWORD authentications for daemon-to-daemon, and
+# allow FS authentication for submitting jobs and running administrator commands
+SEC_DEFAULT_AUTHENTICATION_METHODS = FS, PASSWORD
+SEC_DAEMON_AUTHENTICATION_METHODS = PASSWORD
+SEC_NEGOTIATOR_AUTHENTICATION_METHODS = PASSWORD
+SEC_PASSWORD_FILE = /etc/condor/passwords.d/POOL
+
+# admin commands (e.g. condor_off) can be run by:
+#  1. root on the local host or the central manager
+#  2. condor user on the local host or the central manager
+ALLOW_ADMINISTRATOR = condor@*/$(FULL_HOSTNAME) condor@*/$(CONDOR_HOST) condor_pool@*/$(FULL_HOSTNAME) condor_pool@*/$(CONDOR_HOST)  root@$(UID_DOMAIN)/$(FULL_HOSTNAME)
+# only the condor daemons on the central manager can negotiate
+ALLOW_NEGOTIATOR = condor@*/$(CONDOR_HOST) condor_pool@*/$(CONDOR_HOST)
+# any authenticated daemons in the pool can read/write/advertise
+ALLOW_DAEMON = condor@* condor_pool@*
+```
+
+1.  Major changes in HTCondor from their release annoucements. Consult the
+    [version history](https://htcondor.readthedocs.io/en/latest/version-history/development-release-series-89.html)
+    for details.
+    -   Absent any configuration, HTCondor denies authorization to all users
+    -   All HTCondor daemons under a condor\_master share a security session
+    -   Scheduler Universe jobs are prioritized by job priority
+    -   An efficient curl plugin that supports uploads and authentication tokens
+    -   HTCondor automatically supports GPU jobs in Docker and Singularity
+    -   File transfer times are now recorded in the user job log and the job ad
+    -   The HTTP/HTTPS file transfer plugin will timeout and retry transfers
+    -   A new multi-file box.com file transfer plugin to download files
+    -   The manual has been moved to Read the Docs
+    -   Configuration options for job-log time-stamps (UTC, ISO 8601, sub-second)
+    -   Several improvements to SSL authentication
+    -   New TOKEN authentication method enables fine-grained authorization control
+    -   TOKEN and SSL authentication methods are now enabled by default
+    -   The job and global event logs use ISO 8601 formatted dates by default
+    -   Added Google Drive multifile transfer plugin
+    -   Added upload capability to Box multifile transfer plugin
+    -   Added Python bindings to submit a DAG
+    -   Python 'JobEventLog' can be pickled to facilitate intermittent readers
+    -   2x matchmaking speed for partitionable slots with simple START expressions
+    -   Improved the performance of the condor\_schedd under heavy load
+    -   Reduced the memory footprint of condor\_dagman
+    -   Initial implementation to record the circumstances of a job's termination
+    -   Amazon S3 file transfers using pre-signed URLs
+    -   Further reductions in DAGMan memory usage
+    -   Added -idle option to condor\_q to display information about idle jobs
+    -   Support for SciTokens authentication
+    -   A tool, condor\_evicted\_files, to examine the SPOOL of an idle job
+    -   Added a new mode that skips jobs whose outputs are newer than their inputs
+    -   Added command line tool to help debug ClassAd expressions
+    -   Added port forwarding to Docker containers
+    -   You may now change some DAGMan throttles while the DAG is running
+    -   Added support for session tokens for pre-signed S3 URLs
+    -   Improved the speed of the negotiator when custom resources are defined
+    -   Fixed interactive submission of Docker jobs
+    -   Fixed a bug where jobs wouldn't be killed when getting an OOM notification
+    -   Multiple enhancements in the file transfer code
+    -   Support for more regions in s3:// URLs
+    -   Much more flexible job router language
+    -   Jobs may now specify cuda\_version to match equally-capable GPUs
+    -   TOKENS are now called IDTOKENS to differentiate from SCITOKENS
+    -   Added the ability to blacklist TOKENS via an expression
+    -   Can simultaneously handle Kerberos and OAUTH credentials
+    -   The getenv submit command now supports a blacklist and whitelist
+    -   The startd supports a remote history query similar to the schedd
+    -   condor\_q -submitters now works with accounting groups
+    -   Fixed a bug reading service account credentials for Google Compute Engine
+    -   Added htcondor.dags and htcondor.htchirp to the HTCondor Python bindings
+    -   New condor\_watch\_q tool that efficiently provides live job status updates
+    -   Added support for marking a GPU offline while other jobs continue
+    -   The condor\_master command does not return until it is fully started
+    -   Deprecated several Python interfaces in the Python bindings
+    -   The RPM packages require globus, munge, scitokens, and voms from EPEL
+    -   Improved cgroup memory policy settings that set both hard and soft limit
+    -   Cgroup memory usage reporting no longer includes the kernel buffer cache
+    -   Numerous Python binding improvements, see version history
+    -   Can create a manifest of files on the execute node at job start and finish
+    -   Added provisioner nodes to DAGMan, allowing users to provision resources
+    -   DAGMan can now produce .dot graphs without running the workflow
+    -   Fix bug where negotiator stopped making matches when group quotas are used
+    -   Support OAuth, SciTokens, and Kerberos credentials in local universe jobs
+    -   The Python schedd.submit method now takes a Submit object
+    -   DAGMan can now optionally run a script when a job goes on hold
+    -   DAGMan now provides a method for inline jobs to share submit descriptions
+    -   Can now add arbitrary tags to condor annex instances
+    -   Runs the "singularity test" before running the a singularity job
