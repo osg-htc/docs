@@ -126,14 +126,14 @@ To update OSG-Configure, perform the following steps:
                 resource_group = <TOPOLOGY RESOURCE GROUP FOR THIS HOST>
 
     -   Delete the following attributes:
-        -   sponsor
-        -   site_policy
-        -   contact
-        -   email
-        -   city
-        -   country
-        -   latitude
-        -   longitude
+        -   `sponsor`
+        -   `site_policy
+        -   `contact`
+        -   `email`
+        -   `city`
+        -   `country`
+        -   `latitude`
+        -   `longitude`
 
 1.  Run osg-configure to apply your changes:
 
