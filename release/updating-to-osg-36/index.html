@@ -1769,6 +1769,19 @@ pilot jobs and/or issues with data transfer.</p>
 <p>If you have verified that your VO(s) support token-based pilot submission and HTTP-based data transfers,
 use this document to update your OSG software to OSG 3.6.</p>
 <h2 id="updating-your-osg-compute-entrypoint">Updating Your OSG Compute Entrypoint<a class="headerlink" href="#updating-your-osg-compute-entrypoint" title="Permanent link">&para;</a></h2>
+<div class="admonition danger">
+<p class="admonition-title">Before considering an upgrade to OSG 3.6&hellip;</p>
+<p>Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
+authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
+If you do not know which VOs you are currently supporting, contact us at <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a>.</p>
+</div>
+<p>In OSG 3.6, OSG Compute Entrypoints (CEs) only accept token-based pilot job submissions.
+If you need to support token-based and GSI proxy-based pilot job submission,
+you must install or remain on <a href="../notes/">OSG 3.5</a>.
+If the VOs that you support have the capability to submit token-based pilots, you may update your CE to OSG 3.6.</p>
+<p>In addition to the change in authentication protocol, OSG 3.6 CEs include new major versions of software that require
+manual updates.
+To upgrade your CE to OSG 3.6, follow the sections below to make your configuration OSG 3.6-compatible.</p>
 <h3 id="turning-off-ce-services">Turning off CE services<a class="headerlink" href="#turning-off-ce-services" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Register a <a href="../../common/registration/#registering-resource-downtimes">downtime</a></li>
@@ -1937,9 +1950,33 @@ the update from version 3 to version 4 will require some manual changes to your 
 </li>
 </ol>
 <h4 id="htcondor-ce">HTCondor-CE<a class="headerlink" href="#htcondor-ce" title="Permanent link">&para;</a></h4>
-<p>AI (BrianL): https://opensciencegrid.atlassian.net/browse/SOFTWARE-4501
-HTCondor-CE in front of HTCondor CE, <a href="#updating-your-htcondor-hosts">see updating your HTCondor Hosts</a></p>
+<p>The OSG 3.6 release series contains <a href="https://htcondor.github.io/htcondor-ce/releases/#500">HTCondor-CE 5</a>, a major
+version upgrade from HTCondor-CE 4, which was available in the OSG 3.5 release repositories.
+To update HTCondor-CE, perform the following steps:</p>
+<ol>
+<li>
+<p>Merge any <code>*.rpmnew</code> files in <code>/etc/condor-ce/</code></p>
+</li>
+<li>
+<p>HTCondor-CE &lt;= 4 set <code>$HOME</code> in the routed job to the user's <code>$HOME</code> directory on the HTCondor-CE but this is no
+    longer the default.
+    If you want to ensure that a routed job's <code>$HOME</code> is set to the same directory as the user on the CE,
+    set <code>USE_CE_HOME_DIR = True</code> in <code>/etc/condor-ce/config.d/</code>.</p>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">For OSG CEs serving an HTCondor pool</p>
+<p>If your OSG CE routes pilot jobs to a local HTCondor pool, also
+see the section for <a href="#updating-your-htcondor-hosts">updating your HTCondor hosts</a></p>
+</div>
 <h3 id="starting-ce-services">Starting CE services<a class="headerlink" href="#starting-ce-services" title="Permanent link">&para;</a></h3>
+<p>After updating your RPMs and updating your configuration, turn on the HTCondor-CE service:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> systemctl start htcondor-ce
+</code></pre></div>
+
+<p>!!! question "What about <code>gratia-probes-cron</code>?
+    In OSG 3.6, the OSG CE no longer needs a separate service for Gratia Probe.
+    Instead, the default CE configuration runs its Gratia Probe as a periodic process under the HTCondor-CE process tree.</p>
 <h2 id="updating-your-htcondor-hosts">Updating Your HTCondor Hosts<a class="headerlink" href="#updating-your-htcondor-hosts" title="Permanent link">&para;</a></h2>
 <p>TimT: Insert text for updates to HTCondor (https://opensciencegrid.atlassian.net/browse/SOFTWARE-4508)</p>
                 
