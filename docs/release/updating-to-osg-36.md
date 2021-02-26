@@ -70,9 +70,25 @@ After turning off your CE's services, you may proceed with the RPM update proces
 
 ### Updating CE configuration ###
 
-#### gratia-probe ####
+#### Gratia Probe ####
 
-AI (Carl): https://opensciencegrid.atlassian.net/browse/SOFTWARE-4473
+The OSG 3.6 release series contains [Gratia Probe 2](https://github.com/opensciencegrid/gratia-probe/releases/tag/v2.0.0-2),
+which uses the non-root HTCondor-CE probe to account for your site's resource contributions.
+To ensure that your contributions continue to be properly accounted for, verify that your HTCondor-CE's
+`PER_JOB_HISTORY_DIR` is set to `/var/lib/condor-ce/gratia/data`:
+
+```console
+root@host # condor_ce_config_val -v PER_JOB_HISTORY_DIR
+PER_JOB_HISTORY_DIR = /var/lib/condor-ce/gratia/data
+# at: /etc/condor-ce/config.d/99_gratia-ce.conf, line 5
+# raw: PER_JOB_HISTORY_DIR = /var/lib/condor-ce/gratia/data
+```
+
+- **If you see the above output**, your Gratia Probe configuration is correct and you may continue onto the
+  [next section](#osg-configure).
+
+- **If you do not see the above output**, visit the file listed in the output of `condor_ce_config_val`, remove the
+  offending value, and repeat until the proper value is returned.
 
 #### OSG-Configure ####
 
