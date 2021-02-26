@@ -1829,11 +1829,13 @@ If you do not know which VOs you are currently supporting, contact us at <a href
 </div>
 <h1 id="osg-36-news">OSG 3.6 News<a class="headerlink" href="#osg-36-news" title="Permanent link">&para;</a></h1>
 <p><strong>Supported OS Versions:</strong> EL7, EL8</p>
-<p>The OSG 3.6 release series introduces HTCondor 8.9 and soon HTCondor 9.0.
-With HTCondor 9.0 we will be transistioning to token based authentication.
+<p>The OSG 3.6 release series is a major overhaul of the OSG software stack compared to previous release series with
+changes to core protocols used for authentication and data transfer:
+bearer tokens, such as <a href="https://scitokens.org/">SciTokens</a> or WLCG tokens, are used for authentication instead of
+GSI proxies and HTTP is used for data transfer instead of GridFTP.</p>
+<p>To support these new protocols, OSG 3.6 includes HTCondor 8.9, HTCondor-CE 5, and will shortly include HTCondor 9.0,
+GlideinWMS 3.9, and XRootD 5.1.
 We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
-<p>To update to the OSG 3.6 series, please consult the page on
-<a href="../updating-to-osg-36/">updating between release series</a>.</p>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
 <h3 id="2020-02-26-36-released">2020-02-26: 3.6 Released<a class="headerlink" href="#2020-02-26-36-released" title="Permanent link">&para;</a></h3>
 <div class="admonition question">
@@ -1848,15 +1850,19 @@ their initial releases in this series until they are ready.</p>
 <a href="https://opensciencegrid.org/technology/policy/release-series/">policy</a>:
 regular support will end in <strong>August 2021</strong> and critical bug/security support will end in <strong>February 2022</strong>.</p>
 </div>
-<p>This is the start of a new release series where we introduce major changes.
-One of the major changes is the shift to token based authentication.
-Here is a short list of the differences:</p>
+<p>This initial release of the OSG 3.6 release series is based on the packages available in OSG 3.5.31.
+One of the major changes in this release series is the shift to token-based authentication from GSI proxy-based
+authentication.
+Here is a list of the differences in this initial release:</p>
 <ul>
 <li>GridFTP, GSI, and Hadoop are no longer available</li>
 <li>Added packages to support token-based authentication</li>
-<li><a href="https://htcondor.readthedocs.io/en/latest/version-history/development-release-series-89.html#version-8-9-11">HTCondor 8.9.11</a>: Initial token support (8.9.12, which will contain default configuration using tokens, was delayed)</li>
-<li><a href="https://htcondor.github.io/htcondor-ce/releases/#500">HTCondor-CE 5.0.0</a>: Support for tokens and Python 3</li>
-<li><a href="https://github.com/opensciencegrid/gratia-probe/releases/tag/v2.0.0-2">Gratia Probe 2.0.0</a>: replace all batch system probes with the non-root HTCondor-CE probe</li>
+<li><a href="https://htcondor.readthedocs.io/en/latest/version-history/development-release-series-89.html#version-8-9-11">HTCondor 8.9.11</a>:
+    Initial token support (8.9.12, which will contain default configuration using tokens, was delayed)</li>
+<li><a href="https://htcondor.github.io/htcondor-ce/releases/#500">HTCondor-CE 5.0.0</a>:
+    support for Python 3</li>
+<li><a href="https://github.com/opensciencegrid/gratia-probe/releases/tag/v2.0.0-2">Gratia Probe 2.0.0</a>:
+    replace all batch system probes with the non-root HTCondor-CE probe</li>
 <li><a href="https://github.com/opensciencegrid/osg-configure/releases/tag/v4.0.0">OSG-Configure 4.0.0</a>:<ul>
 <li>Deprecated RSV</li>
 <li>Dropped unused configuration modules and attributes</li>
