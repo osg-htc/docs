@@ -154,7 +154,7 @@ To update HTCondor-CE, perform the following steps:
 
 1.  HTCondor-CE <= 4 set `$HOME` in the routed job to the user's `$HOME` directory on the HTCondor-CE but this is no
     longer the default.
-    If you want to ensure that routed jobs `$HOME` is set to the same directory as the user on the CE,
+    If you want to ensure that a routed job's `$HOME` is set to the same directory as the user on the CE,
     set `USE_CE_HOME_DIR = True` in `/etc/condor-ce/config.d/`.
 
 !!! note "For OSG CEs serving an HTCondor pool"
