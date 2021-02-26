@@ -187,4 +187,44 @@ root@host # systemctl start htcondor-ce
 Updating Your HTCondor Hosts
 ----------------------------
 
-TimT: Insert text for updates to HTCondor (https://opensciencegrid.atlassian.net/browse/SOFTWARE-4508)
+1.  The `ALLOW_DAEMON` permission no longer inherits from `ALLOW_WRITE`.
+    To revert to the old behavior you can add ``ALLOW_DAEMON = ALLOW_WRITE``.
+    However this is not recommended, since re-enabling this configuration means anyone that can submit jobs can also
+    manipulate your HTCondor daemons.
+
+1.  The following OSG specific configuration was dropped in anticipation of HTCondor's new secure by default
+    configuration coming in HTCondor version 9.0.
+
+        CONDOR_HOST = $(FULL_HOSTNAME)
+        DAEMON_LIST = COLLECTOR, MASTER, NEGOTIATOR, SCHEDD, STARTD
+
+        # require authentication and integrity for everything...
+        SEC_DEFAULT_AUTHENTICATION=REQUIRED
+        SEC_DEFAULT_INTEGRITY=REQUIRED
+
+        # ...except read access...
+        SEC_READ_AUTHENTICATION=OPTIONAL
+        SEC_READ_INTEGRITY=OPTIONAL
+
+        # ...and the outgoing (client side) connection since the server side will enforce its policy
+        SEC_CLIENT_AUTHENTICATION=OPTIONAL
+        SEC_CLIENT_INTEGRITY=OPTIONAL
+
+        # this will required PASSWORD authentications for daemon-to-daemon, and
+        # allow FS authentication for submitting jobs and running administrator commands
+        SEC_DEFAULT_AUTHENTICATION_METHODS = FS, PASSWORD
+        SEC_DAEMON_AUTHENTICATION_METHODS = PASSWORD
+        SEC_NEGOTIATOR_AUTHENTICATION_METHODS = PASSWORD
+        SEC_PASSWORD_FILE = /etc/condor/passwords.d/POOL
+
+        # admin commands (e.g. condor_off) can be run by:
+        #  1. root on the local host or the central manager
+        #  2. condor user on the local host or the central manager
+        ALLOW_ADMINISTRATOR = condor@*/$(FULL_HOSTNAME) condor@*/$(CONDOR_HOST) condor_pool@*/$(FULL_HOSTNAME) condor_pool@*/$(CONDOR_HOST)  root@$(UID_DOMAIN)/$(FULL_HOSTNAME)
+        # only the condor daemons on the central manager can negotiate
+        ALLOW_NEGOTIATOR = condor@*/$(CONDOR_HOST) condor_pool@*/$(CONDOR_HOST)
+        # any authenticated daemons in the pool can read/write/advertise
+        ALLOW_DAEMON = condor@* condor_pool@*
+
+For more information about the HTCondor 8.9 series, consult the
+    [upstream version history](https://htcondor.readthedocs.io/en/latest/version-history/development-release-series-89.html).
