@@ -98,7 +98,7 @@ nav:
   # - OSG 3.6:
   #     - 'Release Notes': 'release/osg-36.md
   #     - 'Updating to OSG 3.6': 'release/updating-to-osg-36.md'
-  - 'OSG Release Series': 'release/release_series.md'
+  - 'Release Series': 'release/release_series.md'
   - 'Supported Platforms': 'release/supported_platforms.md'
   - 'OSG Yum Repos': 'common/yum.md'
   - 'Yum Basics': 'release/yum-basics.md'
