@@ -1695,7 +1695,7 @@
         
           <li class="md-nav__item">
   <a href="#gratia-probe" class="md-nav__link">
-    gratia-probe
+    Gratia Probe
   </a>
   
 </li>
@@ -1759,14 +1759,120 @@
 <h2 id="updating-your-osg-compute-entrypoint">Updating Your OSG Compute Entrypoint<a class="headerlink" href="#updating-your-osg-compute-entrypoint" title="Permanent link">&para;</a></h2>
 <h3 id="turning-off-ce-services">Turning off CE services<a class="headerlink" href="#turning-off-ce-services" title="Permanent link">&para;</a></h3>
 <ol>
-<li>Turn off CE/gratia services</li>
-<li>AI (Carl): Document the Gratia command that admins can run to manually upload existing</li>
+<li>Register a <a href="../../common/registration/#registering-resource-downtimes">downtime</a></li>
+<li>
+<p>During the update, turn off the following services on your HTCondor-CE host:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> systemctl stop condor-ce
+<span class="gp">root@host #</span> systemctl stop gratia-probes-cron
+</code></pre></div>
+
+</li>
+<li>
+<p>Run the command corresponding to your batch system to upload any remaining accounting records to the GRACC:</p>
+<table>
+<thead>
+<tr>
+<th align="left">If your batch system is...</th>
+<th align="left">Then run the following command...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">HTCondor</td>
+<td align="left"><code>/usr/share/gratia/condor/condor_meter</code></td>
+</tr>
+<tr>
+<td align="left">LSF</td>
+<td align="left"><code>/usr/share/gratia/lsf/lsf</code></td>
+</tr>
+<tr>
+<td align="left">PBS</td>
+<td align="left"><code>/usr/share/gratia/pbs-lsf/pbs-lsf_meter.cron.sh</code></td>
+</tr>
+<tr>
+<td align="left">SGE</td>
+<td align="left"><code>/usr/share/gratia/sge/sge_meter.cron.sh</code></td>
+</tr>
+<tr>
+<td align="left">Slurm</td>
+<td align="left"><code>/usr/share/gratia/slurm/slurm_meter -c</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Disable the <code>gratia-probes-cron</code> service:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> systemctl disable gratia-probes-cron
+</code></pre></div>
+
+</li>
 </ol>
 <h3 id="updating-ce-packages">Updating CE packages<a class="headerlink" href="#updating-ce-packages" title="Permanent link">&para;</a></h3>
-<p>yum update</p>
+<p>After turning off your CE's services, you may proceed with the RPM update process.</p>
+<ol>
+<li>
+<p>First, remove the old series Yum repositories:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> rpm -e osg-release
+</code></pre></div>
+
+<p>This step ensures that any local modifications to <code>*.repo</code> files will not prevent installing the new series repos.
+Any modified <code>*.repo</code> files should appear under <code>/etc/yum.repos.d/</code> with the <code>*.rpmsave</code> extension.
+After installing the new OSG repositories (the next step) you may want to apply any changes made in the <code>*.rpmsave</code>
+files to the new <code>*.repo</code> files.</p>
+</li>
+<li>
+<p>Update your <a href="../../common/yum/#install-the-osg-repositories">Yum repositories</a> to OSG 3.6</p>
+</li>
+<li>
+<p>Clean yum cache:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> yum clean all --enablerepo<span class="o">=</span>*
+</code></pre></div>
+
+</li>
+<li>
+<p>Update software:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> yum update
+</code></pre></div>
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>Please be aware that running <code>yum update</code> may also update other RPMs.
+    You can exclude packages from being updated using the <code>--exclude=[package-name or glob]</code> option for the
+    <code>yum</code> command.</li>
+<li>Watch the yum update carefully for any messages about a <code>.rpmnew</code> file being created.
+    That means that a configuration file had been edited, and a new default version was to be installed.
+    In that case, RPM does not overwrite the edited configuration file but instead installs the new version with
+    a <code>.rpmnew</code> extension.
+    You will need to merge any edits that have made into the <code>.rpmnew</code> file and then move the merged version
+    into place (that is, without the <code>.rpmnew</code> extension).
+    Watch especially for <code>/etc/lcmaps.db</code>, which every site is expected to edit.</li>
+</ul>
+</div>
+</li>
+</ol>
 <h3 id="updating-ce-configuration">Updating CE configuration<a class="headerlink" href="#updating-ce-configuration" title="Permanent link">&para;</a></h3>
-<h4 id="gratia-probe">gratia-probe<a class="headerlink" href="#gratia-probe" title="Permanent link">&para;</a></h4>
-<p>AI (Carl): https://opensciencegrid.atlassian.net/browse/SOFTWARE-4473</p>
+<h4 id="gratia-probe">Gratia Probe<a class="headerlink" href="#gratia-probe" title="Permanent link">&para;</a></h4>
+<p>The OSG 3.6 release series contains <a href="https://github.com/opensciencegrid/gratia-probe/releases/tag/v2.0.0-2">Gratia Probe 2</a>,
+which uses the non-root HTCondor-CE probe to account for your site's resource contributions.
+To ensure that your contributions continue to be properly accounted for, verify that your HTCondor-CE's
+<code>PER_JOB_HISTORY_DIR</code> is set to <code>/var/lib/condor-ce/gratia/data</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> condor_ce_config_val -v PER_JOB_HISTORY_DIR
+<span class="go">PER_JOB_HISTORY_DIR = /var/lib/condor-ce/gratia/data</span>
+<span class="gp">#</span> at: /etc/condor-ce/config.d/99_gratia-ce.conf, line <span class="m">5</span>
+<span class="gp">#</span> raw: <span class="nv">PER_JOB_HISTORY_DIR</span> <span class="o">=</span> /var/lib/condor-ce/gratia/data
+</code></pre></div>
+
+<ul>
+<li>
+<p><strong>If you see the above output</strong>, your Gratia Probe configuration is correct and you may continue onto the
+  <a href="#osg-configure">next section</a>.</p>
+</li>
+<li>
+<p><strong>If you do not see the above output</strong>, visit the file listed in the output of <code>condor_ce_config_val</code>, remove the
+  offending value, and repeat until the proper value is returned.</p>
+</li>
+</ul>
 <h4 id="osg-configure">OSG-Configure<a class="headerlink" href="#osg-configure" title="Permanent link">&para;</a></h4>
 <p>The OSG 3.6 release series contains OSG-Configure 4, a major version upgrade from the previously released versions in the OSG.
 See the <a href="https://github.com/opensciencegrid/osg-configure/releases/tag/v4.0.0">OSG-Configure 4.0.0 release notes</a>
