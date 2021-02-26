@@ -1544,7 +1544,7 @@
 
   <li class="md-nav__item">
     <a href="../release_series/" class="md-nav__link">
-      OSG Release Series
+      Release Series
     </a>
   </li>
 
@@ -1755,7 +1755,19 @@
                   </a>
                 
                 
-                <h1 id="updating-to-osg-36">Updating to OSG 3.6<a class="headerlink" href="#updating-to-osg-36" title="Permanent link">&para;</a></h1>
+                <div class="admonition danger">
+<p class="admonition-title">Before considering an upgrade to OSG 3.6&hellip;</p>
+<p>Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
+authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
+If you do not know which VOs you are currently supporting, contact us at <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a>.</p>
+</div>
+<h1 id="updating-to-osg-36">Updating to OSG 3.6<a class="headerlink" href="#updating-to-osg-36" title="Permanent link">&para;</a></h1>
+<p><a href="../release_series/#series-overviews">OSG 3.6</a> (the <em>new series</em>) is a major overhaul of the OSG software stack compared
+to OSG 3.5 (the <em>old series</em>) with changes to core protocols used for authentication and data transfer.
+Depending on the VO(s) that you support, updating to the new series could result in issues with your site receiving
+pilot jobs and/or issues with data transfer.</p>
+<p>If you have verified that your VO(s) support token-based pilot submission and HTTP-based data transfers,
+use this document to update your OSG software to OSG 3.6.</p>
 <h2 id="updating-your-osg-compute-entrypoint">Updating Your OSG Compute Entrypoint<a class="headerlink" href="#updating-your-osg-compute-entrypoint" title="Permanent link">&para;</a></h2>
 <h3 id="turning-off-ce-services">Turning off CE services<a class="headerlink" href="#turning-off-ce-services" title="Permanent link">&para;</a></h3>
 <ol>

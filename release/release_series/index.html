@@ -16,7 +16,7 @@
     
     
       
-        <title>OSG Release Series - OSG Site Documentation</title>
+        <title>Release Series - OSG Site Documentation</title>
       
     
     
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#osg-release-series" class="md-skip">
+        <a href="#release-series" class="md-skip">
           Skip to content
         </a>
       
@@ -95,7 +95,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              OSG Release Series
+              Release Series
             
           </span>
         </div>
@@ -1556,12 +1556,12 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        OSG Release Series
+        Release Series
         <span class="md-nav__icon md-icon"></span>
       </label>
     
     <a href="./" class="md-nav__link md-nav__link--active">
-      OSG Release Series
+      Release Series
     </a>
     
       
@@ -1578,8 +1578,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#osg-release-series_1" class="md-nav__link">
-    OSG Release Series
+  <a href="#series-overviews" class="md-nav__link">
+    Series Overviews
   </a>
   
 </li>
@@ -1720,8 +1720,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#osg-release-series_1" class="md-nav__link">
-    OSG Release Series
+  <a href="#series-overviews" class="md-nav__link">
+    Series Overviews
   </a>
   
 </li>
@@ -1757,7 +1757,7 @@
                   </a>
                 
                 
-                <h1 id="osg-release-series"><strong>OSG Release Series</strong><a class="headerlink" href="#osg-release-series" title="Permanent link">&para;</a></h1>
+                <h1 id="release-series"><strong>Release Series</strong><a class="headerlink" href="#release-series" title="Permanent link">&para;</a></h1>
 <p>An OSG release series is a sequence of OSG software releases that are intended to provide a painless upgrade path.
 For example, the 3.2 release series contains OSG software 3.2.0, 3.2.1, 3.2.2, and so forth.
 A release series corresponds to a set of Yum software repositories, including ones for development, testing, and
@@ -1773,13 +1773,28 @@ When a new series is initially released, most packages are identical to the prev
 will diverge over time.</p>
 <p>Our goal is, within a series, that one may upgrade their OSG services via <code>yum update</code> cleanly and without any necessary
 config file changes or excessive downtime.</p>
-<h2 id="osg-release-series_1">OSG Release Series<a class="headerlink" href="#osg-release-series_1" title="Permanent link">&para;</a></h2>
+<h2 id="series-overviews">Series Overviews<a class="headerlink" href="#series-overviews" title="Permanent link">&para;</a></h2>
 <p>Since the start of the RPM-based OSG software stack, we have offered the following release series:</p>
+<div class="admonition danger">
+<p class="admonition-title">Before considering an upgrade to OSG 3.6&hellip;</p>
+<p>Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
+authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
+If you do not know which VOs you are currently supporting, contact us at <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a>.</p>
+</div>
 <ul>
 <li>
-<p><strong>OSG 3.5</strong> started August 2019.
+<p><strong>OSG 3.5</strong> was started in August 2019 and will reach its end-of-life in February 2022.
     The main differences between it and 3.4 were the introduction of the HTCondor 8.8 and 8.9 series;
     also the RSV monitoring probes, EL6 support, and CREAM support were all dropped.</p>
+</li>
+<li>
+<p><strong>OSG 3.6</strong> (started February 2021) overhauls the authentication and data transfer protocols used in the OSG
+    software stack:
+    bearer tokens, such as <a href="https://scitokens.org/">SciTokens</a> or WLCG tokens, are used for authentication instead of
+    GSI proxies and HTTP is used for data transfer instead of GridFTP.
+    See the <a href="https://opensciencegrid.org/technology/policy/gridftp-gsi-migration/">OSG GridFTP and GSI migration plan</a>
+    for more details.
+    To support these new protocols, OSG 3.6 includes HTCondor 8.9, HTCondor-CE 5, and will include XRootD 5.1.</p>
 </li>
 <li>
 <p><strong>OSG 3.4</strong> started June 2017 and was end-of-lifed in November 2020.
