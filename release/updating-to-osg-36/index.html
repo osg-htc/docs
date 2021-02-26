@@ -1906,11 +1906,28 @@ the update from version 3 to version 4 will require some manual changes to your 
 <p>If <code>/etc/osg/config.d/30-gip.ini.rpmsave</code> exists, merge its contents into <code>31-cluster.ini</code></p>
 </li>
 <li>
-<p>Edit the <code>Site Information</code> configuration section (in <code>40-siteinfo.ini</code>).
-    If <code>resource_group</code> is not set, add:</p>
-<div class="codehilite"><pre><span></span><code>resource_group = &lt;TOPOLOGY RESOURCE GROUP FOR THIS HOST&gt;
+<p>Edit the <code>Site Information</code> configuration section (in <code>40-siteinfo.ini</code>):</p>
+<ul>
+<li>
+<p>If <code>resource_group</code> is not set, add:</p>
+<div class="codehilite"><pre><span></span><code>    resource_group = &lt;TOPOLOGY RESOURCE GROUP FOR THIS HOST&gt;
 </code></pre></div>
 
+</li>
+<li>
+<p>Delete the following attributes:</p>
+<ul>
+<li><code>sponsor</code></li>
+<li>`site_policy</li>
+<li><code>contact</code></li>
+<li><code>email</code></li>
+<li><code>city</code></li>
+<li><code>country</code></li>
+<li><code>latitude</code></li>
+<li><code>longitude</code></li>
+</ul>
+</li>
+</ul>
 </li>
 <li>
 <p>Run osg-configure to apply your changes:</p>
