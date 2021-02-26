@@ -2038,30 +2038,26 @@ intended for public use:</p>
 <table>
 <thead>
 <tr>
-<th>The OSG Yum repository...</th>
-<th>Contains RPMs that...</th>
+<th>The OSG Yum repositories...</th>
+<th>Contain RPMs that...</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>osg</code></td>
+<td><code>osg</code>, <code>osg-upcoming</code></td>
 <td>are considered production-ready (default).</td>
 </tr>
 <tr>
-<td><code>osg-rolling</code></td>
-<td>are considered production-ready but are released at faster pace than the <code>osg</code> repository.</td>
+<td><code>osg-rolling</code>, <code>osg-upcoming-rolling</code></td>
+<td>are considered production-ready but are released at faster pace than the <code>osg</code> repository (see note).</td>
 </tr>
 <tr>
-<td><code>osg-testing</code></td>
+<td><code>osg-testing</code>, <code>osg-upcoming-testing</code></td>
 <td>have passed developer or integration testing but not acceptance testing</td>
 </tr>
 <tr>
-<td><code>osg-development</code></td>
+<td><code>osg-development</code>, <code>osg-upcoming-development</code></td>
 <td>have not passed developer, integration or acceptance testing. Do not use without instruction from the OSG Software and Release Team.</td>
-</tr>
-<tr>
-<td><code>osg-upcoming</code>, <code>osg-upcoming-rolling</code>, <code>osg-upcoming-testing</code>, <code>osg-upcoming-development</code></td>
-<td>have newer versions that may require manual action after an update. See <a href="#upcoming-software">this section</a> for details.</td>
 </tr>
 <tr>
 <td><code>osg-contrib</code></td>
@@ -2069,6 +2065,20 @@ intended for public use:</p>
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code>upcoming</code> repositories contain newer software that might require manual action after an update.
+They are not enabled by default and must be enabled <em>in addition to</em> the main <code>osg</code> repository.
+See the <a href="#upcoming-software">upcoming software section</a> for details.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the 3.5 series (and earlier), packages are added to the <code>osg</code> and <code>osg-upcoming</code> repositories
+during discrete, numbered releases (e.g. 3.5.31);
+packages are added to the <code>osg-rolling</code> and <code>osg-upcoming-rolling</code> repositories as soon as they are considered production-ready.<br>
+In the 3.6 series, there are no <code>osg-rolling</code> or <code>osg-upcoming-rolling</code> repositories,
+and packages are added to the <code>osg</code> and <code>osg-upcoming</code> repositories as soon as they are considered production ready.</p>
+</div>
 <p>OSG's RPM packages also rely on external packages provided by supported OSes and EPEL.
 You must have the following repositories available and enabled:</p>
 <ul>
@@ -2097,21 +2107,15 @@ you may have to re-enable some repos as <a href="#centos-83-and-newer">described
 <h3 id="upcoming-software">Upcoming Software<a class="headerlink" href="#upcoming-software" title="Permanent link">&para;</a></h3>
 <p>Certain sites have requested new versions of software that would be considered "disruptive" or "experimental":
 upgrading to them would likely require manual intervention after their installation.
-We do not want sites to unwittingly upgrade to these versions.
-For the benefit of the sites that are interested in upgrading to these versions, we want to provide the same assurance
-of quality and production-readiness that we guarantee for the <code>osg</code> release repository.</p>
-<p>Due to the relatively small number of such packages, a full fork of the OSG 3 distribution is not warranted.
-Instead, we have created a separate set of repositories that contain only the "disruptive" versions of the software.</p>
-<p>These repositories have the same structure as our standard repositories.
-For example, there are <code>osg-upcoming-testing</code> and <code>osg-upcoming</code> repositories, which are analagous to the <code>osg-testing</code>
-and <code>osg</code> repositories, respectively.</p>
-<p>A full installation of our software stack is <em>not</em> possible using only the <code>osg-upcoming</code> repositories, since they
-contain a small subset of the software we ship.
-Both the main <code>osg</code> and the <code>osg-upcoming</code> repositories will need to be enabled for the installation to work.
-Because of this, interoperability will be maintained between the main <code>osg</code> and <code>osg-upcoming</code>.</p>
-<p>Depending on test results from sites, some packages in <code>osg-upcoming</code> may eventually end up in the main <code>osg</code> branch.
-The rest of the packages will eventually form the basis of the next <a href="../../release/release_series/">OSG release series</a>
-(e.g. "OSG 3.5").</p>
+We do not want sites to unwittingly upgrade to these versions.</p>
+<p>We have placed such software in separate repositories.
+Their names start with <code>osg-upcoming</code> and have the same structure as our standard repositories,
+as well as the same guarantees of quality and production-readiness.</p>
+<p>There are separate sets of upcoming repositories for each release series.
+For example, the <a href="https://repo.opensciencegrid.org/osg/3.5/">OSG 3.5 repos</a> have corresponding
+<a href="https://repo.opensciencegrid.org/osg/3.5-upcoming/">3.5-upcoming repos</a>.
+The upcoming repositories are meant to be layered on top of our standard repositories:
+installing software from the upcoming repositories requires also enabling the standard repositories from the same release.</p>
 <h3 id="contrib-software">Contrib Software<a class="headerlink" href="#contrib-software" title="Permanent link">&para;</a></h3>
 <p>In addition to our regular software repositories, we also have a <code>contrib</code> (short for "contributed") software repository.
 This is software that is does not go through the same software testing and release processes as the official OSG
@@ -2120,8 +2124,10 @@ Particularly, contrib software is not guaranteed to be compatible with the rest 
 supported by the OSG.</p>
 <p>The definitive list of software in the contrib repository can be found here:</p>
 <ul>
-<li><a href="https://repo.opensciencegrid.org/osg/3.5/el8/contrib/x86_64/">OSG 3.5 EL8 contrib software repository</a></li>
 <li><a href="https://repo.opensciencegrid.org/osg/3.5/el7/contrib/x86_64/">OSG 3.5 EL7 contrib software repository</a></li>
+<li><a href="https://repo.opensciencegrid.org/osg/3.5/el8/contrib/x86_64/">OSG 3.5 EL8 contrib software repository</a></li>
+<li><a href="https://repo.opensciencegrid.org/osg/3.6/el7/contrib/x86_64/">OSG 3.6 EL7 contrib software repository</a></li>
+<li><a href="https://repo.opensciencegrid.org/osg/3.6/el8/contrib/x86_64/">OSG 3.6 EL8 contrib software repository</a></li>
 </ul>
 <p>If you would like to distribute your software in the OSG <code>contrib</code> repository, please <a href="../help/">contact us</a> with a
 description of your software, what users it serves, and relevant RPM packaging.</p>
@@ -2224,14 +2230,26 @@ For instructions on upgrading from one OSG series to another, see the
    use:</p>
 <ul>
 <li>
+<p>OSG 3.5 EL7:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> yum install https://repo.opensciencegrid.org/osg/3.5/osg-3.5-el7-release-latest.rpm
+</code></pre></div>
+
+</li>
+<li>
 <p>OSG 3.5 EL8:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> yum install https://repo.opensciencegrid.org/osg/3.5/osg-3.5-el8-release-latest.rpm
 </code></pre></div>
 
 </li>
 <li>
-<p>OSG 3.5 EL7:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> yum install https://repo.opensciencegrid.org/osg/3.5/osg-3.5-el7-release-latest.rpm
+<p>OSG 3.6 EL7:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> yum install https://repo.opensciencegrid.org/osg/3.6/osg-3.6-el7-release-latest.rpm
+</code></pre></div>
+
+</li>
+<li>
+<p>OSG 3.6 EL8:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> yum install https://repo.opensciencegrid.org/osg/3.6/osg-3.6-el8-release-latest.rpm
 </code></pre></div>
 
 </li>
@@ -2250,6 +2268,7 @@ priority=98
 <span class="hll">enabled=1
 </span>gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
+       file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-2
 </code></pre></div>
 
 </li>
