@@ -32,7 +32,41 @@ Updating Your OSG Compute Entrypoint
 
 ### Updating CE packages ###
 
-yum update
+After turning off your CE's services, you may proceed with the RPM update process.
+
+1.  First, remove the old series Yum repositories:
+
+        :::console
+        root@host # rpm -e osg-release
+
+    This step ensures that any local modifications to `*.repo` files will not prevent installing the new series repos.
+    Any modified `*.repo` files should appear under `/etc/yum.repos.d/` with the `*.rpmsave` extension.
+    After installing the new OSG repositories (the next step) you may want to apply any changes made in the `*.rpmsave`
+    files to the new `*.repo` files.
+
+1.  Update your [Yum repositories](../common/yum/#install-the-osg-repositories) to OSG 3.6
+
+1.  Clean yum cache:
+
+        :::console
+        root@host # yum clean all --enablerepo=*
+
+1. Update software:
+
+        :::console
+        root@host # yum update
+
+    !!! warning
+        -   Please be aware that running `yum update` may also update other RPMs.
+            You can exclude packages from being updated using the `--exclude=[package-name or glob]` option for the
+            `yum` command.
+        -   Watch the yum update carefully for any messages about a `.rpmnew` file being created.
+            That means that a configuration file had been edited, and a new default version was to be installed.
+            In that case, RPM does not overwrite the edited configuration file but instead installs the new version with
+            a `.rpmnew` extension.
+            You will need to merge any edits that have made into the `.rpmnew` file and then move the merged version
+            into place (that is, without the `.rpmnew` extension).
+            Watch especially for `/etc/lcmaps.db`, which every site is expected to edit.
 
 ### Updating CE configuration ###
 
