@@ -59,6 +59,15 @@ Mountpoint       | Description                                                  
 
 For more details, see the [Frontier Squid documentation](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Configuration).
 
+### Configuration customization (optional) ###
+
+More complicated configuration customization can be done by mounting `.sh` and `.awk` files into /etc/squid/customize.d.
+For details on the names and content of those files see the comments in the
+[customization script](https://github.com/opensciencegrid/docker-frontier-squid/blob/master/squid-customize.sh) 
+and see the
+[upstream documentation](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Configuration)
+on configuration customization.
+
 
 Running a Frontier Squid Container
 ----------------------------------
