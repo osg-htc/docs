@@ -21,7 +21,7 @@ Latest News
 ### 2020-02-26: 3.6 Released
 
 !!! question "Where are GlideinWMS and XRootD?"
-    XRootD and GlideinWMS are both absent in OSG 3.6.0:
+    XRootD and GlideinWMS are both absent in the initial OSG 3.6 release:
     we expect major version updates that may require manual intervention for both of these packages so we are holding
     their initial releases in this series until they are ready.
 
@@ -36,8 +36,8 @@ Here is a short list of the differences:
 
 -   GridFTP, GSI, and Hadoop are no longer available
 -   Added packages to support token-based authentication
--   HTCondor 8.9.11: Initial token support (8.9.12, which will contain default configuration using tokens, was delayed)
--   HTCondor-CE 5.0.0: Support for tokens and Python 3
+-   [HTCondor 8.9.11](https://htcondor.readthedocs.io/en/latest/version-history/development-release-series-89.html#version-8-9-11): Initial token support (8.9.12, which will contain default configuration using tokens, was delayed)
+-   [HTCondor-CE 5.0.0](https://htcondor.github.io/htcondor-ce/releases/#500): Support for tokens and Python 3
 -   [Gratia Probe 2.0.0](https://github.com/opensciencegrid/gratia-probe/releases/tag/v2.0.0-2): replace all batch system probes with the non-root HTCondor-CE probe
 -   [OSG-Configure 4.0.0](https://github.com/opensciencegrid/osg-configure/releases/tag/v4.0.0):
     - Deprecated RSV
