@@ -1,7 +1,8 @@
 !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
     Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
     authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
-    If you do not know which VOs you are currently supporting, contact us at <help@opensciencegrid.org>.
+    If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
+    install or remain on the [OSG 3.5 release series](notes.md)
 
 OSG 3.6 News
 ============

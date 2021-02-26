@@ -1,7 +1,8 @@
 !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
     Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
     authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
-    If you do not know which VOs you are currently supporting, contact us at <help@opensciencegrid.org>.
+    If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
+    install or remain on the [OSG 3.5 release series](notes.md)
 
 Updating to OSG 3.6
 ===================
@@ -20,7 +21,8 @@ Updating Your OSG Compute Entrypoint
 !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
     Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
     authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
-    If you do not know which VOs you are currently supporting, contact us at <help@opensciencegrid.org>.
+    If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
+    install or remain on the [OSG 3.5 release series](notes.md)
 
 In OSG 3.6, OSG Compute Entrypoints (CEs) only accept token-based pilot job submissions.
 If you need to support token-based and GSI proxy-based pilot job submission,
@@ -186,6 +188,12 @@ root@host # systemctl start htcondor-ce
 
 Updating Your HTCondor Hosts
 ----------------------------
+
+!!! danger "Before considering an upgrade to OSG 3.6&hellip;"
+    Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
+    authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
+    If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
+    install or remain on the [OSG 3.5 release series](notes.md)
 
 1.  The `ALLOW_DAEMON` permission no longer inherits from `ALLOW_WRITE`.
     To revert to the old behavior you can add ``ALLOW_DAEMON = ALLOW_WRITE``.
