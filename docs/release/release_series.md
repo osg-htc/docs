@@ -29,6 +29,10 @@ Since the start of the RPM-based OSG software stack, we have offered the followi
     authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
     If you do not know which VOs you are currently supporting, contact us at <help@opensciencegrid.org>.
 
+-   **OSG 3.5** was started in August 2019 and will reach its end-of-life in February 2022.
+    The main differences between it and 3.4 were the introduction of the HTCondor 8.8 and 8.9 series;
+    also the RSV monitoring probes, EL6 support, and CREAM support were all dropped.
+
 -   **OSG 3.6** (started February 2021) overhauls the authentication and data transfer protocols used in the OSG
     software stack:
     bearer tokens, such as [SciTokens](https://scitokens.org/) or WLCG tokens, are used for authentication instead of
@@ -36,10 +40,6 @@ Since the start of the RPM-based OSG software stack, we have offered the followi
     See the [OSG GridFTP and GSI migration plan](https://opensciencegrid.org/technology/policy/gridftp-gsi-migration/)
     for more details.
     To support these new protocols, OSG 3.6 includes HTCondor 8.9, HTCondor-CE 5, and will include XRootD 5.1.
-
--   **OSG 3.5** was started in August 2019 and will reach its end-of-life in February 2022.
-    The main differences between it and 3.4 were the introduction of the HTCondor 8.8 and 8.9 series;
-    also the RSV monitoring probes, EL6 support, and CREAM support were all dropped.
 
 -   **OSG 3.4** started June 2017 and was end-of-lifed in November 2020.
     The main differences between it and 3.3 are the removal of edg-mkgridmap, GUMS, BeStMan, and VOMS Admin Server
