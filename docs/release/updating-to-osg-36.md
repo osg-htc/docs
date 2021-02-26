@@ -132,8 +132,20 @@ To update OSG-Configure, perform the following steps:
 
 #### HTCondor-CE ####
 
-AI (BrianL): https://opensciencegrid.atlassian.net/browse/SOFTWARE-4501
-HTCondor-CE in front of HTCondor CE, [see updating your HTCondor Hosts](#updating-your-htcondor-hosts)
+The OSG 3.6 release series contains [HTCondor-CE 5](https://htcondor.github.io/htcondor-ce/releases/#500), a major
+version upgrade from HTCondor-CE 4, which was available in the OSG 3.5 release repositories.
+To update HTCondor-CE, perform the following steps:
+
+1.  Merge any `*.rpmnew` files in `/etc/condor-ce/`
+
+1.  HTCondor-CE <= 4 set `$HOME` in the routed job to the user's `$HOME` directory on the HTCondor-CE but this is no
+    longer the default.
+    If you want to ensure that routed jobs `$HOME` is set to the same directory as the user on the CE,
+    set `USE_CE_HOME_DIR = True` in `/etc/condor-ce/config.d/`.
+
+!!! note "For OSG CEs serving an HTCondor pool"
+    If your OSG CE routes pilot jobs to a local HTCondor pool, also
+    see the section for [updating your HTCondor hosts](#updating-your-htcondor-hosts)
 
 ### Starting CE services ###
 
