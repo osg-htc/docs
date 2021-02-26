@@ -17,6 +17,20 @@ use this document to update your OSG software to OSG 3.6.
 Updating Your OSG Compute Entrypoint
 ------------------------------------
 
+!!! danger "Before considering an upgrade to OSG 3.6&hellip;"
+    Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
+    authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
+    If you do not know which VOs you are currently supporting, contact us at <help@opensciencegrid.org>.
+
+In OSG 3.6, OSG Compute Entrypoints (CEs) only accept token-based pilot job submissions.
+If you need to support token-based and GSI proxy-based pilot job submission,
+you must install or remain on [OSG 3.5](notes.md).
+If the VOs that you support have the capability to submit token-based pilots, you may update your CE to OSG 3.6.
+
+In addition to the change in authentication protocol, OSG 3.6 CEs include new major versions of software that require
+manual updates.
+To upgrade your CE to OSG 3.6, follow the sections below to make your configuration OSG 3.6-compatible.
+
 ### Turning off CE services ###
 
 1.  Register a [downtime](../common/registration.md#registering-resource-downtimes)
