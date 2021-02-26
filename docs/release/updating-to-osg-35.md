@@ -154,7 +154,7 @@ Updating to HTCondor 8.9.7+
 
 !!!tip "Where to find HTCondor 8.9"
     The HTCondor [development series](https://htcondor.readthedocs.io/en/latest/version-history/introduction-version-history.html#the-development-release-series)
-    is available through the [OSG upcoming](release_series.md#osg-upcoming) repository.
+    is available through the [OSG upcoming](release_series.md) repository.
 
 For HTCondor hosts < 8.9.7 using the SciTokens CredMon, updates to HTCondor 8.9.7+ require manual intervention and a
 corresponding update to `python2-scitokens-credmon`, available in the OSG 3.5 release repository.
