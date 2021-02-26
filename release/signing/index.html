@@ -1633,8 +1633,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-osg-packaging-signing-key" class="md-nav__link">
-    The OSG Packaging Signing Key
+  <a href="#the-osg-packaging-signing-keys" class="md-nav__link">
+    The OSG Packaging Signing Keys
   </a>
   
 </li>
@@ -1720,8 +1720,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-osg-packaging-signing-key" class="md-nav__link">
-    The OSG Packaging Signing Key
+  <a href="#the-osg-packaging-signing-keys" class="md-nav__link">
+    The OSG Packaging Signing Keys
   </a>
   
 </li>
@@ -1751,7 +1751,7 @@
 </code></pre></div>
 
 <p>For example:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">$</span> rpm --checksig -v globus-core-8.0-2.osg.x86_64.rpm 
+<div class="codehilite"><pre><span></span><code><span class="gp">$</span> rpm --checksig -v globus-core-8.0-2.osg.x86_64.rpm
 <span class="go">globus-core-8.0-2.osg.x86_64.rpm:</span>
 <span class="go">    Header V3 DSA signature: OK, key ID 824b8603</span>
 <span class="go">    Header SHA1 digest: OK (2b5af4348c548c27f10e2e47e1ec80500c4f85d7)</span>
@@ -1759,11 +1759,14 @@
 <span class="go">    V3 DSA signature: OK, key ID 824b8603</span>
 </code></pre></div>
 
-<h2 id="the-osg-packaging-signing-key">The OSG Packaging Signing Key<a class="headerlink" href="#the-osg-packaging-signing-key" title="Permanent link">&para;</a></h2>
+<h2 id="the-osg-packaging-signing-keys">The OSG Packaging Signing Keys<a class="headerlink" href="#the-osg-packaging-signing-keys" title="Permanent link">&para;</a></h2>
+<p>The OSG Software Team has two GPG keys for signing RPMs;
+the first key is used for packages before the 3.6 release series,
+and the second key is used for packages in the 3.6 release series and afterward.</p>
 <table>
 <thead>
 <tr>
-<th></th>
+<th>Key 1 (3.0 to 3.5)</th>
 <th></th>
 </tr>
 </thead>
@@ -1786,11 +1789,62 @@
 </tr>
 </tbody>
 </table>
-<p>You can see the fingerprint for yourself:</p>
+<table>
+<thead>
+<tr>
+<th>Key 2 (3.6 and on)</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Location</td>
+<td><code>/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-2</code></td>
+</tr>
+<tr>
+<td>Download</td>
+<td><a href="https://vdt.cs.wisc.edu/RPM-GPG-KEY-OSG-2">UW-Madison</a>, <a href="https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-2">GitHub</a></td>
+</tr>
+<tr>
+<td>Fingerprint</td>
+<td><code>1216 FF68 897A 77EA 222F  C961 27DC 6864 96D2 B90F</code></td>
+</tr>
+<tr>
+<td>Key ID</td>
+<td><code>96d2b90f</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some packages in the 3.6 repos may still be signed with the old key;
+the <code>osg-release</code> RPM contains both keys so you can verify old packages.</p>
+</div>
+<p>You can see the fingerprint for yourself.
+On EL 7 and older (GnuPG &lt; 2.1.13):</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">$</span> gpg --with-fingerprint /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
 <span class="go">pub  1024D/824B8603 2011-09-15 OSG Software Team (RPM Signing Key for Koji Packages) &lt;vdt-support@opensciencegrid.org&gt;</span>
 <span class="go">      Key fingerprint = 6459 D9D2 AAA9 AB67 A251  FB44 2110 B1C8 824B 8603</span>
 <span class="go">sub  2048g/28E5857C 2011-09-15</span>
+
+<span class="gp">$</span> gpg --with-fingerprint /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-2
+<span class="go">pub  4096R/96D2B90F 2021-02-24 Open Science Grid Software &lt;help@opensciencegrid.org&gt;</span>
+<span class="go">      Key fingerprint = 1216 FF68 897A 77EA 222F  C961 27DC 6864 96D2 B90F</span>
+<span class="go">sub  4096R/49E9ACC2 2021-02-24</span>
+</code></pre></div>
+
+<p>On EL 8 and newer (GnuPG &gt;= 2.1.13):</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">$</span> gpg --import-options show-only --import  &lt; /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
+<span class="go">pub   dsa1024 2011-09-15 [SC]</span>
+<span class="go">      6459D9D2AAA9AB67A251FB442110B1C8824B8603</span>
+<span class="go">uid                      OSG Software Team (RPM Signing Key for Koji Packages) &lt;vdt-support@opensciencegrid.org&gt;</span>
+<span class="go">sub   elg2048 2011-09-15 [E]</span>
+
+<span class="gp">$</span> gpg --import-options show-only --import  &lt; /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-2
+<span class="go">pub   rsa4096 2021-02-24 [SC]</span>
+<span class="go">      1216FF68897A77EA222FC96127DC686496D2B90F</span>
+<span class="go">uid                      Open Science Grid Software &lt;help@opensciencegrid.org&gt;</span>
+<span class="go">sub   rsa4096 2021-02-24 [E]</span>
 </code></pre></div>
                 
               
