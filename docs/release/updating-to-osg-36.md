@@ -44,7 +44,7 @@ After turning off your CE's services, you may proceed with the RPM update proces
     After installing the new OSG repositories (the next step) you may want to apply any changes made in the `*.rpmsave`
     files to the new `*.repo` files.
 
-1.  Update your [Yum repositories](../common/yum/#install-the-osg-repositories) to OSG 3.6
+1.  Update your [Yum repositories](../common/yum.md#install-the-osg-repositories) to OSG 3.6
 
 1.  Clean yum cache:
 
