@@ -17,6 +17,20 @@ use this document to update your OSG software to OSG 3.6.
 Updating Your OSG Compute Entrypoint
 ------------------------------------
 
+!!! danger "Before considering an upgrade to OSG 3.6&hellip;"
+    Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
+    authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
+    If you do not know which VOs you are currently supporting, contact us at <help@opensciencegrid.org>.
+
+In OSG 3.6, OSG Compute Entrypoints (CEs) only accept token-based pilot job submissions.
+If you need to support token-based and GSI proxy-based pilot job submission,
+you must install or remain on [OSG 3.5](notes.md).
+If the VOs that you support have the capability to submit token-based pilots, you may update your CE to OSG 3.6.
+
+In addition to the change in authentication protocol, OSG 3.6 CEs include new major versions of software that require
+manual updates.
+To upgrade your CE to OSG 3.6, follow the sections below to make your configuration OSG 3.6-compatible.
+
 ### Turning off CE services ###
 
 1.  Register a [downtime](../common/registration.md#registering-resource-downtimes)
@@ -142,10 +156,32 @@ To update OSG-Configure, perform the following steps:
 
 #### HTCondor-CE ####
 
-AI (BrianL): https://opensciencegrid.atlassian.net/browse/SOFTWARE-4501
-HTCondor-CE in front of HTCondor CE, [see updating your HTCondor Hosts](#updating-your-htcondor-hosts)
+The OSG 3.6 release series contains [HTCondor-CE 5](https://htcondor.github.io/htcondor-ce/releases/#500), a major
+version upgrade from HTCondor-CE 4, which was available in the OSG 3.5 release repositories.
+To update HTCondor-CE, perform the following steps:
+
+1.  Merge any `*.rpmnew` files in `/etc/condor-ce/`
+
+1.  HTCondor-CE <= 4 set `$HOME` in the routed job to the user's `$HOME` directory on the HTCondor-CE but this is no
+    longer the default.
+    If you want to ensure that a routed job's `$HOME` is set to the same directory as the user on the CE,
+    set `USE_CE_HOME_DIR = True` in `/etc/condor-ce/config.d/`.
+
+!!! note "For OSG CEs serving an HTCondor pool"
+    If your OSG CE routes pilot jobs to a local HTCondor pool, also
+    see the section for [updating your HTCondor hosts](#updating-your-htcondor-hosts)
 
 ### Starting CE services ###
+
+After updating your RPMs and updating your configuration, turn on the HTCondor-CE service:
+
+```console
+root@host # systemctl start htcondor-ce
+```
+
+!!! question "What about `gratia-probes-cron`?
+    In OSG 3.6, the OSG CE no longer needs a separate service for Gratia Probe.
+    Instead, the default CE configuration runs its Gratia Probe as a periodic process under the HTCondor-CE process tree.
 
 
 Updating Your HTCondor Hosts
