@@ -29,7 +29,7 @@ Latest News
     their initial releases in this series until they are ready.
 
 !!! warning "OSG 3.5 end-of-life"
-    As a result of this initial OSG 3.6 release, the end-of-life dates have been set for OSG 3.6 per our
+    As a result of this initial OSG 3.6 release, the end-of-life dates have been set for OSG 3.5 per our
     [policy](https://opensciencegrid.org/technology/policy/release-series/):
     regular support will end in **August 2021** and critical bug/security support will end in **February 2022**.
 
