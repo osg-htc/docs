@@ -1921,7 +1921,8 @@
 <p class="admonition-title">Before considering an upgrade to OSG 3.6&hellip;</p>
 <p>Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
 authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
-If you do not know which VOs you are currently supporting, contact us at <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a>.</p>
+If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
+install or remain on the <a href="../notes/">OSG 3.5 release series</a></p>
 </div>
 <h1 id="updating-to-osg-36">Updating to OSG 3.6<a class="headerlink" href="#updating-to-osg-36" title="Permanent link">&para;</a></h1>
 <p><a href="../release_series/#series-overviews">OSG 3.6</a> (the <em>new series</em>) is a major overhaul of the OSG software stack compared
@@ -1935,7 +1936,8 @@ use this document to update your OSG software to OSG 3.6.</p>
 <p class="admonition-title">Before considering an upgrade to OSG 3.6&hellip;</p>
 <p>Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
 authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
-If you do not know which VOs you are currently supporting, contact us at <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a>.</p>
+If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
+install or remain on the <a href="../notes/">OSG 3.5 release series</a></p>
 </div>
 <p>In OSG 3.6, OSG Compute Entrypoints (CEs) only accept token-based pilot job submissions.
 If you need to support token-based and GSI proxy-based pilot job submission,
@@ -2140,6 +2142,13 @@ see the section for <a href="#updating-your-htcondor-hosts">updating your HTCond
     In OSG 3.6, the OSG CE no longer needs a separate service for Gratia Probe.
     Instead, the default CE configuration runs its Gratia Probe as a periodic process under the HTCondor-CE process tree.</p>
 <h2 id="updating-your-htcondor-hosts">Updating Your HTCondor Hosts<a class="headerlink" href="#updating-your-htcondor-hosts" title="Permanent link">&para;</a></h2>
+<div class="admonition danger">
+<p class="admonition-title">Before considering an upgrade to OSG 3.6&hellip;</p>
+<p>Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
+authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
+If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
+install or remain on the <a href="../notes/">OSG 3.5 release series</a></p>
+</div>
 <ol>
 <li>
 <p>The <code>ALLOW_DAEMON</code> permission no longer inherits from <code>ALLOW_WRITE</code>.
