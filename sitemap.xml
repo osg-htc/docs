@@ -124,30 +124,6 @@
      <lastmod>2021-03-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://opensciencegrid.org/docs/data/stashcache/overview/</loc>
-     <lastmod>2021-03-01</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://opensciencegrid.org/docs/data/stashcache/run-stashcache-container/</loc>
-     <lastmod>2021-03-01</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://opensciencegrid.org/docs/data/stashcache/run-stash-origin-container/</loc>
-     <lastmod>2021-03-01</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://opensciencegrid.org/docs/data/stashcache/install-cache/</loc>
-     <lastmod>2021-03-01</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://opensciencegrid.org/docs/data/stashcache/install-origin/</loc>
-     <lastmod>2021-03-01</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://opensciencegrid.org/docs/data/stashcache/vo-data/</loc>
-     <lastmod>2021-03-01</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
      <loc>https://opensciencegrid.org/docs/other/configuration-with-osg-configure/</loc>
      <lastmod>2021-03-01</lastmod>
      <changefreq>daily</changefreq>
@@ -213,6 +189,30 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://opensciencegrid.org/docs/submit/osg-flock/</loc>
+     <lastmod>2021-03-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://opensciencegrid.org/docs/data/stashcache/overview/</loc>
+     <lastmod>2021-03-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://opensciencegrid.org/docs/data/stashcache/run-stashcache-container/</loc>
+     <lastmod>2021-03-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://opensciencegrid.org/docs/data/stashcache/run-stash-origin-container/</loc>
+     <lastmod>2021-03-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://opensciencegrid.org/docs/data/stashcache/install-cache/</loc>
+     <lastmod>2021-03-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://opensciencegrid.org/docs/data/stashcache/install-origin/</loc>
+     <lastmod>2021-03-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://opensciencegrid.org/docs/data/stashcache/vo-data/</loc>
      <lastmod>2021-03-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
