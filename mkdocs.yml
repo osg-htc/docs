@@ -52,13 +52,6 @@ nav:
       - 'Configure Authorization': 'data/xrootd/xrootd-authorization.md'
       - 'Using XRootD': 'data/xrootd/install-client.md'
       - 'Install CMS XCache': 'data/xrootd/install-cms-xcache.md'
-    - StashCache:
-      - 'StashCache Overview': 'data/stashcache/overview.md'
-      - 'Running a Cache in a container': 'data/stashcache/run-stashcache-container.md'
-      - 'Running an Origin in a container': 'data/stashcache/run-stash-origin-container.md'
-      - 'Install a Cache': 'data/stashcache/install-cache.md'
-      - 'Install an Origin': 'data/stashcache/install-origin.md'
-      - 'Getting VO data into StashCache': 'data/stashcache/vo-data.md'
   - Other:
     - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
     - 'Install GlideinWMS Frontend': 'other/install-gwms-frontend.md'
@@ -82,6 +75,13 @@ nav:
     - 'RSV GlideinWMS Tester': 'monitoring/install-rsv-gwms-tester.md'
 - Access Point:
   - 'Flocking to OSG': 'submit/osg-flock.md'
+- Data Federation:
+  - 'Overview': 'data/stashcache/overview.md'
+  - 'Running a Cache in a container': 'data/stashcache/run-stashcache-container.md'
+  - 'Running an Origin in a container': 'data/stashcache/run-stash-origin-container.md'
+  - 'Install a Cache': 'data/stashcache/install-cache.md'
+  - 'Install an Origin': 'data/stashcache/install-origin.md'
+  - 'Getting VO data into StashCache': 'data/stashcache/vo-data.md'
 - Common:
   - 'Registration': 'common/registration.md'
   - 'CA Certificates': 'common/ca.md'
