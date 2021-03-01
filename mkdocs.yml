@@ -80,7 +80,7 @@ nav:
     - 'Advanced RSV Configuration': 'monitoring/advanced-rsv-configuration.md'
     - 'Manage RSV via rsv-control': 'monitoring/rsv-control.md'
     - 'RSV GlideinWMS Tester': 'monitoring/install-rsv-gwms-tester.md'
-- Submit:
+- Access Point:
   - 'Flocking to OSG': 'submit/osg-flock.md'
 - Common:
   - 'Registration': 'common/registration.md'

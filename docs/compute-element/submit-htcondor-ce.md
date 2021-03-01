@@ -117,7 +117,7 @@ This method uses `condor_ce_submit` to submit directly to an HTCondor-CE. The on
 
 #### From another host
 
-For this method, you will need a functional HTCondor submit node. If you do not have one readily available, you can install the `condor` package from the OSG repository to get a simple submit node:
+For this method, you will need a functional HTCondor access point. If you do not have one readily available, you can install the `condor` package from the OSG repository to get a simple access point:
 
 1.  Install HTCondor:
 

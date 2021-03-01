@@ -25,8 +25,8 @@ Before starting the installation process, consider the following points
     accompanying key at `/etc/grid-security/hostkey.pem`
 -   **DNS entries:** Forward and reverse DNS must resolve for the HTCondor-CE host
 -   **Network ports:** The pilot factories must be able to contact your HTCondor-CE service on port 9619 (TCP)
--   **Submit host:** HTCondor-CE should be installed on a host that already has the ability to submit jobs into your
-    local cluster
+-   **Access point/login node:** HTCondor-CE should be installed on a host that already has the ability to submit jobs
+    into your local cluster
 -   **File Systems**: Non-HTCondor batch systems require a [shared file system](#batch-systems-other-than-htcondor)
     between the HTCondor-CE host and the batch system worker nodes.
 

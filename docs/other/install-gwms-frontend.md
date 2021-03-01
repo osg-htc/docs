@@ -39,7 +39,7 @@ Before starting the installation process, consider the following points (consult
 -   **Host choice**: The GlideinWMS VO Frontend has the following hardware requirements for a production host:
     -   **CPU**: Four cores, preferably no more than 2 years old.
     -   **RAM**: 3GB plus 2MB per running job. For example, to sustain 2000 running jobs, a host with 5GB is needed.
-    -   **Disk**: 30GB will be sufficient for all the binaries, config and log files related to GlideinWMS. As this will be an interactive submit host, have enough disk space for your users' jobs. 
+    -   **Disk**: 30GB will be sufficient for all the binaries, config and log files related to GlideinWMS. As this will be an interactive access point, have enough disk space for your users' jobs.
 
 
 !!! note
@@ -50,7 +50,7 @@ Before starting the installation process, consider the following points (consult
 !!! note
     GlideinWMS versions prior to 3.4.1 also required port 9615 for the Schedd,
     and did not support using shared port for the secondary collectors.
-    If you are upgrading a standalone submit host from version 3.4 or earlier, the default open 
+    If you are upgrading a standalone access point from version 3.4 or earlier, the default open
     port has changed from 9615 to 9618, and you need to update your firewall rules to reflect this change.
     You can figure out which port will be used by running the following command:
     
@@ -183,7 +183,7 @@ GlideinWMS services on one node.
 
 ### Installing GlideinWMS Frontend on Multiple Nodes (Advanced) 
 
-For advanced users expecting heavy usage on their submit node, you may want to
+For advanced users expecting heavy usage on their access point, you may want to
 consider splitting the user collector, user submit, and vo frontend
 services. This can be doing using the following three commands (on different
 machines):
@@ -252,7 +252,7 @@ Both the `classad_proxy` and `absfname` files should be owned by `frontend` user
 
     - The `DN` of the **VO Frontend Proxy** described previously [here](#credentials-and-proxies).
     - The `fullname` attribute is the fully qualified domain name of the host where you installed the VO Frontend (`hostname --fqdn`).
-    A secondary schedd is optional. You will need to delete the secondary schedd line if you are not using it. Multiple schedds allow the Frontend to service requests from multiple submit hosts.
+    A secondary schedd is optional. You will need to delete the secondary schedd line if you are not using it. Multiple schedds allow the Frontend to service requests from multiple access points.
 
 
             :::xml
@@ -510,12 +510,12 @@ and renew the **pilot proxies** and **VO Frontend proxy**. To configure this ser
 
 You must report accounting information if you are running more than a few test jobs on the OSG .
 
-1.  Install the GlideinWMS Gratia Probe on each of your submit hosts in your GlideinWMS installation:
+1.  Install the GlideinWMS Gratia Probe on each of your access points in your GlideinWMS installation:
 
         :::console
         root@host # yum install gratia-probe-glideinwms
 
-2.  Edit the ProbeConfig located in `/etc/gratia/condor/ProbeConfig`. First, edit the `SiteName` and `ProbeName` to be a unique identifier for your GlideinWMS Submit host. There can be multiple probes (with different names) per site. If you haven't already, you should register your GlideinWMS submit host in [OIM](https://github.com/opensciencegrid/topology/). Then you can use the name you used to register the resource.
+2.  Edit the ProbeConfig located in `/etc/gratia/condor/ProbeConfig`. First, edit the `SiteName` and `ProbeName` to be a unique identifier for your GlideinWMS access point. There can be multiple probes (with different names) per site. If you haven't already, you should register your GlideinWMS access point in [OIM](https://github.com/opensciencegrid/topology/). Then you can use the name you used to register the resource.
 
         ProbeName="condor:<hostname>"
         SiteName="HCC-GlideinWMW-Frontend"
