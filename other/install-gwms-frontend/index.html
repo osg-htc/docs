@@ -202,7 +202,7 @@
     <li class="md-tabs__item">
       
         <a href="../../submit/osg-flock/" class="md-tabs__link">
-          Submit
+          Access Point
         </a>
       
     </li>
@@ -1768,13 +1768,13 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
     <label class="md-nav__link" for="nav-6">
-      Submit
+      Access Point
       <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" aria-label="Submit" data-md-level="1">
+    <nav class="md-nav" aria-label="Access Point" data-md-level="1">
       <label class="md-nav__title" for="nav-6">
         <span class="md-nav__icon md-icon"></span>
-        Submit
+        Access Point
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -2659,7 +2659,7 @@ significant, large host, we have been able to scale the single-host install to
 <li><strong>Host choice</strong>: The GlideinWMS VO Frontend has the following hardware requirements for a production host:<ul>
 <li><strong>CPU</strong>: Four cores, preferably no more than 2 years old.</li>
 <li><strong>RAM</strong>: 3GB plus 2MB per running job. For example, to sustain 2000 running jobs, a host with 5GB is needed.</li>
-<li><strong>Disk</strong>: 30GB will be sufficient for all the binaries, config and log files related to GlideinWMS. As this will be an interactive submit host, have enough disk space for your users' jobs. </li>
+<li><strong>Disk</strong>: 30GB will be sufficient for all the binaries, config and log files related to GlideinWMS. As this will be an interactive access point, have enough disk space for your users' jobs.</li>
 </ul>
 </li>
 </ul>
@@ -2673,7 +2673,7 @@ this will become the default in the future.</p>
 <p class="admonition-title">Note</p>
 <p>GlideinWMS versions prior to 3.4.1 also required port 9615 for the Schedd,
 and did not support using shared port for the secondary collectors.
-If you are upgrading a standalone submit host from version 3.4 or earlier, the default open 
+If you are upgrading a standalone access point from version 3.4 or earlier, the default open
 port has changed from 9615 to 9618, and you need to update your firewall rules to reflect this change.
 You can figure out which port will be used by running the following command:</p>
 <p><code>console
@@ -2782,7 +2782,7 @@ argument to the command as follows:</p>
 <p>Note that these commands will install default HTCondor configurations with all
 GlideinWMS services on one node.</p>
 <h3 id="installing-glideinwms-frontend-on-multiple-nodes-advanced">Installing GlideinWMS Frontend on Multiple Nodes (Advanced)<a class="headerlink" href="#installing-glideinwms-frontend-on-multiple-nodes-advanced" title="Permanent link">&para;</a></h3>
-<p>For advanced users expecting heavy usage on their submit node, you may want to
+<p>For advanced users expecting heavy usage on their access point, you may want to
 consider splitting the user collector, user submit, and vo frontend
 services. This can be doing using the following three commands (on different
 machines):</p>
@@ -2850,7 +2850,7 @@ Both the <code>classad_proxy</code> and <code>absfname</code> files should be ow
 <ul>
 <li>The <code>DN</code> of the <strong>VO Frontend Proxy</strong> described previously <a href="#credentials-and-proxies">here</a>.</li>
 <li>The <code>fullname</code> attribute is the fully qualified domain name of the host where you installed the VO Frontend (<code>hostname --fqdn</code>).
-A secondary schedd is optional. You will need to delete the secondary schedd line if you are not using it. Multiple schedds allow the Frontend to service requests from multiple submit hosts.<div class="codehilite"><pre><span></span><code><span class="nt">&lt;schedds&gt;</span>
+A secondary schedd is optional. You will need to delete the secondary schedd line if you are not using it. Multiple schedds allow the Frontend to service requests from multiple access points.<div class="codehilite"><pre><span></span><code><span class="nt">&lt;schedds&gt;</span>
   <span class="nt">&lt;schedd</span> <span class="na">DN=</span><span class="s">&quot;Cert DN used by the schedd at fullname:&quot;</span>
         <span class="na">fullname=</span><span class="s">&quot;Hostname of the schedd&quot;</span><span class="nt">/&gt;</span>
    <span class="nt">&lt;schedd</span> <span class="na">DN=</span><span class="s">&quot;Cert DN used by the second Schedd at fullname:&quot;</span>
@@ -3117,13 +3117,13 @@ owner = &lt;NON-DEFAULT USER&gt;
 <p>You must report accounting information if you are running more than a few test jobs on the OSG .</p>
 <ol>
 <li>
-<p>Install the GlideinWMS Gratia Probe on each of your submit hosts in your GlideinWMS installation:</p>
+<p>Install the GlideinWMS Gratia Probe on each of your access points in your GlideinWMS installation:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> yum install gratia-probe-glideinwms
 </code></pre></div>
 
 </li>
 <li>
-<p>Edit the ProbeConfig located in <code>/etc/gratia/condor/ProbeConfig</code>. First, edit the <code>SiteName</code> and <code>ProbeName</code> to be a unique identifier for your GlideinWMS Submit host. There can be multiple probes (with different names) per site. If you haven't already, you should register your GlideinWMS submit host in <a href="https://github.com/opensciencegrid/topology/">OIM</a>. Then you can use the name you used to register the resource.</p>
+<p>Edit the ProbeConfig located in <code>/etc/gratia/condor/ProbeConfig</code>. First, edit the <code>SiteName</code> and <code>ProbeName</code> to be a unique identifier for your GlideinWMS access point. There can be multiple probes (with different names) per site. If you haven't already, you should register your GlideinWMS access point in <a href="https://github.com/opensciencegrid/topology/">OIM</a>. Then you can use the name you used to register the resource.</p>
 <div class="codehilite"><pre><span></span><code>ProbeName=&quot;condor:&lt;hostname&gt;&quot;
 SiteName=&quot;HCC-GlideinWMW-Frontend&quot;
 </code></pre></div>

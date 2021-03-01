@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#installation-of-filebeats-for-submit-nodes" class="md-skip">
+        <a href="#installation-of-filebeats-for-access-points" class="md-skip">
           Skip to content
         </a>
       
@@ -202,7 +202,7 @@
     <li class="md-tabs__item">
       
         <a href="../../submit/osg-flock/" class="md-tabs__link">
-          Submit
+          Access Point
         </a>
       
     </li>
@@ -1393,13 +1393,13 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
     <label class="md-nav__link" for="nav-6">
-      Submit
+      Access Point
       <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" aria-label="Submit" data-md-level="1">
+    <nav class="md-nav" aria-label="Access Point" data-md-level="1">
       <label class="md-nav__title" for="nav-6">
         <span class="md-nav__icon md-icon"></span>
-        Submit
+        Access Point
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -1879,10 +1879,10 @@
 <p class="admonition-title">Warning</p>
 <p>This is a technology preview document and will probably change content and location withouth notice.</p>
 </div>
-<h1 id="installation-of-filebeats-for-submit-nodes">Installation of FileBeats for Submit nodes<a class="headerlink" href="#installation-of-filebeats-for-submit-nodes" title="Permanent link">&para;</a></h1>
-<p>This document is for frontend administrators. It describes the installation of <a href="https://www.elastic.co/products/beats/filebeat">Filebeats</a> to continuously upload the HTCondor submit host transfer log to Elastic Search.</p>
+<h1 id="installation-of-filebeats-for-access-points">Installation of FileBeats for Access Points<a class="headerlink" href="#installation-of-filebeats-for-access-points" title="Permanent link">&para;</a></h1>
+<p>This document is for frontend administrators. It describes the installation of <a href="https://www.elastic.co/products/beats/filebeat">Filebeats</a> to continuously upload the HTCondor access point transfer log to Elastic Search.</p>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>A submit host (HTCondor schedd) is a login node where users submit jobs to the Grid. One interesting log that it produces is the TransferLog. The TransferLogs report all the transfers of files between compute node and submit nodes. In this guide we describe the installation of Filebeats to upload this log to Elastic Search.</p>
+<p>An access point (HTCondor schedd) is a login node where users submit jobs to the Grid. One interesting log that it produces is the TransferLog. The TransferLogs report all the transfers of files between compute node and access points. In this guide we describe the installation of Filebeats to upload this log to Elastic Search.</p>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <h3 id="filebeat-installation">FileBeat Installation<a class="headerlink" href="#filebeat-installation" title="Permanent link">&para;</a></h3>
 <p>For the installation of filebeats follow the  official instruction to set up the repositories and install filebeats as described <a href="https://www.elastic.co/guide/en/beats/filebeat/current/setup-repositories.html">here</a>.</p>
@@ -1952,7 +1952,7 @@ tags: [&quot;xfer-log&quot;]
 </li>
 </ol>
 <h3 id="configuration-of-htcondor">Configuration of HTCondor<a class="headerlink" href="#configuration-of-htcondor" title="Permanent link">&para;</a></h3>
-<p>For the configuration of the HTCondor submit host to use the TransferLog follow the next instructions:</p>
+<p>For the configuration of the HTCondor access point to use the TransferLog follow the next instructions:</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The transfer metrics was introduced in HTCondor 8.6 series. You need to be running a version equal or greater than 8.6.1 to enable it.</p>

@@ -202,7 +202,7 @@
     <li class="md-tabs__item">
       
         <a href="../../submit/osg-flock/" class="md-tabs__link">
-          Submit
+          Access Point
         </a>
       
     </li>
@@ -1410,13 +1410,13 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
     <label class="md-nav__link" for="nav-6">
-      Submit
+      Access Point
       <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" aria-label="Submit" data-md-level="1">
+    <nav class="md-nav" aria-label="Access Point" data-md-level="1">
       <label class="md-nav__title" for="nav-6">
         <span class="md-nav__icon md-icon"></span>
-        Submit
+        Access Point
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -1961,7 +1961,7 @@ the original submitter.</p>
 The OSG configures and maintains an HTCondor-CE on behalf of the site.
 The Hosted CE is a special configuration of HTCondor-CE that can submit jobs to a remote cluster over SSH.
 It provides a simple starting point for opportunistic resource owners that want to start contributing to the OSG with
-minimal effort: an organization will be able to accept OSG jobs by allowing SSH access to a submit node in their cluster.</p>
+minimal effort: an organization will be able to accept OSG jobs by allowing SSH access to a login node in their cluster.</p>
 <p>If your site intends to run over 10,000 concurrent OSG jobs, you will need to host your own
 <a href="../install-htcondor-ce/">HTCondor-CE</a> because the Hosted CE has not yet been optimized for such
 loads.</p>
@@ -1973,7 +1973,7 @@ the grid job directly into the batch system’s scheduler, meaning that the rout
 same.
 Thus, there are three representations of your job, each with its own ID (see diagram below):</p>
 <ul>
-<li>Submit host: the HTCondor job ID in the original queue</li>
+<li>Access point: the HTCondor job ID in the original queue</li>
 <li>HTCondor-CE: the incoming grid job’s ID</li>
 <li>HTCondor batch system: the routed job’s ID</li>
 </ul>
@@ -1991,7 +1991,7 @@ submitted (i.e., <code>SUBMIT_EXPRS</code>), these attributes will not be added 
 submits a job into the batch system via a process called the BLAHP.
 Thus, there are four representations of your job, each with its own ID (see diagram below):</p>
 <ul>
-<li>Submit host: the HTCondor job ID in the original queue</li>
+<li>Login node: the HTCondor job ID in the original queue</li>
 <li>HTCondor-CE: the incoming grid job’s ID and the routed job’s ID</li>
 <li>HTCondor batch system: the batch system’s job ID</li>
 </ul>

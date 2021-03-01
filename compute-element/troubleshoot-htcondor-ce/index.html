@@ -202,7 +202,7 @@
     <li class="md-tabs__item">
       
         <a href="../../submit/osg-flock/" class="md-tabs__link">
-          Submit
+          Access Point
         </a>
       
     </li>
@@ -2049,13 +2049,13 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
     <label class="md-nav__link" for="nav-6">
-      Submit
+      Access Point
       <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" aria-label="Submit" data-md-level="1">
+    <nav class="md-nav" aria-label="Access Point" data-md-level="1">
       <label class="md-nav__title" for="nav-6">
         <span class="md-nav__icon md-icon"></span>
-        Submit
+        Access Point
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -3382,7 +3382,7 @@ Spool permission errors can appear in the <a href="#schedlog">SchedLog</a> and t
 <li>Verify that there aren't any underlying file system issues in the specified location</li>
 </ul>
 <h3 id="jobs-stay-idle-on-a-remote-host-submitting-to-the-ce">Jobs stay idle on a remote host submitting to the CE<a class="headerlink" href="#jobs-stay-idle-on-a-remote-host-submitting-to-the-ce" title="Permanent link">&para;</a></h3>
-<p>If you are submitting your job from a separate submit host to the CE, it stays idle in the queue forever, and you do not
+<p>If you are submitting your job from a separate access point to the CE, it stays idle in the queue forever, and you do not
 see a resultant job in the CE's queue, this means that your job cannot contact the CE for submission or it is not
 authorized to run there. 
 Note that jobs may take several minutes or longer if the CE is busy.</p>
@@ -3396,7 +3396,7 @@ Note that jobs may take several minutes or longer if the CE is busy.</p>
 <p><strong>Next actions</strong></p>
 <ol>
 <li>Make sure that the HTCondor-CE daemons are running with <a href="#condor_ce_status">condor_ce_status</a>.</li>
-<li>Verify that your CE is reachable from your submit host, replacing <code>condorce.example.com</code> with the hostname of your CE:<div class="codehilite"><pre><span></span><code><span class="gp">user@host $</span> ping condorce.example.com
+<li>Verify that your CE is reachable from your access point, replacing <code>condorce.example.com</code> with the hostname of your CE:<div class="codehilite"><pre><span></span><code><span class="gp">user@host $</span> ping condorce.example.com
 </code></pre></div>
 
 </li>

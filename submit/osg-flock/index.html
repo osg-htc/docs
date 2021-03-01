@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#configuring-an-htcondor-submit-host-to-send-jobs-to-the-osg" class="md-skip">
+        <a href="#configuring-an-htcondor-access-point-to-send-jobs-to-the-osg" class="md-skip">
           Skip to content
         </a>
       
@@ -202,7 +202,7 @@
     <li class="md-tabs__item">
       
         <a href="./" class="md-tabs__link md-tabs__link--active">
-          Submit
+          Access Point
         </a>
       
     </li>
@@ -1306,13 +1306,13 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
     
     <label class="md-nav__link" for="nav-6">
-      Submit
+      Access Point
       <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" aria-label="Submit" data-md-level="1">
+    <nav class="md-nav" aria-label="Access Point" data-md-level="1">
       <label class="md-nav__title" for="nav-6">
         <span class="md-nav__icon md-icon"></span>
-        Submit
+        Access Point
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -1376,8 +1376,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#register-your-submit-host-in-osg-topology" class="md-nav__link">
-    Register your submit host in OSG Topology
+  <a href="#register-your-access-point-in-osg-topology" class="md-nav__link">
+    Register your access point in OSG Topology
   </a>
   
 </li>
@@ -1881,8 +1881,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#register-your-submit-host-in-osg-topology" class="md-nav__link">
-    Register your submit host in OSG Topology
+  <a href="#register-your-access-point-in-osg-topology" class="md-nav__link">
+    Register your access point in OSG Topology
   </a>
   
 </li>
@@ -1985,7 +1985,7 @@
                   </a>
                 
                 
-                <h1 id="configuring-an-htcondor-submit-host-to-send-jobs-to-the-osg">Configuring an HTCondor Submit Host to Send Jobs to the OSG<a class="headerlink" href="#configuring-an-htcondor-submit-host-to-send-jobs-to-the-osg" title="Permanent link">&para;</a></h1>
+                <h1 id="configuring-an-htcondor-access-point-to-send-jobs-to-the-osg">Configuring an HTCondor Access Point to Send Jobs to the OSG<a class="headerlink" href="#configuring-an-htcondor-access-point-to-send-jobs-to-the-osg" title="Permanent link">&para;</a></h1>
 <p>This document explains how to add a path for user jobs to flow from your local site out to the OSG,
 which in most cases means that the jobs will have far more resources available to run on than locally.
 If your local batch system frequently has many jobs waiting to run for a long time,
@@ -2003,18 +2003,18 @@ After installation, see the <a href="#usage">usage</a> section for instructions 
 <h2 id="background">Background<a class="headerlink" href="#background" title="Permanent link">&para;</a></h2>
 <p>Every batch computing system has one or more entry points that users log on to and use to hand over their computing work
 to the batch system for completion.
-For the HTCondor batch system, we say that users log on to a submit host to submit their jobs to HTCondor,
-where the jobs wait ("are queued") until computing resources are available to run them.
-In a purely local HTCondor system, there are one to a few submit hosts and many computing resources.</p>
-<p>An HTCondor submit host can also be configured to forward excess jobs to an OSG-managed pool.
+For the HTCondor batch system, we say that users log on to a access point (i.e., submit node, submit host) to submit
+their jobs to HTCondor, where the jobs wait ("are queued") until computing resources are available to run them.
+In a purely local HTCondor system, there are one to a few access points and many computing resources.</p>
+<p>An HTCondor access point can also be configured to forward excess jobs to an OSG-managed pool.
 This process is called <a href="https://htcondor.readthedocs.io/en/stable/grid-computing/connecting-pools-with-flocking.html">flocking</a>.
 If you already have an HTCondor pool, we recommend that you install this software
-on top of one of your existing HTCondor submit hosts.
+on top of one of your existing HTCondor access points.
 This approach allows a user to submit locally and have their jobs run locally or,
 if the user chooses and if local resources are unavailable, have their jobs automatically flock to OSG.
 If you do not have an HTCondor batch system, following these instructions will install the HTCondor submit service
 and configure it only to forward jobs to the OSG.
-In other words, you do not need a whole HTCondor batch system just to have a local OSG submit host.</p>
+In other words, you do not need a whole HTCondor batch system just to have a local OSG access point.</p>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Because jobs running in OSG run in a completely different environment than your local cluster,
 and require additional considerations for data movement,
@@ -2031,7 +2031,7 @@ at both the OSG and at your site.</p>
   See our <a href="../../security/host-certs/">documentation</a> for instructions on how to request and install host certificates.</li>
 <li><strong>Network:</strong> <ul>
 <li>Inbound TCP port 9618 must be open.</li>
-<li>The submit host must have a public IP address with both forward and reverse DNS configured.</li>
+<li>The access point must have a public IP address with both forward and reverse DNS configured.</li>
 </ul>
 </li>
 </ul>
@@ -2042,20 +2042,20 @@ at both the OSG and at your site.</p>
 <li>Install <a href="../../common/ca/">CA certificates</a></li>
 </ul>
 <h2 id="initial-steps">Initial Steps<a class="headerlink" href="#initial-steps" title="Permanent link">&para;</a></h2>
-<h3 id="register-your-submit-host-in-osg-topology">Register your submit host in OSG Topology<a class="headerlink" href="#register-your-submit-host-in-osg-topology" title="Permanent link">&para;</a></h3>
-<p>To be part of OSG, your submit host should be registered with the OSG.
+<h3 id="register-your-access-point-in-osg-topology">Register your access point in OSG Topology<a class="headerlink" href="#register-your-access-point-in-osg-topology" title="Permanent link">&para;</a></h3>
+<p>To be part of OSG, your access point should be registered with the OSG.
 You will need information like the hostname, and the administrative and security contacts.
 Follow the <a href="../../common/registration/#new-resources">general registration instructions</a>.
-The service type is <code>Submit Node</code>.</p>
+For historical reasons, the service type is <code>Submit Node</code>.</p>
 <h3 id="choose-your-authentication-method">Choose your authentication method<a class="headerlink" href="#choose-your-authentication-method" title="Permanent link">&para;</a></h3>
-<p>There are two options for authentication of your submit host to the OSG: GSI and pool password.
-Of these, GSI is the recommended method, but it will require obtaining a host certificate for your submit host.
+<p>There are two options for authentication of your access point to the OSG: GSI and pool password.
+Of these, GSI is the recommended method, but it will require obtaining a host certificate for your access point.
 See our <a href="../../security/host-certs/">documentation</a> for instructions on how to request and install host certificates.</p>
 <p>If you are unable to obtain a host certificate, use the "pool password" authentication method,
 <a href="#configuring-authentication">described in the Configuring Authentication section</a>.</p>
 <h3 id="request-to-be-allowed-to-flock-to-osg">Request to be allowed to flock to OSG<a class="headerlink" href="#request-to-be-allowed-to-flock-to-osg" title="Permanent link">&para;</a></h3>
-<p>OSG staff will need to add your submit host to the list of hosts that flocked jobs are accepted from.
-Send email to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> with the hostname of your submit host and request to be added to the list.</p>
+<p>OSG staff will need to add your access point to the list of hosts that flocked jobs are accepted from.
+Send email to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> with the hostname of your access point and request to be added to the list.</p>
 <h2 id="installing-required-software">Installing Required Software<a class="headerlink" href="#installing-required-software" title="Permanent link">&para;</a></h2>
 <p>Flocking requires HTCondor software as well as software for reporting to the OSG accounting system.
 OSG provides a convenience RPM that installs all required packages.
@@ -2075,14 +2075,14 @@ we provide a recommended configuration for flocking.</p>
 
 </li>
 <li>
-<p>Fill in the value for <code>ProbeName</code> with the hostname of your submit host, with the following format:</p>
+<p>Fill in the value for <code>ProbeName</code> with the hostname of your access point, with the following format:</p>
 <div class="codehilite"><pre><span></span><code>ProbeName=&quot;condor:<span class="nt">&lt;HOSTNAME&gt;</span>&quot;
 </code></pre></div>
 
 </li>
 <li>
 <p>Fill in the value for <code>SiteName</code> with the Resource Name you registered in Topology (see
-   <a href="#register-your-submit-host-in-osg-topology">instructions above</a>).
+   <a href="#register-your-access-point-in-osg-topology">instructions above</a>).
    For example:</p>
 <div class="codehilite"><pre><span></span><code>SiteName=&quot;OSG_US_EXAMPLE_SUBMIT&quot;
 </code></pre></div>
