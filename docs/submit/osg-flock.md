@@ -70,7 +70,7 @@ Initial Steps
 To be part of OSG, your access point should be registered with the OSG.
 You will need information like the hostname, and the administrative and security contacts.
 Follow the [general registration instructions](../common/registration.md#new-resources).
-The service type is `Submit Node`.
+For historical reasons, the service type is `Submit Node`.
 
 
 ### Choose your authentication method
