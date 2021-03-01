@@ -21,8 +21,8 @@ Background
 ----------
 Every batch computing system has one or more entry points that users log on to and use to hand over their computing work
 to the batch system for completion.
-For the HTCondor batch system, we say that users log on to a access point to submit their jobs to HTCondor,
-where the jobs wait ("are queued") until computing resources are available to run them.
+For the HTCondor batch system, we say that users log on to a access point (i.e., submit node, submit host) to submit
+their jobs to HTCondor, where the jobs wait ("are queued") until computing resources are available to run them.
 In a purely local HTCondor system, there are one to a few access points and many computing resources.
 
 An HTCondor access point can also be configured to forward excess jobs to an OSG-managed pool.
