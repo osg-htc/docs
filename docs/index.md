@@ -40,7 +40,7 @@ In both of these cases, the following will be needed:
 
 To contribute computational resources with OSG-hosted services, your site will also need the following:
 
-- Allow SSH access to your local cluster's submit node from a known IP address
+- Allow SSH access to your local cluster's login host from a known IP address
 - Shared home directories on each cluster node
 
 !!!success "Next steps"

@@ -1,5 +1,5 @@
-Configuring an HTCondor Submit Host to Send Jobs to the OSG
-===========================================================
+Configuring an HTCondor Access Point to Send Jobs to the OSG
+============================================================
 
 This document explains how to add a path for user jobs to flow from your local site out to the OSG,
 which in most cases means that the jobs will have far more resources available to run on than locally.
@@ -21,19 +21,19 @@ Background
 ----------
 Every batch computing system has one or more entry points that users log on to and use to hand over their computing work
 to the batch system for completion.
-For the HTCondor batch system, we say that users log on to a submit host to submit their jobs to HTCondor,
+For the HTCondor batch system, we say that users log on to a access point to submit their jobs to HTCondor,
 where the jobs wait ("are queued") until computing resources are available to run them.
-In a purely local HTCondor system, there are one to a few submit hosts and many computing resources.
+In a purely local HTCondor system, there are one to a few access points and many computing resources.
 
-An HTCondor submit host can also be configured to forward excess jobs to an OSG-managed pool.
+An HTCondor access point can also be configured to forward excess jobs to an OSG-managed pool.
 This process is called [flocking](https://htcondor.readthedocs.io/en/stable/grid-computing/connecting-pools-with-flocking.html).
 If you already have an HTCondor pool, we recommend that you install this software
-on top of one of your existing HTCondor submit hosts.
+on top of one of your existing HTCondor access points.
 This approach allows a user to submit locally and have their jobs run locally or,
 if the user chooses and if local resources are unavailable, have their jobs automatically flock to OSG.
 If you do not have an HTCondor batch system, following these instructions will install the HTCondor submit service
 and configure it only to forward jobs to the OSG.
-In other words, you do not need a whole HTCondor batch system just to have a local OSG submit host.
+In other words, you do not need a whole HTCondor batch system just to have a local OSG access point.
 
 
 Before Starting
@@ -54,7 +54,7 @@ Also consider the following technical requirements:
   See our [documentation](../security/host-certs.md) for instructions on how to request and install host certificates.
 * __Network:__ 
     * Inbound TCP port 9618 must be open.
-    * The submit host must have a public IP address with both forward and reverse DNS configured.
+    * The access point must have a public IP address with both forward and reverse DNS configured.
 
 As with all OSG software installations, there are some one-time steps to prepare in advance:
 
@@ -66,16 +66,16 @@ As with all OSG software installations, there are some one-time steps to prepare
 Initial Steps
 -------------
 
-### Register your submit host in OSG Topology
-To be part of OSG, your submit host should be registered with the OSG.
+### Register your access point in OSG Topology
+To be part of OSG, your access point should be registered with the OSG.
 You will need information like the hostname, and the administrative and security contacts.
 Follow the [general registration instructions](../common/registration.md#new-resources).
 The service type is `Submit Node`.
 
 
 ### Choose your authentication method
-There are two options for authentication of your submit host to the OSG: GSI and pool password.
-Of these, GSI is the recommended method, but it will require obtaining a host certificate for your submit host.
+There are two options for authentication of your access point to the OSG: GSI and pool password.
+Of these, GSI is the recommended method, but it will require obtaining a host certificate for your access point.
 See our [documentation](../security/host-certs.md) for instructions on how to request and install host certificates.
 
 If you are unable to obtain a host certificate, use the "pool password" authentication method,
@@ -83,8 +83,8 @@ If you are unable to obtain a host certificate, use the "pool password" authenti
 
 
 ### Request to be allowed to flock to OSG
-OSG staff will need to add your submit host to the list of hosts that flocked jobs are accepted from.
-Send email to <help@opensciencegrid.org> with the hostname of your submit host and request to be added to the list.
+OSG staff will need to add your access point to the list of hosts that flocked jobs are accepted from.
+Send email to <help@opensciencegrid.org> with the hostname of your access point and request to be added to the list.
 
 
 Installing Required Software
@@ -109,7 +109,7 @@ we provide a recommended configuration for flocking.
         :::console
         root@host # cp /etc/gratia/condor/ProbeConfig-flocking /etc/gratia/condor/ProbeConfig
 
-1. Fill in the value for `ProbeName` with the hostname of your submit host, with the following format:
+1. Fill in the value for `ProbeName` with the hostname of your access point, with the following format:
 
         :::xml
         ProbeName="condor:<HOSTNAME>"

@@ -240,7 +240,7 @@ Spool permission errors can appear in the [SchedLog](#schedlog) and the [JobRout
 
 ### Jobs stay idle on a remote host submitting to the CE
 
-If you are submitting your job from a separate submit host to the CE, it stays idle in the queue forever, and you do not
+If you are submitting your job from a separate access point to the CE, it stays idle in the queue forever, and you do not
 see a resultant job in the CE's queue, this means that your job cannot contact the CE for submission or it is not
 authorized to run there. 
 Note that jobs may take several minutes or longer if the CE is busy.
@@ -259,7 +259,7 @@ ERROR: couldn't locate condorce.example.com!
 **Next actions**
 
 1.  Make sure that the HTCondor-CE daemons are running with [condor\_ce\_status](#condor_ce_status).
-2.  Verify that your CE is reachable from your submit host, replacing `condorce.example.com` with the hostname of your CE:
+2.  Verify that your CE is reachable from your access point, replacing `condorce.example.com` with the hostname of your CE:
 
         :::console
         user@host $ ping condorce.example.com

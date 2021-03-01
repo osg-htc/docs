@@ -1,16 +1,16 @@
 !!!warning
     This is a technology preview document and will probably change content and location withouth notice.
 
-Installation of FileBeats for Submit nodes
-==========================================
+Installation of FileBeats for Access Points
+===========================================
 
-This document is for frontend administrators. It describes the installation of [Filebeats](https://www.elastic.co/products/beats/filebeat) to continuously upload the HTCondor submit host transfer log to Elastic Search.
+This document is for frontend administrators. It describes the installation of [Filebeats](https://www.elastic.co/products/beats/filebeat) to continuously upload the HTCondor access point transfer log to Elastic Search.
 
 
 Introduction
 ------------
 
-A submit host (HTCondor schedd) is a login node where users submit jobs to the Grid. One interesting log that it produces is the TransferLog. The TransferLogs report all the transfers of files between compute node and submit nodes. In this guide we describe the installation of Filebeats to upload this log to Elastic Search.
+An access point (HTCondor schedd) is a login node where users submit jobs to the Grid. One interesting log that it produces is the TransferLog. The TransferLogs report all the transfers of files between compute node and access points. In this guide we describe the installation of Filebeats to upload this log to Elastic Search.
 
 Installation
 ------------
@@ -86,7 +86,7 @@ The configuration of filebeats revolves around this file `/etc/filebeat/filebeat
 
 ### Configuration of HTCondor
 
-For the configuration of the HTCondor submit host to use the TransferLog follow the next instructions:
+For the configuration of the HTCondor access point to use the TransferLog follow the next instructions:
 
 !!! note
     The transfer metrics was introduced in HTCondor 8.6 series. You need to be running a version equal or greater than 8.6.1 to enable it.

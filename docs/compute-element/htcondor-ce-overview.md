@@ -62,7 +62,7 @@ The Hosted CE is intended for small sites or as an introduction to the OSG.
 The OSG configures and maintains an HTCondor-CE on behalf of the site.
 The Hosted CE is a special configuration of HTCondor-CE that can submit jobs to a remote cluster over SSH.
 It provides a simple starting point for opportunistic resource owners that want to start contributing to the OSG with
-minimal effort: an organization will be able to accept OSG jobs by allowing SSH access to a submit node in their cluster.
+minimal effort: an organization will be able to accept OSG jobs by allowing SSH access to a login node in their cluster.
 
 If your site intends to run over 10,000 concurrent OSG jobs, you will need to host your own
 [HTCondor-CE](install-htcondor-ce.md) because the Hosted CE has not yet been optimized for such
@@ -79,7 +79,7 @@ the grid job directly into the batch system’s scheduler, meaning that the rout
 same.
 Thus, there are three representations of your job, each with its own ID (see diagram below):
 
--   Submit host: the HTCondor job ID in the original queue
+-   Access point: the HTCondor job ID in the original queue
 -   HTCondor-CE: the incoming grid job’s ID
 -   HTCondor batch system: the routed job’s ID
 
@@ -99,7 +99,7 @@ For non-HTCondor batch systems, the JobRouter transforms the grid job into a rou
 submits a job into the batch system via a process called the BLAHP.
 Thus, there are four representations of your job, each with its own ID (see diagram below):
 
--   Submit host: the HTCondor job ID in the original queue
+-   Login node: the HTCondor job ID in the original queue
 -   HTCondor-CE: the incoming grid job’s ID and the routed job’s ID
 -   HTCondor batch system: the batch system’s job ID
 
