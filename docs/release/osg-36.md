@@ -21,7 +21,7 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.
 Latest News
 -----------
 
-### 2020-02-26: 3.6 Released
+### February 26, 2021: 3.6 Released
 
 !!! question "Where are GlideinWMS and XRootD?"
     XRootD and GlideinWMS are both absent in the initial OSG 3.6 release:
