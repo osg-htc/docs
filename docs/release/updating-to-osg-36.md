@@ -178,7 +178,7 @@ To update HTCondor-CE, perform the following steps:
 After updating your RPMs and updating your configuration, turn on the HTCondor-CE service:
 
 ```console
-root@host # systemctl start htcondor-ce
+root@host # systemctl start condor-ce
 ```
 
 !!! question "What about `gratia-probes-cron`?
