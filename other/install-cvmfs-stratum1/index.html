@@ -2115,7 +2115,7 @@
 Listen 8080 KeepAlive On
 </code></pre></div>
 
-<p>If you will be serving opensciencegrid.org repositories, you have to allow for old client configurations that access repositories without the domain name added. For that reason, you will need to remove each <code>/etc/httpd/conf.d/cvmfs.&lt;repositoryname&gt;.conf</code> that adding a replica creates (this is included in the <a href="https://github.com/opensciencegrid/oasis-server/blob/master/goc/bin/add_osg_repository">add_osg_repository script</a>), and instead add the following to <code>/etc/httpd/conf.d/cvmfs.conf</code>:</p>
+<p>If you will be serving opensciencegrid.org repositories, you have to allow for old client configurations that access repositories without the domain name added. For that reason, you will need to remove each <code>/etc/httpd/conf.d/cvmfs.&lt;repositoryname&gt;.conf</code> that adding a replica creates (this is included in the <a href="https://github.com/opensciencegrid/oasis-server/blob/master/bin/add_osg_repository">add_osg_repository script</a>), and instead add the following to <code>/etc/httpd/conf.d/cvmfs.conf</code>:</p>
 <div class="codehilite"><pre><span></span><code>RewriteEngine On 
 RewriteRule ^/cvmfs/([^./]*)/(.*)$ /cvmfs/$1.opensciencegrid.org/$2 
 RewriteRule ^/cvmfs/([^/]+)/api/(.*)$ /var/www/wsgi-scripts/cvmfs-server/cvmfs-api.wsgi/$1/$2
