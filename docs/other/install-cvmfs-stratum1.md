@@ -106,7 +106,7 @@ Listen 8000 KeepAlive On
 Listen 8080 KeepAlive On
 ```
 
-If you will be serving opensciencegrid.org repositories, you have to allow for old client configurations that access repositories without the domain name added. For that reason, you will need to remove each `/etc/httpd/conf.d/cvmfs.<repositoryname>.conf` that adding a replica creates (this is included in the [add_osg_repository script](https://github.com/opensciencegrid/oasis-server/blob/master/goc/bin/add_osg_repository)), and instead add the following to `/etc/httpd/conf.d/cvmfs.conf`:
+If you will be serving opensciencegrid.org repositories, you have to allow for old client configurations that access repositories without the domain name added. For that reason, you will need to remove each `/etc/httpd/conf.d/cvmfs.<repositoryname>.conf` that adding a replica creates (this is included in the [add_osg_repository script](https://github.com/opensciencegrid/oasis-server/blob/master/bin/add_osg_repository)), and instead add the following to `/etc/httpd/conf.d/cvmfs.conf`:
 
 ```
 RewriteEngine On 
