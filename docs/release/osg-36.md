@@ -21,6 +21,9 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.
 Latest News
 -----------
 
+!!! bug "Known Issues"
+    HTCondor-CE job routing to non-HTCondor batch systems fails due to an issue with `blahp-1.18.48-2.4.osg36`
+
 ### February 26, 2021: 3.6 Released
 
 !!! question "Where are GlideinWMS and XRootD?"
