@@ -11,17 +11,6 @@ upstream frontier-squid package for the convenience of OSG users.
 This document is intended for System Administrators who are installing
 `frontier-squid`, the OSG distribution of the Frontier Squid software.
 
-!!! note "Applicable versions"
-    This document applies to software from the OSG 3.5 Release Series.
-    The version of frontier-squid installed should be >= 3.5.24-3.1.
-    When using OSG software from a previous Release Series (eg, OSG 3.3)
-    and a frontier-squid version in the 2.7STABLE9 series, refer to the
-    [old upstream install documentation](https://twiki.cern.ch/twiki/bin/view/Frontier/OldInstallSquid)
-    instead of the current links included below. There are some
-    incompatibilities between the two versions of frontier-squid, so if you
-    are upgrading from a 2.7STABLE9 version to a 3.5 version, see the
-    [upstream documentation on upgrading](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Upgrading).
-
 ## Frontier Squid Is Recommended
 
 OSG recommends that all sites run a caching proxy for HTTP and HTTPS
