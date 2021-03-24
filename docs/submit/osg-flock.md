@@ -1,5 +1,5 @@
-Configuring an HTCondor Access Point to Send Jobs to the OSG
-============================================================
+Installing an Open Science Pool Access Point
+============================================
 
 This document explains how to add a path for user jobs to flow from your local site out to the OSG,
 which in most cases means that the jobs will have far more resources available to run on than locally.

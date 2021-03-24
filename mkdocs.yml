@@ -74,7 +74,7 @@ nav:
     - 'Manage RSV via rsv-control': 'monitoring/rsv-control.md'
     - 'RSV GlideinWMS Tester': 'monitoring/install-rsv-gwms-tester.md'
 - Access Point:
-  - 'Flocking to OSG': 'submit/osg-flock.md'
+  - 'Installing an Open Science Pool Access Point': 'submit/osg-flock.md'
 - Data Federation:
   - 'Overview': 'data/stashcache/overview.md'
   - 'Running a Cache in a container': 'data/stashcache/run-stashcache-container.md'
