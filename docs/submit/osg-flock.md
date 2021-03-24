@@ -192,7 +192,10 @@ Users should be aware that OSG jobs are distributed across multiple institutions
 Each institution will have its own policy about the kinds of jobs that are allowed to run,
 and data transfer may be more complicated.
 The [OSG Helpdesk Solutions](https://support.opensciencegrid.org/support/solutions) page has information about
-what users should know; the "Choosing Resources for Jobs" and "Data Management" sections are particularly relevant.
+what users should know;
+the [Choosing Resources for Jobs](https://support.opensciencegrid.org/support/solutions/folders/5000266057) and
+[Data Management](https://support.opensciencegrid.org/support/solutions/folders/12000013267)
+sections are particularly relevant.
 
 ### Specifying a project
 OSG will only run jobs that have a registered *project* associated with them.
