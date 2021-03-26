@@ -1,4 +1,4 @@
-DateReviewed: 2021-03-24
+DateReviewed: 2021-03-26
 
 Installing an Open Science Pool Access Point
 ============================================
@@ -38,31 +38,21 @@ and configure it only to forward jobs to the OSG.
 In other words, you do not need a whole HTCondor batch system just to have a local OSG access point.
 
 
-Before Starting
----------------
-Because jobs running in OSG run in a completely different environment than your local cluster,
-and require additional considerations for data movement,
-you or your campus will need to provide additional support for your users to enable them to
-properly use OSG.
-Send email to <help@opensciencegrid.org> saying that you would like to flock jobs to OSG,
-and we will [consult](#scheduling-a-planning-consultation) with you about the proper solution for your site and what
-needs to be set up at both the OSG and at your site.
+System Requirements
+-------------------
+The hardware requirement for an OSG access point depends on several factors such as number of users, 
+number of jobs and for example how I/O intensive those jobs are. Our minimum recommended configuration
+is 6 cores, 12 GB RAM and 1 TB of local disk. The hardware can be bare metal or virtual machine, but
+we do not recommend containers as these submit host are running a bunch of system services which can
+be difficult to configure in a container.
 
-Also consider the following technical requirements:
+Also consider the following configuration requirements:
 
 * __Operating system:__ A RHEL 7 compatible operating system.
 * __User IDs:__ If it does not exist already, the installation will create the Linux user ID `condor`.
-* __Host certificate:__ Recommended for authentication to OSG infrastructure.
-  See our [documentation](../security/host-certs.md) for instructions on how to request and install host certificates.
 * __Network:__ 
     * Inbound TCP port 9618 must be open.
     * The access point must have a public IP address with both forward and reverse DNS configured.
-
-As with all OSG software installations, there are some one-time steps to prepare in advance:
-
-* Obtain root access to the host
-* Prepare [the required Yum repositories](../common/yum.md)
-* Install [CA certificates](../common/ca.md)
 
 
 Scheduling a Planning Consultation
@@ -83,26 +73,21 @@ You will need information like the hostname, and the administrative and security
 Follow the [general registration instructions](../common/registration.md#new-resources).
 For historical reasons, the service type is `Submit Node`.
 
-
-### Choose your authentication method
-There are two options for authentication of your access point to the OSG: GSI and pool password.
-Of these, GSI is the recommended method, but it will require obtaining a host certificate for your access point.
-See our [documentation](../security/host-certs.md) for instructions on how to request and install host certificates.
-
-If you are unable to obtain a host certificate, use the "pool password" authentication method,
-[described in the Configuring Authentication section](#configuring-authentication).
-
-
 ### Request to be allowed to flock to OSG
-OSG staff will need to add your access point to the list of hosts that flocked jobs are accepted from.
+OSG staff will need to add your access point to the list of hosts that flocked jobs are accepted from,
+and provide a HTCondor IDTOKEN so that your new access point can authenticate with OSG.
 Send email to <help@opensciencegrid.org> with the hostname of your access point and request to be added to the list.
 
 
 Installing Required Software
 ----------------------------
 Flocking requires HTCondor software as well as software for reporting to the OSG accounting system.
-OSG provides a convenience RPM that installs all required packages.
-To install, run:
+Start by setting up the OSG YUM repositories following the
+[Installing Yum Repositories](../common/yum/). __Note that you have to use OSG 3.6__. Earlier
+versions will not work.
+
+Once the YUM repositories are setup, install the `osg-flock` convenience RPM that installs all
+required packages:
 
 ```console
 root@host # yum install osg-flock
@@ -146,23 +131,17 @@ we provide a recommended configuration for flocking.
 
 Configuring Authentication
 --------------------------
-If you have obtained a host certificate according to the [instructions](../security/host-certs.md),
-you do not need to do any additional configuration and may [continue to the next section](#managing-services).
+Create a file named `/etc/condor/tokens.d/flock.opensciencegrid.org` with the IDTOKEN you
+received earlier. The token you only take up one line (that is, there should not be any
+line breaks in the token).
 
-If you cannot obtain a host certificate, then configure pool password authentication via the following instructions:
+Change the ownership to `condor:condor` and the permissions to `0600`. Verify this with
+`ls -l /etc/condor/tokens.d/flock.opensciencegrid.org`:
 
-1. Send email to <help@opensciencegrid.org> requesting the pool password file for flocking.
-
-1. Move the pool password file you have received to `/etc/condor/pool_password`;
-   set the ownership of that file to `condor:condor` and the permissions to `0600`.
-
-1. Create a configration file named `/etc/condor/config.d/90-flock-pool-password.conf` with the following contents:
-
-        :::ini
-        #-- Flock to OSG using pool password
-        SEC_PASSWORD_FILE = /etc/condor/pool_password
-        SEC_DEFAULT_AUTHENTICATION_METHODS = FS,PASSWORD
-
+```console
+# ls -l /etc/condor/tokens.d/flock.opensciencegrid.org 
+-rw------- 1 condor condor 288 Nov 11 09:03 /etc/condor/tokens.d/flock.opensciencegrid.org
+```
 
 Managing Services
 -----------------
@@ -170,7 +149,6 @@ In addition to the HTCondor service itself, there are a number of supporting ser
 
 | Software          | Service name                          | Notes                                                                                  |
 |:------------------|:--------------------------------------|:---------------------------------------------------------------------------------------|
-| Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca.md#managing-fetch-crl-services) for more info           |
 | Gratia            | `gratia-probes-cron`                  | Accounting software                                                                    |
 | HTcondor          | `condor`                              |                                                                                        |
 
