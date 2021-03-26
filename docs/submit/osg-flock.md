@@ -1,5 +1,7 @@
-Configuring an HTCondor Access Point to Send Jobs to the OSG
-============================================================
+DateReviewed: 2021-03-24
+
+Installing an Open Science Pool Access Point
+============================================
 
 This document explains how to add a path for user jobs to flow from your local site out to the OSG,
 which in most cases means that the jobs will have far more resources available to run on than locally.
@@ -43,8 +45,8 @@ and require additional considerations for data movement,
 you or your campus will need to provide additional support for your users to enable them to
 properly use OSG.
 Send email to <help@opensciencegrid.org> saying that you would like to flock jobs to OSG,
-and we will consult with you about the proper solution for your site and what needs to be set up
-at both the OSG and at your site.
+and we will [consult](#scheduling-a-planning-consultation) with you about the proper solution for your site and what
+needs to be set up at both the OSG and at your site.
 
 Also consider the following technical requirements:
 
@@ -61,6 +63,15 @@ As with all OSG software installations, there are some one-time steps to prepare
 * Obtain root access to the host
 * Prepare [the required Yum repositories](../common/yum.md)
 * Install [CA certificates](../common/ca.md)
+
+
+Scheduling a Planning Consultation
+----------------------------------
+
+Before participating in the OSG, either as a computational resource contributor or consumer,
+we ask that you [contact us](mailto:help@opensciencegrid.org) to set up a consultation.
+During this consultation, OSG staff will introduce you and your team to the OSG and develop a plan to meet your resource
+contribution and/or research goals.
 
 
 Initial Steps
@@ -181,7 +192,10 @@ Users should be aware that OSG jobs are distributed across multiple institutions
 Each institution will have its own policy about the kinds of jobs that are allowed to run,
 and data transfer may be more complicated.
 The [OSG Helpdesk Solutions](https://support.opensciencegrid.org/support/solutions) page has information about
-what users should know; the "Choosing Resources for Jobs" and "Data Management" sections are particularly relevant.
+what users should know;
+the [Choosing Resources for Jobs](https://support.opensciencegrid.org/support/solutions/folders/5000266057) and
+[Data Management](https://support.opensciencegrid.org/support/solutions/folders/12000013267)
+sections are particularly relevant.
 
 ### Specifying a project
 OSG will only run jobs that have a registered *project* associated with them.
