@@ -83,7 +83,7 @@ Installing Required Software
 ----------------------------
 Flocking requires HTCondor software as well as software for reporting to the OSG accounting system.
 Start by setting up the OSG YUM repositories following the
-[Installing Yum Repositories](../common/yum/). __Note that you have to use OSG 3.6__. Earlier
+[Installing Yum Repositories](../common/yum.md). __Note that you have to use OSG 3.6__. Earlier
 versions will not work.
 
 Once the YUM repositories are setup, install the `osg-flock` convenience RPM that installs all
