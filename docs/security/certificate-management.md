@@ -10,7 +10,7 @@ reference guide for several of these tools:
 
 !!! note
     This is a reference document and not introduction on how to install CA certificates or request
-    host / user certificates.  Most users will want the [CA overview](/common/ca.md),
+    host / user certificates.  Most users will want the [CA overview](../common/ca.md),
     [host certificate overview](host-certs.md), or [user certificate overview](user-certs.md) documents.
 
 
@@ -19,11 +19,11 @@ OSG PKI Command Line Clients
 
 ### Overview
 
-The OSG PKI Command Line Clients provide a command-line interface for requesting and issuing host certificates from the OSG PKI. They complement the [OIM Web Interface](https://oim.opensciencegrid.org/oim/certificateuser).
+The OSG PKI Command Line Clients provide a command-line interface for creating certificate signing requests (CSRs). 
 
 ### Prerequisites
 
-If you have not already done so, you need to [configure the OSG software repositories](/common/yum.md).
+If you have not already done so, you need to [configure the OSG software repositories](../common/yum.md).
 
 ### Installation
 
@@ -38,7 +38,7 @@ root@host # yum install osg-pki-tools
 Usage
 -----
 
-Documentation for usage of the osg-pki-tools can be found [here](https://github.com/opensciencegrid/osg-pki-tools/blob/master/README.txt)
+Documentation for usage of the osg-pki-tools can be found [here](https://github.com/opensciencegrid/osg-pki-tools/blob/master/README.md)
 
 
 OSG CA Certificates Updater
@@ -51,10 +51,10 @@ CA certificates.
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-- Ensure the host has [a supported operating system](/release/supported_platforms)
+- Ensure the host has [a supported operating system](../release/supported_platforms.md)
 - Obtain root access to the host
-- Prepare the [required Yum repositories](/common/yum)
-- Install [CA certificates](/common/ca)
+- Prepare the [required Yum repositories](../common/yum.md)
+- Install [CA certificates](../common/ca.md)
 
 ### Install instructions
 
@@ -114,10 +114,10 @@ While there is no configuration file, the behavior of the updater can be adjuste
 
 ##### Configuration file
 
-| Package              | File Description                                      | Location                                                       | Comment                                                                                       |
-|:---------------------|:------------------------------------------------------|:---------------------------------------------------------------|:----------------------------------------------------------------------------------------------|
-| osg-ca-certs-updater | Cron entry for periodically launching the updater     | `/etc/cron.d/osg-ca-certs-updater`                             | Command-line arguments to the updater can be specified here                                   |
-| osg-release          | Repo definition files for production OSG repositories | `/etc/yum.repos.d/osg.repo` or `/etc/yum.repos.d/osg-el6.repo` | Make sure these repositories are enabled and reachable from the host you are trying to update |
+| Package              | File Description                                      | Location                           | Comment                                                                                       |
+|:---------------------|:------------------------------------------------------|:-----------------------------------|:----------------------------------------------------------------------------------------------|
+| osg-ca-certs-updater | Cron entry for periodically launching the updater     | `/etc/cron.d/osg-ca-certs-updater` | Command-line arguments to the updater can be specified here                                   |
+| osg-release          | Repo definition files for production OSG repositories | `/etc/yum.repos.d/osg.repo`        | Make sure these repositories are enabled and reachable from the host you are trying to update |
 
 #### Log files
 
@@ -135,11 +135,7 @@ Some guides on X.509 certificates:
 -   Install GSI authentication on a server: <http://security.ncsa.illinois.edu/research/wssec/gsihttps/>
 -   Certificates how-to: <http://www.nordugrid.org/documents/certificate_howto.html>
 
-Some examples about verifying the certificates:
-
--   <http://gagravarr.org/writing/openssl-certs/others.shtml>
--   <http://www.cyberciti.biz/faq/test-ssl-certificates-diagnosis-ssl-certificate/>
--   <http://www.cyberciti.biz/tips/debugging-ssl-communications-from-unix-shell-prompt.html>
+See [this page](http://gagravarr.org/writing/openssl-certs/others.shtml) for examples of verifying certificates.
 
 Managing CAs
 ------------
@@ -327,5 +323,5 @@ Logs and configuration:
 References
 ----------
 
--   [Installing the Certificate Authorities Certificates and the related RPMs](/common/ca)
+-   [Installing the Certificate Authorities Certificates and the related RPMs](../common/ca.md)
 

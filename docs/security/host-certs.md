@@ -1,1 +1,1 @@
-host-certs/overview.md
+Page moved to [Host Certificates](host-certs/overview.md).

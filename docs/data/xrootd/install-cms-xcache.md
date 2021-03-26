@@ -14,7 +14,7 @@ Before starting the installation process, consider the following requirements:
 * __Operating system:__ A RHEL 7 or compatible operating systems.
 * __User IDs:__ If they do not exist already, the installation will create the Linux user IDs `xrootd`
 * __Host certificate:__ Required for client authentication and authentication with CMS VOMS Server
-  See our [documentation](/security/host-certs.md) for instructions on how to request and install host certificates.
+  See our [documentation](../../security/host-certs.md) for instructions on how to request and install host certificates.
 * __Network ports:__ The cache service requires the following ports open:
     * Inbound TCP port 1094 for file access via the XRootD protocol
     * Outbound UDP port 9930 for reporting to `xrd-report.osgstorage.org` and `xrd-mon.osgstorage.org` for monitoring
@@ -24,8 +24,8 @@ Before starting the installation process, consider the following requirements:
 As with all OSG software installations, there are some one-time steps to prepare in advance:
 
 * Obtain root access to the host
-* Prepare [the required Yum repositories](/common/yum.md)
-* Install [CA certificates](/common/ca.md)
+* Prepare [the required Yum repositories](../../common/yum.md)
+* Install [CA certificates](../../common/ca.md)
 
 
 Installing the Cache
@@ -53,7 +53,7 @@ with at least 1 TB of storage available.
 The `cms-xcache` package provides default configuration files in `/etc/xrootd/xrootd-cms-xcache.cfg` and `/etc/xrootd/config.d/`.
 Administrators may provide additional configuration by placing files in `/etc/xrootd/config.d/1*.cfg` (for files that need to be processed BEFORE the OSG configuration) or `/etc/xrootd/config.d/9*.cfg` (for files that need to be processed AFTER the OSG configuration).
 
-You _must_ configure every variable in `/etc/xrootd/10-common-site-local.cfg`.
+You _must_ configure every variable in `/etc/xrootd/config.d/10-common-site-local.cfg`.
 
 The mandatory variables to configure are:
 
@@ -79,7 +79,7 @@ The easiest solution for this is to use your host certificate and key as follows
     You must repeat the above steps whenever you renew your host certificate.
     If you automate certificate renewal, you should automate copying as well.
     For example, if you are using Certbot for Let's Encrypt, you should write a "deploy hook" as documented
-    [here](/security/host-certs/lets-encrypt/#pre-and-post-renewal-hooks).
+    [here](../../security/host-certs/lets-encrypt.md#pre-and-post-renewal-hooks).
 
 !!! note
     You must also register this certificate with the CMS VOMS (https://voms2.cern.ch:8443/voms/cms/)
@@ -116,7 +116,7 @@ In order for CMSSW jobs to use the cache at your site you need to modify the `st
 
 
 !!! note
-    If you are installing a [multinode cache](#installing-a-multinode-cache) then instead of `yourlocalcache:1094` url should be changed for `yourcacheredirector:2040`
+    If you are installing a [multinode cache](#installing-a-multinode-cache-optional) then instead of `yourlocalcache:1094` url should be changed for `yourcacheredirector:2040`
 
 ### Enable remote debugging
 
@@ -140,7 +140,7 @@ As soon as your issue has been resolved, revert any changes you have made to `/e
 
 Some sites would like to have a single logical cache composed of several nodes as shown below:
 
-![XRootD cluster](/img/xrootd.jpg)
+![XRootD cluster](../../img/xrootd.jpg)
 
 This can be achieved by following the next steps
 
@@ -151,27 +151,32 @@ This can be a simple lightweight virtual machine and will be the single point of
 1. Install the redirector package
 
         :::console
-        root@host # yum install xcache-redirector --enablerepo=osg-development
+        root@host # yum install xcache-redirector
 
 
-1. Create file named `/etc/xrootd/config.d/04-local-redir.cfg` with contents
+1. Create file named `/etc/xrootd/config.d/04-local-redir.cfg` with contents:
 
         :::file
         all.manager yourlocalredir:2041
+
+1. You _must_ configure every variable in `/etc/xrootd/config.d/10-common-site-local.cfg`. The mandatory variables to configure are:
+
+    - `set rootdir = /mnt/stash`: the mounted filesystem path to export.  This document refers to this as `/mnt/stash`.
+    - `set resourcename = YOUR_RESOURCE_NAME`: the resource name registered with the OSG for example ("T2_US_UCSD")
 
 1. Start and enable the `cmsd` and `xrootd` proccess:
 
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
-| XRootD | `cmsd@xcache-redirector.service` | The cmsd daemon that interact with the different xrootd servers |
-| XRootD | `xrootd@xcache-redirector.service` | The xrootd daemon which performs authenticated data transfers |
+| XRootD | `cmsd@xcache-redir.service` | The cmsd daemon that interact with the different xrootd servers |
+| XRootD | `xrootd@xcache-redir.service` | The xrootd daemon which performs authenticated data transfers |
 
 ### Configuring each of your cache nodes
 
 1. Create a config file in the nodes where you installed your caches `/etc/xrootd/config.d/94-xrootd-manager.cfg` with the following contents:
 
-      :::file
-      all.manager yourlocalredir:2041
+        :::file
+        all.manager yourlocalredir:2041
 
 1. Start and enable the `cmsd` service:
 
@@ -199,7 +204,7 @@ As a reminder, here are common service commands (all run as `root`) for EL7:
 |--------------|------------------|-----------|
 | XRootD | `xrootd@cms-xcache.service` | The XRootD daemon, which performs the data transfers |
 | XRootD (Optional)| `cmsd@cms-xcache.service` | The cmsd daemon that interact with the different xrootd servers |
-| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | Required to authenticate monitoring services.  See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
+| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | Required to authenticate monitoring services.  See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info |
 |  |`xrootd-renew-proxy.service` | Renew a proxy for downloads to the cache |
 |  | `xrootd-renew-proxy.timer` | Trigger daily proxy renewal |
 
@@ -238,4 +243,4 @@ user@host $ xrdcp -vf -d 1 root://cache_host:1094//store/data/Run2017B/SingleEle
 Getting Help
 ------------
 
-To get assistance, please use the [this page](/common/help) or contact <help@opensciencegrid.org> directly.
+To get assistance, please use the [this page](../../common/help.md) or contact <help@opensciencegrid.org> directly.

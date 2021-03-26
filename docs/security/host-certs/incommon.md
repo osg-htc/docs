@@ -5,13 +5,13 @@ Many institutions in the United States already subscribe to InCommon and offer I
 If your institution is in the list of [InCommon subscribers](https://www.incommon.org/federation/incommon-federation-participants/),
 continue with the instructions below.
 If your institution is not in the list, Let's Encrypt certificates do not meet your needs, and you do not have access to
-another IGTF CA subscription, please [contact us](/common/help.md).
+another IGTF CA subscription, please [contact us](../../common/help.md).
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-- Ensure the host has [a supported operating system](/release/supported_platforms)
+- Ensure the host has [a supported operating system](../../release/supported_platforms.md)
 - Obtain root access to the host
-- Prepare the [required Yum repositories](/common/yum)
+- Prepare the [required Yum repositories](../../common/yum.md)
 
 From a host that meets the above requirements, there are two options to get InCommon IGTF-accredited host certificates:
 
@@ -56,9 +56,8 @@ Requesting certificates from a registration authority
     If successful, the CSR will be named `<HOSTNAME>.req` and the private key will be named `<HOSTNAME>-key.pem`.
     Additional options and descriptions can be found [here](https://github.com/opensciencegrid/osg-pki-tools#options).
 
-1. Find your institution-specific InCommon contact
-   (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/division-of-information-technology/enterprise-information-security-services/cybersecurity/security-tools-software/server-certificates/)
-   submit the CSR that you generated above, and request a 1-year `IGTF Server Certificate` for `OTHER` server software.
+1. Find your institution-specific InCommon contact and  submit the CSR that you generated above.
+   Make sure to request a 1-year `IGTF Server Certificate` for `OTHER` server software.
 1. After the certificate has been issued by your institution, download the host certificate only (not the full chain) to
    its intended host and copy over the key you generated above.
 1. Verify that the issuer `CN` field is ` InCommon IGTF Server CA`:
@@ -86,8 +85,7 @@ Requesting certificates as a registration authority
 If you are a Registration Authority for your institution, skip ahead to [this section](#osg-incommon-cert-request).
 If you are not already a Registration Authority (RA) for your institution, you must request to be made one:
 
-1. Find your institution-specific InCommon contact
-   (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/division-of-information-technology/enterprise-information-security-services/cybersecurity/security-tools-software/server-certificates/)),
+1. Find your institution-specific InCommon contact (e.g. campus central IT)
 1. Request a Department Registration Authority user with SSL auto-approve enabled and a client certificate:
     - If they do not grant your request, you will not be able to request, approve, and retrieve certificates yourself.
       Instead, you must [request certificates from your RA](#requesting-certificates-from-a-registration-authority).

@@ -77,12 +77,12 @@ In the tables below:
 Syntax and layout
 -----------------
 
-The configuration files used by `osg-configure` are the one supported by Python's [SafeConfigParser](http://docs.python.org/library/configparser.html), similar in format to the [INI configuration file](http://en.wikipedia.org/wiki/INI_file) used by MS Windows:
+The configuration files used by `osg-configure` are the one supported by Python's [SafeConfigParser](https://docs.python.org/library/configparser.html), similar in format to the [INI configuration file](https://en.wikipedia.org/wiki/INI_file) used by MS Windows:
 
 -   Config files are separated into sections, specified by a section name in square brackets (e.g. `[Section 1]`)
 -   Options should be set using `name = value` pairs
 -   Lines that begin with `;` or `#` are comments
--   Long lines can be split up using continutations: each white space character can be preceded by a newline to fold/continue the field on a new line (same syntax as specified in [email RFC 822](http://tools.ietf.org/html/rfc822.html))
+-   Long lines can be split up using continutations: each white space character can be preceded by a newline to fold/continue the field on a new line (same syntax as specified in [email RFC 822](https://tools.ietf.org/html/rfc822.html))
 -   Variable substitutions are supported -- [see below](#variable-substitution)
 
 `osg-configure` reads and uses all of the files in `/etc/osg/config.d` that have a ".ini" suffix. The files in this directory are ordered with a numeric prefix with higher numbers being applied later and thus having higher precedence (e.g. 00-foo.ini has a lower precedence than 99-local-site-settings.ini). Configuration sections and options can be specified multiple times in different files. E.g. a section called `[PBS]` can be given in `20-pbs.ini` as well as `99-local-site-settings.ini`.
@@ -265,7 +265,6 @@ This section is contained in `/etc/osg/config.d/30-rsv.ini` which is provided by
 | **gratia_probes**    | String                    | This settings indicates which rsv gratia probes should be used.  It is a list of probes separated by a comma.  Valid probes are metric, condor, pbs, lsf, sge, managedfork, hadoop-transfer, and gridftp-transfer                                                      |
 | ce_hosts             | String                    | This option lists the serviceURI of the CEs that generic RSV CE probes should check.  This should be a list of serviceURIs (`hostname[:port/service]`) separated by a comma (e.g. `my.host,my.host2,my.host3:2812`).                                                   |
 | htcondor_ce_hosts    | String                    | This option lists the serviceURI of the HTCondor-CE-based CEs that the RSV HTCondor-CE probes should check. This should be a list of serviceURIs (`hostname[:port/service]`) separated by a comma (e.g. `my.host,my.host2,my.host3:2812`). |                           |
-| gums_hosts           | String                    | This option lists the serviceURI or FQDN of the CEs or SEs, using GUMS for authentication, that the RSV GUMS probes should check.  This should be a list of *CE* or *SE* FQDNs (and _not a GUMS server FQDN_) separated by a comma (e.g. `my.host,my.host2,my.host3`). |
 | gridftp_hosts        | String                    | This option lists the serviceURI of the GridFTP servers that the RSV GridFTP probes should check.  This should be a list of serviceURIs (`hostname[:port/service]`) separated by a comma (e.g. `my.host.iu.edu:2812,my.host2,my.host3`).                               |
 | gridftp_dir          | String                    | This should be the directory that the GridFTP probes should use during testing.  This defaults to `/tmp` if left blank or set to `UNAVAILABLE`.                                                                                                                        |
 | **srm_hosts**        | String                    | This option lists the serviceURI of the srm servers that the RSV srm probes should check.  This should be a list of serviceURIs (`hostname[:port/service]`) separated by a comma (e.g. `my.host,my.host2,my.host3:8444`).                                              |
@@ -391,20 +390,16 @@ This section handles the configuration of services that do not have a dedicated 
 
 This section is contained in `/etc/osg/config.d/10-misc.ini` which is provided by the `osg-configure-misc` RPM.
 
-This section primarily deals with authentication/authorization. For information on suggested settings for your CE, see the [authentication section of the HTCondor-CE install documents](../compute-element/install-htcondor-ce#configuring-authentication).
+This section primarily deals with authentication/authorization. For information on suggested settings for your CE, see the [authentication section of the HTCondor-CE install documents](../compute-element/install-htcondor-ce.md#configuring-authorization).
 
 | Option                                | Values Accepted                                | Explanation                                                                                                                                                                                                                                                                                                                                                                          |
 |---------------------------------------|------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| glexec\_location                      | String                                         | This gives the location of the glExec installation on the worker nodes, if it is present. Can be defined in terms of an environment variable (e.g. `$FOO`) that will be evaluated on the worker node. If it is not installed, set this to `UNAVAILABLE`. glExec does not work with the `vomsmap` authorization method on OSG 3.3 and **is entirely unsupported starting in OSG 3.4** |
-| **gums\_host**                        | String                                         | This setting is used to indicate the hostname of the GUMS host that should be used for authentication, if the authorization method below is set to `xacml`. If GUMS is not used, this should be set to `UNAVAILABLE`. **GUMS is deprecated in OSG 3.4**                                                                                                                              |
 | **authorization\_method**             | `gridmap`, `xacml`, `local-gridmap`, `vomsmap` | This indicates which authorization method your site uses. **`xacml`** **is deprecated in OSG 3.4**                                                                                                                                                                                                                                                                                   |
 | edit\_lcmaps\_db                      | `True`, `False`                                | (Optional, default True) If true, osg-configure will overwrite `/etc/lcmaps.db` to set your authorization method. The previous version will be backed up to `/etc/lcmaps.db.pre-configure`                                                                                                                                                                                           |
-| all\_fqans                            | `True`, `False`                                | (Optional, default False) If true, vomsmap auth will use all VOMS FQANs of a proxy for mapping -- see [documentation](../security/lcmaps-voms-authentication#mapping-using-all-fqans)                                                                                                                                                                                                |
-| copy\_host\_cert\_for\_service\_certs | `True`, `False`                                | (Optional, default False) If true, osg-configure will create a copy or copies of your host cert and key as service certs for RSV and (on OSG 3.3) GUMS                                                                                                                                                                                                                               |
+| all\_fqans                            | `True`, `False`                                | (Optional, default False) If true, vomsmap auth will use all VOMS FQANs of a proxy for mapping -- see [documentation](../security/lcmaps-voms-authentication.md#mapping-using-all-fqans)                                                                                                                                                                                                |
 
 **OSG 3.4 changes:**
 
--   `glexec_location` must be `UNAVAILABLE` or unset
 -   `authorization_method` defaults to `vomsmap`
 -   `authorization_method` will raise a warning if set to `xacml`
 
@@ -457,7 +452,7 @@ This section gives information about the options in the Storage section of the c
 Several of these values are constrained and need to be set in a way that is consistent with one of the OSG storage models.
 Please review the Storage Related Parameters section of the
 [Environment Variables](../worker-node/using-wn.md)
-description and [Site Planning](../site-planning) discussions for explanations of the various storage models and the requirements for them.
+description and [Site Planning](../site-planning.md) discussions for explanations of the various storage models and the requirements for them.
 
 This section is contained in `/etc/osg/config.d/10-storage.ini` which is provided by the `osg-configure-ce` RPM.
 

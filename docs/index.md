@@ -22,15 +22,15 @@ one where the [OSG hosts and maintains](#osg-hosted-services) resource provision
 and the traditional model where the [site](#self-hosted-services) hosts and maintains these same services.
 In both of these cases, the following will be needed:
 
-- An existing compute cluster running on a [supported operating system](/release/supported_platforms) with a supported
+- An existing compute cluster running on a [supported operating system](./release/supported_platforms.md) with a supported
   batch system:
   [Grid Engine](http://www.univa.com/products/),
   [HTCondor](https://research.cs.wisc.edu/htcondor/),
   [LSF](https://www.ibm.com/us-en/marketplace/hpc-workload-management),
-  [PBS Pro](https://www.pbsworks.com/PBSProduct.aspx?n=Altair-PBS-Professional&c=Overview-and-Capabilities)/[Torque](https://adaptivecomputing.com/cherry-services/torque-resource-manager/),
+  [PBS Pro](https://www.altair.com/pbs-professional/)/[Torque](https://adaptivecomputing.com/cherry-services/torque-resource-manager/),
   or [Slurm](https://slurm.schedmd.com/).
 - Outbound network connectivity from your cluster's worker nodes
-- [Temporary scratch space](/worker-node/using-wn#for-site-administrators) on each worker node
+- [Temporary scratch space](./worker-node/using-wn.md#for-site-administrators) on each worker node
 
 !!!info "Don't meet the requirements?"
     If your site does not meet the above conditions, please [contact us](mailto:help@opensciencegrid.org) to discuss
@@ -40,7 +40,7 @@ In both of these cases, the following will be needed:
 
 To contribute computational resources with OSG-hosted services, your site will also need the following:
 
-- Allow SSH access to your local cluster's submit node from a known IP address
+- Allow SSH access to your local cluster's login host from a known IP address
 - Shared home directories on each cluster node
 
 !!!success "Next steps"
@@ -50,4 +50,4 @@ To contribute computational resources with OSG-hosted services, your site will a
 ### Self-hosted services ###
 
 If you are interested in contributing resources by hosting your own OSG services, please continue with the
-[detailed overview](/detailed-overview) page.
+[site planning](./site-planning.md) page.

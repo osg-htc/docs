@@ -15,10 +15,10 @@ below](#reference) as needed):
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-- Ensure the host has [a supported operating system](/release/supported_platforms)
+- Ensure the host has [a supported operating system](../release/supported_platforms.md)
 - Obtain root access to the host
-- Prepare the [required Yum repositories](/common/yum)
-- Install [CA certificates](/common/ca)
+- Prepare the [required Yum repositories](../common/yum.md)
+- Install [CA certificates](../common/ca.md)
 
 Installing GSI OpenSSH
 ----------------------
@@ -66,7 +66,7 @@ This can be done by editing `/etc/gsissh/sshd` and setting `Port 2222`.
 
 ### Configuring authentication
 
-To configure authentication for GSI OpenSSH, follow the instructions in [the LCMAPS VOMS plugin document](/security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin)
+To configure authentication for GSI OpenSSH, follow the instructions in [the LCMAPS VOMS plugin document](../security/lcmaps-voms-authentication.md#configuring-the-lcmaps-voms-plugin)
 to prepare the LCMAPS VOMS plugin.
 
 Using GSI OpenSSH
@@ -74,12 +74,12 @@ Using GSI OpenSSH
 
 The following table gives the commands needed to start, stop, enable, and disable GSI OpenSSH.
 
-| To...                                   | On EL6, run the command...   | On EL7, run the command...                      |
-| :-------------------------------------- | :--------------------------- | :--------------------------------------------   |
-| Start  service                          | `service gsisshd start`      | `systemctl start gsisshd`   |
-| Stop a  service                         | `service gsisshd stop`       | `systemctl stop gsisshd`    |
-| Enable a service to start on boot       | `chkconfig gsisshd on`       | `systemctl enable gsisshd`  |
-| Disable a service from starting on boot | `chkconfig gsisshd off`      | `systemctl disable gsisshd` |
+| To...                                   | Run the command...            |
+| :-------------------------------------- | :---------------------------- |
+| Start the service                         | `systemctl start gsisshd`     |
+| Stop the service                          | `systemctl stop gsisshd`      |
+| Enable the service to start on boot       | `systemctl enable gsisshd`    |
+| Disable the service from starting on boot | `systemctl disable gsisshd`   |
 
 
 Validating GSI OpenSSH
@@ -118,7 +118,7 @@ Output goes to `/var/log/messages` or `journalctl` by default.
 Help
 ----
 
-To get assistance please use this [Help Procedure](/common/help).
+To get assistance please use this [Help Procedure](../common/help.md).
 
 
 Reference 
@@ -147,5 +147,4 @@ Other Files
 | gsisshd            | `/etc/grid-security/hostcert.pem` | Host certificate |
 | gsisshd            | `/etc/grid-security/hostkey.pem`  | X.509 host key   |
 | gsisshd            | `/etc/gsissh/ssh_host_rsa_key`    | RSA Host key     |
-
 

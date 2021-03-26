@@ -9,11 +9,17 @@ There are several authorization options in XRootD available through its security
 In this document, we will cover the [`xrootd-lcmaps`](#enabling-xrootd-lcmaps-authorization) security option supported
 in the OSG.
 
+The XRootD LCMAPS authorization method depends on configuring
+[LCMAPS with the VOMS plugin](../../security/lcmaps-voms-authentication.md).
+LCMAPS maps an incoming user's grid credentials to a Unix account name;
+the permissions listed in the [authorization file](#authorization-file) all reference Unix account names. 
+
 !!! note
-    On the data nodes, the files will actually be owned by unix user `xrootd` (or other daemon user), not as the user
+    On the data nodes, the files will actually be owned by Unix user `xrootd` (or other daemon user), not as the user
     authenticated to, under most circumstances.
     XRootD will verify the permissions and authorization based on the user that the security plugin authenticates you
-    to, but, internally, the data node files will be owned by the `xrootd` user.
+    to, but, internally, the data node files will be owned by the `xrootd` user. If this behaviour is not desired, enable
+    [XRootD multi-user support](install-standalone.md#enabling-multi-user-support). 
 
 #### Authorization file
 
@@ -81,17 +87,16 @@ root@host # chmod 0640 /etc/xrootd/auth_file  # or 0644
 
 #### Enabling xrootd-lcmaps authorization
 
-The xrootd-lcmaps security plugin uses the `lcmaps` library and the [LCMAPS VOMS plugin](/security/lcmaps-voms-authentication)
+The xrootd-lcmaps security plugin uses the `lcmaps` library and the [LCMAPS VOMS plugin](../../security/lcmaps-voms-authentication.md)
 to authenticate and authorize users based on X509 certificates and VOMS attributes. Perform the following instructions
 on all data nodes:
 
-1. Install [CA certificates](/common/ca#installing-ca-certificates) and [manage CRLs](/common/ca#installing-ca-certificates#managing-certificate-revocation-lists)
+1. Install [CA certificates](../../common/ca.md#installing-ca-certificates) and [manage CRLs](../../common/ca.md#managing-certificate-revocation-lists)
 
-1. Follow the instructions for requesting a [service certificate](/security/host-certs#requesting-service-certificates),
-   using `xrootd` for both the `<SERVICE>` and `<OWNER>`, resulting in a certificate and key in `/etc/grid-security/xrd/xrdcert.pem`
-   and `/etc/grid-security/xrd/xrdkey.pem`, respectively.
+1. Copy your host certificate and key to `/etc/grid-security/xrd/xrdcert.pem` and `/etc/grid-security/xrd/xrdkey.pem`,
+   respectively.
 
-1. Install and configure the [LCMAPS VOMS plugin](/security/lcmaps-voms-authentication)
+1. Install and configure the [LCMAPS VOMS plugin](../../security/lcmaps-voms-authentication.md)
 
 1. Install `xrootd-lcmaps` and necessary configuration:
 
@@ -100,7 +105,7 @@ on all data nodes:
 
 1. Configure access rights for mapped users by creating and modifying the XRootD [authorization file](#authorization-file)
 
-1. Restart the [relevant services](/data/xrootd/install-standalone/#using-xrootd)
+1. Restart the [relevant services](install-standalone.md#using-xrootd)
 
 Verifying XRootD Authorization
 ------------------------------
@@ -117,11 +122,11 @@ To verify the LCMAPS security, run the following commands from a machine with yo
         [0B/0B][100%][==================================================][0B/s]
         Run: [FATAL] Auth failed
 
-1. On the XRootD host, add your DN to [/etc/grid-security/grid-mapfile](/security/lcmaps-voms-authentication#mapping-users)
+1. On the XRootD host, add your DN to [/etc/grid-security/grid-mapfile](../../security/lcmaps-voms-authentication.md#mapping-users)
 
 1. Add a line to `/etc/xrootd/auth_file` to ensure the mapped user can write to `<DESTINATION PATH>`
 
-1. Restart the xrootd service. (See [this section](/data/xrootd/install-standalone/#using-xrootd) for more information
+1. Restart the xrootd service. (See [this section](install-standalone.md#using-xrootd) for more information
    of managing XRootD services.)
 
 1. Generate your proxy and verify that you can successfully transfer files:
@@ -132,4 +137,3 @@ To verify the LCMAPS security, run the following commands from a machine with yo
         [938.1kB/938.1kB][100%][==================================================][938.1kB/s]
 
     If your transfer does not succeed, run the previous command with `--debug 2` for more information.
-

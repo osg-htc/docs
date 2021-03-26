@@ -1,12 +1,11 @@
 Installing and Maintaining the LCMAPS VOMS Plugin
 =================================================
 
-LCMAPS is a software library used on [HTCondor-CE](/compute-element/install-htcondor-ce), [GridFTP](/data/gridftp), and
-[XRootD](/data/xrootd/install-storage-element) hosts for mapping grid certificates of incoming connections to specific
+LCMAPS is a software library used on [HTCondor-CE](../compute-element/install-htcondor-ce.md), [GridFTP](../data/gridftp.md), and
+[XRootD](../data/xrootd/install-storage-element.md) hosts for mapping grid certificates of incoming connections to specific
 Unix accounts.
 The LCMAPS VOMS plugin enables LCMAPS to make mapping decisions based on the VOMS attributes of grid certificates, e.g.
 `/cms/Role=production/Capability=NULL`.
-In OSG 3.4, the LCMAPS VOMS plugin replaced GUMS and edg-mkgridmap as the authentication method at OSG sites.
 
 The OSG provides a default set of mappings from VOMS attributes to Unix accounts.
 By configuring LCMAPS, you can override these mappings, including changing the Unix account that a VO is mapped to;
@@ -44,7 +43,7 @@ Configuring the LCMAPS VOMS Plugin
 
 The following section describes the steps required to configure the LCMAPS VOMS plugin for authentication.
 Additionally, there are [optional configuration](#optional-configuration) instructions if you need to make changes to
-the default mappings, or migrate from edg-mkgridmap or GUMS.
+the default mappings.
 
 ### Supporting mapped VOs and users
 
@@ -71,7 +70,7 @@ the default mappings, or migrate from edg-mkgridmap or GUMS.
     | [HCC](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/HCC.yaml)           | `hcc`               |
     | [Gluex](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/Gluex.yaml)       | `gluex`             |
 
-1.  Edit `/etc/osg/config.d/30-gip.ini` and specify the supported VOs per [Subcluster or ResourceEntry section](/other/configuration-with-osg-configure#subcluster-resource-entry):
+1.  Edit `/etc/osg/config.d/30-gip.ini` and specify the supported VOs per [Subcluster or ResourceEntry section](../other/configuration-with-osg-configure.md#subcluster-resource-entry):
 
         :::ini
         allowed_vos="VO1,VO2..."
@@ -80,7 +79,7 @@ the default mappings, or migrate from edg-mkgridmap or GUMS.
 
 Making changes to the OSG configuration files in the `/etc/osg/config.d` directory does not apply those settings to
 software automatically.
-For the OSG settings, use the [osg-configure](/other/configuration-with-osg-configure) tool to validate (to a limited
+For the OSG settings, use the [osg-configure](../other/configuration-with-osg-configure.md) tool to validate (to a limited
 extent) and apply the settings to the relevant software components.
 If instead you wish to manage the LCMAPS VOMS plugin configuration yourself, skip to the
 [manual configuration section](#manual-configuration).
@@ -105,89 +104,17 @@ If instead you wish to manage the LCMAPS VOMS plugin configuration yourself, ski
 
 ### Optional configuration
 
-The following subsections contain information on migration from `edg-mkgridmap`, mapping or banning users by their
+The following subsections contain information on mapping or banning users by their
 certificates' Distinguished Names (DNs) or by their proxies' VOMS attributes.
 Any optional configuration is to be performed after the installation and configuration sections above.
 
 For a table of the configuration files and their order of evaluation, consult the [reference section](#configuration-files).
 
--   [Migrating from edg-mkgridmap](#migrating-from-edg-mkgridmap)
--   [Migrating from GUMS](#migrating-from-gums)
 -   [Mapping VOs](#mapping-vos)
 -   [Mapping users](#mapping-users)
 -   [Banning VOs](#banning-vos)
 -   [Banning users](#banning-users)
 -   [Mapping using all FQANs](#mapping-using-all-fqans)
-
-
-#### Migrating from edg-mkgridmap
-
-The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authentication on HTCondor-CE, GridFTP, and
-XRootD hosts, is no longer supported by the OSG.
-The LCMAPS VOMS plugin (package `lcmaps-plugins-voms`) now provides the same functionality.
-To migrate from edg-mkgridmap to the LCMAPS VOMS plugin, perform the following procedure:
-
-1.  Configure user DN mappings:
-
-    1. Remove `/etc/grid-security/grid-mapfile`
-    1. Check if you have a local grid mapfile:
-
-            :::console
-            root@host # grep gmf_local /etc/edg-mkgridmap.conf
-
-    1. If the above command returns a file that exists and has contents, move it to `/etc/grid-security/grid-mapfile`.
-
-1.  If you are converting an HTCondor-CE host, remove the HTCondor-CE `GRIDMAP` configuration. Otherwise, skip to the
-    next step.
-
-    1. Find where `GRIDMAP` is set:
-
-            :::console
-            root@host # condor_ce_config_val -v GRIDMAP
-
-    1. If the above command returns a file, remove the `GRIDMAP` configuration from that file.
-       Repeat this until the command returns `Not defined: GRIDMAP`.
-    1. Reconfigure HTCondor-CE:
-
-            :::console
-            root@host # condor_ce_reconfig
-
-1. Remove edg-mkgridmap and related packages:
-
-        :::console
-        root@host # yum erase edg-mkgridmap
-
-    !!! warning
-        In the output from this command, yum should **not** list other packages than the one.
-        If it lists other packages, cancel the erase operation, make sure the other packages are updated to their latest
-        OSG 3.5 versions (they should have ".osg35" in their versions), and try again.
-
-#### Migrating from GUMS
-
-GUMS is no longer supported by the OSG and has been replaced by the LCMAPS VOMS plugin.
-Note that unlike GUMS, which runs on a central host, the LCMAPS VOMS plugin will run on your GUMS clients (e.g.
-HTCondor-CE, GridFTP, and XRootD).
-To migrate any custom authentication configuration from GUMS to the LCMAPS VOMS plugin, perform the following procedure:
-
-1. On your GUMS host, retrieve the conversion helper script and run it:
-
-        :::console
-        root@gums-host # wget https://raw.githubusercontent.com/opensciencegrid/osg-vo-config/mapfile-generator-0.2/bin/manual-mapfile-from-gumsdb.py
-        root@gums-host # python manual-mapfile-from-gumsdb.py
-
-1. Verify that the contents of `ban-mapfile.additions`, `grid-mapfile.additions`, and `voms-mapfile.additions` include
-   any custom banned users, user mappings, and VO mappings, respectively.
-
-    !!! note
-        The above files will not include all VO mappings; the OSG provides default VO mappings in
-        `/usr/share/osg/voms-mapfile-default`
-
-1. On each of your client hosts (e.g. HTCondor-CE, GridFTP, XRootD), perform the following:
-
-    1. If you have not done so already, [install](#installing-the-lcmaps-voms-plugin) and
-       [configure](#configuring-the-lcmaps-voms-plugin) the LCMAPS VOMS plugin
-    1. Append each `.additions` file to its corresponding file in `/etc/grid-security/` (creating those files if they do
-       not exist)
 
 #### Mapping VOs
 
@@ -250,7 +177,17 @@ If the pattern matches, that user will be unable to access your resources.
 
 !!!danger
     When banning VOs, you must restart the services using LCMAPS VOMS authentication (e.g. `condor-ce`,
-    `globus-gridftp-server`, etc.) to clear any authentication caches.
+    `globus-gridftp-server`, `xrootd`, etc.) to clear any authentication caches. In the case of XRootD
+    when the service is not restarted the change could take up to 12hrs to take effect. This can be
+    modified by defining the `authzto` option in the `sec.protocol` configuration attribute, e.g.:
+
+        sec.protocol /usr/lib64 gsi \
+            -certdir:/etc/grid-security/certificates \
+            -cert:/etc/grid-security/xrd/xrdcert.pem \
+            ...
+            -authzto:3600
+
+    The units of `-authzto` are in seconds which means that the above will set the LCMAPS cache lifetime to 1hr.
 
 !!!warning
     `/etc/grid-security/ban-voms-mapfile` *must* exist, even if you are not banning any VOs.
@@ -269,7 +206,17 @@ certificates' DNs. An example of the format of a `ban-mapfile` follows:
 
 !!!danger
     When banning users, you must restart the services using LCMAPS VOMS authentication (e.g. `condor-ce`,
-    `globus-gridftp-server`, etc.) to clear any authentication caches.
+    `globus-gridftp-server`, `xrootd`, etc.) to clear any authentication caches. In the case of XRootD
+    when the service is not restarted the change could take up to 12hrs to take effect. This can be
+    modified by defining the `authzto` option in the `sec.protocol` configuration attribute, e.g.:
+
+        sec.protocol /usr/lib64 gsi \
+            -certdir:/etc/grid-security/certificates \
+            -cert:/etc/grid-security/xrd/xrdcert.pem \
+            ...
+            -authzto:3600
+
+    The units of `-authzto` are in seconds which means that the above will set the LCMAPS cache lifetime to 1hr.
 
 !!!warning
     `/etc/grid-security/ban-mapfile` *must* exist, even if you are not banning any users.
@@ -326,8 +273,8 @@ and make sure it matches one of the patterns in `/etc/grid-security/voms-mapfile
 Troubleshooting the LCMAPS VOMS Plugin
 --------------------------------------
 
-LCMAPS logs to `journalctl` (EL7) or `/var/log/messages` (EL6) and the verbosity of the logging can be increased by
-modifying the appropriate configuration and restarting the relevant service.
+LCMAPS logs to `journalctl` and the verbosity of the logging can be increased by modifying the appropriate
+configuration and restarting the relevant service.
 This section outlines the configuration necessary to raise the debug level for the different hosts that can use LCMAPS
 VOMS authentication as well as common LCMAPS VOMS authentication issues.
 
@@ -347,7 +294,7 @@ If you are troubleshooting an HTCondor-CE host, follow these instructions to rai
 
         GSS_ASSIST_GRIDMAP_CACHE_EXPIRATION = 0
 
-1. Restart the [condor-ce](/compute-element/install-htcondor-ce#managing-htcondor-ce-and-associated-services) service
+1. Restart the [condor-ce](../compute-element/install-htcondor-ce.md#managing-htcondor-ce-and-associated-services) service
 
 !!! tip
     After you've completed troubleshooting, remember to revert the changes above and restart services!
@@ -374,7 +321,7 @@ If you are troubleshooting an XRootD host, follow these instructions to raise th
                     -authzfunparms:lcmapscfg=/etc/xrootd/lcmaps.cfg,loglevel=5,policy=authorize_only \
                     -gmapopt:10 -gmapto:0
 
-1. Restart the [xrootd](/data/xrootd/install-storage-element#managing-xrootd-services) service
+1. Restart the [xrootd](../data/xrootd/install-storage-element.md#managing-xrootd-services) service
 
 !!! tip
     After you've completed troubleshooting, remember to revert the changes above and restart services!
@@ -390,17 +337,33 @@ If you are troubleshooting a GridFTP host, follow these instructions to raise th
         # optional (uncomment the following line to output log messages to a file):
         # export LCMAPS_LOG_FILE=/tmp/lcmaps.log
 
-1. Restart the [globus-gridftp-server](/data/gridftp#managing-gridftp) service.
+1. Restart the [globus-gridftp-server](../data/gridftp.md#managing-gridftp) service.
 
 !!! tip
     After you've completed troubleshooting, remember to revert the changes above and restart services!
 
 ### Common issues
 
+#### A user/VO still has access to my XRootD server after adding them to the ban files
+The best way to ensure that a user/VO is immediately banned is to restart the XRootD server after adding the DN or VOMS attributes to the corresponding ban file.
+If the above is not possible, the the lifetime of the LCMAPS cache for XRootD can be controlled by setting the parameter `authzto`
+within the `sec.protocol` configuration attribute, e.g.:
+
+    sec.protocol /usr/lib64 gsi \
+    -certdir:/etc/grid-security/certificates \
+    -cert:/etc/grid-security/xrd/xrdcert.pem \
+    ...
+    -authzto:3600
+
+The units of `-authzto` are in seconds which means that the above will set the LCMAPS cache lifetime to 1hr.
+The default value for this parameter is 12hrs.
+
+
+
 #### Wrong version of GridFTP
 
-If you have the EPEL version of the GridFTP server, you may see error messages in `journalctl` (EL7),
-`var/log/messages` (EL6), or the location specified by `LCMAPS_LOG_FILE`.
+If you have the EPEL version of the GridFTP server, you may see error messages in `journalctl`
+or the location specified by `LCMAPS_LOG_FILE`.
 
 **Symptoms**
 
@@ -417,7 +380,7 @@ Apr 11 13:51:41 atlas-hub globus-gridftp-server: You are still root after the LC
         :::console
         user@host $ rpm -qa 'globus-gridftp*'
 
-1. Verify that the [priority](/common/yum#installing-and-configuring-repositories) of the OSG repositories are set
+1. Verify that the [priority](../common/yum.md#install-the-yum-priorities-plugin-el7) of the OSG repositories are set
    properly
 
 1. Clean your yum cache
@@ -433,7 +396,7 @@ Apr 11 13:51:41 atlas-hub globus-gridftp-server: You are still root after the LC
 Getting Help
 ------------
 
-To get assistance, please use the [this page](/common/help).
+To get assistance, please use the [this page](../common/help.md).
 
 Reference
 ---------
@@ -495,4 +458,3 @@ be present in your existing `/etc/lcmaps.db` file.
 1.  Edit `/etc/grid-security/gsi-authz.conf` and ensure that it contains the following line with a newline at the end:
 
         globus_mapping liblcas_lcmaps_gt4_mapping.so lcmaps_callout
-

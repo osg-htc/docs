@@ -1,4 +1,5 @@
-# Overview of StashCache
+Data Federation Overview
+========================
 
 The OSG operates the _StashCache data federation_, which provides organizations with a method to distribute their data
 in a scalable manner to thousands of jobs without needing to pre-stage data at each site.

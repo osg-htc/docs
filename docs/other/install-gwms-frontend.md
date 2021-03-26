@@ -22,13 +22,13 @@ designed for small to medium VOs (see the Hardware Requirements below). Given a
 significant, large host, we have been able to scale the single-host install to
 20,000 running jobs.
 
-![GlideinWMS Architecture](/img/simple_diagram.png)
+![GlideinWMS Architecture](../img/simple_diagram.png)
 
 
 Before Starting
 ---------------
 
-Before starting the installation process, consider the following points (consulting [the Reference section below](#reference) as needed):
+Before starting the installation process, consider the following points (consulting [the Reference section below](#references) as needed):
 
 -   **User IDs:** If they do not exist already, the installation will create the Linux users `apache` (UID 48), `condor`, `frontend`, and `gratia`
 -   **Network:** The VO frontend must have reliable network connectivity and be on the public internet (i.e. no NAT).
@@ -39,7 +39,7 @@ Before starting the installation process, consider the following points (consult
 -   **Host choice**: The GlideinWMS VO Frontend has the following hardware requirements for a production host:
     -   **CPU**: Four cores, preferably no more than 2 years old.
     -   **RAM**: 3GB plus 2MB per running job. For example, to sustain 2000 running jobs, a host with 5GB is needed.
-    -   **Disk**: 30GB will be sufficient for all the binaries, config and log files related to GlideinWMS. As this will be an interactive submit host, have enough disk space for your users' jobs. 
+    -   **Disk**: 30GB will be sufficient for all the binaries, config and log files related to GlideinWMS. As this will be an interactive access point, have enough disk space for your users' jobs.
 
 
 !!! note
@@ -50,7 +50,7 @@ Before starting the installation process, consider the following points (consult
 !!! note
     GlideinWMS versions prior to 3.4.1 also required port 9615 for the Schedd,
     and did not support using shared port for the secondary collectors.
-    If you are upgrading a standalone submit host from version 3.4 or earlier, the default open 
+    If you are upgrading a standalone access point from version 3.4 or earlier, the default open
     port has changed from 9615 to 9618, and you need to update your firewall rules to reflect this change.
     You can figure out which port will be used by running the following command:
     
@@ -63,10 +63,10 @@ Before starting the installation process, consider the following points (consult
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-- Ensure the host has a [supported operating system](/release/supported_platforms)
+- Ensure the host has a [supported operating system](../release/supported_platforms.md)
 - Obtain root access to the host
-- Prepare the [required Yum repositories](/common/yum)
-- Install [CA certificates](/common/ca)
+- Prepare the [required Yum repositories](../common/yum.md)
+- Install [CA certificates](../common/ca.md)
 
 ### Credentials and Proxies
 
@@ -183,7 +183,7 @@ GlideinWMS services on one node.
 
 ### Installing GlideinWMS Frontend on Multiple Nodes (Advanced) 
 
-For advanced users expecting heavy usage on their submit node, you may want to
+For advanced users expecting heavy usage on their access point, you may want to
 consider splitting the user collector, user submit, and vo frontend
 services. This can be doing using the following three commands (on different
 machines):
@@ -252,7 +252,7 @@ Both the `classad_proxy` and `absfname` files should be owned by `frontend` user
 
     - The `DN` of the **VO Frontend Proxy** described previously [here](#credentials-and-proxies).
     - The `fullname` attribute is the fully qualified domain name of the host where you installed the VO Frontend (`hostname --fqdn`).
-    A secondary schedd is optional. You will need to delete the secondary schedd line if you are not using it. Multiple schedds allow the Frontend to service requests from multiple submit hosts.
+    A secondary schedd is optional. You will need to delete the secondary schedd line if you are not using it. Multiple schedds allow the Frontend to service requests from multiple access points.
 
 
             :::xml
@@ -510,12 +510,12 @@ and renew the **pilot proxies** and **VO Frontend proxy**. To configure this ser
 
 You must report accounting information if you are running more than a few test jobs on the OSG .
 
-1.  Install the GlideinWMS Gratia Probe on each of your submit hosts in your GlideinWMS installation:
+1.  Install the GlideinWMS Gratia Probe on each of your access points in your GlideinWMS installation:
 
         :::console
         root@host # yum install gratia-probe-glideinwms
 
-2.  Edit the ProbeConfig located in `/etc/gratia/condor/ProbeConfig`. First, edit the `SiteName` and `ProbeName` to be a unique identifier for your GlideinWMS Submit host. There can be multiple probes (with different names) per site. If you haven't already, you should register your GlideinWMS submit host in [OIM](https://github.com/opensciencegrid/topology/). Then you can use the name you used to register the resource.
+2.  Edit the ProbeConfig located in `/etc/gratia/condor/ProbeConfig`. First, edit the `SiteName` and `ProbeName` to be a unique identifier for your GlideinWMS access point. There can be multiple probes (with different names) per site. If you haven't already, you should register your GlideinWMS access point in [OIM](https://github.com/opensciencegrid/topology/). Then you can use the name you used to register the resource.
 
         ProbeName="condor:<hostname>"
         SiteName="HCC-GlideinWMW-Frontend"
@@ -585,10 +585,9 @@ By default the probe reports to the OSG GRACC. To change that you must edit the 
 
 The following configuration steps are optional and will likely not be required
 for setting up a small site. If you do not need any of the following special
-configurations, skip to [the section on service
-activation/deactivation](#service-activation-and-deactivation).
+configurations, skip to [the section on using GlideinWMS](#using-glideinwms).
 
-- [Allow users to specify where their jobs run](#allow-users-to-specify-where-their-jobs-run)
+- [Allow users to specify where their jobs run](#allowing-users-to-specify-where-their-jobs-run)
 - [Creating a group to test configuration changes](#creating-a-group-for-testing-configuration-changes)
 
 #### Allowing users to specify where their jobs run
@@ -664,9 +663,6 @@ groupwould only match jobs that have the `+is_itb=True` ClassAd.
         :::console
         # on EL7 systems
         systemctl reload gwms-frontend
-        # on EL6 systems
-        service gwms-frontend reconfig
-        
         
 Using GlideinWMS
 ----------------
@@ -675,37 +671,36 @@ Using GlideinWMS
 
 In addition to the GlideinWMS service itself, there are a number of supporting services in your installation. The specific services are:
 
-| Software   | Service name                             | Notes                                                                        |
-|:-----------|:-----------------------------------------|:-----------------------------------------------------------------------------|
-| Fetch CRL  | `fetch-crl-boot` and `fetch-crl-cron`    | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
-| Gratia     | `gratia-probes-cron`                     | Accounting software                                                          |
-| HTCondor   | `condor`                                 |                                                                              |
-| HTTPD      | `httpd`                                  | GlideinWMS monitoring and staging                                 |
-| GlideinWMS | `gwms-renew-proxies` (EL6) or `gwms-renew-proxies.timer` (EL7) | [Automatic proxy renewal](#proxy-configuration)                              |
-|            | `gwms-frontend`                                                | The main GlideinWMS service
-|
+| Software   | Service name                          | Notes                                                                             |
+|:-----------|:--------------------------------------|:----------------------------------------------------------------------------------|
+| Fetch CRL  | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca.md#managing-fetch-crl-services) for more info |
+| Gratia     | `gratia-probes-cron`                  | Accounting software                                                               |
+| HTCondor   | `condor`                              |                                                                                   |
+| HTTPD      | `httpd`                               | GlideinWMS monitoring and staging                                                 |
+| GlideinWMS | `gwms-renew-proxies.timer`            | [Automatic proxy renewal](#proxy-configuration)                                   |
+|            | `gwms-frontend`                       | The main GlideinWMS service                                                       |
+|            |                                       |                                                                                   |
 
 Start the services in the order listed and stop them in reverse order. As a reminder, here are common service commands (all run as `root`):
 
-| To...                                   | On EL6, run the command...                  | On EL7, run the command...                      |
-| :-------------------------------------- | :----------------------------------------   | :--------------------------------------------   |
-| Start a service                         | `service <SERVICE-NAME> start` | `systemctl start <SERVICE-NAME>`   |
-| Stop a  service                         | `service <SERVICE-NAME> stop`  | `systemctl stop <SERVICE-NAME>`    |
-| Enable a service to start on boot       | `chkconfig <SERVICE-NAME> on`  | `systemctl enable <SERVICE-NAME>`  |
-| Disable a service from starting on boot | `chkconfig <SERVICE-NAME> off` | `systemctl disable <SERVICE-NAME>` |
+| To...                                   | Run the command...                 |
+| :-------------------------------------- | :--------------------------------  |
+| Start a service                         | `systemctl start <SERVICE-NAME>`   |
+| Stop a service                          | `systemctl stop <SERVICE-NAME>`    |
+| Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`  |
+| Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>` |
 
 ### Reconfiguring GlideinWMS ###
 
-After changing the configuration of GlideinWMS, use the following table to find the appropriate command for your
-operating system (run as `root`):
+After changing the configuration of GlideinWMS, run the following command as `root`:
 
-| If your operating system is... | Run the following command...                 |
-|:-------------------------------|:---------------------------------------------|
-| Enterprise Linux 7             | `systemctl reload gwms-frontend` |
-| Enterprise Linux 6             | `service gwms-frontend reconfig`  |
+
+```
+root@host # systemctl reload gwms-frontend
+```
 
 !!! note
-    Notice that, in the case of Enterprise Linux 7 `systemctl reload gwms-frontend` will work only if:
+    Note that `systemctl reload gwms-frontend` will work only if:
     - gwms-frontend service is running
     - gwms-frontend service was started with systemctl
 
@@ -719,25 +714,14 @@ operating system (run as `root`):
 
 After upgrading the GlideinWMS RPM, you must issue an upgrade command to GlideinWMS:
 
-- **If you are using Enterprise Linux 7**:
+1. Stop the `condor` and `gwms-frontend` services as specified in [this section](#managing-glideinwms-services)
 
-    1. Stop the `condor` and `gwms-frontend` services as specified in [this section](#managing-glideinwms-services)
+1. Issue the upgrade command:
 
-    1. Issue the upgrade command:
+        :::console
+        root@host # /usr/sbin/gwms-frontend upgrade
 
-            :::console
-            root@host # /usr/sbin/gwms-frontend upgrade
-
-    1. Start the `condor` and `gwms-frontend` services as specified in [this section](#managing-glideinwms-services)
-
-- **If you are using Enterprise Linux 6**:
-
-    1. Upgrade the GlideinWMS Frontend:
-
-            :::console
-            root@host # service gwms-frontend upgrade
-
-    1. Restart the `condor` service as specified in the [managing GlideinWMS services section](#managing-glideinwms-services)
+1. Start the `condor` and `gwms-frontend` services as specified in [this section](#managing-glideinwms-services)
 
 Validating GlideinWMS Frontend
 ------------------------------
@@ -822,17 +806,17 @@ Troubleshooting GlideinWMS
 
 ### File Locations
 
-|  File Description  |                                                             File Location                                                    |
-|:------------------:|:----------------------------------------------------------------------------------------------------------------------------:|
-| Configuration file |                                                    /etc/gwms-frontend/frontend.xml                                           |
-|        Logs        |                                                        /var/log/gwms-frontend/                                               |
-|   Startup script   |                                      /etc/init.d/gwms-frontend (on EL6) - /usr/bin/gwms-frontend (on EL7)                    |
-|    Web Directory   |                                                    /var/lib/gwms-frontend/web-area                                           |
-|      Web Base      |                                                    /var/lib/gwms-frontend/web-base                                           |
-|  Web configuration |                                                 /etc/httpd/conf.d/gwms-frontend.conf                                         |
-|  Working Directory |                                                  /var/lib/gwms-frontend/vofrontend/                                          |
-|     Lock files     |      /var/lib/gwms-frontend/vofrontend/lock/frontend.lock /var/lib/gwms-frontend/vofrontend/group\_\*/lock/frontend.lock     |
-|    Status files    |                               /var/lib/gwms-frontend/vofrontend/monitor/group\_\*/frontend\_status.xml                       |
+| File Description   | File Location                                                                                                       |
+|:------------------:|:-------------------------------------------------------------------------------------------------------------------:|
+| Configuration file | /etc/gwms-frontend/frontend.xml                                                                                     |
+| Logs               | /var/log/gwms-frontend/                                                                                             |
+| Startup script     | /usr/bin/gwms-frontend                                                                                              |
+| Web Directory      | /var/lib/gwms-frontend/web-area                                                                                     |
+| Web Base           | /var/lib/gwms-frontend/web-base                                                                                     |
+| Web configuration  | /etc/httpd/conf.d/gwms-frontend.conf                                                                                |
+| Working Directory  | /var/lib/gwms-frontend/vofrontend/                                                                                  |
+| Lock files         | /var/lib/gwms-frontend/vofrontend/lock/frontend.lock /var/lib/gwms-frontend/vofrontend/group\_\*/lock/frontend.lock |
+| Status files       | /var/lib/gwms-frontend/vofrontend/monitor/group\_\*/frontend\_status.xml                                            |
 
 
 !!! note
@@ -944,16 +928,11 @@ Common causes of problems could be:
 - If the Frontend http server is down in the glidein logs in the Factory there will be errors like "Failed to load file 'description.dbceCN.cfg' from `http://FRONTEND_HOST/vofrontend/stage`."
     - check that the http server is running and you can reach the URL (`http://FRONTEND_HOST/vofrontend/stage/description.dbceCN.cfg`)
 
-Advanced Configurations
------------------------
-
-- [GlideinWMS Frontend on a Campus Grid](https://github.com/opensciencegrid/docs/blob/master/archive/GlideinWMSCampusGrid)
-
 
 Getting Help
 ------------
 
-To get assistance about the OSG software please use [this page](/common/help).
+To get assistance about the OSG software please use [this page](../common/help.md).
 
 For specific questions about the Frontend configuration (and how to add it in your HTCondor infrastructure) you can email the glideinWMS support <glideinwms-support@fnal.gov>
 
@@ -995,7 +974,7 @@ proxies.
 | Host certificate | `root`                     | `/etc/grid-security/hostcert.pem` |
 | Host key         | `root`                     | `/etc/grid-security/hostkey.pem`  |
 
-[Here](/security/host-certs.md) are instructions to request a host certificate.
+[Here](../security/host-certs.md) are instructions to request a host certificate.
 
 ### Networking
 

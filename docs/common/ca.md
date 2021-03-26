@@ -13,7 +13,7 @@ We provide three options for installing CA certificates that offer varying level
 3.  Install an RPM that doesn't install **any** CAs.
     This is useful if you'd like to manage CAs yourself while satisfying RPM dependencies.
 
-Prior to following the instructions on this page, you must enable our [yum repositories](/common/yum.md)
+Prior to following the instructions on this page, you must enable our [yum repositories](yum.md)
 
 Installing CA Certificates
 --------------------------
@@ -38,7 +38,7 @@ See [this page](https://opensciencegrid.org/security/CaDistribution/) for detail
 | OSG CA certificates  | `yum install osg-ca-certs`            |
 | IGTF CA certificates | `yum install igtf-ca-certs`           |
 
-To automatically keep your RPM installation of CAs up to date, we recommend the [OSG CA certificates updater](/security/certificate-management#osg-ca-certificates-updater) service.
+To automatically keep your RPM installation of CAs up to date, we recommend the [OSG CA certificates updater](../security/certificate-management.md#osg-ca-certificates-updater) service.
 
 ### Option 2: Install osg-ca-scripts ###
 
@@ -63,12 +63,12 @@ See [this page](https://opensciencegrid.org/security/CaDistribution/) for detail
 
 1. Enable the `osg-update-certs-cron` service to enable periodic CA updates. As a reminder, here are common service commands (all run as `root`):
 
-    | To...                                   | On EL6, run the command...                  | On EL7, run the command...                      |
-    | :-------------------------------------- | :----------------------------------------   | :--------------------------------------------   |
-    | Start a service                         | `service <SERVICE-NAME> start` | `systemctl start <SERVICE-NAME>`   |
-    | Stop a  service                         | `service <SERVICE-NAME> stop`  | `systemctl stop <SERVICE-NAME>`    |
-    | Enable a service to start on boot       | `chkconfig <SERVICE-NAME> on`  | `systemctl enable <SERVICE-NAME>`  |
-    | Disable a service from starting on boot | `chkconfig <SERVICE-NAME> off` | `systemctl disable <SERVICE-NAME>` |
+    | To...                                   | Run the command...                            |
+    | :-------------------------------------- | :-------------------------------------------- |
+    | Start a service                         | `systemctl start <SERVICE-NAME>`              |
+    | Stop a service                          | `systemctl stop <SERVICE-NAME>`               |
+    | Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`             |
+    | Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>`            |
 
 1. (Optional) To add a new CA:
 
@@ -78,7 +78,7 @@ See [this page](https://opensciencegrid.org/security/CaDistribution/) for detail
 
         osg-ca-manage remove --hash <CA-HASH>
 
-A complete set of options available though `osg-ca-manage` command, can be found in the [osg-ca-manage documentation](/security/certificate-management#managing-cas)
+A complete set of options available though `osg-ca-manage` command, can be found in the [osg-ca-manage documentation](../security/certificate-management.md#managing-cas)
 
 ### Option 3: Site-managed CAs ###
 
@@ -104,7 +104,7 @@ In addition to the above CAs, you can install other CAs via RPM. These only work
 Verifying CA Certificates
 -------------------------
 
-After installing the CA certificates, they can be verified with the following command:
+After installing or updating the CA certificates, they can be verified with the following command:
 
 ```console
 root@host # curl --cacert <CA FILE> \
@@ -132,6 +132,46 @@ CA certificate installation verified
 
 If you do not see `CA certificate installation verified` this means that your CA certificate installation is broken.
 First, ensure that your CA installation is up-to-date and if you continue to see issues please [contact us](#getting-help).
+
+### Keeping CA Certificates Up-to-date ###
+
+It is important to keep CA certificates up-to-date for grid services and their clients to maintain integrity of
+the production grid.
+To verify that your CA certificates are on the latest version on a given host, determine the most recently released
+versions and the method by which your CA certificates have been installed:
+
+1.  Retrieve the versions of the most recently released
+    [IGTF CA certificates](https://repo.opensciencegrid.org/cadist/index.html) and
+    [OSG CA certificates](https://repo.opensciencegrid.org/cadist/index-new.html)
+
+1.  Determine which of the three CA certificate installation methods you are using:
+
+        :::console
+        # rpm -q igtf-ca-certs osg-ca-certs osg-ca-scripts empty-ca-certs
+
+1.  Based on which package is installed from the output in the previous step, choose one of the following options:
+
+    -   **If `igtf-ca-certs` or `osg-ca-certs` is installed**, compare the installed version from step 2 to the
+        corresponding version from step 1.
+
+        -   If the version is older than the corresponding version from step 1, continue onto 
+            [option 1](#option-1-install-an-rpm-for-a-specific-set-of-ca-certificates) to upgrade your current
+            installation and keep your installation up-to-date.
+
+        -  If the versions match, your CA certificates are up-to-date!
+
+    -   **If `osg-ca-scripts` is installed**, run the following command to update your CA certificates:
+
+            :::console
+            # osg-ca-manage refreshCA
+
+        And continue to the instructions in [option 2](#option-2-install-osg-ca-scripts) to enable automatic
+        updates of your CA certificates.
+
+    -   **If `empty-ca-scripts` is installed**, then you are responsible for maintaining your own CA certificates as
+            outlined in [option 3](#option-3-site-managed-cas).
+
+    -   **If none of the packages are installed**, your host likely does not need CA certificates and you are done.
 
 Managing Certificate Revocation Lists
 -------------------------------------
@@ -182,37 +222,34 @@ To modify the times that `fetch-crl-cron` runs, edit `/etc/cron.d/fetch-crl`.
 
 Start the services in the order listed and stop them in reverse order. As a reminder, here are common service commands (all run as `root`):
 
-| To...                                   | On EL6, run the command...                | On EL7, run the command...                    |
-| :-------------------------------------- | :---------------------------------------- | :-------------------------------------------- |
-| Start a service                         | `service <SERVICE-NAME> start`            | `systemctl start <SERVICE-NAME>`              |
-| Stop a  service                         | `service <SERVICE-NAME> stop`             | `systemctl stop <SERVICE-NAME>`               |
-| Enable a service to start on boot       | `chkconfig <SERVICE-NAME> on`             | `systemctl enable <SERVICE-NAME>`             |
-| Disable a service from starting on boot | `chkconfig <SERVICE-NAME> off`            | `systemctl disable <SERVICE-NAME>`            |
+| To...                                   | Run the command...                            |
+| :-------------------------------------- | :-------------------------------------------- |
+| Start a service                         | `systemctl start <SERVICE-NAME>`              |
+| Stop a service                          | `systemctl stop <SERVICE-NAME>`               |
+| Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`             |
+| Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>`            |
 
 Getting Help
 ------------
 
-To get assistance, please use the [this page](/common/help).
+To get assistance, please use the [this page](help.md).
 
 References
 ----------
 
-x509 certificates:
+Some guides on X.509 certificates:
 
 -   Useful commands: <http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html>
 -   Install GSI authentication on a server: <http://security.ncsa.illinois.edu/research/wssec/gsihttps/>
 -   Certificates how-to: <http://www.nordugrid.org/documents/certificate_howto.html>
 
-Verifying certificates:
+See [this page](http://gagravarr.org/writing/openssl-certs/others.shtml) for examples of verifying certificates.
 
--   <http://gagravarr.org/writing/openssl-certs/others.shtml>
--   <http://www.cyberciti.biz/faq/test-ssl-certificates-diagnosis-ssl-certificate/>
--   <http://www.cyberciti.biz/tips/debugging-ssl-communications-from-unix-shell-prompt.html>
 
 Related software:
 
--   [osg-ca-manage](/security/certificate-management#managing-cas)
--   [osg-ca-certs-updater](/security/certificate-management#osg-ca-certificates-updater)
+-   [osg-ca-manage](../security/certificate-management.md#managing-cas)
+-   [osg-ca-certs-updater](../security/certificate-management.md#osg-ca-certificates-updater)
 
 ### Configuration files ###
 

@@ -9,7 +9,7 @@ This document is for System Administrators. It details the usage of the `rsv-con
 `rsv-control` provides an interface to many RSV tasks. `rsv-control` can view RSV jobs, run metrics, enable or disable metrics and consumers, and allow advanced configuration.
 
 !!! warning
-    `rsv-control` can be used to configure RSV as described here and in [the advanced configuration document](advanced-rsv-configuration). Most site admins will be able to configure RSV by editing `/etc/osg/config.d/30-rsv.ini` and running `osg-configure` as described in the [installation doc](install-rsv#configuring-rsv).
+    `rsv-control` can be used to configure RSV as described here and in [the advanced configuration document](advanced-rsv-configuration.md). Most site admins will be able to configure RSV by editing `/etc/osg/config.d/30-rsv.ini` and running `osg-configure` as described in the [installation doc](install-rsv.md#configuring-rsv).
 
 Using `rsv-control` to configure is for advanced RSV use including enabling non-default metrics. Admins who don't use `rsv-control` for configuration can still use it to view their RSV jobs, run RSV tests, and help debug RSV problems. Anyone can view the jobs, but you must be root or the RSV user (`rsv` by default) to execute other commands, e.g. run, enable and disable probes, or to turn RSV on and off.
 

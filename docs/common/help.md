@@ -17,7 +17,7 @@ If you are experiencing issues with OSG software or services, please consult the
 support inquiry:
 
 *  Troubleshooting sections or pages for the problematic software
-*  Recent OSG Software [release notes](/release/notes)
+*  Recent OSG Software [release notes](../release/notes.md)
 *  [Outage](https://topology.opensciencegrid.org/rgdowntime/xml?) information for OSG services
 
 ### Submitting support inquiries ###

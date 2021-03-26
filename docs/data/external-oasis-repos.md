@@ -6,7 +6,7 @@ OASIS (the **OSG** **A**pplication **S**oftware **I**nstallation **S**ervice) is
 an OASIS repository, the goal is to make it available across about 90% of the OSG within an hour.
 
 OASIS consists of keysigning infrastructure, a content distribution network (CDN), and a shared CVMFS repository that
-is hosted by the OSG.  Many use cases will be covered by utilizing the [shared repository](update-oasis); this document
+is hosted by the OSG.  Many use cases will be covered by utilizing the [shared repository](update-oasis.md); this document
 covers how to install, configure, and host your own CVMFS _repository server_.  This server will distribute software
 via OASIS, but will be hosted and operated externally from the OSG project.
 
@@ -21,7 +21,6 @@ CVMFS repositories work at the kernel filesystem layer, which adds more stringen
 OSG install.  The host OS must meet ONE of the following:
 
 -   RHEL 7.3 (or equivalent) or later.  **This option is recommended**.
--   RHEL 6 with the aufs kernel module.
 
 Additionally,
 
@@ -33,7 +32,7 @@ Additionally,
     and one uncompressed. `/srv/cvmfs` will hold all the published data (compressed and de-deuplicated).  The
     `/var/spool/cvmfs` directory will contain all the data in all current transactions (uncompressed).
 -   **Root access** will be needed to install.  Software install will be done as an unprivileged user.
--   **Yum** will need to be [configured to use the OSG repositories](../common/yum).
+-   **Yum** will need to be [configured to use the OSG repositories](../common/yum.md).
 
 !!! warning "Overlay-FS limitations"
     CVMFS on RHEL7 only supports Overlay-FS if the underlying filesystem is `ext3` or `ext4`; make sure
@@ -45,22 +44,10 @@ Additionally,
 Installation
 ------------
 
-### RHEL7-based Systems
-
-For a RHEL7-based system, installation is a straightforward install via `yum`:
+Installation is a straightforward install via `yum`:
 
 ``` console
 root@host # yum install cvmfs-server osg-oasis 
-```
-
-### RHEL6-based Systems
-
-A RHEL6 host needs additional steps in order to add the AUFS2 kernel module.
-
-``` console
-root@host # rpm -i https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs-release-latest.noarch.rpm
-root@host # yum install --enablerepo=cernvm-kernel --disablerepo=cernvm kernel aufs2-util cvmfs-server.x86_64 osg-oasis
-root@host # reboot
 ```
 
 ### Apache and Repository Mounts
@@ -169,6 +156,7 @@ In order to host a repository on OASIS, perform the following steps:
 
 1.  Create a [support ticket](https://support.opensciencegrid.org/helpdesk/tickets/new) using the following template:
 
+        :::console hl_lines="1 2 3"
         Please add a new CVMFS repository to OASIS for VO <VO NAME> using the URL
             http://<FQDN>:8000/cvmfs/<OASIS REPOSITORY>
         The VO responsible manager will be <OASIS MANAGER>.
@@ -179,7 +167,13 @@ In order to host a repository on OASIS, perform the following steps:
     representative before continuing with the remaining instructions; for all other repositories (such as `*.egi.eu`),
     you are done.
 
-1. One you are told in the ticket to proceed to the next step, execute the following commands:
+1. When you are told in the ticket to proceed to the next step, first if
+    the repository might be in a transaction abort it:
+
+        :::console hl_lines="1"
+        root@host # su <LIBRARIAN> -c "cvmfs_server abort <EXAMPLE.OPENSCIENCEGRID.ORG>"
+
+    Then execute the following commands:
 
         :::console hl_lines="1 2 4"
         root@host # wget -O /srv/cvmfs/<EXAMPLE.OPENSCIENCEGRID.ORG>/.cvmfswhitelist \
@@ -188,6 +182,7 @@ In order to host a repository on OASIS, perform the following steps:
                     /etc/cvmfs/keys/<EXAMPLE.OPENSCIENCEGRID.ORG>.pub
 
     Replace `<EXAMPLE.OPENSCIENCEGRID.ORG>` as appropriate.
+    If the cp command prompts about overwriting an existing file, type 'y'.
     
 1. Verify that publishing operation succeeds:
 
@@ -200,7 +195,7 @@ In order to host a repository on OASIS, perform the following steps:
     On success, make sure the whitelist update happens daily by creating `/etc/cron.d/fetch-cvmfs-whitelist` with the
     following contents:
         
-        :::hl_lines="1"
+        :::console hl_lines="1"
         5 4 * * * <LIBRARIAN> cd /srv/cvmfs/<EXAMPLE.OPENSCIENCEGRID.ORG> && wget -qO .cvmfswhitelist.new http://oasis.opensciencegrid.org/cvmfs/<EXAMPLE.OPENSCIENCEGRID.ORG>/.cvmfswhitelist && mv .cvmfswhitelist.new .cvmfswhitelist
 
     !!! note

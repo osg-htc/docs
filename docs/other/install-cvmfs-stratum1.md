@@ -9,20 +9,20 @@ This document describes how to install a CVMFS Stratum 1. There are many differe
 
 Before starting the installation process, consider the following points:
 
-- **User IDs and Group IDs:** If your machine is also going to be a repository server like OSG Operations, the installation will create the same user and group IDs as the [cvmfs client](../worker-node/install-cvmfs).  If you are installing frontier-squid, the installation will also create the same user id as [frontier-squid](../data/frontier-squid).
+- **User IDs and Group IDs:** If your machine is also going to be a repository server like OSG Operations, the installation will create the same user and group IDs as the [cvmfs client](../worker-node/install-cvmfs.md).  If you are installing frontier-squid, the installation will also create the same user id as [frontier-squid](../data/frontier-squid.md).
 -  **Network ports:** This installation will host the stratum 1 on ports 80, 8000 and 8080, and if squid is installed it will host the uncached apache on port 8081.  Port 80 is default but sometimes runs into operational problems, port 8000 is the alternate for most production use, and port 8080 is for Cloudflare (https://openhtc.io).
 - **Host choice:** -  Make sure there is adequate disk space for the repositories that will be served, at `/srv/cvmfs`. Do not use xfs as the filesystem type on operating systems older than EL7, because it has been demonstrated to perform poorly for CVMFS repositories; instead use ext3 or ext4. About 10GB should be reserved for apache and squid logs under /var/log on a production server, although they normally will not get that large. A Stratum 1 that is also a repository server should have at least 5GB available at `/var/cache`.
 - **SELinux** - Ensure SELinux is disabled
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-- Ensure the host has [a supported operating system](../release/supported_platforms)
+- Ensure the host has [a supported operating system](../release/supported_platforms.md)
 - Obtain root access to the host
-- Prepare the [required Yum repositories](../common/yum)
+- Prepare the [required Yum repositories](../common/yum.md)
 
 ## Installing
 
-All CVMFS Stratum 1s require cvmfs-server software and apache (httpd). It is highly recommended to also install [frontier-squid](../data/frontier-squid) and [frontier-awstats](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallAwstats) on the same machine to be able to easily join the WLCG [MRTG](http://wlcg-squid-monitor.cern.ch/snmpstats/indexcvmfs.html) and [awstats](http://wlcg-squid-monitor.cern.ch/awstats/cvmfs.html) monitoring systems. The recommended configuration for frontier-squid below only caches geo api lookups.  Other than that, it is primarily for monitoring.
+All CVMFS Stratum 1s require cvmfs-server software and apache (httpd). It is highly recommended to also install [frontier-squid](../data/frontier-squid.md) and [frontier-awstats](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallAwstats) on the same machine to be able to easily join the WLCG [MRTG](http://wlcg-squid-monitor.cern.ch/snmpstats/indexcvmfs.html) and [awstats](http://wlcg-squid-monitor.cern.ch/awstats/cvmfs.html) monitoring systems. The recommended configuration for frontier-squid below only caches geo api lookups.  Other than that, it is primarily for monitoring.
 
 ### Installing cvmfs-server and httpd
 
@@ -30,7 +30,7 @@ The OSG Operations Stratum 1 has to function as a repository server in addition 
 
 #### Installing a CVMFS stratum 1 that is also a repository server
 
-EL6 does not support a CVMFS repository server with the standard kernel, so use EL7.  EL7.2 cannot be reliably used as a repository server, because of bugs in the union filesystem OverlayFS. The bugs are fixed in EL7.3, so use EL7.3 or later.
+EL7.2 cannot be reliably used as a repository server, because of bugs in the union filesystem OverlayFS. The bugs are fixed in EL7.3, so use EL7.3 or later.
 
 ```console
 root@host # yum -y install cvmfs-server cvmfs mod_wsgi
@@ -38,7 +38,7 @@ root@host # yum -y install cvmfs-server cvmfs mod_wsgi
 
 #### Installing CVMFS stratum 1 that is not a repository server
 
-If you're not installing for OSG Operations or otherwise want to support serving repositories on the same machine as a Stratum 1, use this command on either EL6 or EL7:
+If you're not installing for OSG Operations or otherwise want to support serving repositories on the same machine as a Stratum 1, use this command:
 
 ```console
 root@host # yum -y install cvmfs-server cvmfs-config mod_wsgi
@@ -106,7 +106,7 @@ Listen 8000 KeepAlive On
 Listen 8080 KeepAlive On
 ```
 
-If you will be serving opensciencegrid.org repositories, you have to allow for old client configurations that access repositories without the domain name added. For that reason, you will need to remove each `/etc/httpd/conf.d/cvmfs.<repositoryname>.conf` that adding a replica creates (this is included in the [add_osg_repository script](https://github.com/opensciencegrid/oasis-server/blob/master/goc/bin/add_osg_repository)), and instead add the following to `/etc/httpd/conf.d/cvmfs.conf`:
+If you will be serving opensciencegrid.org repositories, you have to allow for old client configurations that access repositories without the domain name added. For that reason, you will need to remove each `/etc/httpd/conf.d/cvmfs.<repositoryname>.conf` that adding a replica creates (this is included in the [add_osg_repository script](https://github.com/opensciencegrid/oasis-server/blob/master/bin/add_osg_repository)), and instead add the following to `/etc/httpd/conf.d/cvmfs.conf`:
 
 ```
 RewriteEngine On 
@@ -147,22 +147,10 @@ WSGIDaemonProcess cvmfs-api threads=64 display-name=%{GROUP} \
 WSGISocketPrefix /var/run/wsgi 
 ```
 
-!!! note
-    On EL6-based systems (Apache httpd 2.2) replace both instances of `Require all granted` above with the following:
-
-        Order allow, deny
-        Allow from all
-
 If you will be serving cern.ch repositories, it has the same problem; replace opensciencegrid.org above with cern.ch. If you need to serve both opensciencegrid.org and cern.ch contact Dave Dykstra to discuss the options.
 
-Then enable apache.  On EL6 do
+Then enable apache:
 
-```console
-root@host # chkconfig httpd on 
-root@host # service httpd start
-```
-
-or on EL7 do
 ```console
 root@host # systemctl enable httpd
 root@host # systemctl start httpd
@@ -219,21 +207,14 @@ root@host # iptables -t nat -A PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT -
 root@host # service iptables save
 ```
 
-On EL7 also set up the the same port forwarding for IPv6 (unfortunately it is not supported on EL6):
+On EL7 also set up the the same port forwarding for IPv6:
 
 ```console
 root@host # ip6tables -t nat -A PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8000
 root@host # service ip6tables save
 ```
 
-Enable frontier-squid.  On EL6 do:
-
-```console
-root@host # chkconfig frontier-squid on
-root@host # service frontier-squid start
-```
-
-or on EL7 do:
+Enable frontier-squid:
 
 ```console
 root@host # systemctl enable frontier-squid

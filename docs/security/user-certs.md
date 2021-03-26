@@ -39,26 +39,23 @@ Follow the steps below to get an user certificate:
 1. Open the CILogon page, <https://cilogon.org>, in your browser of choice
 1. First, either search for your institution and select it or scroll through list and do the same.
 
-    ![Institution Selection](/img/cilogon_select_idp.png).
+    ![Institution Selection](..//img/cilogon_select_idp.png).
 
     !!! warning
         Do not use Google, GitHub, or ORCID as providers since they are not widely supported in the OSG.
         If your institution is not on the list, please contact your institution's IT support to see if they can support
         CILogon.
 
-1. Click the `Log On` button and enter your instutional credentials if prompted.
-1. Upon successfully entering your credentials, you'll get a page asking for you to enter a password.
-   Enter a password that is at least 12 characters long and then click on the `Get New Certificate` button.
-
-    ![Password entry](/img/cilogon_cert_password.png)
-
-1. The web page will generate a `usercred.p12` file and prompt you to download it.
-   The certificate will be protected using the password you entered in the prior step.
+1. Click the `Log On` button and enter your institutional credentials if prompted.
+1. After successfully entering your credentials, click on the "Create Password-Protected Certificate" link
+1. Enter a password that is at least 12 characters long and then click on the `Get New Certificate` button.
+1. Click the `Download Your Certificate` button to download your certificate in `.p12` format.
+   The certificate will be protected using the password you entered in the previous step.
 
 
 ### Certificate formats
 
-Your user certficate can be stored in a few different formats.
+Your user certificate can be stored in a few different formats.
 The two most common formats used in OSG are the [PKCS12](https://en.wikipedia.org/wiki/PKCS_12) and
 [PEM](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail) formats.
 In the PEM format, your user certificate is stored in two separate files: one for the certificate and another for the
@@ -75,7 +72,7 @@ To convert a PKCS12 file to  PEM files, do the following.
         Enter Import Password:
         MAC verified OK
    
-1. Second, extract the private key by running the following command. You'll be prompted for two different passwords.  The first prompt will be for the password that you used to create the certficate.  The second prompt will be for the password that will encrypt the PEM certificate that will be created.  As before, the invocation assumes that your PKCS12 certificate is located in `usercred.p12`. After running, the PEM certificate with your private key will be written to `userkey.pem`.
+1. Second, extract the private key by running the following command. You'll be prompted for two different passwords.  The first prompt will be for the password that you used to create the certificate.  The second prompt will be for the password that will encrypt the PEM certificate that will be created.  As before, the invocation assumes that your PKCS12 certificate is located in `usercred.p12`. After running, the PEM certificate with your private key will be written to `userkey.pem`.
 
         :::console 
         user@host $ openssl pkcs12 -in usercred.p12 -out userkey.pem  -nocerts
@@ -83,6 +80,36 @@ To convert a PKCS12 file to  PEM files, do the following.
         MAC verified OK
         Enter PEM pass phrase:
         Verifying - Enter PEM pass phrase:
+
+Using Your User Certificate
+---------------------------
+
+1. The standard location to place user certificates is in the users certificate home directory in the `.globus` directory:
+
+        :::console
+        user@host $ cp mkdir ~/.globus
+        user@host $ cp userkey.pem ~/.globus/
+        user@host $ cp usercert.pem ~/.globus/
+        user@host $ cp usercred.p12 ~/.globus/
+
+1. To generate a proxy use the command `voms-proxy-init`. 
+
+        :::console
+      	user@host $ voms-proxy-init
+
+1. (Optional) If user certificates are not in the `.globus` then the path has to be passed to `voms-proxy-init`
+
+        :::console
+        user@host $ voms-proxy-init --cert /<PATH TO>/usercert.pem --key /<PATH TO>/userkey.pem
+
+1. In order to find the Distinguished Name (DN), issuer and lifetime of a certificate:
+
+        :::console
+        user@host $ openssl x509 -in /<PATH TO>/usercert.pem -noout -subject -issuer -enddate
+
+!!! note
+    For admins trying to validate a service add your user DN to the [grid-map file](lcmaps-voms-authentication.md#mapping-users) of the service.
+  
 
 Revoking Your User Certificate
 ------------------------------
@@ -92,7 +119,7 @@ In addition, if your name or email address changes, you must revoke your certifi
 information.
 
 If you have a CILogon issued certificate, contact [ca@cilogon.org](mailto:ca@cilogon.org) in order revoke your certificate.
-If you received a certificate from another CA, please contact the CA to intiate a certificate revocation.
+If you received a certificate from another CA, please contact the CA to initiate a certificate revocation.
 
 
 Getting a Certificate from a Service Provider with cigetcert
@@ -135,7 +162,7 @@ You may specify default arguments in the `CIGETCERTOPTS` environment variable.
 This can save you from having to type in the entire institution name every time you want a cert.
 For example, to always use FNAL as the institution, put this in your `.bashrc`:
 ```bash
-export CIGETCERTOPTS="-i 'Fermi National Accelerator Laboratory'"
+export CIGETCERTOPTS="-i 'Fermi National Accelerator Laboratory"
 ```
 
 Your VO may also provide specific instructions for how to best use this tool.
@@ -164,7 +191,7 @@ You should then get a 2FA authentication request with Duo Mobile; once you accep
 Getting Help
 ------------
 
-To get assistance, please use the [this page](/common/help).
+To get assistance, please use the [this page](../common/help.md).
 
 
 References

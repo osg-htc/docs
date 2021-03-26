@@ -11,17 +11,6 @@ upstream frontier-squid package for the convenience of OSG users.
 This document is intended for System Administrators who are installing
 `frontier-squid`, the OSG distribution of the Frontier Squid software.
 
-!!! note "Applicable versions"
-    This document applies to software from the OSG 3.5 and 3.4 Release Series.
-    The version of frontier-squid installed should be >= 3.5.24-3.1.
-    When using OSG software from a previous Release Series (eg, OSG 3.3)
-    and a frontier-squid version in the 2.7STABLE9 series, refer to the
-    [old upstream install documentation](https://twiki.cern.ch/twiki/bin/view/Frontier/OldInstallSquid)
-    instead of the current links included below. There are some
-    incompatibilities between the two versions of frontier-squid, so if you
-    are upgrading from a 2.7STABLE9 version to a 3.5 version, see the
-    [upstream documentation on upgrading](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Upgrading).
-
 ## Frontier Squid Is Recommended
 
 OSG recommends that all sites run a caching proxy for HTTP and HTTPS
@@ -46,9 +35,9 @@ Before starting the installation process, consider the following points (consult
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-- Ensure the host has [a supported operating system](../release/supported_platforms)
+- Ensure the host has [a supported operating system](../release/supported_platforms.md)
 - Obtain root access to the host
-- Prepare the [required Yum repositories](../common/yum)
+- Prepare the [required Yum repositories](../common/yum.md)
 
 ### Installing Frontier Squid
 
@@ -89,7 +78,7 @@ To configure the Frontier Squid service itself:
 
 ### Configuring the OSG CE
 
-To configure the OSG Compute Element (CE) to know about your Frontier Squid service:
+To configure the OSG Compute Entrypoint (CE) to know about your Frontier Squid service:
 
 1.  On your CE host (which may be different than your Frontier Squid host), edit `/etc/osg/config.d/01-squid.ini`
     -   Make sure that `enabled` is set to `True`
@@ -109,12 +98,12 @@ To configure the OSG Compute Element (CE) to know about your Frontier Squid serv
 
 Start the frontier-squid service and enable it to start at boot time. As a reminder, here are common service commands (all run as `root`):
 
-| To...                                   | On EL6, run the command...                  | On EL7, run the command...                      |
-| :-------------------------------------- | :----------------------------------------   | :--------------------------------------------   |
-| Start a service                         | `service frontier-squid start` | `systemctl start frontier-squid`   |
-| Stop a  service                         | `service frontier-squid stop`  | `systemctl stop frontier-squid`    |
-| Enable a service to start on boot       | `chkconfig frontier-squid on`  | `systemctl enable frontier-squid`  |
-| Disable a service from starting on boot | `chkconfig frontier-squid off` | `systemctl disable frontier-squid` |
+| To...                                   | Run the command...                            |
+| :-------------------------------------- | :-------------------------------------------- |
+| Start the service                         | `systemctl start frontier-squid`              |
+| Stop the service                          | `systemctl stop frontier-squid`               |
+| Enable the service to start on boot       | `systemctl enable frontier-squid`             |
+| Disable the service from starting on boot | `systemctl disable frontier-squid`            |
 
 ## Validating Frontier Squid
 
@@ -143,7 +132,7 @@ good to do the test in the
 ## Registering Frontier Squid
 
 To register your Frontier Squid host, follow the general registration instructions
-[here](/common/registration#new-resources) with the following Frontier Squid-specific details:
+[here](../common/registration.md#new-resources) with the following Frontier Squid-specific details:
 
 1.  Add a `Squid:` section to the `Services:` list, with any relevant fields for that service.
     This is a partial example:

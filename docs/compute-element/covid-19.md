@@ -12,12 +12,12 @@ for this usage separately from other OSG activity.
 To support COVID-19 work, the overall process includes the following:
 
 1. Make the site computing resources available through a HTCondor-CE if you have not already done so.
-    -  You can install a [locally-managed](/compute-element/install-htcondor-ce/) instance or ask OSG to
-       [host the CE](/compute-element/hosted-ce/) on your behalf.
+    -  You can install a [locally-managed](install-htcondor-ce.md) instance or ask OSG to
+       [host the CE](hosted-ce.md) on your behalf.
        If neither solution is viable, or you'd like to discuss the options, please send email to
        <help@opensciencegrid.org> and we'll work with you to arrive at the best solution.
     -  If you already provide resources through an OSG Hosted CE, skip to [this section](#requesting-covid-19-jobs).
-1. [Enable the OSG VO](/security/lcmaps-voms-authentication/#configuring-the-lcmaps-voms-plugin) on your HTCondor-CE.
+1. [Enable the OSG VO](../security/lcmaps-voms-authentication.md#configuring-the-lcmaps-voms-plugin) on your HTCondor-CE.
 1. Setup a job route specific to COVID-19 pilot jobs (documented below).
    The job route will allow you to prioritize these jobs using local policy in your site's cluster.
 1. [Install Singularity](/worker-node/install-singularity) on your site's worker nodes
@@ -52,7 +52,7 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:
          name = "OSG_COVID19_Jobs";
          GridResource = "batch slurm";
          TargetUniverse = 9;
-         queue = "covid19";
+         set_default_queue = "covid19";
          Requirements = (TARGET.IsCOVID19 =?= true);
         ]
         $(JOB_ROUTER_ENTRIES)
@@ -60,7 +60,8 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:
 
     Replacing `slurm` in the `GridResource` attribute with the appropriate value for your batch system (e.g., `lsf`,
     `pbs`, `sge`, or `slurm`);
-    and the value of `queue` with the name of the partition or queue of your local batch system dedicated to COVID-19 work.
+    and the value of `set_default_queue` with the name of the partition or queue of your local batch system dedicated to
+    COVID-19 work.
 
 1.  Ensure that COVID-19 jobs match to the new route.
     Choose one of the options below depending on your HTCondor version (`condor_version`):
@@ -70,6 +71,12 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:
         following configuration to a file in `/etc/condor-ce/config.d/`:
 
             JOB_ROUTER_ROUTE_NAMES = OSG_COVID19_Jobs, $(JOB_ROUTER_ROUTE_NAMES)
+            
+        If your configuration does not already define `JOB_ROUTER_ROUTE_NAMES`, you need to add the name of all previous
+        routes to it, leaving `OSG_COVID19_Jobs` at the start of the list.
+        For example:
+        
+            JOB_ROUTER_ROUTE_NAMES = OSG_COVID19_Jobs, Local_Condor, $(JOB_ROUTER_ROUTE_NAMES)
 
     -   **For older versions of HTCondor:** add `(TARGET.IsCOVID19 =!= true)` to the `Requirements` of any existing routes.
         For example, the following job route:
@@ -80,8 +87,8 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:
              name = "Local_Slurm"
              GridResource = "batch slurm";
              TargetUniverse = 9;
-             queue = "atlas;
-             Requirements = (TARGET.queue =!= "osg");
+             set_default_queue = "atlas;
+             Requirements = (TARGET.Owner =!= "osg");
             ]
             @jre
 
@@ -93,8 +100,8 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:
              name = "Local_Slurm"
              GridResource = "batch slurm";
              TargetUniverse = 9;
-             queue = "atlas;
-             Requirements = (TARGET.queue =!= "osg") && (TARGET.IsCOVID19 =!= true);
+             set_default_queue = "atlas;
+             Requirements = (TARGET.Owner =!= "osg") && (TARGET.IsCOVID19 =!= true);
             ]
             @jre
 
@@ -103,7 +110,7 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:
         :::console
         condor_ce_reconfig
 
-1.  Continue onto [this section](#verifying-covid-19-job-routes) to verify your configuration
+1.  Continue onto [this section](#verifying-the-covid-19-job-route) to verify your configuration
 
 ### For HTCondor batch systems
 
@@ -150,8 +157,7 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:
             [
              name = "Local_Condor"
              TargetUniverse = 5;
-             queue = "atlas;
-             Requirements = (TARGET.queue =!= "osg");
+             Requirements = (TARGET.Owner =!= "osg");
             ]
             @jre
 
@@ -162,8 +168,7 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:
             [
              name = "Local_Condor"
              TargetUniverse = 5;
-             queue = "atlas;
-             Requirements = (TARGET.queue =!= "atlas") && (TARGET.IsCOVID19 =!= true);
+             Requirements = (TARGET.Owner =!= "atlas") && (TARGET.IsCOVID19 =!= true);
             ]
             @jre
 
@@ -172,7 +177,7 @@ To add a new route for COVID-19 pilots for non-HTCondor batch systems:
         :::console
         condor_ce_reconfig
 
-1.  Continue onto [this section](#verifying-covid-19-job-routes) to verify your configuration
+1.  Continue onto [this section](#verifying-the-covid-19-job-route) to verify your configuration
 
 Verifying the COVID-19 Job Route
 --------------------------------
@@ -203,7 +208,7 @@ To verify that your HTCondor-CE is configured to support COVID-19 jobs, perform 
         all other routes must contain `(TARGET.IsCOVID19 =!= true)` in their `Requirements` expression.
         
 1.  After [requesting COVID-19 jobs](#requesting-covid-19-jobs), verify that jobs are being routed appropriately,
-    [by examining pilots](/compute-element/troubleshoot-htcondor-ce/#condor_ce_router_q) with `condor_ce_router_q`.
+    [by examining pilots](troubleshoot-htcondor-ce.md#condor_ce_router_q) with `condor_ce_router_q`.
 
 Requesting COVID-19 Jobs
 ------------------------
@@ -215,7 +220,13 @@ and the following information:
 -  The hostname(s) of your HTCondor-CE(s)
 -  Any other restrictions that may apply to these jobs (e.g. number of available cores)
 
+Viewing COVID-19 Contributions
+------------------------------
+
+You can view how many hours that COVID-19 projects have consumed at your site with this
+[GRACC dashboard](https://gracc.opensciencegrid.org/dashboard/db/covid-19-research?orgId=1&refresh=5m&from=now-7d&to=now).
+
 Getting Help
 ------------
 
-To get assistance, please use [this page](/common/help).
+To get assistance, please use [this page](../common/help.md).

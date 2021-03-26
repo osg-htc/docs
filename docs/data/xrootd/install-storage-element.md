@@ -26,10 +26,10 @@ Before starting the installation process, consider the following points:
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
--   Ensure the host has [a supported operating system](/release/supported_platforms)
+-   Ensure the host has [a supported operating system](../../release/supported_platforms.md)
 -   Obtain root access to the host
--   Prepare [the required Yum repositories](/common/yum)
--   Install [CA certificates](/common/ca)
+-   Prepare [the required Yum repositories](../../common/yum.md)
+-   Install [CA certificates](../../common/ca.md)
 
 Installing an XRootD Server
 ---------------------------
@@ -50,7 +50,7 @@ We have included validation instructions after each component below.
 
 ### Creating an XRootD cluster
 
-![XRootD cluster](/img/xrootd.jpg)
+![XRootD cluster](../../img/xrootd.jpg)
 
 If your storage is spread out over multiple hosts, you will need to set up an XRootD *cluster*. 
 The cluster uses one "redirector" node as a frontend for user accesses, and multiple data nodes that have the data that
@@ -103,8 +103,8 @@ Further information can be found at <https://xrootd.slac.stanford.edu/docs.html>
 
 #### Verifying the clustered config
 
-Start both `xrootd` and `cmsd` on all nodes according to the instructions in the [managing services
-section](#ManagingServices).
+Start both `xrootd` and `cmsd` on all nodes according to the instructions in the
+[Using XRootD  section](#using-xrootd).
 
 Verify that you can copy a file such as `/bin/sh` to `/mnt/xrootd` on the server data via the redirector:
 
@@ -114,6 +114,21 @@ root@host # xrdcp /bin/sh  root://<RDRNODE>:1094///mnt/xrootd/second_test
 ```
 
 Check that the `/mnt/xrootd/second_test` is located on data server `<DATANODE>`.
+
+### (Optional) Adding High Availability (HA) redirectors
+
+It is possible to have an XRootD clustered setup with more than one redirector to ensure high availability service. To do this:
+
+1. In the `/etc/xrootd/xrootd-clustered.cfg` on each data node follow the instructions in this [section](#modify-etcxrootdxrootd-clusteredcfg) with:
+
+        :::file
+        set xrdr1 = <RDRNODE1>
+        set xrdr2 = <RDRNODE2>
+        all.manager $(xrdr1):3121
+        all.manager $(xrdr2):3121
+
+1. Create DNS `ALIAS` records for `<RDRNODE>` pointing to `<RDNODE1>` and `<RDRNODE2>`
+1. Advertise the `<RDRNODE>` FQDN to users interacting with the XRootD cluster should be `<RDRNODE>`.
 
 ### (Optional) Adding Simple Server Inventory to your cluster
 
@@ -178,62 +193,7 @@ The value of `oss.localroot` will be prepended to any file access.
 E.g. accessing `root://<RDRNODE>:1094//data/xrootdfs/test1` will actually go to
 `/local/xrootd/data/xrootdfs/test1`.
 
-#### Starting a second instance of XRootD on EL 6
-
-The procedure for starting a second instance differs between EL 6 and EL 7. 
-This section is the procedure for EL 6.
-
-Now, we have to change `/etc/sysconfig/xrootd` on the redirector node (`<HOST A>`) to run multiple instances
-of XRootD. 
-The second instance of XRootD will be named "cns" and will be used for SSI.
-
-```file hl_lines="3 4 5 6 7"
-XROOTD_USER=xrootd 
-XROOTD_GROUP=xrootd 
-XROOTD_DEFAULT_OPTIONS="-k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg"
-XROOTD_CNS_OPTIONS="-k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg"
-CMSD_DEFAULT_OPTIONS="-k 7 -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg"
-FRMD_DEFAULT_OPTIONS="-k 7 -l /var/log/xrootd/frmd.log -c /etc/xrootd/xrootd-clustered.cfg"
-XROOTD_INSTANCES="default cns"
-CMSD_INSTANCES="default" 
-FRMD_INSTANCES="default" 
-```
-
-Now, we can start XRootD cluster executing the following commands. 
-On redirector you will see:
-
-```console
-root@host # service xrootd start 
-Starting xrootd (xrootd, default): [ OK ]
-Starting xrootd (xrootd, cns): [ OK ]
-root@host # service cmsd start 
-Starting xrootd (cmsd, default): [ OK ]
-```
-
-On redirector node you should see two instances of xrootd running:
-
-```console
-root@host # ps auxww|grep xrootd
-xrootd 29036 0.0 0.0 44008 3172 ? Sl Apr11 0:00 /usr/bin/xrootd -k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-default.pid -n default
-xrootd 29108 0.0 0.0 43868 3016 ? Sl Apr11 0:00 /usr/bin/xrootd -k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-cns.pid -n cns
-xrootd 29196 0.0 0.0 51420 3692 ? Sl Apr11 0:00 /usr/bin/cmsd -k 7 -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/cmsd-default.pid -n default
-```
-!!! warning
-    The log file for second named instance of xrootd with be placed in `/var/log/xrootd/cns/xrootd.log`
-
-On data server node you should that XrdCnsd process has been started:
-
-```console
-root@host # ps auxww|grep xrootd
-xrootd 19156 0.0 0.0 48096 3256 ? Sl 07:37 0:00 /usr/bin/cmsd -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/cmsd-default.pid -n default
-xrootd 19880 0.0 0.0 46124 2916 ? Sl 08:33 0:00 /usr/bin/xrootd -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-default.pid -n default
-xrootd 19894 0.0 0.1 71164 6960 ? Sl 08:33 0:00 /usr/bin/XrdCnsd -d -D 2 -i 90 -b fermicloud053.fnal.gov:1095:/data/inventory
-```
-
-#### Starting a second instance of XRootD on EL 7
-
-The procedure for starting a second instance differs between EL 6 and EL 7. 
-This section is the procedure for EL 7.
+#### Starting a second instance of XRootD
 
 1.  Create a symlink pointing to `/etc/xrootd/xrootd-clustered.cfg` at `/etc/xrootd/xrootd-cns.cfg`:
 
@@ -241,7 +201,7 @@ This section is the procedure for EL 7.
 root@host # ln -s /etc/xrootd/xrootd-clustered.cfg /etc/xrootd/xrootd-cns.cfg
 ```
 
-1.  Start an instance of the `xrootd` service named `cns` using the syntax in the [managing services section](#ManagingServices):
+1.  Start an instance of the `xrootd` service named `cns` using the syntax in the [managing services section](#using-xrootd):
 
 ```console
 root@host # systemctl start xrootd@cns
@@ -273,7 +233,7 @@ fermicloud054.fnal.gov complete inventory as of Tue Apr 12 07:38:29 2011 /data/x
 
 XRootD can be accessed using the HTTP protocol. To do that:
 
-1. Configure [LCMAPS authorization](/data/xrootd/xrootd-authorization).
+1. Configure [LCMAPS authorization](xrootd-authorization.md).
 
 1. Uncomment the following line in `/etc/xrootd/config.d/10-xrootd-lcmaps.cfg`:
 
@@ -300,7 +260,7 @@ XRootD can be accessed using the HTTP protocol. To do that:
 
 #### (Optional) Enable HTTP based Writes
 
-No changes to the HTTP module is needed to enable HTTP-based writes.  The HTTP protocol uses the same authorization setup as the XRootD protocol.  For example, you may need to provide `a` (all) style authorizations to allow users authorization to write. See the [Authentication File section](##authorization-file) for more details.
+No changes to the HTTP module is needed to enable HTTP-based writes.  The HTTP protocol uses the same authorization setup as the XRootD protocol.  For example, you may need to provide `a` (all) style authorizations to allow users authorization to write. See the [Authentication File section](#optional-authorization) for more details.
 
 ### (Optional) Enabling a FUSE mount
 
@@ -325,47 +285,22 @@ You should now be able to run UNIX commands such as `ls /mnt/xrootd` to see the 
 ### (Optional) Authorization
 
 For information on how to configure xrootd-lcmaps authorization, please refer to the
-[Configuring XRootD Authorization guide](xrootd-authorization).
+[Configuring XRootD Authorization guide](xrootd-authorization.md).
 
 ### (Optional) Adding CMS TFC support to XRootD (CMS sites only)
 
-For CMS users, there is a package available to integrate rule-based name lookup using a `storage.xml` file. 
-If you are not setting up a CMS site, you can skip this section.
-
-``` console
-yum install --enablerepo=osg-contrib xrootd-cmstfc
-```
-
-You will need to add your `storage.xml` to `/etc/xrootd/storage.xml` and then add the following line to your XRootD
-configuration:
-
-``` file
-# Integrate with CMS TFC, placed in /etc/xrootd/storage.xml
-oss.namelib /usr/lib64/libXrdCmsTfc.so file:/etc/xrootd/storage.xml?protocol=hadoop
-```
-
-Add the orange text only if you are running hadoop (see below).
-
-See the CMS TWiki for more information:
-
--   <https://twiki.cern.ch/twiki/bin/view/Main/XrootdTfcChanges>
--   <https://twiki.cern.ch/twiki/bin/view/Main/HdfsXrootdInstall>
+For CMS users, there is a package available to integrate rule-based name lookup using a `storage.xml` file.
+See [this documentation](install-standalone.md#enabling-cms-tfc-support-cms-sites-only).
 
 ### (Optional) Adding Hadoop support to XRootD
 
-Hadoop File System (HDFS) based sites should utilize the `xrootd-hdfs` plugin to allow XRootD to access their storage:
+For documentation on how to export your Hadoop storage using XRootD please see
+[this documentation](install-standalone.md#enabling-hadoop-support-el-7-only)
 
-1. Install the XRootD HDFS plugin package:
+### (Optional) Adding Multi user support for an XRootd server
 
-        :::console
-        root@host # yum install xrootd-hdfs
-
-1. Add the following configuration to `/etc/xrootd/xrootd-clustered.cfg`:
-
-        :::file
-        ofs.osslib /usr/lib64/libXrdHdfs.so
-
-For more information, see [the HDFS installation documents](/data/install-hadoop).
+For documentation how to enable multi-user support using XRootD see
+[this documentation](install-standalone.md#enabling-multi-user-support).
 
 ### (Optional) Adding File Residency Manager (FRM) to an XRootd cluster
 
@@ -416,12 +351,12 @@ storage.
     abbreviated version documenting the special steps needed for XRootD integration.
     You may also find the following useful:
 
-    -   [Basic GridFTP Install](/data/gridftp).  Additionally covers service planning topics.
-    -   [Load-balanced GridFTP Install](/data/load-balanced-gridftp).  Covers the creation of
+    -   [Basic GridFTP Install](../gridftp.md).  Additionally covers service planning topics.
+    -   [Load-balanced GridFTP Install](../load-balanced-gridftp.md).  Covers the creation of
         a load-balanced GridFTP service using multiple servers.
 
 Prior to following this installation guide, verify the host certificates and networking is configured correctly as in
-the [basic GridFTP install](/data/gridftp).
+the [basic GridFTP install](../gridftp.md).
 
 ### Installation
 
@@ -433,10 +368,10 @@ root@host # yum install osg-gridftp-xrootd
 
 ### Configuration
 
-For information on how to configure authentication for your GridFTP installation, please refer to the [configuring
-authentication section of the GridFTP guide](/data/gridftp#configuring-authentication).
+For information on how to configure authentication for your GridFTP installation, please refer to the
+[configuring authentication section of the GridFTP guide](../gridftp.md#configuring-authentication).
 
-Edit `/etc/sysconfig/xrootd-dsi` to set `XROOTD_VMP` to use your XRootD redirector.
+Edit `/etc/sysconfig/globus-gridftp-server` to set `XROOTD_VMP` to use your XRootD redirector.
 
     :::bash
     export XROOTD_VMP="redirector:1094:/local_path=/remote_path"
@@ -445,7 +380,7 @@ Edit `/etc/sysconfig/xrootd-dsi` to set `XROOTD_VMP` to use your XRootD redirect
     The syntax of `XROOTD_VMP` is tricky; make sure to use the following guidance:
 
     - **Redirector**: The hostname and domain of the local XRootD redirector server.
-    - **local_path**: The path exported by the GridFTP server.
+    - **local_path**: The full local path exported by the GridFTP server. For example `/mystorage/export/data/store`
     - **remote_path**: The XRootD path that will be mounted at **local_path**.
 
 When `xrootd-dsi` is enabled, GridFTP configuration changes should go into `/etc/xrootd-dsi/gridftp-xrootd.conf`, not
@@ -455,7 +390,7 @@ Sites should review any customizations made in the latter and copy them as neces
 You can use the FUSE mount in order to test POSIX access to xrootd in the GridFTP server.
 You should be able to run Unix commands such as `ls /mnt/xrootd` and see the contents of the XRootD server.
 
-For log / config file locations and system services to run, see the [basic GridFTP install](/data/gridftp).
+For log / config file locations and system services to run, see the [basic GridFTP install](../gridftp.md).
 
 Using XRootD
 ------------
@@ -466,23 +401,7 @@ Start services on the redirector node before starting any services on the data n
 If you installed only XRootD itself, you will only need to start the `xrootd` service. 
 However, if you installed cluster management services, you will need to start `cmsd` as well.
 
-The instructions for starting and stopping an XRootD service depend on whether the service is installed on an EL 6 or EL
-7 machine, and whether you are using a standalone or clustered configuration.
-
-On EL 6, which config to use is set in the file `/etc/sysconfig/xrootd`. 
-For example, to have `xrootd` use the clustered config, you would have a line such as this:
-
-``` file
-XROOTD_DEFAULT_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -k fifo"
-```
-
-To use the standalone config instead, you would use:
-
-``` file
-XROOTD_DEFAULT_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-standalone.cfg -k fifo"
-```
-
-On EL 7, which config to use is determined by the service name given to `systemctl`. 
+XRootD determines which configuration to use based on the service name specified by `systemctl`.
 For example, to have `xrootd` use the clustered config, you would start up `xrootd` with this line:
 
 ``` console
@@ -498,11 +417,12 @@ root@host # systemctl start xrootd@standalone
 The services are:
 
 
-| Service                    | EL 6 service name | EL 7 service name   |
-|:---------------------------|:------------------|:--------------------|
-| XRootD (standalone config) | `xrootd`          | `xrootd@standalone` |
-| XRootD (clustered config)  | `xrootd`          | `xrootd@clustered`  |
-| CMSD (clustered config)    | `cmsd`            | `cmsd@clustered`    |
+| Service                    | EL 6 service name | EL 7 service name            |
+|:---------------------------|:------------------|:-----------------------------|
+| XRootD (standalone config) | `xrootd`          | `xrootd@standalone`          |
+| XRootD (clustered config)  | `xrootd`          | `xrootd@clustered`           |
+| XRootD (multiuser)         |                   | `xrootd-privileged@clustered`|
+| CMSD (clustered config)    | `cmsd`            | `cmsd@clustered`             |
 
 As a reminder, here are common service commands (all run as `root`):
 
@@ -517,7 +437,7 @@ As a reminder, here are common service commands (all run as `root`):
 Getting Help
 ------------
 
-To get assistance. please use the [Help Procedure](/common/help/) page.
+To get assistance. please use the [Help Procedure](../../common/help.md) page.
 
 Reference
 ---------
@@ -544,5 +464,3 @@ Links
 -----
 
 -   [XRootD documentation](https://xrootd.slac.stanford.edu/docs.html)
-
-
