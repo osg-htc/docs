@@ -16,7 +16,7 @@
     
     
       
-        <title>Flocking to OSG - OSG Site Documentation</title>
+        <title>Installing an Open Science Pool Access Point - OSG Site Documentation</title>
       
     
     
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#configuring-an-htcondor-access-point-to-send-jobs-to-the-osg" class="md-skip">
+        <a href="#installing-an-open-science-pool-access-point" class="md-skip">
           Skip to content
         </a>
       
@@ -95,7 +95,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Flocking to OSG
+              Installing an Open Science Pool Access Point
             
           </span>
         </div>
@@ -1247,12 +1247,12 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Flocking to OSG
+        Installing an Open Science Pool Access Point
         <span class="md-nav__icon md-icon"></span>
       </label>
     
     <a href="./" class="md-nav__link md-nav__link--active">
-      Flocking to OSG
+      Installing an Open Science Pool Access Point
     </a>
     
       
@@ -1278,6 +1278,13 @@
         <li class="md-nav__item">
   <a href="#before-starting" class="md-nav__link">
     Before Starting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scheduling-a-planning-consultation" class="md-nav__link">
+    Scheduling a Planning Consultation
   </a>
   
 </li>
@@ -1886,6 +1893,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#scheduling-a-planning-consultation" class="md-nav__link">
+    Scheduling a Planning Consultation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#initial-steps" class="md-nav__link">
     Initial Steps
   </a>
@@ -1998,7 +2012,7 @@
                   </a>
                 
                 
-                <h1 id="configuring-an-htcondor-access-point-to-send-jobs-to-the-osg">Configuring an HTCondor Access Point to Send Jobs to the OSG<a class="headerlink" href="#configuring-an-htcondor-access-point-to-send-jobs-to-the-osg" title="Permanent link">&para;</a></h1>
+                <h1 id="installing-an-open-science-pool-access-point">Installing an Open Science Pool Access Point<a class="headerlink" href="#installing-an-open-science-pool-access-point" title="Permanent link">&para;</a></h1>
 <p>This document explains how to add a path for user jobs to flow from your local site out to the OSG,
 which in most cases means that the jobs will have far more resources available to run on than locally.
 If your local batch system frequently has many jobs waiting to run for a long time,
@@ -2034,8 +2048,8 @@ and require additional considerations for data movement,
 you or your campus will need to provide additional support for your users to enable them to
 properly use OSG.
 Send email to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> saying that you would like to flock jobs to OSG,
-and we will consult with you about the proper solution for your site and what needs to be set up
-at both the OSG and at your site.</p>
+and we will <a href="#scheduling-a-planning-consultation">consult</a> with you about the proper solution for your site and what
+needs to be set up at both the OSG and at your site.</p>
 <p>Also consider the following technical requirements:</p>
 <ul>
 <li><strong>Operating system:</strong> A RHEL 7 compatible operating system.</li>
@@ -2054,6 +2068,11 @@ at both the OSG and at your site.</p>
 <li>Prepare <a href="../../common/yum/">the required Yum repositories</a></li>
 <li>Install <a href="../../common/ca/">CA certificates</a></li>
 </ul>
+<h2 id="scheduling-a-planning-consultation">Scheduling a Planning Consultation<a class="headerlink" href="#scheduling-a-planning-consultation" title="Permanent link">&para;</a></h2>
+<p>Before participating in the OSG, either as a computational resource contributor or consumer,
+we ask that you <a href="mailto:help@opensciencegrid.org">contact us</a> to set up a consultation.
+During this consultation, OSG staff will introduce you and your team to the OSG and develop a plan to meet your resource
+contribution and/or research goals.</p>
 <h2 id="initial-steps">Initial Steps<a class="headerlink" href="#initial-steps" title="Permanent link">&para;</a></h2>
 <h3 id="register-your-access-point-in-osg-topology">Register your access point in OSG Topology<a class="headerlink" href="#register-your-access-point-in-osg-topology" title="Permanent link">&para;</a></h3>
 <p>To be part of OSG, your access point should be registered with the OSG.
@@ -2199,7 +2218,10 @@ Users should be aware that OSG jobs are distributed across multiple institutions
 Each institution will have its own policy about the kinds of jobs that are allowed to run,
 and data transfer may be more complicated.
 The <a href="https://support.opensciencegrid.org/support/solutions">OSG Helpdesk Solutions</a> page has information about
-what users should know; the "Choosing Resources for Jobs" and "Data Management" sections are particularly relevant.</p>
+what users should know;
+the <a href="https://support.opensciencegrid.org/support/solutions/folders/5000266057">Choosing Resources for Jobs</a> and
+<a href="https://support.opensciencegrid.org/support/solutions/folders/12000013267">Data Management</a>
+sections are particularly relevant.</p>
 <h3 id="specifying-a-project">Specifying a project<a class="headerlink" href="#specifying-a-project" title="Permanent link">&para;</a></h3>
 <p>OSG will only run jobs that have a registered <em>project</em> associated with them.
 Users must follow the
@@ -2213,6 +2235,8 @@ For example:</p>
 <p>The double quotes are necessary.</p>
 <h2 id="get-help">Get Help<a class="headerlink" href="#get-help" title="Permanent link">&para;</a></h2>
 <p>If you need help with setup or troubleshooting, see our <a href="../../common/help/">help procedure</a>.</p>
+                
+                  
                 
               
               
