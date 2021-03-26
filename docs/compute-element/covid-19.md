@@ -20,7 +20,8 @@ To support COVID-19 work, the overall process includes the following:
 1. [Enable the OSG VO](../security/lcmaps-voms-authentication.md#configuring-the-lcmaps-voms-plugin) on your HTCondor-CE.
 1. Setup a job route specific to COVID-19 pilot jobs (documented below).
    The job route will allow you to prioritize these jobs using local policy in your site's cluster.
-1. [Install Singularity](/worker-node/install-singularity) on your site's worker nodes
+1. (Optional) To attract more user jobs, install [CVMFS](../worker-node/install-cvmfs.md) and
+   [Singularity](../worker-node/install-singularity.md) on your site's worker nodes
 1. Send email to <help@opensciencegrid.org> requesting that your CE receive COVID-19 pilots.
    We will need to know the CE hostname and any special restrictions that might apply to these pilots.
 
