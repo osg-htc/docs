@@ -147,7 +147,7 @@ You can click on any given package to see the set of RPMs or see the complete li
 #### Enterprise Linux 7
 
 -   [blahp-1.18.48-2.4.osg35up.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=blahp-1.18.48-2.4.osg35up.el7)
--   [condor-8.9.11-1.osg35up.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=condor-8.9.11-1.1.osg35up.el7)
+-   [condor-8.9.11-1.1.osg35up.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=condor-8.9.11-1.1.osg35up.el7)
 
 ### Upcoming RPMs
 
