@@ -24,7 +24,24 @@ Latest News
 !!! bug "Known Issues"
     HTCondor-CE job routing to non-HTCondor batch systems fails due to an issue with `blahp-1.18.48-2.4.osg36`
 
-### February 26, 2021: 3.6 Released
+### **March 25, 2021:** HTCondor 8.9.11 patches
+
+This release of OSG 3.6 contains the following packages:
+
+-   `HTCondor 8.9.11-1.4` (EL7 only)
+    -   Fixes a potential SchedD crash when using malformed tokens
+    -   `condor_watch_q` now works on DAGs
+-   `vo-client-110-1` with updated WeNMR VOMS information
+
+Additionally, the following packages that were already available in OSG 3.6 for EL7 were released for EL8:
+
+-   `osg-scitokens-mapfile-1-1` containing a new HTCondor-CE mapfile for VO token issuers
+-   `vault-1.6.2-1` and `htvault-config-0.5-1` for managing tokens
+-   `cvmfs-gateway-1.2.0-1`: note the
+    [upstream documentation](https://cvmfs.readthedocs.io/en/latest/cpt-repository-gateway.html#updating-from-cvmfs-gateway-0-2-5)
+    for updating from version 0.2.5
+
+### **February 26, 2021:** 3.6 Released
 
 !!! question "Where are GlideinWMS and XRootD?"
     XRootD and GlideinWMS are both absent in the initial OSG 3.6 release:

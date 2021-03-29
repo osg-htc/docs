@@ -24,6 +24,7 @@ To update to the OSG 3.5 series, please consult the page on
 
 | Version                             | Date       | Summary                                                                       |
 |:------------------------------------|:-----------|:------------------------------------------------------------------------------|
+| [3.5.32](3.5/release-3-5-32.md)     | 2021-03-25 | Vault 1.6.2-1, SciTokens mapfile, VO Package v110; Upcoming: HTcondor 8.9.11-1 |
 | [3.5.31](3.5/release-3-5-31.md)     | 2021-02-04 | CVMFS 2.8.0, XRootD 4.12.6, osg-ca-certs 1.94, osg-release 3.5-5, osg-flock 1.3, python-scitokens 1.3.1 |
 | [3.5.30](3.5/release-3-5-30.md)     | 2021-01-27 | High Priority Release:  Upcoming: HTCondor 8.9.11                             |
 | [3.5.29](3.5/release-3-5-29.md)     | 2021-01-21 | IGTF 1.109, osg-configure 3.11.0, htgettoken 1.1, Upcoming: GlideinWMS 3.7.2  |
