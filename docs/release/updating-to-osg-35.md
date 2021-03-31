@@ -284,3 +284,75 @@ To update HTCondor on your HTCondor-CE and/or HTCondor pool hosts, perform the f
 
         :::console
         root@host # yum remove 'rsv*' glite-ce-cream-client-api-c
+
+Updating to XRootD 5
+--------------------
+
+!!! bug "XRootD multi-user plugin"
+    There is a [known issue](https://github.com/opensciencegrid/xrootd-multiuser/issues/21) with XRootD 5.1.x and the
+    XRootD multi-user plugin.
+    Therefore, users of the XRootD multi-user plugin will be unable to update to XRootD 5.1.x until a fixed version of
+    XRootD multi-user is released into the OSG repositories.
+
+!!! tip "Use the OSG XRootD meta-package!"
+    The `osg-xrootd` and `osg-xrootd-standalone` meta-packages provide default XRootD configurations in
+    `/etc/xrootd/config.d/` with the ability to easily enable or disable features (such as HTTP or LCMAPS) through
+    simple configuration flags.
+    Additionally, the configurations provided by `osg-xrootd` and `osg-xrootd-standalone` are designed to work with the
+    OSG-released versions of XRootD, reducing the number of necessary manual configuration updates.
+
+The OSG 3.5 upcoming repositories contain XRootD 5, a major version upgrade from the previously released versions
+in the OSG.
+See the upstream [release notes](https://github.com/xrootd/xrootd/blob/v5.1.1/docs/ReleaseNotes.txt) for an overview of
+the changes.
+To update XRootD on your StashCache, XCache, XRootD clustered, and XRootD standalone hosts, perform the following steps:
+
+1.  Update all XRootD packages:
+
+        :::console
+        root@host # yum update --enablerepo=osg-upcoming 'xrootd'* xcache
+
+1.  Determine whether or not you are using OSG XRootD meta-packages
+
+        :::console
+        root@host # rpm -q --verify xrootd-server | \
+                    egrep "/etc/xrootd/xrootd-(standalone|clustered).cfg"
+
+1.  If the above command does not return any output, skip to step 6.
+
+1.  **If you are not using OSG XRootD meta-packaging and are using `xrootd-lcmaps`,**
+    update the `-authzfunparams` to the new `key=value` syntax.
+    For example, the following configuration:
+
+        :::console
+        -authzfunparms:--lcmapscfg,/etc/xrootd/lcmaps.cfg,--loglevel,0,--policy,authorize_only
+
+    Should be turned into:
+
+        :::console
+        -authzfunparms:lcmapscfg=/etc/lcmaps.db,loglevel=0,policy=authorize_only
+
+1.  **If you are not using OSG XRootD meta-packaging and are loading multiple `ofs.authlib` libraries,**
+    separate out each library into its own `ofs.authlib` directive.
+    For example, the following configuration:
+
+        :::console
+        ofs.authlib libXrdMacaroons.so libXrdAccSciTokens.so
+
+    Should be re-ordered and turned into:
+
+        :::console
+        # Enable SciTokens-based mappings; if no token is present, then the GSI certificate will be used.
+        ofs.authlib ++ libXrdAccSciTokens.so
+        ofs.authlib ++ libXrdMacaroons.so
+
+1.  Restart the relevant XRootD services:
+
+    | If you are running a(n)... | Restart the service with...             |
+    |:---------------------------|:----------------------------------------|
+    | ATLAS XCache               | `systemctl restart xrootd@atlas-xcache` |
+    | CMS XCache                 | `systemctl restart xrootd@cms-xcache`   |
+    | Stash Cache                | `systemctl restart xrootd@stash-cache`  |
+    | Stash Origin               | `systemctl restart xrootd@stash-origin` |
+    | XRootD Standalone          | `systemctl restart xrootd@standalone`   |
+    | XRootD Clustered           | `systemctl restart xrootd@clustered`    |
