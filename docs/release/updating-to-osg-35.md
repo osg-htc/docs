@@ -289,9 +289,10 @@ Updating to XRootD 5
 --------------------
 
 !!! bug "Known issues with XRootD 5.1.1"
-    -   The XRootD team is investigating memory leaks in the HTTP Third-Party Copy (HTTP-TPC) use case related to
-        `libcurl` and `NSS`.
-        **As a result, XRootD 5.1.1 is not recommended for sites supporting HTTP-TPC.**
+    -   The XRootD team is [evaluating solutions for a memory leak](https://github.com/xrootd/xrootd/pull/1431) in the
+        HTTP Third-Party Copy (HTTP-TPC) use case related to `libcurl` and `NSS`.
+        These leaks appear to exist in `libcurl` for all versions of XRootD and their impact depends on the transfer
+        load at each site.
     -   [Incompatibility with the multi-user plugin](https://github.com/opensciencegrid/xrootd-multiuser/issues/21):
         users of the XRootD multi-user plugin will be unable to update to XRootD 5.1.x until a fixed version
         of XRootD multi-user is released into the OSG repositories
