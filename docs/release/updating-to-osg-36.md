@@ -236,3 +236,8 @@ Updating Your HTCondor Hosts
 
 For more information about the HTCondor 8.9 series, consult the
     [upstream version history](https://htcondor.readthedocs.io/en/latest/version-history/development-release-series-89.html).
+
+Getting Help
+------------
+
+To get assistance, please use the [this page](../common/help.md).

@@ -360,3 +360,8 @@ To update XRootD on your StashCache, XCache, XRootD clustered, and XRootD standa
     | Stash Origin               | `systemctl restart xrootd@stash-origin` |
     | XRootD Standalone          | `systemctl restart xrootd@standalone`   |
     | XRootD Clustered           | `systemctl restart xrootd@clustered`    |
+
+Getting Help
+------------
+
+To get assistance, please use the [this page](../common/help.md).
