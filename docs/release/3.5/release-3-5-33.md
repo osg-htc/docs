@@ -33,24 +33,24 @@ Summary of Changes
 
 This release contains the following changes to the `osg-upcoming` repository:
 
--   `XRootD 5.1.1` (EL7 only): an update from the previously available version, XRootD 5.0.2
+-   **XRootD 5.1.1** (EL7 only): an update from the previously available version, XRootD 5.0.2
     -  See [this section](../updating-to-osg-35.md#updating-to-xrootd-5) for detailed update instructions
     -  The XRootD SciTokens plug-in (`xrootd-scitokens`) has been merged into the XRootD code-base so its version now matches the `xrootd`
        package version
     -  See the [upstream release notes](https://github.com/xrootd/xrootd/blob/v5.1.1/docs/ReleaseNotes.txt#L9-L164) for
        details
--   `XCache 2.0.0`
+-   **XCache 2.0.0**
     -  Updated configuration for XRootD 5.1 compatible chaining of authorization libraries
        ([SOFTWARE-4431](https://opensciencegrid.atlassian.net/browse/SOFTWARE-4431))
     -  Added requirement for XRootD 5.1
        ([SOFTWARE-4431](https://opensciencegrid.atlassian.net/browse/SOFTWARE-4431))
--   `xrootd-hdfs 2.2.0`
+-   **XRootD HDFS 2.2.0**
     -   Fixed a bug where checksums were written on HDFS write failures, potentially confusing clients
         ([#34](https://github.com/opensciencegrid/xrootd-hdfs/pull/34))
     -   Added support for new extended attribute API, allowing token plugins to properly set the username needed by HDFS
         ([#35](https://github.com/opensciencegrid/xrootd-hdfs/pull/35))
--   `xrootd-cmstfc 1.5.2-6`: rebuilt against XRootD 5.1.1
--   `xrootd-rucioN2N-for-Xcache 1.2-3.3`: rebuilt against XRootD 5.1.1
+-   **XRootD CMS TFC 1.5.2-6**: rebuilt against XRootD 5.1.1
+-   **XRootD Rucio plug-in 1.2-3.3**: rebuilt against XRootD 5.1.1
 
 These
 [JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.33%2C3.5.33-upcoming)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC)
