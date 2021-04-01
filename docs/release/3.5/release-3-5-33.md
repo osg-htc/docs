@@ -56,6 +56,17 @@ These
 [JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.33%2C3.5.33-upcoming)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC)
 were addressed in this release.
 
+Containers
+----------
+
+The following container images have been updated to contain the new packages listed above:
+
+-   `opensciencegrid/atlas-xcache:release`
+-   `opensciencegrid/cms-xcache:release`
+-   `opensciencegrid/stash-cache:release`
+-   `opensciencegrid/stash-origin:release`
+-   `opensciencegrid/xrootd-standalone:release`
+
 Updating to the New Release
 ---------------------------
 
