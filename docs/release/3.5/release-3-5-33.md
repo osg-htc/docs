@@ -39,7 +39,7 @@ This release contains the following changes to the `osg-upcoming` repository:
     -  See the [upstream release notes](https://github.com/xrootd/xrootd/blob/v5.1.1/docs/ReleaseNotes.txt#L9-L164) for
        details
 -   `XCache 2.0.0`
-    -  Updated syntax for chaining authorization libraries
+    -  Updated configuration for XRootD 5.1 compatible chaining of authorization libraries
        ([SOFTWARE-4431](https://opensciencegrid.atlassian.net/browse/SOFTWARE-4431))
     -  Added requirement for XRootD 5.1
        ([SOFTWARE-4431](https://opensciencegrid.atlassian.net/browse/SOFTWARE-4431))
