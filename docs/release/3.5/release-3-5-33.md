@@ -33,7 +33,7 @@ Summary of Changes
 This release contains the following changes to the `osg-upcoming` repository:
 
 -   `XRootD 5.1.1` (EL7 only): an update from the previously available version, XRootD 5.0.2
-    -  See [this section](../updating-to-osg-35.md##updating-to-xrootd-5) for detailed update instructions
+    -  See [this section](../updating-to-osg-35.md#updating-to-xrootd-5) for detailed update instructions
     -  The XRootD SciTokens plug-in has been merged into the XRootD code-base so its version now matches the `xrootd`
        package version
     -  See the [upstream release notes](https://github.com/xrootd/xrootd/blob/v5.1.1/docs/ReleaseNotes.txt#L9-L164) for
