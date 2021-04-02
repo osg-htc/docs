@@ -1903,17 +1903,11 @@ Additional options and descriptions can be found <a href="https://github.com/ope
 If you are not already a Registration Authority (RA) for your institution, you must request to be made one:</p>
 <ol>
 <li>Find your institution-specific InCommon contact (e.g. campus central IT)</li>
-<li>
-<p>Request a Department Registration Authority user with SSL auto-approve enabled and a client certificate:</p>
-<ul>
+<li>Request a Department Registration Authority user with SSL auto-approve enabled and a client certificate:<ul>
 <li>If they do not grant your request, you will not be able to request, approve, and retrieve certificates yourself.
   Instead, you must <a href="#requesting-certificates-from-a-registration-authority">request certificates from your RA</a>.</li>
-<li>If they grant your request, you will receive an email with instructions for requesting your client certificate.
-  Download the <code>.p12</code> file and extract the certificate and key:<div class="codehilite"><pre><span></span><code><span class="gp">user@host $</span> openssl pkcs12 -in incommon_file.p12 -nocerts -out ~/path_to_dir/incommon_user_key.pem
-<span class="gp">user@host $</span> openssl pkcs12 -in incommon_file.p12 -nokeys -out ~/path_to_dir/incommon_user_cert.pem
-</code></pre></div>
-
-</li>
+<li>If they grant your request, you will receive an email with instructions for requesting your client certificate;
+  download the <code>.p12</code> file.</li>
 </ul>
 </li>
 <li>
@@ -1928,6 +1922,26 @@ If you are not already a Registration Authority (RA) for your institution, you m
 <p>Once you have RA privileges, you may request, approve, and retrieve host certificates using <code>osg-incommon-cert-request</code>:</p>
 <p><a name="osg-incommon-cert-request"></a></p>
 <ul>
+<li>
+<p>In order to request a certificate, you will need your InCommon client certificate as two separate files,
+    <code>incommon_user_key.pem</code> for the key, and <code>incommon_user_cert.pem</code> for the cert.
+    If you don't already have them, perform the following steps:</p>
+<ol>
+<li>
+<p>Download the <code>.p12</code> file with your client certificate and save this as <code>incommon_file.p12</code>.
+   You should have received instructions for how to obtain this file in an email when you became an RA.</p>
+</li>
+<li>
+<p>Extract the certificate and key:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">user@host $</span> openssl pkcs12 -in incommon_file.p12 <span class="se">\</span>
+            -nocerts -out ~/path_to_dir/incommon_user_key.pem
+<span class="gp">user@host $</span> openssl pkcs12 -in incommon_file.p12 <span class="se">\</span>
+            -nokeys -out ~/path_to_dir/incommon_user_cert.pem
+</code></pre></div>
+
+</li>
+</ol>
+</li>
 <li>
 <p>Requesting a certificate with a single hostname <code>&lt;HOSTNAME&gt;</code>:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">user@host $</span> osg-incommon-cert-request --username &lt;INCOMMON_LOGIN&gt; <span class="se">\</span>
