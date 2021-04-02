@@ -89,13 +89,8 @@ If you are not already a Registration Authority (RA) for your institution, you m
 1. Request a Department Registration Authority user with SSL auto-approve enabled and a client certificate:
     - If they do not grant your request, you will not be able to request, approve, and retrieve certificates yourself.
       Instead, you must [request certificates from your RA](#requesting-certificates-from-a-registration-authority).
-    - If they grant your request, you will receive an email with instructions for requesting your client certificate.
-      Download the `.p12` file and extract the certificate and key:
-
-            :::console
-            user@host $ openssl pkcs12 -in incommon_file.p12 -nocerts -out ~/path_to_dir/incommon_user_key.pem
-            user@host $ openssl pkcs12 -in incommon_file.p12 -nokeys -out ~/path_to_dir/incommon_user_cert.pem
-
+    - If they grant your request, you will receive an email with instructions for requesting your client certificate;
+      download the `.p12` file.
 1. Find your institution-specific organization and department codes at the InCommon Cert Manager (https://cert-manager.com/customer/InCommon).
    These are numeric codes that should be specified through the command line using the -O/--orgcode ORG,DEPT option:
 
@@ -105,6 +100,21 @@ If you are not already a Registration Authority (RA) for your institution, you m
 Once you have RA privileges, you may request, approve, and retrieve host certificates using `osg-incommon-cert-request`:
 
 <a name="osg-incommon-cert-request"></a>
+
+-   In order to request a certificate, you will need your InCommon client certificate as two separate files,
+    `incommon_user_key.pem` for the key, and `incommon_user_cert.pem` for the cert.
+    If you don't already have them, perform the following steps:
+
+    1. Download the `.p12` file with your client certificate and save this as `incommon_file.p12`.
+       You should have received instructions for how to obtain this file in an email when you became an RA.
+
+    1. Extract the certificate and key:
+
+            :::console
+            user@host $ openssl pkcs12 -in incommon_file.p12 \
+                        -nocerts -out ~/path_to_dir/incommon_user_key.pem
+            user@host $ openssl pkcs12 -in incommon_file.p12 \
+                        -nokeys -out ~/path_to_dir/incommon_user_cert.pem
 
 - Requesting a certificate with a single hostname `<HOSTNAME>`:
 
