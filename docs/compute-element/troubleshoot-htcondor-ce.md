@@ -435,8 +435,9 @@ If you are not running an HTCondor batch system, the non-CE commands will return
 
 `condor_ce_trace` is a useful tool for testing end-to-end job submission. It contacts both the CE’s Schedd and Collector daemons to verify your permission to submit to the CE, displays the submit script that it submits to the CE, and tracks the resultant job.
 
-!!! note
-    You must have generated a proxy (e.g., `voms-proxy-init`) and your DN must be added to your [chosen authentication method](install-htcondor-ce.md#configuring-authorization).
+!!! important
+    You must have generated a proxy from a [user certificate](../security/user-certs.md)
+    and your DN must be added to your [chosen authentication method](install-htcondor-ce.md#configuring-authorization).
 
 ``` console
 user@host $ condor_ce_trace condorce.example.com
