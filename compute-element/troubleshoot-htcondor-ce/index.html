@@ -3569,9 +3569,10 @@ If you are not running an HTCondor batch system, the non-CE commands will return
 <h3 id="condor_ce_trace">condor_ce_trace<a class="headerlink" href="#condor_ce_trace" title="Permanent link">&para;</a></h3>
 <h4 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h4>
 <p><code>condor_ce_trace</code> is a useful tool for testing end-to-end job submission. It contacts both the CE’s Schedd and Collector daemons to verify your permission to submit to the CE, displays the submit script that it submits to the CE, and tracks the resultant job.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>You must have generated a proxy (e.g., <code>voms-proxy-init</code>) and your DN must be added to your <a href="../install-htcondor-ce/#configuring-authorization">chosen authentication method</a>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>You must have generated a proxy from a <a href="../../security/user-certs/">user certificate</a>
+and your DN must be added to your <a href="../install-htcondor-ce/#configuring-authorization">chosen authentication method</a>.</p>
 </div>
 <div class="codehilite"><pre><span></span><code><span class="gp">user@host $</span> condor_ce_trace condorce.example.com
 </code></pre></div>
