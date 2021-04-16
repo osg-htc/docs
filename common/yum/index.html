@@ -2389,11 +2389,11 @@ priority = 98
 <p>If you run a large site (&gt;20 nodes), you should consider setting up a local mirror for the OSG repositories.
 A local Yum mirror allows you to reduce the amount of external bandwidth used when updating or installing packages.</p>
 <p>Add the following to a file in <code>/etc/cron.d</code>:</p>
-<div class="codehilite"><pre><span></span><code>&lt;RANDOM&gt; * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/ /var/www/html/osg/
+<div class="codehilite"><pre><span></span><code>&lt;RANDOM&gt; * * * * root rsync -aH rsync://repo-rsync.opensciencegrid.org/osg/ /var/www/html/osg/
 </code></pre></div>
 
 <p>Or, to mirror only a single repository:</p>
-<div class="codehilite"><pre><span></span><code>&lt;RANDOM&gt; * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/&lt;OSG_RELEASE&gt;/el7/development /var/www/html/osg/&lt;OSG_RELEASE&gt;/el7
+<div class="codehilite"><pre><span></span><code>&lt;RANDOM&gt; * * * * root rsync -aH rsync://repo-rsync.opensciencegrid.org/osg/&lt;OSG_RELEASE&gt;/el7/development /var/www/html/osg/&lt;OSG_RELEASE&gt;/el7
 </code></pre></div>
 
 <p>Replace <code>&lt;OSG_RELEASE&gt;</code> with the OSG release you would like to use (e.g. <code>3.5</code>) and <code>&lt;RANDOM&gt;</code> with a number between 0
