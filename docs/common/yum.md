@@ -273,12 +273,12 @@ A local Yum mirror allows you to reduce the amount of external bandwidth used wh
 Add the following to a file in `/etc/cron.d`:
 
     :::file
-    <RANDOM> * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/ /var/www/html/osg/
+    <RANDOM> * * * * root rsync -aH rsync://repo-rsync.opensciencegrid.org/osg/ /var/www/html/osg/
 
 Or, to mirror only a single repository:
 
     :::file
-    <RANDOM> * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/<OSG_RELEASE>/el7/development /var/www/html/osg/<OSG_RELEASE>/el7
+    <RANDOM> * * * * root rsync -aH rsync://repo-rsync.opensciencegrid.org/osg/<OSG_RELEASE>/el7/development /var/www/html/osg/<OSG_RELEASE>/el7
 
 
 Replace `<OSG_RELEASE>` with the OSG release you would like to use (e.g. `3.5`) and `<RANDOM>` with a number between 0
