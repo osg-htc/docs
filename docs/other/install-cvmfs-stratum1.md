@@ -50,7 +50,7 @@ root@host # yum -y install cvmfs-server cvmfs-config mod_wsgi
 
 ```console
 root@host # rpm -i http://frontier.cern.ch/dist/rpms/RPMS/noarch/frontier-release-1.1-1.noarch.rpm
-root@host # yum -y install frontier-awstats
+root@host # yum -y install frontier-squid frontier-awstats
 ```
 
 ## Configuring
