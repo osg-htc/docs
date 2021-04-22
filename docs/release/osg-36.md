@@ -24,6 +24,13 @@ Latest News
 !!! bug "Known Issues"
     HTCondor-CE job routing to non-HTCondor batch systems fails due to an issue with `blahp-1.18.48-2.4.osg36`
 
+### **April 22, 2021:** CVMFS 2.8.1
+
+This release of OSG 3.6 contains the following packages:
+
+-   [CVMFS 2.8.1](https://cvmfs.readthedocs.io/en/2.8/cpt-releasenotes.html): Bug fix release
+-   `gratia-probe 1.23.2`: Converted to use Python 3
+
 ### **March 25, 2021:** HTCondor 8.9.11 patches
 
 This release of OSG 3.6 contains the following packages:
