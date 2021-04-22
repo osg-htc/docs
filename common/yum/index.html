@@ -2284,13 +2284,6 @@ The OSG repositories must have a better (numerically lower) priority than the EP
 otherwise, you might have dependency resolution ("depsolving") issues.</p>
 </div>
 <h3 id="install-the-osg-repositories">Install the OSG Repositories<a class="headerlink" href="#install-the-osg-repositories" title="Permanent link">&para;</a></h3>
-<div class="admonition danger">
-<p class="admonition-title">Before considering an upgrade to OSG 3.6&hellip;</p>
-<p>Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
-authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
-If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
-install or remain on the <a href="../../release/notes/">OSG 3.5 release series</a></p>
-</div>
 <p>This document assumes a fresh install.
 For instructions on upgrading from one OSG series to another, see the
 <a href="../../release/updating-to-osg-35/">release series document</a>.</p>
@@ -2311,6 +2304,16 @@ For instructions on upgrading from one OSG series to another, see the
 </code></pre></div>
 
 </li>
+</ul>
+<div class="admonition danger">
+<p class="admonition-title">Before considering an upgrade to OSG 3.6&hellip;</p>
+<p>OSG 3.6 is under active development and is not currently supported for production use.</p>
+<p>Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
+authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
+If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
+install or remain on the <a href="../../release/notes/">OSG 3.5 release series</a></p>
+</div>
+<ul>
 <li>
 <p>OSG 3.6 EL7:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> yum install https://repo.opensciencegrid.org/osg/3.6/osg-3.6-el7-release-latest.rpm
@@ -2324,6 +2327,14 @@ For instructions on upgrading from one OSG series to another, see the
 
 </li>
 </ul>
+<div class="admonition danger">
+<p class="admonition-title">Before considering an upgrade to OSG 3.6&hellip;</p>
+<p>OSG 3.6 is under active development and is not currently supported for production use.</p>
+<p>Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
+authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
+If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
+install or remain on the <a href="../../release/notes/">OSG 3.5 release series</a></p>
+</div>
 </li>
 <li>
 <p>The only OSG repository enabled by default is the release one.
