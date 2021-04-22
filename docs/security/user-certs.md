@@ -1,6 +1,10 @@
 User Certificates
 =================
 
+!!! warning
+    This document is for software that will no longer be supported after the OSG 3.5 retirement (February 2022).
+    See the [Release Series Support Policy](https://opensciencegrid.org/technology/policy/release-series/) for details.
+
 !!! note
     This document describes how to get and set up a **personal** certificate (also called a grid user certificate).
     For instructions on how to get **host** certificates, see the [Host Certificates document](host-certs.md).

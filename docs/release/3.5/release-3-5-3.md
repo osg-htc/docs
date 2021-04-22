@@ -18,7 +18,7 @@ This release contains:
 -   [HTCondor 8.8.5](https://www-auth.cs.wisc.edu/lists/htcondor-world/2019/msg00017.shtml)
     -   Major upgrade from version 8.6.13
         -   [OSG Upgrade Instructions](https://opensciencegrid.org/docs/release/release_series/#updating-to-htcondor-88x_1)
-        -   [HTCondor Upgrade Release Notes](https://htcondor.readthedocs.io/en/stable/version-history/upgrading-from-86-to-88-series.html)
+        -   [HTCondor Upgrade Release Notes](https://htcondor.readthedocs.io/en/v8_8/version-history/upgrading-from-86-to-88-series.html)
     -   Enhanced security with default configuration added by OSG
     -   `bosco_cluster` pulls tarball via HTTPS
     -   Added support for customizations to remote BOSCO installations
