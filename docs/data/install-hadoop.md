@@ -3,6 +3,7 @@ Installing and Maintaining HDFS
 
 !!! warning
     This document is for software that will no longer be supported after the OSG 3.5 retirement (February 2022).
+    See the [Release Series Support Policy](https://opensciencegrid.org/technology/policy/release-series/) for details.
 
 [Hadoop Distributed File System](http://hadoop.apache.org/) (HDFS) is a scalable, reliable distributed file system developed in the Apache project. It is based on the map-reduce framework and design of the Google file system. The OSG distribution of Hadoop includes all components needed to operate a multi-terabyte storage site.
 
