@@ -63,7 +63,7 @@ Here is a list of the differences in this initial release:
 -   Added packages to support token-based authentication
 -   [HTCondor 8.9.11](https://htcondor.readthedocs.io/en/latest/version-history/development-release-series-89.html#version-8-9-11):
     initial token support (8.9.12, which will contain default configuration using tokens, was delayed)
--   [HTCondor-CE 5.0.0](https://htcondor.github.io/htcondor-ce/releases/#500):
+-   [HTCondor-CE 5.0.0](https://htcondor.github.io/htcondor-ce/v5/releases/):
     support for Python 3
 -   [Gratia Probe 2.0.0](https://github.com/opensciencegrid/gratia-probe/releases/tag/v2.0.0-2):
     replace all batch system probes with the non-root HTCondor-CE probe
