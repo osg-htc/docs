@@ -2175,7 +2175,7 @@ endif
 <p>The OSG 3.5 release series contains HTCondor 8.8, a major version upgrade from the previously released versions
 in the OSG.
 See the HTCondor 8.8 manual for an overview of the
-<a href="https://htcondor.readthedocs.io/en/stable/version-history/upgrading-from-86-to-88-series.html">changes</a>.
+<a href="https://htcondor.readthedocs.io/en/v8_8/version-history/upgrading-from-86-to-88-series.html">changes</a>.
 To update HTCondor on your HTCondor-CE and/or HTCondor pool hosts, perform the following steps:</p>
 <ol>
 <li>
@@ -2193,10 +2193,10 @@ To update HTCondor on your HTCondor-CE and/or HTCondor pool hosts, perform the f
   If you are experiencing issues with communication between hosts in your pool after the upgrade,
   the default OSG configuration is listed in <code>/etc/condor/config.d/00-osg_default_*.config</code>:
   ensure that any default configuration is overriden with your own <code>DAEMON_LIST</code>, <code>CONDOR_HOST</code>, and/or
-  <a href="https://htcondor.readthedocs.io/en/stable/admin-manual/security.html">security</a> configuration in subsequent files.</p>
+  <a href="https://htcondor.readthedocs.io/en/v8_8/admin-manual/security.html">security</a> configuration in subsequent files.</p>
 </li>
 <li>
-<p>As of HTCondor 8.8, <a href="https://htcondor.readthedocs.io/en/stable/admin-manual/configuration-macros.html#condor-startd-configuration-file-macros">MOUNT_UNDER_SCRATCH</a>
+<p>As of HTCondor 8.8, <a href="https://htcondor.readthedocs.io/en/v8_8/admin-manual/configuration-macros.html#condor-startd-configuration-file-macros">MOUNT_UNDER_SCRATCH</a>
   has default values of <code>/tmp</code> and <code>/var/tmp</code>, which may cause issues if your
   <a href="../../worker-node/using-wn/#the-worker-node-environment">OSG_WN_TMP</a> is a subdirectory of either of these directories.
   If the partition containing your execute directories is <a href="../../worker-node/using-wn/#hardware-recommendations">large enough</a>,
