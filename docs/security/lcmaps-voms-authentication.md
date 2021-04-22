@@ -1,6 +1,9 @@
 Installing and Maintaining the LCMAPS VOMS Plugin
 =================================================
 
+!!! warning
+    This document is for software that will no longer be supported after the OSG 3.5 retirement (February 2022).
+
 LCMAPS is a software library used on [HTCondor-CE](../compute-element/install-htcondor-ce.md), [GridFTP](../data/gridftp.md), and
 [XRootD](../data/xrootd/install-storage-element.md) hosts for mapping grid certificates of incoming connections to specific
 Unix accounts.

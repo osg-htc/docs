@@ -1,6 +1,9 @@
 Load Balancing GridFTP
 ======================
 
+!!! warning
+    This document is for software that will no longer be supported after the OSG 3.5 retirement (February 2022).
+
 GridFTP is designed for high throughput data transfers and in many cases can handle all of the transfers for a site. However, in some cases it may be useful to run multiple GridFTP servers to distribute the load. For such sites, we recommend using a [load balancer](https://en.wikipedia.org/wiki/Load_balancing_(computing)) to distribute requests and present the appearance of a single high-throughput GridFTP server.
 
 One general-purpose technology for implementing a load balancer on Linux is [Linux Virtual Server](http://www.linuxvirtualserver.org/whatis.html) (LVS). To use it with GridFTP, a single load balancer listens on a virtual IP address, monitors the health of the set of real GridFTP servers, and forwards requests to available ones. Optionally, there can be one or more inactive, backup load balancers that can activate and take over the virtual IP address in case the primary load balancer fails, resulting in a system that is more resilient to failure. LVS is implemented by the [IP Virtual Server](http://www.linuxvirtualserver.org/software/ipvs.html) kernel module, which can be managed by userspace services on the load balancers such as [keepalived](http://www.keepalived.org).

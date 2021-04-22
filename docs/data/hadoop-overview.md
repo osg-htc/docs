@@ -1,6 +1,9 @@
 Hadoop Overview
 ===============
 
+!!! warning
+    This document is for software that will no longer be supported after the OSG 3.5 retirement (February 2022).
+
 Hadoop Introduction
 -------------------
 
