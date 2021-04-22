@@ -1,6 +1,10 @@
 Installing, Configuring, Using, and Troubleshooting RSV
 =======================================================
 
+!!! warning
+    This document is for software that will no longer be supported after the OSG 3.5 retirement (February 2022).
+    See the [Release Series Support Policy](https://opensciencegrid.org/technology/policy/release-series/) for details.
+
 About This Guide
 ----------------
 

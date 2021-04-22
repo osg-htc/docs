@@ -158,7 +158,7 @@ To update OSG-Configure, perform the following steps:
 
 #### HTCondor-CE ####
 
-The OSG 3.6 release series contains [HTCondor-CE 5](https://htcondor.github.io/htcondor-ce/releases/#500), a major
+The OSG 3.6 release series contains [HTCondor-CE 5](https://htcondor.github.io/htcondor-ce/v5/releases/), a major
 version upgrade from HTCondor-CE 4, which was available in the OSG 3.5 release repositories.
 To update HTCondor-CE, perform the following steps:
 
