@@ -27,7 +27,6 @@ nav:
       - 'HTCondor-CE Overview': 'compute-element/htcondor-ce-overview.md'
       - 'Request a Hosted CE': 'compute-element/hosted-ce.md'
       - 'Install HTCondor-CE': 'compute-element/install-htcondor-ce.md'
-      - 'Supporting COVID-19 Research': 'compute-element/covid-19.md'
     - Worker Node:
         - 'Overview': 'worker-node/using-wn.md'
         - 'Install from RPM': 'worker-node/install-wn.md'

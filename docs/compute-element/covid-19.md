@@ -2,6 +2,9 @@
 Supporting COVID-19 Research on the OSG
 =======================================
 
+!!! info
+    The instructions in this document are deprecated, as COVID-19 jobs are no longer prioritized.
+
 There a few options available for sites with computing resources who want to support the
 important and urgent work of COVID-19 researchers using the OSG. As we're
 currently routing such projects through the OSG VO, your site can be configured
