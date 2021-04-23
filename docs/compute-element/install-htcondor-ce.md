@@ -207,7 +207,7 @@ software needs to be configured so that it doesn't over report the number of job
         | SGE                      | `/etc/gratia/sge/ProbeConfig`               |
         | SLURM                    | `/etc/gratia/slurm/ProbeConfig`             |
 
-    -   **For OSG 3.6 installations,** you'll need to modify `/etc/gratia/condor-ce/ProbeConfig`
+    -   **For OSG 3.6 installations,** you'll need to modify `/etc/gratia/htcondor-ce/ProbeConfig`
 
 1.  Edit the value of `SuppressNoDNRecords` on each of your CE's so that it reads:
 
