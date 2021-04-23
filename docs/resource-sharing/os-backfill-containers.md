@@ -30,14 +30,16 @@ Running the Container with Docker
 The Docker image is kept in [DockerHub](https://hub.docker.com/r/opensciencegrid/osgvo-docker-pilot) and requires a
 number of environment variables to be set in order to function appropriately:
 
-1. Set the `TOKEN` environment variable to the authentication token you received from OSG.
+1. Set `TOKEN` to the authentication token you received from OSG.
 2. Set `GLIDEIN_Site` and `GLIDEIN_ResourceName` to match the site name and resource name you registered in topology,
    respectively.
 3. Set the `OSG_SQUID_LOCATION` environment variable to the HTTP address of your preferred squid instance.
-4. _Optional:_  Some sites prefer that job I/O is done in a specific temporary directory instead of inside the container.
+4. _Recommended:_ Set `CVMFSEXEC_REPOS` to the list of CVMFS repos you want to support (see [CVMFS](#cvmfs) below).
+   We recommend including `oasis.opensciencegrid.org` in the list.
+5. _Optional:_  Some sites prefer that job I/O is done in a specific temporary directory instead of inside the container.
    To do this, map the appropriate directory on the host to `/pilot` inside containers.
    If you are using Docker to launch the container, this is done with the command line flag `-v /somelocaldir:/pilot`.
-5. _Optional:_ add an expression with the `GLIDEIN_Start_Extra` environment variable to append to the HTCondor `START`
+6. _Optional:_ add an expression with the `GLIDEIN_Start_Extra` environment variable to append to the HTCondor `START`
    expression; this limits the pilot to only run certain jobs.
 
 Here is an example invocation using `docker run` by hand:
@@ -46,15 +48,88 @@ Here is an example invocation using `docker run` by hand:
 docker run -it --rm --user osg \
        --cap-add=DAC_OVERRIDE --cap-add=SETUID --cap-add=SETGID \
        --cap-add=SYS_ADMIN --cap-add=SYS_CHROOT --cap-add=SYS_PTRACE \
-       --cap-add=CAP_DAC_READ_SEARCH \
-       -v /cvmfs:/cvmfs:shared \
+       --cap-add=DAC_READ_SEARCH \
+       --device=/dev/fuse \
        -e TOKEN="..." \
        -e GLIDEIN_Site="..." \
        -e GLIDEIN_ResourceName="..." \
        -e GLIDEIN_Start_Extra="True" \
        -e OSG_SQUID_LOCATION="..." \
+       -e CVMFSEXEC_REPOS="oasis.opensciencegrid.org" \
        opensciencegrid/osgvo-docker-pilot:release
 ```
 
+
 Note the additional capabilities requested in the above `docker run` allow the container to invoke `singularity` for
 user jobs; this allows the user to utilize a container for their job that is different from the pilot.
+
+
+CVMFS
+-----
+
+CVMFS is a read-only remote filesystem that many OSG jobs depend on for software and data.
+Supporting CVMFS inside your container will greatly increase the types of OSG jobs you can run.
+
+There are two methods for adding CVMFS: bind-mounting it from the host, and enabling cvmfsexec.
+
+
+### Adding CVMFS via bind-mount
+
+Follow the [installing CVMFS document](../worker-node/install-cvmfs.md) to install CVMFS on the host.
+
+Once you have CVMFS installed and mounted on your host, add `-v /cvmfs:/cvmfs:shared` to your `docker run` invocation:
+
+        docker run -it --rm --user osg \
+               --cap-add=DAC_OVERRIDE --cap-add=SETUID --cap-add=SETGID \
+               --cap-add=SYS_ADMIN --cap-add=SYS_CHROOT --cap-add=SYS_PTRACE \
+               --cap-add=DAC_READ_SEARCH \
+               -v /cvmfs:/cvmfs:shared \
+               -e TOKEN="..." \
+               -e GLIDEIN_Site="..." \
+               -e GLIDEIN_ResourceName="..." \
+               -e GLIDEIN_Start_Extra="True" \
+               -e OSG_SQUID_LOCATION="..." \
+               opensciencegrid/osgvo-docker-pilot:latest
+
+Fill in the values for `TOKEN`, `GLIDEIN_Site`, `GLIDEIN_ResourceName`, and `OSG_SQUID_LOCATION` [as above](#running-the-container-with-docker).
+
+
+### Adding CVMFS using cvmfsexec
+
+[cvmfsexec](https://github.com/CVMFS/cvmfsexec#readme) is a tool that can be used to mount CVMFS inside the container
+without requiring it to be installed on the host.
+cvmfsexec is already installed in the container.
+To enable it, specify a comma-separated list of repos in the `CVMFSEXEC_REPOS` environment variable.
+"oasis.opensciencegrid.org" is a recommended repo to add.
+
+cvmfsexec requires the `/dev/fuse` device to be available, so you will also have to add `--device=/dev/fuse` to your `docker run` invocation:
+
+        docker run -it --rm --user osg \
+               --cap-add=DAC_OVERRIDE --cap-add=SETUID --cap-add=SETGID \
+               --cap-add=SYS_ADMIN --cap-add=SYS_CHROOT --cap-add=SYS_PTRACE \
+               --cap-add=DAC_READ_SEARCH \
+               --device=/dev/fuse \
+               -e TOKEN="..." \
+               -e GLIDEIN_Site="..." \
+               -e GLIDEIN_ResourceName="..." \
+               -e GLIDEIN_Start_Extra="True" \
+               -e OSG_SQUID_LOCATION="..." \
+               -e CVMFSEXEC_REPOS="oasis.opensciencegrid.org,stash.osgstorage.org" \
+               opensciencegrid/osgvo-docker-pilot:latest
+
+Fill in the values for `TOKEN`, `GLIDEIN_Site`, `GLIDEIN_ResourceName`, and `OSG_SQUID_LOCATION` [as above](#running-the-container-with-docker).
+
+There are aditional options for cvmfsexec that are passed via environment variables:
+
+-   `CVMFS_HTTP_PROXY` - this sets the proxy to use for CVMFS;
+    if left blank, it will find the best one via WLCG Web Proxy Auto Discovery.
+
+-   `CVMFS_QUOTA_LIMIT` - the quota limit in MB for CVMFS; leave this blank to use the system default (4 GB)
+
+You can add other CVMFS options by bind-mounting a config file over `/cvmfsexec/default.local`;
+note that options in environment variables are preferred over options in `/cvmfsexec/default.local`.
+
+You can store the cache outside of the container by bind-mounting a directory to `/cvmfs-cache`.
+
+You can store the logs outside of the container by bind-mounting a directory to `/cvmfs-logs`.
+
