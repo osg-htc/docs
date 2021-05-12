@@ -1,4 +1,6 @@
 !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
+    OSG 3.6 is under active development and is not currently supported for production use.
+
     Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
     authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
     If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
@@ -23,6 +25,13 @@ Latest News
 
 !!! bug "Known Issues"
     HTCondor-CE job routing to non-HTCondor batch systems fails due to an issue with `blahp-1.18.48-2.4.osg36`
+
+### **April 22, 2021:** CVMFS 2.8.1
+
+This release of OSG 3.6 contains the following packages:
+
+-   [CVMFS 2.8.1](https://cvmfs.readthedocs.io/en/2.8/cpt-releasenotes.html): Bug fix release
+-   `gratia-probe 1.23.2`: Converted to use Python 3
 
 ### **March 25, 2021:** HTCondor 8.9.11 patches
 
@@ -63,7 +72,7 @@ Here is a list of the differences in this initial release:
 -   Added packages to support token-based authentication
 -   [HTCondor 8.9.11](https://htcondor.readthedocs.io/en/latest/version-history/development-release-series-89.html#version-8-9-11):
     initial token support (8.9.12, which will contain default configuration using tokens, was delayed)
--   [HTCondor-CE 5.0.0](https://htcondor.github.io/htcondor-ce/releases/#500):
+-   [HTCondor-CE 5.0.0](https://htcondor.github.io/htcondor-ce/v5/releases/):
     support for Python 3
 -   [Gratia Probe 2.0.0](https://github.com/opensciencegrid/gratia-probe/releases/tag/v2.0.0-2):
     replace all batch system probes with the non-root HTCondor-CE probe

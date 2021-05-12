@@ -63,5 +63,5 @@ In this case, the `singularity run` command should be changed to:
 singularity run --contain --bind /cvmfs osgvo-pilot.sif
 ```
 
-Note, unlike the [site-launched container](os-backfill-containers.md], the Singularity container above
+Note, unlike the [site-launched container](os-backfill-containers.md), the Singularity container above
 _cannot_ run payloads inside a separate image.

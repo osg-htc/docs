@@ -28,7 +28,7 @@ their jobs to HTCondor, where the jobs wait ("are queued") until computing resou
 In a purely local HTCondor system, there are one to a few access points and many computing resources.
 
 An HTCondor access point can also be configured to forward excess jobs to an OSG-managed pool.
-This process is called [flocking](https://htcondor.readthedocs.io/en/stable/grid-computing/connecting-pools-with-flocking.html).
+This process is called [flocking](https://htcondor.readthedocs.io/en/v8_8/grid-computing/connecting-pools-with-flocking.html).
 If you already have an HTCondor pool, we recommend that you install this software
 on top of one of your existing HTCondor access points.
 This approach allows a user to submit locally and have their jobs run locally or,

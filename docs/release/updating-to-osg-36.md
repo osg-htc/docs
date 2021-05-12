@@ -1,4 +1,6 @@
 !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
+    OSG 3.6 is under active development and is not currently supported for production use.
+
     Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
     authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
     If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
@@ -19,6 +21,8 @@ Updating Your OSG Compute Entrypoint
 ------------------------------------
 
 !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
+    OSG 3.6 is under active development and is not currently supported for production use.
+
     Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
     authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
     If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
@@ -158,7 +162,7 @@ To update OSG-Configure, perform the following steps:
 
 #### HTCondor-CE ####
 
-The OSG 3.6 release series contains [HTCondor-CE 5](https://htcondor.github.io/htcondor-ce/releases/#500), a major
+The OSG 3.6 release series contains [HTCondor-CE 5](https://htcondor.github.io/htcondor-ce/v5/releases/), a major
 version upgrade from HTCondor-CE 4, which was available in the OSG 3.5 release repositories.
 To update HTCondor-CE, perform the following steps:
 
@@ -190,6 +194,8 @@ Updating Your HTCondor Hosts
 ----------------------------
 
 !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
+    OSG 3.6 is under active development and is not currently supported for production use.
+
     Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
     authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
     If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
