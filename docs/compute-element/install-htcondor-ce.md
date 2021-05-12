@@ -2,7 +2,7 @@ Installing and Maintaining HTCondor-CE
 ======================================
 
 The [HTCondor-CE](http://htcondor-ce.org) software is a *job gateway* for an OSG Compute Entrypoint (CE).
-As such, the OSG will submit resource allocation requestsion (RARs) jobs to your HTCondor-CE and it will handle
+As such, the OSG will submit resource allocation requests (RARs) jobs to your HTCondor-CE and it will handle
 authorization and delegation of RARs to your local batch system.
 In OSG today, RARs are sent to CEs as *pilot jobs* from a factory, which in turn are able to accept and run end-user jobs.
 See the [upstream documentation](https://htcondor.github.io/htcondor-ce/architecture/) for a more detailed introduction.
