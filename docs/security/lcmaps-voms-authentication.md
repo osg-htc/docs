@@ -298,7 +298,7 @@ If you are troubleshooting an HTCondor-CE host, follow these instructions to rai
 
         GSS_ASSIST_GRIDMAP_CACHE_EXPIRATION = 0
 
-1. Restart the [condor-ce](../compute-element/install-htcondor-ce.md#managing-htcondor-ce-and-associated-services) service
+1. Restart the [condor-ce](https://htcondor.github.io/htcondor-ce/v5/verification/#managing-htcondor-ce-services) service
 
 !!! tip
     After you've completed troubleshooting, remember to revert the changes above and restart services!

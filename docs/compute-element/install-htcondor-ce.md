@@ -1,7 +1,7 @@
 Installing and Maintaining HTCondor-CE
 ======================================
 
-The [HTCondor-CE](https://htcondor-ce.org) software is a *job gateway* for an OSG Compute Entrypoint (CE).
+The [HTCondor-CE](http://htcondor-ce.org) software is a *job gateway* for an OSG Compute Entrypoint (CE).
 As such, the OSG will submit resource allocation requestsion (RARs) jobs to your HTCondor-CE and it will handle
 authorization and delegation of RARs to your local batch system.
 In OSG today, RARs are sent to CEs as *pilot jobs* from a factory, which in turn are able to accept and run end-user jobs.
@@ -130,7 +130,7 @@ For more advanced configuration, see the section on [optional configurations](#o
 To configure HTCondor-CE to integrate with your local batch system, please refer to the upstream documentation based on
 your installed version of HTCondor-CE:
 
--   [HTCondor-CE 5]((https://htcondor.github.io/htcondor-ce/v5/configuration/local-batch-system/))
+-   [HTCondor-CE 5](https://htcondor.github.io/htcondor-ce/v5/configuration/local-batch-system/)
 -   [HTCondor-CE 4](https://htcondor.github.io/htcondor-ce/v4/installation/htcondor-ce/#configuring-the-batch-system)
 
 ### Configuring authentication ###
@@ -234,7 +234,7 @@ root@host # systemctl enable gratia-probes-cron
 ```
 
 In OSG 3.6, OSG accounting is managed directly by HTCondor-CE
-(see the [update instructions](../release/updating-to-osg-36.md/#gratia-probe) for more details).
+(see the [update instructions](../release/updating-to-osg-36.md#gratia-probe) for more details).
 
 Troubleshooting HTCondor-CE
 ---------------------------
