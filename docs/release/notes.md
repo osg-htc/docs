@@ -24,7 +24,7 @@ To update to the OSG 3.5 series, please consult the page on
 
 | Version                             | Date       | Summary                                                                       |
 |:------------------------------------|:-----------|:------------------------------------------------------------------------------|
-| [3.5.35](3.5/release-3-5-35.md)     | 2021-05-13 | High Priority Release: Frontier Squid 4.15-1.2, IGTF 1.100                    |
+| [3.5.35](3.5/release-3-5-35.md)     | 2021-05-13 | High Priority Release: Frontier Squid 4.15-1.2, IGTF 1.110                    |
 | [3.5.34](3.5/release-3-5-34.md)     | 2021-04-22 | CVMFS 2.8.1, gratia-probe 1.23.2                                              |
 | [3.5.33](3.5/release-3-5-33.md)     | 2021-04-01 | Upcoming: XRootD 5.1.1 and plugins, XCache 2.0.0                              |
 | [3.5.32](3.5/release-3-5-32.md)     | 2021-03-25 | Vault 1.6.2-1, SciTokens mapfile, VO Package v110; Upcoming: HTcondor 8.9.11-1 |
