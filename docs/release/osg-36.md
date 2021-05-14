@@ -26,6 +26,14 @@ Latest News
 !!! bug "Known Issues"
     HTCondor-CE job routing to non-HTCondor batch systems fails due to an issue with `blahp-1.18.48-2.4.osg36`
 
+### **May 13, 2021:** High Priority Release
+
+This release of OSG 3.6 contains the following packages:
+
+-   [Frontier Squid 4.15-1.2](http://frontier.cern.ch/dist/rpms/frontier-squidRELEASE_NOTES): [Closes multiple security vulnerabilities](http://lists.squid-cache.org/pipermail/squid-announce/2021-May/000127.html)
+-   Updated CA certificates based on [IGTF 1.110](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+-   `osg-ca-certs 1.96`: Fixed Let's Encrypt signing policy to accept cross-signing chain
+
 ### **April 22, 2021:** CVMFS 2.8.1
 
 This release of OSG 3.6 contains the following packages:
