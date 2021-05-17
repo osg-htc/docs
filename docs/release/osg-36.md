@@ -23,7 +23,7 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.
 Latest News
 -----------
 
-### **May 17, 2021:** High Priority Release
+### **May 17, 2021:** HTCondor-CE 5.1.0 and HTCondor 9.0.0
 
 This release of OSG 3.6 contains the following packages:
 
