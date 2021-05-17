@@ -2181,14 +2181,9 @@ install or remain on the <a href="../notes/">OSG 3.5 release series</a></p>
 </div>
 <ol>
 <li>
-<p>The <code>ALLOW_DAEMON</code> permission no longer inherits from <code>ALLOW_WRITE</code>.
-    To revert to the old behavior you can add <code>ALLOW_DAEMON = ALLOW_WRITE</code>.
-    However this is not recommended, since re-enabling this configuration means anyone that can submit jobs can also
-    manipulate your HTCondor daemons.</p>
-</li>
-<li>
 <p>The following OSG specific configuration was dropped in anticipation of HTCondor's new secure by default
-    configuration coming in HTCondor version 9.0.</p>
+    configuration coming in HTCondor version 9.0. HTCondor's 9.0 recommended security configuration requires
+    authentication for all access (including read access).</p>
 <div class="codehilite"><pre><span></span><code>CONDOR_HOST = $(FULL_HOSTNAME)
 DAEMON_LIST = COLLECTOR, MASTER, NEGOTIATOR, SCHEDD, STARTD
 
@@ -2222,9 +2217,14 @@ ALLOW_DAEMON = condor@* condor_pool@*
 </code></pre></div>
 
 </li>
+<li>
+<p>Manual intervention may be required to upgrade from the HTCondor 8.8 series to HTCondor 9.0.x.
+    Please consult the <a href="https://htcondor.readthedocs.io/en/v9_0/version-history/upgrading-from-88-to-90-series.html">HTCondor 9.0 upgrade instructions</a>.</p>
+</li>
+<li>
+<p>If you are upgrading from the HTCondor 8.9 series (8.9.11 and earlier), please consult the <a href="https://htcondor-wiki.cs.wisc.edu/index.cgi/wiki?p=UpgradingToNineDotZero">Upgrading to 9.0 instructions</a></p>
+</li>
 </ol>
-<p>For more information about the HTCondor 8.9 series, consult the
-    <a href="https://htcondor.readthedocs.io/en/latest/version-history/development-release-series-89.html">upstream version history</a>.</p>
 <h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
 <p>To get assistance, please use the <a href="../../common/help/">this page</a>.</p>
                 
