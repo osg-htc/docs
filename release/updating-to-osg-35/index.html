@@ -1603,8 +1603,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#updating-to-htcondor-897" class="md-nav__link">
-    Updating to HTCondor 8.9.7+
+  <a href="#updating-to-htcondor-900" class="md-nav__link">
+    Updating to HTCondor 9.0.0+
   </a>
   
 </li>
@@ -1846,8 +1846,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#updating-to-htcondor-897" class="md-nav__link">
-    Updating to HTCondor 8.9.7+
+  <a href="#updating-to-htcondor-900" class="md-nav__link">
+    Updating to HTCondor 9.0.0+
   </a>
   
 </li>
@@ -2062,12 +2062,21 @@ To update OSG Configure on your HTCondor-CE, perform the following steps:</p>
     delete these options from the config to get rid of the warnings.</p>
 </li>
 </ol>
-<h2 id="updating-to-htcondor-897">Updating to HTCondor 8.9.7+<a class="headerlink" href="#updating-to-htcondor-897" title="Permanent link">&para;</a></h2>
+<h2 id="updating-to-htcondor-900">Updating to HTCondor 9.0.0+<a class="headerlink" href="#updating-to-htcondor-900" title="Permanent link">&para;</a></h2>
 <div class="admonition tip">
-<p class="admonition-title">Where to find HTCondor 8.9</p>
-<p>The HTCondor <a href="https://htcondor.readthedocs.io/en/latest/version-history/introduction-version-history.html#the-development-release-series">development series</a>
+<p class="admonition-title">Where to find HTCondor 9.0</p>
+<p>The HTCondor <a href="https://htcondor.readthedocs.io/en/v9_0/version-history/stable-release-series-90.html#stable-release-series-9-0">9.0 series</a>
 is available through the <a href="../release_series/">OSG upcoming</a> repository.</p>
 </div>
+<ol>
+<li>
+<p>Manual intervention may be required to upgrade from the HTCondor 8.8 series to HTCondor 9.0.x.
+    Please consult the <a href="https://htcondor.readthedocs.io/en/v9_0/version-history/upgrading-from-88-to-90-series.html">HTCondor 9.0 upgrade instructions</a>.</p>
+</li>
+<li>
+<p>If you are upgrading from the HTCondor 8.9 series (8.9.11 and earlier), please consult the <a href="https://htcondor-wiki.cs.wisc.edu/index.cgi/wiki?p=UpgradingToNineDotZero">Upgrading to 9.0 instructions</a></p>
+</li>
+</ol>
 <p>For HTCondor hosts &lt; 8.9.7 using the SciTokens CredMon, updates to HTCondor 8.9.7+ require manual intervention and a
 corresponding update to <code>python2-scitokens-credmon</code>, available in the OSG 3.5 release repository.
 If you do not have the <code>python2-scitokens-credmon</code> package installed, you may skip these instructions.
