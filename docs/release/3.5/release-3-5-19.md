@@ -20,7 +20,7 @@ Summary of Changes
 ------------------
 
 !!! note
-    If using scitokens-credmon with HTCondor 8.9, [manual adjustments](../updating-to-osg-35.md#updating-to-htcondor-897) need to be made before upgrading.
+    If using scitokens-credmon with HTCondor 8.9, [manual adjustments](../updating-to-osg-35.md#updating-to-htcondor-900) need to be made before upgrading.
 
 This release contains:
 
