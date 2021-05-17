@@ -23,8 +23,21 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.
 Latest News
 -----------
 
-!!! bug "Known Issues"
-    HTCondor-CE job routing to non-HTCondor batch systems fails due to an issue with `blahp-1.18.48-2.4.osg36`
+### **May 17, 2021:** High Priority Release
+
+This release of OSG 3.6 contains the following packages:
+
+-   [HTCondor 9.0.0-1.5](https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00006.shtml): Major new release with enhanced security
+-   [Blahp 2.0.2](https://github.com/htcondor/BLAH/releases): GPU Support, Converted to Python 3
+-   [HTCondor-CE 5.1.0](https://htcondor.github.io/htcondor-ce/v5/releases/#510)
+    -   Support for Job Router Transform configuration syntax
+    -   Credential mapping changes
+    -   Converted to Python 3
+-   osg-scitokens-mapfile 3: Updated to support HTCondor-CE 5.1.0
+-   osg-ce: now requires osg-scitokens-mapfile
+-   vault 1.7.1: Update to latest upstream release
+-   htvault-config 1.1: Uses yaml configuration files
+-   htgettoken 1.2: improved error message handling and bug fixes
 
 ### **May 13, 2021:** High Priority Release
 
