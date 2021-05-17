@@ -201,13 +201,9 @@ Updating Your HTCondor Hosts
     If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
     install or remain on the [OSG 3.5 release series](notes.md)
 
-1.  The `ALLOW_DAEMON` permission no longer inherits from `ALLOW_WRITE`.
-    To revert to the old behavior you can add ``ALLOW_DAEMON = ALLOW_WRITE``.
-    However this is not recommended, since re-enabling this configuration means anyone that can submit jobs can also
-    manipulate your HTCondor daemons.
-
 1.  The following OSG specific configuration was dropped in anticipation of HTCondor's new secure by default
-    configuration coming in HTCondor version 9.0.
+    configuration coming in HTCondor version 9.0. HTCondor's 9.0 recommended security configuration requires
+    authentication for all access (including read access).
 
         CONDOR_HOST = $(FULL_HOSTNAME)
         DAEMON_LIST = COLLECTOR, MASTER, NEGOTIATOR, SCHEDD, STARTD
@@ -240,8 +236,10 @@ Updating Your HTCondor Hosts
         # any authenticated daemons in the pool can read/write/advertise
         ALLOW_DAEMON = condor@* condor_pool@*
 
-For more information about the HTCondor 8.9 series, consult the
-    [upstream version history](https://htcondor.readthedocs.io/en/latest/version-history/development-release-series-89.html).
+1.  Manual intervention may be required to upgrade from the HTCondor 8.8 series to HTCondor 9.0.x.
+    Please consult the [HTCondor 9.0 upgrade instructions](https://htcondor.readthedocs.io/en/v9_0/version-history/upgrading-from-88-to-90-series.html).
+
+1.  If you are upgrading from the HTCondor 8.9 series (8.9.11 and earlier), please consult the [Upgrading to 9.0 instructions](https://htcondor-wiki.cs.wisc.edu/index.cgi/wiki?p=UpgradingToNineDotZero)
 
 Getting Help
 ------------
