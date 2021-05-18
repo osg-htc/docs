@@ -23,6 +23,12 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.
 Latest News
 -----------
 
+!!! "Known Issues"
+    - HTCondor-CE job routing to non-HTCondor batch systems fails due to an issue with `blahp-2.0.2-1.1.osg36`
+    - HTCondor-CE 5.1.0: batch system max walltime requests are always set to 3 days.
+      Details and workaround can be found in the
+      [upstream bug tracker](https://opensciencegrid.atlassian.net/browse/HTCONDOR-506).
+
 ### **May 17, 2021:** HTCondor-CE 5.1.0 and HTCondor 9.0.0
 
 This release of OSG 3.6 contains the following packages:
