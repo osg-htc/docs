@@ -520,54 +520,6 @@
   </li>
 
         
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../compute-element/job-router-recipes/" class="md-nav__link">
-      Job Router Recipes
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../compute-element/troubleshoot-htcondor-ce/" class="md-nav__link">
-      Troubleshooting HTCondor-CE
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../compute-element/submit-htcondor-ce/" class="md-nav__link">
-      Submitting to HTCondor-CE
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../compute-element/covid-19/" class="md-nav__link">
-      Supporting COVID-19 Research
-    </a>
-  </li>
-
-        
       </ul>
     </nav>
   </li>
@@ -1917,7 +1869,7 @@ This may result in extra network activity, especially on first use of the client
 <h2 id="validating-the-worker-node-client">Validating the Worker Node Client<a class="headerlink" href="#validating-the-worker-node-client" title="Permanent link">&para;</a></h2>
 <p>To verify functionality of the worker node client, you will need to submit a test job against your CE and verify the job's output.</p>
 <ol>
-<li>Submit a job that executes the <code>env</code> command (e.g. Run <a href="../../compute-element/troubleshoot-htcondor-ce/#condor_ce_trace">condor_ce_trace</a> with the <code>-d</code> flag from your HTCondor CE)</li>
+<li>Submit a job that executes the <code>env</code> command (e.g. Run <a href="https://htcondor.github.io/htcondor-ce/v5/troubleshooting/debugging-tools/#condor_ce_trace">condor_ce_trace</a> with the <code>-d</code> flag from your HTCondor CE)</li>
 <li>Verify that the value of <code>OSG_GRID</code> is set to the directory of your WN Client installation</li>
 </ol>
 <h3 id="manually-using-the-worker-node-client-from-oasis">Manually Using the Worker Node Client From OASIS<a class="headerlink" href="#manually-using-the-worker-node-client-from-oasis" title="Permanent link">&para;</a></h3>
