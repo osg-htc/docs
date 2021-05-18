@@ -40,11 +40,11 @@ In other words, you do not need a whole HTCondor batch system just to have a loc
 
 System Requirements
 -------------------
-The hardware requirement for an OSG access point depends on several factors such as number of users, 
-number of jobs and for example how I/O intensive those jobs are. Our minimum recommended configuration
-is 6 cores, 12 GB RAM and 1 TB of local disk. The hardware can be bare metal or virtual machine, but
-we do not recommend containers as these submit host are running a bunch of system services which can
-be difficult to configure in a container.
+The hardware requirement for an OSG access point depends on several factors such as number of users,
+number of jobs and for example how I/O intensity of those jobs.
+Our minimum recommended configuration is 6 cores, 12 GB RAM and 1 TB of local disk.
+The hardware can be bare metal or virtual machine, but we do not recommend containers as these submit host are running
+many system services which can be difficult to configure in a container.
 
 Also consider the following configuration requirements:
 
