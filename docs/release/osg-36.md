@@ -24,6 +24,7 @@ Latest News
 -----------
 
 !!! "Known Issues"
+    - HTCondor-CE job routing to non-HTCondor batch systems fails due to an issue with `blahp-2.0.2-1.1.osg36`
     - HTCondor-CE 5.1.0: batch system max walltime requests are always set to 3 days.
       Details and workaround can be found in the
       [upstream bug tracker](https://opensciencegrid.atlassian.net/browse/HTCONDOR-506).
