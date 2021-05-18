@@ -131,9 +131,8 @@ we provide a recommended configuration for flocking.
 
 Configuring Authentication
 --------------------------
-Create a file named `/etc/condor/tokens.d/flock.opensciencegrid.org` with the IDTOKEN you
-received earlier. The token you only take up one line (that is, there should not be any
-line breaks in the token).
+Create a file named `/etc/condor/tokens.d/flock.opensciencegrid.org` with the IDTOKEN you received earlier.
+Ensure that there aren't any line breaks in this file (i.e., the entire token should only take up one line).
 
 Change the ownership to `condor:condor` and the permissions to `0600`. Verify this with
 `ls -l /etc/condor/tokens.d/flock.opensciencegrid.org`:
