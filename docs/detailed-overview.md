@@ -50,7 +50,7 @@ The general steps to installing an OSG site are:
     For sites with more than a handful of worker nodes, it is recommended to use some sort of configuration management
     tool to install, configure, and maintain your site.
     While beyond the scope of OSG’s documentation to explain how to select and use such a system, some popular
-    configuration management tools are [Puppet](http://puppetlabs.com), [Chef](https://www.chef.io),
+    configuration management tools are [Puppet](https://puppet.com/), [Chef](https://www.chef.io),
     [Ansible](https://www.ansible.com), and [CFEngine](http://cfengine.com).
 
 ### General Installation Instructions ###

@@ -2,6 +2,9 @@
 Supporting COVID-19 Research on the OSG
 =======================================
 
+!!! info
+    The instructions in this document are deprecated, as COVID-19 jobs are no longer prioritized.
+
 There a few options available for sites with computing resources who want to support the
 important and urgent work of COVID-19 researchers using the OSG. As we're
 currently routing such projects through the OSG VO, your site can be configured
@@ -209,7 +212,8 @@ To verify that your HTCondor-CE is configured to support COVID-19 jobs, perform 
         all other routes must contain `(TARGET.IsCOVID19 =!= true)` in their `Requirements` expression.
         
 1.  After [requesting COVID-19 jobs](#requesting-covid-19-jobs), verify that jobs are being routed appropriately,
-    [by examining pilots](troubleshoot-htcondor-ce.md#condor_ce_router_q) with `condor_ce_router_q`.
+    [by examining pilots](https://htcondor.github.io/htcondor-ce/v5/troubleshooting/debugging-tools/#condor_ce_q) with
+    `condor_ce_router_q`.
 
 Requesting COVID-19 Jobs
 ------------------------
