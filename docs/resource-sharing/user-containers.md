@@ -45,7 +45,7 @@ export GLIDEIN_ResourceName="Comet"
 export GLIDEIN_Start_Extra="Owner == \"my_osgconnect_username\""
 
 module load singularity
-singularity run --contain --bind /cvmfs docker://opensciencegrid/osgvo-docker-pilot
+singularity run --contain --bind /cvmfs --scratch /pilot docker://opensciencegrid/osgvo-docker-pilot
 
 ```
 
@@ -60,7 +60,7 @@ $ singularity build osgvo-pilot.sif docker://opensciencegrid/osgvo-docker-pilot
 In this case, the `singularity run` command should be changed to:
 
 ```
-singularity run --contain --bind /cvmfs osgvo-pilot.sif
+singularity run --contain --bind /cvmfs --scratch /pilot osgvo-pilot.sif
 ```
 
 Note, unlike the [site-launched container](os-backfill-containers.md), the Singularity container above
