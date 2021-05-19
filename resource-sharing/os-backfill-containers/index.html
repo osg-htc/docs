@@ -1791,8 +1791,8 @@ number of environment variables to be set in order to function appropriately:</p
    respectively.</li>
 <li>Set the <code>OSG_SQUID_LOCATION</code> environment variable to the HTTP address of your preferred squid instance.</li>
 <li><em>Optional:</em>  Some sites prefer that job I/O is done in a specific temporary directory instead of inside the container.
-   To do this, map the appropriate directory on the host to <code>/tmp</code> inside containers.
-   If you are using Docker to launch the container, this is done with the command line flag <code>-v /somelocaldir:/tmp</code>.</li>
+   To do this, map the appropriate directory on the host to <code>/pilot</code> inside containers.
+   If you are using Docker to launch the container, this is done with the command line flag <code>-v /somelocaldir:/pilot</code>.</li>
 <li><em>Optional:</em> add an expression with the <code>GLIDEIN_Start_Extra</code> environment variable to append to the HTCondor <code>START</code>
    expression; this limits the pilot to only run certain jobs.</li>
 </ol>
