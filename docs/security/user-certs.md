@@ -22,7 +22,7 @@ including activities such as:
 - Obtaining private contact information from OSG systems
 
 Currently, you can get a user certificate from CILogon.
-You may also be able to user other CAs to get a certificate; if your virtual organization (VO) requires that you get a
+You may also be able to use other CAs to get a certificate; if your virtual organization (VO) requires that you get a
 certificate from a different CA, [contact your VO Support Center](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations) for
 instructions.
 
