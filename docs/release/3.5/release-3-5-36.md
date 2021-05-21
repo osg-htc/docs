@@ -27,7 +27,10 @@ This release contains:
 -   vault 1.7.1: Update to latest upstream release
 -   htvault-config 1.1: Uses yaml configuration files
 -   htgettoken 1.2: improved error message handling and bug fixes
--   Upcoming: [GlideinWMS 3.7.3](https://glideinwms.fnal.gov/doc.v3_7_3/history.html#development)
+-   Upcoming
+    -   [HTCondor-CE 5.1.0](https://github.com/htcondor/htcondor-ce/releases/tag/v5.1.0)
+        -   Please consult the [upgrade documentation](https://htcondor.github.io/htcondor-ce/v5/releases/#updating-to-htcondor-ce-5)
+    -   [GlideinWMS 3.7.3](https://glideinwms.fnal.gov/doc.v3_7_3/history.html#development)
 
 !!! bug "Known Issue"
     - GlideinWMS 3.7.3: submissions from 3.6.5 frontends to 3.7.3 factory go on hold

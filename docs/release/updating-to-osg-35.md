@@ -141,7 +141,7 @@ To update OSG Configure on your HTCondor-CE, perform the following steps:
 
 1.  Set `resource_group` in `/etc/osg/config.d/40-siteinfo.ini` to the resource group registered in
     [OSG Topology](../common/registration.md#registering-resources),
-    i.e. the name of the `.yaml` file in OSG Topology that contains the registered resouce above.
+    i.e. the name of the `.yaml` file in OSG Topology that contains the registered resource above.
 
 1.  Set `host_name` to the host name that is registered in [OSG Topology](../common/registration.md#registering-resources).
     This may be different from the FQDN of the host if you're using a DNS alias, for example.
@@ -158,24 +158,7 @@ Updating to HTCondor-CE 5
     version upgrade from HTCondor-CE 4,
     is available through the [OSG upcoming](release_series.md) repository.
 
-To update HTCondor-CE, perform the following steps:
-
-1.  Merge any `*.rpmnew` files in `/etc/condor-ce/`
-
-1.  HTCondor-CE <= 4 set `$HOME` in the routed job to the user's `$HOME` directory on the HTCondor-CE but this is no
-    longer the default.
-    If you want to ensure that a routed job's `$HOME` is set to the same directory as the user on the CE,
-    set `USE_CE_HOME_DIR = True` in `/etc/condor-ce/config.d/`.
-
-!!! note "For OSG CEs serving an HTCondor pool"
-    If your OSG CE routes pilot jobs to a local HTCondor pool, also
-    see the section for [updating your HTCondor hosts](#updating-to-htcondor-900)
-
-After updating your RPMs and updating your configuration, turn on the HTCondor-CE service:
-
-```console
-root@host # systemctl start condor-ce
-```
+To update HTCondor-CE 5, consult the [upgrade documentation](https://htcondor.github.io/htcondor-ce/v5/releases/#updating-to-htcondor-ce-5)
 
 Updating to HTCondor 8.8.x
 --------------------------
@@ -197,7 +180,7 @@ To update HTCondor on your HTCondor-CE and/or HTCondor pool hosts, perform the f
       Additionally in OSG 3.5, the default security was changed to use FS and pool password.
       If you are experiencing issues with communication between hosts in your pool after the upgrade,
       the default OSG configuration is listed in `/etc/condor/config.d/00-osg_default_*.config`:
-      ensure that any default configuration is overriden with your own `DAEMON_LIST`, `CONDOR_HOST`, and/or
+      ensure that any default configuration is overridden with your own `DAEMON_LIST`, `CONDOR_HOST`, and/or
       [security](https://htcondor.readthedocs.io/en/v8_8/admin-manual/security.html) configuration in subsequent files.
 
     - As of HTCondor 8.8, [MOUNT\_UNDER\_SCRATCH](https://htcondor.readthedocs.io/en/v8_8/admin-manual/configuration-macros.html#condor-startd-configuration-file-macros)
