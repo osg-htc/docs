@@ -141,13 +141,66 @@ To update OSG Configure on your HTCondor-CE, perform the following steps:
 
 1.  Set `resource_group` in `/etc/osg/config.d/40-siteinfo.ini` to the resource group registered in
     [OSG Topology](../common/registration.md#registering-resources),
-    i.e. the name of the `.yaml` file in OSG Topology that contains the registered resouce above.
+    i.e. the name of the `.yaml` file in OSG Topology that contains the registered resource above.
 
 1.  Set `host_name` to the host name that is registered in [OSG Topology](../common/registration.md#registering-resources).
     This may be different from the FQDN of the host if you're using a DNS alias, for example.
 
 1.  OSG Configure will warn about config options that it does not recognize;
     delete these options from the config to get rid of the warnings.
+
+Updating to HTCondor-CE 5
+-------------------------
+
+!!!tip "Where to find HTCondor-CE 5"
+
+    [HTCondor-CE 5](https://htcondor.github.io/htcondor-ce/v5/releases/), a major
+    version upgrade from HTCondor-CE 4,
+    is available through the [OSG upcoming](release_series.md) repository.
+
+To update HTCondor-CE 5, consult the [upgrade documentation](https://htcondor.github.io/htcondor-ce/v5/releases/#updating-to-htcondor-ce-5)
+
+Updating to HTCondor 8.8.x
+--------------------------
+
+The OSG 3.5 release series contains HTCondor 8.8, a major version upgrade from the previously released versions
+in the OSG.
+See the HTCondor 8.8 manual for an overview of the
+[changes](https://htcondor.readthedocs.io/en/v8_8/version-history/upgrading-from-86-to-88-series.html).
+To update HTCondor on your HTCondor-CE and/or HTCondor pool hosts, perform the following steps:
+
+1. Update all HTCondor packages:
+
+        :::console
+        root@host # yum update 'condor*'
+
+1. **HTCondor pools only:**
+
+    - The `DAEMON_LIST`, and `CONDOR_HOST` configuration changed in HTCondor 8.8.
+      Additionally in OSG 3.5, the default security was changed to use FS and pool password.
+      If you are experiencing issues with communication between hosts in your pool after the upgrade,
+      the default OSG configuration is listed in `/etc/condor/config.d/00-osg_default_*.config`:
+      ensure that any default configuration is overridden with your own `DAEMON_LIST`, `CONDOR_HOST`, and/or
+      [security](https://htcondor.readthedocs.io/en/v8_8/admin-manual/security.html) configuration in subsequent files.
+
+    - As of HTCondor 8.8, [MOUNT\_UNDER\_SCRATCH](https://htcondor.readthedocs.io/en/v8_8/admin-manual/configuration-macros.html#condor-startd-configuration-file-macros)
+      has default values of `/tmp` and `/var/tmp`, which may cause issues if your
+      [OSG\_WN\_TMP](../worker-node/using-wn.md#the-worker-node-environment) is a subdirectory of either of these directories.
+      If the partition containing your execute directories is [large enough](../worker-node/using-wn.md#hardware-recommendations),
+      we recommend setting your `OSG_WN_TMP` to `/tmp` or `/var/tmp`.
+      If that partition is not large enough, we recommend setting your `OSG_WN_TMP` variable to a directory outside of
+      `/tmp` or `/var/tmp`.
+
+1. **HTCondor-CE hosts only:** The HTCondor 8.8 series changed the default job route matching order
+   [from round-robin to first matching route](https://htcondor.github.io/htcondor-ce/v4/batch-system-integration/#how-jobs-match-to-job-routes).
+   To use the old round-robin matching order, add the following configuration to `/etc/condor-ce/config.d/99-local.conf`:
+
+        JOB_ROUTER_ROUND_ROBIN_SELECTION = True
+
+1. Clean-up deprecated packages:
+
+        :::console
+        root@host # yum remove 'rsv*' glite-ce-cream-client-api-c
 
 Updating to HTCondor 9.0.0+
 ---------------------------
@@ -247,48 +300,6 @@ Otherwise, follow these steps for a seamless update to HTCondor 8.9.7+:
         :::console
         # rm /var/lib/condor/credentials
 
-
-Updating to HTCondor 8.8.x
---------------------------
-
-The OSG 3.5 release series contains HTCondor 8.8, a major version upgrade from the previously released versions
-in the OSG.
-See the HTCondor 8.8 manual for an overview of the
-[changes](https://htcondor.readthedocs.io/en/v8_8/version-history/upgrading-from-86-to-88-series.html).
-To update HTCondor on your HTCondor-CE and/or HTCondor pool hosts, perform the following steps:
-
-1. Update all HTCondor packages:
-
-        :::console
-        root@host # yum update 'condor*'
-
-1. **HTCondor pools only:**
-
-    - The `DAEMON_LIST`, and `CONDOR_HOST` configuration changed in HTCondor 8.8.
-      Additionally in OSG 3.5, the default security was changed to use FS and pool password.
-      If you are experiencing issues with communication between hosts in your pool after the upgrade,
-      the default OSG configuration is listed in `/etc/condor/config.d/00-osg_default_*.config`:
-      ensure that any default configuration is overriden with your own `DAEMON_LIST`, `CONDOR_HOST`, and/or
-      [security](https://htcondor.readthedocs.io/en/v8_8/admin-manual/security.html) configuration in subsequent files.
-
-    - As of HTCondor 8.8, [MOUNT\_UNDER\_SCRATCH](https://htcondor.readthedocs.io/en/v8_8/admin-manual/configuration-macros.html#condor-startd-configuration-file-macros)
-      has default values of `/tmp` and `/var/tmp`, which may cause issues if your
-      [OSG\_WN\_TMP](../worker-node/using-wn.md#the-worker-node-environment) is a subdirectory of either of these directories.
-      If the partition containing your execute directories is [large enough](../worker-node/using-wn.md#hardware-recommendations),
-      we recommend setting your `OSG_WN_TMP` to `/tmp` or `/var/tmp`.
-      If that partition is not large enough, we recommend setting your `OSG_WN_TMP` variable to a directory outside of
-      `/tmp` or `/var/tmp`.
-
-1. **HTCondor-CE hosts only:** The HTCondor 8.8 series changed the default job route matching order
-   [from round-robin to first matching route](https://htcondor.github.io/htcondor-ce/v4/batch-system-integration/#how-jobs-match-to-job-routes).
-   To use the old round-robin matching order, add the following configuration to `/etc/condor-ce/config.d/99-local.conf`:
-
-        JOB_ROUTER_ROUND_ROBIN_SELECTION = True
-
-1. Clean-up deprecated packages:
-
-        :::console
-        root@host # yum remove 'rsv*' glite-ce-cream-client-api-c
 
 Updating to XRootD 5
 --------------------
