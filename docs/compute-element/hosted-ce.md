@@ -30,8 +30,9 @@ Before preparing your cluster for OSG resource requests, consider the following 
 -   An existing compute cluster with a [supported batch system](../index.md#contributing-to-the-osg)
     running on a [supported operating system](../release/supported_platforms.md)
 -   Outbound network connectivity from the worker nodes (they can be behind NAT)
--   One or more Unix accounts on your cluster's submit server, accessible via SSH key, with permissions to submit jobs
-    to your local cluster.
+-   One or more Unix accounts on your cluster's submit server,
+    accessible via SSH key and with remote port forwarding enabled,
+    with permissions to submit jobs to your local cluster.
 -   Shared user home directories between the submit server and the worker nodes.
     Not required for HTCondor clusters:
     see [this section](#htcondor-clusters-only-installing-the-osg-worker-node-client) for more details.
