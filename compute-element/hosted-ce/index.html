@@ -1960,8 +1960,9 @@ resource requests, see <a href="../install-htcondor-ce/">this page</a> for insta
 <li>An existing compute cluster with a <a href="../..#contributing-to-the-osg">supported batch system</a>
     running on a <a href="../../release/supported_platforms/">supported operating system</a></li>
 <li>Outbound network connectivity from the worker nodes (they can be behind NAT)</li>
-<li>One or more Unix accounts on your cluster's submit server, accessible via SSH key, with permissions to submit jobs
-    to your local cluster.</li>
+<li>One or more Unix accounts on your cluster's submit server,
+    accessible via SSH key and with remote port forwarding (<code>AllowTcpForwarding</code>) enabled,
+    with permissions to submit jobs to your local cluster.</li>
 <li>Shared user home directories between the submit server and the worker nodes.
     Not required for HTCondor clusters:
     see <a href="#htcondor-clusters-only-installing-the-osg-worker-node-client">this section</a> for more details.</li>
