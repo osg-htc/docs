@@ -209,10 +209,10 @@ Updating to HTCondor 9.0.0+
     The HTCondor [9.0 series](https://htcondor.readthedocs.io/en/v9_0/version-history/stable-release-series-90.html#stable-release-series-9-0)
     is available through the [OSG upcoming](release_series.md) repository.
 
-1.  Manual intervention may be required to upgrade from the HTCondor 8.8 series to HTCondor 9.0.x.
-    Please consult the [HTCondor 9.0 upgrade instructions](https://htcondor.readthedocs.io/en/v9_0/version-history/upgrading-from-88-to-90-series.html).
+-  Manual intervention may be required to upgrade from the HTCondor 8.8 series to HTCondor 9.0.x.
+   Please consult the [HTCondor 9.0 upgrade instructions](https://htcondor.readthedocs.io/en/v9_0/version-history/upgrading-from-88-to-90-series.html).
 
-1.  If you are upgrading from the HTCondor 8.9 series (8.9.11 and earlier), please consult the [Upgrading to 9.0 instructions](https://htcondor-wiki.cs.wisc.edu/index.cgi/wiki?p=UpgradingToNineDotZero)
+-  If you are upgrading from the HTCondor 8.9 series (8.9.11 and earlier), please consult the [Upgrading to 9.0 instructions](https://htcondor-wiki.cs.wisc.edu/index.cgi/wiki?p=UpgradingToNineDotZero)
 
 For HTCondor hosts < 8.9.7 using the SciTokens CredMon, updates to HTCondor 8.9.7+ require manual intervention and a
 corresponding update to `python2-scitokens-credmon`, available in the OSG 3.5 release repository.
