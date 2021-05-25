@@ -152,13 +152,33 @@ To update OSG Configure on your HTCondor-CE, perform the following steps:
 Updating to HTCondor-CE 5
 -------------------------
 
-!!!tip "Where to find HTCondor-CE 5"
+[HTCondor-CE 5](https://htcondor.github.io/htcondor-ce/v5/releases/) is a major version upgrade from HTCondor-CE 4,
+available through the [OSG upcoming](release_series.md) repository.
+HTCondor-CE 5 provides improved support for SciTokens and WLCG Tokens as well as support for a new Job Router
+configuration syntax.
+To update HTCondor-CE 5, perform the following steps:
 
-    [HTCondor-CE 5](https://htcondor.github.io/htcondor-ce/v5/releases/), a major
-    version upgrade from HTCondor-CE 4,
-    is available through the [OSG upcoming](release_series.md) repository.
+1.  Update your HTCondor-CE packages:
 
-To update HTCondor-CE 5, consult the [upgrade documentation](https://htcondor.github.io/htcondor-ce/v5/releases/#updating-to-htcondor-ce-5)
+        :::console
+        root@host # yum update htcondor-ce --enablerepo=osg-upcoming
+
+    !!! tip "Updating to HTCondor 9.0.x"
+        This update may also pull in updates to HTCondor 9.0.
+        To update, consult the [upgrade section below](#updating-to-htcondor-900), especially if you use HTCondor for
+        your local batch system.
+
+1.  If you support the `OSG` or `GLOW` VOs, add SciTokens mappings to a file in `/etc/condor-ce/mapfiles.d/`:
+
+        # OSG
+        SCITOKENS /^https\:\/\/scitokens\.org\/osg\-connect,/ osg
+        # GLOW
+        SCITOKENS /^https\:\/\/chtc\.cs\.wisc\.edu,/ glow
+
+    Replacing `osg` and `glow` with the local Unix account for the OSG and GLOW VOs, respectively.
+
+1.  Also consult the [upgrade documentation](https://htcondor.github.io/htcondor-ce/v5/releases/#updating-to-htcondor-ce-5)
+    for other required configuration updates.
 
 Updating to HTCondor 8.8.x
 --------------------------
