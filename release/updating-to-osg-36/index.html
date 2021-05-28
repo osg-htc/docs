@@ -2100,13 +2100,18 @@ version upgrade from HTCondor-CE 4, which was available in the OSG 3.5 release r
 To update HTCondor-CE, perform the following steps:</p>
 <ol>
 <li>
-<p>Merge any <code>*.rpmnew</code> files in <code>/etc/condor-ce/</code></p>
+<p>If you support the <code>OSG</code> or <code>GLOW</code> VOs, add SciTokens mappings to a file in <code>/etc/condor-ce/mapfiles.d/</code>:</p>
+<div class="codehilite"><pre><span></span><code># OSG
+SCITOKENS /^https\:\/\/scitokens\.org\/osg\-connect,/ osg
+# GLOW
+SCITOKENS /^https\:\/\/chtc\.cs\.wisc\.edu,/ glow
+</code></pre></div>
+
+<p>Replacing <code>osg</code> and <code>glow</code> with the local Unix account for the OSG and GLOW VOs, respectively.</p>
 </li>
 <li>
-<p>HTCondor-CE &lt;= 4 set <code>$HOME</code> in the routed job to the user's <code>$HOME</code> directory on the HTCondor-CE but this is no
-    longer the default.
-    If you want to ensure that a routed job's <code>$HOME</code> is set to the same directory as the user on the CE,
-    set <code>USE_CE_HOME_DIR = True</code> in <code>/etc/condor-ce/config.d/</code>.</p>
+<p>Also consult the <a href="https://htcondor.github.io/htcondor-ce/v5/releases/#updating-to-htcondor-ce-5">upgrade documentation</a>
+    for other required configuration updates.</p>
 </li>
 </ol>
 <div class="admonition note">

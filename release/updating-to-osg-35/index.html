@@ -2029,13 +2029,39 @@ To update OSG Configure on your HTCondor-CE, perform the following steps:</p>
 </li>
 </ol>
 <h2 id="updating-to-htcondor-ce-5">Updating to HTCondor-CE 5<a class="headerlink" href="#updating-to-htcondor-ce-5" title="Permanent link">&para;</a></h2>
+<p><a href="https://htcondor.github.io/htcondor-ce/v5/releases/">HTCondor-CE 5</a> is a major version upgrade from HTCondor-CE 4,
+available through the <a href="../release_series/">OSG upcoming</a> repository.
+HTCondor-CE 5 provides improved support for SciTokens and WLCG Tokens as well as support for a new Job Router
+configuration syntax.
+To update HTCondor-CE 5, perform the following steps:</p>
+<ol>
+<li>
+<p>Update your HTCondor-CE packages:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host #</span> yum update htcondor-ce --enablerepo<span class="o">=</span>osg-upcoming
+</code></pre></div>
+
 <div class="admonition tip">
-<p class="admonition-title">Where to find HTCondor-CE 5</p>
-<p><a href="https://htcondor.github.io/htcondor-ce/v5/releases/">HTCondor-CE 5</a>, a major
-version upgrade from HTCondor-CE 4,
-is available through the <a href="../release_series/">OSG upcoming</a> repository.</p>
+<p class="admonition-title">Updating to HTCondor 9.0.x</p>
+<p>This update may also pull in updates to HTCondor 9.0.
+To update, consult the <a href="#updating-to-htcondor-900">upgrade section below</a>, especially if you use HTCondor for
+your local batch system.</p>
 </div>
-<p>To update HTCondor-CE 5, consult the <a href="https://htcondor.github.io/htcondor-ce/v5/releases/#updating-to-htcondor-ce-5">upgrade documentation</a></p>
+</li>
+<li>
+<p>If you support the <code>OSG</code> or <code>GLOW</code> VOs, add SciTokens mappings to a file in <code>/etc/condor-ce/mapfiles.d/</code>:</p>
+<div class="codehilite"><pre><span></span><code># OSG
+SCITOKENS /^https\:\/\/scitokens\.org\/osg\-connect,/ osg
+# GLOW
+SCITOKENS /^https\:\/\/chtc\.cs\.wisc\.edu,/ glow
+</code></pre></div>
+
+<p>Replacing <code>osg</code> and <code>glow</code> with the local Unix account for the OSG and GLOW VOs, respectively.</p>
+</li>
+<li>
+<p>Also consult the <a href="https://htcondor.github.io/htcondor-ce/v5/releases/#updating-to-htcondor-ce-5">upgrade documentation</a>
+    for other required configuration updates.</p>
+</li>
+</ol>
 <h2 id="updating-to-htcondor-88x_1">Updating to HTCondor 8.8.x<a class="headerlink" href="#updating-to-htcondor-88x_1" title="Permanent link">&para;</a></h2>
 <p>The OSG 3.5 release series contains HTCondor 8.8, a major version upgrade from the previously released versions
 in the OSG.
