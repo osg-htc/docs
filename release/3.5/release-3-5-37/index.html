@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://opensciencegrid.org/docs/release/3.5/release-3-5-36/">
+        <link rel="canonical" href="https://opensciencegrid.org/docs/release/3.5/release-3-5-37/">
       
       
       <link rel="shortcut icon" href="../../../img/favicon.ico">
@@ -16,7 +16,7 @@
     
     
       
-        <title>Release 3 5 36 - OSG Site Documentation</title>
+        <title>Release 3 5 37 - OSG Site Documentation</title>
       
     
     
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#osg-software-release-3536" class="md-skip">
+        <a href="#osg-software-release-3537" class="md-skip">
           Skip to content
         </a>
       
@@ -95,7 +95,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Release 3 5 36
+              Release 3 5 37
             
           </span>
         </div>
@@ -1783,13 +1783,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#enterprise-linux-8_2" class="md-nav__link">
-    Enterprise Linux 8
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1806,13 +1799,6 @@
           <li class="md-nav__item">
   <a href="#enterprise-linux-7_3" class="md-nav__link">
     Enterprise Linux 7
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#enterprise-linux-8_3" class="md-nav__link">
-    Enterprise Linux 8
   </a>
   
 </li>
@@ -1839,12 +1825,12 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/release/3.5/release-3-5-36.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/release/3.5/release-3-5-37.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="osg-software-release-3536">OSG Software Release 3.5.36<a class="headerlink" href="#osg-software-release-3536" title="Permanent link">&para;</a></h1>
+                <h1 id="osg-software-release-3537">OSG Software Release 3.5.37<a class="headerlink" href="#osg-software-release-3537" title="Permanent link">&para;</a></h1>
 <p><strong>Release Date:</strong> 2021-05-17<br />
 <strong>Supported OS Versions:</strong> EL7, EL8</p>
 <div class="admonition tip">
@@ -1864,39 +1850,33 @@ enabled=1
 <h2 id="summary-of-changes">Summary of Changes<a class="headerlink" href="#summary-of-changes" title="Permanent link">&para;</a></h2>
 <p>This release contains:</p>
 <ul>
-<li><a href="https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00003.shtml">HTCondor 8.8.13</a>: Bug fix release</li>
-<li>osg-scitokens-mapfile 3: Updated to support HTCondor-CE 5.1.0</li>
-<li>osg-ce: now requires osg-scitokens-mapfile</li>
-<li>vault 1.7.1: Update to latest upstream release</li>
-<li>htvault-config 1.1: Uses yaml configuration files</li>
-<li>htgettoken 1.2: improved error message handling and bug fixes</li>
-<li>Upcoming<ul>
-<li><a href="https://htcondor.github.io/htcondor-ce/v5/releases/#510">HTCondor-CE 5.1.0</a><ul>
-<li>Support for Job Router Transform configuration syntax</li>
-<li>Credential mapping changes</li>
-<li>Converted to Python 3</li>
-<li>Please consult the <a href="https://htcondor.github.io/htcondor-ce/v5/releases/#updating-to-htcondor-ce-5">upgrade documentation</a></li>
+<li><a href="https://htcondor.github.io/htcondor-ce/v4/installation/htcondor-ce/">HTCondor-CE 4.5.2</a>: Upgrade from version 4.4.1<ul>
+<li><a href="https://github.com/htcondor/htcondor-ce/releases/tag/v4.5.0">HTCondor-CE 4.5.0 Version History</a>: New feature release</li>
+<li><a href="https://github.com/htcondor/htcondor-ce/releases/tag/v4.5.1">HTCondor-CE 4.5.1 Version History</a>: Bug fix release</li>
+<li><a href="https://github.com/htcondor/htcondor-ce/releases/tag/v4.5.2">HTCondor-CE 4.5.2 Version History</a>: Bug fix release</li>
 </ul>
 </li>
-<li><a href="https://glideinwms.fnal.gov/doc.v3_7_3/history.html#development">GlideinWMS 3.7.3</a></li>
+<li>gratia-probe 1.23.3: Fix problem that could cause pilot hours to be zero for non-HTCondor batch systems</li>
+<li><a href="https://github.com/hashicorp/vault/releases/tag/v1.7.2">vault 1.7.2</a>: Security update; fixes CVE-2021-32923. (OSG configuration not vulnerable)</li>
+<li>osg-gridftp for Enterprise Linux 8</li>
+<li>Upcoming<ul>
+<li><a href="https://glideinwms.fnal.gov/doc.v3_7_4/history.html#development">GlideinWMS 3.7.4</a>: Fixed compatibility issue between 3.7 factories and 3.6.5 frontends</li>
 </ul>
 </li>
 </ul>
 <div class="admonition bug">
 <p class="admonition-title">Known Issue</p>
 <ul>
-<li>GlideinWMS 3.7.3: submissions from 3.6.5 frontends to 3.7.3 factory go on hold</li>
 <li>HTCondor-CE 5.1.0: batch system max walltime requests are always set to 3 days.
   Details and workaround can be found in the
   <a href="https://opensciencegrid.atlassian.net/browse/HTCONDOR-506">upstream bug tracker</a>.</li>
 </ul>
 </div>
 <p>These
-<a href="https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.36%2C3.5.36-upcoming)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC">JIRA tickets</a>
+<a href="https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.37%2C3.5.37-upcoming)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC">JIRA tickets</a>
 were addressed in this release.</p>
 <h2 id="containers">Containers<a class="headerlink" href="#containers" title="Permanent link">&para;</a></h2>
 <p>The <a href="https://hub.docker.com/u/opensciencegrid/">OSG Docker images</a> have been updated to contain the latest CA certificates.</p>
-<p>The <a href="https://hub.docker.com/r/opensciencegrid/frontier-squid">OSG Frontier Squid image</a> contains the security fixes.</p>
 <h2 id="updating-to-the-new-release">Updating to the New Release<a class="headerlink" href="#updating-to-the-new-release" title="Permanent link">&para;</a></h2>
 <p>To update to the OSG 3.5 series, please consult the page on
 <a href="../../updating-to-osg-35/">updating between release series</a>.</p>
@@ -1915,97 +1895,111 @@ Note that in some cases, there are multiple RPMs for each package.
 You can click on any given package to see the set of RPMs or see the complete list <a href="#rpms">below</a>.</p>
 <h4 id="enterprise-linux-7">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7" title="Permanent link">&para;</a></h4>
 <ul>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=blahp-1.18.48-2.2.osg35.el7">blahp-1.18.48-2.2.osg35.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=condor-8.8.13-1.osg35.el7">condor-8.8.13-1.osg35.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=htgettoken-1.2-1.osg35.el7">htgettoken-1.2-1.osg35.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=htvault-config-1.1-1.osg35.el7">htvault-config-1.1-1.osg35.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-ce-3.5-7.osg35.el7">osg-ce-3.5-7.osg35.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-scitokens-mapfile-3-1.osg35.el7">osg-scitokens-mapfile-3-1.osg35.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=vault-1.7.1-1.osg35.el7">vault-1.7.1-1.osg35.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=globus-gridftp-server-13.20-1.3.osg35.el7">globus-gridftp-server-13.20-1.3.osg35.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=gratia-probe-1.23.3-1.osg35.el7">gratia-probe-1.23.3-1.osg35.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=htcondor-ce-4.5.2-1.osg35.el7">htcondor-ce-4.5.2-1.osg35.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=vault-1.7.2-1.osg35.el7">vault-1.7.2-1.osg35.el7</a></li>
 </ul>
 <h4 id="enterprise-linux-8">Enterprise Linux 8<a class="headerlink" href="#enterprise-linux-8" title="Permanent link">&para;</a></h4>
 <ul>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=blahp-1.18.48-2.2.osg35.el8">blahp-1.18.48-2.2.osg35.el8</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=condor-8.8.13-1.osg35.el8">condor-8.8.13-1.osg35.el8</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=htgettoken-1.2-1.osg35.el8">htgettoken-1.2-1.osg35.el8</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=htvault-config-1.1-1.osg35.el8">htvault-config-1.1-1.osg35.el8</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-ce-3.5-7.osg35.el8">osg-ce-3.5-7.osg35.el8</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-scitokens-mapfile-3-1.osg35.el8">osg-scitokens-mapfile-3-1.osg35.el8</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=vault-1.7.1-1.osg35.el8">vault-1.7.1-1.osg35.el8</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=globus-gridftp-osg-extensions-0.4-1.osg35.el8">globus-gridftp-osg-extensions-0.4-1.osg35.el8</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=globus-gridftp-server-13.20-1.3.osg35.el8">globus-gridftp-server-13.20-1.3.osg35.el8</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=gratia-probe-1.23.3-1.osg35.el8">gratia-probe-1.23.3-1.osg35.el8</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=gridftp-dsi-posix-1.4-3.osg35.el8">gridftp-dsi-posix-1.4-3.osg35.el8</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=lcas-lcmaps-gt4-interface-0.3.1-1.3.osg35.el8">lcas-lcmaps-gt4-interface-0.3.1-1.3.osg35.el8</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-gridftp-3.5-4.osg35.el8">osg-gridftp-3.5-4.osg35.el8</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=vault-1.7.2-1.osg35.el8">vault-1.7.2-1.osg35.el8</a></li>
 </ul>
 <h3 id="rpms">RPMs<a class="headerlink" href="#rpms" title="Permanent link">&para;</a></h3>
 <p>If you wish to manually update your system, you can run yum update against the following packages:</p>
-<div class="codehilite"><pre><span></span><code>blahp blahp-debuginfo condor condor-all condor-annex-ec2 condor-bosco condor-classads condor-classads-devel condor-debuginfo condor-kbdd condor-procd condor-test condor-vm-gahp htgettoken htvault-config minicondor osg-ce osg-ce-bosco osg-ce-condor osg-ce-lsf osg-ce-pbs osg-ce-sge osg-ce-slurm osg-scitokens-mapfile python2-condor python3-condor vault
+<div class="codehilite"><pre><span></span><code>globus-gridftp-server globus-gridftp-server-debuginfo globus-gridftp-server-devel globus-gridftp-server-progs gratia-probe gratia-probe-common gratia-probe-condor gratia-probe-condor-events gratia-probe-dcache-storage gratia-probe-dcache-storagegroup gratia-probe-dcache-transfer gratia-probe-enstore-storage gratia-probe-enstore-tapedrive gratia-probe-enstore-transfer gratia-probe-glideinwms gratia-probe-gridftp-transfer gratia-probe-hadoop-storage gratia-probe-htcondor-ce gratia-probe-lsf gratia-probe-metric gratia-probe-onevm gratia-probe-osg-pilot-container gratia-probe-pbs-lsf gratia-probe-services gratia-probe-sge gratia-probe-slurm gratia-probe-xrootd-storage gratia-probe-xrootd-transfer htcondor-ce htcondor-ce-bosco htcondor-ce-client htcondor-ce-collector htcondor-ce-condor htcondor-ce-lsf htcondor-ce-pbs htcondor-ce-sge htcondor-ce-slurm htcondor-ce-view vault
 </code></pre></div>
 
 <p>If you wish to only update the RPMs that changed, the set of RPMs is:</p>
 <h4 id="enterprise-linux-7_1">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code>blahp-1.18.48-2.2.osg35.el7
-blahp-debuginfo-1.18.48-2.2.osg35.el7
-condor-8.8.13-1.osg35.el7
-condor-all-8.8.13-1.osg35.el7
-condor-annex-ec2-8.8.13-1.osg35.el7
-condor-bosco-8.8.13-1.osg35.el7
-condor-classads-8.8.13-1.osg35.el7
-condor-classads-devel-8.8.13-1.osg35.el7
-condor-debuginfo-8.8.13-1.osg35.el7
-condor-kbdd-8.8.13-1.osg35.el7
-condor-procd-8.8.13-1.osg35.el7
-condor-test-8.8.13-1.osg35.el7
-condor-vm-gahp-8.8.13-1.osg35.el7
-htgettoken-1.2-1.osg35.el7
-htvault-config-1.1-1.osg35.el7
-minicondor-8.8.13-1.osg35.el7
-osg-ce-3.5-7.osg35.el7
-osg-ce-bosco-3.5-7.osg35.el7
-osg-ce-condor-3.5-7.osg35.el7
-osg-ce-lsf-3.5-7.osg35.el7
-osg-ce-pbs-3.5-7.osg35.el7
-osg-ce-sge-3.5-7.osg35.el7
-osg-ce-slurm-3.5-7.osg35.el7
-osg-scitokens-mapfile-3-1.osg35.el7
-python2-condor-8.8.13-1.osg35.el7
-python3-condor-8.8.13-1.osg35.el7
-vault-1.7.1-1.osg35.el7
+<div class="codehilite"><pre><span></span><code>globus-gridftp-server-13.20-1.3.osg35.el7
+globus-gridftp-server-debuginfo-13.20-1.3.osg35.el7
+globus-gridftp-server-devel-13.20-1.3.osg35.el7
+globus-gridftp-server-progs-13.20-1.3.osg35.el7
+gratia-probe-1.23.3-1.osg35.el7
+gratia-probe-common-1.23.3-1.osg35.el7
+gratia-probe-condor-1.23.3-1.osg35.el7
+gratia-probe-condor-events-1.23.3-1.osg35.el7
+gratia-probe-dcache-storage-1.23.3-1.osg35.el7
+gratia-probe-dcache-storagegroup-1.23.3-1.osg35.el7
+gratia-probe-dcache-transfer-1.23.3-1.osg35.el7
+gratia-probe-enstore-storage-1.23.3-1.osg35.el7
+gratia-probe-enstore-tapedrive-1.23.3-1.osg35.el7
+gratia-probe-enstore-transfer-1.23.3-1.osg35.el7
+gratia-probe-glideinwms-1.23.3-1.osg35.el7
+gratia-probe-gridftp-transfer-1.23.3-1.osg35.el7
+gratia-probe-hadoop-storage-1.23.3-1.osg35.el7
+gratia-probe-htcondor-ce-1.23.3-1.osg35.el7
+gratia-probe-lsf-1.23.3-1.osg35.el7
+gratia-probe-metric-1.23.3-1.osg35.el7
+gratia-probe-onevm-1.23.3-1.osg35.el7
+gratia-probe-osg-pilot-container-1.23.3-1.osg35.el7
+gratia-probe-pbs-lsf-1.23.3-1.osg35.el7
+gratia-probe-services-1.23.3-1.osg35.el7
+gratia-probe-sge-1.23.3-1.osg35.el7
+gratia-probe-slurm-1.23.3-1.osg35.el7
+gratia-probe-xrootd-storage-1.23.3-1.osg35.el7
+gratia-probe-xrootd-transfer-1.23.3-1.osg35.el7
+htcondor-ce-4.5.2-1.osg35.el7
+htcondor-ce-bosco-4.5.2-1.osg35.el7
+htcondor-ce-client-4.5.2-1.osg35.el7
+htcondor-ce-collector-4.5.2-1.osg35.el7
+htcondor-ce-condor-4.5.2-1.osg35.el7
+htcondor-ce-lsf-4.5.2-1.osg35.el7
+htcondor-ce-pbs-4.5.2-1.osg35.el7
+htcondor-ce-sge-4.5.2-1.osg35.el7
+htcondor-ce-slurm-4.5.2-1.osg35.el7
+htcondor-ce-view-4.5.2-1.osg35.el7
+vault-1.7.2-1.osg35.el7
 </code></pre></div>
 
 <h4 id="enterprise-linux-8_1">Enterprise Linux 8<a class="headerlink" href="#enterprise-linux-8_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code>blahp-1.18.48-2.2.osg35.el8
-blahp-debuginfo-1.18.48-2.2.osg35.el8
-blahp-debugsource-1.18.48-2.2.osg35.el8
-condor-8.8.13-1.osg35.el8
-condor-all-8.8.13-1.osg35.el8
-condor-annex-ec2-8.8.13-1.osg35.el8
-condor-bosco-8.8.13-1.osg35.el8
-condor-bosco-debuginfo-8.8.13-1.osg35.el8
-condor-classads-8.8.13-1.osg35.el8
-condor-classads-debuginfo-8.8.13-1.osg35.el8
-condor-classads-devel-8.8.13-1.osg35.el8
-condor-classads-devel-debuginfo-8.8.13-1.osg35.el8
-condor-debuginfo-8.8.13-1.osg35.el8
-condor-debugsource-8.8.13-1.osg35.el8
-condor-kbdd-8.8.13-1.osg35.el8
-condor-kbdd-debuginfo-8.8.13-1.osg35.el8
-condor-procd-8.8.13-1.osg35.el8
-condor-procd-debuginfo-8.8.13-1.osg35.el8
-condor-test-8.8.13-1.osg35.el8
-condor-test-debuginfo-8.8.13-1.osg35.el8
-condor-vm-gahp-8.8.13-1.osg35.el8
-condor-vm-gahp-debuginfo-8.8.13-1.osg35.el8
-htgettoken-1.2-1.osg35.el8
-htvault-config-1.1-1.osg35.el8
-minicondor-8.8.13-1.osg35.el8
-osg-ce-3.5-7.osg35.el8
-osg-ce-bosco-3.5-7.osg35.el8
-osg-ce-condor-3.5-7.osg35.el8
-osg-ce-lsf-3.5-7.osg35.el8
-osg-ce-pbs-3.5-7.osg35.el8
-osg-ce-sge-3.5-7.osg35.el8
-osg-ce-slurm-3.5-7.osg35.el8
-osg-scitokens-mapfile-3-1.osg35.el8
-python3-condor-8.8.13-1.osg35.el8
-python3-condor-debuginfo-8.8.13-1.osg35.el8
-vault-1.7.1-1.osg35.el8
+<div class="codehilite"><pre><span></span><code>globus-gridftp-osg-extensions-0.4-1.osg35.el8
+globus-gridftp-osg-extensions-debuginfo-0.4-1.osg35.el8
+globus-gridftp-osg-extensions-debugsource-0.4-1.osg35.el8
+globus-gridftp-server-13.20-1.3.osg35.el8
+globus-gridftp-server-debuginfo-13.20-1.3.osg35.el8
+globus-gridftp-server-debugsource-13.20-1.3.osg35.el8
+globus-gridftp-server-devel-13.20-1.3.osg35.el8
+globus-gridftp-server-progs-13.20-1.3.osg35.el8
+globus-gridftp-server-progs-debuginfo-13.20-1.3.osg35.el8
+gratia-probe-1.23.3-1.osg35.el8
+gratia-probe-common-1.23.3-1.osg35.el8
+gratia-probe-condor-1.23.3-1.osg35.el8
+gratia-probe-condor-events-1.23.3-1.osg35.el8
+gratia-probe-dcache-storage-1.23.3-1.osg35.el8
+gratia-probe-dcache-storagegroup-1.23.3-1.osg35.el8
+gratia-probe-dcache-transfer-1.23.3-1.osg35.el8
+gratia-probe-enstore-storage-1.23.3-1.osg35.el8
+gratia-probe-enstore-tapedrive-1.23.3-1.osg35.el8
+gratia-probe-enstore-transfer-1.23.3-1.osg35.el8
+gratia-probe-glideinwms-1.23.3-1.osg35.el8
+gratia-probe-gridftp-transfer-1.23.3-1.osg35.el8
+gratia-probe-hadoop-storage-1.23.3-1.osg35.el8
+gratia-probe-htcondor-ce-1.23.3-1.osg35.el8
+gratia-probe-lsf-1.23.3-1.osg35.el8
+gratia-probe-metric-1.23.3-1.osg35.el8
+gratia-probe-onevm-1.23.3-1.osg35.el8
+gratia-probe-osg-pilot-container-1.23.3-1.osg35.el8
+gratia-probe-pbs-lsf-1.23.3-1.osg35.el8
+gratia-probe-services-1.23.3-1.osg35.el8
+gratia-probe-sge-1.23.3-1.osg35.el8
+gratia-probe-slurm-1.23.3-1.osg35.el8
+gratia-probe-xrootd-storage-1.23.3-1.osg35.el8
+gratia-probe-xrootd-transfer-1.23.3-1.osg35.el8
+gridftp-dsi-posix-1.4-3.osg35.el8
+lcas-lcmaps-gt4-interface-0.3.1-1.3.osg35.el8
+lcas-lcmaps-gt4-interface-debuginfo-0.3.1-1.3.osg35.el8
+lcas-lcmaps-gt4-interface-debugsource-0.3.1-1.3.osg35.el8
+osg-gridftp-3.5-4.osg35.el8
+osg-gridftp-hdfs-3.5-4.osg35.el8
+osg-gridftp-xrootd-3.5-4.osg35.el8
+vault-1.7.2-1.osg35.el8
 </code></pre></div>
 
 <h3 id="upcoming-packages">Upcoming Packages<a class="headerlink" href="#upcoming-packages" title="Permanent link">&para;</a></h3>
@@ -2014,109 +2008,31 @@ Note that in some cases, there are multiple RPMs for each package.
 You can click on any given package to see the set of RPMs or see the complete list below.</p>
 <h4 id="enterprise-linux-7_2">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7_2" title="Permanent link">&para;</a></h4>
 <ul>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=blahp-2.0.2-1.osg35up.el7">blahp-2.0.2-1.osg35up.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=condor-9.0.0-1.5.osg35up.el7">condor-9.0.0-1.5.osg35up.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=glideinwms-3.7.3-1.osg35up.el7">glideinwms-3.7.3-1.osg35up.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=htcondor-ce-5.1.0-1.osg35up.el7">htcondor-ce-5.1.0-1.osg35up.el7</a></li>
-</ul>
-<h4 id="enterprise-linux-8_2">Enterprise Linux 8<a class="headerlink" href="#enterprise-linux-8_2" title="Permanent link">&para;</a></h4>
-<ul>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=blahp-2.0.2-1.osg35up.el8">blahp-2.0.2-1.osg35up.el8</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=condor-9.0.0-1.5.osg35up.el8">condor-9.0.0-1.5.osg35up.el8</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=htcondor-ce-5.1.0-1.osg35up.el8">htcondor-ce-5.1.0-1.osg35up.el8</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=glideinwms-3.7.4-1.osg35up.el7">glideinwms-3.7.4-1.osg35up.el7</a></li>
 </ul>
 <h3 id="upcoming-rpms">Upcoming RPMs<a class="headerlink" href="#upcoming-rpms" title="Permanent link">&para;</a></h3>
 <p>If you wish to manually update your system, you can run yum update against the following packages:</p>
-<div class="codehilite"><pre><span></span><code>blahp blahp-debuginfo condor condor-all condor-annex-ec2 condor-bosco condor-classads condor-classads-devel condor-credmon-oauth condor-credmon-vault condor-debuginfo condor-devel condor-kbdd condor-procd condor-test condor-vm-gahp glideinwms glideinwms-common-tools glideinwms-condor-common-config glideinwms-factory glideinwms-factory-condor glideinwms-factory-core glideinwms-factory-httpd glideinwms-glidecondor-tools glideinwms-libs glideinwms-minimal-condor glideinwms-usercollector glideinwms-userschedd glideinwms-vofrontend glideinwms-vofrontend-core glideinwms-vofrontend-httpd glideinwms-vofrontend-standalone htcondor-ce htcondor-ce-bosco htcondor-ce-client htcondor-ce-collector htcondor-ce-condor htcondor-ce-lsf htcondor-ce-pbs htcondor-ce-sge htcondor-ce-slurm htcondor-ce-view minicondor python2-condor python3-condor
+<div class="codehilite"><pre><span></span><code>glideinwms glideinwms-common-tools glideinwms-condor-common-config glideinwms-factory glideinwms-factory-condor glideinwms-factory-core glideinwms-factory-httpd glideinwms-glidecondor-tools glideinwms-libs glideinwms-minimal-condor glideinwms-usercollector glideinwms-userschedd glideinwms-vofrontend glideinwms-vofrontend-core glideinwms-vofrontend-httpd glideinwms-vofrontend-standalone
 </code></pre></div>
 
 <p>If you wish to only update the RPMs that changed, the set of RPMs is:</p>
 <h4 id="enterprise-linux-7_3">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7_3" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code>blahp-2.0.2-1.osg35up.el7
-blahp-debuginfo-2.0.2-1.osg35up.el7
-condor-9.0.0-1.5.osg35up.el7
-condor-all-9.0.0-1.5.osg35up.el7
-condor-annex-ec2-9.0.0-1.5.osg35up.el7
-condor-bosco-9.0.0-1.5.osg35up.el7
-condor-classads-9.0.0-1.5.osg35up.el7
-condor-classads-devel-9.0.0-1.5.osg35up.el7
-condor-credmon-oauth-9.0.0-1.5.osg35up.el7
-condor-credmon-vault-9.0.0-1.5.osg35up.el7
-condor-debuginfo-9.0.0-1.5.osg35up.el7
-condor-devel-9.0.0-1.5.osg35up.el7
-condor-kbdd-9.0.0-1.5.osg35up.el7
-condor-procd-9.0.0-1.5.osg35up.el7
-condor-test-9.0.0-1.5.osg35up.el7
-condor-vm-gahp-9.0.0-1.5.osg35up.el7
-glideinwms-3.7.3-1.osg35up.el7
-glideinwms-common-tools-3.7.3-1.osg35up.el7
-glideinwms-condor-common-config-3.7.3-1.osg35up.el7
-glideinwms-factory-3.7.3-1.osg35up.el7
-glideinwms-factory-condor-3.7.3-1.osg35up.el7
-glideinwms-factory-core-3.7.3-1.osg35up.el7
-glideinwms-factory-httpd-3.7.3-1.osg35up.el7
-glideinwms-glidecondor-tools-3.7.3-1.osg35up.el7
-glideinwms-libs-3.7.3-1.osg35up.el7
-glideinwms-minimal-condor-3.7.3-1.osg35up.el7
-glideinwms-usercollector-3.7.3-1.osg35up.el7
-glideinwms-userschedd-3.7.3-1.osg35up.el7
-glideinwms-vofrontend-3.7.3-1.osg35up.el7
-glideinwms-vofrontend-core-3.7.3-1.osg35up.el7
-glideinwms-vofrontend-httpd-3.7.3-1.osg35up.el7
-glideinwms-vofrontend-standalone-3.7.3-1.osg35up.el7
-htcondor-ce-5.1.0-1.osg35up.el7
-htcondor-ce-bosco-5.1.0-1.osg35up.el7
-htcondor-ce-client-5.1.0-1.osg35up.el7
-htcondor-ce-collector-5.1.0-1.osg35up.el7
-htcondor-ce-condor-5.1.0-1.osg35up.el7
-htcondor-ce-lsf-5.1.0-1.osg35up.el7
-htcondor-ce-pbs-5.1.0-1.osg35up.el7
-htcondor-ce-sge-5.1.0-1.osg35up.el7
-htcondor-ce-slurm-5.1.0-1.osg35up.el7
-htcondor-ce-view-5.1.0-1.osg35up.el7
-minicondor-9.0.0-1.5.osg35up.el7
-python2-condor-9.0.0-1.5.osg35up.el7
-python3-condor-9.0.0-1.5.osg35up.el7
-</code></pre></div>
-
-<h4 id="enterprise-linux-8_3">Enterprise Linux 8<a class="headerlink" href="#enterprise-linux-8_3" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code>blahp-2.0.2-1.osg35up.el8
-blahp-debuginfo-2.0.2-1.osg35up.el8
-blahp-debugsource-2.0.2-1.osg35up.el8
-condor-9.0.0-1.5.osg35up.el8
-condor-all-9.0.0-1.5.osg35up.el8
-condor-annex-ec2-9.0.0-1.5.osg35up.el8
-condor-bosco-9.0.0-1.5.osg35up.el8
-condor-bosco-debuginfo-9.0.0-1.5.osg35up.el8
-condor-classads-9.0.0-1.5.osg35up.el8
-condor-classads-debuginfo-9.0.0-1.5.osg35up.el8
-condor-classads-devel-9.0.0-1.5.osg35up.el8
-condor-classads-devel-debuginfo-9.0.0-1.5.osg35up.el8
-condor-credmon-vault-9.0.0-1.5.osg35up.el8
-condor-debuginfo-9.0.0-1.5.osg35up.el8
-condor-debugsource-9.0.0-1.5.osg35up.el8
-condor-devel-9.0.0-1.5.osg35up.el8
-condor-kbdd-9.0.0-1.5.osg35up.el8
-condor-kbdd-debuginfo-9.0.0-1.5.osg35up.el8
-condor-procd-9.0.0-1.5.osg35up.el8
-condor-procd-debuginfo-9.0.0-1.5.osg35up.el8
-condor-test-9.0.0-1.5.osg35up.el8
-condor-test-debuginfo-9.0.0-1.5.osg35up.el8
-condor-vm-gahp-9.0.0-1.5.osg35up.el8
-condor-vm-gahp-debuginfo-9.0.0-1.5.osg35up.el8
-htcondor-ce-5.1.0-1.osg35up.el8
-htcondor-ce-bosco-5.1.0-1.osg35up.el8
-htcondor-ce-client-5.1.0-1.osg35up.el8
-htcondor-ce-collector-5.1.0-1.osg35up.el8
-htcondor-ce-condor-5.1.0-1.osg35up.el8
-htcondor-ce-lsf-5.1.0-1.osg35up.el8
-htcondor-ce-pbs-5.1.0-1.osg35up.el8
-htcondor-ce-sge-5.1.0-1.osg35up.el8
-htcondor-ce-slurm-5.1.0-1.osg35up.el8
-htcondor-ce-view-5.1.0-1.osg35up.el8
-minicondor-9.0.0-1.5.osg35up.el8
-python3-condor-9.0.0-1.5.osg35up.el8
-python3-condor-debuginfo-9.0.0-1.5.osg35up.el8
+<div class="codehilite"><pre><span></span><code>glideinwms-3.7.4-1.osg35up.el7
+glideinwms-common-tools-3.7.4-1.osg35up.el7
+glideinwms-condor-common-config-3.7.4-1.osg35up.el7
+glideinwms-factory-3.7.4-1.osg35up.el7
+glideinwms-factory-condor-3.7.4-1.osg35up.el7
+glideinwms-factory-core-3.7.4-1.osg35up.el7
+glideinwms-factory-httpd-3.7.4-1.osg35up.el7
+glideinwms-glidecondor-tools-3.7.4-1.osg35up.el7
+glideinwms-libs-3.7.4-1.osg35up.el7
+glideinwms-minimal-condor-3.7.4-1.osg35up.el7
+glideinwms-usercollector-3.7.4-1.osg35up.el7
+glideinwms-userschedd-3.7.4-1.osg35up.el7
+glideinwms-vofrontend-3.7.4-1.osg35up.el7
+glideinwms-vofrontend-core-3.7.4-1.osg35up.el7
+glideinwms-vofrontend-httpd-3.7.4-1.osg35up.el7
+glideinwms-vofrontend-standalone-3.7.4-1.osg35up.el7
 </code></pre></div>
                 
               
