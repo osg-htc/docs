@@ -29,6 +29,13 @@ Latest News
       Details and workaround can be found in the
       [upstream bug tracker](https://opensciencegrid.atlassian.net/browse/HTCONDOR-506).
 
+### **June 3, 2021:** Vault security update and gratia probes
+
+This release of OSG 3.6 contains the following packages:
+
+-   gratia-probe 1.23.3: Fix problem that could cause pilot hours to be zero for non-HTCondor batch systems
+-   [vault 1.7.2](https://github.com/hashicorp/vault/releases/tag/v1.7.2): Security update; fixes CVE-2021-32923. (OSG configuration not vulnerable)
+
 ### **May 25, 2021:** IGTF 1.111
 
 This release contains updated CA Certificates based on IGTF 1.108:

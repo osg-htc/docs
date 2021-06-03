@@ -192,7 +192,7 @@ You can click on any given package to see the set of RPMs or see the complete li
 -   [glideinwms-3.7.3-1.osg35up.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=glideinwms-3.7.3-1.osg35up.el7)
 -   [htcondor-ce-5.1.0-1.osg35up.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=htcondor-ce-5.1.0-1.osg35up.el7)
 
-#### Enterprise Linux 7
+#### Enterprise Linux 8
 
 -   [blahp-2.0.2-1.osg35up.el8](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=blahp-2.0.2-1.osg35up.el8)
 -   [condor-9.0.0-1.5.osg35up.el8](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=condor-9.0.0-1.5.osg35up.el8)
@@ -256,7 +256,7 @@ python2-condor-9.0.0-1.5.osg35up.el7
 python3-condor-9.0.0-1.5.osg35up.el7
 ```
 
-#### Enterprise Linux 7
+#### Enterprise Linux 8
 
 ``` file
 blahp-2.0.2-1.osg35up.el8
