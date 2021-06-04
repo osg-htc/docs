@@ -132,7 +132,8 @@ good to do the test in the
 ## Registering Frontier Squid
 
 To register your Frontier Squid host, follow the general registration instructions
-[here](../common/registration.md#new-resources) with the following Frontier Squid-specific details:
+[here](../common/registration.md#new-resources) with the following Frontier Squid-specific details.
+If the instructions appear to be too challenging, you can instead send a message to <help@opensciencegrid.org> and ask them to make the changes.
 
 1.  Add a `Squid:` section to the `Services:` list, with any relevant fields for that service.
     This is a partial example:
@@ -148,7 +149,7 @@ To register your Frontier Squid host, follow the general registration instructio
     Replacing `<FULLY QUALIFIED DOMAIN NAME>` with your Frontier Squid server's DNS entry or in the case of multiple
     Frontier Squid servers for a single resource, the round-robin DNS entry.
 
-    See the [BNL_ATLAS_Frontier_Squid](https://github.com/opensciencegrid/topology/blob/80e482279b10c7b13fc7688c71833c14ebdc1b50/topology/Brookhaven%20National%20Laboratory/Brookhaven%20ATLAS%20Tier1/BNL-ATLAS.yaml#L298-L318) 
+    See the [BNL_ATLAS_Frontier_Squid](https://github.com/opensciencegrid/topology/blob/7b27d5878a24b9812a2ec73bb97852fa9098eb2e/topology/Brookhaven%20National%20Laboratory/BNL%20ATLAS%20Tier1/BNL-ATLAS.yaml#L271-L282) 
     for a complete example.
 
 2.  If you are setting up a new resource, set `Active: false`.
