@@ -133,7 +133,7 @@ good to do the test in the
 
 To register your Frontier Squid host, follow the general registration instructions
 [here](../common/registration.md#new-resources) with the following Frontier Squid-specific details.
-If the instructions appear to be too challenging, you can instead send a message to <help@opensciencegrid.org> and ask them to make the changes.
+Alternatively, [contact us](../common/help.md) for assistance with the registration process.
 
 1.  Add a `Squid:` section to the `Services:` list, with any relevant fields for that service.
     This is a partial example:
