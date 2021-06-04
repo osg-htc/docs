@@ -149,7 +149,7 @@ If the instructions appear to be too challenging, you can instead send a message
     Replacing `<FULLY QUALIFIED DOMAIN NAME>` with your Frontier Squid server's DNS entry or in the case of multiple
     Frontier Squid servers for a single resource, the round-robin DNS entry.
 
-    See the [BNL_ATLAS_Frontier_Squid](https://github.com/opensciencegrid/topology/blob/7b27d5878a24b9812a2ec73bb97852fa9098eb2e/topology/Brookhaven%20National%20Laboratory/BNL%20ATLAS%20Tier1/BNL-ATLAS.yaml#L271-L282) 
+    See the [BNL_ATLAS_Frontier_Squid](https://github.com/opensciencegrid/topology/blob/7b27d5878a24b9812a2ec73bb97852fa9098eb2e/topology/Brookhaven%20National%20Laboratory/BNL%20ATLAS%20Tier1/BNL-ATLAS.yaml#L271-L291) 
     for a complete example.
 
 2.  If you are setting up a new resource, set `Active: false`.
