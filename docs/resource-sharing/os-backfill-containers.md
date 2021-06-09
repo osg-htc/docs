@@ -53,7 +53,7 @@ docker run -it --rm --user osg \
        -e GLIDEIN_ResourceName="..." \
        -e GLIDEIN_Start_Extra="True" \
        -e OSG_SQUID_LOCATION="..." \
-       opensciencegrid/osgvo-docker-pilot:latest
+       opensciencegrid/osgvo-docker-pilot:release
 ```
 
 Note the additional capabilities requested in the above `docker run` allow the container to invoke `singularity` for

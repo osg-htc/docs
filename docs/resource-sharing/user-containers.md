@@ -45,7 +45,7 @@ export GLIDEIN_ResourceName="Comet"
 export GLIDEIN_Start_Extra="Owner == \"my_osgconnect_username\""
 
 module load singularity
-singularity run --contain --bind /cvmfs --scratch /pilot docker://opensciencegrid/osgvo-docker-pilot
+singularity run --contain --bind /cvmfs --scratch /pilot docker://opensciencegrid/osgvo-docker-pilot:release
 
 ```
 
@@ -54,7 +54,7 @@ If you plan to run large numbers of these jobs, you can download the Docker cont
 Singularity image:
 
 ```
-$ singularity build osgvo-pilot.sif docker://opensciencegrid/osgvo-docker-pilot
+$ singularity build osgvo-pilot.sif docker://opensciencegrid/osgvo-docker-pilot:release
 ```
 
 In this case, the `singularity run` command should be changed to:
