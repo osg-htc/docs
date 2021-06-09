@@ -1819,13 +1819,13 @@ followingg is given as an example for running on compute hosts with 24 cores:</p
 <span class="nb">export</span> <span class="nv">GLIDEIN_Start_Extra</span><span class="o">=</span><span class="s2">&quot;Owner == \&quot;my_osgconnect_username\&quot;&quot;</span>
 
 module load singularity
-singularity run --contain --bind /cvmfs --scratch /pilot docker://opensciencegrid/osgvo-docker-pilot
+singularity run --contain --bind /cvmfs --scratch /pilot docker://opensciencegrid/osgvo-docker-pilot:release
 </code></pre></div>
 </td></tr></table>
 <p>The above example rebuilds the Docker container on each host.
 If you plan to run large numbers of these jobs, you can download the Docker container once and create a local
 Singularity image:</p>
-<div class="codehilite"><pre><span></span><code>$ singularity build osgvo-pilot.sif docker://opensciencegrid/osgvo-docker-pilot
+<div class="codehilite"><pre><span></span><code>$ singularity build osgvo-pilot.sif docker://opensciencegrid/osgvo-docker-pilot:release
 </code></pre></div>
 
 <p>In this case, the <code>singularity run</code> command should be changed to:</p>
