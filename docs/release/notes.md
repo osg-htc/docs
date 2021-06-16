@@ -24,6 +24,7 @@ To update to the OSG 3.5 series, please consult the page on
 
 | Version                             | Date       | Summary                                                                       |
 |:------------------------------------|:-----------|:------------------------------------------------------------------------------|
+| [3.5.38-2](3.5/release-3-5-38-2.md) | 2021-06-16 | VO Package v113                                                               |
 | [3.5.38](3.5/release-3-5-38.md)     | 2021-06-10 | HTCondor 8.8.13-1.1, Upcoming: XRootD 5.2.0, xrootd-hdfs 2.2.0-1.1            |
 | [3.5.37](3.5/release-3-5-37.md)     | 2021-06-03 | HTCondor-CE 4.5.2, gratia-probe 1.23.3, vault 1.7.2, osg-gridftp on EL8, Upcoming: GlideinWMS 3.7.4 |
 | [3.5.36-2](3.5/release-3-5-36-2.md) | 2020-05-25 | IGTF 1.111                                                                    |

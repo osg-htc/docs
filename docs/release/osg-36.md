@@ -29,6 +29,13 @@ Latest News
       Details and workaround can be found in the
       [upstream bug tracker](https://opensciencegrid.atlassian.net/browse/HTCONDOR-506).
 
+### **June 16, 2021:** VO Package v113
+
+This release contains an updated VO Package with the following changes:
+
+-   Added new CLAS12 and EIC VO certificates
+-   Retired old CLAS12 and EIC VO certificates
+
 ### **June 3, 2021:** Vault security update and gratia probes
 
 This release of OSG 3.6 contains the following packages:
