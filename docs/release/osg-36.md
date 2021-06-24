@@ -25,9 +25,22 @@ Latest News
 
 !!! bug "Known Issues"
     - HTCondor-CE job routing to non-HTCondor batch systems fails due to an issue with `blahp-2.0.2-1.1.osg36`
-    - HTCondor-CE 5.1.0: batch system max walltime requests are always set to 3 days.
-      Details and workaround can be found in the
-      [upstream bug tracker](https://opensciencegrid.atlassian.net/browse/HTCONDOR-506).
+
+### **June 24, 2021:** HTCondor 9.0.1, HTCondor-CE 5.1.1
+
+This release of OSG 3.6 contains the following packages:
+
+-   [HTCondor 9.0.1-1.2](https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00009.shtml): Bug fix release
+    -   Fix problem where X.509 proxy refresh kills job when using AES encryption
+    -   Fix problem when jobs require a different machine after a failure
+    -   Fix problem where a job matched a machine it can't use, delaying job start
+    -   Fix exit code and retry checking when a job exits because of a signal
+    -   Fix a memory leak in the job router when a job is removed via job policy
+    -   Fixed the back-end support for the 'bosco\_cluster --add' command
+-   [HTCondor-CE 5.1.1](https://htcondor.github.io/htcondor-ce/v5/releases/#511)
+    -   Improve restart time of HTCondor-CE View
+    -   Fix bug that caused HTCondor-CE to ignore incoming BatchRuntime requests
+    -   Fixed error that occurred during RPM installation of non-HTCondor batch systems regarding missing file batch\_gahp
 
 ### **June 16, 2021:** VO Package v113
 
