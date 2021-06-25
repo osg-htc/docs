@@ -166,7 +166,8 @@ The OSG 3.6 release series contains [HTCondor-CE 5](https://htcondor.github.io/h
 version upgrade from HTCondor-CE 4, which was available in the OSG 3.5 release repositories.
 To update HTCondor-CE, perform the following steps:
 
-1.  If you support the `OSG` or `GLOW` VOs, add SciTokens mappings to a file in `/etc/condor-ce/mapfiles.d/`:
+1.  If you support the `OSG` or `GLOW` VOs and map their jobs to non-standard local Unix accounts
+    (e.g., not `osg` and `glow`, respectively) add SciTokens mappings to a file in `/etc/condor-ce/mapfiles.d/`:
 
         # OSG
         SCITOKENS /^https\:\/\/scitokens\.org\/osg\-connect,/ osg

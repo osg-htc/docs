@@ -168,7 +168,8 @@ To update HTCondor-CE 5, perform the following steps:
         To update, consult the [upgrade section below](#updating-to-htcondor-900), especially if you use HTCondor for
         your local batch system.
 
-1.  If you support the `OSG` or `GLOW` VOs, add SciTokens mappings to a file in `/etc/condor-ce/mapfiles.d/`:
+1.  If you support the `OSG` or `GLOW` VOs and map their jobs to non-standard local Unix accounts
+    (e.g., not `osg` and `glow`, respectively) add SciTokens mappings to a file in `/etc/condor-ce/mapfiles.d/`:
 
         # OSG
         SCITOKENS /^https\:\/\/scitokens\.org\/osg\-connect,/ osg
