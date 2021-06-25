@@ -8,7 +8,7 @@ from the OSG;
 it handles authorization and delegation of resource requests to your existing campus HPC/HTC cluster.
 Many sites set up their compute entrypoint locally.
 
-As an alternative, OSG offers a Hosted CE option
+As an alternative, OSG offers a no-cost Hosted CE option
 wherein the OSG team will host and operate the HTCondor Compute Entrypoint,
 and configure it for the communities that you choose to support.
 
