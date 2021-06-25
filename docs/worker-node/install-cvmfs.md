@@ -87,7 +87,7 @@ particular, the `CVMFS_HTTP_PROXY` line below must be edited for your
 site.
 
 ```
-CVMFS_REPOSITORIES="`echo $((echo oasis.opensciencegrid.org;echo cms.cern.ch;ls /cvmfs)|sort -u)|tr ' ' ,`"
+CVMFS_REPOSITORIES="$((echo oasis.opensciencegrid.org;echo cms.cern.ch;ls /cvmfs)|sort -u|paste -sd ,)"
 CVMFS_QUOTA_LIMIT=<QUOTA LIMIT>
 CVMFS_HTTP_PROXY="<SQUID URL>:<SQUID PORT>"
 ```
