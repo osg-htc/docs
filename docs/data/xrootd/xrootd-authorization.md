@@ -21,7 +21,8 @@ the permissions listed in the [authorization file](#authorization-file) all refe
     to, but, internally, the data node files will be owned by the `xrootd` user. If this behaviour is not desired, enable
     [XRootD multi-user support](install-standalone.md#enabling-multi-user-support). 
 
-#### Authorization file
+Authorization File
+------------------
 
 XRootD allows configuring fine-grained file access permissions based on usernames and paths.
 This is configured in the authorization file `/etc/xrootd/auth_file` on the data server node, which should be writable
@@ -85,7 +86,8 @@ root@host # chmod 0640 /etc/xrootd/auth_file  # or 0644
 ```
 
 
-#### Enabling xrootd-lcmaps authorization
+LCMAPS Authorization
+--------------------
 
 The xrootd-lcmaps security plugin uses the `lcmaps` library and the [LCMAPS VOMS plugin](../../security/lcmaps-voms-authentication.md)
 to authenticate and authorize users based on X509 certificates and VOMS attributes. Perform the following instructions
