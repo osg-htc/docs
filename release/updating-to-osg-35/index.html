@@ -2048,7 +2048,8 @@ your local batch system.</p>
 </div>
 </li>
 <li>
-<p>If you support the <code>OSG</code> or <code>GLOW</code> VOs, add SciTokens mappings to a file in <code>/etc/condor-ce/mapfiles.d/</code>:</p>
+<p>If you support the <code>OSG</code> or <code>GLOW</code> VOs and map their jobs to non-standard local Unix accounts
+    (e.g., not <code>osg</code> and <code>glow</code>, respectively) add SciTokens mappings to a file in <code>/etc/condor-ce/mapfiles.d/</code>:</p>
 <div class="codehilite"><pre><span></span><code># OSG
 SCITOKENS /^https\:\/\/scitokens\.org\/osg\-connect,/ osg
 # GLOW
