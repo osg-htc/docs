@@ -67,6 +67,9 @@ After the consultation, ensure that your local cluster meets the [requirements a
 In particular, you should now know which [accounts to create](#user-accounts) for the communities that you wish to serve
 at your cluster.
 
+Also consider the size and number of jobs that the OSG should send to your site (e.g., number of cores, memory, GPUs, walltime)
+as well as their scheduling policy (e.g. preemptible backfill partitions).
+
 Additionally, OSG staff may have directed you to follow installation instructions from one or more of the following
 sections:
 
