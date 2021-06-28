@@ -1987,7 +1987,7 @@ CVMFS configuration. Below is a sample configuration, but please note
 that you will need to <strong>edit the parts in angle brackets</strong>. In
 particular, the <code>CVMFS_HTTP_PROXY</code> line below must be edited for your
 site.</p>
-<div class="codehilite"><pre><span></span><code>CVMFS_REPOSITORIES=&quot;`echo $((echo oasis.opensciencegrid.org;echo cms.cern.ch;ls /cvmfs)|sort -u)|tr &#39; &#39; ,`&quot;
+<div class="codehilite"><pre><span></span><code>CVMFS_REPOSITORIES=&quot;$((echo oasis.opensciencegrid.org;echo cms.cern.ch;ls /cvmfs)|sort -u|paste -sd ,)&quot;
 CVMFS_QUOTA_LIMIT=&lt;QUOTA LIMIT&gt;
 CVMFS_HTTP_PROXY=&quot;&lt;SQUID URL&gt;:&lt;SQUID PORT&gt;&quot;
 </code></pre></div>
