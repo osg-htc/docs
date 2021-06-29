@@ -28,16 +28,16 @@ Running the Container with Docker
 ---------------------------------
 
 The Docker image is kept in [DockerHub](https://hub.docker.com/r/opensciencegrid/osgvo-docker-pilot).
-
 In order to successfully start payload jobs:
 
-1. Configure authentication.
-   OSG VO administrators can provide the token,
+
+1. **Configure authentication:**
+   Open Science Pool (OSP) administrators can provide the token,
    which you can then pass to the container by volume mounting it as a file under `/etc/condor/tokens-orig.d/`.
    If you are using Docker to launch the container, this is done with the command line flag
    `-v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org`.
-   (Replace `/path/to/token` with the location you saved the token obtained from the OSG VO administrators.)
-2. Set `GLIDEIN_Site` and `GLIDEIN_ResourceName` to match the site name and resource name you registered in Topology,
+   (Replace `/path/to/token` with the full path to the token you obtained from the OSP administrators.)
+2. Set `GLIDEIN_Site` and `GLIDEIN_ResourceName` to match the site name and resource name that you registered in Topology,
    respectively.
 3. Set the `OSG_SQUID_LOCATION` environment variable to the HTTP address of your preferred Squid instance.
 4. _Recommended:_ Enable [CVMFS](#cvmfs) via one of the mechanisms described below.
@@ -64,22 +64,22 @@ docker run -it --rm --user osg  \
        opensciencegrid/osgvo-docker-pilot:release
 ```
 
-(Replace `/path/to/token` with the location you saved the token obtained from the OSG VO administrators.)
+Replace `/path/to/token` with the location you saved the token obtained from the OSG VO administrators.
 Privileged mode (`--privileged`) requested in the above `docker run` allows the container
-to mount CVMFS using cvmfsexec (see below) and invoke `singularity` for user jobs.
-Singularity allows the user to use their own container for their job.
+to mount [CVMFS using cvmfsexec](#adding-cvmfs-using-cvmfsexec) and invoke `singularity` for user jobs.
+Singularity allows OSP users to use their own container for their job (e.g., a common use case for GPU jobs).
 
 
 CVMFS
 -----
 
-CVMFS is a read-only remote filesystem that many OSG jobs depend on for software and data.
+[CernVM-FS](https://cernvm.cern.ch/fs/) (CVMFS) is a read-only remote filesystem that many OSG jobs depend on for software and data.
 Supporting CVMFS inside your container will greatly increase the types of OSG jobs you can run.
 
-There are two methods for adding CVMFS: [enabling cvmfsexec](#adding-cvmfs-using-cvmfsexec),
+There are two methods for making CVMFS available in your container: [enabling cvmfsexec](#adding-cvmfs-using-cvmfsexec),
 or [bind-mounting CVMFS from the host](#adding-cvmfs-via-bind-mount).
 Bind-mounting CVMFS will require CVMFS to be installed on the host first,
-but the container will need somewhat fewer privileges.
+but the container will need fewer privileges.
 
 
 ### Adding CVMFS using cvmfsexec
@@ -129,7 +129,7 @@ There are several environment variables you can set for cvmfsexec:
     use the system default (4 GB)
 
 You can add other CVMFS options by bind-mounting a config file over `/cvmfsexec/default.local`;
-note that options in environment variables override options in `/cvmfsexec/default.local`.
+note that options in environment variables take precedence over options in `/cvmfsexec/default.local`.
 
 You can store the cache outside of the container by volume mounting a directory to `/cvmfs-cache`.
 
@@ -169,4 +169,3 @@ docker run -it --rm --user osg      \
 ```
 
 Fill in the values for `/path/to/token`, `GLIDEIN_Site`, `GLIDEIN_ResourceName`, and `OSG_SQUID_LOCATION` [as above](#running-the-container-with-docker).
-
