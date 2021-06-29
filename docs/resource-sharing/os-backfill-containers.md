@@ -36,6 +36,7 @@ In order to successfully start payload jobs:
    which you can then pass to the container by volume mounting it as a file under `/etc/condor/tokens-orig.d/`.
    If you are using Docker to launch the container, this is done with the command line flag
    `-v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org`.
+   (Replace `/path/to/token` with the location you saved the token obtained from the OSG VO administrators.)
 2. Set `GLIDEIN_Site` and `GLIDEIN_ResourceName` to match the site name and resource name you registered in Topology,
    respectively.
 3. Set the `OSG_SQUID_LOCATION` environment variable to the HTTP address of your preferred Squid instance.
@@ -63,6 +64,7 @@ docker run -it --rm --user osg  \
        opensciencegrid/osgvo-docker-pilot:release
 ```
 
+(Replace `/path/to/token` with the location you saved the token obtained from the OSG VO administrators.)
 Privileged mode (`--privileged`) requested in the above `docker run` allows the container
 to mount CVMFS using cvmfsexec (see below) and invoke `singularity` for user jobs.
 Singularity allows the user to use their own container for their job.
