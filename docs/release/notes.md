@@ -24,6 +24,7 @@ To update to the OSG 3.5 series, please consult the page on
 
 | Version                             | Date       | Summary                                                                       |
 |:------------------------------------|:-----------|:------------------------------------------------------------------------------|
+| [3.5.40](3.5/release-3-5-40.md)     | 2021-07-01 | Frontier Squid 4.15-2.1, vault 1.7.3, htvault-config 1.2, EL8: XRootD 4.12.6 and plugins, osg-flock 1.3, Upcoming: xrootd-multiuser 1.1.0 |
 | [3.5.39](3.5/release-3-5-39.md)     | 2021-06-24 | scitokens-cpp 0.6.2, Upcoming: HTCondor 9.0.1-1.1, HTCondor-CE 5.1.1-1.1      |
 | [3.5.38-2](3.5/release-3-5-38-2.md) | 2021-06-16 | VO Package v113                                                               |
 | [3.5.38](3.5/release-3-5-38.md)     | 2021-06-10 | HTCondor 8.8.13-1.1, Upcoming: XRootD 5.2.0, xrootd-hdfs 2.2.0-1.1            |
