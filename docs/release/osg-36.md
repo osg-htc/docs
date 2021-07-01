@@ -26,7 +26,7 @@ Latest News
 !!! bug "Known Issues"
     - HTCondor-CE job routing to non-HTCondor batch systems fails due to an issue with `blahp-2.0.2-1.1.osg36`
 
-### **July 1, 2021:** HTCondor 9.0.1, HTCondor-CE 5.1.1
+### **July 1, 2021:** Frontier Squid 4.15-2.1, Vault 1.7.3, Upcoming: HTCondor 9.1.0
 
 This release of OSG 3.6 contains the following packages:
 
