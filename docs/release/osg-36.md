@@ -26,6 +26,16 @@ Latest News
 !!! bug "Known Issues"
     - HTCondor-CE job routing to non-HTCondor batch systems fails due to an issue with `blahp-2.0.2-1.1.osg36`
 
+### **July 1, 2021:** HTCondor 9.0.1, HTCondor-CE 5.1.1
+
+This release of OSG 3.6 contains the following packages:
+
+-   [Frontier Squid 4.15-2.1](http://frontier.cern.ch/dist/frontier-squid-releasenotes.txt): Fix log rotation when not compressing
+-   [Vault 1.7.3](https://discuss.hashicorp.com/t/ann-vault-1-7-3-released/25558): Bug fix release
+-   htvault-config 1.2: Updated to match vault 1.7.3
+-   Upcoming
+    -   [HTCondor 9.1.0](https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00011.shtml): Start of next feature series
+
 ### **June 24, 2021:** HTCondor 9.0.1, HTCondor-CE 5.1.1
 
 This release of OSG 3.6 contains the following packages:
