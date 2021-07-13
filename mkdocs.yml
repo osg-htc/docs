@@ -7,7 +7,7 @@ theme:
   custom_dir: osgthedocs
   favicon: 'img/favicon.ico'
   features:
-    - navigation.tabs
+    - navigation.sections
 
 extra_css:
   - css/extra.css
