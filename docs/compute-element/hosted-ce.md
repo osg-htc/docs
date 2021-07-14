@@ -8,7 +8,7 @@ from the OSG;
 it handles authorization and delegation of resource requests to your existing campus HPC/HTC cluster.
 Many sites set up their compute entrypoint locally.
 
-As an alternative, OSG offers a Hosted CE option
+As an alternative, OSG offers a no-cost Hosted CE option
 wherein the OSG team will host and operate the HTCondor Compute Entrypoint,
 and configure it for the communities that you choose to support.
 
@@ -36,7 +36,8 @@ Before preparing your cluster for OSG resource requests, consider the following 
 -   Shared user home directories between the submit server and the worker nodes.
     Not required for HTCondor clusters:
     see [this section](#htcondor-clusters-only-installing-the-osg-worker-node-client) for more details.
--   [Temporary scratch space](../worker-node/using-wn.md#for-site-administrators) on each worker node
+-   [Temporary scratch space](../worker-node/using-wn.md#for-site-administrators) on each worker node;
+    site administrators should ensure that files in this directory are regularly cleaned out.
 -   OSG resource contributors must inform the OSG of [any relevant](../site-responsibilities.md) changes to their site.
 
     !!! important "Site downtimes"
@@ -65,6 +66,9 @@ Preparing Your Local Cluster
 After the consultation, ensure that your local cluster meets the [requirements as outlined above](#before-starting).
 In particular, you should now know which [accounts to create](#user-accounts) for the communities that you wish to serve
 at your cluster.
+
+Also consider the size and number of jobs that the OSG should send to your site (e.g., number of cores, memory, GPUs, walltime)
+as well as their scheduling policy (e.g. preemptible backfill partitions).
 
 Additionally, OSG staff may have directed you to follow installation instructions from one or more of the following
 sections:

@@ -51,7 +51,7 @@ Traditionally, an OSG *Compute Entrypoint* (CE) provides remote access for VOs t
 [local batch system](./index.md#contributing-to-the-osg).
 There are two options for accepting pilot jobs at your site:
 
-- **Hosted CE**: OSG will run and operate the CE services; the site only needs to provide a SSH pubkey-based
+- **Hosted CE**: OSG will run and operate the CE services at no cost; the site only needs to provide a SSH pubkey-based
    authentication access to the central OSG host.
    OSG will interface with the VO and submit pilots directly to your batch system via SSH.
    By far, this is the _simplest option_: however, it is less-scalable and the site delegates many of the scheduling
