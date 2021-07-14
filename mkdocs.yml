@@ -17,6 +17,7 @@ nav:
 - Site Planning: 'site-planning.md'
 - Site Verification: 'site-verification.md'
 - Site Responsibilities: 'site-responsibilities.md'
+- Registration: 'common/registration.md'
 - Resource Sharing:
   - Compute:
     - 'Overview': 'resource-sharing/overview.md'
@@ -78,15 +79,6 @@ nav:
   - 'Install a Cache': 'data/stashcache/install-cache.md'
   - 'Install an Origin': 'data/stashcache/install-origin.md'
   - 'Getting VO data into StashCache': 'data/stashcache/vo-data.md'
-- Common:
-  - 'Registration': 'common/registration.md'
-  - 'CA Certificates': 'common/ca.md'
-  - 'Certificate Management Reference': 'security/certificate-management.md'
-  - 'Host Certificates':
-    - 'Overview': 'security/host-certs/overview.md'
-    - 'Using InCommon': 'security/host-certs/incommon.md'
-    - "Using Let's Encrypt": 'security/host-certs/lets-encrypt.md'
-    - 'Using DigiCert': 'security/host-certs/digicert.md'
 - Releases:
   - OSG 3.5:
       - 'Release Notes': 'release/notes.md'
@@ -99,6 +91,14 @@ nav:
   - 'OSG Yum Repos': 'common/yum.md'
   - 'Yum Basics': 'release/yum-basics.md'
   - 'RPM Signing': 'release/signing.md'
+- CA Certificates:
+  - 'Overview': 'common/ca.md'
+  - 'Certificate Management Reference': 'security/certificate-management.md'
+  - 'Host Certificates':
+    - 'Overview': 'security/host-certs/overview.md'
+    - 'Using InCommon': 'security/host-certs/incommon.md'
+    - "Using Let's Encrypt": 'security/host-certs/lets-encrypt.md'
+    - 'Using DigiCert': 'security/host-certs/digicert.md'
 - Help:
   - 'Getting Help': 'common/help.md'
 
