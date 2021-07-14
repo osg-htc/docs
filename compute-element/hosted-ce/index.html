@@ -1898,7 +1898,7 @@
 from the OSG;
 it handles authorization and delegation of resource requests to your existing campus HPC/HTC cluster.
 Many sites set up their compute entrypoint locally.</p>
-<p>As an alternative, OSG offers a Hosted CE option
+<p>As an alternative, OSG offers a no-cost Hosted CE option
 wherein the OSG team will host and operate the HTCondor Compute Entrypoint,
 and configure it for the communities that you choose to support.</p>
 <p>This document explains the requirements and the procedure for requesting an OSG Hosted CE.</p>
@@ -1921,7 +1921,8 @@ resource requests, see <a href="../install-htcondor-ce/">this page</a> for insta
 <li>Shared user home directories between the submit server and the worker nodes.
     Not required for HTCondor clusters:
     see <a href="#htcondor-clusters-only-installing-the-osg-worker-node-client">this section</a> for more details.</li>
-<li><a href="../../worker-node/using-wn/#for-site-administrators">Temporary scratch space</a> on each worker node</li>
+<li><a href="../../worker-node/using-wn/#for-site-administrators">Temporary scratch space</a> on each worker node;
+    site administrators should ensure that files in this directory are regularly cleaned out.</li>
 <li>
 <p>OSG resource contributors must inform the OSG of <a href="../../site-responsibilities/">any relevant</a> changes to their site.</p>
 <div class="admonition important">
@@ -1946,6 +1947,8 @@ contribution and/or research goals.</p>
 <p>After the consultation, ensure that your local cluster meets the <a href="#before-starting">requirements as outlined above</a>.
 In particular, you should now know which <a href="#user-accounts">accounts to create</a> for the communities that you wish to serve
 at your cluster.</p>
+<p>Also consider the size and number of jobs that the OSG should send to your site (e.g., number of cores, memory, GPUs, walltime)
+as well as their scheduling policy (e.g. preemptible backfill partitions).</p>
 <p>Additionally, OSG staff may have directed you to follow installation instructions from one or more of the following
 sections:</p>
 <h3 id="recommended-providing-access-to-cvmfs">(Recommended) Providing access to CVMFS<a class="headerlink" href="#recommended-providing-access-to-cvmfs" title="Permanent link">&para;</a></h3>
