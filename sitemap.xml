@@ -16,6 +16,10 @@
      <lastmod>2021-07-14</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://opensciencegrid.org/docs/common/registration/</loc>
+     <lastmod>2021-07-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://opensciencegrid.org/docs/resource-sharing/overview/</loc>
      <lastmod>2021-07-14</lastmod>
      <changefreq>daily</changefreq>
@@ -200,34 +204,6 @@
      <lastmod>2021-07-14</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://opensciencegrid.org/docs/common/registration/</loc>
-     <lastmod>2021-07-14</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://opensciencegrid.org/docs/common/ca/</loc>
-     <lastmod>2021-07-14</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://opensciencegrid.org/docs/security/certificate-management/</loc>
-     <lastmod>2021-07-14</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://opensciencegrid.org/docs/security/host-certs/overview/</loc>
-     <lastmod>2021-07-14</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://opensciencegrid.org/docs/security/host-certs/incommon/</loc>
-     <lastmod>2021-07-14</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://opensciencegrid.org/docs/security/host-certs/lets-encrypt/</loc>
-     <lastmod>2021-07-14</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://opensciencegrid.org/docs/security/host-certs/digicert/</loc>
-     <lastmod>2021-07-14</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
      <loc>https://opensciencegrid.org/docs/release/notes/</loc>
      <lastmod>2021-07-14</lastmod>
      <changefreq>daily</changefreq>
@@ -261,6 +237,30 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://opensciencegrid.org/docs/release/signing/</loc>
+     <lastmod>2021-07-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://opensciencegrid.org/docs/common/ca/</loc>
+     <lastmod>2021-07-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://opensciencegrid.org/docs/security/certificate-management/</loc>
+     <lastmod>2021-07-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://opensciencegrid.org/docs/security/host-certs/overview/</loc>
+     <lastmod>2021-07-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://opensciencegrid.org/docs/security/host-certs/incommon/</loc>
+     <lastmod>2021-07-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://opensciencegrid.org/docs/security/host-certs/lets-encrypt/</loc>
+     <lastmod>2021-07-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://opensciencegrid.org/docs/security/host-certs/digicert/</loc>
      <lastmod>2021-07-14</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
