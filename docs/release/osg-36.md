@@ -26,6 +26,13 @@ Latest News
 !!! bug "Known Issues"
     - HTCondor-CE job routing to non-HTCondor batch systems fails due to an issue with `blahp-2.0.2-1.1.osg36`
 
+### **July 15, 2021:** VO Package v114
+
+This release contains an updated VO Package with the following changes:
+
+-   Fix typo in CLAS12 and EIC VOMS certificate issuers
+-   Add LSC files for CERN VO IAM endpoints
+
 ### **July 1, 2021:** Frontier Squid 4.15-2.1, Vault 1.7.3, Upcoming: HTCondor 9.1.0
 
 This release of OSG 3.6 contains the following packages:
