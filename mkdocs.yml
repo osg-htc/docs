@@ -110,3 +110,8 @@ markdown_extensions:
   - meta
   - toc:
       permalink: True
+
+plugins:
+  - redirects:
+      redirect_maps:
+        site-responsibilities.md: site-maintenance.md
