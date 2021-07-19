@@ -18,6 +18,7 @@ nav:
 - Site Verification: 'site-verification.md'
 - Site Responsibilities: 'site-responsibilities.md'
 - Registration: 'common/registration.md'
+- Help: 'common/help.md'
 - Resource Sharing:
   - Compute:
     - 'Overview': 'resource-sharing/overview.md'
@@ -71,22 +72,24 @@ nav:
     - 'Manage RSV via rsv-control': 'monitoring/rsv-control.md'
     - 'RSV GlideinWMS Tester': 'monitoring/install-rsv-gwms-tester.md'
 - Access Point:
-  - 'Installing an Open Science Pool Access Point': 'submit/osg-flock.md'
+  - 'Install an OS Pool Access Point': 'submit/osg-flock.md'
 - Data Federation:
   - 'Overview': 'data/stashcache/overview.md'
-  - 'Running a Cache in a container': 'data/stashcache/run-stashcache-container.md'
-  - 'Running an Origin in a container': 'data/stashcache/run-stash-origin-container.md'
-  - 'Install a Cache': 'data/stashcache/install-cache.md'
-  - 'Install an Origin': 'data/stashcache/install-origin.md'
-  - 'Getting VO data into StashCache': 'data/stashcache/vo-data.md'
+  - Data Cache:
+      - 'Install from container': 'data/stashcache/run-stashcache-container.md'
+      - 'Install from RPM': 'data/stashcache/install-cache.md'
+  - Data Origin:
+      - 'Install from container': 'data/stashcache/run-stash-origin-container.md'
+      - 'Install from RPM': 'data/stashcache/install-origin.md'
+      - 'Publishing VO data': 'data/stashcache/vo-data.md'
 - Releases:
+  - 'Release Series': 'release/release_series.md'
   - OSG 3.5:
       - 'Release Notes': 'release/notes.md'
       - 'Updating to OSG 3.5': 'release/updating-to-osg-35.md'
   - OSG 3.6:
      - 'News': 'release/osg-36.md'
      - 'Updating to OSG 3.6': 'release/updating-to-osg-36.md'
-  - 'Release Series': 'release/release_series.md'
   - 'Supported Platforms': 'release/supported_platforms.md'
   - 'OSG Yum Repos': 'common/yum.md'
   - 'Yum Basics': 'release/yum-basics.md'
@@ -99,8 +102,6 @@ nav:
     - 'Using InCommon': 'security/host-certs/incommon.md'
     - "Using Let's Encrypt": 'security/host-certs/lets-encrypt.md'
     - 'Using DigiCert': 'security/host-certs/digicert.md'
-- Help:
-  - 'Getting Help': 'common/help.md'
 
 markdown_extensions:
   - admonition
