@@ -38,7 +38,7 @@ Before preparing your cluster for OSG resource requests, consider the following 
     see [this section](#htcondor-clusters-only-installing-the-osg-worker-node-client) for more details.
 -   [Temporary scratch space](../worker-node/using-wn.md#for-site-administrators) on each worker node;
     site administrators should ensure that files in this directory are regularly cleaned out.
--   OSG resource contributors must inform the OSG of [any relevant](../site-maintenance.md##notify-osg-of-major-changes)
+-   OSG resource contributors must inform the OSG of [any relevant](../site-maintenance.md#notify-osg-of-major-changes)
     changes to their site.
 
     !!! important "Site downtimes"
