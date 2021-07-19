@@ -15,9 +15,9 @@ extra_css:
 nav:
 - Home: 'index.md'
 - Site Planning: 'site-planning.md'
+- Registration: 'common/registration.md'
 - Site Verification: 'site-verification.md'
 - Site Responsibilities: 'site-responsibilities.md'
-- Registration: 'common/registration.md'
 - Help: 'common/help.md'
 - Resource Sharing:
   - Compute:
