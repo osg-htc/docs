@@ -52,7 +52,7 @@ After verifying end-to-end pilot job submission and usage reporting, your site i
 In the same OSG Factory Operations ticket that you opened [above](#verify-end-to-end-pilot-job-submission),
 let OSG staff know when you are ready to accept production pilots.
 
-After requesting production pilots, review the [responsibilities of an OSG site](site-responsibilities.md).
+After requesting production pilots, review the documentation for [how to maintain an OSG site](site-maintenance.md).
 
 Getting Help
 ------------

@@ -17,7 +17,7 @@ nav:
 - Site Planning: 'site-planning.md'
 - Registration: 'common/registration.md'
 - Site Verification: 'site-verification.md'
-- Site Responsibilities: 'site-responsibilities.md'
+- Site Maintenance: 'site-maintenance.md'
 - Help: 'common/help.md'
 - Resource Sharing:
   - Compute:
@@ -110,3 +110,9 @@ markdown_extensions:
   - meta
   - toc:
       permalink: True
+
+plugins:
+  - redirects:
+      redirect_maps:
+        site-responsibilities.md: site-maintenance.md
+        release/osg-35.md: release/notes.md
