@@ -23,7 +23,12 @@ If this occurs, you should immediately stop accepting job submissions from the O
         Replacing `<OFFENDING VO USER>` with the name of the local Unix account corresponding to the problematic VO.
 
     -   **For Slurm batch systems,**
-        disable the relevant [Slurm partition](https://slurm.schedmd.com/faq.html#stop_sched)
+        disable the relevant [Slurm partition](https://slurm.schedmd.com/faq.html#stop_sched):
+
+            :::console
+            [root@host] # scontrol update PartitionName=<OSG PARTITION> State=DOWN
+
+        Replacing `<OSG PARTITION>` with the name of the partition where you are sending OSG jobs.
 
 1.  Remove the VO's jobs:
 
