@@ -55,6 +55,7 @@ OSG resources are stored under a hierarchy of facilities, sites, and resource gr
 -   **Site**: Smaller than a facility; typically represents a computing cluster.
     Frequently used as the display name for [accounting dashboards](http://gracc.opensciencegrid.org).
 -   **Resource Group**: A logical grouping of resources at a site.
+    Multi-resource downtimes are easiest to declare across a resource group.
     Production and testing resources must be placed into separate Resource Groups.
 -   **Resource**: A host that provides grid services, e.g. Compute Entrypoints, storage endpoints, or perfSonar hosts.
 
@@ -249,20 +250,24 @@ topology/University of Wisconsin/CHTC/CHTC-Slurm-HPC_downtime.yaml
 
 ### Registering new downtime ###
 
-To register a new downtime for a registered resource,
-you will use a webform to generate the contents of the downtime entry,
+To register a new downtime for a resource or for multiples resources that are part of a resource group,
+you will use webforms to generate the contents of the downtime entry,
 copy it into the downtime file corresponding to your resource,
 and submit it as a GitHub pull request.
 Follow the instructions below:
 
-1.  Open the [downtime generation webform](https://topology.opensciencegrid.org/generate_downtime) in your browser.
+1.  Open one of the downtime generation webforms in your browser:
 
-1.  Select your facility from the corresponding list.
+    -   Use the [resource downtime generator](https://topology.opensciencegrid.org/generate_downtime) if you only need
+        to declare a downtime for a single resource.
+    -   Use the [resource group downtime generator](https://topology.opensciencegrid.org/generate_resource_group_downtime)
+        if you need to declare a downtime for multiple resources across a resource group.
 
-1.  Select the resource that will be down from the corresponding list.
+1.  Select your facility, site, resource group, and/or resource from the corresponding lists.
 
-1.  Select all the services that will be down. To select multiple, use Control-Click on Windows and Linux,
-    or Command-Click on macOS.
+1.  **For the single resource downtime form:**
+    Select all the services that will be down.
+    To select multiple, use Control-Click on Windows and Linux, or Command-Click on macOS.
 
 1.  Fill the other fields with information about the downtime.
 
