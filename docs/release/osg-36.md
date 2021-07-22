@@ -28,7 +28,17 @@ Latest News
 This release of OSG 3.6 contains the following packages:
 
 -   [HTCondor 9.0.2-1.1](https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00014.shtml): Bug fix release
+    -   HTCondor can be setup to use only FIPS 140-2 approved security functions
+    -   If the Singularity test fails, the job returns to the idle state
+    -   Can divide GPU memory, when making multiple GPU entries for a single GPU
+    -   Startd and Schedd cron job maximum line length increased to 64k bytes
+    -   Added first class submit keywords for SciTokens
+    -   Fixed MUNGE authentication
 -   [blahp 2.1.0](https://github.com/htcondor/BLAH/releases/tag/v2.1.0): Bug fix release
+    -   Fix bug where GPU request was not passed onto the batch script
+    -   Fix issue where proxy symlinks were not cleaned up by not creating them
+    -   Fix bug where output files are overwritten if no transfer output remap
+    -   Added support for passing in extra submit arguments from the job ad
 
 ### **July 15, 2021:** VO Package v114
 
