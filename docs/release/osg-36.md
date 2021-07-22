@@ -23,8 +23,12 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.
 Latest News
 -----------
 
-!!! bug "Known Issues"
-    - HTCondor-CE job routing to non-HTCondor batch systems fails due to an issue with `blahp-2.0.2-1.1.osg36`
+### **July 22, 2021:** HTCondor 9.0.2 and blahp 2.1.0
+
+This release of OSG 3.6 contains the following packages:
+
+-   [HTCondor 9.0.2-1.1](https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00014.shtml): Bug fix release
+-   [blahp 2.1.0](https://github.com/htcondor/BLAH/releases/tag/v2.1.0): Bug fix release
 
 ### **July 15, 2021:** VO Package v114
 
