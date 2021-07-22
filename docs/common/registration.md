@@ -52,7 +52,7 @@ See the full list of services that should be registered in the OSG topology
 OSG resources are stored under a hierarchy of facilities, sites, and resource groups, defined as follows:
 
 -   **Facility**: The institution or company name where your resource is located.
--   **Site**: Smaller than a facility; typically represents a computing cluster.
+-   **Site**: Smaller than a facility; typically represents a computing center or an academic department.
     Frequently used as the display name for [accounting dashboards](http://gracc.opensciencegrid.org).
 -   **Resource Group**: A logical grouping of resources at a site.
     Multi-resource downtimes are easiest to declare across a resource group.
