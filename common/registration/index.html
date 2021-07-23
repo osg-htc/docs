@@ -1946,10 +1946,12 @@ See the full list of services that should be registered in the OSG topology
 <p>OSG resources are stored under a hierarchy of facilities, sites, and resource groups, defined as follows:</p>
 <ul>
 <li><strong>Facility</strong>: The institution or company name where your resource is located.</li>
-<li><strong>Site</strong>: Smaller than a facility; typically represents a computing cluster.
+<li><strong>Site</strong>: Smaller than a facility; typically represents a computing center or an academic department.
     Frequently used as the display name for <a href="http://gracc.opensciencegrid.org">accounting dashboards</a>.</li>
-<li><strong>Resource Group</strong>: A logical grouping of resources at a site.
-    Production and testing resources must be placed into separate Resource Groups.</li>
+<li><strong>Resource Group</strong>: A logical grouping of resources at a site,
+    i.e. all resources associated with a specific computing cluster.
+    Multi-resource downtimes are easiest to declare across a resource group.
+    Production and testing resources must be placed into separate resource groups.</li>
 <li><strong>Resource</strong>: A host that provides grid services, e.g. Compute Entrypoints, storage endpoints, or perfSonar hosts.</li>
 </ul>
 <p>Throughout this document, you will be asked to substitute your own facility, site, resource group, and resource names
@@ -1969,11 +1971,11 @@ If you don't already know the relevant names for your resource, using the follow
 </tr>
 <tr>
 <td>Site</td>
-<td>Abbreviated facility and cluster name, e.g. <code>TCNJ-ELSA</code>, or <code>New Mexico State - AggieGrid</code></td>
+<td>Computing center or academic department, e.g. <code>CHTC</code>, <code>MWT2 ATLAS UC</code>, <code>San Diego Supercomputer Center</code></td>
 </tr>
 <tr>
 <td>Resource Group</td>
-<td>Same as the site name. Resource groups used for testintg purposes should have an <code>-ITB</code> or <code>- ITB</code> suffix, e.g. <code>TCNJ-ELSA-ITB</code></td>
+<td>Abbreviated facility, site, and cluster name. Resource groups used for testing purposes should have an <code>-ITB</code> or <code>- ITB</code> suffix, e.g. <code>TCNJ-ELSA-ITB</code></td>
 </tr>
 <tr>
 <td>Resource</td>
@@ -2164,24 +2166,28 @@ Wisconsin</code> can be found and registered in the following file, relative to 
 <p>Do not put downtime updates in the same pull request as other topology updates.</p>
 </div>
 <h3 id="registering-new-downtime">Registering new downtime<a class="headerlink" href="#registering-new-downtime" title="Permanent link">&para;</a></h3>
-<p>To register a new downtime for a registered resource,
-you will use a webform to generate the contents of the downtime entry,
+<p>To register a new downtime for a resource or for multiples resources that are part of a resource group,
+you will use webforms to generate the contents of the downtime entry,
 copy it into the downtime file corresponding to your resource,
 and submit it as a GitHub pull request.
 Follow the instructions below:</p>
 <ol>
 <li>
-<p>Open the <a href="https://topology.opensciencegrid.org/generate_downtime">downtime generation webform</a> in your browser.</p>
+<p>Open one of the downtime generation webforms in your browser:</p>
+<ul>
+<li>Use the <a href="https://topology.opensciencegrid.org/generate_downtime">resource downtime generator</a> if you only need
+    to declare a downtime for a single resource.</li>
+<li>Use the <a href="https://topology.opensciencegrid.org/generate_resource_group_downtime">resource group downtime generator</a>
+    if you need to declare a downtime for multiple resources across a resource group.</li>
+</ul>
 </li>
 <li>
-<p>Select your facility from the corresponding list.</p>
+<p>Select your facility, site, resource group, and/or resource from the corresponding lists.</p>
 </li>
 <li>
-<p>Select the resource that will be down from the corresponding list.</p>
-</li>
-<li>
-<p>Select all the services that will be down. To select multiple, use Control-Click on Windows and Linux,
-    or Command-Click on macOS.</p>
+<p><strong>For the single resource downtime form:</strong>
+    Select all the services that will be down.
+    To select multiple, use Control-Click on Windows and Linux, or Command-Click on macOS.</p>
 </li>
 <li>
 <p>Fill the other fields with information about the downtime.</p>
