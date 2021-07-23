@@ -52,21 +52,23 @@ See the full list of services that should be registered in the OSG topology
 OSG resources are stored under a hierarchy of facilities, sites, and resource groups, defined as follows:
 
 -   **Facility**: The institution or company name where your resource is located.
--   **Site**: Smaller than a facility; typically represents a computing cluster.
+-   **Site**: Smaller than a facility; typically represents a computing center or an academic department.
     Frequently used as the display name for [accounting dashboards](http://gracc.opensciencegrid.org).
--   **Resource Group**: A logical grouping of resources at a site.
-    Production and testing resources must be placed into separate Resource Groups.
+-   **Resource Group**: A logical grouping of resources at a site,
+    i.e. all resources associated with a specific computing cluster.
+    Multi-resource downtimes are easiest to declare across a resource group.
+    Production and testing resources must be placed into separate resource groups.
 -   **Resource**: A host that provides grid services, e.g. Compute Entrypoints, storage endpoints, or perfSonar hosts.
 
 Throughout this document, you will be asked to substitute your own facility, site, resource group, and resource names
 when registering with the OSG.
 If you don't already know the relevant names for your resource, using the following naming conventions:
 
-| Level          | Naming convention                                                                                                                                                                   |
-|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Facility       | Unabbreviated institution or company name, e.g. `University of Wisconsin - Madison`                                                                                                 |
-| Site           | Abbreviated facility and cluster name, e.g. `TCNJ-ELSA`, or `New Mexico State - AggieGrid`                                                                                          |
-| Resource Group | Same as the site name. Resource groups used for testintg purposes should have an `-ITB` or `- ITB` suffix, e.g. `TCNJ-ELSA-ITB`                                                     |
+| Level          | Naming convention                                                                                                                                                                 |
+|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Facility       | Unabbreviated institution or company name, e.g. `University of Wisconsin - Madison`                                                                                               |
+| Site           | Computing center or academic department, e.g. `CHTC`, `MWT2 ATLAS UC`, `San Diego Supercomputer Center`                                                                           |
+| Resource Group | Abbreviated facility, site, and cluster name. Resource groups used for testing purposes should have an `-ITB` or `- ITB` suffix, e.g. `TCNJ-ELSA-ITB`                            |
 | Resource       | In all capital letters, `<ABBREV FACILTY>-<CLUSTER>-<RESOURCE TYPE>`, for example:<br>`TCNJ-ELSA-CE` or `NMSU-AGGIE-GRID-SQUID`<br>If you don't know which VO to use, pick `OSG`. |
 
 OSG resources are stored in the GitHub repository as YAML files under a directory structure that reflects the above
@@ -249,20 +251,24 @@ topology/University of Wisconsin/CHTC/CHTC-Slurm-HPC_downtime.yaml
 
 ### Registering new downtime ###
 
-To register a new downtime for a registered resource,
-you will use a webform to generate the contents of the downtime entry,
+To register a new downtime for a resource or for multiples resources that are part of a resource group,
+you will use webforms to generate the contents of the downtime entry,
 copy it into the downtime file corresponding to your resource,
 and submit it as a GitHub pull request.
 Follow the instructions below:
 
-1.  Open the [downtime generation webform](https://topology.opensciencegrid.org/generate_downtime) in your browser.
+1.  Open one of the downtime generation webforms in your browser:
 
-1.  Select your facility from the corresponding list.
+    -   Use the [resource downtime generator](https://topology.opensciencegrid.org/generate_downtime) if you only need
+        to declare a downtime for a single resource.
+    -   Use the [resource group downtime generator](https://topology.opensciencegrid.org/generate_resource_group_downtime)
+        if you need to declare a downtime for multiple resources across a resource group.
 
-1.  Select the resource that will be down from the corresponding list.
+1.  Select your facility, site, resource group, and/or resource from the corresponding lists.
 
-1.  Select all the services that will be down. To select multiple, use Control-Click on Windows and Linux,
-    or Command-Click on macOS.
+1.  **For the single resource downtime form:**
+    Select all the services that will be down.
+    To select multiple, use Control-Click on Windows and Linux, or Command-Click on macOS.
 
 1.  Fill the other fields with information about the downtime.
 
