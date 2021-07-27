@@ -23,6 +23,12 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.
 Latest News
 -----------
 
+### **July 27, 2021:** High Priority Release
+
+-   HTCondor 9.0.3 and 9.1.1 Security Release. This release contains fixes for important security issues. More details on the security issues are in the vulnerability reports:
+    -   [HTCONDOR-2021-0003](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0003.html)
+    -   [HTCONDOR-2021-0004](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0004.html)
+
 ### **July 22, 2021:** HTCondor 9.0.2 and blahp 2.1.0
 
 This release of OSG 3.6 contains the following packages:
