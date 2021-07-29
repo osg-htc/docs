@@ -32,7 +32,7 @@ Before preparing your cluster for OSG resource requests, consider the following 
 -   Outbound network connectivity from the worker nodes (they can be behind NAT)
 -   One or more Unix accounts on your cluster's submit server with the following capabilities:
     -   Accessible via SSH key
-    -   Use of SSH remote port forwarding (`AllowTcpForwarding yes`) and SSH multiplexing (`MaxSessions 10`)
+    -   Use of SSH remote port forwarding (`AllowTcpForwarding yes`) and SSH multiplexing (`MaxSessions 10` or greater)
     -   Permission to submit jobs to your local cluster.
 -   Shared user home directories between the submit server and the worker nodes.
     Not required for HTCondor clusters:
