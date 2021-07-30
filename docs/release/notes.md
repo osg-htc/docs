@@ -24,6 +24,7 @@ To update to the OSG 3.5 series, please consult the page on
 
 | Version                             | Date       | Summary                                                                       |
 |:------------------------------------|:-----------|:------------------------------------------------------------------------------|
+| [3.5.43](3.5/release-3-5-43.md)     | 2021-07-30 | High Priority Release: HTCondor 8.8.15; Upcoming: HTCondor 9.0.4              |
 | [3.5.42](3.5/release-3-5-42.md)     | 2021-07-27 | High Priority Release: HTCondor 8.8.14; Upcoming: HTCondor 9.0.3              |
 | [3.5.41](3.5/release-3-5-41.md)     | 2021-07-22 | HTCondor 9.0.2, blahp 2.1.0, XRootD 5.3.0                                     |
 | [3.5.40-2](3.5/release-3-5-40-2.md) | 2021-07-15 | VO Package v114                                                               |
