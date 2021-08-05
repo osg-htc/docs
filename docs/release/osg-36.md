@@ -23,6 +23,14 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.
 Latest News
 -----------
 
+### **August 5, 2021:** VOMS Update, htvault-config 1.4, htgettoken 1.3
+
+-   VOMS 2.0.16-1.2 (EL7) and VOMS 2.1.0-0.14.rc2.2 (EL8)
+    -   Add IAM and TLS SNI support
+-   htvault-config 1.4 and htgettoken 1.3
+    -   Improved security through more fine-grained vault tokens and detailed logging
+    -   Miscellaneous improvements
+
 ### **July 30, 2021:** High Priority Release
 
 -   HTCondor 9.0.4 and 9.1.2 Security Release. This release contains fixes for important security issues. More details on the security issues are in the vulnerability reports:
