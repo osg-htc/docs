@@ -1746,8 +1746,8 @@ If this occurs, you should immediately stop accepting job submissions from the O
 <p>Configure your batch system to stop accepting jobs from the VO:</p>
 <ul>
 <li>
-<p><strong>For HTCondor batch systems,</strong> set the following on your HTCondor-CE or Access Point accepting jobs from an OSG
-    Hosted CE:</p>
+<p><strong>For HTCondor batch systems,</strong> set the following in <code>/etc/condor/config.d/</code> on your HTCondor-CE or Access Point
+    accepting jobs from an OSG Hosted CE:</p>
 <div class="codehilite"><pre><span></span><code>SUBMIT_REQUIREMENT_Ban_OSG = (Owner != &quot;&lt;OFFENDING VO USER&gt;&quot;)
 SUBMIT_REQUIREMENT_Ban_OSG_REASON = &quot;OSG pilot job submission temporarily disabled&quot;
 SUBMIT_REQUIREMENT_NAMES = $(SUBMIT_REQUIREMENT_NAMES) Ban_OSG
