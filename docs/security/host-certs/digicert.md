@@ -1,7 +1,7 @@
 DigiCert IGTF Host Certificates
 ===============================
 
-!!! danger "DigiCert no longer issue IGTF certificates"
+!!! danger "DigiCert no longer issues IGTF certificates"
     DigiCert stopped issuing IGTF certificates so the instructions in this document are no longer applicable.
 
 !!! note
