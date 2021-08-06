@@ -1,6 +1,9 @@
 DigiCert IGTF Host Certificates
 ===============================
 
+!!! danger "DigiCert no longer issue IGTF certificates"
+    DigiCert stopped issuing IGTF certificates so the instructions in this document are no longer applicable.
+
 !!! note
     This document describes how to get **host** certificates.
     For instructions on how to get **user** certificates, see the [User Certificates document](../user-certs.md).
