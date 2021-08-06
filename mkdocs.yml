@@ -101,7 +101,6 @@ nav:
     - 'Overview': 'security/host-certs/overview.md'
     - 'Using InCommon': 'security/host-certs/incommon.md'
     - "Using Let's Encrypt": 'security/host-certs/lets-encrypt.md'
-    - 'Using DigiCert': 'security/host-certs/digicert.md'
 
 markdown_extensions:
   - admonition
