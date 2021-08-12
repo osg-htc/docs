@@ -29,6 +29,9 @@ This release contains:
     -   [XRootD 5.3.1](https://github.com/xrootd/xrootd/blob/v5.3.1/docs/ReleaseNotes.txt): Bug fix release
         -   Fix occasional crash under heavy load when using asynchronous I/O
 
+!!! note
+    If you turned off asynchronous I/O to work around the problem with XRootD. Please turn asynchronous I/O back on again.
+
 These
 [JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.45%2C3.5.45-upcoming)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC)
 were addressed in this release.
