@@ -24,7 +24,8 @@ To update to the OSG 3.5 series, please consult the page on
 
 | Version                             | Date       | Summary                                                                       |
 |:------------------------------------|:-----------|:------------------------------------------------------------------------------|
-| [3.5.44](3.5/release-3-5-44.md)     | 2021-08-05 | VOMS 2.0.16 (EL7), VOMS 2.1.0-rc2 (EL8), htvault-config 1.4, htgettoken 1.3, Upcoming XCache 2.0.1 |
+| [3.5.45](3.5/release-3-5-45.md)     | 2021-08-12 | gratia-probe 1.24.0; Upcoming: XRootD 5.3.1                                   |
+| [3.5.44](3.5/release-3-5-44.md)     | 2021-08-05 | VOMS 2.0.16 (EL7), VOMS 2.1.0-rc2 (EL8), htvault-config 1.4, htgettoken 1.3; Upcoming: XCache 2.0.1 |
 | [3.5.43](3.5/release-3-5-43.md)     | 2021-07-30 | High Priority Release: HTCondor 8.8.15; Upcoming: HTCondor 9.0.4              |
 | [3.5.42](3.5/release-3-5-42.md)     | 2021-07-27 | High Priority Release: HTCondor 8.8.14; Upcoming: HTCondor 9.0.3              |
 | [3.5.41](3.5/release-3-5-41.md)     | 2021-07-22 | HTCondor 9.0.2, blahp 2.1.0, XRootD 5.3.0                                     |

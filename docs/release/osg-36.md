@@ -23,6 +23,13 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.
 Latest News
 -----------
 
+### **August 12, 2021:** Gratia probes 2.1.0
+
+-   Gratia probes 2.1.0
+    -   Fix a problem that caused a traceback message in the condor\_meter
+    -   Fix a traceback caused by missing LogLevel in ProbeConfig
+    -   Ensure that Gratia accounts for SciTokens-based pilots
+
 ### **August 5, 2021:** VOMS Update, htvault-config 1.4, htgettoken 1.3
 
 -   VOMS 2.0.16-1.2 (EL7) and VOMS 2.1.0-0.14.rc2.2 (EL8)
