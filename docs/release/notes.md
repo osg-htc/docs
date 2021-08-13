@@ -28,7 +28,7 @@ To update to the OSG 3.5 series, please consult the page on
 | [3.5.44](3.5/release-3-5-44.md)     | 2021-08-05 | VOMS 2.0.16 (EL7), VOMS 2.1.0-rc2 (EL8), htvault-config 1.4, htgettoken 1.3; Upcoming: XCache 2.0.1 |
 | [3.5.43](3.5/release-3-5-43.md)     | 2021-07-30 | High Priority Release: HTCondor 8.8.15; Upcoming: HTCondor 9.0.4              |
 | [3.5.42](3.5/release-3-5-42.md)     | 2021-07-27 | High Priority Release: HTCondor 8.8.14; Upcoming: HTCondor 9.0.3              |
-| [3.5.41](3.5/release-3-5-41.md)     | 2021-07-22 | HTCondor 9.0.2, blahp 2.1.0, XRootD 5.3.0                                     |
+| [3.5.41](3.5/release-3-5-41.md)     | 2021-07-22 | Upcoming: HTCondor 9.0.2, blahp 2.1.0, XRootD 5.3.0                           |
 | [3.5.40-2](3.5/release-3-5-40-2.md) | 2021-07-15 | VO Package v114                                                               |
 | [3.5.40](3.5/release-3-5-40.md)     | 2021-07-01 | Frontier Squid 4.15-2.1, vault 1.7.3, htvault-config 1.2, EL8: XRootD 4.12.6 and plugins, osg-flock 1.3, Upcoming: xrootd-multiuser 1.1.0 |
 | [3.5.39](3.5/release-3-5-39.md)     | 2021-06-24 | scitokens-cpp 0.6.2, Upcoming: HTCondor 9.0.1-1.1, HTCondor-CE 5.1.1-1.1      |
