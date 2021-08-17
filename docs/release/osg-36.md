@@ -23,6 +23,12 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.
 Latest News
 -----------
 
+### **August 16, 2021:** IGTF 1.112
+
+This release contains updated CA Certificates based on IGTF 1.112:
+
+-   Updated ANSPGrid CA with extended validity date (BR)
+
 ### **August 12, 2021:** Gratia probes 2.1.0
 
 -   Gratia probes 2.1.0
@@ -117,7 +123,7 @@ This release of OSG 3.6 contains the following packages:
 
 ### **May 25, 2021:** IGTF 1.111
 
-This release contains updated CA Certificates based on IGTF 1.108:
+This release contains updated CA Certificates based on IGTF 1.111:
 
 -   Removed discontinued NERSC-SLCS CA (US)
 -   Removed discontinued MYIFAM CA (MY)
