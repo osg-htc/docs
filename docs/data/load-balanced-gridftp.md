@@ -363,7 +363,7 @@ To get assistance with `keepalived` in front of OSG Software services, please us
 
 -   [Linux Virtual Server homepage](http://www.linuxvirtualserver.org/whatis.html)
 -   [Keepalived homepage](http://www.keepalived.org/index.html)
--   [RHEL 7 Load Balancer Administration Guide](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Load_Balancer_Administration/index.html)
+-   [RHEL 7 Load Balancer Administration Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/load_balancer_administration/index)
 -   [T2 Nebraska LVS installation notes](https://github.com/gattebury/gridftp-with-lvs)
 
 
