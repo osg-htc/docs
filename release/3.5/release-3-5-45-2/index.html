@@ -9,14 +9,14 @@
       
       
       
-        <link rel="canonical" href="https://opensciencegrid.org/docs/release/3.5/release-3-5-36-2/">
+        <link rel="canonical" href="https://opensciencegrid.org/docs/release/3.5/release-3-5-45-2/">
       
       <link rel="icon" href="../../../img/favicon.ico">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.0">
     
     
       
-        <title>Release 3 5 36 2 - OSG Site Documentation</title>
+        <title>Release 3 5 45 2 - OSG Site Documentation</title>
       
     
     
@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#osg-data-release-3536-2" class="md-skip">
+        <a href="#osg-data-release-3545-2" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Release 3 5 36 2
+              Release 3 5 45 2
             
           </span>
         </div>
@@ -1725,13 +1725,13 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/release/3.5/release-3-5-36-2.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/release/3.5/release-3-5-45-2.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="osg-data-release-3536-2">OSG Data Release 3.5.36-2<a class="headerlink" href="#osg-data-release-3536-2" title="Permanent link">&para;</a></h1>
-<p><strong>Release Date:</strong> 2021-05-25  <br />
+                <h1 id="osg-data-release-3545-2">OSG Data Release 3.5.45-2<a class="headerlink" href="#osg-data-release-3545-2" title="Permanent link">&para;</a></h1>
+<p><strong>Release Date:</strong> 2021-08-16  <br />
 <strong>Supported OS Versions:</strong> EL7, EL8</p>
 <div class="admonition tip">
 <p class="admonition-title">Want faster access to production-ready software?</p>
@@ -1748,12 +1748,11 @@ enabled=1
 
 </div>
 <h2 id="summary-of-changes">Summary of Changes<a class="headerlink" href="#summary-of-changes" title="Permanent link">&para;</a></h2>
-<p>CA Certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.111</a></p>
+<p>CA Certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.112</a></p>
 <ul>
-<li>Removed discontinued NERSC-SLCS CA (US)</li>
-<li>Removed discontinued MYIFAM CA (MY)</li>
+<li>Updated ANSPGrid CA with extended validity date (BR)</li>
 </ul>
-<p>These <a href="https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.5.36-2%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC">JIRA tickets</a> were addressed in this release.</p>
+<p>These <a href="https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.5.45-2%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC">JIRA tickets</a> were addressed in this release.</p>
 <h2 id="containers">Containers<a class="headerlink" href="#containers" title="Permanent link">&para;</a></h2>
 <p>The <a href="https://hub.docker.com/u/opensciencegrid/">OSG Docker images</a> have been updated to contain the latest CA certificates.</p>
 <h2 id="updating-to-the-new-release">Updating to the New Release<a class="headerlink" href="#updating-to-the-new-release" title="Permanent link">&para;</a></h2>
@@ -1774,13 +1773,13 @@ Note that in some cases, there are multiple RPMs for each package.
 You can click on any given package to see the set of RPMs or see the complete list <a href="#rpms">below</a>.</p>
 <h4 id="enterprise-linux-7">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7" title="Permanent link">&para;</a></h4>
 <ul>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=igtf-ca-certs-1.111-1.osg35.el7">igtf-ca-certs-1.111-1.osg35.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-ca-certs-1.97-1.osg35.el7">osg-ca-certs-1.97-1.osg35.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=igtf-ca-certs-1.112-1.osg35.el7">igtf-ca-certs-1.112-1.osg35.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-ca-certs-1.98-1.osg35.el7">osg-ca-certs-1.98-1.osg35.el7</a></li>
 </ul>
 <h4 id="enterprise-linux-8">Enterprise Linux 8<a class="headerlink" href="#enterprise-linux-8" title="Permanent link">&para;</a></h4>
 <ul>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=igtf-ca-certs-1.111-1.osg35.el8">igtf-ca-certs-1.111-1.osg35.el8</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-ca-certs-1.97-1.osg35.el8">osg-ca-certs-1.97-1.osg35.el8</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=igtf-ca-certs-1.112-1.osg35.el8">igtf-ca-certs-1.112-1.osg35.el8</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-ca-certs-1.98-1.osg35.el8">osg-ca-certs-1.98-1.osg35.el8</a></li>
 </ul>
 <h3 id="rpms">RPMs<a class="headerlink" href="#rpms" title="Permanent link">&para;</a></h3>
 <p>If you wish to manually update your system, you can run yum update against the following packages:</p>
@@ -1789,13 +1788,13 @@ You can click on any given package to see the set of RPMs or see the complete li
 
 <p>If you wish to only update the RPMs that changed, the set of RPMs is:</p>
 <h4 id="enterprise-linux-7_1">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code>igtf-ca-certs-1.111-1.osg35.el7
-osg-ca-certs-1.97-1.osg35.el7
+<div class="codehilite"><pre><span></span><code>igtf-ca-certs-1.112-1.osg35.el7
+osg-ca-certs-1.98-1.osg35.el7
 </code></pre></div>
 
 <h4 id="enterprise-linux-8_1">Enterprise Linux 8<a class="headerlink" href="#enterprise-linux-8_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code>igtf-ca-certs-1.111-1.osg35.el8
-osg-ca-certs-1.97-1.osg35.el8
+<div class="codehilite"><pre><span></span><code>igtf-ca-certs-1.112-1.osg35.el8
+osg-ca-certs-1.98-1.osg35.el8
 </code></pre></div>
                 
               
