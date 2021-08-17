@@ -24,6 +24,7 @@ To update to the OSG 3.5 series, please consult the page on
 
 | Version                             | Date       | Summary                                                                       |
 |:------------------------------------|:-----------|:------------------------------------------------------------------------------|
+| [3.5.45-2](3.5/release-3-5-45-2.md) | 2021-08-16 | IGTF 1.112                                                                    |
 | [3.5.45](3.5/release-3-5-45.md)     | 2021-08-12 | gratia-probe 1.24.0; Upcoming: XRootD 5.3.1                                   |
 | [3.5.44](3.5/release-3-5-44.md)     | 2021-08-05 | VOMS 2.0.16 (EL7), VOMS 2.1.0-rc2 (EL8), htvault-config 1.4, htgettoken 1.3; Upcoming: XCache 2.0.1 |
 | [3.5.43](3.5/release-3-5-43.md)     | 2021-07-30 | High Priority Release: HTCondor 8.8.15; Upcoming: HTCondor 9.0.4              |
@@ -35,7 +36,7 @@ To update to the OSG 3.5 series, please consult the page on
 | [3.5.38-2](3.5/release-3-5-38-2.md) | 2021-06-16 | VO Package v113                                                               |
 | [3.5.38](3.5/release-3-5-38.md)     | 2021-06-10 | HTCondor 8.8.13-1.1, Upcoming: XRootD 5.2.0, xrootd-hdfs 2.2.0-1.1            |
 | [3.5.37](3.5/release-3-5-37.md)     | 2021-06-03 | HTCondor-CE 4.5.2, gratia-probe 1.23.3, vault 1.7.2, osg-gridftp on EL8, Upcoming: GlideinWMS 3.7.4 |
-| [3.5.36-2](3.5/release-3-5-36-2.md) | 2020-05-25 | IGTF 1.111                                                                    |
+| [3.5.36-2](3.5/release-3-5-36-2.md) | 2021-05-25 | IGTF 1.111                                                                    |
 | [3.5.36](3.5/release-3-5-36.md)     | 2021-05-17 | HTCondor 8.8.13; Upcoming: HTCondor 9.0.0-1.5, HTCondor-CE 5.1.0, GlideinWMS 3.7.3 |
 | [3.5.35](3.5/release-3-5-35.md)     | 2021-05-13 | High Priority Release: Frontier Squid 4.15-1.2, IGTF 1.110                    |
 | [3.5.34](3.5/release-3-5-34.md)     | 2021-04-22 | CVMFS 2.8.1, gratia-probe 1.23.2                                              |

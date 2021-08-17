@@ -1,7 +1,7 @@
-OSG Data Release 3.5.36-2
+OSG Data Release 3.5.45-2
 =========================
 
-**Release Date:** 2021-05-25    
+**Release Date:** 2021-08-16    
 **Supported OS Versions:** EL7, EL8
 
 !!!tip "Want faster access to production-ready software?"
@@ -19,13 +19,12 @@ OSG Data Release 3.5.36-2
 Summary of Changes
 ------------------
 
-CA Certificates based on [IGTF 1.111](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+CA Certificates based on [IGTF 1.112](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
 
--   Removed discontinued NERSC-SLCS CA (US)
--   Removed discontinued MYIFAM CA (MY)
+-   Updated ANSPGrid CA with extended validity date (BR)
 
 
-These [JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.5.36-2%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
+These [JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.5.45-2%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
 Containers
 ----------
@@ -60,13 +59,13 @@ You can click on any given package to see the set of RPMs or see the complete li
 
 #### Enterprise Linux 7
 
--   [igtf-ca-certs-1.111-1.osg35.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.111-1.osg35.el7)
--   [osg-ca-certs-1.97-1.osg35.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.97-1.osg35.el7)
+-   [igtf-ca-certs-1.112-1.osg35.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.112-1.osg35.el7)
+-   [osg-ca-certs-1.98-1.osg35.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.98-1.osg35.el7)
 
 #### Enterprise Linux 8
 
--   [igtf-ca-certs-1.111-1.osg35.el8](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.111-1.osg35.el8)
--   [osg-ca-certs-1.97-1.osg35.el8](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.97-1.osg35.el8)
+-   [igtf-ca-certs-1.112-1.osg35.el8](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.112-1.osg35.el8)
+-   [osg-ca-certs-1.98-1.osg35.el8](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.98-1.osg35.el8)
 
 ### RPMs
 
@@ -79,13 +78,13 @@ If you wish to only update the RPMs that changed, the set of RPMs is:
 #### Enterprise Linux 7
 
 ``` file
-igtf-ca-certs-1.111-1.osg35.el7
-osg-ca-certs-1.97-1.osg35.el7
+igtf-ca-certs-1.112-1.osg35.el7
+osg-ca-certs-1.98-1.osg35.el7
 ```
 
 #### Enterprise Linux 8
 
 ``` file
-igtf-ca-certs-1.111-1.osg35.el8
-osg-ca-certs-1.97-1.osg35.el8
+igtf-ca-certs-1.112-1.osg35.el8
+osg-ca-certs-1.98-1.osg35.el8
 ```
