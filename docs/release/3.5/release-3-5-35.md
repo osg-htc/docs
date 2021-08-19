@@ -30,7 +30,7 @@ This release contains:
 
 
 These
-[JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.35%2C3.5.35-upcoming)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC)
+[JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.35)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC)
 were addressed in this release.
 
 Containers
