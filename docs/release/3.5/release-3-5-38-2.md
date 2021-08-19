@@ -25,7 +25,7 @@ Summary of Changes
 -   Retired old CLAS12/EIC VO certificates
 
 
-These [JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.38-2%2C3.6.210616-2)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
+These [JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.38-2)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
 Containers
 ----------
