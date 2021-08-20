@@ -41,10 +41,16 @@ In order to successfully start payload jobs:
    respectively.
 3. Set the `OSG_SQUID_LOCATION` environment variable to the HTTP address of your preferred Squid instance.
 4. _Recommended:_ Enable [CVMFS](#cvmfs) via one of the mechanisms described below.
-5. _Optional:_  If you want job I/O to be done in a separate directory outside of the container,
+5. _Strongly recommended:_  If you want job I/O to be done in a separate directory outside of the container,
    volume mount the desired directory on the host to `/pilot` inside the container.
+
+   Without this, user jobs may compete for disk space with other containers on your system.
+
    If you are using Docker to launch the container, this is done with the command line flag
-   `-v /somelocaldir:/pilot`.
+   `-v /worker-temp-dir:/pilot`.
+   Replace `/worker-temp-dir` with a directory you created for jobs to write into.
+   Make sure the user you run your container as has write access to this directory.
+
 6. _Optional:_ add an expression with the `GLIDEIN_Start_Extra` environment variable to append to the HTCondor `START`
    expression; this limits the pilot to only run certain jobs.
 
@@ -54,6 +60,7 @@ Here is an example invocation using `docker run` by hand:
 docker run -it --rm --user osg  \
        --privileged             \
        -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
+       -v /worker-temp-dir:/pilot               \
        -e GLIDEIN_Site="..."                    \
        -e GLIDEIN_ResourceName="..."            \
        -e GLIDEIN_Start_Extra="True"            \
@@ -161,6 +168,7 @@ docker run -it --rm --user osg      \
         --cap-add SYS_PTRACE        \
         -v /cvmfs:/cvmfs:shared     \
         -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
+        -v /worker-temp-dir:/pilot      \
         -e GLIDEIN_Site="..."           \
         -e GLIDEIN_ResourceName="..."   \
         -e GLIDEIN_Start_Extra="True"   \
@@ -168,4 +176,4 @@ docker run -it --rm --user osg      \
         opensciencegrid/osgvo-docker-pilot:release
 ```
 
-Fill in the values for `/path/to/token`, `GLIDEIN_Site`, `GLIDEIN_ResourceName`, and `OSG_SQUID_LOCATION` [as above](#running-the-container-with-docker).
+Fill in the values for `/path/to/token`, `/worker-temp-dir`, `GLIDEIN_Site`, `GLIDEIN_ResourceName`, and `OSG_SQUID_LOCATION` [as above](#running-the-container-with-docker).
