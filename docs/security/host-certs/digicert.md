@@ -31,6 +31,8 @@ notBefore=Jan  4 21:08:09 2010 GMT
 notAfter=Jan  4 21:08:09 2011 GMT
 ```
 
+If you are using OpenSSL 1.1, you may notice minor formatting differences.
+
 If you do not have a valid certificate, the OSG offers a command-line tool to generate certificate signing requests (CSR)
 to assist in acquiring a grid host certificate.
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:

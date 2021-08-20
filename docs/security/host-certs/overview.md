@@ -98,6 +98,8 @@ notBefore=Apr  8 00:00:00 2013 GMT
 notAfter=May 17 12:00:00 2014 GMT
 ```
 
+If you are using OpenSSL 1.1, you may notice minor formatting differences.
+
 ### How can I check the expiration time of my installed host certificate? 
 
 Use the following `openssl` command to find the dates that your host certificate is valid:
