@@ -18,11 +18,15 @@ Larger VOs should consider [hosting their own separate repositories](external-oa
 Requirements
 ------------
 
-To begin the process to distribute software on OASIS using the service hosted by OSG Operations, you must:
+To begin the process to distribute software on OASIS using the service, you must:
 
--   [Obtain a personal grid certificate](../security/user-certs.md), if you don't have one already.
--   Register yourself as a contact in [OSG Topology](../common/registration.md#registering-contacts)
--   Request to be associated with a [VO registered in Topology](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations).
+-   Register as an [OSG contact](https://opensciencegrid.org/technology/policy/comanage-instructions-user/) and
+    upload your SSH Key
+-   Submit a request to <help@opensciencegrid.org> to become an OASIS manager with the following:
+    -   The names of the [VO(s)](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations) whose
+        software that you would like to manage with the shared OASIS login host
+    -   CC a member of the VO(s) that can verify your affiliation
+    -   Any other VO members that should be OASIS managers
 
 How to use OASIS
 ----------------
