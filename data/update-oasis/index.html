@@ -668,15 +668,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#enable-oasis" class="md-nav__link">
-    Enable OASIS
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#log-in-with-gsissh" class="md-nav__link">
-    Log in with GSISSH
+  <a href="#log-in-with-ssh" class="md-nav__link">
+    Log in with SSH
   </a>
   
 </li>
@@ -1733,15 +1726,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#enable-oasis" class="md-nav__link">
-    Enable OASIS
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#log-in-with-gsissh" class="md-nav__link">
-    Log in with GSISSH
+  <a href="#log-in-with-ssh" class="md-nav__link">
+    Log in with SSH
   </a>
   
 </li>
@@ -1797,38 +1783,45 @@
                 
                 
                 <h1 id="updating-software-in-oasis">Updating Software in OASIS<a class="headerlink" href="#updating-software-in-oasis" title="Permanent link">&para;</a></h1>
-<p>OASIS is the OSG Application Software Installation Service. It is the recommended method to install software on the Open Science Grid. It is implemented using CernVM FileSystem (CVMFS) technology.</p>
-<p>This document is a step by step explanation of how a Virtual Organization (VO) Software Administrator can enable use of the shared OASIS service and use it to publish and update software on OSG Worker Nodes under <code>/cvmfs/oasis.opensciencegrid.org</code>.
-The shared OASIS service is especially appropropriate for VOs that have a relatively small number of members and a relatively small amount of software to distribute.  Larger VOs should consider <a href="../external-oasis-repos/">hosting their own separate repositories</a>.</p>
+<p>OASIS is the OSG Application Software Installation Service that can be used to publish and update software on OSG Worker
+Nodes under <code>/cvmfs/oasis.opensciencegrid.org</code>.
+It is implemented using CernVM FileSystem (CVMFS) technology and is the recommended method to install software on the
+Open Science Grid.</p>
+<p>This document is a step by step explanation of how a member of a Virtual Organization (VO) can become an OASIS manager
+for their VO and gain access to the shared OASIS service for software management.
+The shared OASIS service is especially appropropriate for VOs that have a relatively small number of members and a
+relatively small amount of software to distribute.
+Larger VOs should consider <a href="../external-oasis-repos/">hosting their own separate repositories</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>For information on how to configure a client for OASIS see the <a href="../../worker-node/install-cvmfs/">CVMFS installation documentation</a>.</p>
+<p>For information on how to configure an OASIS client see the <a href="../../worker-node/install-cvmfs/">CVMFS installation documentation</a>.</p>
 </div>
 <h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
-<p>To begin the process to distribute software on OASIS using the service hosted by OSG Operations, you must:</p>
+<p>To begin the process to distribute software on OASIS using the service, you must:</p>
 <ul>
-<li><a href="../../security/user-certs/">Obtain a personal grid certificate</a>, if you don't have one already.</li>
-<li>Register yourself as a contact in <a href="../../common/registration/#registering-contacts">OSG Topology</a></li>
-<li>Request to be associated with a <a href="https://github.com/opensciencegrid/topology/tree/master/virtual-organizations">VO registered in Topology</a>.</li>
+<li>Register as an <a href="https://opensciencegrid.org/technology/policy/comanage-instructions-user/">OSG contact</a> and
+    <a href="https://opensciencegrid.org/technology/policy/comanage-instructions-user/#oasis-managers-adding-an-ssh-key">upload your SSH Key</a>.</li>
+<li>Submit a request to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> to become an OASIS manager with the following:<ul>
+<li>The names of the <a href="https://github.com/opensciencegrid/topology/tree/master/virtual-organizations">VO(s)</a> whose
+    software that you would like to manage with the shared OASIS login host</li>
+<li>The names of any other VO members that should be OASIS managers</li>
+<li>The name of a member of the VO(s) that can verify your affiliation, and Cc that person on your emailed request</li>
+</ul>
+</li>
 </ul>
 <h2 id="how-to-use-oasis">How to use OASIS<a class="headerlink" href="#how-to-use-oasis" title="Permanent link">&para;</a></h2>
-<h3 id="enable-oasis">Enable OASIS<a class="headerlink" href="#enable-oasis" title="Permanent link">&para;</a></h3>
-<p>When you are ready to distribute your software with OASIS, submit a <a href="https://support.opensciencegrid.org/helpdesk/tickets/new">support ticket</a> with a request to enable OASIS for your VO. In your request, please specify your VO and provide a list of people who will install and administer the VO software in OASIS.</p>
-<p>OSG Operations will set <code>UseOASIS</code> to true for your VO in <a href="https://github.com/opensciencegrid/topology#topology">OSG topology</a> and add your list of administrators to the "OASIS Managers" list (which is near the bottom of the page of information about each VO in Topology). oasis-login will then grant access to the people who are listed as OASIS managers. Any time the list is to be modified, submit another ticket.</p>
-<h3 id="log-in-with-gsissh">Log in with GSISSH<a class="headerlink" href="#log-in-with-gsissh" title="Permanent link">&para;</a></h3>
-<p>The next step is to generate a proxy and log into <code>oasis-login.opensciencegrid.org</code> with <code>gsissh</code>. These commands should be run on a computer that has the <a href="../../worker-node/install-wn/">OSG worker node client</a> software. First make sure that your grid certificate is installed in <code>~/.globus/usercred.p12</code> on that computer and that it is mode 600, then run these commands:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>voms-proxy-init
-<span class="gp">user@host $ </span>gsissh -o <span class="nv">GSSAPIDelegateCredentials</span><span class="o">=</span>yes oasis-login.opensciencegrid.org
+<h3 id="log-in-with-ssh">Log in with SSH<a class="headerlink" href="#log-in-with-ssh" title="Permanent link">&para;</a></h3>
+<p>The shared OASIS login server is accessible via SSH for all OASIS managers with registered SSH keys:</p>
+<div class="codehilite"><pre><span></span><code>user@host $ ssh -i &lt;PATH TO SSH KEY&gt; ouser.&lt;VO&gt;@oasis-login.opensciencegrid.org
 </code></pre></div>
 
-<p>In case the user can be mapped to more than one account, specify it explicitly in a command like this</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>gsissh -o <span class="nv">GSSAPIDelegateCredentials</span><span class="o">=</span>yes ouser.&lt;VO&gt;%@oasis-login.opensciencegrid.org
-</code></pre></div>
-
-<p>Change <code>&lt;VO&gt;</code> for the name of the Virtual Organization you are trying to access.</p>
-<p>Instead of putting <code>-o GSSAPIDelegateCredentials=yes</code> on the command line, you can put it in your <code>~/.ssh/config</code> like this:</p>
+<p>Change <code>&lt;VO&gt;</code> for the name of the Virtual Organization you are trying to access and <code>&lt;PATH TO SSH KEY&gt;</code> with the path to
+the private part of the SSH key whose public part you
+<a href="https://opensciencegrid.org/technology/policy/comanage-instructions-user/#oasis-managers-adding-an-ssh-key">registered with the OSG</a>.</p>
+<p>Instead of putting <code>-i &lt;PATH TO SSH KEY&gt;</code> or <code>ouser.&lt;VO&gt;@</code> on the command line, you can put it in your <code>~/.ssh/config</code>:</p>
 <div class="codehilite"><pre><span></span><code><span class="go">Host oasis-login.opensciencegrid.org</span>
-<span class="go">    GSSAPIDelegateCredentials yes</span>
+<span class="go">User ouser.&lt;VO&gt;</span>
+<span class="go">IdentityFile &lt;PATH TO SSH KEY&gt;</span>
 </code></pre></div>
 
 <h3 id="install-and-update-software">Install and update software<a class="headerlink" href="#install-and-update-software" title="Permanent link">&para;</a></h3>
@@ -1855,6 +1848,8 @@ The shared OASIS service is especially appropropriate for VOs that have a relati
 
 <h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <p><a href="https://cvmfs.readthedocs.io/en/stable/">CVMFS Documentation</a></p>
+                
+                  
                 
               
               
