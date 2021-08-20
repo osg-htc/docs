@@ -15,7 +15,7 @@ relatively small amount of software to distribute.
 Larger VOs should consider [hosting their own separate repositories](external-oasis-repos.md).
 
 !!! note
-    For information on how to configure an OASIS client [CVMFS installation documentation](../worker-node/install-cvmfs.md).
+    For information on how to configure an OASIS client see the [CVMFS installation documentation](../worker-node/install-cvmfs.md).
 
 Requirements
 ------------
@@ -23,12 +23,12 @@ Requirements
 To begin the process to distribute software on OASIS using the service, you must:
 
 -   Register as an [OSG contact](https://opensciencegrid.org/technology/policy/comanage-instructions-user/) and
-    upload your SSH Key
+    [upload your SSH Key](https://opensciencegrid.org/technology/policy/comanage-instructions-user/#oasis-managers-adding-an-ssh-key).
 -   Submit a request to <help@opensciencegrid.org> to become an OASIS manager with the following:
     -   The names of the [VO(s)](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations) whose
         software that you would like to manage with the shared OASIS login host
-    -   CC a member of the VO(s) that can verify your affiliation
-    -   Any other VO members that should be OASIS managers
+    -   The names of any other VO members that should be OASIS managers
+    -   The name of a member of the VO(s) that can verify your affiliation, and Cc that person on your emailed request
 
 How to use OASIS
 ----------------
