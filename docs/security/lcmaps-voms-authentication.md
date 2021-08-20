@@ -159,7 +159,7 @@ To map specific users to Unix accounts based on their certificates' DNs, create 
     OpenSSL version 1.1 is present on Enterprise Linux 8 systems.
     The new format is a comma separated list of attributes.
     You must convert that back to the older format for our map files.
-    Each attribute must start with a `/` and there are no spaces around the `=` and removed the comma between attributes:
+    Each attribute must start with a `/` and there are no spaces around the `=` and remove the comma between attributes:
 
     ```
     DC = org, DC = opensciencegrid, O = Open Science Grid, OU = People, CN = Matyas Selmeci
