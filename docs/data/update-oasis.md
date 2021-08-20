@@ -1,13 +1,19 @@
 Updating Software in OASIS
 ==========================
 
-OASIS is the OSG Application Software Installation Service. It is the recommended method to install software on the Open Science Grid. It is implemented using CernVM FileSystem (CVMFS) technology.
+OASIS is the OSG Application Software Installation Service that can be used to publish and update software on OSG Worker
+Nodes under `/cvmfs/oasis.opensciencegrid.org`.
+It is implemented using CernVM FileSystem (CVMFS) technology and is the recommended method to install software on the
+Open Science Grid.
 
-This document is a step by step explanation of how a Virtual Organization (VO) Software Administrator can enable use of the shared OASIS service and use it to publish and update software on OSG Worker Nodes under `/cvmfs/oasis.opensciencegrid.org`.
-The shared OASIS service is especially appropropriate for VOs that have a relatively small number of members and a relatively small amount of software to distribute.  Larger VOs should consider [hosting their own separate repositories](external-oasis-repos.md).
+This document is a step by step explanation of how a member of a Virtual Organization (VO) can become an OASIS manager
+for their VO and gain access to the shared OASIS service for software management.
+The shared OASIS service is especially appropropriate for VOs that have a relatively small number of members and a
+relatively small amount of software to distribute.
+Larger VOs should consider [hosting their own separate repositories](external-oasis-repos.md).
 
 !!! note
-    For information on how to configure a client for OASIS see the [CVMFS installation documentation](../worker-node/install-cvmfs.md).
+    For information on how to configure an OASIS client [CVMFS installation documentation](../worker-node/install-cvmfs.md).
 
 Requirements
 ------------
