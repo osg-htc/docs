@@ -63,16 +63,15 @@ In this `account` section, the `password_file` option is a path to a file
 you create as `root` with the encryption password to be used for this client
 account.
 
+Details for this configuration can be found below under
+[Configuring tokens for an OIDC client account](#configuring-tokens-for-an-oidc-client-account).
+
 For each client account, you can configure one or more `[token <TOKEN_NAME>]`
 sections, where `<TOKEN_NAME>` is a unique name of your choosing.
 These sections describe how to create the token with the `oidc-token` tool.
 For details, see
 [Creating a new OIDC Client Account](#creating-a-new-oidc-client-account)
 below.
-
-
-Details for this configuration can be found below under
-[Configuring tokens for an OIDC client account](#configuring-tokens-for-an-oidc-client-account).
 
 
 Creating a new OIDC client account
