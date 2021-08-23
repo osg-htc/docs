@@ -3,7 +3,7 @@ Installing and Using the OSG Token Renewal Service
 
 This document contains instructions to install and configure the
 OSG Token Renewal Service package, `osg-token-renewer`,
-for obtaining and renewing tokens with the OIDC tools.
+for obtaining and automatically renewing tokens with the OIDC tools.
 This service automates the procedure in the
 [Requesting Tokens](https://opensciencegrid.org/technology/software/requesting-tokens/)
 document.
@@ -28,10 +28,9 @@ steps to prepare in advance:
   [a supported operating system](../release/supported_platforms.md)
 - Obtain root access to the host
 - Prepare the [required Yum repositories](../common/yum.md)
-- Install [CA certificates](../common/ca.md)
 
 
-Installing the OSG token renewal service
+Installing the OSG Token Renewal Service
 ----------------------------------------
 
 Install the OSG Token Renewal Service package:
@@ -79,13 +78,6 @@ Details for this configuration can be found below under
 Creating a new OIDC client account
 ----------------------------------
 
-The
-[Requesting Tokens](https://opensciencegrid.org/technology/software/requesting-tokens/)
-document describes the process of running `oidc-gen` as `root` to create a
-new OIDC client account.
-However, in order to keep relevant oidc-agent config files owned by the
-`osg-token-svc` service account rather than `root`, we provide a
-`osg-token-renewer-setup.sh` script.
 
 To create a new client account named `<ACCOUNT_SHORTNAME>`:
 
@@ -95,20 +87,22 @@ To create a new client account named `<ACCOUNT_SHORTNAME>`:
   [Requesting Tokens](https://opensciencegrid.org/technology/software/requesting-tokens/)
   document to determine which scopes you will need for this client account.
 - Run the setup script as follows:
-  ```console
-  root@server # osg-token-renewer-setup.sh <ACCOUNT_SHORTNAME> <SCOPES...>
-  ```
-  For example,
-  ```console
-  root@server # osg-token-renewer-setup.sh myaccount123 wlcg offline_access
-  ```
+
+        :::console
+        root@server # osg-token-renewer-setup.sh <ACCOUNT_SHORTNAME> <SCOPES...>
+
+    For example,
+
+        :::console
+        root@server # osg-token-renewer-setup.sh myaccount123 wlcg offline_access
+
 - You will be prompted on the console to visit a WLCG web link to authorize
   the client request with a passcode printed on the console.
   Follow the prompts (visit the web link, enter the request passcode,
   log in with your WLCG INDIGO IAM user account, and authorize the request).
 - If this succeeds you will be prompted with a new
   `[account <ACCOUNT_SHORTNAME>]` section to add to your `config.ini`.
-  Go ahead and add it, replacing the example section if it's still there.
+  Add the section to your `/etc/token-renewer/config.ini`, replacing the example section if it's still there.
 
 Next you can configure one or more tokens for this client account.
 
@@ -121,31 +115,32 @@ After you have created an OIDC client account and added it to
 section in the config for each token that should be generated for this account
 (possibly with different options).
 
-Choose a `<TOKEN_NAME>` and add a new `[token <TOKEN_NAME>]` section
-(replacing the example section if it's still there).
+1.  Choose a `<TOKEN_NAME>` and add a new `[token <TOKEN_NAME>]` section
+    (replacing the example section if it's still there).
 
-The `account` option in this section must match the `<ACCOUNT_SHORTNAME>`
-for the corresponding `[account <ACCOUNT_SHORTNAME>]` section.
+    The `account` option in this section must match the `<ACCOUNT_SHORTNAME>`
+    for the corresponding `[account <ACCOUNT_SHORTNAME>]` section.
 
-The `token_path` option specifies the output path where the generated token
-will be saved.
+1.  Set the `token_path` to `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.token 
 
-Optionally, you may also specify any of the following options, which will
-be passed to the `oidc-token` command when generating the token:
+1.  Optionally, you may also specify any of the following options, which will
+    be passed to the `oidc-token` command when generating the token:
 
-| Option         | Description                                               |
-|:---------------|:----------------------------------------------------------|
-| `audience`     | list of audiences to pass via `--aud` option              |
-| `scope`        | list of scopes to pass via `--scope` option               |
-| `min_lifetime` | min token lifetime in seconds to pass via `--time` option |
+    | Option         | Description                                               |
+    |:---------------|:----------------------------------------------------------|
+    | `audience`     | list of audiences to pass via `--aud` option              |
+    | `scope`        | list of scopes to pass via `--scope` option               |
+    | `min_lifetime` | min token lifetime in seconds to pass via `--time` option |
 
-!!! note
-    For tokens used against an HTCondor-CE, set the `audience` option to
-    `<CE FQDN>:<CE PORT>`.
+    !!! note
+        For tokens used against an HTCondor-CE, set the `audience` option to
+        `<CE FQDN>:<CE PORT>`.
+### Example configuration
 
+<insert example config here with account + token sections>
 
-Running the token renewal service
----------------------------------
+Managing the OSG Token Renewal Service
+--------------------------------------
 
 The OSG token renewal service is set up as a "oneshot" systemd service,
 which runs under the `osg-token-svc` user, sets up an `oidc-agent`,
@@ -154,7 +149,7 @@ with `oidc-add`, and generates the tokens with `oidc-token`.
 
 This service is set to run via a systemd timer nightly at midnight.
 
-If you would like to run the service manually at a different time (to generate
+If you would like to run the service manually at a different time (e.g., to generate
 all the tokens immediately), you can run the service once with:
 
 ```console
