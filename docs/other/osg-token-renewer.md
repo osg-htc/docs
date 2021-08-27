@@ -15,9 +15,7 @@ Before Starting
 Before starting the installation process, consider the following points
 (consulting [the Reference section below](#reference) as needed):
 
-- **WLCG INDIGO IAM account:** You'll need an account with WLCG.
-  You can register for an account
-  [here](https://wlcg.cloud.cnaf.infn.it/start-registration).
+- An account is needed with an OIDC token issuer that offers the device flow
 - **User and Group IDs:** If they do not exist already, the installation will
   create the Linux user and group named `osg-token-svc`
 
