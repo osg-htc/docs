@@ -112,6 +112,24 @@ section in the config for each token that should be generated for this account
 Managing the OSG Token Renewal Service
 --------------------------------------
 
+These services are managed by `systemctl` and may start additional services as dependencies.
+As a reminder, here are common service commands (all run as `root`) for EL7:
+
+| To...                                   | On EL7, run the command...         |
+| :-------------------------------------- | :--------------------------------- |
+| Start a service                         | `systemctl start <SERVICE-NAME>`   |
+| Stop a service                          | `systemctl stop <SERVICE-NAME>`    |
+| Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`  |
+| Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>` |
+
+### Public cache services
+
+| **Software** | **Service name** | **Notes** |
+|--------------|------------------|-----------|
+| OSG Token Renewer | `osg-token-renewer.service` | The OSG Token Renewer, runs as a "oneshot" service, not a daemon. |
+| OSG Token Renewer timer | `osg-token-renewer.timer` | Nightly run schedule for OSG Token Renewer |
+
+
 The OSG token renewal service is set to run via a systemd timer nightly at midnight.
 
 If you would like to run the service manually at a different time (e.g., to generate
