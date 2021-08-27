@@ -41,7 +41,7 @@ This will install the `osg-token-renewer` scripts & systemd service files,
 and will pull in the `oidc-agent` package that the service depends on.
 
 
-Configuring the OSG token renewal service
+Configuring the OSG Token Renewal Service
 -----------------------------------------
 
 The main configuration file for the service is `/osg/token-renewer/config.ini`.
@@ -70,10 +70,6 @@ These sections describe how to create the token with the `oidc-token` tool.
 For details, see
 [Creating a new OIDC Client Account](#creating-a-new-oidc-client-account)
 below.
-
-
-Configuring the OSG Token Renewal Service
------------------------------------------
 
 
 ### Configuring accounts
