@@ -44,33 +44,6 @@ and will pull in the `oidc-agent` package that the service depends on.
 Configuring the OSG Token Renewal Service
 -----------------------------------------
 
-The main configuration file for the service is `/osg/token-renewer/config.ini`.
-
-For each OIDC Client, you will add an `account` section to the config file.
-For each token you wish to generate for this client account,
-you will configure a `token` section with any relevant options.
-
-Examples of this can be found in the `/osg/token-renewer/config.ini` that gets
-installed with the package.
-
-Each `[account <ACCOUNT_SHORTNAME>]` section corresponds to a client account
-named `<ACCOUNT_SHORTNAME>`, set up with the `oidc-gen` tool, run by the
-`osg-token-renewer-setup.sh` script.
-
-In this `account` section, the `password_file` option is a path to a file
-you create as `root` with the encryption password to be used for this client
-account.
-
-Details for this configuration can be found below under
-[Configuring tokens](#configuring-tokens).
-
-For each client account, you can configure one or more `[token <TOKEN_NAME>]`
-sections, where `<TOKEN_NAME>` is a unique name of your choosing.
-These sections describe how to create the token with the `oidc-token` tool.
-For details, see
-[Creating a new OIDC Client Account](#creating-a-new-oidc-client-account)
-below.
-
 
 ### Configuring accounts
 
