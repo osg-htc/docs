@@ -143,12 +143,7 @@ section in the config for each token that should be generated for this account
 Managing the OSG Token Renewal Service
 --------------------------------------
 
-The OSG token renewal service is set up as a "oneshot" systemd service,
-which runs under the `osg-token-svc` user, sets up an `oidc-agent`,
-adds the relevant OIDC client accounts as specified in the `config.ini`
-with `oidc-add`, and generates the tokens with `oidc-token`.
-
-This service is set to run via a systemd timer nightly at midnight.
+The OSG token renewal service is set to run via a systemd timer nightly at midnight.
 
 If you would like to run the service manually at a different time (e.g., to generate
 all the tokens immediately), you can run the service once with:
