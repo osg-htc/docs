@@ -1814,17 +1814,19 @@ In order to successfully start payload jobs:</p>
    respectively.</li>
 <li>Set the <code>OSG_SQUID_LOCATION</code> environment variable to the HTTP address of your preferred Squid instance.</li>
 <li><em>Recommended:</em> Enable <a href="#cvmfs">CVMFS</a> via one of the mechanisms described below.</li>
-<li><em>Strongly recommended:</em>  If you want job I/O to be done in a separate directory outside of the container,
-   volume mount the desired directory on the host to <code>/pilot</code> inside the container.</li>
-</ol>
+<li>
+<p><em>Strongly recommended:</em>  If you want job I/O to be done in a separate directory outside of the container,
+   volume mount the desired directory on the host to <code>/pilot</code> inside the container.</p>
 <p>Without this, user jobs may compete for disk space with other containers on your system.</p>
 <p>If you are using Docker to launch the container, this is done with the command line flag
-   <code>-v /worker-temp-dir:/pilot</code>.
-   Replace <code>/worker-temp-dir</code> with a directory you created for jobs to write into.
-   Make sure the user you run your container as has write access to this directory.</p>
-<ol>
-<li><em>Optional:</em> add an expression with the <code>GLIDEIN_Start_Extra</code> environment variable to append to the HTCondor <code>START</code>
-   expression; this limits the pilot to only run certain jobs.</li>
+<code>-v /worker-temp-dir:/pilot</code>.
+Replace <code>/worker-temp-dir</code> with a directory you created for jobs to write into.
+Make sure the user you run your container as has write access to this directory.</p>
+</li>
+<li>
+<p><em>Optional:</em> add an expression with the <code>GLIDEIN_Start_Extra</code> environment variable to append to the HTCondor <code>START</code>
+   expression; this limits the pilot to only run certain jobs.</p>
+</li>
 </ol>
 <p>Here is an example invocation using <code>docker run</code> by hand:</p>
 <div class="codehilite"><pre><span></span><code>docker run -it --rm --user osg  \
