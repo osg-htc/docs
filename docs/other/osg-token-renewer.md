@@ -78,12 +78,12 @@ Creating a new OIDC client account
 
 To create a new client account named `<ACCOUNT_SHORTNAME>`:
 
-- Create a corresponding file named `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.pw`
-  with the encryption password to use for this client account.
-- Consult the 
-  [Requesting Tokens](https://opensciencegrid.org/technology/software/requesting-tokens/)
-  document to determine which scopes you will need for this client account.
-- Run the setup script as follows:
+1. Create a corresponding file named `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.pw`
+   with the encryption password to use for this client account.
+1. Consult the 
+   [Requesting Tokens](https://opensciencegrid.org/technology/software/requesting-tokens/)
+   document to determine which scopes you will need for this client account.
+1. Run the setup script as follows:
 
         :::console
         root@server # osg-token-renewer-setup.sh <ACCOUNT_SHORTNAME> <ISSUER> <SCOPES...>
@@ -96,13 +96,13 @@ To create a new client account named `<ACCOUNT_SHORTNAME>`:
         root@server # scopes="wlcg offline_access"
         root@server # osg-token-renewer-setup.sh $account $issuer $scopes
 
-- You will be prompted on the console to visit a web link to authorize
-  the client request with a passcode printed on the console.
-  Follow the prompts (visit the web link, enter the request passcode,
-  log in with your account for your issuer, and authorize the request).
-- If this succeeds you will be prompted with a new
-  `[account <ACCOUNT_SHORTNAME>]` section to add to your `config.ini`.
-  Add the section to your `/etc/token-renewer/config.ini`, replacing the example section if it's still there.
+1. You will be prompted on the console to visit a web link to authorize
+   the client request with a passcode printed on the console.
+   Follow the prompts (visit the web link, enter the request passcode,
+   log in with your account for your issuer, and authorize the request).
+1. If this succeeds you will be prompted with a new
+   `[account <ACCOUNT_SHORTNAME>]` section to add to your `config.ini`.
+   Add the section to your `/etc/token-renewer/config.ini`, replacing the example section if it's still there.
 
 Next you can configure one or more tokens for this client account.
 
