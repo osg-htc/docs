@@ -80,7 +80,7 @@ To create a new client account named `<ACCOUNT_SHORTNAME>`:
 
 1. Create a corresponding file named `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.pw`
    with the encryption password to use for this client account.
-1. Consult the 
+1. Consult the
    [Requesting Tokens](https://opensciencegrid.org/technology/software/requesting-tokens/)
    document to determine which scopes you will need for this client account.
 1. Run the setup script as follows:
@@ -121,7 +121,7 @@ section in the config for each token that should be generated for this account
     The `account` option in this section must match the `<ACCOUNT_SHORTNAME>`
     for the corresponding `[account <ACCOUNT_SHORTNAME>]` section.
 
-1.  Set the `token_path` to `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.token 
+1.  Set the `token_path` to `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.token
 
 1.  Optionally, you may also specify any of the following options, which will
     be passed to the `oidc-token` command when generating the token:
@@ -171,8 +171,8 @@ Help
 To get assistance please use this [Help Procedure](../common/help.md).
 
 
-Reference 
-----------
+Reference
+---------
 
 ### Files of interest
 
