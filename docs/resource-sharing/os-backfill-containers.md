@@ -44,12 +44,12 @@ In order to successfully start payload jobs:
 5. _Strongly recommended:_  If you want job I/O to be done in a separate directory outside of the container,
    volume mount the desired directory on the host to `/pilot` inside the container.
 
-   Without this, user jobs may compete for disk space with other containers on your system.
+    Without this, user jobs may compete for disk space with other containers on your system.
 
-   If you are using Docker to launch the container, this is done with the command line flag
-   `-v /worker-temp-dir:/pilot`.
-   Replace `/worker-temp-dir` with a directory you created for jobs to write into.
-   Make sure the user you run your container as has write access to this directory.
+    If you are using Docker to launch the container, this is done with the command line flag
+    `-v /worker-temp-dir:/pilot`.
+    Replace `/worker-temp-dir` with a directory you created for jobs to write into.
+    Make sure the user you run your container as has write access to this directory.
 
 6. _Optional:_ add an expression with the `GLIDEIN_Start_Extra` environment variable to append to the HTCondor `START`
    expression; this limits the pilot to only run certain jobs.
