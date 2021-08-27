@@ -62,7 +62,7 @@ you create as `root` with the encryption password to be used for this client
 account.
 
 Details for this configuration can be found below under
-[Configuring tokens for an OIDC client account](#configuring-tokens-for-an-oidc-client-account).
+[Configuring tokens](#configuring-tokens).
 
 For each client account, you can configure one or more `[token <TOKEN_NAME>]`
 sections, where `<TOKEN_NAME>` is a unique name of your choosing.
@@ -72,9 +72,11 @@ For details, see
 below.
 
 
-Creating a new OIDC client account
-----------------------------------
+Configuring the OSG Token Renewal Service
+-----------------------------------------
 
+
+### Configuring accounts
 
 To create a new client account named `<ACCOUNT_SHORTNAME>`:
 
@@ -107,8 +109,7 @@ To create a new client account named `<ACCOUNT_SHORTNAME>`:
 Next you can configure one or more tokens for this client account.
 
 
-Configuring tokens for an OIDC client account
----------------------------------------------
+### Configuring tokens
 
 After you have created an OIDC client account and added it to
 `/osg/token-renewer/config.ini`, you need to create a corresponding `token`
