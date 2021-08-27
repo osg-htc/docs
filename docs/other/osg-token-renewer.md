@@ -88,17 +88,20 @@ To create a new client account named `<ACCOUNT_SHORTNAME>`:
 - Run the setup script as follows:
 
         :::console
-        root@server # osg-token-renewer-setup.sh <ACCOUNT_SHORTNAME> <SCOPES...>
+        root@server # osg-token-renewer-setup.sh <ACCOUNT_SHORTNAME> <ISSUER> <SCOPES...>
 
     For example,
 
         :::console
-        root@server # osg-token-renewer-setup.sh myaccount123 wlcg offline_access
+        root@server # account=myaccount123
+        root@server # issuer=https://wlcg.cloud.cnaf.infn.it/
+        root@server # scopes="wlcg offline_access"
+        root@server # osg-token-renewer-setup.sh $account $issuer $scopes
 
-- You will be prompted on the console to visit a WLCG web link to authorize
+- You will be prompted on the console to visit a web link to authorize
   the client request with a passcode printed on the console.
   Follow the prompts (visit the web link, enter the request passcode,
-  log in with your WLCG INDIGO IAM user account, and authorize the request).
+  log in with your account for your issuer, and authorize the request).
 - If this succeeds you will be prompted with a new
   `[account <ACCOUNT_SHORTNAME>]` section to add to your `config.ini`.
   Add the section to your `/etc/token-renewer/config.ini`, replacing the example section if it's still there.
