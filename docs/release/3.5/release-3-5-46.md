@@ -22,7 +22,7 @@ Summary of Changes
 !!! important "Important HTCondor update for HTCondor-CEs"
     If you are running an HTCondor-CE with SciTokens and GSI Authentication, you should update to HTCondor 9.0.5
     at your earliest convenience.
-    If you have not yet updated to HTCondor-CE 5 or HTCondor 9.0, please see [the update instructions](updating-to-osg-35.md).
+    If you have not yet updated to HTCondor-CE 5 or HTCondor 9.0, please see [the update instructions](../updating-to-osg-35.md).
 
 This release contains:
 
