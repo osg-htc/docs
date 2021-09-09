@@ -111,6 +111,7 @@ markdown_extensions:
       permalink: True
 
 plugins:
+  - search
   - redirects:
       redirect_maps:
         site-responsibilities.md: site-maintenance.md
