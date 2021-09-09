@@ -33,7 +33,7 @@ This release contains:
         -   Fix bug where ExitCode attribute would be suppressed when OnExitHold fired
         -   condor_who now suppresses spurious warnings coming from netstat
         -   The online manual now has detailed instructions for installing on MacOS
-        -   Fix bug where misconfigured MIG devices confused condor_gpu_discovery
+        -   Fix bug where misconfigured MIG devices would cause no GPUs to be detected
         -   The transfer_checkpoint_file list may now include input files
     -   [blahp 2.1.1](https://github.com/htcondor/BLAH/releases/tag/v2.1.1): Bug fix release
         -   Add Python 2 support back for Enterprise Linux 7
