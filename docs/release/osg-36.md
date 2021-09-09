@@ -23,6 +23,24 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.
 Latest News
 -----------
 
+### **September 9, 2021:** HTCondor 9.0.5 and blahp 2.1.1
+
+This release of OSG 3.6 contains the following packages:
+
+-   [HTCondor 9.0.5](https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00017.shtml): Bug fix release
+    -   Other authentication methods are tried if mapping fails using SciTokens
+    -   Fix rare crashes from successful condor\_submit, which caused DAGMan issues
+    -   Fix bug where ExitCode attribute would be suppressed when OnExitHold fired
+    -   condor\_who now suppresses spurious warnings coming from netstat
+    -   The online manual now has detailed instructions for installing on MacOS
+    -   Fix bug where misconfigured MIG devices confused condor\_gpu\_discovery
+    -   The transfer\_checkpoint\_file list may now include input files
+-   [blahp 2.1.1](https://github.com/htcondor/BLAH/releases/tag/v2.1.1): Bug fix release
+    -   Add Python 2 support back for Enterprise Linux 7
+    -   Allow the user to override system configuration files
+    -   Enable flexible configuration via a configuration directory
+    -   Fix Slurm resource usage reporting
+
 ### **August 16, 2021:** IGTF 1.112
 
 This release contains updated CA Certificates based on IGTF 1.112:
