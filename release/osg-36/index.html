@@ -1469,6 +1469,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#september-9-2021-htcondor-905-and-blahp-211" class="md-nav__link">
+    September 9, 2021: HTCondor 9.0.5 and blahp 2.1.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#august-16-2021-igtf-1112" class="md-nav__link">
     August 16, 2021: IGTF 1.112
   </a>
@@ -1831,6 +1838,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#september-9-2021-htcondor-905-and-blahp-211" class="md-nav__link">
+    September 9, 2021: HTCondor 9.0.5 and blahp 2.1.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#august-16-2021-igtf-1112" class="md-nav__link">
     August 16, 2021: IGTF 1.112
   </a>
@@ -1996,6 +2010,27 @@ GSI proxies and HTTP is used for data transfer instead of GridFTP.</p>
 GlideinWMS 3.9, and XRootD 5.1.
 We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="september-9-2021-htcondor-905-and-blahp-211"><strong>September 9, 2021:</strong> HTCondor 9.0.5 and blahp 2.1.1<a class="headerlink" href="#september-9-2021-htcondor-905-and-blahp-211" title="Permanent link">&para;</a></h3>
+<p>This release of OSG 3.6 contains the following packages:</p>
+<ul>
+<li><a href="https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00017.shtml">HTCondor 9.0.5</a>: Bug fix release<ul>
+<li>Other authentication methods are tried if mapping fails using SciTokens</li>
+<li>Fix rare crashes from successful condor_submit, which caused DAGMan issues</li>
+<li>Fix bug where ExitCode attribute would be suppressed when OnExitHold fired</li>
+<li>condor_who now suppresses spurious warnings coming from netstat</li>
+<li>The online manual now has detailed instructions for installing on MacOS</li>
+<li>Fix bug where misconfigured MIG devices would cause no GPUs to be detected</li>
+<li>The transfer_checkpoint_file list may now include input files</li>
+</ul>
+</li>
+<li><a href="https://github.com/htcondor/BLAH/releases/tag/v2.1.1">blahp 2.1.1</a>: Bug fix release<ul>
+<li>Add Python 2 support back for Enterprise Linux 7</li>
+<li>Allow the user to override system configuration files</li>
+<li>Enable flexible configuration via a configuration directory</li>
+<li>Fix Slurm resource usage reporting</li>
+</ul>
+</li>
+</ul>
 <h3 id="august-16-2021-igtf-1112"><strong>August 16, 2021:</strong> IGTF 1.112<a class="headerlink" href="#august-16-2021-igtf-1112" title="Permanent link">&para;</a></h3>
 <p>This release contains updated CA Certificates based on IGTF 1.112:</p>
 <ul>
