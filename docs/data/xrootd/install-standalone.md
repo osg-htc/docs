@@ -190,8 +190,8 @@ To validate an XRootD installation, perform the following verification steps:
     For example, if you are using a VOMS proxy,
     make sure your DN is mapped to a user in [/etc/grid-security/grid-mapfile](../../security/lcmaps-voms-authentication.md#mapping-users),
     and make sure you have a valid proxy on your local machine.
-    Also, ensure that the [Authfile](xrootd-authorization.md#authorization-file) on the XRootD server gives write access
-    to the Unix user you will get mapped to.
+    Also, ensure that the [Authfile](xrootd-authorization.md#authorization-database-file) on the XRootD server gives
+    write access to the Unix user you will get mapped to.
 
 1. Verify file transfer over the XRootD protocol using XRootD client tools:
 

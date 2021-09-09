@@ -4,25 +4,28 @@ Configuring XRootD Authorization
 !!!bug "EL7 version compatibility"
     There is an incompatibility with EL7 < 7.5 due to an issue with the `globus-gsi-proxy-core` package
 
+XRootD offers several authentication options [security plugins](https://xrootd.slac.stanford.edu/doc/dev50/sec_config.htm)
+to validate incoming credentials, such as VOMS proxies or bearer tokens.
+After the incoming credential has been mapped to a user, the [Authorization Database File](#authorization-database-file)
+is used to provide fine-grained file access.
 
-There are several authorization options in XRootD available through its security plugins.
-In this document, we will cover the [`xrootd-lcmaps`](#enabling-xrootd-lcmaps-authorization) security option supported
-in the OSG.
+In OSG 3.5, XRootD installations depended on [LCMAPS](#lcmaps-authentication) to authenticate incoming VOMS proxies, so
+XRootD adminstrators must edit `/etc/grid-security/grid-mapfile` and `/etc/grid-security/voms-mapfile` as well as
+[Authorization Database File](#authorization-database-file) to control file access.
 
-The XRootD LCMAPS authorization method depends on configuring
-[LCMAPS with the VOMS plugin](../../security/lcmaps-voms-authentication.md).
-LCMAPS maps an incoming user's grid credentials to a Unix account name;
-the permissions listed in the [authorization file](#authorization-file) all reference Unix account names. 
+In OSG 3.6, XRootD installations are automatically configured to authenticate all bearer tokens, macaroons, and VOMS
+proxies, so XRootD administrators can control file access solely through the
+[Authorization Database File](#authorization-database-file).
 
 !!! note
-    On the data nodes, the files will actually be owned by Unix user `xrootd` (or other daemon user), not as the user
+    On data nodes, files will be owned by Unix user `xrootd` (or other daemon user), not as the user
     authenticated to, under most circumstances.
     XRootD will verify the permissions and authorization based on the user that the security plugin authenticates you
     to, but, internally, the data node files will be owned by the `xrootd` user. If this behaviour is not desired, enable
     [XRootD multi-user support](install-standalone.md#enabling-multi-user-support). 
 
-Authorization File
-------------------
+Authorization Database File
+---------------------------
 
 XRootD allows configuring fine-grained file access permissions based on usernames and paths.
 This is configured in the authorization file `/etc/xrootd/auth_file` on the data server node, which should be writable
@@ -86,12 +89,16 @@ root@host # chmod 0640 /etc/xrootd/auth_file  # or 0644
 ```
 
 
-LCMAPS Authorization
---------------------
+LCMAPS Authentication
+---------------------
 
-The xrootd-lcmaps security plugin uses the `lcmaps` library and the [LCMAPS VOMS plugin](../../security/lcmaps-voms-authentication.md)
-to authenticate and authorize users based on X509 certificates and VOMS attributes. Perform the following instructions
-on all data nodes:
+!!! info "OSG 3.5 only"
+    LCMAPS-based authentication is only supported in OSG 3.5.
+
+The `xrootd-lcmaps` security plugin uses the LCMAPS library and the
+[LCMAPS VOMS plugin](../../security/lcmaps-voms-authentication.md) to authenticate and authorize users based on X.509
+certificates and VOMS attributes.
+Perform the following instructions on all data nodes:
 
 1. Install [CA certificates](../../common/ca.md#installing-ca-certificates) and [manage CRLs](../../common/ca.md#managing-certificate-revocation-lists)
 
@@ -105,7 +112,7 @@ on all data nodes:
         :::console
         root@host # yum install xrootd-lcmaps vo-client
 
-1. Configure access rights for mapped users by creating and modifying the XRootD [authorization file](#authorization-file)
+1. Configure access rights for mapped users by creating and modifying the XRootD [authorization file](#authorization-database-file)
 
 1. Restart the [relevant services](install-standalone.md#using-xrootd)
 
