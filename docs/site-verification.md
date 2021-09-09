@@ -40,7 +40,7 @@ successfully, that number will be ramped up.
 ### Verify reporting and monitoring ###
 
 To verify that your site is correctly reporting to the OSG, visit
-[OSG's Accounting Portal](https://gracc.opensciencegrid.org/dashboard/db/site-summary) and select your registered OSG
+[OSG's Accounting Portal](https://gracc.opensciencegrid.org/d/000000079/site-summary?orgId=1) and select your registered OSG
 site name from the `Site` dropdown.
 If you don't see your site in the dropdown,
 [please contact us for assistance](common/help.md#software-or-service-support).

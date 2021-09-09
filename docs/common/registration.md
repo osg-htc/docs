@@ -80,7 +80,7 @@ hierarchy, i.e. `topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml` from the
 
 To register a site, first choose a name for it (see the [naming conventions table above](#registering-resources))
 The site name will appear in OSG accounting in places such as the
-[GRACC site dashboard](https://gracc.opensciencegrid.org/dashboard/db/site-summary?orgId=1).
+[GRACC site dashboard](https://gracc.opensciencegrid.org/d/000000079/site-summary?orgId=1).
 
 Once you have chosen a site name, open the following in your browser:
 

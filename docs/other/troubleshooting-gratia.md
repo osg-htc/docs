@@ -186,7 +186,7 @@ Was the site previously reporting data, but the site name (not host name, but si
  Is a site reporting data?
 --------------------------
 
-You can see if the OSG GRACC Server is getting data from a site by going to [GRACC](https://gracc.opensciencegrid.org/dashboard/db/pilot-jobs-summary?orgId=1):
+You can see if the OSG GRACC Server is getting data from a site by going to [GRACC](https://gracc.opensciencegrid.org/d/000000043/pilot-jobs-summary?orgId=1):
 
 1.  Specify the site name in Facility
 
