@@ -89,7 +89,7 @@ Supporting CVMFS inside your container will greatly increase the types of OSG jo
 There are two methods for making CVMFS available in your container: [enabling cvmfsexec](#adding-cvmfs-using-cvmfsexec),
 or [bind-mounting CVMFS from the host](#adding-cvmfs-via-bind-mount).
 Bind-mounting CVMFS will require CVMFS to be installed on the host first,
-but the container will not need to attach `/dev/fuse` from the host.
+but it has other advantages such as supporting automounting of repositories.
 
 
 ### Adding CVMFS using cvmfsexec
@@ -149,7 +149,9 @@ You can store the logs outside of the container by volume mounting a directory t
 ### Adding CVMFS via bind-mount
 
 As an alternative to using cvmfsexec, you may install CVMFS on the host, and volume mount it into the container.
-This will let you avoid attaching `/dev/fuse` to the container.
+This will let you avoid specifying a list of CVMFS repositories to mount because they will be automounted on demand.
+It will encourage more stability by enabling longer term reuse of caches, and give you more control over the CVMFS configuration.
+It will also let you avoid attaching `/dev/fuse` to the container.
 
 Follow the [installing CVMFS document](../worker-node/install-cvmfs.md) to install CVMFS on the host.
 
