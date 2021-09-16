@@ -58,7 +58,10 @@ Here is an example invocation using `docker run` by hand:
 
 ```
 docker run -it --rm --user osg  \
-       --privileged             \
+       --security-opt seccomp=unconfined \
+       --security-opt systempaths=unconfined \
+       --security-opt no-new-privileges \
+       --device=/dev/fuse \
        -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
        -v /worker-temp-dir:/pilot               \
        -e GLIDEIN_Site="..."                    \
@@ -72,7 +75,7 @@ docker run -it --rm --user osg  \
 ```
 
 Replace `/path/to/token` with the location you saved the token obtained from the OSP administrators.
-Privileged mode (`--privileged`) requested in the above `docker run` allows the container
+The security options and adding `/dev/fuse` in the above `docker run` allows the container
 to mount [CVMFS using cvmfsexec](#adding-cvmfs-using-cvmfsexec) and invoke `singularity` for user jobs.
 Singularity allows OSP users to use their own container for their job (e.g., a common use case for GPU jobs).
 
@@ -86,7 +89,7 @@ Supporting CVMFS inside your container will greatly increase the types of OSG jo
 There are two methods for making CVMFS available in your container: [enabling cvmfsexec](#adding-cvmfs-using-cvmfsexec),
 or [bind-mounting CVMFS from the host](#adding-cvmfs-via-bind-mount).
 Bind-mounting CVMFS will require CVMFS to be installed on the host first,
-but the container will need fewer privileges.
+but the container will not need to attach `/dev/fuse` from the host.
 
 
 ### Adding CVMFS using cvmfsexec
@@ -146,9 +149,7 @@ You can store the logs outside of the container by volume mounting a directory t
 ### Adding CVMFS via bind-mount
 
 As an alternative to using cvmfsexec, you may install CVMFS on the host, and volume mount it into the container.
-This will let you avoid running the container in privileged mode.
-However, supporting Singularity jobs inside the container will require extra privileges,
-namely the capabilities `DAC_OVERRIDE`, `DAC_READ_SEARCH`, `SETGID`, `SETUID`, `SYS_ADMIN`, `SYS_CHROOT`, and `SYS_PTRACE`.
+This will let you avoid attaching `/dev/fuse` to the container.
 
 Follow the [installing CVMFS document](../worker-node/install-cvmfs.md) to install CVMFS on the host.
 
@@ -159,14 +160,9 @@ modified to volume mount CVMFS instead of using cvmfsexec, and using reduced pri
 
 ```
 docker run -it --rm --user osg      \
-        --cap-add DAC_OVERRIDE      \
-        --cap-add DAC_READ_SEARCH   \
-        --cap-add SETUID            \
-        --cap-add SETGID            \
-        --cap-add SYS_ADMIN         \
-        --cap-add SYS_CHROOT        \
-        --cap-add SYS_PTRACE        \
-        -v /cvmfs:/cvmfs:shared     \
+        --security-opt seccomp=unconfined \
+        --security-opt systempaths=unconfined \
+        --security-opt no-new-privileges \
         -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
         -v /worker-temp-dir:/pilot      \
         -e GLIDEIN_Site="..."           \
