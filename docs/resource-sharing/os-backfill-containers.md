@@ -62,6 +62,7 @@ docker run -it --rm --user osg  \
        --security-opt systempaths=unconfined \
        --security-opt no-new-privileges \
        --device=/dev/fuse \
+       --net=host \
        -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
        -v /worker-temp-dir:/pilot               \
        -e GLIDEIN_Site="..."                    \
@@ -94,6 +95,15 @@ but it has other advantages such as supporting automounting of repositories.
 
 ### Adding CVMFS using cvmfsexec
 
+!!! important "EL7 hosts require an updated kernel"
+    EL7 hosts must have kernel version >= 3.10.0-1127 (run `uname -vr` to check) with user namespaces enabled and
+    network namespaces disabled.
+    See this section on using
+    [unprivileged Singularity](https://opensciencegrid.org/docs/worker-node/install-singularity/#enabling-unprivileged-singularity)
+    for details.
+
+    See the [cvmfsexec README](https://github.com/cvmfs/cvmfsexec#readme) details.
+
 [cvmfsexec](https://github.com/CVMFS/cvmfsexec#readme) is a tool that can be used to mount CVMFS inside the container
 without requiring CVMFS to be installed on the host.
 
@@ -101,17 +111,6 @@ To enable cvmfsexec, specify a space-separated list of repos in the `CVMFSEXEC_R
 We recommend the following repos:
 -   `oasis.opensciencegrid.org`
 -   `singularity.opensciencegrid.org`
-
-cvmfsexec has the following system requirements:
-
--   On EL7, you must have kernel version >= 3.10.0-1127 (run `uname -vr` to check), and user namespaces enabled.
-    See step 1 in the
-    [Singularity Install document](https://opensciencegrid.org/docs/worker-node/install-singularity/#enabling-unprivileged-singularity)
-    for details.
-
--   On EL8, you must have kernel version >= 4.18 (run `uname -vr` to check).
-
-See the [cvmfsexec README](https://github.com/cvmfs/cvmfsexec#readme) details.
 
 Note that cvmfsexec will not be run if CVMFS repos are already available in `/cvmfs` via bind-mount,
 regardless of the value of `CVMFSEXEC_REPOS`.
