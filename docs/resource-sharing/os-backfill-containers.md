@@ -162,6 +162,7 @@ docker run -it --rm --user osg      \
         --security-opt seccomp=unconfined \
         --security-opt systempaths=unconfined \
         --security-opt no-new-privileges \
+        --net=host \
         -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
         -v /worker-temp-dir:/pilot      \
         -e GLIDEIN_Site="..."           \
