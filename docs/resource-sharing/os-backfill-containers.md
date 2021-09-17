@@ -95,12 +95,12 @@ but it has other advantages such as supporting automounting of repositories.
 
 ### Adding CVMFS using cvmfsexec
 
-!!! important "EL7 hosts require an updated kernel"
-    EL7 hosts must have kernel version >= 3.10.0-1127 (run `uname -vr` to check) with user namespaces enabled and
+!!! important "User nameespaces required"
+    Your hosts must have kernel version >= 3.10.0-1127 (run `uname -vr` to check) with user namespaces enabled and
     network namespaces disabled.
     See this section on using
     [unprivileged Singularity](https://opensciencegrid.org/docs/worker-node/install-singularity/#enabling-unprivileged-singularity)
-    for details.
+    for additional details.
 
     See the [cvmfsexec README](https://github.com/cvmfs/cvmfsexec#readme) details.
 
