@@ -1747,27 +1747,7 @@ the user.</p>
 <h2 id="launching-inside-slurm">Launching Inside Slurm<a class="headerlink" href="#launching-inside-slurm" title="Permanent link">&para;</a></h2>
 <p>To launch inside Slurm, one needs to write a small job control script; the details will vary from site-to-site and the
 followingg is given as an example for running on compute hosts with 24 cores:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 <span class="c1">#SBATCH --job-name=osg-glidein</span>
 <span class="c1">#SBATCH -p compute</span>
 <span class="c1">#SBATCH -N 1</span>
@@ -1787,9 +1767,12 @@ followingg is given as an example for running on compute hosts with 24 cores:</p
 <span class="nb">export</span> <span class="nv">GLIDEIN_Start_Extra</span><span class="o">=</span><span class="s2">&quot;Owner == \&quot;my_osgconnect_username\&quot;&quot;</span>
 
 module load singularity
-singularity run --contain --bind /cvmfs --scratch /pilot docker://opensciencegrid/osgvo-docker-pilot:release
+singularity run --contain <span class="se">\</span>
+                --bind /cvmfs <span class="se">\</span>
+                --scratch /pilot <span class="se">\</span>
+                docker://opensciencegrid/osgvo-docker-pilot:release
 </code></pre></div>
-</td></tr></table>
+
 <p>The above example rebuilds the Docker container on each host.
 If you plan to run large numbers of these jobs, you can download the Docker container once and create a local
 Singularity image:</p>
