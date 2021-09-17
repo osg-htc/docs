@@ -24,7 +24,7 @@ Launching Inside Slurm
 To launch inside Slurm, one needs to write a small job control script; the details will vary from site-to-site and the
 followingg is given as an example for running on compute hosts with 24 cores:
 
-```
+```bash
 #!/bin/bash
 #SBATCH --job-name=osg-glidein
 #SBATCH -p compute
