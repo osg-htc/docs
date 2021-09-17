@@ -23,6 +23,13 @@ In order to configure the container, you will need:
 2. An authentication token from the OSG.  Please contact [OSG support](mailto:support@opensciencegrid.org) to request a
    token for your site.
 3. An HTTP caching proxy ("squid server") at or near your site.
+1.  A host with a running Docker service
+1.  A host with kernel version >= 3.10.0-1127 (run `uname -vr` to check) with user namespaces enabled and
+    network namespaces disabled.
+    See this section on using
+    [unprivileged Singularity](https://opensciencegrid.org/docs/worker-node/install-singularity/#enabling-unprivileged-singularity)
+    for details.
+
 
 Running the Container with Docker
 ---------------------------------
@@ -94,15 +101,6 @@ but it has other advantages such as supporting automounting of repositories.
 
 
 ### Adding CVMFS using cvmfsexec
-
-!!! important "User nameespaces required"
-    Your hosts must have kernel version >= 3.10.0-1127 (run `uname -vr` to check) with user namespaces enabled and
-    network namespaces disabled.
-    See this section on using
-    [unprivileged Singularity](https://opensciencegrid.org/docs/worker-node/install-singularity/#enabling-unprivileged-singularity)
-    for additional details.
-
-    See the [cvmfsexec README](https://github.com/cvmfs/cvmfsexec#readme) details.
 
 [cvmfsexec](https://github.com/CVMFS/cvmfsexec#readme) is a tool that can be used to mount CVMFS inside the container
 without requiring CVMFS to be installed on the host.
