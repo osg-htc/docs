@@ -45,8 +45,10 @@ export GLIDEIN_ResourceName="Comet"
 export GLIDEIN_Start_Extra="Owner == \"my_osgconnect_username\""
 
 module load singularity
-singularity run --contain --bind /cvmfs --scratch /pilot docker://opensciencegrid/osgvo-docker-pilot:release
-
+singularity run --contain \
+                --bind /cvmfs \
+                --scratch /pilot \
+                docker://opensciencegrid/osgvo-docker-pilot:release
 ```
 
 The above example rebuilds the Docker container on each host.
