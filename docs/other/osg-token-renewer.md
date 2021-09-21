@@ -159,15 +159,15 @@ Reference
 
 ### Files of interest
 
-| Path                                                | Description                                   |
-|:----------------------------------------------------|:----------------------------------------------|
-| `/etc/osg/token-renewer/config.ini`                 | Main config file for service                  |
-| `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.pw`            | Encryption password file for client account   |
-| `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.<TOKEN_NAME>.token` | Output location for token files          |
-| `/usr/bin/osg-token-renewer-setup.sh`               | Setup script for each new client account      |
-| `/usr/lib/systemd/system/osg-token-renewer.service` | SystemD service unit configuruation           |
-| `/usr/lib/systemd/system/osg-token-renewer.timer`   | SystemD timer for service                     |
-| `/usr/bin/osg-token-renewer.sh`                     | Main wrapper script invoked by service        |
-| `/usr/bin/osg-token-renewer`                        | Token renewal program invoked by main wrapper |
+| Path                                                     | Description                                   |
+|:---------------------------------------------------------|:----------------------------------------------|
+| `/etc/osg/token-renewer/config.ini`                      | Main config file for service                  |
+| `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.pw`                 | Encryption password file for client account   |
+| `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.<TOKEN_NAME>.token` | Output location for token files               |
+| `/usr/bin/osg-token-renewer-setup.sh`                    | Setup script for each new client account      |
+| `/usr/lib/systemd/system/osg-token-renewer.service`      | SystemD service unit configuruation           |
+| `/usr/lib/systemd/system/osg-token-renewer.timer`        | SystemD timer for service                     |
+| `/usr/bin/osg-token-renewer.sh`                          | Main wrapper script invoked by service        |
+| `/usr/bin/osg-token-renewer`                             | Token renewal program invoked by main wrapper |
 
 
