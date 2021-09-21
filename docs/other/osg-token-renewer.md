@@ -129,7 +129,8 @@ As a reminder, here are common service commands (all run as `root`) for EL7:
 | OSG Token Renewer timer | `osg-token-renewer.timer` | Nightly run schedule for OSG Token Renewer |
 
 
-The OSG token renewal service is set to run via a systemd timer nightly at midnight.
+The OSG token renewal service is set to run via a systemd timer every 15
+minutes.
 
 If you would like to run the service manually at a different time (e.g., to generate
 all the tokens immediately), you can run the service once with:
