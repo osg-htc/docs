@@ -91,7 +91,7 @@ section in the config for each token that should be generated for this account
     The `account` option in this section must match the `<ACCOUNT_SHORTNAME>`
     for the corresponding `[account <ACCOUNT_SHORTNAME>]` section.
 
-1.  Set the `token_path` to `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.token
+1.  Set the `token_path` to `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.<TOKEN_NAME>.token`
 
 1.  Optionally, you may also specify any of the following options, which will
     be passed to the `oidc-token` command when generating the token:
@@ -163,7 +163,7 @@ Reference
 |:----------------------------------------------------|:----------------------------------------------|
 | `/etc/osg/token-renewer/config.ini`                 | Main config file for service                  |
 | `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.pw`            | Encryption password file for client account   |
-| `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.token`         | Output location for token files               |
+| `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.<TOKEN_NAME>.token` | Output location for token files          |
 | `/usr/bin/osg-token-renewer-setup.sh`               | Setup script for each new client account      |
 | `/usr/lib/systemd/system/osg-token-renewer.service` | SystemD service unit configuruation           |
 | `/usr/lib/systemd/system/osg-token-renewer.timer`   | SystemD timer for service                     |
