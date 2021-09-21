@@ -57,17 +57,16 @@ To create a new client account named `<ACCOUNT_SHORTNAME>`:
 1. Run the setup script as follows:
 
         :::console
-        root@server # osg-token-renewer-setup.sh <ACCOUNT_SHORTNAME> <ISSUER> <SCOPES...>
+        root@server # osg-token-renewer-setup.sh <ACCOUNT_SHORTNAME>
 
     For example,
 
         :::console
-        root@server # account=myaccount123
-        root@server # issuer=https://wlcg.cloud.cnaf.infn.it/
-        root@server # scopes="wlcg offline_access"
-        root@server # osg-token-renewer-setup.sh $account $issuer $scopes
+        root@server # osg-token-renewer-setup.sh myaccount123
 
-1. You will be prompted on the console to visit a web link to authorize
+1. When prompted, enter your Issuer and desired scopes for this account
+   from the list of valid options.
+1. You will also be prompted on the console to visit a web link to authorize
    the client request with a passcode printed on the console.
    Follow the prompts (visit the web link, enter the request passcode,
    log in with your account for your issuer, and authorize the request).
