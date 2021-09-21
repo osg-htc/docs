@@ -3,10 +3,7 @@ Installing and Using the OSG Token Renewal Service
 
 This document contains instructions to install and configure the
 OSG Token Renewal Service package, `osg-token-renewer`,
-for obtaining and automatically renewing tokens with the OIDC tools.
-This service automates the procedure in the
-[Requesting Tokens](https://opensciencegrid.org/technology/software/requesting-tokens/)
-document.
+for obtaining and automatically renewing tokens with [oidc-agent](https://github.com/indigo-dc/oidc-agent).
 
 
 Before Starting
@@ -106,6 +103,7 @@ section in the config for each token that should be generated for this account
     !!! note
         For tokens used against an HTCondor-CE, set the `audience` option to
         `<CE FQDN>:<CE PORT>`.
+
 ### Example configuration
 
 <insert example config here with account + token sections>
