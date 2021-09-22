@@ -22,11 +22,11 @@ Summary of Changes
 This release contains:
 
 -   HTCondor 8.8.15 Security Release. This release contains fixes for important security issues. More details on the security issues are in the vulnerability reports:
-    -   [HTCONDOR-2021-0003](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0003.html)
+    -   [HTCONDOR-2021-0003](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0003/)
 -   Upcoming
     -   HTCondor 9.0.4 Security Release. This release contains fixes for important security issues. More details on the security issues are in the vulnerability reports:
-        -   [HTCONDOR-2021-0003](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0003.html)
-        -   [HTCONDOR-2021-0004](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0004.html)
+        -   [HTCONDOR-2021-0003](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0003/)
+        -   [HTCONDOR-2021-0004](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0004/)
 
 These
 [JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.43%2C3.5.43-upcoming)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC)
