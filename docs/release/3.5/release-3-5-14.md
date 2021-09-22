@@ -22,15 +22,15 @@ Summary of Changes
 This release contains:
 
 -   HTCondor 8.8.8 Security Release. This release contains fixes for important security issues. More details on the security issues are in the vulnerability reports:
-    -   [HTCONDOR-2020-0001](http://htcondor.org/security/vulnerabilities/HTCONDOR-2020-0001.html)
-    -   [HTCONDOR-2020-0002](http://htcondor.org/security/vulnerabilities/HTCONDOR-2020-0002.html)
-    -   [HTCONDOR-2020-0003](http://htcondor.org/security/vulnerabilities/HTCONDOR-2020-0003.html)
-    -   [HTCONDOR-2020-0004](http://htcondor.org/security/vulnerabilities/HTCONDOR-2020-0004.html)
+    -   [HTCONDOR-2020-0001](http://htcondor.org/security/vulnerabilities/HTCONDOR-2020-0001/)
+    -   [HTCONDOR-2020-0002](http://htcondor.org/security/vulnerabilities/HTCONDOR-2020-0002/)
+    -   [HTCONDOR-2020-0003](http://htcondor.org/security/vulnerabilities/HTCONDOR-2020-0003/)
+    -   [HTCONDOR-2020-0004](http://htcondor.org/security/vulnerabilities/HTCONDOR-2020-0004/)
 -   Upcoming Repository: HTCondor 8.9.6 Security Release. This release contains fixes for important security issues. More details on the security issues are in the vulnerability reports:
-    -   [HTCONDOR-2020-0001](http://htcondor.org/security/vulnerabilities/HTCONDOR-2020-0001.html)
-    -   [HTCONDOR-2020-0002](http://htcondor.org/security/vulnerabilities/HTCONDOR-2020-0002.html)
-    -   [HTCONDOR-2020-0003](http://htcondor.org/security/vulnerabilities/HTCONDOR-2020-0003.html)
-    -   [HTCONDOR-2020-0004](http://htcondor.org/security/vulnerabilities/HTCONDOR-2020-0004.html)
+    -   [HTCONDOR-2020-0001](http://htcondor.org/security/vulnerabilities/HTCONDOR-2020-0001/)
+    -   [HTCONDOR-2020-0002](http://htcondor.org/security/vulnerabilities/HTCONDOR-2020-0002/)
+    -   [HTCONDOR-2020-0003](http://htcondor.org/security/vulnerabilities/HTCONDOR-2020-0003/)
+    -   [HTCONDOR-2020-0004](http://htcondor.org/security/vulnerabilities/HTCONDOR-2020-0004/)
 
 !!!note "Affected nodes"
     These updates affect submit and execute hosts. Please update your submit host first and then your execute nodes.
