@@ -226,39 +226,15 @@ root@host # systemctl start frontier-squid
 
 ## Verifying
 
-In order to verify that everything is installed correctly, create a repository replica. The repository chosen for the instructions below is one from egi.eu because it is very small, but you can use another one if you prefer.
+In order to verify that everything is installed correctly, create a repository replica. The repository chosen for the instructions below is the OSG config repository because it is very small, but you can use another one if you prefer.
 
 ### Adding an example repository
 
-The OSG Operations Stratum 1 should add a repository replica using the `add_osg_repository` script from the oasis-goc rpm. Instructions for installing that are elsewhere. That script assumes that the oasis.opensciencegrid.org replica repository was first created, so this instruction creates it but does not download the first snapshot because that would take a lot of space and time. Use these commands to create the oasis replica and to create and download the example replica:
+It's a good idea to make your own script for adding repository replicas, because there's always at least two commands to run, and it's easy to forget which commands to run. The commands are:
 
 ```console
-root@host # cvmfs_server add-replica -o root http://oasis.opensciencegrid.org:8000/cvmfs/oasis.opensciencegrid.org /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub 
-root@host # add_osg_repository http://cvmfs-stratum0.gridpp.rl.ac.uk:8000/cvmfs/config-egi.egi.eu
-```
-
-It's a good idea for other Stratum 1s to make their own scripts for adding repository replicas, because there's always two or three commands to run, and it's easy to forget the commands after the first one. The first command is this:
-
-```console
-root@host # cvmfs_server add-replica -o root http://cvmfs-stratum0.gridpp.rl.ac.uk:8000/cvmfs/config-egi.egi.eu /etc/cvmfs/keys/egi.eu/egi.eu.pub
-```
-
-However, non-OSG Operations Stratum 1s (that is, at BNL and FNAL), for the sake of fulfilling an OSG security requirement, need to instead read from the OSG Operations machine with this as their first command:
-
-```console
-root@host # cvmfs_server add-replica -o root http://oasis-replica.opensciencegrid.org:8000/cvmfs/config-egi.egi.eu /etc/cvmfs/keys/egi.eu/egi.eu.pub:/etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub
-```
-
-The second command for Stratum 1s that have the httpd configuration as described above in the [Configuring apache section](#configuring-apache) is this:
-
-```console
-root@host # rm -f /etc/httpd/conf.d/cvmfs.config-egi.egi.eu.conf
-```
-
-Then the next command is this:
-
-```console
-root@host # cvmfs_server snapshot config-egi.egi.eu
+root@host # cvmfs_server add-replica -o root -p http://oasis-replica.opensciencegrid.org:8000/cvmfs/config-osg.opensciencegrid.org /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub
+root@host # cvmfs_server snapshot config-osg.opensciencegrid.org
 ```
 
 With large repositories that can take a very long time, but with small repositories it should be very quick and not show any errors.
@@ -268,8 +244,8 @@ With large repositories that can take a very long time, but with small repositor
 Now to verify that the replication is working, do the following commands:
 
 ```console
-root@host # wget -qdO- http://localhost:8000/cvmfs/config-egi.egi.eu/.cvmfspublished | cat -v
-root@host # wget -qdO- http://localhost:80/cvmfs/config-egi.egi.eu/.cvmfspublished | cat -v
+root@host # wget -qdO- http://localhost:8000/cvmfs/config-osg.opensciencegrid.org/.cvmfspublished | cat -v
+root@host # wget -qdO- http://localhost:80/cvmfs/config-osg.opensciencegrid.org/.cvmfspublished | cat -v
 ```
 
 Both commands should show a short file including gibberish at the end which is the signature.
@@ -281,4 +257,8 @@ It is a good idea to familiarize yourself with the log entries at `/var/log/http
 If you installed frontier-squid and frontier-awstats, there is a little more to do to configure monitoring.
 
 First, make sure that your firewall accepts UDP queries from the monitoring server at CERN. Details are in [the frontier-squid instructions](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring). Next, choose any random password and put it in `/etc/awstats/password-file`. Then tell Dave Dykstra the fully qualified domain name of your machine and the password you chose, and he'll set up the monitoring servers.
+
+## Managing replication
+
+Instead of manually managing replication it is highly recommended to use the [cvmfs-manage-replicas package](https://github.com/cvmfs-contrib/cvmfs-manage-replicas) which can automatically add repositories based on wildcards of repositories installed elsewhere.
 
