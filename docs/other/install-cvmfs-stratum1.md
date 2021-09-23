@@ -179,7 +179,7 @@ In order to verify that everything is installed correctly, create a repository r
 It's a good idea to make your own script for adding repository replicas, because there's always at least two commands to run, and it's easy to forget which commands to run. The commands are:
 
 ```console
-root@host # cvmfs_server add-replica -o root http://oasis-replica.opensciencegrid.org:8000/cvmfs/config-osg.opensciencegrid.org /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub
+root@host # cvmfs_server add-replica -o root http://oasis.opensciencegrid.org:8000/cvmfs/config-osg.opensciencegrid.org /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub
 root@host # cvmfs_server snapshot config-osg.opensciencegrid.org
 ```
 
