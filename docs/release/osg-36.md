@@ -23,6 +23,19 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.
 Latest News
 -----------
 
+### **September 23, 2021:** HTCondor-CE 5.1.2
+
+This release of OSG 3.6 contains the following packages:
+
+-   [HTCondor-CE 5.1.2](https://github.com/htcondor/htcondor-ce/releases/tag/v5.1.2)
+    -   Fixed the default memory and CPU requests when using job router transforms
+    -   Apply default MaxJobs and MaxJobsIdle when using job router transforms
+    -   Improved SciTokens support in submission tools
+    -   Fixed --debug flag in condor\_ce\_run
+    -   Update configuration verification script to handle job router transforms
+    -   Corrected ownership of the HTCondor PER\_JOBS\_HISTORY\_DIR
+    -   Fix bug passing maximum wall time requests to the local batch system
+
 ### **September 9, 2021:** HTCondor 9.0.5 and blahp 2.1.1
 
 This release of OSG 3.6 contains the following packages:
