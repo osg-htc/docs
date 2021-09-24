@@ -968,11 +968,11 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#subcluster-resource-entry" class="md-nav__link">
-    Subcluster / Resource Entry
+  <a href="#subcluster-resource-entry-for-agis-glideinwms-entry" class="md-nav__link">
+    Subcluster / Resource Entry for AGIS / GlideinWMS Entry
   </a>
   
-    <nav class="md-nav" aria-label="Subcluster / Resource Entry">
+    <nav class="md-nav" aria-label="Subcluster / Resource Entry for AGIS / GlideinWMS Entry">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -992,6 +992,13 @@
           <li class="md-nav__item">
   <a href="#resource-entry-configuration-atlas-only" class="md-nav__link">
     Resource Entry Configuration (ATLAS only)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#glideinwms-entry-cms-and-osg-pilot-factories" class="md-nav__link">
+    GlideinWMS Entry (CMS and OSG pilot factories)
   </a>
   
 </li>
@@ -2027,11 +2034,11 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#subcluster-resource-entry" class="md-nav__link">
-    Subcluster / Resource Entry
+  <a href="#subcluster-resource-entry-for-agis-glideinwms-entry" class="md-nav__link">
+    Subcluster / Resource Entry for AGIS / GlideinWMS Entry
   </a>
   
-    <nav class="md-nav" aria-label="Subcluster / Resource Entry">
+    <nav class="md-nav" aria-label="Subcluster / Resource Entry for AGIS / GlideinWMS Entry">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2051,6 +2058,13 @@
           <li class="md-nav__item">
   <a href="#resource-entry-configuration-atlas-only" class="md-nav__link">
     Resource Entry Configuration (ATLAS only)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#glideinwms-entry-cms-and-osg-pilot-factories" class="md-nav__link">
+    GlideinWMS Entry (CMS and OSG pilot factories)
   </a>
   
 </li>
@@ -2614,7 +2628,7 @@ Bestman-xrootd admins will have to pass this option with the appropriate
 value (for example: <code>srm/v2/server</code>) for the SRM probes to pass on their
 SE.</p>
 </div>
-<h3 id="subcluster-resource-entry">Subcluster / Resource Entry<a class="headerlink" href="#subcluster-resource-entry" title="Permanent link">&para;</a></h3>
+<h3 id="subcluster-resource-entry-for-agis-glideinwms-entry">Subcluster / Resource Entry for AGIS / GlideinWMS Entry<a class="headerlink" href="#subcluster-resource-entry-for-agis-glideinwms-entry" title="Permanent link">&para;</a></h3>
 <p>Subcluster and Resource Entry configuration is for reporting about the worker resources on your site. A <strong>subcluster</strong> is a homogeneous set of worker node hardware; a <strong>resource</strong> is a set of subcluster(s) with common capabilities that will be reported to the ATLAS AGIS system.</p>
 <p><strong>At least one Subcluster or Resource Entry section</strong> is required on a CE; please populate the information for all your subclusters. This information will be reported to a central collector and will be used to send GlideIns / pilot jobs to your site; having accurate information is necessary for OSG jobs to effectively use your resources.</p>
 <p>This section is contained in <code>/etc/osg/config.d/30-gip.ini</code> which is provided by the <code>osg-configure-gip</code> RPM. (This is for historical reasons.)</p>
@@ -2622,6 +2636,7 @@ SE.</p>
 <ul>
 <li><a href="#subcluster-configuration">Subcluster*</a>: options about homogeneous subclusters</li>
 <li><a href="#resource-entry-configuration-atlas-only">Resource Entry*</a>: options for specifying ATLAS queues for AGIS</li>
+<li><a href="#entry-configuration-gwms">GlideinWMS Entry*</a>: options for specifying queues for the CMS and OSG GlideinWMS factories</li>
 </ul>
 <h4 id="notes-for-multi-ce-sites">Notes for multi-CE sites.<a class="headerlink" href="#notes-for-multi-ce-sites" title="Permanent link">&para;</a></h4>
 <p>If you would like to properly advertise multiple CEs per cluster, make sure that you:</p>
@@ -2762,6 +2777,75 @@ SE.</p>
 <ul>
 <li><code>allowed_vos</code> is mandatory</li>
 </ul>
+<h4 id="glideinwms-entry-cms-and-osg-pilot-factories">GlideinWMS Entry (CMS and OSG pilot factories)<a class="headerlink" href="#glideinwms-entry-cms-and-osg-pilot-factories" title="Permanent link">&para;</a></h4>
+<p>If you are configuring a CE that is going to receive pilot jobs from the CMS or the OSG factories (CMS, OSG, LIGO, CLAS12, DUNE, Glow, IceCube, ...), you can provide pilot job specifications to help operators automatically configure the factory entries in GlideinWMS. For each pilot type, create a new <code>Pilot</code> section with a unique name in the following format: <code>[Pilot NAME]</code> where NAME is a string describing the pilot type (e.g.: GPU, WholeNode, default). The following options can be specified in the <code>Pilot</code> section:</p>
+<p>This section is contained in <code>/etc/osg/config.d/35-pilot.ini</code></p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Values Accepted</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>cpucount</strong></td>
+<td>Positive Integer</td>
+<td>The number of cores for this pilot type.</td>
+</tr>
+<tr>
+<td><strong>ram_mb</strong></td>
+<td>Positive Integer</td>
+<td>The amount of memory (in megabytes) for this pilot type.</td>
+</tr>
+<tr>
+<td><strong>whole_node</strong></td>
+<td>true, false</td>
+<td>This is a whole node pilot; cpucount and ram_mb are ignored if this is true.</td>
+</tr>
+<tr>
+<td><strong>gpucount</strong></td>
+<td>Positive Integer</td>
+<td>The number of GPUs available</td>
+</tr>
+<tr>
+<td><strong>max_pilots</strong></td>
+<td>Positive Integer</td>
+<td>The maximum number of pilots of this type that can be sent</td>
+</tr>
+<tr>
+<td><strong>max_wall_time</strong></td>
+<td>Positive Integer</td>
+<td>The maximum wall-clock time a job is allowed to run for this pilot type, in minutes</td>
+</tr>
+<tr>
+<td><strong>queue</strong></td>
+<td>String</td>
+<td>The queue or partition which jobs should be submitted to in order to run on this resource. Equivalent to the HTCondor grid universe classad attribute <code>remote_queue</code></td>
+</tr>
+<tr>
+<td><strong>require_singularity</strong></td>
+<td>true, false</td>
+<td>True if the pilot should require singularity on the workers.</td>
+</tr>
+<tr>
+<td><strong>os</strong></td>
+<td>Comma-separated List</td>
+<td>The OS of the workers; allowed values are <code>rhel6</code>, <code>rhel7</code>, <code>rhel8</code>, or <code>ubuntu18</code>. This is required unless require_singularity = true</td>
+</tr>
+<tr>
+<td>*<em>send_tests</em></td>
+<td>true, false</td>
+<td>Send test pilots? Currently not working, placeholder</td>
+</tr>
+<tr>
+<td><strong>allowed_vos</strong></td>
+<td>Comma-separated List or <code>*</code></td>
+<td>A comma-separated list of VOs that are allowed to submit to this subcluster; If <code>*</code>, uses VOs that have accounts on this CE</td>
+</tr>
+</tbody>
+</table>
 <h3 id="gateway">Gateway<a class="headerlink" href="#gateway" title="Permanent link">&para;</a></h3>
 <p>This section gives information about the options in the Gateway section of the configuration files. These options control the behavior of job gateways on the CE. CEs are based on HTCondor-CE, which uses <code>condor-ce</code> as the gateway.</p>
 <p>This section is contained in <code>/etc/osg/config.d/10-gateway.ini</code> which is provided by the <code>osg-configure-gateway</code> RPM.</p>
