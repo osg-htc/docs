@@ -880,26 +880,6 @@
     Installing cvmfs-server and httpd
   </a>
   
-    <nav class="md-nav" aria-label="Installing cvmfs-server and httpd">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#installing-a-cvmfs-stratum-1-that-is-also-a-repository-server" class="md-nav__link">
-    Installing a CVMFS stratum 1 that is also a repository server
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#installing-cvmfs-stratum-1-that-is-not-a-repository-server" class="md-nav__link">
-    Installing CVMFS stratum 1 that is not a repository server
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
@@ -985,6 +965,13 @@
         <li class="md-nav__item">
   <a href="#setting-up-monitoring" class="md-nav__link">
     Setting up monitoring
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#managing-replication" class="md-nav__link">
+    Managing replication
   </a>
   
 </li>
@@ -1832,26 +1819,6 @@
     Installing cvmfs-server and httpd
   </a>
   
-    <nav class="md-nav" aria-label="Installing cvmfs-server and httpd">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#installing-a-cvmfs-stratum-1-that-is-also-a-repository-server" class="md-nav__link">
-    Installing a CVMFS stratum 1 that is also a repository server
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#installing-cvmfs-stratum-1-that-is-not-a-repository-server" class="md-nav__link">
-    Installing CVMFS stratum 1 that is not a repository server
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
@@ -1941,6 +1908,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#managing-replication" class="md-nav__link">
+    Managing replication
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1969,7 +1943,7 @@
 <ul>
 <li><strong>User IDs and Group IDs:</strong> If your machine is also going to be a repository server like OSG Operations, the installation will create the same user and group IDs as the <a href="../../worker-node/install-cvmfs/">cvmfs client</a>.  If you are installing frontier-squid, the installation will also create the same user id as <a href="../../data/frontier-squid/">frontier-squid</a>.</li>
 <li><strong>Network ports:</strong> This installation will host the stratum 1 on ports 80, 8000 and 8080, and if squid is installed it will host the uncached apache on port 8081.  Port 80 is default but sometimes runs into operational problems, port 8000 is the alternate for most production use, and port 8080 is for Cloudflare (https://openhtc.io).</li>
-<li><strong>Host choice:</strong> -  Make sure there is adequate disk space for the repositories that will be served, at <code>/srv/cvmfs</code>. Do not use xfs as the filesystem type on operating systems older than EL7, because it has been demonstrated to perform poorly for CVMFS repositories; instead use ext3 or ext4. About 10GB should be reserved for apache and squid logs under /var/log on a production server, although they normally will not get that large. A Stratum 1 that is also a repository server should have at least 5GB available at <code>/var/cache</code>.</li>
+<li><strong>Host choice:</strong> -  Make sure there is adequate disk space for the repositories that will be served, at <code>/srv/cvmfs</code>. About 10GB should be reserved for apache and squid logs under /var/log on a production server, although they normally will not get that large.</li>
 <li><strong>SELinux</strong> - Ensure SELinux is disabled</li>
 </ul>
 <p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
@@ -1981,14 +1955,7 @@
 <h2 id="installing">Installing<a class="headerlink" href="#installing" title="Permanent link">&para;</a></h2>
 <p>All CVMFS Stratum 1s require cvmfs-server software and apache (httpd). It is highly recommended to also install <a href="../../data/frontier-squid/">frontier-squid</a> and <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallAwstats">frontier-awstats</a> on the same machine to be able to easily join the WLCG <a href="http://wlcg-squid-monitor.cern.ch/snmpstats/indexcvmfs.html">MRTG</a> and <a href="http://wlcg-squid-monitor.cern.ch/awstats/cvmfs.html">awstats</a> monitoring systems. The recommended configuration for frontier-squid below only caches geo api lookups.  Other than that, it is primarily for monitoring.</p>
 <h3 id="installing-cvmfs-server-and-httpd">Installing cvmfs-server and httpd<a class="headerlink" href="#installing-cvmfs-server-and-httpd" title="Permanent link">&para;</a></h3>
-<p>The OSG Operations Stratum 1 has to function as a repository server in addition to serving repository replications; most Stratum 1s serve only replications. Instructions are also provided for how to install cvmfs-server on Stratum 1s that do not have to be repository servers.  Choose the appropriate subsection.</p>
-<h4 id="installing-a-cvmfs-stratum-1-that-is-also-a-repository-server">Installing a CVMFS stratum 1 that is also a repository server<a class="headerlink" href="#installing-a-cvmfs-stratum-1-that-is-also-a-repository-server" title="Permanent link">&para;</a></h4>
-<p>EL7.2 cannot be reliably used as a repository server, because of bugs in the union filesystem OverlayFS. The bugs are fixed in EL7.3, so use EL7.3 or later.</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum -y install cvmfs-server cvmfs mod_wsgi
-</code></pre></div>
-
-<h4 id="installing-cvmfs-stratum-1-that-is-not-a-repository-server">Installing CVMFS stratum 1 that is not a repository server<a class="headerlink" href="#installing-cvmfs-stratum-1-that-is-not-a-repository-server" title="Permanent link">&para;</a></h4>
-<p>If you're not installing for OSG Operations or otherwise want to support serving repositories on the same machine as a Stratum 1, use this command:</p>
+<p>Use this command to install cvmfs-server and httpd:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum -y install cvmfs-server cvmfs-config mod_wsgi
 </code></pre></div>
 
@@ -2035,46 +2002,6 @@
 Listen 8080 KeepAlive On
 </code></pre></div>
 
-<p>If you will be serving opensciencegrid.org repositories, you have to allow for old client configurations that access repositories without the domain name added. For that reason, you will need to remove each <code>/etc/httpd/conf.d/cvmfs.&lt;repositoryname&gt;.conf</code> that adding a replica creates (this is included in the <a href="https://github.com/opensciencegrid/oasis-server/blob/master/bin/add_osg_repository">add_osg_repository script</a>), and instead add the following to <code>/etc/httpd/conf.d/cvmfs.conf</code>:</p>
-<div class="codehilite"><pre><span></span><code>RewriteEngine On 
-RewriteRule ^/cvmfs/([^./]*)/(.*)$ /cvmfs/$1.opensciencegrid.org/$2 
-RewriteRule ^/cvmfs/([^/]+)/api/(.*)$ /var/www/wsgi-scripts/cvmfs-server/cvmfs-api.wsgi/$1/$2
-RewriteRule ^/cvmfs/(.*)$ /srv/cvmfs/$1 
-&lt;Directory &quot;/srv/cvmfs&quot;&gt; 
-  Options -MultiViews +FollowSymLinks -Indexes 
-  AllowOverride All 
-  Require all granted
-
-  EnableMMAP Off EnableSendFile Off
-
-  &lt;FilesMatch &quot;^\.cvmfs&quot;&gt;
-    ForceType application/x-cvmfs
-  &lt;/FilesMatch&gt;
-
-  Header unset Last-Modified 
-  RequestHeader unset If-Modified-Since
-  FileETag None
-
-  ExpiresActive On 
-  ExpiresDefault &quot;access plus 3 days&quot; 
-  ExpiresByType text/html &quot;access plus 15 minutes&quot; 
-  ExpiresByType application/x-cvmfs &quot;access plus 61 seconds&quot; 
-  ExpiresByType application/json &quot;access plus 61 seconds&quot; 
-&lt;/Directory&gt;
-
-WSGIDaemonProcess cvmfs-api threads=64 display-name=%{GROUP} \
-    python-path=/usr/share/cvmfs-server/webapi
-&lt;Directory /var/www/wsgi-scripts/cvmfs-server&gt;
-  WSGIProcessGroup cvmfs-api
-  WSGIApplicationGroup cvmfs-api
-  Options ExecCGI
-  SetHandler wsgi-script
-  Require all granted
-&lt;/Directory&gt;
-WSGISocketPrefix /var/run/wsgi 
-</code></pre></div>
-
-<p>If you will be serving cern.ch repositories, it has the same problem; replace opensciencegrid.org above with cern.ch. If you need to serve both opensciencegrid.org and cern.ch contact Dave Dykstra to discuss the options.</p>
 <p>Then enable apache:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>systemctl <span class="nb">enable</span> httpd
 <span class="gp">root@host # </span>systemctl start httpd
@@ -2113,18 +2040,21 @@ WSGISocketPrefix /var/run/wsgi
 <span class="s1">}&#39;</span>
 </code></pre></div>
 
-<p>On an EL7 system, make sure that iptables-services is installed and enabled:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum -y install iptables-services 
+<p>On EL7 and EL8 systems, make sure that firewalld is disabled and iptables-services is installed and enabled:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>systemctl stop firewalld
+<span class="gp">root@host # </span>systemctl disable firewalld
+<span class="gp">root@host # </span>systemctl mask --now firewalld
+<span class="gp">root@host # </span>yum -y install iptables-services 
+<span class="gp">root@host # </span>systemctl start iptables
 <span class="gp">root@host # </span>systemctl <span class="nb">enable</span> iptables
+<span class="gp">root@host # </span>systemctl start ip6tables
+<span class="gp">root@host # </span>systemctl <span class="nb">enable</span> ip6tables
 </code></pre></div>
 
 <p>Forward port 80 to port 8000:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>iptables -t nat -A PREROUTING -p tcp -m tcp --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8000</span> 
 <span class="gp">root@host # </span>service iptables save
-</code></pre></div>
-
-<p>On EL7 also set up the the same port forwarding for IPv6:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>ip6tables -t nat -A PREROUTING -p tcp -m tcp --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8000</span>
+<span class="gp">root@host # </span>ip6tables -t nat -A PREROUTING -p tcp -m tcp --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8000</span>
 <span class="gp">root@host # </span>service ip6tables save
 </code></pre></div>
 
@@ -2138,34 +2068,18 @@ WSGISocketPrefix /var/run/wsgi
 <p>The above configuration is for a single squid thread, which is fine for 1Gbit/s and possibly 2Gbit/s, but if higher bandwidth is needed, see the <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Running_multiple_squid_workers">instructions for running multiple squid workers</a>.</p>
 </div>
 <h2 id="verifying">Verifying<a class="headerlink" href="#verifying" title="Permanent link">&para;</a></h2>
-<p>In order to verify that everything is installed correctly, create a repository replica. The repository chosen for the instructions below is one from egi.eu because it is very small, but you can use another one if you prefer.</p>
+<p>In order to verify that everything is installed correctly, create a repository replica. The repository chosen for the instructions below is the OSG config repository because it is very small, but you can use another one if you prefer.</p>
 <h3 id="adding-an-example-repository">Adding an example repository<a class="headerlink" href="#adding-an-example-repository" title="Permanent link">&para;</a></h3>
-<p>The OSG Operations Stratum 1 should add a repository replica using the <code>add_osg_repository</code> script from the oasis-goc rpm. Instructions for installing that are elsewhere. That script assumes that the oasis.opensciencegrid.org replica repository was first created, so this instruction creates it but does not download the first snapshot because that would take a lot of space and time. Use these commands to create the oasis replica and to create and download the example replica:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>cvmfs_server add-replica -o root http://oasis.opensciencegrid.org:8000/cvmfs/oasis.opensciencegrid.org /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub 
-<span class="gp">root@host # </span>add_osg_repository http://cvmfs-stratum0.gridpp.rl.ac.uk:8000/cvmfs/config-egi.egi.eu
-</code></pre></div>
-
-<p>It's a good idea for other Stratum 1s to make their own scripts for adding repository replicas, because there's always two or three commands to run, and it's easy to forget the commands after the first one. The first command is this:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>cvmfs_server add-replica -o root http://cvmfs-stratum0.gridpp.rl.ac.uk:8000/cvmfs/config-egi.egi.eu /etc/cvmfs/keys/egi.eu/egi.eu.pub
-</code></pre></div>
-
-<p>However, non-OSG Operations Stratum 1s (that is, at BNL and FNAL), for the sake of fulfilling an OSG security requirement, need to instead read from the OSG Operations machine with this as their first command:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>cvmfs_server add-replica -o root http://oasis-replica.opensciencegrid.org:8000/cvmfs/config-egi.egi.eu /etc/cvmfs/keys/egi.eu/egi.eu.pub:/etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub
-</code></pre></div>
-
-<p>The second command for Stratum 1s that have the httpd configuration as described above in the <a href="#configuring-apache">Configuring apache section</a> is this:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>rm -f /etc/httpd/conf.d/cvmfs.config-egi.egi.eu.conf
-</code></pre></div>
-
-<p>Then the next command is this:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>cvmfs_server snapshot config-egi.egi.eu
+<p>It's a good idea to make your own script for adding repository replicas, because there's always at least two commands to run, and it's easy to forget which commands to run. The commands are:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>cvmfs_server add-replica -o root http://oasis.opensciencegrid.org:8000/cvmfs/config-osg.opensciencegrid.org /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub
+<span class="gp">root@host # </span>cvmfs_server snapshot config-osg.opensciencegrid.org
 </code></pre></div>
 
 <p>With large repositories that can take a very long time, but with small repositories it should be very quick and not show any errors.</p>
 <h3 id="verifying-that-the-replica-is-being-served">Verifying that the replica is being served<a class="headerlink" href="#verifying-that-the-replica-is-being-served" title="Permanent link">&para;</a></h3>
 <p>Now to verify that the replication is working, do the following commands:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>wget -qdO- http://localhost:8000/cvmfs/config-egi.egi.eu/.cvmfspublished <span class="p">|</span> cat -v
-<span class="gp">root@host # </span>wget -qdO- http://localhost:80/cvmfs/config-egi.egi.eu/.cvmfspublished <span class="p">|</span> cat -v
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>wget -qdO- http://localhost:8000/cvmfs/config-osg.opensciencegrid.org/.cvmfspublished <span class="p">|</span> cat -v
+<span class="gp">root@host # </span>wget -qdO- http://localhost:80/cvmfs/config-osg.opensciencegrid.org/.cvmfspublished <span class="p">|</span> cat -v
 </code></pre></div>
 
 <p>Both commands should show a short file including gibberish at the end which is the signature.</p>
@@ -2173,6 +2087,8 @@ WSGISocketPrefix /var/run/wsgi
 <h2 id="setting-up-monitoring">Setting up monitoring<a class="headerlink" href="#setting-up-monitoring" title="Permanent link">&para;</a></h2>
 <p>If you installed frontier-squid and frontier-awstats, there is a little more to do to configure monitoring.</p>
 <p>First, make sure that your firewall accepts UDP queries from the monitoring server at CERN. Details are in <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring">the frontier-squid instructions</a>. Next, choose any random password and put it in <code>/etc/awstats/password-file</code>. Then tell Dave Dykstra the fully qualified domain name of your machine and the password you chose, and he'll set up the monitoring servers.</p>
+<h2 id="managing-replication">Managing replication<a class="headerlink" href="#managing-replication" title="Permanent link">&para;</a></h2>
+<p>Instead of manually managing replication it is highly recommended to use the <a href="https://github.com/cvmfs-contrib/cvmfs-manage-replicas">cvmfs-manage-replicas package</a> which can automatically add repositories based on wildcards of repositories installed elsewhere.</p>
                 
               
               
