@@ -287,7 +287,7 @@ This section is contained in `/etc/osg/config.d/30-rsv.ini` which is provided by
     SE.
 
 
-### Subcluster / Resource Entry ###
+### Subcluster / Resource Entry for AGIS / GlideinWMS Entry ###
 
 Subcluster and Resource Entry configuration is for reporting about the worker resources on your site. A **subcluster** is a homogeneous set of worker node hardware; a **resource** is a set of subcluster(s) with common capabilities that will be reported to the ATLAS AGIS system.
 
@@ -299,6 +299,7 @@ This configuration uses multiple sections of the OSG configuration files:
 
 -   [Subcluster\*](#subcluster-configuration): options about homogeneous subclusters
 -   [Resource Entry\*](#resource-entry-configuration-atlas-only): options for specifying ATLAS queues for AGIS
+-   [GlideinWMS Entry\*](#entry-configuration-gwms): options for specifying queues for the CMS and OSG GlideinWMS factories
 
 #### Notes for multi-CE sites. ####
 
@@ -355,6 +356,27 @@ The following attributes are optional:
 **OSG 3.4 changes:**
 
 -   `allowed_vos` is mandatory
+
+
+#### GlideinWMS Entry (CMS and OSG pilot factories) ####
+
+If you are configuring a CE that is going to receive pilot jobs from the CMS or the OSG factories (CMS, OSG, LIGO, CLAS12, DUNE, Glow, IceCube, ...), you can provide pilot job specifications to help operators automatically configure the factory entries in GlideinWMS. For each pilot type, create a new `Pilot` section with a unique name in the following format: `[Pilot NAME]` where NAME is a string describing the pilot type (e.g.: GPU, WholeNode, default). The following options can be specified in the `Pilot` section:
+
+This section is contained in `/etc/osg/config.d/35-pilot.ini`
+
+| Option                                    | Values Accepted             | Explanation                                                                                                                                                          |
+|-------------------------------------------|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **cpucount**                              | Positive Integer            | The number of cores for this pilot type.                                                                                                                             |
+| **ram\_mb**                               | Positive Integer            | The amount of memory (in megabytes) for this pilot type.                                                                                                             |
+| **whole\_node**                           | true, false                 | This is a whole node pilot; cpucount and ram_mb are ignored if this is true.                                                                                         |
+| **gpucount**                              | Positive Integer            | The number of GPUs available                                                                                                                                         |
+| **max\_pilots**                           | Positive Integer            | The maximum number of pilots of this type that can be sent                                                                                                           |
+| **max\_wall\_time**                       | Positive Integer            | The maximum wall-clock time a job is allowed to run for this pilot type, in minutes                                                                                  |
+| **queue**                                 | String                      | The queue or partition which jobs should be submitted to in order to run on this resource. Equivalent to the HTCondor grid universe classad attribute `remote_queue` |
+| **require\_singularity**                  | true, false                 | True if the pilot should require singularity on the workers.                                                                                                         |
+| **os**                                    | Comma-separated List        | The OS of the workers; allowed values are `rhel6`, `rhel7`, `rhel8`, or `ubuntu18`. This is required unless require_singularity = true                               |
+| **send\_tests*                            | true, false                 | Send test pilots? Currently not working, placeholder                                                                                                                 |
+| **allowed\_vos**                          | Comma-separated List or `*` | A comma-separated list of VOs that are allowed to submit to this subcluster; If `*`, uses VOs that have accounts on this CE                                          |
 
 
 ### Gateway ###
