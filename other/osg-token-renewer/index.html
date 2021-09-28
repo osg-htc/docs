@@ -9,14 +9,14 @@
       
       
       
-        <link rel="canonical" href="https://opensciencegrid.org/docs/worker-node/install-wn-oasis/">
+        <link rel="canonical" href="https://opensciencegrid.org/docs/other/osg-token-renewer/">
       
       <link rel="icon" href="../../img/favicon.ico">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.0">
     
     
       
-        <title>Install from OASIS - OSG Site Documentation</title>
+        <title>Install OSG Token Renewal Service - OSG Site Documentation</title>
       
     
     
@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#installing-the-worker-node-client-via-oasis" class="md-skip">
+        <a href="#installing-and-using-the-osg-token-renewal-service" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Install from OASIS
+              Install OSG Token Renewal Service
             
           </span>
         </div>
@@ -316,14 +316,12 @@
             
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1" type="checkbox" id="__nav_7_1" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1" type="checkbox" id="__nav_7_1" >
       
       <label class="md-nav__link" for="__nav_7_1">
         Compute
@@ -465,14 +463,12 @@
             
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1_4" type="checkbox" id="__nav_7_1_4" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1_4" type="checkbox" id="__nav_7_1_4" >
       
       <label class="md-nav__link" for="__nav_7_1_4">
         Worker Node
@@ -490,7 +486,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../using-wn/" class="md-nav__link">
+      <a href="../../worker-node/using-wn/" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -502,7 +498,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../install-wn/" class="md-nav__link">
+      <a href="../../worker-node/install-wn/" class="md-nav__link">
         Install from RPM
       </a>
     </li>
@@ -514,7 +510,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../install-wn-tarball/" class="md-nav__link">
+      <a href="../../worker-node/install-wn-tarball/" class="md-nav__link">
         Install from Tarball
       </a>
     </li>
@@ -524,83 +520,11 @@
             
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Install from OASIS
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../worker-node/install-wn-oasis/" class="md-nav__link">
         Install from OASIS
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#before-starting" class="md-nav__link">
-    Before Starting
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configure-the-ce" class="md-nav__link">
-    Configure the CE
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#validating-the-worker-node-client" class="md-nav__link">
-    Validating the Worker Node Client
-  </a>
-  
-    <nav class="md-nav" aria-label="Validating the Worker Node Client">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#manually-using-the-worker-node-client-from-oasis" class="md-nav__link">
-    Manually Using the Worker Node Client From OASIS
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#getting-help" class="md-nav__link">
-    Getting Help
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -610,7 +534,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../install-cvmfs/" class="md-nav__link">
+      <a href="../../worker-node/install-cvmfs/" class="md-nav__link">
         Install CVMFS
       </a>
     </li>
@@ -622,7 +546,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../install-singularity/" class="md-nav__link">
+      <a href="../../worker-node/install-singularity/" class="md-nav__link">
         Install Singularity
       </a>
     </li>
@@ -634,7 +558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../using-wn-containers/" class="md-nav__link">
+      <a href="../../worker-node/using-wn-containers/" class="md-nav__link">
         Using WN Containers
       </a>
     </li>
@@ -857,12 +781,14 @@
             
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_3" type="checkbox" id="__nav_7_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_3" type="checkbox" id="__nav_7_3" checked>
       
       <label class="md-nav__link" for="__nav_7_3">
         Other
@@ -880,7 +806,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../other/configuration-with-osg-configure/" class="md-nav__link">
+      <a href="../configuration-with-osg-configure/" class="md-nav__link">
         Configuration with OSG-Configure
       </a>
     </li>
@@ -892,7 +818,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../other/install-gwms-frontend/" class="md-nav__link">
+      <a href="../install-gwms-frontend/" class="md-nav__link">
         Install GlideinWMS Frontend
       </a>
     </li>
@@ -904,7 +830,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../other/install-cvmfs-stratum1/" class="md-nav__link">
+      <a href="../install-cvmfs-stratum1/" class="md-nav__link">
         Install a CVMFS Stratum 1
       </a>
     </li>
@@ -916,7 +842,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../other/troubleshooting-gratia/" class="md-nav__link">
+      <a href="../troubleshooting-gratia/" class="md-nav__link">
         Troubleshooting Gratia
       </a>
     </li>
@@ -928,7 +854,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../other/schedd-filebeats/" class="md-nav__link">
+      <a href="../schedd-filebeats/" class="md-nav__link">
         Install Transfer Log Filebeats
       </a>
     </li>
@@ -938,11 +864,137 @@
             
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../other/osg-token-renewer/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Install OSG Token Renewal Service
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Install OSG Token Renewal Service
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#before-starting" class="md-nav__link">
+    Before Starting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-the-osg-token-renewal-service" class="md-nav__link">
+    Installing the OSG Token Renewal Service
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-the-osg-token-renewal-service" class="md-nav__link">
+    Configuring the OSG Token Renewal Service
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring the OSG Token Renewal Service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuring-accounts" class="md-nav__link">
+    Configuring accounts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-tokens" class="md-nav__link">
+    Configuring tokens
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-configuration" class="md-nav__link">
+    Example configuration
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#managing-the-osg-token-renewal-service" class="md-nav__link">
+    Managing the OSG Token Renewal Service
+  </a>
+  
+    <nav class="md-nav" aria-label="Managing the OSG Token Renewal Service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#token-renewal-services" class="md-nav__link">
+    Token renewal services
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#help" class="md-nav__link">
+    Help
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    Reference
+  </a>
+  
+    <nav class="md-nav" aria-label="Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#files-of-interest" class="md-nav__link">
+    Files of interest
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1132,7 +1184,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../other/gsissh/" class="md-nav__link">
+      <a href="../gsissh/" class="md-nav__link">
         Install GSI-enabled SSH
       </a>
     </li>
@@ -1746,23 +1798,37 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configure-the-ce" class="md-nav__link">
-    Configure the CE
+  <a href="#installing-the-osg-token-renewal-service" class="md-nav__link">
+    Installing the OSG Token Renewal Service
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#validating-the-worker-node-client" class="md-nav__link">
-    Validating the Worker Node Client
+  <a href="#configuring-the-osg-token-renewal-service" class="md-nav__link">
+    Configuring the OSG Token Renewal Service
   </a>
   
-    <nav class="md-nav" aria-label="Validating the Worker Node Client">
+    <nav class="md-nav" aria-label="Configuring the OSG Token Renewal Service">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#manually-using-the-worker-node-client-from-oasis" class="md-nav__link">
-    Manually Using the Worker Node Client From OASIS
+  <a href="#configuring-accounts" class="md-nav__link">
+    Configuring accounts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-tokens" class="md-nav__link">
+    Configuring tokens
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-configuration" class="md-nav__link">
+    Example configuration
   </a>
   
 </li>
@@ -1773,9 +1839,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#getting-help" class="md-nav__link">
-    Getting Help
+  <a href="#managing-the-osg-token-renewal-service" class="md-nav__link">
+    Managing the OSG Token Renewal Service
   </a>
+  
+    <nav class="md-nav" aria-label="Managing the OSG Token Renewal Service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#token-renewal-services" class="md-nav__link">
+    Token renewal services
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#help" class="md-nav__link">
+    Help
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    Reference
+  </a>
+  
+    <nav class="md-nav" aria-label="Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#files-of-interest" class="md-nav__link">
+    Files of interest
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1791,89 +1897,244 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/worker-node/install-wn-oasis.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/other/osg-token-renewer.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="installing-the-worker-node-client-via-oasis">Installing the Worker Node Client via OASIS<a class="headerlink" href="#installing-the-worker-node-client-via-oasis" title="Permanent link">&para;</a></h1>
-<p>The <strong>OSG Worker Node Client</strong> is a collection of software components that is expected to be added to every worker node
-that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect
-to use. Contents of the worker node client can be found <a href="../install-wn/#worker-node-contents">here</a>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>It is possible to install the Worker Node Client software in a variety of ways, depending on your local site:</p>
-<ul>
-<li>Use from OASIS (this guide) - useful when <a href="../install-cvmfs/">CVMFS</a> is already mounted on your worker nodes</li>
-<li><a href="../install-wn-tarball/">Install using a tarball</a> - useful when installing onto a shared filesystem for distribution to worker nodes</li>
-<li><a href="../install-wn/">Install using RPMs and Yum</a> - useful when managing your worker nodes with a tool (e.g., Puppet, Chef) that can automate RPM installs</li>
-</ul>
-</div>
-<p>This document is intended to guide system administrators through the process of configuring a site to make the Worker Node Client software available from OASIS.</p>
+                <h1 id="installing-and-using-the-osg-token-renewal-service">Installing and Using the OSG Token Renewal Service<a class="headerlink" href="#installing-and-using-the-osg-token-renewal-service" title="Permanent link">&para;</a></h1>
+<p>This document contains instructions to install and configure the
+OSG Token Renewal Service package, <code>osg-token-renewer</code>,
+for obtaining and automatically renewing tokens with <a href="https://github.com/indigo-dc/oidc-agent">oidc-agent</a>.</p>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
-<p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
+<p>Before starting the installation process, consider the following points
+(consulting <a href="#reference">the Reference section below</a> as needed):</p>
 <ul>
-<li>Ensure the host has <a href="../../release/supported_platforms/">a supported operating system</a></li>
-<li>On every worker node, <a href="../install-cvmfs/">install and configure CVMFS</a></li>
+<li>An account is needed with an OIDC token issuer that offers the device flow</li>
+<li><strong>User and Group IDs:</strong> If they do not exist already, the installation will
+  create the Linux user and group named <code>osg-token-svc</code></li>
 </ul>
-<p>Once configured to use OASIS, grid jobs will download the worker-node software on demand (into the local disk cache).
-This may result in extra network activity, especially on first use of the client tools.</p>
-<h2 id="configure-the-ce">Configure the CE<a class="headerlink" href="#configure-the-ce" title="Permanent link">&para;</a></h2>
-<p>Determine the OASIS path to the Worker Node Client software for your worker nodes:</p>
-<table>
-<thead>
-<tr>
-<th align="left">Worker Node OS</th>
-<th align="left">Use…</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">EL 7 (64-bit)</td>
-<td align="left"><code>/cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.5/current/el7-x86_64</code></td>
-</tr>
-<tr>
-<td align="left">EL 8 (64-bit)</td>
-<td align="left"><code>/cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.5/current/el8-x86_64</code></td>
-</tr>
-</tbody>
-</table>
-<p>On the CE, in the <code>/etc/osg/config.d/10-storage.ini</code> file, set the <code>grid_dir</code> configuration setting to the path from the previous step.</p>
-<p>Once you finish making changes to configuration files on your CE, validate, fix, and apply the configuration:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>osg-configure -v
-<span class="gp">root@host # </span>osg-configure -c
+<p>As with all OSG software installations, there are some one-time (per host)
+steps to prepare in advance:</p>
+<ul>
+<li>Ensure the host has
+  <a href="../../release/supported_platforms/">a supported operating system</a></li>
+<li>Obtain root access to the host</li>
+<li>Prepare the <a href="../../common/yum/">required Yum repositories</a></li>
+</ul>
+<h2 id="installing-the-osg-token-renewal-service">Installing the OSG Token Renewal Service<a class="headerlink" href="#installing-the-osg-token-renewal-service" title="Permanent link">&para;</a></h2>
+<p>Install the OSG Token Renewal Service package:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@server # </span>yum install osg-token-renewer
 </code></pre></div>
 
-<p>For more information, see the <a href="../using-wn/">OSG worker node environment documentation</a> and the
-<a href="../../other/configuration-with-osg-configure/#storage">CE configuration instructions</a>.</p>
-<h2 id="validating-the-worker-node-client">Validating the Worker Node Client<a class="headerlink" href="#validating-the-worker-node-client" title="Permanent link">&para;</a></h2>
-<p>To verify functionality of the worker node client, you will need to submit a test job against your CE and verify the job's output.</p>
+<p>This will install the <code>osg-token-renewer</code> scripts &amp; systemd service files,
+and will pull in the <code>oidc-agent</code> package that the service depends on.</p>
+<h2 id="configuring-the-osg-token-renewal-service">Configuring the OSG Token Renewal Service<a class="headerlink" href="#configuring-the-osg-token-renewal-service" title="Permanent link">&para;</a></h2>
+<h3 id="configuring-accounts">Configuring accounts<a class="headerlink" href="#configuring-accounts" title="Permanent link">&para;</a></h3>
+<p>To create a new client account named <code>&lt;ACCOUNT_SHORTNAME&gt;</code>:</p>
 <ol>
-<li>Submit a job that executes the <code>env</code> command (e.g. Run <a href="https://htcondor.github.io/htcondor-ce/v5/troubleshooting/debugging-tools/#condor_ce_trace">condor_ce_trace</a> with the <code>-d</code> flag from your HTCondor CE)</li>
-<li>Verify that the value of <code>OSG_GRID</code> is set to the directory of your WN Client installation</li>
+<li>Create a corresponding file named <code>/etc/osg/tokens/&lt;ACCOUNT_SHORTNAME&gt;.pw</code>
+   with the encryption password to use for this client account.</li>
+<li>Consult the
+   <a href="https://opensciencegrid.org/technology/software/requesting-tokens/">Requesting Tokens</a>
+   document to determine which scopes you will need for this client account.</li>
+<li>
+<p>Run the setup script as follows:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@server # </span>osg-token-renewer-setup.sh &lt;ACCOUNT_SHORTNAME&gt;
+</code></pre></div>
+
+<p>For example,</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@server # </span>osg-token-renewer-setup.sh myaccount123
+</code></pre></div>
+
+</li>
+<li>
+<p>When prompted, enter your Issuer and desired scopes for this account
+   from the list of valid options.</p>
+</li>
+<li>You will also be prompted on the console to visit a web link to authorize
+   the client request with a passcode printed on the console.
+   Follow the prompts (visit the web link, enter the request passcode,
+   log in with your account for your issuer, and authorize the request).</li>
+<li>If this succeeds, you will be prompted with a new
+   <code>[account &lt;ACCOUNT_SHORTNAME&gt;]</code> section to add to your <code>config.ini</code>.
+   Add the section to your <code>/etc/token-renewer/config.ini</code>,
+   replacing the example section if it's still there.</li>
 </ol>
-<h3 id="manually-using-the-worker-node-client-from-oasis">Manually Using the Worker Node Client From OASIS<a class="headerlink" href="#manually-using-the-worker-node-client-from-oasis" title="Permanent link">&para;</a></h3>
-<p>If you must log onto a worker node and use the Worker Node Client software directly during your login session, consult the following table for the command to set up your environment:</p>
+<p>Next you can configure one or more tokens for this client account.</p>
+<h3 id="configuring-tokens">Configuring tokens<a class="headerlink" href="#configuring-tokens" title="Permanent link">&para;</a></h3>
+<p>After you have created an OIDC client account and added it to
+<code>/osg/token-renewer/config.ini</code>, you need to create a corresponding <code>token</code>
+section in the config for each token that should be generated for this account
+(possibly with different options).</p>
+<ol>
+<li>
+<p>Choose a <code>&lt;TOKEN_NAME&gt;</code> and add a new <code>[token &lt;TOKEN_NAME&gt;]</code> section
+    (replacing the example section if it's still there).</p>
+<p>The <code>account</code> option in this section must match the <code>&lt;ACCOUNT_SHORTNAME&gt;</code>
+for the corresponding <code>[account &lt;ACCOUNT_SHORTNAME&gt;]</code> section.</p>
+</li>
+<li>
+<p>Set the <code>token_path</code> to
+    <code>/etc/osg/tokens/&lt;ACCOUNT_SHORTNAME&gt;.&lt;TOKEN_NAME&gt;.token</code></p>
+</li>
+<li>
+<p>Optionally, you may also specify any of the following options, which can
+    limit the respective values in the generated token compared to the
+    associated account:</p>
 <table>
 <thead>
 <tr>
-<th align="left">Worker Node OS</th>
-<th align="left">Run the following command…</th>
+<th align="left">Option</th>
+<th align="left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">EL 7 (64-bit)</td>
-<td align="left"><code>source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.5/current/el7-x86_64/setup.sh</code></td>
+<td align="left"><code>audience</code></td>
+<td align="left">list of audiences  (see <a href="https://datatracker.ietf.org/doc/html/rfc7519#section-4.1.3">RFC7519</a>)</td>
 </tr>
 <tr>
-<td align="left">EL 8 (64-bit)</td>
-<td align="left"><code>source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.5/current/el8-x86_64/setup.sh</code></td>
+<td align="left"><code>scope</code></td>
+<td align="left">list of <a href="https://github.com/WLCG-AuthZ-WG/common-jwt-profile/blob/master/profile.md#capability-based-authorization-scope">scopes</a></td>
+</tr>
+<tr>
+<td align="left"><code>min_lifetime</code></td>
+<td align="left">min token lifetime in seconds</td>
 </tr>
 </tbody>
 </table>
-<h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
-<p>To get assistance, please use <a href="../../common/help/">this page</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For tokens used against an HTCondor-CE, set the <code>audience</code> option to
+<code>&lt;CE FQDN&gt;:&lt;CE PORT&gt;</code>.</p>
+</div>
+</li>
+</ol>
+<h3 id="example-configuration">Example configuration<a class="headerlink" href="#example-configuration" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>[account myclient1234]
+
+password_file = /etc/osg/tokens/myclient1234.pw
+
+
+
+[token mytoken567]
+
+account = myclient1234
+token_path = /etc/osg/tokens/myclient1234.mytoken567.token
+</code></pre></div>
+
+<h2 id="managing-the-osg-token-renewal-service">Managing the OSG Token Renewal Service<a class="headerlink" href="#managing-the-osg-token-renewal-service" title="Permanent link">&para;</a></h2>
+<p>These services are managed by <code>systemctl</code> and may start additional services as
+dependencies.
+As a reminder, here are common service commands (all run as <code>root</code>) for EL7:</p>
+<table>
+<thead>
+<tr>
+<th align="left">To...</th>
+<th align="left">On EL7, run the command...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Start a service</td>
+<td align="left"><code>systemctl start &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+<tr>
+<td align="left">Stop a service</td>
+<td align="left"><code>systemctl stop &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+<tr>
+<td align="left">Enable a service to start on boot</td>
+<td align="left"><code>systemctl enable &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+<tr>
+<td align="left">Disable a service from starting on boot</td>
+<td align="left"><code>systemctl disable &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="token-renewal-services">Token renewal services<a class="headerlink" href="#token-renewal-services" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Software</strong></th>
+<th><strong>Service name</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OSG Token Renewer</td>
+<td><code>osg-token-renewer.service</code></td>
+<td>The OSG Token Renewer, runs as a "oneshot" service, not a daemon.</td>
+</tr>
+<tr>
+<td>OSG Token Renewer timer</td>
+<td><code>osg-token-renewer.timer</code></td>
+<td>Nightly run schedule for OSG Token Renewer</td>
+</tr>
+</tbody>
+</table>
+<p>The OSG token renewal service is set to run via a systemd timer every 15
+minutes.</p>
+<p>If you would like to run the service manually at a different time (e.g., to
+generate all the tokens immediately), you can run the service once with:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>systemctl start osg-token-renewer
+</code></pre></div>
+
+<p>If this succeeds, the new token will be written to the location you configured
+for <code>token_path</code> (<code>/etc/osg/tokens/&lt;ACCOUNT_SHORTNAME&gt;.token</code>, by convention).</p>
+<p>Failures can be diagnosed by running:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>journalctl -eu osg-token-renewer
+</code></pre></div>
+
+<h2 id="help">Help<a class="headerlink" href="#help" title="Permanent link">&para;</a></h2>
+<p>To get assistance please use this <a href="../../common/help/">Help Procedure</a>.</p>
+<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
+<h3 id="files-of-interest">Files of interest<a class="headerlink" href="#files-of-interest" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Path</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>/etc/osg/token-renewer/config.ini</code></td>
+<td align="left">Main config file for service</td>
+</tr>
+<tr>
+<td align="left"><code>/etc/osg/tokens/&lt;ACCOUNT_SHORTNAME&gt;.pw</code></td>
+<td align="left">Encryption password file for client account</td>
+</tr>
+<tr>
+<td align="left"><code>/etc/osg/tokens/&lt;ACCOUNT_SHORTNAME&gt;.&lt;TOKEN_NAME&gt;.token</code></td>
+<td align="left">Output location for token files</td>
+</tr>
+<tr>
+<td align="left"><code>/usr/bin/osg-token-renewer-setup.sh</code></td>
+<td align="left">Setup script for each new client account</td>
+</tr>
+<tr>
+<td align="left"><code>/usr/lib/systemd/system/osg-token-renewer.service</code></td>
+<td align="left">SystemD service unit configuruation</td>
+</tr>
+<tr>
+<td align="left"><code>/usr/lib/systemd/system/osg-token-renewer.timer</code></td>
+<td align="left">SystemD timer for service</td>
+</tr>
+<tr>
+<td align="left"><code>/usr/bin/osg-token-renewer.sh</code></td>
+<td align="left">Main wrapper script invoked by service</td>
+</tr>
+<tr>
+<td align="left"><code>/usr/bin/osg-token-renewer</code></td>
+<td align="left">Token renewal program invoked by main wrapper</td>
+</tr>
+</tbody>
+</table>
                 
               
               
@@ -1893,7 +2154,7 @@ This may result in extra network activity, especially on first use of the client
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../install-wn-tarball/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../schedd-filebeats/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -1902,19 +2163,19 @@ This may result in extra network activity, especially on first use of the client
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Install from Tarball
+                Install Transfer Log Filebeats
               </div>
             </div>
           </a>
         
         
-          <a href="../install-cvmfs/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../data/gridftp/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Install CVMFS
+                Install GridFTP Server
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
