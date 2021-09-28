@@ -18,18 +18,11 @@ Before Starting
 
 In order to configure the container, you will need:
 
-1.  A [registered resource](../common/registration.md) in OSG Topology;
-    resource registration allows OSG to do proper usage accounting and maintain contacts in case of security incidents.
-1.  An authentication token from the OSG.  Please contact [OSG support](mailto:support@opensciencegrid.org) to request a
-    token for your site.
-1.  An HTTP caching proxy ("squid server") at or near your site.
-1.  A host with a running Docker service
-1.  A host with kernel version >= 3.10.0-1127 (run `uname -vr` to check) with user namespaces enabled and
-    network namespaces disabled.
-    See this section on using
-    [unprivileged Singularity](https://opensciencegrid.org/docs/worker-node/install-singularity/#enabling-unprivileged-singularity)
-    for details.
-
+1. A [registered resource](../common/registration.md) in OSG Topology;
+   resource registration allows OSG to do proper usage accounting and maintain contacts in case of security incidents.
+2. An authentication token from the OSG.  Please contact [OSG support](mailto:support@opensciencegrid.org) to request a
+   token for your site.
+3. An HTTP caching proxy ("squid server") at or near your site.
 
 Running the Container with Docker
 ---------------------------------
@@ -65,11 +58,7 @@ Here is an example invocation using `docker run` by hand:
 
 ```
 docker run -it --rm --user osg  \
-       --security-opt seccomp=unconfined \
-       --security-opt systempaths=unconfined \
-       --security-opt no-new-privileges \
-       --device=/dev/fuse \
-       --net=host \
+       --privileged             \
        -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
        -v /worker-temp-dir:/pilot               \
        -e GLIDEIN_Site="..."                    \
@@ -83,7 +72,7 @@ docker run -it --rm --user osg  \
 ```
 
 Replace `/path/to/token` with the location you saved the token obtained from the OSP administrators.
-The security options and adding `/dev/fuse` in the above `docker run` allows the container
+Privileged mode (`--privileged`) requested in the above `docker run` allows the container
 to mount [CVMFS using cvmfsexec](#adding-cvmfs-using-cvmfsexec) and invoke `singularity` for user jobs.
 Singularity allows OSP users to use their own container for their job (e.g., a common use case for GPU jobs).
 
@@ -97,7 +86,7 @@ Supporting CVMFS inside your container will greatly increase the types of OSG jo
 There are two methods for making CVMFS available in your container: [enabling cvmfsexec](#adding-cvmfs-using-cvmfsexec),
 or [bind-mounting CVMFS from the host](#adding-cvmfs-via-bind-mount).
 Bind-mounting CVMFS will require CVMFS to be installed on the host first,
-but it has other advantages such as supporting automounting of repositories.
+but the container will need fewer privileges.
 
 
 ### Adding CVMFS using cvmfsexec
@@ -109,6 +98,17 @@ To enable cvmfsexec, specify a space-separated list of repos in the `CVMFSEXEC_R
 We recommend the following repos:
 -   `oasis.opensciencegrid.org`
 -   `singularity.opensciencegrid.org`
+
+cvmfsexec has the following system requirements:
+
+-   On EL7, you must have kernel version >= 3.10.0-1127 (run `uname -vr` to check), and user namespaces enabled.
+    See step 1 in the
+    [Singularity Install document](https://opensciencegrid.org/docs/worker-node/install-singularity/#enabling-unprivileged-singularity)
+    for details.
+
+-   On EL8, you must have kernel version >= 4.18 (run `uname -vr` to check).
+
+See the [cvmfsexec README](https://github.com/cvmfs/cvmfsexec#readme) details.
 
 Note that cvmfsexec will not be run if CVMFS repos are already available in `/cvmfs` via bind-mount,
 regardless of the value of `CVMFSEXEC_REPOS`.
@@ -146,9 +146,9 @@ You can store the logs outside of the container by volume mounting a directory t
 ### Adding CVMFS via bind-mount
 
 As an alternative to using cvmfsexec, you may install CVMFS on the host, and volume mount it into the container.
-This will let you avoid specifying a list of CVMFS repositories to mount because they will be automounted on demand.
-It will encourage more stability by enabling longer term reuse of caches, and give you more control over the CVMFS configuration.
-It will also let you avoid attaching `/dev/fuse` to the container.
+This will let you avoid running the container in privileged mode.
+However, supporting Singularity jobs inside the container will require extra privileges,
+namely the capabilities `DAC_OVERRIDE`, `DAC_READ_SEARCH`, `SETGID`, `SETUID`, `SYS_ADMIN`, `SYS_CHROOT`, and `SYS_PTRACE`.
 
 Follow the [installing CVMFS document](../worker-node/install-cvmfs.md) to install CVMFS on the host.
 
@@ -159,10 +159,14 @@ modified to volume mount CVMFS instead of using cvmfsexec, and using reduced pri
 
 ```
 docker run -it --rm --user osg      \
-        --security-opt seccomp=unconfined \
-        --security-opt systempaths=unconfined \
-        --security-opt no-new-privileges \
-        --net=host \
+        --cap-add DAC_OVERRIDE      \
+        --cap-add DAC_READ_SEARCH   \
+        --cap-add SETUID            \
+        --cap-add SETGID            \
+        --cap-add SYS_ADMIN         \
+        --cap-add SYS_CHROOT        \
+        --cap-add SYS_PTRACE        \
+        -v /cvmfs:/cvmfs:shared     \
         -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
         -v /worker-temp-dir:/pilot      \
         -e GLIDEIN_Site="..."           \
