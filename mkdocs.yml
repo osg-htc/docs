@@ -56,7 +56,7 @@ nav:
     - 'Install a CVMFS Stratum 1': 'other/install-cvmfs-stratum1.md'
     - 'Troubleshooting Gratia': 'other/troubleshooting-gratia.md'
     - 'Install Transfer Log Filebeats': 'other/schedd-filebeats.md'
-    - 'Install OSG Token Renewal Service': 'other/install-osg-token-renewer.md'
+    - 'Install OSG Token Renewal Service': 'other/osg-token-renewer.md'
   - Deprecated:
     - POSIX Storage:
       - 'Install GridFTP Server': 'data/gridftp.md'
