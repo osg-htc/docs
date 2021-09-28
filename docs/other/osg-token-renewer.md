@@ -91,14 +91,14 @@ section in the config for each token that should be generated for this account
 1.  Set the `token_path` to
     `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.<TOKEN_NAME>.token`
 
-1.  Optionally, you may also specify any of the following options, which will
-    be passed to the `oidc-token` command when generating the token:
+1.  Optionally, you may also specify any of the following options, which can attenuate
+    the respective values in the generated token compared to the associated with the account:
 
     | Option         | Description                                               |
     |:---------------|:----------------------------------------------------------|
-    | `audience`     | list of audiences to pass via `--aud` option              |
-    | `scope`        | list of scopes to pass via `--scope` option               |
-    | `min_lifetime` | min token lifetime in seconds to pass via `--time` option |
+    | `audience`     | list of audiences  (see [RFC7519](https://datatracker.ietf.org/doc/html/rfc7519#section-4.1.3)) |
+    | `scope`        | list of [scopes](https://github.com/WLCG-AuthZ-WG/common-jwt-profile/blob/master/profile.md#capability-based-authorization-scope)               |
+    | `min_lifetime` | min token lifetime in seconds |
 
     !!! note
         For tokens used against an HTCondor-CE, set the `audience` option to
