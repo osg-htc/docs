@@ -54,12 +54,12 @@ To create a new client account named `<ACCOUNT_SHORTNAME>`:
 1. Run the setup script as follows:
 
         :::console
-        root@server # osg-token-renewer-setup.sh <ACCOUNT_SHORTNAME>
+        root@server # osg-token-renewer-setup <ACCOUNT_SHORTNAME>
 
     For example,
 
         :::console
-        root@server # osg-token-renewer-setup.sh myaccount123
+        root@server # osg-token-renewer-setup myaccount123
 
 1. When prompted, enter your Issuer and desired scopes for this account
    from the list of valid options.
@@ -177,7 +177,7 @@ Reference
 | `/etc/osg/token-renewer/config.ini`                      | Main config file for service                  |
 | `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.pw`                 | Encryption password file for client account   |
 | `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.<TOKEN_NAME>.token` | Output location for token files               |
-| `/usr/bin/osg-token-renewer-setup.sh`                    | Setup script for each new client account      |
+| `/usr/bin/osg-token-renewer-setup`                       | Setup script for each new client account      |
 | `/usr/lib/systemd/system/osg-token-renewer.service`      | SystemD service unit configuruation           |
 | `/usr/lib/systemd/system/osg-token-renewer.timer`        | SystemD timer for service                     |
 | `/usr/bin/osg-token-renewer.sh`                          | Main wrapper script invoked by service        |
