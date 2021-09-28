@@ -91,8 +91,9 @@ section in the config for each token that should be generated for this account
 1.  Set the `token_path` to
     `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.<TOKEN_NAME>.token`
 
-1.  Optionally, you may also specify any of the following options, which can attenuate
-    the respective values in the generated token compared to the associated with the account:
+1.  Optionally, you may also specify any of the following options, which can
+    limit the respective values in the generated token compared to the
+    associated account:
 
     | Option         | Description                                               |
     |:---------------|:----------------------------------------------------------|
