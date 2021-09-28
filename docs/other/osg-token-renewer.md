@@ -107,7 +107,18 @@ section in the config for each token that should be generated for this account
 
 ### Example configuration
 
-<insert example config here with account + token sections>
+```file
+[account myclient1234]
+
+password_file = /etc/osg/tokens/myclient1234.pw
+
+
+
+[token mytoken567]
+
+account = myclient1234
+token_path = /etc/osg/tokens/myclient1234.mytoken567.token
+```
 
 Managing the OSG Token Renewal Service
 --------------------------------------
