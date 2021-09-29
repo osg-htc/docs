@@ -202,9 +202,13 @@ It is a good idea to familiarize yourself with the log entries at `/var/log/http
 
 If you installed frontier-squid and frontier-awstats, there is a little more to do to configure monitoring.
 
-First, make sure that your firewall accepts UDP queries from the monitoring server at CERN. Details are in [the frontier-squid instructions](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring). Next, choose any random password and put it in `/etc/awstats/password-file`. Then tell Dave Dykstra the fully qualified domain name of your machine and the password you chose, and he'll set up the monitoring servers.
+First, make sure that your firewall accepts UDP queries from the monitoring server at CERN. Details are in [the frontier-squid instructions](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring). 
+
+Next, choose any random password and put it in `/etc/awstats/password-file`. Then tell Dave Dykstra the fully qualified domain name of your machine and the password you chose, and he'll set up the monitoring servers.
+
+Finally, install the [cvmfs-servermon package](https://github.com/cvmfs-contrib/cvmfs-servermon#readme) so the stratum 1 can be watched for problems with repositories.
 
 ## Managing replication
 
-Instead of manually managing replication it is highly recommended to use the [cvmfs-manage-replicas package](https://github.com/cvmfs-contrib/cvmfs-manage-replicas) which can automatically add repositories based on wildcards of repositories installed elsewhere.
+Instead of manually managing replication it is highly recommended to use the [cvmfs-manage-replicas package](https://github.com/cvmfs-contrib/cvmfs-manage-replicas#readme) which can automatically add repositories based on wildcards of repositories installed elsewhere.
 
