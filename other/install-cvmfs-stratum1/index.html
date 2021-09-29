@@ -2098,9 +2098,11 @@ Listen 8080 KeepAlive On
 <p>It is a good idea to familiarize yourself with the log entries at <code>/var/log/httpd/access_log</code> and also, if you have installed frontier-squid, at <code>/var/log/squid/access.log</code>. Also, at least 15 minutes after the snapshot is finished, check the log <code>/var/log/cvmfs/snapshots.log</code> to see that it tried to get an update and got no errors.</p>
 <h2 id="setting-up-monitoring">Setting up monitoring<a class="headerlink" href="#setting-up-monitoring" title="Permanent link">&para;</a></h2>
 <p>If you installed frontier-squid and frontier-awstats, there is a little more to do to configure monitoring.</p>
-<p>First, make sure that your firewall accepts UDP queries from the monitoring server at CERN. Details are in <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring">the frontier-squid instructions</a>. Next, choose any random password and put it in <code>/etc/awstats/password-file</code>. Then tell Dave Dykstra the fully qualified domain name of your machine and the password you chose, and he'll set up the monitoring servers.</p>
+<p>First, make sure that your firewall accepts UDP queries from the monitoring server at CERN. Details are in <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring">the frontier-squid instructions</a>. </p>
+<p>Next, choose any random password and put it in <code>/etc/awstats/password-file</code>. Then tell Dave Dykstra the fully qualified domain name of your machine and the password you chose, and he'll set up the monitoring servers.</p>
+<p>Finally, install the <a href="https://github.com/cvmfs-contrib/cvmfs-servermon#readme">cvmfs-servermon package</a> so the stratum 1 can be watched for problems with repositories.</p>
 <h2 id="managing-replication">Managing replication<a class="headerlink" href="#managing-replication" title="Permanent link">&para;</a></h2>
-<p>Instead of manually managing replication it is highly recommended to use the <a href="https://github.com/cvmfs-contrib/cvmfs-manage-replicas">cvmfs-manage-replicas package</a> which can automatically add repositories based on wildcards of repositories installed elsewhere.</p>
+<p>Instead of manually managing replication it is highly recommended to use the <a href="https://github.com/cvmfs-contrib/cvmfs-manage-replicas#readme">cvmfs-manage-replicas package</a> which can automatically add repositories based on wildcards of repositories installed elsewhere.</p>
                 
               
               
