@@ -1940,11 +1940,11 @@ and will pull in the <code>oidc-agent</code> package that the service depends on
    document to determine which scopes you will need for this client account.</li>
 <li>
 <p>Run the setup script as follows:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@server # </span>osg-token-renewer-setup.sh &lt;ACCOUNT_SHORTNAME&gt;
+<div class="codehilite"><pre><span></span><code><span class="gp">root@server # </span>osg-token-renewer-setup &lt;ACCOUNT_SHORTNAME&gt;
 </code></pre></div>
 
 <p>For example,</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@server # </span>osg-token-renewer-setup.sh myaccount123
+<div class="codehilite"><pre><span></span><code><span class="gp">root@server # </span>osg-token-renewer-setup myaccount123
 </code></pre></div>
 
 </li>
@@ -2114,7 +2114,7 @@ for <code>token_path</code> (<code>/etc/osg/tokens/&lt;ACCOUNT_SHORTNAME&gt;.tok
 <td align="left">Output location for token files</td>
 </tr>
 <tr>
-<td align="left"><code>/usr/bin/osg-token-renewer-setup.sh</code></td>
+<td align="left"><code>/usr/bin/osg-token-renewer-setup</code></td>
 <td align="left">Setup script for each new client account</td>
 </tr>
 <tr>
