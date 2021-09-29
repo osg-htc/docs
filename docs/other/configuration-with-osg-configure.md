@@ -299,7 +299,7 @@ This configuration uses multiple sections of the OSG configuration files:
 
 -   [Subcluster\*](#subcluster-configuration): options about homogeneous subclusters
 -   [Resource Entry\*](#resource-entry-configuration-atlas-only): options for specifying ATLAS queues for AGIS
--   [GlideinWMS Entry\*](#entry-configuration-gwms): options for specifying queues for the CMS and OSG GlideinWMS factories
+-   [GlideinWMS Entry\*](#glideinwms-entry-cms-and-osg-pilot-factories): options for specifying queues for the CMS and OSG GlideinWMS factories
 
 #### Notes for multi-CE sites. ####
 
