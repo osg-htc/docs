@@ -74,7 +74,7 @@ the default mappings.
     | [HCC](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/HCC.yaml)           | `hcc`               |
     | [Gluex](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/Gluex.yaml)       | `gluex`             |
 
-1.  Edit `/etc/osg/config.d/30-gip.ini` and specify the supported VOs per [Subcluster or ResourceEntry section](../other/configuration-with-osg-configure.md#subcluster-resource-entry):
+1.  Edit `/etc/osg/config.d/30-gip.ini` and specify the supported VOs per [Subcluster or ResourceEntry section](../other/configuration-with-osg-configure.md#subcluster-resource-entry-for-agis-glideinwms-entry):
 
         :::ini
         allowed_vos="VO1,VO2..."
