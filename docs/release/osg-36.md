@@ -23,6 +23,32 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.
 Latest News
 -----------
 
+### **September 30, 2021:** HTCondor-CE 5.1.2
+
+!!! danger "Please update osg-ca-certificates as soon as possible."
+    Applications and tools using OpenSSL such as wget, HTCondor, and XRootD,
+    will to fail to establish TLS/HTTPS connections to servers using Let's
+    Encrypt certificates with a "certificate has expired" message.
+
+This release of OSG 3.6 contains the following packages:
+
+-   [osg-ca-certs 1.99](https://github.com/opensciencegrid/osg-certificates/releases/tag/v1.99.igtf.1.112): Remove expired Let's Encrypt CA certificate
+-   osg-wn-client: Fix installation issue causes by EPEL's gfal2 update
+-   [CVMFS 2.8.2](https://cvmfs.readthedocs.io/en/2.8/cpt-releasenotes.html): Bug fix release
+-   cvmfs-x509-helper 2.2-2: Fix a number of issues with SciTokens support
+-   [HTCondor 9.0.6](https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00021.shtml)
+    -   CUDA\_VISIBLE\_DEVICES can now contain GPU-<uuid> formatted values
+    -   Fix a bug that caused jobs to fail when using Singularity versions > 3.7
+    -   Fix bugs relating to the transfer of standard output and error logs
+-   vault 1.8.2, htvault-config 1.6, htgettoken 1.6: Minor improvements
+-   Upcoming
+    -   [HTCondor 9.2.0](https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00023.shtml)
+        -   Add DAGMan SERVICE node, used to monitor or report on DAG workflow
+        -   Fix problem where proxy delegation to HTCondor versions < 9.1.3 failed
+        -   Jobs are now re-run if the execute directory unexpectedly disappears
+        -   HTCondor counts the number of files transferred at the submit node
+        -   Fix a bug that caused jobs to fail when using Singularity versions > 3.7
+
 ### **September 23, 2021:** HTCondor-CE 5.1.2
 
 This release of OSG 3.6 contains the following packages:
