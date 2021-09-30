@@ -1481,6 +1481,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#september-30-2021-htcondor-ce-512" class="md-nav__link">
+    September 30, 2021: HTCondor-CE 5.1.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#september-23-2021-htcondor-ce-512" class="md-nav__link">
     September 23, 2021: HTCondor-CE 5.1.2
   </a>
@@ -1857,6 +1864,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#september-30-2021-htcondor-ce-512" class="md-nav__link">
+    September 30, 2021: HTCondor-CE 5.1.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#september-23-2021-htcondor-ce-512" class="md-nav__link">
     September 23, 2021: HTCondor-CE 5.1.2
   </a>
@@ -2036,6 +2050,38 @@ GSI proxies and HTTP is used for data transfer instead of GridFTP.</p>
 GlideinWMS 3.9, and XRootD 5.1.
 We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="september-30-2021-htcondor-ce-512"><strong>September 30, 2021:</strong> HTCondor-CE 5.1.2<a class="headerlink" href="#september-30-2021-htcondor-ce-512" title="Permanent link">&para;</a></h3>
+<div class="admonition danger">
+<p class="admonition-title">Please update osg-ca-certificates as soon as possible.</p>
+<p>Applications and tools using OpenSSL such as wget, HTCondor, and XRootD,
+will to fail to establish TLS/HTTPS connections to servers using Let's
+Encrypt certificates with a "certificate has expired" message.</p>
+</div>
+<p>This release of OSG 3.6 contains the following packages:</p>
+<ul>
+<li><a href="https://github.com/opensciencegrid/osg-certificates/releases/tag/v1.99.igtf.1.112">osg-ca-certs 1.99</a>: Remove expired Let's Encrypt CA certificate</li>
+<li>osg-wn-client: Fix installation issue causes by EPEL's gfal2 update</li>
+<li><a href="https://cvmfs.readthedocs.io/en/2.8/cpt-releasenotes.html">CVMFS 2.8.2</a>: Bug fix release</li>
+<li>cvmfs-x509-helper 2.2-2: Fix a number of issues with SciTokens support</li>
+<li><a href="https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00021.shtml">HTCondor 9.0.6</a><ul>
+<li>CUDA_VISIBLE_DEVICES can now contain GPU-<uuid> formatted values</li>
+<li>Fix a bug that caused jobs to fail when using Singularity versions &gt; 3.7</li>
+<li>Fix bugs relating to the transfer of standard output and error logs</li>
+</ul>
+</li>
+<li>vault 1.8.2, htvault-config 1.6, htgettoken 1.6: Minor improvements</li>
+<li>Upcoming<ul>
+<li><a href="https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00023.shtml">HTCondor 9.2.0</a><ul>
+<li>Add DAGMan SERVICE node, used to monitor or report on DAG workflow</li>
+<li>Fix problem where proxy delegation to HTCondor versions &lt; 9.1.3 failed</li>
+<li>Jobs are now re-run if the execute directory unexpectedly disappears</li>
+<li>HTCondor counts the number of files transferred at the submit node</li>
+<li>Fix a bug that caused jobs to fail when using Singularity versions &gt; 3.7</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="september-23-2021-htcondor-ce-512"><strong>September 23, 2021:</strong> HTCondor-CE 5.1.2<a class="headerlink" href="#september-23-2021-htcondor-ce-512" title="Permanent link">&para;</a></h3>
 <p>This release of OSG 3.6 contains the following packages:</p>
 <ul>
