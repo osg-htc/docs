@@ -25,7 +25,7 @@ Latest News
 
 ### **September 30, 2021:** HTCondor-CE 5.1.2
 
-!!! danger "Please update osg-ca-certificates as soon as possible."
+!!! danger "Please update osg-ca-certs as soon as possible."
     Applications and tools using OpenSSL such as wget, HTCondor, and XRootD,
     will to fail to establish TLS/HTTPS connections to servers using Let's
     Encrypt certificates with a "certificate has expired" message.
