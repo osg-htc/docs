@@ -19,7 +19,7 @@ OSG Software Release 3.5.48
 Summary of Changes
 ------------------
 
-!!! danger "Please update osg-ca-certificates as soon as possible."
+!!! danger "Please update osg-ca-certs as soon as possible."
     Applications and tools using OpenSSL such as wget, HTCondor, and XRootD,
     will to fail to establish TLS/HTTPS connections to servers using Let's
     Encrypt certificates with a "certificate has expired" message.
