@@ -1,4 +1,4 @@
-DateReviewed: 2021-03-26
+DateReviewed: 2021-10-01
 
 Installing an Open Science Pool Access Point
 ============================================
@@ -48,7 +48,7 @@ many system services which can be difficult to configure in a container.
 
 Also consider the following configuration requirements:
 
-* __Operating system:__ A RHEL 7 compatible operating system.
+* __Operating system:__ A RHEL 7 or RHEL 8 compatible operating system.
 * __User IDs:__ If it does not exist already, the installation will create the Linux user ID `condor`.
 * __Network:__ 
     * Inbound TCP port 9618 must be open.
@@ -71,12 +71,20 @@ Initial Steps
 To be part of OSG, your access point should be registered with the OSG.
 You will need information like the hostname, and the administrative and security contacts.
 Follow the [general registration instructions](../common/registration.md#new-resources).
-For historical reasons, the service type is `Submit Node`.
+For historical reasons, the service type is `Submit Node`. We also request that you tag
+the resources with `OSPool`. An example of a registration is
+[the osg-vo.isi.edu entry](https://github.com/opensciencegrid/topology/blob/master/topology/University%20of%20Southern%20California/Information%20Sciences%20Institute/ISI.yaml)
 
-### Request to be allowed to flock to OSG
-OSG staff will need to add your access point to the list of hosts that flocked jobs are accepted from,
-and provide a HTCondor IDTOKEN so that your new access point can authenticate with OSG.
-Send email to <help@opensciencegrid.org> with the hostname of your access point and request to be added to the list.
+### Register with COManage 
+The adminstrative contact from the the topology entry needs to register with COManage. 
+Instructions can be found [here](https://opensciencegrid.org/technology/policy/comanage-instructions-user/)
+
+Next is to retrive a token so that the new submit host can authenticate with the Open
+Science Pool manager. Please use your COManage registered and approved identity to
+log into the [OSG Token Registration](https://os-registry.opensciencegrid.org/). Once
+logged in, select `Token on Docker`, and find your registered submit node in the list.
+Follow the instructions (you probably have to do the steps on a host with Docker and as
+root), and once you have the token generated, keep that for later steps.
 
 
 Installing Required Software
@@ -87,23 +95,28 @@ Start by setting up the OSG YUM repositories following the
 versions will not work.
 
 Once the YUM repositories are setup, install the `osg-flock` convenience RPM that installs all
-required packages:
+required packages. Example on a RHEL 7 host:
 
 ```console
-root@host # yum install osg-flock
+# yum install https://repo.opensciencegrid.org/osg/3.6/osg-3.6-el7-release-latest.rpm
+# yum install osg-flock
 ```
+
+### Upgrading
+
+Upgrading from previous versions should be as simple as switching to OSG 3.6, and then
+issuing `yum upgrade`. If you made local config changes, please verify that the files under
+`/etc/condor/config.d` were renamed/disabled during the upgrade.
+
+Note that in some older versions of the package, the Gratia config was kept in 
+`/etc/gratia/condor/ProbeConfig`. The new location is `/etc/gratia/condor/ProbeConfig-OSPool`.
 
 
 Configuring Reporting via Gratia
 --------------------------------
 Reporting to the OSG accounting system is done using the _Gratia_ service, which consists of multiple _probes_.
-HTCondor uses the "condor" probe, which is configured in `/etc/gratia/condor/ProbeConfig`;
+HTCondor uses the "condor" probe, which is configured in `/etc/gratia/condor/ProbeConfig-OSPool`;
 we provide a recommended configuration for flocking.
-
-1. Copy over the recommended probe configuration:
-
-        :::console
-        root@host # cp /etc/gratia/condor/ProbeConfig-flocking /etc/gratia/condor/ProbeConfig
 
 1. Fill in the value for `ProbeName` with the hostname of your access point, with the following format:
 
@@ -122,34 +135,30 @@ we provide a recommended configuration for flocking.
         :::xml
         EnableProbe=1
 
-1. Under the section `Title2` make sure to set the following (if not already there):
-  
-        :::xml
-        MapUnknownToGroup="1"
-        MapGroupToRole="1"
-        VOOverride="OSG"
 
 Configuring Authentication
 --------------------------
-Create a file named `/etc/condor/tokens.d/flock.opensciencegrid.org` with the IDTOKEN you received earlier.
+Create a file named `/etc/condor/tokens.d/ospool.token` with the IDTOKEN you received earlier.
 Ensure that there aren't any line breaks in this file (i.e., the entire token should only take up one line).
 
 Change the ownership to `condor:condor` and the permissions to `0600`. Verify this with
-`ls -l /etc/condor/tokens.d/flock.opensciencegrid.org`:
+`ls -l /etc/condor/tokens.d/ospool.token`:
 
 ```console
-# ls -l /etc/condor/tokens.d/flock.opensciencegrid.org 
--rw------- 1 condor condor 288 Nov 11 09:03 /etc/condor/tokens.d/flock.opensciencegrid.org
+# ls -l /etc/condor/tokens.d/ospool.token
+-rw------- 1 condor condor 288 Nov 11 09:03 /etc/condor/tokens.d/ospool.token
+```
+
+You can also list the token with the `condor_token_list` command:
+
+```console
+# condor_token_list 
+Header: {"alg":"HS256","kid":"POOL"} Payload: {"iat":1234,"iss":"flock.opensciencegrid.org","jti":"...","scope":"condor:\/READ condor:\/ADVERTISE_SCHEDD","sub":"RESOURCE-hostname@flock.opensciencegrid.org"} File: /etc/condor/tokens.d/ospool.token
 ```
 
 Managing Services
 -----------------
-In addition to the HTCondor service itself, there are a number of supporting services in your installation. The specific services are:
-
-| Software          | Service name                          | Notes                                                                                  |
-|:------------------|:--------------------------------------|:---------------------------------------------------------------------------------------|
-| Gratia            | `gratia-probes-cron`                  | Accounting software                                                                    |
-| HTcondor          | `condor`                              |                                                                                        |
+The only service which is required to be running is `condor`
 
 The following table gives the commands needed to start, stop, enable, and disable a service:
 
@@ -158,8 +167,13 @@ The following table gives the commands needed to start, stop, enable, and disabl
 | Start a service                             | `systemctl start <SERVICE-NAME>`   |
 | Stop a service                              | `systemctl stop <SERVICE-NAME>`    |
 | Enable a service to start on boot           | `systemctl enable <SERVICE-NAME>`  |
-| Disable a service from starting on boot     | `systemctl disable <SERVICE-NAME>` |
 
+Enable and restart the sevice:
+
+```console
+# systemctl enable condor
+# systemctl restart condor
+```
 
 Usage
 -----
