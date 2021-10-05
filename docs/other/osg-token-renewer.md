@@ -139,7 +139,7 @@ As a reminder, here are common service commands (all run as `root`) for EL7:
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
 | OSG Token Renewer | `osg-token-renewer.service` | The OSG Token Renewer, runs as a "oneshot" service, not a daemon. |
-| OSG Token Renewer timer | `osg-token-renewer.timer` | Nightly run schedule for OSG Token Renewer |
+| OSG Token Renewer timer | `osg-token-renewer.timer` | Timer to run the OSG Token Renewer every 15 minutes |
 
 
 The OSG token renewal service is set to run via a systemd timer every 15
