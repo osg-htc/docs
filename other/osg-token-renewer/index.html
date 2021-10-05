@@ -2072,15 +2072,20 @@ As a reminder, here are common service commands (all run as <code>root</code>) f
 <tr>
 <td>OSG Token Renewer timer</td>
 <td><code>osg-token-renewer.timer</code></td>
-<td>Nightly run schedule for OSG Token Renewer</td>
+<td>Timer to run the OSG Token Renewer every 15 minutes</td>
 </tr>
 </tbody>
 </table>
 <p>The OSG token renewal service is set to run via a systemd timer every 15
-minutes.</p>
+minutes.
+After configuring your account(s) and token(s), enable the timer with:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>systemctl <span class="nb">enable</span> osg-token-renewer.timer
+<span class="gp">root@host # </span>systemctl start  osg-token-renewer.timer
+</code></pre></div>
+
 <p>If you would like to run the service manually at a different time (e.g., to
 generate all the tokens immediately), you can run the service once with:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>systemctl start osg-token-renewer
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>systemctl start osg-token-renewer.service
 </code></pre></div>
 
 <p>If this succeeds, the new token will be written to the location you configured
@@ -2114,7 +2119,7 @@ for <code>token_path</code> (<code>/etc/osg/tokens/&lt;ACCOUNT_SHORTNAME&gt;.tok
 <td align="left">Output location for token files</td>
 </tr>
 <tr>
-<td align="left"><code>/usr/bin/osg-token-renewer-setup</code></td>
+<td align="left"><code>/usr/sbin/osg-token-renewer-setup</code></td>
 <td align="left">Setup script for each new client account</td>
 </tr>
 <tr>
@@ -2126,11 +2131,11 @@ for <code>token_path</code> (<code>/etc/osg/tokens/&lt;ACCOUNT_SHORTNAME&gt;.tok
 <td align="left">SystemD timer for service</td>
 </tr>
 <tr>
-<td align="left"><code>/usr/bin/osg-token-renewer.sh</code></td>
+<td align="left"><code>/usr/libexec/osg-token-renewer/osg-token-renewer.sh</code></td>
 <td align="left">Main wrapper script invoked by service</td>
 </tr>
 <tr>
-<td align="left"><code>/usr/bin/osg-token-renewer</code></td>
+<td align="left"><code>/usr/libexec/osg-token-renewer/osg-token-renewer</code></td>
 <td align="left">Token renewal program invoked by main wrapper</td>
 </tr>
 </tbody>
