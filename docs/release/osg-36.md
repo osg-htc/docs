@@ -23,6 +23,12 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.
 Latest News
 -----------
 
+### **October 5, 2021:** IGTF 1.113
+
+This release contains updated CA Certificates based on [IGTF 1.113](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+
+-   Suspended MD-GRID CA due to network resolution issues (MD)
+
 ### **September 30, 2021:** HTCondor-CE 5.1.2
 
 !!! danger "Please update osg-ca-certs as soon as possible."
@@ -82,7 +88,7 @@ This release of OSG 3.6 contains the following packages:
 
 ### **August 16, 2021:** IGTF 1.112
 
-This release contains updated CA Certificates based on IGTF 1.112:
+This release contains updated CA Certificates based on [IGTF 1.112](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
 
 -   Updated ANSPGrid CA with extended validity date (BR)
 
@@ -180,7 +186,7 @@ This release of OSG 3.6 contains the following packages:
 
 ### **May 25, 2021:** IGTF 1.111
 
-This release contains updated CA Certificates based on IGTF 1.111:
+This release contains updated CA Certificates based on [IGTF 1.111](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
 
 -   Removed discontinued NERSC-SLCS CA (US)
 -   Removed discontinued MYIFAM CA (MY)
