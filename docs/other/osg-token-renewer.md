@@ -139,17 +139,23 @@ As a reminder, here are common service commands (all run as `root`) for EL7:
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
 | OSG Token Renewer | `osg-token-renewer.service` | The OSG Token Renewer, runs as a "oneshot" service, not a daemon. |
-| OSG Token Renewer timer | `osg-token-renewer.timer` | Nightly run schedule for OSG Token Renewer |
+| OSG Token Renewer timer | `osg-token-renewer.timer` | Timer to run the OSG Token Renewer every 15 minutes |
 
 
 The OSG token renewal service is set to run via a systemd timer every 15
 minutes.
+After configuring your account(s) and token(s), enable the timer with:
+
+```console
+root@host # systemctl enable osg-token-renewer.timer
+root@host # systemctl start  osg-token-renewer.timer
+```
 
 If you would like to run the service manually at a different time (e.g., to
 generate all the tokens immediately), you can run the service once with:
 
 ```console
-root@host # systemctl start osg-token-renewer
+root@host # systemctl start osg-token-renewer.service
 ```
 
 If this succeeds, the new token will be written to the location you configured
@@ -177,10 +183,10 @@ Reference
 | `/etc/osg/token-renewer/config.ini`                      | Main config file for service                  |
 | `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.pw`                 | Encryption password file for client account   |
 | `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.<TOKEN_NAME>.token` | Output location for token files               |
-| `/usr/bin/osg-token-renewer-setup`                       | Setup script for each new client account      |
+| `/usr/sbin/osg-token-renewer-setup`                      | Setup script for each new client account      |
 | `/usr/lib/systemd/system/osg-token-renewer.service`      | SystemD service unit configuruation           |
 | `/usr/lib/systemd/system/osg-token-renewer.timer`        | SystemD timer for service                     |
-| `/usr/bin/osg-token-renewer.sh`                          | Main wrapper script invoked by service        |
-| `/usr/bin/osg-token-renewer`                             | Token renewal program invoked by main wrapper |
+| `/usr/libexec/osg-token-renewer/osg-token-renewer.sh`    | Main wrapper script invoked by service        |
+| `/usr/libexec/osg-token-renewer/osg-token-renewer`       | Token renewal program invoked by main wrapper |
 
 
