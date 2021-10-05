@@ -144,12 +144,18 @@ As a reminder, here are common service commands (all run as `root`) for EL7:
 
 The OSG token renewal service is set to run via a systemd timer every 15
 minutes.
+After configuring your account(s) and token(s), enable the timer with:
+
+```console
+root@host # systemctl enable osg-token-renewer.timer
+root@host # systemctl start  osg-token-renewer.timer
+```
 
 If you would like to run the service manually at a different time (e.g., to
 generate all the tokens immediately), you can run the service once with:
 
 ```console
-root@host # systemctl start osg-token-renewer
+root@host # systemctl start osg-token-renewer.service
 ```
 
 If this succeeds, the new token will be written to the location you configured
