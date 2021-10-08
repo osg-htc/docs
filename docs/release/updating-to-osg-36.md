@@ -59,7 +59,6 @@ Updating the OSG Repositories
             a `.rpmnew` extension.
             You will need to merge any edits that have made into the `.rpmnew` file and then move the merged version
             into place (that is, without the `.rpmnew` extension).
-            Watch especially for `/etc/lcmaps.db`, which every site is expected to edit.
 
 
 
