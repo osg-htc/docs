@@ -108,7 +108,7 @@ To upgrade your CE to OSG 3.6, follow the sections below to make your configurat
 
 ### Updating CE packages ###
 
-After turning off your CE's services, you may proceed with the [repository and RPM update process](updating-to-osg-36.md#updating-the-osg-repositories).
+After turning off your CE's services, you may proceed with the [repository and RPM update process](#updating-the-osg-repositories).
 
 ### Updating CE configuration ###
 
