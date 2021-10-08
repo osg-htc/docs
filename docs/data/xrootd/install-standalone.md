@@ -229,6 +229,23 @@ To validate an XRootD installation, perform the following verification steps:
             root@xrootd-standalone # ls -l /tmp/first_test
             -rw-r--r-- 1 xrootd xrootd 801512 Apr 11 10:48 /tmp/first_test
 
+1.  Verify HTTP-TPC using the same GFAL2 client tools:
+
+    !!! bug "Requires gfal2 >= 2.20.0"
+        `gfal2-2.20.0` contains a fix for a bug affecting XRootD HTTP-TPC support.
+
+    1.  Copy a file from your XRootD standalone host to another host and path where you have write access:
+
+            :::console
+            root@xrootd-standalone # gfal-copy davs://localhost:1094/<PATH TO LOCAL FILE> \
+                                               <REMOTE HOST>/<PATH TO WRITE REMOTE FILE>
+
+    1.  Copy a file from a remote host where you have read access to your XRootD standalone installation:
+
+            :::console
+            root@xrootd-standalone # gfal-copy <REMOTE HOST>/<PATH TO WRITE REMOTE FILE> \
+                                               davs://localhost:1094/<PATH TO LOCAL FILE>
+
 Registering an XRootD Standalone Server
 ---------------------------------------
 
