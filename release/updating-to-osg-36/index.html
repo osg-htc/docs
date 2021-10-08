@@ -1485,6 +1485,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#updating-the-osg-repositories" class="md-nav__link">
+    Updating the OSG Repositories
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#updating-your-osg-compute-entrypoint" class="md-nav__link">
     Updating Your OSG Compute Entrypoint
   </a>
@@ -1778,6 +1785,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#updating-the-osg-repositories" class="md-nav__link">
+    Updating the OSG Repositories
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#updating-your-osg-compute-entrypoint" class="md-nav__link">
     Updating Your OSG Compute Entrypoint
   </a>
@@ -1891,6 +1905,62 @@ Depending on the VO(s) that you support, updating to the new series could result
 pilot jobs and/or issues with data transfer.</p>
 <p>If you have verified that your VO(s) support token-based pilot submission and HTTP-based data transfers,
 use this document to update your OSG software to OSG 3.6.</p>
+<h2 id="updating-the-osg-repositories">Updating the OSG Repositories<a class="headerlink" href="#updating-the-osg-repositories" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before updating the OSG repository, be sure to turn off any OSG services. Consult the sections below
+that match your situation.</p>
+</div>
+<ol>
+<li>
+<p>Clean the yum cache:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum clean all --enablerepo<span class="o">=</span>*
+</code></pre></div>
+
+</li>
+<li>
+<p>Disable to upcoming repository:</p>
+<div class="codehilite"><pre><span></span><code><span class="go">yum-config-manager --disable osg-upcoming</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Remove the old series Yum repositories:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>rpm -e osg-release
+</code></pre></div>
+
+<p>This step ensures that any local modifications to <code>*.repo</code> files will not prevent installing the new series repos.
+Any modified <code>*.repo</code> files should appear under <code>/etc/yum.repos.d/</code> with the <code>*.rpmsave</code> extension.
+After installing the new OSG repositories (the next step) you may want to apply any changes made in the <code>*.rpmsave</code>
+files to the new <code>*.repo</code> files.</p>
+</li>
+<li>
+<p>Update your <a href="../../common/yum/#install-the-osg-repositories">Yum repositories</a> to OSG 3.6</p>
+</li>
+<li>
+<p>Update software:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum update
+</code></pre></div>
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>Please be aware that running <code>yum update</code> may also update other RPMs.
+    You can exclude packages from being updated using the <code>--exclude=[package-name or glob]</code> option for the
+    <code>yum</code> command.</li>
+<li>Watch the yum update carefully for any messages about a <code>.rpmnew</code> file being created.
+    That means that a configuration file had been edited, and a new default version was to be installed.
+    In that case, RPM does not overwrite the edited configuration file but instead installs the new version with
+    a <code>.rpmnew</code> extension.
+    You will need to merge any edits that have made into the <code>.rpmnew</code> file and then move the merged version
+    into place (that is, without the <code>.rpmnew</code> extension).</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Continue on to any update instructions that match the role(s) that the host performs.</p>
+</li>
+</ol>
 <h2 id="updating-your-osg-compute-entrypoint">Updating Your OSG Compute Entrypoint<a class="headerlink" href="#updating-your-osg-compute-entrypoint" title="Permanent link">&para;</a></h2>
 <div class="admonition danger">
 <p class="admonition-title">Before considering an upgrade to OSG 3.6&hellip;</p>
@@ -1958,49 +2028,7 @@ To upgrade your CE to OSG 3.6, follow the sections below to make your configurat
 </li>
 </ol>
 <h3 id="updating-ce-packages">Updating CE packages<a class="headerlink" href="#updating-ce-packages" title="Permanent link">&para;</a></h3>
-<p>After turning off your CE's services, you may proceed with the RPM update process.</p>
-<ol>
-<li>
-<p>First, remove the old series Yum repositories:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>rpm -e osg-release
-</code></pre></div>
-
-<p>This step ensures that any local modifications to <code>*.repo</code> files will not prevent installing the new series repos.
-Any modified <code>*.repo</code> files should appear under <code>/etc/yum.repos.d/</code> with the <code>*.rpmsave</code> extension.
-After installing the new OSG repositories (the next step) you may want to apply any changes made in the <code>*.rpmsave</code>
-files to the new <code>*.repo</code> files.</p>
-</li>
-<li>
-<p>Update your <a href="../../common/yum/#install-the-osg-repositories">Yum repositories</a> to OSG 3.6</p>
-</li>
-<li>
-<p>Clean yum cache:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum clean all --enablerepo<span class="o">=</span>*
-</code></pre></div>
-
-</li>
-<li>
-<p>Update software:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum update
-</code></pre></div>
-
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<ul>
-<li>Please be aware that running <code>yum update</code> may also update other RPMs.
-    You can exclude packages from being updated using the <code>--exclude=[package-name or glob]</code> option for the
-    <code>yum</code> command.</li>
-<li>Watch the yum update carefully for any messages about a <code>.rpmnew</code> file being created.
-    That means that a configuration file had been edited, and a new default version was to be installed.
-    In that case, RPM does not overwrite the edited configuration file but instead installs the new version with
-    a <code>.rpmnew</code> extension.
-    You will need to merge any edits that have made into the <code>.rpmnew</code> file and then move the merged version
-    into place (that is, without the <code>.rpmnew</code> extension).
-    Watch especially for <code>/etc/lcmaps.db</code>, which every site is expected to edit.</li>
-</ul>
-</div>
-</li>
-</ol>
+<p>After turning off your CE's services, you may proceed with the <a href="#updating-the-osg-repositories">repository and RPM update process</a>.</p>
 <h3 id="updating-ce-configuration">Updating CE configuration<a class="headerlink" href="#updating-ce-configuration" title="Permanent link">&para;</a></h3>
 <h4 id="gratia-probe">Gratia Probe<a class="headerlink" href="#gratia-probe" title="Permanent link">&para;</a></h4>
 <p>The OSG 3.6 release series contains <a href="https://github.com/opensciencegrid/gratia-probe/releases/tag/v2.0.0-2">Gratia Probe 2</a>,
