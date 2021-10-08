@@ -161,7 +161,7 @@ The specific services are:
 |:-----------------|:----------------------------------------|:-----------------------------------------------------------------------------|
 | Fetch CRL        | `fetch-crl-boot` and `fetch-crl-cron`   | See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info |
 | XRootD           | `xrootd@standalone` | |
-| XRootD Multiuser | `xrootd-privileged@standalone`     | See [XRootD multiuser](#enabling-multi-user-support) for more info           |
+| XRootD Multiuser | `xrootd-privileged@standalone`     | Optional. See [XRootD multiuser](#enabling-multi-user-support) for more info           |
 
 Start the services in the order listed and stop them in reverse order.
 As a reminder, here are common service commands (all run as `root`):
