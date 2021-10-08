@@ -24,12 +24,17 @@ Updating the OSG Repositories
     Before updating the OSG repository, be sure to turn off any OSG services. Consult the sections below
     that match your situation.
 
-1.  First, clean the yum cache:
+1.  Clean the yum cache:
 
         :::console
         root@host # yum clean all --enablerepo=*
 
-1.  Then, remove the old series Yum repositories:
+1.  Disable to upcoming repository:
+
+        :::console
+        yum-config-manager --disable osg-upcoming
+
+1.  Remove the old series Yum repositories:
 
         :::console
         root@host # rpm -e osg-release
@@ -38,9 +43,6 @@ Updating the OSG Repositories
     Any modified `*.repo` files should appear under `/etc/yum.repos.d/` with the `*.rpmsave` extension.
     After installing the new OSG repositories (the next step) you may want to apply any changes made in the `*.rpmsave`
     files to the new `*.repo` files.
-
-    !!! note
-        Please disable the ``osg-upcoming`` repository when upgrading to the new release series.
 
 1.  Update your [Yum repositories](../common/yum.md#install-the-osg-repositories) to OSG 3.6
 
