@@ -123,9 +123,6 @@ The `xrootd-multiuser` plugins changes this behaviour:
         :::console
         root@host # systemctl xrootd-privileged@standalone
 
-!!! bug
-    The multiuser support is incompatible with checksums.
-
 !!! note
     This is not necessary when XRootD is used for read-only access
 
