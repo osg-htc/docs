@@ -6,9 +6,15 @@ Install XRootD Standalone
     There is an incompatibility with EL7 < 7.5 due to an issue with the `globus-gsi-proxy-core` package
 
 
-[XRootD](http://xrootd.org/) is a hierarchical storage system that can be used in a variety of ways to access data,
-typically distributed among actual storage resources. In this document we focus on using XRootD as a simple layer
-exporting an underlying storage system (e.g., [HDFS](../install-hadoop.md)) to the outside world.
+[XRootD](http://xrootd.org/) is a hierarchical storage system that can be used in many ways to access data,
+typically distributed among actual storage resources.
+In its standalone configuration, XRootD acts as a simple layer exporting data from a storage system to the outside world.
+
+This document focuses on installing a default configuration of XRootD standalone that provides the following features:
+
+- Supports any POSIX-based storage system
+- Bearer token, macaroon, and VOMS proxy authentication
+- Third-Party Copy over HTTP (HTTP-TPC)
 
 Before Starting
 ---------------
