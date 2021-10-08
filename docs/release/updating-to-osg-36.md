@@ -62,7 +62,7 @@ Updating the OSG Repositories
             You will need to merge any edits that have made into the `.rpmnew` file and then move the merged version
             into place (that is, without the `.rpmnew` extension).
 
-
+1.  Continue on to any update instructions that match the role(s) that the host performs.
 
 Updating Your OSG Compute Entrypoint
 ------------------------------------
