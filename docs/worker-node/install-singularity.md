@@ -1,7 +1,7 @@
 Install Singularity
 ===================
 
-[Singularity](http://sylabs.io/singularity) is a tool that creates
+[Singularity](http://singularity.hpcng.org/) is a tool that creates
 docker-like process containers but without giving extra privileges to
 unprivileged users.  It is used by grid pilot jobs (which are
 submitted by per-VO grid workload management systems) to isolate user
