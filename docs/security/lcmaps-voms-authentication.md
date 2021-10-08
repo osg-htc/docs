@@ -153,12 +153,32 @@ the file.
 #### Mapping users
 
 To map specific users to Unix accounts based on their certificates' DNs, create `/etc/grid-security/grid-mapfile`.
+
+!!!note
+    The openssl version 1.1.x command prints the subject DN in a slightly different format.
+    OpenSSL version 1.1 is present on Enterprise Linux 8 systems.
+    The new format is a comma separated list of attributes.
+    You must convert that back to the older format for our map files.
+    Each attribute must start with a `/` and there are no spaces around the `=` and remove the comma between attributes:
+
+    ```
+    DC = org, DC = opensciencegrid, O = Open Science Grid, OU = People, CN = Matyas Selmeci
+    ```
+
+    should be written as:
+
+    ```
+    /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=People/CN=Matyas Selmeci
+    ```
+
+
 An example of the format of a `grid-mapfile` follows:
 
 ```
 # map Matyas's FNAL DN to the 'matyas' Unix account
 "/DC=gov/DC=fnal/O=Fermilab/OU=People/CN=Matyas Selmeci/CN=UID:matyas" matyas
 ```
+
 
 !!! note
     The Unix account must exist for the user to be mapped. If a user's Unix account is missing, that user will not be
