@@ -17,7 +17,7 @@ Before starting the installation process, consider the following points:
 
 -   **User IDs:** If it does not exist already, the installation will create the Linux user ID `xrootd`
 -   **Service certificate:** The XRootD service uses a host certificate and key pair at
-    `/etc/grid-security/xrd/xrdcert.pem` and `/etc/grid-security/xrd/xrdkey.pem`
+    `/etc/grid-security/xrd/xrdcert.pem` and `/etc/grid-security/xrd/xrdkey.pem` that must be owned by the `xrootd` user
 -   **Networking:** The XRootD service uses port 1094 by default
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
@@ -181,10 +181,11 @@ To validate an XRootD installation, perform the following verification steps:
 !!! note
     If you have configured authentication/authorization for XRootD,
     be sure you have given yourself the necessary permissions to run these tests.
-    For example, if you are using a grid proxy,
+    For example, if you are using a VOMS proxy,
     make sure your DN is mapped to a user in [/etc/grid-security/grid-mapfile](../../security/lcmaps-voms-authentication.md#mapping-users),
     and make sure you have a valid proxy on your local machine.
-    Also, ensure that the [Authfile](xrootd-authorization.md#authorization-file) on the XRootD server gives write access to the Unix user you will get mapped to.
+    Also, ensure that the [Authfile](xrootd-authorization.md#authorization-file) on the XRootD server gives write access
+    to the Unix user you will get mapped to.
 
 1. Verify file transfer over the XRootD protocol using XRootD client tools:
 
