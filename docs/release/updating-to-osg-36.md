@@ -44,7 +44,7 @@ Updating the OSG Repositories
 
 1.  Update your [Yum repositories](../common/yum.md#install-the-osg-repositories) to OSG 3.6
 
-1.  Finally, Update software:
+1.  Update software:
 
         :::console
         root@host # yum update
