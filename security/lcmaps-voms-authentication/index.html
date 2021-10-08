@@ -2267,8 +2267,19 @@ below.
 Do not edit <code>voms-mapfile-default</code> as your changes will be overwritten upon updates.</p>
 </div>
 <h4 id="mapping-users">Mapping users<a class="headerlink" href="#mapping-users" title="Permanent link">&para;</a></h4>
-<p>To map specific users to Unix accounts based on their certificates' DNs, create <code>/etc/grid-security/grid-mapfile</code>.
-An example of the format of a <code>grid-mapfile</code> follows:</p>
+<p>To map specific users to Unix accounts based on their certificates' DNs, create <code>/etc/grid-security/grid-mapfile</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The openssl version 1.1.x command prints the subject DN in a slightly different format.
+OpenSSL version 1.1 is present on Enterprise Linux 8 systems.
+The new format is a comma separated list of attributes.
+You must convert that back to the older format for our map files.
+Each attribute must start with a <code>/</code> and there are no spaces around the <code>=</code> and remove the comma between attributes:</p>
+<p><code>DC = org, DC = opensciencegrid, O = Open Science Grid, OU = People, CN = Matyas Selmeci</code></p>
+<p>should be written as:</p>
+<p><code>/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=People/CN=Matyas Selmeci</code></p>
+</div>
+<p>An example of the format of a <code>grid-mapfile</code> follows:</p>
 <div class="codehilite"><pre><span></span><code># map Matyas&#39;s FNAL DN to the &#39;matyas&#39; Unix account
 &quot;/DC=gov/DC=fnal/O=Fermilab/OU=People/CN=Matyas Selmeci/CN=UID:matyas&quot; matyas
 </code></pre></div>
