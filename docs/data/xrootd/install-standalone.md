@@ -47,7 +47,7 @@ under `/etc/xrootd/config.d/` as follows:
 
         set rootdir = <DIRECTORY>
 
-    !!! warning
+    !!! danger "Carefully consider your `rootdir`"
         Do not set `rootdir` to `/`.
         This might result in serving private information.
 
