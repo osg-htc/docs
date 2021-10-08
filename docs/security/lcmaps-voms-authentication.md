@@ -165,7 +165,7 @@ To map specific users to Unix accounts based on their certificates' DNs, create 
     DC = org, DC = opensciencegrid, O = Open Science Grid, OU = People, CN = Matyas Selmeci
     ```
 
-    becomes
+    should be written as:
 
     ```
     /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=People/CN=Matyas Selmeci
