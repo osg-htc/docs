@@ -98,7 +98,23 @@ notBefore=Apr  8 00:00:00 2013 GMT
 notAfter=May 17 12:00:00 2014 GMT
 ```
 
-If you are using OpenSSL 1.1, you may notice minor formatting differences.
+!!!note
+    The openssl version 1.1.x command prints the subject DN in a slightly different format.
+    OpenSSL version 1.1 is present on Enterprise Linux 8 systems.
+    The new format is a comma separated list of attributes.
+    You must convert that back to the older format for our map files.
+    Each attribute must start with a `/` and there are no spaces around the `=` and remove the comma between attributes:
+
+    ```
+    DC = org, DC = opensciencegrid, O = Open Science Grid, OU = People, CN = Matyas Selmeci
+    ```
+
+    should be written as:
+
+    ```
+    /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=People/CN=Matyas Selmeci
+    ```
+
 
 ### How can I check the expiration time of my installed host certificate? 
 

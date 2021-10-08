@@ -31,7 +31,23 @@ notBefore=Jan  4 21:08:09 2010 GMT
 notAfter=Jan  4 21:08:09 2011 GMT
 ```
 
-If you are using OpenSSL 1.1, you may notice minor formatting differences.
+!!!note
+    The openssl version 1.1.x command prints the subject DN in a slightly different format.
+    OpenSSL version 1.1 is present on Enterprise Linux 8 systems.
+    The new format is a comma separated list of attributes.
+    You must convert that back to the older format for our map files.
+    Each attribute must start with a `/` and there are no spaces around the `=` and remove the comma between attributes:
+
+    ```
+    DC = org, DC = opensciencegrid, O = Open Science Grid, OU = People, CN = Matyas Selmeci
+    ```
+
+    should be written as:
+
+    ```
+    /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=People/CN=Matyas Selmeci
+    ```
+
 
 If you do not have a valid certificate, the OSG offers a command-line tool to generate certificate signing requests (CSR)
 to assist in acquiring a grid host certificate.
