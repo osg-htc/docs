@@ -241,11 +241,20 @@ To validate an XRootD installation, perform the following verification steps:
             root@xrootd-standalone # gfal-copy davs://localhost:1094/<PATH TO LOCAL FILE> \
                                                <REMOTE HOST>/<PATH TO WRITE REMOTE FILE>
 
+        Replacing `<PATH TO LOCAL FILE>` with the path to a file that you can read on your host relative to `rootdir`;
+        `<REMOTE HOST>` with the protocol, FQDN, and port of the remote storage host;
+        and `<PATH TO WRITE REMOTE FILE>` to a location on the remote storage host where you have write access.
+
     1.  Copy a file from a remote host where you have read access to your XRootD standalone installation:
 
             :::console
-            root@xrootd-standalone # gfal-copy <REMOTE HOST>/<PATH TO WRITE REMOTE FILE> \
-                                               davs://localhost:1094/<PATH TO LOCAL FILE>
+            root@xrootd-standalone # gfal-copy <REMOTE HOST>/<PATH TO REMOTE FILE> \
+                                               davs://localhost:1094/<PATH TO WRITE LOCAL FILE>
+
+        Replacing `<REMOTE HOST>` with the protocol, FQDN, and port of the remote storage host;
+        `<PATH TO REMOTE FILE>` with the path to a file that you can read on the remote storage host;
+        and `<PATH TO WRITE LOCAL FILE>` to a location on the XRootD standalone host relative to `rootdir` where you
+        have write access.
 
 Registering an XRootD Standalone Server
 ---------------------------------------
