@@ -110,6 +110,9 @@ For more information, see [the HDFS installation documents](../install-hadoop.md
 
 #### Enabling multi-user support
 
+!!! note
+    This is not necessary when XRootD is used for read-only access
+
 By default XRootD servers write files on the storage system aa the Unix user `xrootd` instead of the [authenticated](xrootd-authorization.md) user.
 The `xrootd-multiuser` plugins changes this behaviour:
 
@@ -122,10 +125,6 @@ The `xrootd-multiuser` plugins changes this behaviour:
 
         :::console
         root@host # systemctl xrootd-privileged@standalone
-
-!!! note
-    This is not necessary when XRootD is used for read-only access
-
 
 #### Enabling CMS TFC support (CMS sites only)
 
