@@ -40,7 +40,7 @@ Installing XRootD
 To install the XRootD Standalone server, run the following Yum command:
 
 ``` console
-root@xrootd-standalone # yum install osg-xrootd-standalone
+root@xrootd-standalone # yum install osg-xrootd-standalone --enablerepo=osg-upcoming
 ```
 
 Configuring XRootD
