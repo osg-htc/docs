@@ -1,3 +1,4 @@
+DateReviewed: 2021-10-08
 
 Install XRootD Standalone
 =========================
@@ -6,9 +7,15 @@ Install XRootD Standalone
     There is an incompatibility with EL7 < 7.5 due to an issue with the `globus-gsi-proxy-core` package
 
 
-[XRootD](http://xrootd.org/) is a hierarchical storage system that can be used in a variety of ways to access data,
-typically distributed among actual storage resources. In this document we focus on using XRootD as a simple layer
-exporting an underlying storage system (e.g., [HDFS](../install-hadoop.md)) to the outside world.
+[XRootD](http://xrootd.org/) is a hierarchical storage system that can be used in many ways to access data,
+typically distributed among actual storage resources.
+In its standalone configuration, XRootD acts as a simple layer exporting data from a storage system to the outside world.
+
+This document focuses on installing a default configuration of XRootD standalone that provides the following features:
+
+- Supports any POSIX-based storage system
+- Bearer token, macaroon, and VOMS proxy authentication
+- Third-Party Copy over HTTP (HTTP-TPC)
 
 Before Starting
 ---------------
@@ -17,7 +24,7 @@ Before starting the installation process, consider the following points:
 
 -   **User IDs:** If it does not exist already, the installation will create the Linux user ID `xrootd`
 -   **Service certificate:** The XRootD service uses a host certificate and key pair at
-    `/etc/grid-security/xrd/xrdcert.pem` and `/etc/grid-security/xrd/xrdkey.pem`
+    `/etc/grid-security/xrd/xrdcert.pem` and `/etc/grid-security/xrd/xrdkey.pem` that must be owned by the `xrootd` user
 -   **Networking:** The XRootD service uses port 1094 by default
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
@@ -47,7 +54,7 @@ under `/etc/xrootd/config.d/` as follows:
 
         set rootdir = <DIRECTORY>
 
-    !!! warning
+    !!! danger "Carefully consider your `rootdir`"
         Do not set `rootdir` to `/`.
         This might result in serving private information.
 
@@ -110,6 +117,9 @@ For more information, see [the HDFS installation documents](../install-hadoop.md
 
 #### Enabling multi-user support
 
+!!! note
+    This is not necessary when XRootD is used for read-only access
+
 By default XRootD servers write files on the storage system aa the Unix user `xrootd` instead of the [authenticated](xrootd-authorization.md) user.
 The `xrootd-multiuser` plugins changes this behaviour:
 
@@ -122,13 +132,6 @@ The `xrootd-multiuser` plugins changes this behaviour:
 
         :::console
         root@host # systemctl xrootd-privileged@standalone
-
-!!! bug
-    The multiuser support is incompatible with checksums.
-
-!!! note
-    This is not necessary when XRootD is used for read-only access
-
 
 #### Enabling CMS TFC support (CMS sites only)
 
@@ -164,7 +167,7 @@ The specific services are:
 |:-----------------|:----------------------------------------|:-----------------------------------------------------------------------------|
 | Fetch CRL        | `fetch-crl-boot` and `fetch-crl-cron`   | See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info |
 | XRootD           | `xrootd@standalone` | |
-| XRootD Multiuser | `xrootd-privileged@standalone`     | See [XRootD multiuser](#enabling-multi-user-support) for more info           |
+| XRootD Multiuser | `xrootd-privileged@standalone`     | Optional. See [XRootD multiuser](#enabling-multi-user-support) for more info           |
 
 Start the services in the order listed and stop them in reverse order.
 As a reminder, here are common service commands (all run as `root`):
@@ -184,10 +187,11 @@ To validate an XRootD installation, perform the following verification steps:
 !!! note
     If you have configured authentication/authorization for XRootD,
     be sure you have given yourself the necessary permissions to run these tests.
-    For example, if you are using a grid proxy,
+    For example, if you are using a VOMS proxy,
     make sure your DN is mapped to a user in [/etc/grid-security/grid-mapfile](../../security/lcmaps-voms-authentication.md#mapping-users),
     and make sure you have a valid proxy on your local machine.
-    Also, ensure that the [Authfile](xrootd-authorization.md#authorization-file) on the XRootD server gives write access to the Unix user you will get mapped to.
+    Also, ensure that the [Authfile](xrootd-authorization.md#authorization-file) on the XRootD server gives write access
+    to the Unix user you will get mapped to.
 
 1. Verify file transfer over the XRootD protocol using XRootD client tools:
 
@@ -225,6 +229,32 @@ To validate an XRootD installation, perform the following verification steps:
             :::console
             root@xrootd-standalone # ls -l /tmp/first_test
             -rw-r--r-- 1 xrootd xrootd 801512 Apr 11 10:48 /tmp/first_test
+
+1.  Verify HTTP-TPC using the same GFAL2 client tools:
+
+    !!! bug "Requires gfal2 >= 2.20.0"
+        `gfal2-2.20.0` contains a fix for a bug affecting XRootD HTTP-TPC support.
+
+    1.  Copy a file from your XRootD standalone host to another host and path where you have write access:
+
+            :::console
+            root@xrootd-standalone # gfal-copy davs://localhost:1094/<PATH TO LOCAL FILE> \
+                                               <REMOTE HOST>/<PATH TO WRITE REMOTE FILE>
+
+        Replacing `<PATH TO LOCAL FILE>` with the path to a file that you can read on your host relative to `rootdir`;
+        `<REMOTE HOST>` with the protocol, FQDN, and port of the remote storage host;
+        and `<PATH TO WRITE REMOTE FILE>` to a location on the remote storage host where you have write access.
+
+    1.  Copy a file from a remote host where you have read access to your XRootD standalone installation:
+
+            :::console
+            root@xrootd-standalone # gfal-copy <REMOTE HOST>/<PATH TO REMOTE FILE> \
+                                               davs://localhost:1094/<PATH TO WRITE LOCAL FILE>
+
+        Replacing `<REMOTE HOST>` with the protocol, FQDN, and port of the remote storage host;
+        `<PATH TO REMOTE FILE>` with the path to a file that you can read on the remote storage host;
+        and `<PATH TO WRITE LOCAL FILE>` to a location on the XRootD standalone host relative to `rootdir` where you
+        have write access.
 
 Registering an XRootD Standalone Server
 ---------------------------------------
