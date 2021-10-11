@@ -1965,15 +1965,21 @@
 <p class="admonition-title">EL7 version compatibility</p>
 <p>There is an incompatibility with EL7 &lt; 7.5 due to an issue with the <code>globus-gsi-proxy-core</code> package</p>
 </div>
-<p><a href="http://xrootd.org/">XRootD</a> is a hierarchical storage system that can be used in a variety of ways to access data,
-typically distributed among actual storage resources. In this document we focus on using XRootD as a simple layer
-exporting an underlying storage system (e.g., <a href="../../install-hadoop/">HDFS</a>) to the outside world.</p>
+<p><a href="http://xrootd.org/">XRootD</a> is a hierarchical storage system that can be used in many ways to access data,
+typically distributed among actual storage resources.
+In its standalone configuration, XRootD acts as a simple layer exporting data from a storage system to the outside world.</p>
+<p>This document focuses on installing a default configuration of XRootD standalone that provides the following features:</p>
+<ul>
+<li>Supports any POSIX-based storage system</li>
+<li>Bearer token, macaroon, and VOMS proxy authentication</li>
+<li>Third-Party Copy over HTTP (HTTP-TPC)</li>
+</ul>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following points:</p>
 <ul>
 <li><strong>User IDs:</strong> If it does not exist already, the installation will create the Linux user ID <code>xrootd</code></li>
 <li><strong>Service certificate:</strong> The XRootD service uses a host certificate and key pair at
-    <code>/etc/grid-security/xrd/xrdcert.pem</code> and <code>/etc/grid-security/xrd/xrdkey.pem</code></li>
+    <code>/etc/grid-security/xrd/xrdcert.pem</code> and <code>/etc/grid-security/xrd/xrdkey.pem</code> that must be owned by the <code>xrootd</code> user</li>
 <li><strong>Networking:</strong> The XRootD service uses port 1094 by default</li>
 </ul>
 <p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
@@ -1998,8 +2004,8 @@ under <code>/etc/xrootd/config.d/</code> as follows:</p>
 <div class="codehilite"><pre><span></span><code>set rootdir = &lt;DIRECTORY&gt;
 </code></pre></div>
 
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<div class="admonition danger">
+<p class="admonition-title">Carefully consider your <code>rootdir</code></p>
 <p>Do not set <code>rootdir</code> to <code>/</code>.
 This might result in serving private information.</p>
 </div>
@@ -2062,6 +2068,10 @@ If you do not need any of the following special configurations, skip to
 </ol>
 <p>For more information, see <a href="../../install-hadoop/">the HDFS installation documents</a>.</p>
 <h4 id="enabling-multi-user-support">Enabling multi-user support<a class="headerlink" href="#enabling-multi-user-support" title="Permanent link">&para;</a></h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is not necessary when XRootD is used for read-only access</p>
+</div>
 <p>By default XRootD servers write files on the storage system aa the Unix user <code>xrootd</code> instead of the <a href="../xrootd-authorization/">authenticated</a> user.
 The <code>xrootd-multiuser</code> plugins changes this behaviour:</p>
 <ol>
@@ -2078,14 +2088,6 @@ The <code>xrootd-multiuser</code> plugins changes this behaviour:</p>
 
 </li>
 </ol>
-<div class="admonition bug">
-<p class="admonition-title">Bug</p>
-<p>The multiuser support is incompatible with checksums.</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This is not necessary when XRootD is used for read-only access</p>
-</div>
 <h4 id="enabling-cms-tfc-support-cms-sites-only">Enabling CMS TFC support (CMS sites only)<a class="headerlink" href="#enabling-cms-tfc-support-cms-sites-only" title="Permanent link">&para;</a></h4>
 <p>For CMS users, there is a package available to integrate rule-based name lookup using a <code>storage.xml</code> file.
 If you are not setting up a CMS site, you can skip this section.</p>
@@ -2129,7 +2131,7 @@ The specific services are:</p>
 <tr>
 <td align="left">XRootD Multiuser</td>
 <td align="left"><code>xrootd-privileged@standalone</code></td>
-<td align="left">See <a href="#enabling-multi-user-support">XRootD multiuser</a> for more info</td>
+<td align="left">Optional. See <a href="#enabling-multi-user-support">XRootD multiuser</a> for more info</td>
 </tr>
 </tbody>
 </table>
@@ -2167,10 +2169,11 @@ As a reminder, here are common service commands (all run as <code>root</code>):<
 <p class="admonition-title">Note</p>
 <p>If you have configured authentication/authorization for XRootD,
 be sure you have given yourself the necessary permissions to run these tests.
-For example, if you are using a grid proxy,
+For example, if you are using a VOMS proxy,
 make sure your DN is mapped to a user in <a href="../../../security/lcmaps-voms-authentication/#mapping-users">/etc/grid-security/grid-mapfile</a>,
 and make sure you have a valid proxy on your local machine.
-Also, ensure that the <a href="../xrootd-authorization/#authorization-file">Authfile</a> on the XRootD server gives write access to the Unix user you will get mapped to.</p>
+Also, ensure that the <a href="../xrootd-authorization/#authorization-file">Authfile</a> on the XRootD server gives write access
+to the Unix user you will get mapped to.</p>
 </div>
 <ol>
 <li>
@@ -2219,6 +2222,36 @@ Also, ensure that the <a href="../xrootd-authorization/#authorization-file">Auth
 <span class="go">-rw-r--r-- 1 xrootd xrootd 801512 Apr 11 10:48 /tmp/first_test</span>
 </code></pre></div>
 
+</li>
+</ol>
+</li>
+<li>
+<p>Verify HTTP-TPC using the same GFAL2 client tools:</p>
+<div class="admonition bug">
+<p class="admonition-title">Requires gfal2 &gt;= 2.20.0</p>
+<p><code>gfal2-2.20.0</code> contains a fix for a bug affecting XRootD HTTP-TPC support.</p>
+</div>
+<ol>
+<li>
+<p>Copy a file from your XRootD standalone host to another host and path where you have write access:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@xrootd-standalone # </span>gfal-copy davs://localhost:1094/&lt;PATH TO LOCAL FILE&gt; <span class="se">\</span>
+<span class="go">                                   &lt;REMOTE HOST&gt;/&lt;PATH TO WRITE REMOTE FILE&gt;</span>
+</code></pre></div>
+
+<p>Replacing <code>&lt;PATH TO LOCAL FILE&gt;</code> with the path to a file that you can read on your host relative to <code>rootdir</code>;
+<code>&lt;REMOTE HOST&gt;</code> with the protocol, FQDN, and port of the remote storage host;
+and <code>&lt;PATH TO WRITE REMOTE FILE&gt;</code> to a location on the remote storage host where you have write access.</p>
+</li>
+<li>
+<p>Copy a file from a remote host where you have read access to your XRootD standalone installation:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@xrootd-standalone # </span>gfal-copy &lt;REMOTE HOST&gt;/&lt;PATH TO REMOTE FILE&gt; <span class="se">\</span>
+<span class="go">                                   davs://localhost:1094/&lt;PATH TO WRITE LOCAL FILE&gt;</span>
+</code></pre></div>
+
+<p>Replacing <code>&lt;REMOTE HOST&gt;</code> with the protocol, FQDN, and port of the remote storage host;
+<code>&lt;PATH TO REMOTE FILE&gt;</code> with the path to a file that you can read on the remote storage host;
+and <code>&lt;PATH TO WRITE LOCAL FILE&gt;</code> to a location on the XRootD standalone host relative to <code>rootdir</code> where you
+have write access.</p>
 </li>
 </ol>
 </li>
@@ -2307,6 +2340,8 @@ To use the standalone config, you would start XRootD with the following command:
 </tr>
 </tbody>
 </table>
+                
+                  
                 
               
               
