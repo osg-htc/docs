@@ -49,6 +49,11 @@ all AP users and operators are expected to adhere to the following usage limitat
 -   You are liable for the consequences of your violation of any of these conditions of use, which may include but are
     not limited to the reporting of your violation to your home institute and, if the activities are thought to be
     illegal, to appropriate law enforcement agencies.
+-   You are responsible for ensuring that your use of OSG Connect and the OSPool is appropriate and does not violate any
+    other requirements.
+    This includes adhering to any applicable agreements regarding appropriate use, any regulatory requirements, any
+    licensing agreements, privacy agreements, or any other requirements covering the data and software which you use
+    with OSG Connect or the OSPool.
 
 Access Point Operation Policy
 -----------------------------
