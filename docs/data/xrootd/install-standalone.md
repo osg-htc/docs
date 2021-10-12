@@ -14,7 +14,7 @@ In its standalone configuration, XRootD acts as a simple layer exporting data fr
 This document focuses on installing a default configuration of XRootD standalone that provides the following features:
 
 - Supports any POSIX-based storage system
-- Bearer token, macaroon, and VOMS proxy authentication
+- Macaroons, X.509 proxy, and VOMS proxy authentication
 - Third-Party Copy over HTTP (HTTP-TPC)
 
 Before Starting
@@ -40,7 +40,7 @@ Installing XRootD
 To install the XRootD Standalone server, run the following Yum command:
 
 ``` console
-root@xrootd-standalone # yum install osg-xrootd-standalone
+root@xrootd-standalone # yum install osg-xrootd-standalone --enablerepo=osg-upcoming
 ```
 
 Configuring XRootD
