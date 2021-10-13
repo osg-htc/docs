@@ -159,13 +159,9 @@ modified to volume mount CVMFS instead of using cvmfsexec, and using reduced pri
 
 ```
 docker run -it --rm --user osg      \
-        --cap-add DAC_OVERRIDE      \
-        --cap-add DAC_READ_SEARCH   \
-        --cap-add SETUID            \
-        --cap-add SETGID            \
-        --cap-add SYS_ADMIN         \
-        --cap-add SYS_CHROOT        \
-        --cap-add SYS_PTRACE        \
+        --security-opt seccomp=unconfined \
+        --security-opt systempaths=unconfined \
+        --security-opt no-new-privileges \
         -v /cvmfs:/cvmfs:shared     \
         -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
         -v /worker-temp-dir:/pilot      \
