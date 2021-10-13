@@ -23,13 +23,21 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.
 Latest News
 -----------
 
+### **October 13, 2021:** Initial osg-token-renewer release
+
+-   Initial release of the [osg-token-renewer](https://opensciencegrid.org/docs/other/osg-token-renewer/): a service to manage automatic renewal of bearer tokens from OIDC providers (e.g., CILogon, IAM), intended for use by VO managers
+-   [blahp 2.1.3](https://github.com/htcondor/BLAH/releases/tag/v2.1.3): Bug fix release
+    -   Include the more efficient LSF status script
+    -   Fix status caching on EL7 for PBS, Slurm, and LSF
+
+
 ### **October 5, 2021:** IGTF 1.113
 
 This release contains updated CA Certificates based on [IGTF 1.113](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
 
 -   Suspended MD-GRID CA due to network resolution issues (MD)
 
-### **September 30, 2021:** HTCondor-CE 5.1.2
+### **September 30, 2021:** Urgent Let's Encrypt CA certificate update
 
 !!! danger "Please update osg-ca-certs as soon as possible."
     Applications and tools using OpenSSL such as wget, HTCondor, and XRootD,
