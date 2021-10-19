@@ -160,7 +160,7 @@ To update OSG-Configure, perform the following steps:
 
     -   Delete the following attributes:
         -   `sponsor`
-        -   `site_policy
+        -   `site_policy`
         -   `contact`
         -   `email`
         -   `city`
