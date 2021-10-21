@@ -1,9 +1,6 @@
 Acceptable Use Policy For OSG Access Points and the OSPool
 ==========================================================
 
-!!! warning "DRAFT"
-    This document is a work in progress.
-
 The OSG Access Points and the [Open Science Pool](https://opensciencegrid.org/about/open_science_pool/) (OSPool) are
 shared resources in support of US Open Science research.
 As a shared resource, actions of one researcher can impact other researchers.
