@@ -1,5 +1,5 @@
-Access Point Acceptable Use Policy For the OSPool
-=================================================
+Acceptable Use Policy For OSG Access Points and the OSPool
+==========================================================
 
 !!! warning "DRAFT"
     This document is a work in progress.
