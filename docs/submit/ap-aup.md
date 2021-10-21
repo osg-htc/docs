@@ -4,14 +4,23 @@ Access Point Acceptable Use Policy For the OSPool
 !!! warning "DRAFT"
     This document is a work in progress.
 
-The Open Science Pool (OSPool) offers capacity contributed by organizations that are members of the OSG Compute
-Federation.
-The OSPool grants Access Points the ability to access the nation’s computing capacity for the benefit of the
-research community.
-It is the responsibility of all parties involved to maximize the impact of these contributions to
-Open Science.
-This AUP outlines the responsibilities in achieving this goal of OSG users that place their workloads on
-OSG managed Access Points (APs) to harness the capacity of the OSPool.
+The OSG Access Points and the Open Science Pool (OSPool) are shared resources in support of US Open Science research.
+As a shared resource, actions of one researcher can impact other researchers.
+It is therefore important that all parties involved in using or operating these OSG services follow the Acceptable Use
+Policies (AUP).
+
+The OSPool offers capacity contributed by organizations that are members of the OSG Compute Federation.
+These contributions are entrusted to the OSG Consortium to be shared with US researchers and their collaborators in
+support of their research.
+It is the responsibility of all parties involved to maximize the impact of these contributions to Open Science. 
+
+The OSG operates shared Access Points (<https://osg-connect.net>) that provide researchers with capabilities to harness
+the capacity of the OSPool.
+Misuse of the resources of these Access Points can slow down or prevent the launching of jobs to the OSPool or file
+movement to and from jobs served by the OSPool.
+
+This AUP outlines the responsibilities for operators of Access Points and researchers that place their workloads on
+OSG-managed Access Points that harness the capacity of the OSPool.
 
 General Use Limitations
 -----------------------
