@@ -74,6 +74,7 @@ nav:
     - 'RSV GlideinWMS Tester': 'monitoring/install-rsv-gwms-tester.md'
 - Access Point:
   - 'Install an OS Pool Access Point': 'submit/osg-flock.md'
+  - 'Acceptable Use Policy': 'submit/ap-ospool-aup.md'
 - Data Federation:
   - 'Overview': 'data/stashcache/overview.md'
   - Data Cache:
