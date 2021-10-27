@@ -8,6 +8,7 @@ theme:
   favicon: 'img/favicon.ico'
   features:
     - navigation.sections
+    - navigation.top
 
 extra_css:
   - css/extra.css
