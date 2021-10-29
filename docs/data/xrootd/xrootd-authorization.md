@@ -43,7 +43,7 @@ To configure XRootD to accept tokens from a given token issuer use the following
 
 1.  **(Optional)** if you want to map the incoming token for a given issuer to a Unix username:
 
-    1.  Install [xrootd-multiuser](#install-standalone#enabling-multi-user-support)
+    1.  Install [xrootd-multiuser](install-standalone#enabling-multi-user-support)
 
     1.  Add the following to the relevant issuer section in `/etc/xrootd/scitokens.conf`:
 
@@ -98,7 +98,7 @@ Authorizing X.509 proxies
     with `xrootd-multiuser`.
     See [XRootD GitHub issue #1538](https://github.com/xrootd/xrootd/issues/1538) for more details.
 
-In [OSG 3.6](../../release/release_series#series-overviews), XRootD installations are automatically configured to
+In [OSG 3.6](../../release/release_series.md#series-overviews), XRootD installations are automatically configured to
 authenticate all X.509 and VOMS proxies, so XRootD administrators can control file access through the
 [authorization database](#authorization-database).
 Optionally, you may map the subject distinguished names of incoming X.509 proxies to a username in
@@ -157,7 +157,7 @@ set vomsfqans = useall
 !!! info "OSG 3.5 end-of-life"
     OSG 3.5 will reach its end-of-life in [February 2022](../../release/release_series.md#series-overviews).
 
-In [OSG 3.5](../../release/release_series#series-overviews), [LCMAPS](../../security/lcmaps-voms-authentication.md) is
+In [OSG 3.5](../../release/release_series.md#series-overviews), [LCMAPS](../../security/lcmaps-voms-authentication.md) is
 used to authenticate X.509 and VOMS proxies to usernames utilized by the
 [authorization database](#authorization-database).
 Perform the following instructions on all data nodes:
