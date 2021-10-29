@@ -1,3 +1,5 @@
+DateReviewed: 2021-10-29
+
 Configuring XRootD Authorization
 ================================
 
@@ -5,10 +7,10 @@ Configuring XRootD Authorization
     There is an incompatibility with EL7 < 7.5 due to an issue with the `globus-gsi-proxy-core` package
 
 XRootD offers several authentication options [security plugins](https://xrootd.slac.stanford.edu/doc/dev50/sec_config.htm)
-to validate incoming credentials, such as bearer tokens, GSI proxies, and VOMS proxies.
+to validate incoming credentials, such as bearer tokens, X.509 proxies, and VOMS proxies.
 
-In the case of GSI and VOMS proxies, after the incoming credential has been mapped to a username or groupname, the
-[authorization database file](#authorization-database-file) is used to provide fine-grained file access.
+In the case of X.509 and VOMS proxies, after the incoming credential has been mapped to a username or groupname, the
+[authorization database](#authorization-database) is used to provide fine-grained file access.
 
 !!! note
     On data nodes, files will be owned by Unix user `xrootd` (or other daemon user), not as the user
@@ -87,7 +89,7 @@ To enable macaroon support:
 Authorizing X.509 proxies
 -------------------------
 
-### Authenticating proxies (OSG 3.6) ###
+### Authenticating proxies ###
 
 !!! bug "VOMS attribute mappings incompatible with `xrootd-multiuser`"
     The OSG 3.6 configuration of XRootD uses the `XrdVoms` plugin, which pass along the entire VOMS FQAN as the
@@ -96,11 +98,12 @@ Authorizing X.509 proxies
     with `xrootd-multiuser`.
     See [XRootD GitHub issue #1538](https://github.com/xrootd/xrootd/issues/1538) for more details.
 
-In [OSG 3.6](#osg-3.6), XRootD installations are automatically configured to authenticate all GSI and VOMS proxies, so
-XRootD administrators can control file access through the [authorization database file](#authorization-database-file).
-Optionally, you may map the subject distinguished names of incoming X.509 proxies to a user in
+In [OSG 3.6](../../release/release_series#series-overviews), XRootD installations are automatically configured to
+authenticate all X.509 and VOMS proxies, so XRootD administrators can control file access through the
+[authorization database](#authorization-database).
+Optionally, you may map the subject distinguished names of incoming X.509 proxies to a username in
 `/etc/grid-security/grid-mapfile`.
-This mapped user can then be used in XRootD's Authorization Database file.
+This mapped username can then be used in XRootD's authorization database file.
 
 #### Mapping subject DNs ####
 
@@ -109,7 +112,7 @@ This mapped user can then be used in XRootD's Authorization Database file.
     XRootD will map it to a username.
 
 In OSG 3.6, X.509 proxies are mapped using the built-in XRootD GSI plug-in.
-To map an incoming proxy's subject DN to an [XRootD username](#formatting),
+To map an incoming proxy's subject DN to an [XRootD username](#authorization-database),
 add lines of the following format to `/etc/grid-security/grid-mapfile`:
 
 ```
@@ -117,7 +120,7 @@ add lines of the following format to `/etc/grid-security/grid-mapfile`:
 ```
 
 Replacing `<SUBJECT DN>` with the X.509 proxy's DN to map and `<AUTHDB USERNAME>` with the username to reference in the
-[authorization database file](#formatting).
+[authorization database](#authorization-database).
 For example, the following mapping:
 
 ```
@@ -125,20 +128,20 @@ For example, the following mapping:
 ```
 
 Will result in the username `blin`,
-i.e. authorize access to clients presenting the above proxy with `u blin ...` in the authorization database file.
+i.e. authorize access to clients presenting the above proxy with `u blin ...` in the authorization database.
 
 #### Mapping VOMS attributes ####
 
 !!! bug "VOMS attribute mappings incompatible with `xrootd-multiuser`"
     The OSG 3.6 configuration of XRootD uses the `XrdVoms` plugin, which pass along the entire VOMS FQAN as the
-    groupname to the authorization layer (see the section on [authorization database file formatting](#formatting)).
+    groupname to the authorization layer (see the section on [authorization database formatting](#formatting)).
     Some characters in VOMS FQANs are not legal in Unix usernames, therefore VOMS attributes mappings are incompatible
     with `xrootd-multiuser`.
     See [XRootD GitHub issue #1538](https://github.com/xrootd/xrootd/issues/1538) for more details.
 
 In OSG 3.6, VOMS proxies are automatically mapped using the built-in XRootD GSI and VOMS plug-ins.
 An incoming VOMS proxy will authenticate the first VOMS FQAN and map it to an organization name, groupname, and role
-name in the [authorization database](#formatting).
+name in the [authorization database](#authorization-database).
 For example, a proxy from the OSPool whose first VOMS FQAN is `/osg/Role=NULL/Capability=NULL` will be authenticated to
 the `osg` groupname.
 
@@ -149,13 +152,14 @@ authentication by setting the following in `/etc/xrootd/config.d/10-osg-xrdvoms.
 set vomsfqans = useall
 ```
 
-### Authenticating Proxies (OSG 3.5) ###
+### Authenticating Proxies (deprecated) ###
 
 !!! info "OSG 3.5 end-of-life"
     OSG 3.5 will reach its end-of-life in [February 2022](../../release/release_series.md#series-overviews).
 
-In OSG 3.5, the [LCMAPS VOMS plugin](../../security/lcmaps-voms-authentication.md) is used to authenticate GSI and
-VOMS proxies to usernames utilized by the [authorization database file](#formatting).
+In [OSG 3.5](../../release/release_series#series-overviews), [LCMAPS](../../security/lcmaps-voms-authentication.md) is
+used to authenticate X.509 and VOMS proxies to usernames utilized by the
+[authorization database](#authorization-database).
 Perform the following instructions on all data nodes:
 
 1.  Install [CA certificates](../../common/ca.md#installing-ca-certificates) and 
@@ -166,7 +170,10 @@ Perform the following instructions on all data nodes:
 
 1.  Configure the [LCMAPS VOMS plugin](../../security/lcmaps-voms-authentication.md)
 
-### Authorization database file ###
+1.  Any subject DN or VOMS FQAN mappings from LCMAPS will result in usernames that can be used in the
+    [authorization database](#authorization-database).
+
+### Authorization database ###
 
 XRootD allows configuring fine-grained file access permissions based on authenticated identities and paths.
 This is configured in the authorization file `/etc/xrootd/Authfile`, which should be writable
@@ -194,18 +201,23 @@ g /osg <STORAGE PATH>/osg a
 ```
 
 Replacing `<STORAGE PATH>` with the path to the directory that will contain data served by XRootD, e.g. `/data/xrootdfs`.
-This path is relative to the `oss.localroot` or `all.localroot` configuration values, if either one is defined in the
-xrootd config file.
+This path is relative to the [`rootdir`](install-standalone.md#configuring-xrootd).
 
-!!! note
-    Specific paths need to be specified _before_ generic paths; e.g., this does not work:
+!!! warning "Configure most to least specific paths"
+    Specific paths need to be specified _before_ generic paths.
+    For example, this line will allow all users to read the contents `/data/xrootdfs/private`:
 
             u * rl /data/xrootdfs -rl /data/xrootdfs/private
+
+    Instead, specify the following to ensure that all users will not be able to read the contents of
+    `/data/xrootdfs/private` unless specified with another authorization rule:
+
+            u * -rl /data/xrootdfs/private rl /data/xrootdfs 
 
 
 #### Formatting ####
 
-More generally, each configuration line of the auth file has the following form:
+More generally, each authorization rule of the authorization database has the following form:
 
 ``` file
 idtype id path privs
@@ -219,7 +231,7 @@ idtype id path privs
 | privs  | Letter list of privileges: `a` - all ; `l` - lookup ; `d` - delete ; `n` - rename ; `i` - insert ; `r` - read ; `k` - lock (not used) ; `w` - write ; `-` - prefix to remove specified privileges |
 
 For more details or examples on how to use templated user options, see
-[XRootd Authorization Database File](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606599).
+[XRootD authorization database](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606599).
 
 #### Verifying file ownership and permissions ####
 
@@ -234,16 +246,19 @@ root@host # chmod 0640 /etc/xrootd/Authfile  # or 0644
 Applying Authorization Changes
 ------------------------------
 
-After making changes to your [authorization database file](#authorization-database-file), you must restart the
+After making changes to your [authorization database](#authorization-database), you must restart the
 [relevant services](install-standalone.md#using-xrootd).
 
 Verifying XRootD Authorization
 ------------------------------
 
-To verify the LCMAPS security, run the following commands from a machine with your user certificate/key pair,
-`xrootd-client`, and `voms-clients-cpp` installed:
+### X.509 and VOMS proxies ###
 
-1. Destroy any pre-existing proxies and attempt a copy to a directory (which we will refer to as `<DESTINATION PATH>`) on the `<XROOTD HOST>` to verify failure:
+To verify X.509 and VOMS proxy authorization, run the following commands from a machine with your user certificate/key
+pair, `xrootd-client`, and `voms-clients-cpp` installed:
+
+1.  Destroy any pre-existing proxies and attempt a copy to a directory (which we will refer to as `<DESTINATION PATH>`)
+    on the `<XROOTD HOST>` to verify failure:
 
         :::console
         user@client $ voms-proxy-destroy
@@ -252,12 +267,13 @@ To verify the LCMAPS security, run the following commands from a machine with yo
         [0B/0B][100%][==================================================][0B/s]
         Run: [FATAL] Auth failed
 
-1. On the XRootD host, add your DN to [/etc/grid-security/grid-mapfile](../../security/lcmaps-voms-authentication.md#mapping-users)
+1.  On the XRootD host, add your DN to [/etc/grid-security/grid-mapfile](../../security/lcmaps-voms-authentication.md#mapping-users)
 
-1. Add a line to `/etc/xrootd/auth_file` to ensure the mapped user can write to `<DESTINATION PATH>`
+1.  Add a line to the [authorization database](#authorization-database) to ensure the mapped user can write to
+    `<DESTINATION PATH>`
 
-1. Restart the xrootd service. (See [this section](install-standalone.md#using-xrootd) for more information
-   of managing XRootD services.)
+1.  Restart the relevant XRootD services.
+    See [this section](install-standalone.md#using-xrootd) for details
 
 1. Generate your proxy and verify that you can successfully transfer files:
 
@@ -266,4 +282,4 @@ To verify the LCMAPS security, run the following commands from a machine with yo
         user@client $ xrdcp  /bin/sh root://<XROOTD HOST>/<DESTINATION PATH>
         [938.1kB/938.1kB][100%][==================================================][938.1kB/s]
 
-    If your transfer does not succeed, run the previous command with `--debug 2` for more information.
+    If your transfer does not succeed, re-run `xrdcp`  with `--debug 2` for more information.
