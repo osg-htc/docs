@@ -43,7 +43,7 @@ To configure XRootD to accept tokens from a given token issuer use the following
 
 1.  **(Optional)** if you want to map the incoming token for a given issuer to a Unix username:
 
-    1.  Install [xrootd-multiuser](install-standalone#enabling-multi-user-support)
+    1.  Install [xrootd-multiuser](install-standalone.md#enabling-multi-user-support)
 
     1.  Add the following to the relevant issuer section in `/etc/xrootd/scitokens.conf`:
 
