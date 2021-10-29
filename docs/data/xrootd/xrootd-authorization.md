@@ -17,22 +17,96 @@ In the case of GSI and VOMS proxies, after the incoming credential has been mapp
     to, but, internally, the data node files will be owned by the `xrootd` user. If this behaviour is not desired, enable
     [XRootD multi-user support](install-standalone.md#enabling-multi-user-support). 
 
-Authentication
---------------
+Authorizing Bearer Tokens
+-------------------------
 
-### OSG 3.6 ###
+The OSG configurations of XRootD support authorization of bearer tokens such as macaroons, SciTokens, or WLCG tokens.
+Encoded in the bearer tokens themselves are information about the files that they should have read/write access to and
+in the case of SciTokens and WLCG tokens, you may configure XRootD to further restrict access.
 
-In [OSG 3.6](#osg-3.6), XRootD installations are automatically configured to
-authenticate all bearer tokens, macaroons, and VOMS proxies, so XRootD administrators can control file access solely
-through the [Authorization Database File](#authorization-database-file).
+### Configuring SciTokens/WLCG Tokens ###
+
+SciTokens and WLCG Tokens are asymetrically signed bearer tokens: they are signed by a token issuer (e.g., CILogon, IAM)
+and can be authenticated with the token issuer's public key.
+To configure XRootD to accept tokens from a given token issuer use the following instructions:
+
+1.  Add a section for each token issuer to `/etc/xrootd/scitokens.conf`:
+
+        [Issuer <NAME>]
+        issuer = <URL>
+        base_path = <RELATIVE PATH>
+
+    Replacing `<NAME`> with a descriptive name, `<URL>` with the token issuer URL, and `base_path` to a path relative to
+    [`rootdir`](install-standalone.md#configuring-xrootd) that the client should be restricted to accessing.
+
+1.  **(Optional)** if you want to map the incoming token for a given issuer to a Unix username:
+
+    1.  Install [xrootd-multiuser](#install-standalone#enabling-multi-user-support)
+
+    1.  Add the following to the relevant issuer section in `/etc/xrootd/scitokens.conf`:
+
+            map_subject = True
+
+1.  **(Optional)** if you want to only accept tokens with the appropriate `aud` field, the following to
+    `/etc/xrootd/scitokens.conf`:
+
+        [Global]
+        audience = <COMMMA SEPARATED LIST OF AUDIENCES>
+
+An example configuration that supports the OSG Connect and CMS:
+
+```
+[Global]
+audience = https://testserver.example.com/, MySite
+
+[Issuer OSG-Connect]
+
+issuer = https://scitokens.org/osg-connect
+base_path = /stash
+map_subject = True
+
+[Issuer CMS]
+
+issuer = https://scitokens.org/cms
+base_path = /user/cms
+```
+
+### Configuring macaroons ###
+
+Macaroons are symetrically signed bearer tokens so your XRootD host must have access to the same secret key that is used
+to sign incoming macaroons.
+To enable macaroon support:
+
+1.  Place the shared secret in `/etc/xrootd/macaroon-secret`
+1.  Ensure that it has the appropriate file ownership and permissions:
+
+        :::console
+        root@host # chown xrootd:xrootd /etc/xrootd/macaroon-secret
+        root@host # chmod 0600 /etc/xrootd/macaroon-secret
+
+Authorizing X.509 proxies
+-------------------------
+
+### Authenticating proxies (OSG 3.6) ###
+
+!!! bug "VOMS attribute mappings incompatible with `xrootd-multiuser`"
+    The OSG 3.6 configuration of XRootD uses the `XrdVoms` plugin, which pass along the entire VOMS FQAN as the
+    groupname to the authorization layer (see the section on [authorization database file formatting](#formatting)).
+    Some characters in VOMS FQANs are not legal in Unix usernames, therefore VOMS attributes mappings are incompatible
+    with `xrootd-multiuser`.
+    See [XRootD GitHub issue #1538](https://github.com/xrootd/xrootd/issues/1538) for more details.
+
+In [OSG 3.6](#osg-3.6), XRootD installations are automatically configured to authenticate all GSI and VOMS proxies, so
+XRootD administrators can control file access through the [authorization database file](#authorization-database-file).
 Optionally, you may map the subject distinguished names of incoming X.509 proxies to a user in
 `/etc/grid-security/grid-mapfile`.
 This mapped user can then be used in XRootD's Authorization Database file.
 
-#### Mapping X.509 proxies ####
+#### Mapping subject DNs ####
 
 !!! note "DN mappings take precedence over VOMS attributes"
-    If you have mapped the subject DN of an incoming VOMS proxy, XRootD will map it to a username
+    If you have mapped the subject Distinguished Name (DN) of an incoming proxy with VOMS attributes,
+    XRootD will map it to a username.
 
 In OSG 3.6, X.509 proxies are mapped using the built-in XRootD GSI plug-in.
 To map an incoming proxy's subject DN to an [XRootD username](#formatting),
@@ -53,7 +127,7 @@ For example, the following mapping:
 Will result in the username `blin`,
 i.e. authorize access to clients presenting the above proxy with `u blin ...` in the authorization database file.
 
-#### Mapping VOMS proxies ####
+#### Mapping VOMS attributes ####
 
 !!! bug "VOMS attribute mappings incompatible with `xrootd-multiuser`"
     The OSG 3.6 configuration of XRootD uses the `XrdVoms` plugin, which pass along the entire VOMS FQAN as the
@@ -63,10 +137,10 @@ i.e. authorize access to clients presenting the above proxy with `u blin ...` in
     See [XRootD GitHub issue #1538](https://github.com/xrootd/xrootd/issues/1538) for more details.
 
 In OSG 3.6, VOMS proxies are automatically mapped using the built-in XRootD GSI and VOMS plug-ins.
-An incoming VOMS proxy will authenticate the first VOMS FQAN to the [authorization database groupname](#formatting).
-For example, a VOMS proxy from the OSPool will be authenticated to the following groupname:
-
-`/osg/Role=NULL/Capability=NULL`
+An incoming VOMS proxy will authenticate the first VOMS FQAN and map it to an organization name, groupname, and role
+name in the [authorization database](#formatting).
+For example, a proxy from the OSPool whose first VOMS FQAN is `/osg/Role=NULL/Capability=NULL` will be authenticated to
+the `osg` groupname.
 
 Instead of only using the first VOMS FQAN, you can configure XRootD to consider all VOMS FQANs in the proxy for
 authentication by setting the following in `/etc/xrootd/config.d/10-osg-xrdvoms.cfg`:
@@ -75,12 +149,12 @@ authentication by setting the following in `/etc/xrootd/config.d/10-osg-xrdvoms.
 set vomsfqans = useall
 ```
 
-### OSG 3.5 ###
+### Authenticating Proxies (OSG 3.5) ###
 
 !!! info "OSG 3.5 end-of-life"
     OSG 3.5 will reach its end-of-life in [February 2022](../../release/release_series.md#series-overviews).
 
-In OSG 3.5, the [LCMAPS VOMS plugin](../../security/lcmaps-voms-authentication.md) is used to authenticate X.509 and
+In OSG 3.5, the [LCMAPS VOMS plugin](../../security/lcmaps-voms-authentication.md) is used to authenticate GSI and
 VOMS proxies to usernames utilized by the [authorization database file](#formatting).
 Perform the following instructions on all data nodes:
 
@@ -92,8 +166,7 @@ Perform the following instructions on all data nodes:
 
 1.  Configure the [LCMAPS VOMS plugin](../../security/lcmaps-voms-authentication.md)
 
-Authorization Database File
----------------------------
+### Authorization database file ###
 
 XRootD allows configuring fine-grained file access permissions based on authenticated identities and paths.
 This is configured in the authorization file `/etc/xrootd/Authfile`, which should be writable
@@ -130,7 +203,7 @@ xrootd config file.
             u * rl /data/xrootdfs -rl /data/xrootdfs/private
 
 
-### Formatting ###
+#### Formatting ####
 
 More generally, each configuration line of the auth file has the following form:
 
@@ -140,15 +213,15 @@ idtype id path privs
 
 | Field  | Description                                                                                                                           |
 |--------|---------------------------------------------------------------------------------------------------------------------------------------|
-| idtype | Type of id. Use `u` for username, `g` for groupname, etc.                                                                             |
-| id     | Username (or groupname). Use `*` for all users or `=` for user-specific capabilities, like home directories                           |
+| idtype | Type of id. Use `u` for username, `g` for groupname, `o` for organization name, `r` for role name, etc.                               |
+| id     | ID name, e.g. username or groupname. Use `*` for all users or `=` for user-specific capabilities, like home directories               |
 | path   | The path prefix to be used for matching purposes.  `@=` expands to the current user name before a path prefix match is attempted      |
 | privs  | Letter list of privileges: `a` - all ; `l` - lookup ; `d` - delete ; `n` - rename ; `i` - insert ; `r` - read ; `k` - lock (not used) ; `w` - write ; `-` - prefix to remove specified privileges |
 
 For more details or examples on how to use templated user options, see
 [XRootd Authorization Database File](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606599).
 
-### Verifying file ownership and permissions ###
+#### Verifying file ownership and permissions ####
 
 Ensure the authorization datbase file is owned by `xrootd` (if you have created file as root),
 and that it is not writable by others.
