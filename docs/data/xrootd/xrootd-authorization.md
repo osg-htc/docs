@@ -28,7 +28,7 @@ in the case of SciTokens and WLCG tokens, you may configure XRootD to further re
 
 ### Configuring SciTokens/WLCG Tokens ###
 
-SciTokens and WLCG Tokens are asymetrically signed bearer tokens: they are signed by a token issuer (e.g., CILogon, IAM)
+SciTokens and WLCG Tokens are asymmetrically signed bearer tokens: they are signed by a token issuer (e.g., CILogon, IAM)
 and can be authenticated with the token issuer's public key.
 To configure XRootD to accept tokens from a given token issuer use the following instructions:
 
