@@ -3,7 +3,7 @@ DateReviewed: 2021-10-29
 Configuring XRootD Authorization
 ================================
 
-!!!bug "EL7 version compatibility"
+!!!bug "OSG 3.5 EL7 version compatibility"
     There is an incompatibility with EL7 < 7.5 due to an issue with the `globus-gsi-proxy-core` package
 
 XRootD offers several authentication options [security plugins](https://xrootd.slac.stanford.edu/doc/dev50/sec_config.htm)
