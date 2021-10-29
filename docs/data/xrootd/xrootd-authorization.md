@@ -209,7 +209,7 @@ This path is relative to the [`rootdir`](install-standalone.md#configuring-xroot
 
             u * rl /data/xrootdfs -rl /data/xrootdfs/private
 
-    Instead, specify the following to ensure that all users will not be able to read the contents of
+    Instead, specify the following to ensure that a given user will not be able to read the contents of
     `/data/xrootdfs/private` unless specified with another authorization rule:
 
             u * -rl /data/xrootdfs/private rl /data/xrootdfs 
