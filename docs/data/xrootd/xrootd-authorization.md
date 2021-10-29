@@ -252,6 +252,34 @@ After making changes to your [authorization database](#authorization-database), 
 Verifying XRootD Authorization
 ------------------------------
 
+### Bearer tokens ###
+
+To test read access using macaroon, SciTokens, and WLCG token authorization, run the following command:
+
+```console
+user@ host $curl -v \
+                 -H 'Authorization: Bearer <TOKEN>' \
+                 https://host.example.com//path/to/directory/hello_world
+```
+
+Replacing `<TOKEN>` with the contents of your encoded token, `host.example.com` with the target XRootD host, and
+`/path/to/directory/hello_world` with the path of the file to read.
+
+
+To test write access, using macaroon, SciTokens, and WLCG token authorization, run the following command:
+
+```console
+user@ host $curl -v \
+                 -X PUT \
+                 --upload-file <FILE TO UPLOAD> \
+                 -H 'Authorization: Bearer <TOKEN>' \
+                 https://host.example.com//path/to/directory/hello_world
+```
+
+Replacing `<TOKEN>` with the contents of your encoded token, `<FILE TO UPLOAD>` with the file to write to the XRootD
+host, `host.example.com` with the target XRootD host, and `/path/to/directory/hello_world` with the path of the file to
+write.
+
 ### X.509 and VOMS proxies ###
 
 To verify X.509 and VOMS proxy authorization, run the following commands from a machine with your user certificate/key
