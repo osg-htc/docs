@@ -208,12 +208,12 @@ This path is relative to the [`rootdir`](install-standalone.md#configuring-xroot
     Specific paths need to be specified _before_ generic paths.
     For example, this line will allow all users to read the contents `/data/xrootdfs/private`:
 
-            u * rl /data/xrootdfs -rl /data/xrootdfs/private
+            u * /data/xrootdfs rl /data/xrootdfs/private -rl
 
     Instead, specify the following to ensure that a given user will not be able to read the contents of
     `/data/xrootdfs/private` unless specified with another authorization rule:
 
-            u * -rl /data/xrootdfs/private rl /data/xrootdfs 
+            u * /data/xrootdfs/private -rl /data/xrootdfs rl
 
 
 #### Formatting ####
