@@ -29,7 +29,7 @@ in the case of SciTokens and WLCG tokens, you may configure XRootD to further re
 ### Configuring SciTokens/WLCG Tokens ###
 
 SciTokens and WLCG Tokens are asymmetrically signed bearer tokens: they are signed by a token issuer (e.g., CILogon, IAM)
-and can be authenticated with the token issuer's public key.
+and can be verified with the token issuer's public key.
 To configure XRootD to accept tokens from a given token issuer use the following instructions:
 
 1.  Add a section for each token issuer to `/etc/xrootd/scitokens.conf`:
@@ -49,13 +49,13 @@ To configure XRootD to accept tokens from a given token issuer use the following
 
             map_subject = True
 
-1.  **(Optional)** if you want to only accept tokens with the appropriate `aud` field, the following to
+1.  **(Optional)** if you want to only accept tokens with the appropriate `aud` field, add the following to
     `/etc/xrootd/scitokens.conf`:
 
         [Global]
         audience = <COMMMA SEPARATED LIST OF AUDIENCES>
 
-An example configuration that supports the OSG Connect and CMS:
+An example configuration that supports tokens issued by the OSG Connect and CMS:
 
 ```
 [Global]
@@ -77,6 +77,7 @@ base_path = /user/cms
 
 Macaroons are symetrically signed bearer tokens so your XRootD host must have access to the same secret key that is used
 to sign incoming macaroons.
+When used in an XRootD cluster, all data nodes and the redirector need access to the same secret.
 To enable macaroon support:
 
 1.  Place the shared secret in `/etc/xrootd/macaroon-secret`
