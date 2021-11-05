@@ -258,7 +258,7 @@ Verifying XRootD Authorization
 To test read access using macaroon, SciTokens, and WLCG token authorization, run the following command:
 
 ```console
-user@ host $curl -v \
+user@host $ curl -v \
                  -H 'Authorization: Bearer <TOKEN>' \
                  https://host.example.com//path/to/directory/hello_world
 ```
@@ -270,7 +270,7 @@ Replacing `<TOKEN>` with the contents of your encoded token, `host.example.com` 
 To test write access, using macaroon, SciTokens, and WLCG token authorization, run the following command:
 
 ```console
-user@ host $curl -v \
+user@host $ curl -v \
                  -X PUT \
                  --upload-file <FILE TO UPLOAD> \
                  -H 'Authorization: Bearer <TOKEN>' \
