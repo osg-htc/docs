@@ -2249,7 +2249,7 @@ and that it is not writable by others.</p>
 <h2 id="verifying-xrootd-authorization">Verifying XRootD Authorization<a class="headerlink" href="#verifying-xrootd-authorization" title="Permanent link">&para;</a></h2>
 <h3 id="bearer-tokens">Bearer tokens<a class="headerlink" href="#bearer-tokens" title="Permanent link">&para;</a></h3>
 <p>To test read access using macaroon, SciTokens, and WLCG token authorization, run the following command:</p>
-<div class="codehilite"><pre><span></span><code><span class="go">user@ host $curl -v \</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>curl -v <span class="se">\</span>
 <span class="go">                 -H &#39;Authorization: Bearer &lt;TOKEN&gt;&#39; \</span>
 <span class="go">                 https://host.example.com//path/to/directory/hello_world</span>
 </code></pre></div>
@@ -2257,7 +2257,7 @@ and that it is not writable by others.</p>
 <p>Replacing <code>&lt;TOKEN&gt;</code> with the contents of your encoded token, <code>host.example.com</code> with the target XRootD host, and
 <code>/path/to/directory/hello_world</code> with the path of the file to read.</p>
 <p>To test write access, using macaroon, SciTokens, and WLCG token authorization, run the following command:</p>
-<div class="codehilite"><pre><span></span><code><span class="go">user@ host $curl -v \</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>curl -v <span class="se">\</span>
 <span class="go">                 -X PUT \</span>
 <span class="go">                 --upload-file &lt;FILE TO UPLOAD&gt; \</span>
 <span class="go">                 -H &#39;Authorization: Bearer &lt;TOKEN&gt;&#39; \</span>
