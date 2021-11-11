@@ -9,14 +9,14 @@
       
       
       
-        <link rel="canonical" href="https://opensciencegrid.org/docs/release/3.5/release-3-5-49/">
+        <link rel="canonical" href="https://opensciencegrid.org/docs/release/3.5/release-3-5-50/">
       
       <link rel="icon" href="../../../img/favicon.ico">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.0">
     
     
       
-        <title>Release 3 5 49 - OSG Site Documentation</title>
+        <title>Release 3 5 50 - OSG Site Documentation</title>
       
     
     
@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#osg-software-release-3549" class="md-skip">
+        <a href="#osg-software-release-3550" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Release 3 5 49
+              Release 3 5 50
             
           </span>
         </div>
@@ -1833,12 +1833,12 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/release/3.5/release-3-5-49.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/release/3.5/release-3-5-50.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="osg-software-release-3549">OSG Software Release 3.5.49<a class="headerlink" href="#osg-software-release-3549" title="Permanent link">&para;</a></h1>
+                <h1 id="osg-software-release-3550">OSG Software Release 3.5.50<a class="headerlink" href="#osg-software-release-3550" title="Permanent link">&para;</a></h1>
 <p><strong>Release Date:</strong> 2021-10-13<br />
 <strong>Supported OS Versions:</strong> EL7, EL8</p>
 <div class="admonition tip">
@@ -1858,18 +1858,14 @@ enabled=1
 <h2 id="summary-of-changes">Summary of Changes<a class="headerlink" href="#summary-of-changes" title="Permanent link">&para;</a></h2>
 <p>This release contains:</p>
 <ul>
-<li>Initial release of the <a href="https://opensciencegrid.org/docs/other/osg-token-renewer/">osg-token-renewer</a>: a service to manage automatic renewal of bearer tokens from OIDC providers (e.g., CILogon, IAM), intended for use by VO managers</li>
+<li>osg-ca-certs-updater 2.0: Update to Python 3 for EL8</li>
 <li>Upcoming<ul>
-<li><a href="https://github.com/htcondor/BLAH/releases/tag/v2.1.3">blahp 2.1.3</a>: Bug fix release<ul>
-<li>Include the more efficient LSF status script</li>
-<li>Fix status caching on EL7 for PBS, Slurm, and LSF</li>
-</ul>
-</li>
+<li>xrootd-multiuser 2.0.3: Fix bug in lfn2pfn function</li>
 </ul>
 </li>
 </ul>
 <p>These
-<a href="https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.49%2C3.5.49-upcoming)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC">JIRA tickets</a>
+<a href="https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.50%2C3.5.50-upcoming)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC">JIRA tickets</a>
 were addressed in this release.</p>
 <h2 id="containers">Containers<a class="headerlink" href="#containers" title="Permanent link">&para;</a></h2>
 <p>The <a href="https://hub.docker.com/u/opensciencegrid/">OSG Docker images</a> have been updated to contain the new software.</p>
@@ -1891,24 +1887,24 @@ Note that in some cases, there are multiple RPMs for each package.
 You can click on any given package to see the set of RPMs or see the complete list <a href="#rpms">below</a>.</p>
 <h4 id="enterprise-linux-7">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7" title="Permanent link">&para;</a></h4>
 <ul>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-token-renewer-0.7.1-1.osg35.el7">osg-token-renewer-0.7.1-1.osg35.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-ca-certs-updater-2.0-1.osg35.el7">osg-ca-certs-updater-2.0-1.osg35.el7</a></li>
 </ul>
 <h4 id="enterprise-linux-8">Enterprise Linux 8<a class="headerlink" href="#enterprise-linux-8" title="Permanent link">&para;</a></h4>
 <ul>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-token-renewer-0.7.1-1.osg35.el8">osg-token-renewer-0.7.1-1.osg35.el8</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-ca-certs-updater-2.0-1.osg35.el8">osg-ca-certs-updater-2.0-1.osg35.el8</a></li>
 </ul>
 <h3 id="rpms">RPMs<a class="headerlink" href="#rpms" title="Permanent link">&para;</a></h3>
 <p>If you wish to manually update your system, you can run yum update against the following packages:</p>
-<div class="codehilite"><pre><span></span><code>osg-token-renewer
+<div class="codehilite"><pre><span></span><code>osg-ca-certs-updater
 </code></pre></div>
 
 <p>If you wish to only update the RPMs that changed, the set of RPMs is:</p>
 <h4 id="enterprise-linux-7_1">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code>osg-token-renewer-0.7.1-1.osg35.el7
+<div class="codehilite"><pre><span></span><code>osg-ca-certs-updater-2.0-1.osg35.el7
 </code></pre></div>
 
 <h4 id="enterprise-linux-8_1">Enterprise Linux 8<a class="headerlink" href="#enterprise-linux-8_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code>osg-token-renewer-0.7.1-1.osg35.el8
+<div class="codehilite"><pre><span></span><code>osg-ca-certs-updater-2.0-1.osg35.el8
 </code></pre></div>
 
 <h3 id="upcoming-packages">Upcoming Packages<a class="headerlink" href="#upcoming-packages" title="Permanent link">&para;</a></h3>
@@ -1917,27 +1913,27 @@ Note that in some cases, there are multiple RPMs for each package.
 You can click on any given package to see the set of RPMs or see the complete list below.</p>
 <h4 id="enterprise-linux-7_2">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7_2" title="Permanent link">&para;</a></h4>
 <ul>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=blahp-2.1.3-1.osg35up.el7">blahp-2.1.3-1.osg35up.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=xrootd-multiuser-2.0.3-1.osg35up.el7">xrootd-multiuser-2.0.3-1.osg35up.el7</a></li>
 </ul>
 <h4 id="enterprise-linux-8_2">Enterprise Linux 8<a class="headerlink" href="#enterprise-linux-8_2" title="Permanent link">&para;</a></h4>
 <ul>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=blahp-2.1.3-1.osg35up.el8">blahp-2.1.3-1.osg35up.el8</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=xrootd-multiuser-2.0.3-1.osg35up.el8">xrootd-multiuser-2.0.3-1.osg35up.el8</a></li>
 </ul>
 <h3 id="upcoming-rpms">Upcoming RPMs<a class="headerlink" href="#upcoming-rpms" title="Permanent link">&para;</a></h3>
 <p>If you wish to manually update your system, you can run yum update against the following packages:</p>
-<div class="codehilite"><pre><span></span><code>blahp blahp-debuginfo
+<div class="codehilite"><pre><span></span><code>xrootd-multiuser xrootd-multiuser-debuginfo
 </code></pre></div>
 
 <p>If you wish to only update the RPMs that changed, the set of RPMs is:</p>
 <h4 id="enterprise-linux-7_3">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7_3" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code>blahp-2.1.3-1.osg35up.el7
-blahp-debuginfo-2.1.3-1.osg35up.el7
+<div class="codehilite"><pre><span></span><code>xrootd-multiuser-2.0.3-1.osg35up.el7
+xrootd-multiuser-debuginfo-2.0.3-1.osg35up.el7
 </code></pre></div>
 
 <h4 id="enterprise-linux-8_3">Enterprise Linux 8<a class="headerlink" href="#enterprise-linux-8_3" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code>blahp-2.1.3-1.osg35up.el8
-blahp-debuginfo-2.1.3-1.osg35up.el8
-blahp-debugsource-2.1.3-1.osg35up.el8
+<div class="codehilite"><pre><span></span><code>xrootd-multiuser-2.0.3-1.osg35up.el8
+xrootd-multiuser-debuginfo-2.0.3-1.osg35up.el8
+xrootd-multiuser-debugsource-2.0.3-1.osg35up.el8
 </code></pre></div>
                 
               
