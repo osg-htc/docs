@@ -23,13 +23,22 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.
 Latest News
 -----------
 
+### **November 11, 2021:** osg-flock and gratia-probes
+
+-   osg-flock 1.6-3
+    -   Update probe configuration to support Open Science Pool
+    -   Overhaul configuration for HTCondor 9.0
+-   gratia-probe 2.3.3
+    -   Add gratia-probe-condor-ap for user job accounting of HTCondor Access Points
+    -   Drop unused XRootD transfer probes
+    -   Fix default HTCondor-CE probe directory configurations and ownership
+
 ### **October 13, 2021:** Initial osg-token-renewer release
 
 -   Initial release of the [osg-token-renewer](https://opensciencegrid.org/docs/other/osg-token-renewer/): a service to manage automatic renewal of bearer tokens from OIDC providers (e.g., CILogon, IAM), intended for use by VO managers
 -   [blahp 2.1.3](https://github.com/htcondor/BLAH/releases/tag/v2.1.3): Bug fix release
     -   Include the more efficient LSF status script
     -   Fix status caching on EL7 for PBS, Slurm, and LSF
-
 
 ### **October 5, 2021:** IGTF 1.113
 
