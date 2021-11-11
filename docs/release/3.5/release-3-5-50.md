@@ -1,4 +1,4 @@
-OSG Software Release 3.5.49
+OSG Software Release 3.5.50
 ===========================
 
 **Release Date:** 2021-10-13  
@@ -21,14 +21,12 @@ Summary of Changes
 
 This release contains:
 
--   Initial release of the [osg-token-renewer](https://opensciencegrid.org/docs/other/osg-token-renewer/): a service to manage automatic renewal of bearer tokens from OIDC providers (e.g., CILogon, IAM), intended for use by VO managers
+-   osg-ca-certs-updater 2.0: Update to Python 3 for EL8
 -   Upcoming
-    -   [blahp 2.1.3](https://github.com/htcondor/BLAH/releases/tag/v2.1.3): Bug fix release
-        -   Include the more efficient LSF status script
-        -   Fix status caching on EL7 for PBS, Slurm, and LSF
+    -   xrootd-multiuser 2.0.3: Fix bug in lfn2pfn function
 
 These
-[JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.49%2C3.5.49-upcoming)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC)
+[JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.50%2C3.5.50-upcoming)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC)
 were addressed in this release.
 
 Containers
@@ -64,30 +62,30 @@ You can click on any given package to see the set of RPMs or see the complete li
 
 #### Enterprise Linux 7
 
--   [osg-token-renewer-0.7.1-1.osg35.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-token-renewer-0.7.1-1.osg35.el7)
+-   [osg-ca-certs-updater-2.0-1.osg35.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-updater-2.0-1.osg35.el7)
 
 #### Enterprise Linux 8
 
--   [osg-token-renewer-0.7.1-1.osg35.el8](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-token-renewer-0.7.1-1.osg35.el8)
+-   [osg-ca-certs-updater-2.0-1.osg35.el8](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-updater-2.0-1.osg35.el8)
 
 ### RPMs
 
 If you wish to manually update your system, you can run yum update against the following packages:
 
-    osg-token-renewer 
+    osg-ca-certs-updater 
 
 If you wish to only update the RPMs that changed, the set of RPMs is:
 
 #### Enterprise Linux 7
 
 ``` file
-osg-token-renewer-0.7.1-1.osg35.el7
+osg-ca-certs-updater-2.0-1.osg35.el7
 ```
 
 #### Enterprise Linux 8
 
 ``` file
-osg-token-renewer-0.7.1-1.osg35.el8
+osg-ca-certs-updater-2.0-1.osg35.el8
 ```
 
 ### Upcoming Packages
@@ -98,31 +96,31 @@ You can click on any given package to see the set of RPMs or see the complete li
 
 #### Enterprise Linux 7
 
--   [blahp-2.1.3-1.osg35up.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=blahp-2.1.3-1.osg35up.el7)
+-   [xrootd-multiuser-2.0.3-1.osg35up.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=xrootd-multiuser-2.0.3-1.osg35up.el7)
 
 #### Enterprise Linux 8
 
--   [blahp-2.1.3-1.osg35up.el8](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=blahp-2.1.3-1.osg35up.el8)
+-   [xrootd-multiuser-2.0.3-1.osg35up.el8](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=xrootd-multiuser-2.0.3-1.osg35up.el8)
 
 ### Upcoming RPMs
 
 If you wish to manually update your system, you can run yum update against the following packages:
 
-    blahp blahp-debuginfo 
+    xrootd-multiuser xrootd-multiuser-debuginfo 
 
 If you wish to only update the RPMs that changed, the set of RPMs is:
 
 #### Enterprise Linux 7
 
 ``` file
-blahp-2.1.3-1.osg35up.el7
-blahp-debuginfo-2.1.3-1.osg35up.el7
+xrootd-multiuser-2.0.3-1.osg35up.el7
+xrootd-multiuser-debuginfo-2.0.3-1.osg35up.el7
 ```
 
 #### Enterprise Linux 8
 
 ``` file
-blahp-2.1.3-1.osg35up.el8
-blahp-debuginfo-2.1.3-1.osg35up.el8
-blahp-debugsource-2.1.3-1.osg35up.el8
+xrootd-multiuser-2.0.3-1.osg35up.el8
+xrootd-multiuser-debuginfo-2.0.3-1.osg35up.el8
+xrootd-multiuser-debugsource-2.0.3-1.osg35up.el8
 ```

@@ -24,7 +24,8 @@ To update to the OSG 3.5 series, please consult the page on
 
 | Version                             | Date       | Summary                                                                       |
 |:------------------------------------|:-----------|:------------------------------------------------------------------------------|
-| [3.5.49](3.5/release-3-5-49.md)     | 2021-10-13 | osg-token-renewer 0.7.1; Upcoming: blahp 2.1.3                                |
+| [3.5.50](3.5/release-3-5-50.md)     | 2021-11-11 | osg-ca-certs-updater 2.0; Upcoming: xrootd-multiuser 2.0.3                    |
+| [3.5.49](3.5/release-3-5-49.md)     | 2021-10-13 | osg-token-renewer 0.7.1; Upcoming: HTCondor 9.0.6, blahp 2.1.3                |
 | [3.5.48-2](3.5/release-3-5-48-2.md) | 2021-10-05 | IGTF 1.113                                                                    |
 | [3.5.48](3.5/release-3-5-48.md)     | 2021-09-30 | osg-ca-certs, osg-wn-client, CVMFS 2.8.2, cvmfs-x509-helper, vault 1.8.2, htvault-config 1.6, htgettoken 1.6; Upcoming: GlideinWMS 3.7.5, xrootd-multiuser 2.0.2, HTCondor 9.0.6 |
 | [3.5.47](3.5/release-3-5-47.md)     | 2021-09-23 | Upcoming: HTCondor-CE 5.1.2                                                   |
