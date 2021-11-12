@@ -2,7 +2,7 @@
     Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
     authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
     If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
-    install or remain on the [OSG 3.5 release series](notes.md)
+    install or remain on the [OSG 3.5 release series](notes.md).
 
 Updating to OSG 3.6
 ===================

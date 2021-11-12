@@ -49,7 +49,7 @@ Choosing the OSG Yum Repository
     Due to potentially disruptive changes in protocols, contact your virtual organization(s) (VO) to verify that they
     support token-based authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
     If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
-    install or remain on the [OSG 3.5 release series](../release/notes.md)
+    install or remain on the [OSG 3.5 release series](../release/notes.md).
 
 The OSG distributes different versions of HTCondor-CE and HTCondor in separate [YUM repositories](../common/yum.md).
 Most notably, the repository that you choose will determine the types of credentials that your CE is able to accept.
