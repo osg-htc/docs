@@ -24,7 +24,7 @@ In both of these cases, the following will be needed:
 
 - An existing compute cluster running on a [supported operating system](./release/supported_platforms.md) with a supported
   batch system:
-  [Grid Engine](http://www.univa.com/products/),
+  [Grid Engine](https://www.altair.com/grid-engine/),
   [HTCondor](https://research.cs.wisc.edu/htcondor/),
   [LSF](https://www.ibm.com/us-en/marketplace/hpc-workload-management),
   [PBS Pro](https://www.altair.com/pbs-professional/)/[Torque](https://adaptivecomputing.com/cherry-services/torque-resource-manager/),
