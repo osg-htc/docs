@@ -260,6 +260,20 @@ Updating Your HTCondor Hosts
 
 1.  If you are upgrading from the HTCondor 8.9 series (8.9.11 and earlier), please consult the [Upgrading to 9.0 instructions](https://htcondor-wiki.cs.wisc.edu/index.cgi/wiki?p=UpgradingToNineDotZero)
 
+Replacing Your GridFTP Service
+------------------------------
+
+!!! danger "Before considering an upgrade to OSG 3.6&hellip;"
+    Due to potentially disruptive changes, contact your VO(s) to verify that they support HTTP-based data transfer
+    before considering replacing your GridFTP service with XRootD.
+    If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
+    install or remain on the [OSG 3.5 release series](notes.md)
+
+As part of the [GridFTP and GSI migration](https://opensciencegrid.org/technology/policy/gridftp-gsi-migration/),
+GridFTP is no longer available in the OSG 3.6 repositories.
+If you need to continue to provide remote access to local storage at your site,
+follow the instructions to install the OSG's configuration of [XRootD Standalone](../data/xrootd/install-standalone.md).
+
 Getting Help
 ------------
 
