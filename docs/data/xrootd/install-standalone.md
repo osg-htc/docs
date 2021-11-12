@@ -43,6 +43,13 @@ Installing XRootD
     If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
     install or remain on the [OSG 3.5 release series](../../release/notes.md).
 
+!!! bug "VOMS attribute mappings incompatible with `xrootd-multiuser` in OSG 3.6"
+    The OSG 3.6 configuration of XRootD uses the `XrdVoms` plugin, which pass along the entire VOMS FQAN as the
+    groupname to the authorization layer (see the section on [authorization database file formatting](#formatting)).
+    Some characters in VOMS FQANs are not legal in Unix usernames, therefore VOMS attributes mappings are incompatible
+    with `xrootd-multiuser`.
+    See [XRootD GitHub issue #1538](https://github.com/xrootd/xrootd/issues/1538) for more details.
+
 To install an XRootD Standalone server, run one of the following commands based on your installed
 [OSG release series](../../release/release_series.md#series-overviews):
 
@@ -133,6 +140,13 @@ For more information, see [the HDFS installation documents](../install-hadoop.md
 
 !!! note
     This is not necessary when XRootD is used for read-only access
+
+!!! bug "VOMS attribute mappings incompatible with `xrootd-multiuser` in OSG 3.6"
+    The OSG 3.6 configuration of XRootD uses the `XrdVoms` plugin, which pass along the entire VOMS FQAN as the
+    groupname to the authorization layer (see the section on [authorization database file formatting](#formatting)).
+    Some characters in VOMS FQANs are not legal in Unix usernames, therefore VOMS attributes mappings are incompatible
+    with `xrootd-multiuser`.
+    See [XRootD GitHub issue #1538](https://github.com/xrootd/xrootd/issues/1538) for more details.
 
 By default XRootD servers write files on the storage system aa the Unix user `xrootd` instead of the [authenticated](xrootd-authorization.md) user.
 The `xrootd-multiuser` plugins changes this behaviour:
