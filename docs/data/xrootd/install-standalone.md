@@ -101,9 +101,9 @@ under `/etc/xrootd/config.d/` as follows:
         The directories specified this way are writable by default.
         Access controls should be managed via [authorization configuration](#configuring-authorization).
 
-1. In `/etc/xrootd/config.d/10-common-site-local.cfg`, add a line to set the `resourcename` variable to the
-   [resource name](../../common/registration.md#registering-resources) of your XRootD service or to a value matching
-   your supported VOs policies.
+1. In `/etc/xrootd/config.d/10-common-site-local.cfg`, add a line to set the `resourcename` variable.
+   Unless your supported VOs' policies state otherwise,
+   this should match the [resource name](../../common/registration.md#registering-resources) of your XRootD service.
    For example, the XRootD service registered at the
    [University of Florida site](https://github.com/opensciencegrid/topology/blob/b14218d6e9d9df013a42e4d8538b2eeea615514c/topology/University%20of%20Florida/UF%20HPC/UFlorida-HPC.yaml#L250)
    should set the following configuration:
