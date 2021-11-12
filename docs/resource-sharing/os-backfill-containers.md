@@ -222,7 +222,7 @@ the `--memory` argument will tell Docker to kill the container if its total memo
 Both options are necessary for optimal behavior.
 
 !!! tip "Allocating additional memory"
-    Note that the above command will allocate 100 MB more memory to the container
+    Note that the above command will allocate 100 MB more memory to the container.
     HTCondor will place jobs on hold if they exceed their requested memory,
     but it may not notice high memory usage immediately.
     In addition, non-job processes (such as HTCondor and crond) also use some amount of memory.
