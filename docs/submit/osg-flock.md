@@ -1,4 +1,4 @@
-DateReviewed: 2021-10-01
+DateReviewed: 2021-11-12
 
 Installing an Open Science Pool Access Point
 ============================================
@@ -28,7 +28,7 @@ their jobs to HTCondor, where the jobs wait ("are queued") until computing resou
 In a purely local HTCondor system, there are one to a few access points and many computing resources.
 
 An HTCondor access point can also be configured to forward excess jobs to an OSG-managed pool.
-This process is called [flocking](https://htcondor.readthedocs.io/en/v8_8/grid-computing/connecting-pools-with-flocking.html).
+This process is called [flocking](https://htcondor.readthedocs.io/en/latest/grid-computing/connecting-pools-with-flocking.html).
 If you already have an HTCondor pool, we recommend that you install this software
 on top of one of your existing HTCondor access points.
 This approach allows a user to submit locally and have their jobs run locally or,
@@ -66,6 +66,10 @@ contribution and/or research goals.
 
 Initial Steps
 -------------
+
+### Read the Acceptable Usage Policy
+Be aware that hosting an access point comes with responsibilities, both for the administrators as
+well as end users of the system. The polices can be found in the [Acceptable Usage Policy document](ap-ospool-aup.md).
 
 ### Register your access point in OSG Topology
 To be part of OSG, your access point should be registered with the OSG.
@@ -109,20 +113,18 @@ issuing `yum upgrade`. If you made local config changes, please verify that the 
 `/etc/condor/config.d` were renamed/disabled during the upgrade.
 
 Note that in some older versions of the package, the Gratia config was kept in 
-`/etc/gratia/condor/ProbeConfig`. The new location is `/etc/gratia/condor/ProbeConfig-OSPool`.
+`/etc/gratia/condor/ProbeConfig`. The new location is `/etc/gratia/condor-ap/ProbeConfig`.
 
+The Open Science Pool will no longer accept GSI authentcation. Access points still configured
+with GSI, will have to be upgraded to OSG 3.6 and switched over to token authentication as
+described in this document.
 
 Configuring Reporting via Gratia
 --------------------------------
 Reporting to the OSG accounting system is done using the _Gratia_ service, which consists of multiple _probes_.
-HTCondor uses the "condor" probe, which is configured in `/etc/gratia/condor/ProbeConfig-OSPool`;
+HTCondor uses the "condor" probe, which is configured in `/etc/gratia/condor-ap/ProbeConfig`;
 we provide a recommended configuration for flocking.
 
-1. Fill in the value for `ProbeName` with the hostname of your access point, with the following format:
-
-        :::xml
-        ProbeName="condor:<HOSTNAME>"
-        
 1. Fill in the value for `SiteName` with the Resource Name you registered in Topology (see
    [instructions above](#register-your-access-point-in-osg-topology)).
    For example:
@@ -130,10 +132,33 @@ we provide a recommended configuration for flocking.
         :::xml
         SiteName="OSG_US_EXAMPLE_SUBMIT"
 
-1. Enable the Gratia Probe.
+1. Enable the Gratia Probe:
 
         :::xml
         EnableProbe=1
+
+1. Add a section to map unknown records to OSG:
+        
+        :::xml
+        VOOverride="OSG"
+        MapGroupToRole="1"
+        MapUnknownToGroup="1"
+
+
+An example of a configured section is:
+
+    :::xml
+    ProbeName="condor-ap:[HOSTNAME]"
+    SiteName="[SITENAME]"
+    Grid="OSG"
+    SuppressUnknownVORecords="0"
+    SuppressNoDNRecords="0"
+    QuarantineUnknownVORecords="1"
+    EnableProbe="1"
+    VOOverride="OSG"
+    MapGroupToRole="1"
+    MapUnknownToGroup="1"
+
 
 
 Configuring Authentication
@@ -158,17 +183,7 @@ Header: {"alg":"HS256","kid":"POOL"} Payload: {"iat":1234,"iss":"flock.openscien
 
 Managing Services
 -----------------
-The only service which is required to be running is `condor`
-
-The following table gives the commands needed to start, stop, enable, and disable a service:
-
-| To...                                       | Run the command...                 |
-| :------------------------------------------ | :--------------------------------- |
-| Start a service                             | `systemctl start <SERVICE-NAME>`   |
-| Stop a service                              | `systemctl stop <SERVICE-NAME>`    |
-| Enable a service to start on boot           | `systemctl enable <SERVICE-NAME>`  |
-
-Enable and restart the sevice:
+The only service which is required to be running is `condor`. Enable and restart the sevice:
 
 ```console
 # systemctl enable condor
@@ -200,7 +215,9 @@ For example:
 ```file
 +ProjectName = "My_Project"
 ```
-The double quotes are necessary.
+
+__The double quotes are necessary__. If not quoted, *My_Project* will be interpreted as an expression,
+and most likely evaluate to undefined, and prevent your job from running.
 
 
 Get Help
