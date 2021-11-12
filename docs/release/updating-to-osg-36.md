@@ -66,10 +66,10 @@ Updating Your OSG Compute Entrypoint
 ------------------------------------
 
 !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
-    Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
-    authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
-    If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
-    install or remain on the [OSG 3.5 release series](notes.md)
+    Due to potentially disruptive changes in authentication methods, contact your VO(s) to verify that they support
+    token-based authentication before considering an upgrade to OSG 3.6.
+    If your VO(s) don't support these new authentication methods or you don't know which authentication methods your
+    VO(s) support, install or remain on the [OSG 3.5 release series](notes.md)
 
 In OSG 3.6, OSG Compute Entrypoints (CEs) only accept token-based pilot job submissions.
 If you need to support token-based and GSI proxy-based pilot job submission,
@@ -209,10 +209,10 @@ Updating Your HTCondor Hosts
 ----------------------------
 
 !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
-    Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
-    authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
-    If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
-    install or remain on the [OSG 3.5 release series](notes.md)
+    Due to potentially disruptive changes in authentication methods, contact your VO(s) to verify that they support
+    token-based authentication before considering an upgrade to OSG 3.6.
+    If your VO(s) don't support these new authentication methods or you don't know which authentication methods your
+    VO(s) support, install or remain on the [OSG 3.5 release series](notes.md)
 
 1.  The following OSG specific configuration was dropped in anticipation of HTCondor's new secure by default
     configuration coming in HTCondor version 9.0. HTCondor's 9.0 recommended security configuration requires
