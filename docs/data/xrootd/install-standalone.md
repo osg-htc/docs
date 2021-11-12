@@ -43,6 +43,8 @@ Installing XRootD
     If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
     install or remain on the [OSG 3.5 release series](../../release/notes.md).
 
+    Note that OSG 3.5 will reach its end-of-life in [February 2022](../../release/release_series.md#series-overviews).
+
 !!! bug "VOMS attribute mappings incompatible with `xrootd-multiuser` in OSG 3.6"
     The OSG 3.6 configuration of XRootD uses the `XrdVoms` plugin, which pass along the entire VOMS FQAN as the
     groupname to the authorization layer (see the section on [authorization database file formatting](#formatting)).
@@ -94,20 +96,18 @@ under `/etc/xrootd/config.d/` as follows:
 
     If you want to serve everything under your configured `rootdir`, you don't have to change anything.
 
-    !!! note
+    !!! danger
         The directories specified this way are writable by default.
         Access controls should be managed via [authorization configuration](#configuring-authorization).
 
 1. In `/etc/xrootd/config.d/10-common-site-local.cfg`, add a line to set the `resourcename` variable to the
-   [resource name](../../common/registration.md#registering-resources) of your XRootD service.
+   [resource name](../../common/registration.md#registering-resources) of your XRootD service or to a value matching
+   your supported VOs policies.
    For example, the XRootD service registered at the
    [University of Florida site](https://github.com/opensciencegrid/topology/blob/b14218d6e9d9df013a42e4d8538b2eeea615514c/topology/University%20of%20Florida/UF%20HPC/UFlorida-HPC.yaml#L250)
    should set the following configuration:
 
         set resourcename = UFlorida-XRD
-
-    !!! note
-        CMS sites should follow CMS policy for `resourcename`
 
 ### Configuring authorization
 
@@ -119,7 +119,11 @@ The following configuration steps are optional and will likely not be required f
 If you do not need any of the following special configurations, skip to
 [the section on using XRootD](#using-xrootd).
 
-#### Enabling Hadoop support (EL 7 Only)
+#### Enabling Hadoop support (deprecated, EL 7 Only)
+
+!!! info "OSG 3.5 end-of-life"
+    Hadoop is no longer supported in OSG 3.6 and OSG 3.5 will reach its end-of-life in
+    [February 2022](../../release/release_series.md#series-overviews).
 
 Hadoop File System (HDFS) based sites should utilize the `xrootd-hdfs` plugin to allow XRootD to access their storage:
 
@@ -138,9 +142,6 @@ For more information, see [the HDFS installation documents](../install-hadoop.md
 
 #### Enabling multi-user support
 
-!!! note
-    This is not necessary when XRootD is used for read-only access
-
 !!! bug "VOMS attribute mappings incompatible with `xrootd-multiuser` in OSG 3.6"
     The OSG 3.6 configuration of XRootD uses the `XrdVoms` plugin, which pass along the entire VOMS FQAN as the
     groupname to the authorization layer (see the section on [authorization database file formatting](#formatting)).
@@ -148,23 +149,24 @@ For more information, see [the HDFS installation documents](../install-hadoop.md
     with `xrootd-multiuser`.
     See [XRootD GitHub issue #1538](https://github.com/xrootd/xrootd/issues/1538) for more details.
 
-By default XRootD servers write files on the storage system aa the Unix user `xrootd` instead of the [authenticated](xrootd-authorization.md) user.
-The `xrootd-multiuser` plugins changes this behaviour:
+The `xrootd-multiuser` plugin allows XRootD to write files on the storage system as the
+[authenticated](xrootd-authorization.md) user instead of the `xrootd` user.
+If your XRootD service only allows read-only access, you should skip installation of this plugin.
 
-1. Install the XRootD multi-user plugin:
+To set up XRootD in multi-user mode, perform the following steps, install the `xrootd-multiuser` package:
 
-        :::console
-        root@host # yum install xrootd-multiuser
-
-1. Start the XRootD process in privileged mode:
-
-        :::console
-        root@host # systemctl xrootd-privileged@standalone
+``` console
+root@host # yum install xrootd-multiuser
+```
 
 #### Enabling CMS TFC support (CMS sites only)
 
-For CMS users, there is a package available to integrate rule-based name lookup using a `storage.xml` file.
-If you are not setting up a CMS site, you can skip this section.
+!!! info "Coming soon to OSG 3.6"
+    The `xrootd-cmstfc` package is not yet available in OSG 3.6.
+    [See this ticket](https://opensciencegrid.atlassian.net/browse/SOFTWARE-4893) to track its progress.
+
+For CMS sites, there is a package available to integrate rule-based name lookup using a `storage.xml` file.
+If you are not setting up a service for CMS, skip this section.
 
 ``` console
 yum install --enablerepo=osg-contrib xrootd-cmstfc
@@ -191,11 +193,11 @@ Using XRootD
 In addition to the XRootD service itself, there are a number of supporting services in your installation.
 The specific services are:
 
-| Software         | Service Name                            | Notes                                                                        |
-|:-----------------|:----------------------------------------|:-----------------------------------------------------------------------------|
-| Fetch CRL        | `fetch-crl-boot` and `fetch-crl-cron`   | See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info |
-| XRootD           | `xrootd@standalone` | |
-| XRootD Multiuser | `xrootd-privileged@standalone`     | Optional. See [XRootD multiuser](#enabling-multi-user-support) for more info           |
+| Software          | Service Name                          | Notes                                                                                                       |
+|:------------------|:--------------------------------------|:------------------------------------------------------------------------------------------------------------|
+| Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info                        |
+| XRootD            | `xrootd@standalone`                   |                                                                                                             |
+| XRootD Multi-user | `xrootd-privileged@standalone`        | If running in [multi-user](#enabling-multi-user-support), start this service instead of `xrootd@standalone` |
 
 Start the services in the order listed and stop them in reverse order.
 As a reminder, here are common service commands (all run as `root`):
