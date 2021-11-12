@@ -54,6 +54,9 @@ In order to successfully start payload jobs:
 6. _Optional:_ add an expression with the `GLIDEIN_Start_Extra` environment variable to append to the HTCondor `START`
    expression; this limits the pilot to only run certain jobs.
 
+7. _Optional:_ [limit OSG pilot container resource usage](#limiting-resource-usage)
+
+
 Here is an example invocation using `docker run` by hand:
 
 ```
@@ -173,3 +176,54 @@ docker run -it --rm --user osg      \
 ```
 
 Fill in the values for `/path/to/token`, `/worker-temp-dir`, `GLIDEIN_Site`, `GLIDEIN_ResourceName`, and `OSG_SQUID_LOCATION` [as above](#running-the-container-with-docker).
+
+
+Limiting Resource Usage
+-----------------------
+
+By default, the OSG pilot container will allow jobs to utilize the entire node's resources (CPUs, memory).
+If you don't want to allow jobs to use all of these, you can specify limits.
+
+You must specify limits in two places:
+
+-   As environment variables, limiting the resources HTCondor offers to jobs.
+
+-   As options to the `docker run` command, limiting the resources the pilot container can use.
+
+### Limiting CPUs
+
+To limit the number of CPUs available to jobs (thus limiting the number of simultaneous jobs),
+add the following to your `docker run` command:
+
+```
+   -e NUM_CPUS=<X>  --cpus=<X> \
+```
+
+where `<X>` is the number of CPUs you want to allow jobs to use.
+
+The `NUM_CPUS` environment variable will tell HTCondor not to offer more than the given number of CPUs to jobs;
+the `--cpus` argument will tell Docker not to allocate more than the given number of CPUs to the container.
+
+Both options are necessary for optimal behavior.
+
+
+### Limiting memory
+
+To limit the total amount of memory available to jobs, add the following to your `docker run` command:
+```
+    -e MEMORY=<X> --memory=$(( (<X> + 100) * 1024 * 1024 )) \
+```
+
+where `<X>` is the total amount of memory (in MB) you want to allow jobs to use.
+
+Both options are necessary for optimal behavior.
+
+Note that the above command will allocate 100 MB more memory to the container; the reasons are detailed below.
+
+The `MEMORY` environment variable will tell HTCondor not to offer more than the given amount of memory to jobs;
+the `--memory` argument will tell Docker to kill the container if its total memory usage exceeds the given number.
+
+HTCondor will place jobs on hold if they exceed their requested memory,
+but it may not notice high memory usage immediately.
+In addition, non-job processes (such as HTCondor and crond) also use some amount of memory.
+Therefore it is important to give the container some extra room.
