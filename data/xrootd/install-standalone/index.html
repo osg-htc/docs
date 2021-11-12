@@ -783,8 +783,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#enabling-hadoop-support-el-7-only" class="md-nav__link">
-    Enabling Hadoop support (EL 7 Only)
+  <a href="#enabling-hadoop-support-deprecated-el-7-only" class="md-nav__link">
+    Enabling Hadoop support (deprecated, EL 7 Only)
   </a>
   
 </li>
@@ -1870,8 +1870,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#enabling-hadoop-support-el-7-only" class="md-nav__link">
-    Enabling Hadoop support (EL 7 Only)
+  <a href="#enabling-hadoop-support-deprecated-el-7-only" class="md-nav__link">
+    Enabling Hadoop support (deprecated, EL 7 Only)
   </a>
   
 </li>
@@ -2002,10 +2002,40 @@ In its standalone configuration, XRootD acts as a simple layer exporting data fr
 <li>Install <a href="../../../common/ca/">CA certificates</a></li>
 </ul>
 <h2 id="installing-xrootd">Installing XRootD<a class="headerlink" href="#installing-xrootd" title="Permanent link">&para;</a></h2>
-<p>To install the XRootD Standalone server, run the following Yum command:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@xrootd-standalone # </span>yum install osg-xrootd-standalone --enablerepo<span class="o">=</span>osg-upcoming
+<div class="admonition danger">
+<p class="admonition-title">Before considering an upgrade to OSG 3.6&hellip;</p>
+<p>Due to potentially disruptive changes, contact your VO(s) to verify that they support HTTP-based data transfer
+before replacing your GridFTP service with XRootD.
+If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
+install or remain on the <a href="../../../release/notes/">OSG 3.5 release series</a>.</p>
+<p>Note that OSG 3.5 will reach its end-of-life in <a href="../../../release/release_series/#series-overviews">February 2022</a>.</p>
+</div>
+<div class="admonition bug">
+<p class="admonition-title">VOMS attribute mappings incompatible with <code>xrootd-multiuser</code> in OSG 3.6</p>
+<p>The OSG 3.6 configuration of XRootD uses the <code>XrdVoms</code> plugin, which pass along the entire VOMS FQAN as the
+groupname to the authorization layer (see the section on
+<a href="../xrootd-authorization/#formatting">authorization database file formatting</a>).
+Some characters in VOMS FQANs are not legal in Unix usernames, therefore VOMS attributes mappings are incompatible
+with <code>xrootd-multiuser</code>.
+See <a href="https://github.com/xrootd/xrootd/issues/1538">XRootD GitHub issue #1538</a> for more details.</p>
+</div>
+<p>To install an XRootD Standalone server, run one of the following commands based on your installed
+<a href="../../../release/release_series/#series-overviews">OSG release series</a>:</p>
+<ul>
+<li>
+<p>OSG 3.6 (recommended):</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@xrootd-standalone # </span>yum install osg-xrootd-standalone
 </code></pre></div>
 
+</li>
+<li>
+<p>OSG 3.5</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@xrootd-standalone # </span>yum install osg-xrootd-standalone <span class="se">\</span>
+<span class="go">                                     --enablerepo=osg-upcoming</span>
+</code></pre></div>
+
+</li>
+</ul>
 <h2 id="configuring-xrootd">Configuring XRootD<a class="headerlink" href="#configuring-xrootd" title="Permanent link">&para;</a></h2>
 <p>To configure XRootD as a standalone server, you will modify <code>/etc/xrootd/xrootd-standalone.cfg</code> and the config files
 under <code>/etc/xrootd/config.d/</code> as follows:</p>
@@ -2035,25 +2065,22 @@ all.export /public/
 </code></pre></div>
 
 <p>If you want to serve everything under your configured <code>rootdir</code>, you don't have to change anything.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
 <p>The directories specified this way are writable by default.
 Access controls should be managed via <a href="#configuring-authorization">authorization configuration</a>.</p>
 </div>
 </li>
 <li>
-<p>In <code>/etc/xrootd/config.d/10-common-site-local.cfg</code>, add a line to set the <code>resourcename</code> variable to the
-   <a href="../../../common/registration/#registering-resources">resource name</a> of your XRootD service.
+<p>In <code>/etc/xrootd/config.d/10-common-site-local.cfg</code>, add a line to set the <code>resourcename</code> variable.
+   Unless your supported VOs' policies state otherwise,
+   this should match the <a href="../../../common/registration/#registering-resources">resource name</a> of your XRootD service.
    For example, the XRootD service registered at the
    <a href="https://github.com/opensciencegrid/topology/blob/b14218d6e9d9df013a42e4d8538b2eeea615514c/topology/University%20of%20Florida/UF%20HPC/UFlorida-HPC.yaml#L250">University of Florida site</a>
    should set the following configuration:</p>
 <div class="codehilite"><pre><span></span><code>set resourcename = UFlorida-XRD
 </code></pre></div>
 
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>CMS sites should follow CMS policy for <code>resourcename</code></p>
-</div>
 </li>
 </ol>
 <h3 id="configuring-authorization">Configuring authorization<a class="headerlink" href="#configuring-authorization" title="Permanent link">&para;</a></h3>
@@ -2062,7 +2089,12 @@ Access controls should be managed via <a href="#configuring-authorization">autho
 <p>The following configuration steps are optional and will likely not be required for setting up a small site.
 If you do not need any of the following special configurations, skip to
 <a href="#using-xrootd">the section on using XRootD</a>.</p>
-<h4 id="enabling-hadoop-support-el-7-only">Enabling Hadoop support (EL 7 Only)<a class="headerlink" href="#enabling-hadoop-support-el-7-only" title="Permanent link">&para;</a></h4>
+<h4 id="enabling-hadoop-support-deprecated-el-7-only">Enabling Hadoop support (deprecated, EL 7 Only)<a class="headerlink" href="#enabling-hadoop-support-deprecated-el-7-only" title="Permanent link">&para;</a></h4>
+<div class="admonition info">
+<p class="admonition-title">OSG 3.5 end-of-life</p>
+<p>Hadoop is no longer supported in OSG 3.6 and OSG 3.5 will reach its end-of-life in
+<a href="../../../release/release_series/#series-overviews">February 2022</a>.</p>
+</div>
 <p>Hadoop File System (HDFS) based sites should utilize the <code>xrootd-hdfs</code> plugin to allow XRootD to access their storage:</p>
 <ol>
 <li>
@@ -2080,29 +2112,29 @@ If you do not need any of the following special configurations, skip to
 </ol>
 <p>For more information, see <a href="../../install-hadoop/">the HDFS installation documents</a>.</p>
 <h4 id="enabling-multi-user-support">Enabling multi-user support<a class="headerlink" href="#enabling-multi-user-support" title="Permanent link">&para;</a></h4>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This is not necessary when XRootD is used for read-only access</p>
+<div class="admonition bug">
+<p class="admonition-title">VOMS attribute mappings incompatible with <code>xrootd-multiuser</code> in OSG 3.6</p>
+<p>The OSG 3.6 configuration of XRootD uses the <code>XrdVoms</code> plugin, which pass along the entire VOMS FQAN as the
+groupname to the authorization layer (see the section on <a href="../xrootd-authorization/#formatting">authorization database file formatting</a>).
+Some characters in VOMS FQANs are not legal in Unix usernames, therefore VOMS attributes mappings are incompatible
+with <code>xrootd-multiuser</code>.
+See <a href="https://github.com/xrootd/xrootd/issues/1538">XRootD GitHub issue #1538</a> for more details.</p>
 </div>
-<p>By default XRootD servers write files on the storage system aa the Unix user <code>xrootd</code> instead of the <a href="../xrootd-authorization/">authenticated</a> user.
-The <code>xrootd-multiuser</code> plugins changes this behaviour:</p>
-<ol>
-<li>
-<p>Install the XRootD multi-user plugin:</p>
+<p>The <code>xrootd-multiuser</code> plugin allows XRootD to write files on the storage system as the
+<a href="../xrootd-authorization/">authenticated</a> user instead of the <code>xrootd</code> user.
+If your XRootD service only allows read-only access, you should skip installation of this plugin.</p>
+<p>To set up XRootD in multi-user mode, perform the following steps, install the <code>xrootd-multiuser</code> package:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install xrootd-multiuser
 </code></pre></div>
 
-</li>
-<li>
-<p>Start the XRootD process in privileged mode:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>systemctl xrootd-privileged@standalone
-</code></pre></div>
-
-</li>
-</ol>
 <h4 id="enabling-cms-tfc-support-cms-sites-only">Enabling CMS TFC support (CMS sites only)<a class="headerlink" href="#enabling-cms-tfc-support-cms-sites-only" title="Permanent link">&para;</a></h4>
-<p>For CMS users, there is a package available to integrate rule-based name lookup using a <code>storage.xml</code> file.
-If you are not setting up a CMS site, you can skip this section.</p>
+<div class="admonition info">
+<p class="admonition-title">Coming soon to OSG 3.6</p>
+<p>The <code>xrootd-cmstfc</code> package is not yet available in OSG 3.6.
+<a href="https://opensciencegrid.atlassian.net/browse/SOFTWARE-4893">See this ticket</a> to track its progress.</p>
+</div>
+<p>For CMS sites, there is a package available to integrate rule-based name lookup using a <code>storage.xml</code> file.
+If you are not setting up a service for CMS, skip this section.</p>
 <div class="codehilite"><pre><span></span><code><span class="go">yum install --enablerepo=osg-contrib xrootd-cmstfc</span>
 </code></pre></div>
 
@@ -2141,9 +2173,9 @@ The specific services are:</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">XRootD Multiuser</td>
+<td align="left">XRootD Multi-user</td>
 <td align="left"><code>xrootd-privileged@standalone</code></td>
-<td align="left">Optional. See <a href="#enabling-multi-user-support">XRootD multiuser</a> for more info</td>
+<td align="left">If running in <a href="#enabling-multi-user-support">multi-user</a>, start this service instead of <code>xrootd@standalone</code></td>
 </tr>
 </tbody>
 </table>
@@ -2181,61 +2213,15 @@ As a reminder, here are common service commands (all run as <code>root</code>):<
 <p class="admonition-title">Note</p>
 <p>If you have configured authentication/authorization for XRootD,
 be sure you have given yourself the necessary permissions to run these tests.
-For example, if you are using a VOMS proxy,
+For example, if you are using an X.509 proxy,
 make sure your DN is mapped to a user in <a href="../../../security/lcmaps-voms-authentication/#mapping-users">/etc/grid-security/grid-mapfile</a>,
-and make sure you have a valid proxy on your local machine.
-Also, ensure that the <a href="../xrootd-authorization/#authorization-database">Authfile</a> on the XRootD server gives
-write access to the Unix user you will get mapped to.</p>
+make sure you have a valid proxy on your local machine,
+and ensure that the <a href="../xrootd-authorization/#authorization-database">Authfile</a> on the XRootD server gives
+write access to the mapped user from <code>/etc/grid-security/grid-mapfile</code>.</p>
 </div>
 <ol>
 <li>
-<p>Verify file transfer over the XRootD protocol using XRootD client tools:</p>
-<ol>
-<li>
-<p>Install the client tools:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@xrootd-standalone # </span>yum install xrootd-client
-</code></pre></div>
-
-</li>
-<li>
-<p>Copy a file to a directory for which you have write access:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@xrootd-standalone # </span>xrdcp /bin/sh root://localhost:1094//tmp/first_test
-<span class="go">[xrootd] Total 0.76 MB  [====================] 100.00 % [inf MB/s]</span>
-</code></pre></div>
-
-</li>
-<li>
-<p>Verify that the file has been copied over:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@xrootd-standalone # </span>ls -l /tmp/first_test
-<span class="go">-rw-r--r-- 1 xrootd xrootd 801512 Apr 11 10:48 /tmp/first_test</span>
-</code></pre></div>
-
-</li>
-</ol>
-</li>
-<li>
-<p>Verify file transfer over HTTP using GFAL2 client tools:</p>
-<ol>
-<li>
-<p>Install the GFAL2 client tools:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@xrootd-standalone # </span>yum install gfal2-util gfal2-plugin-http
-</code></pre></div>
-
-</li>
-<li>
-<p>Copy a file to a directory for which you have write access:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@xrootd-standalone # </span>gfal-copy /bin/sh http://localhost:1094//tmp/first_test
-</code></pre></div>
-
-</li>
-<li>
-<p>Verify that the file has been copied over:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@xrootd-standalone # </span>ls -l /tmp/first_test
-<span class="go">-rw-r--r-- 1 xrootd xrootd 801512 Apr 11 10:48 /tmp/first_test</span>
-</code></pre></div>
-
-</li>
-</ol>
+<p>Verify <a href="../xrootd-authorization/#verifying-xrootd-authorization">authorization</a> of bearer tokens and/or proxies</p>
 </li>
 <li>
 <p>Verify HTTP-TPC using the same GFAL2 client tools:</p>

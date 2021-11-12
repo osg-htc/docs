@@ -2014,7 +2014,8 @@ to, but, internally, the data node files will be owned by the <code>xrootd</code
 <a href="../install-standalone/#enabling-multi-user-support">XRootD multi-user support</a>. </p>
 </div>
 <h2 id="authorizing-bearer-tokens">Authorizing Bearer Tokens<a class="headerlink" href="#authorizing-bearer-tokens" title="Permanent link">&para;</a></h2>
-<p>The OSG configurations of XRootD support authorization of bearer tokens such as macaroons, SciTokens, or WLCG tokens.
+<p>The <a href="../../../release/release_series/#series-overviews">OSG 3.6</a> configurations of XRootD support authorization of bearer
+tokens such as macaroons, SciTokens, or WLCG tokens.
 Encoded in the bearer tokens themselves are information about the files that they should have read/write access to and
 in the case of SciTokens and WLCG tokens, you may configure XRootD to further restrict access.</p>
 <h3 id="configuring-scitokenswlcg-tokens">Configuring SciTokens/WLCG Tokens<a class="headerlink" href="#configuring-scitokenswlcg-tokens" title="Permanent link">&para;</a></h3>
@@ -2248,7 +2249,8 @@ and that it is not writable by others.</p>
 <a href="../install-standalone/#using-xrootd">relevant services</a>.</p>
 <h2 id="verifying-xrootd-authorization">Verifying XRootD Authorization<a class="headerlink" href="#verifying-xrootd-authorization" title="Permanent link">&para;</a></h2>
 <h3 id="bearer-tokens">Bearer tokens<a class="headerlink" href="#bearer-tokens" title="Permanent link">&para;</a></h3>
-<p>To test read access using macaroon, SciTokens, and WLCG token authorization, run the following command:</p>
+<p>To test read access using macaroon, SciTokens, and WLCG token authorization with an OSG 3.6 installation,
+run the following command:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>curl -v <span class="se">\</span>
 <span class="go">                 -H &#39;Authorization: Bearer &lt;TOKEN&gt;&#39; \</span>
 <span class="go">                 https://host.example.com//path/to/directory/hello_world</span>
