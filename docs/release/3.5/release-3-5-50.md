@@ -1,8 +1,8 @@
-OSG Software Release 3.5.30
+OSG Software Release 3.5.50
 ===========================
 
-**Release Date:** 2021-01-27    
-**Supported OS Versions:** EL7
+**Release Date:** 2021-10-13  
+**Supported OS Versions:** EL7, EL8
 
 !!!tip "Want faster access to production-ready software?"
     OSG 3.5 offers a rolling release repository where packages are added as soon as they pass acceptance testing.
@@ -21,13 +21,18 @@ Summary of Changes
 
 This release contains:
 
--   Upcoming Repository: HTCondor 8.9.11 Security Release. This release contains fixes for important security issues. More details on the security issues are in the vulnerability reports:
-    -   [HTCONDOR-2021-0001](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0001.html)
-    -   [HTCONDOR-2021-0002](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0002.html)
+-   osg-ca-certs-updater 2.0: Update to Python 3 for EL8
+-   Upcoming
+    -   xrootd-multiuser 2.0.3: Fix bug in lfn2pfn function
 
 These
-[JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.30-upcoming)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC)
+[JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.50%2C3.5.50-upcoming)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC)
 were addressed in this release.
+
+Containers
+----------
+
+The [OSG Docker images](https://hub.docker.com/u/opensciencegrid/) have been updated to contain the new software.
 
 Updating to the New Release
 ---------------------------
@@ -57,71 +62,65 @@ You can click on any given package to see the set of RPMs or see the complete li
 
 #### Enterprise Linux 7
 
--   None
+-   [osg-ca-certs-updater-2.0-1.osg35.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-updater-2.0-1.osg35.el7)
 
 #### Enterprise Linux 8
 
--   None
+-   [osg-ca-certs-updater-2.0-1.osg35.el8](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-updater-2.0-1.osg35.el8)
 
 ### RPMs
 
 If you wish to manually update your system, you can run yum update against the following packages:
 
-    None
+    osg-ca-certs-updater 
 
 If you wish to only update the RPMs that changed, the set of RPMs is:
 
 #### Enterprise Linux 7
 
 ``` file
+osg-ca-certs-updater-2.0-1.osg35.el7
 ```
 
 #### Enterprise Linux 8
 
 ``` file
+osg-ca-certs-updater-2.0-1.osg35.el8
 ```
 
 ### Upcoming Packages
 
-We added or updated the following packages to the **upcoming** OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+We added or updated the following packages to the **upcoming** OSG Yum repository.
+Note that in some cases, there are multiple RPMs for each package.
+You can click on any given package to see the set of RPMs or see the complete list below.
 
 #### Enterprise Linux 7
 
--   [condor-8.9.11-1.osgup.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=condor-8.9.11-1.osgup.el7)
+-   [xrootd-multiuser-2.0.3-1.osg35up.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=xrootd-multiuser-2.0.3-1.osg35up.el7)
 
 #### Enterprise Linux 8
 
--   None
+-   [xrootd-multiuser-2.0.3-1.osg35up.el8](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=xrootd-multiuser-2.0.3-1.osg35up.el8)
 
 ### Upcoming RPMs
 
 If you wish to manually update your system, you can run yum update against the following packages:
 
-    condor condor-all condor-annex-ec2 condor-bosco condor-classads condor-classads-devel condor-credmon-oauth condor-debuginfo condor-kbdd condor-procd condor-test condor-vm-gahp minicondor python2-condor python3-condor 
+    xrootd-multiuser xrootd-multiuser-debuginfo 
 
 If you wish to only update the RPMs that changed, the set of RPMs is:
 
 #### Enterprise Linux 7
 
 ``` file
-condor-8.9.11-1.osgup.el7
-condor-all-8.9.11-1.osgup.el7
-condor-annex-ec2-8.9.11-1.osgup.el7
-condor-bosco-8.9.11-1.osgup.el7
-condor-classads-8.9.11-1.osgup.el7
-condor-classads-devel-8.9.11-1.osgup.el7
-condor-credmon-oauth-8.9.11-1.osgup.el7
-condor-debuginfo-8.9.11-1.osgup.el7
-condor-kbdd-8.9.11-1.osgup.el7
-condor-procd-8.9.11-1.osgup.el7
-condor-test-8.9.11-1.osgup.el7
-condor-vm-gahp-8.9.11-1.osgup.el7
-minicondor-8.9.11-1.osgup.el7
-python2-condor-8.9.11-1.osgup.el7
-python3-condor-8.9.11-1.osgup.el7
+xrootd-multiuser-2.0.3-1.osg35up.el7
+xrootd-multiuser-debuginfo-2.0.3-1.osg35up.el7
 ```
 
 #### Enterprise Linux 8
 
 ``` file
+xrootd-multiuser-2.0.3-1.osg35up.el8
+xrootd-multiuser-debuginfo-2.0.3-1.osg35up.el8
+xrootd-multiuser-debugsource-2.0.3-1.osg35up.el8
 ```

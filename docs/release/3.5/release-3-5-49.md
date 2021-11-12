@@ -1,8 +1,8 @@
-OSG Software Release 3.5.30
+OSG Software Release 3.5.49
 ===========================
 
-**Release Date:** 2021-01-27    
-**Supported OS Versions:** EL7
+**Release Date:** 2021-10-13  
+**Supported OS Versions:** EL7, EL8
 
 !!!tip "Want faster access to production-ready software?"
     OSG 3.5 offers a rolling release repository where packages are added as soon as they pass acceptance testing.
@@ -21,13 +21,20 @@ Summary of Changes
 
 This release contains:
 
--   Upcoming Repository: HTCondor 8.9.11 Security Release. This release contains fixes for important security issues. More details on the security issues are in the vulnerability reports:
-    -   [HTCONDOR-2021-0001](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0001.html)
-    -   [HTCONDOR-2021-0002](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0002.html)
+-   Initial release of the [osg-token-renewer](https://opensciencegrid.org/docs/other/osg-token-renewer/): a service to manage automatic renewal of bearer tokens from OIDC providers (e.g., CILogon, IAM), intended for use by VO managers
+-   Upcoming
+    -   [blahp 2.1.3](https://github.com/htcondor/BLAH/releases/tag/v2.1.3): Bug fix release
+        -   Include the more efficient LSF status script
+        -   Fix status caching on EL7 for PBS, Slurm, and LSF
 
 These
-[JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.30-upcoming)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC)
+[JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.49%2C3.5.49-upcoming)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC)
 were addressed in this release.
+
+Containers
+----------
+
+The [OSG Docker images](https://hub.docker.com/u/opensciencegrid/) have been updated to contain the new software.
 
 Updating to the New Release
 ---------------------------
@@ -57,71 +64,65 @@ You can click on any given package to see the set of RPMs or see the complete li
 
 #### Enterprise Linux 7
 
--   None
+-   [osg-token-renewer-0.7.1-1.osg35.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-token-renewer-0.7.1-1.osg35.el7)
 
 #### Enterprise Linux 8
 
--   None
+-   [osg-token-renewer-0.7.1-1.osg35.el8](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-token-renewer-0.7.1-1.osg35.el8)
 
 ### RPMs
 
 If you wish to manually update your system, you can run yum update against the following packages:
 
-    None
+    osg-token-renewer 
 
 If you wish to only update the RPMs that changed, the set of RPMs is:
 
 #### Enterprise Linux 7
 
 ``` file
+osg-token-renewer-0.7.1-1.osg35.el7
 ```
 
 #### Enterprise Linux 8
 
 ``` file
+osg-token-renewer-0.7.1-1.osg35.el8
 ```
 
 ### Upcoming Packages
 
-We added or updated the following packages to the **upcoming** OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+We added or updated the following packages to the **upcoming** OSG Yum repository.
+Note that in some cases, there are multiple RPMs for each package.
+You can click on any given package to see the set of RPMs or see the complete list below.
 
 #### Enterprise Linux 7
 
--   [condor-8.9.11-1.osgup.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=condor-8.9.11-1.osgup.el7)
+-   [blahp-2.1.3-1.osg35up.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=blahp-2.1.3-1.osg35up.el7)
 
 #### Enterprise Linux 8
 
--   None
+-   [blahp-2.1.3-1.osg35up.el8](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=blahp-2.1.3-1.osg35up.el8)
 
 ### Upcoming RPMs
 
 If you wish to manually update your system, you can run yum update against the following packages:
 
-    condor condor-all condor-annex-ec2 condor-bosco condor-classads condor-classads-devel condor-credmon-oauth condor-debuginfo condor-kbdd condor-procd condor-test condor-vm-gahp minicondor python2-condor python3-condor 
+    blahp blahp-debuginfo 
 
 If you wish to only update the RPMs that changed, the set of RPMs is:
 
 #### Enterprise Linux 7
 
 ``` file
-condor-8.9.11-1.osgup.el7
-condor-all-8.9.11-1.osgup.el7
-condor-annex-ec2-8.9.11-1.osgup.el7
-condor-bosco-8.9.11-1.osgup.el7
-condor-classads-8.9.11-1.osgup.el7
-condor-classads-devel-8.9.11-1.osgup.el7
-condor-credmon-oauth-8.9.11-1.osgup.el7
-condor-debuginfo-8.9.11-1.osgup.el7
-condor-kbdd-8.9.11-1.osgup.el7
-condor-procd-8.9.11-1.osgup.el7
-condor-test-8.9.11-1.osgup.el7
-condor-vm-gahp-8.9.11-1.osgup.el7
-minicondor-8.9.11-1.osgup.el7
-python2-condor-8.9.11-1.osgup.el7
-python3-condor-8.9.11-1.osgup.el7
+blahp-2.1.3-1.osg35up.el7
+blahp-debuginfo-2.1.3-1.osg35up.el7
 ```
 
 #### Enterprise Linux 8
 
 ``` file
+blahp-2.1.3-1.osg35up.el8
+blahp-debuginfo-2.1.3-1.osg35up.el8
+blahp-debugsource-2.1.3-1.osg35up.el8
 ```

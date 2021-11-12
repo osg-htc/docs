@@ -23,6 +23,55 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.
 Latest News
 -----------
 
+### **November 11, 2021:** osg-flock and gratia-probes
+
+-   osg-flock 1.6-3
+    -   Update probe configuration to support Open Science Pool
+    -   Overhaul configuration for HTCondor 9.0
+-   gratia-probe 2.3.3
+    -   Add gratia-probe-condor-ap for user job accounting of HTCondor Access Points
+    -   Drop unused XRootD transfer probes
+    -   Fix default HTCondor-CE probe directory configurations and ownership
+
+### **October 13, 2021:** Initial osg-token-renewer release
+
+-   Initial release of the [osg-token-renewer](https://opensciencegrid.org/docs/other/osg-token-renewer/): a service to manage automatic renewal of bearer tokens from OIDC providers (e.g., CILogon, IAM), intended for use by VO managers
+-   [blahp 2.1.3](https://github.com/htcondor/BLAH/releases/tag/v2.1.3): Bug fix release
+    -   Include the more efficient LSF status script
+    -   Fix status caching on EL7 for PBS, Slurm, and LSF
+
+### **October 5, 2021:** IGTF 1.113
+
+This release contains updated CA Certificates based on [IGTF 1.113](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+
+-   Suspended MD-GRID CA due to network resolution issues (MD)
+
+### **September 30, 2021:** Urgent Let's Encrypt CA certificate update
+
+!!! danger "Please update osg-ca-certs as soon as possible."
+    Applications and tools using OpenSSL such as wget, HTCondor, and XRootD,
+    will to fail to establish TLS/HTTPS connections to servers using Let's
+    Encrypt certificates with a "certificate has expired" message.
+
+This release of OSG 3.6 contains the following packages:
+
+-   [osg-ca-certs 1.99](https://github.com/opensciencegrid/osg-certificates/releases/tag/v1.99.igtf.1.112): Remove expired Let's Encrypt CA certificate
+-   osg-wn-client: Fix installation issue causes by EPEL's gfal2 update
+-   [CVMFS 2.8.2](https://cvmfs.readthedocs.io/en/2.8/cpt-releasenotes.html): Bug fix release
+-   cvmfs-x509-helper 2.2-2: Fix a number of issues with SciTokens support
+-   [HTCondor 9.0.6](https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00021.shtml)
+    -   CUDA\_VISIBLE\_DEVICES can now contain GPU-<uuid> formatted values
+    -   Fix a bug that caused jobs to fail when using Singularity versions > 3.7
+    -   Fix bugs relating to the transfer of standard output and error logs
+-   vault 1.8.2, htvault-config 1.6, htgettoken 1.6: Minor improvements
+-   Upcoming
+    -   [HTCondor 9.2.0](https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00023.shtml)
+        -   Add DAGMan SERVICE node, used to monitor or report on DAG workflow
+        -   Fix problem where proxy delegation to HTCondor versions < 9.1.3 failed
+        -   Jobs are now re-run if the execute directory unexpectedly disappears
+        -   HTCondor counts the number of files transferred at the submit node
+        -   Fix a bug that caused jobs to fail when using Singularity versions > 3.7
+
 ### **September 23, 2021:** HTCondor-CE 5.1.2
 
 This release of OSG 3.6 contains the following packages:
@@ -56,7 +105,7 @@ This release of OSG 3.6 contains the following packages:
 
 ### **August 16, 2021:** IGTF 1.112
 
-This release contains updated CA Certificates based on IGTF 1.112:
+This release contains updated CA Certificates based on [IGTF 1.112](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
 
 -   Updated ANSPGrid CA with extended validity date (BR)
 
@@ -78,15 +127,15 @@ This release contains updated CA Certificates based on IGTF 1.112:
 ### **July 30, 2021:** High Priority Release
 
 -   HTCondor 9.0.4 and 9.1.2 Security Release. This release contains fixes for important security issues. More details on the security issues are in the vulnerability reports:
-    -   [HTCONDOR-2021-0003](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0003/)
-    -   [HTCONDOR-2021-0004](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0004/)
+    -   [HTCONDOR-2021-0003](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0003.html)
+    -   [HTCONDOR-2021-0004](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0004.html)
 
 ### **July 27, 2021:** High Priority Release
 
 -   HTCondor 9.0.3 and 9.1.1 Security Release. This release contains fixes for important security issues. More details on the security issues are in the vulnerability reports:
     -   Unfortunately, these releases did not fully mitigate the vulnerability described in HTCONDOR-2021-0003
-    -   [HTCONDOR-2021-0003](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0003/)
-    -   [HTCONDOR-2021-0004](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0004/)
+    -   [HTCONDOR-2021-0003](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0003.html)
+    -   [HTCONDOR-2021-0004](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0004.html)
 
 ### **July 22, 2021:** HTCondor 9.0.2 and blahp 2.1.0
 
@@ -154,7 +203,7 @@ This release of OSG 3.6 contains the following packages:
 
 ### **May 25, 2021:** IGTF 1.111
 
-This release contains updated CA Certificates based on IGTF 1.111:
+This release contains updated CA Certificates based on [IGTF 1.111](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
 
 -   Removed discontinued NERSC-SLCS CA (US)
 -   Removed discontinued MYIFAM CA (MY)

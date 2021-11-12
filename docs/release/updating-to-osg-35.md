@@ -84,7 +84,7 @@ To update your HTCondor-CE host(s), perform the following steps:
 1. Update all CE packages:
 
         :::console
-        root@host # yum update htcondor-ce 'osg-ce*'
+        root@host # yum update osg-ce 'osg-ce*'
 
 1. The new default `condor_mapfile` is sufficient since HTCondor-CE no longer relies on GSI authentication between
    its daemons.

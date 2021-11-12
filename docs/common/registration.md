@@ -97,10 +97,10 @@ the [site template](https://github.com/opensciencegrid/topology/blob/master/temp
 You may leave the `ID` field blank.
 When adding new entries, make sure that the formatting and indentation of your entry matches that of the template.
 
-Submit your changes as a pull request, providing a descriptive commit message. For example:
+Submit your changes as a pull request; select "opensciencegrid/topology" as the base repo.
+Provide a descriptive commit message, for example:
 
     Adding AggieGrid cluster for New Mexico State
-
 
 ### Searching for resources ###
 
@@ -172,7 +172,8 @@ To register a new resource, follow the instructions below:
    You may leave any `ID` or `GroupID` fields blank.
    When adding new entries, make sure that the formatting and indentation of your entry matches that of the template.
 
-1. Submit your changes as a pull request, providing a descriptive commit message. For example:
+1. Submit your changes as a pull request; select "opensciencegrid/topology" as the base repo.
+   Provide a descriptive commit message, for example:
 
         Adding a new compute entrypoint to the CHTC
 
@@ -200,7 +201,8 @@ To modify an existing resource, follow these instructions:
         If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
         access to the OSG copy of the topology data, which is why you are creating a pull request.
 
-1. Submit your changes as a pull request, providing a descriptive commit message. For example:
+1. Submit your changes as a pull request; select "opensciencegrid/topology" as the base repo.
+   Provide a descriptive commit message, for example:
 
         Updating administrative contact information for CHTC-glidein2
 
@@ -325,7 +327,8 @@ Follow the instructions below:
     as a reference.
     Make sure that the formatting and indentation of the modified entry does not change.
 
-1.  Submit your changes as a pull request, providing a descriptive commit message. For example:
+1.  Submit your changes as a pull request; select "opensciencegrid/topology" as the base repo.
+    Provide a descriptive commit message, for example:
 
         Move forward end date for CHTC-glidein2 regular maintenance
 
@@ -369,7 +372,8 @@ To modify a VO's information or register a new VO, follow the instructions below
    You may leave any `ID` fields blank.
    If you are modifying existing entries, make sure you do not change formatting or indentation of the modified entry.
 
-1. Submit your changes as a pull request, providing a descriptive commit message. For example:
+1. Submit your changes as a pull request; select "opensciencegrid/topology" as the base repo.
+   Provide a descriptive commit message, for example:
 
         Updating contact information for the GLOW VO
 
@@ -402,7 +406,8 @@ To modify a VO's information or register a new VO, follow the instructions below
    You may leave any `ID` fields blank.
    If you are modifying existing entries, make sure you do not change formatting or indentation of the modified entry.
 
-1. Submit your changes as a pull request, providing a descriptive commit message. For example:
+1. Submit your changes as a pull request; select "opensciencegrid/topology" as the base repo.
+   Provide a descriptive commit message, for example:
 
         Updating contact information for the Mu2e project
 
