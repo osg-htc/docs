@@ -195,8 +195,6 @@ For instructions on upgrading from one OSG series to another, see the
             root@host # yum install https://repo.opensciencegrid.org/osg/3.6/osg-3.6-el7-release-latest.rpm
 
         !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
-            OSG 3.6 is under active development and is not currently supported for production use.
-    
             Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
             authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
             If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
@@ -208,8 +206,6 @@ For instructions on upgrading from one OSG series to another, see the
             root@host # yum install https://repo.opensciencegrid.org/osg/3.6/osg-3.6-el8-release-latest.rpm
 
         !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
-            OSG 3.6 is under active development and is not currently supported for production use.
-    
             Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
             authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
             If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,

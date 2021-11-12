@@ -25,8 +25,6 @@ Series Overviews
 Since the start of the RPM-based OSG software stack, we have offered the following release series:
 
 !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
-    OSG 3.6 is under active development and is not currently supported for production use.
-
     Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
     authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
     If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
