@@ -15,6 +15,9 @@ pilot jobs and/or issues with data transfer.
 If you have verified that your VO(s) support token-based pilot submission and HTTP-based data transfers,
 use this document to update your OSG software to OSG 3.6.
 
+Many software packages, such as HTCondor and HTCondor-CE, use Python 3 scripts. If you are using Enterprise Linux 7,
+you must upgrade to at least version 7.8 to get Python 3 support.
+
 Updating the OSG Repositories
 -----------------------------
 
