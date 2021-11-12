@@ -1,4 +1,4 @@
-DateReviewed: 2021-11-11
+DateReviewed: 2021-11-12
 
 Configuring XRootD Authorization
 ================================
