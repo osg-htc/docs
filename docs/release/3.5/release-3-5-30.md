@@ -22,8 +22,8 @@ Summary of Changes
 This release contains:
 
 -   Upcoming Repository: HTCondor 8.9.11 Security Release. This release contains fixes for important security issues. More details on the security issues are in the vulnerability reports:
-    -   [HTCONDOR-2021-0001](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0001/)
-    -   [HTCONDOR-2021-0002](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0002/)
+    -   [HTCONDOR-2021-0001](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0001.html)
+    -   [HTCONDOR-2021-0002](http://htcondor.org/security/vulnerabilities/HTCONDOR-2021-0002.html)
 
 These
 [JIRA tickets](https://opensciencegrid.atlassian.net/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20in%20(3.5.30-upcoming)%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC)
