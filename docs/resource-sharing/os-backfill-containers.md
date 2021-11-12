@@ -216,14 +216,14 @@ To limit the total amount of memory available to jobs, add the following to your
 
 where `<X>` is the total amount of memory (in MB) you want to allow jobs to use.
 
-Both options are necessary for optimal behavior.
-
-Note that the above command will allocate 100 MB more memory to the container; the reasons are detailed below.
-
 The `MEMORY` environment variable will tell HTCondor not to offer more than the given amount of memory to jobs;
 the `--memory` argument will tell Docker to kill the container if its total memory usage exceeds the given number.
 
-HTCondor will place jobs on hold if they exceed their requested memory,
-but it may not notice high memory usage immediately.
-In addition, non-job processes (such as HTCondor and crond) also use some amount of memory.
-Therefore it is important to give the container some extra room.
+Both options are necessary for optimal behavior.
+
+!!! tip "Allocating additional memory"
+    Note that the above command will allocate 100 MB more memory to the container
+    HTCondor will place jobs on hold if they exceed their requested memory,
+    but it may not notice high memory usage immediately.
+    In addition, non-job processes (such as HTCondor and crond) also use some amount of memory.
+    Therefore it is important to give the container some extra room.
