@@ -137,29 +137,6 @@ we provide a recommended configuration for flocking.
         :::xml
         EnableProbe=1
 
-1. Add a section to map unknown records to OSG:
-        
-        :::xml
-        VOOverride="OSG"
-        MapGroupToRole="1"
-        MapUnknownToGroup="1"
-
-
-An example of a configured section is:
-
-    :::xml
-    ProbeName="condor-ap:[HOSTNAME]"
-    SiteName="[SITENAME]"
-    Grid="OSG"
-    SuppressUnknownVORecords="0"
-    SuppressNoDNRecords="0"
-    QuarantineUnknownVORecords="1"
-    EnableProbe="1"
-    VOOverride="OSG"
-    MapGroupToRole="1"
-    MapUnknownToGroup="1"
-
-
 
 Configuring Authentication
 --------------------------
