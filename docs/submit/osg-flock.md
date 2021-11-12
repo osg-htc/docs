@@ -77,7 +77,7 @@ You will need information like the hostname, and the administrative and security
 Follow the [general registration instructions](../common/registration.md#new-resources).
 For historical reasons, the service type is `Submit Node`. We also request that you tag
 the resources with `OSPool`. An example of a registration is
-[the osg-vo.isi.edu entry](https://github.com/opensciencegrid/topology/blob/master/topology/University%20of%20Southern%20California/Information%20Sciences%20Institute/ISI.yaml)
+[the osg-vo.isi.edu entry](https://github.com/opensciencegrid/topology/blob/7a71dd4731bb5259f5d9d4004b2df1ddb2bd22ce/topology/University%20of%20Southern%20California/Information%20Sciences%20Institute/ISI.yaml#L32-L57)
 
 ### Register with COManage 
 The adminstrative contact from the the topology entry needs to register with COManage. 
