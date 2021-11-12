@@ -1,4 +1,4 @@
-DateReviewed: 2021-10-29
+DateReviewed: 2021-11-12
 
 Configuring XRootD Authorization
 ================================
@@ -22,7 +22,8 @@ In the case of X.509 and VOMS proxies, after the incoming credential has been ma
 Authorizing Bearer Tokens
 -------------------------
 
-The OSG configurations of XRootD support authorization of bearer tokens such as macaroons, SciTokens, or WLCG tokens.
+The [OSG 3.6](../../release/release_series.md#series-overviews) configurations of XRootD support authorization of bearer
+tokens such as macaroons, SciTokens, or WLCG tokens.
 Encoded in the bearer tokens themselves are information about the files that they should have read/write access to and
 in the case of SciTokens and WLCG tokens, you may configure XRootD to further restrict access.
 
@@ -255,7 +256,8 @@ Verifying XRootD Authorization
 
 ### Bearer tokens ###
 
-To test read access using macaroon, SciTokens, and WLCG token authorization, run the following command:
+To test read access using macaroon, SciTokens, and WLCG token authorization with an OSG 3.6 installation,
+run the following command:
 
 ```console
 user@host $ curl -v \

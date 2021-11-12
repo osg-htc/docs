@@ -295,7 +295,7 @@ See [this documentation](install-standalone.md#enabling-cms-tfc-support-cms-site
 ### (Optional) Adding Hadoop support to XRootD
 
 For documentation on how to export your Hadoop storage using XRootD please see
-[this documentation](install-standalone.md#enabling-hadoop-support-el-7-only)
+[this documentation](install-standalone.md#enabling-hadoop-support-deprecated-el-7-only)
 
 ### (Optional) Adding Multi user support for an XRootd server
 
