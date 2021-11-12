@@ -37,11 +37,25 @@ As with all OSG software installations, there are some one-time (per host) steps
 Installing XRootD
 -----------------
 
-To install the XRootD Standalone server, run the following Yum command:
+!!! danger "Before considering an upgrade to OSG 3.6&hellip;"
+    Due to potentially disruptive changes, contact your VO(s) to verify that they support HTTP-based data transfer
+    before considering replacing your GridFTP service with XRootD.
+    If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
+    install or remain on the [OSG 3.5 release series](../../release/notes.md).
 
-``` console
-root@xrootd-standalone # yum install osg-xrootd-standalone --enablerepo=osg-upcoming
-```
+To install an XRootD Standalone server, run one of the following commands based on your installed
+[OSG release series](../../release/release_series.md#series-overviews):
+
+-   OSG 3.6 (recommended):
+
+        :::console
+        root@xrootd-standalone # yum install osg-xrootd-standalone
+
+-   OSG 3.5
+
+        :::console
+        root@xrootd-standalone # yum install osg-xrootd-standalone \
+                                             --enablerepo=osg-upcoming
 
 Configuring XRootD
 ------------------
