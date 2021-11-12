@@ -1,4 +1,4 @@
-DateReviewed: 2021-10-08
+DateReviewed: 2021-10-11
 
 Install XRootD Standalone
 =========================
@@ -217,46 +217,11 @@ To validate an XRootD installation, perform the following verification steps:
     be sure you have given yourself the necessary permissions to run these tests.
     For example, if you are using an X.509 proxy,
     make sure your DN is mapped to a user in [/etc/grid-security/grid-mapfile](../../security/lcmaps-voms-authentication.md#mapping-users),
-    and make sure you have a valid proxy on your local machine.
-    Also, ensure that the [Authfile](xrootd-authorization.md#authorization-database) on the XRootD server gives
+    make sure you have a valid proxy on your local machine,
+    and ensure that the [Authfile](xrootd-authorization.md#authorization-database) on the XRootD server gives
     write access to the mapped user from `/etc/grid-security/grid-mapfile`.
 
-1. Verify file transfer over the XRootD protocol using XRootD client tools:
-
-    1. Install the client tools:
-
-            :::console
-            root@xrootd-standalone # yum install xrootd-client
-
-    1. Copy a file to a directory for which you have write access:
-
-            :::console
-            root@xrootd-standalone # xrdcp /bin/sh root://localhost:1094//tmp/first_test
-            [xrootd] Total 0.76 MB  [====================] 100.00 % [inf MB/s]
-
-    1. Verify that the file has been copied over:
-
-            :::console
-            root@xrootd-standalone # ls -l /tmp/first_test
-            -rw-r--r-- 1 xrootd xrootd 801512 Apr 11 10:48 /tmp/first_test
-
-1. Verify file transfer over HTTP using GFAL2 client tools:
-
-    1. Install the GFAL2 client tools:
-
-            :::console
-            root@xrootd-standalone # yum install gfal2-util gfal2-plugin-http
-
-    1. Copy a file to a directory for which you have write access:
-
-            :::console
-            root@xrootd-standalone # gfal-copy /bin/sh http://localhost:1094//tmp/first_test
-
-    1. Verify that the file has been copied over:
-
-            :::console
-            root@xrootd-standalone # ls -l /tmp/first_test
-            -rw-r--r-- 1 xrootd xrootd 801512 Apr 11 10:48 /tmp/first_test
+1. Verify [authorization](xrootd-authorization.md#verifying-xrootd-authorization) of bearer tokens and/or proxies
 
 1.  Verify HTTP-TPC using the same GFAL2 client tools:
 
