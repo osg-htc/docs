@@ -39,7 +39,7 @@ Installing XRootD
 
 !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
     Due to potentially disruptive changes, contact your VO(s) to verify that they support HTTP-based data transfer
-    before considering replacing your GridFTP service with XRootD.
+    before replacing your GridFTP service with XRootD.
     If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
     install or remain on the [OSG 3.5 release series](../../release/notes.md).
 
@@ -145,7 +145,7 @@ For more information, see [the HDFS installation documents](../install-hadoop.md
 
 !!! bug "VOMS attribute mappings incompatible with `xrootd-multiuser` in OSG 3.6"
     The OSG 3.6 configuration of XRootD uses the `XrdVoms` plugin, which pass along the entire VOMS FQAN as the
-    groupname to the authorization layer (see the section on [authorization database file formatting](#formatting)).
+    groupname to the authorization layer (see the section on [authorization database file formatting](xrootd-authorization.md#formatting)).
     Some characters in VOMS FQANs are not legal in Unix usernames, therefore VOMS attributes mappings are incompatible
     with `xrootd-multiuser`.
     See [XRootD GitHub issue #1538](https://github.com/xrootd/xrootd/issues/1538) for more details.
