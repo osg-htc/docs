@@ -47,7 +47,8 @@ Installing XRootD
 
 !!! bug "VOMS attribute mappings incompatible with `xrootd-multiuser` in OSG 3.6"
     The OSG 3.6 configuration of XRootD uses the `XrdVoms` plugin, which pass along the entire VOMS FQAN as the
-    groupname to the authorization layer (see the section on [authorization database file formatting](#formatting)).
+    groupname to the authorization layer (see the section on
+    [authorization database file formatting](xrootd-authorization.md#formatting)).
     Some characters in VOMS FQANs are not legal in Unix usernames, therefore VOMS attributes mappings are incompatible
     with `xrootd-multiuser`.
     See [XRootD GitHub issue #1538](https://github.com/xrootd/xrootd/issues/1538) for more details.
