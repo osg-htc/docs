@@ -186,7 +186,7 @@ If you don't want to allow jobs to use all of these, you can specify limits.
 
 You must specify limits in two places:
 
--   As environment variables, limiting the resources HTCondor offers to jobs.
+-   As environment variables, limiting the resources the pilot offers to jobs.
 
 -   As options to the `docker run` command, limiting the resources the pilot container can use.
 
@@ -201,7 +201,7 @@ add the following to your `docker run` command:
 
 where `<X>` is the number of CPUs you want to allow jobs to use.
 
-The `NUM_CPUS` environment variable will tell HTCondor not to offer more than the given number of CPUs to jobs;
+The `NUM_CPUS` environment variable will tell the pilot not to offer more than the given number of CPUs to jobs;
 the `--cpus` argument will tell Docker not to allocate more than the given number of CPUs to the container.
 
 Both options are necessary for optimal behavior.
@@ -216,14 +216,14 @@ To limit the total amount of memory available to jobs, add the following to your
 
 where `<X>` is the total amount of memory (in MB) you want to allow jobs to use.
 
-The `MEMORY` environment variable will tell HTCondor not to offer more than the given amount of memory to jobs;
+The `MEMORY` environment variable will tell the pilot not to offer more than the given amount of memory to jobs;
 the `--memory` argument will tell Docker to kill the container if its total memory usage exceeds the given number.
 
 Both options are necessary for optimal behavior.
 
 !!! tip "Allocating additional memory"
     Note that the above command will allocate 100 MB more memory to the container.
-    HTCondor will place jobs on hold if they exceed their requested memory,
+    The pilot will place jobs on hold if they exceed their requested memory,
     but it may not notice high memory usage immediately.
-    In addition, non-job processes (such as HTCondor and crond) also use some amount of memory.
+    In addition, the processes that manage jobs also use some amount of memory.
     Therefore it is important to give the container some extra room.

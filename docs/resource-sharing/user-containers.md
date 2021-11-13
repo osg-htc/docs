@@ -86,7 +86,7 @@ add the following to your `singularity run` command:
 
 where `<X>` is the number of CPUs you want to allow jobs to use.
 
-The `NUM_CPUS` environment variable will tell HTCondor not to offer more than the given number of CPUs to jobs.
+The `NUM_CPUS` environment variable will tell the pilot not to offer more than the given number of CPUs to jobs.
 
 To limit the total amount of memory available to jobs, add the following to your `docker run` command:
 ```
@@ -95,13 +95,13 @@ To limit the total amount of memory available to jobs, add the following to your
 
 where `<X>` is the total amount of memory (in MB) you want to allow jobs to use.
 
-The `MEMORY` environment variable will tell HTCondor not to offer more than the given amount of memory to jobs.
+The `MEMORY` environment variable will tell the pilot not to offer more than the given amount of memory to jobs.
 
 !!! note
     If you requested a specific amount of memory for your SLURM batch job, for example with the `--mem` argument,
     you should set `MEMORY` to be about 100 MB less than that, for the following reasons:
 
-    HTCondor will place jobs on hold if they exceed their requested memory,
+    The pilot will place jobs on hold if they exceed their requested memory,
     but it may not notice high memory usage immediately.
-    In addition, non-job processes (such as HTCondor and crond) also use some amount of memory.
+    In addition, the processes that manage jobs also use some amount of memory.
     Therefore it is important to give the container some extra room.
