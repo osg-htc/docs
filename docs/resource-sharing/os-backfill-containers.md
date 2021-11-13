@@ -3,7 +3,7 @@ Open Science Pool Containers
 
 In order to [share compute resources](overview.md) with the Open Science pool,
 sites can launch pilot jobs directly by starting an OSG-provided Docker container.
-The container includes a simple worker node environment and an embedded pilot;
+The container includes a worker node environment and an embedded pilot;
 when combined with an OSG-provided authentication token (not included in the container),
 the pilot can connect to the Open Science pool and start executing jobs.
 
