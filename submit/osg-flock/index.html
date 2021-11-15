@@ -1214,6 +1214,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#read-the-acceptable-usage-policy" class="md-nav__link">
+    Read the Acceptable Usage Policy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#register-your-access-point-in-osg-topology" class="md-nav__link">
     Register your access point in OSG Topology
   </a>
@@ -1221,8 +1228,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#request-to-be-allowed-to-flock-to-osg" class="md-nav__link">
-    Request to be allowed to flock to OSG
+  <a href="#register-with-comanage" class="md-nav__link">
+    Register with COManage
   </a>
   
 </li>
@@ -1236,6 +1243,19 @@
   <a href="#installing-required-software" class="md-nav__link">
     Installing Required Software
   </a>
+  
+    <nav class="md-nav" aria-label="Installing Required Software">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#upgrading" class="md-nav__link">
+    Upgrading
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1845,6 +1865,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#read-the-acceptable-usage-policy" class="md-nav__link">
+    Read the Acceptable Usage Policy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#register-your-access-point-in-osg-topology" class="md-nav__link">
     Register your access point in OSG Topology
   </a>
@@ -1852,8 +1879,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#request-to-be-allowed-to-flock-to-osg" class="md-nav__link">
-    Request to be allowed to flock to OSG
+  <a href="#register-with-comanage" class="md-nav__link">
+    Register with COManage
   </a>
   
 </li>
@@ -1867,6 +1894,19 @@
   <a href="#installing-required-software" class="md-nav__link">
     Installing Required Software
   </a>
+  
+    <nav class="md-nav" aria-label="Installing Required Software">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#upgrading" class="md-nav__link">
+    Upgrading
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1964,7 +2004,7 @@ For the HTCondor batch system, we say that users log on to a access point (i.e.,
 their jobs to HTCondor, where the jobs wait ("are queued") until computing resources are available to run them.
 In a purely local HTCondor system, there are one to a few access points and many computing resources.</p>
 <p>An HTCondor access point can also be configured to forward excess jobs to an OSG-managed pool.
-This process is called <a href="https://htcondor.readthedocs.io/en/v8_8/grid-computing/connecting-pools-with-flocking.html">flocking</a>.
+This process is called <a href="https://htcondor.readthedocs.io/en/latest/grid-computing/connecting-pools-with-flocking.html">flocking</a>.
 If you already have an HTCondor pool, we recommend that you install this software
 on top of one of your existing HTCondor access points.
 This approach allows a user to submit locally and have their jobs run locally or,
@@ -1980,7 +2020,7 @@ The hardware can be bare metal or virtual machine, but we do not recommend conta
 many system services which can be difficult to configure in a container.</p>
 <p>Also consider the following configuration requirements:</p>
 <ul>
-<li><strong>Operating system:</strong> A RHEL 7 compatible operating system.</li>
+<li><strong>Operating system:</strong> A RHEL 7 or RHEL 8 compatible operating system.</li>
 <li><strong>User IDs:</strong> If it does not exist already, the installation will create the Linux user ID <code>condor</code>.</li>
 <li><strong>Network:</strong> <ul>
 <li>Inbound TCP port 9618 must be open.</li>
@@ -1994,42 +2034,50 @@ we ask that you <a href="mailto:help@opensciencegrid.org">contact us</a> to set 
 During this consultation, OSG staff will introduce you and your team to the OSG and develop a plan to meet your resource
 contribution and/or research goals.</p>
 <h2 id="initial-steps">Initial Steps<a class="headerlink" href="#initial-steps" title="Permanent link">&para;</a></h2>
+<h3 id="read-the-acceptable-usage-policy">Read the Acceptable Usage Policy<a class="headerlink" href="#read-the-acceptable-usage-policy" title="Permanent link">&para;</a></h3>
+<p>Be aware that hosting an access point comes with responsibilities, both for the administrators as
+well as end users of the system. The polices can be found in the <a href="../ap-ospool-aup/">Acceptable Usage Policy document</a>.</p>
 <h3 id="register-your-access-point-in-osg-topology">Register your access point in OSG Topology<a class="headerlink" href="#register-your-access-point-in-osg-topology" title="Permanent link">&para;</a></h3>
 <p>To be part of OSG, your access point should be registered with the OSG.
 You will need information like the hostname, and the administrative and security contacts.
 Follow the <a href="../../common/registration/#new-resources">general registration instructions</a>.
-For historical reasons, the service type is <code>Submit Node</code>.</p>
-<h3 id="request-to-be-allowed-to-flock-to-osg">Request to be allowed to flock to OSG<a class="headerlink" href="#request-to-be-allowed-to-flock-to-osg" title="Permanent link">&para;</a></h3>
-<p>OSG staff will need to add your access point to the list of hosts that flocked jobs are accepted from,
-and provide a HTCondor IDTOKEN so that your new access point can authenticate with OSG.
-Send email to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> with the hostname of your access point and request to be added to the list.</p>
+For historical reasons, the service type is <code>Submit Node</code>. We also request that you tag
+the resources with <code>OSPool</code>. An example of a registration is
+<a href="https://github.com/opensciencegrid/topology/blob/7a71dd4731bb5259f5d9d4004b2df1ddb2bd22ce/topology/University%20of%20Southern%20California/Information%20Sciences%20Institute/ISI.yaml#L32-L57">the osg-vo.isi.edu entry</a></p>
+<h3 id="register-with-comanage">Register with COManage<a class="headerlink" href="#register-with-comanage" title="Permanent link">&para;</a></h3>
+<p>The adminstrative contact from the the topology entry needs to register with COManage. 
+Instructions can be found <a href="https://opensciencegrid.org/technology/policy/comanage-instructions-user/">here</a></p>
+<p>Next is to retrive a token so that the new submit host can authenticate with the Open
+Science Pool manager. Please use your COManage registered and approved identity to
+log into the <a href="https://os-registry.opensciencegrid.org/">OSG Token Registration</a>. Once
+logged in, select <code>Token on Docker</code>, and find your registered submit node in the list.
+Follow the instructions (you probably have to do the steps on a host with Docker and as
+root), and once you have the token generated, keep that for later steps.</p>
 <h2 id="installing-required-software">Installing Required Software<a class="headerlink" href="#installing-required-software" title="Permanent link">&para;</a></h2>
 <p>Flocking requires HTCondor software as well as software for reporting to the OSG accounting system.
 Start by setting up the OSG YUM repositories following the
 <a href="../../common/yum/">Installing Yum Repositories</a>. <strong>Note that you have to use OSG 3.6</strong>. Earlier
 versions will not work.</p>
 <p>Once the YUM repositories are setup, install the <code>osg-flock</code> convenience RPM that installs all
-required packages:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install osg-flock
+required packages. Example on a RHEL 7 host:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp"># </span>yum install https://repo.opensciencegrid.org/osg/3.6/osg-3.6-el7-release-latest.rpm
+<span class="gp"># </span>yum install osg-flock
 </code></pre></div>
 
+<h3 id="upgrading">Upgrading<a class="headerlink" href="#upgrading" title="Permanent link">&para;</a></h3>
+<p>Upgrading from previous versions should be as simple as switching to OSG 3.6, and then
+issuing <code>yum upgrade</code>. If you made local config changes, please verify that the files under
+<code>/etc/condor/config.d</code> were renamed/disabled during the upgrade.</p>
+<p>Note that in some older versions of the package, the Gratia config was kept in 
+<code>/etc/gratia/condor/ProbeConfig</code>. The new location is <code>/etc/gratia/condor-ap/ProbeConfig</code>.</p>
+<p>The Open Science Pool will no longer accept GSI authentcation. Access points still configured
+with GSI, will have to be upgraded to OSG 3.6 and switched over to token authentication as
+described in this document.</p>
 <h2 id="configuring-reporting-via-gratia">Configuring Reporting via Gratia<a class="headerlink" href="#configuring-reporting-via-gratia" title="Permanent link">&para;</a></h2>
 <p>Reporting to the OSG accounting system is done using the <em>Gratia</em> service, which consists of multiple <em>probes</em>.
-HTCondor uses the "condor" probe, which is configured in <code>/etc/gratia/condor/ProbeConfig</code>;
+HTCondor uses the "condor" probe, which is configured in <code>/etc/gratia/condor-ap/ProbeConfig</code>;
 we provide a recommended configuration for flocking.</p>
 <ol>
-<li>
-<p>Copy over the recommended probe configuration:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>cp /etc/gratia/condor/ProbeConfig-flocking /etc/gratia/condor/ProbeConfig
-</code></pre></div>
-
-</li>
-<li>
-<p>Fill in the value for <code>ProbeName</code> with the hostname of your access point, with the following format:</p>
-<div class="codehilite"><pre><span></span><code>ProbeName=&quot;condor:<span class="nt">&lt;HOSTNAME&gt;</span>&quot;
-</code></pre></div>
-
-</li>
 <li>
 <p>Fill in the value for <code>SiteName</code> with the Resource Name you registered in Topology (see
    <a href="#register-your-access-point-in-osg-topology">instructions above</a>).
@@ -2039,79 +2087,32 @@ we provide a recommended configuration for flocking.</p>
 
 </li>
 <li>
-<p>Enable the Gratia Probe.</p>
+<p>Enable the Gratia Probe:</p>
 <div class="codehilite"><pre><span></span><code>EnableProbe=1
-</code></pre></div>
-
-</li>
-<li>
-<p>Under the section <code>Title2</code> make sure to set the following (if not already there):</p>
-<div class="codehilite"><pre><span></span><code>MapUnknownToGroup=&quot;1&quot;
-MapGroupToRole=&quot;1&quot;
-VOOverride=&quot;OSG&quot;
 </code></pre></div>
 
 </li>
 </ol>
 <h2 id="configuring-authentication">Configuring Authentication<a class="headerlink" href="#configuring-authentication" title="Permanent link">&para;</a></h2>
-<p>Create a file named <code>/etc/condor/tokens.d/flock.opensciencegrid.org</code> with the IDTOKEN you received earlier.
+<p>Create a file named <code>/etc/condor/tokens.d/ospool.token</code> with the IDTOKEN you received earlier.
 Ensure that there aren't any line breaks in this file (i.e., the entire token should only take up one line).</p>
 <p>Change the ownership to <code>condor:condor</code> and the permissions to <code>0600</code>. Verify this with
-<code>ls -l /etc/condor/tokens.d/flock.opensciencegrid.org</code>:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp"># </span>ls -l /etc/condor/tokens.d/flock.opensciencegrid.org 
-<span class="go">-rw------- 1 condor condor 288 Nov 11 09:03 /etc/condor/tokens.d/flock.opensciencegrid.org</span>
+<code>ls -l /etc/condor/tokens.d/ospool.token</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp"># </span>ls -l /etc/condor/tokens.d/ospool.token
+<span class="go">-rw------- 1 condor condor 288 Nov 11 09:03 /etc/condor/tokens.d/ospool.token</span>
+</code></pre></div>
+
+<p>You can also list the token with the <code>condor_token_list</code> command:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp"># </span>condor_token_list 
+<span class="go">Header: {&quot;alg&quot;:&quot;HS256&quot;,&quot;kid&quot;:&quot;POOL&quot;} Payload: {&quot;iat&quot;:1234,&quot;iss&quot;:&quot;flock.opensciencegrid.org&quot;,&quot;jti&quot;:&quot;...&quot;,&quot;scope&quot;:&quot;condor:\/READ condor:\/ADVERTISE_SCHEDD&quot;,&quot;sub&quot;:&quot;RESOURCE-hostname@flock.opensciencegrid.org&quot;} File: /etc/condor/tokens.d/ospool.token</span>
 </code></pre></div>
 
 <h2 id="managing-services">Managing Services<a class="headerlink" href="#managing-services" title="Permanent link">&para;</a></h2>
-<p>In addition to the HTCondor service itself, there are a number of supporting services in your installation. The specific services are:</p>
-<table>
-<thead>
-<tr>
-<th align="left">Software</th>
-<th align="left">Service name</th>
-<th align="left">Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">Gratia</td>
-<td align="left"><code>gratia-probes-cron</code></td>
-<td align="left">Accounting software</td>
-</tr>
-<tr>
-<td align="left">HTcondor</td>
-<td align="left"><code>condor</code></td>
-<td align="left"></td>
-</tr>
-</tbody>
-</table>
-<p>The following table gives the commands needed to start, stop, enable, and disable a service:</p>
-<table>
-<thead>
-<tr>
-<th align="left">To...</th>
-<th align="left">Run the command...</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">Start a service</td>
-<td align="left"><code>systemctl start &lt;SERVICE-NAME&gt;</code></td>
-</tr>
-<tr>
-<td align="left">Stop a service</td>
-<td align="left"><code>systemctl stop &lt;SERVICE-NAME&gt;</code></td>
-</tr>
-<tr>
-<td align="left">Enable a service to start on boot</td>
-<td align="left"><code>systemctl enable &lt;SERVICE-NAME&gt;</code></td>
-</tr>
-<tr>
-<td align="left">Disable a service from starting on boot</td>
-<td align="left"><code>systemctl disable &lt;SERVICE-NAME&gt;</code></td>
-</tr>
-</tbody>
-</table>
+<p>The only service which is required to be running is <code>condor</code>. Enable and restart the sevice:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp"># </span>systemctl <span class="nb">enable</span> condor
+<span class="gp"># </span>systemctl restart condor
+</code></pre></div>
+
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="running-jobs-in-osg">Running jobs in OSG<a class="headerlink" href="#running-jobs-in-osg" title="Permanent link">&para;</a></h3>
 <p>If your users are accustomed to running jobs locally, they may encounter some significant differences when running jobs in OSG.
@@ -2133,7 +2134,8 @@ For example:</p>
 <div class="codehilite"><pre><span></span><code>+ProjectName = &quot;My_Project&quot;
 </code></pre></div>
 
-<p>The double quotes are necessary.</p>
+<p><strong>The double quotes are necessary</strong>. If not quoted, <em>My_Project</em> will be interpreted as an expression,
+and most likely evaluate to undefined, and prevent your job from running.</p>
 <h2 id="get-help">Get Help<a class="headerlink" href="#get-help" title="Permanent link">&para;</a></h2>
 <p>If you need help with setup or troubleshooting, see our <a href="../../common/help/">help procedure</a>.</p>
                 
