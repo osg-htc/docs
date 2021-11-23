@@ -18,6 +18,18 @@ To support these new protocols, OSG 3.6 includes HTCondor 8.9, HTCondor-CE 5, an
 GlideinWMS 3.9, and XRootD 5.1.
 We also dropped support for the GridFTP, GSI authentication, and Hadoop.
 
+Known Issues
+------------
+
+The following issues are known to currently affect packages distributed in OSG 3.6:
+
+### HTCondor-CE ###
+
+-   C-style comments, e.g. `/* comment /*`, in `JOB_ROUTER_ENTRIES` will prevent the JobRouter from routing jobs
+    ([HTCONDOR-864](https://opensciencegrid.atlassian.net/browse/HTCONDOR-864)).
+    For the time being, remove any comments if you are still using the
+    [deprecated syntax](https://htcondor.com/htcondor-ce/v5/configuration/job-router-overview#deprecated-syntax).
+
 Latest News
 -----------
 
