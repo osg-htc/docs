@@ -29,6 +29,17 @@ The following issues are known to currently affect packages distributed in OSG 3
     ([HTCONDOR-864](https://opensciencegrid.atlassian.net/browse/HTCONDOR-864)).
     For the time being, remove any comments if you are still using the
     [deprecated syntax](https://htcondor.com/htcondor-ce/v5/configuration/job-router-overview#deprecated-syntax).
+-   Proxy delegation does not work with HTCondor < 9.0.8
+    (see [HTCONDOR-810](https://opensciencegrid.atlassian.net/browse/HTCONDOR-810)).
+    If the VOs you support use X.509 proxies for storage access, either install HTCondor from OSG 3.6 upcoming or wait
+    for the release of HTCondor 9.0.8 (expected December 2021).
+
+### HTCondor ###
+
+-   Proxy delegation does not work with HTCondor < 9.0.8
+    (see [HTCONDOR-810](https://opensciencegrid.atlassian.net/browse/HTCONDOR-810)).
+    If the VOs you support use X.509 proxies for storage access, either install HTCondor from OSG 3.6 upcoming or wait
+    for the release of HTCondor 9.0.8 (expected December 2021).
 
 Latest News
 -----------
