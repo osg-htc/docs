@@ -1,19 +1,19 @@
 DateReviewed: 2020-06-22
 
-Running StashCache Origin in a Container
+Running OSDF Origin in a Container
 ========================================
 
 !!! note
-    Currently, the StashCache Origin container only supports distribution of public data.
+    Currently, the origin container only supports distribution of public data.
     If you would like to distribute private data requiring authentication,
     see [the RPM installation guide](install-origin.md).
 
-The OSG operates the [StashCache data federation](overview.md), which
+The OSG operates the [Open Science Data Federation](overview.md) (OSDF), which
 provides organizations with a method to distribute their data in a scalable manner to thousands of jobs without needing
 to pre-stage data across sites or operate their own scalable infrastructure.
 
-[Stash Origins](install-origin.md) store copies of users' data.
-Each community (or experiment) needs to run one origin to export its data via the StashCache federation.
+[Origins](install-origin.md) store copies of users' data.
+Each community (or experiment) needs to run one origin to export its data via the federation.
 This document outlines how to run such an origin in a Docker container.
 
 Before Starting
@@ -23,9 +23,9 @@ Before starting the installation process, consider the following points:
 
 1. **Docker:** For the purpose of this guide, the host must have a running docker service and you must have the ability
 to start containers (i.e., belong to the `docker` Unix group).
-1. **Network ports:** The Stash Origin listens for incoming HTTP/S and XRootD connections on ports 1094 and 1095 (by
+1. **Network ports:** The origin listens for incoming HTTP/S and XRootD connections on ports 1094 and 1095 (by
 default).
-1. **File Systems:** Stash Origin needs a host partition to store user data.
+1. **File Systems:** The origin needs a host partition to store user data.
 1. **Registration:** Before deploying an origin, you must
    [registered the service](install-origin.md#registering-the-origin) in the OSG Topology
 
@@ -48,7 +48,7 @@ ORIGIN_FQDN=<FQDN>
 Populating Origin Data
 ----------------------
 
-The Stash Cache data federation namespace is shared by multiple VOs so you must
+The OSDF namespace is shared by multiple VOs so you must
 [choose a namespace](vo-data.md#choosing-namespaces) for your own VO's data.
 When running an origin container, your chosen namespace must be reflected in your host partition.
 
@@ -80,7 +80,7 @@ See [this section](#populating-origin-data) for details.
 
 ### Running on origin container with systemd
 
-An example systemd service file for StashCache.
+An example systemd service file for the OSDF.
 This will require creating the environment file in the directory `/opt/origin/.env`.
 
 !!! note
@@ -90,7 +90,7 @@ Create the systemd service file `/etc/systemd/system/docker.stash-origin.service
 
 ```file
 [Unit]
-Description=Stash Origin Container
+Description=Origin Container
 After=docker.service
 Requires=docker.service
 
