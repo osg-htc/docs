@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#installing-the-stashcache-cache" class="md-skip">
+        <a href="#installing-the-osdf-cache" class="md-skip">
           Skip to content
         </a>
       
@@ -1390,11 +1390,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#managing-stashcache-and-associated-services" class="md-nav__link">
-    Managing StashCache and associated services
+  <a href="#managing-osdf-services" class="md-nav__link">
+    Managing OSDF services
   </a>
   
-    <nav class="md-nav" aria-label="Managing StashCache and associated services">
+    <nav class="md-nav" aria-label="Managing OSDF services">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1966,11 +1966,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#managing-stashcache-and-associated-services" class="md-nav__link">
-    Managing StashCache and associated services
+  <a href="#managing-osdf-services" class="md-nav__link">
+    Managing OSDF services
   </a>
   
-    <nav class="md-nav" aria-label="Managing StashCache and associated services">
+    <nav class="md-nav" aria-label="Managing OSDF services">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2036,8 +2036,8 @@
                   </a>
                 
                 
-                <h1 id="installing-the-stashcache-cache">Installing the StashCache Cache<a class="headerlink" href="#installing-the-stashcache-cache" title="Permanent link">&para;</a></h1>
-<p>This document describes how to install a StashCache cache service.  This service allows a site or regional
+                <h1 id="installing-the-osdf-cache">Installing the OSDF Cache<a class="headerlink" href="#installing-the-osdf-cache" title="Permanent link">&para;</a></h1>
+<p>This document describes how to install an Open Science Data Federation (OSDF) cache service.  This service allows a site or regional
 network to cache data frequently used on the OSG, reducing data transfer over the wide-area network and
 decreasing access latency.</p>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
@@ -2046,8 +2046,8 @@ decreasing access latency.</p>
 <li><strong>Operating system:</strong> A RHEL 7 or compatible operating systems.</li>
 <li><strong>User IDs:</strong> If they do not exist already, the installation will create the Linux user IDs <code>condor</code> and
   <code>xrootd</code></li>
-<li><strong>Host certificate:</strong> Required for reporting and authenticated StashCache.
-  Authenticated StashCache is an optional feature.
+<li><strong>Host certificate:</strong> Required for reporting and authenticated caches.
+  Authenticated caching is an optional feature.
   See our <a href="../../../security/host-certs/">documentation</a> for instructions on how to request and install host certificates.</li>
 <li><strong>Network ports:</strong> The cache service requires the following ports open:<ul>
 <li>Inbound TCP port 1094 for file access via the XRootD protocol</li>
@@ -2066,7 +2066,7 @@ decreasing access latency.</p>
 <li>Install <a href="../../../common/ca/">CA certificates</a></li>
 </ul>
 <h2 id="registering-the-cache">Registering the Cache<a class="headerlink" href="#registering-the-cache" title="Permanent link">&para;</a></h2>
-<p>To be part of the OSG StashCache Federation, your cache must be registered with the OSG.
+<p>To be part of the OSDF, your cache must be registered with the OSG.
 You will need basic information like the resource name and hostname,
 and the administrative and security contacts.</p>
 <h3 id="initial-registration">Initial registration<a class="headerlink" href="#initial-registration" title="Permanent link">&para;</a></h3>
@@ -2088,35 +2088,35 @@ The service type is <code>XRootD cache server</code>.</p>
 <ul>
 <li>In addition to the cache allowing a VO in the <code>AllowedVOs</code> list,
   that VO must also allow the cache in its <code>AllowedCaches</code> list.
-  See the page on <a href="../vo-data/">getting your VO's data into StashCache</a>.</li>
+  See the page on <a href="../vo-data/">getting your VO's data into OSDF</a>.</li>
 <li>There must be an authenticated XRootD instance on the cache server.</li>
 <li>There must be a <code>DN</code> attribute in the resource registration
   with the <a href="../../../security/host-certs/overview/#before-starting">subject DN</a> of the host certificate</li>
 </ul>
 <p>This is an example registration for a cache server that serves all public data:</p>
-<div class="codehilite"><pre><span></span><code>  <span class="nt">MY_STASHCACHE_CACHE</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><code>  <span class="nt">MY_OSDF_CACHE</span><span class="p">:</span>
     <span class="nt">FQDN</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-cache.example.net</span>
     <span class="nt">Service</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">XRootD cache server</span>
-      <span class="l l-Scalar l-Scalar-Plain">Description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">StashCache cache server</span>
+      <span class="l l-Scalar l-Scalar-Plain">Description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">OSDF cache server</span>
     <span class="nt">AllowedVOs</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ANY_PUBLIC</span>
 </code></pre></div>
 
-<p>This is an example registration for a cache server that only serves authenticated data from the OSG VO:</p>
-<div class="codehilite"><pre><span></span><code>  <span class="nt">MY_AUTH_STASHCACHE_CACHE</span><span class="p">:</span>
+<p>This is an example registration for a cache server that only serves authenticated data for the Open Science Pool:</p>
+<div class="codehilite"><pre><span></span><code>  <span class="nt">MY_AUTH_OSDF_CACHE</span><span class="p">:</span>
     <span class="nt">FQDN</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-auth-cache.example.net</span>
     <span class="nt">Service</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">XRootD cache server</span>
-      <span class="l l-Scalar l-Scalar-Plain">Description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">StashCache cache server</span>
+      <span class="l l-Scalar l-Scalar-Plain">Description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">OSDF cache server</span>
     <span class="nt">AllowedVOs</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">OSG</span>
     <span class="nt">DN</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=my-auth-cache.example.net</span>
 </code></pre></div>
 
 <p>This is an example registration for a cache server that serves all public data <em>and</em> authenticated data from the OSG VO:</p>
-<div class="codehilite"><pre><span></span><code>  <span class="nt">MY_COMBO_STASHCACHE_CACHE</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><code>  <span class="nt">MY_COMBO_OSDF_CACHE</span><span class="p">:</span>
     <span class="nt">FQDN</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-combo-cache.example.net</span>
     <span class="nt">Service</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">XRootD cache server</span>
-      <span class="l l-Scalar l-Scalar-Plain">Description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">StashCache cache server</span>
+      <span class="l l-Scalar l-Scalar-Plain">Description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">OSDF cache server</span>
     <span class="nt">AllowedVOs</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">OSG</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ANY_PUBLIC</span>
@@ -2128,7 +2128,7 @@ The service type is <code>XRootD cache server</code>.</p>
 In the meantime, open a <a href="https://support.opensciencegrid.org">help ticket</a> with your cache name.
 Mention in your ticket that you would like to "Finalize the cache registration."</p>
 <h2 id="installing-the-cache">Installing the Cache<a class="headerlink" href="#installing-the-cache" title="Permanent link">&para;</a></h2>
-<p>The StashCache software consists of an XRootD server with special configuration and supporting services.
+<p>The OSDF software consists of an XRootD server with special configuration and supporting services.
 To simplify installation, OSG provides convenience RPMs that install all required
 packages with a single command:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install stash-cache
@@ -2152,7 +2152,7 @@ Administrators may provide additional configuration by placing files in <code>/e
 <li><code>set resourcename = YOUR_RESOURCE_NAME</code>: the resource name registered with the OSG.</li>
 </ul>
 <h3 id="ensure-the-xrootd-service-has-a-certificate">Ensure the xrootd service has a certificate<a class="headerlink" href="#ensure-the-xrootd-service-has-a-certificate" title="Permanent link">&para;</a></h3>
-<p>The service will need a certificate for reporting and to authenticate to StashCache origins.
+<p>The service will need a certificate for reporting and to authenticate to origins.
 The easiest solution for this is to use your host certificate and key as follows:</p>
 <ol>
 <li>Copy the host certificate to <code>/etc/grid-security/xrd/xrd{cert,key}.pem</code></li>
@@ -2192,7 +2192,7 @@ to anyone from <code>*.cs.wisc.edu</code> in the <code>/glow</code> VOMS group.<
 <p>Remote debugging should only be enabled for as long as you need assistance.
 As soon as your issue has been resolved, revert any changes you have made to <code>/etc/xrootd/digauth.cfg</code>.</p>
 <h3 id="enable-https-on-the-unauthenticated-cache">Enable HTTPS on the unauthenticated cache<a class="headerlink" href="#enable-https-on-the-unauthenticated-cache" title="Permanent link">&para;</a></h3>
-<p>By default, the unauthenticated stash-cache instance uses plain HTTP, not HTTPS.
+<p>By default, the unauthenticated cache instance uses plain HTTP, not HTTPS.
 To use HTTPS:</p>
 <ol>
 <li>
@@ -2224,7 +2224,7 @@ In this case, you must manually tell the cache services which FQDN to use for to
 
 </li>
 </ol>
-<h2 id="managing-stashcache-and-associated-services">Managing StashCache and associated services<a class="headerlink" href="#managing-stashcache-and-associated-services" title="Permanent link">&para;</a></h2>
+<h2 id="managing-osdf-services">Managing OSDF services<a class="headerlink" href="#managing-osdf-services" title="Permanent link">&para;</a></h2>
 <p>These services must be managed by <code>systemctl</code> and may start additional services as dependencies.
 As a reminder, here are common service commands (all run as <code>root</code>) for EL7:</p>
 <table>

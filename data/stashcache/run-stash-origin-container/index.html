@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#running-stashcache-origin-in-a-container" class="md-skip">
+        <a href="#running-osdf-origin-in-a-container" class="md-skip">
           Skip to content
         </a>
       
@@ -1834,27 +1834,27 @@
                   </a>
                 
                 
-                <h1 id="running-stashcache-origin-in-a-container">Running StashCache Origin in a Container<a class="headerlink" href="#running-stashcache-origin-in-a-container" title="Permanent link">&para;</a></h1>
+                <h1 id="running-osdf-origin-in-a-container">Running OSDF Origin in a Container<a class="headerlink" href="#running-osdf-origin-in-a-container" title="Permanent link">&para;</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Currently, the StashCache Origin container only supports distribution of public data.
+<p>Currently, the origin container only supports distribution of public data.
 If you would like to distribute private data requiring authentication,
 see <a href="../install-origin/">the RPM installation guide</a>.</p>
 </div>
-<p>The OSG operates the <a href="../overview/">StashCache data federation</a>, which
+<p>The OSG operates the <a href="../overview/">Open Science Data Federation</a> (OSDF), which
 provides organizations with a method to distribute their data in a scalable manner to thousands of jobs without needing
 to pre-stage data across sites or operate their own scalable infrastructure.</p>
-<p><a href="../install-origin/">Stash Origins</a> store copies of users' data.
-Each community (or experiment) needs to run one origin to export its data via the StashCache federation.
+<p><a href="../install-origin/">Origins</a> store copies of users' data.
+Each community (or experiment) needs to run one origin to export its data via the federation.
 This document outlines how to run such an origin in a Docker container.</p>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following points:</p>
 <ol>
 <li><strong>Docker:</strong> For the purpose of this guide, the host must have a running docker service and you must have the ability
 to start containers (i.e., belong to the <code>docker</code> Unix group).</li>
-<li><strong>Network ports:</strong> The Stash Origin listens for incoming HTTP/S and XRootD connections on ports 1094 and 1095 (by
+<li><strong>Network ports:</strong> The origin listens for incoming HTTP/S and XRootD connections on ports 1094 and 1095 (by
 default).</li>
-<li><strong>File Systems:</strong> Stash Origin needs a host partition to store user data.</li>
+<li><strong>File Systems:</strong> The origin needs a host partition to store user data.</li>
 <li><strong>Registration:</strong> Before deploying an origin, you must
    <a href="../install-origin/#registering-the-origin">registered the service</a> in the OSG Topology</li>
 </ol>
@@ -1870,7 +1870,7 @@ ORIGIN_FQDN=&lt;FQDN&gt;
 </code></pre></div>
 
 <h2 id="populating-origin-data">Populating Origin Data<a class="headerlink" href="#populating-origin-data" title="Permanent link">&para;</a></h2>
-<p>The Stash Cache data federation namespace is shared by multiple VOs so you must
+<p>The OSDF namespace is shared by multiple VOs so you must
 <a href="../vo-data/#choosing-namespaces">choose a namespace</a> for your own VO's data.
 When running an origin container, your chosen namespace must be reflected in your host partition.</p>
 <p>For example, if your host partition is <code>/srv/origin-puliic</code> and the name of your VO is <code>ASTRO,
@@ -1895,7 +1895,7 @@ See <a href="#populating-origin-data">this section</a> for details.</p>
 <p>A container deployed this way will serve the entire contents of <code>&lt;HOST PARTITION&gt;</code>.</p>
 </div>
 <h3 id="running-on-origin-container-with-systemd">Running on origin container with systemd<a class="headerlink" href="#running-on-origin-container-with-systemd" title="Permanent link">&para;</a></h3>
-<p>An example systemd service file for StashCache.
+<p>An example systemd service file for the OSDF.
 This will require creating the environment file in the directory <code>/opt/origin/.env</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1903,7 +1903,7 @@ This will require creating the environment file in the directory <code>/opt/orig
 </div>
 <p>Create the systemd service file <code>/etc/systemd/system/docker.stash-origin.service</code> as follows:</p>
 <div class="codehilite"><pre><span></span><code>[Unit]
-Description=Stash Origin Container
+Description=Origin Container
 After=docker.service
 Requires=docker.service
 

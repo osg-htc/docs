@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#data-federation-overview" class="md-skip">
+        <a href="#open-science-data-federation-overview" class="md-skip">
           Skip to content
         </a>
       
@@ -1248,8 +1248,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#joining-and-using-stashcache" class="md-nav__link">
-    Joining and Using StashCache
+  <a href="#joining-and-using-the-osdf" class="md-nav__link">
+    Joining and Using the OSDF
   </a>
   
 </li>
@@ -1727,8 +1727,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#joining-and-using-stashcache" class="md-nav__link">
-    Joining and Using StashCache
+  <a href="#joining-and-using-the-osdf" class="md-nav__link">
+    Joining and Using the OSDF
   </a>
   
 </li>
@@ -1750,22 +1750,22 @@
                   </a>
                 
                 
-                <h1 id="data-federation-overview">Data Federation Overview<a class="headerlink" href="#data-federation-overview" title="Permanent link">&para;</a></h1>
-<p>The OSG operates the <em>StashCache data federation</em>, which provides organizations with a method to distribute their data
+                <h1 id="open-science-data-federation-overview">Open Science Data Federation Overview<a class="headerlink" href="#open-science-data-federation-overview" title="Permanent link">&para;</a></h1>
+<p>The OSG operates the <em>Open Science Data Federation</em> (OSDF), which provides organizations with a method to distribute their data
 in a scalable manner to thousands of jobs without needing to pre-stage data at each site.
-The StashCache data federation is best suited for per-job data set sizes between 1 and 50 GB,
+The OSDF is best suited for per-job data set sizes between 1 and 50 GB,
 with no more than 1 TB for a complete workflow.</p>
 <p>Organizations export their data from an <em>origin server</em>,
 and the data is streamed to jobs from a set of <em>cache servers</em> distributed throughout the OSG and Internet2.
 Jobs can achieve lower latency and higher throughput for data transfer by using a nearby cache
 instead of accessing the origin directly.</p>
-<p>The map below shows the location of the current caches in the StashCache federation:</p>
-<p><img alt="StashCache Map" src="../StashCacheMap.png" title="StashCache Map" /></p>
+<p>The map below shows the location of the current caches in the federation:</p>
+<p><img alt="OSDF Map" src="../StashCacheMap.png" title="OSDF Map" /></p>
 <h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
-<p>The StashCache federation consists of three service types:</p>
+<p>The OSDF consists of three service types:</p>
 <ul>
 <li><strong>Origin</strong>: Keeps the authoritative copy of an organization's data.
-    Each origin is operated by the organization that wants to distribute its data within the StashCache federation.</li>
+    Each origin is operated by the organization that wants to distribute its data within the federation.</li>
 <li><strong>Cache</strong>: Transfers data to clients such as jobs or users.
     A set of caches are operated across the OSG for the benefit of nearby sites;
     in addition, each site may run its own cache in order to reduce the amount of data transferred over the WAN.</li>
@@ -1773,17 +1773,17 @@ instead of accessing the origin directly.</p>
     The redirectors are run centrally by OSG Operations.</li>
 </ul>
 <p>The structure of the federation is illustrated below:</p>
-<p><img alt="StashCache Diagram" src="../StashCache-Diagram.png" title="StashCache Diagram" /></p>
+<p><img alt="OSDF Diagram" src="../StashCache-Diagram.png" title="OSDF Diagram" /></p>
 <p>A job will request data from a cache.
 The cache will serve the requested data from local disk if possible.
 Otherwise, it will query a redirector for the origin server that provides the data,
 download the data from that origin server, and then serve the data to the job.
 A copy of the data will be kept on the cache for use by future jobs.</p>
-<h2 id="joining-and-using-stashcache">Joining and Using StashCache<a class="headerlink" href="#joining-and-using-stashcache" title="Permanent link">&para;</a></h2>
+<h2 id="joining-and-using-the-osdf">Joining and Using the OSDF<a class="headerlink" href="#joining-and-using-the-osdf" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Organizations can export their data to StashCache by <a href="../install-origin/">installing the StashCache <strong>Origin</strong></a></li>
-<li>Sites can reduce data transfer via the WAN by <a href="../install-cache/">installing the StashCache <strong>Cache</strong></a></li>
-<li>Users can access StashCache via the
+<li>Organizations can export their data to the OSDF by <a href="../install-origin/">installing the <strong>Origin</strong></a></li>
+<li>Sites can reduce data transfer via the WAN by <a href="../install-cache/">installing the <strong>Cache</strong></a></li>
+<li>Users can access OSDF via the
   <a href="https://support.opensciencegrid.org/support/solutions/articles/12000002775-transferring-data-with-stashcach">stashcp client</a>
   or from CVMFS via the <code>/cvmfs/stash.osgstorage.org</code> directory tree.</li>
 </ul>

@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#running-stashcache-cache-in-a-container" class="md-skip">
+        <a href="#running-osdf-cache-in-a-container" class="md-skip">
           Skip to content
         </a>
       
@@ -1283,11 +1283,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuring-stash-cache" class="md-nav__link">
-    Configuring Stash Cache
+  <a href="#configuring-the-osdf-cache" class="md-nav__link">
+    Configuring the OSDF Cache
   </a>
   
-    <nav class="md-nav" aria-label="Configuring Stash Cache">
+    <nav class="md-nav" aria-label="Configuring the OSDF Cache">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1325,8 +1325,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#running-stash-cache-on-container-with-systemd" class="md-nav__link">
-    Running Stash Cache on container with systemd
+  <a href="#running-a-cache-on-container-with-systemd" class="md-nav__link">
+    Running a cache on container with systemd
   </a>
   
 </li>
@@ -1804,11 +1804,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuring-stash-cache" class="md-nav__link">
-    Configuring Stash Cache
+  <a href="#configuring-the-osdf-cache" class="md-nav__link">
+    Configuring the OSDF Cache
   </a>
   
-    <nav class="md-nav" aria-label="Configuring Stash Cache">
+    <nav class="md-nav" aria-label="Configuring the OSDF Cache">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1846,8 +1846,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#running-stash-cache-on-container-with-systemd" class="md-nav__link">
-    Running Stash Cache on container with systemd
+  <a href="#running-a-cache-on-container-with-systemd" class="md-nav__link">
+    Running a cache on container with systemd
   </a>
   
 </li>
@@ -1902,25 +1902,25 @@
                   </a>
                 
                 
-                <h1 id="running-stashcache-cache-in-a-container">Running StashCache Cache in a Container<a class="headerlink" href="#running-stashcache-cache-in-a-container" title="Permanent link">&para;</a></h1>
-<p>The OSG operates the <a href="../overview/">StashCache data federation</a>, which
+                <h1 id="running-osdf-cache-in-a-container">Running OSDF Cache in a Container<a class="headerlink" href="#running-osdf-cache-in-a-container" title="Permanent link">&para;</a></h1>
+<p>The OSG operates the <a href="../overview/">Open Science Data Federation</a> (OSDF), which
 provides organizations with a method to distribute their data in a scalable manner to thousands of jobs without needing
 to pre-stage data across sites or operate their own scalable infrastructure.</p>
-<p><a href="../install-cache/">Stash Caches</a> transfer data to clients such as jobs or users.
+<p><a href="../install-cache/">OSDF Caches</a> transfer data to clients such as jobs or users.
 A set of caches are operated across the OSG for the benefit of nearby sites;
 in addition, each site may run its own cache in order to reduce the amount of data transferred over the WAN.
-This document outlines how to run StashCache in a Docker container.</p>
+This document outlines how to run a cache in a Docker container.</p>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following points:</p>
 <ol>
 <li><strong>Docker:</strong> For the purpose of this guide, the host must have a running docker service
    and you must have the ability to start containers (i.e., belong to the <code>docker</code> Unix group).</li>
-<li><strong>Network ports:</strong> Stash Cache listens for incoming HTTP/S connections on port 8000 (by default)</li>
-<li><strong>File Systems:</strong> Stash Cache needs host partitions to store user data.
+<li><strong>Network ports:</strong> The cache listens for incoming HTTP/S connections on port 8000 (by default)</li>
+<li><strong>File Systems:</strong> The cache needs host partitions to store user data.
    For improved performance and storage, we recommend multiple partitions for handling namespaces (HDD), data (HDDs),
    and metadata (SSDs).</li>
 </ol>
-<h2 id="configuring-stash-cache">Configuring Stash Cache<a class="headerlink" href="#configuring-stash-cache" title="Permanent link">&para;</a></h2>
+<h2 id="configuring-the-osdf-cache">Configuring the OSDF Cache<a class="headerlink" href="#configuring-the-osdf-cache" title="Permanent link">&para;</a></h2>
 <p>In addition to the required configuration above (ports and file systems),
 you may also configure the behavior of your cache with the following variables using an environment variable file:</p>
 <p>Where the environment file on the docker host, <code>/opt/xcache/.env</code>, has (at least) the following contents,
@@ -1944,7 +1944,7 @@ CACHE_FQDN=&lt;FQDN&gt;
        If you set it to <code>0</code>, prefetching will be disabled, but that is not recommended.</li>
 </ul>
 <h2 id="running-a-cache">Running a Cache<a class="headerlink" href="#running-a-cache" title="Permanent link">&para;</a></h2>
-<p>StashCache cache containers  may be run with either multiple mounted host partitions (recommended) or a single host
+<p>Cache containers  may be run with either multiple mounted host partitions (recommended) or a single host
 partition.</p>
 <p>It is recommended to use a container orchestration service such as <a href="https://docs.docker.com/compose/">docker-compose</a>
 or <a href="https://kubernetes.io/">kubernetes</a> whose details are beyond the scope of this document.
@@ -1984,8 +1984,8 @@ solid state disks or NVME.</p>
 <span class="go">             opensciencegrid/stash-cache:release</span>
 </code></pre></div>
 
-<h3 id="running-stash-cache-on-container-with-systemd">Running Stash Cache on container with systemd<a class="headerlink" href="#running-stash-cache-on-container-with-systemd" title="Permanent link">&para;</a></h3>
-<p>An example systemd service file for Stash Cache.
+<h3 id="running-a-cache-on-container-with-systemd">Running a cache on container with systemd<a class="headerlink" href="#running-a-cache-on-container-with-systemd" title="Permanent link">&para;</a></h3>
+<p>An example systemd service file for the OSDF cache.
 This will require creating the environment file in the directory <code>/opt/xcache/.env</code>. </p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1993,7 +1993,7 @@ This will require creating the environment file in the directory <code>/opt/xcac
 </div>
 <p>Create the systemd service file <code>/etc/systemd/system/docker.stash-cache.service</code> as follows:</p>
 <div class="codehilite"><pre><span></span><code>[Unit]
-Description=Stash Cache Container
+Description=Cache Container
 After=docker.service
 Requires=docker.service
 

@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#getting-vo-data-into-stashcache" class="md-skip">
+        <a href="#getting-vo-data-into-the-osdf" class="md-skip">
           Skip to content
         </a>
       
@@ -1834,11 +1834,11 @@
                   </a>
                 
                 
-                <h1 id="getting-vo-data-into-stashcache">Getting VO Data into StashCache<a class="headerlink" href="#getting-vo-data-into-stashcache" title="Permanent link">&para;</a></h1>
+                <h1 id="getting-vo-data-into-the-osdf">Getting VO Data into the OSDF<a class="headerlink" href="#getting-vo-data-into-the-osdf" title="Permanent link">&para;</a></h1>
 <p>This document describes the steps required to manage a VO's role
-in the StashCache Data Federation including selecting a namespace, registration,
+in the Open Science Data Federation (OSDF) including selecting a namespace, registration,
 and selecting which resources are allowed to host or cache your data.</p>
-<p>For general information about StashCache, see the <a href="../overview/">overview document</a>.</p>
+<p>For general information about the OSDF, see the <a href="../overview/">overview document</a>.</p>
 <p>Site admins should work together with VO managers in order to perform these steps.</p>
 <h2 id="definitions">Definitions<a class="headerlink" href="#definitions" title="Permanent link">&para;</a></h2>
 <ul>
@@ -1847,17 +1847,17 @@ and selecting which resources are allowed to host or cache your data.</p>
 <li><strong>Protected data:</strong> data that requires authentication to read.</li>
 </ul>
 <h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
-<p>In order for a Virtual Organization to join the StashCache Federation, the VO must already be registered in OSG Topology.
+<p>In order for a Virtual Organization to join the federation, the VO must already be registered in OSG Topology.
 See the <a href="../../../common/registration/#registering-virtual-organizations">registration document</a>.</p>
 <h2 id="choosing-namespaces">Choosing Namespaces<a class="headerlink" href="#choosing-namespaces" title="Permanent link">&para;</a></h2>
 <p>The VO must pick one or more "namespaces" for their data.
 A namespace is a directory tree in the federation where VO data is found.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Namespaces are global across the federation, so you must work with the StashCache Operations team
+<p>Namespaces are global across the federation, so you must work with the OSG Operations team
 to ensure that your VO's namespaces do not collide with those of another VO.</p>
 <p>Send an email to help@opensciencegrid.org with the following subject:
-"Requesting StashCache namespaces for VO <VO>"
+"Requesting OSDF namespaces for VO <VO>"
 and put the desired namespaces in the body of the email.</p>
 </div>
 <p>A namespace should be easy for your users to remember but not so generic that it collides with other VOs.
@@ -1871,11 +1871,11 @@ and protected data, if any, should be stored in a subdirectory named <code>PROTE
 </ul>
 <p>Separating the public and protected data in separate directory trees is preferred for technical reasons.</p>
 <h2 id="registering-data-federation-information">Registering Data Federation Information<a class="headerlink" href="#registering-data-federation-information" title="Permanent link">&para;</a></h2>
-<p>The VO must allow one or more StashCache origins to host their data.
+<p>The VO must allow one or more origins to host their data.
 An origin will typically be hosted on a site owned by the VO.
 For information about setting up an origin, see the <a href="../install-origin/">installation document</a>.</p>
-<p>In order to declare your VO's role in the StashCache federation,
-you must add StashCache information to your VO's YAML file in the OSG Topology repository.</p>
+<p>In order to declare your VO's role in the federation,
+you must add OSDF information to your VO's YAML file in the OSG Topology repository.</p>
 <p>For example, the full registration for the <code>Astro</code> VO may look something like the following:</p>
 <div class="codehilite"><pre><span></span><code><span class="nt">DataFederations</span><span class="p">:</span>
   <span class="nt">StashCache</span><span class="p">:</span>
@@ -1885,7 +1885,7 @@ you must add StashCache information to your VO's YAML file in the OSG Topology r
     <span class="nt">AllowedCaches</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ANY</span>
     <span class="nt">AllowedOrigins</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">CHTC_STASHCACHE_ORIGIN</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">CHTC_OSDF_ORIGIN</span>
 </code></pre></div>
 
 <p>The sections are described below.</p>
@@ -1910,7 +1910,7 @@ list who is allowed to access that namespace.</p>
 <p>This declares two namespaces: <code>/astro/PUBLIC</code> for public data, and <code>/astro/PROTECTED</code>
 which can only be read by someone with the <code>/Astro</code> FQAN or by Matyas Selmeci.</p>
 <h3 id="allowedcaches-list">AllowedCaches list<a class="headerlink" href="#allowedcaches-list" title="Permanent link">&para;</a></h3>
-<p>The VO must allow one or more StashCache Caches to cache their data.
+<p>The VO must allow one or more OSDF caches to cache their data.
 The more places a VO's data can be cached in, the bigger the data transfer benefit for the VO.
 The majority of caches across OSG will automatically cache all "public" VO data.
 Caching "protected" VO data will often be done on a site owned by the VO.
@@ -1928,7 +1928,7 @@ There are two cases:</p>
 <ul>
 <li>If you have some protected data, then AllowedCaches is a list of <em>resources</em> that are allowed to cache your data.
    A resource is an entry in a <code>/topology/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCEGROUP&gt;.yaml</code> file,
-   for example "CHTC_STASHCACHE_CACHE".</li>
+   for example <code>CHTC_OSDF_CACHE</code>.</li>
 </ul>
 <p>The following requirements must be met for the resource:</p>
 <ul>
@@ -1940,7 +1940,7 @@ There are two cases:</p>
 <p>AllowedOrigins is a list of which origins are allowed to host your data.
 This is a list of <em>resources</em>.
 A resource is an entry in a <code>/topology/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCEGROUP&gt;.yaml</code> file,
-for example "CHTC_STASHCACHE_ORIGIN".</p>
+for example <code>CHTC_OSDF_ORIGIN</code>.</p>
 <p>The following requirements must be met for the resource:</p>
 <ul>
 <li>It must have an "XRootD origin server" service</li>

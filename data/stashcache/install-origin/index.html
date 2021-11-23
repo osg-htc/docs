@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#installing-the-stashcache-origin" class="md-skip">
+        <a href="#installing-the-osdf-origin" class="md-skip">
           Skip to content
         </a>
       
@@ -1890,16 +1890,15 @@
                   </a>
                 
                 
-                <h1 id="installing-the-stashcache-origin">Installing the StashCache Origin<a class="headerlink" href="#installing-the-stashcache-origin" title="Permanent link">&para;</a></h1>
+                <h1 id="installing-the-osdf-origin">Installing the OSDF Origin<a class="headerlink" href="#installing-the-osdf-origin" title="Permanent link">&para;</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>If you want to run origins for authenticated and unauthenticated data,
 you <strong>must</strong> run them on separate hosts.
-This requires registering a resource for each host.
-This requirement will be removed in a future version of StashCache.</p>
+This requires registering a resource for each host.</p>
 </div>
-<p>This document describes how to install a StashCache origin service.  This service allows an organization
-to export its data to the StashCache data federation.</p>
+<p>This document describes how to install an Open Science Data Federation (OSDF) origin service.  This service allows an organization
+to export its data to the data federation.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The <em>origin</em> must be registered with the OSG prior to joining the data federation. You may start the
@@ -1982,26 +1981,25 @@ or <code>/etc/xrootd/config.d/9*.cfg</code> (for directives that are processed A
 <p>For example, if the HCC VO would like to set up an origin server exporting from the mount point <code>/mnt/stash</code>,
 and HCC's registered namespace is <code>/hcc</code>, then the following would be set in <code>10-common-site-local.cfg</code>:</p>
 <div class="codehilite"><pre><span></span><code>set rootdir = /mnt/stash
-set resourcename = HCC_STASH_ORIGIN
+set resourcename = HCC_OSDF_ORIGIN
 </code></pre></div>
 
 <p>And the following would be set in <code>10-origin-site-local.cfg</code>:</p>
 <div class="codehilite"><pre><span></span><code>set originexport = /hcc
 </code></pre></div>
 
-<p>With this configuration, the data under <code>/mnt/stash/hcc/bio/datasets</code> would be available under the StashCache path
-<code>/hcc/bio/datasets</code> and the data under <code>/mnt/stash/hcc/hep/generators</code> would be available under the StashCache path
-<code>/hcc/hep/generators</code>.</p>
+<p>With this configuration, the data under <code>/mnt/stash/hcc/bio/datasets</code> would be available under the path
+<code>/hcc/bio/datasets</code> in the OSDF namespace and the data under <code>/mnt/stash/hcc/hep/generators</code> would be available under the path
+<code>/hcc/hep/generators</code> in the OSDF namespace.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>If you want to run origins for authenticated and unauthenticated data,
 you <strong>must</strong> run them on separate hosts.
-This requires registering a resource for each host.
-This requirement will be removed in a future version of StashCache.</p>
+This requires registering a resource for each host.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>The StashCache namespace is <em>global</em> within a data federation.
+<p>The OSDF namespace is a <em>global</em> namespace.
 Directories you export <strong>must not</strong> collide with directories provided by other origin servers; this is
 why the explicit registration is required.</p>
 </div>
@@ -2138,14 +2136,14 @@ Run the following command:</p>
 </code></pre></div>
 
 <h2 id="registering-the-origin">Registering the Origin<a class="headerlink" href="#registering-the-origin" title="Permanent link">&para;</a></h2>
-<p>To be part of the OSG StashCache Federation, your origin must be
+<p>To be part of the Open Science Data Federation, your origin must be
 <a href="../../../common/registration/">registered with the OSG</a>.  The service type is <code>XRootD origin server</code>.</p>
 <p>The resource must also specify which VOs it will serve data from.
-To do this, add an <code>AllowedVOs</code> list, with each line specifying a VO whose StashCache data the resource is willing to host.
+To do this, add an <code>AllowedVOs</code> list, with each line specifying a VO whose data the resource is willing to host.
 For example:</p>
-<div class="codehilite"><pre><span></span><code>  <span class="nt">MY_STASHCACHE_ORIGIN</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><code>  <span class="nt">MY_OSDF_ORIGIN</span><span class="p">:</span>
     <span class="nt">Service</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">XRootD origin server</span>
-      <span class="l l-Scalar l-Scalar-Plain">Description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">StashCache origin server</span>
+      <span class="l l-Scalar l-Scalar-Plain">Description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">OSDF origin server</span>
     <span class="nt">AllowedVOs</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GLOW</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">OSG</span>
@@ -2154,7 +2152,7 @@ For example:</p>
 <p>You can use the special value <code>ANY</code> to indicate that the origin will serve data from any VO that puts data on it.</p>
 <p>In addition to the origin allowing a VOs via the <code>AllowedVOs</code> list,
 that VO must also allow the origin in its <code>DataFederations/StashCache/AllowedOrigins</code> list.
-See the page on <a href="../vo-data/">getting your VO's data into StashCache</a>.</p>
+See the page on <a href="../vo-data/">getting your VO's data into OSDF</a>.</p>
 <h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
 <p>To get assistance, please use the <a href="../../../common/help/">this page</a> or contact <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> directly.</p>
                 
