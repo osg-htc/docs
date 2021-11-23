@@ -2129,6 +2129,13 @@ the update from version 3 to version 4 will require some manual changes to your 
 </li>
 </ol>
 <h4 id="htcondor-ce">HTCondor-CE<a class="headerlink" href="#htcondor-ce" title="Permanent link">&para;</a></h4>
+<div class="admonition bug">
+<p class="admonition-title">Remove comments from <code>JOB_ROUTER_ENTRIES</code></p>
+<p>C-style comments, e.g. <code>/* comment */</code>, in <code>JOB_ROUTER_ENTRIES</code> will prevent the JobRouter from routing jobs
+(<a href="https://opensciencegrid.atlassian.net/browse/HTCONDOR-864">HTCONDOR-864</a>).
+For the time being, remove any comments if you are still using the
+<a href="https://htcondor.com/htcondor-ce/v5/configuration/job-router-overview#deprecated-syntax">deprecated syntax</a>.</p>
+</div>
 <p>The OSG 3.6 release series contains <a href="https://htcondor.github.io/htcondor-ce/v5/releases/">HTCondor-CE 5</a>, a major
 version upgrade from HTCondor-CE 4, which was available in the OSG 3.5 release repositories.
 To update HTCondor-CE, perform the following steps:</p>

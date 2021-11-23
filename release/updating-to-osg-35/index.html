@@ -2021,6 +2021,13 @@ To update OSG Configure on your HTCondor-CE, perform the following steps:</p>
 </li>
 </ol>
 <h2 id="updating-to-htcondor-ce-5">Updating to HTCondor-CE 5<a class="headerlink" href="#updating-to-htcondor-ce-5" title="Permanent link">&para;</a></h2>
+<div class="admonition bug">
+<p class="admonition-title">Remove comments from <code>JOB_ROUTER_ENTRIES</code></p>
+<p>C-style comments, e.g. <code>/* comment */</code>, in <code>JOB_ROUTER_ENTRIES</code> will prevent the JobRouter from routing jobs
+(<a href="https://opensciencegrid.atlassian.net/browse/HTCONDOR-864">HTCONDOR-864</a>).
+For the time being, remove any comments if you are still using the
+<a href="https://htcondor.com/htcondor-ce/v5/configuration/job-router-overview#deprecated-syntax">deprecated syntax</a>.</p>
+</div>
 <p><a href="https://htcondor.github.io/htcondor-ce/v5/releases/">HTCondor-CE 5</a> is a major version upgrade from HTCondor-CE 4,
 available through the <a href="../release_series/">OSG upcoming</a> repository.
 HTCondor-CE 5 provides improved support for SciTokens and WLCG Tokens as well as support for a new Job Router
