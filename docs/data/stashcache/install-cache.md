@@ -61,7 +61,7 @@ There are extra requirements for serving non-public data:
 
 - In addition to the cache allowing a VO in the `AllowedVOs` list,
   that VO must also allow the cache in its `AllowedCaches` list.
-  See the page on [getting your VO's data into OSDG](vo-data.md).
+  See the page on [getting your VO's data into OSDF](vo-data.md).
 - There must be an authenticated XRootD instance on the cache server.
 - There must be a `DN` attribute in the resource registration
   with the [subject DN](../../security/host-certs/overview.md#before-starting) of the host certificate
