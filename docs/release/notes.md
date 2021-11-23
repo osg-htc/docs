@@ -22,6 +22,21 @@ To update to the OSG 3.5 series, please consult the page on
 
         --enablerepo=osg-rolling
 
+Known Issues
+------------
+
+The following issues are known to currently affect packages distributed in OSG 3.5:
+
+### HTCondor-CE ###
+
+-   C-style comments, e.g. `/* comment */`, in `JOB_ROUTER_ENTRIES` will prevent the JobRouter from routing jobs
+    ([HTCONDOR-864](https://opensciencegrid.atlassian.net/browse/HTCONDOR-864)).
+    For the time being, remove any comments if you are still using the
+    [deprecated syntax](https://htcondor.com/htcondor-ce/v5/configuration/job-router-overview#deprecated-syntax).
+
+Releases
+--------
+
 | Version                             | Date       | Summary                                                                       |
 |:------------------------------------|:-----------|:------------------------------------------------------------------------------|
 | [3.5.50](3.5/release-3-5-50.md)     | 2021-11-11 | osg-ca-certs-updater 2.0; Upcoming: xrootd-multiuser 2.0.3                    |
