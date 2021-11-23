@@ -1,14 +1,13 @@
-Installing the StashCache Origin
+Installing the OSDF Origin
 ================================
 
 !!! warning
     If you want to run origins for authenticated and unauthenticated data,
     you **must** run them on separate hosts.
     This requires registering a resource for each host.
-    This requirement will be removed in a future version of StashCache.
 
-This document describes how to install a StashCache origin service.  This service allows an organization
-to export its data to the StashCache data federation.
+This document describes how to install an Open Science Data Federation (OSDF) origin service.  This service allows an organization
+to export its data to the data federation.
 
 !!! note
     The _origin_ must be registered with the OSG prior to joining the data federation. You may start the
@@ -84,7 +83,7 @@ and HCC's registered namespace is `/hcc`, then the following would be set in `10
 
 ```
 set rootdir = /mnt/stash
-set resourcename = HCC_STASH_ORIGIN
+set resourcename = HCC_OSDF_ORIGIN
 ```
 
 And the following would be set in `10-origin-site-local.cfg`:
@@ -92,18 +91,17 @@ And the following would be set in `10-origin-site-local.cfg`:
 set originexport = /hcc
 ```
 
-With this configuration, the data under `/mnt/stash/hcc/bio/datasets` would be available under the StashCache path
-`/hcc/bio/datasets` and the data under `/mnt/stash/hcc/hep/generators` would be available under the StashCache path
-`/hcc/hep/generators`.
+With this configuration, the data under `/mnt/stash/hcc/bio/datasets` would be available under the path
+`/hcc/bio/datasets` in the OSDF namespace and the data under `/mnt/stash/hcc/hep/generators` would be available under the path
+`/hcc/hep/generators` in the OSDF namespace.
 
 !!! warning
     If you want to run origins for authenticated and unauthenticated data,
     you **must** run them on separate hosts.
     This requires registering a resource for each host.
-    This requirement will be removed in a future version of StashCache.
 
 !!! warning
-    The StashCache namespace is *global* within a data federation.
+    The OSDF namespace is a *global* namespace.
     Directories you export **must not** collide with directories provided by other origin servers; this is
     why the explicit registration is required.
 
@@ -218,16 +216,16 @@ Run the following command:
 
 Registering the Origin
 ----------------------
-To be part of the OSG StashCache Federation, your origin must be
+To be part of the Open Science Data Federation, your origin must be
 [registered with the OSG](../../common/registration.md).  The service type is `XRootD origin server`.
 
 The resource must also specify which VOs it will serve data from.
-To do this, add an `AllowedVOs` list, with each line specifying a VO whose StashCache data the resource is willing to host.
+To do this, add an `AllowedVOs` list, with each line specifying a VO whose data the resource is willing to host.
 For example:
 ```yaml
-  MY_STASHCACHE_ORIGIN:
+  MY_OSDF_ORIGIN:
     Service: XRootD origin server
-      Description: StashCache origin server
+      Description: OSDF origin server
     AllowedVOs:
       - GLOW
       - OSG
@@ -236,7 +234,7 @@ You can use the special value `ANY` to indicate that the origin will serve data 
 
 In addition to the origin allowing a VOs via the `AllowedVOs` list,
 that VO must also allow the origin in its `DataFederations/StashCache/AllowedOrigins` list.
-See the page on [getting your VO's data into StashCache](vo-data.md).
+See the page on [getting your VO's data into OSDF](vo-data.md).
 
 Getting Help
 ------------

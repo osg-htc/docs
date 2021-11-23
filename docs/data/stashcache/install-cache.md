@@ -1,7 +1,7 @@
-Installing the StashCache Cache
-===============================
+Installing the OSDF Cache
+=========================
 
-This document describes how to install a StashCache cache service.  This service allows a site or regional
+This document describes how to install an Open Science Data Federation (OSDF) cache service.  This service allows a site or regional
 network to cache data frequently used on the OSG, reducing data transfer over the wide-area network and
 decreasing access latency.
 
@@ -14,8 +14,8 @@ Before starting the installation process, consider the following requirements:
 * __Operating system:__ A RHEL 7 or compatible operating systems.
 * __User IDs:__ If they do not exist already, the installation will create the Linux user IDs `condor` and
   `xrootd`
-* __Host certificate:__ Required for reporting and authenticated StashCache.
-  Authenticated StashCache is an optional feature.
+* __Host certificate:__ Required for reporting and authenticated caches.
+  Authenticated caching is an optional feature.
   See our [documentation](../../security/host-certs.md) for instructions on how to request and install host certificates.
 * __Network ports:__ The cache service requires the following ports open:
     * Inbound TCP port 1094 for file access via the XRootD protocol
@@ -35,7 +35,7 @@ As with all OSG software installations, there are some one-time steps to prepare
 Registering the Cache
 ---------------------
 
-To be part of the OSG StashCache Federation, your cache must be registered with the OSG.
+To be part of the OSDF, your cache must be registered with the OSG.
 You will need basic information like the resource name and hostname,
 and the administrative and security contacts.
 
@@ -61,27 +61,27 @@ There are extra requirements for serving non-public data:
 
 - In addition to the cache allowing a VO in the `AllowedVOs` list,
   that VO must also allow the cache in its `AllowedCaches` list.
-  See the page on [getting your VO's data into StashCache](vo-data.md).
+  See the page on [getting your VO's data into OSDG](vo-data.md).
 - There must be an authenticated XRootD instance on the cache server.
 - There must be a `DN` attribute in the resource registration
   with the [subject DN](../../security/host-certs/overview.md#before-starting) of the host certificate
 
 This is an example registration for a cache server that serves all public data:
 ```yaml
-  MY_STASHCACHE_CACHE:
+  MY_OSDF_CACHE:
     FQDN: my-cache.example.net
     Service: XRootD cache server
-      Description: StashCache cache server
+      Description: OSDF cache server
     AllowedVOs:
       - ANY_PUBLIC
 ```
 
-This is an example registration for a cache server that only serves authenticated data from the OSG VO:
+This is an example registration for a cache server that only serves authenticated data for the Open Science Pool:
 ```yaml
-  MY_AUTH_STASHCACHE_CACHE:
+  MY_AUTH_OSDF_CACHE:
     FQDN: my-auth-cache.example.net
     Service: XRootD cache server
-      Description: StashCache cache server
+      Description: OSDF cache server
     AllowedVOs:
       - OSG
     DN: /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=my-auth-cache.example.net
@@ -89,10 +89,10 @@ This is an example registration for a cache server that only serves authenticate
 
 This is an example registration for a cache server that serves all public data _and_ authenticated data from the OSG VO:
 ```yaml
-  MY_COMBO_STASHCACHE_CACHE:
+  MY_COMBO_OSDF_CACHE:
     FQDN: my-combo-cache.example.net
     Service: XRootD cache server
-      Description: StashCache cache server
+      Description: OSDF cache server
     AllowedVOs:
       - OSG
       - ANY_PUBLIC
@@ -109,7 +109,7 @@ Mention in your ticket that you would like to "Finalize the cache registration."
 Installing the Cache
 --------------------
 
-The StashCache software consists of an XRootD server with special configuration and supporting services.
+The OSDF software consists of an XRootD server with special configuration and supporting services.
 To simplify installation, OSG provides convenience RPMs that install all required
 packages with a single command:
 
@@ -141,7 +141,7 @@ The mandatory variables to configure are:
 
 ### Ensure the xrootd service has a certificate
 
-The service will need a certificate for reporting and to authenticate to StashCache origins.
+The service will need a certificate for reporting and to authenticate to origins.
 The easiest solution for this is to use your host certificate and key as follows:
 
 1. Copy the host certificate to `/etc/grid-security/xrd/xrd{cert,key}.pem`
@@ -195,7 +195,7 @@ As soon as your issue has been resolved, revert any changes you have made to `/e
 
 ### Enable HTTPS on the unauthenticated cache
 
-By default, the unauthenticated stash-cache instance uses plain HTTP, not HTTPS.
+By default, the unauthenticated cache instance uses plain HTTP, not HTTPS.
 To use HTTPS:
 
 1.  Add a certificate according to the [instructions above](#ensure-the-xrootd-service-has-a-certificate)
@@ -226,7 +226,7 @@ In this case, you must manually tell the cache services which FQDN to use for to
         Environment=CACHE_FQDN=<Topology-registered FQDN>
 
 
-Managing StashCache and associated services
+Managing OSDF services
 -------------------------------------------
 
 These services must be managed by `systemctl` and may start additional services as dependencies.

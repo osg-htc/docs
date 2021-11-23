@@ -1,16 +1,16 @@
 DateReviewed: 2020-06-22
 
-Running StashCache Cache in a Container
+Running OSDF Cache in a Container
 =======================================
 
-The OSG operates the [StashCache data federation](overview.md), which
+The OSG operates the [Open Science Data Federation](overview.md) (OSDF), which
 provides organizations with a method to distribute their data in a scalable manner to thousands of jobs without needing
 to pre-stage data across sites or operate their own scalable infrastructure.
 
-[Stash Caches](install-cache.md) transfer data to clients such as jobs or users.
+[OSDF Caches](install-cache.md) transfer data to clients such as jobs or users.
 A set of caches are operated across the OSG for the benefit of nearby sites;
 in addition, each site may run its own cache in order to reduce the amount of data transferred over the WAN.
-This document outlines how to run StashCache in a Docker container.
+This document outlines how to run a cache in a Docker container.
 
 Before Starting
 ---------------
@@ -19,12 +19,12 @@ Before starting the installation process, consider the following points:
 
 1. **Docker:** For the purpose of this guide, the host must have a running docker service
    and you must have the ability to start containers (i.e., belong to the `docker` Unix group).
-1. **Network ports:** Stash Cache listens for incoming HTTP/S connections on port 8000 (by default)
-1. **File Systems:** Stash Cache needs host partitions to store user data.
+1. **Network ports:** The cache listens for incoming HTTP/S connections on port 8000 (by default)
+1. **File Systems:** The cache needs host partitions to store user data.
    For improved performance and storage, we recommend multiple partitions for handling namespaces (HDD), data (HDDs),
    and metadata (SSDs).
 
-Configuring Stash Cache
+Configuring the OSDF Cache
 -----------------------
 
 In addition to the required configuration above (ports and file systems),
@@ -57,7 +57,7 @@ Further behavior of the cache can be configured by setting the following in the 
 Running a Cache
 ---------------
 
-StashCache cache containers  may be run with either multiple mounted host partitions (recommended) or a single host
+Cache containers  may be run with either multiple mounted host partitions (recommended) or a single host
 partition.
 
 It is recommended to use a container orchestration service such as [docker-compose](https://docs.docker.com/compose/)
@@ -103,9 +103,9 @@ user@host $ docker run --rm --publish <HOST PORT>:8000 \
              opensciencegrid/stash-cache:release
 ```
 
-### Running Stash Cache on container with systemd
+### Running a cache on container with systemd
 
-An example systemd service file for Stash Cache.
+An example systemd service file for the OSDF cache.
 This will require creating the environment file in the directory `/opt/xcache/.env`. 
 
 !!! note
@@ -115,7 +115,7 @@ Create the systemd service file `/etc/systemd/system/docker.stash-cache.service`
 
 ```file
 [Unit]
-Description=Stash Cache Container
+Description=Cache Container
 After=docker.service
 Requires=docker.service
 
