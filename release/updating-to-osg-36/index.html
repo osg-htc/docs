@@ -1996,6 +1996,13 @@ token-based authentication before considering an upgrade to OSG 3.6.
 If your VO(s) don't support these new authentication methods or you don't know which authentication methods your
 VO(s) support, install or remain on the <a href="../notes/">OSG 3.5 release series</a></p>
 </div>
+<div class="admonition bug">
+<p class="admonition-title">Proxy delegation broken in HTCondor &lt; 9.0.8</p>
+<p>Proxy delegation does not work with HTCondor &lt; 9.0.8
+(see <a href="https://opensciencegrid.atlassian.net/browse/HTCONDOR-810">HTCONDOR-810</a>).
+If the VOs you support use X.509 proxies for storage access, either install HTCondor from OSG 3.6 upcoming or wait
+for the release of HTCondor 9.0.8 (expected December 2021).</p>
+</div>
 <p>In OSG 3.6, OSG Compute Entrypoints (CEs) only accept token-based pilot job submissions.
 If you need to support token-based and GSI proxy-based pilot job submission,
 you must install or remain on <a href="../notes/">OSG 3.5</a>.
@@ -2176,6 +2183,13 @@ see the section for <a href="#updating-your-htcondor-hosts">updating your HTCond
 token-based authentication before considering an upgrade to OSG 3.6.
 If your VO(s) don't support these new authentication methods or you don't know which authentication methods your
 VO(s) support, install or remain on the <a href="../notes/">OSG 3.5 release series</a></p>
+</div>
+<div class="admonition bug">
+<p class="admonition-title">Proxy delegation broken in HTCondor &lt; 9.0.8</p>
+<p>Proxy delegation does not work with HTCondor &lt; 9.0.8
+(see <a href="https://opensciencegrid.atlassian.net/browse/HTCONDOR-810">HTCONDOR-810</a>).
+If the VOs you support use X.509 proxies for storage access, either install HTCondor from OSG 3.6 upcoming or wait
+for the release of HTCondor 9.0.8 (expected December 2021).</p>
 </div>
 <ol>
 <li>
