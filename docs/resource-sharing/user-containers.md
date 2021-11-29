@@ -67,3 +67,41 @@ singularity run --contain --bind /cvmfs --scratch /pilot osgvo-pilot.sif
 
 Note, unlike the [site-launched container](os-backfill-containers.md), the Singularity container above
 _cannot_ run payloads inside a separate image.
+
+
+Limiting Resource Usage
+-----------------------
+
+By default, the OSG pilot container will allow jobs to utilize the entire machines's resources (CPUs, memory).
+This is regardless of how many cores or how much memory you requested in your SLURM batch job.
+If you do not have the full machine allocated for your use, you should specify limits to what HTCondor will offer.
+This is done by specifying environment variables when launching the container.
+
+To limit the number of CPUs available to jobs (thus limiting the number of simultaneous jobs),
+add the following to your `singularity run` command:
+
+```
+   --env NUM_CPUS=<X>
+```
+
+where `<X>` is the number of CPUs you want to allow jobs to use.
+
+The `NUM_CPUS` environment variable will tell the pilot not to offer more than the given number of CPUs to jobs.
+
+To limit the total amount of memory available to jobs, add the following to your `docker run` command:
+```
+    --env MEMORY=<X>
+```
+
+where `<X>` is the total amount of memory (in MB) you want to allow jobs to use.
+
+The `MEMORY` environment variable will tell the pilot not to offer more than the given amount of memory to jobs.
+
+!!! note
+    If you requested a specific amount of memory for your SLURM batch job, for example with the `--mem` argument,
+    you should set `MEMORY` to be about 100 MB less than that, for the following reasons:
+
+    The pilot will place jobs on hold if they exceed their requested memory,
+    but it may not notice high memory usage immediately.
+    In addition, the processes that manage jobs also use some amount of memory.
+    Therefore it is important to give the container some extra room.
