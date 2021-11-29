@@ -190,15 +190,21 @@ The OSG 3.6 release series contains [HTCondor-CE 5](https://htcondor.github.io/h
 version upgrade from HTCondor-CE 4, which was available in the OSG 3.5 release repositories.
 To update HTCondor-CE, perform the following steps:
 
-1.  If you support the `OSG` or `GLOW` VOs and map their jobs to non-standard local Unix accounts
-    (e.g., not `osg` and `glow`, respectively) add SciTokens mappings to a file in `/etc/condor-ce/mapfiles.d/`:
+1.  If you support the `OSG`, `GLOW`, or `ATLAS`  VOs and map their jobs to non-standard local Unix accounts
+    add SciTokens mappings to a file in `/etc/condor-ce/mapfiles.d/`:
 
         # OSG
         SCITOKENS /^https\:\/\/scitokens\.org\/osg\-connect,/ osg
         # GLOW
         SCITOKENS /^https\:\/\/chtc\.cs\.wisc\.edu,/ glow
+        # ATLAS production
+        SCITOKENS /^https:\/\/atlas-auth.web.cern.ch\/,7dee38a3-6ab8-4fe2-9e4c-58039c21d817/ usatlas1
+        # ATLAS analysis
+        SCITOKENS /^https:\/\/atlas-auth.web.cern.ch\/,750e9609-485a-4ed4-bf16-d5cc46c71024/ usatlas3
+        # ATLAS SAM/ETF
+        SCITOKENS /^https:\/\/atlas-auth.web.cern.ch\/,5c5d2a4d-9177-3efa-912f-1b4e5c9fb660/ usatlas2
 
-    Replacing `osg` and `glow` with the local Unix account for the OSG and GLOW VOs, respectively.
+    Replacing the third field with the local Unix account.
 
 1.  Also consult the [upgrade documentation](https://htcondor.github.io/htcondor-ce/v5/releases/#updating-to-htcondor-ce-5)
     for other required configuration updates.
