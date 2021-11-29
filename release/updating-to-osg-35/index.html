@@ -2047,15 +2047,21 @@ your local batch system.</p>
 </div>
 </li>
 <li>
-<p>If you support the <code>OSG</code> or <code>GLOW</code> VOs and map their jobs to non-standard local Unix accounts
-    (e.g., not <code>osg</code> and <code>glow</code>, respectively) add SciTokens mappings to a file in <code>/etc/condor-ce/mapfiles.d/</code>:</p>
+<p>If you support the <code>OSG</code>, <code>GLOW</code>, or <code>ATLAS</code>  VOs and map their jobs to non-standard local Unix accounts
+    add SciTokens mappings to a file in <code>/etc/condor-ce/mapfiles.d/</code>:</p>
 <div class="codehilite"><pre><span></span><code># OSG
 SCITOKENS /^https\:\/\/scitokens\.org\/osg\-connect,/ osg
 # GLOW
 SCITOKENS /^https\:\/\/chtc\.cs\.wisc\.edu,/ glow
+# ATLAS production
+SCITOKENS /^https:\/\/atlas-auth.web.cern.ch\/,7dee38a3-6ab8-4fe2-9e4c-58039c21d817/ usatlas1
+# ATLAS analysis
+SCITOKENS /^https:\/\/atlas-auth.web.cern.ch\/,750e9609-485a-4ed4-bf16-d5cc46c71024/ usatlas3
+# ATLAS SAM/ETF
+SCITOKENS /^https:\/\/atlas-auth.web.cern.ch\/,5c5d2a4d-9177-3efa-912f-1b4e5c9fb660/ usatlas2
 </code></pre></div>
 
-<p>Replacing <code>osg</code> and <code>glow</code> with the local Unix account for the OSG and GLOW VOs, respectively.</p>
+<p>Replacing the third field with the local Unix account.</p>
 </li>
 <li>
 <p>Also consult the <a href="https://htcondor.github.io/htcondor-ce/v5/releases/#updating-to-htcondor-ce-5">upgrade documentation</a>
