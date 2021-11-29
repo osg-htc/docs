@@ -460,6 +460,33 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#limiting-resource-usage" class="md-nav__link">
+    Limiting Resource Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Limiting Resource Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#limiting-cpus" class="md-nav__link">
+    Limiting CPUs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limiting-memory" class="md-nav__link">
+    Limiting memory
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1817,6 +1844,33 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#limiting-resource-usage" class="md-nav__link">
+    Limiting Resource Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Limiting Resource Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#limiting-cpus" class="md-nav__link">
+    Limiting CPUs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limiting-memory" class="md-nav__link">
+    Limiting memory
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1837,7 +1891,7 @@
                 <h1 id="open-science-pool-containers">Open Science Pool Containers<a class="headerlink" href="#open-science-pool-containers" title="Permanent link">&para;</a></h1>
 <p>In order to <a href="../overview/">share compute resources</a> with the Open Science pool,
 sites can launch pilot jobs directly by starting an OSG-provided Docker container.
-The container includes a simple worker node environment and an embedded pilot;
+The container includes a worker node environment and an embedded pilot;
 when combined with an OSG-provided authentication token (not included in the container),
 the pilot can connect to the Open Science pool and start executing jobs.</p>
 <p>This technique is useful to implement <em>backfill</em> at a site:
@@ -1880,6 +1934,9 @@ Make sure the user you run your container as has write access to this directory.
 <li>
 <p><em>Optional:</em> add an expression with the <code>GLIDEIN_Start_Extra</code> environment variable to append to the HTCondor <code>START</code>
    expression; this limits the pilot to only run certain jobs.</p>
+</li>
+<li>
+<p><em>Optional:</em> <a href="#limiting-resource-usage">limit OSG pilot container resource usage</a></p>
 </li>
 </ol>
 <p>Here is an example invocation using <code>docker run</code> by hand:</p>
@@ -1981,6 +2038,45 @@ modified to volume mount CVMFS instead of using cvmfsexec, and using reduced pri
 </code></pre></div>
 
 <p>Fill in the values for <code>/path/to/token</code>, <code>/worker-temp-dir</code>, <code>GLIDEIN_Site</code>, <code>GLIDEIN_ResourceName</code>, and <code>OSG_SQUID_LOCATION</code> <a href="#running-the-container-with-docker">as above</a>.</p>
+<h2 id="limiting-resource-usage">Limiting Resource Usage<a class="headerlink" href="#limiting-resource-usage" title="Permanent link">&para;</a></h2>
+<p>By default, the OSG pilot container will allow jobs to utilize the entire node's resources (CPUs, memory).
+If you don't want to allow jobs to use all of these, you can specify limits.</p>
+<p>You must specify limits in two places:</p>
+<ul>
+<li>
+<p>As environment variables, limiting the resources the pilot offers to jobs.</p>
+</li>
+<li>
+<p>As options to the <code>docker run</code> command, limiting the resources the pilot container can use.</p>
+</li>
+</ul>
+<h3 id="limiting-cpus">Limiting CPUs<a class="headerlink" href="#limiting-cpus" title="Permanent link">&para;</a></h3>
+<p>To limit the number of CPUs available to jobs (thus limiting the number of simultaneous jobs),
+add the following to your <code>docker run</code> command:</p>
+<div class="codehilite"><pre><span></span><code>   -e NUM_CPUS=&lt;X&gt;  --cpus=&lt;X&gt; \
+</code></pre></div>
+
+<p>where <code>&lt;X&gt;</code> is the number of CPUs you want to allow jobs to use.</p>
+<p>The <code>NUM_CPUS</code> environment variable will tell the pilot not to offer more than the given number of CPUs to jobs;
+the <code>--cpus</code> argument will tell Docker not to allocate more than the given number of CPUs to the container.</p>
+<p>Both options are necessary for optimal behavior.</p>
+<h3 id="limiting-memory">Limiting memory<a class="headerlink" href="#limiting-memory" title="Permanent link">&para;</a></h3>
+<p>To limit the total amount of memory available to jobs, add the following to your <code>docker run</code> command:</p>
+<div class="codehilite"><pre><span></span><code>    -e MEMORY=&lt;X&gt; --memory=$(( (&lt;X&gt; + 100) * 1024 * 1024 )) \
+</code></pre></div>
+
+<p>where <code>&lt;X&gt;</code> is the total amount of memory (in MB) you want to allow jobs to use.</p>
+<p>The <code>MEMORY</code> environment variable will tell the pilot not to offer more than the given amount of memory to jobs;
+the <code>--memory</code> argument will tell Docker to kill the container if its total memory usage exceeds the given number.</p>
+<p>Both options are necessary for optimal behavior.</p>
+<div class="admonition tip">
+<p class="admonition-title">Allocating additional memory</p>
+<p>Note that the above command will allocate 100 MB more memory to the container.
+The pilot will place jobs on hold if they exceed their requested memory,
+but it may not notice high memory usage immediately.
+In addition, the processes that manage jobs also use some amount of memory.
+Therefore it is important to give the container some extra room.</p>
+</div>
                 
               
               
