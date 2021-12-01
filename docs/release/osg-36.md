@@ -41,8 +41,36 @@ The following issues are known to currently affect packages distributed in OSG 3
     If the VOs you support use X.509 proxies for storage access, either install HTCondor from OSG 3.6 upcoming or wait
     for the release of HTCondor 9.0.8 (expected December 2021).
 
+### XRootD ###
+
+-   There are known issues in XRootD 5.3.2 with origins and heavily loaded servers.
+    These issue are expected to be fixed in 5.3.4 (expected December 2021).
+
 Latest News
 -----------
+
+### **December 1, 2021:** osg-flock and gratia-probes
+-   [XRootD 5.3.2](https://github.com/xrootd/xrootd/blob/v5.3.2/docs/ReleaseNotes.txt)
+    -   Initial release of XRootD in OSG 3.6
+-   XCache 3.0.0
+    -   Initial release of XCache in OSG 3.6
+-   [HTCondor 9.0.7](https://htcondor.org/news/HTCondor_9.0.7_released/): Bug fix release
+    -   Fix bug where condor\_gpu\_discovery could crash with older CUDA libraries
+    -   Fix bug where condor\_watch\_q would fail on machines with older kernels
+    -   condor\_watch\_q no longer has a limit on the number of job event log files
+    -   Fix bug where a startd could crash claiming a slot with p-slot preemption
+    -   Fix bug where a job start would not be recorded when a shadow reconnects
+-   [GlideinWMS 3.9.3](https://glideinwms.fnal.gov/doc.v3_9_3/history.html#development)
+    -   Type validation support to the check\_python3\_expr.py script
+    -   Drops the encondingSupport.py module and its unit tests
+    -   Fixes an encoding problem affecting cloud submissions
+-   [Pegasus 5.0.1](https://pegasus.isi.edu/2021/10/07/pegasus-5-0-1-released/)
+    -   First OSG release of the Pegasus 5 series
+-   Upcoming
+    -   [HTCondor 9.3.0](https://htcondor.org/news/HTCondor_9.3.0_released/)
+        -   File transfer plugin sample code to aid in developing new plugins
+        -   Add generic knob to set the slot user for all slots
+
 
 ### **November 11, 2021:** osg-flock and gratia-probes
 
