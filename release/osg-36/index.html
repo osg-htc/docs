@@ -1506,6 +1506,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#xrootd" class="md-nav__link">
+    XRootD
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1518,6 +1525,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#december-1-2021-osg-flock-and-gratia-probes" class="md-nav__link">
+    December 1, 2021: osg-flock and gratia-probes
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#november-11-2021-osg-flock-and-gratia-probes" class="md-nav__link">
@@ -1937,6 +1951,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#xrootd" class="md-nav__link">
+    XRootD
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1949,6 +1970,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#december-1-2021-osg-flock-and-gratia-probes" class="md-nav__link">
+    December 1, 2021: osg-flock and gratia-probes
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#november-11-2021-osg-flock-and-gratia-probes" class="md-nav__link">
@@ -2176,7 +2204,49 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
     If the VOs you support use X.509 proxies for storage access, either install HTCondor from OSG 3.6 upcoming or wait
     for the release of HTCondor 9.0.8 (expected December 2021).</li>
 </ul>
+<h3 id="xrootd">XRootD<a class="headerlink" href="#xrootd" title="Permanent link">&para;</a></h3>
+<ul>
+<li>There are known issues in XRootD 5.3.2 with origins and heavily loaded servers.
+    These issue are expected to be fixed in 5.3.4 (expected December 2021).</li>
+</ul>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="december-1-2021-osg-flock-and-gratia-probes"><strong>December 1, 2021:</strong> osg-flock and gratia-probes<a class="headerlink" href="#december-1-2021-osg-flock-and-gratia-probes" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://github.com/xrootd/xrootd/blob/v5.3.2/docs/ReleaseNotes.txt">XRootD 5.3.2</a><ul>
+<li>Initial release of XRootD in OSG 3.6</li>
+</ul>
+</li>
+<li>XCache 3.0.0<ul>
+<li>Initial release of XCache in OSG 3.6</li>
+</ul>
+</li>
+<li><a href="https://htcondor.org/news/HTCondor_9.0.7_released/">HTCondor 9.0.7</a>: Bug fix release<ul>
+<li>Fix bug where condor_gpu_discovery could crash with older CUDA libraries</li>
+<li>Fix bug where condor_watch_q would fail on machines with older kernels</li>
+<li>condor_watch_q no longer has a limit on the number of job event log files</li>
+<li>Fix bug where a startd could crash claiming a slot with p-slot preemption</li>
+<li>Fix bug where a job start would not be recorded when a shadow reconnects</li>
+</ul>
+</li>
+<li><a href="https://glideinwms.fnal.gov/doc.v3_9_3/history.html#development">GlideinWMS 3.9.3</a><ul>
+<li>Type validation support to the check_python3_expr.py script</li>
+<li>Drops the encondingSupport.py module and its unit tests</li>
+<li>Fixes an encoding problem affecting cloud submissions</li>
+</ul>
+</li>
+<li><a href="https://pegasus.isi.edu/2021/10/07/pegasus-5-0-1-released/">Pegasus 5.0.1</a><ul>
+<li>First OSG release of the Pegasus 5 series</li>
+</ul>
+</li>
+<li>Upcoming<ul>
+<li><a href="https://htcondor.org/news/HTCondor_9.3.0_released/">HTCondor 9.3.0</a><ul>
+<li>File transfer plugin sample code to aid in developing new plugins</li>
+<li>Add generic knob to set the slot user for all slots</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="november-11-2021-osg-flock-and-gratia-probes"><strong>November 11, 2021:</strong> osg-flock and gratia-probes<a class="headerlink" href="#november-11-2021-osg-flock-and-gratia-probes" title="Permanent link">&para;</a></h3>
 <ul>
 <li>osg-flock 1.6-3<ul>
