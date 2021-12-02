@@ -49,7 +49,7 @@ The following issues are known to currently affect packages distributed in OSG 3
 Latest News
 -----------
 
-### **December 1, 2021:** osg-flock and gratia-probes
+### **December 1, 2021:** Initial XRootD release
 -   [XRootD 5.3.2](https://github.com/xrootd/xrootd/blob/v5.3.2/docs/ReleaseNotes.txt)
     -   Initial release of XRootD in OSG 3.6
 -   XCache 3.0.0
@@ -60,6 +60,9 @@ Latest News
     -   condor\_watch\_q no longer has a limit on the number of job event log files
     -   Fix bug where a startd could crash claiming a slot with p-slot preemption
     -   Fix bug where a job start would not be recorded when a shadow reconnects
+-   [VO Package v115](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-115)
+    -   Add CMS IAM vomses entry
+    -   Update WLCG VO certificate
 -   [GlideinWMS 3.9.3](https://glideinwms.fnal.gov/doc.v3_9_3/history.html#development)
     -   Type validation support to the check\_python3\_expr.py script
     -   Drops the encondingSupport.py module and its unit tests
