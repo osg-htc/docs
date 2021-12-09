@@ -53,6 +53,11 @@ Installing XRootD
     with `xrootd-multiuser`.
     See [XRootD GitHub issue #1538](https://github.com/xrootd/xrootd/issues/1538) for more details.
 
+!!! bug "Problem interoperating with older origin servers"
+    If an XRootD 5.3.4 cache interacts with a 5.1 or 5.2 origin and there is an asyncio error, it may crash the origin.
+    Please upgrade your origin at your earliest convenience.
+    You may turn off asyncio (`async off`) on either end to avoid the problem.
+
 To install an XRootD Standalone server, run one of the following commands based on your installed
 [OSG release series](../../release/release_series.md#series-overviews):
 
