@@ -29,25 +29,34 @@ The following issues are known to currently affect packages distributed in OSG 3
     ([HTCONDOR-864](https://opensciencegrid.atlassian.net/browse/HTCONDOR-864)).
     For the time being, remove any comments if you are still using the
     [deprecated syntax](https://htcondor.com/htcondor-ce/v5/configuration/job-router-overview#deprecated-syntax).
--   Proxy delegation does not work with HTCondor < 9.0.8
-    (see [HTCONDOR-810](https://opensciencegrid.atlassian.net/browse/HTCONDOR-810)).
-    If the VOs you support use X.509 proxies for storage access, either install HTCondor from OSG 3.6 upcoming or wait
-    for the release of HTCondor 9.0.8 (expected December 2021).
-
-### HTCondor ###
-
--   Proxy delegation does not work with HTCondor < 9.0.8
-    (see [HTCONDOR-810](https://opensciencegrid.atlassian.net/browse/HTCONDOR-810)).
-    If the VOs you support use X.509 proxies for storage access, either install HTCondor from OSG 3.6 upcoming or wait
-    for the release of HTCondor 9.0.8 (expected December 2021).
 
 ### XRootD ###
 
--   There are known issues in XRootD 5.3.2 with origins and heavily loaded servers.
-    These issue are expected to be fixed in 5.3.4 (expected December 2021).
+-   If an XRootD 5.3.4 cache interacts with a 5.1 or 5.2 origin and there is an asyncio error, it may crash the origin.
+    Please upgrade your origin at your earliest convenience.
+    You may turn off asyncio (`async off`) on either end to avoid the problem.
 
 Latest News
 -----------
+
+### **December 9, 2021:** XRootD and HTCondor updates
+
+!!!warning "Problem interoperating with older origin servers"
+    If an XRootD 5.3.4 cache interacts with a 5.1 or 5.2 origin and there is an asyncio error, it may crash the origin.
+    Please upgrade your origin at your earliest convenience.
+    You may turn off asyncio (`async off`) on either end to avoid the problem.
+
+-   [XRootD 5.3.4](https://github.com/xrootd/xrootd/blob/v5.3.4/docs/ReleaseNotes.txt)
+    -   Fix uncorrectable checksum errors in XCache Origins
+-   [HTCondor 9.0.8 LTS](https://htcondor.org/news/HTCondor_9.0.8_released/)
+    -   X.509 proxy delegation now works in OSG 3.6
+    -   Fix bug where huge values of ImageSize and others would end up negative
+    -   Fix bug in how MAX\_JOBS\_PER\_OWNER applied to late materialization jobs
+    -   Fix bug where the schedd could choose a slot with insufficient disk space
+    -   Fix crash in ClassAd substr() function when the offset is out of range
+    -   Fix bug in Kerberos code that can crash on macOS and could leak memory
+    -   Fix bug where a job is ignored for 20 minutes if the startd claim fails
+
 
 ### **December 1, 2021:** Initial XRootD release
 -   [XRootD 5.3.2](https://github.com/xrootd/xrootd/blob/v5.3.2/docs/ReleaseNotes.txt)
