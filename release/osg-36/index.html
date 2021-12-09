@@ -1500,13 +1500,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#htcondor" class="md-nav__link">
-    HTCondor
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#xrootd" class="md-nav__link">
     XRootD
   </a>
@@ -1525,6 +1518,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#december-9-2021-xrootd-and-htcondor-updates" class="md-nav__link">
+    December 9, 2021: XRootD and HTCondor updates
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#december-1-2021-initial-xrootd-release" class="md-nav__link">
@@ -1945,13 +1945,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#htcondor" class="md-nav__link">
-    HTCondor
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#xrootd" class="md-nav__link">
     XRootD
   </a>
@@ -1970,6 +1963,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#december-9-2021-xrootd-and-htcondor-updates" class="md-nav__link">
+    December 9, 2021: XRootD and HTCondor updates
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#december-1-2021-initial-xrootd-release" class="md-nav__link">
@@ -2192,24 +2192,37 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
     (<a href="https://opensciencegrid.atlassian.net/browse/HTCONDOR-864">HTCONDOR-864</a>).
     For the time being, remove any comments if you are still using the
     <a href="https://htcondor.com/htcondor-ce/v5/configuration/job-router-overview#deprecated-syntax">deprecated syntax</a>.</li>
-<li>Proxy delegation does not work with HTCondor &lt; 9.0.8
-    (see <a href="https://opensciencegrid.atlassian.net/browse/HTCONDOR-810">HTCONDOR-810</a>).
-    If the VOs you support use X.509 proxies for storage access, either install HTCondor from OSG 3.6 upcoming or wait
-    for the release of HTCondor 9.0.8 (expected December 2021).</li>
-</ul>
-<h3 id="htcondor">HTCondor<a class="headerlink" href="#htcondor" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Proxy delegation does not work with HTCondor &lt; 9.0.8
-    (see <a href="https://opensciencegrid.atlassian.net/browse/HTCONDOR-810">HTCONDOR-810</a>).
-    If the VOs you support use X.509 proxies for storage access, either install HTCondor from OSG 3.6 upcoming or wait
-    for the release of HTCondor 9.0.8 (expected December 2021).</li>
 </ul>
 <h3 id="xrootd">XRootD<a class="headerlink" href="#xrootd" title="Permanent link">&para;</a></h3>
 <ul>
-<li>There are known issues in XRootD 5.3.2 with origins and heavily loaded servers.
-    These issue are expected to be fixed in 5.3.4 (expected December 2021).</li>
+<li>If an XRootD 5.3.4 cache interacts with a 5.1 or 5.2 origin and there is an asyncio error, it may crash the origin.
+    Please upgrade your origin at your earliest convenience.
+    You may turn off asyncio (<code>async off</code>) on either end to avoid the problem.</li>
 </ul>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="december-9-2021-xrootd-and-htcondor-updates"><strong>December 9, 2021:</strong> XRootD and HTCondor updates<a class="headerlink" href="#december-9-2021-xrootd-and-htcondor-updates" title="Permanent link">&para;</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Problem interoperating with older origin servers</p>
+<p>If an XRootD 5.3.4 cache interacts with a 5.1 or 5.2 origin and there is an asyncio error, it may crash the origin.
+Please upgrade your origin at your earliest convenience.
+You may turn off asyncio (<code>async off</code>) on either end to avoid the problem.</p>
+</div>
+<ul>
+<li><a href="https://github.com/xrootd/xrootd/blob/v5.3.4/docs/ReleaseNotes.txt">XRootD 5.3.4</a><ul>
+<li>Fix uncorrectable checksum errors in XCache Origins</li>
+</ul>
+</li>
+<li><a href="https://htcondor.org/news/HTCondor_9.0.8_released/">HTCondor 9.0.8 LTS</a><ul>
+<li>X.509 proxy delegation now works in OSG 3.6</li>
+<li>Fix bug where huge values of ImageSize and others would end up negative</li>
+<li>Fix bug in how MAX_JOBS_PER_OWNER applied to late materialization jobs</li>
+<li>Fix bug where the schedd could choose a slot with insufficient disk space</li>
+<li>Fix crash in ClassAd substr() function when the offset is out of range</li>
+<li>Fix bug in Kerberos code that can crash on macOS and could leak memory</li>
+<li>Fix bug where a job is ignored for 20 minutes if the startd claim fails</li>
+</ul>
+</li>
+</ul>
 <h3 id="december-1-2021-initial-xrootd-release"><strong>December 1, 2021:</strong> Initial XRootD release<a class="headerlink" href="#december-1-2021-initial-xrootd-release" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://github.com/xrootd/xrootd/blob/v5.3.2/docs/ReleaseNotes.txt">XRootD 5.3.2</a><ul>

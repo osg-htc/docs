@@ -2019,6 +2019,12 @@ Some characters in VOMS FQANs are not legal in Unix usernames, therefore VOMS at
 with <code>xrootd-multiuser</code>.
 See <a href="https://github.com/xrootd/xrootd/issues/1538">XRootD GitHub issue #1538</a> for more details.</p>
 </div>
+<div class="admonition bug">
+<p class="admonition-title">Problem interoperating with older origin servers</p>
+<p>If an XRootD 5.3.4 cache interacts with a 5.1 or 5.2 origin and there is an asyncio error, it may crash the origin.
+Please upgrade your origin at your earliest convenience.
+You may turn off asyncio (<code>async off</code>) on either end to avoid the problem.</p>
+</div>
 <p>To install an XRootD Standalone server, run one of the following commands based on your installed
 <a href="../../../release/release_series/#series-overviews">OSG release series</a>:</p>
 <ul>
