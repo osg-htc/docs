@@ -1,7 +1,7 @@
 OSG Software Release 3.5.50
 ===========================
 
-**Release Date:** 2021-10-13  
+**Release Date:** 2021-11-11  
 **Supported OS Versions:** EL7, EL8
 
 !!!tip "Want faster access to production-ready software?"

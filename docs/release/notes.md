@@ -39,6 +39,8 @@ Releases
 
 | Version                             | Date       | Summary                                                                       |
 |:------------------------------------|:-----------|:------------------------------------------------------------------------------|
+| [3.5.52](3.5/release-3-5-52.md)     | 2021-12-09 | Upcoming: XRootD 5.3.4, HTCondor 9.0.8                                        |
+| [3.5.51](3.5/release-3-5-51.md)     | 2021-12-01 | VO Package v115, python-scitokens 1.6.2, vault 1.8.4, htvault-config 1.10, htgettoken 1.8; Upcoming: HTCondor 9.0.7 |
 | [3.5.50](3.5/release-3-5-50.md)     | 2021-11-11 | osg-ca-certs-updater 2.0; Upcoming: xrootd-multiuser 2.0.3                    |
 | [3.5.49](3.5/release-3-5-49.md)     | 2021-10-13 | osg-token-renewer 0.7.1; Upcoming: HTCondor 9.0.6, blahp 2.1.3                |
 | [3.5.48-2](3.5/release-3-5-48-2.md) | 2021-10-05 | IGTF 1.113                                                                    |

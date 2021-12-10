@@ -74,6 +74,12 @@ Updating Your OSG Compute Entrypoint
     If your VO(s) don't support these new authentication methods or you don't know which authentication methods your
     VO(s) support, install or remain on the [OSG 3.5 release series](notes.md)
 
+!!! bug "Proxy delegation broken in HTCondor < 9.0.8"
+    Proxy delegation does not work with HTCondor < 9.0.8
+    (see [HTCONDOR-810](https://opensciencegrid.atlassian.net/browse/HTCONDOR-810)).
+    If the VOs you support use X.509 proxies for storage access, either install HTCondor from OSG 3.6 upcoming or wait
+    for the release of HTCondor 9.0.8 (expected December 2021).
+
 In OSG 3.6, OSG Compute Entrypoints (CEs) only accept token-based pilot job submissions.
 If you need to support token-based and GSI proxy-based pilot job submission,
 you must install or remain on [OSG 3.5](notes.md).
@@ -184,15 +190,21 @@ The OSG 3.6 release series contains [HTCondor-CE 5](https://htcondor.github.io/h
 version upgrade from HTCondor-CE 4, which was available in the OSG 3.5 release repositories.
 To update HTCondor-CE, perform the following steps:
 
-1.  If you support the `OSG` or `GLOW` VOs and map their jobs to non-standard local Unix accounts
-    (e.g., not `osg` and `glow`, respectively) add SciTokens mappings to a file in `/etc/condor-ce/mapfiles.d/`:
+1.  If you support the `OSG`, `GLOW`, or `ATLAS`  VOs and map their jobs to non-standard local Unix accounts
+    add SciTokens mappings to a file in `/etc/condor-ce/mapfiles.d/`:
 
         # OSG
         SCITOKENS /^https\:\/\/scitokens\.org\/osg\-connect,/ osg
         # GLOW
         SCITOKENS /^https\:\/\/chtc\.cs\.wisc\.edu,/ glow
+        # ATLAS production
+        SCITOKENS /^https:\/\/atlas-auth.web.cern.ch\/,7dee38a3-6ab8-4fe2-9e4c-58039c21d817/ usatlas1
+        # ATLAS analysis
+        SCITOKENS /^https:\/\/atlas-auth.web.cern.ch\/,750e9609-485a-4ed4-bf16-d5cc46c71024/ usatlas3
+        # ATLAS SAM/ETF
+        SCITOKENS /^https:\/\/atlas-auth.web.cern.ch\/,5c5d2a4d-9177-3efa-912f-1b4e5c9fb660/ usatlas2
 
-    Replacing `osg` and `glow` with the local Unix account for the OSG and GLOW VOs, respectively.
+    Replacing the third field with the local Unix account.
 
 1.  Also consult the [upgrade documentation](https://htcondor.github.io/htcondor-ce/v5/releases/#updating-to-htcondor-ce-5)
     for other required configuration updates.
@@ -222,6 +234,12 @@ Updating Your HTCondor Hosts
     token-based authentication before considering an upgrade to OSG 3.6.
     If your VO(s) don't support these new authentication methods or you don't know which authentication methods your
     VO(s) support, install or remain on the [OSG 3.5 release series](notes.md)
+
+!!! bug "Proxy delegation broken in HTCondor < 9.0.8"
+    Proxy delegation does not work with HTCondor < 9.0.8
+    (see [HTCONDOR-810](https://opensciencegrid.atlassian.net/browse/HTCONDOR-810)).
+    If the VOs you support use X.509 proxies for storage access, either install HTCondor from OSG 3.6 upcoming or wait
+    for the release of HTCondor 9.0.8 (expected December 2021).
 
 1.  The following OSG specific configuration was dropped in anticipation of HTCondor's new secure by default
     configuration coming in HTCondor version 9.0. HTCondor's 9.0 recommended security configuration requires

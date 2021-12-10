@@ -39,8 +39,59 @@ The following issues are known to currently affect packages distributed in OSG 3
     with `xrootd-multiuser`.
     See [XRootD GitHub issue #1538](https://github.com/xrootd/xrootd/issues/1538) for more details.
 
+### XRootD ###
+
+-   If an XRootD 5.3.4 cache interacts with a 5.1 or 5.2 origin and there is an asyncio error, it may crash the origin.
+    Please upgrade your origin at your earliest convenience.
+    You may turn off asyncio (`async off`) on either end to avoid the problem.
+
 Latest News
 -----------
+
+### **December 9, 2021:** XRootD and HTCondor updates
+
+!!!warning "Problem interoperating with older origin servers"
+    If an XRootD 5.3.4 cache interacts with a 5.1 or 5.2 origin and there is an asyncio error, it may crash the origin.
+    Please upgrade your origin at your earliest convenience.
+    You may turn off asyncio (`async off`) on either end to avoid the problem.
+
+-   [XRootD 5.3.4](https://github.com/xrootd/xrootd/blob/v5.3.4/docs/ReleaseNotes.txt)
+    -   Fix uncorrectable checksum errors in XCache Origins
+-   [HTCondor 9.0.8 LTS](https://htcondor.org/news/HTCondor_9.0.8_released/)
+    -   X.509 proxy delegation now works in OSG 3.6
+    -   Fix bug where huge values of ImageSize and others would end up negative
+    -   Fix bug in how MAX\_JOBS\_PER\_OWNER applied to late materialization jobs
+    -   Fix bug where the schedd could choose a slot with insufficient disk space
+    -   Fix crash in ClassAd substr() function when the offset is out of range
+    -   Fix bug in Kerberos code that can crash on macOS and could leak memory
+    -   Fix bug where a job is ignored for 20 minutes if the startd claim fails
+
+
+### **December 1, 2021:** Initial XRootD release
+-   [XRootD 5.3.2](https://github.com/xrootd/xrootd/blob/v5.3.2/docs/ReleaseNotes.txt)
+    -   Initial release of XRootD in OSG 3.6
+-   XCache 3.0.0
+    -   Initial release of XCache in OSG 3.6
+-   [HTCondor 9.0.7](https://htcondor.org/news/HTCondor_9.0.7_released/): Bug fix release
+    -   Fix bug where condor\_gpu\_discovery could crash with older CUDA libraries
+    -   Fix bug where condor\_watch\_q would fail on machines with older kernels
+    -   condor\_watch\_q no longer has a limit on the number of job event log files
+    -   Fix bug where a startd could crash claiming a slot with p-slot preemption
+    -   Fix bug where a job start would not be recorded when a shadow reconnects
+-   [VO Package v115](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-115)
+    -   Add CMS IAM vomses entry
+    -   Update WLCG VO certificate
+-   [GlideinWMS 3.9.3](https://glideinwms.fnal.gov/doc.v3_9_3/history.html#development)
+    -   Type validation support to the check\_python3\_expr.py script
+    -   Drops the encondingSupport.py module and its unit tests
+    -   Fixes an encoding problem affecting cloud submissions
+-   [Pegasus 5.0.1](https://pegasus.isi.edu/2021/10/07/pegasus-5-0-1-released/)
+    -   First OSG release of the Pegasus 5 series
+-   Upcoming
+    -   [HTCondor 9.3.0](https://htcondor.org/news/HTCondor_9.3.0_released/)
+        -   File transfer plugin sample code to aid in developing new plugins
+        -   Add generic knob to set the slot user for all slots
+
 
 ### **November 11, 2021:** osg-flock and gratia-probes
 
