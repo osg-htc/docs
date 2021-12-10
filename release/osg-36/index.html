@@ -1500,6 +1500,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#xrootd-multiuser" class="md-nav__link">
+    XRootD Multiuser
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#xrootd" class="md-nav__link">
     XRootD
   </a>
@@ -1945,6 +1952,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#xrootd-multiuser" class="md-nav__link">
+    XRootD Multiuser
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#xrootd" class="md-nav__link">
     XRootD
   </a>
@@ -2192,6 +2206,15 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
     (<a href="https://opensciencegrid.atlassian.net/browse/HTCONDOR-864">HTCONDOR-864</a>).
     For the time being, remove any comments if you are still using the
     <a href="https://htcondor.com/htcondor-ce/v5/configuration/job-router-overview#deprecated-syntax">deprecated syntax</a>.</li>
+</ul>
+<h3 id="xrootd-multiuser">XRootD Multiuser<a class="headerlink" href="#xrootd-multiuser" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The OSG 3.6 configuration of XRootD uses the <code>XrdVoms</code> plugin, which pass along the entire VOMS FQAN as the
+    groupname to the authorization layer (see the section on
+    <a href="../../data/xrootd/xrootd-authorization/#formatting">authorization database file formatting</a>).
+    Some characters in VOMS FQANs are not legal in Unix usernames, therefore VOMS attributes mappings are incompatible
+    with <code>xrootd-multiuser</code>.
+    See <a href="https://github.com/xrootd/xrootd/issues/1538">XRootD GitHub issue #1538</a> for more details.</li>
 </ul>
 <h3 id="xrootd">XRootD<a class="headerlink" href="#xrootd" title="Permanent link">&para;</a></h3>
 <ul>
