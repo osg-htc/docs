@@ -30,6 +30,15 @@ The following issues are known to currently affect packages distributed in OSG 3
     For the time being, remove any comments if you are still using the
     [deprecated syntax](https://htcondor.com/htcondor-ce/v5/configuration/job-router-overview#deprecated-syntax).
 
+### XRootD Multiuser ###
+
+-   The OSG 3.6 configuration of XRootD uses the `XrdVoms` plugin, which pass along the entire VOMS FQAN as the
+    groupname to the authorization layer (see the section on
+    [authorization database file formatting](../data/xrootd/xrootd-authorization.md#formatting)).
+    Some characters in VOMS FQANs are not legal in Unix usernames, therefore VOMS attributes mappings are incompatible
+    with `xrootd-multiuser`.
+    See [XRootD GitHub issue #1538](https://github.com/xrootd/xrootd/issues/1538) for more details.
+
 ### XRootD ###
 
 -   If an XRootD 5.3.4 cache interacts with a 5.1 or 5.2 origin and there is an asyncio error, it may crash the origin.
