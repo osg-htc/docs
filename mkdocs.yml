@@ -74,7 +74,7 @@ nav:
     - 'Manage RSV via rsv-control': 'monitoring/rsv-control.md'
     - 'RSV GlideinWMS Tester': 'monitoring/install-rsv-gwms-tester.md'
 - Access Point:
-  - 'Install an OS Pool Access Point': 'submit/osg-flock.md'
+  - 'Install an OSPool Access Point': 'submit/osg-flock.md'
   - 'Acceptable Use Policy': 'submit/ap-ospool-aup.md'
 - Data Federation:
   - 'Overview': 'data/stashcache/overview.md'
