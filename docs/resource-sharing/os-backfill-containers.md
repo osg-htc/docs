@@ -96,8 +96,8 @@ Optional Configuration
 Supporting CVMFS inside your container will greatly increase the types of OSG jobs you can run.
 
 There are two methods for making CVMFS available in your container: [enabling cvmfsexec](#adding-cvmfs-using-cvmfsexec),
-or [bind-mounting CVMFS from the host](#adding-cvmfs-via-bind-mount).
-Bind-mounting CVMFS will require CVMFS to be installed on the host first,
+or [bind mounting CVMFS from the host](#adding-cvmfs-via-bind-mount).
+Bind mounting CVMFS will require CVMFS to be installed on the host first,
 but the container will need fewer privileges.
 
 
@@ -129,7 +129,7 @@ Additionally, you may set the following environment variables to further control
 -   `CVMFS_QUOTA_LIMIT` - the quota limit in MB for CVMFS; leave this blank to
     use the system default (4 GB)
 
-You can add other CVMFS options by bind-mounting a config file to `/cvmfsexec/default.local`;
+You can add other CVMFS options by bind mounting a config file to `/cvmfsexec/default.local`;
 note that options in environment variables take precedence over options in `/cvmfsexec/default.local`.
 
 You may store the cache outside of the container by volume mounting a directory to `/cvmfs-cache`.
