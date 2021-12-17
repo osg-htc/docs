@@ -166,13 +166,10 @@ Fill in the values for `/path/to/token`, `/worker-temp-dir`, `GLIDEIN_Site`, `GL
 
 ### Limiting resource usage
 
-By default, the OSG pilot container will allow jobs to utilize the entire node's resources (CPUs, memory).
-If you don't want to allow jobs to use all of these, you can specify limits.
-
-You must specify limits in two places:
+By default, the container allows jobs to utilize the entire node's resources (CPUs, memory).
+To limit a container's resource consumptions, you may specify limits, which must be set in the following ways:
 
 -   As environment variables, limiting the resources the pilot offers to jobs.
-
 -   As options to the `docker run` command, limiting the resources the pilot container can use.
 
 #### CPUs
@@ -186,28 +183,29 @@ add the following to your `docker run` command:
 
 where `<X>` is the number of CPUs you want to allow jobs to use.
 
-The `NUM_CPUS` environment variable will tell the pilot not to offer more than the given number of CPUs to jobs;
-the `--cpus` argument will tell Docker not to allocate more than the given number of CPUs to the container.
+The `NUM_CPUS` environment variable tells the pilot not to offer more than the given number of CPUs to jobs;
+the `--cpus` argument tells Docker not to allocate more than the given number of CPUs to the container.
 
 
 #### Memory
 
 To limit the total amount of memory available to jobs, add the following to your `docker run` command:
+
 ```
     -e MEMORY=<X> --memory=$(( (<X> + 100) * 1024 * 1024 )) \
 ```
 
 where `<X>` is the total amount of memory (in MB) you want to allow jobs to use.
 
-The `MEMORY` environment variable will tell the pilot not to offer more than the given amount of memory to jobs;
-the `--memory` argument will tell Docker to kill the container if its total memory usage exceeds the given number.
+The `MEMORY` environment variable tells the pilot not to offer more than the given amount of memory to jobs;
+the `--memory` argument tells Docker to kill the container if its total memory usage exceeds the given number.
 
 !!! tip "Allocating additional memory"
     Note that the above command will allocate 100 MB more memory to the container.
     The pilot will place jobs on hold if they exceed their requested memory,
     but it may not notice high memory usage immediately.
-    In addition, the processes that manage jobs also use some amount of memory.
-    Therefore it is important to give the container some extra room.
+    Additionally, the processes that manage jobs also use some amount of memory.
+    Therefore, it is important to give the container some extra room.
 
 Best Practices
 --------------
