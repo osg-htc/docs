@@ -22,11 +22,13 @@ Before Starting
 
 In order to configure the container, you will need:
 
+1. A [registered administrative contact](https://opensciencegrid.org/technology/policy/comanage-instructions-user/)
 1. A [registered resource](../common/registration.md) in OSG Topology;
-   resource registration allows OSG to do proper usage accounting and maintain contacts in case of security incidents.
-2. An authentication token from the OSG.  Please contact [OSG support](mailto:support@opensciencegrid.org) to request a
-   token for your site.
-3. An HTTP caching proxy ("squid server") at or near your site.
+   resource registration allows OSG to do proper usage accounting and maintain contacts in case of security incidents
+   and other issues.
+1. An authentication token from the OSG: once contact and resource registration are complete, you can retrieve a token
+   through the [OSPool Token Registry](https://os-registry.opensciencegrid.org/)
+1. An [HTTP caching proxy](../data/run-frontier-squid-container.md) at or near your site.
 
 Running the Container with Docker
 ---------------------------------
@@ -36,11 +38,12 @@ In order to successfully start payload jobs:
 
 
 1. **Configure authentication:**
-   OSPool administrators can provide the token,
+   Authentication with the OSPool is performed using tokens retrieved from the
+   [OSPool Token Registry](https://os-registry.opensciencegrid.org/)
    which you can then pass to the container by volume mounting it as a file under `/etc/condor/tokens-orig.d/`.
    If you are using Docker to launch the container, this is done with the command line flag
    `-v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org`.
-   Replace `/path/to/token` with the full path to the token you obtained from the OSPool administrators.
+   Replace `/path/to/token` with the full path to the token you obtained from the OSPool Token Registry.
 2. Set `GLIDEIN_Site` and `GLIDEIN_ResourceName` to match the site name and resource name that you registered in Topology,
    respectively.
 3. Set the `OSG_SQUID_LOCATION` environment variable to the HTTP address of your preferred Squid instance.
@@ -78,7 +81,7 @@ docker run -it --rm --user osg  \
        opensciencegrid/osgvo-docker-pilot:release
 ```
 
-Replace `/path/to/token` with the location you saved the token obtained from the OSPool administrators.
+Replace `/path/to/token` with the location you saved the token obtained from the OSPool Token Registry.
 Privileged mode (`--privileged`) requested in the above `docker run` allows the container
 to mount [CVMFS using cvmfsexec](#adding-cvmfs-using-cvmfsexec) and invoke `singularity` for user jobs.
 Singularity allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).
