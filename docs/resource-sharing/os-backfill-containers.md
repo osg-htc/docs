@@ -103,43 +103,25 @@ but the container will need fewer privileges.
 
 #### cvmfsexec
 
-[cvmfsexec](https://github.com/CVMFS/cvmfsexec#readme) is a tool that can be used to mount CVMFS inside the container
-without requiring CVMFS to be installed on the host.
+!!! info "`cvmfsexec` System Requirements"
+    -   On EL7, you must have kernel version >= 3.10.0-1127 (run `uname -vr` to check), and user namespaces enabled.
+        See step 1 in the
+        [Singularity Install document](https://opensciencegrid.org/docs/worker-node/install-singularity/#enabling-unprivileged-singularity)
+        for details.
 
-To enable cvmfsexec, specify a space-separated list of repos in the `CVMFSEXEC_REPOS` environment variable.
-We recommend the following repos:
+    -   On EL8, you must have kernel version >= 4.18 (run `uname -vr` to check).
+
+    See the [`cvmfsexec` README](https://github.com/cvmfs/cvmfsexec#readme) details.
+
+[`cvmfsexec`](https://github.com/CVMFS/cvmfsexec#readme) is a tool that can be used to mount CVMFS inside the container
+without requiring CVMFS on the host.
+To enable `cvmfsexec`, specify a space-separated list of repos in the `CVMFSEXEC_REPOS` environment variable.
+At a minimum, we recommend enabling the following repos:
+
 -   `oasis.opensciencegrid.org`
 -   `singularity.opensciencegrid.org`
 
-cvmfsexec has the following system requirements:
-
--   On EL7, you must have kernel version >= 3.10.0-1127 (run `uname -vr` to check), and user namespaces enabled.
-    See step 1 in the
-    [Singularity Install document](https://opensciencegrid.org/docs/worker-node/install-singularity/#enabling-unprivileged-singularity)
-    for details.
-
--   On EL8, you must have kernel version >= 4.18 (run `uname -vr` to check).
-
-See the [cvmfsexec README](https://github.com/cvmfs/cvmfsexec#readme) details.
-
-Note that cvmfsexec will not be run if CVMFS repos are already available in `/cvmfs` via bind-mount,
-regardless of the value of `CVMFSEXEC_REPOS`.
-
-Using cvmfsexec takes place in the entrypoint, which means it will still happen
-even if you specify a different command to run, such as `bash`.
-You can bypass the entrypoint by passing `--entrypoint <cmd>` where `<cmd>` is some different command to run,
-e.g. `--entrypoint bash`.
-Setting the entrypoint this way clears the command.
-
-
-##### Additional cvmfsexec configuration
-
-There are several environment variables you can set for cvmfsexec:
-
--   `CVMFSEXEC_REPOS` - this is a space-separated list of CVMFS repos to mount.
-    Leave this blank to disable cvmfsexec.
-    OSG jobs frequently use the OASIS repo (`oasis.opensciencegrid.org`) and
-    the singularity repo (`singularity.opensciencegrid.org`).
+Additionally, you may set the following environment variables to further control the behavior of `cvmfsexec`:
 
 -   `CVMFS_HTTP_PROXY` - this sets the proxy to use for CVMFS; if left blank
     it will find the best one via WLCG Web Proxy Auto Discovery.
@@ -147,13 +129,11 @@ There are several environment variables you can set for cvmfsexec:
 -   `CVMFS_QUOTA_LIMIT` - the quota limit in MB for CVMFS; leave this blank to
     use the system default (4 GB)
 
-You can add other CVMFS options by bind-mounting a config file over `/cvmfsexec/default.local`;
+You can add other CVMFS options by bind-mounting a config file to `/cvmfsexec/default.local`;
 note that options in environment variables take precedence over options in `/cvmfsexec/default.local`.
 
-You can store the cache outside of the container by volume mounting a directory to `/cvmfs-cache`.
-
-You can store the logs outside of the container by volume mounting a directory to `/cvmfs-logs`.
-
+You may store the cache outside of the container by volume mounting a directory to `/cvmfs-cache`.
+Similarly, logs may be stored outside of the container by volume mounting a directory to `/cvmfs-logs`.
 
 #### Bind mount
 
