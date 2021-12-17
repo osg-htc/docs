@@ -157,19 +157,16 @@ You can store the logs outside of the container by volume mounting a directory t
 
 #### Bind mount
 
-As an alternative to using cvmfsexec, you may install CVMFS on the host, and volume mount it into the container.
-This will let you avoid running the container in privileged mode.
-However, supporting Singularity jobs inside the container will require extra privileges,
-namely the capabilities `DAC_OVERRIDE`, `DAC_READ_SEARCH`, `SETGID`, `SETUID`, `SYS_ADMIN`, `SYS_CHROOT`, and `SYS_PTRACE`.
-
-Follow the [installing CVMFS document](../worker-node/install-cvmfs.md) to install CVMFS on the host.
+As an alternative to using `cvmfsexec`, you may [install CVMFS]((../worker-node/install-cvmfs.md)) on the host,
+and volume mount it into the container.
+Containers with bind mounted CVMFS can be run without `--privileged` but still require the following capabilities:
+`DAC_OVERRIDE`, `DAC_READ_SEARCH`, `SETGID`, `SETUID`, `SYS_ADMIN`, `SYS_CHROOT`, and `SYS_PTRACE`.
 
 Once you have CVMFS installed and mounted on your host, add `-v /cvmfs:/cvmfs:shared` to your `docker run` invocation.
-
 This is the [example at the top of the page](#running-the-container-with-docker),
-modified to volume mount CVMFS instead of using cvmfsexec, and using reduced privileges:
+modified to volume mount CVMFS instead of using `cvmfsexec`, and using reduced privileges:
 
-```
+```hl_lines="5"
 docker run -it --rm --user osg      \
         --security-opt seccomp=unconfined \
         --security-opt systempaths=unconfined \
