@@ -229,3 +229,13 @@ Both options are necessary for optimal behavior.
     but it may not notice high memory usage immediately.
     In addition, the processes that manage jobs also use some amount of memory.
     Therefore it is important to give the container some extra room.
+
+Best Practices
+--------------
+
+We recommend redeploying backfill containers at least every 72 hours.
+This ensures that your containers will have the latest bug and security fixes as well as the configurations to match the
+rest of the OSPool.
+Additionally, you may see better utilization of your resources as the OSPool may ignore resources with a high number of
+job starts.
+
