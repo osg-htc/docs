@@ -1,16 +1,18 @@
+DateReviewed: 2021-12-17
+
 Open Science Pool Containers
 ============================
 
-In order to [share compute resources](overview.md) with the Open Science pool,
+In order to [share compute resources](overview.md) with the Open Science Pool (OSPool),
 sites can launch pilot jobs directly by starting an OSG-provided Docker container.
 The container includes a worker node environment and an embedded pilot;
 when combined with an OSG-provided authentication token (not included in the container),
-the pilot can connect to the Open Science pool and start executing jobs.
+the pilot can connect to the OSPool and start executing jobs.
 
 This technique is useful to implement _backfill_ at a site:
 contributing computing resources when they would otherwise be idle.
 It does not allow the site to share resources between multiple pools and,
-if there are no matching idle jobs in the Open Science pool,
+if there are no matching idle jobs in the OSPool,
 the pilots may remain idle.
 
 Before Starting
@@ -32,11 +34,11 @@ In order to successfully start payload jobs:
 
 
 1. **Configure authentication:**
-   Open Science Pool (OSP) administrators can provide the token,
+   OSPool administrators can provide the token,
    which you can then pass to the container by volume mounting it as a file under `/etc/condor/tokens-orig.d/`.
    If you are using Docker to launch the container, this is done with the command line flag
    `-v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org`.
-   Replace `/path/to/token` with the full path to the token you obtained from the OSP administrators.
+   Replace `/path/to/token` with the full path to the token you obtained from the OSPool administrators.
 2. Set `GLIDEIN_Site` and `GLIDEIN_ResourceName` to match the site name and resource name that you registered in Topology,
    respectively.
 3. Set the `OSG_SQUID_LOCATION` environment variable to the HTTP address of your preferred Squid instance.
@@ -74,10 +76,10 @@ docker run -it --rm --user osg  \
        opensciencegrid/osgvo-docker-pilot:release
 ```
 
-Replace `/path/to/token` with the location you saved the token obtained from the OSP administrators.
+Replace `/path/to/token` with the location you saved the token obtained from the OSPool administrators.
 Privileged mode (`--privileged`) requested in the above `docker run` allows the container
 to mount [CVMFS using cvmfsexec](#adding-cvmfs-using-cvmfsexec) and invoke `singularity` for user jobs.
-Singularity allows OSP users to use their own container for their job (e.g., a common use case for GPU jobs).
+Singularity allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).
 
 
 CVMFS
