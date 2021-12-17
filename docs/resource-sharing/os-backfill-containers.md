@@ -241,3 +241,7 @@ rest of the OSPool.
 Additionally, you may see better utilization of your resources as the OSPool may ignore resources with a high number of
 job starts.
 
+Getting Help
+------------
+
+For assistance, please use the [this page](../common/help.md).
