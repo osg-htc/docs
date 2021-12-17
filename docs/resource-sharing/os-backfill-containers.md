@@ -11,9 +11,11 @@ the pilot can connect to the OSPool and start executing jobs.
 
 This technique is useful to implement _backfill_ at a site:
 contributing computing resources when they would otherwise be idle.
-It does not allow the site to share resources between multiple pools and,
-if there are no matching idle jobs in the OSPool,
-the pilots may remain idle.
+
+!!! warning "Container Limitations"
+    These containers do not allow the site to share resources between multiple pools and,
+    if there are no matching idle jobs in the OSPool,
+    the pilots may remain idle.
 
 Before Starting
 ---------------
