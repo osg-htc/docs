@@ -87,9 +87,10 @@ Privileged mode (`--privileged`) requested in the above `docker run` allows the 
 to mount [CVMFS using cvmfsexec](#adding-cvmfs-using-cvmfsexec) and invoke `singularity` for user jobs.
 Singularity allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).
 
+Optional Configuration
+----------------------
 
-CVMFS
------
+### (Recommended) CVMFS
 
 [CernVM-FS](https://cernvm.cern.ch/fs/) (CVMFS) is a read-only remote filesystem that many OSG jobs depend on for software and data.
 Supporting CVMFS inside your container will greatly increase the types of OSG jobs you can run.
@@ -100,7 +101,7 @@ Bind-mounting CVMFS will require CVMFS to be installed on the host first,
 but the container will need fewer privileges.
 
 
-### Adding CVMFS using cvmfsexec
+#### cvmfsexec
 
 [cvmfsexec](https://github.com/CVMFS/cvmfsexec#readme) is a tool that can be used to mount CVMFS inside the container
 without requiring CVMFS to be installed on the host.
@@ -131,7 +132,7 @@ e.g. `--entrypoint bash`.
 Setting the entrypoint this way clears the command.
 
 
-#### Additional cvmfsexec configuration
+##### Additional cvmfsexec configuration
 
 There are several environment variables you can set for cvmfsexec:
 
@@ -154,7 +155,7 @@ You can store the cache outside of the container by volume mounting a directory 
 You can store the logs outside of the container by volume mounting a directory to `/cvmfs-logs`.
 
 
-### Adding CVMFS via bind-mount
+#### Bind mount
 
 As an alternative to using cvmfsexec, you may install CVMFS on the host, and volume mount it into the container.
 This will let you avoid running the container in privileged mode.
@@ -186,8 +187,7 @@ docker run -it --rm --user osg      \
 Fill in the values for `/path/to/token`, `/worker-temp-dir`, `GLIDEIN_Site`, `GLIDEIN_ResourceName`, and `OSG_SQUID_LOCATION` [as above](#running-the-container-with-docker).
 
 
-Limiting Resource Usage
------------------------
+### Limiting resource usage
 
 By default, the OSG pilot container will allow jobs to utilize the entire node's resources (CPUs, memory).
 If you don't want to allow jobs to use all of these, you can specify limits.
@@ -198,7 +198,7 @@ You must specify limits in two places:
 
 -   As options to the `docker run` command, limiting the resources the pilot container can use.
 
-### Limiting CPUs
+#### CPUs
 
 To limit the number of CPUs available to jobs (thus limiting the number of simultaneous jobs),
 add the following to your `docker run` command:
@@ -215,7 +215,7 @@ the `--cpus` argument will tell Docker not to allocate more than the given numbe
 Both options are necessary for optimal behavior.
 
 
-### Limiting memory
+#### Memory
 
 To limit the total amount of memory available to jobs, add the following to your `docker run` command:
 ```
