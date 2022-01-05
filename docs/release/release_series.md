@@ -30,7 +30,7 @@ Since the start of the RPM-based OSG software stack, we have offered the followi
     If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
     install or remain on the [OSG 3.5 release series](notes.md).
 
--   **OSG 3.5** was started in August 2019 and will reach its end-of-life in February 2022.
+-   **OSG 3.5** was started in August 2019 and will reach its end-of-life at the end of February 2022.
     The main differences between it and 3.4 were the introduction of the HTCondor 8.8 and 8.9 series;
     also the RSV monitoring probes, EL6 support, and CREAM support were all dropped.
 
