@@ -103,7 +103,7 @@ but the container will need fewer privileges.
 
 #### cvmfsexec
 
-!!! info "`cvmfsexec` System Requirements"
+!!! info "cvmfsexec System Requirements"
     -   On EL7, you must have kernel version >= 3.10.0-1127 (run `uname -vr` to check), and user namespaces enabled.
         See step 1 in the
         [Singularity Install document](https://opensciencegrid.org/docs/worker-node/install-singularity/#enabling-unprivileged-singularity)
@@ -111,17 +111,17 @@ but the container will need fewer privileges.
 
     -   On EL8, you must have kernel version >= 4.18 (run `uname -vr` to check).
 
-    See the [`cvmfsexec` README](https://github.com/cvmfs/cvmfsexec#readme) details.
+    See the [cvmfsexec README](https://github.com/cvmfs/cvmfsexec#readme) details.
 
-[`cvmfsexec`](https://github.com/CVMFS/cvmfsexec#readme) is a tool that can be used to mount CVMFS inside the container
+[cvmfsexec](https://github.com/CVMFS/cvmfsexec#readme) is a tool that can be used to mount CVMFS inside the container
 without requiring CVMFS on the host.
-To enable `cvmfsexec`, specify a space-separated list of repos in the `CVMFSEXEC_REPOS` environment variable.
+To enable cvmfsexec, specify a space-separated list of repos in the `CVMFSEXEC_REPOS` environment variable.
 At a minimum, we recommend enabling the following repos:
 
 -   `oasis.opensciencegrid.org`
 -   `singularity.opensciencegrid.org`
 
-Additionally, you may set the following environment variables to further control the behavior of `cvmfsexec`:
+Additionally, you may set the following environment variables to further control the behavior of cvmfsexec:
 
 -   `CVMFS_HTTP_PROXY` - this sets the proxy to use for CVMFS; if left blank
     it will find the best one via WLCG Web Proxy Auto Discovery.
@@ -137,14 +137,14 @@ Similarly, logs may be stored outside of the container by volume mounting a dire
 
 #### Bind mount
 
-As an alternative to using `cvmfsexec`, you may [install CVMFS]((../worker-node/install-cvmfs.md)) on the host,
+As an alternative to using cvmfsexec, you may [install CVMFS]((../worker-node/install-cvmfs.md)) on the host,
 and volume mount it into the container.
 Containers with bind mounted CVMFS can be run without `--privileged` but still require the following capabilities:
 `DAC_OVERRIDE`, `DAC_READ_SEARCH`, `SETGID`, `SETUID`, `SYS_ADMIN`, `SYS_CHROOT`, and `SYS_PTRACE`.
 
 Once you have CVMFS installed and mounted on your host, add `-v /cvmfs:/cvmfs:shared` to your `docker run` invocation.
 This is the [example at the top of the page](#running-the-container-with-docker),
-modified to volume mount CVMFS instead of using `cvmfsexec`, and using reduced privileges:
+modified to volume mount CVMFS instead of using cvmfsexec, and using reduced privileges:
 
 ```hl_lines="5"
 docker run -it --rm --user osg      \
