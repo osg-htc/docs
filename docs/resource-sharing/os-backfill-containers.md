@@ -210,7 +210,7 @@ the `--memory` argument tells Docker to kill the container if its total memory u
 Best Practices
 --------------
 
-We recommend redeploying backfill containers at least every 72 hours.
+We recommend pulling new versions of backfill containers at least every 72 hours.
 This ensures that your containers will have the latest bug and security fixes as well as the configurations to match the
 rest of the OSPool.
 Additionally, you may see better utilization of your resources as the OSPool may ignore resources with a high number of
