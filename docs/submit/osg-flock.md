@@ -48,7 +48,7 @@ many system services which can be difficult to configure in a container.
 
 Also consider the following configuration requirements:
 
-* __Operating system:__ A RHEL 7 or RHEL 8 compatible operating system.
+* __Operating system:__ Ensure the host has [a supported operating system](../release/supported_platforms.md)
 * __User IDs:__ If it does not exist already, the installation will create the Linux user ID `condor`.
 * __Network:__ 
     * Inbound TCP port 9618 must be open.
