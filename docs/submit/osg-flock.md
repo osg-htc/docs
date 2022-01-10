@@ -48,7 +48,9 @@ many system services which can be difficult to configure in a container.
 
 Also consider the following configuration requirements:
 
-* __Operating system:__ A RHEL 7 or RHEL 8 compatible operating system.
+* __Operating system:__ Ensure the host has [a supported operating system](../release/supported_platforms.md)
+* __Software repositories:__ Install the appropriate [EPEL](../common/yum.md#install-the-epel-repositories) and
+  [OSG](../common/yum.md#install-the-osg-repositories) Yum repositories for your operating system
 * __User IDs:__ If it does not exist already, the installation will create the Linux user ID `condor`.
 * __Network:__ 
     * Inbound TCP port 9618 must be open.
@@ -94,14 +96,15 @@ root), and once you have the token generated, keep that for later steps.
 Installing Required Software
 ----------------------------
 Flocking requires HTCondor software as well as software for reporting to the OSG accounting system.
-Start by setting up the OSG YUM repositories following the
-[Installing Yum Repositories](../common/yum.md). __Note that you have to use OSG 3.6__. Earlier
+Start by setting up the EPEL and OSG YUM repositories following the
+[Installing Yum Repositories](../common/yum.md) document. __Note that you have to use OSG 3.6__. Earlier
 versions will not work.
 
 Once the YUM repositories are setup, install the `osg-flock` convenience RPM that installs all
 required packages. Example on a RHEL 7 host:
 
 ```console
+# yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 # yum install https://repo.opensciencegrid.org/osg/3.6/osg-3.6-el7-release-latest.rpm
 # yum install osg-flock
 ```

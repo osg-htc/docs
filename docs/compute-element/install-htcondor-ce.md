@@ -39,6 +39,9 @@ Before starting the installation process, consider the following points, consult
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
 - Ensure the host has [a supported operating system](../release/supported_platforms.md)
+- Install the appropriate [EPEL](../common/yum.md#install-the-epel-repositories) and
+  [OSG](../common/yum.md#install-the-osg-repositories) Yum repositories for your operating system.
+  See [the next section](#choosing-the-osg-yum-repository) for guidance on choosing which OSG Yum repository to install.
 - Obtain root access to the host
 - Install [CA certificates](../common/ca.md)
 
