@@ -199,4 +199,8 @@ OSG takes multiple precautions to maintain security and prevent unauthorized usa
 How to Get Help
 ---------------
 
-If you need help with setup or troubleshooting, [contact us](mailto:help@opensciencegrid.org).
+Is your site not receiving jobs from an OSG Hosted CE?
+Consult our [status page](https://status.opensciencegrid.org/) for Hosted CE outages.
+
+If there isn't an outage, you need help with setup, or otherwise have questions,
+[contact us](mailto:support@opensciencegrid.org).

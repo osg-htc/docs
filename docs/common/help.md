@@ -18,7 +18,7 @@ support inquiry:
 
 *  Troubleshooting sections or pages for the problematic software
 *  Recent OSG Software [release notes](../release/notes.md)
-*  [Outage](https://topology.opensciencegrid.org/rgdowntime/xml?) information for OSG services
+*  [Outage](https://status.opensciencegrid.org/) information for OSG services
 
 ### Submitting support inquiries ###
 
