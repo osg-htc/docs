@@ -173,7 +173,7 @@ Normally, the HTCondor-Cron scheduler runs RSV periodically. However, you can ru
 root@host # rsv-control --run --all-enabled
 ```
 
-If successful, results will be available from your local RSV web server (e.g., `http://localhost/rsv`) and, if enabled (which is the default) on [MyOSG](http://my.opensciencegrid.org/).
+If successful, results will be available from your local RSV web server (e.g., `http://localhost/rsv`) and, if enabled (which is the default) on [Topology](https://topology.opensciencegrid.org/).
 
 You can also run the metrics individually or pass special parameters as explained in the [rsv-control document](rsv-control.md).
 
