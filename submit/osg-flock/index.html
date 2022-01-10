@@ -2020,7 +2020,9 @@ The hardware can be bare metal or virtual machine, but we do not recommend conta
 many system services which can be difficult to configure in a container.</p>
 <p>Also consider the following configuration requirements:</p>
 <ul>
-<li><strong>Operating system:</strong> A RHEL 7 or RHEL 8 compatible operating system.</li>
+<li><strong>Operating system:</strong> Ensure the host has <a href="../../release/supported_platforms/">a supported operating system</a></li>
+<li><strong>Software repositories:</strong> Install the appropriate <a href="../../common/yum/#install-the-epel-repositories">EPEL</a> and
+  <a href="../../common/yum/#install-the-osg-repositories">OSG</a> Yum repositories for your operating system</li>
 <li><strong>User IDs:</strong> If it does not exist already, the installation will create the Linux user ID <code>condor</code>.</li>
 <li><strong>Network:</strong> <ul>
 <li>Inbound TCP port 9618 must be open.</li>
@@ -2055,12 +2057,13 @@ Follow the instructions (you probably have to do the steps on a host with Docker
 root), and once you have the token generated, keep that for later steps.</p>
 <h2 id="installing-required-software">Installing Required Software<a class="headerlink" href="#installing-required-software" title="Permanent link">&para;</a></h2>
 <p>Flocking requires HTCondor software as well as software for reporting to the OSG accounting system.
-Start by setting up the OSG YUM repositories following the
-<a href="../../common/yum/">Installing Yum Repositories</a>. <strong>Note that you have to use OSG 3.6</strong>. Earlier
+Start by setting up the EPEL and OSG YUM repositories following the
+<a href="../../common/yum/">Installing Yum Repositories</a> document. <strong>Note that you have to use OSG 3.6</strong>. Earlier
 versions will not work.</p>
 <p>Once the YUM repositories are setup, install the <code>osg-flock</code> convenience RPM that installs all
 required packages. Example on a RHEL 7 host:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp"># </span>yum install https://repo.opensciencegrid.org/osg/3.6/osg-3.6-el7-release-latest.rpm
+<div class="codehilite"><pre><span></span><code><span class="gp"># </span>yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+<span class="gp"># </span>yum install https://repo.opensciencegrid.org/osg/3.6/osg-3.6-el7-release-latest.rpm
 <span class="gp"># </span>yum install osg-flock
 </code></pre></div>
 
