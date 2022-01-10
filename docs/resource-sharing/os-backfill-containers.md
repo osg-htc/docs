@@ -137,7 +137,7 @@ Similarly, logs may be stored outside of the container by volume mounting a dire
 
 #### Bind mount
 
-As an alternative to using cvmfsexec, you may [install CVMFS]((../worker-node/install-cvmfs.md)) on the host,
+As an alternative to using cvmfsexec, you may [install CVMFS](../worker-node/install-cvmfs.md) on the host,
 and volume mount it into the container.
 Containers with bind mounted CVMFS can be run without `--privileged` but still require the following capabilities:
 `DAC_OVERRIDE`, `DAC_READ_SEARCH`, `SETGID`, `SETUID`, `SYS_ADMIN`, `SYS_CHROOT`, and `SYS_PTRACE`.
