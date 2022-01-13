@@ -2179,9 +2179,11 @@ see the section for <a href="#updating-your-htcondor-hosts">updating your HTCond
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>systemctl start condor-ce
 </code></pre></div>
 
-<p>!!! question "What about <code>gratia-probes-cron</code>?
-    In OSG 3.6, the OSG CE no longer needs a separate service for Gratia Probe.
-    Instead, the default CE configuration runs its Gratia Probe as a periodic process under the HTCondor-CE process tree.</p>
+<div class="admonition question">
+<p class="admonition-title">What about <code>gratia-probes-cron</code>?</p>
+<p>In OSG 3.6, the OSG CE no longer needs a separate service for Gratia Probe.
+Instead, the default CE configuration runs its Gratia Probe as a periodic process under the HTCondor-CE process tree.</p>
+</div>
 <h2 id="updating-your-htcondor-hosts">Updating Your HTCondor Hosts<a class="headerlink" href="#updating-your-htcondor-hosts" title="Permanent link">&para;</a></h2>
 <div class="admonition danger">
 <p class="admonition-title">Before considering an upgrade to OSG 3.6&hellip;</p>
