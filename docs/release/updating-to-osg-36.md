@@ -221,7 +221,7 @@ After updating your RPMs and updating your configuration, turn on the HTCondor-C
 root@host # systemctl start condor-ce
 ```
 
-!!! question "What about `gratia-probes-cron`?
+!!! question "What about `gratia-probes-cron`?"
     In OSG 3.6, the OSG CE no longer needs a separate service for Gratia Probe.
     Instead, the default CE configuration runs its Gratia Probe as a periodic process under the HTCondor-CE process tree.
 
