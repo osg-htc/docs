@@ -39,14 +39,25 @@ The following issues are known to currently affect packages distributed in OSG 3
     with `xrootd-multiuser`.
     See [XRootD GitHub issue #1538](https://github.com/xrootd/xrootd/issues/1538) for more details.
 
-### XRootD ###
-
--   If an XRootD 5.3.4 cache interacts with a 5.1 or 5.2 origin and there is an asyncio error, it may crash the origin.
-    Please upgrade your origin at your earliest convenience.
-    You may turn off asyncio (`async off`) on either end to avoid the problem.
-
 Latest News
 -----------
+
+### **January 13, 2022:** XRootD 5.4.0 and Vault updates
+
+-   [XRootD 5.4.0](https://github.com/xrootd/xrootd/releases/tag/v5.4.0): New feature release
+    -   Fix problem interacting with version 5.1 or 5.2 origin servers
+-   xrootd-tcp-stats 1.0.0: Initial release of TCP statistics plugin
+-   vault 1.9.0, htvault-config 1.11, htgettoken 1.9
+    -   upgrade to latest vault
+    -   add support for ssh-agent authentication
+-   [VO Package v116](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-116)
+    -   Add second Belle2 VOMS server
+-   [oidc-agent 4.2.4](https://github.com/indigo-dc/oidc-agent/releases)
+    -   Upgrade to new major version from version 3.3.3
+    -   NOTE: oidc-agent must be restarted after upgrade
+-   osg-scitokens-mapfile 4
+    -    Add default ATLAS token mappings
+-   osg-pki-tools 3.5.0-2: Upgrade to Python 3
 
 ### **December 9, 2021:** XRootD and HTCondor updates
 
