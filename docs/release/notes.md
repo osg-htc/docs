@@ -39,6 +39,7 @@ Releases
 
 | Version                             | Date       | Summary                                                                       |
 |:------------------------------------|:-----------|:------------------------------------------------------------------------------|
+| [3.5.53](3.5/release-3-5-53.md)     | 2022-01-13 | VO Package v115, oidc-agent 4.2.4, osg-scitokens-mapfile 4, osg-pki-tools 3.5.0-2; Upcoming: XRootD 5.4.0, xrootd-tcp-stats 1.0.0 |
 | [3.5.52](3.5/release-3-5-52.md)     | 2021-12-09 | Upcoming: XRootD 5.3.4, HTCondor 9.0.8                                        |
 | [3.5.51](3.5/release-3-5-51.md)     | 2021-12-01 | VO Package v115, python-scitokens 1.6.2, vault 1.8.4, htvault-config 1.10, htgettoken 1.8; Upcoming: HTCondor 9.0.7 |
 | [3.5.50](3.5/release-3-5-50.md)     | 2021-11-11 | osg-ca-certs-updater 2.0; Upcoming: xrootd-multiuser 2.0.3                    |
