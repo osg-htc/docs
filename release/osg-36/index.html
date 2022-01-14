@@ -1506,13 +1506,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#xrootd" class="md-nav__link">
-    XRootD
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1525,6 +1518,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#january-13-2022-xrootd-540-and-vault-updates" class="md-nav__link">
+    January 13, 2022: XRootD 5.4.0 and Vault updates
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#december-9-2021-xrootd-and-htcondor-updates" class="md-nav__link">
@@ -1958,13 +1958,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#xrootd" class="md-nav__link">
-    XRootD
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1977,6 +1970,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#january-13-2022-xrootd-540-and-vault-updates" class="md-nav__link">
+    January 13, 2022: XRootD 5.4.0 and Vault updates
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#december-9-2021-xrootd-and-htcondor-updates" class="md-nav__link">
@@ -2216,13 +2216,34 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
     with <code>xrootd-multiuser</code>.
     See <a href="https://github.com/xrootd/xrootd/issues/1538">XRootD GitHub issue #1538</a> for more details.</li>
 </ul>
-<h3 id="xrootd">XRootD<a class="headerlink" href="#xrootd" title="Permanent link">&para;</a></h3>
-<ul>
-<li>If an XRootD 5.3.4 cache interacts with a 5.1 or 5.2 origin and there is an asyncio error, it may crash the origin.
-    Please upgrade your origin at your earliest convenience.
-    You may turn off asyncio (<code>async off</code>) on either end to avoid the problem.</li>
-</ul>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="january-13-2022-xrootd-540-and-vault-updates"><strong>January 13, 2022:</strong> XRootD 5.4.0 and Vault updates<a class="headerlink" href="#january-13-2022-xrootd-540-and-vault-updates" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://github.com/xrootd/xrootd/releases/tag/v5.4.0">XRootD 5.4.0</a>: New feature release<ul>
+<li>Fix problem interacting with version 5.1 or 5.2 origin servers</li>
+</ul>
+</li>
+<li>xrootd-tcp-stats 1.0.0: Initial release of TCP statistics plugin</li>
+<li>vault 1.9.0, htvault-config 1.11, htgettoken 1.9<ul>
+<li>upgrade to latest vault</li>
+<li>add support for ssh-agent authentication</li>
+</ul>
+</li>
+<li><a href="https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-116">VO Package v116</a><ul>
+<li>Add second Belle2 VOMS server</li>
+</ul>
+</li>
+<li><a href="https://github.com/indigo-dc/oidc-agent/releases">oidc-agent 4.2.4</a><ul>
+<li>Upgrade to new major version from version 3.3.3</li>
+<li>NOTE: oidc-agent must be restarted after upgrade</li>
+</ul>
+</li>
+<li>osg-scitokens-mapfile 4<ul>
+<li>Add default ATLAS token mappings</li>
+</ul>
+</li>
+<li>osg-pki-tools 3.5.0-2: Upgrade to Python 3</li>
+</ul>
 <h3 id="december-9-2021-xrootd-and-htcondor-updates"><strong>December 9, 2021:</strong> XRootD and HTCondor updates<a class="headerlink" href="#december-9-2021-xrootd-and-htcondor-updates" title="Permanent link">&para;</a></h3>
 <div class="admonition warning">
 <p class="admonition-title">Problem interoperating with older origin servers</p>
