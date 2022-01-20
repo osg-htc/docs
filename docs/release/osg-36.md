@@ -87,7 +87,7 @@ Latest News
 
 -   [XRootD 5.3.4](https://github.com/xrootd/xrootd/blob/v5.3.4/docs/ReleaseNotes.txt)
     -   Fix uncorrectable checksum errors in XCache Origins
--   [HTCondor 9.0.8 LTS](https://htcondor.org/news/HTCondor_9.0.8_released/)
+-   [HTCondor 9.0.8 LTS](https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00027.shtml)
     -   X.509 proxy delegation now works in OSG 3.6
     -   Fix bug where huge values of ImageSize and others would end up negative
     -   Fix bug in how MAX\_JOBS\_PER\_OWNER applied to late materialization jobs
@@ -102,7 +102,7 @@ Latest News
     -   Initial release of XRootD in OSG 3.6
 -   XCache 3.0.0
     -   Initial release of XCache in OSG 3.6
--   [HTCondor 9.0.7](https://htcondor.org/news/HTCondor_9.0.7_released/): Bug fix release
+-   [HTCondor 9.0.7](https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00025.shtml): Bug fix release
     -   Fix bug where condor\_gpu\_discovery could crash with older CUDA libraries
     -   Fix bug where condor\_watch\_q would fail on machines with older kernels
     -   condor\_watch\_q no longer has a limit on the number of job event log files
@@ -118,7 +118,7 @@ Latest News
 -   [Pegasus 5.0.1](https://pegasus.isi.edu/2021/10/07/pegasus-5-0-1-released/)
     -   First OSG release of the Pegasus 5 series
 -   Upcoming
-    -   [HTCondor 9.3.0](https://htcondor.org/news/HTCondor_9.3.0_released/)
+    -   [HTCondor 9.3.0](https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00026.shtml)
         -   File transfer plugin sample code to aid in developing new plugins
         -   Add generic knob to set the slot user for all slots
 

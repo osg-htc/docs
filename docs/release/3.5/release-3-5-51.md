@@ -31,7 +31,7 @@ This release contains:
     -   Ensure compatibility with older versions of PyJWT
     -   Add multiple aud in token support
 -   Upcoming
-    -   [HTCondor 9.0.7 LTS](https://htcondor.org/news/HTCondor_9.0.7_released/): Bug fix release
+    -   [HTCondor 9.0.7 LTS](https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00025.shtml): Bug fix release
         -   Fix bug where condor_gpu_discovery could crash with older CUDA libraries
         -   Fix bug where condor_watch_q would fail on machines with older kernels
         -   condor_watch_q no longer has a limit on the number of job event log files

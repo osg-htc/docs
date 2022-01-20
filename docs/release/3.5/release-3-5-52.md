@@ -30,7 +30,7 @@ This release contains:
 
     -   [XRootD 5.3.4](https://github.com/xrootd/xrootd/blob/v5.3.4/docs/ReleaseNotes.txt)
         -   Fix uncorrectable checksum errors in XCache Origins
-    -   [HTCondor 9.0.8 LTS](https://htcondor.org/news/HTCondor_9.0.8_released/)
+    -   [HTCondor 9.0.8 LTS](https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00027.shtml)
         -   Fix bug where huge values of ImageSize and others would end up negative
         -   Fix bug in how MAX_JOBS_PER_OWNER applied to late materialization jobs
         -   Fix bug where the schedd could choose a slot with insufficient disk space
