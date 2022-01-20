@@ -1520,6 +1520,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#january-20-2022-cvmfs-290-and-htcondor-513-updates" class="md-nav__link">
+    January 20, 2022: CVMFS 2.9.0 and HTCondor 5.1.3 updates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#january-13-2022-xrootd-540-and-vault-updates" class="md-nav__link">
     January 13, 2022: XRootD 5.4.0 and Vault updates
   </a>
@@ -1972,6 +1979,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#january-20-2022-cvmfs-290-and-htcondor-513-updates" class="md-nav__link">
+    January 20, 2022: CVMFS 2.9.0 and HTCondor 5.1.3 updates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#january-13-2022-xrootd-540-and-vault-updates" class="md-nav__link">
     January 13, 2022: XRootD 5.4.0 and Vault updates
   </a>
@@ -2217,6 +2231,32 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
     See <a href="https://github.com/xrootd/xrootd/issues/1538">XRootD GitHub issue #1538</a> for more details.</li>
 </ul>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="january-20-2022-cvmfs-290-and-htcondor-513-updates"><strong>January 20, 2022:</strong> CVMFS 2.9.0 and HTCondor 5.1.3 updates<a class="headerlink" href="#january-20-2022-cvmfs-290-and-htcondor-513-updates" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://cvmfs.readthedocs.io/en/2.9/cpt-releasenotes.html">CVMFS 2.9.0</a><ul>
+<li>Incremental conversion of container images, resulting in a large speed-up for publishing new container image versions to unpacked.cern.ch</li>
+<li>Support for maintaining repositories in S3 over HTTPS (not just HTTP)</li>
+<li>Significant speed-ups for S3 and gateway publisher deployments</li>
+<li>Various bugfixes and smaller improvements (error reporting, repository statistics, network failure handling, etc.)</li>
+</ul>
+</li>
+<li><a href="https://github.com/htcondor/htcondor-ce/releases/tag/v5.1.3">HTCondor-CE 5.1.3</a><ul>
+<li>The HTCondor-CE central collector requires SSL credentials from client CEs</li>
+<li>Fix BDII crash if an HTCondor Access Point is not available</li>
+<li>Fix formatting of APEL records that contain huge values</li>
+<li>HTCondor-CE client mapfiles are not installed on the central collector</li>
+</ul>
+</li>
+<li>osg-xrootd 3.6-12<ul>
+<li>Fix default location for grid-mapfile when using HTTP/WebDAV transfer</li>
+<li>Fix monitoring of writes</li>
+</ul>
+</li>
+<li>osg-ce 3.6-4<ul>
+<li>Release the osg-ce-bosco package</li>
+</ul>
+</li>
+</ul>
 <h3 id="january-13-2022-xrootd-540-and-vault-updates"><strong>January 13, 2022:</strong> XRootD 5.4.0 and Vault updates<a class="headerlink" href="#january-13-2022-xrootd-540-and-vault-updates" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://github.com/xrootd/xrootd/releases/tag/v5.4.0">XRootD 5.4.0</a>: New feature release<ul>
@@ -2256,7 +2296,7 @@ You may turn off asyncio (<code>async off</code>) on either end to avoid the pro
 <li>Fix uncorrectable checksum errors in XCache Origins</li>
 </ul>
 </li>
-<li><a href="https://htcondor.org/news/HTCondor_9.0.8_released/">HTCondor 9.0.8 LTS</a><ul>
+<li><a href="https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00027.shtml">HTCondor 9.0.8 LTS</a><ul>
 <li>X.509 proxy delegation now works in OSG 3.6</li>
 <li>Fix bug where huge values of ImageSize and others would end up negative</li>
 <li>Fix bug in how MAX_JOBS_PER_OWNER applied to late materialization jobs</li>
@@ -2277,7 +2317,7 @@ You may turn off asyncio (<code>async off</code>) on either end to avoid the pro
 <li>Initial release of XCache in OSG 3.6</li>
 </ul>
 </li>
-<li><a href="https://htcondor.org/news/HTCondor_9.0.7_released/">HTCondor 9.0.7</a>: Bug fix release<ul>
+<li><a href="https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00025.shtml">HTCondor 9.0.7</a>: Bug fix release<ul>
 <li>Fix bug where condor_gpu_discovery could crash with older CUDA libraries</li>
 <li>Fix bug where condor_watch_q would fail on machines with older kernels</li>
 <li>condor_watch_q no longer has a limit on the number of job event log files</li>
@@ -2301,7 +2341,7 @@ You may turn off asyncio (<code>async off</code>) on either end to avoid the pro
 </ul>
 </li>
 <li>Upcoming<ul>
-<li><a href="https://htcondor.org/news/HTCondor_9.3.0_released/">HTCondor 9.3.0</a><ul>
+<li><a href="https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00026.shtml">HTCondor 9.3.0</a><ul>
 <li>File transfer plugin sample code to aid in developing new plugins</li>
 <li>Add generic knob to set the slot user for all slots</li>
 </ul>
