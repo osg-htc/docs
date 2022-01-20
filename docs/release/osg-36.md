@@ -42,6 +42,25 @@ The following issues are known to currently affect packages distributed in OSG 3
 Latest News
 -----------
 
+### **January 20, 2022:** CVMFS 2.9.0 and HTCondor 5.1.3 updates
+
+-   [CVMFS 2.9.0](https://cvmfs.readthedocs.io/en/2.9/cpt-releasenotes.html)
+    -   Incremental conversion of container images, resulting in a large speed-up for publishing new container image versions to unpacked.cern.ch
+    -   Support for maintaining repositories in S3 over HTTPS (not just HTTP)
+    -   Significant speed-ups for S3 and gateway publisher deployments
+    -   Various bugfixes and smaller improvements (error reporting, repository statistics, network failure handling, etc.)
+-   [HTCondor-CE 5.1.3](https://github.com/htcondor/htcondor-ce/releases/tag/v5.1.3)
+    -   The HTCondor-CE central collector requires SSL credentials from client CEs
+    -   Fix BDII crash if an HTCondor Access Point is not available
+    -   Fix formatting of APEL records that contain huge values
+    -   HTCondor-CE client mapfiles are not installed on the central collector
+-   osg-xrootd 3.6-12
+    -   Fix default location for grid-mapfile when using HTTP/WebDAV transfer
+    -   Fix monitoring of writes
+-   osg-ce 3.6-4
+    -   Release the osg-ce-bosco package
+
+
 ### **January 13, 2022:** XRootD 5.4.0 and Vault updates
 
 -   [XRootD 5.4.0](https://github.com/xrootd/xrootd/releases/tag/v5.4.0): New feature release
