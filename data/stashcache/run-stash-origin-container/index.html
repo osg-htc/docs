@@ -1873,9 +1873,9 @@ ORIGIN_FQDN=&lt;FQDN&gt;
 <p>The OSDF namespace is shared by multiple VOs so you must
 <a href="../vo-data/#choosing-namespaces">choose a namespace</a> for your own VO's data.
 When running an origin container, your chosen namespace must be reflected in your host partition.</p>
-<p>For example, if your host partition is <code>/srv/origin-puliic</code> and the name of your VO is <code>ASTRO,
-you should store the Astro VO's public data in</code>/srv/origin-public/astro/<code>.
-Then, when starting container, you will mount</code>/srv/origin-public/<code>into</code>/xcache/namespace` in the container.</p>
+<p>For example, if your host partition is <code>/srv/origin-public</code> and the name of your VO is <code>ASTRO</code>,
+you should store the Astro VO's public data in <code>/srv/origin-public/astro/</code>.
+Then, when starting container, you will mount <code>/srv/origin-public/</code> into <code>/xcache/namespace</code> in the container.</p>
 <h2 id="running-the-origin">Running the Origin<a class="headerlink" href="#running-the-origin" title="Permanent link">&para;</a></h2>
 <p>It is recommended to use a container orchestration service such as <a href="https://docs.docker.com/compose/">docker-compose</a>
 or <a href="https://kubernetes.io/">kubernetes</a> whose details are beyond the scope of this document.
