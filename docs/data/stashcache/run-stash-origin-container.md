@@ -52,7 +52,7 @@ The OSDF namespace is shared by multiple VOs so you must
 [choose a namespace](vo-data.md#choosing-namespaces) for your own VO's data.
 When running an origin container, your chosen namespace must be reflected in your host partition.
 
-For example, if your host partition is `/srv/origin-puliic` and the name of your VO is `ASTRO,
+For example, if your host partition is `/srv/origin-public` and the name of your VO is `ASTRO`,
 you should store the Astro VO's public data in `/srv/origin-public/astro/`.
 Then, when starting container, you will mount `/srv/origin-public/` into `/xcache/namespace` in the container.
 
