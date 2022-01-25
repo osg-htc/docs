@@ -64,6 +64,7 @@ Custom variables and those that aren't listed may be defined in the [Local Setti
 
 As [described above](#the-worker-node-environment) `OSG_WN_TMP` is a temporary storage area on each worker node for
 pilot jobs to use as temporary scratch space.
+Its value is set through the configuration of your [CE](../compute-element/install-htcondor-ce.md#automatic-configuration).
 
 #### For site administrators  ####
 
