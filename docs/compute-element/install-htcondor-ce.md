@@ -26,6 +26,8 @@ Before starting the installation process, consider the following points, consult
 
 -   **User IDs:** If they do not exist already, the installation will create the Linux users `condor` (UID 4716) and
     `gratia` (UID 42401)
+    You will also need to create Unix accounts for each VO that you wish to support.
+    See details in the ['Configuring authentication' section below](#configuring-authentication).
 -   **SSL certificate:** The HTCondor-CE service uses a host certificate at `/etc/grid-security/hostcert.pem` and an
     accompanying key at `/etc/grid-security/hostkey.pem`
 -   **DNS entries:** Forward and reverse DNS must resolve for the HTCondor-CE host
@@ -149,7 +151,24 @@ To configure which VOs and users are authorized to submit pilot jobs to your HTC
 
 #### Bearer Tokens (OSG 3.5 upcoming, OSG 3.6)####
 
-To configure which VOs are authorized to submit pilot jobs to your HTCondor-CE, consult the "SciTokens" section of the
+The `osg-scitokens-mapfile`, pulled in by the `osg-ce` package, provides default token to local user mappings.
+To add support for a particular VO:
+
+1.  Create the Unix account(s) corresponding to the last field in the default mapfile:
+    `/usr/share/condor-ce/mapfiles.d/osg-scitokens-mapfile.conf`.
+    For example, to add support for the OSPool, create the `osg` user account on the CE and across your cluster.
+
+1.  **(Optional)** if you wish to change the user mapping, copy the relevant mapping from
+    `/usr/share/condor-ce/mapfiles.d/osg-scitokens-mapfile.conf` to a `.conf` file in `/etc/condor-ce/mapfiles.d/`
+    and change the last field to the desired username.
+    For example, if you wish to add support for the OSPool but prefer to map OSPool pilot jobs to the `osgpilot` account
+    that you created on your CE and across your cluster, you could add the following to
+    `/etc/condor-ce/mapfiles.d/50-ospool.conf`:
+
+        # OSG
+        SCITOKENS /^https\:\/\/scitokens\.org\/osg\-connect,/ osgpilot
+
+For more details of the mapfile format, consult the "SciTokens" section of the
 [upstream documentation](https://htcondor.github.io/htcondor-ce/v5/configuration/authentication/#scitokens).
 
 
