@@ -1893,8 +1893,14 @@ All sites are highly encouraged to use an <a href="../data/frontier-squid/">HTTP
 cluster.</p>
 <p>Depending on the VOs you want to support, additional data services may be necessary:</p>
 <ul>
-<li>Some VOs elect to stream their larger input data from offsite using OSG's "StashCache" service.
-  This requires no services to be run by the site</li>
+<li>Some VOs elect to stream their larger input data from offsite using OSG's <a href="../data/stashcache/overview/">Data Federation</a>.
+  User jobs can make use of the OSG Data Federation without any services at your site but you may wish to run one or
+  more of the following services:<ul>
+<li><a href="../data/stashcache/run-stashcache-container/">Data Cache</a> to further reduce load on your connection to the WAN.</li>
+<li><a href="../data/stashcache/run-stash-origin-container/">Data Origin</a> to allow local users to stage their data into
+     the OSG Data Federation.</li>
+</ul>
+</li>
 <li>The largest sites will additionally run large-scale data services such as a "storage element".
   This is often required for sites that want to support more complex organizations such as ATLAS or CMS.</li>
 </ul>
