@@ -42,6 +42,15 @@ The following issues are known to currently affect packages distributed in OSG 3
 Latest News
 -----------
 
+### **January 27, 2022:** VO Package v117 and OSG SciTokens mapfile 5
+
+-   [VO Package v117](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-117)
+    -   Update GlueX DN
+    -   Update hcc-voms2 DN
+    -   Add ATLAS IAM vomses entry
+-   osg-scitokens-mapfile 5
+    -   Add default SciTokens mappings for the FNAL VOs
+
 ### **January 20, 2022:** CVMFS 2.9.0 and HTCondor 5.1.3 updates
 
 -   [CVMFS 2.9.0](https://cvmfs.readthedocs.io/en/2.9/cpt-releasenotes.html)
