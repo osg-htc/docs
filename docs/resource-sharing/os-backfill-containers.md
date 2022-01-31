@@ -84,7 +84,7 @@ docker run -it --rm --user osg  \
 
 Replace `/path/to/token` with the location you saved the token obtained from the OSPool Token Registry.
 Privileged mode (`--privileged`) requested in the above `docker run` allows the container
-to mount [CVMFS using cvmfsexec](#adding-cvmfs-using-cvmfsexec) and invoke `singularity` for user jobs.
+to mount [CVMFS using cvmfsexec](#cvmfsexec) and invoke `singularity` for user jobs.
 Singularity allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).
 
 Optional Configuration
@@ -95,8 +95,8 @@ Optional Configuration
 [CernVM-FS](https://cernvm.cern.ch/fs/) (CVMFS) is a read-only remote filesystem that many OSG jobs depend on for software and data.
 Supporting CVMFS inside your container will greatly increase the types of OSG jobs you can run.
 
-There are two methods for making CVMFS available in your container: [enabling cvmfsexec](#adding-cvmfs-using-cvmfsexec),
-or [bind mounting CVMFS from the host](#adding-cvmfs-via-bind-mount).
+There are two methods for making CVMFS available in your container: [enabling cvmfsexec](#cvmfsexec),
+or [bind mounting CVMFS from the host](#bind-mount).
 Bind mounting CVMFS will require CVMFS to be installed on the host first,
 but the container will need fewer privileges.
 
