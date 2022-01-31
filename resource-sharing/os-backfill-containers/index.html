@@ -1991,14 +1991,14 @@ Make sure the user you run your container as has write access to this directory.
 
 <p>Replace <code>/path/to/token</code> with the location you saved the token obtained from the OSPool Token Registry.
 Privileged mode (<code>--privileged</code>) requested in the above <code>docker run</code> allows the container
-to mount <a href="#adding-cvmfs-using-cvmfsexec">CVMFS using cvmfsexec</a> and invoke <code>singularity</code> for user jobs.
+to mount <a href="#cvmfsexec">CVMFS using cvmfsexec</a> and invoke <code>singularity</code> for user jobs.
 Singularity allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).</p>
 <h2 id="optional-configuration">Optional Configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h2>
 <h3 id="recommended-cvmfs">(Recommended) CVMFS<a class="headerlink" href="#recommended-cvmfs" title="Permanent link">&para;</a></h3>
 <p><a href="https://cernvm.cern.ch/fs/">CernVM-FS</a> (CVMFS) is a read-only remote filesystem that many OSG jobs depend on for software and data.
 Supporting CVMFS inside your container will greatly increase the types of OSG jobs you can run.</p>
-<p>There are two methods for making CVMFS available in your container: <a href="#adding-cvmfs-using-cvmfsexec">enabling cvmfsexec</a>,
-or <a href="#adding-cvmfs-via-bind-mount">bind mounting CVMFS from the host</a>.
+<p>There are two methods for making CVMFS available in your container: <a href="#cvmfsexec">enabling cvmfsexec</a>,
+or <a href="#bind-mount">bind mounting CVMFS from the host</a>.
 Bind mounting CVMFS will require CVMFS to be installed on the host first,
 but the container will need fewer privileges.</p>
 <h4 id="cvmfsexec">cvmfsexec<a class="headerlink" href="#cvmfsexec" title="Permanent link">&para;</a></h4>
