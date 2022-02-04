@@ -42,12 +42,16 @@ The following issues are known to currently affect packages distributed in OSG 3
 Latest News
 -----------
 
-### **February X, 2022:** Gratia Probe 2.5.1
+### **February 3, 2022:** Gratia Probe 2.5.1
 
--  gratia-probe 2.5.1
-   - Fix a bug that prevented record generation for HTCondor batch systems.
-     Manual intervention required; see [this documentation](updating-to-osg-36.md#htcondor-batch-systems) for details.
-   - Fix ownership of the record quarantine directory
+-   gratia-probe 2.5.1
+    -   Fix a bug that prevented record generation for HTCondor batch systems.  Manual intervention required; see [this documentation](updating-to-osg-36.md#htcondor-batch-systems) for details.
+    -   Fix ownership of the record quarantine directory
+-   osg-flock 1.7
+    -   Fixed capitalization of the OSG VO in the default accounting configuration (access point admins that have already updated to osg-flock-1.6 should change VOOverride="OSG" to VOOverride="osg" in /etc/gratia/condor-ap/ProbeConfig)
+    -   Dropped configuration required for old versions of HTCondor
+-   [VO Package v118](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-118)
+    -   Update FNAL voms2 DN
 
 ### **January 27, 2022:** VO Package v117 and OSG SciTokens mapfile 5
 
