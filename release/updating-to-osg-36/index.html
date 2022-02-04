@@ -1538,6 +1538,26 @@
     Gratia Probe
   </a>
   
+    <nav class="md-nav" aria-label="Gratia Probe">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#htcondor-batch-systems" class="md-nav__link">
+    HTCondor batch systems
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-htcondor-batch-systems" class="md-nav__link">
+    Non-HTCondor batch systems
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1845,6 +1865,26 @@
     Gratia Probe
   </a>
   
+    <nav class="md-nav" aria-label="Gratia Probe">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#htcondor-batch-systems" class="md-nav__link">
+    HTCondor batch systems
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-htcondor-batch-systems" class="md-nav__link">
+    Non-HTCondor batch systems
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -2066,8 +2106,56 @@ To upgrade your CE to OSG 3.6, follow the sections below to make your configurat
 <h4 id="gratia-probe">Gratia Probe<a class="headerlink" href="#gratia-probe" title="Permanent link">&para;</a></h4>
 <p>The OSG 3.6 release series contains <a href="https://github.com/opensciencegrid/gratia-probe/releases/tag/v2.0.0-2">Gratia Probe 2</a>,
 which uses the non-root HTCondor-CE probe to account for your site's resource contributions.
-To ensure that your contributions continue to be properly accounted for, verify that your HTCondor-CE's
-<code>PER_JOB_HISTORY_DIR</code> is set to <code>/var/lib/condor-ce/gratia/data</code>:</p>
+To ensure that your contributions continue to be properly accounted for,
+perform the following steps based on the type of batch system running at your site.</p>
+<h5 id="htcondor-batch-systems">HTCondor batch systems<a class="headerlink" href="#htcondor-batch-systems" title="Permanent link">&para;</a></h5>
+<p>After updating your <code>gratia-probe-*</code> packages,
+verify the values of your HTCondor and HTCondor-CE <code>PER_JOB_HISTORY_DIR</code> configurations match the output below:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp"># </span>condor_ce_config_val -v PER_JOB_HISTORY_DIR
+<span class="go">Not defined: PER_JOB_HISTORY_DIR</span>
+<span class="gp"> # </span>at: &lt;Default&gt;
+<span class="gp"> # </span>raw: <span class="nv">PER_JOB_HISTORY_DIR</span> <span class="o">=</span> 
+
+<span class="gp"># </span>condor_config_val -v PER_JOB_HISTORY_DIR
+<span class="go">PER_JOB_HISTORY_DIR = /var/lib/condor-ce/gratia/data</span>
+<span class="gp"> # </span>at: /etc/condor/config.d/99-gratia.conf, line <span class="m">5</span>
+<span class="gp"> # </span>raw: <span class="nv">PER_JOB_HISTORY_DIR</span> <span class="o">=</span> /var/lib/condor-ce/gratia/data
+</code></pre></div>
+
+<ul>
+<li>
+<p><strong>If you see the above output</strong>, your Gratia Probe configuration is correct and you may continue onto the
+  <a href="#osg-configure">next section</a>.</p>
+</li>
+<li>
+<p><strong>If you do not see the above output</strong>:</p>
+<ol>
+<li>
+<p>If the value of <code>condor_config_val -v PER_JOB_HISTORY_DIR</code> is not <code>/var/lib/condor-ce/gratia/data</code>
+    note its value.
+    Then visit the referenced file, remove the offending configuration and repeat until the output of
+    <code>condor_config_val -v PER_JOB_HISTORY_DIR</code> matches the above output.</p>
+</li>
+<li>
+<p>If the value of <code>condor_ce_config_val -v PER_JOB_HISTORY_DIR</code> is set,
+    visit the referenced file and remove the offending configuration.
+    Repeat until the output of <code>condor_ce_config_val -v PER_JOB_HISTORY_DIR</code> matches the above output.</p>
+</li>
+<li>
+<p>If you noted a different value in step a, copy data from the old directory to the new directory and fix ensure
+    that ownership is correct:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>cp  &lt;ORIGINAL DIR&gt;/* /var/lib/condor-ce/gratia/data/
+<span class="gp">root@host # </span>chown -R condor:condor /var/lib/condor-ce/gratia/data/
+</code></pre></div>
+
+<p>Replacing <code>&lt;ORIGINAL_DIR&gt;</code> with the value that you noted in step a.</p>
+</li>
+</ol>
+</li>
+</ul>
+<h5 id="non-htcondor-batch-systems">Non-HTCondor batch systems<a class="headerlink" href="#non-htcondor-batch-systems" title="Permanent link">&para;</a></h5>
+<p>After updating your <code>gratia-probe-*</code> packages,
+verify that your HTCondor-CE's <code>PER_JOB_HISTORY_DIR</code> is set to <code>/var/lib/condor-ce/gratia/data</code>:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>condor_ce_config_val -v PER_JOB_HISTORY_DIR
 <span class="go">PER_JOB_HISTORY_DIR = /var/lib/condor-ce/gratia/data</span>
 <span class="gp"># </span>at: /etc/condor-ce/config.d/99_gratia-ce.conf, line <span class="m">5</span>
