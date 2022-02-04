@@ -123,8 +123,53 @@ After turning off your CE's services, you may proceed with the [repository and R
 
 The OSG 3.6 release series contains [Gratia Probe 2](https://github.com/opensciencegrid/gratia-probe/releases/tag/v2.0.0-2),
 which uses the non-root HTCondor-CE probe to account for your site's resource contributions.
-To ensure that your contributions continue to be properly accounted for, verify that your HTCondor-CE's
-`PER_JOB_HISTORY_DIR` is set to `/var/lib/condor-ce/gratia/data`:
+To ensure that your contributions continue to be properly accounted for,
+perform the following steps based on the type of batch system running at your site.
+
+##### HTCondor batch systems #####
+
+After updating your `gratia-probe-*` packages,
+verify the values of your HTCondor and HTCondor-CE `PER_JOB_HISTORY_DIR` configurations match the output below:
+
+``` console
+# condor_ce_config_val -v PER_JOB_HISTORY_DIR
+Not defined: PER_JOB_HISTORY_DIR
+ # at: <Default>
+ # raw: PER_JOB_HISTORY_DIR = 
+
+# condor_config_val -v PER_JOB_HISTORY_DIR
+PER_JOB_HISTORY_DIR = /var/lib/condor-ce/gratia/data
+ # at: /etc/condor/config.d/99-gratia.conf, line 5
+ # raw: PER_JOB_HISTORY_DIR = /var/lib/condor-ce/gratia/data
+```
+
+- **If you see the above output**, your Gratia Probe configuration is correct and you may continue onto the
+  [next section](#osg-configure).
+
+- **If you do not see the above output**:
+
+    1.  If the value of `condor_config_val -v PER_JOB_HISTORY_DIR` is not `/var/lib/condor-ce/gratia/data`
+        note its value.
+        Then visit the referenced file, remove the offending configuration and repeat until the output of
+        `condor_config_val -v PER_JOB_HISTORY_DIR` matches the above output.
+
+    1.  If the value of `condor_ce_config_val -v PER_JOB_HISTORY_DIR` is set,
+        visit the referenced file and remove the offending configuration.
+        Repeat until the output of `condor_ce_config_val -v PER_JOB_HISTORY_DIR` matches the above output.
+
+    1.  If you noted a different value in step a, copy data from the old directory to the new directory and fix ensure
+        that ownership is correct:
+
+            :::console
+            root@host # cp  <ORIGINAL DIR>/* /var/lib/condor-ce/gratia/data/
+            root@host # chown -R condor:condor /var/lib/condor-ce/gratia/data/
+
+        Replacing `<ORIGINAL_DIR>` with the value that you noted in step a.
+
+##### Non-HTCondor batch systems #####
+
+After updating your `gratia-probe-*` packages,
+verify that your HTCondor-CE's `PER_JOB_HISTORY_DIR` is set to `/var/lib/condor-ce/gratia/data`:
 
 ```console
 root@host # condor_ce_config_val -v PER_JOB_HISTORY_DIR
