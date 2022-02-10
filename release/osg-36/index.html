@@ -1520,6 +1520,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#february-10-2022-htcondor-909-lts" class="md-nav__link">
+    February 10, 2022: HTCondor 9.0.9 LTS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#february-3-2022-gratia-probe-251" class="md-nav__link">
     February 3, 2022: Gratia Probe 2.5.1
   </a>
@@ -1993,6 +2000,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#february-10-2022-htcondor-909-lts" class="md-nav__link">
+    February 10, 2022: HTCondor 9.0.9 LTS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#february-3-2022-gratia-probe-251" class="md-nav__link">
     February 3, 2022: Gratia Probe 2.5.1
   </a>
@@ -2244,7 +2258,8 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
 <p>The following issues are known to currently affect packages distributed in OSG 3.6:</p>
 <h3 id="htcondor-ce">HTCondor-CE<a class="headerlink" href="#htcondor-ce" title="Permanent link">&para;</a></h3>
 <ul>
-<li>C-style comments, e.g. <code>/* comment */</code>, in <code>JOB_ROUTER_ENTRIES</code> will prevent the JobRouter from routing jobs
+<li>If you are using HTCondor from the Upcoming repository,
+    C-style comments, e.g. <code>/* comment */</code>, in <code>JOB_ROUTER_ENTRIES</code> will prevent the JobRouter from routing jobs
     (<a href="https://opensciencegrid.atlassian.net/browse/HTCONDOR-864">HTCONDOR-864</a>).
     For the time being, remove any comments if you are still using the
     <a href="https://htcondor.com/htcondor-ce/v5/configuration/job-router-overview#deprecated-syntax">deprecated syntax</a>.</li>
@@ -2259,6 +2274,20 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
     See <a href="https://github.com/xrootd/xrootd/issues/1538">XRootD GitHub issue #1538</a> for more details.</li>
 </ul>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="february-10-2022-htcondor-909-lts"><strong>February 10, 2022:</strong> HTCondor 9.0.9 LTS<a class="headerlink" href="#february-10-2022-htcondor-909-lts" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://www-auth.cs.wisc.edu/lists/htcondor-world/2022/msg00000.shtml">HTCondor 9.0.9 LTS</a><ul>
+<li>The OAUTH credmon is now available on Enterprise Linux 8</li>
+<li>Deprecated C-style comments no longer cause the job router to crash</li>
+</ul>
+</li>
+<li><a href="https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-119">VO Package v119</a><ul>
+<li>Update OSG VO and GLOW VO DNs</li>
+</ul>
+</li>
+<li>hosted-ce-tools 0.9: new for Enterprise Linux 8</li>
+<li>scitokens-credmon 0.8.1: new for Enterprise Linux 8</li>
+</ul>
 <h3 id="february-3-2022-gratia-probe-251"><strong>February 3, 2022:</strong> Gratia Probe 2.5.1<a class="headerlink" href="#february-3-2022-gratia-probe-251" title="Permanent link">&para;</a></h3>
 <ul>
 <li>gratia-probe 2.5.1<ul>
