@@ -226,6 +226,7 @@ To update OSG-Configure, perform the following steps:
 #### HTCondor-CE ####
 
 !!! bug "Remove comments from `JOB_ROUTER_ENTRIES`"
+    If you are using HTCondor from the Upcoming repository,
     C-style comments, e.g. `/* comment */`, in `JOB_ROUTER_ENTRIES` will prevent the JobRouter from routing jobs
     ([HTCONDOR-864](https://opensciencegrid.atlassian.net/browse/HTCONDOR-864)).
     For the time being, remove any comments if you are still using the
