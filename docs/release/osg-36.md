@@ -25,7 +25,8 @@ The following issues are known to currently affect packages distributed in OSG 3
 
 ### HTCondor-CE ###
 
--   C-style comments, e.g. `/* comment */`, in `JOB_ROUTER_ENTRIES` will prevent the JobRouter from routing jobs
+-   If you are using HTCondor from the Upcoming repository,
+    C-style comments, e.g. `/* comment */`, in `JOB_ROUTER_ENTRIES` will prevent the JobRouter from routing jobs
     ([HTCONDOR-864](https://opensciencegrid.atlassian.net/browse/HTCONDOR-864)).
     For the time being, remove any comments if you are still using the
     [deprecated syntax](https://htcondor.com/htcondor-ce/v5/configuration/job-router-overview#deprecated-syntax).
@@ -41,6 +42,16 @@ The following issues are known to currently affect packages distributed in OSG 3
 
 Latest News
 -----------
+
+### **February 10, 2022:** HTCondor 9.0.9 LTS
+
+-   [HTCondor 9.0.9 LTS](https://www-auth.cs.wisc.edu/lists/htcondor-world/2022/msg00000.shtml)
+    -   The OAUTH credmon is now available on Enterprise Linux 8
+    -   Deprecated C-style comments no longer cause the job router to crash
+-   [VO Package v119](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-119)
+    -   Update OSG VO and GLOW VO DNs
+-   hosted-ce-tools 0.9: new for Enterprise Linux 8
+-   scitokens-credmon 0.8.1: new for Enterprise Linux 8
 
 ### **February 3, 2022:** Gratia Probe 2.5.1
 

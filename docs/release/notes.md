@@ -22,23 +22,12 @@ To update to the OSG 3.5 series, please consult the page on
 
         --enablerepo=osg-rolling
 
-Known Issues
-------------
-
-The following issues are known to currently affect packages distributed in OSG 3.5:
-
-### HTCondor-CE ###
-
--   C-style comments, e.g. `/* comment */`, in `JOB_ROUTER_ENTRIES` will prevent the JobRouter from routing jobs
-    ([HTCONDOR-864](https://opensciencegrid.atlassian.net/browse/HTCONDOR-864)).
-    For the time being, remove any comments if you are still using the
-    [deprecated syntax](https://htcondor.com/htcondor-ce/v5/configuration/job-router-overview#deprecated-syntax).
-
 Releases
 --------
 
 | Version                             | Date       | Summary                                                                       |
 |:------------------------------------|:-----------|:------------------------------------------------------------------------------|
+| [3.5.56](3.5/release-3-5-56.md)     | 2022-02-10 | VO Package v119, hosted-ce-tools 9.0 (EL8), scitokens-credmon 0.6.1 (EL8); Upcoming: HTCondor 9.0.9 |
 | [3.5.55](3.5/release-3-5-55.md)     | 2022-02-03 | VO Package v118                                                               |
 | [3.5.54-2](3.5/release-3-5-54-2.md) | 2022-01-27 | VO Package v117, osg-scitokens-mapfile 5                                      |
 | [3.5.54](3.5/release-3-5-54.md)     | 2022-01-20 | IGTF 1.114, Upcoming: HTCondor-CE 5.1.3                                       |
