@@ -157,7 +157,7 @@ set vomsfqans = useall
 ### Authenticating Proxies (deprecated) ###
 
 !!! info "OSG 3.5 end-of-life"
-    OSG 3.5 will reach its end-of-life in [February 2022](../../release/release_series.md#series-overviews).
+    OSG 3.5 will reach its end-of-life in [May 2022](../../release/release_series.md#series-overviews).
 
 In [OSG 3.5](../../release/release_series.md#series-overviews), [LCMAPS](../../security/lcmaps-voms-authentication.md) is
 used to authenticate X.509 and VOMS proxies to usernames utilized by the
