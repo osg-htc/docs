@@ -2,7 +2,7 @@ Load Balancing GridFTP
 ======================
 
 !!! warning
-    This document is for software that will no longer be supported after the OSG 3.5 retirement (February 2022).
+    This document is for software that will no longer be supported after the OSG 3.5 retirement (beginning of May 2022).
     See the [Release Series Support Policy](https://opensciencegrid.org/technology/policy/release-series/) for details.
 
 GridFTP is designed for high throughput data transfers and in many cases can handle all of the transfers for a site. However, in some cases it may be useful to run multiple GridFTP servers to distribute the load. For such sites, we recommend using a [load balancer](https://en.wikipedia.org/wiki/Load_balancing_(computing)) to distribute requests and present the appearance of a single high-throughput GridFTP server.

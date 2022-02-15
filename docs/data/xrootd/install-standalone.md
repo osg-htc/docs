@@ -43,7 +43,7 @@ Installing XRootD
     If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
     install or remain on the [OSG 3.5 release series](../../release/notes.md).
 
-    Note that OSG 3.5 will reach its end-of-life in [February 2022](../../release/release_series.md#series-overviews).
+    Note that OSG 3.5 will reach its end-of-life in [May 2022](../../release/release_series.md#series-overviews).
 
 !!! bug "VOMS attribute mappings incompatible with `xrootd-multiuser` in OSG 3.6"
     The OSG 3.6 configuration of XRootD uses the `XrdVoms` plugin, which pass along the entire VOMS FQAN as the
@@ -128,8 +128,8 @@ If you do not need any of the following special configurations, skip to
 #### Enabling Hadoop support (deprecated, EL 7 Only)
 
 !!! info "OSG 3.5 end-of-life"
-    Hadoop is no longer supported in OSG 3.6 and OSG 3.5 will reach its end-of-life in
-    [February 2022](../../release/release_series.md#series-overviews).
+    Hadoop is no longer supported in OSG 3.6 and OSG 3.5 will reach its end-of-life at the
+    [beginning of May 2022](../../release/release_series.md#series-overviews).
 
 Hadoop File System (HDFS) based sites should utilize the `xrootd-hdfs` plugin to allow XRootD to access their storage:
 
