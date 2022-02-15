@@ -47,7 +47,7 @@ In order to successfully start payload jobs:
 2. Set `GLIDEIN_Site` and `GLIDEIN_ResourceName` to match the site name and resource name that you registered in Topology,
    respectively.
 3. Set the `OSG_SQUID_LOCATION` environment variable to the HTTP address of your preferred Squid instance.
-4. _Strongly_recommended:_ Enable [CVMFS](#cvmfs) via one of the mechanisms described below.
+4. _Strongly_recommended:_ Enable [CVMFS](#recommended-cvmfs) via one of the mechanisms described below.
 5. _Strongly recommended:_  If you want job I/O to be done in a separate directory outside of the container,
    volume mount the desired directory on the host to `/pilot` inside the container.
 
