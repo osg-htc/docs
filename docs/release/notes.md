@@ -27,6 +27,7 @@ Releases
 
 | Version                             | Date       | Summary                                                                       |
 |:------------------------------------|:-----------|:------------------------------------------------------------------------------|
+| [3.5.56-2](3.5/release-3-5-56-2.md) | 2022-02-17 | VO Package v120                                                               |
 | [3.5.56](3.5/release-3-5-56.md)     | 2022-02-10 | VO Package v119, hosted-ce-tools 9.0 (EL8), scitokens-credmon 0.6.1 (EL8); Upcoming: HTCondor 9.0.9 |
 | [3.5.55](3.5/release-3-5-55.md)     | 2022-02-03 | VO Package v118                                                               |
 | [3.5.54-2](3.5/release-3-5-54-2.md) | 2022-01-27 | VO Package v117, osg-scitokens-mapfile 5                                      |
