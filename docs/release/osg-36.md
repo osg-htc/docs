@@ -43,6 +43,11 @@ The following issues are known to currently affect packages distributed in OSG 3
 Latest News
 -----------
 
+### **February 17, 2022:** VO Package v120
+
+-   [VO Package v120](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-120)
+    -   Update FNAL voms1 DN
+
 ### **February 10, 2022:** HTCondor 9.0.9 LTS
 
 -   [HTCondor 9.0.9 LTS](https://www-auth.cs.wisc.edu/lists/htcondor-world/2022/msg00000.shtml)
