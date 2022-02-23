@@ -145,7 +145,7 @@ In OSG 3.6, VOMS proxies are automatically mapped using the built-in XRootD GSI 
 An incoming VOMS proxy will authenticate the first VOMS FQAN and map it to an organization name, groupname, and role
 name in the [authorization database](#authorization-database).
 For example, a proxy from the OSPool whose first VOMS FQAN is `/osg/Role=NULL/Capability=NULL` will be authenticated to
-the `osg` groupname.
+the `/osg` groupname.
 
 Instead of only using the first VOMS FQAN, you can configure XRootD to consider all VOMS FQANs in the proxy for
 authentication by setting the following in `/etc/xrootd/config.d/10-osg-xrdvoms.cfg`:
