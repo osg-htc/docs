@@ -2134,7 +2134,7 @@ See <a href="https://github.com/xrootd/xrootd/issues/1538">XRootD GitHub issue #
 An incoming VOMS proxy will authenticate the first VOMS FQAN and map it to an organization name, groupname, and role
 name in the <a href="#authorization-database">authorization database</a>.
 For example, a proxy from the OSPool whose first VOMS FQAN is <code>/osg/Role=NULL/Capability=NULL</code> will be authenticated to
-the <code>osg</code> groupname.</p>
+the <code>/osg</code> groupname.</p>
 <p>Instead of only using the first VOMS FQAN, you can configure XRootD to consider all VOMS FQANs in the proxy for
 authentication by setting the following in <code>/etc/xrootd/config.d/10-osg-xrdvoms.cfg</code>:</p>
 <div class="codehilite"><pre><span></span><code>set vomsfqans = useall
