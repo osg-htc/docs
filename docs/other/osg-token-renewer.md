@@ -69,7 +69,7 @@ To create a new client account named `<ACCOUNT_SHORTNAME>`:
    log in with your account for your issuer, and authorize the request).
 1. If this succeeds, you will be prompted with a new
    `[account <ACCOUNT_SHORTNAME>]` section to add to your `config.ini`.
-   Add the section to your `/etc/token-renewer/config.ini`,
+   Add the section to your `/etc/osg/token-renewer/config.ini`,
    replacing the example section if it's still there.
 
 Next you can configure one or more tokens for this client account.
@@ -78,7 +78,7 @@ Next you can configure one or more tokens for this client account.
 ### Configuring tokens
 
 After you have created an OIDC client account and added it to
-`/osg/token-renewer/config.ini`, you need to create a corresponding `token`
+`/etc/osg/token-renewer/config.ini`, you need to create a corresponding `token`
 section in the config for each token that should be generated for this account
 (possibly with different options).
 
