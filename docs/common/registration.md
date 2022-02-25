@@ -67,7 +67,7 @@ If you don't already know the relevant names for your resource, using the follow
 | Level          | Naming convention                                                                                                                                                                 |
 |----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Facility       | Unabbreviated institution or company name, e.g. `University of Wisconsin - Madison`                                                                                               |
-| Site           | Computing center or academic department, e.g. `CHTC`, `MWT2 ATLAS UC`, `San Diego Supercomputer Center`                                                                           |
+| Site           | Computing center or academic department, e.g. `CHTC`, `MWT2 ATLAS UC`, `San Diego Supercomputer Center`<br>The only characters allowed in Site names are letters, numbers, underscores, hyphens, and spaces; i.e., a Site name must match the regular expression `^[A-Za-z0-9_ -]+$` |
 | Resource Group | Abbreviated facility, site, and cluster name. Resource groups used for testing purposes should have an `-ITB` or `- ITB` suffix, e.g. `TCNJ-ELSA-ITB`                            |
 | Resource       | In all capital letters, `<ABBREV FACILTY>-<CLUSTER>-<RESOURCE TYPE>`, for example:<br>`TCNJ-ELSA-CE` or `NMSU-AGGIE-GRID-SQUID`<br>If you don't know which VO to use, pick `OSG`. |
 
