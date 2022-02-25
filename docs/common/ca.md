@@ -215,10 +215,11 @@ To modify the times that `fetch-crl-cron` runs, edit `/etc/cron.d/fetch-crl`.
 
 `fetch-crl` is installed as two different system services. The fetch-crl-boot service runs `fetch-crl` and is intended to only be enabled or disabled. The `fetch-crl-cron` service runs `fetch-crl` every 6 hours (with a random sleep time included). Both services are disabled by default. At the very minimum, the `fetch-crl-cron` service needs to be enabled and started, otherwise services will begin to fail as existing CRLs expire.
 
-| Software  | Service name     | Notes                          |
-|:----------|:-----------------|:-------------------------------|
-| Fetch CRL | `fetch-crl-cron` | Runs `fetch-crl` every 6 hours |
-|           | `fetch-crl-boot` | Runs `fetch-crl` immediately   |
+| Software  | Service name                 | Notes                                      |
+|:----------|:-----------------------------|:-------------------------------------------|
+| Fetch CRL | `fetch-crl.timer` (EL8-only) | Runs `fetch-crl` every 6 hours and on boot |
+|           | `fetch-crl-cron` (EL7-only)  | Runs `fetch-crl` every 6 hours             |
+|           | `fetch-crl-boot` (EL7-only)  | Runs `fetch-crl` immediately               |
 
 Start the services in the order listed and stop them in reverse order. As a reminder, here are common service commands (all run as `root`):
 

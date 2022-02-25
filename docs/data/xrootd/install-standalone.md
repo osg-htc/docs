@@ -201,7 +201,7 @@ The specific services are:
 
 | Software          | Service Name                          | Notes                                                                                                       |
 |:------------------|:--------------------------------------|:------------------------------------------------------------------------------------------------------------|
-| Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info                        |
+| Fetch CRL         | EL8: `fetch-crl.timer` <br> EL7: `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info                        |
 | XRootD            | `xrootd@standalone`                   |                                                                                                             |
 | XRootD Multi-user | `xrootd-privileged@standalone`        | If running in [multi-user](#enabling-multi-user-support), start this service instead of `xrootd@standalone` |
 

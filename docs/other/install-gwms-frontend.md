@@ -673,7 +673,7 @@ In addition to the GlideinWMS service itself, there are a number of supporting s
 
 | Software   | Service name                          | Notes                                                                             |
 |:-----------|:--------------------------------------|:----------------------------------------------------------------------------------|
-| Fetch CRL  | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca.md#managing-fetch-crl-services) for more info |
+| Fetch CRL  | EL8: `fetch-crl.timer` <br> EL7: `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca.md#managing-fetch-crl-services) for more info |
 | Gratia     | `gratia-probes-cron`                  | Accounting software                                                               |
 | HTCondor   | `condor`                              |                                                                                   |
 | HTTPD      | `httpd`                               | GlideinWMS monitoring and staging                                                 |
