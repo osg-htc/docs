@@ -1970,13 +1970,13 @@ and will pull in the <code>oidc-agent</code> package that the service depends on
    log in with your account for your issuer, and authorize the request).</li>
 <li>If this succeeds, you will be prompted with a new
    <code>[account &lt;ACCOUNT_SHORTNAME&gt;]</code> section to add to your <code>config.ini</code>.
-   Add the section to your <code>/etc/token-renewer/config.ini</code>,
+   Add the section to your <code>/etc/osg/token-renewer/config.ini</code>,
    replacing the example section if it's still there.</li>
 </ol>
 <p>Next you can configure one or more tokens for this client account.</p>
 <h3 id="configuring-tokens">Configuring tokens<a class="headerlink" href="#configuring-tokens" title="Permanent link">&para;</a></h3>
 <p>After you have created an OIDC client account and added it to
-<code>/osg/token-renewer/config.ini</code>, you need to create a corresponding <code>token</code>
+<code>/etc/osg/token-renewer/config.ini</code>, you need to create a corresponding <code>token</code>
 section in the config for each token that should be generated for this account
 (possibly with different options).</p>
 <ol>
