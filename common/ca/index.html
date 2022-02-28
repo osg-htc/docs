@@ -2283,13 +2283,18 @@ syslogfacility = daemon
 <tbody>
 <tr>
 <td align="left">Fetch CRL</td>
-<td align="left"><code>fetch-crl-cron</code></td>
+<td align="left"><code>fetch-crl.timer</code> (EL8-only)</td>
+<td align="left">Runs <code>fetch-crl</code> every 6 hours and on boot</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>fetch-crl-cron</code> (EL7-only)</td>
 <td align="left">Runs <code>fetch-crl</code> every 6 hours</td>
 </tr>
 <tr>
 <td align="left"></td>
-<td align="left"><code>fetch-crl-boot</code></td>
-<td align="left">Runs <code>fetch-crl</code> immediately</td>
+<td align="left"><code>fetch-crl-boot</code> (EL7-only)</td>
+<td align="left">Runs <code>fetch-crl</code> immediately and on boot</td>
 </tr>
 </tbody>
 </table>
