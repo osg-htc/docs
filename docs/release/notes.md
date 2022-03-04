@@ -27,12 +27,13 @@ Releases
 
 | Version                             | Date       | Summary                                                                       |
 |:------------------------------------|:-----------|:------------------------------------------------------------------------------|
+| [3.5.57](3.5/release-3-5-57.md)     | 2022-03-03 | osg-scitokens-mapfile 6; Upcoming: XRootD 5.4.1, osg-xrootd 3.5-6             |
 | [3.5.56-2](3.5/release-3-5-56-2.md) | 2022-02-17 | VO Package v120                                                               |
 | [3.5.56](3.5/release-3-5-56.md)     | 2022-02-10 | VO Package v119, hosted-ce-tools 9.0 (EL8), scitokens-credmon 0.6.1 (EL8); Upcoming: HTCondor 9.0.9 |
 | [3.5.55](3.5/release-3-5-55.md)     | 2022-02-03 | VO Package v118                                                               |
 | [3.5.54-2](3.5/release-3-5-54-2.md) | 2022-01-27 | VO Package v117, osg-scitokens-mapfile 5                                      |
 | [3.5.54](3.5/release-3-5-54.md)     | 2022-01-20 | IGTF 1.114, Upcoming: HTCondor-CE 5.1.3                                       |
-| [3.5.53](3.5/release-3-5-53.md)     | 2022-01-13 | VO Package v115, oidc-agent 4.2.4, osg-scitokens-mapfile 4, osg-pki-tools 3.5.0-2; Upcoming: XRootD 5.4.0, xrootd-tcp-stats 1.0.0 |
+| [3.5.53](3.5/release-3-5-53.md)     | 2022-01-13 | VO Package v116, oidc-agent 4.2.4, osg-scitokens-mapfile 4, osg-pki-tools 3.5.0-2; Upcoming: XRootD 5.4.0, xrootd-tcp-stats 1.0.0 |
 | [3.5.52](3.5/release-3-5-52.md)     | 2021-12-09 | Upcoming: XRootD 5.3.4, HTCondor 9.0.8                                        |
 | [3.5.51](3.5/release-3-5-51.md)     | 2021-12-01 | VO Package v115, python-scitokens 1.6.2, vault 1.8.4, htvault-config 1.10, htgettoken 1.8; Upcoming: HTCondor 9.0.7 |
 | [3.5.50](3.5/release-3-5-50.md)     | 2021-11-11 | osg-ca-certs-updater 2.0; Upcoming: xrootd-multiuser 2.0.3                    |
