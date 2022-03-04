@@ -54,7 +54,7 @@ Latest News
     -   Frontend and Factory check the expiration of SciTokens, other JWT tokens
     -   Bug Fixes:
         -   IDTOKEN issuer changed from collector host to trust domain
-        -   x509 proxy is now renewed also when using also tokens
+        -   X.509 proxy is now renewed also when using also tokens
     -   shared port is now the default in the User (VO) Collector HTCondor
 
 ### **February 17, 2022:** VO Package v120
