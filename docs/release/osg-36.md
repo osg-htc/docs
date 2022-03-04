@@ -43,6 +43,20 @@ The following issues are known to currently affect packages distributed in OSG 3
 Latest News
 -----------
 
+### **March 3, 2022:** XRootD 5.4.1 and GlideinWMS 3.9.4
+
+-   [XRootD 5.4.1](https://github.com/xrootd/xrootd/blob/v5.4.1/docs/ReleaseNotes.txt): Bug fix release
+-   osg-xrootd 3.6-15
+-   [GlideinWMS 3.9.4](https://glideinwms.fnal.gov/doc.v3_9_4/history.html#development)
+    -   Add flexible mount points for CVMFS in the Glideins (not always /cvmfs)
+    -   Per-Entry IDTOKENS
+    -   Support per-group SciTokens
+    -   Frontend and Factory check the expiration of SciTokens, other JWT tokens
+    -   Bug Fixes:
+        -   IDTOKEN issuer changed from collector host to trust domain
+        -   x509 proxy is now renewed also when using also tokens
+    -   shared port is now the default in the User (VO) Collector HTCondor
+
 ### **February 17, 2022:** VO Package v120
 
 -   [VO Package v120](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-120)
