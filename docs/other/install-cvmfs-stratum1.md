@@ -11,7 +11,7 @@ Before starting the installation process, consider the following points:
 
 - **User IDs and Group IDs:** If your machine is also going to be a repository server like OSG Operations, the installation will create the same user and group IDs as the [cvmfs client](../worker-node/install-cvmfs.md).  If you are installing frontier-squid, the installation will also create the same user id as [frontier-squid](../data/frontier-squid.md).
 -  **Network ports:** This installation will host the stratum 1 on ports 80, 8000 and 8080, and if squid is installed it will host the uncached apache on port 8081.  Port 80 is default but sometimes runs into operational problems, port 8000 is the alternate for most production use, and port 8080 is for Cloudflare (https://openhtc.io).
-- **Host choice:** -  Make sure there is adequate disk space for the repositories that will be served, at `/srv/cvmfs`. About 10GB should be reserved for apache and squid logs under /var/log on a production server, although they normally will not get that large.
+- **Host choice:** -  Make sure there is adequate disk space for all the repositories that will be served, at `/srv/cvmfs`. In addition, about 100GB should be reserved for apache and squid logs under /var/log on a production server, although they normally will not get that large.  Apache logs get larger than squid logs because by default they are rotated much less frequently.  Many installations share that space with the filesystem used for /srv/cvmfs by turning that directory along with /var/log/squid and /var/log/httpd into symlinks pointing to directories on the big filesystem.
 - **SELinux** - Ensure SELinux is disabled
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
@@ -114,8 +114,8 @@ insertline("^http_access deny all", "acl CVMFSAPI urlpath_regex ^/cvmfs/[^/]*/ap
 insertline("^http_access deny all", "cache deny !CVMFSAPI")
 
 # port 80 is also supported, through an iptables redirect 
-setoption("http_port", "8000 accel defaultsite=localhost:8081 no-vhost")
-insertline("TAG: http_port","http_port 8080 accel defaultsite=localhost:8081 no-vhost")
+setoption("http_port", "8080 accel defaultsite=localhost:8081 no-vhost")
+insertline("^http_port","http_port 8000 accel defaultsite=localhost:8081 no-vhost")
 setoption("cache_peer", "localhost parent 8081 0 no-query originserver")
 
 # allow incoming http accesses from anywhere
