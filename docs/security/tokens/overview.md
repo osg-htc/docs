@@ -1,4 +1,16 @@
 DateReviewed: 2022-03-10
+=======
+Token Authentication/Authorization Infrastructure (AAI) Overview
+================================================================
+
+Token Authentication/Authorization Infrastructure (AAI) is a security method used
+for accessing compute and storage resources.
+It was introduced in the OSG 3.5 series as the replacement for X.509 security.
+
+Token AAI is built on the [JSON Web Token](https://jwt.io) standard;
+supported implementations are [SciTokens](https://scitokens.org)
+[WLCG Tokens](https://github.com/WLCG-AuthZ-WG/common-jwt-profile/blob/master/profile.md).
+
 
 Bearer Token Overview
 =====================
