@@ -42,21 +42,21 @@ Collaboration support
 
 ### Pilot job submission ###
 
-These are the VOs that support or partially support using tokens for pilot submission:
+These are the collaborations that support or partially support using tokens for pilot submission:
 
-| VO Name | Testing Tokens | Using Tokens in Production |
-|:--------|----------------|----------------------------|
-| ATLAS   | Yes            | No                         |
-| EIC     | Yes            | No                         |
-| CMS     | Yes            | No                         |
-| CLAS12  | Yes            | No                         |
-| GLOW    | Yes            | Yes                        |
-| GlueX   | Yes            | No                         |
-| IceCube | Yes            | No                         |
-| LIGO    | Yes            | No                         |
-| OSG     | Yes            | Yes                        |
+| Collaboration | Testing Tokens | Using Tokens in Production |
+|:--------------|----------------|----------------------------|
+| ATLAS         | Yes            | No                         |
+| EIC           | Yes            | No                         |
+| CMS           | Yes            | No                         |
+| CLAS12        | Yes            | No                         |
+| GLOW          | Yes            | Yes                        |
+| GlueX         | Yes            | No                         |
+| IceCube       | Yes            | No                         |
+| LIGO          | Yes            | No                         |
+| OSG           | Yes            | Yes                        |
 
-Until all of the VOs you support are using tokens in production, your CE should remain on OSG 3.5,
+Until all of the collaborations you support are using tokens in production, your CE should remain on OSG 3.5,
 with the 3.5-upcoming repositories enabled.
 
 ### WebDav/XRootD File transfer ###
