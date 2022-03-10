@@ -1,5 +1,5 @@
-Token Authentication Overview
-=============================
+Bearer Token Overview
+=====================
 
 
 
