@@ -1,7 +1,7 @@
 !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
-    Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
+    Due to potentially disruptive changes in protocols, contact your collaboration(s) to verify that they support token-based
     authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
-    If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
+    If your collaboration(s) don't support these new protocols or you don't know which protocols your collaboration(s) support,
     install or remain on the [OSG 3.5 release series](notes.md).
 
 Updating to OSG 3.6
@@ -9,10 +9,10 @@ Updating to OSG 3.6
 
 [OSG 3.6](release_series.md#series-overviews) (the *new series*) is a major overhaul of the OSG software stack compared
 to OSG 3.5 (the *old series*) with changes to core protocols used for authentication and data transfer.
-Depending on the VO(s) that you support, updating to the new series could result in issues with your site receiving
+Depending on the collaboration(s) that you support, updating to the new series could result in issues with your site receiving
 pilot jobs and/or issues with data transfer.
 
-If you have verified that your VO(s) support token-based pilot submission and HTTP-based data transfers,
+If you have verified that your collaboration(s) support token-based pilot submission and HTTP-based data transfers,
 use this document to update your OSG software to OSG 3.6.
 
 Many software packages, such as HTCondor and HTCondor-CE, use Python 3 scripts. If you are using Enterprise Linux 7,
@@ -69,15 +69,15 @@ Updating Your OSG Compute Entrypoint
 ------------------------------------
 
 !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
-    Due to potentially disruptive changes in authentication methods, contact your VO(s) to verify that they support
+    Due to potentially disruptive changes in authentication methods, contact your collaboration(s) to verify that they support
     token-based authentication before considering an upgrade to OSG 3.6.
-    If your VO(s) don't support these new authentication methods or you don't know which authentication methods your
-    VO(s) support, install or remain on the [OSG 3.5 release series](notes.md)
+    If your collaboration(s) don't support these new authentication methods or you don't know which authentication methods your
+    collaboration(s) support, install or remain on the [OSG 3.5 release series](notes.md)
 
 In OSG 3.6, OSG Compute Entrypoints (CEs) only accept token-based pilot job submissions.
 If you need to support token-based and GSI proxy-based pilot job submission,
 you must install or remain on [OSG 3.5](notes.md).
-If the VOs that you support have the capability to submit token-based pilots, you may update your CE to OSG 3.6.
+If the collaborations that you support have the capability to submit token-based pilots, you may update your CE to OSG 3.6.
 
 In addition to the change in authentication protocol, OSG 3.6 CEs include new major versions of software that require
 manual updates.
@@ -236,7 +236,7 @@ The OSG 3.6 release series contains [HTCondor-CE 5](https://htcondor.github.io/h
 version upgrade from HTCondor-CE 4, which was available in the OSG 3.5 release repositories.
 To update HTCondor-CE, perform the following steps:
 
-1.  If you support the `OSG`, `GLOW`, or `ATLAS`  VOs and map their jobs to non-standard local Unix accounts
+1.  If you support the `OSG`, `GLOW`, or `ATLAS`  collaborations and map their jobs to non-standard local Unix accounts
     add SciTokens mappings to a file in `/etc/condor-ce/mapfiles.d/`:
 
         # OSG
@@ -276,10 +276,10 @@ Updating Your HTCondor Hosts
 ----------------------------
 
 !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
-    Due to potentially disruptive changes in authentication methods, contact your VO(s) to verify that they support
+    Due to potentially disruptive changes in authentication methods, contact your collaboration(s) to verify that they support
     token-based authentication before considering an upgrade to OSG 3.6.
-    If your VO(s) don't support these new authentication methods or you don't know which authentication methods your
-    VO(s) support, install or remain on the [OSG 3.5 release series](notes.md)
+    If your collaboration(s) don't support these new authentication methods or you don't know which authentication methods your
+    collaboration(s) support, install or remain on the [OSG 3.5 release series](notes.md)
 
 1.  The following OSG specific configuration was dropped in anticipation of HTCondor's new secure by default
     configuration coming in HTCondor version 9.0. HTCondor's 9.0 recommended security configuration requires
@@ -325,9 +325,9 @@ Replacing Your GridFTP Service
 ------------------------------
 
 !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
-    Due to potentially disruptive changes, contact your VO(s) to verify that they support HTTP-based data transfer
+    Due to potentially disruptive changes, contact your collaboration(s) to verify that they support HTTP-based data transfer
     before considering replacing your GridFTP service with XRootD.
-    If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
+    If your collaboration(s) don't support these new protocols or you don't know which protocols your collaboration(s) support,
     install or remain on the [OSG 3.5 release series](notes.md)
 
 !!! bug "VOMS attribute mappings incompatible with `xrootd-multiuser` in OSG 3.6"
