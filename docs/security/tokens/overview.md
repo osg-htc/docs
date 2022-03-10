@@ -5,8 +5,9 @@ Bearer Token Overview
 
 
 
-How to Tell When Incoming Jobs Are Using Tokens
------------------------------------------------
+
+Validating Tokens in Pilot Jobs
+-------------------------------
 
 If an incoming (pre-routed) pilot on a CE has a token, it will have the following classad attributes:
 
