@@ -29,8 +29,15 @@ To see which authentication method was used for a job:
     -   Authentication via a proxy will say `AuthMethod=GSI`.
 
 
-VOs Supporting Token Authentication for Pilot Submission
---------------------------------------------------------
+Collaboration support
+---------------------
+
+!!! info "Verify support with collaborations"
+    The tables of collaborations below are updated as frequently as possible.
+    If a collaboration you support is listed as not supporting tokens or WebDav, please contact your collaboration
+    directly to verify that this information is up-to-date.
+
+### Pilot job submission ###
 
 These are the VOs that support or partially support using tokens for pilot submission:
 
