@@ -44,17 +44,17 @@ Collaboration support
 
 These are the collaborations that support or partially support using tokens for pilot submission:
 
-| Collaboration | Testing Tokens | Using Tokens in Production |
-|:--------------|----------------|----------------------------|
-| ATLAS         | Yes            | No                         |
-| CLAS12        | Yes            | No                         |
-| CMS           | Yes            | No                         |
-| EIC           | Yes            | No                         |
-| GLOW          | Yes            | Yes                        |
-| GlueX         | Yes            | No                         |
-| IceCube       | Yes            | No                         |
-| LIGO          | Yes            | No                         |
-| OSG           | Yes            | Yes                        |
+| Collaboration | Supports Bearer Tokens |
+|:--------------|------------------------|
+| ATLAS         | Undergoing testing     |
+| CLAS12        | Undergoing testing     |
+| CMS           | Undergoing testing     |
+| EIC           | Undergoing testing     |
+| GLOW          | Yes                    |
+| GlueX         | Undergoing testing     |
+| IceCube       | Undergoing testing     |
+| LIGO          | Undergoing testing     |
+| OSG           | Yes                    |
 
 Until all of the collaborations you support are using tokens in production, your CE should remain on OSG 3.5,
 with the 3.5-upcoming repositories enabled.
@@ -72,5 +72,5 @@ The following collaborations support support file transfer using WebDAV or XRoot
 | GLOW          | N/A                       |
 | GlueX         |                           |
 | IceCube       |                           |
-| LIGO          | No                        |
+| LIGO          | Undergoing testing        |
 | OSG           | N/A                       |
