@@ -47,9 +47,9 @@ These are the collaborations that support or partially support using tokens for 
 | Collaboration | Testing Tokens | Using Tokens in Production |
 |:--------------|----------------|----------------------------|
 | ATLAS         | Yes            | No                         |
-| EIC           | Yes            | No                         |
-| CMS           | Yes            | No                         |
 | CLAS12        | Yes            | No                         |
+| CMS           | Yes            | No                         |
+| EIC           | Yes            | No                         |
 | GLOW          | Yes            | Yes                        |
 | GlueX         | Yes            | No                         |
 | IceCube       | Yes            | No                         |
