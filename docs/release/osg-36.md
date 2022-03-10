@@ -25,6 +25,11 @@ The following issues are known to currently affect packages distributed in OSG 3
 
 ### HTCondor-CE ###
 
+-   `default_CERequirements` in the the new Job Router ClassAd transform syntax is ignored.
+    To fix this, apply the change in [this patch](https://github.com/htcondor/htcondor-ce/pull/530/files) to
+    `/usr/share/condor-ce/config.d/01-ce-router-defaults.conf`.
+    The next release of HTCondor-CE will contain this fix and will not require any additional action post-update.
+
 ### XRootD Multiuser ###
 
 -   The OSG 3.6 configuration of XRootD uses the `XrdVoms` plugin, which pass along the entire VOMS FQAN as the

@@ -219,6 +219,12 @@ To update OSG-Configure, perform the following steps:
 
 #### HTCondor-CE ####
 
+!!! bug "Passing along non-HTCondor batch system directives"
+    `default_CERequirements` in the the new Job Router ClassAd transform syntax is ignored.
+    To fix this, apply the change in [this patch](https://github.com/htcondor/htcondor-ce/pull/530/files) to
+    `/usr/share/condor-ce/config.d/01-ce-router-defaults.conf`.
+    The next release of HTCondor-CE will contain this fix and will not require any additional action post-update.
+
 The OSG 3.6 release series contains [HTCondor-CE 5](https://htcondor.github.io/htcondor-ce/v5/releases/), a major
 version upgrade from HTCondor-CE 4, which was available in the OSG 3.5 release repositories.
 To update HTCondor-CE, perform the following steps:
