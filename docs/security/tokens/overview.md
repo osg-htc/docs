@@ -1,10 +1,13 @@
-Token Authentication Overview
-=============================
+DateReviewed: 2022-03-10
+
+Bearer Token Overview
+=====================
 
 
 
-How to Tell When Incoming Jobs Are Using Tokens
------------------------------------------------
+
+Validating Tokens in Pilot Jobs
+-------------------------------
 
 If an incoming (pre-routed) pilot on a CE has a token, it will have the following classad attributes:
 
@@ -29,23 +32,45 @@ To see which authentication method was used for a job:
     -   Authentication via a proxy will say `AuthMethod=GSI`.
 
 
-VOs Supporting Token Authentication for Pilot Submission
---------------------------------------------------------
+Collaboration support
+---------------------
 
-These are the VOs that support or partially support using tokens for pilot submission:
+!!! info "Verify support with collaborations"
+    The tables of collaborations below are updated as frequently as possible.
+    If a collaboration you support is listed as not supporting tokens or WebDav, please contact your collaboration
+    directly to verify that this information is up-to-date.
 
-| VO Name | Testing Tokens | Using Tokens in Production |
-|:--------|----------------|----------------------------|
-| ATLAS   | Yes            | No                         |
-| EIC     | Yes            | No                         |
-| CMS     | Yes            | No                         |
-| CLAS12  | Yes            | No                         |
-| GLOW    | Yes            | Yes                        |
-| GlueX   | Yes            | No                         |
-| IceCube | Yes            | No                         |
-| LIGO    | Yes            | No                         |
-| OSG     | Yes            | Yes                        |
+### Pilot job submission ###
 
-Until all of the VOs you support are using tokens in production, your CE should remain on OSG 3.5,
+These are the collaborations that support or partially support using tokens for pilot submission:
+
+| Collaboration | Supports Bearer Tokens |
+|:--------------|------------------------|
+| ATLAS         | Undergoing testing     |
+| CLAS12        | Undergoing testing     |
+| CMS           | Undergoing testing     |
+| EIC           | Undergoing testing     |
+| GLOW          | Yes                    |
+| GlueX         | Undergoing testing     |
+| IceCube       | Undergoing testing     |
+| LIGO          | Undergoing testing     |
+| OSG           | Yes                    |
+
+Until all of the collaborations you support are using tokens in production, your CE should remain on OSG 3.5,
 with the 3.5-upcoming repositories enabled.
 
+### WebDAV/XRootD File transfer ###
+
+The following collaborations support support file transfer using WebDAV or XRootD:
+
+| Collaboration | Supports WebDAV or XRootD |
+|:--------------|---------------------------|
+| ATLAS         | Yes                       |
+| CMS           | Yes                       |
+| CLAS12        | Yes                       |
+| EIC           | N/A                       |
+| GLOW          | N/A                       |
+| GlueX         |                           |
+| IceCube       |                           |
+| LIGO          | Undergoing testing        |
+| OSG           | N/A                       |
