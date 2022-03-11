@@ -31,6 +31,8 @@ To see which authentication method was used for a job:
     -   Authentication via a token will say `AuthMethod=SCITOKENS`.
     -   Authentication via a proxy will say `AuthMethod=GSI`.
 
+See the [upstream documentation](https://htcondor.com/htcondor-ce/v5/troubleshooting/common-issues/#jobs-fail-to-submit-verify-scitoken-contents)
+for more details.
 
 Collaboration support
 ---------------------
@@ -71,6 +73,6 @@ The following collaborations support support file transfer using WebDAV or XRoot
 | EIC           | N/A                       |
 | GLOW          | N/A                       |
 | GlueX         |                           |
-| IceCube       |                           |
+| IceCube       | Undergoing testing        |
 | LIGO          | Undergoing testing        |
 | OSG           | N/A                       |
