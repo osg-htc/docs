@@ -1,19 +1,24 @@
 DateReviewed: 2022-03-10
 =======
-Token Authentication/Authorization Infrastructure (AAI) Overview
-================================================================
-
-Token Authentication/Authorization Infrastructure (AAI) is a security method used
-for accessing compute and storage resources.
-It was introduced in the OSG 3.5 series as the replacement for X.509 security.
-
-Token AAI is built on the [JSON Web Token](https://jwt.io) standard;
-supported implementations are [SciTokens](https://scitokens.org)
-[WLCG Tokens](https://github.com/WLCG-AuthZ-WG/common-jwt-profile/blob/master/profile.md).
-
-
 Bearer Token Overview
 =====================
+
+Bearer Tokens are a security method used for accessing compute and storage resources,
+introduced as a replacement for X.509.
+
+Bearer Tokens are credential strings in the [JSON Web Token (JWT)](https://jwt.io) format;
+a JWT is a small piece of JSON data with a signature that can be verified.
+There are two JWT-based token standards that can be used with OSG software: [SciTokens](https://scitokens.org)
+and [WLCG Tokens](https://github.com/WLCG-AuthZ-WG/common-jwt-profile/blob/master/profile.md).
+
+X.509 proxies established identity (the DN in your subject) and group membership (VOMS FQANs).
+Servers made decisions about access based on those properties.
+Tokens also have 'scope' which can restrict the actions that can be done with the token.
+For example, a token used for storage access can restrict the files that can be read to a particular directory tree.
+Instead of using a single proxy, a job may have multiple tokens.
+For example the job could have one token granting it the ability to be run;
+it could have a token for read access to an input dataset, and a token for write access to a results directory.
+
 
 
 
