@@ -59,7 +59,7 @@ These are the collaborations that support or partially support using tokens for 
 Until all of the collaborations you support are using tokens in production, your CE should remain on OSG 3.5,
 with the 3.5-upcoming repositories enabled.
 
-### WebDav/XRootD File transfer ###
+### WebDAV/XRootD File transfer ###
 
 The following collaborations support support file transfer using WebDAV or XRootD:
 
