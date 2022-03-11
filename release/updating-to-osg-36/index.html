@@ -2218,8 +2218,15 @@ the update from version 3 to version 4 will require some manual changes to your 
 </ol>
 <h4 id="htcondor-ce">HTCondor-CE<a class="headerlink" href="#htcondor-ce" title="Permanent link">&para;</a></h4>
 <div class="admonition bug">
+<p class="admonition-title">Passing along non-HTCondor batch system directives</p>
+<p><code>default_CERequirements</code> in the the new Job Router ClassAd transform syntax is ignored.
+To fix this, apply the change in <a href="https://github.com/htcondor/htcondor-ce/pull/530/files">this patch</a> to
+<code>/usr/share/condor-ce/config.d/01-ce-router-defaults.conf</code>.
+The next release of HTCondor-CE will contain this fix and will not require any additional action post-update.</p>
+</div>
+<div class="admonition bug">
 <p class="admonition-title">Remove comments from <code>JOB_ROUTER_ENTRIES</code></p>
-<p>If you are using HTCondor from the Upcoming repository,
+<p>If you are using HTCondor from the 3.6 Upcoming repository,
 C-style comments, e.g. <code>/* comment */</code>, in <code>JOB_ROUTER_ENTRIES</code> will prevent the JobRouter from routing jobs
 (<a href="https://opensciencegrid.atlassian.net/browse/HTCONDOR-864">HTCONDOR-864</a>).
 For the time being, remove any comments if you are still using the
