@@ -31,6 +31,8 @@ To see which authentication method was used for a job:
     -   Authentication via a token will say `AuthMethod=SCITOKENS`.
     -   Authentication via a proxy will say `AuthMethod=GSI`.
 
+See the [upstream documentation](https://htcondor.com/htcondor-ce/v5/troubleshooting/common-issues/#jobs-fail-to-submit-verify-scitoken-contents)
+for more details.
 
 Collaboration support
 ---------------------
