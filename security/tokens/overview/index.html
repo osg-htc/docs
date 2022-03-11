@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#token-authentication-overview" class="md-skip">
+        <a href="#bearer-token-overview" class="md-skip">
           Skip to content
         </a>
       
@@ -1673,16 +1673,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#how-to-tell-when-incoming-jobs-are-using-tokens" class="md-nav__link">
-    How to Tell When Incoming Jobs Are Using Tokens
+  <a href="#validating-tokens-in-pilot-jobs" class="md-nav__link">
+    Validating Tokens in Pilot Jobs
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#vos-supporting-token-authentication-for-pilot-submission" class="md-nav__link">
-    VOs Supporting Token Authentication for Pilot Submission
+  <a href="#collaboration-support" class="md-nav__link">
+    Collaboration support
   </a>
+  
+    <nav class="md-nav" aria-label="Collaboration support">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pilot-job-submission" class="md-nav__link">
+    Pilot job submission
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webdavxrootd-file-transfer" class="md-nav__link">
+    WebDAV/XRootD File transfer
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1703,8 +1723,8 @@
                   </a>
                 
                 
-                <h1 id="token-authentication-overview">Token Authentication Overview<a class="headerlink" href="#token-authentication-overview" title="Permanent link">&para;</a></h1>
-<h2 id="how-to-tell-when-incoming-jobs-are-using-tokens">How to Tell When Incoming Jobs Are Using Tokens<a class="headerlink" href="#how-to-tell-when-incoming-jobs-are-using-tokens" title="Permanent link">&para;</a></h2>
+                <h1 id="bearer-token-overview">Bearer Token Overview<a class="headerlink" href="#bearer-token-overview" title="Permanent link">&para;</a></h1>
+<h2 id="validating-tokens-in-pilot-jobs">Validating Tokens in Pilot Jobs<a class="headerlink" href="#validating-tokens-in-pilot-jobs" title="Permanent link">&para;</a></h2>
 <p>If an incoming (pre-routed) pilot on a CE has a token, it will have the following classad attributes:</p>
 <table>
 <thead>
@@ -1744,66 +1764,113 @@ Presence of any <code>x509*</code> attributes does not indicate the absence of a
     The line before that should say what authentication method was used.
     -   Authentication via a token will say <code>AuthMethod=SCITOKENS</code>.
     -   Authentication via a proxy will say <code>AuthMethod=GSI</code>.</p>
-<h2 id="vos-supporting-token-authentication-for-pilot-submission">VOs Supporting Token Authentication for Pilot Submission<a class="headerlink" href="#vos-supporting-token-authentication-for-pilot-submission" title="Permanent link">&para;</a></h2>
-<p>These are the VOs that support or partially support using tokens for pilot submission:</p>
+<h2 id="collaboration-support">Collaboration support<a class="headerlink" href="#collaboration-support" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Verify support with collaborations</p>
+<p>The tables of collaborations below are updated as frequently as possible.
+If a collaboration you support is listed as not supporting tokens or WebDav, please contact your collaboration
+directly to verify that this information is up-to-date.</p>
+</div>
+<h3 id="pilot-job-submission">Pilot job submission<a class="headerlink" href="#pilot-job-submission" title="Permanent link">&para;</a></h3>
+<p>These are the collaborations that support or partially support using tokens for pilot submission:</p>
 <table>
 <thead>
 <tr>
-<th align="left">VO Name</th>
-<th>Testing Tokens</th>
-<th>Using Tokens in Production</th>
+<th align="left">Collaboration</th>
+<th>Supports Bearer Tokens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">ATLAS</td>
+<td>Undergoing testing</td>
+</tr>
+<tr>
+<td align="left">CLAS12</td>
+<td>Undergoing testing</td>
+</tr>
+<tr>
+<td align="left">CMS</td>
+<td>Undergoing testing</td>
+</tr>
+<tr>
+<td align="left">EIC</td>
+<td>Undergoing testing</td>
+</tr>
+<tr>
+<td align="left">GLOW</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td align="left">GlueX</td>
+<td>Undergoing testing</td>
+</tr>
+<tr>
+<td align="left">IceCube</td>
+<td>Undergoing testing</td>
+</tr>
+<tr>
+<td align="left">LIGO</td>
+<td>Undergoing testing</td>
+</tr>
+<tr>
+<td align="left">OSG</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Until all of the collaborations you support are using tokens in production, your CE should remain on OSG 3.5,
+with the 3.5-upcoming repositories enabled.</p>
+<h3 id="webdavxrootd-file-transfer">WebDAV/XRootD File transfer<a class="headerlink" href="#webdavxrootd-file-transfer" title="Permanent link">&para;</a></h3>
+<p>The following collaborations support support file transfer using WebDAV or XRootD:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Collaboration</th>
+<th>Supports WebDAV or XRootD</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td align="left">ATLAS</td>
 <td>Yes</td>
-<td>No</td>
-</tr>
-<tr>
-<td align="left">EIC</td>
-<td>Yes</td>
-<td>No</td>
 </tr>
 <tr>
 <td align="left">CMS</td>
 <td>Yes</td>
-<td>No</td>
 </tr>
 <tr>
 <td align="left">CLAS12</td>
 <td>Yes</td>
-<td>No</td>
+</tr>
+<tr>
+<td align="left">EIC</td>
+<td>N/A</td>
 </tr>
 <tr>
 <td align="left">GLOW</td>
-<td>Yes</td>
-<td>Yes</td>
+<td>N/A</td>
 </tr>
 <tr>
 <td align="left">GlueX</td>
-<td>Yes</td>
-<td>No</td>
+<td></td>
 </tr>
 <tr>
 <td align="left">IceCube</td>
-<td>Yes</td>
-<td>No</td>
+<td></td>
 </tr>
 <tr>
 <td align="left">LIGO</td>
-<td>Yes</td>
-<td>No</td>
+<td>Undergoing testing</td>
 </tr>
 <tr>
 <td align="left">OSG</td>
-<td>Yes</td>
-<td>Yes</td>
+<td>N/A</td>
 </tr>
 </tbody>
 </table>
-<p>Until all of the VOs you support are using tokens in production, your CE should remain on OSG 3.5,
-with the 3.5-upcoming repositories enabled.</p>
+                
+                  
                 
               
               
