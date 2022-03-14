@@ -266,11 +266,14 @@ root@host # systemctl start condor-ce
 Updating Your HTCondor Hosts
 ----------------------------
 
-!!! danger "Before considering an upgrade to OSG 3.6&hellip;"
-    Due to potentially disruptive changes in authentication methods, contact your collaboration(s) to verify that they support
-    token-based authentication before considering an upgrade to OSG 3.6.
-    If your collaboration(s) don't support these new authentication methods or you don't know which authentication methods your
-    collaboration(s) support, install or remain on the [OSG 3.5 release series](notes.md)
+!!! warning "HTCondor-CE hosts"
+    Consult [this section](#updating-your-osg-compute-entrypoint) before updating the `condor` package on your
+    HTCondor-CE hosts.
+
+If you are running an HTCondor pool, consult the following instructions to update to HTCondor from OSG 3.6.
+Note that the version of HTCondor available in OSG 3.6 does not support GSI authentication.
+If your pool is configured to authenticate with GSI, we recommend using HTCondor's "IDTOKENS" configuration for
+host-to-host authentication.
 
 1.  The following OSG specific configuration was dropped in anticipation of HTCondor's new secure by default
     configuration coming in HTCondor version 9.0. HTCondor's 9.0 recommended security configuration requires
