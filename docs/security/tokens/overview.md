@@ -130,6 +130,45 @@ For example, the following groups and roles have been used by the ATLAS and CMS 
 ```
 
 
+Using Bearer Tokens with HTCondor-CE 
+------------------------------------
+
+In order to support Token AAI, your CE must be based on OSG 3.6 or OSG 3.5-upcoming.
+You will need HTCondor 9.0.0 or newer, and `SCITOKENS` must be enabled as an auth method (this is the default).
+
+You must have a mapfile which provides mappings from bearer tokens to Unix usernames,
+based on the token's issuer and, optionally, subject.
+The OSG distributes the `osg-scitokens-mapfile` RPM package that includes default mappings for use by OSG CEs.
+
+Token mapfile lines look like:
+```
+SCITOKENS /^https\:\/\/scitokens\.org\/ligo,/ ligo
+SCITOKENS /^https\:\/\/cilogon\.org\/gm2,gm2pilot\@fnal\.gov$/ gm2pilot
+```
+These are regular expressions; the first matches a token with the issuer `https://scitokens.org/ligo`
+and any subject, and maps it to the `ligo` user.
+Note the trailing `,` in the regular expression: this separates the issuer from the subject.
+
+The second example matches the issuer `https://cilogon.org/gm2` _and_ the subject `gm2pilot@fnal.gov`,
+and maps it to the `gm2pilot` user.
+
+A `SCITOKENS` mapfile line supports WLCG tokens as well.
+Note that mapping can only be done on issuer and subject, _not_ `wlcg.groups`.
+
+See the [configuring authentication documentation for HTCondor-CE]
+(https://opensciencegrid.org/docs/compute-element/install-htcondor-ce/#configuring-authentication)
+for further information.
+
+
+Using Bearer Tokens with XRootD
+-------------------------------
+
+In order to support Token AAI, your XRootD installation must be based on OSG 3.6 or OSG 3.5-upcoming.
+You will need XRootD 5.0.2 or newer, with the `xrootd-scitokens` plugin.
+Follow the [configuring XRootD authorization documentation](https://opensciencegrid.org/docs/data/xrootd/xrootd-authorization)
+for information on how to configure XRootD to accept bearer tokens.
+
+
 Validating Tokens in Pilot Jobs
 -------------------------------
 
