@@ -11,17 +11,48 @@ Updating to OSG 3.6
 
 [OSG 3.6](release_series.md#series-overviews) (the *new series*) is a major overhaul of the OSG software stack compared
 to OSG 3.5 (the *old series*) with changes to core protocols used for authentication and data transfer.
-Depending on the collaboration(s) that you support, updating to the new series could result in issues with your site receiving
-pilot jobs and/or issues with data transfer.
+See [this page](https://opensciencegrid.org/technology/policy/gridftp-gsi-migration/) for more details regarding this
+transition.
 
-If you have verified that your collaboration(s) support token-based pilot submission and WebDAV/XRootD-based data transfers,
-use this document to update your OSG software to OSG 3.6.
+Depending on the [collaboration(s) that you support](../security/tokens/overview.md##collaboration-support),
+updating to the new series could result in issues with your site receiving pilot jobs and/or issues with data transfer.
+See the list of services below for any special considerations for the OSG 3.6 update:
 
-Many software packages, such as HTCondor and HTCondor-CE, use Python 3 scripts. If you are using Enterprise Linux 7,
-you must upgrade to at least version 7.8 for Python 3 support.
+-   [Compute Entrypoints](../compute-element/htcnodor-ce-overview.md) should be updated to OSG 3.6 with care:
+
+    -   If your [collaboration(s)](../security/tokens/overview.md#pilot-job-submission) support bearer tokens,
+        update your [OSG Compute Entrypoints](#updating-your-osg-compute-entrypoint) at your earliest convenience.
+
+    -   If the collaborations that you support have NOT moved to bearer token pilot job submission, update to
+        HTCondor-CE 5 available in [OSG 3.5 upcoming](updating-to-osg-35.md#updating-to-htcondor-ce-5) to help your
+        collaborations transition to bearer tokens.
+
+        !!! warning "OSG 3.5 end-of-life"
+            OSG 3.5 support is scheduled to end on [May 1, 2022](https://opensciencegrid.org/technology/policy/release-series/#life-cycle-dates).
+            If your collaboration does not yet support token-based pilot job submission, please contact them directly
+            for their timeline.
+
+-   XRootD will continue to support GSI and VOMS proxies in OSG 3.6 directly
+    (instead of through Grid Community Toolkit libraries).
+    Therefore, XRootD hosts (i.e., standalone installations, caches and origins) should be updated to
+    [OSG 3.6](#updating-to-the-OSG-repositories) at your earliest convenience.
+
+-   [GridFTP services](#replacing-your-gridftp-service) should be replaced with an installation of XRootD standalone.
+
+-   [HTCondor pools and access points](#updating-your-htcondor-hosts) should be updated to OSG 3.6 at your earliest
+    convenience.
+    Note that any pools using GSI authentication will need to transition to a different authentication method, such as
+    IDTOKENS.
+
+-   All other services (e.g., OSG Worker Node clients, Frontier Squids) should be updated to
+    [OSG 3.6](#updating-to-the-OSG-repositories) at your earliest convenience.
 
 Updating the OSG Repositories
 -----------------------------
+
+!!! tip "Python 3 support"
+    Many software packages, such as HTCondor and HTCondor-CE, use Python 3 scripts. If you are using Enterprise Linux 7,
+    you must upgrade to at least version 7.8 for Python 3 support.
 
 !!! note
     Before updating the OSG repository, be sure to turn off any OSG services. Consult the sections below
