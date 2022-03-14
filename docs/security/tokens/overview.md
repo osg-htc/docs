@@ -135,12 +135,13 @@ Validating Tokens in Pilot Jobs
 
 If an incoming (pre-routed) pilot on a CE has a token, it will have the following classad attributes:
 
-| Attribute        | Meaning                             |
-|------------------|-------------------------------------|
-| AuthTokenId      | A UUID of the token                 |
-| AuthTokenIssuer  | The URL of the issuer of the token  |
-| AuthTokenScopes  | Any scope restrictions on the token |
-| AuthTokenSubject | The 'sub' field of the token        |
+| Attribute        | Meaning                              |
+|------------------|--------------------------------------|
+| AuthTokenId      | A UUID of the token                  |
+| AuthTokenIssuer  | The URL of the issuer of the token   |
+| AuthTokenScopes  | Any scope restrictions on the token  |
+| AuthTokenSubject | The `sub` claim of the token         |
+| AuthTokenGroups  | The `wlcg.groups` claim of the token |
 
 (A pre-routed job is a job without `RoutedJob=True` in its classad.)
 
