@@ -201,3 +201,48 @@ The following collaborations support support file transfer using WebDAV or XRoot
 | IceCube       | Undergoing testing        |
 | LIGO          | Undergoing testing        |
 | OSG           | N/A                       |
+
+
+Debugging Tokens
+----------------
+
+Validating a token:
+
+A token must be a _one-line_ string consisting of 3 base64-encoded parts separated by periods (`.`).
+You can use the tools in the `scitokens-cpp` RPM to validate a SciToken or WLCG token.
+
+-   Run `scitokens-verify <TOKEN>` (where `<TOKEN>` is the text of the token) to validate the token using the issuer.
+
+-   Run `scitokens-list-access <TOKEN> <ISSUER> <AUDIENCE>` (where `<TOKEN>` is the text of the token,
+    `<ISSUER>` is the issuer to verify the token with,
+    and `<AUDIENCE>` is the server you are using the token to access).
+
+Examining a token:
+
+-   Online: paste the token into <https://jwt.io>.
+
+-   Offline:
+    1.  Write the token to a file named `tok`.
+    2.  Run `IFS=. read header payload signature < tok`.
+    3.  Run `echo $header | base64 -d` to examine the header.
+        Run `echo $payload | base64 -d` to examine the payload.
+        Note: the header or payload may be missing the final padding characters (up to 2 `=` characters);
+        adding them (e.g. `echo $payload== | base64 -d`) should make base64 stop complaining about "invalid input" or "truncated input".
+
+
+
+Help
+----
+
+To get assistance, please use the [this page](https://opensciencegrid.org/docs/common/help/).
+
+
+References and Links
+--------------------
+
+-   [OSG Technology - Collaborations and Bearer Tokens](https://opensciencegrid.org/technology/policy/collab-bearer-tokens/)
+-   [JSON Web Tokens](https://jwt.io) - includes token decoder
+-   [SciTokens](https://scitokens.org)
+    -   [SciToken Claims and Scopes Language](https://scitokens.org/technical_docs/Claims)
+    -   [SciTokens Demo](https://demo.scitokens.org/) - includes token generator, verifier, and links to libraries
+-   [WLCG Common JWT Profiles](https://github.com/WLCG-AuthZ-WG/common-jwt-profile/blob/master/profile.md)
