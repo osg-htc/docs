@@ -3,14 +3,21 @@ DateReviewed: 2022-03-10
 Bearer Token Overview
 =====================
 
-Bearer Tokens are a security method used for accessing compute and storage resources,
-introduced as a replacement for X.509.
+Token-based Authentication and Authorization Infrastructure (AAI) is a security method
+that is intended as the replacement for X.509 for accessing compute and storage resources.
+This document will describe "bearer tokens," which are one of the components of Token AAI;
+bearer tokens are the type of token that server software such as HTCondor and XRootD will primarily interact with.
 
-Bearer Tokens are credential strings in the [JSON Web Token (JWT)](https://jwt.io) format;
-a JWT is a small piece of JSON data with a signature that can be verified.
+Bearer tokens are credential strings in the [JSON Web Token (JWT)](https://jwt.io) format.
+A JWT consists of a JSON header, a JSON payload, and a signature that can be verified.
+The payload contains a number of fields, called "claims", that describe the token and what it can access.
+
 There are two JWT-based token standards that can be used with OSG software: [SciTokens](https://scitokens.org)
 and [WLCG Tokens](https://github.com/WLCG-AuthZ-WG/common-jwt-profile/blob/master/profile.md).
+These standards describe the claims that are used in the payload of the JWT.
 
+A bearer token (sometimes called an "access token") is a short-lived credential,
+performing a similar role as a grid proxy did in X.509.
 X.509 proxies established identity (the DN in your subject) and group membership (VOMS FQANs).
 Servers made decisions about access based on those properties.
 Tokens also have 'scope' which can restrict the actions that can be done with the token.
@@ -20,8 +27,23 @@ For example the job could have one token granting it the ability to be run;
 it could have a token for read access to an input dataset, and a token for write access to a results directory.
 
 
+Token Components
+----------------
+SciTokens and WLCG Tokens are similar standards and have some common fields (known as "claims"):
 
+-   Each token must have an issuer ("iss") claim.
+    This identifies the organization that issued the token.
+    An issuer looks like an HTTPS URL;
+    this URL must be valid and publicly accessible because it is used by services to validate the token.
 
+-   Tokens should have a limited lifespan.
+    This is described by the issued-at ("iat"), not-before ("nbf"), and expiration ("exp") claims,
+    all of which are Unix timestamps.
+
+-   Tokens must have a subject ("sub") claim.
+    The subject identifies an entity (which could be a human or a robot) that owns the token.
+    Unlike the subject of an X.509 certificate, a token subject does not need to be globally unique,
+    only unique to the issuer.
 
 Validating Tokens in Pilot Jobs
 -------------------------------
