@@ -14,7 +14,7 @@ to OSG 3.5 (the *old series*) with changes to core protocols used for authentica
 Depending on the collaboration(s) that you support, updating to the new series could result in issues with your site receiving
 pilot jobs and/or issues with data transfer.
 
-If you have verified that your collaboration(s) support token-based pilot submission and HTTP-based data transfers,
+If you have verified that your collaboration(s) support token-based pilot submission and WebDAV/XRootD-based data transfers,
 use this document to update your OSG software to OSG 3.6.
 
 Many software packages, such as HTCondor and HTCondor-CE, use Python 3 scripts. If you are using Enterprise Linux 7,
