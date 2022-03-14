@@ -1,5 +1,4 @@
 DateReviewed: 2022-03-10
-=======
 Bearer Token Overview
 =====================
 
@@ -36,7 +35,7 @@ SciTokens and WLCG Tokens are similar standards and have some common claims:
 
 The issuer identifies the organization that issued the token.
 An issuer looks like an HTTPS URL;
-this URL must be valid and publicly accessible because it is used by services to validate the token.
+this URL must be valid and publicly accessible as they are used by site services to validate the token.
 Token issuers will be described below.
 
 **Subject ("sub")**
@@ -180,7 +179,7 @@ If an incoming (pre-routed) pilot on a CE has a token, it will have the followin
 | AuthTokenIssuer  | The URL of the issuer of the token   |
 | AuthTokenScopes  | Any scope restrictions on the token  |
 | AuthTokenSubject | The `sub` claim of the token         |
-| AuthTokenGroups  | The `wlcg.groups` claim of the token |
+| AuthTokenGroups  | The `wlcg.groups`, if any, claim of the token |
 
 (A pre-routed job is a job without `RoutedJob=True` in its classad.)
 
