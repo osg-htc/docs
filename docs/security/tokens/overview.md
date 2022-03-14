@@ -71,8 +71,8 @@ The following collaborations support support file transfer using WebDAV or XRoot
 | CMS           | Yes                       |
 | CLAS12        | Yes                       |
 | EIC           | N/A                       |
-| GLOW          | N/A                       |
+| GLOW          | Yes                       |
 | GlueX         | N/A                       |
 | IceCube       | Undergoing testing        |
 | LIGO          | Undergoing testing        |
-| OSG           | N/A                       |
+| OSG           | Yes                       |
