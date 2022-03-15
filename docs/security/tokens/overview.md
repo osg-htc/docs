@@ -203,12 +203,15 @@ The following collaborations support support file transfer using WebDAV or XRoot
 | CMS           | Yes                       |
 | CLAS12        | Yes                       |
 | EIC           | N/A                       |
-| GLOW          | N/A                       |
-| GlueX         | No                        |
-| IceCube       | Undergoing testing        |
-| LIGO          | Undergoing testing        |
-| OSG           | N/A                       |
+| GLOW          | Yes                       |
+| GlueX         | N/A                       |
+| IceCube       | Undergoing testing*       |
+| LIGO          | Undergoing testing*       |
+| OSG           | Yes                       |
 
+\* Currently, collaborations testing WebDAV or XRootD support will continue to support other file transfer protocols so
+it should it should be safe to update your OSG WN clients to OSG 3.6.
+If you have any questions, please contact your collaboration directly.
 
 Help
 ----
@@ -216,8 +219,8 @@ Help
 To get assistance, please use the [this page](https://opensciencegrid.org/docs/common/help/).
 
 
-References and Links
---------------------
+References
+----------
 
 -   [Troubleshooting Tokens](using-tokens.md#troubleshooting-tokens)
 -   [OSG Technology - Collaborations and Bearer Tokens](https://opensciencegrid.org/technology/policy/collab-bearer-tokens/)

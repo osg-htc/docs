@@ -1,25 +1,58 @@
 !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
-    Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
-    authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
-    If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
-    install or remain on the [OSG 3.5 release series](notes.md).
+    Due to potentially disruptive changes in protocols, consult the
+    [collaboration support tables](../security/tokens/overview.md#collaboration-support) to verify that your
+    collaboration(s) support token-based authentication and/or WebDAV/XRootD-based data transfer before considering an
+    upgrade to OSG 3.6.
+    If your collaboration(s) don't support these new protocols, install or remain on the
+    [OSG 3.5 release series, with the osg-upcoming repositories enabled](notes.md).
 
 Updating to OSG 3.6
 ===================
 
 [OSG 3.6](release_series.md#series-overviews) (the *new series*) is a major overhaul of the OSG software stack compared
 to OSG 3.5 (the *old series*) with changes to core protocols used for authentication and data transfer.
-Depending on the VO(s) that you support, updating to the new series could result in issues with your site receiving
-pilot jobs and/or issues with data transfer.
+See [this page](https://opensciencegrid.org/technology/policy/gridftp-gsi-migration/) for more details regarding this
+transition.
 
-If you have verified that your VO(s) support token-based pilot submission and HTTP-based data transfers,
-use this document to update your OSG software to OSG 3.6.
+Depending on the [collaboration(s) that you support](../security/tokens/overview.md##collaboration-support),
+updating to the new series could result in issues with your site receiving pilot jobs and/or issues with data transfer.
+See the list of services below for any special considerations for the OSG 3.6 update:
 
-Many software packages, such as HTCondor and HTCondor-CE, use Python 3 scripts. If you are using Enterprise Linux 7,
-you must upgrade to at least version 7.8 for Python 3 support.
+-   [Compute Entrypoints](../compute-element/htcnodor-ce-overview.md) should be updated to OSG 3.6 with care:
+
+    -   If your [collaboration(s)](../security/tokens/overview.md#pilot-job-submission) support bearer tokens,
+        update your [OSG Compute Entrypoints](#updating-your-osg-compute-entrypoint) at your earliest convenience.
+
+    -   If the collaborations that you support have NOT moved to bearer token pilot job submission, update to
+        HTCondor-CE 5 available in [OSG 3.5 upcoming](updating-to-osg-35.md#updating-to-htcondor-ce-5) to help your
+        collaborations transition to bearer tokens.
+
+        !!! warning "OSG 3.5 end-of-life"
+            OSG 3.5 support is scheduled to end on [May 1, 2022](https://opensciencegrid.org/technology/policy/release-series/#life-cycle-dates).
+            If your collaboration does not yet support token-based pilot job submission, please contact them directly
+            for their timeline.
+
+-   XRootD will continue to support GSI and VOMS proxies in OSG 3.6 directly
+    (instead of through Grid Community Toolkit libraries).
+    Therefore, XRootD hosts (i.e., standalone installations, caches and origins) should be updated to
+    [OSG 3.6](#updating-to-the-OSG-repositories) at your earliest convenience.
+
+-   [GridFTP services](#replacing-your-gridftp-service) should be replaced with an installation of XRootD standalone.
+
+-   [HTCondor pools and access points](#updating-your-htcondor-hosts) should be updated to OSG 3.6 at your earliest
+    convenience.
+    Note that any pools using GSI authentication will need to transition to a different authentication method, such as
+    IDTOKENS.
+
+-   All other services (e.g., OSG Worker Node clients, Frontier Squids) should be updated to
+    [OSG 3.6](#updating-to-the-OSG-repositories) at your earliest convenience.
 
 Updating the OSG Repositories
 -----------------------------
+
+!!! tip "Python 3 support"
+    Many software packages, such as HTCondor and HTCondor-CE, use Python 3 scripts. If you are using Enterprise Linux 7,
+    you must upgrade to at least version 7.8 for Python 3 support.
 
 !!! note
     Before updating the OSG repository, be sure to turn off any OSG services. Consult the sections below
@@ -69,15 +102,16 @@ Updating Your OSG Compute Entrypoint
 ------------------------------------
 
 !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
-    Due to potentially disruptive changes in authentication methods, contact your VO(s) to verify that they support
-    token-based authentication before considering an upgrade to OSG 3.6.
-    If your VO(s) don't support these new authentication methods or you don't know which authentication methods your
-    VO(s) support, install or remain on the [OSG 3.5 release series](notes.md)
+    Due to potentially disruptive changes in protocols, consult the
+    [collaboration support tables](../security/tokens/overview.md#pilot-job-submission) to verify that your
+    collaboration(s) support token-based authentication before considering an upgrade to OSG 3.6.
+    If your collaboration(s) don't support these new authentication methods, install or remain on the
+    [OSG 3.5 release series, with the osg-upcoming repositories enabled](notes.md)
 
 In OSG 3.6, OSG Compute Entrypoints (CEs) only accept token-based pilot job submissions.
 If you need to support token-based and GSI proxy-based pilot job submission,
-you must install or remain on [OSG 3.5](notes.md).
-If the VOs that you support have the capability to submit token-based pilots, you may update your CE to OSG 3.6.
+you must install or remain on [OSG 3.5, with the osg-upcoming repositories enabled](notes.md).
+If the collaborations that you support have the capability to submit token-based pilots, you may update your CE to OSG 3.6.
 
 In addition to the change in authentication protocol, OSG 3.6 CEs include new major versions of software that require
 manual updates.
@@ -229,21 +263,12 @@ The OSG 3.6 release series contains [HTCondor-CE 5](https://htcondor.github.io/h
 version upgrade from HTCondor-CE 4, which was available in the OSG 3.5 release repositories.
 To update HTCondor-CE, perform the following steps:
 
-1.  If you support the `OSG`, `GLOW`, or `ATLAS`  VOs and map their jobs to non-standard local Unix accounts
-    add SciTokens mappings to a file in `/etc/condor-ce/mapfiles.d/`:
+1.  If the collaboration(s) that you support submit token-based pilots and you map these pilots to non-default local
+    Unix accounts:
 
-        # OSG
-        SCITOKENS /^https\:\/\/scitokens\.org\/osg\-connect,/ osg
-        # GLOW
-        SCITOKENS /^https\:\/\/chtc\.cs\.wisc\.edu,/ glow
-        # ATLAS production
-        SCITOKENS /^https:\/\/atlas-auth.web.cern.ch\/,7dee38a3-6ab8-4fe2-9e4c-58039c21d817/ usatlas1
-        # ATLAS analysis
-        SCITOKENS /^https:\/\/atlas-auth.web.cern.ch\/,750e9609-485a-4ed4-bf16-d5cc46c71024/ usatlas3
-        # ATLAS SAM/ETF
-        SCITOKENS /^https:\/\/atlas-auth.web.cern.ch\/,5c5d2a4d-9177-3efa-912f-1b4e5c9fb660/ usatlas2
-
-    Replacing the third field with the local Unix account.
+    1.  Copy the relevant default mappings from `/usr/share/condor-ce/mapfiles.d/osg-scitokens-mapfile.conf` (provided
+        by the `osg-scitokens-mapfile` package) to a file in `/etc/condor-ce/mapfiles.d/`
+    1.  Replacing the third field with the local Unix account.
 
 1.  Also consult the [upgrade documentation](https://htcondor.github.io/htcondor-ce/v5/releases/#updating-to-htcondor-ce-5)
     for other required configuration updates.
@@ -268,11 +293,14 @@ root@host # systemctl start condor-ce
 Updating Your HTCondor Hosts
 ----------------------------
 
-!!! danger "Before considering an upgrade to OSG 3.6&hellip;"
-    Due to potentially disruptive changes in authentication methods, contact your VO(s) to verify that they support
-    token-based authentication before considering an upgrade to OSG 3.6.
-    If your VO(s) don't support these new authentication methods or you don't know which authentication methods your
-    VO(s) support, install or remain on the [OSG 3.5 release series](notes.md)
+!!! warning "HTCondor-CE hosts"
+    Consult [this section](#updating-your-osg-compute-entrypoint) before updating the `condor` package on your
+    HTCondor-CE hosts.
+
+If you are running an HTCondor pool, consult the following instructions to update to HTCondor from OSG 3.6.
+Note that the version of HTCondor available in OSG 3.6 does not support GSI authentication.
+If your pool is configured to authenticate with GSI, we recommend using HTCondor's "IDTOKENS" configuration for
+host-to-host authentication.
 
 1.  The following OSG specific configuration was dropped in anticipation of HTCondor's new secure by default
     configuration coming in HTCondor version 9.0. HTCondor's 9.0 recommended security configuration requires
@@ -318,10 +346,11 @@ Replacing Your GridFTP Service
 ------------------------------
 
 !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
-    Due to potentially disruptive changes, contact your VO(s) to verify that they support HTTP-based data transfer
-    before considering replacing your GridFTP service with XRootD.
-    If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
-    install or remain on the [OSG 3.5 release series](notes.md)
+    Due to potentially disruptive changes in protocols, consult the
+    [collaboration support tables](../security/tokens/overview.md#collaboration-support) to verify that your
+    collaboration(s) support WebDAV/XRootD-based data transfer before considering an upgrade to OSG 3.6.
+    If your collaboration(s) don't support these new protocols, install or remain on the
+    [OSG 3.5 release series, with the osg-upcoming repositories enabled](notes.md).
 
 !!! bug "VOMS attribute mappings incompatible with `xrootd-multiuser` in OSG 3.6"
     The OSG 3.6 configuration of XRootD uses the `XrdVoms` plugin, which pass along the entire VOMS FQAN as the
