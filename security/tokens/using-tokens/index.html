@@ -9,14 +9,14 @@
       
       
       
-        <link rel="canonical" href="https://opensciencegrid.org/docs/security/tokens/overview/">
+        <link rel="canonical" href="https://opensciencegrid.org/docs/security/tokens/using-tokens/">
       
       <link rel="icon" href="../../../img/favicon.ico">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.0">
     
     
       
-        <title>Overview - OSG Site Documentation</title>
+        <title>Using tokens - OSG Site Documentation</title>
       
     
     
@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#bearer-token-overview" class="md-skip">
+        <a href="#using-bearer-tokens" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Overview
+              Using tokens
             
           </span>
         </div>
@@ -1673,38 +1673,78 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#token-components" class="md-nav__link">
-    Token Components
+  <a href="#requesting-tokens-from-an-oidc-provider" class="md-nav__link">
+    Requesting Tokens From An OIDC Provider
   </a>
   
-    <nav class="md-nav" aria-label="Token Components">
+    <nav class="md-nav" aria-label="Requesting Tokens From An OIDC Provider">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#issuer" class="md-nav__link">
-    Issuer
+  <a href="#using-a-container" class="md-nav__link">
+    Using a Container
+  </a>
+  
+    <nav class="md-nav" aria-label="Using a Container">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#registering-an-oidc-profile" class="md-nav__link">
+    Registering an OIDC profile
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#subject" class="md-nav__link">
-    Subject
+  <a href="#requesting-access-tokens" class="md-nav__link">
+    Requesting access tokens
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#scopes" class="md-nav__link">
-    Scopes
+  <a href="#reloading-an-oidc-profile" class="md-nav__link">
+    Reloading an OIDC profile
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-an-rpm-installation" class="md-nav__link">
+    Using an RPM installation
+  </a>
+  
+    <nav class="md-nav" aria-label="Using an RPM installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#registering-an-oidc-profile_1" class="md-nav__link">
+    Registering an OIDC profile
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#wlcg-groups" class="md-nav__link">
-    WLCG Groups
+  <a href="#requesting-access-tokens_1" class="md-nav__link">
+    Requesting access tokens
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reloading-an-oidc-profile_1" class="md-nav__link">
+    Reloading an OIDC profile
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1714,50 +1754,36 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validating-tokens-in-pilot-jobs" class="md-nav__link">
-    Validating Tokens in Pilot Jobs
+  <a href="#generating-scitokens-for-testing" class="md-nav__link">
+    Generating SciTokens For Testing
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#collaboration-support" class="md-nav__link">
-    Collaboration support
+  <a href="#troubleshooting-tokens" class="md-nav__link">
+    Troubleshooting Tokens
   </a>
   
-    <nav class="md-nav" aria-label="Collaboration support">
+    <nav class="md-nav" aria-label="Troubleshooting Tokens">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#pilot-job-submission" class="md-nav__link">
-    Pilot job submission
+  <a href="#validating-tokens" class="md-nav__link">
+    Validating tokens
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#webdavxrootd-file-transfer" class="md-nav__link">
-    WebDAV/XRootD File transfer
+  <a href="#examining-tokens" class="md-nav__link">
+    Examining tokens
   </a>
   
 </li>
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#help" class="md-nav__link">
-    Help
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#references" class="md-nav__link">
-    References
-  </a>
   
 </li>
       
@@ -1773,305 +1799,335 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/security/tokens/overview.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/security/tokens/using-tokens.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="bearer-token-overview">Bearer Token Overview<a class="headerlink" href="#bearer-token-overview" title="Permanent link">&para;</a></h1>
-<p>Token-based Authentication and Authorization Infrastructure (AAI) is a security method
-that is intended as the replacement for X.509 for accessing compute and storage resources.
-This document will describe "bearer tokens," which are one of the components of Token AAI;
-bearer tokens are the type of token that server software such as HTCondor and XRootD will primarily interact with.</p>
-<p>A bearer token (sometimes called an "access token") is a short-lived credential,
-performing a similar role as a grid proxy did in X.509.
-X.509 proxies established identity (the DN in your subject) and group membership (VOMS FQANs).
-Servers made decisions about access based on those properties.
-Tokens also have 'scope' which can restrict the actions that can be done with the token.
-For example, a token used for storage access can restrict the files that can be read to a particular directory tree.
-Instead of using a single proxy, a job may have multiple tokens.
-For example the job could have one token granting it the ability to be run;
-it could have a token for read access to an input dataset, and a token for write access to a results directory.</p>
-<h2 id="token-components">Token Components<a class="headerlink" href="#token-components" title="Permanent link">&para;</a></h2>
-<p>Bearer tokens are credential strings in the <a href="https://jwt.io">JSON Web Token (JWT)</a> format.
-A JWT consists of a JSON header, a JSON payload, and a signature that can be verified.
-The payload contains a number of fields, called "claims", that describe the token and what it can access.</p>
-<p>There are two JWT-based token standards that can be used with OSG software: <a href="https://scitokens.org">SciTokens</a>
-and <a href="https://github.com/WLCG-AuthZ-WG/common-jwt-profile/blob/master/profile.md">WLCG Tokens</a>.
-These standards describe the claims that are used in the payload of the JWT.</p>
-<p>SciTokens and WLCG Tokens are similar standards and have some common claims:</p>
-<p><strong>Issuer ("iss")</strong></p>
-<p>The issuer identifies the organization that issued the token.
-An issuer looks like an HTTPS URL;
-this URL must be valid and publicly accessible as they are used by site services to validate the token.
-Token issuers will be <a href="#issuer">described below</a>.</p>
-<p><strong>Subject ("sub")</strong></p>
-<p>The subject identifies an entity (which could be a human or a robot) that owns the token.
-Unlike the subject of an X.509 certificate, a token subject does not need to be globally unique,
-only unique to the issuer.
-Subjects will be <a href="#subject">elaborated on below</a>.</p>
-<p><strong>Issued-at ("iat"), not-before ("nbf"), expiration ("exp")</strong></p>
-<p>These claims are Unix timestamps that specify when the token was issued, and its lifespan.</p>
-<p><strong>Audience ("aud")</strong></p>
-<p>The audience is a server (or a JSON list of servers) that the token may be used on;
-it is typically a hostname, host:port, or URI.
-For example a token used for submitting a job to a CE would have
-<code>&lt;CE FQDN&gt;:&lt;CE PORT&gt;</code> in the <code>aud</code> claim.
-The special values <code>ANY</code> (SciTokens) or <code>https://wlcg.cern.ch/jwt/v1/any</code> (WLCG Tokens) allow the token to be
-used on any server.</p>
-<p><strong>Scope ("scope")</strong></p>
-<p>The scope limits the actions that can be made using the token.
-The format of the scope claim differs between SciTokens and WLCG Tokens;
-scopes in use by OSG services will be <a href="#scopes">listed below</a>.
-WLCG Tokens may have a <code>wlcg.group</code> instead of a scope, <a href="#wlcg-groups">as described below</a>.</p>
-<h3 id="issuer">Issuer<a class="headerlink" href="#issuer" title="Permanent link">&para;</a></h3>
-<p>To generate bearer tokens, a collaboration must adminster at least one "token issuer" to issue tokens to their users.
-In addition to generating and signing tokens, token issuers provide a public endpoint that can be used to validate an
-issued token,
-e.g. an OSG Compute Entrypoint (CE) will contact the token issuer to authorize a bearer token used for pilot job
-submission.</p>
-<p>The issuer is listed in the <code>iss</code> claim; this should be an HTTPS URL of a web server.
-This server must have the public key that can be used to validate the token in a well-known location,
-as described by the <a href="https://openid.net/specs/openid-connect-discovery-1_0.html">OpenID Connect Discovery standard</a>.
-If the issuer is down, or the the public key cannot be downloaded, the token cannot be verified
-and will be rejected.
-Note that most clients will cache the public key.
-In order to ease the token transition, the current cache lifetime is 4 days,
-but at some point this will be lowered to a few hours.</p>
-<p>A collaboration may have more than one token issuer,
-but a single token issuer should never serve more than one collaboration.
-The issuer claim should be able to uniquely identify the collaboration that identifies the token.</p>
-<h3 id="subject">Subject<a class="headerlink" href="#subject" title="Permanent link">&para;</a></h3>
-<p>The subject is listed in the <code>sub</code> claim and should be unique, stable identifier that corresponds to a user (human)
-or a service (robot or pilot job submission).
-A subject does not need to be globally unique but it must be unique to the issuer.
-The subject, when combined with the issuer, will give a globally unique identity
-that can be used for mapping, banning, accounting, monitoring, auditing, or tracing.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Due to privacy concerns, the subject may be a randomly generated string, hash, UUID, etc.,
-that does not contain any personally identifying information.
-Tracing a token to a user or service may require contacting the issuer.</p>
+                <h1 id="using-bearer-tokens">Using Bearer Tokens<a class="headerlink" href="#using-bearer-tokens" title="Permanent link">&para;</a></h1>
+<p>As part of the <a href="https://opensciencegrid.org/technology/policy/gridftp-gsi-migration/">GridFTP and GSI migration</a>,
+the OSG will be transitioning authentication away from X.509 certificates to the use of bearer tokens such as
+<a href="http://scitokens.org/">SciTokens</a> or <a href="https://twiki.cern.ch/twiki/bin/view/LCG/WLCGAuthorizationWG">WLCG JWT</a>.</p>
+<p>Use this document to learn how to request tokens from an OpenID Connect (OIDC) Provider or how to generate a test token
+for validating your OSG services.</p>
+<h2 id="requesting-tokens-from-an-oidc-provider">Requesting Tokens From An OIDC Provider<a class="headerlink" href="#requesting-tokens-from-an-oidc-provider" title="Permanent link">&para;</a></h2>
+<p>If you are a member of a collaboration with an OIDC provider (such as <a href="https://www.cilogon.org/oidc">CILogon</a> or
+<a href="https://indigo-iam.github.io/v/v1.7.2/docs/">Indigo IAM</a>), you can use the
+<a href="https://indigo-dc.gitbook.io/oidc-agent/">oidc-agent</a> client to request tokens.
+This client tool is available either as <a href="#using-a-container">a container</a> or as
+<a href="#using-an-rpm-installation">an RPM installation</a>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Alternative tokens for testing</p>
+<p>If you are not a member of a collaboration with access to an OIDC provider, you can generate test SciTokens using
+<a href="#generating-scitokens-for-testing">these instructions</a></p>
 </div>
-<h3 id="scopes">Scopes<a class="headerlink" href="#scopes" title="Permanent link">&para;</a></h3>
-<p>The <code>scope</code> claim is a space-separated list of authorizations that should be granted to the bearer.
-Scopes utilized by OSG services include the following:</p>
+<h3 id="using-a-container">Using a Container<a class="headerlink" href="#using-a-container" title="Permanent link">&para;</a></h3>
+<h4 id="registering-an-oidc-profile">Registering an OIDC profile<a class="headerlink" href="#registering-an-oidc-profile" title="Permanent link">&para;</a></h4>
+<ol>
+<li>
+<p>Start an agent container in the background and name it <code>my-agent</code> to easily run subsequent commands against it:</p>
+<div class="codehilite"><pre><span></span><code><span class="go">docker run -d --name my-agent opensciencegrid/oidc-agent:3.6-release</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Generate a local client profile and follow the prompts:</p>
+<div class="codehilite"><pre><span></span><code><span class="go">docker exec -it my-agent oidc-gen -w device &lt;CLIENT PROFILE&gt;</span>
+</code></pre></div>
+
+<ol>
+<li>
+<p>Specify an OIDC provider such as CILogon or an IAM instance as the client issuer.
+   For example, if you are requesting tokens from the WLCG IAM instance:</p>
+<div class="codehilite"><pre><span></span><code>Issuer [https://iam-test.indigo-datacloud.eu/]: https://wlcg.cloud.cnaf.infn.it/
+</code></pre></div>
+
+</li>
+<li>
+<p>Request scopes for the capabilities that you need based on the type of tokens that your provider issues:</p>
 <table>
 <thead>
 <tr>
-<th><strong>Capability</strong></th>
-<th><strong>SciTokens scope</strong></th>
-<th><strong>WLCG scope</strong></th>
+<th align="left"><strong>Capability</strong></th>
+<th><strong>SciTokens Scope</strong></th>
+<th><strong>WLCG Scope</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>HTCondor <code>READ</code></td>
-<td><code>condor:/READ</code></td>
+<td align="left">HTCondor <code>READ</code></td>
+<td><code>condor:READ</code></td>
 <td><code>compute.read</code></td>
 </tr>
 <tr>
-<td>HTCondor <code>WRITE</code></td>
-<td><code>condor:/WRITE</code></td>
+<td align="left">HTCondor <code>WRITE</code></td>
+<td><code>condor:WRITE</code></td>
 <td><code>compute.modify compute.cancel compute.create</code></td>
 </tr>
 <tr>
-<td>XRootD read</td>
+<td align="left">XRootD read</td>
 <td><code>read:&lt;PATH&gt;</code></td>
 <td><code>storage.read:&lt;PATH&gt;</code></td>
 </tr>
 <tr>
-<td>XRootD write</td>
+<td align="left">XRootD write</td>
 <td><code>write:&lt;PATH&gt;</code></td>
 <td><code>storage.modify:&lt;PATH&gt;</code></td>
 </tr>
 </tbody>
 </table>
-<p>Replacing <code>&lt;PATH&gt;</code> with a path to the storage location that the bearer should be authorized to access.</p>
-<p>A SciToken must have a non-empty scope, or it cannot be used to do anything.</p>
-<h3 id="wlcg-groups">WLCG Groups<a class="headerlink" href="#wlcg-groups" title="Permanent link">&para;</a></h3>
-<p>A WLCG Token may have a <code>wlcg.groups</code> claim instead of a scope.
-The <code>wlcg.groups</code> claim is a comma and space separated list of collaboration groups.
-The format of these groups are similar to VOMS FQANs: <code>/&lt;collaboration&gt;[/&lt;group&gt;][/Role=&lt;role&gt;]</code>,
-replacing <code>&lt;collaboration&gt;</code>, <code>&lt;group&gt;</code>, and <code>&lt;role&gt;</code> with the collaboration, group, and role, respectively, where the
-group and role are optional.
-For example, the following groups and roles have been used by the ATLAS and CMS collaborations:</p>
-<div class="codehilite"><pre><span></span><code>/atlas/
-/atlas/usatlas
-/cms/Role=pilot
-/cms/local/Role=pilot
+<p>Replacing <code>&lt;PATH&gt;</code> with a path to the storage location that the bearer should be authorized to access.
+If you are requesting WLCG tokens, you will need to also add the <code>wlcg</code> and <code>offline_access</code> scopes.
+For example, to request HTCondor <code>READ</code> and <code>WRITE</code> access from an OIDC provider issuing WLCG tokens,
+specify the following when prompted for a space delimited list of scopes:</p>
+<div class="codehilite"><pre><span></span><code>wlcg offline_access compute.read compute.modify compute.cancel compute.create
 </code></pre></div>
 
-<h2 id="validating-tokens-in-pilot-jobs">Validating Tokens in Pilot Jobs<a class="headerlink" href="#validating-tokens-in-pilot-jobs" title="Permanent link">&para;</a></h2>
-<p>If an incoming (pre-routed) pilot on a CE has a token, it will have the following classad attributes:</p>
-<table>
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>AuthTokenId</td>
-<td>A UUID of the token</td>
-</tr>
-<tr>
-<td>AuthTokenIssuer</td>
-<td>The URL of the issuer of the token</td>
-</tr>
-<tr>
-<td>AuthTokenScopes</td>
-<td>Any scope restrictions on the token</td>
-</tr>
-<tr>
-<td>AuthTokenSubject</td>
-<td>The <code>sub</code> claim of the token</td>
-</tr>
-<tr>
-<td>AuthTokenGroups</td>
-<td>The <code>wlcg.groups</code>, if any, claim of the token</td>
-</tr>
-</tbody>
-</table>
-<p>(A pre-routed job is a job without <code>RoutedJob=True</code> in its classad.)</p>
+</li>
+<li>
+<p>When prompted, open the verification URL provided a browser, enter the code provided by <code>oidc-gen</code>,
+   and click "Submit".</p>
+</li>
+<li>
+<p>Follow the instructions in your browser to authorize your new <code>oidc-agent</code> client</p>
+</li>
+<li>
+<p>Back in your terminal, enter a password to encrypt your local client profile.
+   You'll need to remember this if you want to re-use this profile in subsequent sessions.</p>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="requesting-access-tokens">Requesting access tokens<a class="headerlink" href="#requesting-access-tokens" title="Permanent link">&para;</a></h4>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>A job may have both a token and an X.509 proxy.
-Presence of any <code>x509*</code> attributes does not indicate the absence of a token.</p>
+<p>You must first <a href="#registering-an-oidc-profile">register a new profile</a>.</p>
 </div>
-<p>To see which authentication method was used for a job:
--   Examine the <code>/var/log/condor-ce/AuditLog*</code> files.
--   Find a line saying <code>Submitting new job &lt;JOBID&gt;</code> (where <code>&lt;JOBID&gt;</code> is a job ID like <code>21249.0</code>).
-    The line before that should say what authentication method was used.
-    -   Authentication via a token will say <code>AuthMethod=SCITOKENS</code>.
-    -   Authentication via a proxy will say <code>AuthMethod=GSI</code>.</p>
-<p>See the <a href="https://htcondor.com/htcondor-ce/v5/troubleshooting/common-issues/#jobs-fail-to-submit-verify-scitoken-contents">upstream documentation</a>
-for more details.</p>
-<h2 id="collaboration-support">Collaboration support<a class="headerlink" href="#collaboration-support" title="Permanent link">&para;</a></h2>
-<div class="admonition info">
-<p class="admonition-title">Verify support with collaborations</p>
-<p>The tables of collaborations below are updated as frequently as possible.
-If a collaboration you support is listed as not supporting tokens or WebDav, please contact your collaboration
-directly to verify that this information is up-to-date.</p>
+<ol>
+<li>
+<p>Request a token using the client profile that you used with <code>oidc-gen</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="go">docker exec -it my-agent oidc-token --aud=&quot;&lt;SERVER AUDIENCE&gt;&quot; &lt;CLIENT PROFILE&gt;</span>
+</code></pre></div>
+
+<p>For tokens used against an HTCondor-CE, set <code>&lt;SERVER AUDIENCE&gt;</code> to <code>&lt;CE FQDN&gt;:&lt;CE PORT&gt;</code>.</p>
+</li>
+<li>
+<p>Copy the output of <code>oidc-token</code> into a file on the host where you need bearer token authentication, e.g. an HTCondor
+   or XRootD client.</p>
+</li>
+</ol>
+<h4 id="reloading-an-oidc-profile">Reloading an OIDC profile<a class="headerlink" href="#reloading-an-oidc-profile" title="Permanent link">&para;</a></h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Required after restarting the running container. You must have an existing <a href="#registering-an-oidc-profile">registered profile</a>.</p>
 </div>
-<h3 id="pilot-job-submission">Pilot job submission<a class="headerlink" href="#pilot-job-submission" title="Permanent link">&para;</a></h3>
-<p>These are the collaborations that support or partially support using tokens for pilot submission:</p>
+<ol>
+<li>
+<p>If your existing container is not already running, start it:</p>
+<div class="codehilite"><pre><span></span><code><span class="go">docker start my-agent</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Reload profile:</p>
+<div class="codehilite"><pre><span></span><code><span class="go">docker exec -it my-agent oidc-add &lt;CLIENT PROFILE&gt;</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Enter the password used to encrypt your <code>&lt;CLIENT PROFILE&gt;</code> created during profile registration.</p>
+</li>
+</ol>
+<h3 id="using-an-rpm-installation">Using an RPM installation<a class="headerlink" href="#using-an-rpm-installation" title="Permanent link">&para;</a></h3>
+<h4 id="registering-an-oidc-profile_1">Registering an OIDC profile<a class="headerlink" href="#registering-an-oidc-profile_1" title="Permanent link">&para;</a></h4>
+<ol>
+<li>
+<p>Start the agent and add the appropriate variables to your environment:</p>
+<div class="codehilite"><pre><span></span><code><span class="go">eval `oidc-agent`</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Generate a local client profile and follow the prompts:</p>
+<div class="codehilite"><pre><span></span><code><span class="go">oidc-gen -w device &lt;CLIENT PROFILE&gt;</span>
+</code></pre></div>
+
+<ol>
+<li>
+<p>Specify an OIDC provider such as CILogon or an IAM instance as the client issuer.
+   For example, if you are requesting tokens from the WLCG IAM instance:</p>
+<div class="codehilite"><pre><span></span><code>Issuer [https://iam-test.indigo-datacloud.eu/]: https://wlcg.cloud.cnaf.infn.it/
+</code></pre></div>
+
+</li>
+<li>
+<p>Request scopes for the capabilities that you need based on the type of tokens that your provider issues:</p>
 <table>
 <thead>
 <tr>
-<th align="left">Collaboration</th>
-<th>Supports Bearer Tokens</th>
+<th align="left"><strong>Capability</strong></th>
+<th><strong>SciTokens Scope</strong></th>
+<th><strong>WLCG Scope</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">ATLAS</td>
-<td>Undergoing testing</td>
+<td align="left">HTCondor <code>READ</code></td>
+<td><code>condor:READ</code></td>
+<td><code>compute.read</code></td>
 </tr>
 <tr>
-<td align="left">CLAS12</td>
-<td>Undergoing testing</td>
+<td align="left">HTCondor <code>WRITE</code></td>
+<td><code>condor:WRITE</code></td>
+<td><code>compute.modify compute.cancel compute.create</code></td>
 </tr>
 <tr>
-<td align="left">CMS</td>
-<td>Undergoing testing</td>
+<td align="left">XRootD read</td>
+<td><code>read:&lt;PATH&gt;</code></td>
+<td><code>storage.read:&lt;PATH&gt;</code></td>
 </tr>
 <tr>
-<td align="left">EIC</td>
-<td>Undergoing testing</td>
-</tr>
-<tr>
-<td align="left">GLOW</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td align="left">GlueX</td>
-<td>Undergoing testing</td>
-</tr>
-<tr>
-<td align="left">IceCube</td>
-<td>Undergoing testing</td>
-</tr>
-<tr>
-<td align="left">LIGO</td>
-<td>Undergoing testing</td>
-</tr>
-<tr>
-<td align="left">OSG</td>
-<td>Yes</td>
+<td align="left">XRootD write</td>
+<td><code>write:&lt;PATH&gt;</code></td>
+<td><code>storage.modify:&lt;PATH&gt;</code></td>
 </tr>
 </tbody>
 </table>
-<p>Until all of the collaborations you support are using tokens in production, your CE should remain on OSG 3.5,
-with the 3.5-upcoming repositories enabled.</p>
-<h3 id="webdavxrootd-file-transfer">WebDAV/XRootD File transfer<a class="headerlink" href="#webdavxrootd-file-transfer" title="Permanent link">&para;</a></h3>
-<p>The following collaborations support support file transfer using WebDAV or XRootD:</p>
-<table>
-<thead>
-<tr>
-<th align="left">Collaboration</th>
-<th>Supports WebDAV or XRootD</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">ATLAS</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td align="left">CMS</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td align="left">CLAS12</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td align="left">EIC</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td align="left">GLOW</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td align="left">GlueX</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td align="left">IceCube</td>
-<td>Undergoing testing*</td>
-</tr>
-<tr>
-<td align="left">LIGO</td>
-<td>Undergoing testing*</td>
-</tr>
-<tr>
-<td align="left">OSG</td>
-<td>Yes</td>
-</tr>
-</tbody>
-</table>
-<p>* Currently, collaborations testing WebDAV or XRootD support will continue to support other file transfer protocols so
-it should it should be safe to update your OSG WN clients to OSG 3.6.
-If you have any questions, please contact your collaboration directly.</p>
-<h2 id="help">Help<a class="headerlink" href="#help" title="Permanent link">&para;</a></h2>
-<p>To get assistance, please use the <a href="https://opensciencegrid.org/docs/common/help/">this page</a>.</p>
-<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<p>Replacing <code>&lt;PATH&gt;</code> with a path to the storage location that the bearer should be authorized to access.
+If you are requesting WLCG tokens, you will need to also add the <code>wlcg</code> and <code>offline_access</code> scopes.
+For example, to request HTCondor <code>READ</code> and <code>WRITE</code> access from an OIDC provider issuing WLCG tokens,
+specify the following when prompted for a space delimited list of scopes:</p>
+<div class="codehilite"><pre><span></span><code>wlcg offline_access compute.read compute.modify compute.cancel compute.create
+</code></pre></div>
+
+</li>
+<li>
+<p>When prompted, open the verification URL provided a browser, enter the code provided by <code>oidc-gen</code>,
+   and click "Submit".</p>
+</li>
+<li>
+<p>Follow the instructions in your browser to authorize your new <code>oidc-agent</code> client</p>
+</li>
+<li>
+<p>Back in your terminal, enter a password to encrypt your local client profile.
+   You'll need to remember this if you want to re-use this profile in subsequent sessions.</p>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="requesting-access-tokens_1">Requesting access tokens<a class="headerlink" href="#requesting-access-tokens_1" title="Permanent link">&para;</a></h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You must first <a href="#registering-an-oidc-profile_1">register a new profile</a>.</p>
+</div>
+<ol>
+<li>
+<p>Request a token using the client profile that you used with <code>oidc-gen</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="go">oidc-token --aud=&quot;&lt;SERVER AUDIENCE&gt;&quot; &lt;CLIENT PROFILE&gt;</span>
+</code></pre></div>
+
+<p>For tokens used against an HTCondor-CE, set <code>&lt;SERVER AUDIENCE&gt;</code> to<br />
+<code>&lt;CE FQDN&gt;:&lt;CE PORT&gt;</code>.</p>
+</li>
+<li>
+<p>Copy the output of <code>oidc-token</code> into a file on the host where you need bearer token authentication, e.g. an HTCondor
+   or XRootD client.</p>
+</li>
+</ol>
+<h4 id="reloading-an-oidc-profile_1">Reloading an OIDC profile<a class="headerlink" href="#reloading-an-oidc-profile_1" title="Permanent link">&para;</a></h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Required if you log out of the running machine. You must have an existing <a href="#registering-an-oidc-profile_1">registered profile</a>.</p>
+</div>
+<ol>
+<li>
+<p>If you do not already have a running 'oidc-agent', start one:</p>
+<div class="codehilite"><pre><span></span><code><span class="go">eval &#39;oidc-agent&#39;</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Reload profile:</p>
+<div class="codehilite"><pre><span></span><code><span class="go">oidc-add &lt;CLIENT PROFILE&gt;</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Enter the password used to encrypt your <code>&lt;CLIENT PROFILE&gt;</code> created during profile registration.</p>
+</li>
+</ol>
+<h2 id="generating-scitokens-for-testing">Generating SciTokens For Testing<a class="headerlink" href="#generating-scitokens-for-testing" title="Permanent link">&para;</a></h2>
+<p>If you are not a member of a collaboration with an OIDC Provider and would like to validate token functionality with
+your HTCondor-CE or XRootD service, you can use the <a href="https://demo.scitokens.org">SciTokens demo website</a>:</p>
+<ol>
+<li>
+<p>Open <a href="https://demo.scitokens.org">https://demo.scitokens.org</a> in a browser window</p>
+</li>
+<li>
+<p>Add a subject claim to the generated token by adding the following to the <code>PAYLOAD: DATA</code> window, between the curly
+    braces:</p>
+<div class="codehilite"><pre><span></span><code>&quot;sub&quot;: &quot;&lt;subject string&gt;&quot;,
+</code></pre></div>
+
+<p>Replacing <code>&lt;subject string&gt;</code> with a subject appropriate for the service that you are testing:</p>
 <ul>
-<li><a href="../using-tokens/#troubleshooting-tokens">Troubleshooting Tokens</a></li>
-<li><a href="https://opensciencegrid.org/technology/policy/collab-bearer-tokens/">OSG Technology - Collaborations and Bearer Tokens</a></li>
-<li><a href="https://jwt.io">JSON Web Tokens</a> - includes token decoder</li>
-<li><a href="https://scitokens.org">SciTokens</a><ul>
-<li><a href="https://scitokens.org/technical_docs/Claims">SciToken Claims and Scopes Language</a></li>
-<li><a href="https://demo.scitokens.org/">SciTokens Demo</a> - includes token generator, verifier, and links to libraries</li>
+<li>Any random string for an HTCondor-CE, which should be reflected in your token mapping</li>
+<li>If you are using <code>xrootd-multiuser</code>, a local Unix username</li>
 </ul>
 </li>
-<li><a href="https://github.com/WLCG-AuthZ-WG/common-jwt-profile/blob/master/profile.md">WLCG Common JWT Profiles</a></li>
+<li>
+<p>Add a scopes claim to the generated token by adding the following to the <code>PAYLOAD: DATA</code> window, between the curly
+    braces:</p>
+<div class="codehilite"><pre><span></span><code>&quot;scope&quot;: &quot;&lt;list of scopes&gt;&quot;,
+</code></pre></div>
+
+<p>Replacing <code>&lt;list of scopes&gt;</code> appropriate for the service and authorization that you are interested in testeing.</p>
+</li>
+<li>
+<p>Copy the entire contents of the <code>Encoded</code> window to a file where you will be running your client commands</p>
+</li>
+<li>
+<p>Add <code>https://demo.scitokens.org</code> (and subject if appropriate) to your service's configuration to authenticate your
+    new test token</p>
+<div class="admonition danger">
+<p class="admonition-title">Remove test mappings</p>
+<p>After completing testing, remove any test <code>demo.scitokens.org</code> mappings that you have added as anyone is capable
+of creating a demo SciToken.</p>
+</div>
+</li>
+</ol>
+<h2 id="troubleshooting-tokens">Troubleshooting Tokens<a class="headerlink" href="#troubleshooting-tokens" title="Permanent link">&para;</a></h2>
+<h3 id="validating-tokens">Validating tokens<a class="headerlink" href="#validating-tokens" title="Permanent link">&para;</a></h3>
+<p>A token must be a <em>one-line</em> string consisting of 3 base64-encoded parts separated by periods (<code>.</code>).
+You can use the tools in the <code>scitokens-cpp</code> RPM to validate a SciToken or WLCG token.</p>
+<ul>
+<li>
+<p>Run <code>scitokens-verify &lt;TOKEN&gt;</code> (where <code>&lt;TOKEN&gt;</code> is the text of the token) to validate the token using the issuer.</p>
+</li>
+<li>
+<p>Run <code>scitokens-list-access &lt;TOKEN&gt; &lt;ISSUER&gt; &lt;AUDIENCE&gt;</code> (where <code>&lt;TOKEN&gt;</code> is the text of the token,
+    <code>&lt;ISSUER&gt;</code> is the issuer to verify the token with,
+    and <code>&lt;AUDIENCE&gt;</code> is the server you are using the token to access).</p>
+</li>
 </ul>
-                
-                  
+<h3 id="examining-tokens">Examining tokens<a class="headerlink" href="#examining-tokens" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Online: paste the token into <a href="https://jwt.io">https://jwt.io</a>.</p>
+</li>
+<li>
+<p>Offline:</p>
+<ol>
+<li>Write the token to a file named <code>tok</code>.</li>
+<li>Run <code>IFS=. read header payload signature &lt; tok</code>.</li>
+<li>Run <code>echo $header | base64 -d</code> to examine the header.
+    Run <code>echo $payload | base64 -d</code> to examine the payload.
+    Note: the header or payload may be missing the final padding characters (up to 2 <code>=</code> characters);
+    adding them (e.g. <code>echo $payload== | base64 -d</code>) should make base64 stop complaining about "invalid input" or
+    "truncated input".</li>
+</ol>
+</li>
+</ul>
                 
               
               
