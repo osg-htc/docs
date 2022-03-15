@@ -23,9 +23,6 @@ This client tool is available either as [a container](#using-a-container) or as
 
 ### Using a Container
 
-[oidc-agent](https://indigo-dc.gitbook.io/oidc-agent/) is a process that runs in the background that can request access
-and refresh tokens from OpenID Connect token providers.
-
 #### Registering an OIDC profile
 
 1. Start an agent container in the background and name it `my-agent` to easily run subsequent commands against it:
