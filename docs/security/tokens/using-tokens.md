@@ -44,7 +44,7 @@ This client tool is available either as [a container](#using-a-container) or as
 
         | **Capability**   | **SciTokens Scope** | **WLCG Scope**                                 |
         |:-----------------|---------------------|------------------------------------------------|
-        | HTCondor `READ`  | `condor:/READ`      | `compute.read`                                 |
+        | HTCondor `READ`  | `condor:READ`      | `compute.read`                                 |
         | HTCondor `WRITE` | `condor:WRITE`      | `compute.modify compute.cancel compute.create` |
         | XRootD read      | `read:<PATH>`       | `storage.read:<PATH>`                          |
         | XRootD write     | `write:<PATH>`      | `storage.modify:<PATH>`                        |
@@ -97,7 +97,7 @@ This client tool is available either as [a container](#using-a-container) or as
         docker exec -it my-agent oidc-add <CLIENT PROFILE>
 
 
-1. Enter password used to encrypt your `<CLIENT PROFILE>` created during profile registration.
+1. Enter the password used to encrypt your `<CLIENT PROFILE>` created during profile registration.
 
 
 ### Using an RPM installation
@@ -123,7 +123,7 @@ This client tool is available either as [a container](#using-a-container) or as
 
         | **Capability**   | **SciTokens Scope** | **WLCG Scope**                                 |
         |:-----------------|---------------------|------------------------------------------------|
-        | HTCondor `READ`  | `condor:/READ`      | `compute.read`                                 |
+        | HTCondor `READ`  | `condor:READ`      | `compute.read`                                 |
         | HTCondor `WRITE` | `condor:WRITE`      | `compute.modify compute.cancel compute.create` |
         | XRootD read      | `read:<PATH>`       | `storage.read:<PATH>`                          |
         | XRootD write     | `write:<PATH>`      | `storage.modify:<PATH>`                        |
@@ -176,7 +176,7 @@ This client tool is available either as [a container](#using-a-container) or as
         oidc-add <CLIENT PROFILE>
 
 
-1. Enter password used to encrypt your `<CLIENT PROFILE>` created during profile registration.
+1. Enter the password used to encrypt your `<CLIENT PROFILE>` created during profile registration.
 
 Generating SciTokens For Testing
 --------------------------------
