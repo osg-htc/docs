@@ -52,10 +52,9 @@ This client tool is available either as [a container](#using-a-container) or as
         Replacing `<PATH>` with a path to the storage location that the bearer should be authorized to access.
         If you are requesting WLCG tokens, you will need to also add the `wlcg` and `offline_access` scopes.
         For example, to request HTCondor `READ` and `WRITE` access from an OIDC provider issuing WLCG tokens,
-        specify the following scopes:
+        specify the following when prompted for a space delimited list of scopes:
 
-            This issuer supports the following scopes: openid profile email address phone offline_access wlcg iam wlcg.groups
-            Space delimited list of scopes or 'max' [openid profile offline_access]: wlcg offline_access compute.read compute.modify compute.cancel compute.create
+            wlcg offline_access compute.read compute.modify compute.cancel compute.create
     
     1. When prompted, open the verification URL provided a browser, enter the code provided by `oidc-gen`,
        and click "Submit".
@@ -131,10 +130,9 @@ This client tool is available either as [a container](#using-a-container) or as
         Replacing `<PATH>` with a path to the storage location that the bearer should be authorized to access.
         If you are requesting WLCG tokens, you will need to also add the `wlcg` and `offline_access` scopes.
         For example, to request HTCondor `READ` and `WRITE` access from an OIDC provider issuing WLCG tokens,
-        specify the following scopes:
+        specify the following when prompted for a space delimited list of scopes:
 
-            This issuer supports the following scopes: openid profile email address phone offline_access wlcg iam wlcg.groups
-            Space delimited list of scopes or 'max' [openid profile offline_access]: wlcg offline_access compute.read compute.modify compute.cancel compute.create
+            wlcg offline_access compute.read compute.modify compute.cancel compute.create
     
     1. When prompted, open the verification URL provided a browser, enter the code provided by `oidc-gen`,
        and click "Submit".
