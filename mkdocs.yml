@@ -97,6 +97,9 @@ nav:
   - 'OSG Yum Repos': 'common/yum.md'
   - 'Yum Basics': 'release/yum-basics.md'
   - 'RPM Signing': 'release/signing.md'
+- Tokens:
+  - Overview: 'security/tokens/overview.md'
+  - Using Tokens: 'security/tokens/using-tokens.md'
 - CA Certificates:
   - 'Overview': 'common/ca.md'
   - 'Certificate Management Reference': 'security/certificate-management.md'
