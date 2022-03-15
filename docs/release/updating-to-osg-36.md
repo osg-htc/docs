@@ -4,7 +4,7 @@
     collaboration(s) support token-based authentication and/or WebDAV/XRootD-based data transfer before considering an
     upgrade to OSG 3.6.
     If your collaboration(s) don't support these new protocols, install or remain on the
-    [OSG 3.5 release series](notes.md).
+    [OSG 3.5 release series, with the osg-upcoming repositories enabled](notes.md).
 
 Updating to OSG 3.6
 ===================
