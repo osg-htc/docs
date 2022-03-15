@@ -204,7 +204,7 @@ your HTCondor-CE or XRootD service, you can use the [SciTokens demo website](htt
 
     Replacing `<list of scopes>` appropriate for the service and authorization that you are interested in testeing.
 
-1.  Copy the entire contents of the `Encoded` window to a file where you will be running our client commands
+1.  Copy the entire contents of the `Encoded` window to a file where you will be running your client commands
 
 1.  Add `https://demo.scitokens.org` (and subject if appropriate) to your service's configuration to authenticate your
     new test token
