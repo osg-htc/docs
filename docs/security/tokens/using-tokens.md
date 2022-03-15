@@ -15,7 +15,7 @@ If you are a member of a collaboration with an OIDC provider (such as [CILogon](
 [Indigo IAM](https://indigo-iam.github.io/v/v1.7.2/docs/)), you can use the
 [oidc-agent](https://indigo-dc.gitbook.io/oidc-agent/) client to request tokens.
 This client tool is available either as [a container](#using-a-container) or as
-[an RPM installation](#using an RPM installation).
+[an RPM installation](#using-an-rpm-installation).
 
 !!! tip "Alternative tokens for testing"
     If you are not a member of a collaboration with access to an OIDC provider, you can generate test SciTokens using
