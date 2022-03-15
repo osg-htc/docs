@@ -28,7 +28,7 @@ This client tool is available either as [a container](#using-a-container) or as
 1. Start an agent container in the background and name it `my-agent` to easily run subsequent commands against it:
 
         :::console
-        docker run -d --name my-agent opensciencegrid/oidc-agent:release
+        docker run -d --name my-agent opensciencegrid/oidc-agent:3.6-release
 
 1. Generate a local client profile and follow the prompts:
 
