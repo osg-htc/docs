@@ -35,30 +35,34 @@ This client tool is available either as [a container](#using-a-container) or as
         :::console
         docker exec -it my-agent oidc-gen -w device <CLIENT PROFILE>
 
-    1. Specify an OAUTH2 provider such as CILogon or any IAM instance as the client issuer:
+    1. Specify an OIDC provider such as CILogon or an IAM instance as the client issuer.
+       For example, if you are requesting tokens from the WLCG IAM instance:
 
             Issuer [https://iam-test.indigo-datacloud.eu/]: https://wlcg.cloud.cnaf.infn.it/
 
-    1. Request `wlcg`, `offline_access`, and other scopes for the capabilities that you need:
+    1. Request scopes for the capabilities that you need based on the type of tokens that your provider issues:
 
-        | **Capability**   | **Scope**                     |
-        |------------------|-------------------------------|
-        | HTCondor `READ`  | `compute.read`                |
-        | HTCondor `WRITE` | `compute.modify compute.cancel compute.create` |
-        | XRootD read      | `read:/`                      |
-        | XRootD write     | `write:/`                     |
+        | **Capability**   | **SciTokens Scope** | **WLCG Scope**                                 |
+        |:-----------------|---------------------|------------------------------------------------|
+        | HTCondor `READ`  | `condor:/READ`      | `compute.read`                                 |
+        | HTCondor `WRITE` | `condor:WRITE`      | `compute.modify compute.cancel compute.create` |
+        | XRootD read      | `read:<PATH>`       | `storage.read:<PATH>`                          |
+        | XRootD write     | `write:<PATH>`      | `storage.modify:<PATH>`                        |
 
-        For example, to request HTCondor `READ` and `WRITE` access, specify the following scopes:
+        Replacing `<PATH>` with a path to the storage location that the bearer should be authorized to access.
+        If you are requesting WLCG tokens, you will need to also add the `wlcg` and `offline_access` scopes.
+        For example, to request HTCondor `READ` and `WRITE` access from an OIDC provider issuing WLCG tokens,
+        specify the following scopes:
 
             This issuer supports the following scopes: openid profile email address phone offline_access wlcg iam wlcg.groups
             Space delimited list of scopes or 'max' [openid profile offline_access]: wlcg offline_access compute.read compute.modify compute.cancel compute.create
     
-    1. When prompted, open <https://wlcg.cloud.cnaf.infn.it/device> in a browser, enter the code provided by `oidc-gen`,
+    1. When prompted, open the verification URL provided a browser, enter the code provided by `oidc-gen`,
        and click "Submit".
 
-    1. On the next page, verify the scopes and client profile name, and click "Authorize".
+    1. Follow the instructions in your browser to authorize your new `oidc-agent` client
 
-    1. Enter a password to encrypt your local client profile.
+    1. Back in your terminal, enter a password to encrypt your local client profile.
        You'll need to remember this if you want to re-use this profile in subsequent sessions.
 
 #### Requesting access tokens
@@ -72,11 +76,10 @@ This client tool is available either as [a container](#using-a-container) or as
         docker exec -it my-agent oidc-token --aud="<SERVER AUDIENCE>" <CLIENT PROFILE>
 
 
-    For tokens used against an HTCondor-CE, set `<SERVER AUDIENCE>` to  
-    `<CE FQDN>:<CE PORT>`.
+    For tokens used against an HTCondor-CE, set `<SERVER AUDIENCE>` to `<CE FQDN>:<CE PORT>`.
 
-1. Copy the output of `oidc-token` into a file on the host where you need SciToken authentication, e.g. an HTCondor or
-   XRootD client.
+1. Copy the output of `oidc-token` into a file on the host where you need bearer token authentication, e.g. an HTCondor
+   or XRootD client.
 
 #### Reloading an OIDC profile
 
@@ -111,29 +114,34 @@ This client tool is available either as [a container](#using-a-container) or as
         :::console
         oidc-gen -w device <CLIENT PROFILE>
 
-    1. Specify an OAUTH2 provider such as CILogon or any IAM instance as the client issuer:
+    1. Specify an OIDC provider such as CILogon or an IAM instance as the client issuer.
+       For example, if you are requesting tokens from the WLCG IAM instance:
 
             Issuer [https://iam-test.indigo-datacloud.eu/]: https://wlcg.cloud.cnaf.infn.it/
 
-    1. Request `wlcg`, `offline_access`, and other scopes for the capabilities that you need:
+    1. Request scopes for the capabilities that you need based on the type of tokens that your provider issues:
 
-        | **Capability**   | **Scope**                     |
-        |------------------|-------------------------------|
-        | HTCondor `READ`  | `compute.read`                |
-        | HTCondor `WRITE` | `compute.modify compute.cancel compute.create` |
-        | XRootD read      | `read:/`                      |
-        | XRootD write     | `write:/`                     |
-         For example, to request HTCondor `READ` and `WRITE` access, specify the following scopes:
+        | **Capability**   | **SciTokens Scope** | **WLCG Scope**                                 |
+        |:-----------------|---------------------|------------------------------------------------|
+        | HTCondor `READ`  | `condor:/READ`      | `compute.read`                                 |
+        | HTCondor `WRITE` | `condor:WRITE`      | `compute.modify compute.cancel compute.create` |
+        | XRootD read      | `read:<PATH>`       | `storage.read:<PATH>`                          |
+        | XRootD write     | `write:<PATH>`      | `storage.modify:<PATH>`                        |
+
+        Replacing `<PATH>` with a path to the storage location that the bearer should be authorized to access.
+        If you are requesting WLCG tokens, you will need to also add the `wlcg` and `offline_access` scopes.
+        For example, to request HTCondor `READ` and `WRITE` access from an OIDC provider issuing WLCG tokens,
+        specify the following scopes:
 
             This issuer supports the following scopes: openid profile email address phone offline_access wlcg iam wlcg.groups
             Space delimited list of scopes or 'max' [openid profile offline_access]: wlcg offline_access compute.read compute.modify compute.cancel compute.create
     
-    1. When prompted, open <https://wlcg.cloud.cnaf.infn.it/device> in a browser, enter the code provided by `oidc-gen`,
+    1. When prompted, open the verification URL provided a browser, enter the code provided by `oidc-gen`,
        and click "Submit".
 
-    1. On the next page, verify the scopes and client profile name, and click "Authorize".
+    1. Follow the instructions in your browser to authorize your new `oidc-agent` client
 
-    1. Enter a password to encrypt your local client profile.
+    1. Back in your terminal, enter a password to encrypt your local client profile.
        You'll need to remember this if you want to re-use this profile in subsequent sessions.
 
 #### Requesting access tokens
@@ -149,8 +157,8 @@ This client tool is available either as [a container](#using-a-container) or as
     For tokens used against an HTCondor-CE, set `<SERVER AUDIENCE>` to  
     `<CE FQDN>:<CE PORT>`.
 
-1. Copy the output of `oidc-token` into a file on the host where you need SciToken authentication, e.g. an HTCondor or
-   XRootD client.
+1. Copy the output of `oidc-token` into a file on the host where you need bearer token authentication, e.g. an HTCondor
+   or XRootD client.
 
 #### Reloading an OIDC profile
 
