@@ -36,14 +36,14 @@ SciTokens and WLCG Tokens are similar standards and have some common claims:
 The issuer identifies the organization that issued the token.
 An issuer looks like an HTTPS URL;
 this URL must be valid and publicly accessible as they are used by site services to validate the token.
-Token issuers will be described below.
+Token issuers will be [described below](#issuer).
 
 **Subject ("sub")**
 
 The subject identifies an entity (which could be a human or a robot) that owns the token.
 Unlike the subject of an X.509 certificate, a token subject does not need to be globally unique,
 only unique to the issuer.
-Subjects will be elaborated on below.
+Subjects will be [elaborated on below](#subject).
 
 **Issued-at ("iat"), not-before ("nbf"), expiration ("exp")**
 
@@ -62,8 +62,9 @@ used on any server.
 
 The scope limits the actions that can be made using the token.
 The format of the scope claim differs between SciTokens and WLCG Tokens;
-scopes in use by OSG services will be listed below.
-    
+scopes in use by OSG services will be [listed below](#scopes).
+WLCG Tokens may have a `wlcg.group` instead of a scope, [as described below](#wlcg-groups).
+
 
 ### Issuer ###
 
@@ -78,6 +79,9 @@ This server must have the public key that can be used to validate the token in a
 as described by the [OpenID Connect Discovery standard](https://openid.net/specs/openid-connect-discovery-1_0.html).
 If the issuer is down, or the the public key cannot be downloaded, the token cannot be verified
 and will be rejected.
+Note that most clients will cache the public key.
+In order to ease the token transition, the current cache lifetime is 4 days,
+but at some point this will be lowered to a few hours.
 
 A collaboration may have more than one token issuer,
 but a single token issuer should never serve more than one collaboration.
@@ -98,7 +102,7 @@ that can be used for mapping, banning, accounting, monitoring, auditing, or trac
     Tracing a token to a user or service may require contacting the issuer.
 
 
-### Scopes and WLCG Groups ###
+### Scopes ###
 
 The `scope` claim is a space-separated list of authorizations that should be granted to the bearer.
 Scopes utilized by OSG services include the following:
@@ -114,8 +118,11 @@ Replacing `<PATH>` with a path to the storage location that the bearer should be
 
 A SciToken must have a non-empty scope, or it cannot be used to do anything.
 
+
+### WLCG Groups ###
+
 A WLCG Token may have a `wlcg.groups` claim instead of a scope.
-This is a comma and space separated list of collaboration groups.
+The `wlcg.groups` claim is a comma and space separated list of collaboration groups.
 The format of these groups are similar to VOMS FQANs: `/<collaboration>[/<group>][/Role=<role>]`,
 replacing `<collaboration>`, `<group>`, and `<role>` with the collaboration, group, and role, respectively, where the
 group and role are optional.
