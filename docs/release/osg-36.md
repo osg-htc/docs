@@ -29,11 +29,6 @@ The following issues are known to currently affect packages distributed in OSG 3
     To fix this, apply the change in [this patch](https://github.com/htcondor/htcondor-ce/pull/530/files) to
     `/usr/share/condor-ce/config.d/01-ce-router-defaults.conf`.
     The next release of HTCondor-CE will contain this fix and will not require any additional action post-update.
--   If you are using HTCondor from the 3.6 Upcoming repository,
-    C-style comments, e.g. `/* comment */`, in `JOB_ROUTER_ENTRIES` will prevent the JobRouter from routing jobs
-    ([HTCONDOR-864](https://opensciencegrid.atlassian.net/browse/HTCONDOR-864)).
-    For the time being, remove any comments if you are still using the
-    [deprecated syntax](https://htcondor.com/htcondor-ce/v5/configuration/job-router-overview#deprecated-syntax).
 
 ### XRootD Multiuser ###
 
@@ -47,6 +42,13 @@ The following issues are known to currently affect packages distributed in OSG 3
 Latest News
 -----------
 
+### **March 15, 2022:** High Priority Release
+
+-   HTCondor 9.0.10 and 9.6.0 Security Release. This release contains fixes for important security issues. More details on the security issues are in the vulnerability reports:
+    -   [HTCONDOR-2022-0001](https://htcondor.org/security/vulnerabilities/HTCONDOR-2022-0001)
+    -   [HTCONDOR-2022-0002](https://htcondor.org/security/vulnerabilities/HTCONDOR-2022-0002)
+    -   [HTCONDOR-2022-0003](https://htcondor.org/security/vulnerabilities/HTCONDOR-2022-0003)
+
 ### **March 3, 2022:** XRootD 5.4.1 and GlideinWMS 3.9.4
 
 -   [XRootD 5.4.1](https://github.com/xrootd/xrootd/blob/v5.4.1/docs/ReleaseNotes.txt): Bug fix release
@@ -58,7 +60,7 @@ Latest News
     -   Frontend and Factory check the expiration of SciTokens, other JWT tokens
     -   Bug Fixes:
         -   IDTOKEN issuer changed from collector host to trust domain
-        -   x509 proxy is now renewed also when using also tokens
+        -   X.509 proxy is now renewed also when using also tokens
     -   shared port is now the default in the User (VO) Collector HTCondor
 
 ### **February 17, 2022:** VO Package v120
