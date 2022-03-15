@@ -172,6 +172,37 @@ and refresh tokens from OpenID Connect token providers.
 
 1. Enter password used to encrypt your `<CLIENT PROFILE>` created during profile registration.
 
+Generating SciTokens For Testing
+--------------------------------
+
+If you are not a member of a collaboration with an OIDC Provider and would like to validate token functionality with
+your HTCondor-CE or XRootD service, you can use the [SciTokens demo website](https://demo.scitokens.org):
+
+1.  Open <https://demo.scitokens.org> in a browser window
+
+1.  Add a subject claim to the generated token by adding the following to the `PAYLOAD: DATA` window, between the curly
+    braces:
+
+        "sub": "<subject string>",
+
+    Replacing `<subject string>` with a subject appropriate for the service that you are testing:
+
+    -   Any random string for an HTCondor-CE, which should be reflected in your token mapping
+    -   If you are using `xrootd-multiuser`, a local Unix username
+
+1.  Add a scopes claim to the generated token by adding the following to the `PAYLOAD: DATA` window, between the curly
+    braces:
+
+
+        "scope": "<list of scopes>",
+
+    Replacing `<list of scopes>` appropriate for the service and authorization that you are interested in testeing.
+
+1.  Copy the entire contents of the `Encoded` window to a file where you will be running our client commands
+
+1.  Add `https://demo.scitokens.org` (and subject if appropriate) to your service's configuration to authenticate your
+    new test token
+
 ## Troubleshooting Tokens
 
 A token must be a _one-line_ string consisting of 3 base64-encoded parts separated by periods (`.`).
