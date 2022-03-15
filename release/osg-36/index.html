@@ -1520,6 +1520,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#march-15-2022-high-priority-release" class="md-nav__link">
+    March 15, 2022: High Priority Release
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#march-3-2022-xrootd-541-and-glideinwms-394" class="md-nav__link">
     March 3, 2022: XRootD 5.4.1 and GlideinWMS 3.9.4
   </a>
@@ -2014,6 +2021,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#march-15-2022-high-priority-release" class="md-nav__link">
+    March 15, 2022: High Priority Release
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#march-3-2022-xrootd-541-and-glideinwms-394" class="md-nav__link">
     March 3, 2022: XRootD 5.4.1 and GlideinWMS 3.9.4
   </a>
@@ -2290,11 +2304,6 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
     To fix this, apply the change in <a href="https://github.com/htcondor/htcondor-ce/pull/530/files">this patch</a> to
     <code>/usr/share/condor-ce/config.d/01-ce-router-defaults.conf</code>.
     The next release of HTCondor-CE will contain this fix and will not require any additional action post-update.</li>
-<li>If you are using HTCondor from the 3.6 Upcoming repository,
-    C-style comments, e.g. <code>/* comment */</code>, in <code>JOB_ROUTER_ENTRIES</code> will prevent the JobRouter from routing jobs
-    (<a href="https://opensciencegrid.atlassian.net/browse/HTCONDOR-864">HTCONDOR-864</a>).
-    For the time being, remove any comments if you are still using the
-    <a href="https://htcondor.com/htcondor-ce/v5/configuration/job-router-overview#deprecated-syntax">deprecated syntax</a>.</li>
 </ul>
 <h3 id="xrootd-multiuser">XRootD Multiuser<a class="headerlink" href="#xrootd-multiuser" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2306,6 +2315,15 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
     See <a href="https://github.com/xrootd/xrootd/issues/1538">XRootD GitHub issue #1538</a> for more details.</li>
 </ul>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="march-15-2022-high-priority-release"><strong>March 15, 2022:</strong> High Priority Release<a class="headerlink" href="#march-15-2022-high-priority-release" title="Permanent link">&para;</a></h3>
+<ul>
+<li>HTCondor 9.0.10 and 9.6.0 Security Release. This release contains fixes for important security issues. More details on the security issues are in the vulnerability reports:<ul>
+<li><a href="https://htcondor.org/security/vulnerabilities/HTCONDOR-2022-0001">HTCONDOR-2022-0001</a></li>
+<li><a href="https://htcondor.org/security/vulnerabilities/HTCONDOR-2022-0002">HTCONDOR-2022-0002</a></li>
+<li><a href="https://htcondor.org/security/vulnerabilities/HTCONDOR-2022-0003">HTCONDOR-2022-0003</a></li>
+</ul>
+</li>
+</ul>
 <h3 id="march-3-2022-xrootd-541-and-glideinwms-394"><strong>March 3, 2022:</strong> XRootD 5.4.1 and GlideinWMS 3.9.4<a class="headerlink" href="#march-3-2022-xrootd-541-and-glideinwms-394" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://github.com/xrootd/xrootd/blob/v5.4.1/docs/ReleaseNotes.txt">XRootD 5.4.1</a>: Bug fix release</li>
@@ -2317,7 +2335,7 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
 <li>Frontend and Factory check the expiration of SciTokens, other JWT tokens</li>
 <li>Bug Fixes:<ul>
 <li>IDTOKEN issuer changed from collector host to trust domain</li>
-<li>x509 proxy is now renewed also when using also tokens</li>
+<li>X.509 proxy is now renewed also when using also tokens</li>
 </ul>
 </li>
 <li>shared port is now the default in the User (VO) Collector HTCondor</li>
