@@ -1673,6 +1673,47 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#token-components" class="md-nav__link">
+    Token Components
+  </a>
+  
+    <nav class="md-nav" aria-label="Token Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issuer" class="md-nav__link">
+    Issuer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subject" class="md-nav__link">
+    Subject
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scopes" class="md-nav__link">
+    Scopes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wlcg-groups" class="md-nav__link">
+    WLCG Groups
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#validating-tokens-in-pilot-jobs" class="md-nav__link">
     Validating Tokens in Pilot Jobs
   </a>
@@ -1706,6 +1747,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#help" class="md-nav__link">
+    Help
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references-and-links" class="md-nav__link">
+    References and Links
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1724,6 +1779,129 @@
                 
                 
                 <h1 id="bearer-token-overview">Bearer Token Overview<a class="headerlink" href="#bearer-token-overview" title="Permanent link">&para;</a></h1>
+<p>Token-based Authentication and Authorization Infrastructure (AAI) is a security method
+that is intended as the replacement for X.509 for accessing compute and storage resources.
+This document will describe "bearer tokens," which are one of the components of Token AAI;
+bearer tokens are the type of token that server software such as HTCondor and XRootD will primarily interact with.</p>
+<p>A bearer token (sometimes called an "access token") is a short-lived credential,
+performing a similar role as a grid proxy did in X.509.
+X.509 proxies established identity (the DN in your subject) and group membership (VOMS FQANs).
+Servers made decisions about access based on those properties.
+Tokens also have 'scope' which can restrict the actions that can be done with the token.
+For example, a token used for storage access can restrict the files that can be read to a particular directory tree.
+Instead of using a single proxy, a job may have multiple tokens.
+For example the job could have one token granting it the ability to be run;
+it could have a token for read access to an input dataset, and a token for write access to a results directory.</p>
+<h2 id="token-components">Token Components<a class="headerlink" href="#token-components" title="Permanent link">&para;</a></h2>
+<p>Bearer tokens are credential strings in the <a href="https://jwt.io">JSON Web Token (JWT)</a> format.
+A JWT consists of a JSON header, a JSON payload, and a signature that can be verified.
+The payload contains a number of fields, called "claims", that describe the token and what it can access.</p>
+<p>There are two JWT-based token standards that can be used with OSG software: <a href="https://scitokens.org">SciTokens</a>
+and <a href="https://github.com/WLCG-AuthZ-WG/common-jwt-profile/blob/master/profile.md">WLCG Tokens</a>.
+These standards describe the claims that are used in the payload of the JWT.</p>
+<p>SciTokens and WLCG Tokens are similar standards and have some common claims:</p>
+<p><strong>Issuer ("iss")</strong></p>
+<p>The issuer identifies the organization that issued the token.
+An issuer looks like an HTTPS URL;
+this URL must be valid and publicly accessible as they are used by site services to validate the token.
+Token issuers will be <a href="#issuer">described below</a>.</p>
+<p><strong>Subject ("sub")</strong></p>
+<p>The subject identifies an entity (which could be a human or a robot) that owns the token.
+Unlike the subject of an X.509 certificate, a token subject does not need to be globally unique,
+only unique to the issuer.
+Subjects will be <a href="#subject">elaborated on below</a>.</p>
+<p><strong>Issued-at ("iat"), not-before ("nbf"), expiration ("exp")</strong></p>
+<p>These claims are Unix timestamps that specify when the token was issued, and its lifespan.</p>
+<p><strong>Audience ("aud")</strong></p>
+<p>The audience is a server (or a JSON list of servers) that the token may be used on;
+it is typically a hostname, host:port, or URI.
+For example a token used for submitting a job to a CE would have
+<code>&lt;CE FQDN&gt;:&lt;CE PORT&gt;</code> in the <code>aud</code> claim.
+The special values <code>ANY</code> (SciTokens) or <code>https://wlcg.cern.ch/jwt/v1/any</code> (WLCG Tokens) allow the token to be
+used on any server.</p>
+<p><strong>Scope ("scope")</strong></p>
+<p>The scope limits the actions that can be made using the token.
+The format of the scope claim differs between SciTokens and WLCG Tokens;
+scopes in use by OSG services will be <a href="#scopes">listed below</a>.
+WLCG Tokens may have a <code>wlcg.group</code> instead of a scope, <a href="#wlcg-groups">as described below</a>.</p>
+<h3 id="issuer">Issuer<a class="headerlink" href="#issuer" title="Permanent link">&para;</a></h3>
+<p>To generate bearer tokens, a collaboration must adminster at least one "token issuer" to issue tokens to their users.
+In addition to generating and signing tokens, token issuers provide a public endpoint that can be used to validate an
+issued token,
+e.g. an OSG Compute Entrypoint (CE) will contact the token issuer to authorize a bearer token used for pilot job
+submission.</p>
+<p>The issuer is listed in the <code>iss</code> claim; this should be an HTTPS URL of a web server.
+This server must have the public key that can be used to validate the token in a well-known location,
+as described by the <a href="https://openid.net/specs/openid-connect-discovery-1_0.html">OpenID Connect Discovery standard</a>.
+If the issuer is down, or the the public key cannot be downloaded, the token cannot be verified
+and will be rejected.
+Note that most clients will cache the public key.
+In order to ease the token transition, the current cache lifetime is 4 days,
+but at some point this will be lowered to a few hours.</p>
+<p>A collaboration may have more than one token issuer,
+but a single token issuer should never serve more than one collaboration.
+The issuer claim should be able to uniquely identify the collaboration that identifies the token.</p>
+<h3 id="subject">Subject<a class="headerlink" href="#subject" title="Permanent link">&para;</a></h3>
+<p>The subject is listed in the <code>sub</code> claim and should be unique, stable identifier that corresponds to a user (human)
+or a service (robot or pilot job submission).
+A subject does not need to be globally unique but it must be unique to the issuer.
+The subject, when combined with the issuer, will give a globally unique identity
+that can be used for mapping, banning, accounting, monitoring, auditing, or tracing.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Due to privacy concerns, the subject may be a randomly generated string, hash, UUID, etc.,
+that does not contain any personally identifying information.
+Tracing a token to a user or service may require contacting the issuer.</p>
+</div>
+<h3 id="scopes">Scopes<a class="headerlink" href="#scopes" title="Permanent link">&para;</a></h3>
+<p>The <code>scope</code> claim is a space-separated list of authorizations that should be granted to the bearer.
+Scopes utilized by OSG services include the following:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Capability</strong></th>
+<th><strong>SciTokens scope</strong></th>
+<th><strong>WLCG scope</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HTCondor <code>READ</code></td>
+<td><code>condor:/READ</code></td>
+<td><code>compute.read</code></td>
+</tr>
+<tr>
+<td>HTCondor <code>WRITE</code></td>
+<td><code>condor:/WRITE</code></td>
+<td><code>compute.modify compute.cancel compute.create</code></td>
+</tr>
+<tr>
+<td>XRootD read</td>
+<td><code>read:&lt;PATH&gt;</code></td>
+<td><code>storage.read:&lt;PATH&gt;</code></td>
+</tr>
+<tr>
+<td>XRootD write</td>
+<td><code>write:&lt;PATH&gt;</code></td>
+<td><code>storage.modify:&lt;PATH&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p>Replacing <code>&lt;PATH&gt;</code> with a path to the storage location that the bearer should be authorized to access.</p>
+<p>A SciToken must have a non-empty scope, or it cannot be used to do anything.</p>
+<h3 id="wlcg-groups">WLCG Groups<a class="headerlink" href="#wlcg-groups" title="Permanent link">&para;</a></h3>
+<p>A WLCG Token may have a <code>wlcg.groups</code> claim instead of a scope.
+The <code>wlcg.groups</code> claim is a comma and space separated list of collaboration groups.
+The format of these groups are similar to VOMS FQANs: <code>/&lt;collaboration&gt;[/&lt;group&gt;][/Role=&lt;role&gt;]</code>,
+replacing <code>&lt;collaboration&gt;</code>, <code>&lt;group&gt;</code>, and <code>&lt;role&gt;</code> with the collaboration, group, and role, respectively, where the
+group and role are optional.
+For example, the following groups and roles have been used by the ATLAS and CMS collaborations:</p>
+<div class="codehilite"><pre><span></span><code>/atlas/
+/atlas/usatlas
+/cms/Role=pilot
+/cms/local/Role=pilot
+</code></pre></div>
+
 <h2 id="validating-tokens-in-pilot-jobs">Validating Tokens in Pilot Jobs<a class="headerlink" href="#validating-tokens-in-pilot-jobs" title="Permanent link">&para;</a></h2>
 <p>If an incoming (pre-routed) pilot on a CE has a token, it will have the following classad attributes:</p>
 <table>
@@ -1748,7 +1926,11 @@
 </tr>
 <tr>
 <td>AuthTokenSubject</td>
-<td>The 'sub' field of the token</td>
+<td>The <code>sub</code> claim of the token</td>
+</tr>
+<tr>
+<td>AuthTokenGroups</td>
+<td>The <code>wlcg.groups</code>, if any, claim of the token</td>
 </tr>
 </tbody>
 </table>
@@ -1871,6 +2053,20 @@ with the 3.5-upcoming repositories enabled.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="help">Help<a class="headerlink" href="#help" title="Permanent link">&para;</a></h2>
+<p>To get assistance, please use the <a href="https://opensciencegrid.org/docs/common/help/">this page</a>.</p>
+<h2 id="references-and-links">References and Links<a class="headerlink" href="#references-and-links" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="using-tokens.md#troubleshooting-tokens">Troubleshooting Tokens</a></li>
+<li><a href="https://opensciencegrid.org/technology/policy/collab-bearer-tokens/">OSG Technology - Collaborations and Bearer Tokens</a></li>
+<li><a href="https://jwt.io">JSON Web Tokens</a> - includes token decoder</li>
+<li><a href="https://scitokens.org">SciTokens</a><ul>
+<li><a href="https://scitokens.org/technical_docs/Claims">SciToken Claims and Scopes Language</a></li>
+<li><a href="https://demo.scitokens.org/">SciTokens Demo</a> - includes token generator, verifier, and links to libraries</li>
+</ul>
+</li>
+<li><a href="https://github.com/WLCG-AuthZ-WG/common-jwt-profile/blob/master/profile.md">WLCG Common JWT Profiles</a></li>
+</ul>
                 
                   
                 
