@@ -1,5 +1,5 @@
-How to Request Tokens
-=====================
+Using Bearer Tokens
+===================
 
 As part of the [GridFTP and GSI migration](https://opensciencegrid.org/technology/policy/gridftp-gsi-migration/),
 the OSG will be transitioning authentication away from X.509 certificates to the use of bearer tokens such as
