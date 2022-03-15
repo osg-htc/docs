@@ -172,7 +172,26 @@ and refresh tokens from OpenID Connect token providers.
 
 1. Enter password used to encrypt your `<CLIENT PROFILE>` created during profile registration.
 
-##Troubleshooting Tokens
+## Troubleshooting Tokens
 
-You can inspect the payload  by copy-pasting the token into the "Encoded" text box here: <http://jwt.io/>.
-Mouse over the fields and values for details.
+A token must be a _one-line_ string consisting of 3 base64-encoded parts separated by periods (`.`).
+You can use the tools in the `scitokens-cpp` RPM to validate a SciToken or WLCG token.
+
+-   Run `scitokens-verify <TOKEN>` (where `<TOKEN>` is the text of the token) to validate the token using the issuer.
+
+-   Run `scitokens-list-access <TOKEN> <ISSUER> <AUDIENCE>` (where `<TOKEN>` is the text of the token,
+    `<ISSUER>` is the issuer to verify the token with,
+    and `<AUDIENCE>` is the server you are using the token to access).
+
+Examining a token:
+
+-   Online: paste the token into <https://jwt.io>.
+
+-   Offline:
+    1.  Write the token to a file named `tok`.
+    2.  Run `IFS=. read header payload signature < tok`.
+    3.  Run `echo $header | base64 -d` to examine the header.
+        Run `echo $payload | base64 -d` to examine the payload.
+        Note: the header or payload may be missing the final padding characters (up to 2 `=` characters);
+        adding them (e.g. `echo $payload== | base64 -d`) should make base64 stop complaining about "invalid input" or
+        "truncated input".
