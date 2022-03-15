@@ -1,10 +1,12 @@
 How to Request Tokens
 =====================
 
-As part of the [GridFTP and GSI migration](../policy/gridftp-gsi-migration.md), the OSG will be transitioning authentication
-away from X.509 certificates to the use of bearer tokens such as [SciTokens](http://scitokens.org/) or
-any OAUTH2 OpenID Connect provider such as [CILogon OpenID Connect](https://www.cilogon.org/oidc) or
-[WLCG JWT](https://twiki.cern.ch/twiki/bin/view/LCG/WLCGAuthorizationWG).
+As part of the [GridFTP and GSI migration](https://opensciencegrid.org/technology/policy/gridftp-gsi-migration/),
+the OSG will be transitioning authentication away from X.509 certificates to the use of bearer tokens such as
+[SciTokens](http://scitokens.org/) or [WLCG JWT](https://twiki.cern.ch/twiki/bin/view/LCG/WLCGAuthorizationWG).
+
+Use this document to learn how to request tokens from an OpenID Connect (OIDC) Provider or how to generate a test token
+for validating your OSG services.
 
 Before Starting
 ---------------
