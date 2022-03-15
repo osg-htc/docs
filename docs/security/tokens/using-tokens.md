@@ -207,6 +207,10 @@ your HTCondor-CE or XRootD service, you can use the [SciTokens demo website](htt
 1.  Add `https://demo.scitokens.org` (and subject if appropriate) to your service's configuration to authenticate your
     new test token
 
+    !!! danger "Remove test mappings"
+        After completing testing, remove any test `demo.scitokens.org` mappings that you have added as anyone is capable
+        of creating a demo SciToken.
+
 Troubleshooting Tokens
 ----------------------
 
