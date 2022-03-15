@@ -106,11 +106,11 @@ Updating Your OSG Compute Entrypoint
     [collaboration support tables](../security/tokens/overview.md#pilot-job-submission) to verify that your
     collaboration(s) support token-based authentication before considering an upgrade to OSG 3.6.
     If your collaboration(s) don't support these new authentication methods, install or remain on the
-    [OSG 3.5 release series](notes.md)
+    [OSG 3.5 release series, with the osg-upcoming repositories enabled](notes.md)
 
 In OSG 3.6, OSG Compute Entrypoints (CEs) only accept token-based pilot job submissions.
 If you need to support token-based and GSI proxy-based pilot job submission,
-you must install or remain on [OSG 3.5](notes.md).
+you must install or remain on [OSG 3.5, with the osg-upcoming repositories enabled](notes.md).
 If the collaborations that you support have the capability to submit token-based pilots, you may update your CE to OSG 3.6.
 
 In addition to the change in authentication protocol, OSG 3.6 CEs include new major versions of software that require
@@ -357,7 +357,7 @@ Replacing Your GridFTP Service
     [collaboration support tables](../security/tokens/overview.md#collaboration-support) to verify that your
     collaboration(s) support WebDAV/XRootD-based data transfer before considering an upgrade to OSG 3.6.
     If your collaboration(s) don't support these new protocols, install or remain on the
-    [OSG 3.5 release series](notes.md).
+    [OSG 3.5 release series, with the osg-upcoming repositories enabled](notes.md).
 
 !!! bug "VOMS attribute mappings incompatible with `xrootd-multiuser` in OSG 3.6"
     The OSG 3.6 configuration of XRootD uses the `XrdVoms` plugin, which pass along the entire VOMS FQAN as the
