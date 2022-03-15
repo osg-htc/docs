@@ -16,7 +16,7 @@ If you have verified that your VO(s) support token-based pilot submission and HT
 use this document to update your OSG software to OSG 3.6.
 
 Many software packages, such as HTCondor and HTCondor-CE, use Python 3 scripts. If you are using Enterprise Linux 7,
-you must upgrade to at least version 7.8 to get Python 3 support.
+you must upgrade to at least version 7.8 for Python 3 support.
 
 Updating the OSG Repositories
 -----------------------------
@@ -219,8 +219,14 @@ To update OSG-Configure, perform the following steps:
 
 #### HTCondor-CE ####
 
+!!! bug "Passing along non-HTCondor batch system directives"
+    `default_CERequirements` in the the new Job Router ClassAd transform syntax is ignored.
+    To fix this, apply the change in [this patch](https://github.com/htcondor/htcondor-ce/pull/530/files) to
+    `/usr/share/condor-ce/config.d/01-ce-router-defaults.conf`.
+    The next release of HTCondor-CE will contain this fix and will not require any additional action post-update.
+
 !!! bug "Remove comments from `JOB_ROUTER_ENTRIES`"
-    If you are using HTCondor from the Upcoming repository,
+    If you are using HTCondor from the 3.6 Upcoming repository,
     C-style comments, e.g. `/* comment */`, in `JOB_ROUTER_ENTRIES` will prevent the JobRouter from routing jobs
     ([HTCONDOR-864](https://opensciencegrid.atlassian.net/browse/HTCONDOR-864)).
     For the time being, remove any comments if you are still using the

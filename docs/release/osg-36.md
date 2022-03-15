@@ -25,7 +25,11 @@ The following issues are known to currently affect packages distributed in OSG 3
 
 ### HTCondor-CE ###
 
--   If you are using HTCondor from the Upcoming repository,
+-   `default_CERequirements` in the the new Job Router ClassAd transform syntax is ignored.
+    To fix this, apply the change in [this patch](https://github.com/htcondor/htcondor-ce/pull/530/files) to
+    `/usr/share/condor-ce/config.d/01-ce-router-defaults.conf`.
+    The next release of HTCondor-CE will contain this fix and will not require any additional action post-update.
+-   If you are using HTCondor from the 3.6 Upcoming repository,
     C-style comments, e.g. `/* comment */`, in `JOB_ROUTER_ENTRIES` will prevent the JobRouter from routing jobs
     ([HTCONDOR-864](https://opensciencegrid.atlassian.net/browse/HTCONDOR-864)).
     For the time being, remove any comments if you are still using the
