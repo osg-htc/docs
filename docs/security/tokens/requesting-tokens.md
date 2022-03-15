@@ -8,23 +8,18 @@ the OSG will be transitioning authentication away from X.509 certificates to the
 Use this document to learn how to request tokens from an OpenID Connect (OIDC) Provider or how to generate a test token
 for validating your OSG services.
 
-Before Starting
----------------
-
-Before you can request the appropriate tokens, you must have the following:
-
--   One of the following:
-    -   The ability to run containers through tools like `docker` or `podman`
-    -   An installation of [oidc-agent](https://indigo-dc.gitbook.io/oidc-agent/) available as an RPM from the OSG
-        repositories
--   An account at an OAUTH provider
-    -   [CILogon OpenID Connect](https://www.cilogon.org/oidc)
-    -   A [WLCG INDIGO IAM](https://wlcg.cloud.cnaf.infn.it/) account belonging to the `wlcg`, `wlcg/pilots`, and `wlcg/xfers`
-        groups.
-    -   If no account available, use the [SciTokens demo site](https://demos.scitokens.org/)
-
 Requesting Tokens From An OIDC Provider
 ---------------------------------------
+
+If you are a member of a collaboration with an OIDC provider (such as [CILogon](https://www.cilogon.org/oidc) or
+[Indigo IAM](https://indigo-iam.github.io/v/v1.7.2/docs/)), you can use the
+[oidc-agent](https://indigo-dc.gitbook.io/oidc-agent/) client to request tokens.
+This client tool is available either as [a container](#using-a-container) or as
+[an RPM installation](#using an RPM installation).
+
+!!! tip "Alternative tokens for testing"
+    If you are not a member of a collaboration with access to an OIDC provider, you can generate test SciTokens using
+    [these instructions](#generating-scitokens-for-testing)
 
 ### Using a Container
 
