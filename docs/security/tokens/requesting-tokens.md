@@ -6,7 +6,8 @@ away from X.509 certificates to the use of bearer tokens such as [SciTokens](htt
 any OAUTH2 OpenID Connect provider such as [CILogon OpenID Connect](https://www.cilogon.org/oidc) or
 [WLCG JWT](https://twiki.cern.ch/twiki/bin/view/LCG/WLCGAuthorizationWG).
 
-## Before Starting
+Before Starting
+---------------
 
 Before you can request the appropriate tokens, you must have the following:
 
@@ -20,12 +21,15 @@ Before you can request the appropriate tokens, you must have the following:
         groups.
     -   If no account available, use the [SciTokens demo site](https://demos.scitokens.org/)
 
-## Requesting Tokens Using a Container
+Requesting Tokens From An OIDC Provider
+---------------------------------------
+
+### Using a Container
 
 [oidc-agent](https://indigo-dc.gitbook.io/oidc-agent/) is a process that runs in the background that can request access
 and refresh tokens from OpenID Connect token providers.
 
-### Registering an OIDC profile
+#### Registering an OIDC profile
 
 1. Start an agent container in the background and name it `my-agent` to easily run subsequent commands against it:
 
@@ -63,7 +67,7 @@ and refresh tokens from OpenID Connect token providers.
     1. Enter a password to encrypt your local client profile.
        You'll need to remember this if you want to re-use this profile in subsequent sessions.
 
-### Requesting access tokens
+#### Requesting access tokens
 
 !!! note
     You must first [register a new profile](#registering-an-oidc-profile).
@@ -80,7 +84,7 @@ and refresh tokens from OpenID Connect token providers.
 1. Copy the output of `oidc-token` into a file on the host where you need SciToken authentication, e.g. an HTCondor or
    XRootD client.
 
-### Reloading an OIDC profile
+#### Reloading an OIDC profile
 
 !!! note
     Required after restarting the running container. You must have an existing [registered profile](#registering-an-oidc-profile).
@@ -99,9 +103,9 @@ and refresh tokens from OpenID Connect token providers.
 1. Enter password used to encrypt your `<CLIENT PROFILE>` created during profile registration.
 
 
-## Requesting Tokens with an RPM installation
+### Using an RPM installation
 
-### Registering an OIDC profile
+#### Registering an OIDC profile
 
 1. Start the agent and add the appropriate variables to your environment:
 
@@ -138,7 +142,7 @@ and refresh tokens from OpenID Connect token providers.
     1. Enter a password to encrypt your local client profile.
        You'll need to remember this if you want to re-use this profile in subsequent sessions.
 
-### Requesting access tokens
+#### Requesting access tokens
 
 !!! note
     You must first [register a new profile](#registering-an-oidc-profile_1).
@@ -154,7 +158,7 @@ and refresh tokens from OpenID Connect token providers.
 1. Copy the output of `oidc-token` into a file on the host where you need SciToken authentication, e.g. an HTCondor or
    XRootD client.
 
-### Reloading an OIDC profile
+#### Reloading an OIDC profile
 
 !!! note
     Required if you log out of the running machine. You must have an existing [registered profile](#registering-an-oidc-profile_1).
@@ -203,7 +207,10 @@ your HTCondor-CE or XRootD service, you can use the [SciTokens demo website](htt
 1.  Add `https://demo.scitokens.org` (and subject if appropriate) to your service's configuration to authenticate your
     new test token
 
-## Troubleshooting Tokens
+Troubleshooting Tokens
+----------------------
+
+### Validating tokens
 
 A token must be a _one-line_ string consisting of 3 base64-encoded parts separated by periods (`.`).
 You can use the tools in the `scitokens-cpp` RPM to validate a SciToken or WLCG token.
@@ -214,7 +221,7 @@ You can use the tools in the `scitokens-cpp` RPM to validate a SciToken or WLCG 
     `<ISSUER>` is the issuer to verify the token with,
     and `<AUDIENCE>` is the server you are using the token to access).
 
-Examining a token:
+### Examining tokens
 
 -   Online: paste the token into <https://jwt.io>.
 
