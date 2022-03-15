@@ -259,13 +259,6 @@ To update OSG-Configure, perform the following steps:
     `/usr/share/condor-ce/config.d/01-ce-router-defaults.conf`.
     The next release of HTCondor-CE will contain this fix and will not require any additional action post-update.
 
-!!! bug "Remove comments from `JOB_ROUTER_ENTRIES`"
-    If you are using HTCondor from the 3.6 Upcoming repository,
-    C-style comments, e.g. `/* comment */`, in `JOB_ROUTER_ENTRIES` will prevent the JobRouter from routing jobs
-    ([HTCONDOR-864](https://opensciencegrid.atlassian.net/browse/HTCONDOR-864)).
-    For the time being, remove any comments if you are still using the
-    [deprecated syntax](https://htcondor.com/htcondor-ce/v5/configuration/job-router-overview#deprecated-syntax).
-
 The OSG 3.6 release series contains [HTCondor-CE 5](https://htcondor.github.io/htcondor-ce/v5/releases/), a major
 version upgrade from HTCondor-CE 4, which was available in the OSG 3.5 release repositories.
 To update HTCondor-CE, perform the following steps:
