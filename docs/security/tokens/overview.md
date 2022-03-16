@@ -185,7 +185,7 @@ These are the collaborations that support or partially support using tokens for 
 | CMS           | Undergoing testing     |
 | EIC           | Undergoing testing     |
 | GLOW          | Yes                    |
-| GlueX         | Undergoing testing     |
+| GlueX         | Yes                    |
 | IceCube       | Undergoing testing     |
 | LIGO          | Undergoing testing     |
 | OSG           | Yes                    |
