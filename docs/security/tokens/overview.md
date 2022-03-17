@@ -180,7 +180,7 @@ These are the collaborations that support or partially support using tokens for 
 
 | Collaboration | Supports Bearer Tokens |
 |:--------------|------------------------|
-| ATLAS         | Undergoing testing     |
+| ATLAS         | yes                    |
 | CLAS12        | Undergoing testing     |
 | CMS           | Undergoing testing     |
 | EIC           | Undergoing testing     |
