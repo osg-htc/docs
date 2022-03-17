@@ -18,7 +18,7 @@ Depending on the [collaboration(s) that you support](../security/tokens/overview
 updating to the new series could result in issues with your site receiving pilot jobs and/or issues with data transfer.
 See the list of services below for any special considerations for the OSG 3.6 update:
 
--   [Compute Entrypoints](../compute-element/htcnodor-ce-overview.md) should be updated to OSG 3.6 with care:
+-   [Compute Entrypoints](../compute-element/htcondor-ce-overview.md) should be updated to OSG 3.6 with care:
 
     -   If your [collaboration(s)](../security/tokens/overview.md#pilot-job-submission) support bearer tokens,
         update your [OSG Compute Entrypoints](#updating-your-osg-compute-entrypoint) at your earliest convenience.
