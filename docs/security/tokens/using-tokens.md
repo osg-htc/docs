@@ -230,9 +230,9 @@ You can use the tools in the `scitokens-cpp` RPM to validate a SciToken or WLCG 
 -   Online: paste the token into <https://jwt.io>.
 
 -   Offline:
-    1.  Obtain `httokendecode` by either yum installing the `htgettoken` RPM
-        or by downloading it directly from
-        [the htgettoken GitHub repo](https://github.com/fermitools/htgettoken/blob/master/httokendecode).
-        (You will need `jq` installed if you are doing the latter.)
+    1.  Install `htgettoken`:
+
+            # yum install htgettoken
+
     2.  Write the token to a file named `tok`.
     3.  Run `httokendecode -H tok`
