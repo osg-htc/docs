@@ -230,10 +230,9 @@ You can use the tools in the `scitokens-cpp` RPM to validate a SciToken or WLCG 
 -   Online: paste the token into <https://jwt.io>.
 
 -   Offline:
-    1.  Write the token to a file named `tok`.
-    2.  Run `IFS=. read header payload signature < tok`.
-    3.  Run `echo $header | base64 -d` to examine the header.
-        Run `echo $payload | base64 -d` to examine the payload.
-        Note: the header or payload may be missing the final padding characters (up to 2 `=` characters);
-        adding them (e.g. `echo $payload== | base64 -d`) should make base64 stop complaining about "invalid input" or
-        "truncated input".
+    1.  Install `htgettoken`:
+
+            # yum install htgettoken
+
+    2.  Write the token to a file named `tok`.
+    3.  Run `httokendecode -H tok`
