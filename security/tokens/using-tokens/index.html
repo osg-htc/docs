@@ -2322,13 +2322,16 @@ You can use the tools in the <code>scitokens-cpp</code> RPM to validate a SciTok
 <li>
 <p>Offline:</p>
 <ol>
-<li>Write the token to a file named <code>tok</code>.</li>
-<li>Run <code>IFS=. read header payload signature &lt; tok</code>.</li>
-<li>Run <code>echo $header | base64 -d</code> to examine the header.
-    Run <code>echo $payload | base64 -d</code> to examine the payload.
-    Note: the header or payload may be missing the final padding characters (up to 2 <code>=</code> characters);
-    adding them (e.g. <code>echo $payload== | base64 -d</code>) should make base64 stop complaining about "invalid input" or
-    "truncated input".</li>
+<li>
+<p>Install <code>htgettoken</code>:</p>
+<div class="codehilite"><pre><span></span><code># yum install htgettoken
+</code></pre></div>
+
+</li>
+<li>
+<p>Write the token to a file named <code>tok</code>.</p>
+</li>
+<li>Run <code>httokendecode -H tok</code></li>
 </ol>
 </li>
 </ul>
