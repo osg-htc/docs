@@ -27,7 +27,8 @@ Releases
 
 | Version                             | Date       | Summary                                                                       |
 |:------------------------------------|:-----------|:------------------------------------------------------------------------------|
-| [3.5.58](3.5/release-3-5-58.md)     | 2021-07-30 | High Priority Release: HTCondor 8.8.16; Upcoming: HTCondor 9.0.10             |
+| [3.5.59](3.5/release-3-5-59.md)     | 2022-03-22 | scitokens-cpp 0.7.0; Upcoming: gfal2 2.20.5                                   |
+| [3.5.58](3.5/release-3-5-58.md)     | 2022-03-15 | High Priority Release: HTCondor 8.8.16; Upcoming: HTCondor 9.0.10             |
 | [3.5.57](3.5/release-3-5-57.md)     | 2022-03-03 | osg-scitokens-mapfile 6; Upcoming: XRootD 5.4.1, osg-xrootd 3.5-6             |
 | [3.5.56-2](3.5/release-3-5-56-2.md) | 2022-02-17 | VO Package v120                                                               |
 | [3.5.56](3.5/release-3-5-56.md)     | 2022-02-10 | VO Package v119, hosted-ce-tools 9.0 (EL8), scitokens-credmon 0.6.1 (EL8); Upcoming: HTCondor 9.0.9 |
