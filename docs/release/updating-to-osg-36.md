@@ -14,7 +14,7 @@ to OSG 3.5 (the *old series*) with changes to core protocols used for authentica
 See [this page](https://opensciencegrid.org/technology/policy/gridftp-gsi-migration/) for more details regarding this
 transition.
 
-Depending on the [collaboration(s) that you support](../security/tokens/overview.md##collaboration-support),
+Depending on the [collaboration(s) that you support](../security/tokens/overview.md#collaboration-support),
 updating to the new series could result in issues with your site receiving pilot jobs and/or issues with data transfer.
 See the list of services below for any special considerations for the OSG 3.6 update:
 
@@ -35,7 +35,7 @@ See the list of services below for any special considerations for the OSG 3.6 up
 -   XRootD will continue to support GSI and VOMS proxies in OSG 3.6 directly
     (instead of through Grid Community Toolkit libraries).
     Therefore, XRootD hosts (i.e., standalone installations, caches and origins) should be updated to
-    [OSG 3.6](#updating-to-the-OSG-repositories) at your earliest convenience.
+    [OSG 3.6](#updating-the-OSG-repositories) at your earliest convenience.
 
 -   [GridFTP services](#replacing-your-gridftp-service) should be replaced with an installation of XRootD standalone.
 
@@ -45,7 +45,7 @@ See the list of services below for any special considerations for the OSG 3.6 up
     IDTOKENS.
 
 -   All other services (e.g., OSG Worker Node clients, Frontier Squids) should be updated to
-    [OSG 3.6](#updating-to-the-OSG-repositories) at your earliest convenience.
+    [OSG 3.6](#updating-the-OSG-repositories) at your earliest convenience.
 
 Updating the OSG Repositories
 -----------------------------
