@@ -39,10 +39,11 @@ Installing XRootD
 -----------------
 
 !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
-    Due to potentially disruptive changes, contact your VO(s) to verify that they support HTTP-based data transfer
-    before replacing your GridFTP service with XRootD.
-    If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
-    install or remain on the [OSG 3.5 release series](../../release/notes.md).
+    Due to potentially disruptive changes in protocols, consult the
+    [collaboration support tables](../security/tokens/overview.md#collaboration-support) to verify that your
+    collaboration(s) support WebDAV/XRootD-based data transfer before considering an upgrade to OSG 3.6.
+    If your collaboration(s) don't support these new protocols, install or remain on the
+    [OSG 3.5 release series, with the osg-upcoming repositories enabled](notes.md).
 
     Note that OSG 3.5 will reach its end-of-life in [May 2022](../../release/release_series.md#series-overviews).
 
