@@ -42,6 +42,39 @@ The following issues are known to currently affect packages distributed in OSG 3
 Latest News
 -----------
 
+### **March 24, 2022:** XRootD 5.4.2-1.1, HTCondor 9.0.11, stashcp 6.6.0
+
+-   [XRootD 5.4.2](https://github.com/xrootd/xrootd/blob/v5.4.2/docs/ReleaseNotes.txt) plus OSG patches
+    -   [Add support for VOMS mapfiles](https://opensciencegrid.atlassian.net/browse/SOFTWARE-4870)
+    -   [Fix DN hashing for HTTPS transfers](https://github.com/xrootd/xrootd/pull/1640)
+    -   [Add new throttling for max open files and active connections per entity](https://github.com/xrootd/xrootd/pull/1582)
+-   [HTCondor 9.0.11](https://htcondor.readthedocs.io/en/v9_0/version-history/stable-release-series-90.html#version-9-0-11)
+    -   The Job Router can now create an IDTOKEN for use by the job
+        -   Fix bug where a self-checkpointing job may erroneously be held
+        -   Fix bug where the Job Router erroneously substitutes a default value
+        -   Fix bug where a file transfer error may identify the wrong file
+        -   Fix bug where condor_ssh_to_job may fail to connect
+-   [stashcp 6.6.0](https://github.com/opensciencegrid/stashcp/releases/tag/v6.6.0)
+    -   Rewritten in Go
+    -   New features
+        -   HTCondor File Transfer plugin interface
+        -   Progress bar on interactive terminals
+        -   Recursive downloads
+        -   WLCG token discovery
+-   [python-scitokens 1.7.0](https://github.com/scitokens/scitokens/releases/tag/v1.7.0)
+-   osg-token-renewer 0.8.1: Add support for manual client registration
+-   [xrootd-monitoring-shoveler 1.0.0](https://github.com/opensciencegrid/xrootd-monitoring-shoveler/releases/tag/v1.0.0): Initial release
+-   [vault 1.9.3](https://github.com/hashicorp/vault/releases/tag/v1.9.3)
+-   [htgettoken 1.10](https://github.com/fermitools/htgettoken/releases/tag/v1.10)
+    -   Upcoming
+        -   [HTCondor 9.7.0](https://htcondor.readthedocs.io/en/v9_1/version-history/development-release-series-91.html#version-9-7-0)
+            -   Support environment variables, application elements in ARC REST jobs
+            -   Container universe supports Singularity jobs with hard-coded command
+            -   DAGMan submits jobs directly (does not shell out to condor_submit)
+            -   Meaningful error message and sub-code for file transfer failures
+            -   Add file transfer statistics for file transfer plugins
+            -   Add named list policy knobs for SYSTEM_PERIODIC_ policies
+
 ### **March 15, 2022:** High Priority Release
 
 -   HTCondor 9.0.10 and 9.6.0 Security Release. This release contains fixes for important security issues. More details on the security issues are in the vulnerability reports:
