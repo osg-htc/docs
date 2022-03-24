@@ -167,16 +167,22 @@ root@host # yum install xrootd-multiuser
 
 #### Enabling CMS TFC support (CMS sites only)
 
-!!! info "Coming soon to OSG 3.6"
-    The `xrootd-cmstfc` package is not yet available in OSG 3.6.
-    [See this ticket](https://opensciencegrid.atlassian.net/browse/SOFTWARE-4893) to track its progress.
-
 For CMS sites, there is a package available to integrate rule-based name lookup using a `storage.xml` file.
 If you are not setting up a service for CMS, skip this section.
 
-``` console
-yum install --enablerepo=osg-contrib xrootd-cmstfc
-```
+To install an `xrootd-cmstfc`, run one of the following commands based on your installed
+[OSG release series](../../release/release_series.md#series-overviews):
+
+-   OSG 3.6 (recommended):
+
+        :::console
+        root@xrootd-standalone # yum install --enablerepo=osg-contrib xrootd-cmstfc
+
+-   OSG 3.5
+
+        :::console
+        root@xrootd-standalone # yum install xrootd-cmstfc \
+                                             --enablerepo=osg-upcoming
 
 You will need to add your `storage.xml` to `/etc/xrootd/storage.xml` and then add the following line to your XRootD
 configuration:
