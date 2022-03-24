@@ -1,10 +1,11 @@
-DateReviewed: 2021-11-12
+DateReviewed: 2022-03-24
 
 Install XRootD Standalone
 =========================
 
-!!!bug "EL7 version compatibility"
-    There is an incompatibility with EL7 < 7.5 due to an issue with the `globus-gsi-proxy-core` package
+!!!bug "OSG 3.5 EL7 version compatibility"
+    There is an incompatibility with EL7 < 7.5 and XRootD available from OSG 3.5 due to an issue with the
+    `globus-gsi-proxy-core` package
 
 
 [XRootD](http://xrootd.org/) is a hierarchical storage system that can be used in many ways to access data,
