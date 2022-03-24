@@ -40,10 +40,10 @@ Installing XRootD
 
 !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
     Due to potentially disruptive changes in protocols, consult the
-    [collaboration support tables](../security/tokens/overview.md#collaboration-support) to verify that your
+    [collaboration support tables](../../security/tokens/overview.md#collaboration-support) to verify that your
     collaboration(s) support WebDAV/XRootD-based data transfer before considering an upgrade to OSG 3.6.
     If your collaboration(s) don't support these new protocols, install or remain on the
-    [OSG 3.5 release series, with the osg-upcoming repositories enabled](notes.md).
+    [OSG 3.5 release series, with the osg-upcoming repositories enabled](../../release/notes.md).
 
     Note that OSG 3.5 will reach its end-of-life in [May 2022](../../release/release_series.md#series-overviews).
 
