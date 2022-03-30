@@ -2139,7 +2139,8 @@ remove the repository configuration while preserving the data and keys:</p>
 </span></code></pre></div>
 
 <p>Otherwise if it is a new machine, copy the keys from /etc/cvmfs/keys/<code>&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;</code>.* and the data from /srv/cvmfs/<code>&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;</code> from the old server to the new, making sure that no publish operations happen on the old server while you copy the data.</p>
-<p>Then in either case use <code>cvmfs_server import</code> instead of <code>cvmfs_server mkfs</code> in the above instructions for <a href="#creating-a-repository">Creating the Repository</a>, in order to reuse old data and keys.</p>
+<p>Then in either case use <code>cvmfs_server import</code> instead of <code>cvmfs_server mkfs</code> in the above instructions for <a href="#creating-a-repository">Creating the Repository</a>, in order to reuse old data and keys.
+Note that you wil need to reapply any custom configuration changes under <code>/etc/cvmfs/repositories.d/</code><EXAMPLE.OPENSCIENCEGRID.ORG>` that was on the old server.</p>
 <p>If you run an old and a new machine in parallel for a while, make sure that when you put the new machine into production (by moving the DNS name) that the new machine has had at least as many publishes as the old machine, so the revision number does not decrease.</p>
 <h3 id="with-changing-the-server-dns-name">With changing the server DNS name<a class="headerlink" href="#with-changing-the-server-dns-name" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
