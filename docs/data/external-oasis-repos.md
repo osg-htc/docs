@@ -238,6 +238,7 @@ root@host # cvmfs_server rmfs -p <EXAMPLE.OPENSCIENCEGRID.ORG>
 Otherwise if it is a new machine, copy the keys from /etc/cvmfs/keys/`<EXAMPLE.OPENSCIENCEGRID.ORG>`.* and the data from /srv/cvmfs/`<EXAMPLE.OPENSCIENCEGRID.ORG>` from the old server to the new, making sure that no publish operations happen on the old server while you copy the data.
 
 Then in either case use `cvmfs_server import` instead of `cvmfs_server mkfs` in the above instructions for [Creating the Repository](#creating-a-repository), in order to reuse old data and keys.
+Note that you wil need to reapply any custom configuration changes under `/etc/cvmfs/repositories.d/`<EXAMPLE.OPENSCIENCEGRID.ORG>` that was on the old server.
 
 If you run an old and a new machine in parallel for a while, make sure that when you put the new machine into production (by moving the DNS name) that the new machine has had at least as many publishes as the old machine, so the revision number does not decrease.
 
