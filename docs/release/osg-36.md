@@ -42,6 +42,15 @@ The following issues are known to currently affect packages distributed in OSG 3
 Latest News
 -----------
 
+### **October 5, 2021:** IGTF 1.115
+
+This release contains updated CA Certificates based on [IGTF 1.115](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+
+-    Removed obsolete CNRS2 CAs, superseded by AC-GRID-FR hierarchy (FR)
+-    Add supplementary BCDR download location for UGRID-G2 CRL (UA)
+-    Extended validity period of HPCI CA (JP)
+
+
 ### **March 24, 2022:** XRootD 5.4.2-1.1, HTCondor 9.0.11, stashcp 6.6.0
 
 -   [XRootD 5.4.2](https://github.com/xrootd/xrootd/blob/v5.4.2/docs/ReleaseNotes.txt) plus OSG patches
