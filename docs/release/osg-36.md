@@ -42,7 +42,7 @@ The following issues are known to currently affect packages distributed in OSG 3
 Latest News
 -----------
 
-### **October 5, 2021:** IGTF 1.115
+### **March 31, 2022:** IGTF 1.115
 
 This release contains updated CA Certificates based on [IGTF 1.115](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
 
