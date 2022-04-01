@@ -54,7 +54,6 @@ nav:
       - 'Configure Authorization': 'data/xrootd/xrootd-authorization.md'
       - 'Using XRootD': 'data/xrootd/install-client.md'
       - 'Install CMS XCache': 'data/xrootd/install-cms-xcache.md'
-      - 'Install XRootD Shoveler': 'data/xrootd/install-shoveler.md'
   - Other:
     - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
     - 'Install GlideinWMS Frontend': 'other/install-gwms-frontend.md'
