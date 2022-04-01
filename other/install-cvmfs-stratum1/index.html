@@ -8,11 +8,10 @@
       
       
       
-      
         <link rel="canonical" href="https://opensciencegrid.org/docs/other/install-cvmfs-stratum1/">
       
       <link rel="icon" href="../../img/favicon.ico">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.0">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.8">
     
     
       
@@ -20,32 +19,40 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.33e2939f.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.644de097.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ef6f36e2.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
         
       
     
     
     
       
+        
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
-    
     
     
       <link rel="stylesheet" href="../../css/extra.css">
     
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-        
-<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-69012-29","opensciencegrid.github.io"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
-<script async src="https://www.google-analytics.com/analytics.js"></script>
-      
+  
+
+
+  
+  
+
+
+  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-69012-29","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+  <script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
     
     
   </head>
@@ -59,7 +66,6 @@
     <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
   
     
-    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -76,7 +82,10 @@
       
     </div>
     
-      <header class="md-header" data-md-component="header">
+    
+      
+
+<header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="OSG Site Documentation" class="md-header__button md-logo" aria-label="OSG Site Documentation" data-md-component="logo">
       
@@ -109,19 +118,22 @@
       <label class="md-header__button md-icon" for="__search">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
       </label>
-      
-<div class="md-search" data-md-component="search" role="dialog">
+      <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
       </label>
-      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
-      </button>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
@@ -138,11 +150,10 @@
     
     
       <div class="md-header__source">
-        
-<a href="https://github.com/opensciencegrid/docs/" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/opensciencegrid/docs/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -151,11 +162,14 @@
       </div>
     
   </nav>
+  
 </header>
     
     <div class="md-container" data-md-component="container">
       
       
+        
+          
         
       
       <main class="md-main" data-md-component="main">
@@ -181,11 +195,10 @@
   </label>
   
     <div class="md-nav__source">
-      
-<a href="https://github.com/opensciencegrid/docs/" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/opensciencegrid/docs/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -302,10 +315,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
       
-      <label class="md-nav__link" for="__nav_7">
-        Resource Sharing
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Resource Sharing
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Resource Sharing" data-md-level="1">
         <label class="md-nav__title" for="__nav_7">
           <span class="md-nav__icon md-icon"></span>
@@ -314,6 +331,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -323,10 +341,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1" type="checkbox" id="__nav_7_1" >
       
-      <label class="md-nav__link" for="__nav_7_1">
-        Compute
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_1">
+          Compute
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Compute" data-md-level="2">
         <label class="md-nav__title" for="__nav_7_1">
           <span class="md-nav__icon md-icon"></span>
@@ -335,6 +357,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -345,8 +368,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -356,10 +381,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1_2" type="checkbox" id="__nav_7_1_2" >
       
-      <label class="md-nav__link" for="__nav_7_1_2">
-        Pilot Containers
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_1_2">
+          Pilot Containers
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Pilot Containers" data-md-level="3">
         <label class="md-nav__title" for="__nav_7_1_2">
           <span class="md-nav__icon md-icon"></span>
@@ -368,6 +397,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -378,8 +408,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -390,14 +422,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -407,10 +442,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1_3" type="checkbox" id="__nav_7_1_3" >
       
-      <label class="md-nav__link" for="__nav_7_1_3">
-        Compute Entrypoint
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_1_3">
+          Compute Entrypoint
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Compute Entrypoint" data-md-level="3">
         <label class="md-nav__title" for="__nav_7_1_3">
           <span class="md-nav__icon md-icon"></span>
@@ -419,6 +458,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -429,8 +469,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -441,8 +483,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -453,14 +497,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -470,10 +517,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1_4" type="checkbox" id="__nav_7_1_4" >
       
-      <label class="md-nav__link" for="__nav_7_1_4">
-        Worker Node
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_1_4">
+          Worker Node
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Worker Node" data-md-level="3">
         <label class="md-nav__title" for="__nav_7_1_4">
           <span class="md-nav__icon md-icon"></span>
@@ -482,6 +533,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -492,8 +544,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -504,8 +558,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -516,8 +572,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -528,8 +586,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -540,8 +600,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -552,8 +614,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -564,20 +628,24 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -587,10 +655,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_2" type="checkbox" id="__nav_7_2" >
       
-      <label class="md-nav__link" for="__nav_7_2">
-        Data
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_2">
+          Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Data" data-md-level="2">
         <label class="md-nav__title" for="__nav_7_2">
           <span class="md-nav__icon md-icon"></span>
@@ -599,6 +671,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -608,10 +681,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_2_1" type="checkbox" id="__nav_7_2_1" >
       
-      <label class="md-nav__link" for="__nav_7_2_1">
-        HTTP & OASIS
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_2_1">
+          HTTP & OASIS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="HTTP & OASIS" data-md-level="3">
         <label class="md-nav__title" for="__nav_7_2_1">
           <span class="md-nav__icon md-icon"></span>
@@ -620,6 +697,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -630,8 +708,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -642,8 +722,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -654,8 +736,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -666,14 +750,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -683,10 +770,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_2_2" type="checkbox" id="__nav_7_2_2" >
       
-      <label class="md-nav__link" for="__nav_7_2_2">
-        XRootD
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_2_2">
+          XRootD
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="XRootD" data-md-level="3">
         <label class="md-nav__title" for="__nav_7_2_2">
           <span class="md-nav__icon md-icon"></span>
@@ -695,6 +786,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -705,8 +797,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -717,8 +811,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -729,8 +825,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -741,8 +839,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -753,8 +853,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -765,20 +867,24 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
     
@@ -790,10 +896,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_3" type="checkbox" id="__nav_7_3" checked>
       
-      <label class="md-nav__link" for="__nav_7_3">
-        Other
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_3">
+          Other
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Other" data-md-level="2">
         <label class="md-nav__title" for="__nav_7_3">
           <span class="md-nav__icon md-icon"></span>
@@ -802,6 +912,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -812,8 +923,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -824,8 +937,10 @@
     </li>
   
 
+            
           
             
+              
   
   
     
@@ -834,6 +949,7 @@
     <li class="md-nav__item md-nav__item--active">
       
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
       
         
       
@@ -848,7 +964,9 @@
       </a>
       
         
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
   
   
     
@@ -983,8 +1101,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -995,8 +1115,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1007,8 +1129,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1019,14 +1143,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1036,10 +1163,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_4" type="checkbox" id="__nav_7_4" >
       
-      <label class="md-nav__link" for="__nav_7_4">
-        Deprecated
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_4">
+          Deprecated
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Deprecated" data-md-level="2">
         <label class="md-nav__title" for="__nav_7_4">
           <span class="md-nav__icon md-icon"></span>
@@ -1048,6 +1179,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1057,10 +1189,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_4_1" type="checkbox" id="__nav_7_4_1" >
       
-      <label class="md-nav__link" for="__nav_7_4_1">
-        POSIX Storage
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_4_1">
+          POSIX Storage
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="POSIX Storage" data-md-level="3">
         <label class="md-nav__title" for="__nav_7_4_1">
           <span class="md-nav__icon md-icon"></span>
@@ -1069,6 +1205,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1079,8 +1216,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1091,14 +1230,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1108,10 +1250,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_4_2" type="checkbox" id="__nav_7_4_2" >
       
-      <label class="md-nav__link" for="__nav_7_4_2">
-        HDFS
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_4_2">
+          HDFS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="HDFS" data-md-level="3">
         <label class="md-nav__title" for="__nav_7_4_2">
           <span class="md-nav__icon md-icon"></span>
@@ -1120,6 +1266,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1130,8 +1277,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1142,14 +1291,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1159,10 +1311,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_4_3" type="checkbox" id="__nav_7_4_3" >
       
-      <label class="md-nav__link" for="__nav_7_4_3">
-        Security
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_4_3">
+          Security
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Security" data-md-level="3">
         <label class="md-nav__title" for="__nav_7_4_3">
           <span class="md-nav__icon md-icon"></span>
@@ -1171,6 +1327,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1181,8 +1338,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1193,14 +1352,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1211,8 +1373,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1223,8 +1387,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1235,8 +1401,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1247,8 +1415,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1259,12 +1429,14 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
         </ul>
       </nav>
@@ -1287,10 +1459,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
       
-      <label class="md-nav__link" for="__nav_8">
-        Access Point
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          Access Point
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Access Point" data-md-level="1">
         <label class="md-nav__title" for="__nav_8">
           <span class="md-nav__icon md-icon"></span>
@@ -1299,6 +1475,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1309,8 +1486,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1321,6 +1500,7 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
@@ -1343,10 +1523,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
       
-      <label class="md-nav__link" for="__nav_9">
-        Data Federation
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          Data Federation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Data Federation" data-md-level="1">
         <label class="md-nav__title" for="__nav_9">
           <span class="md-nav__icon md-icon"></span>
@@ -1355,6 +1539,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1365,8 +1550,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1376,10 +1563,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_2" type="checkbox" id="__nav_9_2" >
       
-      <label class="md-nav__link" for="__nav_9_2">
-        Data Cache
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_2">
+          Data Cache
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Data Cache" data-md-level="2">
         <label class="md-nav__title" for="__nav_9_2">
           <span class="md-nav__icon md-icon"></span>
@@ -1388,6 +1579,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1398,8 +1590,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1410,14 +1604,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1427,10 +1624,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_3" type="checkbox" id="__nav_9_3" >
       
-      <label class="md-nav__link" for="__nav_9_3">
-        Data Origin
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_3">
+          Data Origin
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Data Origin" data-md-level="2">
         <label class="md-nav__title" for="__nav_9_3">
           <span class="md-nav__icon md-icon"></span>
@@ -1439,6 +1640,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1449,8 +1651,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1461,8 +1665,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1473,12 +1679,14 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
         </ul>
       </nav>
@@ -1501,10 +1709,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
       
-      <label class="md-nav__link" for="__nav_10">
-        Releases
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10">
+          Releases
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Releases" data-md-level="1">
         <label class="md-nav__title" for="__nav_10">
           <span class="md-nav__icon md-icon"></span>
@@ -1513,6 +1725,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1523,8 +1736,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1534,10 +1749,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_2" type="checkbox" id="__nav_10_2" >
       
-      <label class="md-nav__link" for="__nav_10_2">
-        OSG 3.5
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10_2">
+          OSG 3.5
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="OSG 3.5" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_2">
           <span class="md-nav__icon md-icon"></span>
@@ -1546,6 +1765,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1556,8 +1776,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1568,14 +1790,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1585,10 +1810,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_3" type="checkbox" id="__nav_10_3" >
       
-      <label class="md-nav__link" for="__nav_10_3">
-        OSG 3.6
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10_3">
+          OSG 3.6
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="OSG 3.6" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_3">
           <span class="md-nav__icon md-icon"></span>
@@ -1597,6 +1826,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1607,8 +1837,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1619,14 +1851,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1637,8 +1872,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1649,8 +1886,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1661,8 +1900,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1673,6 +1914,7 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
@@ -1695,10 +1937,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11" type="checkbox" id="__nav_11" >
       
-      <label class="md-nav__link" for="__nav_11">
-        Tokens
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_11">
+          Tokens
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Tokens" data-md-level="1">
         <label class="md-nav__title" for="__nav_11">
           <span class="md-nav__icon md-icon"></span>
@@ -1707,6 +1953,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1717,8 +1964,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1729,6 +1978,7 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
@@ -1751,10 +2001,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
       
-      <label class="md-nav__link" for="__nav_12">
-        CA Certificates
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12">
+          CA Certificates
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="CA Certificates" data-md-level="1">
         <label class="md-nav__title" for="__nav_12">
           <span class="md-nav__icon md-icon"></span>
@@ -1763,6 +2017,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1773,8 +2028,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1785,8 +2042,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1796,10 +2055,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12_3" type="checkbox" id="__nav_12_3" >
       
-      <label class="md-nav__link" for="__nav_12_3">
-        Host Certificates
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12_3">
+          Host Certificates
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Host Certificates" data-md-level="2">
         <label class="md-nav__title" for="__nav_12_3">
           <span class="md-nav__icon md-icon"></span>
@@ -1808,6 +2071,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1818,8 +2082,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1830,8 +2096,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1842,12 +2110,14 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
         </ul>
       </nav>
@@ -1867,7 +2137,9 @@
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
   
   
     
@@ -2007,12 +2279,13 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/other/install-cvmfs-stratum1.md" title="Edit this page" class="md-content__button md-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
-                  </a>
-                
-                
-                <h1 id="install-a-cvmfs-stratum-1">Install a CVMFS Stratum 1<a class="headerlink" href="#install-a-cvmfs-stratum-1" title="Permanent link">&para;</a></h1>
+<a href="https://github.com/opensciencegrid/docs/edit/master/docs/other/install-cvmfs-stratum1.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+
+<h1 id="install-a-cvmfs-stratum-1">Install a CVMFS Stratum 1<a class="headerlink" href="#install-a-cvmfs-stratum-1" title="Permanent link">&para;</a></h1>
 <p>This document describes how to install a CVMFS Stratum 1. There are many different variations on how to do that, but this document focuses on the configuration of the OSG Operations Stratum 1 oasis-replica.opensciencegrid.org. It is applicable to other Stratum 1s as well, very likely with modifications (some of which are suggested in the document below).</p>
 <div class="admonition note">
 <p class="admonition-title">Applicable versions</p>
@@ -2036,60 +2309,51 @@
 <p>All CVMFS Stratum 1s require cvmfs-server software and apache (httpd). It is highly recommended to also install <a href="../../data/frontier-squid/">frontier-squid</a> and <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallAwstats">frontier-awstats</a> on the same machine to be able to easily join the WLCG <a href="http://wlcg-squid-monitor.cern.ch/snmpstats/indexcvmfs.html">MRTG</a> and <a href="http://wlcg-squid-monitor.cern.ch/awstats/cvmfs.html">awstats</a> monitoring systems. The recommended configuration for frontier-squid below only caches geo api lookups.  Other than that, it is primarily for monitoring.</p>
 <h3 id="installing-cvmfs-server-and-httpd">Installing cvmfs-server and httpd<a class="headerlink" href="#installing-cvmfs-server-and-httpd" title="Permanent link">&para;</a></h3>
 <p>Use this command to install cvmfs-server and httpd:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum -y install cvmfs-server cvmfs-config mod_wsgi
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum -y install cvmfs-server cvmfs-config mod_wsgi
 </code></pre></div>
-
 <h3 id="installing-frontier-squid-and-frontier-awstats">Installing frontier-squid and frontier-awstats<a class="headerlink" href="#installing-frontier-squid-and-frontier-awstats" title="Permanent link">&para;</a></h3>
 <p><a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallAwstats">frontier-awstats</a> is not distributed by OSG so these instructions get it from its original source.  Do these commands to install frontier-squid and frontier-awstats:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>rpm -i http://frontier.cern.ch/dist/rpms/RPMS/noarch/frontier-release-1.1-1.noarch.rpm
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>rpm -i http://frontier.cern.ch/dist/rpms/RPMS/noarch/frontier-release-1.1-1.noarch.rpm
 <span class="gp">root@host # </span>yum -y install frontier-squid frontier-awstats
 </code></pre></div>
-
 <h2 id="configuring">Configuring<a class="headerlink" href="#configuring" title="Permanent link">&para;</a></h2>
 <h3 id="configuring-the-system">Configuring the system<a class="headerlink" href="#configuring-the-system" title="Permanent link">&para;</a></h3>
 <p>Increase the default number of open file descriptors:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span><span class="nb">echo</span> -e <span class="s2">&quot;*\t\t-\tnofile\t\t16384&quot;</span> &gt;&gt;/etc/security/limits.conf 
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span><span class="nb">echo</span> -e <span class="s2">&quot;*\t\t-\tnofile\t\t16384&quot;</span> &gt;&gt;/etc/security/limits.conf 
 <span class="gp">root@host # </span><span class="nb">ulimit</span> -n <span class="m">16384</span>
 </code></pre></div>
-
 <p>In order for this to apply also interactively when logging in over ssh, the option <code>UsePAM</code> has to be set to <code>yes</code> in <code>/etc/ssh/sshd_config</code>.</p>
 <h3 id="configuring-cron">Configuring cron<a class="headerlink" href="#configuring-cron" title="Permanent link">&para;</a></h3>
 <p>First, create the log directory: </p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>mkdir -p /var/log/cvmfs
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>mkdir -p /var/log/cvmfs
 </code></pre></div>
-
 <p>Put the following in <code>/etc/cron.d/cvmfs</code>:</p>
-<div class="codehilite"><pre><span></span><code>*/5 * * * * root test -d /srv/cvmfs || exit;cvmfs_server snapshot -ai 
+<div class="highlight"><pre><span></span><code>*/5 * * * * root test -d /srv/cvmfs || exit;cvmfs_server snapshot -ai 
 6 1 * * * root cvmfs_server gc -af 2&gt;/dev/null || true
 0 9 * * * root find /srv/cvmfs/*.*/data/txn -name &quot;*.*&quot; -mtime +2 2&gt;/dev/null|xargs rm -f
 </code></pre></div>
-
 <p>Also, put the following in <code>/etc/logrotate.d/cvmfs</code>:</p>
-<div class="codehilite"><pre><span></span><code>/var/log/cvmfs/*.log {
+<div class="highlight"><pre><span></span><code>/var/log/cvmfs/*.log {
     weekly
     missingok
     notifempty
 }
 </code></pre></div>
-
 <h3 id="configuring-apache">Configuring apache<a class="headerlink" href="#configuring-apache" title="Permanent link">&para;</a></h3>
 <p>If you are installing frontier-squid, create <code>/etc/httpd/conf.d/cvmfs.conf</code> and put the following lines into it:</p>
-<div class="codehilite"><pre><span></span><code>Listen 8081 KeepAlive On
+<div class="highlight"><pre><span></span><code>Listen 8081 KeepAlive On
 </code></pre></div>
-
 <p>If you are not installing frontier-squid, instead put the following lines into that file:</p>
-<div class="codehilite"><pre><span></span><code>Listen 8000 KeepAlive On
+<div class="highlight"><pre><span></span><code>Listen 8000 KeepAlive On
 Listen 8080 KeepAlive On
 </code></pre></div>
-
 <p>Then enable apache:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>systemctl <span class="nb">enable</span> httpd
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>systemctl <span class="nb">enable</span> httpd
 <span class="gp">root@host # </span>systemctl start httpd
 </code></pre></div>
-
 <h3 id="configuring-frontier-squid">Configuring frontier-squid<a class="headerlink" href="#configuring-frontier-squid" title="Permanent link">&para;</a></h3>
 <p>Put the following in <code>/etc/squid/customize.sh</code> after the existing comment header:</p>
-<div class="codehilite"><pre><span></span><code><span class="nx">awk</span> <span class="o">--</span><span class="nx">file</span> <span class="err">`</span><span class="nx">dirname</span> <span class="o">$</span><span class="mi">0</span><span class="err">`</span><span class="o">/</span><span class="nx">customhelps</span><span class="p">.</span><span class="nx">awk</span> <span class="o">--</span><span class="nx">source</span> <span class="s1">&#39;{</span>
+<div class="highlight"><pre><span></span><code><span class="nx">awk</span> <span class="o">--</span><span class="nx">file</span> <span class="err">`</span><span class="nx">dirname</span> <span class="o">$</span><span class="mi">0</span><span class="err">`</span><span class="o">/</span><span class="nx">customhelps</span><span class="p">.</span><span class="nx">awk</span> <span class="o">--</span><span class="nx">source</span> <span class="s1">&#39;{</span>
 
 <span class="s1"># cache only api calls </span>
 <span class="s1">insertline(&quot;^http_access deny all&quot;, &quot;acl CVMFSAPI urlpath_regex ^/cvmfs/[^/]*/api/&quot;)</span>
@@ -2119,9 +2383,8 @@ Listen 8080 KeepAlive On
 <span class="s1">print</span>
 <span class="s1">}&#39;</span>
 </code></pre></div>
-
 <p>On EL7 and EL8 systems, make sure that firewalld is disabled and iptables-services is installed and enabled:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>systemctl stop firewalld
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>systemctl stop firewalld
 <span class="gp">root@host # </span>systemctl disable firewalld
 <span class="gp">root@host # </span>systemctl mask --now firewalld
 <span class="gp">root@host # </span>yum -y install iptables-services 
@@ -2130,19 +2393,16 @@ Listen 8080 KeepAlive On
 <span class="gp">root@host # </span>systemctl start ip6tables
 <span class="gp">root@host # </span>systemctl <span class="nb">enable</span> ip6tables
 </code></pre></div>
-
 <p>Forward port 80 to port 8000:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>iptables -t nat -A PREROUTING -p tcp -m tcp --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8000</span> 
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>iptables -t nat -A PREROUTING -p tcp -m tcp --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8000</span> 
 <span class="gp">root@host # </span>service iptables save
 <span class="gp">root@host # </span>ip6tables -t nat -A PREROUTING -p tcp -m tcp --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8000</span>
 <span class="gp">root@host # </span>service ip6tables save
 </code></pre></div>
-
 <p>Enable frontier-squid:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>systemctl <span class="nb">enable</span> frontier-squid
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>systemctl <span class="nb">enable</span> frontier-squid
 <span class="gp">root@host # </span>systemctl start frontier-squid
 </code></pre></div>
-
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The above configuration is for a single squid thread, which is fine for 1Gbit/s and possibly 2Gbit/s, but if higher bandwidth is needed, see the <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Running_multiple_squid_workers">instructions for running multiple squid workers</a>.</p>
@@ -2151,17 +2411,15 @@ Listen 8080 KeepAlive On
 <p>In order to verify that everything is installed correctly, create a repository replica. The repository chosen for the instructions below is the OSG config repository because it is very small, but you can use another one if you prefer.</p>
 <h3 id="adding-an-example-repository">Adding an example repository<a class="headerlink" href="#adding-an-example-repository" title="Permanent link">&para;</a></h3>
 <p>It's a good idea to make your own script for adding repository replicas, because there's always at least two commands to run, and it's easy to forget which commands to run. The commands are:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>cvmfs_server add-replica -o root http://oasis.opensciencegrid.org:8000/cvmfs/config-osg.opensciencegrid.org /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>cvmfs_server add-replica -o root http://oasis.opensciencegrid.org:8000/cvmfs/config-osg.opensciencegrid.org /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub
 <span class="gp">root@host # </span>cvmfs_server snapshot config-osg.opensciencegrid.org
 </code></pre></div>
-
 <p>With large repositories that can take a very long time, but with small repositories it should be very quick and not show any errors.</p>
 <h3 id="verifying-that-the-replica-is-being-served">Verifying that the replica is being served<a class="headerlink" href="#verifying-that-the-replica-is-being-served" title="Permanent link">&para;</a></h3>
 <p>Now to verify that the replication is working, do the following commands:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>wget -qdO- http://localhost:8000/cvmfs/config-osg.opensciencegrid.org/.cvmfspublished <span class="p">|</span> cat -v
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>wget -qdO- http://localhost:8000/cvmfs/config-osg.opensciencegrid.org/.cvmfspublished <span class="p">|</span> cat -v
 <span class="gp">root@host # </span>wget -qdO- http://localhost:80/cvmfs/config-osg.opensciencegrid.org/.cvmfspublished <span class="p">|</span> cat -v
 </code></pre></div>
-
 <p>Both commands should show a short file including gibberish at the end which is the signature.</p>
 <p>It is a good idea to familiarize yourself with the log entries at <code>/var/log/httpd/access_log</code> and also, if you have installed frontier-squid, at <code>/var/log/squid/access.log</code>. Also, at least 15 minutes after the snapshot is finished, check the log <code>/var/log/cvmfs/snapshots.log</code> to see that it tried to get an update and got no errors.</p>
 <h2 id="setting-up-monitoring">Setting up monitoring<a class="headerlink" href="#setting-up-monitoring" title="Permanent link">&para;</a></h2>
@@ -2171,11 +2429,6 @@ Listen 8080 KeepAlive On
 <p>Finally, install the <a href="https://github.com/cvmfs-contrib/cvmfs-servermon#readme">cvmfs-servermon package</a> so the stratum 1 can be watched for problems with repositories.</p>
 <h2 id="managing-replication">Managing replication<a class="headerlink" href="#managing-replication" title="Permanent link">&para;</a></h2>
 <p>Instead of manually managing replication it is highly recommended to use the <a href="https://github.com/cvmfs-contrib/cvmfs-manage-replicas#readme">cvmfs-manage-replicas package</a> which can automatically add repositories based on wildcards of repositories installed elsewhere.</p>
-                
-              
-              
-                
-
 
               
             </article>
@@ -2184,67 +2437,65 @@ Listen 8080 KeepAlive On
         
           <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
           </a>
         
       </main>
       
-        
-<footer class="md-footer">
+        <footer class="md-footer">
   
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
         
-          <a href="../install-gwms-frontend/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        <a href="../install-gwms-frontend/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Install GlideinWMS Frontend" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Install GlideinWMS Frontend
             </div>
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Install GlideinWMS Frontend
-              </div>
-            </div>
-          </a>
+          </div>
+        </a>
+      
+      
         
-        
-          <a href="../troubleshooting-gratia/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Troubleshooting Gratia
-              </div>
+        <a href="../troubleshooting-gratia/" class="md-footer__link md-footer__link--next" aria-label="Next: Troubleshooting Gratia" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Troubleshooting Gratia
             </div>
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-        This material is based upon work supported by the
-        <a href="https://nsf.gov">National Science Foundation</a>
-        under Grant Nos.
-        <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1148698">1148698</a>
-        , 
-        <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1836650">1836650</a>
-        , and 
-        <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2030508">2030508</a>
-        . Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
-        Made with
-        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-          Material for MkDocs
-        </a>
-
-      </div>
+      <div>
+    This material is based upon work supported by the
+    <a href="https://nsf.gov">National Science Foundation</a>
+    under Grant Nos.
+    <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1148698">1148698</a>
+    ,
+    <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1836650">1836650</a>
+    , and
+    <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2030508">2030508</a>
+    . Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+        Material for MkDocs
+    </a>
+</div>
       
     </div>
   </div>
@@ -2254,10 +2505,10 @@ Listen 8080 KeepAlive On
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.top"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.5e67fbfe.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d892486b.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c44cc438.min.js"></script>
       
     
   </body>

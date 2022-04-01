@@ -8,11 +8,10 @@
       
       
       
-      
         <link rel="canonical" href="https://opensciencegrid.org/docs/worker-node/install-wn-tarball/">
       
       <link rel="icon" href="../../img/favicon.ico">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.0">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.8">
     
     
       
@@ -20,32 +19,40 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.33e2939f.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.644de097.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ef6f36e2.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
         
       
     
     
     
       
+        
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
-    
     
     
       <link rel="stylesheet" href="../../css/extra.css">
     
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-        
-<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-69012-29","opensciencegrid.github.io"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
-<script async src="https://www.google-analytics.com/analytics.js"></script>
-      
+  
+
+
+  
+  
+
+
+  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-69012-29","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+  <script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
     
     
   </head>
@@ -59,7 +66,6 @@
     <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
   
     
-    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -76,7 +82,10 @@
       
     </div>
     
-      <header class="md-header" data-md-component="header">
+    
+      
+
+<header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="OSG Site Documentation" class="md-header__button md-logo" aria-label="OSG Site Documentation" data-md-component="logo">
       
@@ -109,19 +118,22 @@
       <label class="md-header__button md-icon" for="__search">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
       </label>
-      
-<div class="md-search" data-md-component="search" role="dialog">
+      <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
       </label>
-      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
-      </button>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
@@ -138,11 +150,10 @@
     
     
       <div class="md-header__source">
-        
-<a href="https://github.com/opensciencegrid/docs/" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/opensciencegrid/docs/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -151,11 +162,14 @@
       </div>
     
   </nav>
+  
 </header>
     
     <div class="md-container" data-md-component="container">
       
       
+        
+          
         
       
       <main class="md-main" data-md-component="main">
@@ -181,11 +195,10 @@
   </label>
   
     <div class="md-nav__source">
-      
-<a href="https://github.com/opensciencegrid/docs/" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/opensciencegrid/docs/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -302,10 +315,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
       
-      <label class="md-nav__link" for="__nav_7">
-        Resource Sharing
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Resource Sharing
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Resource Sharing" data-md-level="1">
         <label class="md-nav__title" for="__nav_7">
           <span class="md-nav__icon md-icon"></span>
@@ -314,6 +331,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
     
@@ -325,10 +343,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1" type="checkbox" id="__nav_7_1" checked>
       
-      <label class="md-nav__link" for="__nav_7_1">
-        Compute
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_1">
+          Compute
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Compute" data-md-level="2">
         <label class="md-nav__title" for="__nav_7_1">
           <span class="md-nav__icon md-icon"></span>
@@ -337,6 +359,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -347,8 +370,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -358,10 +383,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1_2" type="checkbox" id="__nav_7_1_2" >
       
-      <label class="md-nav__link" for="__nav_7_1_2">
-        Pilot Containers
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_1_2">
+          Pilot Containers
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Pilot Containers" data-md-level="3">
         <label class="md-nav__title" for="__nav_7_1_2">
           <span class="md-nav__icon md-icon"></span>
@@ -370,6 +399,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -380,8 +410,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -392,14 +424,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -409,10 +444,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1_3" type="checkbox" id="__nav_7_1_3" >
       
-      <label class="md-nav__link" for="__nav_7_1_3">
-        Compute Entrypoint
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_1_3">
+          Compute Entrypoint
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Compute Entrypoint" data-md-level="3">
         <label class="md-nav__title" for="__nav_7_1_3">
           <span class="md-nav__icon md-icon"></span>
@@ -421,6 +460,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -431,8 +471,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -443,8 +485,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -455,14 +499,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
     
@@ -474,10 +521,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1_4" type="checkbox" id="__nav_7_1_4" checked>
       
-      <label class="md-nav__link" for="__nav_7_1_4">
-        Worker Node
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_1_4">
+          Worker Node
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Worker Node" data-md-level="3">
         <label class="md-nav__title" for="__nav_7_1_4">
           <span class="md-nav__icon md-icon"></span>
@@ -486,6 +537,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -496,8 +548,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -508,8 +562,10 @@
     </li>
   
 
+            
           
             
+              
   
   
     
@@ -518,6 +574,7 @@
     <li class="md-nav__item md-nav__item--active">
       
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
       
         
       
@@ -532,7 +589,9 @@
       </a>
       
         
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
   
   
     
@@ -613,8 +672,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -625,8 +686,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -637,8 +700,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -649,8 +714,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -661,20 +728,24 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -684,10 +755,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_2" type="checkbox" id="__nav_7_2" >
       
-      <label class="md-nav__link" for="__nav_7_2">
-        Data
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_2">
+          Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Data" data-md-level="2">
         <label class="md-nav__title" for="__nav_7_2">
           <span class="md-nav__icon md-icon"></span>
@@ -696,6 +771,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -705,10 +781,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_2_1" type="checkbox" id="__nav_7_2_1" >
       
-      <label class="md-nav__link" for="__nav_7_2_1">
-        HTTP & OASIS
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_2_1">
+          HTTP & OASIS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="HTTP & OASIS" data-md-level="3">
         <label class="md-nav__title" for="__nav_7_2_1">
           <span class="md-nav__icon md-icon"></span>
@@ -717,6 +797,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -727,8 +808,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -739,8 +822,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -751,8 +836,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -763,14 +850,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -780,10 +870,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_2_2" type="checkbox" id="__nav_7_2_2" >
       
-      <label class="md-nav__link" for="__nav_7_2_2">
-        XRootD
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_2_2">
+          XRootD
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="XRootD" data-md-level="3">
         <label class="md-nav__title" for="__nav_7_2_2">
           <span class="md-nav__icon md-icon"></span>
@@ -792,6 +886,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -802,8 +897,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -814,8 +911,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -826,8 +925,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -838,8 +939,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -850,8 +953,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -862,20 +967,24 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -885,10 +994,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_3" type="checkbox" id="__nav_7_3" >
       
-      <label class="md-nav__link" for="__nav_7_3">
-        Other
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_3">
+          Other
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Other" data-md-level="2">
         <label class="md-nav__title" for="__nav_7_3">
           <span class="md-nav__icon md-icon"></span>
@@ -897,6 +1010,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -907,8 +1021,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -919,8 +1035,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -931,8 +1049,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -943,8 +1063,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -955,8 +1077,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -967,14 +1091,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -984,10 +1111,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_4" type="checkbox" id="__nav_7_4" >
       
-      <label class="md-nav__link" for="__nav_7_4">
-        Deprecated
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_4">
+          Deprecated
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Deprecated" data-md-level="2">
         <label class="md-nav__title" for="__nav_7_4">
           <span class="md-nav__icon md-icon"></span>
@@ -996,6 +1127,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1005,10 +1137,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_4_1" type="checkbox" id="__nav_7_4_1" >
       
-      <label class="md-nav__link" for="__nav_7_4_1">
-        POSIX Storage
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_4_1">
+          POSIX Storage
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="POSIX Storage" data-md-level="3">
         <label class="md-nav__title" for="__nav_7_4_1">
           <span class="md-nav__icon md-icon"></span>
@@ -1017,6 +1153,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1027,8 +1164,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1039,14 +1178,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1056,10 +1198,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_4_2" type="checkbox" id="__nav_7_4_2" >
       
-      <label class="md-nav__link" for="__nav_7_4_2">
-        HDFS
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_4_2">
+          HDFS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="HDFS" data-md-level="3">
         <label class="md-nav__title" for="__nav_7_4_2">
           <span class="md-nav__icon md-icon"></span>
@@ -1068,6 +1214,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1078,8 +1225,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1090,14 +1239,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1107,10 +1259,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_4_3" type="checkbox" id="__nav_7_4_3" >
       
-      <label class="md-nav__link" for="__nav_7_4_3">
-        Security
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_4_3">
+          Security
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Security" data-md-level="3">
         <label class="md-nav__title" for="__nav_7_4_3">
           <span class="md-nav__icon md-icon"></span>
@@ -1119,6 +1275,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1129,8 +1286,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1141,14 +1300,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1159,8 +1321,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1171,8 +1335,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1183,8 +1349,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1195,8 +1363,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1207,12 +1377,14 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
         </ul>
       </nav>
@@ -1235,10 +1407,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
       
-      <label class="md-nav__link" for="__nav_8">
-        Access Point
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          Access Point
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Access Point" data-md-level="1">
         <label class="md-nav__title" for="__nav_8">
           <span class="md-nav__icon md-icon"></span>
@@ -1247,6 +1423,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1257,8 +1434,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1269,6 +1448,7 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
@@ -1291,10 +1471,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
       
-      <label class="md-nav__link" for="__nav_9">
-        Data Federation
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          Data Federation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Data Federation" data-md-level="1">
         <label class="md-nav__title" for="__nav_9">
           <span class="md-nav__icon md-icon"></span>
@@ -1303,6 +1487,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1313,8 +1498,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1324,10 +1511,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_2" type="checkbox" id="__nav_9_2" >
       
-      <label class="md-nav__link" for="__nav_9_2">
-        Data Cache
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_2">
+          Data Cache
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Data Cache" data-md-level="2">
         <label class="md-nav__title" for="__nav_9_2">
           <span class="md-nav__icon md-icon"></span>
@@ -1336,6 +1527,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1346,8 +1538,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1358,14 +1552,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1375,10 +1572,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_3" type="checkbox" id="__nav_9_3" >
       
-      <label class="md-nav__link" for="__nav_9_3">
-        Data Origin
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_3">
+          Data Origin
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Data Origin" data-md-level="2">
         <label class="md-nav__title" for="__nav_9_3">
           <span class="md-nav__icon md-icon"></span>
@@ -1387,6 +1588,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1397,8 +1599,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1409,8 +1613,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1421,12 +1627,14 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
         </ul>
       </nav>
@@ -1449,10 +1657,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
       
-      <label class="md-nav__link" for="__nav_10">
-        Releases
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10">
+          Releases
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Releases" data-md-level="1">
         <label class="md-nav__title" for="__nav_10">
           <span class="md-nav__icon md-icon"></span>
@@ -1461,6 +1673,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1471,8 +1684,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1482,10 +1697,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_2" type="checkbox" id="__nav_10_2" >
       
-      <label class="md-nav__link" for="__nav_10_2">
-        OSG 3.5
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10_2">
+          OSG 3.5
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="OSG 3.5" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_2">
           <span class="md-nav__icon md-icon"></span>
@@ -1494,6 +1713,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1504,8 +1724,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1516,14 +1738,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1533,10 +1758,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_3" type="checkbox" id="__nav_10_3" >
       
-      <label class="md-nav__link" for="__nav_10_3">
-        OSG 3.6
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10_3">
+          OSG 3.6
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="OSG 3.6" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_3">
           <span class="md-nav__icon md-icon"></span>
@@ -1545,6 +1774,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1555,8 +1785,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1567,14 +1799,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1585,8 +1820,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1597,8 +1834,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1609,8 +1848,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1621,6 +1862,7 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
@@ -1643,10 +1885,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11" type="checkbox" id="__nav_11" >
       
-      <label class="md-nav__link" for="__nav_11">
-        Tokens
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_11">
+          Tokens
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Tokens" data-md-level="1">
         <label class="md-nav__title" for="__nav_11">
           <span class="md-nav__icon md-icon"></span>
@@ -1655,6 +1901,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1665,8 +1912,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1677,6 +1926,7 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
@@ -1699,10 +1949,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
       
-      <label class="md-nav__link" for="__nav_12">
-        CA Certificates
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12">
+          CA Certificates
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="CA Certificates" data-md-level="1">
         <label class="md-nav__title" for="__nav_12">
           <span class="md-nav__icon md-icon"></span>
@@ -1711,6 +1965,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1721,8 +1976,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1733,8 +1990,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1744,10 +2003,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12_3" type="checkbox" id="__nav_12_3" >
       
-      <label class="md-nav__link" for="__nav_12_3">
-        Host Certificates
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12_3">
+          Host Certificates
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Host Certificates" data-md-level="2">
         <label class="md-nav__title" for="__nav_12_3">
           <span class="md-nav__icon md-icon"></span>
@@ -1756,6 +2019,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1766,8 +2030,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1778,8 +2044,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1790,12 +2058,14 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
         </ul>
       </nav>
@@ -1815,7 +2085,9 @@
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
   
   
     
@@ -1901,12 +2173,13 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/worker-node/install-wn-tarball.md" title="Edit this page" class="md-content__button md-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
-                  </a>
-                
-                
-                <h1 id="installing-the-worker-node-client-via-tarball">Installing the Worker Node Client via Tarball<a class="headerlink" href="#installing-the-worker-node-client-via-tarball" title="Permanent link">&para;</a></h1>
+<a href="https://github.com/opensciencegrid/docs/edit/master/docs/worker-node/install-wn-tarball.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+
+<h1 id="installing-the-worker-node-client-via-tarball">Installing the Worker Node Client via Tarball<a class="headerlink" href="#installing-the-worker-node-client-via-tarball" title="Permanent link">&para;</a></h1>
 <p>The <strong>OSG Worker Node Client</strong> is a collection of software components that is expected to be added to every worker node
 that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect
 to use. Contents of the worker node client can be found <a href="../install-wn/#worker-node-contents">here</a>.</p>
@@ -1949,7 +2222,7 @@ If not present, install by running <code>yum install perl</code> as root.</p>
 <p>Once <code>osg-post-install</code> is run to relocate the install, it cannot be run again.  You will need to unpack a fresh copy.</p>
 </div>
 <p>Example installation (in <code>/home/user/test-install</code>, the <strong><code>&lt;PATH_TO_CLIENT&gt;/</code></strong> is <code>/home/user/test-install/osg-wn-client</code> ):</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>mkdir /home/user/test-install
+<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>mkdir /home/user/test-install
 <span class="gp">user@host $ </span><span class="nb">cd</span> /home/user/test-install
 <span class="gp">user@host $ </span>wget https://repo.opensciencegrid.org/tarball-install/3.5/osg-wn-client-latest.el7.x86_64.tar.gz
 <span class="gp">user@host $ </span>tar xzf osg-wn-client-latest.el7.x86_64.tar.gz
@@ -1959,7 +2232,6 @@ If not present, install by running <code>yum install perl</code> as root.</p>
 <span class="gp">user@host $ </span>osg-ca-manage setupCA --url osg
 <span class="gp">user@host $ </span>fetch-crl
 </code></pre></div>
-
 <h2 id="configure-the-ce">Configure the CE<a class="headerlink" href="#configure-the-ce" title="Permanent link">&para;</a></h2>
 <p>Using the wn-client software installed from the tarball will require a few changes on the compute entrypoint so that the resource's configuration can be correctly reported.</p>
 <p>Set <code>grid_dir</code> in the <code>Storage</code> section of your OSG-Configure configs: <a href="../../other/configuration-with-osg-configure/#storage">CE configuration instructions</a>. <code>grid_dir</code> is used as the <code>$OSG_GRID</code> environment variable in running jobs - see the <a href="../using-wn/">worker node environment document</a>. Pilot jobs source <code>$OSG_GRID/setup.sh</code> before performing any work. The value set for <code>grid_dir</code> must be the path of the wn-client installation directory. This is the path returned by <strong><code>echo $OSG_LOCATION</code></strong> once you source the setup file created by this installation.</p>
@@ -1968,18 +2240,16 @@ If not present, install by running <code>yum install perl</code> as root.</p>
 <h3 id="auto-updating-certificates-and-crls">Auto-updating certificates and CRLs<a class="headerlink" href="#auto-updating-certificates-and-crls" title="Permanent link">&para;</a></h3>
 <p>You must create cron jobs to run <code>fetch-crl</code> and <code>osg-update-certs</code> to update your CRLs and certificates automatically.</p>
 <p>Here is what they should look like. (Note: fill in <code>&lt;OSG_LOCATION&gt;</code> with the full path of your tarball install, including <code>osg-wn-client</code> that is created by the tarball).</p>
-<div class="codehilite"><pre><span></span><code># Cron job to update certs.
+<div class="highlight"><pre><span></span><code># Cron job to update certs.
 # Runs every hour by default, though does not update certs until they&#39;re at
 # least 24 hours old.  There is a random sleep time for up to 45 minutes (2700
 # seconds) to avoid overloading cert servers.
 10 * * * *   ( . &lt;OSG_LOCATION&gt;/setup.sh &amp;&amp; osg-update-certs --random-sleep 2700 --called-from-cron )
 </code></pre></div>
-
-<div class="codehilite"><pre><span></span><code># Cron job to update CRLs
+<div class="highlight"><pre><span></span><code># Cron job to update CRLs
 # Runs every 6 hours at, 45 minutes +/- 3 minutes.
 42 */6 * * *   ( . &lt;OSG_LOCATION&gt;/setup.sh &amp;&amp; fetch-crl -q -r 360 )
 </code></pre></div>
-
 <p>You might want to configure proxy settings in <code>$OSG_LOCATION/etc/fetch-crl.conf</code>.</p>
 <h3 id="enabling-and-disabling-services">Enabling and Disabling Services<a class="headerlink" href="#enabling-and-disabling-services" title="Permanent link">&para;</a></h3>
 <p>To enable the CRL updates, you must edit your cron with <strong><code>crontab -e</code></strong> and add the lines above.  To disable, remove
@@ -1992,11 +2262,6 @@ the lines from the <code>crontab</code>.</p>
 </ol>
 <h2 id="how-to-get-help">How to get Help?<a class="headerlink" href="#how-to-get-help" title="Permanent link">&para;</a></h2>
 <p>To get assistance please use this <a href="../../common/help/">Help Procedure</a>.</p>
-                
-              
-              
-                
-
 
               
             </article>
@@ -2005,67 +2270,65 @@ the lines from the <code>crontab</code>.</p>
         
           <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
           </a>
         
       </main>
       
-        
-<footer class="md-footer">
+        <footer class="md-footer">
   
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
         
-          <a href="../install-wn/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        <a href="../install-wn/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Install from RPM" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Install from RPM
             </div>
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Install from RPM
-              </div>
-            </div>
-          </a>
+          </div>
+        </a>
+      
+      
         
-        
-          <a href="../install-wn-oasis/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Install from OASIS
-              </div>
+        <a href="../install-wn-oasis/" class="md-footer__link md-footer__link--next" aria-label="Next: Install from OASIS" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Install from OASIS
             </div>
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-        This material is based upon work supported by the
-        <a href="https://nsf.gov">National Science Foundation</a>
-        under Grant Nos.
-        <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1148698">1148698</a>
-        , 
-        <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1836650">1836650</a>
-        , and 
-        <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2030508">2030508</a>
-        . Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
-        Made with
-        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-          Material for MkDocs
-        </a>
-
-      </div>
+      <div>
+    This material is based upon work supported by the
+    <a href="https://nsf.gov">National Science Foundation</a>
+    under Grant Nos.
+    <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1148698">1148698</a>
+    ,
+    <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1836650">1836650</a>
+    , and
+    <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2030508">2030508</a>
+    . Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+        Material for MkDocs
+    </a>
+</div>
       
     </div>
   </div>
@@ -2075,10 +2338,10 @@ the lines from the <code>crontab</code>.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.top"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.5e67fbfe.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d892486b.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c44cc438.min.js"></script>
       
     
   </body>

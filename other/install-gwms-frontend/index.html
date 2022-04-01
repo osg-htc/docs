@@ -8,11 +8,10 @@
       
       
       
-      
         <link rel="canonical" href="https://opensciencegrid.org/docs/other/install-gwms-frontend/">
       
       <link rel="icon" href="../../img/favicon.ico">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.0">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.8">
     
     
       
@@ -20,32 +19,40 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.33e2939f.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.644de097.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ef6f36e2.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
         
       
     
     
     
       
+        
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
-    
     
     
       <link rel="stylesheet" href="../../css/extra.css">
     
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-        
-<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-69012-29","opensciencegrid.github.io"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
-<script async src="https://www.google-analytics.com/analytics.js"></script>
-      
+  
+
+
+  
+  
+
+
+  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-69012-29","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+  <script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
     
     
   </head>
@@ -59,7 +66,6 @@
     <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
   
     
-    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -76,7 +82,10 @@
       
     </div>
     
-      <header class="md-header" data-md-component="header">
+    
+      
+
+<header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="OSG Site Documentation" class="md-header__button md-logo" aria-label="OSG Site Documentation" data-md-component="logo">
       
@@ -109,19 +118,22 @@
       <label class="md-header__button md-icon" for="__search">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
       </label>
-      
-<div class="md-search" data-md-component="search" role="dialog">
+      <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
       </label>
-      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
-      </button>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
@@ -138,11 +150,10 @@
     
     
       <div class="md-header__source">
-        
-<a href="https://github.com/opensciencegrid/docs/" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/opensciencegrid/docs/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -151,11 +162,14 @@
       </div>
     
   </nav>
+  
 </header>
     
     <div class="md-container" data-md-component="container">
       
       
+        
+          
         
       
       <main class="md-main" data-md-component="main">
@@ -181,11 +195,10 @@
   </label>
   
     <div class="md-nav__source">
-      
-<a href="https://github.com/opensciencegrid/docs/" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/opensciencegrid/docs/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -302,10 +315,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
       
-      <label class="md-nav__link" for="__nav_7">
-        Resource Sharing
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Resource Sharing
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Resource Sharing" data-md-level="1">
         <label class="md-nav__title" for="__nav_7">
           <span class="md-nav__icon md-icon"></span>
@@ -314,6 +331,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -323,10 +341,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1" type="checkbox" id="__nav_7_1" >
       
-      <label class="md-nav__link" for="__nav_7_1">
-        Compute
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_1">
+          Compute
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Compute" data-md-level="2">
         <label class="md-nav__title" for="__nav_7_1">
           <span class="md-nav__icon md-icon"></span>
@@ -335,6 +357,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -345,8 +368,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -356,10 +381,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1_2" type="checkbox" id="__nav_7_1_2" >
       
-      <label class="md-nav__link" for="__nav_7_1_2">
-        Pilot Containers
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_1_2">
+          Pilot Containers
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Pilot Containers" data-md-level="3">
         <label class="md-nav__title" for="__nav_7_1_2">
           <span class="md-nav__icon md-icon"></span>
@@ -368,6 +397,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -378,8 +408,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -390,14 +422,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -407,10 +442,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1_3" type="checkbox" id="__nav_7_1_3" >
       
-      <label class="md-nav__link" for="__nav_7_1_3">
-        Compute Entrypoint
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_1_3">
+          Compute Entrypoint
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Compute Entrypoint" data-md-level="3">
         <label class="md-nav__title" for="__nav_7_1_3">
           <span class="md-nav__icon md-icon"></span>
@@ -419,6 +458,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -429,8 +469,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -441,8 +483,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -453,14 +497,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -470,10 +517,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1_4" type="checkbox" id="__nav_7_1_4" >
       
-      <label class="md-nav__link" for="__nav_7_1_4">
-        Worker Node
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_1_4">
+          Worker Node
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Worker Node" data-md-level="3">
         <label class="md-nav__title" for="__nav_7_1_4">
           <span class="md-nav__icon md-icon"></span>
@@ -482,6 +533,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -492,8 +544,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -504,8 +558,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -516,8 +572,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -528,8 +586,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -540,8 +600,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -552,8 +614,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -564,20 +628,24 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -587,10 +655,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_2" type="checkbox" id="__nav_7_2" >
       
-      <label class="md-nav__link" for="__nav_7_2">
-        Data
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_2">
+          Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Data" data-md-level="2">
         <label class="md-nav__title" for="__nav_7_2">
           <span class="md-nav__icon md-icon"></span>
@@ -599,6 +671,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -608,10 +681,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_2_1" type="checkbox" id="__nav_7_2_1" >
       
-      <label class="md-nav__link" for="__nav_7_2_1">
-        HTTP & OASIS
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_2_1">
+          HTTP & OASIS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="HTTP & OASIS" data-md-level="3">
         <label class="md-nav__title" for="__nav_7_2_1">
           <span class="md-nav__icon md-icon"></span>
@@ -620,6 +697,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -630,8 +708,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -642,8 +722,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -654,8 +736,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -666,14 +750,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -683,10 +770,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_2_2" type="checkbox" id="__nav_7_2_2" >
       
-      <label class="md-nav__link" for="__nav_7_2_2">
-        XRootD
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_2_2">
+          XRootD
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="XRootD" data-md-level="3">
         <label class="md-nav__title" for="__nav_7_2_2">
           <span class="md-nav__icon md-icon"></span>
@@ -695,6 +786,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -705,8 +797,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -717,8 +811,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -729,8 +825,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -741,8 +839,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -753,8 +853,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -765,20 +867,24 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
     
@@ -790,10 +896,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_3" type="checkbox" id="__nav_7_3" checked>
       
-      <label class="md-nav__link" for="__nav_7_3">
-        Other
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_3">
+          Other
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Other" data-md-level="2">
         <label class="md-nav__title" for="__nav_7_3">
           <span class="md-nav__icon md-icon"></span>
@@ -802,6 +912,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -812,8 +923,10 @@
     </li>
   
 
+            
           
             
+              
   
   
     
@@ -822,6 +935,7 @@
     <li class="md-nav__item md-nav__item--active">
       
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
       
         
       
@@ -836,7 +950,9 @@
       </a>
       
         
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
   
   
     
@@ -1284,8 +1400,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1296,8 +1414,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1308,8 +1428,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1320,8 +1442,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1332,14 +1456,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1349,10 +1476,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_4" type="checkbox" id="__nav_7_4" >
       
-      <label class="md-nav__link" for="__nav_7_4">
-        Deprecated
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_4">
+          Deprecated
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Deprecated" data-md-level="2">
         <label class="md-nav__title" for="__nav_7_4">
           <span class="md-nav__icon md-icon"></span>
@@ -1361,6 +1492,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1370,10 +1502,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_4_1" type="checkbox" id="__nav_7_4_1" >
       
-      <label class="md-nav__link" for="__nav_7_4_1">
-        POSIX Storage
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_4_1">
+          POSIX Storage
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="POSIX Storage" data-md-level="3">
         <label class="md-nav__title" for="__nav_7_4_1">
           <span class="md-nav__icon md-icon"></span>
@@ -1382,6 +1518,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1392,8 +1529,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1404,14 +1543,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1421,10 +1563,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_4_2" type="checkbox" id="__nav_7_4_2" >
       
-      <label class="md-nav__link" for="__nav_7_4_2">
-        HDFS
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_4_2">
+          HDFS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="HDFS" data-md-level="3">
         <label class="md-nav__title" for="__nav_7_4_2">
           <span class="md-nav__icon md-icon"></span>
@@ -1433,6 +1579,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1443,8 +1590,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1455,14 +1604,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1472,10 +1624,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_4_3" type="checkbox" id="__nav_7_4_3" >
       
-      <label class="md-nav__link" for="__nav_7_4_3">
-        Security
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_4_3">
+          Security
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Security" data-md-level="3">
         <label class="md-nav__title" for="__nav_7_4_3">
           <span class="md-nav__icon md-icon"></span>
@@ -1484,6 +1640,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1494,8 +1651,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1506,14 +1665,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1524,8 +1686,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1536,8 +1700,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1548,8 +1714,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1560,8 +1728,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1572,12 +1742,14 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
         </ul>
       </nav>
@@ -1600,10 +1772,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
       
-      <label class="md-nav__link" for="__nav_8">
-        Access Point
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          Access Point
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Access Point" data-md-level="1">
         <label class="md-nav__title" for="__nav_8">
           <span class="md-nav__icon md-icon"></span>
@@ -1612,6 +1788,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1622,8 +1799,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1634,6 +1813,7 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
@@ -1656,10 +1836,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
       
-      <label class="md-nav__link" for="__nav_9">
-        Data Federation
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          Data Federation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Data Federation" data-md-level="1">
         <label class="md-nav__title" for="__nav_9">
           <span class="md-nav__icon md-icon"></span>
@@ -1668,6 +1852,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1678,8 +1863,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1689,10 +1876,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_2" type="checkbox" id="__nav_9_2" >
       
-      <label class="md-nav__link" for="__nav_9_2">
-        Data Cache
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_2">
+          Data Cache
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Data Cache" data-md-level="2">
         <label class="md-nav__title" for="__nav_9_2">
           <span class="md-nav__icon md-icon"></span>
@@ -1701,6 +1892,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1711,8 +1903,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1723,14 +1917,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1740,10 +1937,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_3" type="checkbox" id="__nav_9_3" >
       
-      <label class="md-nav__link" for="__nav_9_3">
-        Data Origin
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_3">
+          Data Origin
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Data Origin" data-md-level="2">
         <label class="md-nav__title" for="__nav_9_3">
           <span class="md-nav__icon md-icon"></span>
@@ -1752,6 +1953,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1762,8 +1964,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1774,8 +1978,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1786,12 +1992,14 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
         </ul>
       </nav>
@@ -1814,10 +2022,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
       
-      <label class="md-nav__link" for="__nav_10">
-        Releases
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10">
+          Releases
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Releases" data-md-level="1">
         <label class="md-nav__title" for="__nav_10">
           <span class="md-nav__icon md-icon"></span>
@@ -1826,6 +2038,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1836,8 +2049,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1847,10 +2062,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_2" type="checkbox" id="__nav_10_2" >
       
-      <label class="md-nav__link" for="__nav_10_2">
-        OSG 3.5
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10_2">
+          OSG 3.5
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="OSG 3.5" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_2">
           <span class="md-nav__icon md-icon"></span>
@@ -1859,6 +2078,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1869,8 +2089,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1881,14 +2103,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1898,10 +2123,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_3" type="checkbox" id="__nav_10_3" >
       
-      <label class="md-nav__link" for="__nav_10_3">
-        OSG 3.6
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10_3">
+          OSG 3.6
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="OSG 3.6" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_3">
           <span class="md-nav__icon md-icon"></span>
@@ -1910,6 +2139,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -1920,8 +2150,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1932,14 +2164,17 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1950,8 +2185,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1962,8 +2199,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1974,8 +2213,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -1986,6 +2227,7 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
@@ -2008,10 +2250,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11" type="checkbox" id="__nav_11" >
       
-      <label class="md-nav__link" for="__nav_11">
-        Tokens
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_11">
+          Tokens
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Tokens" data-md-level="1">
         <label class="md-nav__title" for="__nav_11">
           <span class="md-nav__icon md-icon"></span>
@@ -2020,6 +2266,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -2030,8 +2277,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -2042,6 +2291,7 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
@@ -2064,10 +2314,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
       
-      <label class="md-nav__link" for="__nav_12">
-        CA Certificates
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12">
+          CA Certificates
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="CA Certificates" data-md-level="1">
         <label class="md-nav__title" for="__nav_12">
           <span class="md-nav__icon md-icon"></span>
@@ -2076,6 +2330,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -2086,8 +2341,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -2098,8 +2355,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -2109,10 +2368,14 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12_3" type="checkbox" id="__nav_12_3" >
       
-      <label class="md-nav__link" for="__nav_12_3">
-        Host Certificates
-        <span class="md-nav__icon md-icon"></span>
-      </label>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12_3">
+          Host Certificates
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <nav class="md-nav" aria-label="Host Certificates" data-md-level="2">
         <label class="md-nav__title" for="__nav_12_3">
           <span class="md-nav__icon md-icon"></span>
@@ -2121,6 +2384,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -2131,8 +2395,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -2143,8 +2409,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -2155,12 +2423,14 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
     </li>
   
 
+            
           
         </ul>
       </nav>
@@ -2180,7 +2450,9 @@
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
   
   
     
@@ -2633,12 +2905,13 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/other/install-gwms-frontend.md" title="Edit this page" class="md-content__button md-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
-                  </a>
-                
-                
-                <h1 id="glideinwms-vo-frontend-installation">GlideinWMS VO Frontend Installation<a class="headerlink" href="#glideinwms-vo-frontend-installation" title="Permanent link">&para;</a></h1>
+<a href="https://github.com/opensciencegrid/docs/edit/master/docs/other/install-gwms-frontend.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+
+<h1 id="glideinwms-vo-frontend-installation">GlideinWMS VO Frontend Installation<a class="headerlink" href="#glideinwms-vo-frontend-installation" title="Permanent link">&para;</a></h1>
 <p>This document describes how to install the Glidein Workflow Managment System
 (GlideinWMS) VO Frontend for use with the OSG Glidein factory. This software is
 the minimum requirement for a VO to use GlideinWMS.</p>
@@ -2689,8 +2962,8 @@ and did not support using shared port for the secondary collectors.
 If you are upgrading a standalone access point from version 3.4 or earlier, the default open
 port has changed from 9615 to 9618, and you need to update your firewall rules to reflect this change.
 You can figure out which port will be used by running the following command:</p>
-<p><code>console
- condor_config_val SHARED_PORT_ARGS</code></p>
+<div class="highlight"><pre><span></span><code><span class="go"> condor_config_val SHARED_PORT_ARGS</span>
+</code></pre></div>
 </div>
 <p>For more detailed information, see <a href="#configuring-glideinwms-frontend">Configuring GlideinWMS Frontend</a>.</p>
 <p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
@@ -2769,19 +3042,16 @@ request to the GlideinWMS Factory.</p>
 <h3 id="installing-htcondor">Installing HTCondor<a class="headerlink" href="#installing-htcondor" title="Permanent link">&para;</a></h3>
 <p>If you don't have HTCondor already installed, you can install the HTCondor RPM
 from the OSG repository:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install condor.x86_64
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum install condor.x86_64
 </code></pre></div>
-
 <p>If you already have installed HTCondor using a tarball or a source other than
 the OSG ROM, you will need to install the empty-condor RPM:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install empty-condor --enablerepo<span class="o">=</span>osg-empty
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum install empty-condor --enablerepo<span class="o">=</span>osg-empty
 </code></pre></div>
-
 <h3 id="installing-the-vo-frontend-rpm">Installing the VO Frontend RPM<a class="headerlink" href="#installing-the-vo-frontend-rpm" title="Permanent link">&para;</a></h3>
 <p>Install the RPM and dependencies (be prepared for a lot of dependencies).</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install glideinwms-vofrontend
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum install glideinwms-vofrontend
 </code></pre></div>
-
 <p>This will install the current production release verified and tested by OSG with
 default HTCondor configuration. This command will install the GlideinWMS
 vofrontend, HTCondor, the OSG client, and all the required dependencies all on one
@@ -2799,11 +3069,10 @@ GlideinWMS services on one node.</p>
 consider splitting the user collector, user submit, and vo frontend
 services. This can be doing using the following three commands (on different
 machines):</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install glideinwms-vofrontend-standalone
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum install glideinwms-vofrontend-standalone
 <span class="gp">root@host # </span>yum install glideinwms-usercollector
 <span class="gp">root@host # </span>yum install glideinwms-userschedd
 </code></pre></div>
-
 <p>In addition, you will need to perform the following steps:</p>
 <ul>
 <li>On the vofrontend and userschedd, modify <code>CONDOR_HOST</code> to point to your usercollector. This is in <code>/etc/condor/config.d/00_gwms_general.config</code>. You can also override this value by placing it in a new config file. (For instance, <code>/etc/condor/config.d/99_local_custom.config</code> to avoid rpmsave/rpmnew conflicts on upgrades).</li>
@@ -2955,7 +3224,7 @@ version name should include "osg", e.g. <code>8.6.4-3.osg.el7</code>.</p>
 </ul>
 <p>In general if you are using a non OSG RPM or if you added custom configuration
 files for HTCondor please check the order of the configuration files:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>condor_config_val -config
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>condor_config_val -config
 <span class="go">Configuration source:</span>
 <span class="go">    /etc/condor/condor_config</span>
 <span class="go">Local configuration sources:</span>
@@ -2967,7 +3236,6 @@ files for HTCondor please check the order of the configuration files:</p>
 <span class="go">    /etc/condor/config.d/90_gwms_dns.config</span>
 <span class="go">    /etc/condor/condor_config.local</span>
 </code></pre></div>
-
 <p>If, like in the example above, the GlideinWMS configuration files are not the
 last ones in the list please verify that important configuration options have
 not been overridden by the other configuration files.</p>
@@ -3026,14 +3294,13 @@ on the local machine. It is important that you map the DN's of:</p>
 <p>Below is an example mapfile, by default found in
 <code>/etc/condor/certs/condor_mapfile</code>. In this example there are lines for each of
 services mentioned above.</p>
-<div class="codehilite"><pre><span></span><code>GSI &quot;&lt;DN OF SCHEDD PROXY&gt;&quot; schedd
+<div class="highlight"><pre><span></span><code>GSI &quot;&lt;DN OF SCHEDD PROXY&gt;&quot; schedd
 GSI &quot;&lt;DN OF FRONTEND PROXY&gt;&quot; frontend
 GSI &quot;&lt;DN OF PILOT PROXY&gt;&quot; pilot_proxy
 GSI &quot;^/DC=org/DC=doegrids/OU=Services/CN=personal-submit-host2.mydomain.edu$&quot; &lt;example_of_format&gt;
 GSI (.*) anonymous
 FS (.*) \1
 </code></pre></div>
-
 <p>Change <code>&lt;DN OF SCHEDD PROXY&gt;</code>, <code>&lt;DN OF FRONTEND PROXY&gt;</code>, and  <code>&lt;DN OF PILOT PROXY&gt;</code> to the distinguished names of the
 respective proxies.</p>
 <h4 id="restarting-htcondor">Restarting HTCondor<a class="headerlink" href="#restarting-htcondor" title="Permanent link">&para;</a></h4>
@@ -3157,7 +3424,7 @@ SiteName=&quot;HCC-GlideinWMW-Frontend&quot;
 <p>The following sections contain additional configuration that may be required depending on the customizations you've made to your GlideinWMS frontend installation.</p>
 <h5 id="users-without-certificates">Users without Certificates<a class="headerlink" href="#users-without-certificates" title="Permanent link">&para;</a></h5>
 <p>If you have users that submit jobs without a certificate explicitly declared in the submit file, you will need to add <code>MapUnknownToGroup</code> to the ProbeConfig. In the file <code>/etc/gratia/condor/ProbeConfig</code>, add the value after the <code>EnableProbe</code>.</p>
-<div class="codehilite"><pre><span></span><code>    ...
+<div class="highlight"><pre><span></span><code>    ...
     SuppressGridLocalRecords=&quot;0&quot;
     EnableProbe=&quot;1&quot;
 <span class="hll">    MapUnknownToGroup=&quot;1&quot;
@@ -3165,31 +3432,27 @@ SiteName=&quot;HCC-GlideinWMW-Frontend&quot;
     Title3=&quot;Tuning parameter&quot;
     ...
 </code></pre></div>
-
 <p>Further, if you want to record all usage as coming from a single VO, you can configure the probe to override the 'guessed' VO. In the below example, replace <code>&lt;ENGAGE&gt;</code> with a registered VO that you would like to report as. If you don't have a VO that you are affiliated with, you may use "Engage".</p>
-<div class="codehilite"><pre><span></span><code>...
+<div class="highlight"><pre><span></span><code>...
     MapUnknownToGroup=&quot;1&quot;
     MapGroupToRole=&quot;1&quot;
 <span class="hll">    VOOverride=&quot;&lt;ENGAGE&gt;&quot;
 </span>...
 </code></pre></div>
-
 <h5 id="non-standard-htcondor-install">Non-Standard HTCondor Install<a class="headerlink" href="#non-standard-htcondor-install" title="Permanent link">&para;</a></h5>
 <p>If HTCondor is installed in a non-standard location (i.e., not RPMs, or relocated RPM outside <code>/usr/bin</code>), then you need to tell the probe where to find the HTCondor binaries. This can be done with a script with a special attribute in <code>/etc/gratia/condor/ProbeConfig</code>, <code>CondorLocation</code>. Point it to the location of the HTCondor install, such that <code>CondorLocation/bin/condor_version</code> exists.</p>
 <h5 id="new-data-directory">New Data Directory<a class="headerlink" href="#new-data-directory" title="Permanent link">&para;</a></h5>
 <p>If your <code>PER_JOB_HISTORY_DIR</code> HTCondor configuration variable is different from the default value, you must update the value of <code>DataFolder</code> in <code>/etc/gratia/condor/ProbeConfig</code>. To check the value of <code>PER_JOB_HISTORY_DIR</code> run the following command:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>condor_config_val PER_JOB_HISTORY_DIR
+<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>condor_config_val PER_JOB_HISTORY_DIR
 </code></pre></div>
-
 <h5 id="different-collector-and-other-customizations">Different collector and other customizations<a class="headerlink" href="#different-collector-and-other-customizations" title="Permanent link">&para;</a></h5>
 <p>By default the probe reports to the OSG GRACC. To change that you must edit the configuration file, <code>/etc/gratia/condor/ProbeConfig</code>, and replace the OSG production host with your desired one:</p>
-<div class="codehilite"><pre><span></span><code>...
+<div class="highlight"><pre><span></span><code>...
     CollectorHost=&quot;gratia-osg-prod.opensciencegrid.org:80&quot;
     SSLHost=&quot;gratia-osg-prod.opensciencegrid.org:443&quot;
     SSLRegistrationHost=&quot;gratia-osg-prod.opensciencegrid.org:80&quot;
 ...
 </code></pre></div>
-
 <h3 id="optional-configuration">Optional Configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h3>
 <p>The following configuration steps are optional and will likely not be required
 for setting up a small site. If you do not need any of the following special
@@ -3352,9 +3615,8 @@ groupwould only match jobs that have the <code>+is_itb=True</code> ClassAd.</p>
 </table>
 <h3 id="reconfiguring-glideinwms">Reconfiguring GlideinWMS<a class="headerlink" href="#reconfiguring-glideinwms" title="Permanent link">&para;</a></h3>
 <p>After changing the configuration of GlideinWMS, run the following command as <code>root</code>:</p>
-<div class="codehilite"><pre><span></span><code>root@host # systemctl reload gwms-frontend
+<div class="highlight"><pre><span></span><code>root@host # systemctl reload gwms-frontend
 </code></pre></div>
-
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Note that <code>systemctl reload gwms-frontend</code> will work only if:
@@ -3427,7 +3689,7 @@ Defined in &#39;/etc/condor/config.d/11_gwms_secondary_collectors.config&#39;, l
 <FRONTEND_NAME_FROM_CONFIG> is the value set for "frontend_name" in the frontend.xml file</p>
 <h3 id="glideinwms-job-submission">GlideinWMS Job submission<a class="headerlink" href="#glideinwms-job-submission" title="Permanent link">&para;</a></h3>
 <p>HTCondor submit file <code>glidein-job.sub</code>. This is a simple job printing the hostname of the host where the job is running:</p>
-<div class="codehilite"><pre><span></span><code>#file glidein-job.sub
+<div class="highlight"><pre><span></span><code>#file glidein-job.sub
 universe = vanilla
 executable = /bin/hostname
 output = glidein/test.out
@@ -3439,11 +3701,9 @@ ShouldTransferFiles = YES
 when_to_transfer_output = ON_EXIT
 queue
 </code></pre></div>
-
 <p>To submit the job:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>condor_submit glidein-job.sub
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>condor_submit glidein-job.sub
 </code></pre></div>
-
 <p>Then you can control the job like a normal HTCondor job, e.g. to check the status of the job use <code>condor_q</code>.</p>
 <h3 id="monitoring-web-pages">Monitoring Web pages<a class="headerlink" href="#monitoring-web-pages" title="Permanent link">&para;</a></h3>
 <p>You should be able to see the jobs also in the GlideinWMS monitoring pages that are
@@ -3551,11 +3811,10 @@ made available on the Web:
 </ul>
 <h3 id="increase-the-log-level-and-change-rotation-policies">Increase the log level and change rotation policies<a class="headerlink" href="#increase-the-log-level-and-change-rotation-policies" title="Permanent link">&para;</a></h3>
 <p>You can increase the log level of the frontend. To add a log file with all the log information add the following line with all the message types in the <code>process_log</code> section of <code>/etc/gwms-frontend/frontend.xml</code>:</p>
-<div class="codehilite"><pre><span></span><code><span class="nt">&lt;log_retention&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;log_retention&gt;</span>
    <span class="nt">&lt;process_logs&gt;</span>
        <span class="nt">&lt;process_log</span> <span class="na">extension=</span><span class="s">&quot;all&quot;</span> <span class="na">max_days=</span><span class="s">&quot;7.0&quot;</span> <span class="na">max_mbytes=</span><span class="s">&quot;100.0&quot;</span> <span class="na">min_days=</span><span class="s">&quot;3.0&quot;</span> <span class="na">msg_types=</span><span class="s">&quot;DEBUG,EXCEPTION,INFO,ERROR,ERR&quot;</span><span class="nt">/&gt;</span>
 </code></pre></div>
-
 <p>You can also change the rotation policy and choose whether compress the rotated files, all in the same section of the config files:</p>
 <ul>
 <li>max_bytes is the max size of the log files</li>
@@ -3591,9 +3850,8 @@ made available on the Web:
 </ul>
 <h3 id="frontend-doesnt-trust-factory">Frontend doesn't trust Factory<a class="headerlink" href="#frontend-doesnt-trust-factory" title="Permanent link">&para;</a></h3>
 <p>If your frontend complains in the debug log:</p>
-<div class="codehilite"><pre><span></span><code>code 256:[&#39;Error: communication error\n&#39;, &#39;AUTHENTICATE:1003:Failed to authenticate with any method\n&#39;, &#39;AUTHENTICATE:1004:Failed to authenticate using GSI\n&#39;, &quot;GSI:5006:Failed to authenticate because the subject &#39;/DC=org/DC=doegrids/OU=Services/CN=devg-3.t2.ucsd.edu&#39; is not currently trusted by you.  If it should be, add it to GSI_DAEMON_NAME in the condor_config, or use the environment variable override (check the manual).\n&quot;, &#39;GSI:5004:Failed to gss_assist_gridmap /DC=org/DC=doegrids/OU=Services/CN=devg-3.t2.ucsd.edu to a local user.
+<div class="highlight"><pre><span></span><code>code 256:[&#39;Error: communication error\n&#39;, &#39;AUTHENTICATE:1003:Failed to authenticate with any method\n&#39;, &#39;AUTHENTICATE:1004:Failed to authenticate using GSI\n&#39;, &quot;GSI:5006:Failed to authenticate because the subject &#39;/DC=org/DC=doegrids/OU=Services/CN=devg-3.t2.ucsd.edu&#39; is not currently trusted by you.  If it should be, add it to GSI_DAEMON_NAME in the condor_config, or use the environment variable override (check the manual).\n&quot;, &#39;GSI:5004:Failed to gss_assist_gridmap /DC=org/DC=doegrids/OU=Services/CN=devg-3.t2.ucsd.edu to a local user.
 </code></pre></div>
-
 <p>A possible solution is to comment/remove the LOCAL_CONFIG_DIR in the file <code>/var/lib/gwms-frontend/vofrontend/frontend.condor_config</code>.</p>
 <h3 id="no-security-credentials-match-for-factory-pool-not-advertising-request">No security credentials match for factory pool ..., not advertising request<a class="headerlink" href="#no-security-credentials-match-for-factory-pool-not-advertising-request" title="Permanent link">&para;</a></h3>
 <p>You may see a warning like "No security credentials match for factory pool ..., not advertising request", if the <code>trust_domain</code> and <code>auth_method</code> of an entry in the Factory configuration is not matching any of the <code>trust_domain</code>, <code>type</code> couples in the credentials in the Frontend configuration. This causes the Frontend not to use some Factory entries (the ones not matching) and may end up without entries to send glideins to.</p>
@@ -3729,11 +3987,6 @@ proxies.</p>
 </table>
 <p>The VO frontend must have reliable network connectivity, be on the public
 internet (no NAT), and preferably with no firewalls. Incoming TCP ports 9618 to 9660 must be open.</p>
-                
-              
-              
-                
-
 
               
             </article>
@@ -3742,67 +3995,65 @@ internet (no NAT), and preferably with no firewalls. Incoming TCP ports 9618 to 
         
           <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
           </a>
         
       </main>
       
-        
-<footer class="md-footer">
+        <footer class="md-footer">
   
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
         
-          <a href="../configuration-with-osg-configure/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        <a href="../configuration-with-osg-configure/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Configuration with OSG-Configure" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Configuration with OSG-Configure
             </div>
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Configuration with OSG-Configure
-              </div>
-            </div>
-          </a>
+          </div>
+        </a>
+      
+      
         
-        
-          <a href="../install-cvmfs-stratum1/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Install a CVMFS Stratum 1
-              </div>
+        <a href="../install-cvmfs-stratum1/" class="md-footer__link md-footer__link--next" aria-label="Next: Install a CVMFS Stratum 1" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Install a CVMFS Stratum 1
             </div>
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-        This material is based upon work supported by the
-        <a href="https://nsf.gov">National Science Foundation</a>
-        under Grant Nos.
-        <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1148698">1148698</a>
-        , 
-        <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1836650">1836650</a>
-        , and 
-        <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2030508">2030508</a>
-        . Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
-        Made with
-        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-          Material for MkDocs
-        </a>
-
-      </div>
+      <div>
+    This material is based upon work supported by the
+    <a href="https://nsf.gov">National Science Foundation</a>
+    under Grant Nos.
+    <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1148698">1148698</a>
+    ,
+    <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1836650">1836650</a>
+    , and
+    <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2030508">2030508</a>
+    . Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+        Material for MkDocs
+    </a>
+</div>
       
     </div>
   </div>
@@ -3812,10 +4063,10 @@ internet (no NAT), and preferably with no firewalls. Incoming TCP ports 9618 to 
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.top"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.5e67fbfe.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d892486b.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c44cc438.min.js"></script>
       
     
   </body>
