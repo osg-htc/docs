@@ -2555,10 +2555,36 @@ your HTCondor-CE or XRootD service, you can use the <a href="https://demo.scitok
 <li>
 <p>Add a scopes claim to the generated token by adding the following to the <code>PAYLOAD: DATA</code> window, between the curly
     braces:</p>
-<div class="codehilite"><pre><span></span><code>&quot;scope&quot;: &quot;&lt;list of scopes&gt;&quot;,
+<div class="codehilite"><pre><span></span><code>&quot;scope&quot;: &quot;&lt;space separated list of scopes&gt;&quot;,
 </code></pre></div>
 
-<p>Replacing <code>&lt;list of scopes&gt;</code> appropriate for the service and authorization that you are interested in testeing.</p>
+<p>Replacing <code>&lt;list of scopes&gt;</code> appropriate for the service and authorization that you are interested in testing:</p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>Capability</strong></th>
+<th><strong>Scope</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">HTCondor <code>READ</code></td>
+<td><code>condor:READ</code></td>
+</tr>
+<tr>
+<td align="left">HTCondor <code>WRITE</code></td>
+<td><code>condor:WRITE</code></td>
+</tr>
+<tr>
+<td align="left">XRootD read</td>
+<td><code>read:&lt;PATH&gt;</code></td>
+</tr>
+<tr>
+<td align="left">XRootD write</td>
+<td><code>write:&lt;PATH&gt;</code></td>
+</tr>
+</tbody>
+</table>
 </li>
 <li>
 <p>Copy the entire contents of the <code>Encoded</code> window to a file where you will be running your client commands</p>
