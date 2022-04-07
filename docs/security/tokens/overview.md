@@ -182,7 +182,7 @@ These are the collaborations that support or partially support using tokens for 
 |:--------------|------------------------|
 | ATLAS         | Yes                    |
 | CLAS12        | Undergoing testing     |
-| CMS           | Undergoing testing     |
+| CMS           | Yes                    |
 | EIC           | Undergoing testing     |
 | GLOW          | Yes                    |
 | GlueX         | Yes                    |
