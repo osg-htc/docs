@@ -1,3 +1,4 @@
+title: Requesting an OSG Hosted CE
 DateReviewed: 2021-01-28
 
 Requesting an OSG Hosted CE

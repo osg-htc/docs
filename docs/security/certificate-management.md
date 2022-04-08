@@ -1,3 +1,5 @@
+title: Managing Certificates
+
 Managing Certificates
 =====================
 

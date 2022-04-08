@@ -1,3 +1,5 @@
+title: Installing and Using the OSG Token Renewal Service
+
 Installing and Using the OSG Token Renewal Service
 ==================================================
 

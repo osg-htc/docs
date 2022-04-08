@@ -1,3 +1,5 @@
+title: OSG Yum Repositories
+
 OSG Yum Repositories
 ====================
 

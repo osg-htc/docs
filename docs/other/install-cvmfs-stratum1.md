@@ -1,3 +1,5 @@
+title: Install a CVMFS Stratum 1
+
 # Install a CVMFS Stratum 1
 
 This document describes how to install a CVMFS Stratum 1. There are many different variations on how to do that, but this document focuses on the configuration of the OSG Operations Stratum 1 oasis-replica.opensciencegrid.org. It is applicable to other Stratum 1s as well, very likely with modifications (some of which are suggested in the document below).

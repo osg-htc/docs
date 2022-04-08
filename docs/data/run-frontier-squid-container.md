@@ -1,3 +1,5 @@
+title: Running Frontier Squid in a Container
+
 Running Frontier Squid in a Container
 =====================================
 

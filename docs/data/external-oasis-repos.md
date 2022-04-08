@@ -1,3 +1,5 @@
+title: Install an OASIS Repository
+
 Install an OASIS Repository
 ===========================
 

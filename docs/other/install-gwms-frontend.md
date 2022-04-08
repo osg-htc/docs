@@ -1,3 +1,5 @@
+title: GlideinWMS VO Frontend Installation
+
 GlideinWMS VO Frontend Installation
 ===================================
 

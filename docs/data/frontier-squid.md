@@ -1,3 +1,5 @@
+title: Install the Frontier Squid HTTP Caching Proxy
+
 # Install the Frontier Squid HTTP Caching Proxy
 
 Frontier Squid is a distribution of the well-known [squid HTTP caching

@@ -1,3 +1,5 @@
+title: Installing the Worker Node Client From RPMs
+
 Installing the Worker Node Client From RPMs
 ===========================================
 

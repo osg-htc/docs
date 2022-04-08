@@ -1,5 +1,7 @@
-**Release Series**
-==================
+title: Release Series
+
+Release Series
+==============
 
 An OSG release series is a sequence of OSG software releases that are intended to provide a painless upgrade path.
 For example, the 3.2 release series contains OSG software 3.2.0, 3.2.1, 3.2.2, and so forth.

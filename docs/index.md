@@ -1,3 +1,5 @@
+title: OSG Site Documentation
+
 OSG Site Documentation
 ======================
 
