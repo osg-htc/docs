@@ -1,3 +1,5 @@
+title: Installing the OSDF Origin
+
 Installing the OSDF Origin
 ================================
 

@@ -1,3 +1,5 @@
+title: Installing an XRootD Storage Element
+
 Installing an XRootD Storage Element
 ====================================
 
