@@ -1,3 +1,5 @@
+title: Installing the OSDF Cache
+
 Installing the OSDF Cache
 =========================
 

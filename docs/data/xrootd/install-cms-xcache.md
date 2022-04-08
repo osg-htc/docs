@@ -1,3 +1,5 @@
+title: Installing the CMS XCache
+
 Installing the CMS XCache
 ===============================
 
