@@ -7,6 +7,8 @@ This document describes how to install an Open Science Data Federation (OSDF) ca
 network to cache data frequently used on the OSG, reducing data transfer over the wide-area network and
 decreasing access latency.
 
+!!! note
+    The OSDF cache was previously named "Stash Cache" and some documentation and software may use the old name.
 
 Before Starting
 ---------------
