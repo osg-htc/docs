@@ -199,7 +199,7 @@ Your server should be marked with a `>+` to indicate that it contains the given 
 
 To verify that you can download a file from the origin server, use the `stashcp` tool.
 Place a `<TEST FILE>` in `<EXPORTED DIR>`. Where `<TEST FILE>` can be any file. The
-`stashcp` tool is available in the `stashcache-client` RPM.
+`stashcp` tool is available in the `stashcp` RPM.
 Run the following command:
 
 ```console
