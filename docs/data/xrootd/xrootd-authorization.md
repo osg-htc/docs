@@ -93,8 +93,8 @@ Authorizing X.509 proxies
 
 !!! warning "Requirements for XRootD-Multiuser with VOMS FQANs"
     Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a `voms-mapfile`.
-    Support for this is expected in xrootd-voms 5.5.0 and is available in xrootd-voms 5.4.2-1.1, in the OSG 3.6 repos.
-    If you want to use multiuser, ensure you are getting xrootd-voms from the OSG repos.
+    Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
+    If you want to use multiuser, ensure you are getting `xrootd-voms` from the OSG repos.
 
 In [OSG 3.6](../../release/release_series.md#series-overviews), XRootD installations are automatically configured to
 authenticate all X.509 and VOMS proxies, so XRootD administrators can control file access through the
@@ -132,8 +132,8 @@ i.e. authorize access to clients presenting the above proxy with `u blin ...` in
 
 !!! warning "Requirements for XRootD-Multiuser with VOMS FQANs"
     Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a `voms-mapfile`.
-    Support for this is expected in xrootd-voms 5.5.0 and is available in xrootd-voms 5.4.2-1.1, in the OSG 3.6 repos.
-    If you want to use multiuser, ensure you are getting xrootd-voms from the OSG repos.
+    Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
+    If you want to use multiuser, ensure you are getting `xrootd-voms` from the OSG repos.
 
 In OSG 3.6, VOMS proxies are automatically mapped using the built-in XRootD GSI and VOMS plug-ins.
 An incoming VOMS proxy will authenticate the first VOMS FQAN and map it to an organization name, groupname, and role
