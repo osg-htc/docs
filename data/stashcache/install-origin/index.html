@@ -2230,6 +2230,10 @@ This requires registering a resource for each host.</p>
 to export its data to the data federation.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
+<p>The OSDF Origin was previously named "Stash Origin" and some documentation and software may use the old name.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The <em>origin</em> must be registered with the OSG prior to joining the data federation. You may start the
 registration process prior to finishing the installation by <a href="#registering-the-origin">using this link</a> 
 along with information like:</p>
@@ -2443,7 +2447,7 @@ Your server should be marked with a <code>&gt;+</code> to indicate that it conta
 <h3 id="testing-file-access">Testing file access<a class="headerlink" href="#testing-file-access" title="Permanent link">&para;</a></h3>
 <p>To verify that you can download a file from the origin server, use the <code>stashcp</code> tool.
 Place a <code>&lt;TEST FILE&gt;</code> in <code>&lt;EXPORTED DIR&gt;</code>. Where <code>&lt;TEST FILE&gt;</code> can be any file. The
-<code>stashcp</code> tool is available in the <code>stashcache-client</code> RPM.
+<code>stashcp</code> tool is available in the <code>stashcp</code> RPM.
 Run the following command:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">[user@host]$ </span>stashcp &lt;TEST FILE&gt; /tmp/testfile
 </code></pre></div>

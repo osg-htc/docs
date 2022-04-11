@@ -927,6 +927,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#mapping-voms-attributes-to-users" class="md-nav__link">
+    Mapping VOMS attributes to users
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2229,6 +2236,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#mapping-voms-attributes-to-users" class="md-nav__link">
+    Mapping VOMS attributes to users
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2326,10 +2340,6 @@
 
 
 <h1 id="configuring-xrootd-authorization">Configuring XRootD Authorization<a class="headerlink" href="#configuring-xrootd-authorization" title="Permanent link">&para;</a></h1>
-<div class="admonition bug">
-<p class="admonition-title">OSG 3.5 EL7 version compatibility</p>
-<p>There is an incompatibility with EL7 &lt; 7.5 due to an issue with the <code>globus-gsi-proxy-core</code> package</p>
-</div>
 <p>XRootD offers several authentication options <a href="https://xrootd.slac.stanford.edu/doc/dev50/sec_config.htm">security plugins</a>
 to validate incoming credentials, such as bearer tokens, X.509 proxies, and VOMS proxies.</p>
 <p>In the case of X.509 and VOMS proxies, after the incoming credential has been mapped to a username or groupname, the
@@ -2415,20 +2425,31 @@ To enable macaroon support:</p>
 </ol>
 <h2 id="authorizing-x509-proxies">Authorizing X.509 proxies<a class="headerlink" href="#authorizing-x509-proxies" title="Permanent link">&para;</a></h2>
 <h3 id="authenticating-proxies">Authenticating proxies<a class="headerlink" href="#authenticating-proxies" title="Permanent link">&para;</a></h3>
-<div class="admonition bug">
-<p class="admonition-title">VOMS attribute mappings incompatible with <code>xrootd-multiuser</code></p>
-<p>The OSG 3.6 configuration of XRootD uses the <code>XrdVoms</code> plugin, which pass along the entire VOMS FQAN as the
-groupname to the authorization layer (see the section on <a href="#formatting">authorization database file formatting</a>).
-Some characters in VOMS FQANs are not legal in Unix usernames, therefore VOMS attributes mappings are incompatible
-with <code>xrootd-multiuser</code>.
-See <a href="https://github.com/xrootd/xrootd/issues/1538">XRootD GitHub issue #1538</a> for more details.</p>
+<p>Authorizations for proxy-based security are declared in an <a href="#authorization-database">XRootD authorization database file</a>.
+XRootD authentication plugins are used to provide the mappings that are used in the database.</p>
+<p>Starting with <a href="../../../release/release_series/#series-overviews">OSG 3.6</a>,
+DN mappings are performed with XRootD's built-in GSI support,
+and FQAN mappings are with the XRootD-VOMS (<code>XrdVoms</code>) plugin.</p>
+<p>To enable proxy authentication, edit <code>/etc/xrootd/config.d/10-osg-xrdvoms.cfg</code> and add or uncomment the line</p>
+<div class="highlight"><pre><span></span><code>set EnableVoms = 1
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Proxy authentication is already enabled in <a href="../install-standalone/">XRootD Standalone</a>,
+so this step is not necessary there.</p>
 </div>
-<p>In <a href="../../../release/release_series/#series-overviews">OSG 3.6</a>, XRootD installations are automatically configured to
-authenticate all X.509 and VOMS proxies, so XRootD administrators can control file access through the
-<a href="#authorization-database">authorization database</a>.
-Optionally, you may map the subject distinguished names of incoming X.509 proxies to a username in
-<code>/etc/grid-security/grid-mapfile</code>.
-This mapped username can then be used in XRootD's authorization database file.</p>
+<div class="admonition warning">
+<p class="admonition-title">Requirements for XRootD-Multiuser with VOMS FQANs</p>
+<p>Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a <code>voms-mapfile</code>.
+Support is available in <code>xrootd-voms 5.4.2-1.1</code>, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
+If you want to use multiuser, ensure you are getting <code>xrootd-voms</code> from the OSG repos.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Key length requirements</p>
+<p>Servers on EL 8 or newer will reject proxies that are not at least 2048 bits long.
+Ensure your clients' proxies have at least 2048 bits long with <code>voms-proxy-info</code>;
+if necessary, have them add the argument <code>-bits 2048</code> to their <code>voms-proxy-init</code> calls.</p>
+</div>
 <h4 id="mapping-subject-dns">Mapping subject DNs<a class="headerlink" href="#mapping-subject-dns" title="Permanent link">&para;</a></h4>
 <div class="admonition note">
 <p class="admonition-title">DN mappings take precedence over VOMS attributes</p>
@@ -2448,23 +2469,38 @@ For example, the following mapping:</p>
 <p>Will result in the username <code>blin</code>,
 i.e. authorize access to clients presenting the above proxy with <code>u blin ...</code> in the authorization database.</p>
 <h4 id="mapping-voms-attributes">Mapping VOMS attributes<a class="headerlink" href="#mapping-voms-attributes" title="Permanent link">&para;</a></h4>
-<div class="admonition bug">
-<p class="admonition-title">VOMS attribute mappings incompatible with <code>xrootd-multiuser</code></p>
-<p>The OSG 3.6 configuration of XRootD uses the <code>XrdVoms</code> plugin, which pass along the entire VOMS FQAN as the
-groupname to the authorization layer (see the section on <a href="#formatting">authorization database formatting</a>).
-Some characters in VOMS FQANs are not legal in Unix usernames, therefore VOMS attributes mappings are incompatible
-with <code>xrootd-multiuser</code>.
-See <a href="https://github.com/xrootd/xrootd/issues/1538">XRootD GitHub issue #1538</a> for more details.</p>
+<div class="admonition warning">
+<p class="admonition-title">Requirements for XRootD-Multiuser with VOMS FQANs</p>
+<p>Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a <code>voms-mapfile</code>.
+Support is available in <code>xrootd-voms 5.4.2-1.1</code>, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
+If you want to use multiuser, ensure you are getting <code>xrootd-voms</code> from the OSG repos.</p>
 </div>
-<p>In OSG 3.6, VOMS proxies are automatically mapped using the built-in XRootD GSI and VOMS plug-ins.
-An incoming VOMS proxy will authenticate the first VOMS FQAN and map it to an organization name, groupname, and role
-name in the <a href="#authorization-database">authorization database</a>.
+<p>In OSG 3.6, if the XRootD-VOMS plugin is enabled,
+an incoming VOMS proxy will authenticate the first VOMS FQAN and map it to an organization name (<code>o</code>),
+groupname (<code>g</code>), and role name (<code>r</code>) in the <a href="#authorization-database">authorization database</a>.
 For example, a proxy from the OSPool whose first VOMS FQAN is <code>/osg/Role=NULL/Capability=NULL</code> will be authenticated to
-the <code>/osg</code> groupname.</p>
+the <code>/osg</code> groupname; note that the <code>/</code> <em>is</em> included in the groupname.</p>
+<!-- XXX Which part of an FQAN ends up in "organization" ? -->
+
 <p>Instead of only using the first VOMS FQAN, you can configure XRootD to consider all VOMS FQANs in the proxy for
 authentication by setting the following in <code>/etc/xrootd/config.d/10-osg-xrdvoms.cfg</code>:</p>
 <div class="highlight"><pre><span></span><code>set vomsfqans = useall
 </code></pre></div>
+<!-- XXX and how does this work? How can multiple FQANs be used? -->
+
+<h4 id="mapping-voms-attributes-to-users">Mapping VOMS attributes to users<a class="headerlink" href="#mapping-voms-attributes-to-users" title="Permanent link">&para;</a></h4>
+<p>In order for the XRootD-Multiuser plugin to work, a proxy must be mapped to a user (<code>u</code>) that is a valid Unix user.
+Use a VOMS Mapfile in <code>/etc/grid-security/voms-mapfile</code> that contains lines in the following form:
+<div class="highlight"><pre><span></span><code>&quot;&lt;FQAN PATTERN&gt;&quot; &lt;USERNAME&gt;
+</code></pre></div>
+replacing <code>&lt;FQAN PATTERN&gt;</code> with a glob matching FQANs, and <code>&lt;USERNAME&gt;</code> with the user that you want to map
+matching FQANs to.</p>
+<p>For example,
+<div class="highlight"><pre><span></span><code>&quot;/osg/*&quot; osg01
+</code></pre></div>
+will map FQANs starting with <code>/osg/</code> to the user <code>osg01</code>.</p>
+<p>See the <a href="https://github.com/xrootd/xrootd/tree/master/src/XrdVoms#voms-mapping">VOMS Mapping documentation</a> for details.
+VOMS Mapfiles used with LCMAPS should continue to work unmodified.</p>
 <h3 id="authenticating-proxies-deprecated">Authenticating Proxies (deprecated)<a class="headerlink" href="#authenticating-proxies-deprecated" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
 <p class="admonition-title">OSG 3.5 end-of-life</p>
