@@ -91,17 +91,27 @@ Authorizing X.509 proxies
 
 ### Authenticating proxies ###
 
+Authorizations for proxy-based security are declared in an [XRootD authorization database file](#authorization-database).
+XRootD authentication plugins are used to provide the mappings that are used in the database.
+
+Starting with [OSG 3.6](../../release/release_series.md#series-overviews),
+DN mappings are performed with XRootD's built-in GSI support,
+and FQAN mappings are with the XRootD-VOMS (`XrdVoms`) plugin.
+
+To enable proxy authentication, edit `/etc/xrootd/config.d/10-osg-xrdvoms.cfg` and add or uncomment the line
+
+```
+set EnableVoms = 1
+```
+
+!!! note
+    Proxy authentication is already enabled in [XRootD Standalone](install-standalone.md),
+    so this step is not necessary there.
+
 !!! warning "Requirements for XRootD-Multiuser with VOMS FQANs"
     Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a `voms-mapfile`.
     Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
     If you want to use multiuser, ensure you are getting `xrootd-voms` from the OSG repos.
-
-In [OSG 3.6](../../release/release_series.md#series-overviews), XRootD installations are automatically configured to
-authenticate all X.509 and VOMS proxies, so XRootD administrators can control file access through the
-[authorization database](#authorization-database).
-Optionally, you may map the subject distinguished names of incoming X.509 proxies to a username in
-`/etc/grid-security/grid-mapfile`.
-This mapped username can then be used in XRootD's authorization database file.
 
 #### Mapping subject DNs ####
 
