@@ -113,6 +113,11 @@ set EnableVoms = 1
     Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
     If you want to use multiuser, ensure you are getting `xrootd-voms` from the OSG repos.
 
+!!! warning "Key length requirements"
+    Servers on EL 8 or newer will reject proxies that are not at least 2048 bits long.
+    Ensure your clients' proxies have at least 2048 bits long with `voms-proxy-info`;
+    if necessary, have them add the argument `-bits 2048` to their `voms-proxy-init` calls.
+
 #### Mapping subject DNs ####
 
 !!! note "DN mappings take precedence over VOMS attributes"
