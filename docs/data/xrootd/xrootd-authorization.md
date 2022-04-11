@@ -348,3 +348,72 @@ pair, `xrootd-client`, and `voms-clients-cpp` installed:
         [938.1kB/938.1kB][100%][==================================================][938.1kB/s]
 
     If your transfer does not succeed, re-run `xrdcp`  with `--debug 2` for more information.
+
+
+
+Upgrading to OSG 3.6
+--------------------
+
+There are some manual steps that need to be taken for authentication to work in OSG 3.6.
+
+
+### Ensure OSG xrootd packages are fully up-to-date
+
+Some authentication configuration is provided by OSG packaging.
+Old versions of the packages may result in broken configuration.
+It is best if your packages match the versions in the appropriate `release` subdirectories of https://repo.opensciencegrid.org/osg/3.6/
+but at the very least these should be true:
+
+*   `xrootd >= 5.4`
+*   `xrootd-scitokens >= 5.4`
+*   `xrootd-voms >= 5.4.2-1.1` (if using VOMS auth)
+*   `osg-xrootd >= 3.6`
+*   `osg-xrootd-standalone >= 3.6` (if installed)
+*   `xcache >= 3` (if using xcache-derieved software such as stash-cache, stash-origin, atlas-xcache, or cms-xcache)
+
+
+### Transitioning from XrdLcmaps to XrdVoms
+
+In OSG 3.5 and previous, proxy authentication was handled by the XrdLcmaps plugin, provided in the `xrootd-lcmaps` RPM.
+This is no longer the case in OSG 3.6; instead it is handled by the XrdVoms plugin, provided in the `xrootd-voms` RPM.
+In order to make `yum update` easier, `xrootd-lcmaps` has been replaced with an empty package,
+which can be removed after upgrading.
+
+Remove any old config in `/etc/xrootd` and `/etc/xrootd/config.d` that mentions LCMAPS or `libXrdLcmaps.so`,
+otherwise XRootD may fail to start.
+
+Uncomment `set EnableVoms = 1` in `/etc/xrootd/config.d/10-osg-xrdvoms.cfg`.
+
+If you are using XRootD Multiuser, create a VOMS Mapfile at `/etc/grid-security/voms-mapfile`,
+with the syntax [described above](#mapping-voms-attributes-to-users),
+then add `voms.mapfile /etc/grid-security/voms-mapfile` to your XRootD config if it's not already present.
+
+
+#### Update your authorization database
+
+Unlike the XrdLcmaps plugin, which mapped VOMS FQANs to users `u`, the XrdVoms plugin maps FQANs to
+groups `g`, roles `r`, and organizations `o`, as described in the [mapping VOMS attributes section](#mapping-voms-attributes).
+You can still use a VOMS mapfile (see above) but the default mappings provided at `/usr/share/osg/voms-mapfile-default`
+by the `vo-client-lcmaps-voms` package are not used.
+
+Replace mappings based on users with mappings based on the other attributes.
+For example, instead of
+```
+u uscmslocal /uscms rl
+```
+use
+```
+g /cms/uscms /uscms rl
+```
+
+If you need to make a mapping based on group _and_ role, create an use a "compound ID" as described in
+[the XRootD security documentation](https://xrootd.slac.stanford.edu/doc/dev47/sec_config.htm#_Toc489606599).
+
+```
+# create the ID named "cmsprod"
+= cmsprod g /cms r Production
+
+# use it
+x cmsprod /cmsprod rl
+```
+
