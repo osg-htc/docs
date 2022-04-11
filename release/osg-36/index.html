@@ -2664,12 +2664,9 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
 </ul>
 <h3 id="xrootd-multiuser">XRootD Multiuser<a class="headerlink" href="#xrootd-multiuser" title="Permanent link">&para;</a></h3>
 <ul>
-<li>The OSG 3.6 configuration of XRootD uses the <code>XrdVoms</code> plugin, which pass along the entire VOMS FQAN as the
-    groupname to the authorization layer (see the section on
-    <a href="../../data/xrootd/xrootd-authorization/#formatting">authorization database file formatting</a>).
-    Some characters in VOMS FQANs are not legal in Unix usernames, therefore VOMS attributes mappings are incompatible
-    with <code>xrootd-multiuser</code>.
-    See <a href="https://github.com/xrootd/xrootd/issues/1538">XRootD GitHub issue #1538</a> for more details.</li>
+<li>Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a <code>voms-mapfile</code>.
+    Support is available in <code>xrootd-voms 5.4.2-1.1</code>, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
+    If you want to use multiuser, ensure you are getting <code>xrootd-voms</code> from the OSG repos.</li>
 </ul>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
 <h3 id="march-31-2022-igtf-1115"><strong>March 31, 2022:</strong> IGTF 1.115<a class="headerlink" href="#march-31-2022-igtf-1115" title="Permanent link">&para;</a></h3>
