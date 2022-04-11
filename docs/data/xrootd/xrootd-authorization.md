@@ -162,6 +162,27 @@ set vomsfqans = useall
 
 <!-- XXX and how does this work? How can multiple FQANs be used? -->
 
+
+#### Mapping VOMS attributes to users ####
+
+In order for the XRootD-Multiuser plugin to work, a proxy must be mapped to a user (`u`) that is a valid Unix user.
+Use a VOMS Mapfile in `/etc/grid-security/voms-mapfile` that contains lines in the following form:
+```
+"<FQAN PATTERN>" <USERNAME>
+```
+replacing `<FQAN PATTERN>` with a glob matching FQANs, and `<USERNAME>` with the user that you want to map
+matching FQANs to.
+
+For example,
+```
+"/osg/*" osg01
+```
+will map FQANs starting with `/osg/` to the user `osg01`.
+
+See the [VOMS Mapping documentation](https://github.com/xrootd/xrootd/tree/master/src/XrdVoms#voms-mapping) for details.
+VOMS Mapfiles used with LCMAPS should continue to work unmodified.
+
+
 ### Authenticating Proxies (deprecated) ###
 
 !!! info "OSG 3.5 end-of-life"
