@@ -12,6 +12,9 @@ This document describes how to install an Open Science Data Federation (OSDF) or
 to export its data to the data federation.
 
 !!! note
+    The OSDF Origin was previously named "Stash Origin" and some documentation and software may use the old name.
+
+!!! note
     The _origin_ must be registered with the OSG prior to joining the data federation. You may start the
     registration process prior to finishing the installation by [using this link](#registering-the-origin) 
     along with information like:
@@ -196,7 +199,7 @@ Your server should be marked with a `>+` to indicate that it contains the given 
 
 To verify that you can download a file from the origin server, use the `stashcp` tool.
 Place a `<TEST FILE>` in `<EXPORTED DIR>`. Where `<TEST FILE>` can be any file. The
-`stashcp` tool is available in the `stashcache-client` RPM.
+`stashcp` tool is available in the `stashcp` RPM.
 Run the following command:
 
 ```console

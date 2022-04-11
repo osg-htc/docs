@@ -17,6 +17,9 @@ to pre-stage data across sites or operate their own scalable infrastructure.
 Each community (or experiment) needs to run one origin to export its data via the federation.
 This document outlines how to run such an origin in a Docker container.
 
+!!! note
+    The OSDF Origin was previously named "Stash Origin" and some documentation and software may use the old name.
+
 Before Starting
 ---------------
 

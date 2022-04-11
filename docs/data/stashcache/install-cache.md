@@ -7,6 +7,8 @@ This document describes how to install an Open Science Data Federation (OSDF) ca
 network to cache data frequently used on the OSG, reducing data transfer over the wide-area network and
 decreasing access latency.
 
+!!! note
+    The OSDF cache was previously named "Stash Cache" and some documentation and software may use the old name.
 
 Before Starting
 ---------------
@@ -155,6 +157,8 @@ The easiest solution for this is to use your host certificate and key as follows
 !!! note
     You must repeat the above steps whenever you renew your host certificate.
     If you automate certificate renewal, you should automate copying as well.
+    In addition, you will need to restart the XRootD services (`xrootd@stash-cache` and/or `xrootd@stash-cache-auth`)
+    so they load the updated certificates.
     For example, if you are using Certbot for Let's Encrypt, you should write a "deploy hook" as documented
     [on the Certbot site](https://certbot.eff.org/docs/using.html#renewing-certificates).
 
