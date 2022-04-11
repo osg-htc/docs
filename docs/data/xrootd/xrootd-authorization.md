@@ -145,11 +145,13 @@ i.e. authorize access to clients presenting the above proxy with `u blin ...` in
     Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
     If you want to use multiuser, ensure you are getting `xrootd-voms` from the OSG repos.
 
-In OSG 3.6, VOMS proxies are automatically mapped using the built-in XRootD GSI and VOMS plug-ins.
-An incoming VOMS proxy will authenticate the first VOMS FQAN and map it to an organization name, groupname, and role
-name in the [authorization database](#authorization-database).
+In OSG 3.6, if the XRootD-VOMS plugin is enabled,
+an incoming VOMS proxy will authenticate the first VOMS FQAN and map it to an organization name (`o`),
+groupname (`g`), and role name (`r`) in the [authorization database](#authorization-database).
 For example, a proxy from the OSPool whose first VOMS FQAN is `/osg/Role=NULL/Capability=NULL` will be authenticated to
-the `/osg` groupname.
+the `/osg` groupname; note that the `/` _is_ included in the groupname.
+
+<!-- XXX Which part of an FQAN ends up in "organization" ? -->
 
 Instead of only using the first VOMS FQAN, you can configure XRootD to consider all VOMS FQANs in the proxy for
 authentication by setting the following in `/etc/xrootd/config.d/10-osg-xrdvoms.cfg`:
@@ -157,6 +159,8 @@ authentication by setting the following in `/etc/xrootd/config.d/10-osg-xrdvoms.
 ```
 set vomsfqans = useall
 ```
+
+<!-- XXX and how does this work? How can multiple FQANs be used? -->
 
 ### Authenticating Proxies (deprecated) ###
 
