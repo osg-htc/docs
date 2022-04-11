@@ -4,9 +4,6 @@ DateReviewed: 2021-11-12
 Configuring XRootD Authorization
 ================================
 
-!!!bug "OSG 3.5 EL7 version compatibility"
-    There is an incompatibility with EL7 < 7.5 due to an issue with the `globus-gsi-proxy-core` package
-
 XRootD offers several authentication options [security plugins](https://xrootd.slac.stanford.edu/doc/dev50/sec_config.htm)
 to validate incoming credentials, such as bearer tokens, X.509 proxies, and VOMS proxies.
 
