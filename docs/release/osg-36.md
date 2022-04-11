@@ -32,12 +32,10 @@ The following issues are known to currently affect packages distributed in OSG 3
 
 ### XRootD Multiuser ###
 
--   The OSG 3.6 configuration of XRootD uses the `XrdVoms` plugin, which pass along the entire VOMS FQAN as the
-    groupname to the authorization layer (see the section on
-    [authorization database file formatting](../data/xrootd/xrootd-authorization.md#formatting)).
-    Some characters in VOMS FQANs are not legal in Unix usernames, therefore VOMS attributes mappings are incompatible
-    with `xrootd-multiuser`.
-    See [XRootD GitHub issue #1538](https://github.com/xrootd/xrootd/issues/1538) for more details.
+-   Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a `voms-mapfile`.
+    Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
+    If you want to use multiuser, ensure you are getting `xrootd-voms` from the OSG repos.
+
 
 Latest News
 -----------
