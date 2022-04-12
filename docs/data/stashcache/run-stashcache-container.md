@@ -1,3 +1,4 @@
+title: Running OSDF Cache in a Container
 DateReviewed: 2020-06-22
 
 Running OSDF Cache in a Container
@@ -11,6 +12,9 @@ to pre-stage data across sites or operate their own scalable infrastructure.
 A set of caches are operated across the OSG for the benefit of nearby sites;
 in addition, each site may run its own cache in order to reduce the amount of data transferred over the WAN.
 This document outlines how to run a cache in a Docker container.
+
+!!! note
+    The OSDF cache was previously named "Stash Cache" and some documentation and software may use the old name.
 
 Before Starting
 ---------------

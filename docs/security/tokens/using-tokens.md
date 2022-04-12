@@ -198,9 +198,16 @@ your HTCondor-CE or XRootD service, you can use the [SciTokens demo website](htt
     braces:
 
 
-        "scope": "<list of scopes>",
+        "scope": "<space separated list of scopes>",
 
-    Replacing `<list of scopes>` appropriate for the service and authorization that you are interested in testeing.
+    Replacing `<list of scopes>` appropriate for the service and authorization that you are interested in testing:
+
+    | **Capability**   | **Scope**      |
+    |:-----------------|----------------|
+    | HTCondor `READ`  | `condor:READ`  | 
+    | HTCondor `WRITE` | `condor:WRITE` |
+    | XRootD read      | `read:<PATH>`  |
+    | XRootD write     | `write:<PATH>` |
 
 1.  Copy the entire contents of the `Encoded` window to a file where you will be running your client commands
 

@@ -1,3 +1,5 @@
+title: Getting VO Data into the OSDF
+
 Getting VO Data into the OSDF
 ======================================
 

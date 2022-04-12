@@ -1,3 +1,4 @@
+title: Install XRootD Standalone
 DateReviewed: 2022-03-24
 
 Install XRootD Standalone
@@ -47,13 +48,10 @@ Installing XRootD
 
     Note that OSG 3.5 will reach its end-of-life in [May 2022](../../release/release_series.md#series-overviews).
 
-!!! bug "VOMS attribute mappings incompatible with `xrootd-multiuser` in OSG 3.6"
-    The OSG 3.6 configuration of XRootD uses the `XrdVoms` plugin, which pass along the entire VOMS FQAN as the
-    groupname to the authorization layer (see the section on
-    [authorization database file formatting](xrootd-authorization.md#formatting)).
-    Some characters in VOMS FQANs are not legal in Unix usernames, therefore VOMS attributes mappings are incompatible
-    with `xrootd-multiuser`.
-    See [XRootD GitHub issue #1538](https://github.com/xrootd/xrootd/issues/1538) for more details.
+!!! warning "Requirements for XRootD-Multiuser with VOMS FQANs"
+    Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a `voms-mapfile`.
+    Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
+    If you want to use multiuser, ensure you are getting `xrootd-voms` from the OSG repos.
 
 To install an XRootD Standalone server, run one of the following commands based on your installed
 [OSG release series](../../release/release_series.md#series-overviews):
@@ -145,12 +143,10 @@ For more information, see [the HDFS installation documents](../install-hadoop.md
 
 #### Enabling multi-user support
 
-!!! bug "VOMS attribute mappings incompatible with `xrootd-multiuser` in OSG 3.6"
-    The OSG 3.6 configuration of XRootD uses the `XrdVoms` plugin, which pass along the entire VOMS FQAN as the
-    groupname to the authorization layer (see the section on [authorization database file formatting](xrootd-authorization.md#formatting)).
-    Some characters in VOMS FQANs are not legal in Unix usernames, therefore VOMS attributes mappings are incompatible
-    with `xrootd-multiuser`.
-    See [XRootD GitHub issue #1538](https://github.com/xrootd/xrootd/issues/1538) for more details.
+!!! warning "Requirements for XRootD-Multiuser with VOMS FQANs"
+    Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a `voms-mapfile`.
+    Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
+    If you want to use multiuser, ensure you are getting `xrootd-voms` from the OSG repos.
 
 The `xrootd-multiuser` plugin allows XRootD to write files on the storage system as the
 [authenticated](xrootd-authorization.md) user instead of the `xrootd` user.

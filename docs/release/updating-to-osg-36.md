@@ -352,13 +352,10 @@ Replacing Your GridFTP Service
     If your collaboration(s) don't support these new protocols, install or remain on the
     [OSG 3.5 release series, with the osg-upcoming repositories enabled](notes.md).
 
-!!! bug "VOMS attribute mappings incompatible with `xrootd-multiuser` in OSG 3.6"
-    The OSG 3.6 configuration of XRootD uses the `XrdVoms` plugin, which pass along the entire VOMS FQAN as the
-    groupname to the authorization layer (see the section on
-    [authorization database file formatting](../data/xrootd/xrootd-authorization.md#formatting)).
-    Some characters in VOMS FQANs are not legal in Unix usernames, therefore VOMS attributes mappings are incompatible
-    with `xrootd-multiuser`.
-    See [XRootD GitHub issue #1538](https://github.com/xrootd/xrootd/issues/1538) for more details.
+!!! warning "Requirements for XRootD-Multiuser with VOMS FQANs"
+    Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a `voms-mapfile`.
+    Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
+    If you want to use multiuser, ensure you are getting `xrootd-voms` from the OSG repos.
 
 As part of the [GridFTP and GSI migration](https://opensciencegrid.org/technology/policy/gridftp-gsi-migration/),
 GridFTP is no longer available in the OSG 3.6 repositories.

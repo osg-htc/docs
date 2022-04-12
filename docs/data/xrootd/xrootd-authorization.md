@@ -1,10 +1,8 @@
+title: Configuring XRootD Authorization
 DateReviewed: 2021-11-12
 
 Configuring XRootD Authorization
 ================================
-
-!!!bug "OSG 3.5 EL7 version compatibility"
-    There is an incompatibility with EL7 < 7.5 due to an issue with the `globus-gsi-proxy-core` package
 
 XRootD offers several authentication options [security plugins](https://xrootd.slac.stanford.edu/doc/dev50/sec_config.htm)
 to validate incoming credentials, such as bearer tokens, X.509 proxies, and VOMS proxies.
@@ -93,19 +91,32 @@ Authorizing X.509 proxies
 
 ### Authenticating proxies ###
 
-!!! bug "VOMS attribute mappings incompatible with `xrootd-multiuser`"
-    The OSG 3.6 configuration of XRootD uses the `XrdVoms` plugin, which pass along the entire VOMS FQAN as the
-    groupname to the authorization layer (see the section on [authorization database file formatting](#formatting)).
-    Some characters in VOMS FQANs are not legal in Unix usernames, therefore VOMS attributes mappings are incompatible
-    with `xrootd-multiuser`.
-    See [XRootD GitHub issue #1538](https://github.com/xrootd/xrootd/issues/1538) for more details.
+Authorizations for proxy-based security are declared in an [XRootD authorization database file](#authorization-database).
+XRootD authentication plugins are used to provide the mappings that are used in the database.
 
-In [OSG 3.6](../../release/release_series.md#series-overviews), XRootD installations are automatically configured to
-authenticate all X.509 and VOMS proxies, so XRootD administrators can control file access through the
-[authorization database](#authorization-database).
-Optionally, you may map the subject distinguished names of incoming X.509 proxies to a username in
-`/etc/grid-security/grid-mapfile`.
-This mapped username can then be used in XRootD's authorization database file.
+Starting with [OSG 3.6](../../release/release_series.md#series-overviews),
+DN mappings are performed with XRootD's built-in GSI support,
+and FQAN mappings are with the XRootD-VOMS (`XrdVoms`) plugin.
+
+To enable proxy authentication, edit `/etc/xrootd/config.d/10-osg-xrdvoms.cfg` and add or uncomment the line
+
+```
+set EnableVoms = 1
+```
+
+!!! note
+    Proxy authentication is already enabled in [XRootD Standalone](install-standalone.md),
+    so this step is not necessary there.
+
+!!! warning "Requirements for XRootD-Multiuser with VOMS FQANs"
+    Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a `voms-mapfile`.
+    Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
+    If you want to use multiuser, ensure you are getting `xrootd-voms` from the OSG repos.
+
+!!! warning "Key length requirements"
+    Servers on EL 8 or newer will reject proxies that are not at least 2048 bits long.
+    Ensure your clients' proxies have at least 2048 bits long with `voms-proxy-info`;
+    if necessary, have them add the argument `-bits 2048` to their `voms-proxy-init` calls.
 
 #### Mapping subject DNs ####
 
@@ -134,18 +145,18 @@ i.e. authorize access to clients presenting the above proxy with `u blin ...` in
 
 #### Mapping VOMS attributes ####
 
-!!! bug "VOMS attribute mappings incompatible with `xrootd-multiuser`"
-    The OSG 3.6 configuration of XRootD uses the `XrdVoms` plugin, which pass along the entire VOMS FQAN as the
-    groupname to the authorization layer (see the section on [authorization database formatting](#formatting)).
-    Some characters in VOMS FQANs are not legal in Unix usernames, therefore VOMS attributes mappings are incompatible
-    with `xrootd-multiuser`.
-    See [XRootD GitHub issue #1538](https://github.com/xrootd/xrootd/issues/1538) for more details.
+!!! warning "Requirements for XRootD-Multiuser with VOMS FQANs"
+    Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a `voms-mapfile`.
+    Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
+    If you want to use multiuser, ensure you are getting `xrootd-voms` from the OSG repos.
 
-In OSG 3.6, VOMS proxies are automatically mapped using the built-in XRootD GSI and VOMS plug-ins.
-An incoming VOMS proxy will authenticate the first VOMS FQAN and map it to an organization name, groupname, and role
-name in the [authorization database](#authorization-database).
+In OSG 3.6, if the XRootD-VOMS plugin is enabled,
+an incoming VOMS proxy will authenticate the first VOMS FQAN and map it to an organization name (`o`),
+groupname (`g`), and role name (`r`) in the [authorization database](#authorization-database).
 For example, a proxy from the OSPool whose first VOMS FQAN is `/osg/Role=NULL/Capability=NULL` will be authenticated to
-the `/osg` groupname.
+the `/osg` groupname; note that the `/` _is_ included in the groupname.
+
+<!-- XXX Which part of an FQAN ends up in "organization" ? -->
 
 Instead of only using the first VOMS FQAN, you can configure XRootD to consider all VOMS FQANs in the proxy for
 authentication by setting the following in `/etc/xrootd/config.d/10-osg-xrdvoms.cfg`:
@@ -153,6 +164,29 @@ authentication by setting the following in `/etc/xrootd/config.d/10-osg-xrdvoms.
 ```
 set vomsfqans = useall
 ```
+
+<!-- XXX and how does this work? How can multiple FQANs be used? -->
+
+
+#### Mapping VOMS attributes to users ####
+
+In order for the XRootD-Multiuser plugin to work, a proxy must be mapped to a user (`u`) that is a valid Unix user.
+Use a VOMS Mapfile in `/etc/grid-security/voms-mapfile` that contains lines in the following form:
+```
+"<FQAN PATTERN>" <USERNAME>
+```
+replacing `<FQAN PATTERN>` with a glob matching FQANs, and `<USERNAME>` with the user that you want to map
+matching FQANs to.
+
+For example,
+```
+"/osg/*" osg01
+```
+will map FQANs starting with `/osg/` to the user `osg01`.
+
+See the [VOMS Mapping documentation](https://github.com/xrootd/xrootd/tree/master/src/XrdVoms#voms-mapping) for details.
+VOMS Mapfiles used with LCMAPS should continue to work unmodified.
+
 
 ### Authenticating Proxies (deprecated) ###
 

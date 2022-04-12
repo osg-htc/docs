@@ -182,10 +182,11 @@ These are the collaborations that support or partially support using tokens for 
 |:--------------|------------------------|
 | ATLAS         | Yes                    |
 | CLAS12        | Undergoing testing     |
-| CMS           | Undergoing testing     |
+| CMS           | Yes                    |
 | EIC           | Undergoing testing     |
 | GLOW          | Yes                    |
 | GlueX         | Yes                    |
+| HCC           | Undergoign testing     |
 | IceCube       | Undergoing testing     |
 | LIGO          | Undergoing testing     |
 | OSG           | Yes                    |
@@ -205,6 +206,7 @@ The following collaborations support support file transfer using WebDAV or XRoot
 | EIC           | N/A                       |
 | GLOW          | Yes                       |
 | GlueX         | N/A                       |
+| HCC           | N/A                       |
 | IceCube       | Undergoing testing*       |
 | LIGO          | Undergoing testing*       |
 | OSG           | Yes                       |
