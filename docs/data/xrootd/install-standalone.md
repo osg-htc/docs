@@ -1,11 +1,12 @@
 title: Install XRootD Standalone
-DateReviewed: 2021-11-12
+DateReviewed: 2022-03-24
 
 Install XRootD Standalone
 =========================
 
-!!!bug "EL7 version compatibility"
-    There is an incompatibility with EL7 < 7.5 due to an issue with the `globus-gsi-proxy-core` package
+!!!bug "OSG 3.5 EL7 version compatibility"
+    There is an incompatibility with EL7 < 7.5 and XRootD available from OSG 3.5 due to an issue with the
+    `globus-gsi-proxy-core` package
 
 
 [XRootD](http://xrootd.org/) is a hierarchical storage system that can be used in many ways to access data,
@@ -39,10 +40,11 @@ Installing XRootD
 -----------------
 
 !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
-    Due to potentially disruptive changes, contact your VO(s) to verify that they support HTTP-based data transfer
-    before replacing your GridFTP service with XRootD.
-    If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
-    install or remain on the [OSG 3.5 release series](../../release/notes.md).
+    Due to potentially disruptive changes in protocols, consult the
+    [collaboration support tables](../../security/tokens/overview.md#collaboration-support) to verify that your
+    collaboration(s) support WebDAV/XRootD-based data transfer before considering an upgrade to OSG 3.6.
+    If your collaboration(s) don't support these new protocols, install or remain on the
+    [OSG 3.5 release series, with the osg-upcoming repositories enabled](../../release/notes.md).
 
     Note that OSG 3.5 will reach its end-of-life in [May 2022](../../release/release_series.md#series-overviews).
 
@@ -50,11 +52,6 @@ Installing XRootD
     Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a `voms-mapfile`.
     Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
     If you want to use multiuser, ensure you are getting `xrootd-voms` from the OSG repos.
-
-!!! bug "Problem interoperating with older origin servers"
-    If an XRootD 5.3.4 cache interacts with a 5.1 or 5.2 origin and there is an asyncio error, it may crash the origin.
-    Please upgrade your origin at your earliest convenience.
-    You may turn off asyncio (`async off`) on either end to avoid the problem.
 
 To install an XRootD Standalone server, run one of the following commands based on your installed
 [OSG release series](../../release/release_series.md#series-overviews):
@@ -163,16 +160,22 @@ root@host # yum install xrootd-multiuser
 
 #### Enabling CMS TFC support (CMS sites only)
 
-!!! info "Coming soon to OSG 3.6"
-    The `xrootd-cmstfc` package is not yet available in OSG 3.6.
-    [See this ticket](https://opensciencegrid.atlassian.net/browse/SOFTWARE-4893) to track its progress.
-
 For CMS sites, there is a package available to integrate rule-based name lookup using a `storage.xml` file.
 If you are not setting up a service for CMS, skip this section.
 
-``` console
-yum install --enablerepo=osg-contrib xrootd-cmstfc
-```
+To install an `xrootd-cmstfc`, run one of the following commands based on your installed
+[OSG release series](../../release/release_series.md#series-overviews):
+
+-   OSG 3.6 (recommended):
+
+        :::console
+        root@xrootd-standalone # yum install --enablerepo=osg-contrib xrootd-cmstfc
+
+-   OSG 3.5
+
+        :::console
+        root@xrootd-standalone # yum install xrootd-cmstfc \
+                                             --enablerepo=osg-upcoming
 
 You will need to add your `storage.xml` to `/etc/xrootd/storage.xml` and then add the following line to your XRootD
 configuration:
