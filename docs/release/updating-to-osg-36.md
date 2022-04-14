@@ -37,7 +37,7 @@ See the list of services below for any special considerations for the OSG 3.6 up
     Therefore, XRootD hosts (i.e., standalone installations, caches and origins) should be updated to
     [OSG 3.6](#updating-the-osg-repositories) at your earliest convenience.
     **Some config changes will be necessary;**
-    see the [XRootD auth upgrade instructions](../data/xrootd/xrootd-authorization.md#upgrading-to-osg-36)
+    see the [XRootD auth update instructions](../data/xrootd/xrootd-authorization.md#updating-to-osg-36)
     for specifics.
 
 -   [GridFTP services](#replacing-your-gridftp-service) should be replaced with an installation of XRootD standalone.

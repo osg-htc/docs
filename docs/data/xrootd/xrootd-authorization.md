@@ -355,7 +355,7 @@ pair, `xrootd-client`, and `voms-clients-cpp` installed:
 
 
 
-Upgrading to OSG 3.6
+Updating to OSG 3.6
 --------------------
 
 There are some manual steps that need to be taken for authentication to work in OSG 3.6.
@@ -379,7 +379,7 @@ It is best if your packages match the versions in the appropriate `release` subd
 
 ### SciToken auth
 
-**Upgrading from XRootD 4 (OSG 3.5 without 3.5-upcoming)**
+#### Updating from XRootD 4 (OSG 3.5 without 3.5-upcoming)
 
 The config syntax for adding auth plugins has changed between XRootD 4 and XRootD 5.
 Replace
@@ -391,7 +391,7 @@ with
 ofs.authlib ++ libXrdAccSciTokens.so ...
 ```
 
-**Upgrading from XRootD 5 (OSG 3.5 with 3.5-upcoming)**
+#### Updating from XRootD 5 (OSG 3.5 with 3.5-upcoming)
 
 No config changes are necessary.
 
