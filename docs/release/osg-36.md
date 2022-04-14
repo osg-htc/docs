@@ -40,6 +40,14 @@ The following issues are known to currently affect packages distributed in OSG 3
 Latest News
 -----------
 
+### **April 14, 2022:** osg-configure 4.1.1, osg-scitokens-map 8
+
+-   [OSG-Configure 4.1.1](https://github.com/opensciencegrid/osg-configure/releases/tag/v4.1.1)
+    -   Fix gratia DataFolder/PER\_JOB\_HISTORY\_DIR check for HTCondor-CE with an HTCondor batch system
+-   osg-scitokens-map 8
+    -   New token mappings for CMS local and USCMS local pilots.
+    -   New token mappings for HCC pilots
+
 ### **March 31, 2022:** IGTF 1.115
 
 This release contains updated CA Certificates based on [IGTF 1.115](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
@@ -47,7 +55,6 @@ This release contains updated CA Certificates based on [IGTF 1.115](http://dist.
 -    Removed obsolete CNRS2 CAs, superseded by AC-GRID-FR hierarchy (FR)
 -    Add supplementary BCDR download location for UGRID-G2 CRL (UA)
 -    Extended validity period of HPCI CA (JP)
-
 
 ### **March 24, 2022:** XRootD 5.4.2-1.1, HTCondor 9.0.11, stashcp 6.6.0
 
