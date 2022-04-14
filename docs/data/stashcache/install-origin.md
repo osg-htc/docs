@@ -241,6 +241,20 @@ In addition to the origin allowing a VOs via the `AllowedVOs` list,
 that VO must also allow the origin in its `DataFederations/StashCache/AllowedOrigins` list.
 See the page on [getting your VO's data into OSDF](vo-data.md).
 
+Upgrading to OSG 3.6
+--------------------
+
+The OSG 3.5 series is reaching end-of-life on May 1, 2022.
+Admins are strongly encouraged to move their origins to OSG 3.6.
+
+See [general upgrade instructions](../../release/updating-to-osg-36.md).
+
+Unauthenticated origins (`xrootd@stash-origin` service) do not need any configuration changes.
+
+Authenticated origins (`xrootd@stash-origin-auth` service) may need the config changes described in the
+[upgrading to OSG 3.6 section](../xrootd/xrootd-authorization.md)
+of the XRootD authorization configuration document.
+
 Getting Help
 ------------
 

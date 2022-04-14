@@ -185,7 +185,11 @@ For example,
 will map FQANs starting with `/osg/` to the user `osg01`.
 
 See the [VOMS Mapping documentation](https://github.com/xrootd/xrootd/tree/master/src/XrdVoms#voms-mapping) for details.
-VOMS Mapfiles used with LCMAPS should continue to work unmodified.
+VOMS Mapfiles previously used with LCMAPS should continue to work unmodified,
+but the plugin can only look at a single mapfile,
+so if you want to use the mappings provided at `/usr/share/osg/voms-mapfile-default`
+(by the `vo-client-lcmaps-voms` package),
+you will have to copy them to `/etc/grid-security/voms-mapfile`.
 
 
 ### Authenticating Proxies (deprecated) ###
@@ -357,44 +361,82 @@ Upgrading to OSG 3.6
 There are some manual steps that need to be taken for authentication to work in OSG 3.6.
 
 
-### Ensure OSG xrootd packages are fully up-to-date
+### Ensure OSG XRootD packages are fully up-to-date
 
 Some authentication configuration is provided by OSG packaging.
 Old versions of the packages may result in broken configuration.
-It is best if your packages match the versions in the appropriate `release` subdirectories of https://repo.opensciencegrid.org/osg/3.6/
-but at the very least these should be true:
+It is best if your packages match the versions in the appropriate `release` subdirectories of
+<https://repo.opensciencegrid.org/osg/3.6/>, but at the very least these should be true:
 
-*   `xrootd >= 5.4`
-*   `xrootd-scitokens >= 5.4`
-*   `xrootd-voms >= 5.4.2-1.1` (if using VOMS auth)
-*   `osg-xrootd >= 3.6`
-*   `osg-xrootd-standalone >= 3.6` (if installed)
-*   `xcache >= 3` (if using xcache-derieved software such as stash-cache, stash-origin, atlas-xcache, or cms-xcache)
+-   `xrootd >= 5.4`
+-   `xrootd-multiuser >= 2` (if using multiuser)
+-   `xrootd-scitokens >= 5.4` (if using SciTokens/WLCG Tokens)
+-   `xrootd-voms >= 5.4.2-1.1` (if using VOMS auth)
+-   `osg-xrootd >= 3.6`
+-   `osg-xrootd-standalone >= 3.6` (if installed)
+-   `xcache >= 3` (if using xcache-derieved software such as stash-cache, stash-origin, atlas-xcache, or cms-xcache)
 
 
-### Transitioning from XrdLcmaps to XrdVoms
+### SciToken auth
+
+**Upgrading from XRootD 4 (OSG 3.5 without 3.5-upcoming)**
+
+The config syntax for adding auth plugins has changed between XRootD 4 and XRootD 5.
+Replace
+```
+ofs.authlib libXrdAccSciTokens.so ...
+```
+with
+```
+ofs.authlib ++ libXrdAccSciTokens.so ...
+```
+
+**Upgrading from XRootD 5 (OSG 3.5 with 3.5-upcoming)**
+
+No config changes are necessary.
+
+
+### Proxy auth: transitioning from XrdLcmaps to XrdVoms
 
 In OSG 3.5 and previous, proxy authentication was handled by the XrdLcmaps plugin, provided in the `xrootd-lcmaps` RPM.
 This is no longer the case in OSG 3.6; instead it is handled by the XrdVoms plugin, provided in the `xrootd-voms` RPM.
-In order to make `yum update` easier, `xrootd-lcmaps` has been replaced with an empty package,
-which can be removed after upgrading.
 
-Remove any old config in `/etc/xrootd` and `/etc/xrootd/config.d` that mentions LCMAPS or `libXrdLcmaps.so`,
-otherwise XRootD may fail to start.
+To continue using proxy authentication, [update your configuration](#updating-xrootd-configuration)
+and [your authorization database (Authfile)](#updating-your-authorization-database)
+as described below.
 
-Uncomment `set EnableVoms = 1` in `/etc/xrootd/config.d/10-osg-xrdvoms.cfg`.
+#### Updating XRootD configuration
 
-If you are using XRootD Multiuser, create a VOMS Mapfile at `/etc/grid-security/voms-mapfile`,
-with the syntax [described above](#mapping-voms-attributes-to-users),
-then add `voms.mapfile /etc/grid-security/voms-mapfile` to your XRootD config if it's not already present.
+-   **Remove any old config in `/etc/xrootd` and `/etc/xrootd/config.d` that mentions LCMAPS or `libXrdLcmaps.so`,
+    otherwise XRootD may fail to start.**
+
+-   If you do not have both an unauthenticated stash-cache and an authenticated stash-cache on the same server,
+    uncomment `set EnableVoms = 1` in `/etc/xrootd/config.d/10-osg-xrdvoms.cfg`.
+
+-   If you have both an an authenticated stash-cache and an unauthenticated stash-cache on the same server,
+    add the following block to `/etc/xrootd/config.d/10-osg-xrdvoms.cfg`:
+
+        if named stash-cache-auth
+            set EnableVoms = 1
+        fi
+
+-   If you are using XRootD Multiuser, create a VOMS Mapfile at `/etc/grid-security/voms-mapfile`,
+    with the syntax [described above](#mapping-voms-attributes-to-users),
+    then add `voms.mapfile /etc/grid-security/voms-mapfile` to your XRootD config if it's not already present.
+
+!!! note
+    In order to make `yum update` easier, `xrootd-lcmaps` has been replaced with an empty package, which can be removed after upgrading.
 
 
-#### Update your authorization database
+#### Updating your authorization database
 
 Unlike the XrdLcmaps plugin, which mapped VOMS FQANs to users `u`, the XrdVoms plugin maps FQANs to
 groups `g`, roles `r`, and organizations `o`, as described in the [mapping VOMS attributes section](#mapping-voms-attributes).
-You can still use a VOMS mapfile (see above) but the default mappings provided at `/usr/share/osg/voms-mapfile-default`
-by the `vo-client-lcmaps-voms` package are not used.
+You can still [use a VOMS mapfile](#mapping-voms-attributes-to-users)
+but if you want to use the mappings provided at `/usr/share/osg/voms-mapfile-default`
+by the `vo-client-lcmaps-voms` package,
+you will have to copy them to `/etc/grid-security/voms-mapfile`.
+
 
 Replace mappings based on users with mappings based on the other attributes.
 For example, instead of
