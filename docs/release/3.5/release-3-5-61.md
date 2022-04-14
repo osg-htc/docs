@@ -21,7 +21,7 @@ Summary of Changes
 
 This release contains:
 
--   osg-scitokens-map 8
+-   osg-scitokens-mapfile 8
     -   New token mappings for CMS local and USCMS local pilots.
     -   New token mappings for HCC pilots
 

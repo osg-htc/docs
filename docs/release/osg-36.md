@@ -40,11 +40,11 @@ The following issues are known to currently affect packages distributed in OSG 3
 Latest News
 -----------
 
-### **April 14, 2022:** osg-configure 4.1.1, osg-scitokens-map 8
+### **April 14, 2022:** osg-configure 4.1.1, osg-scitokens-mapfile 8
 
 -   [OSG-Configure 4.1.1](https://github.com/opensciencegrid/osg-configure/releases/tag/v4.1.1)
     -   Fix gratia DataFolder/PER\_JOB\_HISTORY\_DIR check for HTCondor-CE with an HTCondor batch system
--   osg-scitokens-map 8
+-   osg-scitokens-mapfile 8
     -   New token mappings for CMS local and USCMS local pilots.
     -   New token mappings for HCC pilots
 
