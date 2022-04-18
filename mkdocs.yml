@@ -22,7 +22,7 @@ nav:
 - Registration: 'common/registration.md'
 - Site Verification: 'site-verification.md'
 - Site Maintenance: 'site-maintenance.md'
-- Help: 'common/help.md'
+- 'Help / Security Incidents': 'common/help.md'
 - Resource Sharing:
   - Compute:
     - 'Overview': 'resource-sharing/overview.md'
