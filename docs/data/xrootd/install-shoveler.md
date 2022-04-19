@@ -39,7 +39,7 @@ Requirements for running the Shoveler
 Configuring the Shoveler
 ------------------------
 
-Configuration can be specified with environment variables or a configuration file.  The configuration file is in `yaml`.  An example configuration file is distributed with the shoveler.  Below, we will break the configuration file into fragments, but they together make a whole configuration file.
+Configuration can be specified with environment variables or a configuration file.  The configuration file is in `yaml`.  An example configuration file is distributed with the shoveler.  In the RPM, the configuration file is located in `/etc/xrootd-monitoring-shoveler/config.xml`.  Below, we will break the configuration file into fragments, but they together make a whole configuration file.
 
 Environment variables can be derived from the yaml.  Every environment variable starts with `SHOVELER_`, then continues with the structure of the configuration file.  For example, the `amqp url` can be configured with the environment variable `SHOVELER_AMQP_URL`.  The `verify` option can be configured with `SHOVELER_VERIFY`.
 
