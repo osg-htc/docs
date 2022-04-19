@@ -75,7 +75,7 @@ metrics:
   port: 8000
 ```
 
-Listening location [prometheus](https://prometheus.io/) metrics to view the performance and status of the shoveler in prometheus format.
+Listening location of [Prometheus](https://prometheus.io/) metrics to view the performance and status of the shoveler in Prometheus format.
 
 ```yaml
 config_directory: /tmp/shoveler-queue
@@ -86,8 +86,8 @@ Directory to store overflow of queue onto disk. The queue keeps 100 messages in 
 # map:
 #   all: 172.0.0.4
 ```
-Mapping configuration (optional). If map.all is set, all messages will be mapped to the configured ip address.
-For example, with the above configuration, if a packet comes in with the private ip address of 192.168.0.4, the packet origin will be changed to 172.0.0.4.  The port is always preserved.
+Mapping configuration (optional). If `map.all` is set, all messages will be mapped to the configured IP address.
+For example, with the above configuration, if a packet comes in with the private IP address of 192.168.0.4, the packet origin will be changed to 172.0.0.4.  The port is always preserved.
 
 ```yaml
 # map:
