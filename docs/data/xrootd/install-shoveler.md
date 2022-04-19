@@ -4,7 +4,9 @@ Installing the XRootD Monitoring Shoveler
 =========================================
 
 The [XRootD Monitoring Shoveler](https://github.com/opensciencegrid/xrootd-monitoring-shoveler) 
-is designed to accept the XRootD monitoring packets and "shovel" them to the OSG message bus.
+is designed to accept the XRootD monitoring packets and "shovel" them to the OSG message bus.  
+Shovelering is the act of moving messages from one medium to another.  
+In this case, the shoveler is moving messages from a UDP stream to a message bus.
 
 ```mermaid
 graph LR
