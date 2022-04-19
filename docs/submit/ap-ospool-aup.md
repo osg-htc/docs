@@ -44,7 +44,7 @@ all AP users and operators are expected to adhere to the following usage limitat
 -   You shall immediately report any known or suspected security breach or misuse of the resources/services or access
     credentials to the specified incident reporting locations and to the relevant credential-issuing authorities.
 -   You use the resources/services at your own risk. There is no guarantee that the
--   resources/services will be available at any time or that their integrity or confidentiality will be preserved or
+    resources/services will be available at any time or that their integrity or confidentiality will be preserved or
     that they will suit any purpose.
 -   You agree that logged information, including personal data provided by you for registration purposes, may be used
     for administrative, operational, accounting, monitoring and security purposes.
