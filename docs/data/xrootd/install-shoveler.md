@@ -1,3 +1,5 @@
+title: Installing the XRootD Monitoring Shoveler
+
 Installing the XRootD Monitoring Shoveler
 =========================================
 
