@@ -12,8 +12,8 @@ These contributions are entrusted to the OSG Consortium to be shared with US res
 support of their research.
 It is the responsibility of all parties involved to maximize the impact of these contributions to Open Science. 
 
-The OSG operates shared Access Points (<https://osgconnect.net>) that provide researchers with capabilities to harness
-the capacity of the OSPool.
+The OSG operates shared Access Points (<https://connect.osg-htc.org>) that provide researchers with capabilities to
+harness the capacity of the OSPool.
 Misuse of the resources of these Access Points can slow down or prevent the launching of jobs to the OSPool or file
 movement to and from jobs served by the OSPool.
 
