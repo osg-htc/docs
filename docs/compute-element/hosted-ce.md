@@ -170,7 +170,6 @@ The mappings from Unix username to community is as follows:
 | osg03         | HCC      | Projects coming from the Holland Computing Center at the University of Nebraska - Lincoln            |
 | osg04         | CMS      | High-energy physics experiment from the Large Hadron Collider at CERN                                |
 | osg05         | Fermilab | Experiments from the Fermi National Accelerator Laboratory                                           |
-| osg06         | JLab     | Experiments from the Thomas Jefferson National Accelerator Facility                                  |
 | osg07         | IGWN     | Gravitational wave detection experiments                                                             |
 | osg08         | IGWN     | Gravitational wave detection experiments                                                             |
 | osg09         | ATLAS    | High-energy physics experiment from the Large Hadron Collider at CERN                                |
@@ -178,7 +177,8 @@ The mappings from Unix username to community is as follows:
 | osg11         | DUNE     | Experiment for neutrino science and proton decay studies                                             |
 | osg12         | IceCube  | Research based on data from the IceCube neutrino detector                                            |
 | osg13         | XENON    | Dark matter search experiment                                                                        |
-| osg14 - osg20 | -        | Unassigned                                                                                           |
+| osg14         | JLab     | Experiments from the Thomas Jefferson National Accelerator Facility                                  |
+| osg15 - osg20 | -        | Unassigned                                                                                           |
 
 For example, the activities in your batch system corresponding to the user `osg02` will always be associated with the
 GLOW community.
