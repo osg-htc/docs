@@ -13,7 +13,7 @@ The map below shows the location of the current caches in the federation:
 
 We support three types of deployments:
 
-1. We operate the service for you. All you need is provide us with a K8S host to deploy our container into.
+1. We operate the service for you. All you need is provide us with a Kubernetes host to deploy our container into.
    
     This is our preferred way for you to join.
     It is conceptually described on our [home website](https://osg-htc.org/about/osdf/deploying_an_osdf_origin.html) for an origin.
@@ -25,12 +25,10 @@ We support three types of deployments:
    
 1. You can deploy from RPM as described in our [documentation](install-cache.md)
 
-We strongly suggest that you __allow us to operate these services for you__. The software that implements the service 
-changes frequently enough, and is complicated enough, that keeping up with changes requires significant effort. As you fall 
-behind with what you installed, we are likely to eliminate you from the OSDF for operational and/or security reasons.
+We strongly suggest that you __allow us to operate these services for you (option 1)__. 
+The software that implements the service changes frequently enough, and is complicated enough, that keeping up with changes may require significant effort.
+If your installation is deemed too out-of-date, your service may be excluded from the OSDF.
 
-Why put all the effort into learning how to install and operate these services unless you are committed to keeping up with 
-the changes? You are much better off letting our experts deploy and operate these services for you.
 
 __For more information on the OSDF__, please see our [overview page](https://osg-htc.org/about/osdf/).
 
