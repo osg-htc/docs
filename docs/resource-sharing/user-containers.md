@@ -48,7 +48,7 @@ module load singularity
 singularity run --contain \
                 --bind /cvmfs \
                 --scratch /pilot \
-                docker://opensciencegrid/osgvo-docker-pilot:release
+                docker://opensciencegrid/osgvo-docker-pilot3.6-release
 ```
 
 The above example rebuilds the Docker container on each host.
@@ -56,7 +56,7 @@ If you plan to run large numbers of these jobs, you can download the Docker cont
 Singularity image:
 
 ```
-$ singularity build osgvo-pilot.sif docker://opensciencegrid/osgvo-docker-pilot:release
+$ singularity build osgvo-pilot.sif docker://opensciencegrid/osgvo-docker-pilot3.6-release
 ```
 
 In this case, the `singularity run` command should be changed to:

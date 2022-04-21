@@ -73,7 +73,7 @@ user@host $ docker run --rm --publish 1094:1094 \
              --publish 1095:1095 \
              --volume <HOST PARTITION>:/xcache/namespace \
              --env-file=/opt/origin/.env \
-             opensciencegrid/stash-origin:release
+             opensciencegrid/stash-origin:3.6-release
 ```
 
 Replacing `<HOST PARTITION>` with the host directory containing data that your origin should serve.
@@ -103,8 +103,8 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
-ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin:release
-ExecStart=/usr/bin/docker run --rm --name %n -p 1094:1094 -p 1095:1095 -v /srv/origin-public:/xcache/namespace --env-file /opt/origin/.env opensciencegrid/stash-origin:release
+ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin3.6-release
+ExecStart=/usr/bin/docker run --rm --name %n -p 1094:1094 -p 1095:1095 -v /srv/origin-public:/xcache/namespace --env-file /opt/origin/.env opensciencegrid/stash-origin3.6-release
 
 [Install] 
 WantedBy=multi-user.target

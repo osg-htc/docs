@@ -89,7 +89,7 @@ user@host $ docker run --rm --publish <HOST PORT>:8000 \
              ...
              --volume <DATA PARTITION N>:/xcache/dataN
              --env-file=/opt/xcache/.env \
-             opensciencegrid/stash-cache:release
+             opensciencegrid/stash-cache3.6-release
 ```
 
 !!! warning
@@ -104,7 +104,7 @@ For a simpler installation, you may use a single host partition mounted to `/xca
 user@host $ docker run --rm --publish <HOST PORT>:8000 \
              --volume <HOST PARTITION>:/xcache \
              --env-file=/opt/xcache/.env \
-             opensciencegrid/stash-cache:release
+             opensciencegrid/stash-cache3.6-release
 ```
 
 ### Running a cache on container with systemd
@@ -128,8 +128,8 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
-ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-cache:release
-ExecStart=/usr/bin/docker run --rm --name %n --publish 8000:8000 --volume /srv/cache:/xcache --env-file /opt/xcache/.env opensciencegrid/stash-cache:release
+ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-cache3.6-release
+ExecStart=/usr/bin/docker run --rm --name %n --publish 8000:8000 --volume /srv/cache:/xcache --env-file /opt/xcache/.env opensciencegrid/stash-cache3.6-release
 
 [Install]
 WantedBy=multi-user.target
@@ -158,7 +158,7 @@ user@host $ docker run --rm  \
              --network="host" \
              --volume <HOST PARTITION>:/cache \
              --env-file=/opt/xcache/.env \
-             opensciencegrid/stash-cache:release
+             opensciencegrid/stash-cache3.6-release
 ```
 
 ### Memory optimization ###
