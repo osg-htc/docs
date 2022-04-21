@@ -15,13 +15,15 @@ We support three types of deployments:
 
 1. We operate the service for you. All you need is provide us with a K8S host to deploy our container into.
    
-    This is our preferred way for you to join. It is conceptually described on our [home website](https://osg-htc.org/about/osdf/deploying_an_osdf_origin.html) for an origin. A cache would be deployed exactly the same way.
+    This is our preferred way for you to join.
+    It is conceptually described on our [home website](https://osg-htc.org/about/osdf/deploying_an_osdf_origin.html) for an origin.
+    A cache would be deployed exactly the same way.
 
     If this is how you want to join OSDF, please send email to <support@opensciencegrid.org> and we will guide you through the process.
    
-2. You can deploy our container yourself as described in our [documentation](https://opensciencegrid.org/docs/data/stashcache/run-stashcache-container/).
+1. You can deploy our container yourself as described in our [documentation](run-stashcache-container.md).
    
-3. You can deploy from RPM as described in our [documentation](https://opensciencegrid.org/docs/data/stashcache/install-cache/)
+1. You can deploy from RPM as described in our [documentation](install-cache.md)
 
 We strongly suggest that you __allow us to operate these services for you__. The software that implements the service 
 changes frequently enough, and is complicated enough, that keeping up with changes requires significant effort. As you fall 
