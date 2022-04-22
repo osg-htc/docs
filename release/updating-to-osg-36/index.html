@@ -2324,10 +2324,13 @@ for their timeline.</p>
 </ul>
 </li>
 <li>
-<p>XRootD will continue to support GSI and VOMS proxies in OSG 3.6 directly
-    (instead of through Grid Community Toolkit libraries).
+<p>XRootD will continue to support GSI and VOMS proxies in OSG 3.6 through plugins
+    that do not use the Grid Community Toolkit libraries.
     Therefore, XRootD hosts (i.e., standalone installations, caches and origins) should be updated to
-    <a href="#updating-the-osg-repositories">OSG 3.6</a> at your earliest convenience.</p>
+    <a href="#updating-the-osg-repositories">OSG 3.6</a> at your earliest convenience.
+    <strong>Some config changes will be necessary;</strong>
+    see the <a href="../../data/xrootd/xrootd-authorization/#updating-to-osg-36">XRootD auth update instructions</a>
+    for specifics.</p>
 </li>
 <li>
 <p><a href="#replacing-your-gridftp-service">GridFTP services</a> should be replaced with an installation of XRootD standalone.</p>
