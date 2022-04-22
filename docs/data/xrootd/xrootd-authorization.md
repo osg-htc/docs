@@ -187,7 +187,7 @@ will map FQANs starting with `/osg/` to the user `osg01`.
 See the [VOMS Mapping documentation](https://github.com/xrootd/xrootd/tree/master/src/XrdVoms#voms-mapping) for details.
 VOMS Mapfiles previously used with LCMAPS should continue to work unmodified,
 but the plugin can only look at a single mapfile,
-so if you want to use the mappings provided at `/usr/share/osg/voms-mapfile-default`
+so if you are using the mappings provided in `/usr/share/osg/voms-mapfile-default`
 (by the `vo-client-lcmaps-voms` package),
 you will have to copy them to `/etc/grid-security/voms-mapfile`.
 
@@ -374,7 +374,7 @@ It is best if your packages match the versions in the appropriate `release` subd
 -   `xrootd-voms >= 5.4.2-1.1` (if using VOMS auth)
 -   `osg-xrootd >= 3.6`
 -   `osg-xrootd-standalone >= 3.6` (if installed)
--   `xcache >= 3` (if using xcache-derieved software such as stash-cache, stash-origin, atlas-xcache, or cms-xcache)
+-   `xcache >= 3` (if using xcache-derived software such as stash-cache, stash-origin, atlas-xcache, or cms-xcache)
 
 
 ### SciToken auth
@@ -435,7 +435,7 @@ groups `g`, roles `r`, and organizations `o`, as described in the [mapping VOMS 
 You can still [use a VOMS mapfile](#mapping-voms-attributes-to-users)
 but if you want to use the mappings provided at `/usr/share/osg/voms-mapfile-default`
 by the `vo-client-lcmaps-voms` package,
-you will have to copy them to `/etc/grid-security/voms-mapfile`.
+you must copy them to `/etc/grid-security/voms-mapfile`.
 
 
 Replace mappings based on users with mappings based on the other attributes.
@@ -448,7 +448,7 @@ use
 g /cms/uscms /uscms rl
 ```
 
-If you need to make a mapping based on group _and_ role, create an use a "compound ID" as described in
+If you need to make a mapping based on group _and_ role, create and use a "compound ID" as described in
 [the XRootD security documentation](https://xrootd.slac.stanford.edu/doc/dev47/sec_config.htm#_Toc489606599).
 
 ```
