@@ -311,6 +311,20 @@ STASHCACHE_DaemonVersion = "1.0.0"
 ```
 
 
+Updating to OSG 3.6
+-------------------
+
+The OSG 3.5 series is reaching end-of-life on May 1, 2022.
+Admins are strongly encouraged to move their caches to OSG 3.6.
+
+See [general update instructions](../../release/updating-to-osg-36.md).
+
+Unauthenticated caches (`xrootd@stash-cache` service) do not need any configuration changes.
+
+Authenticated caches (`xrootd@stash-cache-auth` service) may need the configuration changes described in the
+[updating to OSG 3.6 section](../xrootd/xrootd-authorization.md#updating-to-osg-36)
+of the XRootD authorization configuration document.
+
 
 Getting Help
 ------------
