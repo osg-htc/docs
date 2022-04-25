@@ -30,18 +30,23 @@ graph LR
 Installing the Shoveler
 -----------------------
 
-The shoveler can be installed via RPM, Container, or staticly compiled binary.
+The shoveler can be installed via RPM, container, or staticly compiled binary.
 
 Requirements for running the Shoveler
 
-1. An open port (configurable) that can receive UDP packets from the XRootD servers.  It does not need to be an open port to the internet, only open to the XRootD servers.
-2. Outgoing TCP connectivity.
-3. A directory to store the on-disk queue.
+1. An open port (configurable) that can receive UDP packets from the XRootD servers.
+    It does not need to be an open port to the internet, only open to the XRootD servers.
+1. Outgoing TCP connectivity.
+1. A directory to store the on-disk queue.
 
 Configuring the Shoveler
 ------------------------
 
-Configuration can be specified with environment variables or a configuration file.  The configuration file is in `yaml`.  An example configuration file is distributed with the shoveler.  In the RPM, the configuration file is located in `/etc/xrootd-monitoring-shoveler/config.xml`.  Below, we will break the configuration file into fragments, but they together make a whole configuration file.
+Configuration can be specified with environment variables or a configuration file.
+The configuration file is in `yaml`.
+An example configuration file is distributed with the shoveler.
+In the RPM, the configuration file is located in `/etc/xrootd-monitoring-shoveler/config.xml`.
+Below, we will break the configuration file into fragments but together they make a whole configuration file.
 
 Environment variables can be derived from the yaml.  Every environment variable starts with `SHOVELER_`, then continues with the structure of the configuration file.  For example, the `amqp url` can be configured with the environment variable `SHOVELER_AMQP_URL`.  The `verify` option can be configured with `SHOVELER_VERIFY`.
 
@@ -118,11 +123,12 @@ sequenceDiagram
     oidc-agent->>Issuer: Get Token
 ```
 
-1. Get your unique CILogon User Identifier from [CILogon](https://cilogon.org/).  It is under User Attributes, and follows the pattern http://cilogon.org/serverA/users/12345.
-2. Open a ticket at help@opensciencegrid.org with your CILogon User Identifier to authorize your login with the renewer.
-3. Install the [OSG Token Renewal Service](https://opensciencegrid.org/docs/other/osg-token-renewer/)
-4. When installing, the issuer is `https://lw-issuer.osgdev.chtc.io/scitokens-server/`
-5. When asked about scopes, accept the default.
-6. Follow through authentication the flow.
-7. In the configuration for the issuer, `/etc/osg/token-renewer/config.ini`, the token location must match the location of the token in the Shoveler configuration.
+1. Get your unique CILogon User Identifier from [CILogon](https://cilogon.org/).
+    It is under User Attributes, and follows the pattern http://cilogon.org/serverA/users/12345.
+1. Open a ticket at help@opensciencegrid.org with your CILogon User Identifier to authorize your login with the renewer.
+1. Install the [OSG Token Renewal Service](https://opensciencegrid.org/docs/other/osg-token-renewer/)
+1. When installing, the issuer is `https://lw-issuer.osgdev.chtc.io/scitokens-server/`
+1. When asked about scopes, accept the default.
+1. Follow through authentication the flow.
+1. In the configuration for the issuer, `/etc/osg/token-renewer/config.ini`, the token location must match the location of the token in the Shoveler configuration.
 
