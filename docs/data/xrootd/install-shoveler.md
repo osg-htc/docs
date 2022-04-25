@@ -47,6 +47,11 @@ Environment variables can be derived from the yaml.  Every environment variable 
 
 ### Configuration Fragments
 
+
+#### AMQP Configuration
+
+AMQP configuration.  For the OSG, the url should be `amqps://clever-turkey.rmq.cloudamqp.com/xrd-mon`.  The `exchange` should is correct for the OSG.  `token_location` is the path to the authentication token.
+
 ```yaml
 # AMQP configuration
 amqp:
@@ -56,7 +61,9 @@ amqp:
   token_location: /etc/xrootd-monitoring-shoveler/token
 ```
 
-AMQP configuration.  For the OSG, the url should be `amqps://clever-turkey.rmq.cloudamqp.com/xrd-mon`.  The `exchange` should is correct for the OSG.  `token_location` is the path to the authentication token.
+#### Listening to UDP messages
+
+Where to listen for UDP messages from XRootD servers.
 
 ```yaml
 listen:
@@ -64,13 +71,17 @@ listen:
   ip: 0.0.0.0
 ```
 
-Where to listen for UDP messages from XRootD servers.
+#### Verify packet header
+
+Whether to verify the header of the packet matches XRootD's monitoring packet format.
 
 ```yaml
 verify: true
 ```
 
-Whether to verify the header of the packet matches XRootD's monitoring packet format.
+#### Prometheus monitoring data
+
+Listening location of [Prometheus](https://prometheus.io/) metrics to view the performance and status of the shoveler in Prometheus format.
 
 ```yaml
 # Export prometheus metrics
@@ -79,26 +90,31 @@ metrics:
   port: 8000
 ```
 
-Listening location of [Prometheus](https://prometheus.io/) metrics to view the performance and status of the shoveler in Prometheus format.
+#### Queue Configuration
+
+Directory to store overflow of queue onto disk. The queue keeps 100 messages in memory.  If the shoveler is disconnected from the message bus, it will store messages over the 100 in memory onto disk into this directory.  Once the connection has been re-established the queue will be emptied.  The queue on disk is persistent between restarts.
 
 ```yaml
-config_directory: /tmp/shoveler-queue
+queue_directory: /tmp/shoveler-queue
 ```
-Directory to store overflow of queue onto disk. The queue keeps 100 messages in memory.  If the shoveler is disconnected from the message bus, it will store messages over the 100 in memory onto disk into this directory.  Once the connection has been re-established the queue will be emptied.  The queue on disk is persistent between restarts.
+
+#### IP Mapping Configuration
+
+Mapping configuration (optional). If `map.all` is set, all messages will be mapped to the configured IP address.
+For example, with the above configuration, if a packet comes in with the private IP address of 192.168.0.4, the packet origin will be changed to 172.0.0.4.  The port is always preserved.
 
 ```yaml
 # map:
 #   all: 172.0.0.4
 ```
-Mapping configuration (optional). If `map.all` is set, all messages will be mapped to the configured IP address.
-For example, with the above configuration, if a packet comes in with the private IP address of 192.168.0.4, the packet origin will be changed to 172.0.0.4.  The port is always preserved.
+
+If you want multiple mappings, you can specify multiple map entries.
 
 ```yaml
 # map:
 #   192.168.0.5: 172.0.0.5
 #   192.168.0.6: 129.93.10.7
 ```
-If you want multiple mappings, you can specify multiple map entries.
 
 
 Configuring Security
