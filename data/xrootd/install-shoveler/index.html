@@ -2235,8 +2235,8 @@
 
 <h1 id="installing-the-xrootd-monitoring-shoveler">Installing the XRootD Monitoring Shoveler<a class="headerlink" href="#installing-the-xrootd-monitoring-shoveler" title="Permanent link">&para;</a></h1>
 <p>The <a href="https://github.com/opensciencegrid/xrootd-monitoring-shoveler">XRootD Monitoring Shoveler</a> 
-is designed to accept the XRootD monitoring packets and "shovel" them to the OSG message bus.<br />
-Shoveling is the act of moving messages from one medium to another.<br />
+is designed to accept the XRootD monitoring packets and "shovel" them to the OSG message bus.
+Shoveling is the act of moving messages from one medium to another.
 In this case, the shoveler is moving messages from a UDP stream to a message bus.</p>
 <pre class="mermaid"><code>graph LR
   subgraph Site
@@ -2258,10 +2258,10 @@ In this case, the shoveler is moving messages from a UDP stream to a message bus
 <p>The shoveler can be installed via RPM, container, or staticly compiled binary.</p>
 <p>Requirements for running the Shoveler</p>
 <ol>
-<li>An open port (configurable) that can receive UDP packets from the XRootD servers.
+<li>An open port (configurable) that can receive UDP packets from the XRootD servers on the shoveler server.
     It does not need to be an open port to the internet, only open to the XRootD servers.</li>
-<li>Outgoing TCP connectivity.</li>
-<li>A directory to store the on-disk queue.</li>
+<li>Outgoing TCP connectivity on the shoveler host.</li>
+<li>A directory on the shoveler host to store the on-disk queue.</li>
 </ol>
 <h2 id="configuring-the-shoveler">Configuring the Shoveler<a class="headerlink" href="#configuring-the-shoveler" title="Permanent link">&para;</a></h2>
 <p>Configuration can be specified with environment variables or a configuration file.
