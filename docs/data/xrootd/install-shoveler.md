@@ -4,8 +4,8 @@ Installing the XRootD Monitoring Shoveler
 =========================================
 
 The [XRootD Monitoring Shoveler](https://github.com/opensciencegrid/xrootd-monitoring-shoveler) 
-is designed to accept the XRootD monitoring packets and "shovel" them to the OSG message bus.  
-Shoveling is the act of moving messages from one medium to another.  
+is designed to accept the XRootD monitoring packets and "shovel" them to the OSG message bus.
+Shoveling is the act of moving messages from one medium to another.
 In this case, the shoveler is moving messages from a UDP stream to a message bus.
 
 ```mermaid
@@ -34,10 +34,10 @@ The shoveler can be installed via RPM, container, or staticly compiled binary.
 
 Requirements for running the Shoveler
 
-1. An open port (configurable) that can receive UDP packets from the XRootD servers.
+1. An open port (configurable) that can receive UDP packets from the XRootD servers on the shoveler server.
     It does not need to be an open port to the internet, only open to the XRootD servers.
-1. Outgoing TCP connectivity.
-1. A directory to store the on-disk queue.
+1. Outgoing TCP connectivity on the shoveler host.
+1. A directory on the shoveler host to store the on-disk queue.
 
 Configuring the Shoveler
 ------------------------
