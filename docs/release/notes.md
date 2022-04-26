@@ -27,6 +27,7 @@ Releases
 
 | Version                             | Date       | Summary                                                                       |
 |:------------------------------------|:-----------|:------------------------------------------------------------------------------|
+| [3.5.62](3.5/release-3-5-62.md)     | 2022-04-26 | IGTF 1.116                                                                    |
 | [3.5.61](3.5/release-3-5-61.md)     | 2022-04-14 | osg-scitokens-mapfile 8                                                       |
 | [3.5.60-2](3.5/release-3-5-60-2.md) | 2022-03-31 | IGTF 1.115                                                                    |
 | [3.5.60](3.5/release-3-5-60.md)     | 2022-03-24 | python-scitokens 1.7.0, osg-token-renewer 8.0.1, HTCondor 8.8.17; Upcoming: HTCondor 9.0.11, XRootD 5.4.2, GlideinWMS 3.7.6 |
