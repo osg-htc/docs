@@ -40,6 +40,26 @@ The following issues are known to currently affect packages distributed in OSG 3
 Latest News
 -----------
 
+### **April 26, 2022:** CVMFS 2.9.2, Upcoming: HTCondor 9.8.1
+
+-   [CVMFS 2.9.2](https://cvmfs.readthedocs.io/en/2.9/cpt-releasenotes.html): Bug fix release
+-   cigetgert 1.20: works better with CILogon's AWS infrastructure
+-   osg-ce 3.6-5
+    -   Add OSG\_SERIES = 3.6 as a schedd attribute
+    -   Remove default BATCH\_GAHP configuration now provided by upstream
+-   osg-pki-tools 3.5.1: Python 3 fixes for osg-incommon-cert-request
+-   osg-xrootd 3.6-16
+    -   Fix stash-cache: enabling VOMS causes unauth cache to crash
+-   vault 1.10, htvault-config 1.12 htgettoken 1.11
+    -   Update from upstream software and change httokendecode to also
+          verify tokens if scitokens-verify is present
+-   VOMS 2: Update default proxy certificate key length to 2048 bits
+-   Upcoming: [HTCondor 9.8.1](https://htcondor.readthedocs.io/en/update/version-history/development-release-series-91.html#version-9-8-1)
+    -   Support for Heterogeneous GPUs, some configuration required
+    -   Allow HTCondor to use grid sites requiring multi-factor authentication
+    -   Technology preview: bring your own resources from HPC clusters
+    -   Fix HTCondor startup failure with complex network configurations
+
 ### **April 14, 2022:** osg-configure 4.1.1, osg-scitokens-mapfile 8
 
 -   [OSG-Configure 4.1.1](https://github.com/opensciencegrid/osg-configure/releases/tag/v4.1.1)
