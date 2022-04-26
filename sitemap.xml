@@ -646,6 +646,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://opensciencegrid.org/docs/release/3.5/release-3-5-62/</loc>
+         <lastmod>2022-04-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://opensciencegrid.org/docs/release/3.5/release-3-5-7/</loc>
          <lastmod>2022-04-26</lastmod>
          <changefreq>daily</changefreq>
