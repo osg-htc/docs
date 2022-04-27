@@ -43,7 +43,7 @@ Latest News
 ### **April 26, 2022:** CVMFS 2.9.2, Upcoming: HTCondor 9.8.1
 
 -   [CVMFS 2.9.2](https://cvmfs.readthedocs.io/en/2.9/cpt-releasenotes.html): Bug fix release
--   cigetgert 1.20: works better with CILogon's AWS infrastructure
+-   cigetcert 1.20: works better with CILogon's AWS infrastructure
 -   osg-ce 3.6-5
     -   Add OSG\_SERIES = 3.6 as a schedd attribute
     -   Remove default BATCH\_GAHP configuration now provided by upstream
