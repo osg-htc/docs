@@ -1,3 +1,5 @@
+title: OSG 3.6 News
+
 !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
     Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
     authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.

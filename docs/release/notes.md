@@ -1,3 +1,5 @@
+title: OSG 3.5 Release Notes
+
 OSG 3.5 Release Notes
 =====================
 

@@ -1,3 +1,5 @@
+title: Basics of using yum and RPM
+
 Basics of using yum and RPM
 ===========================
 

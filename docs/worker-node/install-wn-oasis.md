@@ -1,3 +1,5 @@
+title: Installing the Worker Node Client via OASIS
+
 Installing the Worker Node Client via OASIS
 ===========================================
 

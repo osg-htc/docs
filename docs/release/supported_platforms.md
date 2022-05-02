@@ -1,3 +1,5 @@
+title: Supported Platforms
+
 Supported Platforms
 ===================
 

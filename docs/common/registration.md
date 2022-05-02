@@ -1,3 +1,5 @@
+title: Registering in the OSG
+
 Registering in the OSG
 ======================
 

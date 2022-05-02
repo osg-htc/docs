@@ -1,3 +1,5 @@
+title: Installing and Maintaining HDFS
+
 Installing and Maintaining HDFS
 ===============================
 

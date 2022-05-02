@@ -1,3 +1,5 @@
+title: Updating to OSG 3.6
+
 !!! danger "Before considering an upgrade to OSG 3.6&hellip;"
     Due to potentially disruptive changes in protocols, consult the
     [collaboration support tables](../security/tokens/overview.md#collaboration-support) to verify that your

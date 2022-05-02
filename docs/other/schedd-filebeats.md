@@ -1,3 +1,5 @@
+title: Installation of FileBeats for Access Points
+
 !!!warning
     This is a technology preview document and will probably change content and location withouth notice.
 

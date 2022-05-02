@@ -1,3 +1,5 @@
+title: Installing and Maintaining the LCMAPS VOMS Plugin
+
 Installing and Maintaining the LCMAPS VOMS Plugin
 =================================================
 

@@ -1,3 +1,5 @@
+title: Configuration with OSG-Configure
+
 Configuration with OSG-Configure
 ================================
 

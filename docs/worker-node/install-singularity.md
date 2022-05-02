@@ -1,3 +1,5 @@
+title: Install Singularity
+
 Install Singularity
 ===================
 

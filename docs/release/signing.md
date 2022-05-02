@@ -1,4 +1,6 @@
 
+title: OSG Release Signing Information
+
 OSG Release Signing Information
 ===============================
 

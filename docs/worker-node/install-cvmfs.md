@@ -1,3 +1,5 @@
+title: Installing and Maintaining the CernVM File System Client
+
 # Installing and Maintaining the CernVM File System Client
 
 !!!bug "EL7 version compatibility"

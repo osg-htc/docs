@@ -1,3 +1,5 @@
+title: How to Get Help
+
 How to Get Help
 ===============
 

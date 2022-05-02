@@ -1,3 +1,5 @@
+title: Using Bearer Tokens
+
 Using Bearer Tokens
 ===================
 
