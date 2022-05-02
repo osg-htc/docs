@@ -21,7 +21,7 @@ Summary of Changes
 
 This release contains:
 
--   CA Certificates based on IGTF 1.116
+-   CA Certificates based on [IGTF 1.116](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   Updated intermediate CERN Grid CA ICA with extended validity (CERN)
 
 These

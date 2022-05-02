@@ -42,6 +42,8 @@ Latest News
 
 ### **April 26, 2022:** CVMFS 2.9.2, Upcoming: HTCondor 9.8.1
 
+-   CA certificates based on [IGTF 1.116](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Updated intermediate CERN Grid CA ICA with extended validity (CERN)
 -   [CVMFS 2.9.2](https://cvmfs.readthedocs.io/en/2.9/cpt-releasenotes.html): Bug fix release
 -   cigetcert 1.20: works better with CILogon's AWS infrastructure
 -   osg-ce 3.6-5
@@ -167,6 +169,9 @@ This release contains updated CA Certificates based on [IGTF 1.115](http://dist.
 
 ### **January 20, 2022:** CVMFS 2.9.0 and HTCondor 5.1.3 updates
 
+-   CA Certificates based on [IGTF 1.114](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Extend validity for SlovakGrid issuing CA (SK)
+    -   Remove expired Let's Encrypt ROOT CA X3 and X4
 -   [CVMFS 2.9.0](https://cvmfs.readthedocs.io/en/2.9/cpt-releasenotes.html)
     -   Incremental conversion of container images, resulting in a large speed-up for publishing new container image versions to unpacked.cern.ch
     -   Support for maintaining repositories in S3 over HTTPS (not just HTTP)
