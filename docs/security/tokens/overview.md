@@ -188,7 +188,7 @@ These are the collaborations that support or partially support using tokens for 
 | EIC           | Undergoing testing     |
 | GLOW          | Yes                    |
 | GlueX         | Yes                    |
-| HCC           | Undergoign testing     |
+| HCC           | Yes                    |
 | IceCube       | Undergoing testing     |
 | LIGO          | Undergoing testing     |
 | OSG           | Yes                    |
