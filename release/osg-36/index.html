@@ -2713,6 +2713,10 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
 <h3 id="april-26-2022-cvmfs-292-upcoming-htcondor-981"><strong>April 26, 2022:</strong> CVMFS 2.9.2, Upcoming: HTCondor 9.8.1<a class="headerlink" href="#april-26-2022-cvmfs-292-upcoming-htcondor-981" title="Permanent link">&para;</a></h3>
 <ul>
+<li>CA certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.116</a><ul>
+<li>Updated intermediate CERN Grid CA ICA with extended validity (CERN)</li>
+</ul>
+</li>
 <li><a href="https://cvmfs.readthedocs.io/en/2.9/cpt-releasenotes.html">CVMFS 2.9.2</a>: Bug fix release</li>
 <li>cigetcert 1.20: works better with CILogon's AWS infrastructure</li>
 <li>osg-ce 3.6-5<ul>
@@ -2887,6 +2891,11 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
 </ul>
 <h3 id="january-20-2022-cvmfs-290-and-htcondor-513-updates"><strong>January 20, 2022:</strong> CVMFS 2.9.0 and HTCondor 5.1.3 updates<a class="headerlink" href="#january-20-2022-cvmfs-290-and-htcondor-513-updates" title="Permanent link">&para;</a></h3>
 <ul>
+<li>CA Certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.114</a><ul>
+<li>Extend validity for SlovakGrid issuing CA (SK)</li>
+<li>Remove expired Let's Encrypt ROOT CA X3 and X4</li>
+</ul>
+</li>
 <li><a href="https://cvmfs.readthedocs.io/en/2.9/cpt-releasenotes.html">CVMFS 2.9.0</a><ul>
 <li>Incremental conversion of container images, resulting in a large speed-up for publishing new container image versions to unpacked.cern.ch</li>
 <li>Support for maintaining repositories in S3 over HTTPS (not just HTTP)</li>
