@@ -183,14 +183,14 @@ These are the collaborations that support or partially support using tokens for 
 | Collaboration | Supports Bearer Tokens |
 |:--------------|------------------------|
 | ATLAS         | Yes                    |
-| CLAS12        | Undergoing testing     |
+| CLAS12        | Yes                    |
 | CMS           | Yes                    |
-| EIC           | Undergoing testing     |
+| EIC           | Yes                    |
 | GLOW          | Yes                    |
 | GlueX         | Yes                    |
 | HCC           | Undergoign testing     |
 | IceCube       | Undergoing testing     |
-| LIGO          | Undergoing testing     |
+| LIGO          | Yes                    |
 | OSG           | Yes                    |
 
 Until all of the collaborations you support are using tokens in production, your CE should remain on OSG 3.5,
