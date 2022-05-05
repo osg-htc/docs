@@ -917,6 +917,32 @@
     Installing the Shoveler
   </a>
   
+    <nav class="md-nav" aria-label="Installing the Shoveler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requirements-for-running-the-shoveler" class="md-nav__link">
+    Requirements for running the Shoveler
+  </a>
+  
+    <nav class="md-nav" aria-label="Requirements for running the Shoveler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resource-requirements" class="md-nav__link">
+    Resource Requirements
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2138,6 +2164,32 @@
     Installing the Shoveler
   </a>
   
+    <nav class="md-nav" aria-label="Installing the Shoveler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requirements-for-running-the-shoveler" class="md-nav__link">
+    Requirements for running the Shoveler
+  </a>
+  
+    <nav class="md-nav" aria-label="Requirements for running the Shoveler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resource-requirements" class="md-nav__link">
+    Resource Requirements
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2256,12 +2308,19 @@ In this case, the shoveler is moving messages from a UDP stream to a message bus
   end;</code></pre>
 <h2 id="installing-the-shoveler">Installing the Shoveler<a class="headerlink" href="#installing-the-shoveler" title="Permanent link">&para;</a></h2>
 <p>The shoveler can be installed via RPM, container, or staticly compiled binary.</p>
-<p>Requirements for running the Shoveler</p>
+<h3 id="requirements-for-running-the-shoveler">Requirements for running the Shoveler<a class="headerlink" href="#requirements-for-running-the-shoveler" title="Permanent link">&para;</a></h3>
 <ol>
 <li>An open port (configurable) that can receive UDP packets from the XRootD servers on the shoveler server.
     It does not need to be an open port to the internet, only open to the XRootD servers.</li>
 <li>Outgoing TCP connectivity on the shoveler host.</li>
 <li>A directory on the shoveler host to store the on-disk queue.</li>
+</ol>
+<h4 id="resource-requirements">Resource Requirements<a class="headerlink" href="#resource-requirements" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>RAM</strong>: Production shovelers use less than 50MB of memory.</li>
+<li><strong>Disk</strong>: If the shoveler is disconnected from the message bus, it will store the messages on disk until reconnected.  Through testing, a disconnected shoveler with 12 busy XRootD servers will generate &lt;30 MB of data a day on disk.</li>
+<li><strong>CPU</strong>: A production shoveler will use 1-2% of a CPU, depending on how many XRootD servers are reporting to the shoveler.  A shoveler with 12 busy XRootD servers reporting to it uses 1-2% of a CPU.</li>
+<li><strong>Network</strong>: A production shoveler will receive UDP messages from XRootD servers and send them to a message bus.  The incoming and outgoing network utilization will be the same.  In testing, a shoveler will use &lt;30MB of data a day on the network.</li>
 </ol>
 <h2 id="configuring-the-shoveler">Configuring the Shoveler<a class="headerlink" href="#configuring-the-shoveler" title="Permanent link">&para;</a></h2>
 <p>Configuration can be specified with environment variables or a configuration file.
