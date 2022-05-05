@@ -32,7 +32,7 @@ Installing the Shoveler
 
 The shoveler can be installed via RPM, container, or staticly compiled binary.
 
-### Requirements for running the Shoveler:
+### Requirements for running the Shoveler
 
 1. An open port (configurable) that can receive UDP packets from the XRootD servers on the shoveler server.
     It does not need to be an open port to the internet, only open to the XRootD servers.
