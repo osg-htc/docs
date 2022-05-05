@@ -32,12 +32,19 @@ Installing the Shoveler
 
 The shoveler can be installed via RPM, container, or staticly compiled binary.
 
-Requirements for running the Shoveler
+### Requirements for running the Shoveler
 
 1. An open port (configurable) that can receive UDP packets from the XRootD servers on the shoveler server.
     It does not need to be an open port to the internet, only open to the XRootD servers.
 1. Outgoing TCP connectivity on the shoveler host.
 1. A directory on the shoveler host to store the on-disk queue.
+
+#### Resource Requirements
+
+1. **RAM**: Production shovelers use less than 50MB of memory.
+2. **Disk**: If the shoveler is disconnected from the message bus, it will store the messages on disk until reconnected.  Through testing, a disconnected shoveler with 12 busy XRootD servers will generate <30 MB of data a day on disk.
+3. **CPU**: A production shoveler will use 1-2% of a CPU, depending on how many XRootD servers are reporting to the shoveler.  A shoveler with 12 busy XRootD servers reporting to it uses 1-2% of a CPU.
+4. **Network**: A production shoveler will receive UDP messages from XRootD servers and send them to a message bus.  The incoming and outgoing network utilization will be the same.  In testing, a shoveler will use <30MB of data a day on the network.
 
 Configuring the Shoveler
 ------------------------
