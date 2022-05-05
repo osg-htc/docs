@@ -1764,6 +1764,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#may-5-2022-htcondor-9012-xcache-301-gratia-probe-252" class="md-nav__link">
+    May 5, 2022: HTCondor 9.0.12, XCache 3.0.1, gratia-probe 2.5.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#april-26-2022-cvmfs-292-upcoming-htcondor-981" class="md-nav__link">
     April 26, 2022: CVMFS 2.9.2, Upcoming: HTCondor 9.8.1
   </a>
@@ -2391,6 +2398,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#may-5-2022-htcondor-9012-xcache-301-gratia-probe-252" class="md-nav__link">
+    May 5, 2022: HTCondor 9.0.12, XCache 3.0.1, gratia-probe 2.5.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#april-26-2022-cvmfs-292-upcoming-htcondor-981" class="md-nav__link">
     April 26, 2022: CVMFS 2.9.2, Upcoming: HTCondor 9.8.1
   </a>
@@ -2692,8 +2706,7 @@ install or remain on the <a href="../notes/">OSG 3.5 release series</a>.</p>
 changes to core protocols used for authentication and data transfer:
 bearer tokens, such as <a href="https://scitokens.org/">SciTokens</a> or WLCG tokens, are used for authentication instead of
 GSI proxies and HTTP is used for data transfer instead of GridFTP.</p>
-<p>To support these new protocols, OSG 3.6 includes HTCondor 8.9, HTCondor-CE 5, and will shortly include HTCondor 9.0,
-GlideinWMS 3.9, and XRootD 5.1.
+<p>To support these new protocols, OSG 3.6 includes HTCondor 9.0, HTCondor-CE 5, GlideinWMS 3.9, and XRootD 5.4.
 We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
 <h2 id="known-issues">Known Issues<a class="headerlink" href="#known-issues" title="Permanent link">&para;</a></h2>
 <p>The following issues are known to currently affect packages distributed in OSG 3.6:</p>
@@ -2711,6 +2724,24 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
     If you want to use multiuser, ensure you are getting <code>xrootd-voms</code> from the OSG repos.</li>
 </ul>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="may-5-2022-htcondor-9012-xcache-301-gratia-probe-252"><strong>May 5, 2022:</strong> HTCondor 9.0.12, XCache 3.0.1, gratia-probe 2.5.2<a class="headerlink" href="#may-5-2022-htcondor-9012-xcache-301-gratia-probe-252" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://htcondor.readthedocs.io/en/v9_0/version-history/stable-release-series-90.html#version-9-0-12">HTCondor 9.0.12</a>: Bug fix release</li>
+<li>XCache 3.0.1<ul>
+<li>Fixed library dependency issues for xcache-reporter</li>
+</ul>
+</li>
+<li>gratia-probe 2.5.2<ul>
+<li>Remove pre-routed jobs instead of quarantining them</li>
+<li>Always set MapUnknownToGroup</li>
+</ul>
+</li>
+<li>osg-flock 1.8<ul>
+<li>Remove MapUnknownToGroup and MapGroupToRole from osg-flock</li>
+<li>Advertise osg-flock version in the osg-flock RPM</li>
+</ul>
+</li>
+</ul>
 <h3 id="april-26-2022-cvmfs-292-upcoming-htcondor-981"><strong>April 26, 2022:</strong> CVMFS 2.9.2, Upcoming: HTCondor 9.8.1<a class="headerlink" href="#april-26-2022-cvmfs-292-upcoming-htcondor-981" title="Permanent link">&para;</a></h3>
 <ul>
 <li>CA certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.116</a><ul>
