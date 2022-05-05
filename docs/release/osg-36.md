@@ -47,7 +47,7 @@ Latest News
     -   Fixed library dependency issues for xcache-reporter
 -   gratia-probe 2.5.2
     -   Remove pre-routed jobs instead of quarantining them
-    -   always set MapUnknownToGroup
+    -   Always set MapUnknownToGroup
 -   osg-flock 1.8
     -   Remove MapUnknownToGroup and MapGroupToRole from osg-flock
     -   Advertise osg-flock version in the osg-flock RPM
