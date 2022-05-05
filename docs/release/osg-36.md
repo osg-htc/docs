@@ -16,8 +16,7 @@ changes to core protocols used for authentication and data transfer:
 bearer tokens, such as [SciTokens](https://scitokens.org/) or WLCG tokens, are used for authentication instead of
 GSI proxies and HTTP is used for data transfer instead of GridFTP.
 
-To support these new protocols, OSG 3.6 includes HTCondor 8.9, HTCondor-CE 5, and will shortly include HTCondor 9.0,
-GlideinWMS 3.9, and XRootD 5.1.
+To support these new protocols, OSG 3.6 includes HTCondor 9.0, HTCondor-CE 5, GlideinWMS 3.9, and XRootD 5.4.
 We also dropped support for the GridFTP, GSI authentication, and Hadoop.
 
 Known Issues
@@ -41,6 +40,17 @@ The following issues are known to currently affect packages distributed in OSG 3
 
 Latest News
 -----------
+
+### **May 5, 2022:** HTCondor 9.0.12, XCache 3.0.1, gratia-probe 2.5.2
+-   [HTCondor 9.0.12](https://htcondor.readthedocs.io/en/v9_0/version-history/stable-release-series-90.html#version-9-0-12): Bug fix release
+-   XCache 3.0.1
+    -   Fixed library dependency issues for xcache-reporter
+-   gratia-probe 2.5.2
+    -   Remove pre-routed jobs instead of quarantining them
+    -   Always set MapUnknownToGroup
+-   osg-flock 1.8
+    -   Remove MapUnknownToGroup and MapGroupToRole from osg-flock
+    -   Advertise osg-flock version in the osg-flock RPM
 
 ### **April 26, 2022:** CVMFS 2.9.2, Upcoming: HTCondor 9.8.1
 
