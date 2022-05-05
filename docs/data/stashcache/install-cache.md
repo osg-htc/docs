@@ -27,7 +27,7 @@ Before starting the installation process, consider the following requirements:
     * Inbound TCP port 8443 for authenticated file access via HTTPS (optional)
     * Outbound UDP port 9930 for reporting to `xrd-report.osgstorage.org` and `xrd-mon.osgstorage.org` for monitoring
 * __Hardware requirements:__ We recommend that a cache has at least 10Gbps connectivity, 1TB of
- disk space for the cache directory, and 8GB of RAM.
+ disk space for the cache directory, and 12GB of RAM.
 
 As with all OSG software installations, there are some one-time steps to prepare in advance:
 
