@@ -39,7 +39,7 @@ The shoveler can be installed via RPM, container, or staticly compiled binary.
 1. Outgoing TCP connectivity on the shoveler host.
 1. A directory on the shoveler host to store the on-disk queue.
 
-### Resource Requirements:
+#### Resource Requirements
 
 1. **RAM**: Production shovelers use less than 50MB of memory.
 2. **Disk**: If the shoveler is disconnected from the message bus, it will store the messages on disk until reconnected.  Through testing, a disconnected shoveler with 12 busy XRootD servers will generate <30 MB of data a day on disk.
