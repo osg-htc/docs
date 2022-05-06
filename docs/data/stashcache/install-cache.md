@@ -208,7 +208,7 @@ To use HTTPS:
 
 1.  Uncomment `set EnableVoms = 1` in `/etc/xrootd/config.d/10-osg-xrdvoms.cfg`
 
-!!! note Upgrading from OSG 3.5
+!!! note "Upgrading from OSG 3.5"
     If upgrading from OSG 3.5, you may have a file with the following contents in `/etc/xrootd/config.d`:
 
            # Support HTTPS access to unauthenticated cache
