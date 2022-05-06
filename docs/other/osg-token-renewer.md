@@ -140,6 +140,13 @@ EOF
 root@host # systemctl daemon-reload
 ```
 
+!!! note
+    Be aware that the default timer configuration also has a 3 minute random
+    delay built in, via the parameter `RandomizedDelaySec=3min`.
+    Thus setting the frequency to `10min` only guarantees runs every 13 minutes.
+    This parameter is also configurable in the above systemd override file.
+
+
 Managing the OSG Token Renewal Service
 --------------------------------------
 
