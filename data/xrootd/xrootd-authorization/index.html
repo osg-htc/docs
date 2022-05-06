@@ -940,13 +940,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#authenticating-proxies-deprecated" class="md-nav__link">
-    Authenticating Proxies (deprecated)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#authorization-database" class="md-nav__link">
     Authorization database
   </a>
@@ -2276,13 +2269,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#authenticating-proxies-deprecated" class="md-nav__link">
-    Authenticating Proxies (deprecated)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#authorization-database" class="md-nav__link">
     Authorization database
   </a>
@@ -2606,32 +2592,6 @@ but the plugin can only look at a single mapfile,
 so if you are using the mappings provided in <code>/usr/share/osg/voms-mapfile-default</code>
 (by the <code>vo-client-lcmaps-voms</code> package),
 you will have to copy them to <code>/etc/grid-security/voms-mapfile</code>.</p>
-<h3 id="authenticating-proxies-deprecated">Authenticating Proxies (deprecated)<a class="headerlink" href="#authenticating-proxies-deprecated" title="Permanent link">&para;</a></h3>
-<div class="admonition info">
-<p class="admonition-title">OSG 3.5 end-of-life</p>
-<p>OSG 3.5 will reach its end-of-life in <a href="../../../release/release_series/#series-overviews">May 2022</a>.</p>
-</div>
-<p>In <a href="../../../release/release_series/#series-overviews">OSG 3.5</a>, <a href="../../../security/lcmaps-voms-authentication/">LCMAPS</a> is
-used to authenticate X.509 and VOMS proxies to usernames utilized by the
-<a href="#authorization-database">authorization database</a>.
-Perform the following instructions on all data nodes:</p>
-<ol>
-<li>
-<p>Install <a href="../../../common/ca/#installing-ca-certificates">CA certificates</a> and 
-    <a href="../../../common/ca/#managing-certificate-revocation-lists">manage CRLs</a></p>
-</li>
-<li>
-<p>Copy your host certificate and key to <code>/etc/grid-security/xrd/xrdcert.pem</code> and <code>/etc/grid-security/xrd/xrdkey.pem</code>,
-    respectively.</p>
-</li>
-<li>
-<p>Configure the <a href="../../../security/lcmaps-voms-authentication/">LCMAPS VOMS plugin</a></p>
-</li>
-<li>
-<p>Any subject DN or VOMS FQAN mappings from LCMAPS will result in usernames that can be used in the
-    <a href="#authorization-database">authorization database</a>.</p>
-</li>
-</ol>
 <h3 id="authorization-database">Authorization database<a class="headerlink" href="#authorization-database" title="Permanent link">&para;</a></h3>
 <p>XRootD allows configuring fine-grained file access permissions based on authenticated identities and paths.
 This is configured in the authorization file <code>/etc/xrootd/Authfile</code>, which should be writable

@@ -1089,13 +1089,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rsv" class="md-nav__link">
-    RSV
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#subcluster-resource-entry-for-agis-glideinwms-entry" class="md-nav__link">
     Subcluster / Resource Entry for AGIS / GlideinWMS Entry
   </a>
@@ -1146,13 +1139,6 @@
           <li class="md-nav__item">
   <a href="#local-settings" class="md-nav__link">
     Local Settings
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#misc-services" class="md-nav__link">
-    Misc Services
   </a>
   
 </li>
@@ -2332,13 +2318,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rsv" class="md-nav__link">
-    RSV
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#subcluster-resource-entry-for-agis-glideinwms-entry" class="md-nav__link">
     Subcluster / Resource Entry for AGIS / GlideinWMS Entry
   </a>
@@ -2389,13 +2368,6 @@
           <li class="md-nav__item">
   <a href="#local-settings" class="md-nav__link">
     Local Settings
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#misc-services" class="md-nav__link">
-    Misc Services
   </a>
   
 </li>
@@ -2494,7 +2466,7 @@ If something goes wrong, specify the <code>-d</code> flag to add more verbose ou
 <li>Options that are not found in the default ini file are in <em>italics</em>.</li>
 </ul>
 <h2 id="syntax-and-layout">Syntax and layout<a class="headerlink" href="#syntax-and-layout" title="Permanent link">&para;</a></h2>
-<p>The configuration files used by <code>osg-configure</code> are the one supported by Python's <a href="https://docs.python.org/library/configparser.html">SafeConfigParser</a>, similar in format to the <a href="https://en.wikipedia.org/wiki/INI_file">INI configuration file</a> used by MS Windows:</p>
+<p>The configuration files used by <code>osg-configure</code> are the one supported by Python's <a href="https://docs.python.org/library/configparser.html">configparser</a>, similar in format to the <a href="https://en.wikipedia.org/wiki/INI_file">INI configuration file</a> used by MS Windows:</p>
 <ul>
 <li>Config files are separated into sections, specified by a section name in square brackets (e.g. <code>[Section 1]</code>)</li>
 <li>Options should be set using <code>name = value</code> pairs</li>
@@ -2821,123 +2793,15 @@ Legal values for <code>probe_type</code> are:</p>
 <li>Otherwise, set this to the <code>hostname:port</code> of a host running a <code>condor-ce-collector</code> daemon</li>
 </ul>
 </div>
-<h3 id="rsv">RSV<a class="headerlink" href="#rsv" title="Permanent link">&para;</a></h3>
-<p>This section handles the configuration and setup of the RSV services.</p>
-<p>This section is contained in <code>/etc/osg/config.d/30-rsv.ini</code> which is provided by the <code>osg-configure-rsv</code> RPM.</p>
-<table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Values Accepted</th>
-<th>Explanation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>enabled</strong></td>
-<td><code>True</code>, <code>False</code>, <code>Ignore</code></td>
-<td>This indicates whether the rsv  service is being used or not.</td>
-</tr>
-<tr>
-<td><strong>rsv_user</strong></td>
-<td>String</td>
-<td>This gives username that rsv will run under.  If this is blank or set to <code>UNAVAILABLE</code>, it will default to rsv.</td>
-</tr>
-<tr>
-<td><strong>gratia_probes</strong></td>
-<td>String</td>
-<td>This settings indicates which rsv gratia probes should be used.  It is a list of probes separated by a comma.  Valid probes are metric, condor, pbs, lsf, sge, managedfork, hadoop-transfer, and gridftp-transfer</td>
-</tr>
-<tr>
-<td>ce_hosts</td>
-<td>String</td>
-<td>This option lists the serviceURI of the CEs that generic RSV CE probes should check.  This should be a list of serviceURIs (<code>hostname[:port/service]</code>) separated by a comma (e.g. <code>my.host,my.host2,my.host3:2812</code>).</td>
-</tr>
-<tr>
-<td>htcondor_ce_hosts</td>
-<td>String</td>
-<td>This option lists the serviceURI of the HTCondor-CE-based CEs that the RSV HTCondor-CE probes should check. This should be a list of serviceURIs (<code>hostname[:port/service]</code>) separated by a comma (e.g. <code>my.host,my.host2,my.host3:2812</code>).</td>
-</tr>
-<tr>
-<td>gridftp_hosts</td>
-<td>String</td>
-<td>This option lists the serviceURI of the GridFTP servers that the RSV GridFTP probes should check.  This should be a list of serviceURIs (<code>hostname[:port/service]</code>) separated by a comma (e.g. <code>my.host.iu.edu:2812,my.host2,my.host3</code>).</td>
-</tr>
-<tr>
-<td>gridftp_dir</td>
-<td>String</td>
-<td>This should be the directory that the GridFTP probes should use during testing.  This defaults to <code>/tmp</code> if left blank or set to <code>UNAVAILABLE</code>.</td>
-</tr>
-<tr>
-<td><strong>srm_hosts</strong></td>
-<td>String</td>
-<td>This option lists the serviceURI of the srm servers that the RSV srm probes should check.  This should be a list of serviceURIs (<code>hostname[:port/service]</code>) separated by a comma (e.g. <code>my.host,my.host2,my.host3:8444</code>).</td>
-</tr>
-<tr>
-<td>srm_dir</td>
-<td>String</td>
-<td>This should be the directory that the srm probes should use during testing.</td>
-</tr>
-<tr>
-<td>srm_webservice_path</td>
-<td>String</td>
-<td>This option gives the webservice path that SRM probes need to use along with the host:port. See note.</td>
-</tr>
-<tr>
-<td>service_cert</td>
-<td>String</td>
-<td>This option should point to the public key file (pem) for your service  certificate. If this is left blank or set to <code>UNAVAILABLE</code> and the <code>user_proxy</code> setting is set, it will default to <code>/etc/grid-security/rsvcert.pem</code></td>
-</tr>
-<tr>
-<td>service_key</td>
-<td>String</td>
-<td>This option should point to the private key file (pem) for your service  certificate. If this is left blank or set to <code>UNAVAILABLE</code> and the <code>service_cert</code> setting is enabled, it will default to <code>/etc/grid-security/rsvkey.pem</code> .</td>
-</tr>
-<tr>
-<td>service_proxy</td>
-<td>String</td>
-<td>This should point to the location of the rsv proxy file. If this is left blank or set to <code>UNAVAILABLE</code> and the use_service_cert  setting is enabled, it will default to <code>/tmp/rsvproxy</code>.</td>
-</tr>
-<tr>
-<td>user_proxy</td>
-<td>String</td>
-<td>If you don't use a service certificate for rsv, you will need to specify a  proxy file that RSV should use in the proxy_file setting.  If this is set, then  service_cert, service_key, and service_proxy should be left blank, or set to <code>UNAVAILABE</code> or <code>DEFAULT</code>.</td>
-</tr>
-<tr>
-<td><strong>setup_rsv_nagios</strong></td>
-<td><code>True</code>, <code>False</code></td>
-<td>This option indicates whether rsv should upload results to a local  nagios server instance. This should be set to True or False.<br> This plugin is provided as an experimental component, and admins are recommend <em>not to enable</em> it on production resources.</td>
-</tr>
-<tr>
-<td>rsv_nagios_conf_file</td>
-<td>String</td>
-<td>This option indicates the location of the rsv nagios  file to use for configuration details. This file <em>needs to be configured locally for RSV-Nagios forwarding to work</em> -- see inline comments in file for more information.</td>
-</tr>
-<tr>
-<td>condor_location</td>
-<td>String</td>
-<td>If you installed Condor in a non-standard location (somewhere other than /usr, which is where the RPM puts it)  you must specify the path to the install dir here.</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><strong>srm_webservice_path</strong>:<br/>
-For dcache installations, this should work if left blank. However
-Bestman-xrootd SEs normally use <code>srm/v2/server</code> as web service path, and so
-Bestman-xrootd admins will have to pass this option with the appropriate
-value (for example: <code>srm/v2/server</code>) for the SRM probes to pass on their
-SE.</p>
-</div>
 <h3 id="subcluster-resource-entry-for-agis-glideinwms-entry">Subcluster / Resource Entry for AGIS / GlideinWMS Entry<a class="headerlink" href="#subcluster-resource-entry-for-agis-glideinwms-entry" title="Permanent link">&para;</a></h3>
 <p>Subcluster and Resource Entry configuration is for reporting about the worker resources on your site. A <strong>subcluster</strong> is a homogeneous set of worker node hardware; a <strong>resource</strong> is a set of subcluster(s) with common capabilities that will be reported to the ATLAS AGIS system.</p>
 <p><strong>At least one Subcluster or Resource Entry section</strong> is required on a CE; please populate the information for all your subclusters. This information will be reported to a central collector and will be used to send GlideIns / pilot jobs to your site; having accurate information is necessary for OSG jobs to effectively use your resources.</p>
-<p>This section is contained in <code>/etc/osg/config.d/30-gip.ini</code> which is provided by the <code>osg-configure-gip</code> RPM. (This is for historical reasons.)</p>
+<p>These configuration files are provided by the <code>osg-configure-cluster</code> RPM.</p>
 <p>This configuration uses multiple sections of the OSG configuration files:</p>
 <ul>
-<li><a href="#subcluster-configuration">Subcluster*</a>: options about homogeneous subclusters</li>
-<li><a href="#resource-entry-configuration-atlas-only">Resource Entry*</a>: options for specifying ATLAS queues for AGIS</li>
-<li><a href="#glideinwms-entry-cms-and-osg-pilot-factories">GlideinWMS Entry*</a>: options for specifying queues for the CMS and OSG GlideinWMS factories</li>
+<li><a href="#subcluster-configuration">Subcluster*</a> in <code>/etc/osg/config.d/31-cluster.ini</code>: options about homogeneous subclusters</li>
+<li><a href="#resource-entry-configuration-atlas-only">Resource Entry*</a> in <code>/etc/osg/config.d/31-cluster.ini</code>: options for specifying ATLAS queues for AGIS</li>
+<li><a href="#glideinwms-entry-cms-and-osg-pilot-factories">GlideinWMS Entry*</a> in <code>/etc/osg/config.d/35-pilot.ini</code>: options for specifying queues for the CMS and OSG GlideinWMS factories</li>
 </ul>
 <h4 id="notes-for-multi-ce-sites">Notes for multi-CE sites.<a class="headerlink" href="#notes-for-multi-ce-sites" title="Permanent link">&para;</a></h4>
 <p>If you would like to properly advertise multiple CEs per cluster, make sure that you:</p>
@@ -2974,7 +2838,7 @@ SE.</p>
 <tr>
 <td><strong>allowed_vos</strong></td>
 <td>Comma-separated List or <code>*</code></td>
-<td>The VOs that are allowed to run jobs on this subcluster (autodetected if <code>*</code>). Optional on OSG 3.3</td>
+<td>The collaborations that are allowed to run jobs on this subcluster</td>
 </tr>
 </tbody>
 </table>
@@ -3005,10 +2869,6 @@ SE.</p>
 </tr>
 </tbody>
 </table>
-<p><strong>OSG 3.4 changes:</strong></p>
-<ul>
-<li><code>allowed_vos</code> is mandatory</li>
-</ul>
 <h4 id="resource-entry-configuration-atlas-only">Resource Entry Configuration (ATLAS only)<a class="headerlink" href="#resource-entry-configuration-atlas-only" title="Permanent link">&para;</a></h4>
 <p>If you are configuring a CE for the ATLAS VO, you must provide hardware information to advertise the queues that are available to AGIS. For each queue, create a new <code>Resource Entry</code> section with a unique name in the following format: <code>[Resource Entry RESOURCE]</code> where RESOURCE is a globally unique resource name (it must be a <strong>globally</strong> unique name for the whole grid, not just unique to your site). The following options are required for the <code>Resource Entry</code> section and are used to generate the data required by AGIS:</p>
 <table>
@@ -3048,7 +2908,7 @@ SE.</p>
 <tr>
 <td><strong>allowed_vos</strong></td>
 <td>Comma-separated List or <code>*</code></td>
-<td>The VOs that are allowed to run jobs on this resource (autodetected if <code>*</code>). Optional on OSG 3.3</td>
+<td>The collaborations that are allowed to run jobs on this resource</td>
 </tr>
 </tbody>
 </table>
@@ -3074,10 +2934,6 @@ SE.</p>
 </tr>
 </tbody>
 </table>
-<p><strong>OSG 3.4 changes:</strong></p>
-<ul>
-<li><code>allowed_vos</code> is mandatory</li>
-</ul>
 <h4 id="glideinwms-entry-cms-and-osg-pilot-factories">GlideinWMS Entry (CMS and OSG pilot factories)<a class="headerlink" href="#glideinwms-entry-cms-and-osg-pilot-factories" title="Permanent link">&para;</a></h4>
 <p>If you are configuring a CE that is going to receive pilot jobs from the CMS or the OSG factories (CMS, OSG, LIGO, CLAS12, DUNE, Glow, IceCube, ...), you can provide pilot job specifications to help operators automatically configure the factory entries in GlideinWMS. For each pilot type, create a new <code>Pilot</code> section with a unique name in the following format: <code>[Pilot NAME]</code> where NAME is a string describing the pilot type (e.g.: GPU, WholeNode, default). The following options can be specified in the <code>Pilot</code> section:</p>
 <p>This section is contained in <code>/etc/osg/config.d/35-pilot.ini</code></p>
@@ -3143,7 +2999,7 @@ SE.</p>
 <tr>
 <td><strong>allowed_vos</strong></td>
 <td>Comma-separated List or <code>*</code></td>
-<td>A comma-separated list of VOs that are allowed to submit to this subcluster; If <code>*</code>, uses VOs that have accounts on this CE</td>
+<td>A comma-separated list of collaborations that are allowed to submit to this subcluster</td>
 </tr>
 </tbody>
 </table>
@@ -3179,41 +3035,6 @@ SE.</p>
 <span class="na">MY_PATH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">/usr/local/myapp</span><span class="w"></span>
 </code></pre></div>
 <p>This section is contained in <code>/etc/osg/config.d/40-localsettings.ini</code> which is provided by the <code>osg-configure-ce</code> RPM.</p>
-<h3 id="misc-services">Misc Services<a class="headerlink" href="#misc-services" title="Permanent link">&para;</a></h3>
-<p>This section handles the configuration of services that do not have a dedicated section for their configuration.</p>
-<p>This section is contained in <code>/etc/osg/config.d/10-misc.ini</code> which is provided by the <code>osg-configure-misc</code> RPM.</p>
-<p>This section primarily deals with authentication/authorization. For information on suggested settings for your CE, see the <a href="../../compute-element/install-htcondor-ce/#configuring-authentication">authentication section of the HTCondor-CE install documents</a>.</p>
-<table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Values Accepted</th>
-<th>Explanation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>authorization_method</strong></td>
-<td><code>gridmap</code>, <code>xacml</code>, <code>local-gridmap</code>, <code>vomsmap</code></td>
-<td>This indicates which authorization method your site uses. <strong><code>xacml</code></strong> <strong>is deprecated in OSG 3.4</strong></td>
-</tr>
-<tr>
-<td>edit_lcmaps_db</td>
-<td><code>True</code>, <code>False</code></td>
-<td>(Optional, default True) If true, osg-configure will overwrite <code>/etc/lcmaps.db</code> to set your authorization method. The previous version will be backed up to <code>/etc/lcmaps.db.pre-configure</code></td>
-</tr>
-<tr>
-<td>all_fqans</td>
-<td><code>True</code>, <code>False</code></td>
-<td>(Optional, default False) If true, vomsmap auth will use all VOMS FQANs of a proxy for mapping -- see <a href="../../security/lcmaps-voms-authentication/#mapping-using-all-fqans">documentation</a></td>
-</tr>
-</tbody>
-</table>
-<p><strong>OSG 3.4 changes:</strong></p>
-<ul>
-<li><code>authorization_method</code> defaults to <code>vomsmap</code></li>
-<li><code>authorization_method</code> will raise a warning if set to <code>xacml</code></li>
-</ul>
 <h3 id="site-information">Site Information<a class="headerlink" href="#site-information" title="Permanent link">&para;</a></h3>
 <p>The settings found in the <code>Site Information</code> section are described below. This section is used to give information about a resource such as resource name, site sponsors, administrators, etc.</p>
 <p>This section is contained in <code>/etc/osg/config.d/40-siteinfo.ini</code> which is provided by the <code>osg-configure-ce</code> RPM.</p>

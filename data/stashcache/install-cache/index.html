@@ -2495,18 +2495,23 @@ To use HTTPS:</p>
 <p>Add a certificate according to the <a href="#ensure-the-xrootd-service-has-a-certificate">instructions above</a></p>
 </li>
 <li>
-<p>Create a file named <code>/etc/xrootd/config.d/11-cache-https.cfg</code> with the following contents:</p>
-<div class="codehilite"><pre><span></span><code># Support HTTPS access to unauthenticated cache
-if named stash-cache
-  http.cadir /etc/grid-security/certificates
-  http.cert /etc/grid-security/xrd/xrdcert.pem
-  http.key /etc/grid-security/xrd/xrdkey.pem
-  http.secxtractor /usr/lib64/libXrdLcmaps.so
-fi
-</code></pre></div>
-
+<p>Uncomment <code>set EnableVoms = 1</code> in <code>/etc/xrootd/config.d/10-osg-xrdvoms.cfg</code></p>
 </li>
 </ol>
+<div class="admonition note">
+<p class="admonition-title">Upgrading from OSG 3.5</p>
+<p>If upgrading from OSG 3.5, you may have a file with the following contents in <code>/etc/xrootd/config.d</code>:</p>
+<div class="codehilite"><pre><span></span><code>   # Support HTTPS access to unauthenticated cache
+   if named stash-cache
+     http.cadir /etc/grid-security/certificates
+     http.cert /etc/grid-security/xrd/xrdcert.pem
+     http.key /etc/grid-security/xrd/xrdkey.pem
+     http.secxtractor /usr/lib64/libXrdLcmaps.so
+   fi
+</code></pre></div>
+
+<p>You must delete this config block or XRootD will fail to start.</p>
+</div>
 <h2 id="manually-setting-the-fqdn-optional">Manually Setting the FQDN (optional)<a class="headerlink" href="#manually-setting-the-fqdn-optional" title="Permanent link">&para;</a></h2>
 <p>The FQDN of the cache server that you registered in <a href="#registering-the-cache">Topology</a> may be different than its internal hostname
 (as reported by <code>hostname -f</code>).
@@ -2644,10 +2649,13 @@ STASHCACHE_DaemonVersion = &quot;1.0.0&quot;
 ...
 </code></pre></div></p>
 <h2 id="updating-to-osg-36">Updating to OSG 3.6<a class="headerlink" href="#updating-to-osg-36" title="Permanent link">&para;</a></h2>
-<p>The OSG 3.5 series is reaching end-of-life on May 1, 2022.
+<p>The OSG 3.5 series has reached end-of-life on May 1, 2022.
 Admins are strongly encouraged to move their caches to OSG 3.6.</p>
 <p>See <a href="../../../release/updating-to-osg-36/">general update instructions</a>.</p>
-<p>Unauthenticated caches (<code>xrootd@stash-cache</code> service) do not need any configuration changes.</p>
+<p>Unauthenticated caches (<code>xrootd@stash-cache</code> service) do not need any configuration changes,
+unless HTTPS access has been enabled.
+See the <a href="#enable-https-on-the-unauthenticated-cache">"enable HTTPS on the unauthenticated cache" section</a>)
+for the necessary configuration changes.</p>
 <p>Authenticated caches (<code>xrootd@stash-cache-auth</code> service) may need the configuration changes described in the
 <a href="../../xrootd/xrootd-authorization/#updating-to-osg-36">updating to OSG 3.6 section</a>
 of the XRootD authorization configuration document.</p>
