@@ -229,9 +229,7 @@ This section is contained in `/etc/osg/config.d/30-gratia.ini` which is provided
     **probes**:<br/>
     Legal values for `probe_type` are:
 
-    -   `metric` (for RSV)
-    -   `jobmanager` (for the appropriate jobmanager probe)
-    -   `gridftp` (for the GridFTP transfer probe)
+    -   `jobmanager` (for the HTCondor-CE probe)
 
 
 ### Info Services ###
