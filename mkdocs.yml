@@ -91,9 +91,6 @@ nav:
       - 'Publishing VO data': 'data/stashcache/vo-data.md'
 - Releases:
   - 'Release Series': 'release/release_series.md'
-  - OSG 3.5:
-      - 'Release Notes': 'release/notes.md'
-      - 'Updating to OSG 3.5': 'release/updating-to-osg-35.md'
   - OSG 3.6:
      - 'News': 'release/osg-36.md'
      - 'Updating to OSG 3.6': 'release/updating-to-osg-36.md'
