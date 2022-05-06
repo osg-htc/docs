@@ -120,27 +120,6 @@ The following configuration steps are optional and will likely not be required f
 If you do not need any of the following special configurations, skip to
 [the section on using XRootD](#using-xrootd).
 
-#### Enabling Hadoop support (deprecated, EL 7 Only)
-
-!!! info "OSG 3.5 end-of-life"
-    Hadoop is no longer supported in OSG 3.6 and OSG 3.5 will reach its end-of-life at the
-    [beginning of May 2022](../../release/release_series.md#series-overviews).
-
-Hadoop File System (HDFS) based sites should utilize the `xrootd-hdfs` plugin to allow XRootD to access their storage:
-
-1. Install the XRootD HDFS plugin package:
-
-        :::console
-        root@host # yum install xrootd-hdfs
-
-1. Add the following configuration to `/etc/xrootd/xrootd-clustered.cfg`:
-
-        :::file
-        ofs.osslib /usr/lib64/libXrdHdfs.so
-
-For more information, see [the HDFS installation documents](../install-hadoop.md).
-
-
 #### Enabling multi-user support
 
 !!! warning "Requirements for XRootD-Multiuser with VOMS FQANs"

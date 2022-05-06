@@ -102,8 +102,6 @@ installed [CVMFS](worker-node/install-cvmfs.md) on your worker nodes.
 
 -   [Install Frontier Squid](data/frontier-squid.md), an HTTP caching proxy service.
 -   Storage element:
-    -   Hadoop Distributed File System (HDFS):
-        -   [Hadoop Overview](data/hadoop-overview.md): HDFS information, planning, and guides
     -   XRootD:
         -   [XRootd Overview](./data/xrootd/overview.md): XRootD information, planning, and guides
         -   [Install XRootD Server](./data/xrootd/install-storage-element.md): XRootD redirector installation
