@@ -6,11 +6,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://opensciencegrid.org/docs/detailed-overview/</loc>
-         <lastmod>2022-05-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://opensciencegrid.org/docs/site-maintenance/</loc>
          <lastmod>2022-05-06</lastmod>
          <changefreq>daily</changefreq>
@@ -91,26 +86,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://opensciencegrid.org/docs/data/gridftp/</loc>
-         <lastmod>2022-05-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://opensciencegrid.org/docs/data/hadoop-overview/</loc>
-         <lastmod>2022-05-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://opensciencegrid.org/docs/data/install-hadoop/</loc>
-         <lastmod>2022-05-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://opensciencegrid.org/docs/data/load-balanced-gridftp/</loc>
-         <lastmod>2022-05-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://opensciencegrid.org/docs/data/run-frontier-squid-container/</loc>
          <lastmod>2022-05-06</lastmod>
          <changefreq>daily</changefreq>
@@ -186,32 +161,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://opensciencegrid.org/docs/monitoring/advanced-rsv-configuration/</loc>
-         <lastmod>2022-05-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://opensciencegrid.org/docs/monitoring/install-rsv-gwms-tester/</loc>
-         <lastmod>2022-05-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://opensciencegrid.org/docs/monitoring/install-rsv/</loc>
-         <lastmod>2022-05-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://opensciencegrid.org/docs/monitoring/rsv-control/</loc>
-         <lastmod>2022-05-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://opensciencegrid.org/docs/other/configuration-with-osg-configure/</loc>
-         <lastmod>2022-05-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://opensciencegrid.org/docs/other/gsissh/</loc>
          <lastmod>2022-05-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -702,16 +652,6 @@
     </url>
     <url>
          <loc>https://opensciencegrid.org/docs/security/host-certs/</loc>
-         <lastmod>2022-05-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://opensciencegrid.org/docs/security/lcmaps-voms-authentication/</loc>
-         <lastmod>2022-05-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://opensciencegrid.org/docs/security/user-certs/</loc>
          <lastmod>2022-05-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
