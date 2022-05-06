@@ -17,7 +17,7 @@ Registration Requirements
 The instructions in this document require the following:
 
 - A [GitHub](https://github.com/) account
-- A working knowledge of [GitHub collaboration](https://help.github.com/categories/collaborating-with-issues-and-pull-requests/)
+- A working knowledge of [GitHub collaboration](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests)
 - [OSG contact](#registering-contacts) registration
 
 Registering Contacts
@@ -94,7 +94,7 @@ Once you have chosen a site name, open the following in your browser:
     If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
     access to the OSG copy of the topology data, which is why you are creating a pull request.
    
-Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
+Make changes with the [GitHub file editor](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files) using
 the [site template](https://github.com/opensciencegrid/topology/blob/master/template-SITE.yaml) as a guide.
 You may leave the `ID` field blank.
 When adding new entries, make sure that the formatting and indentation of your entry matches that of the template.
@@ -168,7 +168,7 @@ To register a new resource, follow the instructions below:
         If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
         access to the OSG copy of the topology data, which is why you are creating a pull request.
 
-1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
+1. Make changes with the [GitHub file editor](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files) using
    the [resource group template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
    as a guide.
    You may leave any `ID` or `GroupID` fields blank.
@@ -190,7 +190,7 @@ To modify an existing resource, follow these instructions:
 
     ![GitHub branch selection](../img/registration/switch-branch.png)
 
-1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
+1. Make changes with the [GitHub file editor](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files) using
    the [resource group template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
    as a guide.
    You may leave any `ID` or `GroupID` fields blank.
@@ -324,7 +324,7 @@ Follow the instructions below:
         If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
         access to the OSG copy of the topology data, which is why you are creating a pull request.
 
-1.  Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
+1.  Make changes with the [GitHub file editor](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files) using
     the [downtime template](https://github.com/opensciencegrid/topology/blob/master/template-downtime.yaml)
     as a reference.
     Make sure that the formatting and indentation of the modified entry does not change.
@@ -368,7 +368,7 @@ To modify a VO's information or register a new VO, follow the instructions below
         If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
         access to the OSG copy of the topology data, which is why you are creating a pull request.
 
-1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
+1. Make changes with the [GitHub file editor](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files) using
    the [VO template](https://github.com/opensciencegrid/topology/blob/master/template-virtual-organization.yaml)
    as a guide.
    You may leave any `ID` fields blank.
@@ -403,7 +403,7 @@ To modify a VO's information or register a new VO, follow the instructions below
         If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
         access to the OSG copy of the topology data, which is why you are creating a pull request.
 
-1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
+1. Make changes with the [GitHub file editor](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files) using
    the [project template](https://github.com/opensciencegrid/topology/blob/master/template-project.yaml) as a guide.
    You may leave any `ID` fields blank.
    If you are modifying existing entries, make sure you do not change formatting or indentation of the modified entry.
