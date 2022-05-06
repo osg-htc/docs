@@ -21,7 +21,7 @@ To support COVID-19 work, the overall process includes the following:
        If neither solution is viable, or you'd like to discuss the options, please send email to
        <help@opensciencegrid.org> and we'll work with you to arrive at the best solution.
     -  If you already provide resources through an OSG Hosted CE, skip to [this section](#requesting-covid-19-jobs).
-1. [Enable the OSG VO](../security/lcmaps-voms-authentication.md#configuring-the-lcmaps-voms-plugin) on your HTCondor-CE.
+1. [Enable the OSG VO](install-htcondor-ce.md#configuring-authentication) on your HTCondor-CE.
 1. Setup a job route specific to COVID-19 pilot jobs (documented below).
    The job route will allow you to prioritize these jobs using local policy in your site's cluster.
 1. (Optional) To attract more user jobs, install [CVMFS](../worker-node/install-cvmfs.md) and
