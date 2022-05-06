@@ -24,9 +24,6 @@ intended for public use:
     They are not enabled by default and must be enabled _in addition to_ the main `osg` repository.
     See the [upcoming software section](#upcoming-software) for details.
 
-!!! note
-    In the 3.6 series, packages are added to the `osg` and `osg-upcoming` repositories as soon as they are considered production ready.
-
 OSG's RPM packages also rely on external packages provided by supported OSes and EPEL.
 You must have the following repositories available and enabled:
 
