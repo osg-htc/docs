@@ -2088,10 +2088,9 @@ See the <a href="#upcoming-software">upcoming software section</a> for details.<
 You must have the following repositories available and enabled:</p>
 <ul>
 <li>OS repositories, including the following ones that aren't enabled by default:<ul>
-<li><code>extras</code> (SL 7, CentOS 7/8)</li>
+<li><code>extras</code> (SL 7, CentOS 7, CentOS Stream 8, Rocky Linux 8, AlmaLinux 8)</li>
 <li><code>Server-Extras</code> (RHEL 7)</li>
-<li><code>PowerTools</code> (CentOS 8.0 through 8.2)</li>
-<li><code>powertools</code> (CentOS 8.3 and newer)</li>
+<li><code>powertools</code> (CentOS Stream 8, Rocky Linux 8, AlmaLinux 8)</li>
 <li><code>CodeReady Builder</code> (RHEL 8)</li>
 </ul>
 </li>
@@ -2103,11 +2102,6 @@ You must have the following repositories available and enabled:</p>
 <p class="admonition-title">Danger</p>
 <p>Other repositories, such as <code>jpackage</code>, <code>dag</code>, or <code>rpmforge</code>, are not supported and you may encounter problems if
 you use them.</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you upgrade from CentOS 8.0 through 8.2 to CentOS 8.3 or newer,
-you may have to re-enable some repos as <a href="#centos-83-and-newer">described below</a></p>
 </div>
 <h3 id="upcoming-software">Upcoming Software<a class="headerlink" href="#upcoming-software" title="Permanent link">&para;</a></h3>
 <p>Certain sites have requested new versions of software that would be considered "disruptive" or "experimental":
@@ -2204,7 +2198,7 @@ You must install and enable these first.</p>
 <p>Install the EPEL repository, if not already present.  Choose the right version to match your OS version.</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">#</span><span class="c1"># EPEL 7 (For RHEL 7, CentOS 7, and SL 7)</span>
 <span class="gp">root@host # </span>yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-<span class="gp">#</span><span class="c1"># EPEL 8 (For RHEL 8 and CentOS 8)</span>
+<span class="gp">#</span><span class="c1"># EPEL 8 (For RHEL 8 and CentOS Stream 8, Rocky Linux 8, AlmaLinux 8)</span>
 <span class="gp">root@host # </span>yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 </code></pre></div>
 
@@ -2275,7 +2269,7 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
 Therefore we recommend security-only automatic updates or disabling automatic updates entirely.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>RHEL/CentOS 8 automatic updates are provided in the <code>dnf-automatic</code> RPM, which is not installed by default.</p>
+<p>RHEL/CentOS Stream 8 automatic updates are provided in the <code>dnf-automatic</code> RPM, which is not installed by default.</p>
 </div>
 <p>To enable only security related automatic updates:</p>
 <ul>
@@ -2286,7 +2280,7 @@ Therefore we recommend security-only automatic updates or disabling automatic up
 <p>On RHEL 8, edit <code>/etc/dnf/automatic.conf</code> and set <code>upgrade_type = security</code></p>
 </li>
 </ul>
-<p>CentOS 7/8 does not support security-only automatic updates;
+<p>CentOS 7 and CentOS Stream 8 do not support security-only automatic updates;
 doing any of the above steps will prevent automatic updates from happening at all.</p>
 <p>To disable automatic updates entirely:</p>
 <ul>
