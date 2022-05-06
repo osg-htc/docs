@@ -182,7 +182,7 @@ To validate an XRootD installation, perform the following verification steps:
     If you have configured authentication/authorization for XRootD,
     be sure you have given yourself the necessary permissions to run these tests.
     For example, if you are using an X.509 proxy,
-    make sure your DN is mapped to a user in [/etc/grid-security/grid-mapfile](../../security/lcmaps-voms-authentication.md#mapping-users),
+    make sure your DN is mapped to a user in [/etc/grid-security/grid-mapfile](xrootd-authorization.md#mapping-subject-dns),
     make sure you have a valid proxy on your local machine,
     and ensure that the [Authfile](xrootd-authorization.md#authorization-database) on the XRootD server gives
     write access to the mapped user from `/etc/grid-security/grid-mapfile`.
