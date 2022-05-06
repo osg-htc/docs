@@ -26,7 +26,7 @@ Before starting the installation process, consider the following points, consult
 ([HTCondor-CE 5](https://htcondor.com/htcondor-ce/v5/reference/)):
 
 -   **User IDs:** If they do not exist already, the installation will create the Linux users `condor` (UID 4716) and
-    `gratia` (UID 42401)
+    `gratia`
     You will also need to create Unix accounts for each collaboration that you wish to support.
     See details in the ['Configuring authentication' section below](#configuring-authentication).
 -   **SSL certificate:** The HTCondor-CE service uses a host certificate at `/etc/grid-security/hostcert.pem` and an
