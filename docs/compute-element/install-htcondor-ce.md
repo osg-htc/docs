@@ -7,7 +7,7 @@ The [HTCondor-CE](http://htcondor-ce.org) software is a *job gateway* for an OSG
 As such, the OSG will submit resource allocation requests (RARs) jobs to your HTCondor-CE and it will handle
 authorization and delegation of RARs to your local batch system.
 In OSG today, RARs are sent to CEs as *pilot jobs* from a factory, which in turn are able to accept and run end-user jobs.
-See the [upstream documentation](https://htcondor.github.io/htcondor-ce/architecture/) for a more detailed introduction.
+See the [upstream documentation](https://htcondor.com/htcondor-ce/architecture/) for a more detailed introduction.
 
 Use this page to learn how to install, configure, run, test, and troubleshoot an OSG HTCondor-CE.
 
@@ -17,14 +17,14 @@ Use this page to learn how to install, configure, run, test, and troubleshoot an
 
 !!! note
     If you are installing an HTCondor-CE for use outside of the OSG, consult
-    [the upstream documentation](https://htcondor.github.io/htcondor-ce/v5/installation/htcondor-ce/) instead.
+    [the upstream documentation](https://htcondor.com/htcondor-ce/) instead.
 
 Before Starting
 ---------------
 
 Before starting the installation process, consider the following points, consulting the upstream references as needed
-([HTCondor-CE 5](https://htcondor.github.io/htcondor-ce/v5/reference/),
-[HTCondor-CE 4](https://htcondor.github.io/htcondor-ce/v4/reference/)):
+([HTCondor-CE 5](https://htcondor.com/htcondor-ce/v5/reference/),
+[HTCondor-CE 4](https://htcondor.com/htcondor-ce/v4/reference/)):
 
 -   **User IDs:** If they do not exist already, the installation will create the Linux users `condor` (UID 4716) and
     `gratia` (UID 42401)
@@ -37,7 +37,7 @@ Before starting the installation process, consider the following points, consult
 -   **Access point/login node:** HTCondor-CE should be installed on a host that already has the ability to submit jobs
     into your local cluster
 -   **File Systems**: Non-HTCondor batch systems require a
-    [shared file system](https://htcondor.github.io/htcondor-ce/v5/configuration/local-batch-system/#sharing-the-spool-directory)
+    [shared file system](https://htcondor.com/htcondor-ce/v5/configuration/local-batch-system/#sharing-the-spool-directory)
     between the HTCondor-CE host and the batch system worker nodes.
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
@@ -137,8 +137,8 @@ For more advanced configuration, see the section on [optional configurations](#o
 To configure HTCondor-CE to integrate with your local batch system, please refer to the upstream documentation based on
 your installed version of HTCondor-CE:
 
--   [HTCondor-CE 5](https://htcondor.github.io/htcondor-ce/v5/configuration/local-batch-system/)
--   [HTCondor-CE 4](https://htcondor.github.io/htcondor-ce/v4/installation/htcondor-ce/#configuring-the-batch-system)
+-   [HTCondor-CE 5](https://htcondor.com/htcondor-ce/v5/configuration/local-batch-system/)
+-   [HTCondor-CE 4](https://htcondor.com/htcondor-ce/v4/installation/htcondor-ce/#configuring-the-batch-system)
 
 ### Configuring authentication ###
 
@@ -171,7 +171,7 @@ To add support for a particular VO:
         SCITOKENS /^https\:\/\/scitokens\.org\/osg\-connect,/ osgpilot
 
 For more details of the mapfile format, consult the "SciTokens" section of the
-[upstream documentation](https://htcondor.github.io/htcondor-ce/v5/configuration/authentication/#scitokens).
+[upstream documentation](https://htcondor.com/htcondor-ce/v5/configuration/authentication/#scitokens).
 
 
 ### Automatic configuration
@@ -207,11 +207,11 @@ before they are submitted to your local batch system or otherwise change the beh
 For detailed instructions, please refer to the upstream documentation based on your installed version of HTCondor-CE:
 
 -   HTCondor-CE 5
-    -   [Configuring the Job Router](https://htcondor.github.io/htcondor-ce/v5/configuration/job-router-overview/)
-    -   [Optional configuration](https://htcondor.github.io/htcondor-ce/v5/configuration/optional-configuration/)
+    -   [Configuring the Job Router](https://htcondor.com/htcondor-ce/v5/configuration/job-router-overview/)
+    -   [Optional configuration](https://htcondor.com/htcondor-ce/v5/configuration/optional-configuration/)
 -   HTCondor-CE 4
-    -   [Configuring the Job Router](https://htcondor.github.io/htcondor-ce/v4/batch-system-integration/)
-    -   [Optional configuration](https://htcondor.github.io/htcondor-ce/v4/installation/htcondor-ce/#optional-configuration)
+    -   [Configuring the Job Router](https://htcondor.com/htcondor-ce/v4/batch-system-integration/)
+    -   [Optional configuration](https://htcondor.com/htcondor-ce/v4/installation/htcondor-ce/#optional-configuration)
 
 #### Accounting with multiple CEs or local user jobs
 
@@ -245,8 +245,8 @@ Starting and Validating HTCondor-CE
 For information on how to start and validate the core HTCondor-CE services, please refer to the upstream documentation
 based on your installed version of HTCondor-CE:
 
--   [HTCondor-CE 5](https://htcondor.github.io/htcondor-ce/v5/verification/)
--   [HTCondor-CE 4](https://htcondor.github.io/htcondor-ce/v4/verification/)
+-   [HTCondor-CE 5](https://htcondor.com/htcondor-ce/v5/verification/)
+-   [HTCondor-CE 4](https://htcondor.com/htcondor-ce/v4/verification/)
 
 ### Enabling OSG accounting (OSG 3.5 only)
 
@@ -268,13 +268,13 @@ For information on how to troubleshoot your HTCondor-CE, please refer to the ups
 installed version of HTCondor-CE:
 
 -   HTCondor-CE 5:
-    -   [Common issues](https://htcondor.github.io/htcondor-ce/v5/troubleshooting/common-issues/)
-    -   [Debugging tools](https://htcondor.github.io/htcondor-ce/v5/troubleshooting/debugging-tools/)
-    -   [Helpful logs](https://htcondor.github.io/htcondor-ce/v5/troubleshooting/logs/)
+    -   [Common issues](https://htcondor.com/htcondor-ce/v5/troubleshooting/common-issues/)
+    -   [Debugging tools](https://htcondor.com/htcondor-ce/v5/troubleshooting/debugging-tools/)
+    -   [Helpful logs](https://htcondor.com/htcondor-ce/v5/troubleshooting/logs/)
 -   HTCondor-CE 4
-    -   [Common issues](https://htcondor.github.io/htcondor-ce/v4/troubleshooting/troubleshooting/#htcondor-ce-troubleshooting-items)
-    -   [Debugging tools](https://htcondor.github.io/htcondor-ce/v4/troubleshooting/troubleshooting/#htcondor-ce-troubleshooting-tools)
-    -   [Helpful logs](https://htcondor.github.io/htcondor-ce/v4/troubleshooting/troubleshooting/#htcondor-ce-troubleshooting-data)
+    -   [Common issues](https://htcondor.com/htcondor-ce/v4/troubleshooting/troubleshooting/#htcondor-ce-troubleshooting-items)
+    -   [Debugging tools](https://htcondor.com/htcondor-ce/v4/troubleshooting/troubleshooting/#htcondor-ce-troubleshooting-tools)
+    -   [Helpful logs](https://htcondor.com/htcondor-ce/v4/troubleshooting/troubleshooting/#htcondor-ce-troubleshooting-data)
 
 Registering the CE
 ------------------
