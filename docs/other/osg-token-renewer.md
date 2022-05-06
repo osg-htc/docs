@@ -122,6 +122,31 @@ account = myclient1234
 token_path = /etc/osg/tokens/myclient1234.mytoken567.token
 ```
 
+### Adjusting token renewal frequency
+
+It is possible to override the default `osg-token-renewer` systemd timer
+frequency for this service by creating a config override file under
+`/etc/systemd/system/osg-token-renewer.timer.d/`.
+
+For example, to configure the token renewal service to run every 10 minutes,
+run the following:
+
+```console
+root@host # cat << EOF > /etc/systemd/system/osg-token-renewer.timer.d/timer-frequency.conf
+[Timer]
+OnBootSec=10min
+OnUnitActiveSec=10min
+EOF
+root@host # systemctl daemon-reload
+```
+
+!!! note
+    Be aware that the default timer configuration also has a 3 minute random
+    delay built in, via the parameter `RandomizedDelaySec=3min`.
+    Thus setting the frequency to `10min` only guarantees runs every 13 minutes.
+    This parameter is also configurable in the above systemd override file.
+
+
 Managing the OSG Token Renewal Service
 --------------------------------------
 
