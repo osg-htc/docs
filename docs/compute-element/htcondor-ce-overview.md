@@ -131,8 +131,8 @@ installation, there are two main ways to customize your CE (if you decide any cu
 How Security Works
 ------------------
 
-In a distributed environment such as the OSG, communication is secured between various parties using a combination of
-PKI infrastructure involving Certificate Authorities (CAs) and bearer tokens.
+In the OSG, communication is secured between various parties using a combination of PKI infrastructure involving
+Certificate Authorities (CAs) and bearer tokens.
 Services such as a Compute Entrypoint, present [host certificates](../security/host-certs/overview.md) to prove their
 identity to clients, much like your browser verifies websites that you may visit.
 
