@@ -185,14 +185,6 @@ This section is contained in `/etc/osg/config.d/20-sge.ini` which is provided by
 | **enabled**       | `True`, `False`, `Ignore` | This indicates whether the SGE jobmanager is being used or not.                                                                                                        |
 | **sge\_root**     | String                    | This should be set to be directory where sge is installed (e.g. same as **$SGE\_ROOT** variable).                                                                      |
 | **sge\_cell**     | String                    | The sge\_cell setting should be set to the value of $SGE\_CELL for your SGE install.                                                                                   |
-| default\_queue    | String                    | This setting determines queue that jobs should be placed in if the job description does not specify a queue.                                                           |
-| available\_queues | String                    | This setting indicates which queues are available on the cluster and should be used for validation when `validate_queues` is set.                                      |
-| validate\_queues  | String                    | This setting determines whether the globus jobmanager should check the job RSL and verify that any queue specified matches a queue available on the cluster. See note. |
-
-!!! note
-    **validate_queues**:<br/>
-    If `available_queues` is set, that list of queues will be used for
-    validation, otherwise SGE will be queried for available queues.
 
 
 ### Slurm ###
