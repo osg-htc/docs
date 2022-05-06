@@ -1,79 +1,276 @@
 title: Troubleshooting Gratia Accounting
-DateReviewed: 2021-01-29
+DateReviewed: 2022-05-06
 
 Troubleshooting Gratia Accounting
 =================================
 
-This document will help you troubleshoot problems with the Gratia Accounting, particularly with problems in collecting and reporting accounting information to the central OSG accounting service.
-
-
-Gratia/GRACC: The Big Picture
------------------------
-
 Gratia is software used in OSG to gather accounting information for usage of computational resources.
-The information is collected from individual resources at a site, such as a Compute Entrypoint or a submission host.
-The program that collects the data is called a "Gratia probe".
-The information is transferred to the central OSG GRACC server.
-Here is a diagram:
+This information is collected from individual services at a site,
+such as a Compute Entrypoint (CE) or an Access Point (AP),
+through "Gratia probes" and transferred to the central OSG GRACC server.
 
-!!! note "Difference between Gratia and GRACC"
-    Gratia is the legacy name of the OSG Accounting system.  GRACC is the new name of the server and hosted components of the accounting system.  When we refer to Gratia, we mean either the data or the probes on the resources.  If we mention GRACC, we are referring to the hosted components that the OSG maintains.
+Gratia probes are run periodically as cron jobs under an HTCondor Schedd process (i.e., Schedd cron jobs) as the
+`condor` user.
+The commands that you run, configuration locations that you verify, and log locations that you check will depend on the
+type of host that you are troubleshooting.
+
+Accounting Architecture
+-----------------------
 
 ![Gratia Basics](../img/gratia-overview.png)
 
 These are the definitions of the major elements in the above figure.
 
--   **Gratia probe**: A piece of software that collects accounting data from the computer on which it's running, and transmits it to a Gratia server.
--   **GRACC server**: A server that collects Gratia accounting data from one or more sites and can share it with users via a web page.  The GRACC server is hosted by the OSG.
--   **Reporter**: A web service running on the GRACC server. Users can connect to the reporter via a web browser to explore the Gratia data.
--   **Collector**: A web service running on the GRACC server that collects data from one or more Gratia probes. Users do not directly interact with the collector.
+-   **Gratia probe**: A piece of software that collects accounting data from the host on which it's running, and
+    transmits it to the GRACC server.
+-   **GRACC server**: A server that collects Gratia accounting data from one or more sites and can share it with users
+    via a web page.
+    The GRACC server is hosted by the OSG.
+-   **Reporter**: A web service running on the GRACC server.
+    Users can connect to the reporter via a web browser to explore the Gratia data.
+-   **Collector**: A web service running on the GRACC server that collects data from one or more Gratia probes.
+    Users do not directly interact with the collector.
 
-You can see the OSG's GRACC website at <https://gracc.opensciencegrid.org>.
+You can explore the details of the OSG accounting data at <https://gracc.opensciencegrid.org> and
+<https://display.opensciencegrid.org/>.
 
-You can see a fancier version of the Gratia data at <https://display.opensciencegrid.org/>. This is **not** running a Gratia collector, but is a separate service.
+Determine Your Host Type
+------------------------
 
-Gratia Probes
--------------
+Before continuing with the rest of the document, it is important to know what type of host you are troubleshooting:
 
-Gratia Probes are periodically run as cron jobs, but different probes will run at different intervals. The cron jobs will always run and you should not remove them. You can find them in `/etc/cron.d`.
+-  Do users log into this host and submit jobs? Then you are running an **Access Point**
+-  Does this host accept pilot jobs from remote clients? Then you are running a **Compute Entrypoint**
 
-However, the cron jobs will only do anything if you have enabled them. You enable them via an init script. For example, to enable them:
+If you are still not sure, you can run the following command to determine if this is a CE installation:
 
-    :::console
-    root@host # service gratia-probes-cron start
-    Enabling gratia probes cron:                               [  OK  ]
+``` console
+$ rpm -q osg-ce
+osg-ce-3.6-4.osg36.el7.x86_64
+```
 
-To disable them:
+If the output is blank, then you are not working with a CE host.
 
-    :::console
-    root@host # service gratia-probes-cron stop
-    Disabling gratia probes cron:                               [  OK  ]
+!!! note "Access Points vs Compute Entrypoints"
+    A single host should not be used as both an AP and a CE but if you've inherited a host,
+    it's possible that the host was installed improperly.
 
-You also need to enable individual probes, usually via `osg-configure`.  Documentation on using `osg-configure` with Gratia [documented elsewhere](configuration-with-osg-configure.md#gratia).
+Is Gratia Running?
+------------------
 
-### Running Gratia Probes
+Since Gratia probes run as Schedd cron jobs, first verify that the relevant HTCondor service is running based on the
+type of host that you are troubleshooting:
 
-When the cron jobs are enabled and run, they go through the following process, with minor changes between different Gratia probes:
+| **Host**           | **Command**                  |
+|:-------------------|------------------------------|
+| Access Point       | `systemctl status condor`    |
+| Compute Entrypoint | `systemctl status condor-ce` |
 
-1.  The probe is invoked. It reads its configuration from `/etc/gratia/PROBE-NAME/ProbeConfig`.
-2.  It collects the accounting information from the underlying system.
-    For example, the HTCondor probe will read it from the `PER_JOB_HISTORY_DIR`, which is usually
-    `/var/lib/gratia/data`.
-3.  It transforms the data into Gratia records and saves them into `/var/lib/gratia/tmp/gratiafiles/`
-4.  When there are sufficient Gratia records, or when sufficient time has passed, it uploads sets of records in batches to the GRACC server, then removes them from the `gratiafiles` directory.
-5.  All progress is logged to `/var/log/gratia`.
-6.  If there are failures in uploading the files to the GRACC server
-    1.  Files are not removed from `gratiafiles` until they are successfully uploaded.
-    2.  Errors are logged to log files in `/var/log/gratia`.
-    3.  The uploads will be tried again later.
+If they are not running, consult the relevant documentation to enable and start the appropriate service:
 
-### Gratia Probe Configuration
+-   [Access Point](../submit/osg-flock.md#managing-services)
+-   [Compute Entrypoint](../compute-element)
 
-In normal cases, `osg-configure` does the editing of the probe configuration files, at least on the CE. The configuration is found in `/etc/osg/config.d/30-gratia.ini` and [documented elsewhere](configuration-with-osg-configure.md#gratia).
+### Identifying failures ###
 
-If there are problems or special configuration, you might need to edit the Gratia configuration files yourself. Each probe has a separate configuration file found in `/etc/gratia/PROBE-NAME/ProbeConfig`.
+Schedd cron jobs are logged to the SchedLog, whose location depends on the type of host you are troubleshooting:
 
-The ProbeConfig files have many details. A few options that you might need to edit are shown before. This is **not** a complete file, but only shows a subset of the options.
+| **Host**           | **Log Path**                  |
+|:-------------------|-------------------------------|
+| Access Point       | `/var/log/condor/SchedLog`    |
+| Compute Entrypoint | `/var/log/condor-ce/SchedLog` |
+
+Currently, the default log level does not show Schedd cron job activity (future releases will show failures by default)
+so you must perform the following steps to see the relevant log messages:
+
+1.  Identify the configuration location for your host:
+
+    | **Host**           | **Configuration Directory** |
+    |:-------------------|-----------------------------|
+    | Access Point       | `/etc/condor/config.d`      |
+    | Compute Entrypoint | `/etc/condor-ce/config.d`   |
+
+1.  In a `.conf` file in the configuration directory that you determined above, increase the debug level:
+
+        SCHEDD_DEBUG = $(SCHEDD_DEBUG) D_CAT D_ALWAYS:2
+
+Successful cron jobs will appear in the relevant `SchedLog` like so: 
+
+```
+05/06/22 19:25:31 (D_ALWAYS:2) CronJob: Starting job 'GRATIA' (/usr/share/gratia/htcondor-ce/condor_meter)
+05/06/22 19:25:31 (D_ALWAYS:2) Create_Process: using fast clone() to create child process.
+05/06/22 19:25:31 (D_ALWAYS:2) CronJob: STDOUT closed for 'GRATIA'
+05/06/22 19:25:31 (D_ALWAYS:2) CronJob: STDERR closed for 'GRATIA'
+05/06/22 19:25:31 (D_ALWAYS:2) CronJob: 'GRATIA' (pid 1082) exit_status=0
+05/06/22 19:25:31 (D_ALWAYS:2) CronJob::Schedule 'GRATIA' IR=F IP=T IWE=F IOS=F IOD=F nr=116 nf=0
+05/06/22 19:25:31 (D_ALWAYS:2) CronJob::Schedule 'GRATIA_CLEANUP' IR=F IP=T IWE=F IOS=F IOD=F nr=2 nf=0
+```
+
+### Verifying packaging ###
+
+Gratia probe RPM packaging will create the appropriate files and folder structure with the correct permissions so that
+Gratia probes can run smoothly.
+However, it's possible that stale configuration management or other automation scripts at your site could 
+To verify that file contents and ownership have not been changed, run one of the following commands based on the type of
+host you are troubleshooting:
+
+| **Host**           | **Command**                                |
+|:-------------------|--------------------------------------------|
+| Access Point       | `rpm -q --verify gratia-probe-condor-ap`   |
+| Compute Entrypoint | `rpm -q --verify gratia-probe-htcondor-ce` |
+
+
+### Verifying configuration ###
+
+When troubleshooting Gratia, there are two different configurations to investigate:
+
+-   [HTCondor configuration](#htcondor-configuration) if job history records aren't being processed.
+-   [Gratia ProbeConfig](#gratia-probeconfig) if your job history records are being processed but they are either
+    malformed or are not being sent to the GRACC
+
+#### HTCondor configuration ####
+
+The HTCondor and/or HTCondor-CE configuration determines where job history files are written and how often the Gratia
+probe Schedd cron job are run.
+If you recently updated your host to OSG 3.6, it's important to verify the location of the job history files.
+
+##### Access Points ####
+
+Verify the values of your HTCondor `PER_JOB_HISTORY_DIR` configurations match the output below:
+
+``` console
+# condor_config_val -v PER_JOB_HISTORY_DIR
+PER_JOB_HISTORY_DIR = /var/lib/condor/gratia/data
+ # at: /usr/share/condor/config.d/50-gratia-gwms.conf, line 28
+ # raw: PER_JOB_HISTORY_DIR = /var/lib/condor/gratia/data
+
+```
+
+- **If you see the above output**, your Gratia Probe configuration is correct and you may continue onto the
+  [next section](#gratia-probeconfig).
+
+- **If you do not see the above output**:
+
+    1.  If the value of `condor_config_val -v PER_JOB_HISTORY_DIR` is not `/var/lib/condor/gratia/data`
+        note its value.
+        Then visit the referenced file, remove the offending configuration and repeat until the output of
+        `condor_config_val -v PER_JOB_HISTORY_DIR` matches the above output.
+
+    1.  If you noted a different value in step a, copy data from the old directory to the new directory and fix ensure
+        that ownership is correct:
+
+            :::console
+            root@host # cp  <ORIGINAL DIR>/* /var/lib/condor/gratia/data/
+            root@host # chown -R condor:condor /var/lib/condor/gratia/data/
+
+        Replacing `<ORIGINAL_DIR>` with the value that you noted in step a.
+
+##### HTCondor-CE and HTCondor batch systems #####
+
+Verify the values of your HTCondor and HTCondor-CE `PER_JOB_HISTORY_DIR` configurations match the output below:
+
+``` console
+# condor_ce_config_val -v PER_JOB_HISTORY_DIR
+Not defined: PER_JOB_HISTORY_DIR
+ # at: <Default>
+ # raw: PER_JOB_HISTORY_DIR = 
+
+# condor_config_val -v PER_JOB_HISTORY_DIR
+PER_JOB_HISTORY_DIR = /var/lib/condor-ce/gratia/data
+ # at: /etc/condor/config.d/99-gratia.conf, line 5
+ # raw: PER_JOB_HISTORY_DIR = /var/lib/condor-ce/gratia/data
+```
+
+- **If you see the above output**, your Gratia Probe configuration is correct and you may continue onto the
+  [next section](#gratia-probeconfig).
+
+- **If you do not see the above output**:
+
+    1.  If the value of `condor_config_val -v PER_JOB_HISTORY_DIR` is not `/var/lib/condor-ce/gratia/data`
+        note its value.
+        Then visit the referenced file, remove the offending configuration and repeat until the output of
+        `condor_config_val -v PER_JOB_HISTORY_DIR` matches the above output.
+
+    1.  If the value of `condor_ce_config_val -v PER_JOB_HISTORY_DIR` is set,
+        visit the referenced file and remove the offending configuration.
+        Repeat until the output of `condor_ce_config_val -v PER_JOB_HISTORY_DIR` matches the above output.
+
+    1.  If you noted a different value in step a, copy data from the old directory to the new directory and fix ensure
+        that ownership is correct:
+
+            :::console
+            root@host # cp  <ORIGINAL DIR>/* /var/lib/condor-ce/gratia/data/
+            root@host # chown -R condor:condor /var/lib/condor-ce/gratia/data/
+
+        Replacing `<ORIGINAL_DIR>` with the value that you noted in step a.
+
+##### HTCondor-CE and non-HTCondor batch systems #####
+
+After updating your `gratia-probe-*` packages,
+verify that your HTCondor-CE's `PER_JOB_HISTORY_DIR` is set to `/var/lib/condor-ce/gratia/data`:
+
+```console
+root@host # condor_ce_config_val -v PER_JOB_HISTORY_DIR
+PER_JOB_HISTORY_DIR = /var/lib/condor-ce/gratia/data
+# at: /etc/condor-ce/config.d/99_gratia-ce.conf, line 5
+# raw: PER_JOB_HISTORY_DIR = /var/lib/condor-ce/gratia/data
+```
+
+- **If you see the above output**, your Gratia Probe configuration is correct and you may continue onto the
+  [next section](#gratia-probeconfig).
+
+- **If you do not see the above output**, visit the file listed in the output of `condor_ce_config_val`, remove the
+  offending value, and repeat until the proper value is returned.
+
+### Gratia ProbeConfig ###
+
+#### Access Points ####
+
+Verify that your Gratia configuration is correct in `/etc/gratia/condor-ap/ProbeConfig` based on the table below:
+
+1.  Fill in the value for `SiteName` with the Resource Name you registered in Topology (see
+    [this section](../submit/osg-flock.md#register-your-access-point-in-topology) for details).
+    For example:
+   
+        :::xml
+        SiteName="OSG_US_EXAMPLE_SUBMIT"
+
+1.  Set the ProbeName:
+
+        :::xml
+        ProbeName="condor-ap:<HOST_FQDN>"
+
+    Replacing `<HOST_FQDN>` with your access point's fully qualifed domain name
+
+1.  Enable the Gratia Probe:
+
+        :::xml
+        EnableProbe="1"
+
+1.  If you are updating an existing ProbeConfig from a pre-OSG 3.6 installation,
+    also ensure that the following values are set:
+
+    | Option                     | Value                                                                     |
+    |:---------------------------|---------------------------------------------------------------------------|
+    | `VOOverrides`              | The collaboration's resource pool of your AP, e.g. `osg` for an OSPool AP |
+    | `SuppressGridLocalRecords` | `"1"`                                                                     |
+    | `MapUnknownToGroup`        | `"1"`                                                                     |
+    | `DataFolder`               | `"/var/lib/condor/gratia/data/"`                                          |
+    | `WorkingFolder`            | `"/var/lib/condor/gratia/tmp/"`                                           |
+    | `LogFolder`                | `"/var/log/condor/gratia/"`                                               |
+
+#### Compute Entrypoints ####
+
+In normal cases, `osg-configure` manages the relevant ProbeConfig and it can be configured by modifying
+`/etc/osg/config.d/30-gratia.ini`.
+Consult the [osg-configuration documentation](configuration-with-osg-configure.md#gratia) for details.
+
+If there are problems or special configuration, you might need to edit the Gratia configuration files yourself by
+modifying `/etc/gratia/htcondor-ce/ProbeConfig`.
+
+The ProbeConfig files have many details.
+A few options that you might need to edit are shown before.
+This is **not** a complete file, but only shows a subset of the options.
 
 ``` file
 <ProbeConfiguration 
@@ -82,7 +279,7 @@ The ProbeConfig files have many details. A few options that you might need to ed
     SSLHost="gratia-osg-itb.opensciencegrid.org:80"
     SSLRegistrationHost="gratia-osg-itb.opensciencegrid.org:80"
 
-    ProbeName="condor:fermicloud084.fnal.gov"
+    ProbeName="htcondor-ce:fermicloud084.fnal.gov"
     SiteName="WISC_OSG_EDU"
     EnableProbe="1"
 />
@@ -101,39 +298,26 @@ The options you see here are:
 
 Again, there are many more options in this file. Most of the time you won't need to touch them.
 
-Are the Gratia cron jobs running? 
----------------------------------
+Have Records Been Uploaded To the GRACC?
+----------------------------------------
 
-You should make sure the Gratia cron jobs are running. The simplest way is with the `service` command:
+If you have verified that your [Gratia probe is running](#is-gratia-running) and you are receiving pilot jobs,
+you should see data in the GRACC for your service approximately 24h after jobs have completed successfully by entering
+your Topology-registered site name into the `Facility` dropdown:
 
-    :::console
-    root@host # /sbin/service gratia-probes-cron status
-    gratia probes cron is enabled.
+-   [Access Points](https://gracc.opensciencegrid.org/d/000000037/payload-jobs-summary?orgId=1)
+-   [Compute Entrypoints](https://gracc.opensciencegrid.org/d/000000043/pilot-jobs-summary?orgId=1)
 
-If it is not enabled, enable it as described above.
+If you still aren't seeing data in GRACC, use this section to ensure that your resources are registered properly.
 
-This only ensures that the basic gratia-probe-cron "service" is running.
-To check if the individual Gratia probes are enabled, look at the `EnableProbe` option in the `ProbeConfig` file, as described above.
-A quick command to do this is shown here.
-Note that the HTCondor and GridFTP Transfer probes are enabled while the glexec probe is disabled:
+### Have you configured the resource names correctly? ###
 
-    :::console
-    root@host # cd /etc/gratia
-    root@host # grep -r EnableProbe *
-    condor/ProbeConfig:    EnableProbe="1"
-    glexec/ProbeConfig:    EnableProbe="0"
-    gridftp-transfer/ProbeConfig:    EnableProbe="1"
+#### Access Points ####
 
-If you see no log files in `/var/log/gratia` you may have an error in the probe configuration file. Manually run the test for your probe (check `/etc/cron.d/gratia-probe-condor.cron`), e.g. `/usr/share/gratia/common/cron_check  /etc/gratia/condor/ProbeConfig`. If there is an error you may get a suggestion on where it is, e.g.:
+Ensure that `SiteName` in your ProbeConfig matches your Topology-registered resource name.
+See [this section](#access-points_1) for details
 
-    :::console
-    root@host # /usr/share/gratia/common/cron_check  /etc/gratia/condor/ProbeConfig
-    Parse error in /etc/gratia/condor/ProbeConfig: not well-formed (invalid token): line 21, column 4
-
-Correct the error and restart gratia.
-
-Have you configured the resource names correctly? 
--------------------------------------------------
+#### Compute Entrypoints ####
 
 Do the names of your resources match the names in
 [OSG Topology](https://github.com/opensciencegrid/topology/tree/master/topology)?
@@ -168,184 +352,44 @@ resource = Tusker-CE1
 Do those names match the names that you registered with OSG Topology?
 If not, edit the names, and rerun "osg-configure -c".
 
-Did the site name change?
--------------------------
+### Did the site name change? ###
 
-Was the site previously reporting data, but the site name (not host name, but site name) changed? When the site name changes, you need to ask the GRACC operations team to update the name of your site at the GRACC collector. To do this:
+Was the site previously reporting data, but the registered Topology site name changed?
+When the site name changes, you need to ask the GRACC operations team to update the name of your site at the GRACC
+collector:
 
 1.  Open a [support ticket](https://support.opensciencegrid.org/helpdesk/tickets/new)
 1.  Select "Software or Service"
 1.  Select "GRACC Operations"
-1.  Type a friendly email that asks the GRACC team to change your site name at the collector. Make sure to tell them the old name and the new name.  Below is an example email:
+1.  Write a friendly email that asks the GRACC team to change your site name at the collector.
+    Make sure to tell them the old name and the new name:
 
         Hello GRACC Team,
         
-        Please change the site name of my site from <Insert Old Name> to <Insert New Name>.
+        Please change the site name of my site from <OLD NAME> to <NEW NAME>.
         
         Thanks, ...
 
- Is a site reporting data?
---------------------------
+Reference
+---------
 
-You can see if the OSG GRACC Server is getting data from a site by going to [GRACC](https://gracc.opensciencegrid.org/d/000000043/pilot-jobs-summary?orgId=1):
+If you need to look for more data, consider consulting some of the relevant files here:
 
-1.  Specify the site name in Facility
+| File                                                                          | Purpose                                                                                                                                                                      |
+|:------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `/var/log/condor/gratia/<DATE>.log` or `/var/log/condor-ce/gratia/<DATE>.log` | Log file that records information about processing and uploading of Gratia accounting data                                                                                   |
+| `/var/lib/condor/gratia/data` or `/var/lib/condor-ce/gratia/data`             | Location for AP and CE job data before being processed by Gratia<br>HTCondor or HTCondor-CE's `PER_JOB_HISTORY_DIR` should be set to this location                           |
+| `/var/lib/condor/gratia/tmp` or `/var/lib/condor-ce/gratia/tmp`               | Location for temporary Gratia data as it is being processed, usually empty.<br>If you have files that are more than 30 minutes old in this directory, there may be a problem |
+| `/etc/gratia/condor-ap/ProbeConfig` or `/etc/gratia/htcondor-ce/ProbeConfig`  | Configuration for Gratia probes                                                                                           |
 
-HTCondor's Gratia Configuration 
--------------------------------
+Not all RPMs will be on all hosts.
+Instead, only the `gratia-probe-common` and the one RPM specific to that host will be installed.
+The most common RPMs you will see are:
 
-!!! note 
-    Only applicable to HTCondor batch sites, not SLURM, PBS, SGE or LSF sites
-
-HTCondor must be configured to put information about each job into a special directory.
-Gratia will read and remove the files in order to collect the accounting information.
-
-The configuration variable is called `PER_JOB_HISTORY_DIR`.
-If you install the OSG RPM for HTCondor, the Gratia probe will extend its configuration by adding a file to
-`/etc/condor/config.d`, and will set this variable to `/var/lib/gratia/data`.
-If you are using a different installation method, you may need to set the variable yourself.
-You can check if it's set by using `condor_config_val`, like this:
-
-    :::console
-    user@host $ condor_config_val -v PER_JOB_HISTORY_DIR
-    PER_JOB_HISTORY_DIR: /var/lib/gratia/data
-        Defined in '/etc/condor/config.d/99_gratia.conf', line 5.
-
-If you set this value, you need to restart condor:
-
-    :::console
-    root@host # condor_restart
-    Sent "Restart" command to local master
-
-Unlike many HTCondor settings, a **condor\_reconfig** is not sufficient - you must restart!
-
-### Bad Gratia hostname
-
-This is an example problem where the configuration was bad: there was an incorrect hostname for the Gratia server. The problem is clearly visible in the Gratia log file, which is located in `/var/log/gratia/`. There is one log file per day, labeled by the date:
-
-    :::console
-    root@host # cd /var/log/gratia/
-    root@host # cat 2012-04-03.log 
-
-You can see that Gratia is using the correct configuration file:
-
-    :::console
-    15:06:55 CDT Gratia: Using config file: /etc/gratia/condor/ProbeConfig
-
-Here Gratia is removing a file from the HTCondor PER_JOB_HISTORY_DIR and creating a Gratia accounting record for it
-
-    :::console hl_lines="4 7"
-    15:06:55 CDT Gratia: Creating a UsageRecord 2012-04-03T20:06:55Z
-    15:06:55 CDT Gratia: Registering transient input file: /var/lib/gratia/data/history.37.0
-    15:06:55 CDT Gratia: ***********************************************************
-    15:06:55 CDT Gratia: Saved record to /var/lib/gratia/tmp/gratiafiles/
-        subdir.condor_fermicloud084.fnal.gov_ggratia-osg-itb.opensciencegrid.org_80/
-        outbox/r.30604.condor_fermicloud084.fnal.gov_ggratia-osg-itb.opensciencegrid.org_80.gratia.xml__wfIgi30606
-    15:06:55 CDT Gratia: Deleting transient input file: /var/lib/gratia/data/history.37.0
-
-Later, Gratia failed to connect to the server due to a bad hostname
-
-    :::console hl_lines="1"
-    15:06:55 CDT Gratia: Failed to send xml to web service due to an error of type "socket.gaierror": (-2, 'Name or service not known')
-    ...
-    15:06:55 CDT Gratia: Response indicates failure, the following files will not be deleted:
-    15:06:55 CDT Gratia:    /var/lib/gratia/tmp/gratiafiles/
-        subdir.condor_fermicloud084.fnal.gov_ggratia-osg-itb.opensciencegrid.org_80/
-        outbox/r.30604.condor_fermicloud084.fnal.gov_ggratia-osg-itb.opensciencegrid.org_80.gratia.xml__wfIgi30606
-
-
-If you accidentally had a bad Gratia hostname, you probably want to recover your Gratia data. 
-
-This can be done, though it's not simple. There are a few things you need to do. But first, you need to understand exactly where Gratia stores files.
-
-When a Gratia extracts accounting information, it creates one file per record and stores it in a directory. The directory is a long name that contains the type of the probe (such as `condor`), the name of the host you're running on, and the name of the GRACC host you're sending the information to. For simplicity, lets call that name `<PROBE-RECORDS>`, but you'll see what it really looks like below. Within this directory, you'll see some subdirectories:
-
-|  Directory                                                                | Purpose                                       |
-|:--------------------------------------------------------------------------|:----------------------------------------------|
-| /var/lib/gratia/tmp/grataifiles/`<PROBE-RECORDS>`/outbox       | The usual location for the accounting records |
-| /var/lib/gratia/tmp/grataifiles/`<PROBE-RECORDS>`/staged/store | An overflow location when there are problems  |
-
-When you recover old records, you need to:
-
-1.  Move files from the outbox of the incorrect *probe-records* directory into the outbox of the correctly named *probe-records* directory.
-2.  Move tarred and compressed files from the staged/store of the incorrect *probe-records* directory into the staged/store of the correctly named *probe-records* directory. Then you uncompress them and remove the compressed version.
-
-In the examples below, the hostname for gratia was "accidentally" spelled backwards. Instead of `gratia-osg-itb.opensciencegrid.org`, it was `aitarg-osg-itb.opensciencegrid.org`.
-
-1. First you need to fix the hostname. For a CE, you can edit `/etc/osg/config.d/30-gratia.ini` and rerun `osg-configure -c`. In other installations, you have to edit the appropriate `ProbeConfig` file.
-
-2. Next, submit a job via to your batch system, then run the appropriate Gratia probe (or wait for it to run via cron). This will create the properly named directories on your disk. For example:
-
-    As a user: 
-
-        :::console
-        user@host $ globus-job-run fermicloud084.fnal.gov/jobmanager-condor /bin/hostname 
-
-    As root (adjust for your batch system): 
-
-        :::console
-        root@host # /usr/share/gratia/condor/condor_meter
-
-3. Find the Gratia records that can be easily uploaded.
-   They are located in a a directory with an unwieldy name that includes your hostname and the incorrect name of the
-   Gratia host.
-   You can see the directory name in the Gratia log: the misspelled name is between angled brackets and capital letters
-   below, but *it will be different on your computer*.
-
-        :::console
-        user@host $ less /var/log/gratia/2012-04-06
-        ...
-        16:04:29 CDT Gratia: Response indicates failure, the following files will not be deleted:
-        16:04:29 CDT Gratia:    /var/lib/gratia/tmp/gratiafiles/
-            subdir.condor_fermicloud084.fnal.gov_<AITARG>-osg-itb.opensciencegrid.org_80/
-            outbox/r.916.condor_fermicloud084.fnal.gov_aitarg-osg-itb.opensciencegrid.org_80.gratia.xml__JDlHbNb918
-
-    (The filename was wrapped for legibility.)
-
-    You can simply copy these to the correct directory. Wait for the Gratia cron job to run, or force it to run.
-
-        :::console
-        root@host # cd /var/lib/gratia/tmp/gratiafiles/subdir.condor_fermicloud084.fnal.gov_<AITARG>-osg-itb.opensciencegrid.org_80/outbox/.
-        root@host # mv * /var/lib/gratia/tmp/gratiafiles/subdir.condor_fermicloud084.fnal.gov_gratia-osg-itb.opensciencegrid.org_80/outbox/.
-
-
-4. If this has been a persistent problem, you might have many records. After a while, they are put into a compressed files in another directory. You can move those files, then uncompress them. This is a long name: note that the path ends in "staged/store" instead of "outbox" as above:
-
-        :::console
-        # Find the old files
-        root@host # cd /var/lib/gratia/tmp/gratiafiles/subdir.condor_fermicloud084.fnal.gov_<AITARG>-osg-itb.opensciencegrid.org_80/staged/store
-
-        # Move them to the correct directory
-        root@host # mv tz* /var/lib/gratia/tmp/gratiafiles/subdir.condor_fermicloud084.fnal.gov_gratia-osg-itb.opensciencegrid.org_80/outbox/.
-        root@host # cd !$
-
-        # For each tz file:
-        root@host # tar xf tz.1223.... [name shortened for legibility]
-        root@host # rm tz.1223....
-
-
-    When you've done this, you can re-run the Gratia probe by hand, or wait for it to run via cron.
-
-Reference: Important Gratia files
---------------------------------
-
-If you need to look for more data, you can look at log files for the various services on your CE.
-
-| File                                                | Purpose                                                                                                                                                                            |
-|:----------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `/var/log/gratia/<DATE>.log`                        | Log file that records information about processing and uploading of Gratia accounting data                                                                                         |
-| `/var/log/gratia/gridftpTransfer.log`               | Log file specific to the Gratia GridFTP probe                                                                                                                                      |
-| `/var/lib/gratia/data`                              | Location for HTCondor and PBS job data before being processed by Gratia<br>HTCondor's `PER_JOB_HISTORY_DIR` should be set to this location                                       |
-| `/var/lib/gratia/tmp/gratiafiles`                   | Location for temporary Gratia data as it is being processed, usually empty.<br>If you have files that are more than 30 minutes old in this directory, there may be a problem |
-| `/etc/gratia/<PROBE-NAME>/ProbeConfig`              | Configuration for Gratia probes, one per probe type</br>Normally you don't need to edit this                                                                                 |
-
-Not all RPMs will be on all hosts.  Instead, only the `gratia-probe-common` and the one RPM specific to that host will be installed. The most common RPMs you will see are:
-
-| RPM                             | Purpose                                                                             |
-|:--------------------------------|:------------------------------------------------------------------------------------|
-| `gratia-probe-common`           | Code shared between all Graita probes                                               |                            |
-| `gratia-probe-condor`           | The probe that tracks HTCondor usage                                         |
-| `gratia-probe-slurm`           | The probe that tracks SLURM usage                                         |
-| `gratia-probe-pbs-lsf`          | The probe that tracks PBS and/or LSF usage                                  |
-| `gratia-probe-gridftp-transfer` | The probe that tracks transfers done with GridFTP                                   |
+| RPM                        | Purpose                                                                       |
+|:---------------------------|:------------------------------------------------------------------------------|
+| `gratia-probe-common`      | Code shared between all Gratia probes                                         |
+| `gratia-probe-condor`      | An empty probe to ease updates from OSG 3.5 to OSG 3.6. Can be safely removed |
+| `gratia-probe-condor-ap`   | The probe that tracks Access Point usage                                      |
+| `gratia-probe-htcondor-ce` | Probe that tracks HTCondor-CE usage                                           |
 
