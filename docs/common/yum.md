@@ -28,10 +28,9 @@ OSG's RPM packages also rely on external packages provided by supported OSes and
 You must have the following repositories available and enabled:
 
 -   OS repositories, including the following ones that aren't enabled by default:
-    -   `extras` (SL 7, CentOS 7/8)
+    -   `extras` (SL 7, CentOS 7, CentOS Stream 8, Rocky Linux 8, AlmaLinux 8)
     -   `Server-Extras` (RHEL 7)
-    -   `PowerTools` (CentOS 8.0 through 8.2)
-    -   `powertools` (CentOS 8.3 and newer)
+    -   `powertools` (CentOS Stream 8, Rocky Linux 8, AlmaLinux 8)
     -   `CodeReady Builder` (RHEL 8)
 -   EPEL repositories
 -   OSG repositories
@@ -41,10 +40,6 @@ If any of these repositories are missing, you may end up with installation issue
 !!! danger
     Other repositories, such as `jpackage`, `dag`, or `rpmforge`, are not supported and you may encounter problems if
     you use them.
-
-!!! note
-    If you upgrade from CentOS 8.0 through 8.2 to CentOS 8.3 or newer,
-    you may have to re-enable some repos as [described below](#centos-83-and-newer)
 
 ### Upcoming Software
 
@@ -152,7 +147,7 @@ You must install and enable these first.
         :::console
         ## EPEL 7 (For RHEL 7, CentOS 7, and SL 7)
         root@host # yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-        ## EPEL 8 (For RHEL 8 and CentOS 8)
+        ## EPEL 8 (For RHEL 8 and CentOS Stream 8, Rocky Linux 8, AlmaLinux 8)
         root@host # yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 
 -   Verify that `/etc/yum.repos.d/epel.repo` exists; the `[epel]` section should contain:
@@ -211,7 +206,7 @@ For production services, we suggest only changing software versions during contr
 Therefore we recommend security-only automatic updates or disabling automatic updates entirely.
 
 !!! note
-    RHEL/CentOS 8 automatic updates are provided in the `dnf-automatic` RPM, which is not installed by default.
+    RHEL/CentOS Stream 8 automatic updates are provided in the `dnf-automatic` RPM, which is not installed by default.
 
 To enable only security related automatic updates:
 
@@ -219,7 +214,7 @@ To enable only security related automatic updates:
 
 -   On RHEL 8, edit `/etc/dnf/automatic.conf` and set `upgrade_type = security`
 
-CentOS 7/8 does not support security-only automatic updates;
+CentOS 7 and CentOS Stream 8 do not support security-only automatic updates;
 doing any of the above steps will prevent automatic updates from happening at all.
 
 To disable automatic updates entirely:
