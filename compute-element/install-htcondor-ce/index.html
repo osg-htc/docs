@@ -536,13 +536,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#choosing-the-osg-yum-repository" class="md-nav__link">
-    Choosing the OSG Yum Repository
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#installing-htcondor-ce" class="md-nav__link">
     Installing HTCondor-CE
   </a>
@@ -568,26 +561,6 @@
   <a href="#configuring-authentication" class="md-nav__link">
     Configuring authentication
   </a>
-  
-    <nav class="md-nav" aria-label="Configuring authentication">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#gsi-and-voms-osg-35-only" class="md-nav__link">
-    GSI and VOMS (OSG 3.5 only)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#bearer-tokens-osg-35-upcoming-osg-36" class="md-nav__link">
-    Bearer Tokens (OSG 3.5 upcoming, OSG 3.6)
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -627,19 +600,6 @@
   <a href="#starting-and-validating-htcondor-ce" class="md-nav__link">
     Starting and Validating HTCondor-CE
   </a>
-  
-    <nav class="md-nav" aria-label="Starting and Validating HTCondor-CE">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#enabling-osg-accounting-osg-35-only" class="md-nav__link">
-    Enabling OSG accounting (OSG 3.5 only)
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -2134,13 +2094,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#choosing-the-osg-yum-repository" class="md-nav__link">
-    Choosing the OSG Yum Repository
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#installing-htcondor-ce" class="md-nav__link">
     Installing HTCondor-CE
   </a>
@@ -2166,26 +2119,6 @@
   <a href="#configuring-authentication" class="md-nav__link">
     Configuring authentication
   </a>
-  
-    <nav class="md-nav" aria-label="Configuring authentication">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#gsi-and-voms-osg-35-only" class="md-nav__link">
-    GSI and VOMS (OSG 3.5 only)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#bearer-tokens-osg-35-upcoming-osg-36" class="md-nav__link">
-    Bearer Tokens (OSG 3.5 upcoming, OSG 3.6)
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -2225,19 +2158,6 @@
   <a href="#starting-and-validating-htcondor-ce" class="md-nav__link">
     Starting and Validating HTCondor-CE
   </a>
-  
-    <nav class="md-nav" aria-label="Starting and Validating HTCondor-CE">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#enabling-osg-accounting-osg-35-only" class="md-nav__link">
-    Enabling OSG accounting (OSG 3.5 only)
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -2285,7 +2205,7 @@
 As such, the OSG will submit resource allocation requests (RARs) jobs to your HTCondor-CE and it will handle
 authorization and delegation of RARs to your local batch system.
 In OSG today, RARs are sent to CEs as <em>pilot jobs</em> from a factory, which in turn are able to accept and run end-user jobs.
-See the <a href="https://htcondor.github.io/htcondor-ce/architecture/">upstream documentation</a> for a more detailed introduction.</p>
+See the <a href="https://htcondor.com/htcondor-ce/architecture/">upstream documentation</a> for a more detailed introduction.</p>
 <p>Use this page to learn how to install, configure, run, test, and troubleshoot an OSG HTCondor-CE.</p>
 <div class="admonition tip">
 <p class="admonition-title">OSG Hosted CE</p>
@@ -2295,16 +2215,15 @@ we suggest <a href="../hosted-ce/">requesting an OSG Hosted CE</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you are installing an HTCondor-CE for use outside of the OSG, consult
-<a href="https://htcondor.github.io/htcondor-ce/v5/installation/htcondor-ce/">the upstream documentation</a> instead.</p>
+<a href="https://htcondor.com/htcondor-ce/">the upstream documentation</a> instead.</p>
 </div>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following points, consulting the upstream references as needed
-(<a href="https://htcondor.github.io/htcondor-ce/v5/reference/">HTCondor-CE 5</a>,
-<a href="https://htcondor.github.io/htcondor-ce/v4/reference/">HTCondor-CE 4</a>):</p>
+(<a href="https://htcondor.com/htcondor-ce/v5/reference/">HTCondor-CE 5</a>):</p>
 <ul>
 <li><strong>User IDs:</strong> If they do not exist already, the installation will create the Linux users <code>condor</code> (UID 4716) and
-    <code>gratia</code> (UID 42401)
-    You will also need to create Unix accounts for each VO that you wish to support.
+    <code>gratia</code>
+    You will also need to create Unix accounts for each collaboration that you wish to support.
     See details in the <a href="#configuring-authentication">'Configuring authentication' section below</a>.</li>
 <li><strong>SSL certificate:</strong> The HTCondor-CE service uses a host certificate at <code>/etc/grid-security/hostcert.pem</code> and an
     accompanying key at <code>/etc/grid-security/hostkey.pem</code></li>
@@ -2313,55 +2232,17 @@ we suggest <a href="../hosted-ce/">requesting an OSG Hosted CE</a>.</p>
 <li><strong>Access point/login node:</strong> HTCondor-CE should be installed on a host that already has the ability to submit jobs
     into your local cluster</li>
 <li><strong>File Systems</strong>: Non-HTCondor batch systems require a
-    <a href="https://htcondor.github.io/htcondor-ce/v5/configuration/local-batch-system/#sharing-the-spool-directory">shared file system</a>
+    <a href="https://htcondor.com/htcondor-ce/v5/configuration/local-batch-system/#sharing-the-spool-directory">shared file system</a>
     between the HTCondor-CE host and the batch system worker nodes.</li>
 </ul>
 <p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
 <ul>
 <li>Ensure the host has <a href="../../release/supported_platforms/">a supported operating system</a></li>
 <li>Install the appropriate <a href="../../common/yum/#install-the-epel-repositories">EPEL</a> and
-  <a href="../../common/yum/#install-the-osg-repositories">OSG</a> Yum repositories for your operating system.
-  See <a href="#choosing-the-osg-yum-repository">the next section</a> for guidance on choosing which OSG Yum repository to install.</li>
+  <a href="../../common/yum/#install-the-osg-repositories">OSG</a> Yum repositories for your operating system.</li>
 <li>Obtain root access to the host</li>
 <li>Install <a href="../../common/ca/">CA certificates</a></li>
 </ul>
-<h2 id="choosing-the-osg-yum-repository">Choosing the OSG Yum Repository<a class="headerlink" href="#choosing-the-osg-yum-repository" title="Permanent link">&para;</a></h2>
-<div class="admonition danger">
-<p class="admonition-title">Before considering OSG 3.6&hellip;</p>
-<p>Due to potentially disruptive changes in protocols, contact your virtual organization(s) (VO) to verify that they
-support token-based authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
-If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
-install or remain on the <a href="../../release/notes/">OSG 3.5 release series</a>.</p>
-</div>
-<p>The OSG distributes different versions of HTCondor-CE and HTCondor in separate <a href="../../common/yum/">YUM repositories</a>.
-Most notably, the repository that you choose will determine the types of credentials that your CE is able to accept.
-Use the following table to decide OSG YUM repository to install HTCondor-CE:</p>
-<table>
-<thead>
-<tr>
-<th><strong>YUM Repository</strong></th>
-<th><strong>Bearer Tokens</strong></th>
-<th><strong>GSI and VOMS</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>OSG 3.5 upcoming <strong>(recommended)</strong>: HTCondor-CE 5, HTCondor 9.0</td>
-<td>&#9989;</td>
-<td>&#9989;</td>
-</tr>
-<tr>
-<td>OSG 3.5 release: HTCondor-CE 4, HTCondor 8.8</td>
-<td></td>
-<td>&#9989;</td>
-</tr>
-<tr>
-<td>OSG 3.6 release: HTCondor-CE 5, HTCondor 9.0</td>
-<td>&#9989;</td>
-<td></td>
-</tr>
-</tbody>
-</table>
 <h2 id="installing-htcondor-ce">Installing HTCondor-CE<a class="headerlink" href="#installing-htcondor-ce" title="Permanent link">&para;</a></h2>
 <p>An HTCondor-CE installation consists of the job gateway (i.e., the HTCondor-CE job router) and other support software
 (e.g., <code>osg-configure</code>, a Gratia probe for OSG accounting).
@@ -2446,41 +2327,22 @@ To simplify installation, OSG provides convenience RPMs that install all require
 </li>
 <li>
 <p>Install the CE software where <code>&lt;PACKAGE&gt;</code> is the package you selected in the above step.:</p>
-<ul>
-<li>
-<p>If you have decided to install from <a href="#choosing-the-osg-yum-repository">3.5 upcoming</a>, run the following command</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install --enablerepo<span class="o">=</span>osg-upcoming &lt;PACKAGE&gt;
-</code></pre></div>
-
-</li>
-<li>
-<p>Otherwise, run the following command:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install &lt;PACKAGE&gt;
 </code></pre></div>
 
-</li>
-</ul>
 </li>
 </ol>
 <h2 id="configuring-htcondor-ce">Configuring HTCondor-CE<a class="headerlink" href="#configuring-htcondor-ce" title="Permanent link">&para;</a></h2>
 <p>There are a few required configuration steps to connect HTCondor-CE with your batch system and authentication method.
 For more advanced configuration, see the section on <a href="#optional-configuration">optional configurations</a>.</p>
 <h3 id="configuring-the-local-batch-system">Configuring the local batch system<a class="headerlink" href="#configuring-the-local-batch-system" title="Permanent link">&para;</a></h3>
-<p>To configure HTCondor-CE to integrate with your local batch system, please refer to the upstream documentation based on
-your installed version of HTCondor-CE:</p>
-<ul>
-<li><a href="https://htcondor.github.io/htcondor-ce/v5/configuration/local-batch-system/">HTCondor-CE 5</a></li>
-<li><a href="https://htcondor.github.io/htcondor-ce/v4/installation/htcondor-ce/#configuring-the-batch-system">HTCondor-CE 4</a></li>
-</ul>
+<p>To configure HTCondor-CE to integrate with your local batch system,
+please refer to the <a href="https://htcondor.com/htcondor-ce/v5/configuration/local-batch-system/">upstream documentation</a>.</p>
 <h3 id="configuring-authentication">Configuring authentication<a class="headerlink" href="#configuring-authentication" title="Permanent link">&para;</a></h3>
-<p>Depending on the OSG repository from which you have installed HTCondor-CE, you can allow pilot job submission to your CE
-based on X.509 proxies (i.e., GSI and VOMS), bearer tokens, or both.</p>
-<h4 id="gsi-and-voms-osg-35-only">GSI and VOMS (OSG 3.5 only)<a class="headerlink" href="#gsi-and-voms-osg-35-only" title="Permanent link">&para;</a></h4>
-<p>To configure which VOs and users are authorized to submit pilot jobs to your HTCondor-CE, follow the instructions in
-<a href="../../security/lcmaps-voms-authentication/#configuring-the-lcmaps-voms-plugin">the LCMAPS VOMS plugin document</a>.</p>
-<h4 id="bearer-tokens-osg-35-upcoming-osg-36">Bearer Tokens (OSG 3.5 upcoming, OSG 3.6)<a class="headerlink" href="#bearer-tokens-osg-35-upcoming-osg-36" title="Permanent link">&para;</a></h4>
-<p>The <code>osg-scitokens-mapfile</code>, pulled in by the <code>osg-ce</code> package, provides default token to local user mappings.
-To add support for a particular VO:</p>
+<p>HTCondor-CE clients will submit RARs accompanied by <a href="../../security/tokens/overview/">bearer tokens</a> declaring their
+association with a given collaboration and what permissions the collaboration has given the client
+The <code>osg-scitokens-mapfile</code>, pulled in by the <code>osg-ce</code> package, provides default token to local user mappings.
+To accept RARs from a particular collaboration:</p>
 <ol>
 <li>
 <p>Create the Unix account(s) corresponding to the last field in the default mapfile:
@@ -2501,7 +2363,7 @@ SCITOKENS /^https\:\/\/scitokens\.org\/osg\-connect,/ osgpilot
 </li>
 </ol>
 <p>For more details of the mapfile format, consult the "SciTokens" section of the
-<a href="https://htcondor.github.io/htcondor-ce/v5/configuration/authentication/#scitokens">upstream documentation</a>.</p>
+<a href="https://htcondor.com/htcondor-ce/v5/configuration/authentication/#scitokens">upstream documentation</a>.</p>
 <h3 id="automatic-configuration">Automatic configuration<a class="headerlink" href="#automatic-configuration" title="Permanent link">&para;</a></h3>
 <p>The OSG CE metapackage brings along a configuration tool, <code>osg-configure</code>, that is designed to automatically configure
 the different pieces of software required for an OSG HTCondor-CE:</p>
@@ -2536,18 +2398,10 @@ the different pieces of software required for an OSG HTCondor-CE:</p>
 <h3 id="optional-configuration">Optional configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h3>
 <p>In addition to the configurations above, you may need to further configure how pilot jobs are filtered and transformed
 before they are submitted to your local batch system or otherwise change the behavior of your CE.
-For detailed instructions, please refer to the upstream documentation based on your installed version of HTCondor-CE:</p>
+For detailed instructions, please refer to the upstream documentation:</p>
 <ul>
-<li>HTCondor-CE 5<ul>
-<li><a href="https://htcondor.github.io/htcondor-ce/v5/configuration/job-router-overview/">Configuring the Job Router</a></li>
-<li><a href="https://htcondor.github.io/htcondor-ce/v5/configuration/optional-configuration/">Optional configuration</a></li>
-</ul>
-</li>
-<li>HTCondor-CE 4<ul>
-<li><a href="https://htcondor.github.io/htcondor-ce/v4/batch-system-integration/">Configuring the Job Router</a></li>
-<li><a href="https://htcondor.github.io/htcondor-ce/v4/installation/htcondor-ce/#optional-configuration">Optional configuration</a></li>
-</ul>
-</li>
+<li><a href="https://htcondor.com/htcondor-ce/v5/configuration/job-router-overview/">Configuring the Job Router</a></li>
+<li><a href="https://htcondor.com/htcondor-ce/v5/configuration/optional-configuration/">Optional configuration</a></li>
 </ul>
 <h4 id="accounting-with-multiple-ces-or-local-user-jobs">Accounting with multiple CEs or local user jobs<a class="headerlink" href="#accounting-with-multiple-ces-or-local-user-jobs" title="Permanent link">&para;</a></h4>
 <div class="admonition note">
@@ -2555,83 +2409,22 @@ For detailed instructions, please refer to the upstream documentation based on y
 <p>For non-HTCondor batch systems only</p>
 </div>
 <p>If your site has multiple CEs or you have non-grid users submitting to the same local batch system, the OSG accounting
-software needs to be configured so that it doesn't over report the number of jobs.</p>
-<ol>
-<li>
-<p>Determine which file you need to modify</p>
-<ul>
-<li>
-<p><strong>For OSG 3.5 installations,</strong> use the following table:</p>
-<table>
-<thead>
-<tr>
-<th align="left">If your batch system is…</th>
-<th align="left">Then edit the following file on each of your CE(s)…</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">LSF</td>
-<td align="left"><code>/etc/gratia/pbs-lsf/ProbeConfig</code></td>
-</tr>
-<tr>
-<td align="left">PBS</td>
-<td align="left"><code>/etc/gratia/pbs-lsf/ProbeConfig</code></td>
-</tr>
-<tr>
-<td align="left">SGE</td>
-<td align="left"><code>/etc/gratia/sge/ProbeConfig</code></td>
-</tr>
-<tr>
-<td align="left">SLURM</td>
-<td align="left"><code>/etc/gratia/slurm/ProbeConfig</code></td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p><strong>For OSG 3.6 installations,</strong> you'll need to modify <code>/etc/gratia/htcondor-ce/ProbeConfig</code></p>
-</li>
-</ul>
-</li>
-<li>
-<p>Edit the value of <code>SuppressNoDNRecords</code> on each of your CE's so that it reads:</p>
-<div class="codehilite"><pre><span></span><code>SuppressNoDNRecords=&quot;1&quot;
+software needs to be configured so that it doesn't over report the number of jobs.
+Modify the value of <code>SuppressNoDNRecords</code> in <code>/etc/gratia/htcondor-ce/ProbeConfig</code> on each of your CE's so that it
+reads:</p>
+<div class="codehilite"><pre><span></span><code>    :::file
+    SuppressNoDNRecords=&quot;1&quot;
 </code></pre></div>
 
-</li>
-</ol>
 <h2 id="starting-and-validating-htcondor-ce">Starting and Validating HTCondor-CE<a class="headerlink" href="#starting-and-validating-htcondor-ce" title="Permanent link">&para;</a></h2>
-<p>For information on how to start and validate the core HTCondor-CE services, please refer to the upstream documentation
-based on your installed version of HTCondor-CE:</p>
-<ul>
-<li><a href="https://htcondor.github.io/htcondor-ce/v5/verification/">HTCondor-CE 5</a></li>
-<li><a href="https://htcondor.github.io/htcondor-ce/v4/verification/">HTCondor-CE 4</a></li>
-</ul>
-<h3 id="enabling-osg-accounting-osg-35-only">Enabling OSG accounting (OSG 3.5 only)<a class="headerlink" href="#enabling-osg-accounting-osg-35-only" title="Permanent link">&para;</a></h3>
-<p>In addition to the core HTCondor-CE services, an OSG 3.5 HTCondor-CE must also start and enable the accounting service,
-<code>gratia-probes-cron</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>systemctl start gratia-probes-cron
-<span class="gp">root@host # </span>systemctl <span class="nb">enable</span> gratia-probes-cron
-</code></pre></div>
-<p>In OSG 3.6, OSG accounting is managed directly by HTCondor-CE
-(see the <a href="../../release/updating-to-osg-36/#gratia-probe">update instructions</a> for more details).</p>
+<p>For information on how to start and validate the core HTCondor-CE services, please refer to the
+<a href="https://htcondor.com/htcondor-ce/v5/verification/">upstream documentation</a></p>
 <h2 id="troubleshooting-htcondor-ce">Troubleshooting HTCondor-CE<a class="headerlink" href="#troubleshooting-htcondor-ce" title="Permanent link">&para;</a></h2>
-<p>For information on how to troubleshoot your HTCondor-CE, please refer to the upstream documentation based on your
-installed version of HTCondor-CE:</p>
+<p>For information on how to troubleshoot your HTCondor-CE, please refer to the upstream documentation:</p>
 <ul>
-<li>HTCondor-CE 5:<ul>
-<li><a href="https://htcondor.github.io/htcondor-ce/v5/troubleshooting/common-issues/">Common issues</a></li>
-<li><a href="https://htcondor.github.io/htcondor-ce/v5/troubleshooting/debugging-tools/">Debugging tools</a></li>
-<li><a href="https://htcondor.github.io/htcondor-ce/v5/troubleshooting/logs/">Helpful logs</a></li>
-</ul>
-</li>
-<li>HTCondor-CE 4<ul>
-<li><a href="https://htcondor.github.io/htcondor-ce/v4/troubleshooting/troubleshooting/#htcondor-ce-troubleshooting-items">Common issues</a></li>
-<li><a href="https://htcondor.github.io/htcondor-ce/v4/troubleshooting/troubleshooting/#htcondor-ce-troubleshooting-tools">Debugging tools</a></li>
-<li><a href="https://htcondor.github.io/htcondor-ce/v4/troubleshooting/troubleshooting/#htcondor-ce-troubleshooting-data">Helpful logs</a></li>
-</ul>
-</li>
+<li><a href="https://htcondor.com/htcondor-ce/v5/troubleshooting/common-issues/">Common issues</a></li>
+<li><a href="https://htcondor.com/htcondor-ce/v5/troubleshooting/debugging-tools/">Debugging tools</a></li>
+<li><a href="https://htcondor.com/htcondor-ce/v5/troubleshooting/logs/">Helpful logs</a></li>
 </ul>
 <h2 id="registering-the-ce">Registering the CE<a class="headerlink" href="#registering-the-ce" title="Permanent link">&para;</a></h2>
 <p>To contribute to the the OSG Production Grid, your CE must be
