@@ -293,11 +293,6 @@ For information on how to configure xrootd-lcmaps authorization, please refer to
 For CMS users, there is a package available to integrate rule-based name lookup using a `storage.xml` file.
 See [this documentation](install-standalone.md#enabling-cms-tfc-support-cms-sites-only).
 
-### (Optional) Adding Hadoop support to XRootD
-
-For documentation on how to export your Hadoop storage using XRootD please see
-[this documentation](install-standalone.md#enabling-hadoop-support-deprecated-el-7-only)
-
 ### (Optional) Adding Multi user support for an XRootd server
 
 For documentation how to enable multi-user support using XRootD see
