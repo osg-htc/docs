@@ -79,7 +79,7 @@ In the tables below:
 Syntax and layout
 -----------------
 
-The configuration files used by `osg-configure` are the one supported by Python's [SafeConfigParser](https://docs.python.org/library/configparser.html), similar in format to the [INI configuration file](https://en.wikipedia.org/wiki/INI_file) used by MS Windows:
+The configuration files used by `osg-configure` are the one supported by Python's [configparser](https://docs.python.org/library/configparser.html), similar in format to the [INI configuration file](https://en.wikipedia.org/wiki/INI_file) used by MS Windows:
 
 -   Config files are separated into sections, specified by a section name in square brackets (e.g. `[Section 1]`)
 -   Options should be set using `name = value` pairs
@@ -254,54 +254,19 @@ This section is contained in `/etc/osg/config.d/30-infoservices.ini`, which is p
     -   Otherwise, set this to the `hostname:port` of a host running a `condor-ce-collector` daemon
 
 
-### RSV ###
-
-This section handles the configuration and setup of the RSV services.
-
-This section is contained in `/etc/osg/config.d/30-rsv.ini` which is provided by the `osg-configure-rsv` RPM.
-
-| Option               | Values Accepted           | Explanation                                                                                                                                                                                                                                                            |
-|----------------------|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **enabled**          | `True`, `False`, `Ignore` | This indicates whether the rsv  service is being used or not.                                                                                                                                                                                                          |
-| **rsv_user**         | String                    | This gives username that rsv will run under.  If this is blank or set to `UNAVAILABLE`, it will default to rsv.                                                                                                                                                        |
-| **gratia_probes**    | String                    | This settings indicates which rsv gratia probes should be used.  It is a list of probes separated by a comma.  Valid probes are metric, condor, pbs, lsf, sge, managedfork, hadoop-transfer, and gridftp-transfer                                                      |
-| ce_hosts             | String                    | This option lists the serviceURI of the CEs that generic RSV CE probes should check.  This should be a list of serviceURIs (`hostname[:port/service]`) separated by a comma (e.g. `my.host,my.host2,my.host3:2812`).                                                   |
-| htcondor_ce_hosts    | String                    | This option lists the serviceURI of the HTCondor-CE-based CEs that the RSV HTCondor-CE probes should check. This should be a list of serviceURIs (`hostname[:port/service]`) separated by a comma (e.g. `my.host,my.host2,my.host3:2812`). |                           |
-| gridftp_hosts        | String                    | This option lists the serviceURI of the GridFTP servers that the RSV GridFTP probes should check.  This should be a list of serviceURIs (`hostname[:port/service]`) separated by a comma (e.g. `my.host.iu.edu:2812,my.host2,my.host3`).                               |
-| gridftp_dir          | String                    | This should be the directory that the GridFTP probes should use during testing.  This defaults to `/tmp` if left blank or set to `UNAVAILABLE`.                                                                                                                        |
-| **srm_hosts**        | String                    | This option lists the serviceURI of the srm servers that the RSV srm probes should check.  This should be a list of serviceURIs (`hostname[:port/service]`) separated by a comma (e.g. `my.host,my.host2,my.host3:8444`).                                              |
-| srm_dir              | String                    | This should be the directory that the srm probes should use during testing.                                                                                                                                                                                            |
-| srm_webservice_path  | String                    | This option gives the webservice path that SRM probes need to use along with the host:port. See note.                                                                                                                                                                  |
-| service_cert         | String                    | This option should point to the public key file (pem) for your service  certificate. If this is left blank or set to `UNAVAILABLE` and the `user_proxy` setting is set, it will default to `/etc/grid-security/rsvcert.pem`                                            |
-| service_key          | String                    | This option should point to the private key file (pem) for your service  certificate. If this is left blank or set to `UNAVAILABLE` and the `service_cert` setting is enabled, it will default to `/etc/grid-security/rsvkey.pem` .                                    |
-| service_proxy        | String                    | This should point to the location of the rsv proxy file. If this is left blank or set to `UNAVAILABLE` and the use_service_cert  setting is enabled, it will default to `/tmp/rsvproxy`.                                                                               |
-| user_proxy           | String                    | If you don't use a service certificate for rsv, you will need to specify a  proxy file that RSV should use in the proxy_file setting.  If this is set, then  service_cert, service_key, and service_proxy should be left blank, or set to `UNAVAILABE` or `DEFAULT`.   |
-| **setup_rsv_nagios** | `True`, `False`           | This option indicates whether rsv should upload results to a local  nagios server instance. This should be set to True or False.<br> This plugin is provided as an experimental component, and admins are recommend *not to enable* it on production resources.        |
-| rsv_nagios_conf_file | String                    | This option indicates the location of the rsv nagios  file to use for configuration details. This file *needs to be configured locally for RSV-Nagios forwarding to work* -- see inline comments in file for more information.                                         |
-| condor_location      | String                    | If you installed Condor in a non-standard location (somewhere other than /usr, which is where the RPM puts it)  you must specify the path to the install dir here.                                                                                                     |
-
-!!! note
-    **srm_webservice_path**:<br/>
-    For dcache installations, this should work if left blank. However
-    Bestman-xrootd SEs normally use `srm/v2/server` as web service path, and so
-    Bestman-xrootd admins will have to pass this option with the appropriate
-    value (for example: `srm/v2/server`) for the SRM probes to pass on their
-    SE.
-
-
 ### Subcluster / Resource Entry for AGIS / GlideinWMS Entry ###
 
 Subcluster and Resource Entry configuration is for reporting about the worker resources on your site. A **subcluster** is a homogeneous set of worker node hardware; a **resource** is a set of subcluster(s) with common capabilities that will be reported to the ATLAS AGIS system.
 
 **At least one Subcluster or Resource Entry section** is required on a CE; please populate the information for all your subclusters. This information will be reported to a central collector and will be used to send GlideIns / pilot jobs to your site; having accurate information is necessary for OSG jobs to effectively use your resources.
 
-This section is contained in `/etc/osg/config.d/30-gip.ini` which is provided by the `osg-configure-gip` RPM. (This is for historical reasons.)
+These configuration files are provided by the `osg-configure-cluster` RPM.
 
 This configuration uses multiple sections of the OSG configuration files:
 
--   [Subcluster\*](#subcluster-configuration): options about homogeneous subclusters
--   [Resource Entry\*](#resource-entry-configuration-atlas-only): options for specifying ATLAS queues for AGIS
--   [GlideinWMS Entry\*](#glideinwms-entry-cms-and-osg-pilot-factories): options for specifying queues for the CMS and OSG GlideinWMS factories
+-   [Subcluster\*](#subcluster-configuration) in `/etc/osg/config.d/31-cluster.ini`: options about homogeneous subclusters
+-   [Resource Entry\*](#resource-entry-configuration-atlas-only) in `/etc/osg/config.d/31-cluster.ini`: options for specifying ATLAS queues for AGIS
+-   [GlideinWMS Entry\*](#glideinwms-entry-cms-and-osg-pilot-factories) in `/etc/osg/config.d/35-pilot.ini`: options for specifying queues for the CMS and OSG GlideinWMS factories
 
 #### Notes for multi-CE sites. ####
 
@@ -320,7 +285,7 @@ Each homogeneous set of worker node hardware is called a **subcluster**. For eac
 | **name**             | String                      | The same name that is in the Section label; it should be **globally unique**                       |
 | **ram\_mb**          | Positive Integer            | Megabytes of RAM per node                                                                          |
 | **cores\_per\_node** | Positive Integer            | Number of cores per node                                                                           |
-| **allowed\_vos**     | Comma-separated List or `*` | The VOs that are allowed to run jobs on this subcluster (autodetected if `*`). Optional on OSG 3.3 |
+| **allowed\_vos**     | Comma-separated List or `*` | The collaborations that are allowed to run jobs on this subcluster                                 |
 
 The following attributes are optional:
 
@@ -329,10 +294,6 @@ The following attributes are optional:
 | max\_wall\_time   | Positive Integer | Maximum wall-clock time, in minutes, that a job is allowed to run on this subcluster. The default is 1440, or the equivalent of one day.
 | queue             | String           | The queue to which jobs should be submitted in order to run on this subcluster                                             |
 | extra\_transforms | Classad          | Transformation attributes which the HTCondor Job Router should apply to incoming jobs so they can run on this subcluster   |
-
-**OSG 3.4 changes:**
-
--   `allowed_vos` is mandatory
 
 
 #### Resource Entry Configuration (ATLAS only) ####
@@ -346,7 +307,7 @@ If you are configuring a CE for the ATLAS VO, you must provide hardware informat
 | **queue**                                 | String                      | The queue to which jobs should be submitted to run on this resource                              |
 | **cpucount** (alias **cores\_per\_node**) | Positive Integer            | Number of cores that a job using this resource can get                                           |
 | **maxmemory** (alias **ram\_mb**)         | Positive Integer            | Maximum amount of memory (in MB) that a job using this resource can get                          |
-| **allowed\_vos**                          | Comma-separated List or `*` | The VOs that are allowed to run jobs on this resource (autodetected if `*`). Optional on OSG 3.3 |
+| **allowed\_vos**                          | Comma-separated List or `*` | The collaborations that are allowed to run jobs on this resource                                 |
 
 The following attributes are optional:
 
@@ -354,10 +315,6 @@ The following attributes are optional:
 |-------------|----------------------|---------------------------------------------------------------------------------------------------------------------|
 | subclusters | Comma-separated List | The physical subclusters the resource entry refers to; must be defined as Subcluster sections elsewhere in the file |
 | vo\_tag     | String               | An arbitrary label that is added to jobs routed through this resource                                               |
-
-**OSG 3.4 changes:**
-
--   `allowed_vos` is mandatory
 
 
 #### GlideinWMS Entry (CMS and OSG pilot factories) ####
@@ -378,7 +335,7 @@ This section is contained in `/etc/osg/config.d/35-pilot.ini`
 | **require\_singularity**                  | true, false                 | True if the pilot should require singularity on the workers.                                                                                                         |
 | **os**                                    | Comma-separated List        | The OS of the workers; allowed values are `rhel6`, `rhel7`, `rhel8`, or `ubuntu18`. This is required unless require_singularity = true                               |
 | **send\_tests*                            | true, false                 | Send test pilots? Currently not working, placeholder                                                                                                                 |
-| **allowed\_vos**                          | Comma-separated List or `*` | A comma-separated list of VOs that are allowed to submit to this subcluster; If `*`, uses VOs that have accounts on this CE                                          |
+| **allowed\_vos**                          | Comma-separated List or `*` | A comma-separated list of collaborations that are allowed to submit to this subcluster                                                                               |
 
 
 ### Gateway ###
@@ -406,26 +363,6 @@ MY_PATH = /usr/local/myapp
 ```
 
 This section is contained in `/etc/osg/config.d/40-localsettings.ini` which is provided by the `osg-configure-ce` RPM.
-
-
-### Misc Services ###
-
-This section handles the configuration of services that do not have a dedicated section for their configuration.
-
-This section is contained in `/etc/osg/config.d/10-misc.ini` which is provided by the `osg-configure-misc` RPM.
-
-This section primarily deals with authentication/authorization. For information on suggested settings for your CE, see the [authentication section of the HTCondor-CE install documents](../compute-element/install-htcondor-ce.md#configuring-authentication).
-
-| Option                                | Values Accepted                                | Explanation                                                                                                                                                                                                                                                                                                                                                                          |
-|---------------------------------------|------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **authorization\_method**             | `gridmap`, `xacml`, `local-gridmap`, `vomsmap` | This indicates which authorization method your site uses. **`xacml`** **is deprecated in OSG 3.4**                                                                                                                                                                                                                                                                                   |
-| edit\_lcmaps\_db                      | `True`, `False`                                | (Optional, default True) If true, osg-configure will overwrite `/etc/lcmaps.db` to set your authorization method. The previous version will be backed up to `/etc/lcmaps.db.pre-configure`                                                                                                                                                                                           |
-| all\_fqans                            | `True`, `False`                                | (Optional, default False) If true, vomsmap auth will use all VOMS FQANs of a proxy for mapping -- see [documentation](../security/lcmaps-voms-authentication.md#mapping-using-all-fqans)                                                                                                                                                                                                |
-
-**OSG 3.4 changes:**
-
--   `authorization_method` defaults to `vomsmap`
--   `authorization_method` will raise a warning if set to `xacml`
 
 
 ### Site Information ###
