@@ -4,11 +4,6 @@ DateReviewed: 2022-03-24
 Install XRootD Standalone
 =========================
 
-!!!bug "OSG 3.5 EL7 version compatibility"
-    There is an incompatibility with EL7 < 7.5 and XRootD available from OSG 3.5 due to an issue with the
-    `globus-gsi-proxy-core` package
-
-
 [XRootD](http://xrootd.org/) is a hierarchical storage system that can be used in many ways to access data,
 typically distributed among actual storage resources.
 In its standalone configuration, XRootD acts as a simple layer exporting data from a storage system to the outside world.
@@ -46,26 +41,18 @@ Installing XRootD
     If your collaboration(s) don't support these new protocols, install or remain on the
     [OSG 3.5 release series, with the osg-upcoming repositories enabled](../../release/notes.md).
 
-    Note that OSG 3.5 will reach its end-of-life in [May 2022](../../release/release_series.md#series-overviews).
+    Note that OSG 3.5 has reached its end-of-life on [May 1, 2022](../../release/release_series.md#series-overviews).
 
 !!! warning "Requirements for XRootD-Multiuser with VOMS FQANs"
     Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a `voms-mapfile`.
     Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
     If you want to use multiuser, ensure you are getting `xrootd-voms` from the OSG repos.
 
-To install an XRootD Standalone server, run one of the following commands based on your installed
-[OSG release series](../../release/release_series.md#series-overviews):
+To install an XRootD Standalone server, run the following command:
 
--   OSG 3.6 (recommended):
-
-        :::console
-        root@xrootd-standalone # yum install osg-xrootd-standalone
-
--   OSG 3.5
-
-        :::console
-        root@xrootd-standalone # yum install osg-xrootd-standalone \
-                                             --enablerepo=osg-upcoming
+```console
+root@xrootd-standalone # yum install osg-xrootd-standalone
+```
 
 Configuring XRootD
 ------------------
@@ -120,26 +107,6 @@ The following configuration steps are optional and will likely not be required f
 If you do not need any of the following special configurations, skip to
 [the section on using XRootD](#using-xrootd).
 
-#### Enabling Hadoop support (deprecated, EL 7 Only)
-
-!!! info "OSG 3.5 end-of-life"
-    Hadoop is no longer supported in OSG 3.6 and OSG 3.5 will reach its end-of-life at the
-    [beginning of May 2022](../../release/release_series.md#series-overviews).
-
-Hadoop File System (HDFS) based sites should utilize the `xrootd-hdfs` plugin to allow XRootD to access their storage:
-
-1. Install the XRootD HDFS plugin package:
-
-        :::console
-        root@host # yum install xrootd-hdfs
-
-1. Add the following configuration to `/etc/xrootd/xrootd-clustered.cfg`:
-
-        :::file
-        ofs.osslib /usr/lib64/libXrdHdfs.so
-
-For more information, see [the HDFS installation documents](../install-hadoop.md).
-
 
 #### Enabling multi-user support
 
@@ -152,10 +119,10 @@ The `xrootd-multiuser` plugin allows XRootD to write files on the storage system
 [authenticated](xrootd-authorization.md) user instead of the `xrootd` user.
 If your XRootD service only allows read-only access, you should skip installation of this plugin.
 
-To set up XRootD in multi-user mode, perform the following steps, install the `xrootd-multiuser` package:
+To set up XRootD in multi-user mode, install the `xrootd-multiuser` package:
 
 ``` console
-root@host # yum install xrootd-multiuser
+root@xrootd-standalone # yum install xrootd-multiuser
 ```
 
 #### Enabling CMS TFC support (CMS sites only)
@@ -163,19 +130,11 @@ root@host # yum install xrootd-multiuser
 For CMS sites, there is a package available to integrate rule-based name lookup using a `storage.xml` file.
 If you are not setting up a service for CMS, skip this section.
 
-To install an `xrootd-cmstfc`, run one of the following commands based on your installed
-[OSG release series](../../release/release_series.md#series-overviews):
+To install an `xrootd-cmstfc` on OSG 3.6, run the following command:
 
--   OSG 3.6 (recommended):
-
-        :::console
-        root@xrootd-standalone # yum install --enablerepo=osg-contrib xrootd-cmstfc
-
--   OSG 3.5
-
-        :::console
-        root@xrootd-standalone # yum install xrootd-cmstfc \
-                                             --enablerepo=osg-upcoming
+``` console
+root@xrootd-standalone # yum install --enablerepo=osg-contrib xrootd-cmstfc
+```
 
 You will need to add your `storage.xml` to `/etc/xrootd/storage.xml` and then add the following line to your XRootD
 configuration:

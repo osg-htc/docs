@@ -206,15 +206,20 @@ To use HTTPS:
 
 1.  Add a certificate according to the [instructions above](#ensure-the-xrootd-service-has-a-certificate)
 
-1.  Create a file named `/etc/xrootd/config.d/11-cache-https.cfg` with the following contents:
+1.  Uncomment `set EnableVoms = 1` in `/etc/xrootd/config.d/10-osg-xrdvoms.cfg`
 
-        # Support HTTPS access to unauthenticated cache
-        if named stash-cache
-          http.cadir /etc/grid-security/certificates
-          http.cert /etc/grid-security/xrd/xrdcert.pem
-          http.key /etc/grid-security/xrd/xrdkey.pem
-          http.secxtractor /usr/lib64/libXrdLcmaps.so
-        fi
+!!! note "Upgrading from OSG 3.5"
+    If upgrading from OSG 3.5, you may have a file with the following contents in `/etc/xrootd/config.d`:
+
+           # Support HTTPS access to unauthenticated cache
+           if named stash-cache
+             http.cadir /etc/grid-security/certificates
+             http.cert /etc/grid-security/xrd/xrdcert.pem
+             http.key /etc/grid-security/xrd/xrdkey.pem
+             http.secxtractor /usr/lib64/libXrdLcmaps.so
+           fi
+
+    You must delete this config block or XRootD will fail to start.
 
 
 Manually Setting the FQDN (optional)
@@ -314,12 +319,15 @@ STASHCACHE_DaemonVersion = "1.0.0"
 Updating to OSG 3.6
 -------------------
 
-The OSG 3.5 series is reaching end-of-life on May 1, 2022.
+The OSG 3.5 series has reached end-of-life on May 1, 2022.
 Admins are strongly encouraged to move their caches to OSG 3.6.
 
 See [general update instructions](../../release/updating-to-osg-36.md).
 
-Unauthenticated caches (`xrootd@stash-cache` service) do not need any configuration changes.
+Unauthenticated caches (`xrootd@stash-cache` service) do not need any configuration changes,
+unless HTTPS access has been enabled.
+See the ["enable HTTPS on the unauthenticated cache" section](#enable-https-on-the-unauthenticated-cache))
+for the necessary configuration changes.
 
 Authenticated caches (`xrootd@stash-cache-auth` service) may need the configuration changes described in the
 [updating to OSG 3.6 section](../xrootd/xrootd-authorization.md#updating-to-osg-36)
