@@ -215,7 +215,7 @@ This section is contained in `/etc/osg/config.d/20-slurm.ini` which is provided 
 
 ### Gratia ###
 
-This section configures Gratia. If `probes` is set to `UNAVAILABLE`, then `osg-configure` will use appropriate default values. If you need to specify custom reporting (e.g. a local gratia collector) in addition to the default probes, `%(osg-jobmanager-gratia)s`, `%(osg-gridftp-gratia)s`, `%(osg-metric-gratia)s`, `%(itb-jobmanager-gratia)s`, `%(itb-gridftp-gratia)s`, `%(itb-metric-gratia)s` are defined in the default configuration files to make it easier to specify the standard osg reporting.
+This section configures Gratia. If `probes` is set to `UNAVAILABLE`, then `osg-configure` will use appropriate default values. If you need to specify custom reporting (e.g. a local gratia collector) in addition to the default probes, `%(osg-jobmanager-gratia)s`, and `%(itb-jobmanager-gratia)s` are defined in the default configuration files to make it easier to specify the standard osg reporting.
 
 This section is contained in `/etc/osg/config.d/30-gratia.ini` which is provided by the `osg-configure-gratia` RPM.
 

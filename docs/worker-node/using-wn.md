@@ -28,16 +28,14 @@ The OSG worker node environment contains the following software:
 
 -   The supported set of CA certificates (located in `$X509_CERT_DIR` after the environment is set up)
 -   Proxy management tools:
-    -   Create proxies: `voms-proxy-init` and `grid-proxy-init`
-    -   Show proxy info: `voms-proxy-info` and `grid-proxy-info`
-    -   Destroy the current proxy: `voms-proxy-destroy` and `grid-proxy-destroy`
+    -   Create proxies: `voms-proxy-init`
+    -   Show proxy info: `voms-proxy-info`
+    -   Destroy the current proxy: `voms-proxy-destroy`
 -   Data transfer tools:
     -   HTTP/plain FTP protocol tools (via system dependencies):
         -   `wget` and `curl`: standard tools for downloading files with HTTP and FTP
     -   Transfer clients
-        -   `GFAL`-based client (`gfal-copy` and others).  GFAL supports SRM, GridFTP, and HTTP protocols.
-        -   Globus GridFTP client (`globus-url-copy`)
--   MyProxy client tools
+        -   `GFAL`-based client (`gfal-copy` and others).  GFAL supports SRM, XRootD, and HTTP protocols.
 
 At some sites, these tools may not be available at the pilot launch.  To setup the environment, do the following:
 

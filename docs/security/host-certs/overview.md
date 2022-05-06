@@ -8,7 +8,7 @@ Host Certificates
 
 Host certificates are [X.509 certificates](https://en.wikipedia.org/wiki/X.509) that are used to securely identify
 servers and to establish encrypted connections between services and clients.
-In the OSG, some grid resources (e.g., HTCondor-CE, XRootD, GridFTP) require host certificates.
+In the OSG, some grid resources (e.g., HTCondor-CE, XRootD) require host certificates.
 If you are unsure if your host needs a host certificate, please consult the installation instructions for the software
 you are interested in installing.
 
