@@ -102,10 +102,6 @@ installed [CVMFS](worker-node/install-cvmfs.md) on your worker nodes.
 
 -   [Install Frontier Squid](data/frontier-squid.md), an HTTP caching proxy service.
 -   Storage element:
-    -   Existing POSIX-based systems (such as NFS, Lustre, or GPFS):
-        -   [Install standalone OSG GridFTP](data/gridftp.md): GridFTP server
-        -   (optional) [Install load-balanced OSG GridFTP](data/load-balanced-gridftp.md): when a single GridFTP server
-            isn't enough
     -   Hadoop Distributed File System (HDFS):
         -   [Hadoop Overview](data/hadoop-overview.md): HDFS information, planning, and guides
     -   XRootD:
