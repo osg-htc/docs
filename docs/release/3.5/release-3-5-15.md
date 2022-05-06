@@ -2,7 +2,7 @@
     The OSG 3.5 end-of-life date was May 1, 2022 per our
     [release policy](https://opensciencegrid.org/technology/policy/release-series/).
     We recommend
-    [updating to OSG 3.6](https://opensciencegrid.org/docs/release/updating-to-osg-36/)
+    [updating to OSG 3.6](../updating-to-osg-36.md)
     at your earliest convenience.```
 
 OSG Software Release 3.5.15
