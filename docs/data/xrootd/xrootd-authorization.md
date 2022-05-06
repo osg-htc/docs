@@ -315,7 +315,7 @@ pair, `xrootd-client`, and `voms-clients-cpp` installed:
         [0B/0B][100%][==================================================][0B/s]
         Run: [FATAL] Auth failed
 
-1.  On the XRootD host, add your DN to [/etc/grid-security/grid-mapfile](../../security/lcmaps-voms-authentication.md#mapping-users)
+1.  On the XRootD host, add your DN to [/etc/grid-security/grid-mapfile](#mapping-subject-dns)
 
 1.  Add a line to the [authorization database](#authorization-database) to ensure the mapped user can write to
     `<DESTINATION PATH>`
