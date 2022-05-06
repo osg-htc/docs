@@ -15,7 +15,6 @@ intended for public use:
 | The OSG Yum repositories...                    | Contain RPMs that...                                                                                                                 |
 |------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | `osg`, `osg-upcoming`                          | are considered production-ready (default).                                                                                           |
-| `osg-rolling`, `osg-upcoming-rolling`          | are considered production-ready but are released at faster pace than the `osg` repository (see note).                                |
 | `osg-testing`, `osg-upcoming-testing`          | have passed developer or integration testing but not acceptance testing                                                              |
 | `osg-development`, `osg-upcoming-development`  | have not passed developer, integration or acceptance testing. Do not use without instruction from the OSG Software and Release Team. |
 | `osg-contrib`                                  | have been contributed from outside of the OSG Software and Release Team. See [this section](#contrib-software) for details.          |
@@ -26,11 +25,7 @@ intended for public use:
     See the [upcoming software section](#upcoming-software) for details.
 
 !!! note
-    In the 3.5 series (and earlier), packages are added to the `osg` and `osg-upcoming` repositories
-    during discrete, numbered releases (e.g. 3.5.31);
-    packages are added to the `osg-rolling` and `osg-upcoming-rolling` repositories as soon as they are considered production-ready.<br>
-    In the 3.6 series, there are no `osg-rolling` or `osg-upcoming-rolling` repositories,
-    and packages are added to the `osg` and `osg-upcoming` repositories as soon as they are considered production ready.
+    In the 3.6 series, packages are added to the `osg` and `osg-upcoming` repositories as soon as they are considered production ready.
 
 OSG's RPM packages also rely on external packages provided by supported OSes and EPEL.
 You must have the following repositories available and enabled:
