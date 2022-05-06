@@ -75,7 +75,7 @@ We recommend one of the following solutions:
 - **(Recommended)** Use batch-system capabilities to create directories in the job scratch directory and bind mount
   them for the job so that the batch system performs the clean up.
   For example, HTCondor has this ability through
-  [MOUNT\_UNDER\_SCRATCH](http://research.cs.wisc.edu/htcondor/manual/v8.6/3_5Configuration_Macros.html#24738):
+  [MOUNT\_UNDER\_SCRATCH](https://htcondor.readthedocs.io/en/lts/admin-manual/configuration-macros.html#MOUNT_UNDER_SCRATCH):
 
         MOUNT_UNDER_SCRATCH = $(MOUNT_UNDER_SCRATCH), <PATH TO OSG_WN_TMP>
 
