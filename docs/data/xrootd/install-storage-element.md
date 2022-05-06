@@ -276,7 +276,6 @@ Modify `/etc/fstab` by adding the following entries:
 
 
 Replace `/mnt/xrootd` with the path that you would like to access with. 
-This should also match the GridFTP settings for the `XROOTD_VMP` local path. 
 Create `/mnt/xrootd` directory. Make sure the xrootd user exists on the system. Once you are finished, you can mount it:
 
     :::file
@@ -336,58 +335,6 @@ FRMD_INSTANCES="default"
 root@host # service frm_xfrd start
 root@host # service frm_purged start
 ```
-
-(Optional) Installing a GridFTP Server
---------------------------------------
-
-The Globus GridFTP server can be installed alongside an XRootD storage element to provide GridFTP-based access to the
-storage.
-
-!!! note "See Also"
-    OSG has extensive documentation on setting up a GridFTP server; this section is an
-    abbreviated version documenting the special steps needed for XRootD integration.
-    You may also find the following useful:
-
-    -   [Basic GridFTP Install](../gridftp.md).  Additionally covers service planning topics.
-    -   [Load-balanced GridFTP Install](../load-balanced-gridftp.md).  Covers the creation of
-        a load-balanced GridFTP service using multiple servers.
-
-Prior to following this installation guide, verify the host certificates and networking is configured correctly as in
-the [basic GridFTP install](../gridftp.md).
-
-### Installation
-
-GridFTP support for XRootD-based storage is provided by the `osg-gridftp-xrootd` meta-package:
-
-``` console
-root@host # yum install osg-gridftp-xrootd
-```
-
-### Configuration
-
-For information on how to configure authentication for your GridFTP installation, please refer to the
-[configuring authentication section of the GridFTP guide](../gridftp.md#configuring-authentication).
-
-Edit `/etc/sysconfig/globus-gridftp-server` to set `XROOTD_VMP` to use your XRootD redirector.
-
-    :::bash
-    export XROOTD_VMP="redirector:1094:/local_path=/remote_path"
-
-!!! warning
-    The syntax of `XROOTD_VMP` is tricky; make sure to use the following guidance:
-
-    - **Redirector**: The hostname and domain of the local XRootD redirector server.
-    - **local_path**: The full local path exported by the GridFTP server. For example `/mystorage/export/data/store`
-    - **remote_path**: The XRootD path that will be mounted at **local_path**.
-
-When `xrootd-dsi` is enabled, GridFTP configuration changes should go into `/etc/xrootd-dsi/gridftp-xrootd.conf`, not
-`/etc/gridftp.conf`.  
-Sites should review any customizations made in the latter and copy them as necessary.
-
-You can use the FUSE mount in order to test POSIX access to xrootd in the GridFTP server.
-You should be able to run Unix commands such as `ls /mnt/xrootd` and see the contents of the XRootD server.
-
-For log / config file locations and system services to run, see the [basic GridFTP install](../gridftp.md).
 
 Using XRootD
 ------------

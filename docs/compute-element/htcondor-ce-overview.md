@@ -9,9 +9,8 @@ Before continuing with the overview, make sure that you are familiar with the fo
 -   An OSG site plan
     -   What is a batch system and which one will you use ([HTCondor](http://htcondor.org/), PBS, LSF, SGE, or
         [SLURM](https://slurm.schedmd.com/))?
-    -   Security in the OSG via [GSI](https://gridcf.org/gct-docs/latest/gsic/index.html) (i.e.,
-        [Certificate authorities](https://en.wikipedia.org/wiki/Certificate_authority), user and host
-        [certificates](https://en.wikipedia.org/wiki/Public_key_certificate), proxies)
+    -   Security in the OSG via [host certificates](../security/host-certs/overview.md) to authenticate servers and
+        [bearer tokens](../security/tokens/overview.md) to authenticate clients
 -   Pilot jobs, frontends, and factories (i.e., [GlideinWMS](http://glideinwms.fnal.gov/doc.prd/index.html),
     AutoPyFactory)
 
@@ -36,7 +35,7 @@ What is HTCondor-CE?
 --------------------
 
 HTCondor-CE is a special configuration of the HTCondor software designed to be a job gateway solution for the OSG.
-It is configured to use the [JobRouter daemon](http://research.cs.wisc.edu/htcondor/manual/v8.6/5_4HTCondor_Job.html) to
+It is configured to use the [JobRouter daemon](https://htcondor.readthedocs.io/en/v9_0/grid-computing/job-router.html) to
 delegate jobs by transforming and submitting them to the site’s batch system.
 
 Benefits of running the HTCondor-CE:
@@ -118,8 +117,8 @@ How the CE is Customized
 Aside from the [basic configuration](install-htcondor-ce.md#configuring-htcondor-ce) required in the CE
 installation, there are two main ways to customize your CE (if you decide any customization is required at all):
 
--   **Deciding which VOs are allowed to run at your site:** The recommended method of authorizing VOs at your site is
-    based on the [LCMAPS framework](../security/lcmaps-voms-authentication.md)
+-   **Deciding which collaborations are allowed to run at your site:** collaborations will submit resource allocation
+    requests to your CE using bearer tokens, and you can configure which collaboration's tokens you are willing to accept.
 -   **How to filter and transform the grid jobs to be run on your batch system:** Filtering and transforming grid jobs
     (i.e., setting site-specific attributes or resource limits), requires configuration of your site’s job routes.
     For examples of common job routes, consult the [JobRouter recipes](job-router-recipes.md) page.
@@ -132,17 +131,14 @@ installation, there are two main ways to customize your CE (if you decide any cu
 How Security Works
 ------------------
 
-In the OSG, security depends on a PKI infrastructure involving Certificate Authorities (CAs) where CAs sign and issue
-certificates.
-When these clients and hosts wish to communicate with each other, the identities of each party is confirmed by
-cross-checking their certificates with the signing CA and establishing trust.
+In the OSG, communication is secured between various parties using a combination of PKI infrastructure involving
+Certificate Authorities (CAs) and bearer tokens.
+Services such as a Compute Entrypoint, present [host certificates](../security/host-certs/overview.md) to prove their
+identity to clients, much like your browser verifies websites that you may visit.
 
-In its default configuration, HTCondor-CE uses GSI-based authentication and authorization to verify the certificate
-chain, which will work with [LCMAPS VOMS authentication](../security/lcmaps-voms-authentication.md).
-Additionally, it can be reconfigured to provide alternate authentication mechanisms such as Kerberos, SSL, shared
-secret, or even IP-based authentication.
-More information about authorization methods can be found
-[here](http://research.cs.wisc.edu/htcondor/manual/v8.6/3_8Security.html#SECTION00483000000000000000).
+And to use these services, clients present [bearer tokens](../security/tokens/overview.md) declaring their association
+with a given collaboration and what permissions the collaboration has given the client.
+In turn, the service may be configured to authorize the client based on their collaboration.
 
 Next steps
 ----------

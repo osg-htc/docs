@@ -5,7 +5,6 @@ Host Certificates
 
 !!! note
     This document describes how to get **host** certificates.
-    For instructions on how to get **user** certificates, see the [User Certificates document](../user-certs.md).
 
 Host certificates are [X.509 certificates](https://en.wikipedia.org/wiki/X.509) that are used to securely identify
 servers and to establish encrypted connections between services and clients.

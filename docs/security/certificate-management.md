@@ -13,7 +13,7 @@ reference guide for several of these tools:
 !!! note
     This is a reference document and not introduction on how to install CA certificates or request
     host / user certificates.  Most users will want the [CA overview](../common/ca.md),
-    [host certificate overview](host-certs.md), or [user certificate overview](user-certs.md) documents.
+    [host certificate overview](host-certs.md).
 
 
 OSG PKI Command Line Clients
