@@ -121,15 +121,20 @@ The repositories to enable, as well as the instructions to enable them, are OS-d
 
 -   Ensure that the `extras` repo in `/etc/yum.repos.d/CentOS-Base.repo` is enabled.
 
-#### CentOS 8.0 to 8.2
+#### CentOS Stream 8
 
--   Ensure that the `extras` repo in `/etc/yum.repos.d/CentOS-Extras.repo` is enabled.
--   Ensure that the `PowerTools` repo in `/etc/yum.repos.d/CentOS-PowerTools.repo` is enabled.
+-   Ensure that the `extras` repo in `/etc/yum.repos.d/CentOS-Stream-Extras.repo` is enabled.
+-   Ensure that the `powertools` repo in `/etc/yum.repos.d/CentOS-Stream-PowerTools.repo` is enabled.
 
-#### CentOS 8.3 and newer
+#### Rocky Linux 8
 
--   Ensure that the `extras` repo in `/etc/yum.repos.d/CentOS-Linux-Extras.repo` is enabled.
--   Ensure that the `powertools` repo in `/etc/yum.repos.d/CentOS-Linux-PowerTools.repo` is enabled.
+-   Ensure that the `extras` repo in `/etc/yum.repos.d/Rocky-Extras.repo` is enabled.
+-   Ensure that the `powertools` repo in `/etc/yum.repos.d/Rocky-PowerTools.repo` is enabled.
+
+#### AlmaLinux 8
+
+-   Ensure that the `extras` repo in `/etc/yum.repos.d/almalinux.repo` is enabled.
+-   Ensure that the `powertools` repo in `/etc/yum.repos.d/almalinux-powertools.repo` is enabled.
 
 #### RHEL 7
 
