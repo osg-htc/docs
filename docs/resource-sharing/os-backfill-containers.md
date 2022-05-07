@@ -80,7 +80,7 @@ docker run -it --rm --user osg  \
        -e CVMFSEXEC_REPOS="                     \
             oasis.opensciencegrid.org           \
             singularity.opensciencegrid.org"    \
-       opensciencegrid/osgvo-docker-pilot3.6-release
+       opensciencegrid/osgvo-docker-pilot:3.6-release
 ```
 
 Replace `/path/to/token` with the location you saved the token obtained from the OSPool Token Registry.
@@ -159,7 +159,7 @@ docker run -it --rm --user osg      \
         -e GLIDEIN_ResourceName="..."   \
         -e GLIDEIN_Start_Extra="True"   \
         -e OSG_SQUID_LOCATION="..."     \
-        opensciencegrid/osgvo-docker-pilot3.6-release
+        opensciencegrid/osgvo-docker-pilot:3.6-release
 ```
 
 Fill in the values for `/path/to/token`, `/worker-temp-dir`, `GLIDEIN_Site`, `GLIDEIN_ResourceName`, and `OSG_SQUID_LOCATION` [as above](#running-the-container-with-docker).
