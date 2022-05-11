@@ -41,6 +41,23 @@ The following issues are known to currently affect packages distributed in OSG 3
 Latest News
 -----------
 
+### **May 11, 2022:** OSG Worker Node Client and Tarballs
+-   OSG worker node client 3.6-5
+    -   Add in missing `stashcp` and `voms-client-cpp` packages
+
+!!! warning
+    The current [OASIS tarball](/worker-node/install-wn-oasis/) link now points to the OSG 3.6 tarball.
+
+    Packages no longer available in the OSG worker node tarball include:
+
+    -   fts-client (was present in EL7 only)
+    -   MyProxy
+    -   GridFTP clients (e.g. globus-url-copy)
+    -   UberFTP
+    -   SRM and GridFTP plugins for GFAL2
+    -   GSISSH client
+
+
 ### **May 5, 2022:** HTCondor 9.0.12, XCache 3.0.1, gratia-probe 2.5.2
 -   [HTCondor 9.0.12](https://htcondor.readthedocs.io/en/v9_0/version-history/stable-release-series-90.html#version-9-0-12): Bug fix release
 -   XCache 3.0.1
