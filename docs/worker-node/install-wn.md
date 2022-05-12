@@ -83,19 +83,15 @@ Please see the documentation on using [Yum and RPM](../release/yum-basics.md), a
 
 ### Worker node contents
 
-The worker node may be updated from time to time. As of OSG 3.3.21 in February 2017, the OSG worker node client contains:
+The worker node may be updated from time to time. As of OSG 3.6 in May 2022, the OSG worker node client contains:
 
--   OSG Certificates
 -   curl
 -   Fetch CRL
--   FTS client
 -   gfal2
--   globus-url-copy (GridFTP client)
--   globus-xio-udt-driver
 -   ldapsearch
--   MyProxy
+-   OSG Certificates
 -   osg-system-profiler
--   UberFTP
+-   stashcp
 -   vo-client (includes /etc/vomses file)
 -   VOMS client
 -   wget
