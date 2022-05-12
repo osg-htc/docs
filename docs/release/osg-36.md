@@ -46,7 +46,7 @@ Latest News
     -   Add in missing `stashcp` and `voms-client-cpp` packages
 
 !!! warning
-    The current [OASIS tarball](/worker-node/install-wn-oasis/) link now points to the OSG 3.6 tarball.
+    The current [OASIS tarball](../worker-node/install-wn-oasis.md) link now points to the OSG 3.6 tarball.
 
     Packages no longer available in the OSG worker node tarball include:
 
