@@ -1,6 +1,6 @@
 !!! failure "OSG 3.5 end-of-life"
     The OSG 3.5 end-of-life date was May 1, 2022 per our
-    [release policy](https://opensciencegrid.org/technology/policy/release-series/).
+    [release policy](https://osg-htc.org/technology/policy/release-series/).
     We recommend
     [updating to OSG 3.6](../updating-to-osg-36.md)
     at your earliest convenience.
@@ -28,7 +28,7 @@ Summary of Changes
 
 This release contains:
 
--   Initial release of the [osg-token-renewer](https://opensciencegrid.org/docs/other/osg-token-renewer/): a service to manage automatic renewal of bearer tokens from OIDC providers (e.g., CILogon, IAM), intended for use by VO managers
+-   Initial release of the [osg-token-renewer](https://osg-htc.org/docs/other/osg-token-renewer/): a service to manage automatic renewal of bearer tokens from OIDC providers (e.g., CILogon, IAM), intended for use by VO managers
 -   Upcoming
     -   [blahp 2.1.3](https://github.com/htcondor/BLAH/releases/tag/v2.1.3): Bug fix release
         -   Include the more efficient LSF status script

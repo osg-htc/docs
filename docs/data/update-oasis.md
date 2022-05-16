@@ -23,8 +23,8 @@ Requirements
 
 To begin the process to distribute software on OASIS using the service, you must:
 
--   Register as an [OSG contact](https://opensciencegrid.org/technology/policy/comanage-instructions-user/) and
-    [upload your SSH Key](https://opensciencegrid.org/technology/policy/comanage-instructions-user/#oasis-managers-adding-an-ssh-key).
+-   Register as an [OSG contact](https://osg-htc.org/technology/policy/comanage-instructions-user/) and
+    [upload your SSH Key](https://osg-htc.org/technology/policy/comanage-instructions-user/#oasis-managers-adding-an-ssh-key).
 -   Submit a request to <help@opensciencegrid.org> to become an OASIS manager with the following:
     -   The names of the [VO(s)](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations) whose
         software that you would like to manage with the shared OASIS login host
@@ -44,7 +44,7 @@ user@host $ ssh -i <PATH TO SSH KEY> ouser.<VO>@oasis-login.opensciencegrid.org
 
 Change `<VO>` for the name of the Virtual Organization you are trying to access and `<PATH TO SSH KEY>` with the path to
 the private part of the SSH key whose public part you
-[registered with the OSG](https://opensciencegrid.org/technology/policy/comanage-instructions-user/#oasis-managers-adding-an-ssh-key).
+[registered with the OSG](https://osg-htc.org/technology/policy/comanage-instructions-user/#oasis-managers-adding-an-ssh-key).
 
 Instead of putting `-i <PATH TO SSH KEY>` or `ouser.<VO>@` on the command line, you can put it in your `~/.ssh/config`:
 

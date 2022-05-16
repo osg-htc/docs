@@ -1,6 +1,6 @@
 !!! failure "OSG 3.5 end-of-life"
     The OSG 3.5 end-of-life date was May 1, 2022 per our
-    [release policy](https://opensciencegrid.org/technology/policy/release-series/).
+    [release policy](https://osg-htc.org/technology/policy/release-series/).
     We recommend
     [updating to OSG 3.6](../updating-to-osg-36.md)
     at your earliest convenience.
@@ -16,7 +16,7 @@ Summary of Changes
 
 This release contains:
 
--   [Frontier-Squid 4.9-2.1](http://frontier.cern.ch/dist/rpms/frontier-squidRELEASE_NOTES): [Fixed security vulnerabilities](https://opensciencegrid.org/security/vulns/OSG-SEC-2019-11-11-Vulnerability-in-Squid-UPDATE/)
+-   [Frontier-Squid 4.9-2.1](http://frontier.cern.ch/dist/rpms/frontier-squidRELEASE_NOTES): [Fixed security vulnerabilities](https://osg-htc.org/security/vulns/OSG-SEC-2019-11-11-Vulnerability-in-Squid-UPDATE/)
     -   Heap Overflow issue in URN processing
     -   Multiple issues in URI processing
 -   [XRootD 4.11.0](https://github.com/xrootd/xrootd/blob/v4.11.0/docs/ReleaseNotes.txt): New feature release

@@ -13,7 +13,7 @@ Updating to OSG 3.6
 
 [OSG 3.6](release_series.md#series-overviews) (the *new series*) is a major overhaul of the OSG software stack compared
 to OSG 3.5 (the *old series*) with changes to core protocols used for authentication and data transfer.
-See [this page](https://opensciencegrid.org/technology/policy/gridftp-gsi-migration/) for more details regarding this
+See [this page](https://osg-htc.org/technology/policy/gridftp-gsi-migration/) for more details regarding this
 transition.
 
 Depending on the [collaboration(s) that you support](../security/tokens/overview.md#collaboration-support),
@@ -30,7 +30,7 @@ See the list of services below for any special considerations for the OSG 3.6 up
         collaborations transition to bearer tokens.
 
         !!! warning "OSG 3.5 end-of-life"
-            OSG 3.5 support is scheduled to end on [May 1, 2022](https://opensciencegrid.org/technology/policy/release-series/#life-cycle-dates).
+            OSG 3.5 support is scheduled to end on [May 1, 2022](https://osg-htc.org/technology/policy/release-series/#life-cycle-dates).
             If your collaboration does not yet support token-based pilot job submission, please contact them directly
             for their timeline.
 
@@ -362,7 +362,7 @@ Replacing Your GridFTP Service
     Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
     If you want to use multiuser, ensure you are getting `xrootd-voms` from the OSG repos.
 
-As part of the [GridFTP and GSI migration](https://opensciencegrid.org/technology/policy/gridftp-gsi-migration/),
+As part of the [GridFTP and GSI migration](https://osg-htc.org/technology/policy/gridftp-gsi-migration/),
 GridFTP is no longer available in the OSG 3.6 repositories.
 If you need to continue to provide remote access to local storage at your site,
 follow the instructions to install the OSG's configuration of [XRootD Standalone](../data/xrootd/install-standalone.md).

@@ -1,6 +1,6 @@
 site_name: OSG Site Documentation
-site_url: https://opensciencegrid.org/docs/
-repo_url: https://github.com/opensciencegrid/docs/
+site_url: https://osg-htc.org/docs/
+repo_url: https://github.com/osg-htc/docs/
 extra:
   analytics:
     provider: google

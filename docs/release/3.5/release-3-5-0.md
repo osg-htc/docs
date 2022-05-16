@@ -1,6 +1,6 @@
 !!! failure "OSG 3.5 end-of-life"
     The OSG 3.5 end-of-life date was May 1, 2022 per our
-    [release policy](https://opensciencegrid.org/technology/policy/release-series/).
+    [release policy](https://osg-htc.org/technology/policy/release-series/).
     We recommend
     [updating to OSG 3.6](../updating-to-osg-36.md)
     at your earliest convenience.
@@ -19,7 +19,7 @@ This initial release of the OSG 3.5 release series is based on the packages avai
 Additionally, the contents of the [upcoming repository](../release_series.md) have been emptied
 of packages related to OSG 3.4 and replaced with packages for OSG 3.5.
 Other notable changes in this release series include dropping support for Enterprise Linux 6 and
-[CREAM CEs](https://opensciencegrid.org/technology/policy/cream-support/).
+[CREAM CEs](https://osg-htc.org/technology/policy/cream-support/).
 
 To update to the OSG 3.5 release series, please consult the page on
 [updating between release series](../updating-to-osg-35.md).

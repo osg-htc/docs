@@ -84,7 +84,7 @@ the resources with `OSPool`. An example of a registration is
 
 ### Register with COManage 
 The adminstrative contact from the the topology entry needs to register with COManage. 
-Instructions can be found [here](https://opensciencegrid.org/technology/policy/comanage-instructions-user/)
+Instructions can be found [here](https://osg-htc.org/technology/policy/comanage-instructions-user/)
 
 Next is to retrive a token so that the new submit host can authenticate with the Open
 Science Pool manager. Please use your COManage registered and approved identity to

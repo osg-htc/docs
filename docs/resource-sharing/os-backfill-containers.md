@@ -23,7 +23,7 @@ Before Starting
 
 In order to configure the container, you will need:
 
-1. A [registered administrative contact](https://opensciencegrid.org/technology/policy/comanage-instructions-user/)
+1. A [registered administrative contact](https://osg-htc.org/technology/policy/comanage-instructions-user/)
 1. A [registered resource](../common/registration.md) in OSG Topology;
    resource registration allows OSG to do proper usage accounting and maintain contacts in case of security incidents
    and other issues.
@@ -107,7 +107,7 @@ but the container will need fewer privileges.
 !!! info "cvmfsexec System Requirements"
     -   On EL7, you must have kernel version >= 3.10.0-1127 (run `uname -vr` to check), and user namespaces enabled.
         See step 1 in the
-        [Singularity Install document](https://opensciencegrid.org/docs/worker-node/install-singularity/#enabling-unprivileged-singularity)
+        [Singularity Install document](https://osg-htc.org/docs/worker-node/install-singularity/#enabling-unprivileged-singularity)
         for details.
 
     -   On EL8, you must have kernel version >= 4.18 (run `uname -vr` to check).

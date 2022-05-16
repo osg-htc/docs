@@ -40,7 +40,7 @@ Since the start of the RPM-based OSG software stack, we have offered the followi
     software stack:
     bearer tokens, such as [SciTokens](https://scitokens.org/) or WLCG tokens, are used for authentication instead of
     GSI proxies and HTTP is used for data transfer instead of GridFTP.
-    See the [OSG GridFTP and GSI migration plan](https://opensciencegrid.org/technology/policy/gridftp-gsi-migration/)
+    See the [OSG GridFTP and GSI migration plan](https://osg-htc.org/technology/policy/gridftp-gsi-migration/)
     for more details.
     To support these new protocols, OSG 3.6 includes HTCondor 8.9, HTCondor-CE 5, and will include XRootD 5.1.
 
