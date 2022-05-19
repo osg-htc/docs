@@ -1,6 +1,6 @@
 !!! failure "OSG 3.5 end-of-life"
     The OSG 3.5 end-of-life date was May 1, 2022 per our
-    [release policy](https://opensciencegrid.org/technology/policy/release-series/).
+    [release policy](https://osg-htc.org/technology/policy/release-series/).
     We recommend
     [updating to OSG 3.6](../updating-to-osg-36.md)
     at your earliest convenience.

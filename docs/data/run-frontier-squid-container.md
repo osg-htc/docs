@@ -139,7 +139,7 @@ X-Cache: HIT from 797a56e426cf
 
 ## Registering Frontier Squid
 
-See the [Registering Frontier Squid](https://opensciencegrid.org/docs/data/frontier-squid/#registering-frontier-squid)
+See the [Registering Frontier Squid](https://osg-htc.org/docs/data/frontier-squid/#registering-frontier-squid)
 instructions to register your Frontier Squid host.
 
 

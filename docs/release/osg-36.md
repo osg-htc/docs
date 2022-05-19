@@ -292,7 +292,7 @@ This release contains updated CA Certificates based on [IGTF 1.115](http://dist.
 
 ### **October 13, 2021:** Initial osg-token-renewer release
 
--   Initial release of the [osg-token-renewer](https://opensciencegrid.org/docs/other/osg-token-renewer/): a service to manage automatic renewal of bearer tokens from OIDC providers (e.g., CILogon, IAM), intended for use by VO managers
+-   Initial release of the [osg-token-renewer](https://osg-htc.org/docs/other/osg-token-renewer/): a service to manage automatic renewal of bearer tokens from OIDC providers (e.g., CILogon, IAM), intended for use by VO managers
 -   [blahp 2.1.3](https://github.com/htcondor/BLAH/releases/tag/v2.1.3): Bug fix release
     -   Include the more efficient LSF status script
     -   Fix status caching on EL7 for PBS, Slurm, and LSF
@@ -522,7 +522,7 @@ Additionally, the following packages that were already available in OSG 3.6 for 
 
 !!! warning "OSG 3.5 end-of-life"
     As a result of this initial OSG 3.6 release, the end-of-life dates have been set for OSG 3.5 per our
-    [policy](https://opensciencegrid.org/technology/policy/release-series/):
+    [policy](https://osg-htc.org/technology/policy/release-series/):
     regular support will end in **August 2021** and critical bug/security support will end in **May 2022**.
 
 
@@ -545,10 +545,10 @@ Here is a list of the differences in this initial release:
     - Reorganized some configuration (see [update instructions](updating-to-osg-36.md#osg-configure) for more details)
 
 In addition, we have updated our
-[Software Release Policy](https://opensciencegrid.org/technology/policy/software-release/) to follow a rolling
+[Software Release Policy](https://osg-htc.org/technology/policy/software-release/) to follow a rolling
 release model.
 
-Finally, our [Docker image releases](https://opensciencegrid.org/technology/policy/container-release/) will more
+Finally, our [Docker image releases](https://osg-htc.org/technology/policy/container-release/) will more
 closely track our OSG 3.6 repositories.
 
 Announcements

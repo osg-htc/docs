@@ -1,6 +1,6 @@
 !!! failure "OSG 3.5 end-of-life"
     The OSG 3.5 end-of-life date was May 1, 2022 per our
-    [release policy](https://opensciencegrid.org/technology/policy/release-series/).
+    [release policy](https://osg-htc.org/technology/policy/release-series/).
     We recommend
     [updating to OSG 3.6](../updating-to-osg-36.md)
     at your earliest convenience.
@@ -43,7 +43,7 @@ This release contains:
     These updates affect submit and execute hosts. Please update your submit host first and then your execute nodes.
     Don't forget to update your HTCondor CE.
     If you are upgrading from HTCondor 8.6.x, please note that configuration changes may be necessary when
-    [updating to HTCondor 8.8.8](https://opensciencegrid.org/docs/release/release_series/#updating-to-htcondor-88x)
+    [updating to HTCondor 8.8.8](https://osg-htc.org/docs/release/release_series/#updating-to-htcondor-88x)
 
 These
 [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.5.14%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC)
