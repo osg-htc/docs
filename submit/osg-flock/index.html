@@ -2072,25 +2072,9 @@ issuing <code>yum upgrade</code>. If you made local config changes, please verif
 with GSI, will have to be upgraded to OSG 3.6 and switched over to token authentication as
 described in this document.</p>
 <h2 id="configuring-reporting-via-gratia">Configuring Reporting via Gratia<a class="headerlink" href="#configuring-reporting-via-gratia" title="Permanent link">&para;</a></h2>
-<p>Reporting to the OSG accounting system is done using the <em>Gratia</em> service, which consists of multiple <em>probes</em>.
-HTCondor uses the "condor" probe, which is configured in <code>/etc/gratia/condor-ap/ProbeConfig</code>;
-we provide a recommended configuration for flocking.</p>
-<ol>
-<li>
-<p>Fill in the value for <code>SiteName</code> with the Resource Name you registered in Topology (see
-   <a href="#register-your-access-point-in-osg-topology">instructions above</a>).
-   For example:</p>
-<div class="codehilite"><pre><span></span><code>SiteName=&quot;OSG_US_EXAMPLE_SUBMIT&quot;
-</code></pre></div>
-
-</li>
-<li>
-<p>Enable the Gratia Probe:</p>
-<div class="codehilite"><pre><span></span><code>EnableProbe=1
-</code></pre></div>
-
-</li>
-</ol>
+<p>Reporting to the OSG accounting system is done using the <em>Gratia</em> service, which consists of <em>probes</em>.
+HTCondor uses the "condor-ap" probe, which is configured in <code>/etc/gratia/condor-ap/ProbeConfig</code>:
+see <a href="../../other/troubleshooting-gratia/#access-points_1">this section</a> for more details.</p>
 <h2 id="configuring-authentication">Configuring Authentication<a class="headerlink" href="#configuring-authentication" title="Permanent link">&para;</a></h2>
 <p>Create a file named <code>/etc/condor/tokens.d/ospool.token</code> with the IDTOKEN you received earlier.
 Ensure that there aren't any line breaks in this file (i.e., the entire token should only take up one line).</p>
