@@ -41,6 +41,10 @@ The following issues are known to currently affect packages distributed in OSG 3
 Latest News
 -----------
 
+### **May 24, 2022:** VO Package v121
+-   [VO Package v121](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-121-1)
+    -   Add new VO certificates for CLAS12 and EIC
+
 ### **May 11, 2022:** OSG Worker Node Client and Tarballs
 -   OSG worker node client 3.6-5
     -   Add in missing `stashcp` and `voms-client-cpp` packages
