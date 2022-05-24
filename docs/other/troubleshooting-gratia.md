@@ -69,7 +69,7 @@ type of host that you are troubleshooting:
 If they are not running, consult the relevant documentation to enable and start the appropriate service:
 
 -   [Access Point](../submit/osg-flock.md#managing-services)
--   [Compute Entrypoint](../compute-element)
+-   [Compute Entrypoint](https://htcondor.com/htcondor-ce/v5/operation/#managing-htcondor-ce-services)
 
 ### Identifying failures ###
 
@@ -229,7 +229,7 @@ PER_JOB_HISTORY_DIR = /var/lib/condor-ce/gratia/data
 Verify that your Gratia configuration is correct in `/etc/gratia/condor-ap/ProbeConfig` based on the table below:
 
 1.  Fill in the value for `SiteName` with the Resource Name you registered in Topology (see
-    [this section](../submit/osg-flock.md#register-your-access-point-in-topology) for details).
+    [this section](../submit/osg-flock.md#register-your-access-point-in-osg-topology) for details).
     For example:
    
         :::xml
