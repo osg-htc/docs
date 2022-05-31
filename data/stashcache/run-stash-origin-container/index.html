@@ -1910,8 +1910,8 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
-ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin3.6-release
-ExecStart=/usr/bin/docker run --rm --name %n -p 1094:1094 -p 1095:1095 -v /srv/origin-public:/xcache/namespace --env-file /opt/origin/.env opensciencegrid/stash-origin3.6-release
+ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin:3.6-release
+ExecStart=/usr/bin/docker run --rm --name %n -p 1094:1094 -p 1095:1095 -v /srv/origin-public:/xcache/namespace --env-file /opt/origin/.env opensciencegrid/stash-origin:3.6-release
 
 [Install] 
 WantedBy=multi-user.target
