@@ -25,8 +25,8 @@ Before starting the installation process, consider the following points:
    and you must have the ability to start containers (i.e., belong to the `docker` Unix group).
 1. **Network ports:** The cache listens for incoming HTTP/S connections on port 8000 (by default)
 1. **File Systems:** The cache needs host partitions to store user data.
-   For improved performance and storage, we recommend multiple partitions for handling namespaces (HDD), data (HDDs),
-   and metadata (SSDs).
+   For improved performance and storage, we recommend multiple partitions for handling namespaces (HDD, SSD, or NVMe),
+   data (HDDs), and metadata (SSDs or NVMe).
 
 Configuring the OSDF Cache
 -----------------------
@@ -48,9 +48,9 @@ CACHE_FQDN=<FQDN>
 
 Further behavior of the cache can be configured by setting the following in the environment variable file:
 
-- `XC_SPACE_HIGH_WM`, `XC_SPACE_LOW_WM`: High-water and low-water marks for disk usage;
+- `XC_SPACE_HIGH_WM`, `XC_SPACE_LOW_WM`: High-water and low-water marks for disk usage, as a number between 0.0 and 1.0;
       when usage goes above the high-water mark, the cache will delete files until it hits the low-water mark.
-- `XC_PORT`: TCP port that XCache listens on
+- `XC_PORT`: TCP port that XCache listens on.
 - `XC_RAMSIZE`: Amount of memory to use for storing blocks before writting them to disk. (Use higher for slower disks).
 - `XC_BLOCKSIZE`: Size of the blocks in the cache.
 - `XC_PREFETCH`: Number of blocks to prefetch from a file at once.
@@ -61,7 +61,7 @@ Further behavior of the cache can be configured by setting the following in the 
 Running a Cache
 ---------------
 
-Cache containers  may be run with either multiple mounted host partitions (recommended) or a single host
+Cache containers may be run with either multiple mounted host partitions (recommended) or a single host
 partition.
 
 It is recommended to use a container orchestration service such as [docker-compose](https://docs.docker.com/compose/)
@@ -73,7 +73,7 @@ production-appropriate method using systemd.
 
 For improved performance and storage,
 especially if your cache is serving over 10 TB of data,
-we recommend multiple partitions for handling namespaces (HDD, SSD, or NVME), data (HDDs), and metadata (SSDs or NVME).
+we recommend multiple partitions for handling namespaces (HDD, SSD, or NVMe), data (HDDs), and metadata (SSDs or NVMe).
 
 !!! note
     Under this configuration the `<NAMESPACE PARTITION>` is not used to store the files.
@@ -93,8 +93,8 @@ user@host $ docker run --rm --publish <HOST PORT>:8000 \
 ```
 
 !!! warning
-    For over 100 TB of assigned space we highly encourage to use this setup and mount `<NAMESPACE PARTITION>` in
-    solid state disks or NVME.
+    For over 10 TB of assigned space we highly encourage to use this setup and mount `<NAMESPACE PARTITION>` in
+    solid state disks or NVMe.
 
 ### Single host partition ###
 
