@@ -1,3 +1,4 @@
+DateReviewed: 2022-06-10
 title: Worker Node Overview
 
 Worker Node Overview
@@ -26,7 +27,10 @@ Common Software Available on Worker Nodes
 
 The OSG worker node environment contains the following software:
 
--   The supported set of CA certificates (located in `$X509_CERT_DIR` after the environment is set up)
+-   Data and related tooling:
+    -   The supported set of CA certificates (located in `$X509_CERT_DIR` after the environment is set up)
+    -   VO authentication: `vo-client`
+    -   Update Certificate Revocation Lists: `fetch-crl`
 -   Proxy management tools:
     -   Create proxies: `voms-proxy-init`
     -   Show proxy info: `voms-proxy-info`
@@ -36,6 +40,9 @@ The OSG worker node environment contains the following software:
         -   `wget` and `curl`: standard tools for downloading files with HTTP and FTP
     -   Transfer clients
         -   `GFAL`-based client (`gfal-copy` and others).  GFAL supports SRM, XRootD, and HTTP protocols.
+        -   The `stashcp` data federation client
+        -   The XRootD command line client, `xrdcp` 
+-   Troubelshooting tool: `osg-system-profiler`
 
 At some sites, these tools may not be available at the pilot launch.  To setup the environment, do the following:
 

@@ -1,3 +1,4 @@
+DateReviewed: 2022-06-10
 title: Installing the Worker Node Client via Tarball
 
 Installing the Worker Node Client via Tarball
@@ -25,10 +26,10 @@ Download the WN Client
 
 Please pick the `osg-wn-client` tarball that is appropriate for your distribution and architecture. You will find them in <https://repo.opensciencegrid.org/tarball-install/> .
 
-For OSG 3.5:
+For OSG 3.6:
 
--   [Binaries for RHEL7](https://repo.opensciencegrid.org/tarball-install/3.5/osg-wn-client-latest.el7.x86_64.tar.gz)
--   [Binaries for RHEL8](https://repo.opensciencegrid.org/tarball-install/3.5/osg-wn-client-latest.el8.x86_64.tar.gz)
+-   [Binaries for RHEL7](https://repo.opensciencegrid.org/tarball-install/3.6/osg-wn-client-latest.el7.x86_64.tar.gz)
+-   [Binaries for RHEL8](https://repo.opensciencegrid.org/tarball-install/3.6/osg-wn-client-latest.el8.x86_64.tar.gz)
 
 Install the WN Client
 ---------------------
@@ -52,7 +53,7 @@ Example installation (in `/home/user/test-install`, the **`<PATH_TO_CLIENT>/`** 
 ```console
 user@host $ mkdir /home/user/test-install
 user@host $ cd /home/user/test-install
-user@host $ wget https://repo.opensciencegrid.org/tarball-install/3.5/osg-wn-client-latest.el7.x86_64.tar.gz
+user@host $ wget https://repo.opensciencegrid.org/tarball-install/3.6/osg-wn-client-latest.el7.x86_64.tar.gz
 user@host $ tar xzf osg-wn-client-latest.el7.x86_64.tar.gz
 user@host $ cd osg-wn-client
 user@host $ ./osg/osg-post-install
