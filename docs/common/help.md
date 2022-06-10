@@ -10,7 +10,7 @@ Security Incidents
 ------------------
 
 Security incidents can be reported by following the instructions on the
-[Incident Discovery and Reporting](https://opensciencegrid.org/security/IncidentDiscoveryReporting/) page.
+[Incident Discovery and Reporting](https://osg-htc.org/security/IncidentDiscoveryReporting/) page.
 
 Software or Service Support
 ---------------------------

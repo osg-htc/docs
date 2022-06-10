@@ -23,7 +23,7 @@ Before Starting
 
 In order to configure the container, you will need:
 
-1. A [registered administrative contact](https://opensciencegrid.org/technology/policy/comanage-instructions-user/)
+1. A [registered administrative contact](https://osg-htc.org/technology/policy/comanage-instructions-user/)
 1. A [registered resource](../common/registration.md) in OSG Topology;
    resource registration allows OSG to do proper usage accounting and maintain contacts in case of security incidents
    and other issues.
@@ -80,7 +80,7 @@ docker run -it --rm --user osg  \
        -e CVMFSEXEC_REPOS="                     \
             oasis.opensciencegrid.org           \
             singularity.opensciencegrid.org"    \
-       opensciencegrid/osgvo-docker-pilot3.6-release
+       opensciencegrid/osgvo-docker-pilot:3.6-release
 ```
 
 Replace `/path/to/token` with the location you saved the token obtained from the OSPool Token Registry.
@@ -107,7 +107,7 @@ but the container will need fewer privileges.
 !!! info "cvmfsexec System Requirements"
     -   On EL7, you must have kernel version >= 3.10.0-1127 (run `uname -vr` to check), and user namespaces enabled.
         See step 1 in the
-        [Singularity Install document](https://opensciencegrid.org/docs/worker-node/install-singularity/#enabling-unprivileged-singularity)
+        [Singularity Install document](https://osg-htc.org/docs/worker-node/install-singularity/#enabling-unprivileged-singularity)
         for details.
 
     -   On EL8, you must have kernel version >= 4.18 (run `uname -vr` to check).
@@ -159,7 +159,7 @@ docker run -it --rm --user osg      \
         -e GLIDEIN_ResourceName="..."   \
         -e GLIDEIN_Start_Extra="True"   \
         -e OSG_SQUID_LOCATION="..."     \
-        opensciencegrid/osgvo-docker-pilot3.6-release
+        opensciencegrid/osgvo-docker-pilot:3.6-release
 ```
 
 Fill in the values for `/path/to/token`, `/worker-temp-dir`, `GLIDEIN_Site`, `GLIDEIN_ResourceName`, and `OSG_SQUID_LOCATION` [as above](#running-the-container-with-docker).

@@ -437,15 +437,14 @@ Installing the debuginfo package requires three steps.
 
 1.  Enable the installation of debuginfo packages. This only needs to be done once. Edit the yum repo file, usually `/etc/yum.repos.d/osg.repo` to enable the separate debuginfo repository. Near the bottom of the file, you'll see the `osg-debug` repo: 
 
-        [osg-debug]
-
-        name=OSG Software for Enterprise Linux 5 - $basearch - Debug
-        baseurl=http://repo.opensciencegrid.org/osg-release/$basearch/debu
-        failovermethod=priority 
+        [osg-debuginfo]
+        name=OSG Software for Enterprise Linux 7 - $basearch - Debug
+        baseurl=https://repo.opensciencegrid.org/osg/3.6/el7/release/$basearch/debug
         priority=98 
         enabled=1
         gpgcheck=1 
         gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
+               file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-2
 
     Make sure that "enabled" is set to 1.
 

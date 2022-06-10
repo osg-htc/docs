@@ -344,7 +344,7 @@ Virtual Organizations (VOs) are sets of groups or individuals defined by some co
 This can be a scientific experiment, a university campus or a distributed research effort.
 A VO represents all its members and their common needs in a grid environment.
 A VO also includes the group’s computing/storage resources and services.
-For more information about VOs, see [this page](https://opensciencegrid.org/about/organization#virtual-organizations).
+For more information about VOs, see [this page](https://osg-htc.org/about/organization#virtual-organizations).
 
 !!! info
     Before submitting a registration for a new VO, please [contact us](#getting-help) describing your organization's

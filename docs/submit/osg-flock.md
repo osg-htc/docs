@@ -84,7 +84,7 @@ the resources with `OSPool`. An example of a registration is
 
 ### Register with COManage 
 The adminstrative contact from the the topology entry needs to register with COManage. 
-Instructions can be found [here](https://opensciencegrid.org/technology/policy/comanage-instructions-user/)
+Instructions can be found [here](https://osg-htc.org/technology/policy/comanage-instructions-user/)
 
 Next is to retrive a token so that the new submit host can authenticate with the Open
 Science Pool manager. Please use your COManage registered and approved identity to
@@ -125,21 +125,10 @@ described in this document.
 
 Configuring Reporting via Gratia
 --------------------------------
-Reporting to the OSG accounting system is done using the _Gratia_ service, which consists of multiple _probes_.
-HTCondor uses the "condor" probe, which is configured in `/etc/gratia/condor-ap/ProbeConfig`;
-we provide a recommended configuration for flocking.
 
-1. Fill in the value for `SiteName` with the Resource Name you registered in Topology (see
-   [instructions above](#register-your-access-point-in-osg-topology)).
-   For example:
-   
-        :::xml
-        SiteName="OSG_US_EXAMPLE_SUBMIT"
-
-1. Enable the Gratia Probe:
-
-        :::xml
-        EnableProbe=1
+Reporting to the OSG accounting system is done using the _Gratia_ service, which consists of _probes_.
+HTCondor uses the "condor-ap" probe, which is configured in `/etc/gratia/condor-ap/ProbeConfig`:
+see [this section](../other/troubleshooting-gratia.md#access-points_1) for more details.
 
 
 Configuring Authentication

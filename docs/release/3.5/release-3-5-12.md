@@ -1,6 +1,6 @@
 !!! failure "OSG 3.5 end-of-life"
     The OSG 3.5 end-of-life date was May 1, 2022 per our
-    [release policy](https://opensciencegrid.org/technology/policy/release-series/).
+    [release policy](https://osg-htc.org/technology/policy/release-series/).
     We recommend
     [updating to OSG 3.6](../updating-to-osg-36.md)
     at your earliest convenience.
@@ -28,7 +28,7 @@ Summary of Changes
 
 This release contains:
 
--   [XRootD-SciTokens 1.2.0](https://github.com/scitokens/xrootd-scitokens/releases/tag/v1.2.0): Fixes authorization logic error ([Security announcement](https://opensciencegrid.org/security/vulns/OSG-SEC-2020-03-26-Vulnerability-in-xrootd-scitokens-plugin/))
+-   [XRootD-SciTokens 1.2.0](https://github.com/scitokens/xrootd-scitokens/releases/tag/v1.2.0): Fixes authorization logic error ([Security announcement](https://osg-htc.org/security/vulns/OSG-SEC-2020-03-26-Vulnerability-in-xrootd-scitokens-plugin/))
 
 These
 [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.5.12%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC)

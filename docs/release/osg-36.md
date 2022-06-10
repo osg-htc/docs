@@ -41,6 +41,27 @@ The following issues are known to currently affect packages distributed in OSG 3
 Latest News
 -----------
 
+### **May 24, 2022:** VO Package v121
+-   [VO Package v121](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-121-1)
+    -   Add new VO certificates for CLAS12 and EIC
+
+### **May 11, 2022:** OSG Worker Node Client and Tarballs
+-   OSG worker node client 3.6-5
+    -   Add in missing `stashcp` and `voms-client-cpp` packages
+
+!!! warning
+    The current [OASIS tarball](../worker-node/install-wn-oasis.md) link now points to the OSG 3.6 tarball.
+
+    Packages no longer available in the OSG worker node tarball include:
+
+    -   fts-client (was present in EL7 only)
+    -   MyProxy
+    -   GridFTP clients (e.g. globus-url-copy)
+    -   UberFTP
+    -   SRM and GridFTP plugins for GFAL2
+    -   GSISSH client
+
+
 ### **May 5, 2022:** HTCondor 9.0.12, XCache 3.0.1, gratia-probe 2.5.2
 -   [HTCondor 9.0.12](https://htcondor.readthedocs.io/en/v9_0/version-history/stable-release-series-90.html#version-9-0-12): Bug fix release
 -   XCache 3.0.1
@@ -275,7 +296,7 @@ This release contains updated CA Certificates based on [IGTF 1.115](http://dist.
 
 ### **October 13, 2021:** Initial osg-token-renewer release
 
--   Initial release of the [osg-token-renewer](https://opensciencegrid.org/docs/other/osg-token-renewer/): a service to manage automatic renewal of bearer tokens from OIDC providers (e.g., CILogon, IAM), intended for use by VO managers
+-   Initial release of the [osg-token-renewer](https://osg-htc.org/docs/other/osg-token-renewer/): a service to manage automatic renewal of bearer tokens from OIDC providers (e.g., CILogon, IAM), intended for use by VO managers
 -   [blahp 2.1.3](https://github.com/htcondor/BLAH/releases/tag/v2.1.3): Bug fix release
     -   Include the more efficient LSF status script
     -   Fix status caching on EL7 for PBS, Slurm, and LSF
@@ -505,7 +526,7 @@ Additionally, the following packages that were already available in OSG 3.6 for 
 
 !!! warning "OSG 3.5 end-of-life"
     As a result of this initial OSG 3.6 release, the end-of-life dates have been set for OSG 3.5 per our
-    [policy](https://opensciencegrid.org/technology/policy/release-series/):
+    [policy](https://osg-htc.org/technology/policy/release-series/):
     regular support will end in **August 2021** and critical bug/security support will end in **May 2022**.
 
 
@@ -528,10 +549,10 @@ Here is a list of the differences in this initial release:
     - Reorganized some configuration (see [update instructions](updating-to-osg-36.md#osg-configure) for more details)
 
 In addition, we have updated our
-[Software Release Policy](https://opensciencegrid.org/technology/policy/software-release/) to follow a rolling
+[Software Release Policy](https://osg-htc.org/technology/policy/software-release/) to follow a rolling
 release model.
 
-Finally, our [Docker image releases](https://opensciencegrid.org/technology/policy/container-release/) will more
+Finally, our [Docker image releases](https://osg-htc.org/technology/policy/container-release/) will more
 closely track our OSG 3.6 repositories.
 
 Announcements

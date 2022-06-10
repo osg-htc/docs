@@ -51,7 +51,7 @@ To create a new client account named `<ACCOUNT_SHORTNAME>`:
 1. Create a corresponding file named `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.pw`
    with the encryption password to use for this client account.
 1. Consult the
-   [Requesting Tokens](https://opensciencegrid.org/technology/software/requesting-tokens/)
+   [Requesting Tokens](https://osg-htc.org/technology/software/requesting-tokens/)
    document to determine which scopes you will need for this client account.
 1. Run the setup script as follows:
 

@@ -194,7 +194,7 @@ OSG takes multiple precautions to maintain security and prevent unauthorized usa
 -   Jobs running through OSG can be traced back to the user that submitted them
 -   Job submission can quickly be disabled if needed
 -   Our security team is readily contactable in case of an emergency:
-    <https://opensciencegrid.org/security/#reporting-a-security-incident>
+    <https://osg-htc.org/security/#reporting-a-security-incident>
 
 
 How to Get Help

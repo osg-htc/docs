@@ -80,7 +80,7 @@ To run a Frontier Squid container with the defaults:
 user@host $ docker run --rm --name frontier-squid \
              -v <HOST CACHE PARTITION>:/var/cache/squid \
              -v <HOST LOG PARTITION>:/var/log/squid \
-             -p <HOST PORT>:3128 opensciencegrid/frontier-squid3.6-release
+             -p <HOST PORT>:3128 opensciencegrid/frontier-squid:3.6-release
 ```
 
 You may pass configuration variables in `KEY=VALUE` format with either
@@ -108,8 +108,8 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
-ExecStartPre=/usr/bin/docker pull opensciencegrid/frontier-squid3.6-release
-ExecStart=/usr/bin/docker run --rm --name %n --publish 3128:3128 -v /tmp/squid:/var/cache/squid -v /tmp/log:/var/log/squid --env-file /opt/xcache/.env opensciencegrid/frontier-squid3.6-release
+ExecStartPre=/usr/bin/docker pull opensciencegrid/frontier-squid:3.6-release
+ExecStart=/usr/bin/docker run --rm --name %n --publish 3128:3128 -v /tmp/squid:/var/cache/squid -v /tmp/log:/var/log/squid --env-file /opt/xcache/.env opensciencegrid/frontier-squid:3.6-release
 
 
 [Install]
@@ -139,7 +139,7 @@ X-Cache: HIT from 797a56e426cf
 
 ## Registering Frontier Squid
 
-See the [Registering Frontier Squid](https://opensciencegrid.org/docs/data/frontier-squid/#registering-frontier-squid)
+See the [Registering Frontier Squid](https://osg-htc.org/docs/data/frontier-squid/#registering-frontier-squid)
 instructions to register your Frontier Squid host.
 
 

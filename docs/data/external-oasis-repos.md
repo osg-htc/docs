@@ -13,7 +13,7 @@ covers how to install, configure, and host your own CVMFS _repository server_.  
 via OASIS, but will be hosted and operated externally from the OSG project.
 
 OASIS-based distribution and key signing is available to OSG VOs or repositories affiliated with an OSG VO.
-See the [policy page](https://opensciencegrid.org/technology/policy/external-oasis-repos/) for more information
+See the [policy page](https://osg-htc.org/technology/policy/external-oasis-repos/) for more information
 on what repositories OSG is willing to distribute.
 
 Before Starting

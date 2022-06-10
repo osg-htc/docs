@@ -46,7 +46,7 @@ and the administrative and security contacts.
 
 ### Initial registration
 
-To register your cache host, follow the general registration instructions [here](https://opensciencegrid.org/docs/common/registration/#new-resources).
+To register your cache host, follow the general registration instructions [here](https://osg-htc.org/docs/common/registration/#new-resources).
 The service type is `XRootD cache server`.
 
 !!! info
