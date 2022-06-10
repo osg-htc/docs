@@ -27,11 +27,13 @@ Before starting the installation process, consider the following points:
 
 1. **Docker:** For the purpose of this guide, the host must have a running docker service and you must have the ability
 to start containers (i.e., belong to the `docker` Unix group).
-1. **Network ports:** The origin listens for incoming HTTP/S and XRootD connections on ports 1094 and 1095 (by
-default).
+1. **Network ports:** The origin listens for incoming HTTP(S) and XRootD connections on port 1094.
 1. **File Systems:** The origin needs a host partition to store user data.
+1. **Hardware requirements:** We recommend that an origin has at least 1Gbps connectivity and 8GB of RAM.
+1. **Host certificate:** Required for joining the OSDF.
+  See our [documentation](../../security/host-certs.md) for instructions on how to request host certificates.
 1. **Registration:** Before deploying an origin, you must
-   [registered the service](install-origin.md#registering-the-origin) in the OSG Topology
+   [register the service](install-origin.md#registering-the-origin) in the OSG Topology
 
 Configuring the Origin
 ----------------------
@@ -48,6 +50,25 @@ and `<FQDN>` with the public DNS name that should be used to contact your origin
 XC_RESOURCENAME=YOUR_SITE_NAME
 ORIGIN_FQDN=<FQDN>
 ```
+
+### Ensure the xrootd service has a certificate
+
+The service will need a certificate for contacting central OSDF services.
+
+The certificate and key must be inside the container at `/etc/grid-security/xrd/xrd{cert,key}.pem`,
+owned by the `xrootd` user and group (UID/GID 10940).
+
+The easiest solution for this is to use your host certificate and key.
+Volume-mount the certificate to `/etc/grid-security/hostcert.pem` and the key to `/etc/grid-security/hostkey.pem`.
+The files will be copied with the right permissions on container startup.
+
+!!! note
+    You must restart the container whenever you renew your certificate
+    in order for the services to pick up the new certificate.
+    If you automate certificate renewal, you should automate restarts as well.
+    For example, if you are using Certbot for Let's Encrypt, you should write a "deploy hook" as documented
+    [on the Certbot site](https://certbot.eff.org/docs/using.html#renewing-certificates).
+
 
 Populating Origin Data
 ----------------------
@@ -70,8 +91,9 @@ production-appropriate method using systemd.
 
 ```console
 user@host $ docker run --rm --publish 1094:1094 \
-             --publish 1095:1095 \
              --volume <HOST PARTITION>:/xcache/namespace \
+             --volume <HOST CERT>:/etc/grid-security/hostcert.pem \
+             --volume <HOST KEY>:/etc/grid-security/hostkey.pem \
              --env-file=/opt/origin/.env \
              opensciencegrid/stash-origin:3.6-release
 ```
@@ -88,7 +110,9 @@ An example systemd service file for the OSDF.
 This will require creating the environment file in the directory `/opt/origin/.env`.
 
 !!! note
-    This example systemd file assumes `<HOST PARTITION>` is `/srv/origin-public`.
+    This example systemd file assumes `<HOST PARTITION>` is `/srv/origin-public`,
+    and the cert and key to use are in `/etc/ssl/host.crt` and `/etc/ssl/host.key`,
+    respectively.
 
 Create the systemd service file `/etc/systemd/system/docker.stash-origin.service` as follows:
 
@@ -104,9 +128,14 @@ Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
 ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin:3.6-release
-ExecStart=/usr/bin/docker run --rm --name %n -p 1094:1094 -p 1095:1095 -v /srv/origin-public:/xcache/namespace --env-file /opt/origin/.env opensciencegrid/stash-origin:3.6-release
+ExecStart=/usr/bin/docker run --rm --name %n --publish 1094:1094 \
+  --volume /srv/origin-public:/xcache/namespace \
+  --volume /etc/ssl/host.crt:/etc/grid-security/hostcert.pem \
+  --volume /etc/ssl/host.key:/etc/grid-security/hostkey.pem \
+  --env-file /opt/origin/.env \
+  opensciencegrid/stash-origin:3.6-release
 
-[Install] 
+[Install]
 WantedBy=multi-user.target
 ```
 
@@ -118,8 +147,7 @@ root@host $ systemctl start docker.stash-origin
 ```
 
 !!! warning
-    You must [register](install-origin.md#registering-the-origin) the origin before considering it a
-    production service.
+    You must [register](install-origin.md#registering-the-origin) the origin before starting it up.
 
 
 

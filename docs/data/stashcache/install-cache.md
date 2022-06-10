@@ -18,8 +18,7 @@ Before starting the installation process, consider the following requirements:
 * __Operating system:__ Ensure the host has [a supported operating system](../../release/supported_platforms.md)
 * __User IDs:__ If they do not exist already, the installation will create the Linux user IDs `condor` and
   `xrootd`
-* __Host certificate:__ Required for reporting and authenticated caches.
-  Authenticated caching is an optional feature.
+* __Host certificate:__ Required for contacting the central OSDF redirector.
   See our [documentation](../../security/host-certs.md) for instructions on how to request and install host certificates.
 * __Network ports:__ The cache service requires the following ports open:
     * Inbound TCP port 1094 for file access via the XRootD protocol
@@ -35,6 +34,8 @@ As with all OSG software installations, there are some one-time steps to prepare
 * Prepare [the required Yum repositories](../../common/yum.md)
 * Install [CA certificates](../../common/ca.md)
 
+
+<!-- NOTE: Keep the "Registering the Cache" section below in sync with run-stashcache-container.md -->
 
 Registering the Cache
 ---------------------
@@ -109,6 +110,7 @@ Once initial registration is complete, you may start the installation process.
 In the meantime, open a [help ticket](https://support.opensciencegrid.org) with your cache name.
 Mention in your ticket that you would like to "Finalize the cache registration."
 
+<!-- NOTE: Keep the "Registering the Cache" section above in sync with run-stashcache-container.md -->
 
 Installing the Cache
 --------------------

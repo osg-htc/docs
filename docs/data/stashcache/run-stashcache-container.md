@@ -19,14 +19,99 @@ This document outlines how to run a cache in a Docker container.
 Before Starting
 ---------------
 
-Before starting the installation process, consider the following points:
+Before starting the installation process, consider the following requirements:
 
 1. **Docker:** For the purpose of this guide, the host must have a running docker service
    and you must have the ability to start containers (i.e., belong to the `docker` Unix group).
-1. **Network ports:** The cache listens for incoming HTTP/S connections on port 8000 (by default)
+1. **Network ports:** The cache service requires the following ports open:
+     * Inbound TCP port 1094 for unauthenticated file access via the XRootD protocol (optional)
+     * Inbound TCP port 8000 for unauthenticated file access via HTTP(S)
+     * Inbound TCP port 8443 for authenticated file access via HTTPS (optional)
+     * Outbound UDP port 9930 for reporting to `xrd-report.osgstorage.org` and `xrd-mon.osgstorage.org` for monitoring
 1. **File Systems:** The cache needs host partitions to store user data.
    For improved performance and storage, we recommend multiple partitions for handling namespaces (HDD, SSD, or NVMe),
    data (HDDs), and metadata (SSDs or NVMe).
+1. **Host certificate:** Required for contacting the central OSDF redirector.
+  See our [documentation](../../security/host-certs.md) for instructions on how to request host certificates.
+1. **Hardware requirements:** We recommend that a cache has at least 10Gbps connectivity,
+   1 TB of disk space for the cache directory, and 12GB of RAM.
+
+<!-- NOTE: Keep the "Registering the Cache" section below in sync with install-cache.md -->
+
+Registering the Cache
+---------------------
+
+To be part of the OSDF, your cache must be registered with the OSG.
+You will need basic information like the resource name and hostname,
+and the administrative and security contacts.
+
+
+### Initial registration
+
+To register your cache host, follow the general registration instructions [here](https://osg-htc.org/docs/common/registration/#new-resources).
+The service type is `XRootD cache server`.
+
+!!! info
+    This step must be completed before installation.
+
+In your registration, you must specify which VOs your cache will serve by adding an `AllowedVOs` list, with each line specifying a VO whose data you are willing to cache.
+
+There are special values you may use in `AllowedVOs`:
+
+- `ANY_PUBLIC` indicates that the cache is willing to serve public data from any VO.
+- `ANY` indicates that the cache is willing to serve data from any VO,
+  both public and non-public.
+  `ANY` implies `ANY_PUBLIC`.
+
+There are extra requirements for serving non-public data:
+
+- In addition to the cache allowing a VO in the `AllowedVOs` list,
+  that VO must also allow the cache in its `AllowedCaches` list.
+  See the page on [getting your VO's data into OSDF](vo-data.md).
+- There must be an authenticated XRootD instance on the cache server.
+- There must be a `DN` attribute in the resource registration
+  with the [subject DN](../../security/host-certs/overview.md#before-starting) of the host certificate
+
+This is an example registration for a cache server that serves all public data:
+```yaml
+  MY_OSDF_CACHE:
+    FQDN: my-cache.example.net
+    Service: XRootD cache server
+      Description: OSDF cache server
+    AllowedVOs:
+      - ANY_PUBLIC
+```
+
+This is an example registration for a cache server that only serves authenticated data for the Open Science Pool:
+```yaml
+  MY_AUTH_OSDF_CACHE:
+    FQDN: my-auth-cache.example.net
+    Service: XRootD cache server
+      Description: OSDF cache server
+    AllowedVOs:
+      - OSG
+    DN: /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=my-auth-cache.example.net
+```
+
+This is an example registration for a cache server that serves all public data _and_ authenticated data from the OSG VO:
+```yaml
+  MY_COMBO_OSDF_CACHE:
+    FQDN: my-combo-cache.example.net
+    Service: XRootD cache server
+      Description: OSDF cache server
+    AllowedVOs:
+      - OSG
+      - ANY_PUBLIC
+    DN: /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=my-combo-cache.example.net
+```
+
+### Finalizing registration
+
+Once initial registration is complete, you may start the installation process.
+In the meantime, open a [help ticket](https://support.opensciencegrid.org) with your cache name.
+Mention in your ticket that you would like to "Finalize the cache registration."
+
+<!-- NOTE: Keep the "Registering the Cache" section above in sync with install-cache.md -->
 
 Configuring the OSDF Cache
 -----------------------
@@ -44,18 +129,38 @@ XC_RESOURCENAME=<YOUR_RESOURCE_NAME>
 CACHE_FQDN=<FQDN>
 ```
 
+### Ensure the xrootd service has a certificate
+
+The service will need a certificate for contacting central OSDF services
+and for authenticating to origins.
+
+The certificate and key must be inside the container at `/etc/grid-security/xrd/xrd{cert,key}.pem`,
+owned by the `xrootd` user and group (UID/GID 10940).
+
+The easiest solution for this is to use your host certificate and key.
+Volume-mount the certificate to `/etc/grid-security/hostcert.pem` and the key to `/etc/grid-security/hostkey.pem`.
+The files will be copied with the right permissions on container startup.
+
+!!! note
+    You must restart the container whenever you renew your certificate
+    in order for the services to pick up the new certificate.
+    If you automate certificate renewal, you should automate restarts as well.
+    For example, if you are using Certbot for Let's Encrypt, you should write a "deploy hook" as documented
+    [on the Certbot site](https://certbot.eff.org/docs/using.html#renewing-certificates).
+
+
 ### Optional configuration ###
 
 Further behavior of the cache can be configured by setting the following in the environment variable file:
 
-- `XC_SPACE_HIGH_WM`, `XC_SPACE_LOW_WM`: High-water and low-water marks for disk usage, as a number between 0.0 and 1.0;
-      when usage goes above the high-water mark, the cache will delete files until it hits the low-water mark.
+- `XC_SPACE_HIGH_WM`, `XC_SPACE_LOW_WM`: High-water and low-water marks for disk usage,
+  as numbers between 0.00 (0%) and 1.00 (100%);
+  when usage goes above the high-water mark, the cache will delete files until it hits the low-water mark.
 - `XC_PORT`: TCP port that XCache listens on.
 - `XC_RAMSIZE`: Amount of memory to use for storing blocks before writting them to disk. (Use higher for slower disks).
 - `XC_BLOCKSIZE`: Size of the blocks in the cache.
 - `XC_PREFETCH`: Number of blocks to prefetch from a file at once.
        This controls how aggressive the cache is to request portions of a file.
-       If you set it to `0`, prefetching will be disabled, but that is not recommended.
 
 
 Running a Cache
@@ -81,6 +186,8 @@ we recommend multiple partitions for handling namespaces (HDD, SSD, or NVMe), da
 
 ```console
 user@host $ docker run --rm --publish <HOST PORT>:8000 \
+             --volume <HOST CERT>:/etc/grid-security/hostcert.pem \
+             --volume <HOST KEY>:/etc/grid-security/hostkey.pem \
              --volume <NAMESPACE PARTITION>:/xcache/namespace \
              --volume <METADATA PARTITION 1>:/xcache/meta1
              ...
@@ -103,6 +210,8 @@ For a simpler installation, you may use a single host partition mounted to `/xca
 ```console
 user@host $ docker run --rm --publish <HOST PORT>:8000 \
              --volume <HOST PARTITION>:/xcache \
+             --volume <HOST CERT>:/etc/grid-security/hostcert.pem \
+             --volume <HOST KEY>:/etc/grid-security/hostkey.pem \
              --env-file=/opt/xcache/.env \
              opensciencegrid/stash-cache:3.6-release
 ```
@@ -110,10 +219,12 @@ user@host $ docker run --rm --publish <HOST PORT>:8000 \
 ### Running a cache on container with systemd
 
 An example systemd service file for the OSDF cache.
-This will require creating the environment file in the directory `/opt/xcache/.env`. 
+This will require creating the environment file in the directory `/opt/xcache/.env`.
 
 !!! note
-    This example systemd file assumes `<HOST PORT>` is `8000` and  `<HOST PARTITION>` is `/srv/cache`.
+    This example systemd file assumes `<HOST PORT>` is `8000`, `<HOST PARTITION>` is `/srv/cache`,
+    and the cert and key to use are in `/etc/ssl/host.crt` and `/etc/ssl/host.key`,
+    respectively.
 
 Create the systemd service file `/etc/systemd/system/docker.stash-cache.service` as follows:
 
@@ -129,7 +240,12 @@ Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
 ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-cache:3.6-release
-ExecStart=/usr/bin/docker run --rm --name %n --publish 8000:8000 --volume /srv/cache:/xcache --env-file /opt/xcache/.env opensciencegrid/stash-cache:3.6-release
+ExecStart=/usr/bin/docker run --rm --name %n --publish 8000:8000 \
+  --volume /srv/cache:/xcache \
+  --volume /etc/ssl/host.crt:/etc/grid-security/hostcert.pem \
+  --volume /etc/ssl/host.key:/etc/grid-security/hostkey.pem \
+  --env-file /opt/xcache/.env \
+  opensciencegrid/stash-cache:3.6-release
 
 [Install]
 WantedBy=multi-user.target
@@ -143,8 +259,7 @@ root@host $ systemctl start docker.stash-cache
 ```
 
 !!! warning
-    You must [register](install-cache.md#registering-the-cache) the cache before considering it a
-    production service.
+    You must [register](install-cache.md#registering-the-cache) the cache before starting it up.
 
 
 
@@ -157,6 +272,8 @@ container to the host network:
 user@host $ docker run --rm  \
              --network="host" \
              --volume <HOST PARTITION>:/cache \
+             --volume <HOST CERT>:/etc/grid-security/hostcert.pem \
+             --volume <HOST KEY>:/etc/grid-security/hostkey.pem \
              --env-file=/opt/xcache/.env \
              opensciencegrid/stash-cache:3.6-release
 ```
