@@ -212,7 +212,7 @@ To enable only security related automatic updates:
 
 -   On RHEL 7/SL 7, edit `/etc/yum/yum-cron.conf` and set `update_cmd = security`
 
--   On RHEL 8, edit `/etc/dnf/automatic.conf` and set `upgrade_type = security`
+-   On RHEL 8, Rocky Linux 8, AlmaLinux 8, edit `/etc/dnf/automatic.conf` and set `upgrade_type = security`
 
 CentOS 7 and CentOS Stream 8 do not support security-only automatic updates;
 doing any of the above steps will prevent automatic updates from happening at all.
