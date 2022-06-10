@@ -6,7 +6,8 @@ Installing the Worker Node Client From RPMs
 
 The **OSG Worker Node Client** is a collection of software components that is expected to be added to every worker node
 that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect
-to use. Contents of the worker node client can be found [here](#worker-node-contents).
+to use.
+Contents of the worker node client can be found [here](using-wn.md#common-software-available-on-worker-nodes).
 
 !!! note
     It is possible to install the Worker Node Client software in a variety of ways, depending on your local site:
