@@ -1,3 +1,4 @@
+DateReviewed: 2022-06-10
 title: Installing the Worker Node Client via OASIS
 
 Installing the Worker Node Client via OASIS
@@ -5,7 +6,8 @@ Installing the Worker Node Client via OASIS
 
 The **OSG Worker Node Client** is a collection of software components that is expected to be added to every worker node
 that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect
-to use. Contents of the worker node client can be found [here](../worker-node/install-wn.md#worker-node-contents).
+to use.
+Contents of the worker node client can be found [here](using-wn.md#common-software-available-on-worker-nodes).
 
 !!! note
     It is possible to install the Worker Node Client software in a variety of ways, depending on your local site:
@@ -34,8 +36,8 @@ Determine the OASIS path to the Worker Node Client software for your worker node
 
 | Worker Node OS | Use…                                                                                 |
 |:---------------|:-------------------------------------------------------------------------------------|
-| EL 7 (64-bit)  | `/cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/current/el7-x86_64` |
-| EL 8 (64-bit)  | `/cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/current/el8-x86_64` |
+| EL 7 (64-bit)  | `/cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.6/current/el7-x86_64` |
+| EL 8 (64-bit)  | `/cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.6/current/el8-x86_64` |
 
 On the CE, in the `/etc/osg/config.d/10-storage.ini` file, set the `grid_dir` configuration setting to the path from the previous step.
 
@@ -63,8 +65,8 @@ If you must log onto a worker node and use the Worker Node Client software direc
 
 | Worker Node OS | Run the following command…                                                                           |
 |:---------------|:-----------------------------------------------------------------------------------------------------|
-| EL 7 (64-bit)  | `source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/current/el7-x86_64/setup.sh` |
-| EL 8 (64-bit)  | `source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/current/el8-x86_64/setup.sh` |
+| EL 7 (64-bit)  | `source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.6/current/el7-x86_64/setup.sh` |
+| EL 8 (64-bit)  | `source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.6/current/el8-x86_64/setup.sh` |
 
 Getting Help
 ------------

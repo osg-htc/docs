@@ -1,3 +1,4 @@
+DateReviewed: 2022-06-10
 title: Installing the Worker Node Client From RPMs
 
 Installing the Worker Node Client From RPMs
@@ -5,7 +6,8 @@ Installing the Worker Node Client From RPMs
 
 The **OSG Worker Node Client** is a collection of software components that is expected to be added to every worker node
 that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect
-to use. Contents of the worker node client can be found [here](#worker-node-contents).
+to use.
+Contents of the worker node client can be found [here](using-wn.md#common-software-available-on-worker-nodes).
 
 !!! note
     It is possible to install the Worker Node Client software in a variety of ways, depending on your local site:
@@ -74,33 +76,3 @@ How to get Help?
 ----------------
 
 To get assistance please use this [Help Procedure](../common/help.md).
-
-
-Reference
----------
-
-Please see the documentation on using [Yum and RPM](../release/yum-basics.md), and using the [OSG Yum repositories](../common/yum.md).
-
-### Worker node contents
-
-The worker node may be updated from time to time. As of OSG 3.6 in May 2022, the OSG worker node client contains:
-
--   curl
--   Fetch CRL
--   gfal2
--   ldapsearch
--   OSG Certificates
--   osg-system-profiler
--   stashcp
--   vo-client (includes /etc/vomses file)
--   VOMS client
--   wget
--   xrdcp
-
-To see the currently installed version of the worker node package, run the following command:
-
-``` console
-root@host # rpm -q --requires osg-wn-client
-```
-
-Click [here](../release/yum-basics.md) for more details on using RPM to see what was installed.

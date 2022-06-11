@@ -1,3 +1,4 @@
+DateReviewed: 2022-06-10
 title: Worker Node Overview
 
 Worker Node Overview
@@ -26,18 +27,22 @@ Common Software Available on Worker Nodes
 
 The OSG worker node environment contains the following software:
 
--   The supported set of CA certificates (located in `$X509_CERT_DIR` after the environment is set up)
+-   Data and related tooling:
+    -   The supported set of CA certificates (located in `$X509_CERT_DIR` after the environment is set up)
+    -   VO authentication: `vo-client`
+    -   Update Certificate Revocation Lists: `fetch-crl`
 -   Proxy management tools:
-    -   Create proxies: `voms-proxy-init` and `grid-proxy-init`
-    -   Show proxy info: `voms-proxy-info` and `grid-proxy-info`
-    -   Destroy the current proxy: `voms-proxy-destroy` and `grid-proxy-destroy`
+    -   Create proxies: `voms-proxy-init`
+    -   Show proxy info: `voms-proxy-info`
+    -   Destroy the current proxy: `voms-proxy-destroy`
 -   Data transfer tools:
     -   HTTP/plain FTP protocol tools (via system dependencies):
         -   `wget` and `curl`: standard tools for downloading files with HTTP and FTP
     -   Transfer clients
-        -   `GFAL`-based client (`gfal-copy` and others).  GFAL supports SRM, GridFTP, and HTTP protocols.
-        -   Globus GridFTP client (`globus-url-copy`)
--   MyProxy client tools
+        -   `GFAL`-based client (`gfal-copy` and others).  GFAL supports SRM, XRootD, and HTTP protocols.
+        -   The `stashcp` data federation client
+        -   The XRootD command line client, `xrdcp` 
+-   Troubelshooting tool: `osg-system-profiler`
 
 At some sites, these tools may not be available at the pilot launch.  To setup the environment, do the following:
 
@@ -77,7 +82,7 @@ We recommend one of the following solutions:
 - **(Recommended)** Use batch-system capabilities to create directories in the job scratch directory and bind mount
   them for the job so that the batch system performs the clean up.
   For example, HTCondor has this ability through
-  [MOUNT\_UNDER\_SCRATCH](http://research.cs.wisc.edu/htcondor/manual/v8.6/3_5Configuration_Macros.html#24738):
+  [MOUNT\_UNDER\_SCRATCH](https://htcondor.readthedocs.io/en/lts/admin-manual/configuration-macros.html#MOUNT_UNDER_SCRATCH):
 
         MOUNT_UNDER_SCRATCH = $(MOUNT_UNDER_SCRATCH), <PATH TO OSG_WN_TMP>
 
