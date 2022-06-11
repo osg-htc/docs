@@ -1849,7 +1849,8 @@
 <h1 id="installing-the-worker-node-client-via-tarball">Installing the Worker Node Client via Tarball<a class="headerlink" href="#installing-the-worker-node-client-via-tarball" title="Permanent link">&para;</a></h1>
 <p>The <strong>OSG Worker Node Client</strong> is a collection of software components that is expected to be added to every worker node
 that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect
-to use. Contents of the worker node client can be found <a href="../install-wn/#worker-node-contents">here</a>.</p>
+to use.
+Contents of the worker node client can be found <a href="../using-wn/#common-software-available-on-worker-nodes">here</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>It is possible to install the Worker Node Client software in a variety of ways, depending on your local site:</p>
@@ -1865,10 +1866,10 @@ may install and use the client.</p>
 <p>Before starting, ensure the host has <a href="../../release/supported_platforms/">a supported operating system</a>.</p>
 <h2 id="download-the-wn-client">Download the WN Client<a class="headerlink" href="#download-the-wn-client" title="Permanent link">&para;</a></h2>
 <p>Please pick the <code>osg-wn-client</code> tarball that is appropriate for your distribution and architecture. You will find them in <a href="https://repo.opensciencegrid.org/tarball-install/">https://repo.opensciencegrid.org/tarball-install/</a> .</p>
-<p>For OSG 3.5:</p>
+<p>For OSG 3.6:</p>
 <ul>
-<li><a href="https://repo.opensciencegrid.org/tarball-install/3.5/osg-wn-client-latest.el7.x86_64.tar.gz">Binaries for RHEL7</a></li>
-<li><a href="https://repo.opensciencegrid.org/tarball-install/3.5/osg-wn-client-latest.el8.x86_64.tar.gz">Binaries for RHEL8</a></li>
+<li><a href="https://repo.opensciencegrid.org/tarball-install/3.6/osg-wn-client-latest.el7.x86_64.tar.gz">Binaries for RHEL7</a></li>
+<li><a href="https://repo.opensciencegrid.org/tarball-install/3.6/osg-wn-client-latest.el8.x86_64.tar.gz">Binaries for RHEL8</a></li>
 </ul>
 <h2 id="install-the-wn-client">Install the WN Client<a class="headerlink" href="#install-the-wn-client" title="Permanent link">&para;</a></h2>
 <ol>
@@ -1891,7 +1892,7 @@ If not present, install by running <code>yum install perl</code> as root.</p>
 <p>Example installation (in <code>/home/user/test-install</code>, the <strong><code>&lt;PATH_TO_CLIENT&gt;/</code></strong> is <code>/home/user/test-install/osg-wn-client</code> ):</p>
 <div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>mkdir /home/user/test-install
 <span class="gp">user@host $ </span><span class="nb">cd</span> /home/user/test-install
-<span class="gp">user@host $ </span>wget https://repo.opensciencegrid.org/tarball-install/3.5/osg-wn-client-latest.el7.x86_64.tar.gz
+<span class="gp">user@host $ </span>wget https://repo.opensciencegrid.org/tarball-install/3.6/osg-wn-client-latest.el7.x86_64.tar.gz
 <span class="gp">user@host $ </span>tar xzf osg-wn-client-latest.el7.x86_64.tar.gz
 <span class="gp">user@host $ </span><span class="nb">cd</span> osg-wn-client
 <span class="gp">user@host $ </span>./osg/osg-post-install

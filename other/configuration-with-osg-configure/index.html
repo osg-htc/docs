@@ -2357,29 +2357,8 @@ any option set in a given section can be used as a variable in that section.  As
 <td>String</td>
 <td>The sge_cell setting should be set to the value of $SGE_CELL for your SGE install.</td>
 </tr>
-<tr>
-<td>default_queue</td>
-<td>String</td>
-<td>This setting determines queue that jobs should be placed in if the job description does not specify a queue.</td>
-</tr>
-<tr>
-<td>available_queues</td>
-<td>String</td>
-<td>This setting indicates which queues are available on the cluster and should be used for validation when <code>validate_queues</code> is set.</td>
-</tr>
-<tr>
-<td>validate_queues</td>
-<td>String</td>
-<td>This setting determines whether the globus jobmanager should check the job RSL and verify that any queue specified matches a queue available on the cluster. See note.</td>
-</tr>
 </tbody>
 </table>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><strong>validate_queues</strong>:<br/>
-If <code>available_queues</code> is set, that list of queues will be used for
-validation, otherwise SGE will be queried for available queues.</p>
-</div>
 <h3 id="slurm">Slurm<a class="headerlink" href="#slurm" title="Permanent link">&para;</a></h3>
 <p>This section describes the parameters for a Slurm jobmanager if it's being used in the current CE installation. If Slurm is not being used, the <code>enabled</code> setting should be set to <code>False</code>.</p>
 <p>This section is contained in <code>/etc/osg/config.d/20-slurm.ini</code> which is provided by the <code>osg-configure-slurm</code> RPM.</p>
@@ -2435,7 +2414,7 @@ validation, otherwise SGE will be queried for available queues.</p>
 </tbody>
 </table>
 <h3 id="gratia">Gratia<a class="headerlink" href="#gratia" title="Permanent link">&para;</a></h3>
-<p>This section configures Gratia. If <code>probes</code> is set to <code>UNAVAILABLE</code>, then <code>osg-configure</code> will use appropriate default values. If you need to specify custom reporting (e.g. a local gratia collector) in addition to the default probes, <code>%(osg-jobmanager-gratia)s</code>, <code>%(osg-gridftp-gratia)s</code>, <code>%(osg-metric-gratia)s</code>, <code>%(itb-jobmanager-gratia)s</code>, <code>%(itb-gridftp-gratia)s</code>, <code>%(itb-metric-gratia)s</code> are defined in the default configuration files to make it easier to specify the standard osg reporting.</p>
+<p>This section configures Gratia. If <code>probes</code> is set to <code>UNAVAILABLE</code>, then <code>osg-configure</code> will use appropriate default values. If you need to specify custom reporting (e.g. a local gratia collector) in addition to the default probes, <code>%(osg-jobmanager-gratia)s</code>, and <code>%(itb-jobmanager-gratia)s</code> are defined in the default configuration files to make it easier to specify the standard osg reporting.</p>
 <p>This section is contained in <code>/etc/osg/config.d/30-gratia.ini</code> which is provided by the <code>osg-configure-gratia</code> RPM.</p>
 <table>
 <thead>
@@ -2468,9 +2447,7 @@ validation, otherwise SGE will be queried for available queues.</p>
 <p><strong>probes</strong>:<br/>
 Legal values for <code>probe_type</code> are:</p>
 <ul>
-<li><code>metric</code> (for RSV)</li>
-<li><code>jobmanager</code> (for the appropriate jobmanager probe)</li>
-<li><code>gridftp</code> (for the GridFTP transfer probe)</li>
+<li><code>jobmanager</code> (for the HTCondor-CE probe)</li>
 </ul>
 </div>
 <h3 id="info-services">Info Services<a class="headerlink" href="#info-services" title="Permanent link">&para;</a></h3>

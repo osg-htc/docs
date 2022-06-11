@@ -624,26 +624,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#reference" class="md-nav__link">
-    Reference
-  </a>
-  
-    <nav class="md-nav" aria-label="Reference">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#worker-node-contents" class="md-nav__link">
-    Worker node contents
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1794,26 +1774,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#reference" class="md-nav__link">
-    Reference
-  </a>
-  
-    <nav class="md-nav" aria-label="Reference">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#worker-node-contents" class="md-nav__link">
-    Worker node contents
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1835,7 +1795,8 @@
 <h1 id="installing-the-worker-node-client-from-rpms">Installing the Worker Node Client From RPMs<a class="headerlink" href="#installing-the-worker-node-client-from-rpms" title="Permanent link">&para;</a></h1>
 <p>The <strong>OSG Worker Node Client</strong> is a collection of software components that is expected to be added to every worker node
 that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect
-to use. Contents of the worker node client can be found <a href="#worker-node-contents">here</a>.</p>
+to use.
+Contents of the worker node client can be found <a href="../using-wn/#common-software-available-on-worker-nodes">here</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>It is possible to install the Worker Node Client software in a variety of ways, depending on your local site:</p>
@@ -1920,27 +1881,6 @@ Node Client software available from an RPM.</p>
 </ol>
 <h2 id="how-to-get-help">How to get Help?<a class="headerlink" href="#how-to-get-help" title="Permanent link">&para;</a></h2>
 <p>To get assistance please use this <a href="../../common/help/">Help Procedure</a>.</p>
-<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
-<p>Please see the documentation on using <a href="../../release/yum-basics/">Yum and RPM</a>, and using the <a href="../../common/yum/">OSG Yum repositories</a>.</p>
-<h3 id="worker-node-contents">Worker node contents<a class="headerlink" href="#worker-node-contents" title="Permanent link">&para;</a></h3>
-<p>The worker node may be updated from time to time. As of OSG 3.6 in May 2022, the OSG worker node client contains:</p>
-<ul>
-<li>curl</li>
-<li>Fetch CRL</li>
-<li>gfal2</li>
-<li>ldapsearch</li>
-<li>OSG Certificates</li>
-<li>osg-system-profiler</li>
-<li>stashcp</li>
-<li>vo-client (includes /etc/vomses file)</li>
-<li>VOMS client</li>
-<li>wget</li>
-<li>xrdcp</li>
-</ul>
-<p>To see the currently installed version of the worker node package, run the following command:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>rpm -q --requires osg-wn-client
-</code></pre></div>
-<p>Click <a href="../../release/yum-basics/">here</a> for more details on using RPM to see what was installed.</p>
 
               
             </article>

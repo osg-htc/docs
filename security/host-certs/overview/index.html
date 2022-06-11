@@ -1851,7 +1851,7 @@
 </div>
 <p>Host certificates are <a href="https://en.wikipedia.org/wiki/X.509">X.509 certificates</a> that are used to securely identify
 servers and to establish encrypted connections between services and clients.
-In the OSG, some grid resources (e.g., HTCondor-CE, XRootD, GridFTP) require host certificates.
+In the OSG, some grid resources (e.g., HTCondor-CE, XRootD) require host certificates.
 If you are unsure if your host needs a host certificate, please consult the installation instructions for the software
 you are interested in installing.</p>
 <p>To acquire a host certificate, you must submit a request to a Certificate Authority (CA).
@@ -1874,11 +1874,6 @@ and not the InCommon RSA CA.</p>
   see the <a href="https://opensciencegrid.org/security/LetsEncryptOSGCAbundle/">security team's position on Let's Encrypt</a>
   for more details.
   Let's Encrypt is not IGTF-accredited so their certificates are not suitable for WLCG services.</p>
-</li>
-<li>
-<p>DigiCert IGTF:
-  an IGTF-accredited CA for services that interact with the WLCG;
-  <strong>certificates are no longer issued by this CA</strong>.</p>
 </li>
 </ul>
 <p>If neither of the above options work for your site, the OSG also accepts all

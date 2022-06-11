@@ -1875,11 +1875,16 @@
 <h2 id="common-software-available-on-worker-nodes">Common Software Available on Worker Nodes<a class="headerlink" href="#common-software-available-on-worker-nodes" title="Permanent link">&para;</a></h2>
 <p>The OSG worker node environment contains the following software:</p>
 <ul>
+<li>Data and related tooling:<ul>
 <li>The supported set of CA certificates (located in <code>$X509_CERT_DIR</code> after the environment is set up)</li>
+<li>VO authentication: <code>vo-client</code></li>
+<li>Update Certificate Revocation Lists: <code>fetch-crl</code></li>
+</ul>
+</li>
 <li>Proxy management tools:<ul>
-<li>Create proxies: <code>voms-proxy-init</code> and <code>grid-proxy-init</code></li>
-<li>Show proxy info: <code>voms-proxy-info</code> and <code>grid-proxy-info</code></li>
-<li>Destroy the current proxy: <code>voms-proxy-destroy</code> and <code>grid-proxy-destroy</code></li>
+<li>Create proxies: <code>voms-proxy-init</code></li>
+<li>Show proxy info: <code>voms-proxy-info</code></li>
+<li>Destroy the current proxy: <code>voms-proxy-destroy</code></li>
 </ul>
 </li>
 <li>Data transfer tools:<ul>
@@ -1888,13 +1893,14 @@
 </ul>
 </li>
 <li>Transfer clients<ul>
-<li><code>GFAL</code>-based client (<code>gfal-copy</code> and others).  GFAL supports SRM, GridFTP, and HTTP protocols.</li>
-<li>Globus GridFTP client (<code>globus-url-copy</code>)</li>
+<li><code>GFAL</code>-based client (<code>gfal-copy</code> and others).  GFAL supports SRM, XRootD, and HTTP protocols.</li>
+<li>The <code>stashcp</code> data federation client</li>
+<li>The XRootD command line client, <code>xrdcp</code> </li>
 </ul>
 </li>
 </ul>
 </li>
-<li>MyProxy client tools</li>
+<li>Troubelshooting tool: <code>osg-system-profiler</code></li>
 </ul>
 <p>At some sites, these tools may not be available at the pilot launch.  To setup the environment, do the following:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span><span class="nb">source</span> <span class="nv">$OSG_GRID</span>/setup.sh
@@ -1961,7 +1967,7 @@ We recommend one of the following solutions:</p>
 <p><strong>(Recommended)</strong> Use batch-system capabilities to create directories in the job scratch directory and bind mount
   them for the job so that the batch system performs the clean up.
   For example, HTCondor has this ability through
-  <a href="http://research.cs.wisc.edu/htcondor/manual/v8.6/3_5Configuration_Macros.html#24738">MOUNT_UNDER_SCRATCH</a>:</p>
+  <a href="https://htcondor.readthedocs.io/en/lts/admin-manual/configuration-macros.html#MOUNT_UNDER_SCRATCH">MOUNT_UNDER_SCRATCH</a>:</p>
 <div class="codehilite"><pre><span></span><code>MOUNT_UNDER_SCRATCH = $(MOUNT_UNDER_SCRATCH), &lt;PATH TO OSG_WN_TMP&gt;
 </code></pre></div>
 
