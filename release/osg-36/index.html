@@ -2476,9 +2476,16 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
 </ul>
 </li>
 <li>osg-release 3.6-5: Add osg-next yum repository</li>
-<li>Upcoming
-    <a href="https://htcondor.readthedocs.io/en/update/version-history/development-release-series-91.html#version-9-9-1">HTCondor 9.9.1</a><ul>
-<li>Fix bug where jobs would not match when using a child collector</li>
+<li>Upcoming<ul>
+<li><a href="https://htcondor.readthedocs.io/en/update/version-history/development-release-series-91.html#version-9-9-1">HTCondor 9.9.1</a><ul>
+<li>A new authentication method for remote HTCondor administration</li>
+<li>Several changes to improve the security of connections</li>
+<li>Fix issue where DAGMan direct submission failed when using Kerberos</li>
+<li>The submission method is now recorded in the job ClassAd</li>
+<li>Singularity jobs can now pull from Docker style repositories</li>
+<li>The OWNER authorization level has been folded into the ADMINISTRATOR level</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
