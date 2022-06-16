@@ -72,7 +72,7 @@ Latest News
     -   Relax download timeouts for file transfer plugin
     -   Multiple bug fixes
 -   htvault-config 1.13
-    -   removes support for old style secret storage, requires htgettoken >= 1.7
+    -   Removes support for old style secret storage; requires htgettoken >= 1.7
 -   htgettoken 1.12
     -   avoids crash when verbose output includes UTF-8
 -   osg-pki-tools 3.5.2
