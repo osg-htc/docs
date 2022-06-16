@@ -74,15 +74,16 @@ Latest News
 -   htvault-config 1.13
     -   Removes support for old style secret storage; requires htgettoken >= 1.7
 -   htgettoken 1.12
-    -   avoids crash when verbose output includes UTF-8
+    -   Avoids crash when verbose output includes UTF-8
 -   osg-pki-tools 3.5.2
-    -   bug fix for osg-incommon-cert-request when using host file
+    -   Bug fix for osg-incommon-cert-request when using host file
 -   osg-token-renewer 0.8.2
-    -   use oidc-agent's built-in password file option
-    -   ensure tokens are renewed more frequently than their lifespan
--   rrdtool 1.8.0-1.2.el7: make Python RRDtools available to GlideinWMS
+    -   Use oidc-agent's built-in password file option
+    -   Ensure tokens are renewed more frequently than their lifespan
+-   rrdtool 1.8.0-1.2.el7
+    -   Make Python RRDtools available to GlideinWMS
 -   xrootd-multiuser 2.0.4
-    -   fix crash on Enterprise Linux 8
+    -   Fix crash on Enterprise Linux 8
 -   osg-release 3.6-5: Add osg-next yum repository
 -   Upcoming
     [HTCondor 9.9.1](https://htcondor.readthedocs.io/en/update/version-history/development-release-series-91.html#version-9-9-1)
