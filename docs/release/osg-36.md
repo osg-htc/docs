@@ -86,8 +86,13 @@ Latest News
     -   Fix crash on Enterprise Linux 8
 -   osg-release 3.6-5: Add osg-next yum repository
 -   Upcoming
-    [HTCondor 9.9.1](https://htcondor.readthedocs.io/en/update/version-history/development-release-series-91.html#version-9-9-1)
-    -   Fix bug where jobs would not match when using a child collector
+    -   [HTCondor 9.9.1](https://htcondor.readthedocs.io/en/update/version-history/development-release-series-91.html#version-9-9-1)
+        -   A new authentication method for remote HTCondor administration
+        -   Several changes to improve the security of connections
+        -   Fix issue where DAGMan direct submission failed when using Kerberos
+        -   The submission method is now recorded in the job ClassAd
+        -   Singularity jobs can now pull from Docker style repositories
+        -   The OWNER authorization level has been folded into the ADMINISTRATOR level
 
 ### **May 24, 2022:** VO Package v121
 -   [VO Package v121](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-121-1)
