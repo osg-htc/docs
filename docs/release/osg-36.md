@@ -24,13 +24,6 @@ Known Issues
 
 The following issues are known to currently affect packages distributed in OSG 3.6:
 
-### HTCondor-CE ###
-
--   `default_CERequirements` in the the new Job Router ClassAd transform syntax is ignored.
-    To fix this, apply the change in [this patch](https://github.com/htcondor/htcondor-ce/pull/530/files) to
-    `/usr/share/condor-ce/config.d/01-ce-router-defaults.conf`.
-    The next release of HTCondor-CE will contain this fix and will not require any additional action post-update.
-
 ### XRootD Multiuser ###
 
 -   Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a `voms-mapfile`.
@@ -40,6 +33,60 @@ The following issues are known to currently affect packages distributed in OSG 3
 
 Latest News
 -----------
+
+### **June 16, 2022:** HTCondor-CE 5.1.5, gratia-probe 2.6.1, GlideinWMS 3.9.5, HTCondor 9.0.13
+-   HTCondor-CE 5.1.5
+    -   Fix whole node job glidein CPUs and GPUs expressions that caused held jobs
+    -   Fix bug where default CERequirements were being ignored
+    -   Pass whole node request from GlideinWMS to the batch system
+    -   Rename AuthToken attributes in the routed job to better support accounting
+    -   Prevent GSI environment from pointing the job to the wrong certificates
+    -   Fix issue where HTCondor-CE would need port 9618 open to start up
+-   gratia-probe 2.6.1
+    -   Log schedd cron errors with newer versions of HTCondor
+    -   Replace AuthToken\* references with routed job attributes
+    -   Remove certinfo flie log messages
+    -   Fix crash on send failure
+-   [GlideinWMS 3.9.5](https://glideinwms.fnal.gov/doc.v3_9_5/history.html#development)
+    -   Support for Apptainer
+    -   Support for CVMFS on-demand
+    -   Configurable idtokens lifetime
+    -   Improved frontend logging
+    -   Improved default SHARED\_PORT configuration
+    -   Special handling of multiline condor config values
+    -   Several bug fixes
+-   [HTCondor 9.0.13](https://htcondor.readthedocs.io/en/v9_0/version-history/stable-release-series-90.html#version-9-0-13): Bug fix release
+    -   Schedd and startd cron jobs can now log output upon non-zero exit
+    -   condor\_config\_val now produces correct syntax for multi-line values
+    -   The condor\_run tool now reports submit errors and warnings to the terminal
+    -   Fix issue where Kerberos authentication would fail within DAGMan
+    -   Fix HTCondor startup failure with certain complex network configurations
+-   [VO Package v122](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-122)
+    -   Add new sPHENIX and EIC VO certificates
+  -   XCache 3.1.0
+    -   Fixed library dependency issues for xcache-reporter
+    -   Add systemd overrides for xrootd-privileged
+-   [XRootD 5.4.3](https://github.com/xrootd/xrootd/blob/v5.4.3/docs/ReleaseNotes.txt): Bug fix release
+-   stashcp 6.7.5
+    -   Adds multi-file transfer and improved error messages
+    -   relax download timeouts for file transfer plugin
+    -   multiple bug fixes
+-   htvault-config 1.13
+    -   removes support for old style secret storage, requires htgettoken >= 1.7
+-   htgettoken 1.12
+    -   avoids crash when verbose output includes UTF-8
+-   osg-pki-tools 3.5.2
+    -   bug fix for osg-incommon-cert-request when using host file
+-   osg-token-renewer 0.8.2
+    -   use oidc-agent's built-in password file option
+    -   ensure tokens are renewed more frequently than their lifespan
+-   rrdtool 1.8.0-1.2.el7: make Python RRDtools available to GlideinWMS
+-   xrootd-multiuser 2.0.4
+    -   fix crash on Enterprise Linux 8
+-   osg-release 3.6-5: Add osg-next yum repository
+-   Upcoming
+    [HTCondor 9.9.1](https://htcondor.readthedocs.io/en/update/version-history/development-release-series-91.html#version-9-9-1)
+    -   Fix bug where jobs would not match when using a child collector
 
 ### **May 24, 2022:** VO Package v121
 -   [VO Package v121](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-121-1)
