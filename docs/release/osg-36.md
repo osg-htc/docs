@@ -69,8 +69,8 @@ Latest News
 -   [XRootD 5.4.3](https://github.com/xrootd/xrootd/blob/v5.4.3/docs/ReleaseNotes.txt): Bug fix release
 -   stashcp 6.7.5
     -   Adds multi-file transfer and improved error messages
-    -   relax download timeouts for file transfer plugin
-    -   multiple bug fixes
+    -   Relax download timeouts for file transfer plugin
+    -   Multiple bug fixes
 -   htvault-config 1.13
     -   removes support for old style secret storage, requires htgettoken >= 1.7
 -   htgettoken 1.12
