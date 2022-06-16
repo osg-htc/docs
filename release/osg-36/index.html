@@ -1390,13 +1390,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#htcondor-ce" class="md-nav__link">
-    HTCondor-CE
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#xrootd-multiuser" class="md-nav__link">
     XRootD Multiuser
   </a>
@@ -1415,6 +1408,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#june-16-2022-htcondor-ce-515-gratia-probe-261-glideinwms-395-htcondor-9013" class="md-nav__link">
+    June 16, 2022: HTCondor-CE 5.1.5, gratia-probe 2.6.1, GlideinWMS 3.9.5, HTCondor 9.0.13
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#may-24-2022-vo-package-v121" class="md-nav__link">
@@ -2038,13 +2038,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#htcondor-ce" class="md-nav__link">
-    HTCondor-CE
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#xrootd-multiuser" class="md-nav__link">
     XRootD Multiuser
   </a>
@@ -2063,6 +2056,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#june-16-2022-htcondor-ce-515-gratia-probe-261-glideinwms-395-htcondor-9013" class="md-nav__link">
+    June 16, 2022: HTCondor-CE 5.1.5, gratia-probe 2.6.1, GlideinWMS 3.9.5, HTCondor 9.0.13
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#may-24-2022-vo-package-v121" class="md-nav__link">
@@ -2391,13 +2391,6 @@ GSI proxies and HTTP is used for data transfer instead of GridFTP.</p>
 We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
 <h2 id="known-issues">Known Issues<a class="headerlink" href="#known-issues" title="Permanent link">&para;</a></h2>
 <p>The following issues are known to currently affect packages distributed in OSG 3.6:</p>
-<h3 id="htcondor-ce">HTCondor-CE<a class="headerlink" href="#htcondor-ce" title="Permanent link">&para;</a></h3>
-<ul>
-<li><code>default_CERequirements</code> in the the new Job Router ClassAd transform syntax is ignored.
-    To fix this, apply the change in <a href="https://github.com/htcondor/htcondor-ce/pull/530/files">this patch</a> to
-    <code>/usr/share/condor-ce/config.d/01-ce-router-defaults.conf</code>.
-    The next release of HTCondor-CE will contain this fix and will not require any additional action post-update.</li>
-</ul>
 <h3 id="xrootd-multiuser">XRootD Multiuser<a class="headerlink" href="#xrootd-multiuser" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a <code>voms-mapfile</code>.
@@ -2405,6 +2398,90 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
     If you want to use multiuser, ensure you are getting <code>xrootd-voms</code> from the OSG repos.</li>
 </ul>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="june-16-2022-htcondor-ce-515-gratia-probe-261-glideinwms-395-htcondor-9013"><strong>June 16, 2022:</strong> HTCondor-CE 5.1.5, gratia-probe 2.6.1, GlideinWMS 3.9.5, HTCondor 9.0.13<a class="headerlink" href="#june-16-2022-htcondor-ce-515-gratia-probe-261-glideinwms-395-htcondor-9013" title="Permanent link">&para;</a></h3>
+<ul>
+<li>HTCondor-CE 5.1.5<ul>
+<li>Fix whole node job glidein CPUs and GPUs expressions that caused held jobs</li>
+<li>Fix bug where default CERequirements were being ignored</li>
+<li>Pass whole node request from GlideinWMS to the batch system</li>
+<li>Rename AuthToken attributes in the routed job to better support accounting</li>
+<li>Prevent GSI environment from pointing the job to the wrong certificates</li>
+<li>Fix issue where HTCondor-CE would need port 9618 open to start up</li>
+</ul>
+</li>
+<li>gratia-probe 2.6.1<ul>
+<li>Log schedd cron errors with newer versions of HTCondor</li>
+<li>Replace AuthToken* references with routed job attributes</li>
+<li>Remove certinfo flie log messages</li>
+<li>Fix crash on send failure</li>
+</ul>
+</li>
+<li><a href="https://glideinwms.fnal.gov/doc.v3_9_5/history.html#development">GlideinWMS 3.9.5</a><ul>
+<li>Support for Apptainer</li>
+<li>Support for CVMFS on-demand</li>
+<li>Configurable idtokens lifetime</li>
+<li>Improved frontend logging</li>
+<li>Improved default SHARED_PORT configuration</li>
+<li>Special handling of multiline condor config values</li>
+<li>Several bug fixes</li>
+</ul>
+</li>
+<li><a href="https://htcondor.readthedocs.io/en/v9_0/version-history/stable-release-series-90.html#version-9-0-13">HTCondor 9.0.13</a>: Bug fix release<ul>
+<li>Schedd and startd cron jobs can now log output upon non-zero exit</li>
+<li>condor_config_val now produces correct syntax for multi-line values</li>
+<li>The condor_run tool now reports submit errors and warnings to the terminal</li>
+<li>Fix issue where Kerberos authentication would fail within DAGMan</li>
+<li>Fix HTCondor startup failure with certain complex network configurations</li>
+</ul>
+</li>
+<li><a href="https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-122">VO Package v122</a><ul>
+<li>Add new sPHENIX and EIC VO certificates</li>
+</ul>
+</li>
+<li>XCache 3.1.0<ul>
+<li>Fixed library dependency issues for xcache-reporter</li>
+<li>Add systemd overrides for xrootd-privileged</li>
+</ul>
+</li>
+<li><a href="https://github.com/xrootd/xrootd/blob/v5.4.3/docs/ReleaseNotes.txt">XRootD 5.4.3</a>: Bug fix release</li>
+<li>stashcp 6.7.5<ul>
+<li>Adds multi-file transfer and improved error messages</li>
+<li>Relax download timeouts for file transfer plugin</li>
+<li>Multiple bug fixes</li>
+</ul>
+</li>
+<li>htvault-config 1.13<ul>
+<li>Removes support for old style secret storage; requires htgettoken &gt;= 1.7</li>
+</ul>
+</li>
+<li>htgettoken 1.12<ul>
+<li>Avoids crash when verbose output includes UTF-8</li>
+</ul>
+</li>
+<li>osg-pki-tools 3.5.2<ul>
+<li>Bug fix for osg-incommon-cert-request when using host file</li>
+</ul>
+</li>
+<li>osg-token-renewer 0.8.2<ul>
+<li>Use oidc-agent's built-in password file option</li>
+<li>Ensure tokens are renewed more frequently than their lifespan</li>
+</ul>
+</li>
+<li>rrdtool 1.8.0-1.2.el7<ul>
+<li>Make Python RRDtools available to GlideinWMS</li>
+</ul>
+</li>
+<li>xrootd-multiuser 2.0.4<ul>
+<li>Fix crash on Enterprise Linux 8</li>
+</ul>
+</li>
+<li>osg-release 3.6-5: Add osg-next yum repository</li>
+<li>Upcoming
+    <a href="https://htcondor.readthedocs.io/en/update/version-history/development-release-series-91.html#version-9-9-1">HTCondor 9.9.1</a><ul>
+<li>Fix bug where jobs would not match when using a child collector</li>
+</ul>
+</li>
+</ul>
 <h3 id="may-24-2022-vo-package-v121"><strong>May 24, 2022:</strong> VO Package v121<a class="headerlink" href="#may-24-2022-vo-package-v121" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-121-1">VO Package v121</a><ul>
