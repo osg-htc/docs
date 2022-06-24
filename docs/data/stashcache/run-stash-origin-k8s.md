@@ -1,13 +1,9 @@
-title: Running OSDF Origin in a Container
+title: Running OSDF Origin in a Container using Kubernetes
 DateReviewed: 2020-06-22
 
 Running OSDF Origin in a Container
 ========================================
 
-!!! note
-    Currently, the origin container only supports distribution of public data.
-    If you would like to distribute private data requiring authentication,
-    see [the RPM installation guide](install-origin.md).
 
 The OSG operates the [Open Science Data Federation](overview.md) (OSDF), which
 provides organizations with a method to distribute their data in a scalable manner to thousands of jobs without needing
@@ -25,7 +21,7 @@ Before Starting
 
 Before starting the installation process, consider the following points:
 
-1. **Docker:** For the purpose of this guide, the host must have a running docker service and you must have the ability
+1. **Kubernetes:** For the purpose of this guide, the host must have a running docker service and you must have the ability
 to start containers (i.e., belong to the `docker` Unix group).
 1. **Network ports:** The origin listens for incoming HTTP/S and XRootD connections on ports 1094 and 1095 (by
 default).
@@ -47,6 +43,8 @@ and `<FQDN>` with the public DNS name that should be used to contact your origin
 ```file
 XC_RESOURCENAME=YOUR_SITE_NAME
 ORIGIN_FQDN=<FQDN>
+export XC_ORIGINEXPORT=PATH_TO_STORAGE
+export XC_ROOTDIR=
 ```
 
 Populating Origin Data
@@ -93,21 +91,50 @@ This will require creating the environment file in the directory `/opt/origin/.e
 Create the systemd service file `/etc/systemd/system/docker.stash-origin.service` as follows:
 
 ```file
-[Unit]
-Description=Origin Container
-After=docker.service
-Requires=docker.service
-
-[Service]
-TimeoutStartSec=0
-Restart=always
-ExecStartPre=-/usr/bin/docker stop %n
-ExecStartPre=-/usr/bin/docker rm %n
-ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin:3.6-release
-ExecStart=/usr/bin/docker run --rm --name %n -p 1094:1094 -p 1095:1095 -v /srv/origin-public:/xcache/namespace --env-file /opt/origin/.env opensciencegrid/stash-origin:3.6-release
-
-[Install] 
-WantedBy=multi-user.target
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: osdftest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: osdftest
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: osdftest
+    spec:
+      containers:
+        image: opensciencegrid/stash-origin:3.6-release
+        command: [ "sleep" ]
+        args: [ "infinity" ]
+        ports:
+        - containerPort: 1094
+          hostPort: 1094
+          protocol: TCP
+        - containerPort: 1095
+          hostPort: 1095
+          protocol: TCP
+        resources:
+          limits:
+            cpu: "2"
+            memory: 1Gi
+          requests:
+            cpu: "1"
+            memory: 1Gi
+      - env:
+        - name: XC_RESOURCENAME
+          value: "osdforigintest"
+        - name: ORIGIN_FQDN
+          value: "osdftest.t2.ucsd.edu"
+        - name: XC_ORIGINEXPORT
+          value: /osdftest/
+        - name: XC_ROOTDIR
+          value: /
+      nodeSelector:
+        kubernetes.io/hostname: osdftest.t2.ucsd.edu
+~                                                          
 ```
 
 Enable and start the service with:
