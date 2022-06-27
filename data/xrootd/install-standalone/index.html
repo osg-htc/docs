@@ -865,8 +865,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#configuring-authorization" class="md-nav__link">
-    Configuring authorization
+  <a href="#configuring-authentication-and-authorization" class="md-nav__link">
+    Configuring authentication and authorization
   </a>
   
 </li>
@@ -1843,8 +1843,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#configuring-authorization" class="md-nav__link">
-    Configuring authorization
+  <a href="#configuring-authentication-and-authorization" class="md-nav__link">
+    Configuring authentication and authorization
   </a>
   
 </li>
@@ -2030,7 +2030,7 @@ all.export /public/
 <div class="admonition danger">
 <p class="admonition-title">Danger</p>
 <p>The directories specified this way are writable by default.
-Access controls should be managed via <a href="#configuring-authorization">authorization configuration</a>.</p>
+Access controls should be managed via <a href="#configuring-authentication-and-authorization">authorization configuration</a>.</p>
 </div>
 </li>
 <li>
@@ -2045,8 +2045,10 @@ Access controls should be managed via <a href="#configuring-authorization">autho
 
 </li>
 </ol>
-<h3 id="configuring-authorization">Configuring authorization<a class="headerlink" href="#configuring-authorization" title="Permanent link">&para;</a></h3>
-<p>To configure XRootD authorization please follow the documentation <a href="../xrootd-authorization/">here</a>.</p>
+<h3 id="configuring-authentication-and-authorization">Configuring authentication and authorization<a class="headerlink" href="#configuring-authentication-and-authorization" title="Permanent link">&para;</a></h3>
+<p>XRootD offers several authentication options using security plugins to validate incoming credentials, such as bearer tokens, X.509 proxies, and VOMS proxies.
+Please follow the <a href="../xrootd-authorization/">XRootD authorization documentation</a> for instructions on how to configure authentication and authorization,
+including validating credentials and mapping them to users if desired.</p>
 <h3 id="optional-configuration">Optional configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h3>
 <p>The following configuration steps are optional and will likely not be required for setting up a small site.
 If you do not need any of the following special configurations, skip to
