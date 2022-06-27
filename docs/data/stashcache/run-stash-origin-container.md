@@ -1,5 +1,5 @@
-title: Running OSDF Origin in a Container
-DateReviewed: 2020-06-22
+title: Running OSDF Origin in a Container (Docker and Kubernetes)
+DateReviewed: 2022-06-27
 
 Running OSDF Origin in a Container
 ========================================
@@ -25,13 +25,14 @@ Before Starting
 
 Before starting the installation process, consider the following points:
 
-1. **Docker:** For the purpose of this guide, the host must have a running docker service and you must have the ability
-to start containers (i.e., belong to the `docker` Unix group).
-1. **Network ports:** The origin listens for incoming HTTP/S and XRootD connections on ports 1094 and 1095 (by
-default).
-1. **File Systems:** The origin needs a host partition to store user data.
 1. **Registration:** Before deploying an origin, you must
    [registered the service](install-origin.md#registering-the-origin) in the OSG Topology
+1. **Kubernetes or docker:** For the purpose of this guide, the host must have a running Kubernets or docker service and you must have the ability
+to start containers (i.e., belong to the `docker` Unix group).
+1. **Network ports:** The origin listens for incoming HTTP/S and XRootD connections on ports 1094 and 1095 (by
+default) and 9993 for the monitoring streams.
+1. **File Systems:** The origin needs a host partition to store user data.
+1. **Shoveler:** Consider the installation of the [Shoveler](https://github.com/opensciencegrid/xrootd-monitoring-shoveler)
 
 Configuring the Origin
 ----------------------
@@ -45,9 +46,13 @@ replacing `<YOUR_RESOURCE_NAME>` with the resource name of your origin as
 and `<FQDN>` with the public DNS name that should be used to contact your origin:
 
 ```file
-XC_RESOURCENAME=YOUR_SITE_NAME
+XC_RESOURCENAME=<YOUR_SITE_NAME>
 ORIGIN_FQDN=<FQDN>
+export XC_ORIGINEXPORT=<PATH_TO_STORAGE>
+export XC_ROOTDIR=<PATH_TO_BE_ADDED_BY_XROOTD>
 ```
+
+Before starting the service, it could be necessary to run this script before starting the service `/usr/libexec/xcache/authfile-update --origin` (this is on the image crontab)
 
 Populating Origin Data
 ----------------------
@@ -78,6 +83,47 @@ user@host $ docker run --rm --publish 1094:1094 \
 
 Replacing `<HOST PARTITION>` with the host directory containing data that your origin should serve.
 See [this section](#populating-origin-data) for details.
+
+
+For Kubernetes (with examples):
+
+```file
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: osdftest
+spec:
+  replicas: 1
+    spec:
+      containers:
+        image: opensciencegrid/stash-origin:3.6-release
+        command: [ "sleep" ]
+        args: [ "infinity" ]
+        ports:
+        - containerPort: 1094
+          hostPort: 1094
+          protocol: TCP
+        - containerPort: 1095
+          hostPort: 1095
+          protocol: TCP
+        resources:
+          limits:
+            cpu: "2"
+            memory: 1Gi
+          requests:
+            cpu: "2"
+            memory: 1Gi
+      - env:
+        - name: XC_RESOURCENAME
+          value: "osdforigintest"
+        - name: ORIGIN_FQDN
+          value: "osdftest.t2.ucsd.edu"
+        - name: XC_ORIGINEXPORT
+          value: /osdftest/
+        - name: XC_ROOTDIR
+          value: /                                                        
+```
+
 
 !!!warning
     A container deployed this way will serve the entire contents of `<HOST PARTITION>`.
