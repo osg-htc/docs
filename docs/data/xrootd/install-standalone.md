@@ -86,7 +86,7 @@ under `/etc/xrootd/config.d/` as follows:
 
     !!! danger
         The directories specified this way are writable by default.
-        Access controls should be managed via [authorization configuration](#configuring-authorization).
+        Access controls should be managed via [authorization configuration](#configuring-authentication-and-authorization).
 
 1. In `/etc/xrootd/config.d/10-common-site-local.cfg`, add a line to set the `resourcename` variable.
    Unless your supported VOs' policies state otherwise,
