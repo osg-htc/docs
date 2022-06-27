@@ -124,7 +124,6 @@ spec:
           value: /                                                        
 ```
 
-
 !!!warning
     A container deployed this way will serve the entire contents of `<HOST PARTITION>`.
 
@@ -166,6 +165,8 @@ root@host $ systemctl start docker.stash-origin
 !!! warning
     You must [register](install-origin.md#registering-the-origin) the origin before considering it a
     production service.
+
+### Running on origin kubenetes with systemd
 
 
 
