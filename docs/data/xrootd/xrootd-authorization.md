@@ -4,7 +4,7 @@ DateReviewed: 2022-05-06
 Configuring XRootD Authorization
 ================================
 
-XRootD offers several authentication options [security plugins](https://xrootd.slac.stanford.edu/doc/dev50/sec_config.htm)
+XRootD offers several authentication options using [security plugins](https://xrootd.slac.stanford.edu/doc/dev50/sec_config.htm)
 to validate incoming credentials, such as bearer tokens, X.509 proxies, and VOMS proxies.
 
 In the case of X.509 and VOMS proxies, after the incoming credential has been mapped to a username or groupname, the
