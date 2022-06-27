@@ -100,7 +100,7 @@ under `/etc/xrootd/config.d/` as follows:
 ### Configuring authentication and authorization
 
 XRootD offers several authentication options using security plugins to validate incoming credentials, such as bearer tokens, X.509 proxies, and VOMS proxies.
-Please follow the [XRootD authorization documentation](xrootd-authorization.md) for instructions on how to configure authorization,
+Please follow the [XRootD authorization documentation](xrootd-authorization.md) for instructions on how to configure authentication and authorization,
 including validating credentials and mapping them to users if desired.
 
 ### Optional configuration
