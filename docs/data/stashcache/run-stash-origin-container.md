@@ -168,7 +168,7 @@ root@host $ systemctl start docker.stash-origin
 
 ### Running on origin kubenetes with systemd
 
-
+TODO
 
 Validating Origin
 -----------------
