@@ -86,7 +86,7 @@ under `/etc/xrootd/config.d/` as follows:
 
     !!! danger
         The directories specified this way are writable by default.
-        Access controls should be managed via [authorization configuration](#configuring-authorization).
+        Access controls should be managed via [authorization configuration](#configuring-authentication-and-authorization).
 
 1. In `/etc/xrootd/config.d/10-common-site-local.cfg`, add a line to set the `resourcename` variable.
    Unless your supported VOs' policies state otherwise,
@@ -97,9 +97,11 @@ under `/etc/xrootd/config.d/` as follows:
 
         set resourcename = UFlorida-XRD
 
-### Configuring authorization
+### Configuring authentication and authorization
 
-To configure XRootD authorization please follow the documentation [here](xrootd-authorization.md).
+XRootD offers several authentication options using security plugins to validate incoming credentials, such as bearer tokens, X.509 proxies, and VOMS proxies.
+Please follow the [XRootD authorization documentation](xrootd-authorization.md) for instructions on how to configure authentication and authorization,
+including validating credentials and mapping them to users if desired.
 
 ### Optional configuration
 
