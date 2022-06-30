@@ -91,7 +91,10 @@ We recommend one of the following solutions:
     If using HTCondor, this will be the partition containing the path defined by the HTCondor `EXECUTE` configuration
     variable.
 
-- Use batch-system capabilities to create a temporary, per-job directory that is cleaned up after each job is run.  For SLURM, we recommend the Lua plugin [Slurm-tmpdir](https://github.com/unlhcc/slurm-tmpdir/).  It will create per job `/scratch` and `/tmp` directories which will be cleaned up after the job completes.
+- Use batch-system capabilities to create a temporary, per-job directory that is cleaned up after each job is run.  
+  For SLURM, we recommend the Lua plugin [Slurm-tmpdir](https://github.com/unlhcc/slurm-tmpdir/) alongside prolog/epilog scripts 
+  (<https://slurm.schedmd.com/prolog_epilog.html>).  
+  It will create per job `/scratch` and `/tmp` directories which will be cleaned up after the job completes.
 - Periodically purge the directory (e.g. `tmpwatch`).
 
 #### For VO managers ####
