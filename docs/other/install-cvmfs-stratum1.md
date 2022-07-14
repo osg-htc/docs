@@ -86,14 +86,16 @@ Also, put the following in `/etc/logrotate.d/cvmfs`:
 If you are installing frontier-squid, create `/etc/httpd/conf.d/cvmfs.conf` and put the following lines into it:
 
 ```
-Listen 8081 KeepAlive On
+Listen 8081
+KeepAlive On
 ```
 
 If you are not installing frontier-squid, instead put the following lines into that file:
 
 ```
-Listen 8000 KeepAlive On
-Listen 8080 KeepAlive On
+Listen 8000
+Listen 8080
+KeepAlive On
 ```
 
 Then enable apache:
