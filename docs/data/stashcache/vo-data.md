@@ -17,7 +17,7 @@ Definitions
 
 - **Namespace:** a directory tree in the federation that is used to find VO data.
 - **Public data:** data that can be read by anyone.
-- **Protected data:** data that requires authentication to read.
+- **Protected data:** data that requires authorization to read.
 
 
 Requirements
