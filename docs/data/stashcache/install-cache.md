@@ -18,8 +18,8 @@ Before starting the installation process, consider the following requirements:
 * __Operating system:__ Ensure the host has [a supported operating system](../../release/supported_platforms.md)
 * __User IDs:__ If they do not exist already, the installation will create the Linux user IDs `condor` and
   `xrootd`
-* __Host certificate:__ Required for contacting the central OSDF redirector.
-  See our [documentation](../../security/host-certs.md) for instructions on how to request and install host certificates.
+* __Host certificate:__ Required for authentication.
+  See our [host certificate documentation](../../security/host-certs.md) for instructions on how to request and install host certificates.
 * __Network ports:__ The cache service requires the following ports open:
     * Inbound TCP port 1094 for file access via the XRootD protocol
     * Inbound TCP port 8000 for file access via HTTP and/or
@@ -41,8 +41,8 @@ Registering the Cache
 ---------------------
 
 To be part of the OSDF, your cache must be registered with the OSG.
-You will need basic information like the resource name and hostname,
-and the administrative and security contacts.
+You will need basic information like the resource name, hostname,
+host certificate DN, and the administrative and security contacts.
 
 
 ### Initial registration

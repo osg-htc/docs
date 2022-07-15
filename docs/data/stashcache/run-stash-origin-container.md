@@ -23,15 +23,15 @@ This document outlines how to run such an origin in a Docker container.
 Before Starting
 ---------------
 
-Before starting the installation process, consider the following points:
+Before starting the installation process, consider the following requirements:
 
 1. **Docker:** For the purpose of this guide, the host must have a running docker service and you must have the ability
 to start containers (i.e., belong to the `docker` Unix group).
 1. **Network ports:** The origin listens for incoming HTTP(S) and XRootD connections on port 1094.
 1. **File Systems:** The origin needs a host partition to store user data.
 1. **Hardware requirements:** We recommend that an origin has at least 1Gbps connectivity and 8GB of RAM.
-1. **Host certificate:** Presented to origin service clients to prove authenticity.
-  See our [documentation](../../security/host-certs.md) for instructions on how to request host certificates.
+1. **Host certificate:** Required for authentication.
+  See our [host certificate documentation](../../security/host-certs.md) for instructions on how to request host certificates.
 1. **Registration:** Before deploying an origin, you must
    [register the service](install-origin.md#registering-the-origin) in the OSG Topology
 
@@ -53,14 +53,11 @@ ORIGIN_FQDN=<FQDN>
 
 ### Providing a host certificate
 
-The service will need a certificate for contacting central OSDF services.
+The service will need a certificate for contacting central OSDF services and for authenticating connections.
 
-The certificate and key must be inside the container at `/etc/grid-security/xrd/xrd{cert,key}.pem`,
-owned by the `xrootd` user and group (UID/GID 10940).
-
-The easiest solution for this is to use your host certificate and key.
-Volume-mount the certificate to `/etc/grid-security/hostcert.pem` and the key to `/etc/grid-security/hostkey.pem`.
-The files will be copied with the right permissions on container startup.
+Follow our [host certificate documentation](../../security/host-certs.md) to obtain a host certificate and key.
+Then, volume-mount the host certificate to `/etc/grid-security/hostcert.pem`,
+and the key to `/etc/grid-security/hostkey.pem`.
 
 !!! note
     You must restart the container whenever you renew your certificate

@@ -28,14 +28,13 @@ to export its data to the data federation.
 Before Starting
 ---------------
 
-Before starting the installation process, consider the following points:
+Before starting the installation process, consider the following requirements:
 
 * __Operating system:__ A RHEL 7 or compatible operating system.
 * __User IDs:__ If they do not exist already, the installation will create the Linux user IDs `condor` and `xrootd`;
   only the `xrootd` user is utilized for the running daemons.
-* __Host certificate:__ The origin service uses a host certificate to authenticate with the caches it serves.
-  The [host certificate documentation](../../security/host-certs.md) provides more information on setting up host
-  certificates.
+* __Host certificate:__ Required for authentication.
+  See our [host certificate documentation](../../security/host-certs.md) for instructions on how to request and install host certificates.
 * __Network ports:__ The origin service requires the following ports open:
   * Inbound TCP port 1094 for file access via the XRootD protocol
   * Outbound TCP port 1213 to `redirector.osgstorage.org` for connecting to the data federation
