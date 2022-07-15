@@ -31,7 +31,8 @@ If the network usage regularly peaks at over one third of the bandwidth capacity
 Before starting the installation process, consider the following points (consulting [the Reference section below](#reference) as needed):
 
 -   **User IDs:** If it does not exist already, the installation will create the `squid` Linux user
--   **Network ports:** Clients within your cluster will communicate with Frontier Squid on port 3128 (TCP).
+-   **Network ports:**
+    Clients within your cluster (e.g., OSG user jobs) will communicate with Frontier Squid on port 3128 (TCP).
     Additionally, central infrastructure will monitor Frontier Squid through port 3401 (UDP);
     see [this section](#networking) for more details.
 -   **Host choice:** If you will be supporting the Frontier application at your site, review the
