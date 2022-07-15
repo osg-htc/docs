@@ -31,7 +31,9 @@ If the network usage regularly peaks at over one third of the bandwidth capacity
 Before starting the installation process, consider the following points (consulting [the Reference section below](#reference) as needed):
 
 -   **User IDs:** If it does not exist already, the installation will create the `squid` Linux user
--   **Network ports:** Frontier squid communicates on ports 3128 (TCP) and 3401 (UDP)
+-   **Network ports:** Clients within your cluster will communicate with Frontier Squid on port 3128 (TCP).
+    Additionally, central infrastructure will monitor Frontier Squid through port 3401 (UDP);
+    see [this section](#networking) for more details.
 -   **Host choice:** If you will be supporting the Frontier application at your site, review the
 [upstream documentation](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Hardware) to determine how to size your equipment.
 
@@ -191,10 +193,12 @@ create a configuration file before installation. Details are in the
 
 ### Networking
 
-| Service Name | Protocol | Port Number | Inbound | Outbound | Comment  |
-| ------------ | -------  | ----------  | ------- | -------- | -------- |
-| Squid        | tcp      | 3128        | ✓       | ✓        | Also limited in squid ACLs. Both in and outbound must not be wide open to internet simultaneously |
-| Squid monitor | udp     | 3401        | ✓       |          | Also limited in squid ACLs. Should be limited to monitoring server addresses |
+Open the following ports on your Frontier Squid hosts:
+
+| Port Number | Protocol | WAN | LAN | Comment                                                                             |
+|-------------|----------|-----|-----|-------------------------------------------------------------------------------------|
+| 3128        | tcp      |     | ✓   | Also limited in squid ACLs. Should be limited to access from your worker nodes      |
+| 3401        | udp      | ✓   |     | Also limited in squid ACLs. Should be limited to public monitoring server addresses |
 
 The addresses of the WLCG monitoring servers for use in firewalls are
 listed in the
