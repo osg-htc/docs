@@ -106,6 +106,25 @@ This is an example registration for a cache server that serves all public data _
     DN: /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=my-combo-cache.example.net
 ```
 
+
+#### Non-standard ports
+
+By default, an unauthenticated cache serves public data on port 8000,
+and an authenticated cache serves protected data on port 8443.
+If you change the ports for your cache instances, you must specify the new endpoints under the service, as follows:
+
+```yaml
+  MY_COMBO_OSDF_CACHE2:
+    FQDN: my-combo-cache2.example.net
+    Services:
+      XRootD cache server:
+        Description: OSDF cache server
+        Details:
+          endpoint_override: my-combo-cache2.example.net:8080
+          auth_endpoint_override: my-combo-cache2.example.net:8444
+```
+
+
 ### Finalizing registration
 
 Once initial registration is complete, you may start the installation process.
