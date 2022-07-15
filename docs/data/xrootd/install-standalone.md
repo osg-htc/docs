@@ -127,6 +127,33 @@ To set up XRootD in multi-user mode, install the `xrootd-multiuser` package:
 root@xrootd-standalone # yum install xrootd-multiuser
 ```
 
+#### Throttling IO requests
+
+XRootD allows throttling of requests to the underlying filesystem.
+To enable this,
+
+1.  In an `/etc/xrootd/config.d/*.cfg` file, e.g. `/etc/xrootd/config.d/99-local.cfg`, set the following configuration:
+
+        xrootd.fslib throttle default
+        throttle.throttle concurrency <CONCUR> data <RATE>
+
+    Replacing `<CONCUR>` with the IO concurrency limit and `<RATE>` with the data rate limit in bytes.
+    Note that you may also just specify either the concurrency limit:
+
+        xrootd.fslib throttle default
+        throttle.throttle concurrency <CONCUR>
+
+    Or the data rate limit:
+
+        xrootd.fslib throttle default
+        throttle.throttle data <RATE>
+
+1.  If XRootD is already running, restart the relevant [XRootD service](#using-xrootd) for your configuration to take
+    effect.
+
+For more details of the throttling implementation,
+see the [upstream documentation](https://github.com/xrootd/xrootd/tree/master/src/XrdThrottle).
+
 #### Enabling CMS TFC support (CMS sites only)
 
 For CMS sites, there is a package available to integrate rule-based name lookup using a `storage.xml` file.
