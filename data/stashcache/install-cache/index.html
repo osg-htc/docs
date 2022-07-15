@@ -2065,8 +2065,8 @@ decreasing access latency.</p>
   See our <a href="../../../security/host-certs/">documentation</a> for instructions on how to request and install host certificates.</li>
 <li><strong>Network ports:</strong> The cache service requires the following ports open:<ul>
 <li>Inbound TCP port 1094 for file access via the XRootD protocol</li>
-<li>Inbound TCP port 8000 for file access via HTTP</li>
-<li>Inbound TCP port 8443 for authenticated file access via HTTPS (optional)</li>
+<li>Inbound TCP port 8000 for file access via HTTP and/or</li>
+<li>Inbound TCP port 8443 for authenticated file access via HTTPS</li>
 <li>Outbound UDP port 9930 for reporting to <code>xrd-report.osgstorage.org</code> and <code>xrd-mon.osgstorage.org</code> for monitoring</li>
 </ul>
 </li>
@@ -2095,10 +2095,10 @@ The service type is <code>XRootD cache server</code>.</p>
 <ul>
 <li><code>ANY_PUBLIC</code> indicates that the cache is willing to serve public data from any VO.</li>
 <li><code>ANY</code> indicates that the cache is willing to serve data from any VO,
-  both public and non-public.
+  both public and protected.
   <code>ANY</code> implies <code>ANY_PUBLIC</code>.</li>
 </ul>
-<p>There are extra requirements for serving non-public data:</p>
+<p>There are extra requirements for serving protected data:</p>
 <ul>
 <li>In addition to the cache allowing a VO in the <code>AllowedVOs</code> list,
   that VO must also allow the cache in its <code>AllowedCaches</code> list.
@@ -2110,25 +2110,28 @@ The service type is <code>XRootD cache server</code>.</p>
 <p>This is an example registration for a cache server that serves all public data:
 <div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">MY_OSDF_CACHE</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">FQDN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-cache.example.net</span><span class="w"></span>
-<span class="w">    </span><span class="nt">Service</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">XRootD cache server</span><span class="w"></span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">Description</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OSDF cache server</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Services</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">XRootD cache server</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">Description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OSDF cache server</span><span class="w"></span>
 <span class="w">    </span><span class="nt">AllowedVOs</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ANY_PUBLIC</span><span class="w"></span>
 </code></pre></div></p>
-<p>This is an example registration for a cache server that only serves authenticated data for the Open Science Pool:
+<p>This is an example registration for a cache server that only serves protected data for the Open Science Pool:
 <div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">MY_AUTH_OSDF_CACHE</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">FQDN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-auth-cache.example.net</span><span class="w"></span>
-<span class="w">    </span><span class="nt">Service</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">XRootD cache server</span><span class="w"></span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">Description</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OSDF cache server</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Services</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">XRootD cache server</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">Description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OSDF cache server</span><span class="w"></span>
 <span class="w">    </span><span class="nt">AllowedVOs</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OSG</span><span class="w"></span>
 <span class="w">    </span><span class="nt">DN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=my-auth-cache.example.net</span><span class="w"></span>
 </code></pre></div></p>
-<p>This is an example registration for a cache server that serves all public data <em>and</em> authenticated data from the OSG VO:
+<p>This is an example registration for a cache server that serves all public data <em>and</em> protected data from the OSG VO:
 <div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">MY_COMBO_OSDF_CACHE</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">FQDN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-combo-cache.example.net</span><span class="w"></span>
-<span class="w">    </span><span class="nt">Service</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">XRootD cache server</span><span class="w"></span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">Description</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OSDF cache server</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Services</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">XRootD cache server</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">Description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OSDF cache server</span><span class="w"></span>
 <span class="w">    </span><span class="nt">AllowedVOs</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OSG</span><span class="w"></span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ANY_PUBLIC</span><span class="w"></span>

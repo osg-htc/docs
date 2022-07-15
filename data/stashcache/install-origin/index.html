@@ -2149,16 +2149,19 @@ Run the following command:</p>
 To do this, add an <code>AllowedVOs</code> list, with each line specifying a VO whose data the resource is willing to host.
 For example:
 <div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">MY_OSDF_ORIGIN</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">Service</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">XRootD origin server</span><span class="w"></span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">Description</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OSDF origin server</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Services</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">XRootD origin server</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">Description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OSDF origin server</span><span class="w"></span>
 <span class="w">    </span><span class="nt">AllowedVOs</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GLOW</span><span class="w"></span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OSG</span><span class="w"></span>
+<span class="w">    </span><span class="nt">DN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=my-osdf-origin.example.net</span><span class="w"></span>
 </code></pre></div>
 You can use the special value <code>ANY</code> to indicate that the origin will serve data from any VO that puts data on it.</p>
 <p>In addition to the origin allowing a VOs via the <code>AllowedVOs</code> list,
 that VO must also allow the origin in its <code>DataFederations/StashCache/AllowedOrigins</code> list.
 See the page on <a href="../vo-data/">getting your VO's data into OSDF</a>.</p>
+<p>Specifying the DN of your origin is not required but it is useful for testing.</p>
 <h2 id="updating-to-osg-36">Updating to OSG 3.6<a class="headerlink" href="#updating-to-osg-36" title="Permanent link">&para;</a></h2>
 <p>The OSG 3.5 series is reaching end-of-life on May 1, 2022.
 Admins are strongly encouraged to move their origins to OSG 3.6.</p>
