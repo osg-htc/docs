@@ -1964,7 +1964,10 @@ If the network usage regularly peaks at over one third of the bandwidth capacity
 <p>Before starting the installation process, consider the following points (consulting <a href="#reference">the Reference section below</a> as needed):</p>
 <ul>
 <li><strong>User IDs:</strong> If it does not exist already, the installation will create the <code>squid</code> Linux user</li>
-<li><strong>Network ports:</strong> Frontier squid communicates on ports 3128 (TCP) and 3401 (UDP)</li>
+<li><strong>Network ports:</strong>
+    Clients within your cluster (e.g., OSG user jobs) will communicate with Frontier Squid on port 3128 (TCP).
+    Additionally, central infrastructure will monitor Frontier Squid through port 3401 (UDP);
+    see <a href="#networking">this section</a> for more details.</li>
 <li><strong>Host choice:</strong> If you will be supporting the Frontier application at your site, review the
 <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Hardware">upstream documentation</a> to determine how to size your equipment.</li>
 </ul>
@@ -2146,33 +2149,31 @@ already exists.</p>
 create a configuration file before installation. Details are in the
 <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Preparation">upstream documentation Preparation section</a>.</p>
 <h3 id="networking">Networking<a class="headerlink" href="#networking" title="Permanent link">&para;</a></h3>
+<p>Open the following ports on your Frontier Squid hosts:</p>
 <table>
 <thead>
 <tr>
-<th>Service Name</th>
-<th>Protocol</th>
 <th>Port Number</th>
-<th>Inbound</th>
-<th>Outbound</th>
+<th>Protocol</th>
+<th>WAN</th>
+<th>LAN</th>
 <th>Comment</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Squid</td>
-<td>tcp</td>
 <td>3128</td>
+<td>tcp</td>
+<td></td>
 <td>✓</td>
-<td>✓</td>
-<td>Also limited in squid ACLs. Both in and outbound must not be wide open to internet simultaneously</td>
+<td>Also limited in squid ACLs. Should be limited to access from your worker nodes</td>
 </tr>
 <tr>
-<td>Squid monitor</td>
-<td>udp</td>
 <td>3401</td>
+<td>udp</td>
 <td>✓</td>
 <td></td>
-<td>Also limited in squid ACLs. Should be limited to monitoring server addresses</td>
+<td>Also limited in squid ACLs. Should be limited to public monitoring server addresses</td>
 </tr>
 </tbody>
 </table>
