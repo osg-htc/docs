@@ -22,8 +22,8 @@ Before starting the installation process, consider the following requirements:
   See our [documentation](../../security/host-certs.md) for instructions on how to request and install host certificates.
 * __Network ports:__ The cache service requires the following ports open:
     * Inbound TCP port 1094 for file access via the XRootD protocol
-    * Inbound TCP port 8000 for file access via HTTP
-    * Inbound TCP port 8443 for authenticated file access via HTTPS (optional)
+    * Inbound TCP port 8000 for file access via HTTP and/or
+    * Inbound TCP port 8443 for authenticated file access via HTTPS
     * Outbound UDP port 9930 for reporting to `xrd-report.osgstorage.org` and `xrd-mon.osgstorage.org` for monitoring
 * __Hardware requirements:__ We recommend that a cache has at least 10Gbps connectivity, 1TB of
  disk space for the cache directory, and 12GB of RAM.
@@ -59,10 +59,10 @@ There are special values you may use in `AllowedVOs`:
 
 - `ANY_PUBLIC` indicates that the cache is willing to serve public data from any VO.
 - `ANY` indicates that the cache is willing to serve data from any VO,
-  both public and non-public.
+  both public and protected.
   `ANY` implies `ANY_PUBLIC`.
 
-There are extra requirements for serving non-public data:
+There are extra requirements for serving protected data:
 
 - In addition to the cache allowing a VO in the `AllowedVOs` list,
   that VO must also allow the cache in its `AllowedCaches` list.
@@ -75,29 +75,32 @@ This is an example registration for a cache server that serves all public data:
 ```yaml
   MY_OSDF_CACHE:
     FQDN: my-cache.example.net
-    Service: XRootD cache server
-      Description: OSDF cache server
+    Services:
+      XRootD cache server:
+        Description: OSDF cache server
     AllowedVOs:
       - ANY_PUBLIC
 ```
 
-This is an example registration for a cache server that only serves authenticated data for the Open Science Pool:
+This is an example registration for a cache server that only serves protected data for the Open Science Pool:
 ```yaml
   MY_AUTH_OSDF_CACHE:
     FQDN: my-auth-cache.example.net
-    Service: XRootD cache server
-      Description: OSDF cache server
+    Services:
+      XRootD cache server:
+        Description: OSDF cache server
     AllowedVOs:
       - OSG
     DN: /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=my-auth-cache.example.net
 ```
 
-This is an example registration for a cache server that serves all public data _and_ authenticated data from the OSG VO:
+This is an example registration for a cache server that serves all public data _and_ protected data from the OSG VO:
 ```yaml
   MY_COMBO_OSDF_CACHE:
     FQDN: my-combo-cache.example.net
-    Service: XRootD cache server
-      Description: OSDF cache server
+    Services:
+      XRootD cache server:
+        Description: OSDF cache server
     AllowedVOs:
       - OSG
       - ANY_PUBLIC

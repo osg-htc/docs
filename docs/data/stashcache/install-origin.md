@@ -229,17 +229,22 @@ To do this, add an `AllowedVOs` list, with each line specifying a VO whose data 
 For example:
 ```yaml
   MY_OSDF_ORIGIN:
-    Service: XRootD origin server
-      Description: OSDF origin server
+    Services:
+      XRootD origin server:
+        Description: OSDF origin server
     AllowedVOs:
       - GLOW
       - OSG
+    DN: /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=my-osdf-origin.example.net
+
 ```
 You can use the special value `ANY` to indicate that the origin will serve data from any VO that puts data on it.
 
 In addition to the origin allowing a VOs via the `AllowedVOs` list,
 that VO must also allow the origin in its `DataFederations/StashCache/AllowedOrigins` list.
 See the page on [getting your VO's data into OSDF](vo-data.md).
+
+Specifying the DN of your origin is not required but it is useful for testing.
 
 Updating to OSG 3.6
 -------------------
