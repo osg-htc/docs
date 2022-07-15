@@ -30,7 +30,7 @@ to start containers (i.e., belong to the `docker` Unix group).
 1. **Network ports:** The origin listens for incoming HTTP(S) and XRootD connections on port 1094.
 1. **File Systems:** The origin needs a host partition to store user data.
 1. **Hardware requirements:** We recommend that an origin has at least 1Gbps connectivity and 8GB of RAM.
-1. **Host certificate:** Required for joining the OSDF.
+1. **Host certificate:** Presented to origin service clients to prove authenticity.
   See our [documentation](../../security/host-certs.md) for instructions on how to request host certificates.
 1. **Registration:** Before deploying an origin, you must
    [register the service](install-origin.md#registering-the-origin) in the OSG Topology
@@ -51,7 +51,7 @@ XC_RESOURCENAME=YOUR_SITE_NAME
 ORIGIN_FQDN=<FQDN>
 ```
 
-### Ensure the xrootd service has a certificate
+### Providing a host certificate
 
 The service will need a certificate for contacting central OSDF services.
 

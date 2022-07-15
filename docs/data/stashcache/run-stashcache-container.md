@@ -23,7 +23,7 @@ Before starting the installation process, consider the following requirements:
 
 1. **Docker:** For the purpose of this guide, the host must have a running docker service
    and you must have the ability to start containers (i.e., belong to the `docker` Unix group).
-1. **Network ports:** The cache service requires the following ports open:
+1. **Network ports:** The cache service requires the following open ports:
      * Inbound TCP port 1094 for unauthenticated file access via the XRootD protocol (optional)
      * Inbound TCP port 8000 for unauthenticated file access via HTTP(S)
      * Inbound TCP port 8443 for authenticated file access via HTTPS (optional)
