@@ -1203,12 +1203,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#registering-the-cache" class="md-nav__link">
+    Registering the Cache
+  </a>
+  
+    <nav class="md-nav" aria-label="Registering the Cache">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initial-registration" class="md-nav__link">
+    Initial registration
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#configuring-the-osdf-cache" class="md-nav__link">
     Configuring the OSDF Cache
   </a>
   
     <nav class="md-nav" aria-label="Configuring the OSDF Cache">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#providing-a-host-certificate" class="md-nav__link">
+    Providing a host certificate
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#optional-configuration" class="md-nav__link">
@@ -1799,12 +1826,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#registering-the-cache" class="md-nav__link">
+    Registering the Cache
+  </a>
+  
+    <nav class="md-nav" aria-label="Registering the Cache">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initial-registration" class="md-nav__link">
+    Initial registration
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#configuring-the-osdf-cache" class="md-nav__link">
     Configuring the OSDF Cache
   </a>
   
     <nav class="md-nav" aria-label="Configuring the OSDF Cache">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#providing-a-host-certificate" class="md-nav__link">
+    Providing a host certificate
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#optional-configuration" class="md-nav__link">
@@ -1911,15 +1965,87 @@ This document outlines how to run a cache in a Docker container.</p>
 <p>The OSDF cache was previously named "Stash Cache" and some documentation and software may use the old name.</p>
 </div>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
-<p>Before starting the installation process, consider the following points:</p>
+<p>Before starting the installation process, consider the following requirements:</p>
 <ol>
 <li><strong>Docker:</strong> For the purpose of this guide, the host must have a running docker service
    and you must have the ability to start containers (i.e., belong to the <code>docker</code> Unix group).</li>
-<li><strong>Network ports:</strong> The cache listens for incoming HTTP/S connections on port 8000 (by default)</li>
+<li><strong>Network ports:</strong> The cache service requires the following open ports:<ul>
+<li>Inbound TCP port 1094 for unauthenticated file access via the XRootD protocol (optional)</li>
+<li>Inbound TCP port 8000 for unauthenticated file access via HTTP(S) and/or</li>
+<li>Inbound TCP port 8443 for authenticated file access via HTTPS</li>
+<li>Outbound UDP port 9930 for reporting to <code>xrd-report.osgstorage.org</code> and <code>xrd-mon.osgstorage.org</code> for monitoring</li>
+</ul>
+</li>
 <li><strong>File Systems:</strong> The cache needs host partitions to store user data.
-   For improved performance and storage, we recommend multiple partitions for handling namespaces (HDD), data (HDDs),
-   and metadata (SSDs).</li>
+   For improved performance and storage, we recommend multiple partitions for handling namespaces (HDD, SSD, or NVMe),
+   data (HDDs), and metadata (SSDs or NVMe).</li>
+<li><strong>Host certificate:</strong> Required for authentication.
+   See our <a href="../../../security/host-certs/">host certificate documentation</a> for instructions on how to request host certificates.</li>
+<li><strong>Hardware requirements:</strong> We recommend that a cache has at least 10Gbps connectivity,
+   1 TB of disk space for the cache directory, and 12GB of RAM.</li>
 </ol>
+<!-- NOTE: Keep the "Registering the Cache" section below in sync with install-cache.md -->
+
+<h2 id="registering-the-cache">Registering the Cache<a class="headerlink" href="#registering-the-cache" title="Permanent link">&para;</a></h2>
+<p>To be part of the OSDF, your cache must be registered with the OSG.
+You will need basic information like the resource name, hostname,
+host certificate DN, and the administrative and security contacts.</p>
+<h3 id="initial-registration">Initial registration<a class="headerlink" href="#initial-registration" title="Permanent link">&para;</a></h3>
+<p>To register your cache host, follow the general registration instructions <a href="https://osg-htc.org/docs/common/registration/#new-resources">here</a>.
+The service type is <code>XRootD cache server</code>.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This step must be completed before installation.</p>
+</div>
+<p>In your registration, you must specify which VOs your cache will serve by adding an <code>AllowedVOs</code> list, with each line specifying a VO whose data you are willing to cache.</p>
+<p>There are special values you may use in <code>AllowedVOs</code>:</p>
+<ul>
+<li><code>ANY_PUBLIC</code> indicates that the cache is willing to serve public data from any VO.</li>
+<li><code>ANY</code> indicates that the cache is willing to serve data from any VO,
+  both public and protected.
+  <code>ANY</code> implies <code>ANY_PUBLIC</code>.</li>
+</ul>
+<p>There are extra requirements for serving protected data:</p>
+<ul>
+<li>In addition to the cache allowing a VO in the <code>AllowedVOs</code> list,
+  that VO must also allow the cache in its <code>AllowedCaches</code> list.
+  See the page on <a href="../vo-data/">getting your VO's data into OSDF</a>.</li>
+<li>There must be an authenticated XRootD instance on the cache server.</li>
+<li>There must be a <code>DN</code> attribute in the resource registration
+  with the <a href="../../../security/host-certs/overview/#before-starting">subject DN</a> of the host certificate</li>
+</ul>
+<p>This is an example registration for a cache server that serves all public data:
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">MY_OSDF_CACHE</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">FQDN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-cache.example.net</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Services</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">XRootD cache server</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">Description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OSDF cache server</span><span class="w"></span>
+<span class="w">    </span><span class="nt">AllowedVOs</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ANY_PUBLIC</span><span class="w"></span>
+</code></pre></div></p>
+<p>This is an example registration for a cache server that only serves protected data for the Open Science Pool:
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">MY_AUTH_OSDF_CACHE</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">FQDN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-auth-cache.example.net</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Services</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">XRootD cache server</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">Description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OSDF cache server</span><span class="w"></span>
+<span class="w">    </span><span class="nt">AllowedVOs</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OSG</span><span class="w"></span>
+<span class="w">    </span><span class="nt">DN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=my-auth-cache.example.net</span><span class="w"></span>
+</code></pre></div></p>
+<p>This is an example registration for a cache server that serves all public data <em>and</em> protected data from the OSG VO:
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">MY_COMBO_OSDF_CACHE</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">FQDN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-combo-cache.example.net</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Services</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">XRootD cache server</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">Description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OSDF cache server</span><span class="w"></span>
+<span class="w">    </span><span class="nt">AllowedVOs</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OSG</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ANY_PUBLIC</span><span class="w"></span>
+<span class="w">    </span><span class="nt">DN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=my-combo-cache.example.net</span><span class="w"></span>
+</code></pre></div></p>
+<!-- NOTE: Keep the "Registering the Cache" section above in sync with install-cache.md -->
+
 <h2 id="configuring-the-osdf-cache">Configuring the OSDF Cache<a class="headerlink" href="#configuring-the-osdf-cache" title="Permanent link">&para;</a></h2>
 <p>In addition to the required configuration above (ports and file systems),
 you may also configure the behavior of your cache with the following variables using an environment variable file:</p>
@@ -1930,20 +2056,33 @@ and <code>&lt;FQDN&gt;</code> with the public DNS name that should be used to co
 <div class="highlight"><pre><span></span><code>XC_RESOURCENAME=&lt;YOUR_RESOURCE_NAME&gt;
 CACHE_FQDN=&lt;FQDN&gt;
 </code></pre></div>
+<h3 id="providing-a-host-certificate">Providing a host certificate<a class="headerlink" href="#providing-a-host-certificate" title="Permanent link">&para;</a></h3>
+<p>The service will need a certificate for contacting central OSDF services
+and for authenticating to origins.</p>
+<p>Follow our <a href="../../../security/host-certs/">host certificate documentation</a> to obtain a host certificate and key.
+Then, volume-mount the host certificate to <code>/etc/grid-security/hostcert.pem</code>,
+and the key to <code>/etc/grid-security/hostkey.pem</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You must restart the container whenever you renew your certificate
+in order for the services to pick up the new certificate.
+If you automate certificate renewal, you should automate restarts as well.
+For example, if you are using Certbot for Let's Encrypt, you should write a "deploy hook" as documented
+<a href="https://certbot.eff.org/docs/using.html#renewing-certificates">on the Certbot site</a>.</p>
+</div>
 <h3 id="optional-configuration">Optional configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h3>
 <p>Further behavior of the cache can be configured by setting the following in the environment variable file:</p>
 <ul>
-<li><code>XC_SPACE_HIGH_WM</code>, <code>XC_SPACE_LOW_WM</code>: High-water and low-water marks for disk usage;
-      when usage goes above the high-water mark, the cache will delete files until it hits the low-water mark.</li>
-<li><code>XC_PORT</code>: TCP port that XCache listens on</li>
+<li><code>XC_SPACE_HIGH_WM</code>, <code>XC_SPACE_LOW_WM</code>: High-water and low-water marks for disk usage,
+  as numbers between 0.00 (0%) and 1.00 (100%);
+  when usage goes above the high-water mark, the cache will delete files until it hits the low-water mark.</li>
 <li><code>XC_RAMSIZE</code>: Amount of memory to use for storing blocks before writting them to disk. (Use higher for slower disks).</li>
 <li><code>XC_BLOCKSIZE</code>: Size of the blocks in the cache.</li>
 <li><code>XC_PREFETCH</code>: Number of blocks to prefetch from a file at once.
-       This controls how aggressive the cache is to request portions of a file.
-       If you set it to <code>0</code>, prefetching will be disabled, but that is not recommended.</li>
+       This controls how aggressive the cache is to request portions of a file.</li>
 </ul>
 <h2 id="running-a-cache">Running a Cache<a class="headerlink" href="#running-a-cache" title="Permanent link">&para;</a></h2>
-<p>Cache containers  may be run with either multiple mounted host partitions (recommended) or a single host
+<p>Cache containers may be run with either multiple mounted host partitions (recommended) or a single host
 partition.</p>
 <p>It is recommended to use a container orchestration service such as <a href="https://docs.docker.com/compose/">docker-compose</a>
 or <a href="https://kubernetes.io/">kubernetes</a> whose details are beyond the scope of this document.
@@ -1952,13 +2091,17 @@ production-appropriate method using systemd.</p>
 <h3 id="multiple-host-partitions-recommended">Multiple host partitions (recommended)<a class="headerlink" href="#multiple-host-partitions-recommended" title="Permanent link">&para;</a></h3>
 <p>For improved performance and storage,
 especially if your cache is serving over 10 TB of data,
-we recommend multiple partitions for handling namespaces (HDD, SSD, or NVME), data (HDDs), and metadata (SSDs or NVME).</p>
+we recommend multiple partitions for handling namespaces (HDD, SSD, or NVMe), data (HDDs), and metadata (SSDs or NVMe).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Under this configuration the <code>&lt;NAMESPACE PARTITION&gt;</code> is not used to store the files.
 Instead, the partition stores symlinks to the files in the metadata and data partitions.</p>
 </div>
-<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>docker run --rm --publish &lt;HOST PORT&gt;:8000 <span class="se">\</span>
+<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>docker run --rm <span class="se">\</span>
+             --publish &lt;HTTP HOST PORT&gt;:8000 <span class="se">\</span>
+             --publish &lt;HTTPS HOST PORT&gt;:8443 <span class="se">\</span>
+             --volume &lt;HOST CERT&gt;:/etc/grid-security/hostcert.pem <span class="se">\</span>
+             --volume &lt;HOST KEY&gt;:/etc/grid-security/hostkey.pem <span class="se">\</span>
              --volume &lt;NAMESPACE PARTITION&gt;:/xcache/namespace <span class="se">\</span>
              --volume &lt;METADATA PARTITION <span class="m">1</span>&gt;:/xcache/meta1
 <span class="go">             ...</span>
@@ -1971,22 +2114,28 @@ Instead, the partition stores symlinks to the files in the metadata and data par
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>For over 100 TB of assigned space we highly encourage to use this setup and mount <code>&lt;NAMESPACE PARTITION&gt;</code> in
-solid state disks or NVME.</p>
+<p>For over 10 TB of assigned space we highly encourage to use this setup and mount <code>&lt;NAMESPACE PARTITION&gt;</code> in
+solid state disks or NVMe.</p>
 </div>
 <h3 id="single-host-partition">Single host partition<a class="headerlink" href="#single-host-partition" title="Permanent link">&para;</a></h3>
 <p>For a simpler installation, you may use a single host partition mounted to <code>/xcache/</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>docker run --rm --publish &lt;HOST PORT&gt;:8000 <span class="se">\</span>
+<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>docker run --rm <span class="se">\</span>
+             --publish &lt;HTTP HOST PORT&gt;:8000 <span class="se">\</span>
+             --publish &lt;HTTPS HOST PORT&gt;:8443 <span class="se">\</span>
              --volume &lt;HOST PARTITION&gt;:/xcache <span class="se">\</span>
+             --volume &lt;HOST CERT&gt;:/etc/grid-security/hostcert.pem <span class="se">\</span>
+             --volume &lt;HOST KEY&gt;:/etc/grid-security/hostkey.pem <span class="se">\</span>
              --env-file<span class="o">=</span>/opt/xcache/.env <span class="se">\</span>
              opensciencegrid/stash-cache:3.6-release
 </code></pre></div>
 <h3 id="running-a-cache-on-container-with-systemd">Running a cache on container with systemd<a class="headerlink" href="#running-a-cache-on-container-with-systemd" title="Permanent link">&para;</a></h3>
 <p>An example systemd service file for the OSDF cache.
-This will require creating the environment file in the directory <code>/opt/xcache/.env</code>. </p>
+This will require creating the environment file in the directory <code>/opt/xcache/.env</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This example systemd file assumes <code>&lt;HOST PORT&gt;</code> is <code>8000</code> and  <code>&lt;HOST PARTITION&gt;</code> is <code>/srv/cache</code>.</p>
+<p>This example systemd file assumes <code>&lt;HTTP HOST PORT&gt;</code> is <code>8000</code>, <code>&lt;HTTPS HOST PORT&gt;</code> is <code>8443</code>, 
+<code>&lt;HOST PARTITION&gt;</code> is <code>/srv/cache</code>, and the cert and key to use are in <code>/etc/ssl/host.crt</code> and <code>/etc/ssl/host.key</code>,
+respectively.</p>
 </div>
 <p>Create the systemd service file <code>/etc/systemd/system/docker.stash-cache.service</code> as follows:</p>
 <div class="highlight"><pre><span></span><code>[Unit]
@@ -2000,7 +2149,14 @@ Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
 ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-cache:3.6-release
-ExecStart=/usr/bin/docker run --rm --name %n --publish 8000:8000 --volume /srv/cache:/xcache --env-file /opt/xcache/.env opensciencegrid/stash-cache:3.6-release
+ExecStart=/usr/bin/docker run --rm --name %n \
+  --publish 8000:8000 \
+  --publish 8443:8443 \
+  --volume /srv/cache:/xcache \
+  --volume /etc/ssl/host.crt:/etc/grid-security/hostcert.pem \
+  --volume /etc/ssl/host.key:/etc/grid-security/hostkey.pem \
+  --env-file /opt/xcache/.env \
+  opensciencegrid/stash-cache:3.6-release
 
 [Install]
 WantedBy=multi-user.target
@@ -2011,15 +2167,16 @@ WantedBy=multi-user.target
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>You must <a href="../install-cache/#registering-the-cache">register</a> the cache before considering it a
-production service.</p>
+<p>You must <a href="../install-cache/#registering-the-cache">register</a> the cache before starting it up.</p>
 </div>
 <h3 id="network-optimization">Network optimization<a class="headerlink" href="#network-optimization" title="Permanent link">&para;</a></h3>
-<p>For caches that are connected to NIC's over <code>40Gbps</code> we recommend that you disable the virtualized network and "bind" the
+<p>For caches that are connected to NICs over 40 Gbps we recommend that you disable the virtualized network and "bind" the
 container to the host network:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>docker run --rm  <span class="se">\</span>
              --network<span class="o">=</span><span class="s2">&quot;host&quot;</span> <span class="se">\</span>
              --volume &lt;HOST PARTITION&gt;:/cache <span class="se">\</span>
+             --volume &lt;HOST CERT&gt;:/etc/grid-security/hostcert.pem <span class="se">\</span>
+             --volume &lt;HOST KEY&gt;:/etc/grid-security/hostkey.pem <span class="se">\</span>
              --env-file<span class="o">=</span>/opt/xcache/.env <span class="se">\</span>
              opensciencegrid/stash-cache:3.6-release
 </code></pre></div>
@@ -2034,8 +2191,8 @@ If you set a limit on the container's memory usage via the docker option <code>-
 make sure it is at least twice the value of <code>XC_RAMSIZE</code>.</p>
 <h2 id="validating-the-cache">Validating the Cache<a class="headerlink" href="#validating-the-cache" title="Permanent link">&para;</a></h2>
 <p>The cache server functions as a normal HTTP server and can interact with typical HTTP clients, such as <code>curl</code>.
-Here, <code>&lt;HOST PORT&gt;</code> is the port chosen in the <code>docker run</code> command, <code>8000</code> by default.</p>
-<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>curl -O http://cache_host:&lt;HOST PORT&gt;/osgconnect/public/rynge/test.data
+Here, <code>&lt;HTTP HOST PORT&gt;</code> is the port chosen in the <code>docker run</code> command, <code>8000</code> by default.</p>
+<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>curl -O http://cache_host:&lt;HTTP HOST PORT&gt;/osgconnect/public/rynge/test.data
 </code></pre></div>
 <p><code>curl</code> may not correctly report a failure, so verify that the contents of the file are:
 <div class="highlight"><pre><span></span><code>hello world!

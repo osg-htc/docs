@@ -1268,6 +1268,19 @@
     Configuring the Origin
   </a>
   
+    <nav class="md-nav" aria-label="Configuring the Origin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#providing-a-host-certificate" class="md-nav__link">
+    Providing a host certificate
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1769,6 +1782,19 @@
     Configuring the Origin
   </a>
   
+    <nav class="md-nav" aria-label="Configuring the Origin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#providing-a-host-certificate" class="md-nav__link">
+    Providing a host certificate
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1848,15 +1874,17 @@ This document outlines how to run such an origin in a Docker container.</p>
 <p>The OSDF Origin was previously named "Stash Origin" and some documentation and software may use the old name.</p>
 </div>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
-<p>Before starting the installation process, consider the following points:</p>
+<p>Before starting the installation process, consider the following requirements:</p>
 <ol>
 <li><strong>Docker:</strong> For the purpose of this guide, the host must have a running docker service and you must have the ability
 to start containers (i.e., belong to the <code>docker</code> Unix group).</li>
-<li><strong>Network ports:</strong> The origin listens for incoming HTTP/S and XRootD connections on ports 1094 and 1095 (by
-default).</li>
+<li><strong>Network ports:</strong> The origin listens for incoming HTTP(S) and XRootD connections on port 1094.</li>
 <li><strong>File Systems:</strong> The origin needs a host partition to store user data.</li>
+<li><strong>Hardware requirements:</strong> We recommend that an origin has at least 1Gbps connectivity and 8GB of RAM.</li>
+<li><strong>Host certificate:</strong> Required for authentication.
+  See our <a href="../../../security/host-certs/">host certificate documentation</a> for instructions on how to request host certificates.</li>
 <li><strong>Registration:</strong> Before deploying an origin, you must
-   <a href="../install-origin/#registering-the-origin">registered the service</a> in the OSG Topology</li>
+   <a href="../install-origin/#registering-the-origin">register the service</a> in the OSG Topology</li>
 </ol>
 <h2 id="configuring-the-origin">Configuring the Origin<a class="headerlink" href="#configuring-the-origin" title="Permanent link">&para;</a></h2>
 <p>In addition to the required configuration above (ports and file systems), you may also configure the behavior of your
@@ -1868,6 +1896,19 @@ and <code>&lt;FQDN&gt;</code> with the public DNS name that should be used to co
 <div class="highlight"><pre><span></span><code>XC_RESOURCENAME=YOUR_SITE_NAME
 ORIGIN_FQDN=&lt;FQDN&gt;
 </code></pre></div>
+<h3 id="providing-a-host-certificate">Providing a host certificate<a class="headerlink" href="#providing-a-host-certificate" title="Permanent link">&para;</a></h3>
+<p>The service will need a certificate for contacting central OSDF services and for authenticating connections.</p>
+<p>Follow our <a href="../../../security/host-certs/">host certificate documentation</a> to obtain a host certificate and key.
+Then, volume-mount the host certificate to <code>/etc/grid-security/hostcert.pem</code>,
+and the key to <code>/etc/grid-security/hostkey.pem</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You must restart the container whenever you renew your certificate
+in order for the services to pick up the new certificate.
+If you automate certificate renewal, you should automate restarts as well.
+For example, if you are using Certbot for Let's Encrypt, you should write a "deploy hook" as documented
+<a href="https://certbot.eff.org/docs/using.html#renewing-certificates">on the Certbot site</a>.</p>
+</div>
 <h2 id="populating-origin-data">Populating Origin Data<a class="headerlink" href="#populating-origin-data" title="Permanent link">&para;</a></h2>
 <p>The OSDF namespace is shared by multiple VOs so you must
 <a href="../vo-data/#choosing-namespaces">choose a namespace</a> for your own VO's data.
@@ -1881,8 +1922,9 @@ or <a href="https://kubernetes.io/">kubernetes</a> whose details are beyond the 
 The following sections provide examples for starting origin containers from the command-line as well as a more
 production-appropriate method using systemd.</p>
 <div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>docker run --rm --publish <span class="m">1094</span>:1094 <span class="se">\</span>
-             --publish <span class="m">1095</span>:1095 <span class="se">\</span>
              --volume &lt;HOST PARTITION&gt;:/xcache/namespace <span class="se">\</span>
+             --volume &lt;HOST CERT&gt;:/etc/grid-security/hostcert.pem <span class="se">\</span>
+             --volume &lt;HOST KEY&gt;:/etc/grid-security/hostkey.pem <span class="se">\</span>
              --env-file<span class="o">=</span>/opt/origin/.env <span class="se">\</span>
              opensciencegrid/stash-origin:3.6-release
 </code></pre></div>
@@ -1897,7 +1939,9 @@ See <a href="#populating-origin-data">this section</a> for details.</p>
 This will require creating the environment file in the directory <code>/opt/origin/.env</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This example systemd file assumes <code>&lt;HOST PARTITION&gt;</code> is <code>/srv/origin-public</code>.</p>
+<p>This example systemd file assumes <code>&lt;HOST PARTITION&gt;</code> is <code>/srv/origin-public</code>,
+and the cert and key to use are in <code>/etc/ssl/host.crt</code> and <code>/etc/ssl/host.key</code>,
+respectively.</p>
 </div>
 <p>Create the systemd service file <code>/etc/systemd/system/docker.stash-origin.service</code> as follows:</p>
 <div class="highlight"><pre><span></span><code>[Unit]
@@ -1911,9 +1955,14 @@ Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
 ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin:3.6-release
-ExecStart=/usr/bin/docker run --rm --name %n -p 1094:1094 -p 1095:1095 -v /srv/origin-public:/xcache/namespace --env-file /opt/origin/.env opensciencegrid/stash-origin:3.6-release
+ExecStart=/usr/bin/docker run --rm --name %n --publish 1094:1094 \
+  --volume /srv/origin-public:/xcache/namespace \
+  --volume /etc/ssl/host.crt:/etc/grid-security/hostcert.pem \
+  --volume /etc/ssl/host.key:/etc/grid-security/hostkey.pem \
+  --env-file /opt/origin/.env \
+  opensciencegrid/stash-origin:3.6-release
 
-[Install] 
+[Install]
 WantedBy=multi-user.target
 </code></pre></div>
 <p>Enable and start the service with:</p>
@@ -1922,8 +1971,7 @@ WantedBy=multi-user.target
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>You must <a href="../install-origin/#registering-the-origin">register</a> the origin before considering it a
-production service.</p>
+<p>You must <a href="../install-origin/#registering-the-origin">register</a> the origin before starting it up.</p>
 </div>
 <h2 id="validating-origin">Validating Origin<a class="headerlink" href="#validating-origin" title="Permanent link">&para;</a></h2>
 <p>To validate the origin please follow the

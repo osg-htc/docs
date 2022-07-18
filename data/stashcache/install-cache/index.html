@@ -2060,9 +2060,8 @@ decreasing access latency.</p>
 <li><strong>Operating system:</strong> Ensure the host has <a href="../../../release/supported_platforms/">a supported operating system</a></li>
 <li><strong>User IDs:</strong> If they do not exist already, the installation will create the Linux user IDs <code>condor</code> and
   <code>xrootd</code></li>
-<li><strong>Host certificate:</strong> Required for reporting and authenticated caches.
-  Authenticated caching is an optional feature.
-  See our <a href="../../../security/host-certs/">documentation</a> for instructions on how to request and install host certificates.</li>
+<li><strong>Host certificate:</strong> Required for authentication.
+  See our <a href="../../../security/host-certs/">host certificate documentation</a> for instructions on how to request and install host certificates.</li>
 <li><strong>Network ports:</strong> The cache service requires the following ports open:<ul>
 <li>Inbound TCP port 1094 for file access via the XRootD protocol</li>
 <li>Inbound TCP port 8000 for file access via HTTP and/or</li>
@@ -2079,10 +2078,12 @@ decreasing access latency.</p>
 <li>Prepare <a href="../../../common/yum/">the required Yum repositories</a></li>
 <li>Install <a href="../../../common/ca/">CA certificates</a></li>
 </ul>
+<!-- NOTE: Keep the "Registering the Cache" section below in sync with run-stashcache-container.md -->
+
 <h2 id="registering-the-cache">Registering the Cache<a class="headerlink" href="#registering-the-cache" title="Permanent link">&para;</a></h2>
 <p>To be part of the OSDF, your cache must be registered with the OSG.
-You will need basic information like the resource name and hostname,
-and the administrative and security contacts.</p>
+You will need basic information like the resource name, hostname,
+host certificate DN, and the administrative and security contacts.</p>
 <h3 id="initial-registration">Initial registration<a class="headerlink" href="#initial-registration" title="Permanent link">&para;</a></h3>
 <p>To register your cache host, follow the general registration instructions <a href="https://osg-htc.org/docs/common/registration/#new-resources">here</a>.
 The service type is <code>XRootD cache server</code>.</p>
@@ -2141,6 +2142,8 @@ The service type is <code>XRootD cache server</code>.</p>
 <p>Once initial registration is complete, you may start the installation process.
 In the meantime, open a <a href="https://support.opensciencegrid.org">help ticket</a> with your cache name.
 Mention in your ticket that you would like to "Finalize the cache registration."</p>
+<!-- NOTE: Keep the "Registering the Cache" section above in sync with run-stashcache-container.md -->
+
 <h2 id="installing-the-cache">Installing the Cache<a class="headerlink" href="#installing-the-cache" title="Permanent link">&para;</a></h2>
 <p>The OSDF software consists of an XRootD server with special configuration and supporting services.
 To simplify installation, OSG provides convenience RPMs that install all required
