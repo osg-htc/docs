@@ -36,7 +36,7 @@ Latest News
 
 ### **July 28, 2022:** gratia-probe 2.7.0, blahp 2.2.1, HTCondor 9.0.15, CVMFS 2.9.3
 -  gratia-probe 2.7.0
-    -   Report allocated CPUs if available
+    -   Fix issue with accounting for whole node Slurm pilots by reporting allocated CPUs if available
     -   Fix broken dcache-transfer probe
     -   Improve mechanism to extract Resource Name
     -   Add back missing gratia-probe-services package
