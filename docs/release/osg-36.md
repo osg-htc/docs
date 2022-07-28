@@ -34,7 +34,7 @@ The following issues are known to currently affect packages distributed in OSG 3
 Latest News
 -----------
 
-### **June 28, 2022:** gratia-probe 2.7.0, blahp 2.2.1, HTCondor 9.0.15, CVMFS 2.9.3
+### **July 28, 2022:** gratia-probe 2.7.0, blahp 2.2.1, HTCondor 9.0.15, CVMFS 2.9.3
 -  gratia-probe 2.7.0
     -   Report allocated CPUs if available
     -   Fix broken dcache-transfer probe
