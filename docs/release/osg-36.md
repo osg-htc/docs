@@ -34,6 +34,39 @@ The following issues are known to currently affect packages distributed in OSG 3
 Latest News
 -----------
 
+### **June 28, 2022:** gratia-probe 2.7.0, blahp 2.2.1, HTCondor 9.0.15, CVMFS 2.9.3
+-  gratia-probe 2.7.0
+    -   Report allocated CPUs if available
+    -   Fix broken dcache-transfer probe
+    -   Improve mechanism to extract Resource Name
+    -   Add back missing gratia-probe-services package
+-  blahp 2.2.1
+    -   Report allocated CPUs of Slurm jobs in status result
+    -   Disable email notifications for blahp-\>condor jobs
+-  [HTCondor 9.0.15](https://htcondor.readthedocs.io/en/v9_0/version-history/stable-release-series-90.html#version-9-0-15)
+    -   Report resources provisioned by the Slurm batch scheduler when available
+    -   SciToken mapping failures are now recorded in the HTCondor daemon logs
+    -   Fix bug that stopped file transfers when output and error are the same
+    -   Ensure that the Python bindings version matches the installed HTCondor
+    -   $(OPSYSANDVER) now expand properly in job transforms
+    -   Fix bug where context managed Python htcondor.SecMan sessions crash
+    -   Fix bug where remote CPU times would rarely be set to zero
+-  [CVMFS 2.9.3](https://cvmfs.readthedocs.io/en/stable/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-9-3)
+    -   Bug fix for a type of client crash
+    -   Bug fix for server garbage collection unreleased locks
+-  osg-xrootd 3.6-18
+    -   Enable VOMS support in authenticated stash caches and origins
+    -   Add ability to turn off VOMS support via environment variable
+-  XRootD 5.4.3-1.2
+    -   Improve logging for xrootd-scitokens
+-  htgettoken 1.15
+    -   Improve support for vault service using round-robin DNS
+-  Upcoming: [HTCondor 9.10.1](https://htcondor.readthedocs.io/en/v9_1/version-history/development-release-series-91.html#version-9-10-1)
+    -   ActivationSetupDuration is now correct for jobs that checkpoint
+    -   With collector administrator access, can manage HTCondor pool daemons
+    -   SciTokens can now be used for authentication with ARC CE servers
+    -   Prevent negative values when using huge files with file transfer plugins
+
 ### **June 16, 2022:** HTCondor-CE 5.1.5, gratia-probe 2.6.1, GlideinWMS 3.9.5, HTCondor 9.0.13
 -   HTCondor-CE 5.1.5
     -   Fix whole node job glidein CPUs and GPUs expressions that caused held jobs
