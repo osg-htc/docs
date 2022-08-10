@@ -46,8 +46,8 @@ This client tool is available either as [a container](#using-a-container) or as
 
         | **Capability**   | **SciTokens Scope** | **WLCG Scope**                                 |
         |:-----------------|---------------------|------------------------------------------------|
-        | HTCondor `READ`  | `condor:READ`      | `compute.read`                                 |
-        | HTCondor `WRITE` | `condor:WRITE`      | `compute.modify compute.cancel compute.create` |
+        | HTCondor `READ`  | `condor:/READ`      | `compute.read`                                 |
+        | HTCondor `WRITE` | `condor:/WRITE`      | `compute.modify compute.cancel compute.create` |
         | XRootD read      | `read:<PATH>`       | `storage.read:<PATH>`                          |
         | XRootD write     | `write:<PATH>`      | `storage.modify:<PATH>`                        |
 
@@ -124,8 +124,8 @@ This client tool is available either as [a container](#using-a-container) or as
 
         | **Capability**   | **SciTokens Scope** | **WLCG Scope**                                 |
         |:-----------------|---------------------|------------------------------------------------|
-        | HTCondor `READ`  | `condor:READ`      | `compute.read`                                 |
-        | HTCondor `WRITE` | `condor:WRITE`      | `compute.modify compute.cancel compute.create` |
+        | HTCondor `READ`  | `condor:/READ`      | `compute.read`                                 |
+        | HTCondor `WRITE` | `condor:/WRITE`      | `compute.modify compute.cancel compute.create` |
         | XRootD read      | `read:<PATH>`       | `storage.read:<PATH>`                          |
         | XRootD write     | `write:<PATH>`      | `storage.modify:<PATH>`                        |
 
@@ -206,8 +206,8 @@ your HTCondor-CE or XRootD service, you can use the [SciTokens demo website](htt
 
     | **Capability**   | **Scope**      | **Note**                    |
     |:-----------------|----------------|-----------------------------|
-    | HTCondor `READ`  | `condor:READ`  | Required for job submission |
-    | HTCondor `WRITE` | `condor:WRITE` | Required for job submission |
+    | HTCondor `READ`  | `condor:/READ`  | Required for job submission |
+    | HTCondor `WRITE` | `condor:/WRITE` | Required for job submission |
     | XRootD read      | `read:<PATH>`  |                             |
     | XRootD write     | `write:<PATH>` |                             |
 
