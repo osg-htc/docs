@@ -215,7 +215,7 @@ Once the repository is fully replicated on the OSG, the VO may proceed in publis
     [content limitations](http://cernvm.cern.ch/portal/filesystem/repository-limits).
 
 If the repository ends in `.opensciencegrid.org` or `.osgstorage.org`, the VO may ask for it to be replicated outside the US.  The
-VO should open a GGUS ticket following EGI's [PROC20](https://wiki.egi.eu/wiki/PROC20).
+VO should open a [GGUS](https://ggus.eu) ticket following EGI's [PROC20](https://wiki.egi.eu/wiki/PROC20).
 
 Replacing an Existing OASIS Repository Server
 ---------------------------------------
@@ -266,8 +266,12 @@ Removing a Repository from OASIS
 
 In order to remove a repository that is being hosted on OASIS, perform the following steps:
 
-1.  If the repository has been replicated outside of the U.S., open a GGUS ticket asking that the replication be removed
-    from EGI Stratum-1s. Wait until this ticket is resolved before proceeding.
+1.  If the repository has been replicated outside of the U.S., open a [GGUS](https://ggus.eu) ticket assigned to
+    support unit "Software and Data Distribution (CVMFS)" asking that the replication be removed from EGI Stratum-1s. 
+    Remind them in the ticket that there are worldwide Stratum-1s that automatically replicate all OSG repositories that RAL replicates,
+    so those Stratum-1s cannot remove their replicas before RAL does but their administrators will need to be notified
+    to remove their replicas within 8 hours after RAL does to avoid alarms.
+    Wait until this ticket is resolved before proceeding.
 2.  Open a [support ticket](https://support.opensciencegrid.org/helpdesk/tickets/new) asking to shut down the repository, giving the repository
     name (e.g., `<EXAMPLE.OPENSCIENCEGRID.ORG>`), and the corresponding VO.
 
