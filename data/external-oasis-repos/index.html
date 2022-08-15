@@ -2060,7 +2060,7 @@ following contents:</p>
 <a href="http://cernvm.cern.ch/portal/filesystem/repository-limits">content limitations</a>.</p>
 </div>
 <p>If the repository ends in <code>.opensciencegrid.org</code> or <code>.osgstorage.org</code>, the VO may ask for it to be replicated outside the US.  The
-VO should open a GGUS ticket following EGI's <a href="https://wiki.egi.eu/wiki/PROC20">PROC20</a>.</p>
+VO should open a <a href="https://ggus.eu">GGUS</a> ticket following EGI's <a href="https://wiki.egi.eu/wiki/PROC20">PROC20</a>.</p>
 <h2 id="replacing-an-existing-oasis-repository-server">Replacing an Existing OASIS Repository Server<a class="headerlink" href="#replacing-an-existing-oasis-repository-server" title="Permanent link">&para;</a></h2>
 <p>If a need arises to replace a server for an existing <code>*.opensciencegrid.org</code> or <code>*.osgstorage.org</code> repository, there are two ways to do it:
 one without changing the DNS name and one with changing it.
@@ -2101,8 +2101,12 @@ Note that you wil need to reapply any custom configuration changes under <code>/
 <h2 id="removing-a-repository-from-oasis">Removing a Repository from OASIS<a class="headerlink" href="#removing-a-repository-from-oasis" title="Permanent link">&para;</a></h2>
 <p>In order to remove a repository that is being hosted on OASIS, perform the following steps:</p>
 <ol>
-<li>If the repository has been replicated outside of the U.S., open a GGUS ticket asking that the replication be removed
-    from EGI Stratum-1s. Wait until this ticket is resolved before proceeding.</li>
+<li>If the repository has been replicated outside of the U.S., open a <a href="https://ggus.eu">GGUS</a> ticket assigned to
+    support unit "Software and Data Distribution (CVMFS)" asking that the replication be removed from EGI Stratum-1s. 
+    Remind them in the ticket that there are worldwide Stratum-1s that automatically replicate all OSG repositories that RAL replicates,
+    so those Stratum-1s cannot remove their replicas before RAL does but their administrators will need to be notified
+    to remove their replicas within 8 hours after RAL does to avoid alarms.
+    Wait until this ticket is resolved before proceeding.</li>
 <li>Open a <a href="https://support.opensciencegrid.org/helpdesk/tickets/new">support ticket</a> asking to shut down the repository, giving the repository
     name (e.g., <code>&lt;EXAMPLE.OPENSCIENCEGRID.ORG&gt;</code>), and the corresponding VO.</li>
 </ol>
