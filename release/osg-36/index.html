@@ -1410,6 +1410,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#august-18-2022-htcondor-9016-xrootd-monitoring-shoveler-112" class="md-nav__link">
+    August 18, 2022: HTCondor 9.0.16, xrootd-monitoring-shoveler 1.1.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#july-28-2022-gratia-probe-270-blahp-221-htcondor-9015-cvmfs-293" class="md-nav__link">
     July 28, 2022: gratia-probe 2.7.0, blahp 2.2.1, HTCondor 9.0.15, CVMFS 2.9.3
   </a>
@@ -2065,6 +2072,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#august-18-2022-htcondor-9016-xrootd-monitoring-shoveler-112" class="md-nav__link">
+    August 18, 2022: HTCondor 9.0.16, xrootd-monitoring-shoveler 1.1.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#july-28-2022-gratia-probe-270-blahp-221-htcondor-9015-cvmfs-293" class="md-nav__link">
     July 28, 2022: gratia-probe 2.7.0, blahp 2.2.1, HTCondor 9.0.15, CVMFS 2.9.3
   </a>
@@ -2412,6 +2426,29 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
     If you want to use multiuser, ensure you are getting <code>xrootd-voms</code> from the OSG repos.</li>
 </ul>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="august-18-2022-htcondor-9016-xrootd-monitoring-shoveler-112"><strong>August 18, 2022:</strong> HTCondor 9.0.16, xrootd-monitoring-shoveler 1.1.2<a class="headerlink" href="#august-18-2022-htcondor-9016-xrootd-monitoring-shoveler-112" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><a href="https://htcondor.readthedocs.io/en/v9_0/version-history/stable-release-series-90.html#version-9-0-16">HTCondor 9.0.16</a></p>
+<ul>
+<li>Singularity now mounts /tmp and /var/tmp under the scratch directory</li>
+<li>Fix bug where Singularity jobs go on hold at the first checkpoint</li>
+<li>Fix bug where gridmanager deletes the X.509 proxy file instead of the copy<ul>
+<li>Fixes jobs going on hold in the HTCondor-CE with the following message:<div class="codehilite"><pre><span></span><code>HoldReason:Failed to get expiration time of proxy: unable to read proxy file
+</code></pre></div>
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>xrootd-monitoring-shoveler 1.1.2</p>
+<ul>
+<li>Fix bug that affects those using the auto-renewal of tokens</li>
+</ul>
+</li>
+</ul>
 <h3 id="july-28-2022-gratia-probe-270-blahp-221-htcondor-9015-cvmfs-293"><strong>July 28, 2022:</strong> gratia-probe 2.7.0, blahp 2.2.1, HTCondor 9.0.15, CVMFS 2.9.3<a class="headerlink" href="#july-28-2022-gratia-probe-270-blahp-221-htcondor-9015-cvmfs-293" title="Permanent link">&para;</a></h3>
 <ul>
 <li>gratia-probe 2.7.0<ul>
