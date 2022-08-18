@@ -34,6 +34,18 @@ The following issues are known to currently affect packages distributed in OSG 3
 Latest News
 -----------
 
+### **August 18, 2022:** HTCondor 9.0.16, xrootd-monitoring-shoveler 1.1.2
+-  [HTCondor 9.0.16](https://htcondor.readthedocs.io/en/v9_0/version-history/stable-release-series-90.html#version-9-0-16)
+    -   Singularity now mounts /tmp and /var/tmp under the scratch directory
+    -   Fix bug where Singularity jobs go on hold at the first checkpoint
+    -   Fix bug where gridmanager deletes the X.509 proxy file instead of the copy
+        -   Fixes jobs going on hold in the HTCondor-CE with the following message:
+
+                HoldReason:Failed to get expiration time of proxy: unable to read proxy file
+
+-  xrootd-monitoring-shoveler 1.1.2
+    -   Fix bug that affects those using the auto-renewal of tokens
+
 ### **July 28, 2022:** gratia-probe 2.7.0, blahp 2.2.1, HTCondor 9.0.15, CVMFS 2.9.3
 -  gratia-probe 2.7.0
     -   Fix issue with accounting for whole node Slurm pilots by reporting allocated CPUs if available
