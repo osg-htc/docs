@@ -39,7 +39,10 @@ Latest News
     -   Singularity now mounts /tmp and /var/tmp under the scratch directory
     -   Fix bug where Singularity jobs go on hold at the first checkpoint
     -   Fix bug where gridmanager deletes the X.509 proxy file instead of the copy
-    -   Fix file descriptor leak when using SciTokens for authentication
+        -   Fixes jobs going on hold in the HTCondor-CE with the following message:
+
+                HoldReason:Failed to get expiration time of proxy: unable to read proxy file
+
 -  xrootd-monitoring-shoveler 1.1.2
     -   Fix bug that affects those using the auto-renewal of tokens
 
