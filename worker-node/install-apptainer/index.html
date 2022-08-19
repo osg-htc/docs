@@ -1,0 +1,2130 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://osg-htc.org/docs/worker-node/install-apptainer/">
+      
+      <link rel="icon" href="../../img/favicon.ico">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.8">
+    
+    
+      
+        <title>Install Apptainer - OSG Site Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.644de097.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+
+  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-69012-29","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+  <script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#install-apptainer" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OSG Site Documentation" class="md-header__button md-logo" aria-label="OSG Site Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OSG Site Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Install Apptainer
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/osg-htc/docs/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OSG Site Documentation" class="md-nav__button md-logo" aria-label="OSG Site Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    OSG Site Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/osg-htc/docs/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../site-planning/" class="md-nav__link">
+        Site Planning
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../common/registration/" class="md-nav__link">
+        Registration
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../site-verification/" class="md-nav__link">
+        Site Verification
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../site-maintenance/" class="md-nav__link">
+        Site Maintenance
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../common/help/" class="md-nav__link">
+        Help / Security Incidents
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Resource Sharing
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Resource Sharing" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Resource Sharing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1" type="checkbox" id="__nav_7_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_1">
+          Compute
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Compute" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_1">
+          <span class="md-nav__icon md-icon"></span>
+          Compute
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resource-sharing/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1_2" type="checkbox" id="__nav_7_1_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_1_2">
+          Pilot Containers
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Pilot Containers" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Pilot Containers
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resource-sharing/os-backfill-containers/" class="md-nav__link">
+        Site Backfill
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resource-sharing/user-containers/" class="md-nav__link">
+        User Allocations
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1_3" type="checkbox" id="__nav_7_1_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_1_3">
+          Compute Entrypoint
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Compute Entrypoint" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          Compute Entrypoint
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../compute-element/htcondor-ce-overview/" class="md-nav__link">
+        HTCondor-CE Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../compute-element/hosted-ce/" class="md-nav__link">
+        Request a Hosted CE
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../compute-element/install-htcondor-ce/" class="md-nav__link">
+        Install HTCondor-CE
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1_4" type="checkbox" id="__nav_7_1_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_1_4">
+          Worker Node
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Worker Node" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_1_4">
+          <span class="md-nav__icon md-icon"></span>
+          Worker Node
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../using-wn/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install-wn/" class="md-nav__link">
+        Install from RPM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install-wn-tarball/" class="md-nav__link">
+        Install from Tarball
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install-wn-oasis/" class="md-nav__link">
+        Install from OASIS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install-cvmfs/" class="md-nav__link">
+        Install CVMFS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install-singularity/" class="md-nav__link">
+        Install Singularity
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../using-wn-containers/" class="md-nav__link">
+        Using WN Containers
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_2" type="checkbox" id="__nav_7_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_2">
+          Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_2">
+          <span class="md-nav__icon md-icon"></span>
+          Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_2_1" type="checkbox" id="__nav_7_2_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_2_1">
+          HTTP & OASIS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="HTTP & OASIS" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          HTTP & OASIS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/run-frontier-squid-container/" class="md-nav__link">
+        Running Frontier Squid in a Container
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/frontier-squid/" class="md-nav__link">
+        Install Frontier Squid RPM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/update-oasis/" class="md-nav__link">
+        Update OASIS Shared Repo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/external-oasis-repos/" class="md-nav__link">
+        Install an OASIS Repo
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_2_2" type="checkbox" id="__nav_7_2_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_2_2">
+          XRootD
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="XRootD" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          XRootD
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/xrootd/overview/" class="md-nav__link">
+        XRootD Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/xrootd/install-standalone/" class="md-nav__link">
+        Install XRootD Standalone
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/xrootd/install-storage-element/" class="md-nav__link">
+        Install XRootD SE
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/xrootd/xrootd-authorization/" class="md-nav__link">
+        Configure Authorization
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/xrootd/install-client/" class="md-nav__link">
+        Using XRootD
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/xrootd/install-cms-xcache/" class="md-nav__link">
+        Install CMS XCache
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/xrootd/install-shoveler/" class="md-nav__link">
+        Install XRootD Shoveler
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_3" type="checkbox" id="__nav_7_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_3">
+          Other
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Other" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_3">
+          <span class="md-nav__icon md-icon"></span>
+          Other
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../other/configuration-with-osg-configure/" class="md-nav__link">
+        Configuration with OSG-Configure
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../other/install-gwms-frontend/" class="md-nav__link">
+        Install GlideinWMS Frontend
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../other/install-cvmfs-stratum1/" class="md-nav__link">
+        Install a CVMFS Stratum 1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../other/troubleshooting-gratia/" class="md-nav__link">
+        Troubleshooting Gratia
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../other/schedd-filebeats/" class="md-nav__link">
+        Install Transfer Log Filebeats
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../other/osg-token-renewer/" class="md-nav__link">
+        Install OSG Token Renewal Service
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          Access Point
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Access Point" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Access Point
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../submit/osg-flock/" class="md-nav__link">
+        Install an OSPool Access Point
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../submit/ap-ospool-aup/" class="md-nav__link">
+        Acceptable Use Policy
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          Data Federation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data Federation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          Data Federation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/stashcache/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_2" type="checkbox" id="__nav_9_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_2">
+          Data Cache
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data Cache" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_2">
+          <span class="md-nav__icon md-icon"></span>
+          Data Cache
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/stashcache/run-stashcache-container/" class="md-nav__link">
+        Install from container
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/stashcache/install-cache/" class="md-nav__link">
+        Install from RPM
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_3" type="checkbox" id="__nav_9_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_3">
+          Data Origin
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data Origin" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_3">
+          <span class="md-nav__icon md-icon"></span>
+          Data Origin
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/stashcache/run-stash-origin-container/" class="md-nav__link">
+        Install from container
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/stashcache/install-origin/" class="md-nav__link">
+        Install from RPM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/stashcache/vo-data/" class="md-nav__link">
+        Publishing VO data
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10">
+          Releases
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Releases" data-md-level="1">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          Releases
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../release/release_series/" class="md-nav__link">
+        Release Series
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_2" type="checkbox" id="__nav_10_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10_2">
+          OSG 3.6
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="OSG 3.6" data-md-level="2">
+        <label class="md-nav__title" for="__nav_10_2">
+          <span class="md-nav__icon md-icon"></span>
+          OSG 3.6
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../release/osg-36/" class="md-nav__link">
+        News
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../release/updating-to-osg-36/" class="md-nav__link">
+        Updating to OSG 3.6
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../release/supported_platforms/" class="md-nav__link">
+        Supported Platforms
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../common/yum/" class="md-nav__link">
+        OSG Yum Repos
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../release/yum-basics/" class="md-nav__link">
+        Yum Basics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../release/signing/" class="md-nav__link">
+        RPM Signing
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11" type="checkbox" id="__nav_11" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_11">
+          Tokens
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Tokens" data-md-level="1">
+        <label class="md-nav__title" for="__nav_11">
+          <span class="md-nav__icon md-icon"></span>
+          Tokens
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/tokens/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/tokens/using-tokens/" class="md-nav__link">
+        Using Tokens
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12">
+          CA Certificates
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="CA Certificates" data-md-level="1">
+        <label class="md-nav__title" for="__nav_12">
+          <span class="md-nav__icon md-icon"></span>
+          CA Certificates
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../common/ca/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/certificate-management/" class="md-nav__link">
+        Certificate Management Reference
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12_3" type="checkbox" id="__nav_12_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12_3">
+          Host Certificates
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Host Certificates" data-md-level="2">
+        <label class="md-nav__title" for="__nav_12_3">
+          <span class="md-nav__icon md-icon"></span>
+          Host Certificates
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/host-certs/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/host-certs/incommon/" class="md-nav__link">
+        Using InCommon
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/host-certs/lets-encrypt/" class="md-nav__link">
+        Using Let's Encrypt
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#before-starting" class="md-nav__link">
+    Before Starting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choosing-whether-or-not-to-install-the-rpm" class="md-nav__link">
+    Choosing whether or not to install the RPM
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enabling-unprivileged-apptainer" class="md-nav__link">
+    Enabling Unprivileged Apptainer
+  </a>
+  
+    <nav class="md-nav" aria-label="Enabling Unprivileged Apptainer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuring-docker-to-work-with-apptainer" class="md-nav__link">
+    Configuring Docker to work with Apptainer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-unprivileged-apptainer" class="md-nav__link">
+    Configuring Unprivileged Apptainer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validating-unprivileged-apptainer" class="md-nav__link">
+    Validating Unprivileged Apptainer
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apptainer-via-rpm" class="md-nav__link">
+    Apptainer via RPM
+  </a>
+  
+    <nav class="md-nav" aria-label="Apptainer via RPM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installing-apptainer-via-rpm" class="md-nav__link">
+    Installing Apptainer via RPM
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-apptainer-rpm" class="md-nav__link">
+    Configuring Apptainer RPM
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring Apptainer RPM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#upgrading-from-singularity-rpm" class="md-nav__link">
+    Upgrading from Singularity RPM
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limiting-image-types-with-setuid-installation" class="md-nav__link">
+    Limiting Image Types with Setuid Installation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validating-apptainer-rpm" class="md-nav__link">
+    Validating Apptainer RPM
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#starting-and-stopping-services" class="md-nav__link">
+    Starting and Stopping Services
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/osg-htc/docs/edit/master/docs/worker-node/install-apptainer.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+
+<h1 id="install-apptainer">Install Apptainer<a class="headerlink" href="#install-apptainer" title="Permanent link">&para;</a></h1>
+<p><a href="http://apptainer.org">Apptainer</a> (formerly known as Singularity, see
+<a href="https://apptainer.org/news/community-announcement-20211130">announcement</a>)
+is a tool that creates
+docker-like process containers but without giving extra privileges to
+unprivileged users.  It is used by pilot jobs (which are
+submitted by per-VO grid workload management systems) to isolate user
+jobs from the pilot's files and processes and from other users' files
+and processes.  It also supplies a chroot environment in order to run
+user jobs in different operating system images under one Linux kernel.</p>
+<p>Apptainer works either by making use of unprivileged user namespaces
+or with a setuid-root assist program. 
+By default it does not install the setuid-root assist program
+and it uses only unprivileged user namespaces.
+Unprivileged user namespaces are available on all OS versions that
+OSG supports, although it is not enabled by default on EL 7;
+instructions to enable it are <a href="#enabling-unprivileged-apptainer">below</a>.
+The feature is enabled by default on EL 8.</p>
+<div class="admonition danger">
+<p class="admonition-title">Kernel vs. Userspace Security</p>
+<p>Enabling unprivileged user namespaces increases the risk to the
+kernel. However, the kernel is much more widely reviewed than Apptainer
+and the additional capability given to users is more limited.
+OSG Security considers the non-setuid, kernel-based method to have a
+lower security risk, and they also recommend disabling network
+namespaces as detailed below.</p>
+</div>
+<p>The OSG has installed Apptainer in <a href="../install-cvmfs/">OASIS</a>,
+so most sites will not need to install Apptainer locally unless they
+have non-OSG users that need it.</p>
+<p>This document is intended for system administrators that wish to enable,
+install, and/or configure Apptainer.</p>
+<h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
+<p>As with all OSG software installations, there are some one-time (per host)
+steps to prepare in advance:</p>
+<ul>
+<li>Ensure the host has <a href="../../release/supported_platforms/">a supported operating system</a></li>
+<li>Obtain root access to the host</li>
+<li>If you intend to install Apptainer locally, then
+  prepare the <a href="../../common/yum/">required Yum repositories</a>. 
+  Note that the apptainer RPM comes from the EPEL Yum repository.
+  OSG validates that distribution, and detailed instructions are still here.</li>
+</ul>
+<p>In addition, this is highly recommended for image distribution and for
+access to Apptainer itself:</p>
+<ul>
+<li>Install <a href="../install-cvmfs/">CVMFS</a></li>
+</ul>
+<h2 id="choosing-whether-or-not-to-install-the-rpm">Choosing whether or not to install the RPM<a class="headerlink" href="#choosing-whether-or-not-to-install-the-rpm" title="Permanent link">&para;</a></h2>
+<p>There are two sets of instructions on this page:</p>
+<ul>
+<li><a href="#enabling-unprivileged-apptainer">Enabling Unprivileged Apptainer</a></li>
+<li><a href="#apptainer-via-rpm">Apptainer via RPM</a></li>
+</ul>
+<p>OSG VOs all support running apptainer directly from CVMFS when unprivileged
+user namespaces are enabled.
+Unprivileged user namespaces are enabled by default on EL 8, and OSG
+recommends that system administrators enable it on EL 7 worker nodes.
+When unprivileged user namespaces are enabled, OSG
+recommends that sites not install the apptainer RPM unless they have
+non-OSG users that require it.
+Sites that do install the RPM will by default still only get a
+non-setuid installation that makes use of unprivileged user namespaces
+and will need to install an additional apptainer-suid RPM if they
+want a setuid installation.</p>
+<h2 id="enabling-unprivileged-apptainer">Enabling Unprivileged Apptainer<a class="headerlink" href="#enabling-unprivileged-apptainer" title="Permanent link">&para;</a></h2>
+<p>The instructions in this section are for enabling Apptainer to run
+unprivileged by enabling unprivileged user namespaces.</p>
+<ol>
+<li>
+<p>Enable user namespaces via <code>sysctl</code> on EL 7:</p>
+<p>If the operating system is an EL 7, enable unprivileged Apptainer
+with the following steps.
+This step is not needed on EL 8 because it is enabled by default.</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span><span class="nb">echo</span> <span class="s2">&quot;user.max_user_namespaces = 15000&quot;</span> <span class="se">\</span>
+    &gt; /etc/sysctl.d/90-max_user_namespaces.conf
+<span class="gp">root@host # </span>sysctl -p /etc/sysctl.d/90-max_user_namespaces.conf
+</code></pre></div>
+
+</li>
+<li>
+<p>(Recommended) Disable network namespaces:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span><span class="nb">echo</span> <span class="s2">&quot;user.max_net_namespaces = 0&quot;</span> <span class="se">\</span>
+    &gt; /etc/sysctl.d/90-max_net_namespaces.conf
+<span class="gp">root@host # </span>sysctl -p /etc/sysctl.d/90-max_net_namespaces.conf
+</code></pre></div>
+
+<p>OSG VOs do not need network namespaces with Apptainer, and
+disabling them significantly lowers the risk profile of enabling user
+namespaces and reduces the frequency of needing to apply urgent updates.
+Most of the kernel vulnerabilities related to unprivileged user
+namespaces over the last few years have been in combination with
+network namespaces.</p>
+<p>Network namespaces are, however, utilized by other software,
+such as Docker or Podman.
+Disabling network namespaces may break other
+software, or limit its capabilities (such as requiring the
+<code>--net=host</code> option in Docker or Podman).</p>
+<p>Disabling network namespaces blocks the systemd PrivateNetwork
+feature, which is a feature that is used by some EL 8 services.
+It is also configured for some EL 7 services but they are all
+disabled by default.  To check them all, look for PrivateNetwork in
+<code>/lib/systemd/system/*.service</code> and see which of those services are
+enabled but failed to start.  The only default such service on EL 8
+is systemd-hostnamed, and a popular non-default such service is
+mlocate-updatedb.  The PrivateNetwork feature can be turned off for
+a service without modifying an RPM-installed file through a
+<code>&lt;service&gt;.d/*.conf</code> file, for example for systemd-hostnamed:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span><span class="nb">cd</span> /etc/systemd/system
+<span class="gp">root@host # </span>mkdir -p systemd-hostnamed.service.d
+<span class="gp">root@host # </span><span class="o">(</span><span class="nb">echo</span> <span class="s2">&quot;[Service]&quot;</span><span class="p">;</span> <span class="nb">echo</span> <span class="s2">&quot;PrivateNetwork=no&quot;</span><span class="o">)</span> <span class="se">\</span>
+        &gt;systemd-hostnamed.service.d/no-private-network.conf
+<span class="gp">root@host # </span>systemctl daemon-reload
+<span class="gp">root@host # </span>systemctl start systemd-hostnamed
+<span class="gp">root@host # </span>systemctl status systemd-hostnamed
+</code></pre></div>
+
+</li>
+</ol>
+<h3 id="configuring-docker-to-work-with-apptainer">Configuring Docker to work with Apptainer<a class="headerlink" href="#configuring-docker-to-work-with-apptainer" title="Permanent link">&para;</a></h3>
+<p>If docker is being used to run jobs, the following options are 
+recommended to allow unprivileged Apptainer to run (it does not
+need <code>--privileged</code> or any added capabilities):</p>
+<div class="codehilite"><pre><span></span><code><span class="go">--security-opt seccomp=unconfined --security-opt systempaths=unconfined</span>
+</code></pre></div>
+
+<p><code>--security-opt seccomp=unconfined</code> enables unshare to be called
+(which is needed to create namespaces),
+and <code>--security-opt systempaths=unconfined</code> allows <code>/proc</code> to be mounted
+in an unprivileged process namespace (as is done by apptainer exec -p).
+<code>--security-opt systempaths=unconfined</code> requires Docker 19.03 or later.
+The options are secure as long as the system administrator controls
+the images and does not allow user code to run as root, and are
+generally more secure than adding capabilities.  If at this point no
+setuid or setcap programs needs to be run within the container, adding the
+following option will improve security by preventing any privilege
+escalation (Apptainer uses the same feature on its containers):</p>
+<div class="codehilite"><pre><span></span><code><span class="go">--security-opt no-new-privileges</span>
+</code></pre></div>
+
+<p>In addition, the following option is recommended for allowing
+unprivileged fuse mounts:</p>
+<div class="codehilite"><pre><span></span><code><span class="go">--device=/dev/fuse</span>
+</code></pre></div>
+
+<h3 id="configuring-unprivileged-apptainer">Configuring Unprivileged Apptainer<a class="headerlink" href="#configuring-unprivileged-apptainer" title="Permanent link">&para;</a></h3>
+<p>When unprivileged user namespaces are enabled and VOs run apptainer from
+CVMFS, the Apptainer configuration file also comes from CVMFS so local
+sites have no control over changing the configuration.  However, the
+most common local configuration change to the apptainer RPM is to add
+additional local "bind path" options to map extra local file paths into
+containers.  This can instead be accomplished by setting the
+<code>APPTAINER_BINDPATH</code> variable in the environment of jobs, for
+example through
+<a href="../../other/configuration-with-osg-configure/#local-settings">configuration</a>
+on your compute entrypoint.
+This is a comma-separated list of paths to bind, following the syntax of the
+<code>apptainer exec --bind</code> option.
+In order to be backward compatible with Singularity, also set
+<code>SINGULARITY_BINDPATH</code> to the same value.
+Apptainer also recognizes that variable but it prints a deprecation
+warning if only a <code>SINGULARITY_</code> variable is set without the
+corresponding <code>APPTAINER_</code> variable.</p>
+<p>There are also other environment variables that can affect Apptainer
+operation; see the
+<a href="https://apptainer.org/docs/user/main/appendix.html">Apptainer documentation</a>
+for details.</p>
+<h3 id="validating-unprivileged-apptainer">Validating Unprivileged Apptainer<a class="headerlink" href="#validating-unprivileged-apptainer" title="Permanent link">&para;</a></h3>
+<p>If you haven't yet installed <a href="../install-cvmfs/">CVMFS</a>, please do so.
+Alternatively, use the
+<a href="https://github.com/cvmfs-contrib/cvmfsexec">cvmfsexec package</a>
+configured for osg as an unprivileged user and mount the
+oasis.opensciencegrid.org and singularity.opensciencegrid.org
+repositories.</p>
+<p>As an unprivileged user verify that Apptainer in OASIS works with this
+command:</p>
+<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>/cvmfs/oasis.opensciencegrid.org/mis/apptainer/bin/apptainer <span class="se">\</span>
+                <span class="nb">exec</span> --contain --ipc --pid --bind /cvmfs <span class="se">\</span>
+                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el7:latest <span class="se">\</span>
+                ps -ef
+<span class="go">UID          PID    PPID  C STIME TTY          TIME CMD</span>
+<span class="go">user           1       0  0 10:51 console  00:00:00 appinit</span>
+<span class="go">user          11       1  0 10:51 console  00:00:00 /usr/bin/ps -ef</span>
+</code></pre></div>
+<h2 id="apptainer-via-rpm">Apptainer via RPM<a class="headerlink" href="#apptainer-via-rpm" title="Permanent link">&para;</a></h2>
+<p>The instructions in this section are for the apptainer RPM, which only
+includes the setuid-root executable if you install the additional
+apptainer-suid RPM.</p>
+<h3 id="installing-apptainer-via-rpm">Installing Apptainer via RPM<a class="headerlink" href="#installing-apptainer-via-rpm" title="Permanent link">&para;</a></h3>
+<p>To install the apptainer RPM, make sure that your host is up to date
+before installing the required packages:</p>
+<ol>
+<li>
+<p>Clean yum cache:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum clean all --enablerepo<span class="o">=</span>*
+</code></pre></div>
+
+</li>
+<li>
+<p>Update software:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum update
+</code></pre></div>
+
+<p>This command will update <strong>all</strong> packages</p>
+</li>
+<li>
+<p>Install Apptainer</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install --enablerepo<span class="o">=</span>epel-testing apptainer
+</code></pre></div>
+
+</li>
+<li>
+<p>If you choose to install the (not recommended) setuid-root portion of
+    Apptainer, that can be done by instead doing this:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install --enablerepo<span class="o">=</span>epel-testing apptainer-suid
+</code></pre></div>
+
+</li>
+</ol>
+<h3 id="configuring-apptainer-rpm">Configuring Apptainer RPM<a class="headerlink" href="#configuring-apptainer-rpm" title="Permanent link">&para;</a></h3>
+<p>Generally Apptainer requires no configuration, but if you install it by
+RPM the primary configuration is done in <code>/etc/apptainer/apptainer.conf</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you modify <code>/etc/apptainer/apptainer.conf</code>, be careful with
+your upgrade procedures.
+RPM will not automatically merge your changes with new upstream
+configuration keys, which may cause a broken install or inadvertently
+change the site configuration.  Apptainer changes its default
+configuration file more frequently than typical OSG software.</p>
+<p>Look for <code>apptainer.conf.rpmnew</code> after upgrades and merge in any
+changes to the defaults.</p>
+</div>
+<h4 id="upgrading-from-singularity-rpm">Upgrading from Singularity RPM<a class="headerlink" href="#upgrading-from-singularity-rpm" title="Permanent link">&para;</a></h4>
+<p>When upgrading from Singularity to Apptainer, any local changes that
+were made to <code>/etc/singularity/singularity.conf</code> need to be manually
+migrated to <code>/etc/apptainer/apptainer.conf</code> and the <code>/etc/singularity</code>
+directory needs to be deleted.</p>
+<p>See the Apptainer <a href="https://apptainer.org/docs/admin/main/singularity_migration.html">Migrating from Singularity</a>
+guide and its explanation of <a href="https://apptainer.org/docs/user/main/singularity_compatibility.html">Singularity compatibility</a>
+for more details.</p>
+<h4 id="limiting-image-types-with-setuid-installation">Limiting Image Types with Setuid Installation<a class="headerlink" href="#limiting-image-types-with-setuid-installation" title="Permanent link">&para;</a></h4>
+<p>If the RPM installation is setuid, consider the following.</p>
+<p>Images based on loopback devices carry an inherently higher exposure to
+unknown kernel exploits compared to directory-based images distributed via
+CVMFS.  See <a href="https://lwn.net/Articles/652468/">this article</a> for further
+discussion.</p>
+<p>In setuid mode, the SIF images produced by default by Apptainer are 
+mounted with loopback devices.
+However, OSG VOs only need directory-based images,
+and Apptainer can also mount SIF images using unprivileged user namespaces.
+Hence, it is reasonable to disable the loopback-based images by setting
+the following option in <code>/etc/apptainer/apptainer.conf</code>:</p>
+<div class="codehilite"><pre><span></span><code>    max loop devices = 0
+</code></pre></div>
+
+<p>While reasonable for some sites, this is not required as there are currently
+no public kernel exploits for this issue; any exploits are patched by
+Red Hat when they are discovered.
+If loopback devices are disabled but unprivileged user namespaces are enabled,
+then users can run Apptainer with the <code>--userns</code> option (which is the same
+thing as the default in a non-setuid installation)
+and still be able to mount images unprivileged,
+although they will get an error if they don't use the option.</p>
+<h3 id="validating-apptainer-rpm">Validating Apptainer RPM<a class="headerlink" href="#validating-apptainer-rpm" title="Permanent link">&para;</a></h3>
+<p>After apptainer is installed, as an ordinary user run the following
+command to verify it:</p>
+<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>apptainer <span class="nb">exec</span> --contain --ipc --pid --bind /cvmfs <span class="se">\</span>
+                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el7:latest <span class="se">\</span>
+                ps -ef
+<span class="go">UID          PID    PPID  C STIME TTY          TIME CMD</span>
+<span class="go">user           1       0  0 11:07 console  00:00:00 appinit</span>
+<span class="go">user          12       1  0 11:07 console  00:00:00 /usr/bin/ps -ef</span>
+</code></pre></div>
+<h2 id="starting-and-stopping-services">Starting and Stopping Services<a class="headerlink" href="#starting-and-stopping-services" title="Permanent link">&para;</a></h2>
+<p>Apptainer has no services to start or stop.</p>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://apptainer.org/docs/">Apptainer Documentation</a></li>
+<li><a href="https://apptainer.org/help/">Apptainer Support</a></li>
+</ul>
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div>
+    This material is based upon work supported by the
+    <a href="https://nsf.gov">National Science Foundation</a>
+    under Grant Nos.
+    <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1148698">1148698</a>
+    ,
+    <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1836650">1836650</a>
+    , and
+    <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2030508">2030508</a>
+    . Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+        Material for MkDocs
+    </a>
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.5e67fbfe.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c44cc438.min.js"></script>
+      
+    
+  </body>
+</html>
