@@ -7,7 +7,7 @@ Install Apptainer
 [announcement](https://apptainer.org/news/community-announcement-20211130))
 is a tool that creates
 docker-like process containers but without giving extra privileges to
-unprivileged users.  It is used by grid pilot jobs (which are
+unprivileged users.  It is used by pilot jobs (which are
 submitted by per-VO grid workload management systems) to isolate user
 jobs from the pilot's files and processes and from other users' files
 and processes.  It also supplies a chroot environment in order to run
@@ -18,9 +18,9 @@ or with a setuid-root assist program.
 By default it does not install the setuid-root assist program
 and it uses only unprivileged user namespaces.
 Unprivileged user namespaces are available on all OS versions that
-OSG supports, although it is not enabled by default on RHEL 7;
-instructions to enable it are below.
-The feature is enabled by default on RHEL 8.
+OSG supports, although it is not enabled by default on EL 7;
+instructions to enable it are [below](#enabling-unprivileged-apptainer).
+The feature is enabled by default on EL 8.
 
 !!! danger "Kernel vs. Userspace Security"
     Enabling unprivileged user namespaces increases the risk to the
@@ -47,7 +47,7 @@ steps to prepare in advance:
 - Obtain root access to the host
 - If you intend to install Apptainer locally, then
   prepare the [required Yum repositories](../common/yum.md). 
-  Note that the apptainer RPM comes from the EPEL yum repository.
+  Note that the apptainer RPM comes from the EPEL Yum repository.
   OSG validates that distribution, and detailed instructions are still here.
 
 In addition, this is highly recommended for image distribution and for
@@ -65,8 +65,8 @@ There are two sets of instructions on this page:
 
 OSG VOs all support running apptainer directly from CVMFS when unprivileged
 user namespaces are enabled.
-Unprivileged user namespaces are enabled by default on RHEL 8, and OSG
-recommends that system administrators enable it on RHEL 7 worker nodes.
+Unprivileged user namespaces are enabled by default on EL 8, and OSG
+recommends that system administrators enable it on EL 7 worker nodes.
 When unprivileged user namespaces are enabled, OSG
 recommends that sites not install the apptainer RPM unless they have
 non-OSG users that require it.
@@ -144,7 +144,7 @@ need `--privileged` or any added capabilities):
 
 `--security-opt seccomp=unconfined` enables unshare to be called
 (which is needed to create namespaces),
-and `--security-opt systempaths=unconfined` allows /proc to be mounted
+and `--security-opt systempaths=unconfined` allows `/proc` to be mounted
 in an unprivileged process namespace (as is done by apptainer exec -p).
 `--security-opt systempaths=unconfined` requires Docker 19.03 or later.
 The options are secure as long as the system administrator controls
