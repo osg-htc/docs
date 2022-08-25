@@ -34,6 +34,26 @@ The following issues are known to currently affect packages distributed in OSG 3
 Latest News
 -----------
 
+### **August 25, 2022:** gratia-probe 2.7.1, HTCondor 9.11.0
+-   gratia-probe 2.7.1
+    -   Fix condor-ap probe bugs in resource name detection
+-   Upcoming: [HTCondor 9.11.0](https://htcondor.readthedocs.io/en/v9_1/version-history/development-release-series-91.html#version-9-11-0)
+    -   Modified GPU attributes to support the new `require_gpus` submit command
+    -   Add `PREEMPT_IF_DISK_EXCEEDED` and `HOLD_IF_DISK_EXCEEDED` configuration templates
+    -   `ADVERTISE` authorization levels now also provide `READ` authorization
+    -   Periodic release expressions no longer apply to manually held jobs
+    -   If a `#!` interpreter doesn't exist, a proper hold and log message appears
+    -   Can now set the Singularity target directory with `container_target_dir`
+    -   If SciToken and X.509 available, uses SciToken for arc job authentication
+    -   Singularity now mounts `/tmp` and `/var/tmp` under the scratch directory
+    -   Fix bug where Singularity jobs go on hold at the first checkpoint
+    -   Report resources provisioned by the Slurm batch scheduler when available
+    -   Fix bug where gridmanager deletes the X.509 proxy file instead of the copy
+        -   Fixes jobs going on hold in the HTCondor-CE with the following message:
+
+                HoldReason:Failed to get expiration time of proxy: unable to read proxy file
+
+
 ### **August 18, 2022:** HTCondor 9.0.16, xrootd-monitoring-shoveler 1.1.2
 -  [HTCondor 9.0.16](https://htcondor.readthedocs.io/en/v9_0/version-history/stable-release-series-90.html#version-9-0-16)
     -   Singularity now mounts /tmp and /var/tmp under the scratch directory
