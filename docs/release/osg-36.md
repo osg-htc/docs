@@ -47,10 +47,12 @@ Latest News
     -   If SciToken and X.509 available, uses SciToken for arc job authentication
     -   Singularity now mounts `/tmp` and `/var/tmp` under the scratch directory
     -   Fix bug where Singularity jobs go on hold at the first checkpoint
+    -   Report resources provisioned by the Slurm batch scheduler when available
     -   Fix bug where gridmanager deletes the X.509 proxy file instead of the copy
         -   Fixes jobs going on hold in the HTCondor-CE with the following message:
+
                 HoldReason:Failed to get expiration time of proxy: unable to read proxy file
-    -   Report resources provisioned by the Slurm batch scheduler when available
+
 
 ### **August 18, 2022:** HTCondor 9.0.16, xrootd-monitoring-shoveler 1.1.2
 -  [HTCondor 9.0.16](https://htcondor.readthedocs.io/en/v9_0/version-history/stable-release-series-90.html#version-9-0-16)
