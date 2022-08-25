@@ -42,12 +42,14 @@ Latest News
     -   Add `PREEMPT_IF_DISK_EXCEEDED` and `HOLD_IF_DISK_EXCEEDED` configuration templates
     -   `ADVERTISE` authorization levels now also provide `READ` authorization
     -   Periodic release expressions no longer apply to manually held jobs
-    -   If a #! interpreter doesn't exist, a proper hold and log message appears
+    -   If a `#!` interpreter doesn't exist, a proper hold and log message appears
     -   Can now set the Singularity target directory with `container_target_dir`
     -   If SciToken and X.509 available, uses SciToken for arc job authentication
-    -   Singularity now mounts /tmp and /var/tmp under the scratch directory
+    -   Singularity now mounts `/tmp` and `/var/tmp` under the scratch directory
     -   Fix bug where Singularity jobs go on hold at the first checkpoint
-    -   Fix bug where gridmanger deletes the X.509 proxy file instead of the copy
+    -   Fix bug where gridmanager deletes the X.509 proxy file instead of the copy
+        -   Fixes jobs going on hold in the HTCondor-CE with the following message:
+                HoldReason:Failed to get expiration time of proxy: unable to read proxy file
     -   Report resources provisioned by the Slurm batch scheduler when available
 
 ### **August 18, 2022:** HTCondor 9.0.16, xrootd-monitoring-shoveler 1.1.2
