@@ -195,11 +195,11 @@ Change `<EXPORTED_DIR>` for the directory the service is suppose to export.
 Your server should be marked with a `>+` to indicate that it contains the given path and the path was accessible.
 
 
-### Testing file access
+### Testing file access (unauthenticated origin)
 
-To verify that you can download a file from the origin server, use the `stashcp` tool.
-Place a `<TEST FILE>` in `<EXPORTED DIR>`. Where `<TEST FILE>` can be any file. The
-`stashcp` tool is available in the `stashcp` RPM.
+To verify that you can download a file from the origin server, use the `stashcp` tool,
+which is available in the `stashcp` RPM.
+Place a `<TEST FILE>` in `<EXPORTED DIR>`, where `<TEST FILE>` can be any file in a publicly accessible path.
 Run the following command:
 
 ```console
@@ -218,6 +218,44 @@ Run the following command:
 ```console
 [user@host]$ xrdcp xroot://<origin server>:1094/<TEST FILE> /tmp/testfile
 ```
+
+
+### Testing file access (authenticated origin)
+
+In order to download files from the origin, caches must be able to access the origin via SSL certificates.
+To test SSL authentication, use the `curl` command.
+Place a `<TEST FILE>` in `<EXPORTED DIR>`, where `<TEST FILE>` can be any file in a protected location.
+As root on your origin, run the following command:
+
+```console
+[root@host]# curl --cert /etc/grid-security/hostcert.pem \
+                  --key /etc/grid-security/hostkey.pem \
+                  https://<origin server>:1095/<TEST FILE> \
+                  -o /tmp/testfile
+```
+If successful, there should be a file at `/tmp/testfile` with the contents of the test file on your origin server.
+
+!!! note
+    This test requires including the DN of your origin in your origin's [OSG Topology registration](#registering-the-origin).
+
+
+To verify that a user can download a file from the origin server, use the `stashcp` tool,
+which is available in the `stashcp` RPM.
+Obtain a credential (either a SciToken/WLCG Token, or an X.509 proxy, depending on your origin's configuration).
+Place a `<TEST FILE>` in `<EXPORTED DIR>`, where `<TEST FILE>` can be any file in a path you expect to be accessible
+using the credential you just obtained.
+Run the following command:
+
+```console
+[user@host]$ stashcp <TEST FILE> /tmp/testfile
+```
+<!-- ^ note the unicode space ' ' between "test" and "file" to fix syntax highlighting
+       (because it thinks "test" is a keyword)
+--->
+
+If successful, there should be a file at `/tmp/testfile` with the contents of the test file on your origin server.
+If unsuccessful, you can pass the `-d` flag to `stashcp` for debug info.
+
 
 Registering the Origin
 ----------------------
