@@ -263,9 +263,9 @@ Managing OSDF services
 -------------------------------------------
 
 These services must be managed by `systemctl` and may start additional services as dependencies.
-As a reminder, here are common service commands (all run as `root`) for EL7:
+As a reminder, here are common service commands (all run as `root`):
 
-| To...                                   | On EL7, run the command...         |
+| To...                                   | Run the command...                 |
 | :-------------------------------------- | :--------------------------------- |
 | Start a service                         | `systemctl start <SERVICE-NAME>`   |
 | Stop a service                          | `systemctl stop <SERVICE-NAME>`    |
