@@ -324,7 +324,7 @@ STASHCACHE_DaemonVersion = "1.0.0"
 Updating to OSG 3.6
 -------------------
 
-The OSG 3.5 series has reached end-of-life on May 1, 2022.
+The OSG 3.5 series reached end-of-life on May 1, 2022.
 Admins are strongly encouraged to move their caches to OSG 3.6.
 
 See [general update instructions](../../release/updating-to-osg-36.md).
