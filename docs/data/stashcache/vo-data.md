@@ -160,16 +160,16 @@ A SciTokens authorization has multiple parameters, which are described below:
   construct the full path to the file that the token is allowed to access.
   For example, if `Base Path` is set to `/astro/PROTECTED` then a token with the scope `read:/matyas`
   will have the permission to read from the directory tree under `/astro/PROTECTED/matyas`.
-  
+
   The correct value for `Base Path` depends on how the issuer is set up, but we recommend that you set
   `Base Path` to the namespace path, and configure the issuer to create scopes relative to the namespace path.
 
-<!--
-- `Restricted Path` (optional) is a hack for a specific VO and shouldn't be used by anyone else
--->
-
 - `Map Subject` (optional, False if not specified) should be set to True if the origin uses the XRootD-Multiuser plugin.
   It will cause the origin to use the token subject (`sub` field) to map to a Unix user in order to access files.
+
+- `Restricted Path` (optional) is a further restriction on paths the token is allowed to access.
+  Only tokens whose scopes start with the `Restricted Path` will be accepted.
+  Use this only if your issuer does not create relative scopes.
 
 
 ### AllowedCaches list
