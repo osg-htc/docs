@@ -34,15 +34,6 @@ As with all OSG software installations, there are some one-time (per host) steps
 Installing XRootD
 -----------------
 
-!!! danger "Before considering an upgrade to OSG 3.6&hellip;"
-    Due to potentially disruptive changes in protocols, consult the
-    [collaboration support tables](../../security/tokens/overview.md#collaboration-support) to verify that your
-    collaboration(s) support WebDAV/XRootD-based data transfer before considering an upgrade to OSG 3.6.
-    If your collaboration(s) don't support these new protocols, install or remain on the
-    [OSG 3.5 release series, with the osg-upcoming repositories enabled](../../release/notes.md).
-
-    Note that OSG 3.5 has reached its end-of-life on [May 1, 2022](../../release/release_series.md#series-overviews).
-
 !!! warning "Requirements for XRootD-Multiuser with VOMS FQANs"
     Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a `voms-mapfile`.
     Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
