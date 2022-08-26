@@ -1328,8 +1328,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#testing-file-access" class="md-nav__link">
-    Testing file access
+  <a href="#testing-file-access-unauthenticated-origin" class="md-nav__link">
+    Testing file access (unauthenticated origin)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-file-access-authenticated-origin" class="md-nav__link">
+    Testing file access (authenticated origin)
   </a>
   
 </li>
@@ -1850,8 +1857,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#testing-file-access" class="md-nav__link">
-    Testing file access
+  <a href="#testing-file-access-unauthenticated-origin" class="md-nav__link">
+    Testing file access (unauthenticated origin)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-file-access-authenticated-origin" class="md-nav__link">
+    Testing file access (authenticated origin)
   </a>
   
 </li>
@@ -2125,10 +2139,10 @@ run the following command from the origin server:</p>
 </code></pre></div>
 Change <code>&lt;EXPORTED_DIR&gt;</code> for the directory the service is suppose to export.
 Your server should be marked with a <code>&gt;+</code> to indicate that it contains the given path and the path was accessible.</p>
-<h3 id="testing-file-access">Testing file access<a class="headerlink" href="#testing-file-access" title="Permanent link">&para;</a></h3>
-<p>To verify that you can download a file from the origin server, use the <code>stashcp</code> tool.
-Place a <code>&lt;TEST FILE&gt;</code> in <code>&lt;EXPORTED DIR&gt;</code>. Where <code>&lt;TEST FILE&gt;</code> can be any file. The
-<code>stashcp</code> tool is available in the <code>stashcp</code> RPM.
+<h3 id="testing-file-access-unauthenticated-origin">Testing file access (unauthenticated origin)<a class="headerlink" href="#testing-file-access-unauthenticated-origin" title="Permanent link">&para;</a></h3>
+<p>To verify that you can download a file from the origin server, use the <code>stashcp</code> tool,
+which is available in the <code>stashcp</code> RPM.
+Place a <code>&lt;TEST FILE&gt;</code> in <code>&lt;EXPORTED DIR&gt;</code>, where <code>&lt;TEST FILE&gt;</code> can be any file in a publicly accessible path.
 Run the following command:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">[user@host]$ </span>stashcp &lt;TEST FILE&gt; /tmp/testfile
 </code></pre></div>
@@ -2142,6 +2156,35 @@ If unsuccessful, you can pass the <code>-d</code> flag to <code>stashcp</code> f
 Run the following command:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">[user@host]$ </span>xrdcp xroot://&lt;origin server&gt;:1094/&lt;TEST FILE&gt; /tmp/testfile
 </code></pre></div>
+<h3 id="testing-file-access-authenticated-origin">Testing file access (authenticated origin)<a class="headerlink" href="#testing-file-access-authenticated-origin" title="Permanent link">&para;</a></h3>
+<p>In order to download files from the origin, caches must be able to access the origin via SSL certificates.
+To test SSL authentication, use the <code>curl</code> command.
+Place a <code>&lt;TEST FILE&gt;</code> in <code>&lt;EXPORTED DIR&gt;</code>, where <code>&lt;TEST FILE&gt;</code> can be any file in a protected location.
+As root on your origin, run the following command:</p>
+<p><div class="highlight"><pre><span></span><code><span class="gp">[root@host]# </span>curl --cert /etc/grid-security/hostcert.pem <span class="se">\</span>
+                  --key /etc/grid-security/hostkey.pem <span class="se">\</span>
+                  https://&lt;origin server&gt;:1095/&lt;TEST FILE&gt; <span class="se">\</span>
+                  -o /tmp/testfile
+</code></pre></div>
+If successful, there should be a file at <code>/tmp/testfile</code> with the contents of the test file on your origin server.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This test requires including the DN of your origin in your origin's <a href="#registering-the-origin">OSG Topology registration</a>.</p>
+</div>
+<p>To verify that a user can download a file from the origin server, use the <code>stashcp</code> tool,
+which is available in the <code>stashcp</code> RPM.
+Obtain a credential (either a SciToken/WLCG Token, or an X.509 proxy, depending on your origin's configuration).
+Place a <code>&lt;TEST FILE&gt;</code> in <code>&lt;EXPORTED DIR&gt;</code>, where <code>&lt;TEST FILE&gt;</code> can be any file in a path you expect to be accessible
+using the credential you just obtained.
+Run the following command:</p>
+<div class="highlight"><pre><span></span><code><span class="gp">[user@host]$ </span>stashcp &lt;TEST FILE&gt; /tmp/testfile
+</code></pre></div>
+<!-- ^ note the unicode space ' ' between "test" and "file" to fix syntax highlighting
+       (because it thinks "test" is a keyword)
+--->
+
+<p>If successful, there should be a file at <code>/tmp/testfile</code> with the contents of the test file on your origin server.
+If unsuccessful, you can pass the <code>-d</code> flag to <code>stashcp</code> for debug info.</p>
 <h2 id="registering-the-origin">Registering the Origin<a class="headerlink" href="#registering-the-origin" title="Permanent link">&para;</a></h2>
 <p>To be part of the Open Science Data Federation, your origin must be
 <a href="../../../common/registration/">registered with the OSG</a>.  The service type is <code>XRootD origin server</code>.</p>
