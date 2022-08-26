@@ -13,10 +13,10 @@ Available Containers
 Available tags include:
 
 * `latest`: The latest version of the OSG worker node environment on the most recent supported OS.
-  As of August 2019, this is OSG 3.5 and RHEL7.
-* `3.5`: The OSG 3.5 release series on top of the most recent supported OS.  As of August 2019, this is RHEL7.
-* `3.5-el7`: The OSG 3.5 release series on top of a RHEL7 environment.
-* `3.5-el8`: The OSG 3.5 release series on top of a RHEL8 environment.
+  As of August 2021, this is OSG 3.6 and RHEL8.
+* `3.6`: The OSG 3.6 release series on top of the most recent supported OS.  As of August 2021, this is RHEL8.
+* `3.6-el7`: The OSG 3.6 release series on top of a RHEL7 environment.
+* `3.6-el8`: The OSG 3.6 release series on top of a RHEL8 environment.
 
 Building Upon the Container
 ---------------------------
