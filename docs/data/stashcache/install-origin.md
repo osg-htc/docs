@@ -242,7 +242,7 @@ For example:
 You can use the special value `ANY` to indicate that the origin will serve data from any VO that puts data on it.
 
 In addition to the origin allowing a VOs via the `AllowedVOs` list,
-that VO must also allow the origin in its `DataFederations/StashCache/AllowedOrigins` list.
+that VO must also allow the origin in one of its `AllowedOrigins` lists in `DataFederation/StashCache/Namespaces`.
 See the page on [getting your VO's data into OSDF](vo-data.md).
 
 Specifying the DN of your origin is not required but it is useful for testing.

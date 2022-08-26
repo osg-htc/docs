@@ -78,7 +78,7 @@ DataFederations:
           - ANY
         AllowedOrigins:
           - ASTRO_OSDF_ORIGIN
-          
+
       - Path: /astro/PROTECTED
         Authorizations:
           - FQAN: /Astro
@@ -127,15 +127,22 @@ The list will contain one or more of these:
 A complete declaration looks like:
 ```yaml
     Namespaces:
-      /astro/PUBLIC:
-        - PUBLIC
-      /astro/PROTECTED:
-        - FQAN: /Astro
-        - DN: /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=People/CN=Matyas Selmeci
-        - SciTokens:
-            Issuer: https://astro.org
-            Base Path: /astro/PROTECTED
-            Map Subject: True
+      - Path: /astro/PUBLIC
+        Authorizations:
+          - PUBLIC
+        AllowedCaches: ...
+        AllowedOrigins: ...
+
+      - Path: /astro/PROTECTED
+        Authorizations:
+          - FQAN: /Astro
+          - DN: /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=People/CN=Matyas Selmeci
+          - SciTokens:
+              Issuer: https://astro.org
+              Base Path: /astro/PROTECTED
+              Map Subject: True
+        AllowedCaches: ...
+        AllowedOrigins: ...
 ```
 
 This declares two namespaces: `/astro/PUBLIC` for public data, and `/astro/PROTECTED`
