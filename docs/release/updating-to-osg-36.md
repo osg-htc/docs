@@ -1,13 +1,5 @@
 title: Updating to OSG 3.6
 
-!!! danger "Before considering an upgrade to OSG 3.6&hellip;"
-    Due to potentially disruptive changes in protocols, consult the
-    [collaboration support tables](../security/tokens/overview.md#collaboration-support) to verify that your
-    collaboration(s) support token-based authentication and/or WebDAV/XRootD-based data transfer before considering an
-    upgrade to OSG 3.6.
-    If your collaboration(s) don't support these new protocols, install or remain on the
-    [OSG 3.5 release series, with the osg-upcoming repositories enabled](notes.md).
-
 Updating to OSG 3.6
 ===================
 
@@ -21,9 +13,6 @@ updating to the new series could result in issues with your site receiving pilot
 See the list of services below for any special considerations for the OSG 3.6 update:
 
 -   [Compute Entrypoints](../compute-element/htcondor-ce-overview.md) should be updated to OSG 3.6 with care:
-
-    -   If your [collaboration(s)](../security/tokens/overview.md#pilot-job-submission) support bearer tokens,
-        update your [OSG Compute Entrypoints](#updating-your-osg-compute-entrypoint) at your earliest convenience.
 
     -   If the collaborations that you support have NOT moved to bearer token pilot job submission, update to
         HTCondor-CE 5 available in [OSG 3.5 upcoming](updating-to-osg-35.md#updating-to-htcondor-ce-5) to help your
@@ -105,13 +94,6 @@ Updating the OSG Repositories
 
 Updating Your OSG Compute Entrypoint
 ------------------------------------
-
-!!! danger "Before considering an upgrade to OSG 3.6&hellip;"
-    Due to potentially disruptive changes in protocols, consult the
-    [collaboration support tables](../security/tokens/overview.md#pilot-job-submission) to verify that your
-    collaboration(s) support token-based authentication before considering an upgrade to OSG 3.6.
-    If your collaboration(s) don't support these new authentication methods, install or remain on the
-    [OSG 3.5 release series, with the osg-upcoming repositories enabled](notes.md)
 
 In OSG 3.6, OSG Compute Entrypoints (CEs) only accept token-based pilot job submissions.
 If you need to support token-based and GSI proxy-based pilot job submission,
@@ -349,13 +331,6 @@ host-to-host authentication.
 
 Replacing Your GridFTP Service
 ------------------------------
-
-!!! danger "Before considering an upgrade to OSG 3.6&hellip;"
-    Due to potentially disruptive changes in protocols, consult the
-    [collaboration support tables](../security/tokens/overview.md#collaboration-support) to verify that your
-    collaboration(s) support WebDAV/XRootD-based data transfer before considering an upgrade to OSG 3.6.
-    If your collaboration(s) don't support these new protocols, install or remain on the
-    [OSG 3.5 release series, with the osg-upcoming repositories enabled](notes.md).
 
 !!! warning "Requirements for XRootD-Multiuser with VOMS FQANs"
     Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a `voms-mapfile`.

@@ -1,11 +1,5 @@
 title: OSG 3.6 News
 
-!!! danger "Before considering an upgrade to OSG 3.6&hellip;"
-    Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
-    authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
-    If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
-    install or remain on the [OSG 3.5 release series](notes.md).
-
 OSG 3.6 News
 ============
 
@@ -641,11 +635,6 @@ Additionally, the following packages that were already available in OSG 3.6 for 
     XRootD and GlideinWMS are both absent in the initial OSG 3.6 release:
     we expect major version updates that may require manual intervention for both of these packages so we are holding
     their initial releases in this series until they are ready.
-
-!!! warning "OSG 3.5 end-of-life"
-    As a result of this initial OSG 3.6 release, the end-of-life dates have been set for OSG 3.5 per our
-    [policy](https://osg-htc.org/technology/policy/release-series/):
-    regular support will end in **August 2021** and critical bug/security support will end in **May 2022**.
 
 
 This initial release of the OSG 3.6 release series is based on the packages available in OSG 3.5.31.

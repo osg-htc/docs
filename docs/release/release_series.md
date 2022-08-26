@@ -26,16 +26,6 @@ Series Overviews
 
 Since the start of the RPM-based OSG software stack, we have offered the following release series:
 
-!!! danger "Before considering an upgrade to OSG 3.6&hellip;"
-    Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
-    authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
-    If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
-    install or remain on the [OSG 3.5 release series](notes.md).
-
--   **OSG 3.5** was started in August 2019 and will reach its end-of-life at the beginning of May 2022.
-    The main differences between it and 3.4 were the introduction of the HTCondor 8.8 and 8.9 series;
-    also the RSV monitoring probes, EL6 support, and CREAM support were all dropped.
-
 -   **OSG 3.6** (started February 2021) overhauls the authentication and data transfer protocols used in the OSG
     software stack:
     bearer tokens, such as [SciTokens](https://scitokens.org/) or WLCG tokens, are used for authentication instead of
@@ -43,6 +33,10 @@ Since the start of the RPM-based OSG software stack, we have offered the followi
     See the [OSG GridFTP and GSI migration plan](https://osg-htc.org/technology/policy/gridftp-gsi-migration/)
     for more details.
     To support these new protocols, OSG 3.6 includes HTCondor 8.9, HTCondor-CE 5, and will include XRootD 5.1.
+
+-   **OSG 3.5** started in August 2019 and was end-of-lifed in May 2022.
+    The main differences between it and 3.4 were the introduction of the HTCondor 8.8 and 8.9 series;
+    also the RSV monitoring probes, EL6 support, and CREAM support were all dropped.
 
 -   **OSG 3.4** started June 2017 and was end-of-lifed in November 2020.
     The main differences between it and 3.3 are the removal of edg-mkgridmap, GUMS, BeStMan, and VOMS Admin Server

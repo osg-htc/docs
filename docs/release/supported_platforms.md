@@ -6,15 +6,15 @@ Supported Platforms
 The OSG [release series](../release/release_series.md) are supported on Red Hat Enterprise Linux (RHEL) compatible platforms
 for 64-bit Intel architectures according to the following table:
 
-| Platform                   | OSG 3.5 | OSG 3.6 |
-|----------------------------|---------|---------|
-| CentOS 7                   | &#9989; | &#9989; |
-| CentOS Stream 8            | &#9989; | &#9989; |
-| Alma Linux 8               | &#9989; | &#9989; |
-| Red Hat Enterprise Linux 7 | &#9989; | &#9989; |
-| Red Hat Enterprise Linux 8 | &#9989; | &#9989; |
-| Rocky Linux 8              | &#9989; | &#9989; |
-| Scientifix Linux 7         | &#9989; | &#9989; |
+| Platform                   | OSG 3.6 |
+|----------------------------|---------|
+| CentOS 7                   | &#9989; |
+| CentOS Stream 8            | &#9989; |
+| Alma Linux 8               | &#9989; |
+| Red Hat Enterprise Linux 7 | &#9989; |
+| Red Hat Enterprise Linux 8 | &#9989; |
+| Rocky Linux 8              | &#9989; |
+| Scientifix Linux 7         | &#9989; |
 
 OSG builds and tests its RPMs on the latest releases of the relevant platforms (e.g., in 2021, the RHEL 7 builds were based on RHEL 7.9).
 Older platform release versions may not receive thorough testing and may have subtle bugs.

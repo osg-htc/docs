@@ -176,26 +176,6 @@ Collaboration support
     If a collaboration you support is listed as not supporting tokens or WebDav, please contact your collaboration
     directly to verify that this information is up-to-date.
 
-### Pilot job submission ###
-
-These are the collaborations that support or partially support using tokens for pilot submission:
-
-| Collaboration | Supports Bearer Tokens |
-|:--------------|------------------------|
-| ATLAS         | Yes                    |
-| CLAS12        | Yes                    |
-| CMS           | Yes                    |
-| EIC           | Yes                    |
-| GLOW          | Yes                    |
-| GlueX         | Yes                    |
-| HCC           | Yes                    |
-| IceCube       | Undergoing testing     |
-| LIGO          | Yes                    |
-| OSG           | Yes                    |
-
-Until all of the collaborations you support are using tokens in production, your CE should remain on OSG 3.5,
-with the 3.5-upcoming repositories enabled.
-
 ### WebDAV/XRootD File transfer ###
 
 The following collaborations support support file transfer using WebDAV or XRootD:
