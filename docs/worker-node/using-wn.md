@@ -114,6 +114,14 @@ We recommend one of the following solutions:
 
 - Periodically purge the directory (e.g. `tmpwatch`).
 
+!!! tip "Job removal grace periods"
+    Additionally, increasing the batch system grace period for job removal will give pilot jobs a better chance of
+    cleaning up after themselves.
+    For example, the time between `scancel` triggering a `SIGTERM` and a `SIGKILL` is controlled by the value of the
+    [KillWait](https://slurm.schedmd.com/slurm.conf.html#OPT_KillWait) configuration.
+    Consider increasing this grace period scaling with the number of cores given to a pilot job as there could be more
+    data to clean up with an increasing core count.
+
 #### For VO managers ####
 
 !!! note
