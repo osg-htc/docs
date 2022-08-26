@@ -14,9 +14,6 @@ See the list of services below for any special considerations for the OSG 3.6 up
 
 -   [Compute Entrypoints](../compute-element/htcondor-ce-overview.md) should be updated to OSG 3.6 with care:
 
-    -   If your [collaboration(s)](../security/tokens/overview.md#pilot-job-submission) support bearer tokens,
-        update your [OSG Compute Entrypoints](#updating-your-osg-compute-entrypoint) at your earliest convenience.
-
     -   If the collaborations that you support have NOT moved to bearer token pilot job submission, update to
         HTCondor-CE 5 available in [OSG 3.5 upcoming](updating-to-osg-35.md#updating-to-htcondor-ce-5) to help your
         collaborations transition to bearer tokens.
