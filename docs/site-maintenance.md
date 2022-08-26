@@ -58,7 +58,6 @@ Keep OSG Software Updated
 It is important to keep your software and data (e.g., CAs and VO client) up-to-date with the latest OSG release.
 See the release notes for your installed release series:
 
--  [OSG 3.5 release notes](release/notes.md)
 -  [OSG 3.6 release notes](release/osg-36.md)
 
 To stay abreast of software releases, we recommend subscribing to the <mailto:osg-sites@opensciencegrid.org> mailing
