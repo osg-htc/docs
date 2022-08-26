@@ -1952,15 +1952,6 @@
 
 
 
-<div class="admonition danger">
-<p class="admonition-title">Before considering an upgrade to OSG 3.6&hellip;</p>
-<p>Due to potentially disruptive changes in protocols, consult the
-<a href="../../security/tokens/overview/#collaboration-support">collaboration support tables</a> to verify that your
-collaboration(s) support token-based authentication and/or WebDAV/XRootD-based data transfer before considering an
-upgrade to OSG 3.6.
-If your collaboration(s) don't support these new protocols, install or remain on the
-<a href="../notes/">OSG 3.5 release series, with the osg-upcoming repositories enabled</a>.</p>
-</div>
 <h1 id="updating-to-osg-36">Updating to OSG 3.6<a class="headerlink" href="#updating-to-osg-36" title="Permanent link">&para;</a></h1>
 <p><a href="../release_series/#series-overviews">OSG 3.6</a> (the <em>new series</em>) is a major overhaul of the OSG software stack compared
 to OSG 3.5 (the <em>old series</em>) with changes to core protocols used for authentication and data transfer.
@@ -1973,10 +1964,6 @@ See the list of services below for any special considerations for the OSG 3.6 up
 <li>
 <p><a href="../../compute-element/htcondor-ce-overview/">Compute Entrypoints</a> should be updated to OSG 3.6 with care:</p>
 <ul>
-<li>
-<p>If your <a href="../../security/tokens/overview/#pilot-job-submission">collaboration(s)</a> support bearer tokens,
-    update your <a href="#updating-your-osg-compute-entrypoint">OSG Compute Entrypoints</a> at your earliest convenience.</p>
-</li>
 <li>
 <p>If the collaborations that you support have NOT moved to bearer token pilot job submission, update to
     HTCondor-CE 5 available in <a href="../updating-to-osg-35/#updating-to-htcondor-ce-5">OSG 3.5 upcoming</a> to help your
@@ -2075,14 +2062,6 @@ files to the new <code>*.repo</code> files.</p>
 </li>
 </ol>
 <h2 id="updating-your-osg-compute-entrypoint">Updating Your OSG Compute Entrypoint<a class="headerlink" href="#updating-your-osg-compute-entrypoint" title="Permanent link">&para;</a></h2>
-<div class="admonition danger">
-<p class="admonition-title">Before considering an upgrade to OSG 3.6&hellip;</p>
-<p>Due to potentially disruptive changes in protocols, consult the
-<a href="../../security/tokens/overview/#pilot-job-submission">collaboration support tables</a> to verify that your
-collaboration(s) support token-based authentication before considering an upgrade to OSG 3.6.
-If your collaboration(s) don't support these new authentication methods, install or remain on the
-<a href="../notes/">OSG 3.5 release series, with the osg-upcoming repositories enabled</a></p>
-</div>
 <p>In OSG 3.6, OSG Compute Entrypoints (CEs) only accept token-based pilot job submissions.
 If you need to support token-based and GSI proxy-based pilot job submission,
 you must install or remain on <a href="../notes/">OSG 3.5, with the osg-upcoming repositories enabled</a>.
@@ -2358,14 +2337,6 @@ ALLOW_DAEMON = condor@* condor_pool@*
 </li>
 </ol>
 <h2 id="replacing-your-gridftp-service">Replacing Your GridFTP Service<a class="headerlink" href="#replacing-your-gridftp-service" title="Permanent link">&para;</a></h2>
-<div class="admonition danger">
-<p class="admonition-title">Before considering an upgrade to OSG 3.6&hellip;</p>
-<p>Due to potentially disruptive changes in protocols, consult the
-<a href="../../security/tokens/overview/#collaboration-support">collaboration support tables</a> to verify that your
-collaboration(s) support WebDAV/XRootD-based data transfer before considering an upgrade to OSG 3.6.
-If your collaboration(s) don't support these new protocols, install or remain on the
-<a href="../notes/">OSG 3.5 release series, with the osg-upcoming repositories enabled</a>.</p>
-</div>
 <div class="admonition warning">
 <p class="admonition-title">Requirements for XRootD-Multiuser with VOMS FQANs</p>
 <p>Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a <code>voms-mapfile</code>.

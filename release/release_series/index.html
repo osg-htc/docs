@@ -1778,19 +1778,7 @@ will diverge over time.</p>
 config file changes or excessive downtime.</p>
 <h2 id="series-overviews">Series Overviews<a class="headerlink" href="#series-overviews" title="Permanent link">&para;</a></h2>
 <p>Since the start of the RPM-based OSG software stack, we have offered the following release series:</p>
-<div class="admonition danger">
-<p class="admonition-title">Before considering an upgrade to OSG 3.6&hellip;</p>
-<p>Due to potentially disruptive changes in protocols, contact your VO(s) to verify that they support token-based
-authentication and/or HTTP-based data transfer before considering an upgrade to OSG 3.6.
-If your VO(s) don't support these new protocols or you don't know which protocols your VO(s) support,
-install or remain on the <a href="../notes/">OSG 3.5 release series</a>.</p>
-</div>
 <ul>
-<li>
-<p><strong>OSG 3.5</strong> was started in August 2019 and will reach its end-of-life at the beginning of May 2022.
-    The main differences between it and 3.4 were the introduction of the HTCondor 8.8 and 8.9 series;
-    also the RSV monitoring probes, EL6 support, and CREAM support were all dropped.</p>
-</li>
 <li>
 <p><strong>OSG 3.6</strong> (started February 2021) overhauls the authentication and data transfer protocols used in the OSG
     software stack:
@@ -1799,6 +1787,11 @@ install or remain on the <a href="../notes/">OSG 3.5 release series</a>.</p>
     See the <a href="https://osg-htc.org/technology/policy/gridftp-gsi-migration/">OSG GridFTP and GSI migration plan</a>
     for more details.
     To support these new protocols, OSG 3.6 includes HTCondor 8.9, HTCondor-CE 5, and will include XRootD 5.1.</p>
+</li>
+<li>
+<p><strong>OSG 3.5</strong> started in August 2019 and was end-of-lifed in May 2022.
+    The main differences between it and 3.4 were the introduction of the HTCondor 8.8 and 8.9 series;
+    also the RSV monitoring probes, EL6 support, and CREAM support were all dropped.</p>
 </li>
 <li>
 <p><strong>OSG 3.4</strong> started June 2017 and was end-of-lifed in November 2020.
