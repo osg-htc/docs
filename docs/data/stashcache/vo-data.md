@@ -122,7 +122,7 @@ The list will contain one or more of these:
 - `FQAN: <VOMS FQAN>` allows someone using a proxy with the specified VOMS FQAN
 - `DN: <DN>` allows someone using a proxy with that specific DN
 - `PUBLIC` allows anyone; this is used for public data
-- `SciTokens` allows someone using a scitoken with the given parameters, which will be described below
+- `SciTokens` allows someone using a SciToken with the given parameters, which are described [below](#scitokens)
 
 A complete declaration looks like:
 ```yaml
@@ -152,12 +152,12 @@ or by someone with a SciToken issued by `https://astro.org`.
 
 #### SciTokens
 
-A SciTokens authorization has multiple parameters, which are described below:
+A SciTokens authorization has multiple parameters:
 
 - `Issuer` (required) is the token issuer of the SciToken that the authorization accepts.
   
 - `Base Path` (required) is a path that will be prepended to the scopes of the token in order to
-  construct the full path to the file that the token is allowed to access.
+  construct the full path to the file(s) that the bearer of the token is allowed to access.
   For example, if `Base Path` is set to `/astro/PROTECTED` then a token with the scope `read:/matyas`
   will have the permission to read from the directory tree under `/astro/PROTECTED/matyas`.
 
