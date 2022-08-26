@@ -18,6 +18,18 @@ Known Issues
 
 The following issues are known to currently affect packages distributed in OSG 3.6:
 
+### rrdtool ###
+
+To improve support for Python 3 based GlideinWMS in EL7,
+the EL7 OSG Yum repositories contain a newer version of `rrdtool` than the operating system repositories.
+This may cause dependency solving issues with non-OSG packages.
+Therefore, on EL7 hosts that are not running GlideinWMS, we suggest adding the following line under the `[osg]` section
+of `/etc/yum.repos.d/osg.repo`:
+
+```
+excludepkgs=rrdtool
+```
+
 ### XRootD Multiuser ###
 
 -   Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a `voms-mapfile`.
