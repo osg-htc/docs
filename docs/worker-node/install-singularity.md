@@ -48,10 +48,9 @@ steps to prepare in advance:
 - Ensure the host has [a supported operating system](../release/supported_platforms.md)
 - Obtain root access to the host
 - Prepare the [required Yum repositories](../common/yum.md). 
-  Note that with OSG 3.5 and later, the singularity RPM comes from the
-  EPEL yum repository.  OSG validates that distribution, and detailed
-  instructions are still here.  With unprivileged singularity, no yum
-  repository is needed.
+  Note that the singularity RPM comes from the EPEL yum repository.
+  OSG validates that distribution, and detailed instructions are still here.
+  With unprivileged singularity, no yum repository is needed.
 
 In addition, this is highly recommended for image distribution:
 
