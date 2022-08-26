@@ -26,10 +26,11 @@ The following issues are known to currently affect packages distributed in OSG 3
 
 ### rrdtool ###
 
-To improve support for Python 3 based GlideinWMS and HTCondor-CE in EL7,
+To improve support for Python 3 based GlideinWMS in EL7,
 the EL7 OSG Yum repositories contain a newer version of `rrdtool` than the operating system repositories.
 This may cause dependency solving issues with non-OSG packages.
-Therefore, we suggest adding the following line under the `[osg]` section of `/etc/yum.repos.d/osg.repo`:
+Therefore, on EL7 hosts that are not running GlideinWMS, we suggest adding the following line under the `[osg]` section
+of `/etc/yum.repos.d/osg.repo`:
 
 ```
 excludepkgs=rrdtool
