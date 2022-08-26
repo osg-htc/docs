@@ -12,6 +12,14 @@ The OSG provides no scientific software dependencies or software build tools on 
 
 If you would like to test the minimal OS environment that jobs can expect, you can test out your scientific software in [the OSG Docker image](https://hub.docker.com/r/opensciencegrid/osg-wn/).
 
+!!! danger "Filling local scratch disk"
+    The directory specified by the `OSG_WN_TMP` environment variable is used by pilot jobs as a temporary staging area
+    for user job data during the lifetime of the pilot.
+    If many pilot jobs do not exit cleanly (e.g., due to preemption), this may result in the local scratch directory
+    filling up, which could negatively affect other jobs running on the impacted node.
+
+    See [this section](#for-site-administrators) for suggestions for mitigation.
+
 Hardware Recommendations
 ------------------------
 | Hardware               | Minimum | Recommended                         | Notes                                             |
@@ -75,27 +83,44 @@ Its value is set through the configuration of your [CE](../compute-element/insta
 
 #### For site administrators  ####
 
+!!! danger "Filling local scratch disk"
+    The directory specified by the `OSG_WN_TMP` environment variable is used by pilot jobs as a temporary staging area
+    for user job data during the lifetime of the pilot.
+    If many pilot jobs do not exit cleanly (e.g., due to preemption), this may result in the local scratch directory
+    filling up, which could negatively affect other jobs running on the impacted node.
+
 Site administrators are responsible for cleaning up the contents of `$OSG_WN_TMP`
 (see [table above](#hardware-recommendations) for size recommendations).
 We recommend one of the following solutions:
 
 - **(Recommended)** Use batch-system capabilities to create directories in the job scratch directory and bind mount
   them for the job so that the batch system performs the clean up.
-  For example, HTCondor has this ability through
-  [MOUNT\_UNDER\_SCRATCH](https://htcondor.readthedocs.io/en/lts/admin-manual/configuration-macros.html#MOUNT_UNDER_SCRATCH):
 
-        MOUNT_UNDER_SCRATCH = $(MOUNT_UNDER_SCRATCH), <PATH TO OSG_WN_TMP>
+    -   **For HTCondor batch systems**, HTCondor has this ability through
+        [MOUNT\_UNDER\_SCRATCH](https://htcondor.readthedocs.io/en/lts/admin-manual/configuration-macros.html#MOUNT_UNDER_SCRATCH):
 
-    If using this method, space set aside for `OSG_WN_TMP` should be reallocated to the partition containing the job
-    scratch directories.
-    If using HTCondor, this will be the partition containing the path defined by the HTCondor `EXECUTE` configuration
-    variable.
+            MOUNT_UNDER_SCRATCH = $(MOUNT_UNDER_SCRATCH), <PATH TO OSG_WN_TMP>
 
-- Use batch-system capabilities to create a temporary, per-job directory that is cleaned up after each job is run. 
-  For SLURM, we recommend the Lua plugin [Slurm-tmpdir](https://github.com/unlhcc/slurm-tmpdir/) alongside prolog/epilog scripts 
-  (<https://slurm.schedmd.com/prolog_epilog.html>).  
-  It will create per job `/scratch` and `/tmp` directories which will be cleaned up after the job completes.
+        If using this method, space set aside for `OSG_WN_TMP` should be reallocated to the partition containing the job
+        scratch directories.
+        If using HTCondor, this will be the partition containing the path defined by the HTCondor `EXECUTE`
+        configuration variable.
+
+    - **For Slurm batch systems**, we recommend using the Lua plugin
+      [Slurm-tmpdir](https://github.com/unlhcc/slurm-tmpdir/) alongside prolog/epilog scripts
+      (<https://slurm.schedmd.com/prolog_epilog.html>).
+      This method will create per job `/scratch` and `/tmp` directories which will be cleaned up after the job
+      completes.
+
 - Periodically purge the directory (e.g. `tmpwatch`).
+
+!!! tip "Job removal grace periods"
+    Additionally, increasing the batch system grace period for job removal will give pilot jobs a better chance of
+    cleaning up after themselves.
+    For example, the time between `scancel` triggering a `SIGTERM` and a `SIGKILL` is controlled by the value of the
+    [KillWait](https://slurm.schedmd.com/slurm.conf.html#OPT_KillWait) configuration.
+    Consider increasing this grace period scaling with the number of cores given to a pilot job as there could be more
+    data to clean up with an increasing core count.
 
 #### For VO managers ####
 
