@@ -12,6 +12,14 @@ The OSG provides no scientific software dependencies or software build tools on 
 
 If you would like to test the minimal OS environment that jobs can expect, you can test out your scientific software in [the OSG Docker image](https://hub.docker.com/r/opensciencegrid/osg-wn/).
 
+!!! danger "Filling local scratch disk"
+    The directory specified by the `OSG_WN_TMP` environment variable is used by pilot jobs as a temporary staging area
+    for user job data during the lifetime of the pilot.
+    If many pilot jobs do not exit cleanly (e.g., due to preemption), this may result in the local scratch directory
+    filling up, which could negatively affect other jobs running on the impacted node.
+
+    See [this section](#for-site-administrators) for suggestions for mitigation.
+
 Hardware Recommendations
 ------------------------
 | Hardware               | Minimum | Recommended                         | Notes                                             |
@@ -74,6 +82,12 @@ pilot jobs to use as temporary scratch space.
 Its value is set through the configuration of your [CE](../compute-element/install-htcondor-ce.md#automatic-configuration).
 
 #### For site administrators  ####
+
+!!! danger "Filling local scratch disk"
+    The directory specified by the `OSG_WN_TMP` environment variable is used by pilot jobs as a temporary staging area
+    for user job data during the lifetime of the pilot.
+    If many pilot jobs do not exit cleanly (e.g., due to preemption), this may result in the local scratch directory
+    filling up, which could negatively affect other jobs running on the impacted node.
 
 Site administrators are responsible for cleaning up the contents of `$OSG_WN_TMP`
 (see [table above](#hardware-recommendations) for size recommendations).
