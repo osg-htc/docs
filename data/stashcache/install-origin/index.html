@@ -1935,7 +1935,8 @@ along with information like:</p>
 <li><strong>Host certificate:</strong> Required for authentication.
   See our <a href="../../../security/host-certs/">host certificate documentation</a> for instructions on how to request and install host certificates.</li>
 <li><strong>Network ports:</strong> The origin service requires the following ports open:</li>
-<li>Inbound TCP port 1094 for file access via the XRootD protocol</li>
+<li>Inbound TCP port 1094 for unauthenticated file access via the XRoot or HTTP protocols (unauthenticated origin only)</li>
+<li>Inbound TCP port 1095 for authenticated file access via the XRoot or HTTPS protocols (authenticated origin only)</li>
 <li>Outbound TCP port 1213 to <code>redirector.osgstorage.org</code> for connecting to the data federation</li>
 <li>Outbound UDP port 9930 for reporting to <code>xrd-report.osgstorage.org</code> and <code>xrd-mon.osgstorage.org</code> for monitoring.</li>
 <li><strong>Hardware requirements:</strong> We recommend that an origin has at least 1Gbps connectivity and 8GB of RAM.
@@ -2052,7 +2053,7 @@ As a reminder, here are common service commands (all run as <code>root</code>):<
 <thead>
 <tr>
 <th align="left">To...</th>
-<th align="left">On EL7, run the command...</th>
+<th align="left">Run the command...</th>
 </tr>
 </thead>
 <tbody>
@@ -2158,7 +2159,7 @@ For example:
 </code></pre></div>
 You can use the special value <code>ANY</code> to indicate that the origin will serve data from any VO that puts data on it.</p>
 <p>In addition to the origin allowing a VOs via the <code>AllowedVOs</code> list,
-that VO must also allow the origin in its <code>DataFederations/StashCache/AllowedOrigins</code> list.
+that VO must also allow the origin in one of its <code>AllowedOrigins</code> lists in <code>DataFederation/StashCache/Namespaces</code>.
 See the page on <a href="../vo-data/">getting your VO's data into OSDF</a>.</p>
 <p>Specifying the DN of your origin is not required but it is useful for testing.</p>
 <h2 id="updating-to-osg-36">Updating to OSG 3.6<a class="headerlink" href="#updating-to-osg-36" title="Permanent link">&para;</a></h2>

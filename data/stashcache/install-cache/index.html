@@ -1229,6 +1229,19 @@
     Initial registration
   </a>
   
+    <nav class="md-nav" aria-label="Initial registration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#non-standard-ports" class="md-nav__link">
+    Non-standard ports
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1885,6 +1898,19 @@
     Initial registration
   </a>
   
+    <nav class="md-nav" aria-label="Initial registration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#non-standard-ports" class="md-nav__link">
+    Non-standard ports
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -2138,6 +2164,19 @@ The service type is <code>XRootD cache server</code>.</p>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ANY_PUBLIC</span><span class="w"></span>
 <span class="w">    </span><span class="nt">DN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=my-combo-cache.example.net</span><span class="w"></span>
 </code></pre></div></p>
+<h4 id="non-standard-ports">Non-standard ports<a class="headerlink" href="#non-standard-ports" title="Permanent link">&para;</a></h4>
+<p>By default, an unauthenticated cache serves public data on port 8000,
+and an authenticated cache serves protected data on port 8443.
+If you change the ports for your cache instances, you must specify the new endpoints under the service, as follows:</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">MY_COMBO_OSDF_CACHE2</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">FQDN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-combo-cache2.example.net</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Services</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">XRootD cache server</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">Description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OSDF cache server</span><span class="w"></span>
+<span class="w">        </span><span class="nt">Details</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">endpoint_override</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-combo-cache2.example.net:8080</span><span class="w"></span>
+<span class="w">          </span><span class="nt">auth_endpoint_override</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-combo-cache2.example.net:8444</span><span class="w"></span>
+</code></pre></div>
 <h3 id="finalizing-registration">Finalizing registration<a class="headerlink" href="#finalizing-registration" title="Permanent link">&para;</a></h3>
 <p>Once initial registration is complete, you may start the installation process.
 In the meantime, open a <a href="https://support.opensciencegrid.org">help ticket</a> with your cache name.
@@ -2247,12 +2286,12 @@ In this case, you must manually tell the cache services which FQDN to use for to
 </ol>
 <h2 id="managing-osdf-services">Managing OSDF services<a class="headerlink" href="#managing-osdf-services" title="Permanent link">&para;</a></h2>
 <p>These services must be managed by <code>systemctl</code> and may start additional services as dependencies.
-As a reminder, here are common service commands (all run as <code>root</code>) for EL7:</p>
+As a reminder, here are common service commands (all run as <code>root</code>):</p>
 <table>
 <thead>
 <tr>
 <th align="left">To...</th>
-<th align="left">On EL7, run the command...</th>
+<th align="left">Run the command...</th>
 </tr>
 </thead>
 <tbody>

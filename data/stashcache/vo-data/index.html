@@ -1321,6 +1321,26 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#authorizations-list" class="md-nav__link">
+    Authorizations list
+  </a>
+  
+    <nav class="md-nav" aria-label="Authorizations list">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scitokens" class="md-nav__link">
+    SciTokens
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#allowedcaches-list" class="md-nav__link">
     AllowedCaches list
   </a>
@@ -1794,6 +1814,26 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#authorizations-list" class="md-nav__link">
+    Authorizations list
+  </a>
+  
+    <nav class="md-nav" aria-label="Authorizations list">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scitokens" class="md-nav__link">
+    SciTokens
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#allowedcaches-list" class="md-nav__link">
     AllowedCaches list
   </a>
@@ -1876,33 +1916,98 @@ you must add OSDF information to your VO's YAML file in the OSG Topology reposit
 <div class="highlight"><pre><span></span><code><span class="nt">DataFederations</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="nt">StashCache</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">Namespaces</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">/astro/PUBLIC</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PUBLIC</span><span class="w"></span>
-<span class="w">    </span><span class="nt">AllowedCaches</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ANY</span><span class="w"></span>
-<span class="w">    </span><span class="nt">AllowedOrigins</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CHTC_OSDF_ORIGIN</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/astro/PUBLIC</span><span class="w"></span>
+<span class="w">        </span><span class="nt">Authorizations</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PUBLIC</span><span class="w"></span>
+<span class="w">        </span><span class="nt">AllowedCaches</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ANY</span><span class="w"></span>
+<span class="w">        </span><span class="nt">AllowedOrigins</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ASTRO_OSDF_ORIGIN</span><span class="w"></span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/astro/PROTECTED</span><span class="w"></span>
+<span class="w">        </span><span class="nt">Authorizations</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">FQAN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/Astro</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">DN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=People/CN=Matyas Selmeci</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">SciTokens</span><span class="p">:</span><span class="w"></span>
+<span class="w">              </span><span class="nt">Issuer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://astro.org</span><span class="w"></span>
+<span class="w">              </span><span class="nt">Base Path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/astro/PROTECTED</span><span class="w"></span>
+<span class="w">        </span><span class="nt">AllowedCaches</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ASTRO_EAST_CACHE</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ASTRO_WEST_CACHE</span><span class="w"></span>
+<span class="w">        </span><span class="nt">AllowedOrigins</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ASTRO_AUTH_OSDF_ORIGIN</span><span class="w"></span>
 </code></pre></div>
 <p>The sections are described below.</p>
 <h3 id="namespaces-section">Namespaces section<a class="headerlink" href="#namespaces-section" title="Permanent link">&para;</a></h3>
-<p>In the namespaces section, you will declare one or more namespaces and, for each namespace,
-list who is allowed to access that namespace.</p>
-<p>The list will contain one or more of these:</p>
+<p>In the namespaces section, you will declare one or more namespaces.
+A namespace is a directory tree in the data federation that is owned by a VO/collaboration.</p>
+<p>Each namespace requires:
+- a <code>Path</code> that is the path to the directory tree, e.g. <code>/astro/PUBLIC</code>
+- an <code>Authorizations</code> list which describes how users are authorized to access data within the namespace
+- an <code>AllowedCaches</code> list of the OSDF caches that are allowed to cache the data within the namespace
+- an <code>AllowedOrigins</code> list of the OSDF origins that are allowed to serve the data within the namespace</p>
+<p>In addition, a namespace may have the following optional attributes:
+- a <code>Writeback</code> endpoint that is an HTTPS URL like <code>https://stash-xrd.osgconnect.net:1094</code>
+  that can be used for jobs to write data to the origin
+- a <code>DirList</code> endpoint that is an HTTPS URL like <code>https://origin-auth2001.chtc.wisc.edu:1095</code>
+  that can be used for getting a directory listing of that namespace</p>
+<h3 id="authorizations-list">Authorizations list<a class="headerlink" href="#authorizations-list" title="Permanent link">&para;</a></h3>
+<p>The Authorizations list of each namespace describes how a user can get authorized in order to access the data within the namespace.
+The list will contain one or more of these:</p>
 <ul>
-<li><code>FQAN:&lt;VOMS FQAN&gt;</code> allows someone using a proxy with the specified VOMS FQAN</li>
-<li><code>DN:&lt;DN&gt;</code> allows someone using a proxy with that specific DN</li>
+<li><code>FQAN: &lt;VOMS FQAN&gt;</code> allows someone using a proxy with the specified VOMS FQAN</li>
+<li><code>DN: &lt;DN&gt;</code> allows someone using a proxy with that specific DN</li>
 <li><code>PUBLIC</code> allows anyone; this is used for public data</li>
+<li><code>SciTokens</code> allows someone using a SciToken with the given parameters, which are described <a href="#scitokens">below</a></li>
 </ul>
 <p>A complete declaration looks like:
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nt">Namespaces</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">/astro/PUBLIC</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PUBLIC</span><span class="w"></span>
-<span class="w">      </span><span class="nt">/astro/PROTECTED</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FQAN:/Astro</span><span class="w"></span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DN:/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=People/CN=Matyas Selmeci</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/astro/PUBLIC</span><span class="w"></span>
+<span class="w">        </span><span class="nt">Authorizations</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PUBLIC</span><span class="w"></span>
+<span class="w">        </span><span class="nt">AllowedCaches</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
+<span class="w">        </span><span class="nt">AllowedOrigins</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/astro/PROTECTED</span><span class="w"></span>
+<span class="w">        </span><span class="nt">Authorizations</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">FQAN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/Astro</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">DN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=People/CN=Matyas Selmeci</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">SciTokens</span><span class="p">:</span><span class="w"></span>
+<span class="w">              </span><span class="nt">Issuer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://astro.org</span><span class="w"></span>
+<span class="w">              </span><span class="nt">Base Path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/astro/PROTECTED</span><span class="w"></span>
+<span class="w">              </span><span class="nt">Map Subject</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
+<span class="w">        </span><span class="nt">AllowedCaches</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
+<span class="w">        </span><span class="nt">AllowedOrigins</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
 </code></pre></div></p>
 <p>This declares two namespaces: <code>/astro/PUBLIC</code> for public data, and <code>/astro/PROTECTED</code>
-which can only be read by someone with the <code>/Astro</code> FQAN or by Matyas Selmeci.</p>
+which can only be read by someone with the <code>/Astro</code> FQAN, by Matyas Selmeci,
+or by someone with a SciToken issued by <code>https://astro.org</code>.</p>
+<h4 id="scitokens">SciTokens<a class="headerlink" href="#scitokens" title="Permanent link">&para;</a></h4>
+<p>A SciTokens authorization has multiple parameters:</p>
+<ul>
+<li>
+<p><code>Issuer</code> (required) is the token issuer of the SciToken that the authorization accepts.</p>
+</li>
+<li>
+<p><code>Base Path</code> (required) is a path that will be prepended to the scopes of the token in order to
+  construct the full path to the file(s) that the bearer of the token is allowed to access.
+  For example, if <code>Base Path</code> is set to <code>/astro/PROTECTED</code> then a token with the scope <code>read:/matyas</code>
+  will have the permission to read from the directory tree under <code>/astro/PROTECTED/matyas</code>.</p>
+</li>
+</ul>
+<p>The correct value for <code>Base Path</code> depends on how the issuer is set up, but we recommend that you set
+  <code>Base Path</code> to the namespace path, and configure the issuer to create scopes relative to the namespace path.</p>
+<ul>
+<li>
+<p><code>Map Subject</code> (optional, False if not specified) should be set to True if the origin uses the XRootD-Multiuser plugin.
+  It will cause the origin to use the token subject (<code>sub</code> field) to map to a Unix user in order to access files.</p>
+</li>
+<li>
+<p><code>Restricted Path</code> (optional) is a further restriction on paths the token is allowed to access.
+  Only tokens whose scopes start with the <code>Restricted Path</code> will be accepted.
+  Use this only if your issuer does not create relative scopes.</p>
+</li>
+</ul>
 <h3 id="allowedcaches-list">AllowedCaches list<a class="headerlink" href="#allowedcaches-list" title="Permanent link">&para;</a></h3>
 <p>The VO must allow one or more OSDF caches to cache their data.
 The more places a VO's data can be cached in, the bigger the data transfer benefit for the VO.
