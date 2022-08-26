@@ -1835,6 +1835,14 @@
 <p>This page describes how to initialize the environment of your job to correctly access the execution and data areas from the worker node.</p>
 <p>The OSG provides no scientific software dependencies or software build tools on the worker node; you are expected to bring along all application-level dependencies yourself (preferred; most portable) or utilize CVMFS. Sites are not required to provide any specific tools (<code>gcc</code>, <code>lapack</code>, <code>blas</code>, etc.) beyond the ones in the OSG worker node client and the base OS.</p>
 <p>If you would like to test the minimal OS environment that jobs can expect, you can test out your scientific software in <a href="https://hub.docker.com/r/opensciencegrid/osg-wn/">the OSG Docker image</a>.</p>
+<div class="admonition danger">
+<p class="admonition-title">Filling local scratch disk</p>
+<p>The directory specified by the <code>OSG_WN_TMP</code> environment variable is used by pilot jobs as a temporary staging area
+for user job data during the lifetime of the pilot.
+If many pilot jobs do not exit cleanly (e.g., due to preemption), this may result in the local scratch directory
+filling up, which could negatively affect other jobs running on the impacted node.</p>
+<p>See <a href="#for-site-administrators">this section</a> for suggestions for mitigation.</p>
+</div>
 <h2 id="hardware-recommendations">Hardware Recommendations<a class="headerlink" href="#hardware-recommendations" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -1959,31 +1967,54 @@ Custom variables and those that aren't listed may be defined in the <a href="../
 pilot jobs to use as temporary scratch space.
 Its value is set through the configuration of your <a href="../../compute-element/install-htcondor-ce/#automatic-configuration">CE</a>.</p>
 <h4 id="for-site-administrators">For site administrators<a class="headerlink" href="#for-site-administrators" title="Permanent link">&para;</a></h4>
+<div class="admonition danger">
+<p class="admonition-title">Filling local scratch disk</p>
+<p>The directory specified by the <code>OSG_WN_TMP</code> environment variable is used by pilot jobs as a temporary staging area
+for user job data during the lifetime of the pilot.
+If many pilot jobs do not exit cleanly (e.g., due to preemption), this may result in the local scratch directory
+filling up, which could negatively affect other jobs running on the impacted node.</p>
+</div>
 <p>Site administrators are responsible for cleaning up the contents of <code>$OSG_WN_TMP</code>
 (see <a href="#hardware-recommendations">table above</a> for size recommendations).
 We recommend one of the following solutions:</p>
 <ul>
 <li>
 <p><strong>(Recommended)</strong> Use batch-system capabilities to create directories in the job scratch directory and bind mount
-  them for the job so that the batch system performs the clean up.
-  For example, HTCondor has this ability through
-  <a href="https://htcondor.readthedocs.io/en/lts/admin-manual/configuration-macros.html#MOUNT_UNDER_SCRATCH">MOUNT_UNDER_SCRATCH</a>:</p>
+  them for the job so that the batch system performs the clean up.</p>
+<ul>
+<li>
+<p><strong>For HTCondor batch systems</strong>, HTCondor has this ability through
+    <a href="https://htcondor.readthedocs.io/en/lts/admin-manual/configuration-macros.html#MOUNT_UNDER_SCRATCH">MOUNT_UNDER_SCRATCH</a>:</p>
 <div class="codehilite"><pre><span></span><code>MOUNT_UNDER_SCRATCH = $(MOUNT_UNDER_SCRATCH), &lt;PATH TO OSG_WN_TMP&gt;
 </code></pre></div>
 
 <p>If using this method, space set aside for <code>OSG_WN_TMP</code> should be reallocated to the partition containing the job
 scratch directories.
-If using HTCondor, this will be the partition containing the path defined by the HTCondor <code>EXECUTE</code> configuration
-variable.</p>
+If using HTCondor, this will be the partition containing the path defined by the HTCondor <code>EXECUTE</code>
+configuration variable.</p>
 </li>
 <li>
-<p>Use batch-system capabilities to create a temporary, per-job directory that is cleaned up after each job is run. 
-  For SLURM, we recommend the Lua plugin <a href="https://github.com/unlhcc/slurm-tmpdir/">Slurm-tmpdir</a> alongside prolog/epilog scripts 
-  (<a href="https://slurm.schedmd.com/prolog_epilog.html">https://slurm.schedmd.com/prolog_epilog.html</a>).<br />
-  It will create per job <code>/scratch</code> and <code>/tmp</code> directories which will be cleaned up after the job completes.</p>
+<p><strong>For Slurm batch systems</strong>, we recommend using the Lua plugin
+  <a href="https://github.com/unlhcc/slurm-tmpdir/">Slurm-tmpdir</a> alongside prolog/epilog scripts
+  (<a href="https://slurm.schedmd.com/prolog_epilog.html">https://slurm.schedmd.com/prolog_epilog.html</a>).
+  This method will create per job <code>/scratch</code> and <code>/tmp</code> directories which will be cleaned up after the job
+  completes.</p>
 </li>
-<li>Periodically purge the directory (e.g. <code>tmpwatch</code>).</li>
 </ul>
+</li>
+<li>
+<p>Periodically purge the directory (e.g. <code>tmpwatch</code>).</p>
+</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Job removal grace periods</p>
+<p>Additionally, increasing the batch system grace period for job removal will give pilot jobs a better chance of
+cleaning up after themselves.
+For example, the time between <code>scancel</code> triggering a <code>SIGTERM</code> and a <code>SIGKILL</code> is controlled by the value of the
+<a href="https://slurm.schedmd.com/slurm.conf.html#OPT_KillWait">KillWait</a> configuration.
+Consider increasing this grace period scaling with the number of cores given to a pilot job as there could be more
+data to clean up with an increasing core count.</p>
+</div>
 <h4 id="for-vo-managers">For VO managers<a class="headerlink" href="#for-vo-managers" title="Permanent link">&para;</a></h4>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
