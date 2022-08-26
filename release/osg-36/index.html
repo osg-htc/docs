@@ -1390,6 +1390,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#rrdtool" class="md-nav__link">
+    rrdtool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#xrootd-multiuser" class="md-nav__link">
     XRootD Multiuser
   </a>
@@ -2059,6 +2066,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#rrdtool" class="md-nav__link">
+    rrdtool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#xrootd-multiuser" class="md-nav__link">
     XRootD Multiuser
   </a>
@@ -2426,6 +2440,14 @@ GSI proxies and HTTP is used for data transfer instead of GridFTP.</p>
 We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
 <h2 id="known-issues">Known Issues<a class="headerlink" href="#known-issues" title="Permanent link">&para;</a></h2>
 <p>The following issues are known to currently affect packages distributed in OSG 3.6:</p>
+<h3 id="rrdtool">rrdtool<a class="headerlink" href="#rrdtool" title="Permanent link">&para;</a></h3>
+<p>To improve support for Python 3 based GlideinWMS in EL7,
+the EL7 OSG Yum repositories contain a newer version of <code>rrdtool</code> than the operating system repositories.
+This may cause dependency solving issues with non-OSG packages.
+Therefore, on EL7 hosts that are not running GlideinWMS, we suggest adding the following line under the <code>[osg]</code> section
+of <code>/etc/yum.repos.d/osg.repo</code>:</p>
+<div class="highlight"><pre><span></span><code>excludepkgs=rrdtool
+</code></pre></div>
 <h3 id="xrootd-multiuser">XRootD Multiuser<a class="headerlink" href="#xrootd-multiuser" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a <code>voms-mapfile</code>.
