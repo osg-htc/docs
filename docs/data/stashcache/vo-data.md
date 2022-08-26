@@ -71,12 +71,27 @@ For example, the full registration for the `Astro` VO may look something like th
 DataFederations:
   StashCache:
     Namespaces:
-      /astro/PUBLIC:
-        - PUBLIC
-    AllowedCaches:
-      - ANY
-    AllowedOrigins:
-      - CHTC_OSDF_ORIGIN
+      - Path: /astro/PUBLIC
+        Authorizations:
+          - PUBLIC
+        AllowedCaches:
+          - ANY
+        AllowedOrigins:
+          - ASTRO_OSDF_ORIGIN
+
+      - Path: /astro/PROTECTED
+        Authorizations:
+          - FQAN: /Astro
+          - DN: /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=People/CN=Matyas Selmeci
+          - SciTokens:
+              Issuer: https://astro.org
+              Base Path: /astro/PROTECTED
+        AllowedCaches:
+          - ASTRO_EAST_CACHE
+          - ASTRO_WEST_CACHE
+        AllowedOrigins:
+          - ASTRO_AUTH_OSDF_ORIGIN
+
 ```
 
 The sections are described below.
@@ -84,27 +99,77 @@ The sections are described below.
 
 ### Namespaces section
 
-In the namespaces section, you will declare one or more namespaces and, for each namespace,
-list who is allowed to access that namespace.
+In the namespaces section, you will declare one or more namespaces.
+A namespace is a directory tree in the data federation that is owned by a VO/collaboration.
 
+Each namespace requires:
+- a `Path` that is the path to the directory tree, e.g. `/astro/PUBLIC`
+- an `Authorizations` list which describes how users are authorized to access data within the namespace
+- an `AllowedCaches` list of the OSDF caches that are allowed to cache the data within the namespace
+- an `AllowedOrigins` list of the OSDF origins that are allowed to serve the data within the namespace
+
+In addition, a namespace may have the following optional attributes:
+- a `Writeback` endpoint that is an HTTPS URL like `https://stash-xrd.osgconnect.net:1094`
+  that can be used for jobs to write data to the origin
+- a `DirList` endpoint that is an HTTPS URL like `https://origin-auth2001.chtc.wisc.edu:1095`
+  that can be used for getting a directory listing of that namespace
+
+### Authorizations list
+
+The Authorizations list of each namespace describes how a user can get authorized in order to access the data within the namespace.
 The list will contain one or more of these:
 
-- `FQAN:<VOMS FQAN>` allows someone using a proxy with the specified VOMS FQAN
-- `DN:<DN>` allows someone using a proxy with that specific DN
+- `FQAN: <VOMS FQAN>` allows someone using a proxy with the specified VOMS FQAN
+- `DN: <DN>` allows someone using a proxy with that specific DN
 - `PUBLIC` allows anyone; this is used for public data
+- `SciTokens` allows someone using a SciToken with the given parameters, which are described [below](#scitokens)
 
 A complete declaration looks like:
 ```yaml
     Namespaces:
-      /astro/PUBLIC:
-        - PUBLIC
-      /astro/PROTECTED:
-        - FQAN:/Astro
-        - DN:/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=People/CN=Matyas Selmeci
+      - Path: /astro/PUBLIC
+        Authorizations:
+          - PUBLIC
+        AllowedCaches: ...
+        AllowedOrigins: ...
+
+      - Path: /astro/PROTECTED
+        Authorizations:
+          - FQAN: /Astro
+          - DN: /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=People/CN=Matyas Selmeci
+          - SciTokens:
+              Issuer: https://astro.org
+              Base Path: /astro/PROTECTED
+              Map Subject: True
+        AllowedCaches: ...
+        AllowedOrigins: ...
 ```
 
 This declares two namespaces: `/astro/PUBLIC` for public data, and `/astro/PROTECTED`
-which can only be read by someone with the `/Astro` FQAN or by Matyas Selmeci.
+which can only be read by someone with the `/Astro` FQAN, by Matyas Selmeci,
+or by someone with a SciToken issued by `https://astro.org`.
+
+
+#### SciTokens
+
+A SciTokens authorization has multiple parameters:
+
+- `Issuer` (required) is the token issuer of the SciToken that the authorization accepts.
+  
+- `Base Path` (required) is a path that will be prepended to the scopes of the token in order to
+  construct the full path to the file(s) that the bearer of the token is allowed to access.
+  For example, if `Base Path` is set to `/astro/PROTECTED` then a token with the scope `read:/matyas`
+  will have the permission to read from the directory tree under `/astro/PROTECTED/matyas`.
+
+  The correct value for `Base Path` depends on how the issuer is set up, but we recommend that you set
+  `Base Path` to the namespace path, and configure the issuer to create scopes relative to the namespace path.
+
+- `Map Subject` (optional, False if not specified) should be set to True if the origin uses the XRootD-Multiuser plugin.
+  It will cause the origin to use the token subject (`sub` field) to map to a Unix user in order to access files.
+
+- `Restricted Path` (optional) is a further restriction on paths the token is allowed to access.
+  Only tokens whose scopes start with the `Restricted Path` will be accepted.
+  Use this only if your issuer does not create relative scopes.
 
 
 ### AllowedCaches list
@@ -148,4 +213,3 @@ The following requirements must be met for the resource:
 
 - It must have an "XRootD origin server" service
 - It must have an AllowedVOs list that includes either your VO or "ANY"
-

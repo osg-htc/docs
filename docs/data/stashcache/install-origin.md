@@ -36,7 +36,8 @@ Before starting the installation process, consider the following requirements:
 * __Host certificate:__ Required for authentication.
   See our [host certificate documentation](../../security/host-certs.md) for instructions on how to request and install host certificates.
 * __Network ports:__ The origin service requires the following ports open:
-  * Inbound TCP port 1094 for file access via the XRootD protocol
+  * Inbound TCP port 1094 for unauthenticated file access via the XRoot or HTTP protocols (unauthenticated origin only)
+  * Inbound TCP port 1095 for authenticated file access via the XRoot or HTTPS protocols (authenticated origin only)
   * Outbound TCP port 1213 to `redirector.osgstorage.org` for connecting to the data federation
   * Outbound UDP port 9930 for reporting to `xrd-report.osgstorage.org` and `xrd-mon.osgstorage.org` for monitoring.
 * __Hardware requirements:__ We recommend that an origin has at least 1Gbps connectivity and 8GB of RAM.
@@ -137,7 +138,7 @@ The origin service consists of the following SystemD units that you must directl
 These services must be managed with `systemctl` and may start additional services as dependencies.
 As a reminder, here are common service commands (all run as `root`):
 
-| To...                                   | On EL7, run the command...         |
+| To...                                   | Run the command...                 |
 | :-------------------------------------- | :--------------------------------- |
 | Start a service                         | `systemctl start <SERVICE-NAME>`   |
 | Stop a service                          | `systemctl stop <SERVICE-NAME>`    |
@@ -240,7 +241,7 @@ For example:
 You can use the special value `ANY` to indicate that the origin will serve data from any VO that puts data on it.
 
 In addition to the origin allowing a VOs via the `AllowedVOs` list,
-that VO must also allow the origin in its `DataFederations/StashCache/AllowedOrigins` list.
+that VO must also allow the origin in one of its `AllowedOrigins` lists in `DataFederation/StashCache/Namespaces`.
 See the page on [getting your VO's data into OSDF](vo-data.md).
 
 Specifying the DN of your origin is not required but it is useful for testing.
