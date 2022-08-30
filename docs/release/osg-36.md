@@ -34,6 +34,15 @@ The following issues are known to currently affect packages distributed in OSG 3
 Latest News
 -----------
 
+### **August 30, 2022:** VO Package v123, IGTF 1.117
+-   [VO Package v123](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-123)
+    -    Update Virgo DNs
+-   CA certificates based on [IGTF 1.117](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -    Add new intermediate ICA DigiCert Grid-TLS (US)
+    -    Add new intermediate ICA DigiCert Grid-Client-RSA2048-SHA256-2022-CA1 (US)
+    -    Removed discontinued NCSA-slcs-2013 following end of XSEDE (US)
+    -    Removed discontinued PSC-Myproxy-CA following end of XSEDE (US)
+
 ### **August 25, 2022:** gratia-probe 2.7.1, HTCondor 9.11.0
 -   gratia-probe 2.7.1
     -   Fix condor-ap probe bugs in resource name detection
