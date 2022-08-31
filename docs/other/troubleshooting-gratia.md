@@ -55,6 +55,15 @@ If the output is blank, then you are not working with a CE host.
     A single host should not be used as both an AP and a CE but if you've inherited a host,
     it's possible that the host was installed improperly.
 
+Is Gratia Up-To-Date?
+---------------------
+
+Ensure that you have the latest bug-fixes:
+
+```
+yum update 'gratia-probe*'
+```
+
 Is Gratia Running?
 ------------------
 
