@@ -40,6 +40,10 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### ** September 9, 2022:** VO Package v124
+-   [VO Package v124](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-124)
+    -    Add voms1.slac.stanford.edu VOMS server for LSST and SuperCDMS
+
 ### **August 30, 2022:** VO Package v123, IGTF 1.117
 -   [VO Package v123](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-123)
     -    Update Virgo DNs
