@@ -2017,15 +2017,14 @@ since if that space is not available it can cause many I/O errors and
 application crashes. Many system administrators choose to put the
 cache space in a separate filesystem, which is a good way to manage
 it.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>If you use SELinux and change <code>CVMFS_CACHE_BASE</code>, then the
-new cache directory must be labeled with SELinux type
-<code>cvmfs_cache_t</code>. This can be done by executing the following command:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>chcon -R -t cvmfs_cache_t &lt;CVMFS_CACHE_BASE&gt;
+<p>!!! warning  If you change CVMFS_CACHE_BASE...
+    - The new cache directory must be owned by the <code>cvmfs</code> user, and have <code>0700</code> permissions.
+    - If you use SELinux, then the new cache directory must be labeled with SELinux type <code>cvmfs_cache_t</code>.
+      This can be done by executing the following command:</p>
+<div class="codehilite"><pre><span></span><code>    :::console
+    user@host $ chcon -R -t cvmfs_cache_t &lt;CVMFS_CACHE_BASE&gt;
 </code></pre></div>
 
-</div>
 <h2 id="validating-cvmfs">Validating CVMFS<a class="headerlink" href="#validating-cvmfs" title="Permanent link">&para;</a></h2>
 <p>After CVMFS is installed, you should be able to see the <code>/cvmfs</code>
 directory. But note that it will initially appear to be empty:</p>
