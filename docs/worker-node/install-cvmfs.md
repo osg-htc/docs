@@ -138,7 +138,7 @@ application crashes. Many system administrators choose to put the
 cache space in a separate filesystem, which is a good way to manage
 it.
 
-!!! warning  If you change CVMFS_CACHE_BASE
+!!! warning  If you change CVMFS_CACHE_BASE...
     - The new cache directory must be owned by the `cvmfs` user, and have `0700` permissions.
     - If you use SELinux, then the new cache directory must be labeled with SELinux type `cvmfs_cache_t`.
       This can be done by executing the following command:
