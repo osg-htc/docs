@@ -30,15 +30,22 @@ of `/etc/yum.repos.d/osg.repo`:
 excludepkgs=rrdtool
 ```
 
-### XRootD Multiuser ###
+### XRootD 5.5.0 ###
 
--   Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a `voms-mapfile`.
-    Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
-    If you want to use multiuser, ensure you are getting `xrootd-voms` from the OSG repos.
+-   There is a critical bug for those using FUSE mounts through XRootD FS: [Fuse mount failed after upgrading xrootd to v5.5.0](https://github.com/xrootd/xrootd/issues/1777).
+    XCache and XRootD standalone sites should be unaffected. But, sites using XRootD FUSE mounts should wait for 5.5.1.
 
 
 Latest News
 -----------
+
+### ** September 15, 2022:** XRootD 5.5.0, stashcp 6.8.1, osg-token-renewer 0.8.3
+-   [XRootD 5.5.0](https://github.com/xrootd/xrootd/blob/v5.5.0/docs/ReleaseNotes.txt): Multiple new features and bug fixes
+-   [stashcp 6.8.1](https://github.com/opensciencegrid/stashcp/releases/tag/v6.8.1)
+    -   Fix WLCG token discovery
+    -   dynamically obtain list of caches based on the source file's namespace
+-   [osg-token-renewer 0.8.3](https://github.com/opensciencegrid/osg-token-renewer/releases/tag/v0.8.3)
+    -   don't check for password file when ``--pw-fd`` is being used
 
 ### ** September 9, 2022:** VO Package v124
 -   [VO Package v124](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-124)
