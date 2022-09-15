@@ -45,7 +45,7 @@ Latest News
     -   Fix WLCG token discovery
     -   Dynamically obtain list of caches based on the source file's namespace
 -   [osg-token-renewer 0.8.3](https://github.com/opensciencegrid/osg-token-renewer/releases/tag/v0.8.3)
-    -   don't check for password file when ``--pw-fd`` is being used
+    -   Doesn't check for password file when ``--pw-fd`` is being used
 
 ### ** September 9, 2022:** VO Package v124
 -   [VO Package v124](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-124)
