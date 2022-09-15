@@ -43,7 +43,7 @@ Latest News
 -   [XRootD 5.5.0](https://github.com/xrootd/xrootd/blob/v5.5.0/docs/ReleaseNotes.txt): Multiple new features and bug fixes
 -   [stashcp 6.8.1](https://github.com/opensciencegrid/stashcp/releases/tag/v6.8.1)
     -   Fix WLCG token discovery
-    -   dynamically obtain list of caches based on the source file's namespace
+    -   Dynamically obtain list of caches based on the source file's namespace
 -   [osg-token-renewer 0.8.3](https://github.com/opensciencegrid/osg-token-renewer/releases/tag/v0.8.3)
     -   don't check for password file when ``--pw-fd`` is being used
 
