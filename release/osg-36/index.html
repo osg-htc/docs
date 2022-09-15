@@ -1397,8 +1397,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#xrootd-multiuser" class="md-nav__link">
-    XRootD Multiuser
+  <a href="#xrootd-550" class="md-nav__link">
+    XRootD 5.5.0
   </a>
   
 </li>
@@ -1415,6 +1415,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#september-15-2022-xrootd-550-stashcp-681-osg-token-renewer-083" class="md-nav__link">
+    September 15, 2022: XRootD 5.5.0, stashcp 6.8.1, osg-token-renewer 0.8.3
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#september-9-2022-vo-package-v124" class="md-nav__link">
@@ -2087,8 +2094,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#xrootd-multiuser" class="md-nav__link">
-    XRootD Multiuser
+  <a href="#xrootd-550" class="md-nav__link">
+    XRootD 5.5.0
   </a>
   
 </li>
@@ -2105,6 +2112,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#september-15-2022-xrootd-550-stashcp-681-osg-token-renewer-083" class="md-nav__link">
+    September 15, 2022: XRootD 5.5.0, stashcp 6.8.1, osg-token-renewer 0.8.3
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#september-9-2022-vo-package-v124" class="md-nav__link">
@@ -2476,13 +2490,25 @@ Therefore, on EL7 hosts that are not running GlideinWMS, we suggest adding the f
 of <code>/etc/yum.repos.d/osg.repo</code>:</p>
 <div class="highlight"><pre><span></span><code>excludepkgs=rrdtool
 </code></pre></div>
-<h3 id="xrootd-multiuser">XRootD Multiuser<a class="headerlink" href="#xrootd-multiuser" title="Permanent link">&para;</a></h3>
+<h3 id="xrootd-550">XRootD 5.5.0<a class="headerlink" href="#xrootd-550" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a <code>voms-mapfile</code>.
-    Support is available in <code>xrootd-voms 5.4.2-1.1</code>, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
-    If you want to use multiuser, ensure you are getting <code>xrootd-voms</code> from the OSG repos.</li>
+<li>There is a critical bug for those using FUSE mounts through XRootD FS: <a href="https://github.com/xrootd/xrootd/issues/1777">Fuse mount failed after upgrading xrootd to v5.5.0</a>.
+    XCache and XRootD standalone sites should be unaffected. But, sites using XRootD FUSE mounts should wait for 5.5.1.</li>
 </ul>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="september-15-2022-xrootd-550-stashcp-681-osg-token-renewer-083"><strong> September 15, 2022:</strong> XRootD 5.5.0, stashcp 6.8.1, osg-token-renewer 0.8.3<a class="headerlink" href="#september-15-2022-xrootd-550-stashcp-681-osg-token-renewer-083" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://github.com/xrootd/xrootd/blob/v5.5.0/docs/ReleaseNotes.txt">XRootD 5.5.0</a>: Multiple new features and bug fixes</li>
+<li><a href="https://github.com/opensciencegrid/stashcp/releases/tag/v6.8.1">stashcp 6.8.1</a><ul>
+<li>Fix WLCG token discovery</li>
+<li>Dynamically obtain list of caches based on the source file's namespace</li>
+</ul>
+</li>
+<li><a href="https://github.com/opensciencegrid/osg-token-renewer/releases/tag/v0.8.3">osg-token-renewer 0.8.3</a><ul>
+<li>Doesn't check for password file when <code>--pw-fd</code> is being used</li>
+</ul>
+</li>
+</ul>
 <h3 id="september-9-2022-vo-package-v124"><strong> September 9, 2022:</strong> VO Package v124<a class="headerlink" href="#september-9-2022-vo-package-v124" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-124">VO Package v124</a><ul>
