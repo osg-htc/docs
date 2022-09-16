@@ -39,6 +39,10 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### ** September 16, 2022:** VO Package v125
+-   [VO Package v125](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-125)
+    -   DN changes for Gluex VO
+
 ### ** September 15, 2022:** XRootD 5.5.0, stashcp 6.8.1, osg-token-renewer 0.8.3
 -   [XRootD 5.5.0](https://github.com/xrootd/xrootd/blob/v5.5.0/docs/ReleaseNotes.txt): Multiple new features and bug fixes
 -   [stashcp 6.8.1](https://github.com/opensciencegrid/stashcp/releases/tag/v6.8.1)
