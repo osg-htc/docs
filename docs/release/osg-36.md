@@ -39,6 +39,15 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### ** September 29, 2022:** XCache 3.2.2
+-   XCache 3.2.2
+    -   Allow specifying separate export paths for unauthenticated and authenticated origin instances
+    -   Allow local scitokens.conf additions
+    -   Fix authfile generation on origins that serve no public data
+    
+!!! note
+    XRootD services should be restarted after this update
+
 ### ** September 16, 2022:** VO Package v125
 -   [VO Package v125](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-125)
     -   DN changes for Gluex VO
