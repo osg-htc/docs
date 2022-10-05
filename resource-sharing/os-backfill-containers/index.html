@@ -741,8 +741,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../worker-node/install-singularity/" class="md-nav__link">
-        Install Singularity
+      <a href="../../worker-node/install-apptainer/" class="md-nav__link">
+        Install Apptainer
       </a>
     </li>
   
@@ -1987,7 +1987,7 @@ Make sure the user you run your container as has write access to this directory.
 <p>Replace <code>/path/to/token</code> with the location you saved the token obtained from the OSPool Token Registry.
 Privileged mode (<code>--privileged</code>) requested in the above <code>docker run</code> allows the container
 to mount <a href="#cvmfsexec">CVMFS using cvmfsexec</a> and invoke <code>singularity</code> for user jobs.
-Singularity allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).</p>
+Singularity (now known as Apptainer) allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).</p>
 <h2 id="optional-configuration">Optional Configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h2>
 <h3 id="recommended-cvmfs">(Recommended) CVMFS<a class="headerlink" href="#recommended-cvmfs" title="Permanent link">&para;</a></h3>
 <p><a href="https://cernvm.cern.ch/fs/">CernVM-FS</a> (CVMFS) is a read-only remote filesystem that many OSG jobs depend on for software and data.
@@ -2003,7 +2003,7 @@ but the container will need fewer privileges.</p>
 <li>
 <p>On EL7, you must have kernel version &gt;= 3.10.0-1127 (run <code>uname -vr</code> to check), and user namespaces enabled.
     See step 1 in the
-    <a href="https://osg-htc.org/docs/worker-node/install-singularity/#enabling-unprivileged-singularity">Singularity Install document</a>
+    <a href="https://osg-htc.org/docs/worker-node/install-apptainer/#enabling-unprivileged-apptainer">Apptainer Install document</a>
     for details.</p>
 </li>
 <li>

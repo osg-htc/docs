@@ -304,14 +304,16 @@
 
   
   
+    
+  
   
     
       
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
       
       
       
@@ -332,12 +334,14 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1" type="checkbox" id="__nav_7_1" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1" type="checkbox" id="__nav_7_1" checked>
       
       
       
@@ -508,12 +512,14 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1_4" type="checkbox" id="__nav_7_1_4" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1_4" type="checkbox" id="__nav_7_1_4" checked>
       
       
       
@@ -604,11 +610,161 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../install-singularity/" class="md-nav__link">
-        Install Singularity
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Install Apptainer
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Install Apptainer
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#before-starting" class="md-nav__link">
+    Before Starting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choosing-whether-or-not-to-install-the-rpm" class="md-nav__link">
+    Choosing whether or not to install the RPM
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enabling-unprivileged-apptainer" class="md-nav__link">
+    Enabling Unprivileged Apptainer
+  </a>
+  
+    <nav class="md-nav" aria-label="Enabling Unprivileged Apptainer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuring-docker-to-work-with-apptainer" class="md-nav__link">
+    Configuring Docker to work with Apptainer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-unprivileged-apptainer" class="md-nav__link">
+    Configuring Unprivileged Apptainer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validating-unprivileged-apptainer" class="md-nav__link">
+    Validating Unprivileged Apptainer
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apptainer-via-rpm" class="md-nav__link">
+    Apptainer via RPM
+  </a>
+  
+    <nav class="md-nav" aria-label="Apptainer via RPM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installing-apptainer-via-rpm" class="md-nav__link">
+    Installing Apptainer via RPM
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-apptainer-rpm" class="md-nav__link">
+    Configuring Apptainer RPM
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring Apptainer RPM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#upgrading-from-singularity-rpm" class="md-nav__link">
+    Upgrading from Singularity RPM
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limiting-image-types-with-setuid-installation" class="md-nav__link">
+    Limiting Image Types with Setuid Installation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validating-apptainer-rpm" class="md-nav__link">
+    Validating Apptainer RPM
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#starting-and-stopping-services" class="md-nav__link">
+    Starting and Stopping Services
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2005,14 +2161,14 @@ before installing the required packages:</p>
 </li>
 <li>
 <p>Install Apptainer</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install --enablerepo<span class="o">=</span>epel-testing apptainer
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install apptainer
 </code></pre></div>
 
 </li>
 <li>
 <p>If you choose to install the (not recommended) setuid-root portion of
     Apptainer, that can be done by instead doing this:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install --enablerepo<span class="o">=</span>epel-testing apptainer-suid
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install apptainer-suid
 </code></pre></div>
 
 </li>
@@ -2093,6 +2249,41 @@ command to verify it:</p>
       </main>
       
         <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../install-cvmfs/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Install CVMFS" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Install CVMFS
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../using-wn-containers/" class="md-footer__link md-footer__link--next" aria-label="Next: Using WN Containers" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Using WN Containers
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
