@@ -1,7 +1,7 @@
-title: User-launched Containers with Singularity
+title: User-launched Containers with Singularity/Apptainer
 
-User-launched Containers with Singularity
-=========================================
+User-launched Containers with Singularity/Apptainer
+===================================================
 
 The [OSG pilot container](os-backfill-containers.md) can be launched by users in order to run jobs on resources they
 have access to.

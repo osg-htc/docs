@@ -70,7 +70,7 @@ To avoid potential issues with OSG job submissions, please [notify us](mailto:he
 to your site, including:
 
 - Major OS version changes on the worker nodes (e.g., upgraded from EL 7 to EL 8)
-- Adding or removing [container support through Singularity](worker-node/install-singularity.md)
+- Adding or removing [container support through singularity or apptainer](worker-node/install-apptainer.md)
 - Policy changes regarding OSG resource requests (e.g., number of cores or GPUs, memory usage, or maximum walltime)
 - Scheduled or unscheduled [downtimes](common/registration.md#registering-resource-downtimes)
 - [Site topology changes](common/registration.md) such as additions, modifications, or retirements of OSG services
