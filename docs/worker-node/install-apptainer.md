@@ -238,13 +238,13 @@ before installing the required packages:
 1. Install Apptainer
 
         :::console
-        root@host # yum install --enablerepo=epel-testing apptainer
+        root@host # yum install apptainer
 
 1. If you choose to install the (not recommended) setuid-root portion of
     Apptainer, that can be done by instead doing this:
 
         :::console
-        root@host # yum install --enablerepo=epel-testing apptainer-suid
+        root@host # yum install apptainer-suid
 
 ### Configuring Apptainer RPM ###
 

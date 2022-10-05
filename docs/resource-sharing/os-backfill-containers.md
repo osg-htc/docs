@@ -86,7 +86,7 @@ docker run -it --rm --user osg  \
 Replace `/path/to/token` with the location you saved the token obtained from the OSPool Token Registry.
 Privileged mode (`--privileged`) requested in the above `docker run` allows the container
 to mount [CVMFS using cvmfsexec](#cvmfsexec) and invoke `singularity` for user jobs.
-Singularity allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).
+Singularity (now known as Apptainer) allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).
 
 Optional Configuration
 ----------------------
@@ -107,7 +107,7 @@ but the container will need fewer privileges.
 !!! info "cvmfsexec System Requirements"
     -   On EL7, you must have kernel version >= 3.10.0-1127 (run `uname -vr` to check), and user namespaces enabled.
         See step 1 in the
-        [Singularity Install document](https://osg-htc.org/docs/worker-node/install-singularity/#enabling-unprivileged-singularity)
+        [Apptainer Install document](https://osg-htc.org/docs/worker-node/install-apptainer/#enabling-unprivileged-apptainer)
         for details.
 
     -   On EL8, you must have kernel version >= 4.18 (run `uname -vr` to check).
