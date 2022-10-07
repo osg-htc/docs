@@ -56,6 +56,11 @@ If neither of the above options work for your site, the OSG also accepts all
 [IGTF-accredited CAs](https://repo.opensciencegrid.org/cadist/).
 
 
+!!!note
+    For SSL to work properly, you will need to request a host certificate with
+    "TLS Web Server Authentication" included in the X509v3 Extended Key Usage.
+
+
 Requesting Service Certificates
 -------------------------------
 
