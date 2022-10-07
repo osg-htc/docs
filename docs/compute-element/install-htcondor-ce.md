@@ -132,6 +132,22 @@ To accept RARs from a particular collaboration:
 For more details of the mapfile format, consult the "SciTokens" section of the
 [upstream documentation](https://htcondor.com/htcondor-ce/v5/configuration/authentication/#scitokens).
 
+#### Bannning a collaboration
+
+!!! tip "Implicit banning"
+    Note that if you have not created the mapped user per [the above section](#configuring-authentication),
+    it is not strictly necessary to add a ban mapping.
+    HTCondor-CE will only authenticate remote RAR submission for the relevant credential if the Unix user exists.
+
+To explicitly ban a remote submitter from your HTCondor-CE, add a line like the following to a file in
+`/etc/condor-ce/mapfiles.d/*.conf`:
+
+    SCITOKENS /<TOKEN ISSUER>,<TOKEN SUBJECT>/ <USER>@banned.htcondor.org
+
+Replacing `<CREDENTIAL>` with a regular expression and `<USER>` with an arbitrary user name.
+For example, to ban OSPool pilots from your site, you could add the following to `/etc/condor-ce/config.d/99-bans.conf`:
+
+    SCITOKENS /^https\:\/\/scitokens\.org\/osg\-connect,/ osgpilot@banned.htcondor.org
 
 ### Automatic configuration
 
