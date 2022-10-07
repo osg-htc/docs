@@ -12,6 +12,28 @@ In the OSG, some grid resources (e.g., HTCondor-CE, XRootD) require host certifi
 If you are unsure if your host needs a host certificate, please consult the installation instructions for the software
 you are interested in installing.
 
+
+Before Starting
+---------------
+
+Before requesting a new host certificate, use `openssl` to check if your host already has a valid certificate, i.e. the
+present is between `notBefore` and `notAfter` dates and times.
+If so, you may safely skip this document:
+
+``` console
+user@host $ openssl x509 -in /etc/grid-security/hostcert.pem -subject -issuer -dates -noout
+subject= /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=host.opensciencegrid.org
+issuer=/DC=org/DC=cilogon/C=US/O=CILogon/CN=CILogon OSG CA 1
+notBefore=Jan  4 21:08:09 2010 GMT
+notAfter=Jan  4 21:08:09 2011 GMT
+```
+
+If you are using OpenSSL 1.1, you may notice minor formatting differences.
+
+
+Requesting Host Certificates
+----------------------------
+
 To acquire a host certificate, you must submit a request to a Certificate Authority (CA).
 We recommend requesting host certificates from one of the following CAs:
 
@@ -32,24 +54,6 @@ We recommend requesting host certificates from one of the following CAs:
 
 If neither of the above options work for your site, the OSG also accepts all
 [IGTF-accredited CAs](https://repo.opensciencegrid.org/cadist/).
-
-Before Starting
----------------
-
-Before requesting a new host certificate, use `openssl` to check if your host already has a valid certificate, i.e. the
-present is between `notBefore` and `notAfter` dates and times.
-If so, you may safely skip this document:
-
-``` console
-user@host $ openssl x509 -in /etc/grid-security/hostcert.pem -subject -issuer -dates -noout
-subject= /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=host.opensciencegrid.org
-issuer=/DC=org/DC=cilogon/C=US/O=CILogon/CN=CILogon OSG CA 1
-notBefore=Jan  4 21:08:09 2010 GMT
-notAfter=Jan  4 21:08:09 2011 GMT
-```
-
-If you are using OpenSSL 1.1, you may notice minor formatting differences.
-
 
 
 Requesting Service Certificates
