@@ -1634,6 +1634,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#requesting-host-certificates" class="md-nav__link">
+    Requesting Host Certificates
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#requesting-service-certificates" class="md-nav__link">
     Requesting Service Certificates
   </a>
@@ -1772,6 +1779,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#requesting-host-certificates" class="md-nav__link">
+    Requesting Host Certificates
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#requesting-service-certificates" class="md-nav__link">
     Requesting Service Certificates
   </a>
@@ -1854,6 +1868,18 @@ servers and to establish encrypted connections between services and clients.
 In the OSG, some grid resources (e.g., HTCondor-CE, XRootD) require host certificates.
 If you are unsure if your host needs a host certificate, please consult the installation instructions for the software
 you are interested in installing.</p>
+<h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
+<p>Before requesting a new host certificate, use <code>openssl</code> to check if your host already has a valid certificate, i.e. the
+present is between <code>notBefore</code> and <code>notAfter</code> dates and times.
+If so, you may safely skip this document:</p>
+<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>openssl x509 -in /etc/grid-security/hostcert.pem -subject -issuer -dates -noout
+<span class="go">subject= /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=host.opensciencegrid.org</span>
+<span class="go">issuer=/DC=org/DC=cilogon/C=US/O=CILogon/CN=CILogon OSG CA 1</span>
+<span class="go">notBefore=Jan  4 21:08:09 2010 GMT</span>
+<span class="go">notAfter=Jan  4 21:08:09 2011 GMT</span>
+</code></pre></div>
+<p>If you are using OpenSSL 1.1, you may notice minor formatting differences.</p>
+<h2 id="requesting-host-certificates">Requesting Host Certificates<a class="headerlink" href="#requesting-host-certificates" title="Permanent link">&para;</a></h2>
 <p>To acquire a host certificate, you must submit a request to a Certificate Authority (CA).
 We recommend requesting host certificates from one of the following CAs:</p>
 <ul>
@@ -1878,17 +1904,12 @@ and not the InCommon RSA CA.</p>
 </ul>
 <p>If neither of the above options work for your site, the OSG also accepts all
 <a href="https://repo.opensciencegrid.org/cadist/">IGTF-accredited CAs</a>.</p>
-<h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
-<p>Before requesting a new host certificate, use <code>openssl</code> to check if your host already has a valid certificate, i.e. the
-present is between <code>notBefore</code> and <code>notAfter</code> dates and times.
-If so, you may safely skip this document:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>openssl x509 -in /etc/grid-security/hostcert.pem -subject -issuer -dates -noout
-<span class="go">subject= /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=host.opensciencegrid.org</span>
-<span class="go">issuer=/DC=org/DC=cilogon/C=US/O=CILogon/CN=CILogon OSG CA 1</span>
-<span class="go">notBefore=Jan  4 21:08:09 2010 GMT</span>
-<span class="go">notAfter=Jan  4 21:08:09 2011 GMT</span>
-</code></pre></div>
-<p>If you are using OpenSSL 1.1, you may notice minor formatting differences.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For SSL to work properly, you will need to request a host certificate with
+"TLS Web Server Authentication" and "TLS Web Client Authentication" included
+in the X509v3 Extended Key Usage.</p>
+</div>
 <h2 id="requesting-service-certificates">Requesting Service Certificates<a class="headerlink" href="#requesting-service-certificates" title="Permanent link">&para;</a></h2>
 <p>Previously, the OSG recommended using separate X.509 certificates, called "service certificates", for each grid service
 on a host.

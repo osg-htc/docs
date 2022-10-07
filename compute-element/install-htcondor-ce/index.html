@@ -1965,8 +1965,14 @@ we suggest <a href="../hosted-ce/">requesting an OSG Hosted CE</a>.</p>
     <code>gratia</code>
     You will also need to create Unix accounts for each collaboration that you wish to support.
     See details in the <a href="#configuring-authentication">'Configuring authentication' section below</a>.</li>
-<li><strong>SSL certificate:</strong> The HTCondor-CE service uses a host certificate at <code>/etc/grid-security/hostcert.pem</code> and an
-    accompanying key at <code>/etc/grid-security/hostkey.pem</code></li>
+<li><strong>SSL certificate:</strong> The HTCondor-CE service uses a host certificate and an accompanying key.<ul>
+<li>If using a Let's Encrypt cert, install these as
+   <code>/etc/pki/tls/certs/localhost.crt</code> and <code>/etc/pki/tls/private/localhost.key</code></li>
+<li>If using an IGTF cert, install these as
+   <code>/etc/grid-security/hostcert.pem</code> and <code>/etc/grid-security/hostkey.pem</code>
+See details in the <a href="../../security/host-certs/overview/">Host Certificates overview</a>.</li>
+</ul>
+</li>
 <li><strong>DNS entries:</strong> Forward and reverse DNS must resolve for the HTCondor-CE host</li>
 <li><strong>Network ports:</strong> The pilot factories must be able to contact your HTCondor-CE service on port 9619 (TCP)</li>
 <li><strong>Access point/login node:</strong> HTCondor-CE should be installed on a host that already has the ability to submit jobs
