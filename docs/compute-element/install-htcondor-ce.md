@@ -31,9 +31,9 @@ Before starting the installation process, consider the following points, consult
     See details in the ['Configuring authentication' section below](#configuring-authentication).
 -   **SSL certificate:** The HTCondor-CE service uses a host certificate and an accompanying key.
     -  If using a Let's Encrypt cert, install these as
-       `/etc/pki/tls/hostcert.pem` and `/etc/pki/tls/hostkey.pem`
-    -  If using an IGTF cert, install these as
        `/etc/pki/tls/certs/localhost.crt` and `/etc/pki/tls/private/localhost.key`
+    -  If using an IGTF cert, install these as
+       `/etc/grid-security/hostcert.pem` and `/etc/grid-security/hostkey.pem`
     See details in the [Host Certificates overview](../security/host-certs/overview.md).
 -   **DNS entries:** Forward and reverse DNS must resolve for the HTCondor-CE host
 -   **Network ports:** The pilot factories must be able to contact your HTCondor-CE service on port 9619 (TCP)
