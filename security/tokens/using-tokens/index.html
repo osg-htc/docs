@@ -1609,6 +1609,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#using-tokens" class="md-nav__link">
+    Using Tokens
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#troubleshooting-tokens" class="md-nav__link">
     Troubleshooting Tokens
   </a>
@@ -1899,6 +1906,13 @@
         <li class="md-nav__item">
   <a href="#generating-scitokens-for-testing" class="md-nav__link">
     Generating SciTokens For Testing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-tokens" class="md-nav__link">
+    Using Tokens
   </a>
   
 </li>
@@ -2271,6 +2285,15 @@ of creating a demo SciToken.</p>
 </div>
 </li>
 </ol>
+<h2 id="using-tokens">Using Tokens<a class="headerlink" href="#using-tokens" title="Permanent link">&para;</a></h2>
+<p>Client tools such as <code>condor_submit</code> or <code>xrdcp</code> will search for your access token in order of the following locations:</p>
+<ol>
+<li>Token contents in the <code>$BEARER_TOKEN</code> environment variable</li>
+<li>Path to the token in the <code>$BEARER_TOKEN_FILE</code> environment variable</li>
+<li>Path to the token in <code>$XDG_RUNTIME_DIR/bt_u$UID</code></li>
+<li>Token saved to <code>/tmp/bt_u$UID</code></li>
+</ol>
+<p>For more details, see the <a href="https://zenodo.org/record/3937438">WLCG Bearer Token Discovery technical note</a>.</p>
 <h2 id="troubleshooting-tokens">Troubleshooting Tokens<a class="headerlink" href="#troubleshooting-tokens" title="Permanent link">&para;</a></h2>
 <h3 id="validating-tokens">Validating tokens<a class="headerlink" href="#validating-tokens" title="Permanent link">&para;</a></h3>
 <p>A token must be a <em>one-line</em> string consisting of 3 base64-encoded parts separated by periods (<code>.</code>).
