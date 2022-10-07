@@ -119,13 +119,10 @@ install CVMFS or maintain shared file system, you have the following options:
 Requesting an OSG Hosted CE
 ---------------------------
 
-!!! question "Cluster Integration Questionnaire"
-    Here is the [Cluster Integration Questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSexKMFho_TGJ8nOY-qLXJf_8neAnjDSJqrNbYIUvMcOfoZ6Uw/viewform?usp=sf_lin)
-    [Cluster Integration Questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSexKMFho_TGJ8nOY-qLXJf_8neAnjDSJqrNbYIUvMcOfoZ6Uw/viewform?usp=sf_lin){ .md-button .md-button--primary }
-
-After preparing your local cluster, apply for a Hosted CE by filling out the
-[cluster integration questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSexKMFho_TGJ8nOY-qLXJf_8neAnjDSJqrNbYIUvMcOfoZ6Uw/viewform?usp=sf_lin).
+After preparing your local cluster, apply for a Hosted CE by filling out the cluster integration questionnaire.
 Your answers will help our operators submit resource requests to your local cluster of the appropriate size and scale.
+
+[Cluster Integration Questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSexKMFho_TGJ8nOY-qLXJf_8neAnjDSJqrNbYIUvMcOfoZ6Uw/viewform?usp=sf_lin){ .md-button .md-button--primary }
 
 !!! question "Can I change my answers at a later date?"
     Yes! If you want the OSG to change the size (i.e. CPU, RAM), type (e.g., GPU requests), or number of resource requests,
