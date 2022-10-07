@@ -34,6 +34,7 @@ Before starting the installation process, consider the following points, consult
        `/etc/pki/tls/certs/localhost.crt` and `/etc/pki/tls/private/localhost.key`
     -  If using an IGTF cert, install these as
        `/etc/grid-security/hostcert.pem` and `/etc/grid-security/hostkey.pem`
+
     See details in the [Host Certificates overview](../security/host-certs/overview.md).
 -   **DNS entries:** Forward and reverse DNS must resolve for the HTCondor-CE host
 -   **Network ports:** The pilot factories must be able to contact your HTCondor-CE service on port 9619 (TCP)
