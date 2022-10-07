@@ -137,7 +137,8 @@ To enable this,
         xrootd.fslib throttle default
         throttle.throttle concurrency <CONCUR> data <RATE>
 
-    Replacing `<CONCUR>` with the IO concurrency limit and `<RATE>` with the data rate limit in bytes.
+    Replacing `<CONCUR>` with the IO concurrency limit, measured in seconds
+    (e.g., 100 connections taking 1ms each, would be 0.1), and `<RATE>` with the data rate limit in bytes per second.
     Note that you may also just specify either the concurrency limit:
 
         xrootd.fslib throttle default
