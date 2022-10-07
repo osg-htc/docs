@@ -220,6 +220,18 @@ your HTCondor-CE or XRootD service, you can use the [SciTokens demo website](htt
         After completing testing, remove any test `demo.scitokens.org` mappings that you have added as anyone is capable
         of creating a demo SciToken.
 
+Using Tokens
+------------
+
+Client tools such as `condor_submit` or `xrdcp` will search for your access token in order of the following locations:
+
+1.  Token contents in the `$BEARER_TOKEN` environment variable
+1.  Path to the token in the `$BEARER_TOKEN_FILE` environment variable
+1.  Path to the token in `$XDG_RUNTIME_DIR/bt_u$UID`
+1.  Token saved to `/tmp/bt_u$UID`
+
+For more details, see the [WLCG Bearer Token Discovery technical note](https://zenodo.org/record/3937438).
+
 Troubleshooting Tokens
 ----------------------
 
