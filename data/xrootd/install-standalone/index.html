@@ -887,6 +887,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#throttling-io-requests" class="md-nav__link">
+    Throttling IO requests
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#enabling-cms-tfc-support-cms-sites-only" class="md-nav__link">
     Enabling CMS TFC support (CMS sites only)
   </a>
@@ -1865,6 +1872,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#throttling-io-requests" class="md-nav__link">
+    Throttling IO requests
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#enabling-cms-tfc-support-cms-sites-only" class="md-nav__link">
     Enabling CMS TFC support (CMS sites only)
   </a>
@@ -2057,6 +2071,36 @@ If your XRootD service only allows read-only access, you should skip installatio
 <p>To set up XRootD in multi-user mode, install the <code>xrootd-multiuser</code> package:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">root@xrootd-standalone # </span>yum install xrootd-multiuser
 </code></pre></div>
+<h4 id="throttling-io-requests">Throttling IO requests<a class="headerlink" href="#throttling-io-requests" title="Permanent link">&para;</a></h4>
+<p>XRootD allows throttling of requests to the underlying filesystem.
+To enable this,</p>
+<ol>
+<li>
+<p>In an <code>/etc/xrootd/config.d/*.cfg</code> file, e.g. <code>/etc/xrootd/config.d/99-local.cfg</code>, set the following configuration:</p>
+<div class="codehilite"><pre><span></span><code>xrootd.fslib throttle default
+throttle.throttle concurrency &lt;CONCUR&gt; data &lt;RATE&gt;
+</code></pre></div>
+
+<p>Replacing <code>&lt;CONCUR&gt;</code> with the IO concurrency limit, measured in seconds
+(e.g., 100 connections taking 1ms each, would be 0.1), and <code>&lt;RATE&gt;</code> with the data rate limit in bytes per second.
+Note that you may also just specify either the concurrency limit:</p>
+<div class="codehilite"><pre><span></span><code>xrootd.fslib throttle default
+throttle.throttle concurrency &lt;CONCUR&gt;
+</code></pre></div>
+
+<p>Or the data rate limit:</p>
+<div class="codehilite"><pre><span></span><code>xrootd.fslib throttle default
+throttle.throttle data &lt;RATE&gt;
+</code></pre></div>
+
+</li>
+<li>
+<p>If XRootD is already running, restart the relevant <a href="#using-xrootd">XRootD service</a> for your configuration to take
+    effect.</p>
+</li>
+</ol>
+<p>For more details of the throttling implementation,
+see the <a href="https://github.com/xrootd/xrootd/tree/master/src/XrdThrottle">upstream documentation</a>.</p>
 <h4 id="enabling-cms-tfc-support-cms-sites-only">Enabling CMS TFC support (CMS sites only)<a class="headerlink" href="#enabling-cms-tfc-support-cms-sites-only" title="Permanent link">&para;</a></h4>
 <p>For CMS sites, there is a package available to integrate rule-based name lookup using a <code>storage.xml</code> file.
 If you are not setting up a service for CMS, skip this section.</p>
