@@ -39,6 +39,15 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### ** October 13, 2022:** HTCondor 9.0.17
+-   [HTCondor 9.0.17](https://htcondor.readthedocs.io/en/v9_0/version-history/stable-release-series-90.html#version-9-0-17)
+    -   Fix file descriptor leak when schedd fails to launch scheduler universe jobs
+    -   Fix failure to forward batch grid universe job's refreshed X.509 proxy
+    -   Fix DAGMan failure when the DONE keyword appeared in the JOB line
+    -   Fix HTCondor's handling of extremely large UIDs on Linux
+    -   Fix bug where OAUTH tokens lose their scope and audience upon refresh
+    -   Support for Apptainer in addition to Singularity
+
 ### ** September 29, 2022:** XCache 3.2.2
 -   XCache 3.2.2
     -   Allow specifying separate export paths for unauthenticated and authenticated origin instances
