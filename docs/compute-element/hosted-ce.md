@@ -160,16 +160,16 @@ Reference
 
 ### User accounts ###
 
-Each community in the OSG utilizing the Hosted CEs is mapped to your site as a fixed, specific account; we request
-the account names are of the form `osg01` through `osg20`.
+Each resource pool in the OSG Consortium that uses Hosted CEs is mapped to your site as a fixed, specific account;
+we request the account names are of the form `osg01` through `osg20`.
 
-The mappings from Unix username to community is as follows:
+The mappings from Unix usernames to resource pools are as follows:
 
-| User          | VO(s)    | Description                                                                                          |
+| Username      | Pool     | Supported Science                                                                                    |
 | ----          | -----    | -----                                                                                                |
-| osg01         | OSG      | Projects (primarily single PI, such as OSG-Connect) supported directly by the OSG organization       |
+| osg01         | OSPool   | Projects (primarily single PI) supported directly by the OSG organization                            |
 | osg02         | GLOW     | Projects coming from the Center for High Throughput Computing at the University of Wisconsin-Madison |
-| osg03         | HCC      | Projects coming from the Holland Computing Center at the University of Nebraska - Lincoln            |
+| osg03         | HCC      | Projects coming from the Holland Computing Center at the University of Nebraska–Lincoln              |
 | osg04         | CMS      | High-energy physics experiment from the Large Hadron Collider at CERN                                |
 | osg05         | Fermilab | Experiments from the Fermi National Accelerator Laboratory                                           |
 | osg07         | IGWN     | Gravitational wave detection experiments                                                             |
@@ -183,7 +183,7 @@ The mappings from Unix username to community is as follows:
 | osg15 - osg20 | -        | Unassigned                                                                                           |
 
 For example, the activities in your batch system corresponding to the user `osg02` will always be associated with the
-GLOW community.
+GLOW resource pool.
 
 
 ### Security ###
