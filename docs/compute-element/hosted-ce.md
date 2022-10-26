@@ -165,7 +165,7 @@ we request the account names are of the form `osg01` through `osg20`.
 
 The mappings from Unix usernames to resource pools are as follows:
 
-| Username      | Pool     | Supported Science                                                                                    |
+| Username      | Pool     | Supported Research                                                                                   |
 | ----          | -----    | -----                                                                                                |
 | osg01         | OSPool   | Projects (primarily single PI) supported directly by the OSG organization                            |
 | osg02         | GLOW     | Projects coming from the Center for High Throughput Computing at the University of Wisconsin-Madison |
