@@ -1972,6 +1972,7 @@ Make sure the user you run your container as has write access to this directory.
 </ol>
 <p>Here is an example invocation using <code>docker run</code> by hand:</p>
 <div class="highlight"><pre><span></span><code>docker run -it --rm --user osg  \
+       --pull=always            \
        --privileged             \
        -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
        -v /worker-temp-dir:/pilot               \
@@ -2044,6 +2045,7 @@ Containers with bind mounted CVMFS can be run without <code>--privileged</code> 
 This is the <a href="#running-the-container-with-docker">example at the top of the page</a>,
 modified to volume mount CVMFS instead of using cvmfsexec, and using reduced privileges:</p>
 <div class="highlight"><pre><span></span><code>docker run -it --rm --user osg      \
+        --pull=always            \
         --security-opt seccomp=unconfined \
         --security-opt systempaths=unconfined \
         --security-opt no-new-privileges \
