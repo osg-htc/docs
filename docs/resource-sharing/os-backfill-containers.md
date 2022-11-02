@@ -70,6 +70,7 @@ Here is an example invocation using `docker run` by hand:
 
 ```
 docker run -it --rm --user osg  \
+       --pull=always            \
        --privileged             \
        -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
        -v /worker-temp-dir:/pilot               \
@@ -147,8 +148,9 @@ Once you have CVMFS installed and mounted on your host, add `-v /cvmfs:/cvmfs:sh
 This is the [example at the top of the page](#running-the-container-with-docker),
 modified to volume mount CVMFS instead of using cvmfsexec, and using reduced privileges:
 
-```hl_lines="5"
+```hl_lines="6"
 docker run -it --rm --user osg      \
+        --pull=always            \
         --security-opt seccomp=unconfined \
         --security-opt systempaths=unconfined \
         --security-opt no-new-privileges \
