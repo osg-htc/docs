@@ -39,6 +39,31 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### ** November 3, 2022:** HTCondor-CE 5.1.6, osdf-client 6.9.2, xrootd-multiuser 2.1.2, XCache 3.2.3; Upcoming: HTCondor 9.12.0
+-   HTCondor-CE 5.1.6
+    -   HTCondor-CE now uses the C++ Collector plugin for payload job traceability
+    -   Fix HTCondor-CE mapfiles to be compliant with PCRE2 and HTCondor 9.10.0+
+    -   Add support for multiple APEL accounting scaling factors
+    -   Suppress spurious log message about a missing negotiator
+    -   Fix crash in HTCondor-CE View
+-   osdf-client 6.9.2 (includes stashcp and condor\_stash\_plugin)
+    -   Add support for osdf:// URLs
+    -   Fix zero-byte file upload error
+-   xrootd-multiuser 2.1.2
+    -   Fix advertising of files not readable by the "xrootd" user
+-   XCache 3.2.3
+    -   Update XCache systemd overrides for xrootd-multiuser 2.1.2
+-   Upcoming: [HTCondor 9.12.0](https://htcondor.readthedocs.io/en/v9_1/version-history/development-release-series-91.html#version-9-12-0)
+    -   Provide a mechanism to bootstrap secure authentication within a pool
+    -   Add the ability to define submit templates
+    -   Administrators can now extend the help offered by condor\_submit
+    -   Add DAGMan ClassAd attributes to record more information about jobs
+    -   On Linux, advertise the x86\_64 micro-architecture in a slot attribute
+    -   Added -drain option to condor\_off and condor\_restart
+    -   Administrators can now set the shared memory size for Docker jobs
+    -   Multiple improvements to condor\_adstash
+    -   HAD daemons now use SHA-256 checksums by default
+
 ### ** October 13, 2022:** HTCondor 9.0.17
 -   [HTCondor 9.0.17](https://htcondor.readthedocs.io/en/v9_0/version-history/stable-release-series-90.html#version-9-0-17)
     -   Fix file descriptor leak when schedd fails to launch scheduler universe jobs
