@@ -39,6 +39,14 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### ** November 21, 2022:** VO Package v126
+-   [VO Package v126](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-126-1)
+    -   Update VOMS certificates for DESY VOs (IceCube, Belle, ILC, and others)
+
+!!! note
+    Any sites supporting "IceCube", "Belle", or "ILC" **must** update.
+    If not, pilots will not arrive or jobs will have storage access issues.
+
 ### ** November 3, 2022:** HTCondor-CE 5.1.6, osdf-client 6.9.2, xrootd-multiuser 2.1.2, XCache 3.2.3; Upcoming: HTCondor 9.12.0
 -   HTCondor-CE 5.1.6
     -   HTCondor-CE now uses the C++ Collector plugin for payload job traceability
