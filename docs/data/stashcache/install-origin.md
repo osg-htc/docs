@@ -30,7 +30,7 @@ Before Starting
 
 Before starting the installation process, consider the following requirements:
 
-* __Operating system:__ A RHEL 7 or compatible operating system.
+* __Operating system:__ A RHEL 7 or RHEL 8 or compatible operating systems.
 * __User IDs:__ If they do not exist already, the installation will create the Linux user IDs `condor` and `xrootd`;
   only the `xrootd` user is utilized for the running daemons.
 * __Host certificate:__ Required for authentication.
