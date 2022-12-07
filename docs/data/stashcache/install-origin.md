@@ -36,8 +36,8 @@ Before starting the installation process, consider the following requirements:
 * __Host certificate:__ Required for authentication.
   See our [host certificate documentation](../../security/host-certs.md) for instructions on how to request and install host certificates.
 * __Network ports:__ The origin service requires the following ports open:
-  * Inbound TCP port 1094 for unauthenticated file access via the XRoot or HTTP protocols (unauthenticated origin only)
-  * Inbound TCP port 1095 for authenticated file access via the XRoot or HTTPS protocols (authenticated origin only)
+  * Inbound TCP port 1094 for unauthenticated file access via the XRoot or HTTP protocols (unauthenticated origin only). In case of an origin with restricted access, it is interesting to open the range to 129.93.244.192/26 for the monitoring system.
+  * Inbound TCP port 1095 for authenticated file access via the XRoot or HTTPS protocols (authenticated origin only). In case of an origin with restricted access, it is interesting to open the range to 129.93.244.192/26 for the monitoring system.
   * Outbound TCP port 1213 to `redirector.osgstorage.org` for connecting to the data federation
   * Outbound UDP port 9930 for reporting to `xrd-report.osgstorage.org` and `xrd-mon.osgstorage.org` for monitoring.
 * __Hardware requirements:__ We recommend that an origin has at least 1Gbps connectivity and 8GB of RAM.
