@@ -21,9 +21,9 @@ Before starting the installation process, consider the following requirements:
 * __Host certificate:__ Required for authentication.
   See our [host certificate documentation](../../security/host-certs.md) for instructions on how to request and install host certificates.
 * __Network ports:__ The cache service requires the following ports open:
-    * Inbound TCP port 1094 for file access via the XRootD protocol
-    * Inbound TCP port 8000 for file access via HTTP and/or
-    * Inbound TCP port 8443 for authenticated file access via HTTPS
+    * Inbound TCP port 1094 for file access via the XRootD protocol. In case of an cache with restricted access, it is interesting to open the range to 129.93.244.192/26 for the monitoring system.
+    * Inbound TCP port 8000 for file access via HTTP and/or (In case of an cache with restricted access, it is interesting to open the range to 129.93.244.192/26 for the monitoring system.)
+    * Inbound TCP port 8443 for authenticated file access via HTTPS.  In case of an cache with restricted access, it is interesting to open the range to 129.93.244.192/26 for the monitoring system.
     * Outbound UDP port 9930 for reporting to `xrd-report.osgstorage.org` and `xrd-mon.osgstorage.org` for monitoring
 * __Hardware requirements:__ We recommend that a cache has at least 10Gbps connectivity, 1TB of
  disk space for the cache directory, and 12GB of RAM.
