@@ -30,14 +30,29 @@ of `/etc/yum.repos.d/osg.repo`:
 excludepkgs=rrdtool
 ```
 
-### XRootD 5.5.0 ###
+### GlideinWMS 3.9.6 ###
 
--   There is a critical bug for those using FUSE mounts through XRootD FS: [Fuse mount failed after upgrading xrootd to v5.5.0](https://github.com/xrootd/xrootd/issues/1777).
-    XCache and XRootD standalone sites should be unaffected. But, sites using XRootD FUSE mounts should wait for 5.5.1.
-
+-   Running Glideins are not reported correctly when using tokens. This is due to a missing ID and is affecting all releases up to 3.9.6. It has been fixed in 3.10.0
 
 Latest News
 -----------
+
+### ** December 8, 2022:** osg-scitokens-mapfile 11, XRootD 5.5.1, CVMFS 2.10.0, GlideinWMS 3.9.6, XCache 3.3.0, Vault 1.12.1
+-   osg-scitokens-mapfile 11
+    -   Support HEPCloud factory
+-   [XRootD 5.5.1](https://github.com/xrootd/xrootd/blob/v5.5.1/docs/ReleaseNotes.txt)
+    -   Fixes critical issue with XRootD FUSE mounts via xrdfs
+-   [CVMFS 2.10.0](https://cvmfs.readthedocs.io/en/stable/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-10-0)
+    -   Support for proxy sharding with the new client option `CVMFS_PROXY_SHARD={yes|no}`
+    -   Improved use of the kernel page cache resulting in significant client performance improvements in some scenarios
+    -   Fix for a long-standing open issue regarding the concurrent reading of changing files
+    -   Support for unpacking container images through Harbor registry proxies in the container conversion tools
+-   [GlideinWMS 3.9.6](https://glideinwms.fnal.gov/doc.v3_9_6/history.html#development)
+    -   Adds token (and hybrid) support for Clouds (AWS/GCE)
+-   XCache 3.3.0
+    -   Removed X.509 proxy requirement for an unauthenticated stash-cache instance
+-   [Vault 1.12.1](https://discuss.hashicorp.com/t/vault-1-12-1-1-11-5-and-1-10-8-released/46374)
+    -   Includes a fix to prevent a potential denial of service attack for HA installations
 
 ### ** November 21, 2022:** VO Package v126
 -   [VO Package v126](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-126-1)
