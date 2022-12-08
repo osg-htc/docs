@@ -1397,8 +1397,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#xrootd-550" class="md-nav__link">
-    XRootD 5.5.0
+  <a href="#glideinwms-396" class="md-nav__link">
+    GlideinWMS 3.9.6
   </a>
   
 </li>
@@ -1415,6 +1415,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#december-8-2022-osg-scitokens-mapfile-11-xrootd-551-cvmfs-2100-glideinwms-396-xcache-330-vault-1121" class="md-nav__link">
+    December 8, 2022: osg-scitokens-mapfile 11, XRootD 5.5.1, CVMFS 2.10.0, GlideinWMS 3.9.6, XCache 3.3.0, Vault 1.12.1
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#november-21-2022-vo-package-v126" class="md-nav__link">
@@ -2129,8 +2136,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#xrootd-550" class="md-nav__link">
-    XRootD 5.5.0
+  <a href="#glideinwms-396" class="md-nav__link">
+    GlideinWMS 3.9.6
   </a>
   
 </li>
@@ -2147,6 +2154,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#december-8-2022-osg-scitokens-mapfile-11-xrootd-551-cvmfs-2100-glideinwms-396-xcache-330-vault-1121" class="md-nav__link">
+    December 8, 2022: osg-scitokens-mapfile 11, XRootD 5.5.1, CVMFS 2.10.0, GlideinWMS 3.9.6, XCache 3.3.0, Vault 1.12.1
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#november-21-2022-vo-package-v126" class="md-nav__link">
@@ -2560,12 +2574,41 @@ Therefore, on EL7 hosts that are not running GlideinWMS, we suggest adding the f
 of <code>/etc/yum.repos.d/osg.repo</code>:</p>
 <div class="highlight"><pre><span></span><code>excludepkgs=rrdtool
 </code></pre></div>
-<h3 id="xrootd-550">XRootD 5.5.0<a class="headerlink" href="#xrootd-550" title="Permanent link">&para;</a></h3>
+<h3 id="glideinwms-396">GlideinWMS 3.9.6<a class="headerlink" href="#glideinwms-396" title="Permanent link">&para;</a></h3>
 <ul>
-<li>There is a critical bug for those using FUSE mounts through XRootD FS: <a href="https://github.com/xrootd/xrootd/issues/1777">Fuse mount failed after upgrading xrootd to v5.5.0</a>.
-    XCache and XRootD standalone sites should be unaffected. But, sites using XRootD FUSE mounts should wait for 5.5.1.</li>
+<li>Running Glideins are not reported correctly when using tokens. This is due to a missing ID and is affecting all releases up to 3.9.6. It has been fixed in 3.10.0</li>
 </ul>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="december-8-2022-osg-scitokens-mapfile-11-xrootd-551-cvmfs-2100-glideinwms-396-xcache-330-vault-1121"><strong> December 8, 2022:</strong> osg-scitokens-mapfile 11, XRootD 5.5.1, CVMFS 2.10.0, GlideinWMS 3.9.6, XCache 3.3.0, Vault 1.12.1<a class="headerlink" href="#december-8-2022-osg-scitokens-mapfile-11-xrootd-551-cvmfs-2100-glideinwms-396-xcache-330-vault-1121" title="Permanent link">&para;</a></h3>
+<ul>
+<li>osg-scitokens-mapfile 11<ul>
+<li>Support HEPCloud factory</li>
+</ul>
+</li>
+<li><a href="https://github.com/xrootd/xrootd/blob/v5.5.1/docs/ReleaseNotes.txt">XRootD 5.5.1</a><ul>
+<li>Fixes critical issue with XRootD FUSE mounts via xrdfs</li>
+</ul>
+</li>
+<li><a href="https://cvmfs.readthedocs.io/en/stable/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-10-0">CVMFS 2.10.0</a><ul>
+<li>Support for proxy sharding with the new client option <code>CVMFS_PROXY_SHARD={yes|no}</code></li>
+<li>Improved use of the kernel page cache resulting in significant client performance improvements in some scenarios</li>
+<li>Fix for a long-standing open issue regarding the concurrent reading of changing files</li>
+<li>Support for unpacking container images through Harbor registry proxies in the container conversion tools</li>
+</ul>
+</li>
+<li><a href="https://glideinwms.fnal.gov/doc.v3_9_6/history.html#development">GlideinWMS 3.9.6</a><ul>
+<li>Adds token (and hybrid) support for Clouds (AWS/GCE)</li>
+</ul>
+</li>
+<li>XCache 3.3.0<ul>
+<li>Removed X.509 proxy requirement for an unauthenticated stash-cache instance</li>
+</ul>
+</li>
+<li><a href="https://discuss.hashicorp.com/t/vault-1-12-1-1-11-5-and-1-10-8-released/46374">Vault 1.12.1</a><ul>
+<li>Includes a fix to prevent a potential denial of service attack for HA installations</li>
+</ul>
+</li>
+</ul>
 <h3 id="november-21-2022-vo-package-v126"><strong> November 21, 2022:</strong> VO Package v126<a class="headerlink" href="#november-21-2022-vo-package-v126" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-126-1">VO Package v126</a><ul>
