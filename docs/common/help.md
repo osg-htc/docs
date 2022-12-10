@@ -40,7 +40,7 @@ the information noted below:
     | If you are primarily associated with... | Submit new tickets to...                                                                                        |
     |-----------------------------------------|-----------------------------------------------------------------------------------------------------------------|
     | LHC VOs                                 | [GGUS](https://ggus.eu)                                                                                         |
-    | Anyone else                             | [help@opensciencegrid.org](mailto:help@opensciencegrid.org) |
+    | Anyone else                             | [help@osg-htc.org](mailto:help@osg-htc.org) |
 
 ### Community-specific support ###
 
