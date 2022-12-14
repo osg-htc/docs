@@ -12,7 +12,7 @@ or if you simply want to provide a local entry point for OSG-bound jobs,
 adding a path to OSG may result in less waiting for your users.
 
 Note that if you do not have a local batch system, consider having your users use
-[OSG Connect](https://support.opensciencegrid.org/support/solutions), which will require less
+[OSG Connect](https://portal.osg-htc.org/documentation), which will require less
 infrastructure work at your site.
 
 !!!note
@@ -167,16 +167,16 @@ If your users are accustomed to running jobs locally, they may encounter some si
 Users should be aware that OSG jobs are distributed across multiple institutions across a large geographical area.
 Each institution will have its own policy about the kinds of jobs that are allowed to run,
 and data transfer may be more complicated.
-The [OSG Helpdesk Solutions](https://support.opensciencegrid.org/support/solutions) page has information about
+The [OSG Helpdesk Solutions](https://portal.osg-htc.org/documentation) page has information about
 what users should know;
-the [Choosing Resources for Jobs](https://support.opensciencegrid.org/support/solutions/folders/5000266057) and
-[Data Management](https://support.opensciencegrid.org/support/solutions/folders/12000013267)
-sections are particularly relevant.
+the [Organizing and Submitting HTC Workloads Tutorial](https://portal.osg-htc.org/documentation/htc_workloads/submitting_workloads/tutorial-organizing/) and
+[Data Management Guide](https://portal.osg-htc.org/documentation/htc_workloads/managing_data/osgconnect-storage/)
+are particularly relevant.
 
 ### Specifying a project
 OSG will only run jobs that have a registered *project* associated with them.
 Users must follow the
-[instructions for starting a project in OSG-Connect](https://support.opensciencegrid.org/support/solutions/articles/5000634360-start-or-join-a-project-in-osg-connect)
+[instructions for starting a project in OSG-Connect](https://portal.osg-htc.org/documentation/overview/account_setup/starting-project/)
 to register a project.
 
 A project is associated with a job by adding a ProjectName line to the user's submit file.
