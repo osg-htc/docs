@@ -36,7 +36,7 @@ all AP users and operators are expected to adhere to the following usage limitat
 -   Efforts benefitting from the OSPool and other Access Point features shall provide appropriate acknowledgement of
     support or citation;
     please see
-    [this page](https://support.opensciencegrid.org/support/solutions/articles/5000640421-acknowledging-the-open-science-grid)
+    [this page](https://osg-htc.org/acknowledging)
     for information about citation.
 -   You shall not use the Access Point or OSPool for any purpose that is unlawful and not (attempt to) breach or
     circumvent any administrative or security controls.
