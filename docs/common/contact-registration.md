@@ -29,7 +29,7 @@ To register with the OSG, submit an application using the self-signup process:
     !!! question "Help, my institution does not show up in the drop-down!"
         If your institution does not show up in the drop-down menu, then your institution is not part of the
         [InCommon federation](https://www.incommon.org/federation/).
-        Instead, we recommend using an [ORCID account](https://orcid.org/), registering a new one if necessary.
+        In this case, we recommend using an [ORCID account](https://orcid.org/) instead, registering a new one if necessary.
 
     ![CILogon Single-Sign On page](../img/comanage/comanage-sso.png)
 
