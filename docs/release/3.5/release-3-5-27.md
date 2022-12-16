@@ -33,7 +33,7 @@ This release contains:
     -   The RPM packages require globus, munge, scitokens, and voms from EPEL
     -   Improved cgroup memory policy settings that set both hard and soft limit
     -   Cgroup memory usage reporting no longer includes the kernel buffer cache
-    -   Numerous Python binding improvements, see [version history](https://htcondor.readthedocs.io/en/latest/version-history/development-release-series-89.html#version-8-9-9)
+    -   Numerous Python binding improvements, see [version history](https://htcondor.readthedocs.io/en/v9_0/version-history/development-release-series-89.html#version-8-9-9)
     -   Can create a manifest of files on the execute node at job start and finish
     -   Added provisioner nodes to DAGMan, allowing users to provision resources
     -   DAGMan can now produce .dot graphs without running the workflow

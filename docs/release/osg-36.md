@@ -746,7 +746,7 @@ Here is a list of the differences in this initial release:
 
 -   GridFTP, GSI, and Hadoop are no longer available
 -   Added packages to support token-based authentication
--   [HTCondor 8.9.11](https://htcondor.readthedocs.io/en/latest/version-history/development-release-series-89.html#version-8-9-11):
+-   [HTCondor 8.9.11](https://htcondor.readthedocs.io/en/v9_0/version-history/development-release-series-89.html#version-8-9-11):
     initial token support (8.9.12, which will contain default configuration using tokens, was delayed)
 -   [HTCondor-CE 5.0.0](https://htcondor.github.io/htcondor-ce/v5/releases/):
     support for Python 3
