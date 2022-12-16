@@ -110,7 +110,7 @@ set EnableVoms = 1
 
 !!! warning "Requirements for XRootD-Multiuser with VOMS FQANs"
     Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a `voms-mapfile`.
-    Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
+    Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, or XRootD 5.5.0 or newer.
     If you want to use multiuser, ensure you are getting `xrootd-voms` from the OSG repos.
 
 !!! warning "Key length requirements"
@@ -147,7 +147,7 @@ i.e. authorize access to clients presenting the above proxy with `u blin ...` in
 
 !!! warning "Requirements for XRootD-Multiuser with VOMS FQANs"
     Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a `voms-mapfile`.
-    Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
+    Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, or XRootD 5.5.0 or newer.
     If you want to use multiuser, ensure you are getting `xrootd-voms` from the OSG repos.
 
 In OSG 3.6, if the XRootD-VOMS plugin is enabled,
@@ -171,6 +171,7 @@ set vomsfqans = useall
 #### Mapping VOMS attributes to users ####
 
 In order for the XRootD-Multiuser plugin to work, a proxy must be mapped to a user (`u`) that is a valid Unix user.
+
 Use a VOMS Mapfile in `/etc/grid-security/voms-mapfile` that contains lines in the following form:
 ```
 "<FQAN PATTERN>" <USERNAME>
@@ -184,13 +185,17 @@ For example,
 ```
 will map FQANs starting with `/osg/` to the user `osg01`.
 
+To enable using VOMS mapfiles in the first place, add the following line to your XRootD configuration:
+```
+voms.mapfile /etc/grid-security/voms-mapfile
+```
+
 See the [VOMS Mapping documentation](https://github.com/xrootd/xrootd/tree/master/src/XrdVoms#voms-mapping) for details.
 VOMS Mapfiles previously used with LCMAPS should continue to work unmodified,
 but the plugin can only look at a single mapfile,
 so if you are using the mappings provided in `/usr/share/osg/voms-mapfile-default`
 (by the `vo-client-lcmaps-voms` package),
 you will have to copy them to `/etc/grid-security/voms-mapfile`.
-
 
 ### Authorization database ###
 
