@@ -231,7 +231,7 @@ fermicloud054.fnal.gov complete inventory as of Tue Apr 12 07:38:29 2011 /data/x
 
 XRootD can be accessed using the HTTP protocol. To do that:
 
-1. Add the following line to `/etc/xrootd/config.d/50-osg-http.cfg`:
+1. Add the following line to `/etc/xrootd/config.d/10-common-site-local.cfg`:
 
         :::file
         set EnableHttp = 1
@@ -274,7 +274,7 @@ You should now be able to run UNIX commands such as `ls /mnt/xrootd` to see the 
 
 ### (Optional) Authorization
 
-For information on how to configure xrootd authorization, please refer to the
+For information on how to configure XRootD authorization, please refer to the
 [Configuring XRootD Authorization guide](xrootd-authorization.md).
 
 ### (Optional) Adding CMS TFC support to XRootD (CMS sites only)
