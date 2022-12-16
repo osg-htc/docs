@@ -2313,16 +2313,7 @@ E.g. accessing <code>root://&lt;RDRNODE&gt;:1094//data/xrootdfs/test1</code> wil
 <p>XRootD can be accessed using the HTTP protocol. To do that:</p>
 <ol>
 <li>
-<p>Configure <a href="../xrootd-authorization/">LCMAPS authorization</a>.</p>
-</li>
-<li>
-<p>Uncomment the following line in <code>/etc/xrootd/config.d/10-xrootd-lcmaps.cfg</code>:</p>
-<div class="codehilite"><pre><span></span><code>set EnableLcmaps = 1
-</code></pre></div>
-
-</li>
-<li>
-<p>Additionally, add the following line to the same file:</p>
+<p>Add the following line to <code>/etc/xrootd/config.d/10-common-site-local.cfg</code>:</p>
 <div class="codehilite"><pre><span></span><code>set EnableHttp = 1
 </code></pre></div>
 
@@ -2359,7 +2350,7 @@ Create <code>/mnt/xrootd</code> directory. Make sure the xrootd user exists on t
 
 <p>You should now be able to run UNIX commands such as <code>ls /mnt/xrootd</code> to see the contents of the XRootD server.</p>
 <h3 id="optional-authorization">(Optional) Authorization<a class="headerlink" href="#optional-authorization" title="Permanent link">&para;</a></h3>
-<p>For information on how to configure xrootd-lcmaps authorization, please refer to the
+<p>For information on how to configure XRootD authorization, please refer to the
 <a href="../xrootd-authorization/">Configuring XRootD Authorization guide</a>.</p>
 <h3 id="optional-adding-cms-tfc-support-to-xrootd-cms-sites-only">(Optional) Adding CMS TFC support to XRootD (CMS sites only)<a class="headerlink" href="#optional-adding-cms-tfc-support-to-xrootd-cms-sites-only" title="Permanent link">&para;</a></h3>
 <p>For CMS users, there is a package available to integrate rule-based name lookup using a <code>storage.xml</code> file.
@@ -2416,29 +2407,24 @@ For example, to have <code>xrootd</code> use the clustered config, you would sta
 <thead>
 <tr>
 <th align="left">Service</th>
-<th align="left">EL 6 service name</th>
-<th align="left">EL 7 service name</th>
+<th align="left">EL 7 &amp; 8 service name</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td align="left">XRootD (standalone config)</td>
-<td align="left"><code>xrootd</code></td>
 <td align="left"><code>xrootd@standalone</code></td>
 </tr>
 <tr>
 <td align="left">XRootD (clustered config)</td>
-<td align="left"><code>xrootd</code></td>
 <td align="left"><code>xrootd@clustered</code></td>
 </tr>
 <tr>
 <td align="left">XRootD (multiuser)</td>
-<td align="left"></td>
 <td align="left"><code>xrootd-privileged@clustered</code></td>
 </tr>
 <tr>
 <td align="left">CMSD (clustered config)</td>
-<td align="left"><code>cmsd</code></td>
 <td align="left"><code>cmsd@clustered</code></td>
 </tr>
 </tbody>
@@ -2447,30 +2433,25 @@ For example, to have <code>xrootd</code> use the clustered config, you would sta
 <table>
 <thead>
 <tr>
-<th align="left">To …</th>
-<th align="left">On EL 6, run the command…</th>
-<th align="left">On EL 7, run the command…</th>
+<th align="left">To ...</th>
+<th align="left">On EL 7 &amp; 8, run the command...</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td align="left">Start a service</td>
-<td align="left"><code>service SERVICE-NAME start</code></td>
 <td align="left"><code>systemctl start SERVICE-NAME</code></td>
 </tr>
 <tr>
 <td align="left">Stop a service</td>
-<td align="left"><code>service SERVICE-NAME stop</code></td>
 <td align="left"><code>systemctl stop SERVICE-NAME</code></td>
 </tr>
 <tr>
 <td align="left">Enable a service to start during boot</td>
-<td align="left"><code>chkconfig SERVICE-NAME on</code></td>
 <td align="left"><code>systemctl enable SERVICE-NAME</code></td>
 </tr>
 <tr>
 <td align="left">Disable a service from starting during boot</td>
-<td align="left"><code>chkconfig SERVICE-NAME off</code></td>
 <td align="left"><code>systemctl disable SERVICE-NAME</code></td>
 </tr>
 </tbody>
