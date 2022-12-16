@@ -1,3 +1,4 @@
+DateReviewed: 2022-12-16
 title: Installing an XRootD Storage Element
 
 Installing an XRootD Storage Element
@@ -231,14 +232,7 @@ fermicloud054.fnal.gov complete inventory as of Tue Apr 12 07:38:29 2011 /data/x
 
 XRootD can be accessed using the HTTP protocol. To do that:
 
-1. Configure [LCMAPS authorization](xrootd-authorization.md).
-
-1. Uncomment the following line in `/etc/xrootd/config.d/10-xrootd-lcmaps.cfg`:
-
-        :::file
-        set EnableLcmaps = 1
-
-1. Additionally, add the following line to the same file:
+1. Add the following line to `/etc/xrootd/config.d/10-common-site-local.cfg`:
 
         :::file
         set EnableHttp = 1
@@ -281,7 +275,7 @@ You should now be able to run UNIX commands such as `ls /mnt/xrootd` to see the 
 
 ### (Optional) Authorization
 
-For information on how to configure xrootd-lcmaps authorization, please refer to the
+For information on how to configure XRootD authorization, please refer to the
 [Configuring XRootD Authorization guide](xrootd-authorization.md).
 
 ### (Optional) Adding CMS TFC support to XRootD (CMS sites only)
@@ -357,22 +351,23 @@ root@host # systemctl start xrootd@standalone
 The services are:
 
 
-| Service                    | EL 6 service name | EL 7 service name            |
-|:---------------------------|:------------------|:-----------------------------|
-| XRootD (standalone config) | `xrootd`          | `xrootd@standalone`          |
-| XRootD (clustered config)  | `xrootd`          | `xrootd@clustered`           |
-| XRootD (multiuser)         |                   | `xrootd-privileged@clustered`|
-| CMSD (clustered config)    | `cmsd`            | `cmsd@clustered`             |
+| Service                    | EL 7 & 8 service name        |
+|:---------------------------|:-----------------------------|
+| XRootD (standalone config) | `xrootd@standalone`          |
+| XRootD (clustered config)  | `xrootd@clustered`           |
+| XRootD (multiuser)         | `xrootd-privileged@clustered`|
+| CMSD (clustered config)    | `cmsd@clustered`             |
+
 
 As a reminder, here are common service commands (all run as `root`):
 
 
-| To …                                        | On EL 6, run the command…    | On EL 7, run the command…        |
-|:--------------------------------------------|:-----------------------------|:---------------------------------|
-| Start a service                             | `service SERVICE-NAME start` | `systemctl start SERVICE-NAME`   |
-| Stop a service                              | `service SERVICE-NAME stop`  | `systemctl stop SERVICE-NAME`    |
-| Enable a service to start during boot       | `chkconfig SERVICE-NAME on`  | `systemctl enable SERVICE-NAME`  |
-| Disable a service from starting during boot | `chkconfig SERVICE-NAME off` | `systemctl disable SERVICE-NAME` |
+| To ...                                      | On EL 7 & 8, run the command...  |
+|:--------------------------------------------|:---------------------------------|
+| Start a service                             | `systemctl start SERVICE-NAME`   |
+| Stop a service                              | `systemctl stop SERVICE-NAME`    |
+| Enable a service to start during boot       | `systemctl enable SERVICE-NAME`  |
+| Disable a service from starting during boot | `systemctl disable SERVICE-NAME` |
 
 Getting Help
 ------------
