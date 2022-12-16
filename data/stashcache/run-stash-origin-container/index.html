@@ -1311,8 +1311,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validating-origin" class="md-nav__link">
-    Validating Origin
+  <a href="#validating-the-origin" class="md-nav__link">
+    Validating the Origin
   </a>
   
 </li>
@@ -1825,8 +1825,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validating-origin" class="md-nav__link">
-    Validating Origin
+  <a href="#validating-the-origin" class="md-nav__link">
+    Validating the Origin
   </a>
   
 </li>
@@ -1857,12 +1857,6 @@
 
 
 <h1 id="running-osdf-origin-in-a-container">Running OSDF Origin in a Container<a class="headerlink" href="#running-osdf-origin-in-a-container" title="Permanent link">&para;</a></h1>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Currently, the origin container only supports distribution of public data.
-If you would like to distribute private data requiring authentication,
-see <a href="../install-origin/">the RPM installation guide</a>.</p>
-</div>
 <p>The OSG operates the <a href="../overview/">Open Science Data Federation</a> (OSDF), which
 provides organizations with a method to distribute their data in a scalable manner to thousands of jobs without needing
 to pre-stage data across sites or operate their own scalable infrastructure.</p>
@@ -1878,7 +1872,8 @@ This document outlines how to run such an origin in a Docker container.</p>
 <ol>
 <li><strong>Docker:</strong> For the purpose of this guide, the host must have a running docker service and you must have the ability
 to start containers (i.e., belong to the <code>docker</code> Unix group).</li>
-<li><strong>Network ports:</strong> The origin listens for incoming HTTP(S) and XRootD connections on port 1094.</li>
+<li><strong>Network ports:</strong> The origin listens for incoming HTTP(S) and XRootD connections on ports 1094 and/or 1095.
+   1094 is used for serving public (unauthenticated) data, and 1095 is used for serving authenticated data.</li>
 <li><strong>File Systems:</strong> The origin needs a host partition to store user data.</li>
 <li><strong>Hardware requirements:</strong> We recommend that an origin has at least 1Gbps connectivity and 8GB of RAM.</li>
 <li><strong>Host certificate:</strong> Required for authentication.
@@ -1886,6 +1881,11 @@ to start containers (i.e., belong to the <code>docker</code> Unix group).</li>
 <li><strong>Registration:</strong> Before deploying an origin, you must
    <a href="../install-origin/#registering-the-origin">register the service</a> in the OSG Topology</li>
 </ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This document describes features introduced in XCache 3.2.2, released on 2022-09-29.
+You must use a version of the <code>opensciencegrid/stash-origin</code> image built after that date.</p>
+</div>
 <h2 id="configuring-the-origin">Configuring the Origin<a class="headerlink" href="#configuring-the-origin" title="Permanent link">&para;</a></h2>
 <p>In addition to the required configuration above (ports and file systems), you may also configure the behavior of your
 origin with the following variables using an environment variable file:</p>
@@ -1896,6 +1896,20 @@ and <code>&lt;FQDN&gt;</code> with the public DNS name that should be used to co
 <div class="highlight"><pre><span></span><code>XC_RESOURCENAME=YOUR_SITE_NAME
 ORIGIN_FQDN=&lt;FQDN&gt;
 </code></pre></div>
+<p>In addition, define the following variables to specify which subpaths should be served as public (unauthenticated) data
+on port 1094, and which subpaths should be served as authenticated data on port 1095:</p>
+<div class="highlight"><pre><span></span><code>XC_PUBLIC_ORIGIN_EXPORT=/&lt;VO&gt;/PUBLIC
+XC_AUTH_ORIGIN_EXPORT=/&lt;VO&gt;/PROTECTED
+</code></pre></div>
+<p>These paths are relative to the host partition being served -- see the <a href="#populating-origin-data">Populating Origin Data</a>
+section below.</p>
+<p>If you only define <code>XC_AUTH_ORIGIN_EXPORT</code>, you will only serve data on port 1095.
+If you only define <code>XC_PUBLIC_ORIGIN_EXPORT</code>, you will only serve data on port 1094.
+If you do not define either, you will serve the entire host partition as public data on port 1094.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For backward compatibility, <code>XC_ORIGINEXPORT</code> is accepted as an alias for <code>XC_PUBLIC_ORIGIN_EXPORT</code>.</p>
+</div>
 <h3 id="providing-a-host-certificate">Providing a host certificate<a class="headerlink" href="#providing-a-host-certificate" title="Permanent link">&para;</a></h3>
 <p>The service will need a certificate for contacting central OSDF services and for authenticating connections.</p>
 <p>Follow our <a href="../../../security/host-certs/">host certificate documentation</a> to obtain a host certificate and key.
@@ -1913,15 +1927,20 @@ For example, if you are using Certbot for Let's Encrypt, you should write a "dep
 <p>The OSDF namespace is shared by multiple VOs so you must
 <a href="../vo-data/#choosing-namespaces">choose a namespace</a> for your own VO's data.
 When running an origin container, your chosen namespace must be reflected in your host partition.</p>
-<p>For example, if your host partition is <code>/srv/origin-public</code> and the name of your VO is <code>ASTRO</code>,
-you should store the Astro VO's public data in <code>/srv/origin-public/astro/</code>.
-Then, when starting container, you will mount <code>/srv/origin-public/</code> into <code>/xcache/namespace</code> in the container.</p>
+<p>For example, if your host partition is <code>/srv/origin</code> and the name of your VO is <code>ASTRO</code>,
+you should store the Astro VO's public data in <code>/srv/origin/astro/PUBLIC</code>,
+and protected data in <code>/srv/origin/astro/PROTECTED</code>.</p>
+<p>When starting the container, mount <code>/srv/origin/</code> into <code>/xcache/namespace</code> in the container,
+and set the environment variables <code>XC_PUBLIC_ORIGIN_EXPORT=/astro/PUBLIC</code> and <code>XC_AUTH_ORIGIN_EXPORT=/astro/PROTECTED</code>.</p>
+<p>You may omit <code>XC_AUTH_ORIGIN_EXPORT</code> if you are only serving public data,
+or omit <code>XC_PUBLIC_ORIGIN_EXPORT</code> if you are only serving protected data.
+If you omit both, the entire <code>/srv/origin</code> partition will be served as public data.</p>
 <h2 id="running-the-origin">Running the Origin<a class="headerlink" href="#running-the-origin" title="Permanent link">&para;</a></h2>
 <p>It is recommended to use a container orchestration service such as <a href="https://docs.docker.com/compose/">docker-compose</a>
 or <a href="https://kubernetes.io/">kubernetes</a> whose details are beyond the scope of this document.
 The following sections provide examples for starting origin containers from the command-line as well as a more
 production-appropriate method using systemd.</p>
-<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>docker run --rm --publish <span class="m">1094</span>:1094 <span class="se">\</span>
+<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>docker run --rm --publish <span class="m">1094</span>:1094 --publish <span class="m">1095</span>:1095 <span class="se">\</span>
              --volume &lt;HOST PARTITION&gt;:/xcache/namespace <span class="se">\</span>
              --volume &lt;HOST CERT&gt;:/etc/grid-security/hostcert.pem <span class="se">\</span>
              --volume &lt;HOST KEY&gt;:/etc/grid-security/hostkey.pem <span class="se">\</span>
@@ -1932,14 +1951,22 @@ production-appropriate method using systemd.</p>
 See <a href="#populating-origin-data">this section</a> for details.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>A container deployed this way will serve the entire contents of <code>&lt;HOST PARTITION&gt;</code>.</p>
+<p>Unless configured otherwise via the env file <code>/opt/origin/.env</code>,
+a container deployed this way will serve the entire contents of <code>&lt;HOST PARTITION&gt;</code>.
+See the <a href="#configuring-the-origin">Configuring the Origin</a> section for information on how to
+serve one subpath as public and another as protected.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You may omit <code>--publish 1094:1094</code> if you are only serving authenticated data,
+or omit <code>--publish 1095:1095</code> if you are only serving public data.</p>
 </div>
 <h3 id="running-on-origin-container-with-systemd">Running on origin container with systemd<a class="headerlink" href="#running-on-origin-container-with-systemd" title="Permanent link">&para;</a></h3>
 <p>An example systemd service file for the OSDF.
 This will require creating the environment file in the directory <code>/opt/origin/.env</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This example systemd file assumes <code>&lt;HOST PARTITION&gt;</code> is <code>/srv/origin-public</code>,
+<p>This example systemd file assumes <code>&lt;HOST PARTITION&gt;</code> is <code>/srv/origin</code>,
 and the cert and key to use are in <code>/etc/ssl/host.crt</code> and <code>/etc/ssl/host.key</code>,
 respectively.</p>
 </div>
@@ -1955,8 +1982,10 @@ Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
 ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin:3.6-release
-ExecStart=/usr/bin/docker run --rm --name %n --publish 1094:1094 \
-  --volume /srv/origin-public:/xcache/namespace \
+ExecStart=/usr/bin/docker run --rm --name %n \
+  --publish 1094:1094 \
+  --publish 1095:1095 \
+  --volume /srv/origin:/xcache/namespace \
   --volume /etc/ssl/host.crt:/etc/grid-security/hostcert.pem \
   --volume /etc/ssl/host.key:/etc/grid-security/hostkey.pem \
   --env-file /opt/origin/.env \
@@ -1971,9 +2000,21 @@ WantedBy=multi-user.target
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
+<p>Unless configured otherwise via the env file <code>/opt/origin/.env</code>,
+a container deployed this way will serve the entire contents of <code>/srv/origin</code>.
+See the <a href="#configuring-the-origin">Configuring the Origin</a> section for information on how to
+serve one subpath as public and another as protected.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You may omit <code>--publish 1094:1094</code> if you are only serving authenticated data,
+or omit <code>--publish 1095:1095</code> if you are only serving public data.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>You must <a href="../install-origin/#registering-the-origin">register</a> the origin before starting it up.</p>
 </div>
-<h2 id="validating-origin">Validating Origin<a class="headerlink" href="#validating-origin" title="Permanent link">&para;</a></h2>
+<h2 id="validating-the-origin">Validating the Origin<a class="headerlink" href="#validating-the-origin" title="Permanent link">&para;</a></h2>
 <p>To validate the origin please follow the
 <a href="../install-origin/#verifying-the-origin-server">validating origin instructions</a>.</p>
 <h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>

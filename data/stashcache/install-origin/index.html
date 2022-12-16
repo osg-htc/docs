@@ -1299,8 +1299,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#managing-the-origin-service" class="md-nav__link">
-    Managing the Origin Service
+  <a href="#managing-the-origin-services" class="md-nav__link">
+    Managing the Origin Services
   </a>
   
 </li>
@@ -1828,8 +1828,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#managing-the-origin-service" class="md-nav__link">
-    Managing the Origin Service
+  <a href="#managing-the-origin-services" class="md-nav__link">
+    Managing the Origin Services
   </a>
   
 </li>
@@ -1915,12 +1915,6 @@
 
 
 <h1 id="installing-the-osdf-origin">Installing the OSDF Origin<a class="headerlink" href="#installing-the-osdf-origin" title="Permanent link">&para;</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>If you want to run origins for authenticated and unauthenticated data,
-you <strong>must</strong> run them on separate hosts.
-This requires registering a resource for each host.</p>
-</div>
 <p>This document describes how to install an Open Science Data Federation (OSDF) origin service.  This service allows an organization
 to export its data to the data federation.</p>
 <div class="admonition note">
@@ -1949,8 +1943,8 @@ along with information like:</p>
 <li><strong>Host certificate:</strong> Required for authentication.
   See our <a href="../../../security/host-certs/">host certificate documentation</a> for instructions on how to request and install host certificates.</li>
 <li><strong>Network ports:</strong> The origin service requires the following ports open:</li>
-<li>Inbound TCP port 1094 for unauthenticated file access via the XRoot or HTTP protocols (unauthenticated origin only)</li>
-<li>Inbound TCP port 1095 for authenticated file access via the XRoot or HTTPS protocols (authenticated origin only)</li>
+<li>Inbound TCP port 1094 for unauthenticated file access via the XRoot or HTTP protocols (if serving public data)</li>
+<li>Inbound TCP port 1095 for authenticated file access via the XRoot or HTTPS protocols (if serving authenticated data)</li>
 <li>Outbound TCP port 1213 to <code>redirector.osgstorage.org</code> for connecting to the data federation</li>
 <li>Outbound UDP port 9930 for reporting to <code>xrd-report.osgstorage.org</code> and <code>xrd-mon.osgstorage.org</code> for monitoring.</li>
 <li><strong>Hardware requirements:</strong> We recommend that an origin has at least 1Gbps connectivity and 8GB of RAM.
@@ -1963,6 +1957,11 @@ along with information like:</p>
 <li>Prepare <a href="../../../common/yum/">the required Yum repositories</a></li>
 <li>Install <a href="../../../common/ca/">CA certificates</a></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This document describes features introduced in XCache 3.2.2, released on 2022-09-29.
+When installing, ensure that your version of the <code>stash-origin</code> RPM is at least 3.2.2.</p>
+</div>
 <h2 id="installing-the-origin">Installing the Origin<a class="headerlink" href="#installing-the-origin" title="Permanent link">&para;</a></h2>
 <p>The origin service consists of one or more XRootD daemons and their dependencies for the authentication infrastructure.
 To simplify installation, OSG provides convenience RPMs that install all required
@@ -2000,28 +1999,32 @@ or <code>/etc/xrootd/config.d/9*.cfg</code> (for directives that are processed A
 </tr>
 <tr>
 <td>10-origin-site-local.cfg</td>
-<td><code>set originexport = /VO</code></td>
-<td>The directory relative to <code>rootdir</code> that is the top of the exported namespace for the origin services</td>
+<td><code>set PublicOriginExport = /VO/PUBLIC</code></td>
+<td>The directory relative to <code>rootdir</code> that is the top of the exported namespace for public (unauthenticated) origin services</td>
+</tr>
+<tr>
+<td>10-origin-site-local.cfg</td>
+<td><code>set AuthOriginExport = /VO/PUBLIC</code></td>
+<td>The directory relative to <code>rootdir</code> that is the top of the exported namespace for authenticated origin services</td>
 </tr>
 </tbody>
 </table>
 <p>For example, if the HCC VO would like to set up an origin server exporting from the mount point <code>/mnt/stash</code>,
-and HCC's registered namespace is <code>/hcc</code>, then the following would be set in <code>10-common-site-local.cfg</code>:</p>
+and HCC has a public registered namespace at <code>/hcc/PUBLIC</code>, then the following would be set in <code>10-common-site-local.cfg</code>:</p>
 <div class="highlight"><pre><span></span><code>set rootdir = /mnt/stash
 set resourcename = HCC_OSDF_ORIGIN
 </code></pre></div>
 <p>And the following would be set in <code>10-origin-site-local.cfg</code>:
-<div class="highlight"><pre><span></span><code>set originexport = /hcc
+<div class="highlight"><pre><span></span><code>set PublicOriginExport = /hcc/PUBLIC
 </code></pre></div></p>
-<p>With this configuration, the data under <code>/mnt/stash/hcc/bio/datasets</code> would be available under the path
-<code>/hcc/bio/datasets</code> in the OSDF namespace and the data under <code>/mnt/stash/hcc/hep/generators</code> would be available under the path
-<code>/hcc/hep/generators</code> in the OSDF namespace.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>If you want to run origins for authenticated and unauthenticated data,
-you <strong>must</strong> run them on separate hosts.
-This requires registering a resource for each host.</p>
-</div>
+<p>With this configuration, the data under <code>/mnt/stash/hcc/PUBLIC/bio/datasets</code> would be available under the path
+<code>/hcc/PUBLIC/bio/datasets</code> in the OSDF namespace and the data under <code>/mnt/stash/hcc/PUBLIC/hep/generators</code> would be available under the path
+<code>/hcc/PUBLIC/hep/generators</code> in the OSDF namespace.</p>
+<p>If the HCC has a protected registered namespace at <code>/hcc/PROTECTED</code> then set the following in <code>10-origin-site-local.cfg</code>:
+<div class="highlight"><pre><span></span><code>set AuthOriginExport = /hcc/PROTECTED
+</code></pre></div>
+If you are serving public data from the origin, you must set <code>PublicOriginExport</code> and use the <code>xrootd@stash-origin</code> service.
+If you are serving protected data from the origin, you must set <code>AuthOriginExport</code> and use the <code>xrootd@stash-origin-auth</code> service.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The OSDF namespace is a <em>global</em> namespace.
@@ -2041,8 +2044,13 @@ In this case, you must manually tell the origin services which FQDN to use for t
 
 </li>
 </ol>
-<h2 id="managing-the-origin-service">Managing the Origin Service<a class="headerlink" href="#managing-the-origin-service" title="Permanent link">&para;</a></h2>
-<p>The origin service consists of the following SystemD units that you must directly manage:</p>
+<h2 id="managing-the-origin-services">Managing the Origin Services<a class="headerlink" href="#managing-the-origin-services" title="Permanent link">&para;</a></h2>
+<p>Serving data for an origin is done by the <code>xrootd</code> daemon.
+There can be multiple instances of <code>xrootd</code>, running on different ports.
+The instance that serves unauthenticated data will run on port 1094.
+The instance that serves authenticated data will run on port 1095.
+If your origin serves both authenticated and unauthenticated data, you will run both instances.</p>
+<p>The origin services consist of the following SystemD units that you must directly manage:</p>
 <table>
 <thead>
 <tr>
