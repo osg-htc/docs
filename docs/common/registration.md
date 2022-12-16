@@ -29,6 +29,11 @@ associated GitHub ID.
 To register as an OSG contact or add your GitHub ID to your pre-existing contact entry, search for your name in the
 [contact database](https://topology.opensciencegrid.org/contacts) and choose one of the following:
 
+!!! info "Privacy"
+    The OSG treats any email addresses and phone numbers as confidential data but does not make any guarantees of
+    privacy.
+    All other data is public, such as name, GitHub username, and any association with particular hosts or services.
+
 - **If you find your name and see an associated `GitHub` account**, you can start submitting registrations!
 - **If you find your name but do not see an associated `GitHub` account**, send an email to <mailto:help@opensciencegrid.org>
   with your GitHub ID.
@@ -39,10 +44,6 @@ To register as an OSG contact or add your GitHub ID to your pre-existing contact
     - Description of your OSG affiliation, e.g. FermiGrid site administrator, senior scientist for the DUNE experiment,
       etc.
     - Contact information of site, virtual organization, or project sponsor to prove your affiliation
-
-    !!! info "Privacy"
-        The OSG treats any email addresses and phone numbers as confidential data but does not make any guarantees of
-        privacy.
 
 Registering Resources
 ---------------------
