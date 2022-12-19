@@ -24,7 +24,7 @@ Before Starting
 In order to configure the container, you will need:
 
 1. A system that can run containers, such as Docker or Kubernetes
-1. A [registered administrative contact](https://osg-htc.org/technology/policy/comanage-instructions-user/)
+1. A [registered administrative contact](../common/contact-registration.md)
 1. A [registered resource](../common/registration.md) in OSG Topology;
    resource registration allows OSG to do proper usage accounting and maintain contacts in case of security incidents
    and other issues.
