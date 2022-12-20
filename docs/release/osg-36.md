@@ -36,6 +36,11 @@ Running Glideins are not reported correctly when using tokens.
 This is due to a missing ID and is affecting all releases up to 3.9.6.
 It has been fixed in 3.10.0 (not yet released).
 
+### XRootD ###
+
+We have received reports of issues with HTTPS transfers involving gfal2 and XRootD after 8h of uptime.
+Follow the discussion with the developers [here](https://github.com/xrootd/xrootd/issues/1874).
+
 Latest News
 -----------
 
