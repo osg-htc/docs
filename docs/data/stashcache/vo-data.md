@@ -24,7 +24,7 @@ Requirements
 ------------
 
 In order for a Virtual Organization to join the federation, the VO must already be registered in OSG Topology.
-See the [registration document](../../common/registration.md#registering-virtual-organizations).
+See the [registration document](../../common/registration.md#registering-collaborations).
 
 
 
