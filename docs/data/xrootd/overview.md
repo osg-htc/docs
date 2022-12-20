@@ -22,7 +22,7 @@ In the OSG, there are three data federations based on XCache: ATLAS XCache, CMS 
 [StashCache](../stashcache/overview.md) for all other VOs.
 
 If you are affiliated with a site or VO interested in contributing to a data federation, contact us at
-<mailto:help@opensciencegrid.org>.
+<mailto:help@osg-htc.org>.
 
 XRootD Standalone
 -----------------

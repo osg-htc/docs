@@ -138,7 +138,7 @@ To register a new resource, follow the instructions below:
    `topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml`.
    When searching for these, keep in mind that case and spaces matter.
 
-    - If you do not have a facility, contact <mailto:help@opensciencegrid.org> for help.
+    - If you do not have a facility, contact <mailto:help@osg-htc.org> for help.
     - If you have a facility but not a site, first follow the instructions
       for [registering a site](#new-site) above.
     - If you have a facility and a site but not a resource group, pick a [resource group name](#registering-resources).

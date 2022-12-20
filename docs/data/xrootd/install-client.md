@@ -229,6 +229,5 @@ user@client $ cp xroot://redirector.yourdomain.org:1094//storage/path/test_file 
 How to get Help?
 ----------------
 
-If you cannot resolve the problem, the best way to get help is by contacting <osg-software@opensciencegrid.org>.
-For a full set of help options, see [Help Procedure](../../common/help.md).
+If you cannot resolve the problem, please consult [this page](../../common/help.md) for assistance..
 

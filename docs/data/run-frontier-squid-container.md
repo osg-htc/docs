@@ -150,4 +150,4 @@ instructions to register your Frontier Squid host.
 Getting Help
 ------------
 
-To get assistance, please use the [this page](/common/help) or contact <help@opensciencegrid.org> directly.
+To get assistance, please use the [this page](/common/help).

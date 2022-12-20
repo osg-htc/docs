@@ -18,7 +18,7 @@ In order to configure the container, you will need:
 1. A [registered resource](../common/registration.md) in OSG Topology;
    resource registration allows OSG to do proper usage accounting and maintain contacts in case of security incidents.
 2. An authentication token from the OSG.
-   Please contact [OSG support](mailto:support@opensciencegrid.org) to request a token for your user.
+   Please contact [OSG support](mailto:support@osg-htc.org) to request a token for your user.
 
 Launching Inside Slurm
 ----------------------

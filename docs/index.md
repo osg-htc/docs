@@ -35,7 +35,7 @@ In both of these cases, the following will be needed:
 - [Temporary scratch space](./worker-node/using-wn.md#for-site-administrators) on each worker node
 
 !!!info "Don't meet the requirements?"
-    If your site does not meet the above conditions, please [contact us](mailto:help@opensciencegrid.org) to discuss
+    If your site does not meet the above conditions, please [contact us](mailto:help@osg-htc.org) to discuss
     your options for contributing to the OSG.
 
 ### OSG-hosted services ###
@@ -46,7 +46,7 @@ To contribute computational resources with OSG-hosted services, your site will a
 - Shared home directories on each cluster node
 
 !!!success "Next steps"
-    If you are interested in OSG-hosted services, please [contact us](mailto:help@opensciencegrid.org) for a
+    If you are interested in OSG-hosted services, please [contact us](mailto:help@osg-htc.org) for a
     consultation, even if your site does not meet the conditions as outlined above!
 
 ### Self-hosted services ###
