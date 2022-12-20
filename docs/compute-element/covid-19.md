@@ -19,14 +19,14 @@ To support COVID-19 work, the overall process includes the following:
     -  You can install a [locally-managed](install-htcondor-ce.md) instance or ask OSG to
        [host the CE](hosted-ce.md) on your behalf.
        If neither solution is viable, or you'd like to discuss the options, please send email to
-       <help@opensciencegrid.org> and we'll work with you to arrive at the best solution.
+       <mailto:help@osg-htc.org> and we'll work with you to arrive at the best solution.
     -  If you already provide resources through an OSG Hosted CE, skip to [this section](#requesting-covid-19-jobs).
 1. [Enable the OSG VO](install-htcondor-ce.md#configuring-authentication) on your HTCondor-CE.
 1. Setup a job route specific to COVID-19 pilot jobs (documented below).
    The job route will allow you to prioritize these jobs using local policy in your site's cluster.
 1. (Optional) To attract more user jobs, install [CVMFS](../worker-node/install-cvmfs.md) and
    [Apptainer](../worker-node/install-apptainer.md) on your site's worker nodes
-1. Send email to <help@opensciencegrid.org> requesting that your CE receive COVID-19 pilots.
+1. Send email to <mailto:help@osg-htc.org> requesting that your CE receive COVID-19 pilots.
    We will need to know the CE hostname and any special restrictions that might apply to these pilots.
 
 Setting up a COVID-19 Job Route
@@ -219,7 +219,7 @@ To verify that your HTCondor-CE is configured to support COVID-19 jobs, perform 
 Requesting COVID-19 Jobs
 ------------------------
 
-To receive COVID-19 pilot jobs, send an email to <help@opensciencegrid.org> with the subject `Requesting COVID-19 pilots`
+To receive COVID-19 pilot jobs, send an email to <mailto:help@osg-htc.org> with the subject `Requesting COVID-19 pilots`
 and the following information:
 
 -  Whether you want to receive _only_ COVID-19 jobs, or if you want to accept COVID-19 and other OSG jobs

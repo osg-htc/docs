@@ -58,7 +58,7 @@ There are two options for accepting pilot jobs at your site:
    OSG will interface with the VO and submit pilots directly to your batch system via SSH.
    By far, this is the _simplest option_: however, it is less-scalable and the site delegates many of the scheduling
    decisions to the OSG.
-   Contact <mailto:help@opensciencegrid.org> for more information on the hosted CE.
+   Contact <mailto:help@osg-htc.org> for more information on the hosted CE.
 - **OSG CE**: The traditional option where the site installs and operates a HTCondor-based CE on a dedicated host.
    This provides the best scalability and flexibility, but may require an ongoing time investment from the site.
    The OSG CE install and operation is covered in [this documentation page](compute-element/install-htcondor-ce.md).

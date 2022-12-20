@@ -25,7 +25,7 @@ To begin the process to distribute software on OASIS using the service, you must
 
 -   Register as an [OSG contact](https://osg-htc.org/technology/policy/comanage-instructions-user/) and
     [upload your SSH Key](https://osg-htc.org/technology/policy/comanage-instructions-user/#oasis-managers-adding-an-ssh-key).
--   Submit a request to <help@opensciencegrid.org> to become an OASIS manager with the following:
+-   Submit a request to <mailto:help@osg-htc.org> to become an OASIS manager with the following:
     -   The names of the [VO(s)](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations) whose
         software that you would like to manage with the shared OASIS login host
     -   The names of any other VO members that should be OASIS managers

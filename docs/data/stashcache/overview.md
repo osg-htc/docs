@@ -19,7 +19,8 @@ We support three types of deployments:
     It is conceptually described on our [home website](https://osg-htc.org/about/osdf/deploying_an_osdf_origin.html) for an origin.
     A cache would be deployed exactly the same way.
 
-    If this is how you want to join OSDF, please send email to <support@opensciencegrid.org> and we will guide you through the process.
+    If this is how you want to join OSDF, please send email to <mailto:support@osg-htc.org> and we will guide you
+    through the process.
    
 1. You can deploy our container yourself as described in our [documentation](run-stashcache-container.md).
    

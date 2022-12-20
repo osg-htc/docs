@@ -307,4 +307,4 @@ hello world!
 Getting Help
 ------------
 
-To get assistance, please use the [this page](../../common/help.md) or contact <help@opensciencegrid.org> directly.
+To get assistance, please use the [this page](../../common/help.md).
