@@ -1,10 +1,12 @@
+DateReviewed: 2022-12-20
 title: Registering in the OSG
 
 Registering in the OSG
 ======================
 
-The OSG keeps a registry containing active projects, virtual organizations (VOs), resources, and resource
-downtimes stored as [YAML files](https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html)
+The OSG keeps a registry containing active projects, collaborations (i.e., virtual organizations or VOs), resources,
+and resource downtimes stored as
+[YAML files](https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html)
 in the [topology GitHub repository](https://github.com/opensciencegrid/topology/).
 This registry is used for [accounting data](https://gracc.opensciencegrid.org), contact information, and resource
 availability, particularly if your site is part of the [World LHC Computing Grid](http://wlcg.web.cern.ch/) (WLCG).
@@ -63,7 +65,7 @@ If you don't already know the relevant names for your resource, using the follow
 | Facility       | Unabbreviated institution or company name, e.g. `University of Wisconsin - Madison`                                                                                               |
 | Site           | Computing center or academic department, e.g. `CHTC`, `MWT2 ATLAS UC`, `San Diego Supercomputer Center`<br>The only characters allowed in Site names are letters, numbers, underscores, hyphens, and spaces; i.e., a Site name must match the regular expression `^[A-Za-z0-9_ -]+$` |
 | Resource Group | Abbreviated facility, site, and cluster name. Resource groups used for testing purposes should have an `-ITB` or `- ITB` suffix, e.g. `TCNJ-ELSA-ITB`                            |
-| Resource       | In all capital letters, `<ABBREV FACILTY>-<CLUSTER>-<RESOURCE TYPE>`, for example:<br>`TCNJ-ELSA-CE` or `NMSU-AGGIE-GRID-SQUID`<br>If you don't know which VO to use, pick `OSG`. |
+| Resource       | In all capital letters, `<ABBREV FACILTY>-<CLUSTER>-<RESOURCE TYPE>`, for example:<br>`TCNJ-ELSA-CE` or `NMSU-AGGIE-GRID-SQUID`<br>If you don't know which collaboration to use, pick `OSG`. |
 
 OSG resources are stored in the GitHub repository as YAML files under a directory structure that reflects the above
 hierarchy, i.e. `topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml` from the
@@ -329,39 +331,40 @@ Follow the instructions below:
 1.  Wait for OSG staff to approve and merge your modified downtime.
 
 
-Registering Virtual Organizations
----------------------------------
+Registering Collaborations
+--------------------------
 
-Virtual Organizations (VOs) are sets of groups or individuals defined by some common cyber-infrastructure need.
+Collaborations (formerly virtual organizations or VOs) are sets of groups or individuals defined by some common
+cyber-infrastructure need.
 This can be a scientific experiment, a university campus or a distributed research effort.
-A VO represents all its members and their common needs in a grid environment.
-A VO also includes the group’s computing/storage resources and services.
-For more information about VOs, see [this page](https://osg-htc.org/about/organization#virtual-organizations).
+A collaboration represents all its members and their common needs in a grid environment.
+A collaboration also includes the group’s computing/storage resources and services.
+For more information about collaboration, see [this page](https://osg-htc.org/about/organization#virtual-organizations).
 
 !!! info
-    Before submitting a registration for a new VO, please [contact us](#getting-help) describing your organization's
-    computing needs.
+    Before submitting a registration for a new collaboration, please [contact us](#getting-help) describing your
+    organization's computing needs.
 
-VO information is stored as YAML files in the `virtual-organizations` directory of the
+Collaboration information is stored as YAML files in the `virtual-organizations` directory of the
 [topology repository](https://github.com/opensciencegrid/topology/tree/master).
-To modify a VO's information or register a new VO, follow the instructions below:
+To modify a collaboration's information or register a new collaboration, follow the instructions below:
 
 1. Open the [topology repository](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations) in your
    browser.
 
-1. If you see your VO in the list, open the file and continue to the next step.
-   If you do not see your VO in the list, click `Create new file` button:
+1. If you see your collaboration in the list, open the file and continue to the next step.
+   If you do not see your collaboration in the list, click `Create new file` button:
 
     ![GitHub file creation](../img/registration/create-file.png)
 
-    In the new file dialog, enter `<VO>.yaml`, replacing `<VO>` with the name of your VO.
+    In the new file dialog, enter `<collaboration>.yaml`, replacing `<collaboration>` with the name of your collaboration.
 
     !!! note ""You're editing a file in a project you don't have write access to.""
         If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
         access to the OSG copy of the topology data, which is why you are creating a pull request.
 
 1. Make changes with the [GitHub file editor](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files) using
-   the [VO template](https://github.com/opensciencegrid/topology/blob/master/template-virtual-organization.yaml)
+   the [collaboration template](https://github.com/opensciencegrid/topology/blob/master/template-virtual-organization.yaml)
    as a guide.
    You may leave any `ID` fields blank.
    If you are modifying existing entries, make sure you do not change formatting or indentation of the modified entry.
@@ -369,7 +372,7 @@ To modify a VO's information or register a new VO, follow the instructions below
 1. Submit your changes as a pull request; select "opensciencegrid/topology" as the base repo.
    Provide a descriptive commit message, for example:
 
-        Updating contact information for the GLOW VO
+        Updating contact information for the GLOW collaboration
 
 Registering Projects
 --------------------
@@ -380,7 +383,7 @@ Registering Projects
 
 Project information is stored as YAML files in the `projects` directory of the
 [topology repository](https://github.com/opensciencegrid/topology/tree/master).
-To modify a VO's information or register a new VO, follow the instructions below:
+To modify a collaboration's information or register a new collaboration, follow the instructions below:
 
 1. Open the [topology repository](https://github.com/opensciencegrid/topology/tree/master/projects) in your browser.
 
