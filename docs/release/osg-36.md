@@ -30,9 +30,11 @@ of `/etc/yum.repos.d/osg.repo`:
 excludepkgs=rrdtool
 ```
 
-### GlideinWMS 3.9.6 ###
+### GlideinWMS ###
 
--   Running Glideins are not reported correctly when using tokens. This is due to a missing ID and is affecting all releases up to 3.9.6. It has been fixed in 3.10.0
+Running Glideins are not reported correctly when using tokens.
+This is due to a missing ID and is affecting all releases up to 3.9.6.
+It has been fixed in 3.10.0 (not yet released).
 
 Latest News
 -----------
