@@ -23,27 +23,18 @@ The instructions in this document require the following:
 Registering Contacts
 --------------------
 
-The OSG keeps a database of contact information for resources, virtual organizations, and projects.
-Before submitting any registrations in the topology repository, you must have an entry in the contact database with an
-associated GitHub ID.
-To register as an OSG contact or add your GitHub ID to your pre-existing contact entry, search for your name in the
-[contact database](https://topology.opensciencegrid.org/contacts) and choose one of the following:
+OSG staff keep track of contact information for OSG Consortium participants to provide access to OSG services,
+notify administrators and security contacts of software and security updates,
+and coordinating in case of security incidents or troubleshooting services.
 
-!!! info "Privacy"
+To register your contact information with the OSG Consortium, follow the instructions in
+[this document](contact-registration.md).
+
+!!! info "Privacy Notice"
     The OSG treats any email addresses and phone numbers as confidential data but does not make any guarantees of
     privacy.
-    All other data is public, such as name, GitHub username, and any association with particular hosts or services.
-
-- **If you find your name and see an associated `GitHub` account**, you can start submitting registrations!
-- **If you find your name but do not see an associated `GitHub` account**, send an email to <mailto:help@opensciencegrid.org>
-  with your GitHub ID.
-- **If you cannot find your name**, send an email to <mailto:help@opensciencegrid.org> with the following information:
-    - Full name
-    - Primary email address
-    - GitHub user name
-    - Description of your OSG affiliation, e.g. FermiGrid site administrator, senior scientist for the DUNE experiment,
-      etc.
-    - Contact information of site, virtual organization, or project sponsor to prove your affiliation
+    All other data is public (such as name, GitHub username, and any association with particular services or
+    collaborations).
 
 Registering Resources
 ---------------------
