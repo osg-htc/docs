@@ -16,6 +16,9 @@ meaning that contacts may register with the OSG using their institutional identi
     All other data is public (such as name, GitHub username, and any association with particular services or
     collaborations).
 
+!!! question "How do I register a mailing list?"
+    If you would like to register a mailing list as a contact for your site, please [contact us directly](#getting-help).
+
 Submitting an Application
 -------------------------
 
