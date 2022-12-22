@@ -5,7 +5,7 @@ Registering Contact Information
 
 OSG staff keep track of contact information for OSG Consortium participants to provide access to OSG services,
 notify administrators and security contacts of software and security updates,
-and coordinating in case of security incidents or troubleshooting services.
+and coordinate in case of security incidents or troubleshooting services.
 
 The OSG contact management service is backed by [InCommon federation](https://www.incommon.org/federation/),
 meaning that contacts may register with the OSG using their institutional identities with familiar Single Sign-On forms.
@@ -15,6 +15,9 @@ meaning that contacts may register with the OSG using their institutional identi
     privacy.
     All other data is public (such as name, GitHub username, and any association with particular services or
     collaborations).
+
+!!! question "How do I register a mailing list?"
+    If you would like to register a mailing list as a contact for your site, please [contact us directly](#getting-help).
 
 Submitting an Application
 -------------------------
