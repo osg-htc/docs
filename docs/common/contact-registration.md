@@ -5,7 +5,7 @@ Registering Contact Information
 
 OSG staff keep track of contact information for OSG Consortium participants to provide access to OSG services,
 notify administrators and security contacts of software and security updates,
-and coordinating in case of security incidents or troubleshooting services.
+and coordinate in case of security incidents or troubleshooting services.
 
 The OSG contact management service is backed by [InCommon federation](https://www.incommon.org/federation/),
 meaning that contacts may register with the OSG using their institutional identities with familiar Single Sign-On forms.
