@@ -44,6 +44,22 @@ Follow the discussion with the developers [here](https://github.com/xrootd/xroot
 Latest News
 -----------
 
+### ** December 22, 2022:** VO Package v127
+-   [VO Package v127](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-127)
+    -   Update VOMS certificates for DESY VOs (IceCube, Belle, ILC, and others)
+-   Rebuild packages and sign with new repository key (no software changes)
+    -   cigetcert
+    -   cilogon-openid-ca-cert
+    -   cvmfs-config-osg
+    -   cvmfs-gateway
+    -   javascriptrrd
+    -   osg-ca-certs-updater
+    -   osg-ca-scripts
+    -   osg-system-profiler
+    -   osg-update-vos
+    -   python-jwt
+    -   scitokens-credmon
+
 ### ** December 8, 2022:** osg-scitokens-mapfile 11, XRootD 5.5.1, CVMFS 2.10.0, GlideinWMS 3.9.6, XCache 3.3.0, Vault 1.12.1
 -   osg-scitokens-mapfile 11
     -   Support HEPCloud factory
