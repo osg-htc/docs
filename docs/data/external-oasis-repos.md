@@ -211,8 +211,8 @@ Once the repository is fully replicated on the OSG, the VO may proceed in publis
 
 !!! tip
     We strongly recommend the repository maintainer read through the upstream documentation on
-    [maintaining repositories](http://cernvm.cern.ch/portal/filesystem/maintain-repositories) and
-    [content limitations](http://cernvm.cern.ch/portal/filesystem/repository-limits).
+    [maintaining repositories](https://cvmfs.readthedocs.io/en/stable/cpt-repo.html#maintaining-a-cernvm-fs-repository) and
+    [content limitations](https://cvmfs.readthedocs.io/en/stable/cpt-repo.html#limitations-on-repository-content).
 
 If the repository ends in `.opensciencegrid.org` or `.osgstorage.org`, the VO may ask for it to be replicated outside the US.  The
 VO should open a [GGUS](https://ggus.eu) ticket following EGI's [PROC20](https://wiki.egi.eu/wiki/PROC20).
