@@ -1473,6 +1473,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#january-3-2023-htgettoken-116" class="md-nav__link">
+    January 3, 2023: htgettoken 1.16
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#december-22-2022-vo-package-v127" class="md-nav__link">
     December 22, 2022: VO Package v127
   </a>
@@ -2226,6 +2233,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#january-3-2023-htgettoken-116" class="md-nav__link">
+    January 3, 2023: htgettoken 1.16
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#december-22-2022-vo-package-v127" class="md-nav__link">
     December 22, 2022: VO Package v127
   </a>
@@ -2659,6 +2673,14 @@ It has been fixed in 3.10.0 (not yet released).</p>
 <p>We have received reports of issues with HTTPS transfers involving gfal2, openssl &lt; 1.1.1, and XRootD after 8h of uptime.
 Follow the discussion with the developers <a href="https://github.com/xrootd/xrootd/issues/1874">here</a>.</p>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="january-3-2023-htgettoken-116"><strong> January 3, 2023:</strong> htgettoken 1.16<a class="headerlink" href="#january-3-2023-htgettoken-116" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fix <code>httokendecode -H</code> functionality to only attempt to convert a parsed word
+    if it is entirely numeric, not if it just contains one digit</li>
+<li>At the same time, rewrite this functionality in native <code>bash</code> instead of using <code>grep</code> and <code>sed</code></li>
+<li>Add <code>htdestroytoken</code> command</li>
+<li>Add <code>htdecodetoken</code> symbolic link that points to <code>httokendecode</code></li>
+</ul>
 <h3 id="december-22-2022-vo-package-v127"><strong> December 22, 2022:</strong> VO Package v127<a class="headerlink" href="#december-22-2022-vo-package-v127" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-127">VO Package v127</a><ul>
