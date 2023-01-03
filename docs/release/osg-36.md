@@ -44,6 +44,13 @@ Follow the discussion with the developers [here](https://github.com/xrootd/xroot
 Latest News
 -----------
 
+### ** January 3, 2023:** htgettoken 1.16
+-   Fix ``httokendecode -H`` functionality to only attempt to convert a parsed word
+    if it is entirely numeric, not if it just contains one digit
+-   At the same time, rewrite this functionality in native ``bash`` instead of using ``grep`` and ``sed``
+-   Add ``htdestroytoken`` command
+-   Add ``htdecodetoken`` symbolic link that points to ``httokendecode``
+
 ### ** December 22, 2022:** VO Package v127
 -   [VO Package v127](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-127)
     -   Update VOMS certificates for DESY VOs (IceCube, Belle, ILC, and others)
