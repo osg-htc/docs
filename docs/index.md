@@ -4,23 +4,23 @@ OSG Site Documentation
 ======================
 
 !!!tip "User documentation"
-    If you are a **researcher** interested in accessing OSG resources, please consult our
+    If you are a **researcher** interested in accessing OSG computational capacity, please consult our
     [user documentation](https://support.opensciencegrid.org/support/home) instead.
 
-The [Open Science Grid](https://www.opensciencegrid.org) (OSG) provides common service and support for resource
+The [OSG Consortium](https://www.opensciencegrid.org) provides common service and support for capacity
 providers and scientific institutions (i.e., "sites") using a [distributed fabric](https://map.opensciencegrid.org) of
 high throughput computational services.
-The OSG does not own resources but provides software and services to users and resource providers alike to enable the
-opportunistic usage and sharing of resources.
+The OSG Consortium does not own computational capacity but provides software and services to users and capacity
+providers alike to enable the opportunistic usage and sharing of capacity.
 
-This documentation aims to provide HTC/HPC system administrators with the necessary information to contribute resources
-to the OSG.
+This documentation aims to provide HTC/HPC system administrators with the necessary information to contribute
+computational capacity to the OSG Consortium.
 
 Contributing to the OSG
 -----------------------
 
-We offer two models for sites to contribute resources to OSG users:
-one where the [OSG hosts and maintains](#osg-hosted-services) resource provisioning services for OSG users;
+We offer two models for sites to contribute capacity to the OSG Consortium:
+one where [OSG staff hosts and maintains](#osg-hosted-services) capacity provisioning services for users;
 and the traditional model where the [site](#self-hosted-services) hosts and maintains these same services.
 In both of these cases, the following will be needed:
 
@@ -36,11 +36,11 @@ In both of these cases, the following will be needed:
 
 !!!info "Don't meet the requirements?"
     If your site does not meet the above conditions, please [contact us](mailto:help@osg-htc.org) to discuss
-    your options for contributing to the OSG.
+    your options for contributing to the OSG Consortium.
 
 ### OSG-hosted services ###
 
-To contribute computational resources with OSG-hosted services, your site will also need the following:
+To contribute computational capacity with OSG-hosted services, your site will also need the following:
 
 - Allow SSH access to your local cluster's login host from a known IP address
 - Shared home directories on each cluster node
@@ -51,5 +51,5 @@ To contribute computational resources with OSG-hosted services, your site will a
 
 ### Self-hosted services ###
 
-If you are interested in contributing resources by hosting your own OSG services, please continue with the
+If you are interested in contributing capacity by hosting your own OSG services, please continue with the
 [site planning](./site-planning.md) page.
