@@ -1,15 +1,15 @@
-title: Registering in the OSG
+title: Registering with the OSG Consortium
 
-Registering in the OSG
-======================
+Registering with the OSG Consortium
+===================================
 
-The OSG keeps a registry containing active projects, virtual organizations (VOs), resources, and resource
+OSG staff keeps a registry containing active projects, virtual organizations (VOs), resources, and resource
 downtimes stored as [YAML files](https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html)
 in the [topology GitHub repository](https://github.com/opensciencegrid/topology/).
 This registry is used for [accounting data](https://gracc.opensciencegrid.org), contact information, and resource
-availability, particularly if your site is part of the [World LHC Computing Grid](http://wlcg.web.cern.ch/) (WLCG).
+availability.
 
-Use this page to learn how to register information in the OSG.
+Use this page to learn how to register information in the OSG Consortium.
 
 Registration Requirements
 -------------------------
