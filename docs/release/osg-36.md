@@ -44,6 +44,10 @@ Follow the discussion with the developers [here](https://github.com/xrootd/xroot
 Latest News
 -----------
 
+### ** January 17, 2023:** VO Package v128
+-   [VO Package v128](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-128)
+    -   Update HCC, GLOW, and OSG VOMS certificates
+
 ### ** January 3, 2023:** htgettoken 1.16
 -   Fix ``httokendecode -H`` functionality to only attempt to convert a parsed word
     if it is entirely numeric, not if it just contains one digit
