@@ -1452,6 +1452,60 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#updating-your-osg-access-point" class="md-nav__link">
+    Updating Your OSG Access Point
+  </a>
+  
+    <nav class="md-nav" aria-label="Updating Your OSG Access Point">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#updating-ap-packages" class="md-nav__link">
+    Updating AP packages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updating-ap-configuration" class="md-nav__link">
+    Updating AP configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Updating AP configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#htcondor" class="md-nav__link">
+    HTCondor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gratia-probe" class="md-nav__link">
+    Gratia Probe
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reconfiguring-htcondor" class="md-nav__link">
+    Reconfiguring HTCondor
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#updating-your-osg-compute-entrypoint" class="md-nav__link">
     Updating Your OSG Compute Entrypoint
   </a>
@@ -1482,7 +1536,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#gratia-probe" class="md-nav__link">
+  <a href="#gratia-probe_1" class="md-nav__link">
     Gratia Probe
   </a>
   
@@ -1875,6 +1929,60 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#updating-your-osg-access-point" class="md-nav__link">
+    Updating Your OSG Access Point
+  </a>
+  
+    <nav class="md-nav" aria-label="Updating Your OSG Access Point">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#updating-ap-packages" class="md-nav__link">
+    Updating AP packages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updating-ap-configuration" class="md-nav__link">
+    Updating AP configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Updating AP configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#htcondor" class="md-nav__link">
+    HTCondor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gratia-probe" class="md-nav__link">
+    Gratia Probe
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reconfiguring-htcondor" class="md-nav__link">
+    Reconfiguring HTCondor
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#updating-your-osg-compute-entrypoint" class="md-nav__link">
     Updating Your OSG Compute Entrypoint
   </a>
@@ -1905,7 +2013,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#gratia-probe" class="md-nav__link">
+  <a href="#gratia-probe_1" class="md-nav__link">
     Gratia Probe
   </a>
   
@@ -2030,7 +2138,7 @@ for their timeline.</p>
 <p>XRootD will continue to support GSI and VOMS proxies in OSG 3.6 through plugins
     that do not use the Grid Community Toolkit libraries.
     Therefore, XRootD hosts (i.e., standalone installations, caches and origins) should be updated to
-    <a href="#updating-the-osg-repositories">OSG 3.6</a> at your earliest convenience.
+    <a href="#updating-the-osg-repositories">OSG 3.6</a> as soon as possible.
     <strong>Some config changes will be necessary;</strong>
     see the <a href="../../data/xrootd/xrootd-authorization/#updating-to-osg-36">XRootD auth update instructions</a>
     for specifics.</p>
@@ -2039,14 +2147,14 @@ for their timeline.</p>
 <p><a href="#replacing-your-gridftp-service">GridFTP services</a> should be replaced with an installation of XRootD standalone.</p>
 </li>
 <li>
-<p><a href="#updating-your-htcondor-hosts">HTCondor pools and access points</a> should be updated to OSG 3.6 at your earliest
-    convenience.
+<p><a href="#updating-your-htcondor-hosts">HTCondor pools</a> and <a href="#updating-your-osg-access-point">access points</a> should be
+    updated to OSG 3.6 as soon as possible.
     Note that any pools using GSI authentication will need to transition to a different authentication method, such as
     IDTOKENS.</p>
 </li>
 <li>
 <p>All other services (e.g., OSG Worker Node clients, Frontier Squids) should be updated to
-    <a href="#updating-the-osg-repositories">OSG 3.6</a> at your earliest convenience.</p>
+    <a href="#updating-the-osg-repositories">OSG 3.6</a> as soon as possible.</p>
 </li>
 </ul>
 <h2 id="updating-the-osg-repositories">Updating the OSG Repositories<a class="headerlink" href="#updating-the-osg-repositories" title="Permanent link">&para;</a></h2>
@@ -2110,6 +2218,73 @@ files to the new <code>*.repo</code> files.</p>
 <p>Continue on to any update instructions that match the role(s) that the host performs.</p>
 </li>
 </ol>
+<h2 id="updating-your-osg-access-point">Updating Your OSG Access Point<a class="headerlink" href="#updating-your-osg-access-point" title="Permanent link">&para;</a></h2>
+<p>In OSG 3.6, some manual configuration changes are required for OSG Access Point (APs).
+To perform this upgrade, turn off and disable the <code>gratia-probes-cron</code> service:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>systemctl stop gratia-probes-cron
+<span class="gp">root@host # </span>systemctl disable gratia-probes-cron
+</code></pre></div>
+
+<h3 id="updating-ap-packages">Updating AP packages<a class="headerlink" href="#updating-ap-packages" title="Permanent link">&para;</a></h3>
+<p>For OSG 3.6 APs, the relevant Gratia Probe package to install is <code>gratia-probe-condor-ap</code> and you may need to explicitly
+install it if you are running a non-OSPool AP:</p>
+<ol>
+<li>Proceed with the <a href="#updating-the-osg-repositories">repository and RPM update process</a>.</li>
+<li>Install the <code>gratia-probe-condor-ap</code> RPM (OSPool APs should already have this package through the <code>osg-flock</code> RPM):<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install condor-probe-ap
+</code></pre></div>
+
+</li>
+</ol>
+<h3 id="updating-ap-configuration">Updating AP configuration<a class="headerlink" href="#updating-ap-configuration" title="Permanent link">&para;</a></h3>
+<h4 id="htcondor">HTCondor<a class="headerlink" href="#htcondor" title="Permanent link">&para;</a></h4>
+<p>Consult the <a href="#updating-your-htcondor-hosts">HTCondor upgrade section</a> for details on updating your HTCondor configuration.</p>
+<h4 id="gratia-probe">Gratia Probe<a class="headerlink" href="#gratia-probe" title="Permanent link">&para;</a></h4>
+<ol>
+<li>
+<p>Copy the following values from <code>/etc/gratia/condor/ProbeConfig</code> to <code>/etc/gratia/condor-ap/ProbeConfig</code>:</p>
+<ul>
+<li>EnableProbe</li>
+<li>MapUnknownToGroup</li>
+<li>ProbeName</li>
+<li>SiteName</li>
+<li>VOOverride</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Updated default values</p>
+<p>It is not sufficient to overwrite the contents of <code>/etc/gratia/condor-ap/ProbeConfig</code> entirely with the contents
+of <code>/etc/gratia/condor/ProbeConfig</code> as many default values have changed.</p>
+</div>
+</li>
+<li>
+<p>In <code>/etc/gratia/condor-ap/ProbeConfig</code>, replace <code>condor:</code> in the <code>ProbeName</code> with <code>condor-ap:</code>.
+    For example, the following value should be changed from:</p>
+<div class="codehilite"><pre><span></span><code>ProbeName=&quot;condor:my-ap.site.edu
+</code></pre></div>
+
+<p>to:</p>
+<div class="codehilite"><pre><span></span><code>ProbeName=&quot;condor-ap:my-ap.site.edu
+</code></pre></div>
+
+</li>
+<li>
+<p>Ensure that the paths (<code>/var/lib/condor/gratia/data</code>) from the following commands are the same:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>condor_config_val PER_JOB_HISTORY_DIR
+<span class="go">/var/lib/condor/gratia/data</span>
+<span class="gp">root@host # </span>awk -F <span class="s1">&#39;=&#39;</span> <span class="s1">&#39;/DataFolder/ {print $2}&#39;</span> /etc/gratia/condor-ap/ProbeConfig <span class="p">|</span> tr -d <span class="s1">&#39;&quot;&#39;</span>
+<span class="go">/var/lib/condor/gratia/data</span>
+</code></pre></div>
+
+</li>
+</ol>
+<h3 id="reconfiguring-htcondor">Reconfiguring HTCondor<a class="headerlink" href="#reconfiguring-htcondor" title="Permanent link">&para;</a></h3>
+<p>After updating your RPMs and updating your configuration, reconfigure your HTCondor service:</p>
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>condor_reconfig
+</code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">What about <code>gratia-probes-cron</code>?</p>
+<p>In OSG 3.6, OSG APs no longer needs a separate service for Gratia Probe.
+Instead, the default CE configuration runs its Gratia Probe as a periodic process under the HTCondor process tree.</p>
+</div>
 <h2 id="updating-your-osg-compute-entrypoint">Updating Your OSG Compute Entrypoint<a class="headerlink" href="#updating-your-osg-compute-entrypoint" title="Permanent link">&para;</a></h2>
 <p>In OSG 3.6, OSG Compute Entrypoints (CEs) only accept token-based pilot job submissions.
 If you need to support token-based and GSI proxy-based pilot job submission,
@@ -2171,7 +2346,7 @@ To upgrade your CE to OSG 3.6, follow the sections below to make your configurat
 <h3 id="updating-ce-packages">Updating CE packages<a class="headerlink" href="#updating-ce-packages" title="Permanent link">&para;</a></h3>
 <p>After turning off your CE's services, you may proceed with the <a href="#updating-the-osg-repositories">repository and RPM update process</a>.</p>
 <h3 id="updating-ce-configuration">Updating CE configuration<a class="headerlink" href="#updating-ce-configuration" title="Permanent link">&para;</a></h3>
-<h4 id="gratia-probe">Gratia Probe<a class="headerlink" href="#gratia-probe" title="Permanent link">&para;</a></h4>
+<h4 id="gratia-probe_1">Gratia Probe<a class="headerlink" href="#gratia-probe_1" title="Permanent link">&para;</a></h4>
 <p>The OSG 3.6 release series contains <a href="https://github.com/opensciencegrid/gratia-probe/releases/tag/v2.0.0-2">Gratia Probe 2</a>,
 which uses the non-root HTCondor-CE probe to account for your site's resource contributions.
 To ensure that your contributions continue to be properly accounted for,
