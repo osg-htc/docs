@@ -26,20 +26,20 @@ See the list of services below for any special considerations for the OSG 3.6 up
 -   XRootD will continue to support GSI and VOMS proxies in OSG 3.6 through plugins
     that do not use the Grid Community Toolkit libraries.
     Therefore, XRootD hosts (i.e., standalone installations, caches and origins) should be updated to
-    [OSG 3.6](#updating-the-osg-repositories) at your earliest convenience.
+    [OSG 3.6](#updating-the-osg-repositories) as soon as possible.
     **Some config changes will be necessary;**
     see the [XRootD auth update instructions](../data/xrootd/xrootd-authorization.md#updating-to-osg-36)
     for specifics.
 
 -   [GridFTP services](#replacing-your-gridftp-service) should be replaced with an installation of XRootD standalone.
 
--   [HTCondor pools and access points](#updating-your-htcondor-hosts) should be updated to OSG 3.6 at your earliest
-    convenience.
+-   [HTCondor pools](#updating-your-htcondor-hosts) and [access points](#updating-your-osg-access-point) should be
+    updated to OSG 3.6 as soon as possible.
     Note that any pools using GSI authentication will need to transition to a different authentication method, such as
     IDTOKENS.
 
 -   All other services (e.g., OSG Worker Node clients, Frontier Squids) should be updated to
-    [OSG 3.6](#updating-the-osg-repositories) at your earliest convenience.
+    [OSG 3.6](#updating-the-osg-repositories) as soon as possible.
 
 Updating the OSG Repositories
 -----------------------------
@@ -91,6 +91,77 @@ Updating the OSG Repositories
             into place (that is, without the `.rpmnew` extension).
 
 1.  Continue on to any update instructions that match the role(s) that the host performs.
+
+Updating Your OSG Access Point
+------------------------------
+
+In OSG 3.6, some manual configuration changes are required for OSG Access Point (APs).
+To perform this upgrade, turn off and disable the `gratia-probes-cron` service:
+
+    :::console
+    root@host # systemctl stop gratia-probes-cron
+    root@host # systemctl disable gratia-probes-cron
+
+### Updating AP packages ###
+
+For OSG 3.6 APs, the relevant Gratia Probe package to install is `gratia-probe-condor-ap` and you may need to explicitly
+install it if you are running a non-OSPool AP:
+
+1.  Proceed with the [repository and RPM update process](#updating-the-osg-repositories).
+1.  Install the `gratia-probe-condor-ap` RPM (OSPool APs should already have this package through the `osg-flock` RPM):
+
+        :::console
+        root@host # yum install condor-probe-ap
+
+### Updating AP configuration ###
+
+#### HTCondor ####
+
+Consult the [HTCondor upgrade section](#updating-your-htcondor-hosts) for details on updating your HTCondor configuration.
+
+#### Gratia Probe####
+
+1.  Copy the following values from `/etc/gratia/condor/ProbeConfig` to `/etc/gratia/condor-ap/ProbeConfig`:
+    -   EnableProbe
+    -   MapUnknownToGroup
+    -   ProbeName
+    -   SiteName
+    -   VOOverride
+
+    !!! warning "Updated default values"
+        It is not sufficient to overwrite the contents of `/etc/gratia/condor-ap/ProbeConfig` entirely with the contents
+        of `/etc/gratia/condor/ProbeConfig` as many default values have changed.
+
+1.  In `/etc/gratia/condor-ap/ProbeConfig`, replace `condor:` in the `ProbeName` with `condor-ap:`.
+    For example, the following value should be changed from:
+
+        :::xml
+        ProbeName="condor:my-ap.site.edu
+
+    to:
+
+        :::xml
+        ProbeName="condor-ap:my-ap.site.edu
+
+1.  Ensure that the paths (`/var/lib/condor/gratia/data`) from the following commands are the same:
+
+        :::console
+        root@host # condor_config_val PER_JOB_HISTORY_DIR
+        /var/lib/condor/gratia/data
+        root@host # awk -F '=' '/DataFolder/ {print $2}' /etc/gratia/condor-ap/ProbeConfig | tr -d '"'
+        /var/lib/condor/gratia/data
+
+### Reconfiguring HTCondor ###
+
+After updating your RPMs and updating your configuration, reconfigure your HTCondor service:
+
+```console
+root@host # condor_reconfig
+```
+
+!!! question "What about `gratia-probes-cron`?"
+    In OSG 3.6, OSG APs no longer needs a separate service for Gratia Probe.
+    Instead, the default CE configuration runs its Gratia Probe as a periodic process under the HTCondor process tree.
 
 Updating Your OSG Compute Entrypoint
 ------------------------------------
