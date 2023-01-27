@@ -5,7 +5,7 @@ Installing the Worker Node Client via OASIS
 ===========================================
 
 The **OSG Worker Node Client** is a collection of software components that is expected to be added to every worker node
-that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect
+that can run OSPool jobs. It provides a common environment and a minimal set of common tools that all OSPool jobs can expect
 to use.
 Contents of the worker node client can be found [here](using-wn.md#common-software-available-on-worker-nodes).
 
@@ -26,7 +26,7 @@ As with all OSG software installations, there are some one-time (per host) steps
 -   Ensure the host has [a supported operating system](../release/supported_platforms.md)
 -   On every worker node, [install and configure CVMFS](install-cvmfs.md)
 
-Once configured to use OASIS, grid jobs will download the worker-node software on demand (into the local disk cache).
+Once configured to use OASIS, OSPool jobs will download the worker-node software on demand (into the local disk cache).
 This may result in extra network activity, especially on first use of the client tools.
 
 Configure the CE
