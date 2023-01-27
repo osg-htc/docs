@@ -40,7 +40,7 @@ Registering Resources
 ---------------------
 
 An OSG resource is a host that provides services to OSG campuses and collaborations;
-some examples are Compute Entrypoints, storage endpoints, or perfSonar hosts.
+some examples are Compute Entrypoints, storage endpoints, or perfSONAR hosts.
 See the full list of services that should be registered in the OSG topology
 [here](https://github.com/opensciencegrid/topology/blob/master/topology/services.yaml).
 
@@ -53,7 +53,7 @@ OSG resources are stored under a hierarchy of facilities, sites, and resource gr
     i.e. all resources associated with a specific computing cluster.
     Multi-resource downtimes are easiest to declare across a resource group.
     Production and testing resources must be placed into separate resource groups.
--   **Resource**: A host that provides services, e.g. Compute Entrypoints, storage endpoints, or perfSonar hosts.
+-   **Resource**: A host that provides services, e.g. Compute Entrypoints, storage endpoints, or perfSONAR hosts.
 
 Throughout this document, you will be asked to substitute your own facility, site, resource group, and resource names
 when registering with the OSG.
