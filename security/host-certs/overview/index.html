@@ -1914,7 +1914,7 @@
 </div>
 <p>Host certificates are <a href="https://en.wikipedia.org/wiki/X.509">X.509 certificates</a> that are used to securely identify
 servers and to establish encrypted connections between services and clients.
-In the OSG, some grid resources (e.g., HTCondor-CE, XRootD) require host certificates.
+In the OSG Fabric of Services, some services (e.g., HTCondor-CE, XRootD) require host certificates.
 If you are unsure if your host needs a host certificate, please consult the installation instructions for the software
 you are interested in installing.</p>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
@@ -1938,7 +1938,7 @@ We recommend requesting host certificates from one of the following CAs:</p>
   requires a subscription, generally held by an institution</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>For integration with the OSG, InCommon host certificates must be issued by the
+<p>For integration with the OSG Fabric of Services, InCommon host certificates must be issued by the
 <a href="https://spaces.at.internet2.edu/display/ICCS/InCommon+Cert+Types#InCommonCertTypes-IGTFServerCertificates">IGTF CA</a>
 and not the InCommon RSA CA.</p>
 </div>
@@ -1951,7 +1951,7 @@ and not the InCommon RSA CA.</p>
   Let's Encrypt is not IGTF-accredited so their certificates are not suitable for WLCG services.</p>
 </li>
 </ul>
-<p>If neither of the above options work for your site, the OSG also accepts all
+<p>If neither of the above options work for your site, the OSG Fabric of Services also accepts all
 <a href="https://repo.opensciencegrid.org/cadist/">IGTF-accredited CAs</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1960,7 +1960,7 @@ and not the InCommon RSA CA.</p>
 in the X509v3 Extended Key Usage.</p>
 </div>
 <h2 id="requesting-service-certificates">Requesting Service Certificates<a class="headerlink" href="#requesting-service-certificates" title="Permanent link">&para;</a></h2>
-<p>Previously, the OSG recommended using separate X.509 certificates, called "service certificates", for each grid service
+<p>Previously, the OSG Consortium recommended using separate X.509 certificates, called "service certificates", for each service
 on a host.
 This practice has become less popular as sites have separated SSL-requiring services to their own hosts.</p>
 <p>In the case where your host is only running a single service that requires a service certificate, we recommend using

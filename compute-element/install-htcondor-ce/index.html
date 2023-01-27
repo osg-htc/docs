@@ -2222,7 +2222,7 @@ For detailed instructions, please refer to the upstream documentation:</p>
 <p class="admonition-title">Note</p>
 <p>For non-HTCondor batch systems only</p>
 </div>
-<p>If your site has multiple CEs or you have non-grid users submitting to the same local batch system, the OSG accounting
+<p>If your site has multiple CEs or you have local users submitting to the same local batch system, the OSG accounting
 software needs to be configured so that it doesn't over report the number of jobs.
 Modify the value of <code>SuppressNoDNRecords</code> in <code>/etc/gratia/htcondor-ce/ProbeConfig</code> on each of your CE's so that it
 reads:</p>
@@ -2241,8 +2241,8 @@ reads:</p>
 <li><a href="https://htcondor.com/htcondor-ce/v5/troubleshooting/logs/">Helpful logs</a></li>
 </ul>
 <h2 id="registering-the-ce">Registering the CE<a class="headerlink" href="#registering-the-ce" title="Permanent link">&para;</a></h2>
-<p>To contribute to the the OSG Production Grid, your CE must be
-<a href="https://github.com/opensciencegrid/topology#topology">registered with the OSG</a>.
+<p>To contribute capacity, your CE must be
+<a href="https://github.com/opensciencegrid/topology#topology">registered with the OSG Consortium</a>.
 To register your resource:</p>
 <ol>
 <li>

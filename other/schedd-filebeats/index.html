@@ -1884,7 +1884,7 @@
 <h1 id="installation-of-filebeats-for-access-points">Installation of FileBeats for Access Points<a class="headerlink" href="#installation-of-filebeats-for-access-points" title="Permanent link">&para;</a></h1>
 <p>This document is for frontend administrators. It describes the installation of <a href="https://www.elastic.co/products/beats/filebeat">Filebeats</a> to continuously upload the HTCondor access point transfer log to Elastic Search.</p>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>An access point (HTCondor schedd) is a login node where users submit jobs to the Grid. One interesting log that it produces is the TransferLog. The TransferLogs report all the transfers of files between compute node and access points. In this guide we describe the installation of Filebeats to upload this log to Elastic Search.</p>
+<p>An access point (HTCondor schedd) is a login node where users submit jobs to distributed computing pools. One interesting log that it produces is the TransferLog. The TransferLogs report all the transfers of files between compute node and access points. In this guide we describe the installation of Filebeats to upload this log to Elastic Search.</p>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <h3 id="filebeat-installation">FileBeat Installation<a class="headerlink" href="#filebeat-installation" title="Permanent link">&para;</a></h3>
 <p>For the installation of filebeats follow the  official instruction to set up the repositories and install filebeats as described <a href="https://www.elastic.co/guide/en/beats/filebeat/current/setup-repositories.html">here</a>.</p>

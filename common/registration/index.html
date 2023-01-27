@@ -1988,7 +1988,7 @@
 
 
 <h1 id="registering-with-the-osg-consortium">Registering with the OSG Consortium<a class="headerlink" href="#registering-with-the-osg-consortium" title="Permanent link">&para;</a></h1>
-<p>OSG staff keeps a registry containing active projects, virtual organizations (VOs), resources, and resource
+<p>OSG staff keeps a registry containing active projects, collaborations (a.k.a. virtual organizations or VOs), resources, and resource
 downtimes stored as <a href="https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html">YAML files</a>
 in the <a href="https://github.com/opensciencegrid/topology/">topology GitHub repository</a>.
 This registry is used for <a href="https://gracc.opensciencegrid.org">accounting data</a>, contact information, and resource
@@ -2015,7 +2015,8 @@ All other data is public (such as name, GitHub username, and any association wit
 collaborations).</p>
 </div>
 <h2 id="registering-resources">Registering Resources<a class="headerlink" href="#registering-resources" title="Permanent link">&para;</a></h2>
-<p>An OSG resource is a host that provides grid services, e.g. Compute Entrypoints, storage endpoints, or perfSonar hosts.
+<p>An OSG resource is a host that provides services to OSG campuses and collaborations;
+some examples are Compute Entrypoints, storage endpoints, or perfSONAR hosts.
 See the full list of services that should be registered in the OSG topology
 <a href="https://github.com/opensciencegrid/topology/blob/master/topology/services.yaml">here</a>.</p>
 <p>OSG resources are stored under a hierarchy of facilities, sites, and resource groups, defined as follows:</p>
@@ -2027,7 +2028,7 @@ See the full list of services that should be registered in the OSG topology
     i.e. all resources associated with a specific computing cluster.
     Multi-resource downtimes are easiest to declare across a resource group.
     Production and testing resources must be placed into separate resource groups.</li>
-<li><strong>Resource</strong>: A host that provides grid services, e.g. Compute Entrypoints, storage endpoints, or perfSonar hosts.</li>
+<li><strong>Resource</strong>: A host that provides services, e.g. Compute Entrypoints, storage endpoints, or perfSONAR hosts.</li>
 </ul>
 <p>Throughout this document, you will be asked to substitute your own facility, site, resource group, and resource names
 when registering with the OSG.
@@ -2224,7 +2225,7 @@ Resources:
 <p>If the <code>Active</code> attribute does not already exist within the resource definition, add it.
 If your resource becomes available again, set <code>Active: true</code>.</p>
 <h2 id="registering-resource-downtimes">Registering Resource Downtimes<a class="headerlink" href="#registering-resource-downtimes" title="Permanent link">&para;</a></h2>
-<p>Resource downtime is a finite period of time for which one or more of the grid services of a registered resource are
+<p>Resource downtime is a finite period of time for which one or more of the services of a registered resource are
 unavailable.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -2345,7 +2346,7 @@ access to the OSG copy of the topology data, which is why you are creating a pul
 <h2 id="registering-virtual-organizations">Registering Virtual Organizations<a class="headerlink" href="#registering-virtual-organizations" title="Permanent link">&para;</a></h2>
 <p>Virtual Organizations (VOs) are sets of groups or individuals defined by some common cyber-infrastructure need.
 This can be a scientific experiment, a university campus or a distributed research effort.
-A VO represents all its members and their common needs in a grid environment.
+A VO represents all its members and their common needs in distributed computing environment.
 A VO also includes the group’s computing/storage resources and services.
 For more information about VOs, see <a href="https://osg-htc.org/about/organization#virtual-organizations">this page</a>.</p>
 <div class="admonition info">
