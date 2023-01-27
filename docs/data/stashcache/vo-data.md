@@ -103,12 +103,14 @@ In the namespaces section, you will declare one or more namespaces.
 A namespace is a directory tree in the data federation that is owned by a VO/collaboration.
 
 Each namespace requires:
+
 - a `Path` that is the path to the directory tree, e.g. `/astro/PUBLIC`
 - an `Authorizations` list which describes how users are authorized to access data within the namespace
 - an `AllowedCaches` list of the OSDF caches that are allowed to cache the data within the namespace
 - an `AllowedOrigins` list of the OSDF origins that are allowed to serve the data within the namespace
 
 In addition, a namespace may have the following optional attributes:
+
 - a `Writeback` endpoint that is an HTTPS URL like `https://stash-xrd.osgconnect.net:1094`
   that can be used for jobs to write data to the origin
 - a `DirList` endpoint that is an HTTPS URL like `https://origin-auth2001.chtc.wisc.edu:1095`
