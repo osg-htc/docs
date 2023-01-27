@@ -4,8 +4,12 @@ DateReviewed:
 Firewall Considerations
 =======================
 
-In order for hosts such as CEs to communicate with the OSG Factory hosts,
-firewall rules should be added to allow the following connections:
+Services run at a site need to communicate with the distributed OSG fabric of
+services.
+For instance, the OSG Factory hosts need to communicate with CEs in order for
+the CEs to receive any work.
+In order for the OSG Factory hosts to communicate with your site's services,
+firewall rules should be added to your hosts to allow the following connections:
 
 !!! note
     -   Inbound hosts only apply to certain collaborations (including the OSPool).
