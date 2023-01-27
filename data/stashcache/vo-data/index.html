@@ -1990,16 +1990,20 @@ you must add OSDF information to your VO's YAML file in the OSG Topology reposit
 <h3 id="namespaces-section">Namespaces section<a class="headerlink" href="#namespaces-section" title="Permanent link">&para;</a></h3>
 <p>In the namespaces section, you will declare one or more namespaces.
 A namespace is a directory tree in the data federation that is owned by a VO/collaboration.</p>
-<p>Each namespace requires:
-- a <code>Path</code> that is the path to the directory tree, e.g. <code>/astro/PUBLIC</code>
-- an <code>Authorizations</code> list which describes how users are authorized to access data within the namespace
-- an <code>AllowedCaches</code> list of the OSDF caches that are allowed to cache the data within the namespace
-- an <code>AllowedOrigins</code> list of the OSDF origins that are allowed to serve the data within the namespace</p>
-<p>In addition, a namespace may have the following optional attributes:
-- a <code>Writeback</code> endpoint that is an HTTPS URL like <code>https://stash-xrd.osgconnect.net:1094</code>
-  that can be used for jobs to write data to the origin
-- a <code>DirList</code> endpoint that is an HTTPS URL like <code>https://origin-auth2001.chtc.wisc.edu:1095</code>
-  that can be used for getting a directory listing of that namespace</p>
+<p>Each namespace requires:</p>
+<ul>
+<li>a <code>Path</code> that is the path to the directory tree, e.g. <code>/astro/PUBLIC</code></li>
+<li>an <code>Authorizations</code> list which describes how users are authorized to access data within the namespace</li>
+<li>an <code>AllowedCaches</code> list of the OSDF caches that are allowed to cache the data within the namespace</li>
+<li>an <code>AllowedOrigins</code> list of the OSDF origins that are allowed to serve the data within the namespace</li>
+</ul>
+<p>In addition, a namespace may have the following optional attributes:</p>
+<ul>
+<li>a <code>Writeback</code> endpoint that is an HTTPS URL like <code>https://stash-xrd.osgconnect.net:1094</code>
+  that can be used for jobs to write data to the origin</li>
+<li>a <code>DirList</code> endpoint that is an HTTPS URL like <code>https://origin-auth2001.chtc.wisc.edu:1095</code>
+  that can be used for getting a directory listing of that namespace</li>
+</ul>
 <h3 id="authorizations-list">Authorizations list<a class="headerlink" href="#authorizations-list" title="Permanent link">&para;</a></h3>
 <p>The Authorizations list of each namespace describes how a user can get authorized in order to access the data within the namespace.
 The list will contain one or more of these:</p>
