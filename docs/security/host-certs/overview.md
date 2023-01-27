@@ -8,7 +8,7 @@ Host Certificates
 
 Host certificates are [X.509 certificates](https://en.wikipedia.org/wiki/X.509) that are used to securely identify
 servers and to establish encrypted connections between services and clients.
-In the OSG, some grid resources (e.g., HTCondor-CE, XRootD) require host certificates.
+In the OSG Fabric of Services, some services (e.g., HTCondor-CE, XRootD) require host certificates.
 If you are unsure if your host needs a host certificate, please consult the installation instructions for the software
 you are interested in installing.
 
@@ -42,7 +42,7 @@ We recommend requesting host certificates from one of the following CAs:
   requires a subscription, generally held by an institution
 
     !!! important
-        For integration with the OSG, InCommon host certificates must be issued by the
+        For integration with the OSG Fabric of Services, InCommon host certificates must be issued by the
         [IGTF CA](https://spaces.at.internet2.edu/display/ICCS/InCommon+Cert+Types#InCommonCertTypes-IGTFServerCertificates)
         and not the InCommon RSA CA.
 
@@ -52,7 +52,7 @@ We recommend requesting host certificates from one of the following CAs:
   for more details.
   Let's Encrypt is not IGTF-accredited so their certificates are not suitable for WLCG services.
 
-If neither of the above options work for your site, the OSG also accepts all
+If neither of the above options work for your site, the OSG Fabric of Services also accepts all
 [IGTF-accredited CAs](https://repo.opensciencegrid.org/cadist/).
 
 
@@ -65,7 +65,7 @@ If neither of the above options work for your site, the OSG also accepts all
 Requesting Service Certificates
 -------------------------------
 
-Previously, the OSG recommended using separate X.509 certificates, called "service certificates", for each grid service
+Previously, the OSG Consortium recommended using separate X.509 certificates, called "service certificates", for each service
 on a host.
 This practice has become less popular as sites have separated SSL-requiring services to their own hosts.
 

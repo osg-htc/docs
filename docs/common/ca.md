@@ -137,8 +137,8 @@ First, ensure that your CA installation is up-to-date and if you continue to see
 
 ### Keeping CA Certificates Up-to-date ###
 
-It is important to keep CA certificates up-to-date for grid services and their clients to maintain integrity of
-the production grid.
+It is important to keep CA certificates up-to-date for services and their clients to maintain integrity of
+production services.
 To verify that your CA certificates are on the latest version on a given host, determine the most recently released
 versions and the method by which your CA certificates have been installed:
 

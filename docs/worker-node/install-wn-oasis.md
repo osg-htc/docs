@@ -21,12 +21,12 @@ This document is intended to guide system administrators through the process of 
 Before Starting
 ---------------
 
-As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
+As with all OSG Software installations, there are some one-time (per host) steps to prepare in advance:
 
 -   Ensure the host has [a supported operating system](../release/supported_platforms.md)
 -   On every worker node, [install and configure CVMFS](install-cvmfs.md)
 
-Once configured to use OASIS, grid jobs will download the worker-node software on demand (into the local disk cache).
+Once configured to use OASIS, OSG jobs will download the worker-node software on demand (into the local disk cache).
 This may result in extra network activity, especially on first use of the client tools.
 
 Configure the CE

@@ -3,7 +3,7 @@ title: Registering with the OSG Consortium
 Registering with the OSG Consortium
 ===================================
 
-OSG staff keeps a registry containing active projects, virtual organizations (VOs), resources, and resource
+OSG staff keeps a registry containing active projects, collaborations (a.k.a. virtual organizations or VOs), resources, and resource
 downtimes stored as [YAML files](https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html)
 in the [topology GitHub repository](https://github.com/opensciencegrid/topology/).
 This registry is used for [accounting data](https://gracc.opensciencegrid.org), contact information, and resource
@@ -39,7 +39,8 @@ To register your contact information with the OSG Consortium, follow the instruc
 Registering Resources
 ---------------------
 
-An OSG resource is a host that provides grid services, e.g. Compute Entrypoints, storage endpoints, or perfSonar hosts.
+An OSG resource is a host that provides services to OSG campuses and collaborations;
+some examples are Compute Entrypoints, storage endpoints, or perfSONAR hosts.
 See the full list of services that should be registered in the OSG topology
 [here](https://github.com/opensciencegrid/topology/blob/master/topology/services.yaml).
 
@@ -52,7 +53,7 @@ OSG resources are stored under a hierarchy of facilities, sites, and resource gr
     i.e. all resources associated with a specific computing cluster.
     Multi-resource downtimes are easiest to declare across a resource group.
     Production and testing resources must be placed into separate resource groups.
--   **Resource**: A host that provides grid services, e.g. Compute Entrypoints, storage endpoints, or perfSonar hosts.
+-   **Resource**: A host that provides services, e.g. Compute Entrypoints, storage endpoints, or perfSONAR hosts.
 
 Throughout this document, you will be asked to substitute your own facility, site, resource group, and resource names
 when registering with the OSG.
@@ -225,7 +226,7 @@ If your resource becomes available again, set `Active: true`.
 Registering Resource Downtimes
 ------------------------------
 
-Resource downtime is a finite period of time for which one or more of the grid services of a registered resource are
+Resource downtime is a finite period of time for which one or more of the services of a registered resource are
 unavailable.
 
 !!! warning
@@ -334,7 +335,7 @@ Registering Virtual Organizations
 
 Virtual Organizations (VOs) are sets of groups or individuals defined by some common cyber-infrastructure need.
 This can be a scientific experiment, a university campus or a distributed research effort.
-A VO represents all its members and their common needs in a grid environment.
+A VO represents all its members and their common needs in distributed computing environment.
 A VO also includes the group’s computing/storage resources and services.
 For more information about VOs, see [this page](https://osg-htc.org/about/organization#virtual-organizations).
 

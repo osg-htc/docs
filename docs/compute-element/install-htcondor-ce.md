@@ -194,7 +194,7 @@ For detailed instructions, please refer to the upstream documentation:
 !!! note
     For non-HTCondor batch systems only
 
-If your site has multiple CEs or you have non-grid users submitting to the same local batch system, the OSG accounting
+If your site has multiple CEs or you have local users submitting to the same local batch system, the OSG accounting
 software needs to be configured so that it doesn't over report the number of jobs.
 Modify the value of `SuppressNoDNRecords` in `/etc/gratia/htcondor-ce/ProbeConfig` on each of your CE's so that it
 reads:
@@ -220,8 +220,8 @@ For information on how to troubleshoot your HTCondor-CE, please refer to the ups
 Registering the CE
 ------------------
 
-To contribute to the the OSG Production Grid, your CE must be
-[registered with the OSG](https://github.com/opensciencegrid/topology#topology).
+To contribute capacity, your CE must be
+[registered with the OSG Consortium](https://github.com/opensciencegrid/topology#topology).
 To register your resource:
 
 1.  Identify the facility, site, and resource group where your HTCondor-CE is hosted.
