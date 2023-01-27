@@ -172,7 +172,7 @@ set vomsfqans = useall
 
 In order for the XRootD-Multiuser plugin to work, a proxy must be mapped to a user (`u`) that is a valid Unix user.
 
-Use a VOMS Mapfile in `/etc/grid-security/voms-mapfile` that contains lines in the following form:
+Use a VOMS Mapfile, conventionally in `/etc/grid-security/voms-mapfile` that contains lines in the following form:
 ```
 "<FQAN PATTERN>" <USERNAME>
 ```
@@ -189,6 +189,12 @@ To enable using VOMS mapfiles in the first place, add the following line to your
 ```
 voms.mapfile /etc/grid-security/voms-mapfile
 ```
+replacing `/etc/grid-security/voms-mapfile` with the actual location of your mapfile, if it is different.
+
+!!!note
+    A VOMS Mapfile only affects mapping the user (`u`) attribute understood in the [authorization-database](#authorization-database).
+    The FQAN will always be used for the groupname (`g`), organization name (`o`), and role name (`r`),
+    even if the mapfile is missing or does not contain a matching mapping.
 
 See the [VOMS Mapping documentation](https://github.com/xrootd/xrootd/tree/master/src/XrdVoms#voms-mapping) for details.
 VOMS Mapfiles previously used with LCMAPS should continue to work unmodified,
@@ -266,6 +272,18 @@ and that it is not writable by others.
 root@host # chown xrootd:xrootd /etc/xrootd/Authfile
 root@host # chmod 0640 /etc/xrootd/Authfile  # or 0644
 ```
+
+
+### Multiuser and the authorization database
+
+The XRootD-Multiuser plugin can be used to perform file system operations as a different user than the XRootD daemon (whose user is `xrootd`).
+If it is enabled, then _after_ authorization is done using the authorization database,
+XRootD will take the user (`u`) attribute of the incoming request, and perform file operations as the Unix user with the same name as that attribute.
+
+!!!note
+    If there is no Unix user with a matching name, XRootD will perform the file operations as the `xrootd` user.
+    This may lead to actions that were authorized by the authorization database to be denied by the file system.
+
 
 Applying Authorization Changes
 ------------------------------
