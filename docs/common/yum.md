@@ -79,7 +79,7 @@ Installing Yum Repositories
 ### Install the Yum priorities plugin (EL7)
 
 The Yum priorities plugin is used to tell Yum to prefer OSG packages over EPEL or OS packages.
-It is important to install and enable the Yum priorities plugin before installing OSG software to ensure that you are
+It is important to install and enable the Yum priorities plugin before installing OSG Software to ensure that you are
 getting the OSG-supported versions.
 
 This plugin is built into Yum on EL8 distributions.
