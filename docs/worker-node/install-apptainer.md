@@ -8,7 +8,7 @@ Install Apptainer
 is a tool that creates
 docker-like process containers but without giving extra privileges to
 unprivileged users.  It is used by pilot jobs (which are
-submitted by per-VO grid workload management systems) to isolate user
+submitted by per-collaboration workload management systems) to isolate user
 jobs from the pilot's files and processes and from other users' files
 and processes.  It also supplies a chroot environment in order to run
 user jobs in different operating system images under one Linux kernel.
@@ -40,7 +40,7 @@ install, and/or configure Apptainer.
 Before Starting
 ---------------
 
-As with all OSG software installations, there are some one-time (per host)
+As with all OSG Software installations, there are some one-time (per host)
 steps to prepare in advance:
 
 - Ensure the host has [a supported operating system](../release/supported_platforms.md)
