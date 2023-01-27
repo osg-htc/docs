@@ -220,7 +220,7 @@ For information on how to troubleshoot your HTCondor-CE, please refer to the ups
 Registering the CE
 ------------------
 
-To contribute capacity to collaborations, your CE must be
+To contribute capacity, your CE must be
 [registered with the OSG Consortium](https://github.com/opensciencegrid/topology#topology).
 To register your resource:
 

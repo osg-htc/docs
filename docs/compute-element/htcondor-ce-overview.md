@@ -62,7 +62,7 @@ the original submitter.
 The Hosted CE is intended for small sites or as an introduction to providing capacity to collaborations.
 OSG staff configure and maintain an HTCondor-CE on behalf of the site.
 The Hosted CE is a special configuration of HTCondor-CE that can submit jobs to a remote cluster over SSH.
-It provides a simple starting point for opportunistic resource owners that want to start contributing to collaborations with
+It provides a simple starting point for opportunistic resource owners that want to start contributing capacity with
 minimal effort: an organization will be able to accept CE jobs by allowing SSH access to a login node in their cluster.
 
 If your site intends to run over 10,000 concurrent CE jobs, you will need to host your own
@@ -131,7 +131,7 @@ installation, there are two main ways to customize your CE (if you decide any cu
 How Security Works
 ------------------
 
-Communication is secured between various parties using a combination of PKI infrastructure involving
+Among OSG services, communication is secured between various parties using a combination of PKI infrastructure involving
 Certificate Authorities (CAs) and bearer tokens.
 Services such as a Compute Entrypoint, present [host certificates](../security/host-certs/overview.md) to prove their
 identity to clients, much like your browser verifies websites that you may visit.
