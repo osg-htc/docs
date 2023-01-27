@@ -26,7 +26,7 @@ See the list of services below for any special considerations for the OSG 3.6 up
 -   XRootD will continue to support GSI and VOMS proxies in OSG 3.6 through plugins
     that do not use the Grid Community Toolkit libraries.
     Therefore, XRootD hosts (i.e., standalone installations, caches and origins) should be updated to
-    [OSG 3.6](#updating-the-osg-repositories) at your earliest convenience.
+    [OSG 3.6](#updating-the-osg-repositories) as soon as possible.
     **Some config changes will be necessary;**
     see the [XRootD auth update instructions](../data/xrootd/xrootd-authorization.md#updating-to-osg-36)
     for specifics.
@@ -34,12 +34,12 @@ See the list of services below for any special considerations for the OSG 3.6 up
 -   [GridFTP services](#replacing-your-gridftp-service) should be replaced with an installation of XRootD standalone.
 
 -   [HTCondor pools](#updating-your-htcondor-hosts) and [access points](#updating-your-osg-access-point) should be
-    updated to OSG 3.6 at your earliest convenience.
+    updated to OSG 3.6 as soon as possible.
     Note that any pools using GSI authentication will need to transition to a different authentication method, such as
     IDTOKENS.
 
 -   All other services (e.g., OSG Worker Node clients, Frontier Squids) should be updated to
-    [OSG 3.6](#updating-the-osg-repositories) at your earliest convenience.
+    [OSG 3.6](#updating-the-osg-repositories) as soon as possible.
 
 Updating the OSG Repositories
 -----------------------------
