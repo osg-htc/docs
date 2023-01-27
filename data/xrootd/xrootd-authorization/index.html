@@ -1015,6 +1015,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#multiuser-and-the-authorization-database" class="md-nav__link">
+    Multiuser and the authorization database
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2058,6 +2065,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#multiuser-and-the-authorization-database" class="md-nav__link">
+    Multiuser and the authorization database
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2291,7 +2305,7 @@ so this step is not necessary there.</p>
 <div class="admonition warning">
 <p class="admonition-title">Requirements for XRootD-Multiuser with VOMS FQANs</p>
 <p>Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a <code>voms-mapfile</code>.
-Support is available in <code>xrootd-voms 5.4.2-1.1</code>, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
+Support is available in <code>xrootd-voms 5.4.2-1.1</code>, in the OSG 3.6 repos, or XRootD 5.5.0 or newer.
 If you want to use multiuser, ensure you are getting <code>xrootd-voms</code> from the OSG repos.</p>
 </div>
 <div class="admonition warning">
@@ -2322,7 +2336,7 @@ i.e. authorize access to clients presenting the above proxy with <code>u blin ..
 <div class="admonition warning">
 <p class="admonition-title">Requirements for XRootD-Multiuser with VOMS FQANs</p>
 <p>Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a <code>voms-mapfile</code>.
-Support is available in <code>xrootd-voms 5.4.2-1.1</code>, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
+Support is available in <code>xrootd-voms 5.4.2-1.1</code>, in the OSG 3.6 repos, or XRootD 5.5.0 or newer.
 If you want to use multiuser, ensure you are getting <code>xrootd-voms</code> from the OSG repos.</p>
 </div>
 <p>In OSG 3.6, if the XRootD-VOMS plugin is enabled,
@@ -2339,8 +2353,8 @@ authentication by setting the following in <code>/etc/xrootd/config.d/10-osg-xrd
 <!-- XXX and how does this work? How can multiple FQANs be used? -->
 
 <h4 id="mapping-voms-attributes-to-users">Mapping VOMS attributes to users<a class="headerlink" href="#mapping-voms-attributes-to-users" title="Permanent link">&para;</a></h4>
-<p>In order for the XRootD-Multiuser plugin to work, a proxy must be mapped to a user (<code>u</code>) that is a valid Unix user.
-Use a VOMS Mapfile in <code>/etc/grid-security/voms-mapfile</code> that contains lines in the following form:
+<p>In order for the XRootD-Multiuser plugin to work, a proxy must be mapped to a user (<code>u</code>) that is a valid Unix user.</p>
+<p>Use a VOMS Mapfile, conventionally in <code>/etc/grid-security/voms-mapfile</code> that contains lines in the following form:
 <div class="highlight"><pre><span></span><code>&quot;&lt;FQAN PATTERN&gt;&quot; &lt;USERNAME&gt;
 </code></pre></div>
 replacing <code>&lt;FQAN PATTERN&gt;</code> with a glob matching FQANs, and <code>&lt;USERNAME&gt;</code> with the user that you want to map
@@ -2349,6 +2363,16 @@ matching FQANs to.</p>
 <div class="highlight"><pre><span></span><code>&quot;/osg/*&quot; osg01
 </code></pre></div>
 will map FQANs starting with <code>/osg/</code> to the user <code>osg01</code>.</p>
+<p>To enable using VOMS mapfiles in the first place, add the following line to your XRootD configuration:
+<div class="highlight"><pre><span></span><code>voms.mapfile /etc/grid-security/voms-mapfile
+</code></pre></div>
+replacing <code>/etc/grid-security/voms-mapfile</code> with the actual location of your mapfile, if it is different.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A VOMS Mapfile only affects mapping the user (<code>u</code>) attribute understood in the <a href="#authorization-database">authorization-database</a>.
+The FQAN will always be used for the groupname (<code>g</code>), organization name (<code>o</code>), and role name (<code>r</code>),
+even if the mapfile is missing or does not contain a matching mapping.</p>
+</div>
 <p>See the <a href="https://github.com/xrootd/xrootd/tree/master/src/XrdVoms#voms-mapping">VOMS Mapping documentation</a> for details.
 VOMS Mapfiles previously used with LCMAPS should continue to work unmodified,
 but the plugin can only look at a single mapfile,
@@ -2430,6 +2454,15 @@ and that it is not writable by others.</p>
 <div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>chown xrootd:xrootd /etc/xrootd/Authfile
 <span class="gp">root@host # </span>chmod <span class="m">0640</span> /etc/xrootd/Authfile  <span class="c1"># or 0644</span>
 </code></pre></div>
+<h3 id="multiuser-and-the-authorization-database">Multiuser and the authorization database<a class="headerlink" href="#multiuser-and-the-authorization-database" title="Permanent link">&para;</a></h3>
+<p>The XRootD-Multiuser plugin can be used to perform file system operations as a different user than the XRootD daemon (whose user is <code>xrootd</code>).
+If it is enabled, then <em>after</em> authorization is done using the authorization database,
+XRootD will take the user (<code>u</code>) attribute of the incoming request, and perform file operations as the Unix user with the same name as that attribute.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If there is no Unix user with a matching name, XRootD will perform the file operations as the <code>xrootd</code> user.
+This may lead to actions that were authorized by the authorization database to be denied by the file system.</p>
+</div>
 <h2 id="applying-authorization-changes">Applying Authorization Changes<a class="headerlink" href="#applying-authorization-changes" title="Permanent link">&para;</a></h2>
 <p>After making changes to your <a href="#authorization-database">authorization database</a>, you must restart the
 <a href="../install-standalone/#using-xrootd">relevant services</a>.</p>
