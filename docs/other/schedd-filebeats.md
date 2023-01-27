@@ -12,7 +12,7 @@ This document is for frontend administrators. It describes the installation of [
 Introduction
 ------------
 
-An access point (HTCondor schedd) is a login node where users submit jobs to the Grid. One interesting log that it produces is the TransferLog. The TransferLogs report all the transfers of files between compute node and access points. In this guide we describe the installation of Filebeats to upload this log to Elastic Search.
+An access point (HTCondor schedd) is a login node where users submit jobs to distributed computing pools. One interesting log that it produces is the TransferLog. The TransferLogs report all the transfers of files between compute node and access points. In this guide we describe the installation of Filebeats to upload this log to Elastic Search.
 
 Installation
 ------------

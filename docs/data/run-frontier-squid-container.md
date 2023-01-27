@@ -7,7 +7,7 @@ Frontier Squid is a distribution of the well-known [squid HTTP caching
 proxy software](http://squid-cache.org) that is optimized for use with
 applications on the Worldwide LHC Computing Grid (WLCG). It has
 [many advantages](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Why_use_frontier_squid_instead_o)
-over regular squid for common pool applications, especially Frontier
+over regular squid for common distributed computing applications, especially Frontier
 and CVMFS. The OSG distribution of frontier-squid is a straight rebuild of the
 upstream frontier-squid package for the convenience of OSG users.
 
