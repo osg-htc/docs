@@ -151,12 +151,12 @@ Consult the [HTCondor upgrade section](#updating-your-htcondor-hosts) for detail
         root@host # awk -F '=' '/DataFolder/ {print $2}' /etc/gratia/condor-ap/ProbeConfig | tr -d '"'
         /var/lib/condor/gratia/data
 
-### Reconfiguring HTCondor ###
+### Restarting HTCondor ###
 
-After updating your RPMs and updating your configuration, reconfigure your HTCondor service:
+After updating your RPMs and updating your configuration, restart your HTCondor service:
 
 ```console
-root@host # condor_reconfig
+root@host # systemctl restart condor
 ```
 
 !!! question "What about `gratia-probes-cron`?"
