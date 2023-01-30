@@ -1494,8 +1494,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reconfiguring-htcondor" class="md-nav__link">
-    Reconfiguring HTCondor
+  <a href="#restarting-htcondor" class="md-nav__link">
+    Restarting HTCondor
   </a>
   
 </li>
@@ -1971,8 +1971,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reconfiguring-htcondor" class="md-nav__link">
-    Reconfiguring HTCondor
+  <a href="#restarting-htcondor" class="md-nav__link">
+    Restarting HTCondor
   </a>
   
 </li>
@@ -2276,9 +2276,9 @@ of <code>/etc/gratia/condor/ProbeConfig</code> as many default values have chang
 
 </li>
 </ol>
-<h3 id="reconfiguring-htcondor">Reconfiguring HTCondor<a class="headerlink" href="#reconfiguring-htcondor" title="Permanent link">&para;</a></h3>
-<p>After updating your RPMs and updating your configuration, reconfigure your HTCondor service:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>condor_reconfig
+<h3 id="restarting-htcondor">Restarting HTCondor<a class="headerlink" href="#restarting-htcondor" title="Permanent link">&para;</a></h3>
+<p>After updating your RPMs and updating your configuration, restart your HTCondor service:</p>
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>systemctl restart condor
 </code></pre></div>
 <div class="admonition question">
 <p class="admonition-title">What about <code>gratia-probes-cron</code>?</p>
