@@ -2460,8 +2460,8 @@ If it is enabled, then <em>after</em> authorization is done using the authorizat
 XRootD will take the user (<code>u</code>) attribute of the incoming request, and perform file operations as the Unix user with the same name as that attribute.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If there is no Unix user with a matching name, XRootD will perform the file operations as the <code>xrootd</code> user.
-This may lead to actions that were authorized by the authorization database to be denied by the file system.</p>
+<p>If there is no Unix user with a matching name, you will see an error like
+<code>XRootD mapped request to username that does not exist: &lt;username&gt;</code>; the operation will then fail with "EACCES" (access denied).</p>
 </div>
 <h2 id="applying-authorization-changes">Applying Authorization Changes<a class="headerlink" href="#applying-authorization-changes" title="Permanent link">&para;</a></h2>
 <p>After making changes to your <a href="#authorization-database">authorization database</a>, you must restart the
