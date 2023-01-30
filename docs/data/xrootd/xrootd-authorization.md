@@ -281,8 +281,8 @@ If it is enabled, then _after_ authorization is done using the authorization dat
 XRootD will take the user (`u`) attribute of the incoming request, and perform file operations as the Unix user with the same name as that attribute.
 
 !!!note
-    If there is no Unix user with a matching name, XRootD will perform the file operations as the `xrootd` user.
-    This may lead to actions that were authorized by the authorization database to be denied by the file system.
+    If there is no Unix user with a matching name, you will see an error like
+    `XRootD mapped request to username that does not exist: <username>`; the operation will then fail with "EACCES" (access denied).
 
 
 Applying Authorization Changes
