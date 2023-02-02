@@ -34,7 +34,7 @@ excludepkgs=rrdtool
 
 Running Glideins are not reported correctly when using tokens.
 This is due to a missing ID and is affecting all releases up to 3.9.6.
-It has been fixed in 3.10.0 (not yet released).
+It has been fixed in 3.10.1.
 
 ### XRootD ###
 
@@ -43,6 +43,21 @@ Follow the discussion with the developers [here](https://github.com/xrootd/xroot
 
 Latest News
 -----------
+
+### ** February 2, 2023:** GlideinWMS 3.10.1, osg-client 6.9.5, htvault-config 1.14
+-   [GlideinWMS 3.10.1](https://glideinwms.fnal.gov/doc.v3_10_1/history.html#stable)
+    -   Production release supporting tokens and Python 3
+    -   Fix monitoring by including Glidein IDs with SciTokens
+    -   Add Python module to help with custom scripts
+    -   Custom setup scripts written in shell should always use the gconfig\_\* functions introduced in
+        [3.9.6](https://glideinwms.fnal.gov/doc.v3_10_1/history.html#development) to read and write glidein configuration.
+        See the release notes for details.
+-   [osdf-client 6.9.5](https://github.com/htcondor/osdf-client/releases/tag/v6.9.5)
+    -   Better handling of failures and broken proxies
+    -   Various token handling bug fixes
+    -   Add support for specifying token name in URL
+-   htvault-config 1.14
+    -   Add auditlog option to move the audit log to a different location
 
 ### ** January 17, 2023:** VO Package v128
 -   [VO Package v128](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-128)
