@@ -44,6 +44,14 @@ Follow the discussion with the developers [here](https://github.com/xrootd/xroot
 Latest News
 -----------
 
+### ** February 7, 2023:** VO Package v129
+-   [VO Package v129](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-129)
+    -   Update DN for voms1.fnal.gov
+
+!!! note
+    The CA/Browser Forum has changed DN formats again this year.
+    This will affect certificates issued by IGTF CAs.
+
 ### ** February 2, 2023:** GlideinWMS 3.10.1, osg-client 6.9.5, htvault-config 1.14
 -   [GlideinWMS 3.10.1](https://glideinwms.fnal.gov/doc.v3_10_1/history.html#stable)
     -   Production release supporting tokens and Python 3
