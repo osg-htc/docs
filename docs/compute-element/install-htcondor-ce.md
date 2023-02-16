@@ -206,7 +206,7 @@ Starting and Validating HTCondor-CE
 -----------------------------------
 
 For information on how to start and validate the core HTCondor-CE services, please refer to the
-[upstream documentation](https://htcondor.com/htcondor-ce/v5/verification/)
+[upstream documentation](https://htcondor.com/htcondor-ce/v5/operation/)
 
 Troubleshooting HTCondor-CE
 ---------------------------
