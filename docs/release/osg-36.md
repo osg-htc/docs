@@ -44,6 +44,12 @@ Follow the discussion with the developers [here](https://github.com/xrootd/xroot
 Latest News
 -----------
 
+### ** February 16, 2023:** gratia-probe 2.8.1, python-scitokens 1.7.4
+-   gratia-probe 2.8.1
+    -   gratia-probe-condor-ap: important reporting update for APs with access to multiple pools (e.g., flocking)
+-   [python-scitokens 1.7.4](https://github.com/scitokens/scitokens/releases)
+    -   Remove aud enforcement from deserialize function
+
 ### ** February 7, 2023:** VO Package v129
 -   [VO Package v129](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-129)
     -   Update DN for voms1.fnal.gov
