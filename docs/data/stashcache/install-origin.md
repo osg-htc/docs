@@ -251,7 +251,7 @@ If successful, there should be a file at `/tmp/testfile` with the contents of th
 
 To verify that a user can download a file from the origin server, use the `stashcp` tool,
 which is available in the `stashcp` RPM.
-Obtain a credential (either a SciToken/WLCG Token, or an X.509 proxy, depending on your origin's configuration).
+Obtain a credential (a SciToken or WLCG Token, depending on your origin's configuration).
 Place a `<TEST FILE>` in `<EXPORTED DIR>`, where `<TEST FILE>` can be any file in a path you expect to be accessible
 using the credential you just obtained.
 Run the following command:
