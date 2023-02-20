@@ -1576,6 +1576,27 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#rocky-linux-9" class="md-nav__link">
+    Rocky Linux 9
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#almalinux-9" class="md-nav__link">
+    AlmaLinux 9
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#centos-stream-9" class="md-nav__link">
+    CentOS Stream 9
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2012,6 +2033,27 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#rocky-linux-9" class="md-nav__link">
+    Rocky Linux 9
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#almalinux-9" class="md-nav__link">
+    AlmaLinux 9
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#centos-stream-9" class="md-nav__link">
+    CentOS Stream 9
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2140,7 +2182,7 @@ You must have the following repositories available and enabled:</p>
 <li><code>extras</code> (SL 7, CentOS 7, CentOS Stream 8, Rocky Linux 8, AlmaLinux 8)</li>
 <li><code>Server-Extras</code> (RHEL 7)</li>
 <li><code>powertools</code> (CentOS Stream 8, Rocky Linux 8, AlmaLinux 8)</li>
-<li><code>CodeReady Builder</code> (RHEL 8)</li>
+<li><code>CodeReady Builder</code> (RHEL 8) or <code>crb</code> (all EL9 variants)</li>
 </ul>
 </li>
 <li>EPEL repositories</li>
@@ -2238,6 +2280,18 @@ or if the <code>enabled</code> line is missing
 <ul>
 <li>Ensure that the <code>CodeReady Linux Builder</code> channel is enabled.
     See <a href="https://access.redhat.com/articles/4348511#enable">Red Hat's instructions</a> on how to enable this repo.</li>
+</ul>
+<h4 id="rocky-linux-9">Rocky Linux 9<a class="headerlink" href="#rocky-linux-9" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Ensure that the <code>crb</code> repo in <code>/etc/yum.repos.d/rocky.repo</code> is enabled</li>
+</ul>
+<h4 id="almalinux-9">AlmaLinux 9<a class="headerlink" href="#almalinux-9" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Ensure that the <code>crb</code> repo in <code>/etc/yum.repos.d/almalinux-crb.repo</code> is enabled</li>
+</ul>
+<h4 id="centos-stream-9">CentOS Stream 9<a class="headerlink" href="#centos-stream-9" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Ensure that the <code>crb</code> repo in <code>/etc/yum.repos.d/centos.repo</code> is enabled</li>
 </ul>
 <h3 id="install-the-epel-repositories">Install the EPEL repositories<a class="headerlink" href="#install-the-epel-repositories" title="Permanent link">&para;</a></h3>
 <p>OSG software depends on packages distributed via the <a href="https://fedoraproject.org/wiki/EPEL">EPEL</a> repositories.
