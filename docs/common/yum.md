@@ -31,7 +31,7 @@ You must have the following repositories available and enabled:
     -   `extras` (SL 7, CentOS 7, CentOS Stream 8, Rocky Linux 8, AlmaLinux 8)
     -   `Server-Extras` (RHEL 7)
     -   `powertools` (CentOS Stream 8, Rocky Linux 8, AlmaLinux 8)
-    -   `CodeReady Builder` (RHEL 8)
+    -   `CodeReady Builder` (RHEL 8) or `crb` (all EL9 variants)
 -   EPEL repositories
 -   OSG repositories
 
@@ -136,6 +136,18 @@ The repositories to enable, as well as the instructions to enable them, are OS-d
 
 -   Ensure that the `CodeReady Linux Builder` channel is enabled.
     See [Red Hat's instructions](https://access.redhat.com/articles/4348511#enable) on how to enable this repo.
+
+#### Rocky Linux 9
+
+-   Ensure that the `crb` repo in `/etc/yum.repos.d/rocky.repo` is enabled
+
+#### AlmaLinux 9
+
+-   Ensure that the `crb` repo in `/etc/yum.repos.d/almalinux-crb.repo` is enabled
+
+#### CentOS Stream 9
+
+-   Ensure that the `crb` repo in `/etc/yum.repos.d/centos.repo` is enabled
 
 ### Install the EPEL repositories
 
