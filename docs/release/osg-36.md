@@ -44,6 +44,10 @@ Follow the discussion with the developers [here](https://github.com/xrootd/xroot
 Latest News
 -----------
 
+### ** February 21, 2023:** VO Package v130
+-   [VO Package v130](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-130)
+    -   Update DN for voms2.fnal.gov
+
 ### ** February 16, 2023:** gratia-probe 2.8.1, python-scitokens 1.7.4
 -   gratia-probe 2.8.1
     -   gratia-probe-condor-ap: important reporting update for APs with access to multiple pools (e.g., flocking)
