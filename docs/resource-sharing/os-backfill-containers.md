@@ -60,9 +60,10 @@ In order to successfully start payload jobs:
     Replace `/worker-temp-dir` with a directory you created for jobs to write into.
     Make sure the user you run your container as has write access to this directory.
 
-6. _Optional:_ add an expression with the `GLIDEIN_Start_Extra` environment variable to append to the
-   [HTCondor `START` expression](https://htcondor.readthedocs.io/en/latest/admin-manual/policy-configuration.html#the-start-expression);
-   this limits the pilot to only run certain jobs.
+6. _Optional:_ specify a project with the `OSG_PROJECT_NAME` environment variable to limit
+    the pilot to only run jobs from a certain project. Example:
+    `-e OSG_PROJECT_NAME="my-project"`. Note that the previous setting
+    `GLIDEIN_Start_Extra` is now deprecated and will be removed in the future.
 
 7. _Optional:_ [limit OSG pilot container resource usage](#limiting-resource-usage)
 
@@ -77,7 +78,6 @@ docker run -it --rm --user osg  \
        -v /worker-temp-dir:/pilot               \
        -e GLIDEIN_Site="..."                    \
        -e GLIDEIN_ResourceName="..."            \
-       -e GLIDEIN_Start_Extra="True"            \
        -e OSG_SQUID_LOCATION="..."              \
        -e CVMFSEXEC_REPOS="                     \
             oasis.opensciencegrid.org           \
@@ -160,7 +160,6 @@ docker run -it --rm --user osg      \
         -v /worker-temp-dir:/pilot      \
         -e GLIDEIN_Site="..."           \
         -e GLIDEIN_ResourceName="..."   \
-        -e GLIDEIN_Start_Extra="True"   \
         -e OSG_SQUID_LOCATION="..."     \
         opensciencegrid/osgvo-docker-pilot:3.6-release
 ```

@@ -41,10 +41,11 @@ export TOKEN="put_your_provided_token_here"
 export GLIDEIN_Site="SDSC"
 export GLIDEIN_ResourceName="Comet"
 
-# This is an important setting limiting what jobs your glideins will accept.
-# At the minimum, the expression should limit the "Owner" of the jobs to
-# whatever your username is on the OSG _submit_ side
-export GLIDEIN_Start_Extra="Owner == \"my_osgconnect_username\""
+# You may limit pilots to only run jobs from a specific project. For
+# example, if the pilot runs on hardware which is dedicated and policy
+# states that only project jobs may use that hardward. The default is
+# to run any job in the OSPool.
+# export OSG_PROJECT_NAME="my-project"
 
 module load singularity
 singularity run --contain \
