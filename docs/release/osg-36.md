@@ -18,6 +18,23 @@ Known Issues
 
 The following issues are known to currently affect packages distributed in OSG 3.6:
 
+### gratia-probe-htcondor-ce ###
+
+`gratia-probe-htcondor-ce-2.8.1-1` has a known issue that prevents HTCondor-CE records from being uploaded to the GRACC.
+If you have already upgraded to this version, we suggest the following:
+
+1.  Downgrade the version of `gratia-probe-htcondor-ce`
+
+        :::console
+        root@host # yum downgrade 'gratia-probe-*'
+
+1.  Move all files from the quarantine directory to the data directory for reprocessing on the next run:
+
+        :::console
+        # By default, this will bring you to /var/lib/condor-ce/gratia/data/
+        root@host # cd $(condor_ce_config_val PER_JOB_HISTORY_DIR)
+        root@host # mv quarantine/history*.0 .
+
 ### rrdtool ###
 
 To improve support for Python 3 based GlideinWMS in EL7,
