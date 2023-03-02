@@ -7,7 +7,7 @@ The OSG operates the Open Science Data Federation (OSDF), which provides organiz
 
 The map below shows the location of the current caches in the federation:
 
-<iframe width="100%" height="500px" frameBorder="0" style="margin-bottom:1em; margin-top:1em" src="https://map.opensciencegrid.org/map/iframe?view=XRootD#38.61687,-97.86621|4|hybrid"></iframe>
+<iframe width="100%" height="500px" frameBorder="0" style="margin-bottom:1em; margin-top:1em" src="https://map.opensciencegrid.org/map/iframe?view=OpenScienceDataFederation#38.61687,-97.86621|4|hybrid"></iframe>
 
 ## Joining and Using the OSDF
 
