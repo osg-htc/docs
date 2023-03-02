@@ -1439,22 +1439,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#gratia-probe-htcondor-ce" class="md-nav__link">
-    gratia-probe-htcondor-ce
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#rrdtool" class="md-nav__link">
     rrdtool
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#glideinwms" class="md-nav__link">
-    GlideinWMS
   </a>
   
 </li>
@@ -1478,6 +1464,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#march-2-2023-gratia-probe-282-osg-flock-19" class="md-nav__link">
+    March 2, 2023: gratia-probe 2.8.2, osg-flock 1.9
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#february-21-2023-vo-package-v130" class="md-nav__link">
@@ -2241,22 +2234,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#gratia-probe-htcondor-ce" class="md-nav__link">
-    gratia-probe-htcondor-ce
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#rrdtool" class="md-nav__link">
     rrdtool
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#glideinwms" class="md-nav__link">
-    GlideinWMS
   </a>
   
 </li>
@@ -2280,6 +2259,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#march-2-2023-gratia-probe-282-osg-flock-19" class="md-nav__link">
+    March 2, 2023: gratia-probe 2.8.2, osg-flock 1.9
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#february-21-2023-vo-package-v130" class="md-nav__link">
@@ -2741,25 +2727,6 @@ GSI proxies and HTTP is used for data transfer instead of GridFTP.</p>
 We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
 <h2 id="known-issues">Known Issues<a class="headerlink" href="#known-issues" title="Permanent link">&para;</a></h2>
 <p>The following issues are known to currently affect packages distributed in OSG 3.6:</p>
-<h3 id="gratia-probe-htcondor-ce">gratia-probe-htcondor-ce<a class="headerlink" href="#gratia-probe-htcondor-ce" title="Permanent link">&para;</a></h3>
-<p><code>gratia-probe-htcondor-ce-2.8.1-1</code> has a known issue that prevents HTCondor-CE records from being uploaded to the GRACC.
-If you have already upgraded to this version, we suggest the following:</p>
-<ol>
-<li>
-<p>Downgrade the version of <code>gratia-probe-htcondor-ce</code></p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum downgrade <span class="s1">&#39;gratia-probe-*&#39;</span>
-</code></pre></div>
-
-</li>
-<li>
-<p>Move all files from the quarantine directory to the data directory for reprocessing on the next run:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp"># </span>By default, this will bring you to /var/lib/condor-ce/gratia/data/
-<span class="gp">root@host # </span><span class="nb">cd</span> <span class="k">$(</span>condor_ce_config_val PER_JOB_HISTORY_DIR<span class="k">)</span>
-<span class="gp">root@host # </span>mv quarantine/history*.0 .
-</code></pre></div>
-
-</li>
-</ol>
 <h3 id="rrdtool">rrdtool<a class="headerlink" href="#rrdtool" title="Permanent link">&para;</a></h3>
 <p>To improve support for Python 3 based GlideinWMS in EL7,
 the EL7 OSG Yum repositories contain a newer version of <code>rrdtool</code> than the operating system repositories.
@@ -2768,14 +2735,39 @@ Therefore, on EL7 hosts that are not running GlideinWMS, we suggest adding the f
 of <code>/etc/yum.repos.d/osg.repo</code>:</p>
 <div class="highlight"><pre><span></span><code>excludepkgs=rrdtool
 </code></pre></div>
-<h3 id="glideinwms">GlideinWMS<a class="headerlink" href="#glideinwms" title="Permanent link">&para;</a></h3>
-<p>Running Glideins are not reported correctly when using tokens.
-This is due to a missing ID and is affecting all releases up to 3.9.6.
-It has been fixed in 3.10.1.</p>
 <h3 id="xrootd">XRootD<a class="headerlink" href="#xrootd" title="Permanent link">&para;</a></h3>
 <p>We have received reports of issues with HTTPS transfers involving gfal2, openssl &lt; 1.1.1, and XRootD after 8h of uptime.
 Follow the discussion with the developers <a href="https://github.com/xrootd/xrootd/issues/1874">here</a>.</p>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="march-2-2023-gratia-probe-282-osg-flock-19"><strong> March 2, 2023:</strong> gratia-probe 2.8.2, osg-flock 1.9<a class="headerlink" href="#march-2-2023-gratia-probe-282-osg-flock-19" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>gratia-probe 2.8.1</p>
+<ul>
+<li>
+<p>CRITICAL bug fix for sites that have installed <code>gratia-probe-htcondor-ce-2.8.1</code> or
+    <code>gratia-probe-condor-ap-2.8.1</code>. After updating to 2.8.2, perform the following manual steps for a CE:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp"># </span>By default, this will bring you to /var/lib/condor-ce/gratia/data/
+<span class="gp">root@host # </span><span class="nb">cd</span> <span class="k">$(</span>condor_ce_config_val PER_JOB_HISTORY_DIR<span class="k">)</span>
+<span class="gp">root@host # </span>mv quarantine/history*.0 .
+</code></pre></div>
+
+<p>And for an AP:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp"># </span>By default, this will bring you to /var/lib/condor-ce/gratia/data/
+<span class="gp">root@host # </span><span class="nb">cd</span> <span class="k">$(</span>condor_config_val PER_JOB_HISTORY_DIR<span class="k">)</span>
+<span class="gp">root@host # </span>mv quarantine/history*.0 .
+</code></pre></div>
+
+</li>
+</ul>
+</li>
+<li>
+<p>osg-flock 1.9</p>
+<ul>
+<li>Adds the "OSPool" attribute to the job ad based on the EP configuration</li>
+</ul>
+</li>
+</ul>
 <h3 id="february-21-2023-vo-package-v130"><strong> February 21, 2023:</strong> VO Package v130<a class="headerlink" href="#february-21-2023-vo-package-v130" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-130">VO Package v130</a><ul>
