@@ -18,23 +18,6 @@ Known Issues
 
 The following issues are known to currently affect packages distributed in OSG 3.6:
 
-### gratia-probe-htcondor-ce ###
-
-`gratia-probe-htcondor-ce-2.8.1-1` has a known issue that prevents HTCondor-CE records from being uploaded to the GRACC.
-If you have already upgraded to this version, we suggest the following:
-
-1.  Downgrade the version of `gratia-probe-htcondor-ce`
-
-        :::console
-        root@host # yum downgrade 'gratia-probe-*'
-
-1.  Move all files from the quarantine directory to the data directory for reprocessing on the next run:
-
-        :::console
-        # By default, this will bring you to /var/lib/condor-ce/gratia/data/
-        root@host # cd $(condor_ce_config_val PER_JOB_HISTORY_DIR)
-        root@host # mv quarantine/history*.0 .
-
 ### rrdtool ###
 
 To improve support for Python 3 based GlideinWMS in EL7,
@@ -47,12 +30,6 @@ of `/etc/yum.repos.d/osg.repo`:
 excludepkgs=rrdtool
 ```
 
-### GlideinWMS ###
-
-Running Glideins are not reported correctly when using tokens.
-This is due to a missing ID and is affecting all releases up to 3.9.6.
-It has been fixed in 3.10.1.
-
 ### XRootD ###
 
 We have received reports of issues with HTTPS transfers involving gfal2, openssl < 1.1.1, and XRootD after 8h of uptime.
@@ -60,6 +37,26 @@ Follow the discussion with the developers [here](https://github.com/xrootd/xroot
 
 Latest News
 -----------
+
+### ** March 2, 2023:** gratia-probe 2.8.2, osg-flock 1.9
+-   gratia-probe 2.8.1
+    -   CRITICAL bug fix for sites that have installed `gratia-probe-htcondor-ce-2.8.1` or
+        `gratia-probe-condor-ap-2.8.1`. After updating to 2.8.2, perform the following manual steps for a CE:
+
+            :::console
+            # By default, this will bring you to /var/lib/condor-ce/gratia/data/
+            root@host # cd $(condor_ce_config_val PER_JOB_HISTORY_DIR)
+            root@host # mv quarantine/history*.0 .
+
+        And for an AP:
+
+            :::console
+            # By default, this will bring you to /var/lib/condor-ce/gratia/data/
+            root@host # cd $(condor_config_val PER_JOB_HISTORY_DIR)
+            root@host # mv quarantine/history*.0 .
+
+-   osg-flock 1.9
+    -   Adds the "OSPool" attribute to the job ad based on the EP configuration
 
 ### ** February 21, 2023:** VO Package v130
 -   [VO Package v130](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-130)
