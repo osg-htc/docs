@@ -204,7 +204,7 @@ When usage goes above the high water mark,
 the XRootD service will delete cached files until usage goes below the low water mark.
 
 
-### Enable remote debugging
+### Enable remote debugging (only if needed)
 
 XRootD provides remote debugging via a read-only file system named digFS.
 This feature is disabled by default, but you may enable it if you need help troubleshooting your server.
