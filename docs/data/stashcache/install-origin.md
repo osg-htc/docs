@@ -47,8 +47,8 @@ As with all OSG software installations, there are some one-time steps to prepare
 * Install [CA certificates](../../common/ca.md)
 
 !!! note
-    This document describes features introduced in XCache 3.2.2, released on 2022-09-29.
-    When installing, ensure that your version of the `stash-origin` RPM is at least 3.2.2.
+    This document describes features introduced in XCache 3.3.0, released on 2022-12-08.
+    When installing, ensure that your version of the `stash-origin` RPM is at least 3.3.0.
 
 
 Installing the Origin

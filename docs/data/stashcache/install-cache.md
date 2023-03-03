@@ -38,6 +38,9 @@ As with all OSG software installations, there are some one-time steps to prepare
 * Prepare [the required Yum repositories](../../common/yum.md)
 * Install [CA certificates](../../common/ca.md)
 
+!!! note
+    This document describes features introduced in XCache 3.3.0, released on 2022-12-08.
+    When installing, ensure that your version of the `stash-cache` RPM is at least 3.3.0.
 
 <!-- NOTE: Keep the "Registering the Cache" section below in sync with run-stashcache-container.md -->
 
