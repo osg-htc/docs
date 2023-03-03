@@ -20,11 +20,15 @@ Before starting the installation process, consider the following requirements:
   `xrootd`
 * __Host certificate:__ Required for authentication.
   See our [host certificate documentation](../../security/host-certs.md) for instructions on how to request and install host certificates.
-* __Network ports:__ The cache service requires the following ports open:
-    * Inbound TCP port 1094 for file access via the XRootD protocol
-    * Inbound TCP port 8000 for file access via HTTP and/or
-    * Inbound TCP port 8443 for authenticated file access via HTTPS
-    * Outbound UDP port 9930 for reporting to `xrd-report.osgstorage.org` and `xrd-mon.osgstorage.org` for monitoring
+* __Network ports:__ Your host may run a public cache instance (for serving public data only), an authenticated cache instance (for serving protected data), or both.
+    
+    * A public cache instance requires the following ports open:
+        * Inbound TCP port 1094 for file access via the XRootD protocol
+        * Inbound TCP port 8000 for file access via HTTP(S)
+        * Outbound UDP port 9930 for reporting to `xrd-report.osgstorage.org` and `xrd-mon.osgstorage.org` for monitoring
+    * An authenticated cache instance requires the following ports open:
+        * Inbound TCP port 8443 for authenticated file access via HTTPS
+        * Outbound UDP port 9930 for reporting to `xrd-report.osgstorage.org` and `xrd-mon.osgstorage.org` for monitoring
 * __Hardware requirements:__ We recommend that a cache has at least 10Gbps connectivity, 1TB of
  disk space for the cache directory, and 12GB of RAM.
 
@@ -110,8 +114,8 @@ This is an example registration for a cache server that serves all public data _
 
 #### Non-standard ports
 
-By default, an unauthenticated cache serves public data on port 8000,
-and an authenticated cache serves protected data on port 8443.
+By default, an unauthenticated cache instance serves public data on port 8000,
+and an authenticated cache instance serves protected data on port 8443.
 If you change the ports for your cache instances, you must specify the new endpoints under the service, as follows:
 
 ```yaml
@@ -253,7 +257,19 @@ The FQDN of the cache server that you registered in [Topology](#registering-the-
 For example, this may be the case if your cache is behind a load balancer such as LVS or MetalLB.
 In this case, you must manually tell the cache services which FQDN to use for topology lookups.
 
-1.  Create the file `/etc/systemd/system/stash-cache-authfile.service.d/override.conf`
+If you are running a public cache instance:
+
+1.  Create the file `/etc/systemd/system/stash-authfile@stash-cache.service.d/override.conf`
+    with the following contents:
+   
+        :::ini
+        [Service]
+        Environment=CACHE_FQDN=<Topology-registered FQDN>
+
+
+If you are running an authenticated cache instance:
+
+1.  Create the file `/etc/systemd/system/stash-authfile@stash-cache-auth.service.d/override.conf`
     with the following contents:
    
         :::ini
