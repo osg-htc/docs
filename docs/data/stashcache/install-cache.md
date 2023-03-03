@@ -290,26 +290,28 @@ As a reminder, here are common service commands (all run as `root`):
 | Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`  |
 | Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>` |
 
-### Public cache services
+### Public cache services (if running a public cache instance)
 
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
 | XRootD | `xrootd@stash-cache.service` | The XRootD daemon, which performs the data transfers |
 | XCache | `xcache-reporter.timer` | Reports usage information to collector.opensciencegrid.org |
 | Fetch CRL |EL8: `fetch-crl.timer` <br> EL7: `fetch-crl-boot` and `fetch-crl-cron` | Required to authenticate monitoring services.  See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info |
+| | `stash-authfile@stash-cache.service` | Generate authentication configuration files for XRootD (public cache instance) |
+| | `stash-authfile@stash-cache.timer` | Periodically run the above service (public cache instance) |
 
 
-### Authenticated cache services (optional)
+### Authenticated cache services (if running an authenticated cache instance)
 
-In addition to the public cache services, there are three systemd units specific to the authenticated cache.
+
 
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
 | XRootD | `xrootd-renew-proxy.service` | Renew a proxy for authenticated downloads to the cache |
 |  | `xrootd@stash-cache-auth.service` | The xrootd daemon which performs authenticated data transfers |
 |  | `xrootd-renew-proxy.timer` | Trigger daily proxy renewal |
-|  | `stash-cache-authfile.service` | Generate the Authentication configuration file for XRootD |
-|  | `stash-cache-authfile.timer` | Periodically generate the Authentication configuration file for XRootD |
+|  | `stash-authfile@stash-cache-auth.service` | Generate the authentication configuration files for XRootD (authenticated cache instance) |
+|  | `stash-authfile@stash-cache-auth.timer` | Periodically run the above service (authenticated cache instance) |
 
 
 Validating the Cache
