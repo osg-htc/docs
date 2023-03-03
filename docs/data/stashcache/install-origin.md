@@ -107,7 +107,8 @@ If the HCC has a protected registered namespace at `/hcc/PROTECTED` then set the
 set AuthOriginExport = /hcc/PROTECTED
 ```
 If you are serving public data from the origin, you must set `PublicOriginExport` and use the `xrootd@stash-origin` service.
-If you are serving protected data from the origin, you must set `AuthOriginExport` and use the `xrootd@stash-origin-auth` service.
+If you are serving protected data from the origin, you must set `AuthOriginExport`
+and use the `xrootd@stash-origin-auth` service (if not using [xrootd-multiuser][multiuser]) or `xrootd-privileged@stash-origin-auth` service (if using [xrootd-multiuser][multiuser]).
 
 !!! warning
     The OSDF namespace is a *global* namespace.
@@ -122,13 +123,25 @@ The FQDN of the origin server that you registered in [Topology](#registering-the
 For example, this may be the case if your origin is behind a load balancer such as LVS or MetalLB.
 In this case, you must manually tell the origin services which FQDN to use for topology lookups.
 
-1.  Create the file `/etc/systemd/system/stash-origin-authfile.service.d/override.conf`
+
+If you are running a public origin instance:
+
+1.  Create the file `/etc/systemd/system/stash-authfile@stash-origin.service.d/override.conf`
     with the following contents:
    
         :::ini
         [Service]
         Environment=ORIGIN_FQDN=<Topology-registered FQDN>
 
+
+If you are running an authenticated origin instance:
+
+1.  Create the file `/etc/systemd/system/stash-authfile@stash-origin-auth.service.d/override.conf`
+    with the following contents:
+   
+        :::ini
+        [Service]
+        Environment=ORIGIN_FQDN=<Topology-registered FQDN>
 
 Managing the Origin Services
 ----------------------------
@@ -137,13 +150,15 @@ There can be multiple instances of `xrootd`, running on different ports.
 The instance that serves unauthenticated data will run on port 1094.
 The instance that serves authenticated data will run on port 1095.
 If your origin serves both authenticated and unauthenticated data, you will run both instances.
+Some of the service names are different if you have configured the [XRootD Multiuser plugin][multiuser].
 
 The origin services consist of the following SystemD units that you must directly manage:
 
 | **Service name** | **Notes** |
 |------------------|-----------|
 | `xrootd@stash-origin.service` | Performs data transfers (unauthenticated instance) |
-| `xrootd@stash-origin-auth.service` | Performs data transfers (authenticated instance) |
+| `xrootd@stash-origin-auth.service` | Performs data transfers (authenticated instance without [multiuser][multiuser]) |
+| `xrootd-privileged@stash-origin-auth.service` | Performs data transfers (authenticated instance with [multiuser][multiuser]) |
 
 These services must be managed with `systemctl` and may start additional services as dependencies.
 As a reminder, here are common service commands (all run as `root`):
@@ -160,8 +175,10 @@ In addition, the origin service automatically uses the following SystemD units:
 | **Service name** | **Notes** |
 |------------------|-----------|
 | `cmsd@stash-origin.service` | Integrates the origin into the data federation (unauthenticated instance) |
-| `cmsd@stash-origin-auth.service` | Integrates the origin into the data federation (authenticated instance) |
-| `stash-origin-authfile.timer` | Updates the authorization files periodically |
+| `cmsd@stash-origin-auth.service` | Integrates the origin into the data federation (authenticated instance without [multiuser][multiuser]) |
+| `cmsd-privileged@stash-origin-auth.service` | Integrates the origin into the data federation (authenticated instance with [multiuser][multiuser]) |
+| `stash-authfile@stash-origin.timer` | Updates the authorization files periodically (unauthenticated instance) |
+| `stash-authfile@stash-origin-auth.timer` | Updates the authorization files periodically (authenticated instance) |
 
 Verifying the Origin Server
 ---------------------------
@@ -312,3 +329,5 @@ Getting Help
 ------------
 
 To get assistance, please use the [this page](../../common/help.md).
+
+[multiuser]: https://github.com/opensciencegrid/xrootd-multiuser "XRootD Multiuser Plugin"
