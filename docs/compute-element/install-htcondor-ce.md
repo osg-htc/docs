@@ -199,8 +199,8 @@ software needs to be configured so that it doesn't over report the number of job
 Modify the value of `SuppressNoDNRecords` in `/etc/gratia/htcondor-ce/ProbeConfig` on each of your CE's so that it
 reads:
 
-        :::file
-        SuppressNoDNRecords="1"
+    :::file
+    SuppressNoDNRecords="1"
 
 Starting and Validating HTCondor-CE
 -----------------------------------
