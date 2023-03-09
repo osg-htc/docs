@@ -1445,13 +1445,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#xrootd" class="md-nav__link">
-    XRootD
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1464,6 +1457,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#march-9-2023-xrootd-553-12-frontier-squid-57-21-cvmfs-2101" class="md-nav__link">
+    March 9, 2023: XRootD 5.5.3-1.2, frontier-squid 5.7-2.1, CVMFS 2.10.1
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#march-2-2023-gratia-probe-282-osg-flock-19" class="md-nav__link">
@@ -2240,13 +2240,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#xrootd" class="md-nav__link">
-    XRootD
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -2259,6 +2252,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#march-9-2023-xrootd-553-12-frontier-squid-57-21-cvmfs-2101" class="md-nav__link">
+    March 9, 2023: XRootD 5.5.3-1.2, frontier-squid 5.7-2.1, CVMFS 2.10.1
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#march-2-2023-gratia-probe-282-osg-flock-19" class="md-nav__link">
@@ -2735,10 +2735,37 @@ Therefore, on EL7 hosts that are not running GlideinWMS, we suggest adding the f
 of <code>/etc/yum.repos.d/osg.repo</code>:</p>
 <div class="highlight"><pre><span></span><code>excludepkgs=rrdtool
 </code></pre></div>
-<h3 id="xrootd">XRootD<a class="headerlink" href="#xrootd" title="Permanent link">&para;</a></h3>
-<p>We have received reports of issues with HTTPS transfers involving gfal2, openssl &lt; 1.1.1, and XRootD after 8h of uptime.
-Follow the discussion with the developers <a href="https://github.com/xrootd/xrootd/issues/1874">here</a>.</p>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="march-9-2023-xrootd-553-12-frontier-squid-57-21-cvmfs-2101"><strong> March 9, 2023:</strong> XRootD 5.5.3-1.2, frontier-squid 5.7-2.1, CVMFS 2.10.1<a class="headerlink" href="#march-9-2023-xrootd-553-12-frontier-squid-57-21-cvmfs-2101" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://github.com/xrootd/xrootd/blob/v5.5.3/docs/ReleaseNotes.txt">XRootD 5.5.3-1.2</a><ul>
+<li>Fix bug where GFAL davs writes fail on EL7 redirectors after eight hours</li>
+<li>XRootD 5.5.2 was not released because of critical bugs that are fixed in XRootD 5.5.3</li>
+</ul>
+</li>
+<li><a href="http://www.squid-cache.org/Versions/v5/squid-5.7-RELEASENOTES.html">frontier-squid-5.7-2.1</a><ul>
+<li>Uses first destination IP address that responds (dns_v4_first removed)</li>
+<li>Add MAJOR_CVMFS sites cvmfs-stratum-one.cc.kek.jp, cvmfs*.sdcc.bnl.gov</li>
+<li>Remove obsolete sites frontier*.racf.bnl.gov from ATLAS_FRONTIER</li>
+<li>Fix bug where old caches may not be cleaned up</li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Manual intervention is needed to downgrade <code>frontier-squid</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="gp"># </span>Downgrade instructions
+<span class="gp">root@host # </span>rpm -e --nodeps frontier-squid
+<span class="gp">root@host # </span>yum install <span class="err">&#39;</span>frontier-squid &lt; <span class="m">11</span>:5
+</code></pre></div>
+
+</div>
+<ul>
+<li><a href="https://cvmfs.readthedocs.io/en/stable/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-10-1">CVMFS 2.10.1</a><ul>
+<li>Minor bug fixes and improvements</li>
+</ul>
+</li>
+</ul>
 <h3 id="march-2-2023-gratia-probe-282-osg-flock-19"><strong> March 2, 2023:</strong> gratia-probe 2.8.2, osg-flock 1.9<a class="headerlink" href="#march-2-2023-gratia-probe-282-osg-flock-19" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
