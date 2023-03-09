@@ -30,13 +30,29 @@ of `/etc/yum.repos.d/osg.repo`:
 excludepkgs=rrdtool
 ```
 
-### XRootD ###
-
-We have received reports of issues with HTTPS transfers involving gfal2, openssl < 1.1.1, and XRootD after 8h of uptime.
-Follow the discussion with the developers [here](https://github.com/xrootd/xrootd/issues/1874).
-
 Latest News
 -----------
+
+### ** March 9, 2023:** XRootD 5.5.3-1.2, frontier-squid 5.7-2.1, CVMFS 2.10.1
+-   [XRootD 5.5.3-1.2](https://github.com/xrootd/xrootd/blob/v5.5.3/docs/ReleaseNotes.txt)
+    -   Fix bug where GFAL davs writes fail on EL7 redirectors after eight hours
+    -   XRootD 5.5.2 was not released because of critical bugs that are fixed in XRootD 5.5.3
+-   [frontier-squid-5.7-2.1](http://www.squid-cache.org/Versions/v5/squid-5.7-RELEASENOTES.html)
+    -   Uses first destination IP address that responds (dns\_v4\_first removed)
+    -   Add MAJOR\_CVMFS sites cvmfs-stratum-one.cc.kek.jp, cvmfs*.sdcc.bnl.gov
+    -   Remove obsolete sites frontier*.racf.bnl.gov from ATLAS\_FRONTIER
+    -   Fix bug where old caches may not be cleaned up
+
+!!! note
+    Manual intervention is needed to downgrade `frontier-squid`.
+
+        :::console
+        # Downgrade instructions
+        root@host # rpm -e --nodeps frontier-squid
+        root@host # yum install 'frontier-squid < 11:5
+
+-   [CVMFS 2.10.1](https://cvmfs.readthedocs.io/en/stable/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-10-1)
+    -   Minor bug fixes and improvements
 
 ### ** March 2, 2023:** gratia-probe 2.8.2, osg-flock 1.9
 -   gratia-probe 2.8.1
