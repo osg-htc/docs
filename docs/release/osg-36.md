@@ -33,6 +33,21 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### ** March 14, 2023:** IGTF 1.119, osg-scitokens-mapfile 12, XCache 3.4.0-3
+-   CA certificates based on [IGTF 1.119](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Updated UKeScience Root (2007) with consistent string encodings (UK)
+    -   Removed obsolete SHA1 subordinates DigiCertGridTrustCA-Classic
+        and DigiCertGridCA-1-Classic from DigiCert, reflected in RPDNC namespaces
+    -   Experimental (non-accredited) new InCommon RSA IGTF Server CA 2 (ICA under
+        Sectigo USERTrust RSA root, for which namespaces have been updated) (US)
+    -   Updated GridCanada CA with re-issued SHA-2 based root (CA)
+    -   Updated CILogon basic, silver, and openid with re-issued SHA-2 certs (US)
+    -   Updated UKeScience Root (2007) re-issued with SHA-2, retired 2A ICA (UK)
+-   osg-scitokens-mapfile 12
+    -   New token for USCMS local pilots
+-   XCache 3.4.0-3
+    -   Add xrootd-tcp-stats to osdf-cache
+
 ### ** March 9, 2023:** XRootD 5.5.3-1.2, frontier-squid 5.7-2.1, CVMFS 2.10.1
 -   [XRootD 5.5.3-1.2](https://github.com/xrootd/xrootd/blob/v5.5.3/docs/ReleaseNotes.txt)
     -   Fix bug where GFAL davs writes fail on EL7 redirectors after eight hours
