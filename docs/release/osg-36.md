@@ -33,6 +33,13 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### ** March 16, 2023:** OSDF Client 6.10.0
+-   [OSDF Client 6.10.0](https://github.com/htcondor/osdf-client/releases/tag/v6.10.0)
+    -   The `stashcp` client, when run in a terminal, can acquire a new token via OAuth2 if supported by the upstream origin
+    -   The use of the `http_proxy` can now be disabled via setting the `OSDF_DISABLE_HTTP_PROXY` environment variable
+    -   The OSDF client can now handle `HTTP 206 Partial Content` responses
+    -   `stash_plugin -get-caches <prefix>` will print out the caches to be used for a given prefix
+
 ### ** March 14, 2023:** IGTF 1.119, osg-scitokens-mapfile 12, XCache 3.4.0-3
 -   CA certificates based on [IGTF 1.119](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   Updated UKeScience Root (2007) with consistent string encodings (UK)
