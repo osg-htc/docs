@@ -2829,11 +2829,11 @@ of <code>/etc/yum.repos.d/osg.repo</code>:</p>
 <h3 id="march-2-2023-gratia-probe-282-osg-flock-19"><strong> March 2, 2023:</strong> gratia-probe 2.8.2, osg-flock 1.9<a class="headerlink" href="#march-2-2023-gratia-probe-282-osg-flock-19" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
-<p>gratia-probe 2.8.1</p>
+<p>gratia-probe 2.8.2</p>
 <ul>
 <li>
-<p>CRITICAL bug fix for sites that have installed <code>gratia-probe-htcondor-ce-2.8.1</code> or
-    <code>gratia-probe-condor-ap-2.8.1</code>. After updating to 2.8.2, perform the following manual steps for a CE:</p>
+<p>CRITICAL bug fix for sites that have installed <code>gratia-probe-htcondor-ce-2.8.2</code> or
+    <code>gratia-probe-condor-ap-2.8.2</code>. After updating to 2.8.2, perform the following manual steps for a CE:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp"># </span>By default, this will bring you to /var/lib/condor-ce/gratia/data/
 <span class="gp">root@host # </span><span class="nb">cd</span> <span class="k">$(</span>condor_ce_config_val PER_JOB_HISTORY_DIR<span class="k">)</span>
 <span class="gp">root@host # </span>mv quarantine/history*.0 .
