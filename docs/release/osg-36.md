@@ -77,9 +77,9 @@ Latest News
     -   Minor bug fixes and improvements
 
 ### ** March 2, 2023:** gratia-probe 2.8.2, osg-flock 1.9
--   gratia-probe 2.8.1
-    -   CRITICAL bug fix for sites that have installed `gratia-probe-htcondor-ce-2.8.1` or
-        `gratia-probe-condor-ap-2.8.1`. After updating to 2.8.2, perform the following manual steps for a CE:
+-   gratia-probe 2.8.2
+    -   CRITICAL bug fix for sites that have installed `gratia-probe-htcondor-ce-2.8.2` or
+        `gratia-probe-condor-ap-2.8.2`. After updating to 2.8.2, perform the following manual steps for a CE:
 
             :::console
             # By default, this will bring you to /var/lib/condor-ce/gratia/data/
