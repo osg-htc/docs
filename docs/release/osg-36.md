@@ -91,7 +91,7 @@ Latest News
             :::console
             # By default, this will bring you to /var/lib/condor-ce/gratia/data/
             root@host # cd $(condor_config_val PER_JOB_HISTORY_DIR)
-            root@host # mv quarantine/history*.0 .
+            root@host # mv quarantine/history*. .
 
 -   osg-flock 1.9
     -   Adds the "OSPool" attribute to the job ad based on the EP configuration
