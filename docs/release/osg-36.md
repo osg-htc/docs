@@ -33,6 +33,39 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### **March 30, 2023: EL9 and Gratia Probe 2.8.4**
+
+!!! note "No tarball client updates"
+    This release does not contain any tarball client updates for EL7 or EL8.
+    Initial EL9 tarballs will be released at a later date.
+
+-   Critical [Gratia Probe 2.8.4](https://github.com/opensciencegrid/gratia-probe/releases/tag/v2.8.4) update for
+    HTCondor APs, fixing issues with `gratia-probe-condor-ap` 2.8.1 through 2.8.3.
+    If you have any of these versions, please update and perform the following steps to process
+
+        :::console
+        # By default, this will bring you to /var/lib/condor-ce/gratia/data/
+        root@host # cd $(condor_config_val PER_JOB_HISTORY_DIR)
+        root@host # mv quarantine/history*. .
+
+-   This is the initial release of OSG Software Stack for EL9!
+    Notable differences between EL9 and EL7/EL8 include:
+    -   Frontier Squid 5.8-2.1
+
+        !!! warning "If you've already installed `frontier-squid-5.8-1.1` on an EL9 host..."
+            You will need to uninstall `frontier-squid` and remove `/etc/init.d`.
+            If you have any other packages that have files in `/etc/init.d`, they may also need to be reinstalled and
+            cleaned up in a similar fashion.
+
+    -   HTCondor 10.3.0: see [upstream documentation](https://htcondor.readthedocs.io/en/latest/version-history/upgrading-from-9-0-to-10-0-versions.html)
+        for manual update steps.
+    -   HTCondor-CE 6.0.0: see [upstream documentation](https://htcondor.com/htcondor-ce/v6/releases/#updating-to-htcondor-ce-6)
+        for manual update steps.
+    -   Missing packages to be released at a later date:
+        -   hosted-ce-tools
+        -   htgettoken
+        -   osg-update-data
+
 ### ** March 16, 2023:** OSDF Client 6.10.0
 -   [OSDF Client 6.10.0](https://github.com/htcondor/osdf-client/releases/tag/v6.10.0)
     -   The `stashcp` client, when run in a terminal, can acquire a new token via OAuth2 if supported by the upstream origin
