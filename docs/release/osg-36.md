@@ -18,6 +18,23 @@ Known Issues
 
 The following issues are known to currently affect packages distributed in OSG 3.6:
 
+### CA Certificates on EL9 ###
+
+EL9 operating systems have a tighter default cryptographic policy that can cause services to reject certificates issued
+by SHA-1 signed CAs.
+Some CAs in the `igtf-ca-certs` and `osg-ca-certs` packages are affected and you may see service issues if your server
+certificate or certificates presented by clients are issued by these CAs.
+The Software Team is investigating solutions but in the meantime, we recommend running the following command on XRootD
+hosts to accept certificates issued by SHA-1 signed CAs:
+
+```
+root@host # update-crypto-policies --set DEFAULT:SHA1
+```
+
+!!! note "Do I need to run this on my Compute Entrypoint (CE) hosts?"
+    No. At this time, the Software Team believes that CE hosts are unaffected since their clients only present tokens
+    and token issuers present modern CAs.
+
 ### rrdtool ###
 
 To improve support for Python 3 based GlideinWMS in EL7,
