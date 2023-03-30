@@ -1439,6 +1439,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#ca-certificates-on-el9" class="md-nav__link">
+    CA Certificates on EL9
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#rrdtool" class="md-nav__link">
     rrdtool
   </a>
@@ -1457,6 +1464,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#march-30-2023-el9-and-gratia-probe-284" class="md-nav__link">
+    March 30, 2023: EL9 and Gratia Probe 2.8.4
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#march-16-2023-osdf-client-6100" class="md-nav__link">
@@ -2248,6 +2262,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#ca-certificates-on-el9" class="md-nav__link">
+    CA Certificates on EL9
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#rrdtool" class="md-nav__link">
     rrdtool
   </a>
@@ -2266,6 +2287,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#march-30-2023-el9-and-gratia-probe-284" class="md-nav__link">
+    March 30, 2023: EL9 and Gratia Probe 2.8.4
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#march-16-2023-osdf-client-6100" class="md-nav__link">
@@ -2755,6 +2783,20 @@ GSI proxies and HTTP is used for data transfer instead of GridFTP.</p>
 We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
 <h2 id="known-issues">Known Issues<a class="headerlink" href="#known-issues" title="Permanent link">&para;</a></h2>
 <p>The following issues are known to currently affect packages distributed in OSG 3.6:</p>
+<h3 id="ca-certificates-on-el9">CA Certificates on EL9<a class="headerlink" href="#ca-certificates-on-el9" title="Permanent link">&para;</a></h3>
+<p>EL9 operating systems have a tighter default cryptographic policy that can cause services to reject certificates issued
+by SHA-1 signed CAs.
+Some CAs in the <code>igtf-ca-certs</code> and <code>osg-ca-certs</code> packages are affected and you may see service issues if your server
+certificate or certificates presented by clients are issued by these CAs.
+The Software Team is investigating solutions but in the meantime, we recommend running the following command on XRootD
+hosts to accept certificates issued by SHA-1 signed CAs:</p>
+<div class="highlight"><pre><span></span><code>root@host # update-crypto-policies --set DEFAULT:SHA1
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Do I need to run this on my Compute Entrypoint (CE) hosts?</p>
+<p>No. At this time, the Software Team believes that CE hosts are unaffected since their clients only present tokens
+and token issuers present modern CAs.</p>
+</div>
 <h3 id="rrdtool">rrdtool<a class="headerlink" href="#rrdtool" title="Permanent link">&para;</a></h3>
 <p>To improve support for Python 3 based GlideinWMS in EL7,
 the EL7 OSG Yum repositories contain a newer version of <code>rrdtool</code> than the operating system repositories.
@@ -2764,6 +2806,51 @@ of <code>/etc/yum.repos.d/osg.repo</code>:</p>
 <div class="highlight"><pre><span></span><code>excludepkgs=rrdtool
 </code></pre></div>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="march-30-2023-el9-and-gratia-probe-284"><strong>March 30, 2023: EL9 and Gratia Probe 2.8.4</strong><a class="headerlink" href="#march-30-2023-el9-and-gratia-probe-284" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">No tarball client updates</p>
+<p>This release does not contain any tarball client updates for EL7 or EL8.
+Initial EL9 tarballs will be released at a later date.</p>
+</div>
+<ul>
+<li>
+<p>Critical <a href="https://github.com/opensciencegrid/gratia-probe/releases/tag/v2.8.4">Gratia Probe 2.8.4</a> update for
+    HTCondor APs, fixing issues with <code>gratia-probe-condor-ap</code> 2.8.1 through 2.8.3.
+    If you have any of these versions, please update and perform the following steps to process</p>
+<div class="codehilite"><pre><span></span><code><span class="gp"># </span>By default, this will bring you to /var/lib/condor-ce/gratia/data/
+<span class="gp">root@host # </span><span class="nb">cd</span> <span class="k">$(</span>condor_config_val PER_JOB_HISTORY_DIR<span class="k">)</span>
+<span class="gp">root@host # </span>mv quarantine/history*. .
+</code></pre></div>
+
+</li>
+<li>
+<p>This is the initial release of OSG Software Stack for EL9!
+    Notable differences between EL9 and EL7/EL8 include:</p>
+<ul>
+<li>
+<p>Frontier Squid 5.8-2.1</p>
+<div class="admonition warning">
+<p class="admonition-title">If you've already installed <code>frontier-squid-5.8-1.1</code> on an EL9 host...</p>
+<p>You will need to uninstall <code>frontier-squid</code> and remove <code>/etc/init.d</code>.
+If you have any other packages that have files in <code>/etc/init.d</code>, they may also need to be reinstalled and
+cleaned up in a similar fashion.</p>
+</div>
+</li>
+<li>
+<p>HTCondor 10.3.0: see <a href="https://htcondor.readthedocs.io/en/latest/version-history/upgrading-from-9-0-to-10-0-versions.html">upstream documentation</a>
+    for manual update steps.</p>
+</li>
+<li>HTCondor-CE 6.0.0: see <a href="https://htcondor.com/htcondor-ce/v6/releases/#updating-to-htcondor-ce-6">upstream documentation</a>
+    for manual update steps.</li>
+<li>Missing packages to be released at a later date:<ul>
+<li>hosted-ce-tools</li>
+<li>htgettoken</li>
+<li>osg-update-data</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="march-16-2023-osdf-client-6100"><strong> March 16, 2023:</strong> OSDF Client 6.10.0<a class="headerlink" href="#march-16-2023-osdf-client-6100" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://github.com/htcondor/osdf-client/releases/tag/v6.10.0">OSDF Client 6.10.0</a><ul>
