@@ -63,7 +63,13 @@ Latest News
         :::console
         # By default, this will bring you to /var/lib/condor-ce/gratia/data/
         root@host # cd $(condor_config_val PER_JOB_HISTORY_DIR)
-        root@host # mv quarantine/history*. .
+        root@host # mv quarantine/history* .
+
+    !!! tip "Too many files for `mv`"
+        If you have a busy AP, you may encounter too many files in the `quarantine` directory to move all at once.
+        In this case, we suggest moving the history files to the `data` directory in batches.
+        The Gratia Probe will handle history files in the `data` directory in bundles so you do not need to wait
+        for processing to complete before moving the next batch over.
 
 -   This is the initial release of OSG Software Stack for EL9!
     Notable differences between EL9 and EL7/EL8 include:
@@ -141,7 +147,7 @@ Latest News
             :::console
             # By default, this will bring you to /var/lib/condor-ce/gratia/data/
             root@host # cd $(condor_config_val PER_JOB_HISTORY_DIR)
-            root@host # mv quarantine/history*. .
+            root@host # mv quarantine/history* .
 
 -   osg-flock 1.9
     -   Adds the "OSPool" attribute to the job ad based on the EP configuration
