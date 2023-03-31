@@ -63,7 +63,7 @@ Latest News
         :::console
         # By default, this will bring you to /var/lib/condor-ce/gratia/data/
         root@host # cd $(condor_config_val PER_JOB_HISTORY_DIR)
-        root@host # mv quarantine/history*. .
+        root@host # mv quarantine/history* .
 
 -   This is the initial release of OSG Software Stack for EL9!
     Notable differences between EL9 and EL7/EL8 include:
