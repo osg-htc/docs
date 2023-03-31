@@ -2819,9 +2819,16 @@ Initial EL9 tarballs will be released at a later date.</p>
     If you have any of these versions, please update and perform the following steps to process</p>
 <div class="codehilite"><pre><span></span><code><span class="gp"># </span>By default, this will bring you to /var/lib/condor-ce/gratia/data/
 <span class="gp">root@host # </span><span class="nb">cd</span> <span class="k">$(</span>condor_config_val PER_JOB_HISTORY_DIR<span class="k">)</span>
-<span class="gp">root@host # </span>mv quarantine/history*. .
+<span class="gp">root@host # </span>mv quarantine/history* .
 </code></pre></div>
 
+<div class="admonition tip">
+<p class="admonition-title">Too many files for <code>mv</code></p>
+<p>If you have a busy AP, you may encounter too many files in the <code>quarantine</code> directory to move all at once.
+In this case, we suggest moving the history files to the <code>data</code> directory in batches.
+The Gratia Probe will handle history files in the <code>data</code> directory in bundles so you do not need to wait
+for processing to complete before moving the next batch over.</p>
+</div>
 </li>
 <li>
 <p>This is the initial release of OSG Software Stack for EL9!
@@ -2929,7 +2936,7 @@ cleaned up in a similar fashion.</p>
 <p>And for an AP:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp"># </span>By default, this will bring you to /var/lib/condor-ce/gratia/data/
 <span class="gp">root@host # </span><span class="nb">cd</span> <span class="k">$(</span>condor_config_val PER_JOB_HISTORY_DIR<span class="k">)</span>
-<span class="gp">root@host # </span>mv quarantine/history*. .
+<span class="gp">root@host # </span>mv quarantine/history* .
 </code></pre></div>
 
 </li>
