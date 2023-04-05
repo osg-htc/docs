@@ -50,14 +50,14 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
-### **March 30, 2023: EL9 and Gratia Probe 2.8.4**
+### **March 30, 2023: EL9 and Gratia Probe 2.8.4 (all operating systems)**
 
 !!! note "No tarball client updates"
     This release does not contain any tarball client updates for EL7 or EL8.
     Initial EL9 tarballs will be released at a later date.
 
 -   Critical [Gratia Probe 2.8.4](https://github.com/opensciencegrid/gratia-probe/releases/tag/v2.8.4) update for
-    HTCondor APs, fixing issues with `gratia-probe-condor-ap` 2.8.1 through 2.8.3.
+    HTCondor APs for all operating systems, fixing issues with `gratia-probe-condor-ap` 2.8.1 through 2.8.3.
     If you have any of these versions, please update and perform the following steps to process
 
         :::console
