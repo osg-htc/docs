@@ -50,7 +50,19 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
-### **March 30, 2023: EL9 and Gratia Probe 2.8.4 (all operating systems)**
+### **April 20, 2023:** HTCondor-CE 6.0.0, htgettoken; Upcoming: HTCondor 10.4.0
+-   [HTCondor-CE 6.0.0](https://htcondor.com/htcondor-ce/v6/releases/#600)
+    -   Align HTCondor-CE security configuration with HTCondor defaults
+    -   Add example configuration on how to ban users
+    -   Add `condor_ce_transform_ads` command
+    -   Improve essential directory checking and creation at startup
+-   htgettoken 1.17
+    -   Make `--showbearerurl` work properly in combination with `--nobearertoken`
+    -   `httokendecode`'s error message for missing token file now goes to `stderr`
+-   EL7/EL8 upcoming and EL9 release: [HTCondor 10.4.0](https://htcondor.readthedocs.io/en/latest/version-history/feature-versions-10-x.html#version-10-4-0) - new feature release
+    -   Please review the [upgrade documentation](https://htcondor.readthedocs.io/en/latest/version-history/upgrading-from-9-0-to-10-0-versions.html) for any manual steps
+
+### **March 30, 2023:** EL9 and Gratia Probe 2.8.4 (all operating systems)
 
 !!! note "No tarball client updates"
     This release does not contain any tarball client updates for EL7 or EL8.
