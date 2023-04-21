@@ -48,7 +48,7 @@ Variable name       | Description                                               
 ---------------------|-------------------------------------------------------------------------|----------------------------------------------|
 SQUID_IPRANGE       | Limits the incoming connections to the provided whitelist.     |By default only standard private network addresses are whitelisted. |
 SQUID_CACHE_DISK    | Sets the cache_dir option which determines the disk size squid uses. Must be an integer value, and its unit is MBs. Note: The cache disk area is located at /var/cache/squid. | Defaults to 10000. |
-SQUID_CACHE_MEM     | Sets the cache_mem option which regulates the size squid reserves for caching small objects in memory. | Defaults to "128 MB". |
+SQUID_CACHE_MEM     | Sets the cache_mem option which regulates the size squid reserves for caching small objects in memory. Includes a space and unit, e.g. "MB". | Defaults to "128 MB". |
 
 !!! tip "Cache Disk Size"
     For production deployments, OSG recommends allocating at least 50 to 100 GB
