@@ -157,10 +157,7 @@ Alternatively, [contact us](../common/help.md) for assistance with the registrat
     See the [BNL_ATLAS_Frontier_Squid](https://github.com/opensciencegrid/topology/blob/7b27d5878a24b9812a2ec73bb97852fa9098eb2e/topology/Brookhaven%20National%20Laboratory/BNL%20ATLAS%20Tier1/BNL-ATLAS.yaml#L271-L291) 
     for a complete example.
 
-2.  If you are setting up a new resource, set `Active: false`.
-    Only set `Active: true` for a resource when it is accepting requests and ready for production.
-
-3.  Normally registered squids will be monitored by WLCG.  This is
+2.  Normally registered squids will be monitored by WLCG.  This is
 strongly recommended even for non-WLCG sites so operations experts can
 help with diagnosing problems.  However, if a site declines
 monitoring, that can be indicated by setting `Monitored: false` in a
@@ -169,7 +166,7 @@ important for the sake of excluding squids from worker node failover
 monitors.  The default if `Details:` `Monitored:` is not set is
 `true`.
 
-4. If you set Monitored to true, also enable monitoring as described in 
+3. If you set Monitored to true, also enable monitoring as described in 
 the [upstream documentation on enabling monitoring](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring).
 
 
