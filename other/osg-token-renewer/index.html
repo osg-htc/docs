@@ -2018,10 +2018,17 @@ and will pull in the <code>oidc-agent</code> package that the service depends on
 </code></pre></div>
 
 </li>
-<li>
-<p>When prompted, enter your Issuer and desired scopes for this account
-   from the list of valid options.</p>
-</li>
+</ol>
+<p>That will use dynamic client registration.  If you instead have a
+   predefined client id and secret, add a <code>--manual</code> option, for example,</p>
+<div class="codehilite"><pre><span></span><code>    :::console
+    root@server # osg-token-renewer-setup --manual myaccount123
+</code></pre></div>
+
+<ol>
+<li>When prompted, enter your Issuer and desired scopes for this account
+   from the list of valid options.
+   If you used <code>--manual</code>, also enter the client id and secret.</li>
 <li>You will also be prompted on the console to visit a web link to authorize
    the client request with a passcode printed on the console.
    Follow the prompts (visit the web link, enter the request passcode,
