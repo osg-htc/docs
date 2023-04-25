@@ -1933,10 +1933,9 @@ via OASIS, but will be hosted and operated externally from the OSG project.</p>
 See the <a href="https://osg-htc.org/technology/policy/external-oasis-repos/">policy page</a> for more information
 on what repositories OSG is willing to distribute.</p>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
-<p>CVMFS repositories work at the kernel filesystem layer, which adds more stringent host requirements than a typical
-OSG install.  The host OS must meet ONE of the following:</p>
+<p>The host OS must be:</p>
 <ul>
-<li>RHEL 7.3 (or equivalent) or later.  <strong>This option is recommended</strong>.</li>
+<li>RHEL7 or RHEL8 (or equivalent).</li>
 </ul>
 <p>Additionally,</p>
 <ul>
@@ -1947,7 +1946,8 @@ OSG install.  The host OS must meet ONE of the following:</p>
 <li><strong>Disk space:</strong> This host will need enough free disk space to host <em>two</em> copies of the software: one compressed
     and one uncompressed. <code>/srv/cvmfs</code> will hold all the published data (compressed and de-deuplicated).  The
     <code>/var/spool/cvmfs</code> directory will contain all the data in all current transactions (uncompressed).</li>
-<li><strong>Root access</strong> will be needed to install.  Software install will be done as an unprivileged user.</li>
+<li><strong>Root access</strong> will be needed to install.  Installation of software into the
+    repository itself will be done as an unprivileged user.</li>
 <li><strong>Yum</strong> will need to be <a href="../../common/yum/">configured to use the OSG repositories</a>.</li>
 </ul>
 <div class="admonition warning">
