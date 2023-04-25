@@ -19,10 +19,9 @@ on what repositories OSG is willing to distribute.
 Before Starting
 ---------------
 
-CVMFS repositories work at the kernel filesystem layer, which adds more stringent host requirements than a typical
-OSG install.  The host OS must meet ONE of the following:
+The host OS must be:
 
--   RHEL 7.3 (or equivalent) or later.  **This option is recommended**.
+-   RHEL7 or RHEL8 (or equivalent).
 
 Additionally,
 
@@ -33,7 +32,8 @@ Additionally,
 -   **Disk space:** This host will need enough free disk space to host _two_ copies of the software: one compressed
     and one uncompressed. `/srv/cvmfs` will hold all the published data (compressed and de-deuplicated).  The
     `/var/spool/cvmfs` directory will contain all the data in all current transactions (uncompressed).
--   **Root access** will be needed to install.  Software install will be done as an unprivileged user.
+-   **Root access** will be needed to install.  Installation of software into the
+    repository itself will be done as an unprivileged user.
 -   **Yum** will need to be [configured to use the OSG repositories](../common/yum.md).
 
 !!! warning "Overlay-FS limitations"
