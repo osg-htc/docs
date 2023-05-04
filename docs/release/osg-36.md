@@ -50,6 +50,13 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### **May 4, 2023:** XRootD 5.5.4, VO Pacakge v131
+-   [XRootD 5.5.4](https://github.com/xrootd/xrootd/blob/v5.5.4/docs/ReleaseNotes.txt)
+    -   Bug fix release
+    -   Enabled xrdcl-http, an HTTP plugin to the XRootD clients
+-   [VO Package v131](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-131)
+    -   New CLAS2 and EIC certificates
+
 ### **April 20, 2023:** HTCondor-CE 6.0.0, htgettoken; Upcoming: HTCondor 10.4.0
 -   [HTCondor-CE 6.0.0](https://htcondor.com/htcondor-ce/v6/releases/#600)
     -   Align HTCondor-CE security configuration with HTCondor defaults
