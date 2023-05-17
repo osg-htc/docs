@@ -156,7 +156,7 @@ In order to host a repository on OASIS, perform the following steps:
     will be contacted in case of issues. To designate an OASIS manager, have the VO manager update the
     [Topology registration](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations).
 
-1.  Create a [support ticket](https://support.opensciencegrid.org/helpdesk/tickets/new) using the following template:
+1.  Send a message to [OSG support](mailto:support@osg-htc.org) using the following template:
 
         :::console hl_lines="1 2 3"
         Please add a new CVMFS repository to OASIS for VO <VO NAME> using the URL
@@ -214,8 +214,10 @@ Once the repository is fully replicated on the OSG, the VO may proceed in publis
     [maintaining repositories](https://cvmfs.readthedocs.io/en/stable/cpt-repo.html#maintaining-a-cernvm-fs-repository) and
     [content limitations](https://cvmfs.readthedocs.io/en/stable/cpt-repo.html#limitations-on-repository-content).
 
-If the repository ends in `.opensciencegrid.org` or `.osgstorage.org`, the VO may ask for it to be replicated outside the US.  The
-VO should open a [GGUS](https://ggus.eu) ticket following EGI's [PROC20](https://wiki.egi.eu/wiki/PROC20).
+Finally, if the new repository will be used outside of the U.S., the
+VO should open a [GGUS](https://ggus.eu) ticket following EGI's
+[PROC20](https://confluence.egi.eu/display/EGIPP/PROC20+Support+for+CVMFS+replication+across+the+EGI+and+OSG+CVMFS+services)
+to get the repository replicated onto worldwide Stratum 1s.
 
 Replacing an Existing OASIS Repository Server
 ---------------------------------------
