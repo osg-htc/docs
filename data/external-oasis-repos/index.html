@@ -2049,7 +2049,7 @@ always convenient.</p>
     <a href="https://github.com/opensciencegrid/topology/tree/master/virtual-organizations">Topology registration</a>.</p>
 </li>
 <li>
-<p>Create a <a href="https://support.opensciencegrid.org/helpdesk/tickets/new">support ticket</a> using the following template:</p>
+<p>Send a message to <a href="mailto:help@osg-htc.org">OSG support</a> using the following template:</p>
 <div class="codehilite"><pre><span></span><code><span class="hll"><span class="go">Please add a new CVMFS repository to OASIS for VO &lt;VO NAME&gt; using the URL</span>
 </span><span class="hll"><span class="go">    http://&lt;FQDN&gt;:8000/cvmfs/&lt;OASIS REPOSITORY&gt;</span>
 </span><span class="hll"><span class="go">The VO responsible manager will be &lt;OASIS MANAGER&gt;.</span>
@@ -2108,8 +2108,10 @@ following contents:</p>
 <a href="https://cvmfs.readthedocs.io/en/stable/cpt-repo.html#maintaining-a-cernvm-fs-repository">maintaining repositories</a> and
 <a href="https://cvmfs.readthedocs.io/en/stable/cpt-repo.html#limitations-on-repository-content">content limitations</a>.</p>
 </div>
-<p>If the repository ends in <code>.opensciencegrid.org</code> or <code>.osgstorage.org</code>, the VO may ask for it to be replicated outside the US.  The
-VO should open a <a href="https://ggus.eu">GGUS</a> ticket following EGI's <a href="https://wiki.egi.eu/wiki/PROC20">PROC20</a>.</p>
+<p>Finally, if the new repository will be used outside of the U.S., the
+VO should open a <a href="https://ggus.eu">GGUS</a> ticket following EGI's
+<a href="https://confluence.egi.eu/display/EGIPP/PROC20+Support+for+CVMFS+replication+across+the+EGI+and+OSG+CVMFS+services">PROC20</a>
+to get the repository replicated onto worldwide Stratum 1s.</p>
 <h2 id="replacing-an-existing-oasis-repository-server">Replacing an Existing OASIS Repository Server<a class="headerlink" href="#replacing-an-existing-oasis-repository-server" title="Permanent link">&para;</a></h2>
 <p>If a need arises to replace a server for an existing <code>*.opensciencegrid.org</code> or <code>*.osgstorage.org</code> repository, there are two ways to do it:
 one without changing the DNS name and one with changing it.
