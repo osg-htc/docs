@@ -156,7 +156,7 @@ In order to host a repository on OASIS, perform the following steps:
     will be contacted in case of issues. To designate an OASIS manager, have the VO manager update the
     [Topology registration](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations).
 
-1.  Send a message to [OSG support](mailto:support@osg-htc.org) using the following template:
+1.  Send a message to [OSG support](mailto:help@osg-htc.org) using the following template:
 
         :::console hl_lines="1 2 3"
         Please add a new CVMFS repository to OASIS for VO <VO NAME> using the URL
