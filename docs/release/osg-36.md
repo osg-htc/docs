@@ -50,6 +50,15 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### **May 18, 2023:** XRootD 5.5.5, vault 1.13.2, htvault-config 1.15, VOMS 2.0.6-1.6 + 2.1.0-0.14.rc2.6
+-   [XRootD 5.5.5](https://github.com/xrootd/xrootd/releases/tag/v5.5.5): Bug fix release
+-   Vault 1.13.2, htvault-config 1.15
+    -   Update to latest upstream plugin versions
+    -   Add new API for token exchange
+    -   Fix bug where kerberos policydomain was ignored
+-   VOMS 2.0.16-1.6 (el7), 2.1.0-0.14.rc2.6 (el8)
+    -   More detailed error messages to help diagnose CA or certificate issues
+
 ### **May 4, 2023:** XRootD 5.5.4, VO Pacakge v131
 -   [XRootD 5.5.4](https://github.com/xrootd/xrootd/blob/v5.5.4/docs/ReleaseNotes.txt)
     -   Bug fix release
