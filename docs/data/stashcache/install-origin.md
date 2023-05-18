@@ -7,6 +7,10 @@ Installing the OSDF Origin
 This document describes how to install an Open Science Data Federation (OSDF) origin service.  This service allows an organization
 to export its data to the data federation.
 
+!!! note "Minimum version for this documentation"
+    This document describes features introduced in XCache 3.3.0, released on 2022-12-08.
+    When installing, ensure that your version of the `stash-origin` RPM is at least 3.3.0.
+
 !!! note
     The OSDF Origin was previously named "Stash Origin" and some documentation and software may use the old name.
 
@@ -45,11 +49,6 @@ As with all OSG software installations, there are some one-time steps to prepare
 * Obtain root access to the host
 * Prepare [the required Yum repositories](../../common/yum.md)
 * Install [CA certificates](../../common/ca.md)
-
-!!! note
-    This document describes features introduced in XCache 3.3.0, released on 2022-12-08.
-    When installing, ensure that your version of the `stash-origin` RPM is at least 3.3.0.
-
 
 Installing the Origin
 ---------------------
@@ -120,28 +119,18 @@ Manually Setting the FQDN (optional)
 ------------------------------------
 The FQDN of the origin server that you registered in [Topology](#registering-the-origin) may be different than its internal hostname
 (as reported by `hostname -f`).
-For example, this may be the case if your origin is behind a load balancer such as LVS or MetalLB.
+For example, this may be the case if your origin is behind a load balancer such as LVS.
 In this case, you must manually tell the origin services which FQDN to use for topology lookups.
 
 
-If you are running a public origin instance:
-
-1.  Create the file `/etc/systemd/system/stash-authfile@stash-origin.service.d/override.conf`
+1.  Create the file `/etc/systemd/system/stash-authfile@.service.d/override.conf`
     with the following contents:
    
         :::ini
         [Service]
         Environment=ORIGIN_FQDN=<Topology-registered FQDN>
 
-
-If you are running an authenticated origin instance:
-
-1.  Create the file `/etc/systemd/system/stash-authfile@stash-origin-auth.service.d/override.conf`
-    with the following contents:
-   
-        :::ini
-        [Service]
-        Environment=ORIGIN_FQDN=<Topology-registered FQDN>
+1.  Run `systemctl daemon-reload` after modifying the file.
 
 Managing the Origin Services
 ----------------------------
@@ -150,7 +139,13 @@ There can be multiple instances of `xrootd`, running on different ports.
 The instance that serves unauthenticated data will run on port 1094.
 The instance that serves authenticated data will run on port 1095.
 If your origin serves both authenticated and unauthenticated data, you will run both instances.
-Some of the service names are different if you have configured the [XRootD Multiuser plugin][multiuser].
+
+!!! note "Use of multiuser plugin"
+    Some of the service names are different if you have configured the [XRootD Multiuser plugin][multiuser]:
+    -   `xrootd-privileged` is used instead of `xrootd`
+    -   `cmsd-privileged` is used instead of `cmsd`
+
+    The privileged and non-privileged services are mutually exclusive.
 
 The origin services consist of the following SystemD units that you must directly manage:
 

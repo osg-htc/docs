@@ -8,6 +8,10 @@ This document describes how to install an Open Science Data Federation (OSDF) ca
 network to cache data frequently used on the OSG, reducing data transfer over the wide-area network and
 decreasing access latency.
 
+!!! note "Minimum version for this documentation"
+    This document describes features introduced in XCache 3.3.0, released on 2022-12-08.
+    When installing, ensure that your version of the `stash-cache` RPM is at least 3.3.0.
+
 !!! note
     The OSDF cache was previously named "Stash Cache" and some documentation and software may use the old name.
 
@@ -38,10 +42,6 @@ As with all OSG software installations, there are some one-time steps to prepare
 * Obtain root access to the host
 * Prepare [the required Yum repositories](../../common/yum.md)
 * Install [CA certificates](../../common/ca.md)
-
-!!! note "Minimum version for this documentation"
-    This document describes features introduced in XCache 3.3.0, released on 2022-12-08.
-    When installing, ensure that your version of the `stash-cache` RPM is at least 3.3.0.
 
 <!-- NOTE: Keep the "Registering the Cache" section below in sync with run-stashcache-container.md -->
 
@@ -212,10 +212,13 @@ When usage goes above the high water mark,
 the XRootD service will delete cached files until usage goes below the low water mark.
 
 
-### Enable remote debugging (only if needed)
+### Enable remote debugging
 
 XRootD provides remote debugging via a read-only file system named digFS.
 This feature is disabled by default, but you may enable it if you need help troubleshooting your server.
+
+!!! warning
+    Remote debugging should only be enabled for long as it is needed to troubleshoot your server.
 
 To enable remote debugging, edit `/etc/xrootd/digauth.cfg` and specify the authorizations for reading digFS.
 An example of authorizations:
@@ -258,28 +261,17 @@ Manually Setting the FQDN (optional)
 ------------------------------------
 The FQDN of the cache server that you registered in [Topology](#registering-the-cache) may be different than its internal hostname
 (as reported by `hostname -f`).
-For example, this may be the case if your cache is behind a load balancer such as LVS or MetalLB.
+For example, this may be the case if your cache is behind a load balancer such as LVS.
 In this case, you must manually tell the cache services which FQDN to use for topology lookups.
 
-If you are running a public cache instance:
-
-1.  Create the file `/etc/systemd/system/stash-authfile@stash-cache.service.d/override.conf`
-    with the following contents:
+1.  Create the file `/etc/systemd/system/stash-authfile@.service.d/override.conf`
+    (note the `@` in the directory name) with the following contents:
    
         :::ini
         [Service]
         Environment=CACHE_FQDN=<Topology-registered FQDN>
 
-
-If you are running an authenticated cache instance:
-
-1.  Create the file `/etc/systemd/system/stash-authfile@stash-cache-auth.service.d/override.conf`
-    with the following contents:
-   
-        :::ini
-        [Service]
-        Environment=CACHE_FQDN=<Topology-registered FQDN>
-
+1.  Run `systemctl daemon-reload` after modifying the file.
 
 Managing OSDF services
 -------------------------------------------
@@ -294,7 +286,7 @@ As a reminder, here are common service commands (all run as `root`):
 | Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`  |
 | Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>` |
 
-### Public cache services (if running a public cache instance)
+### Public cache services
 
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
@@ -305,7 +297,7 @@ As a reminder, here are common service commands (all run as `root`):
 | | `stash-authfile@stash-cache.timer` | Periodically run the above service (public cache instance) |
 
 
-### Authenticated cache services (if running an authenticated cache instance)
+### Authenticated cache services
 
 
 
