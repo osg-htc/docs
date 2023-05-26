@@ -1,4 +1,5 @@
 title: Installing the OSDF Cache
+DateReviewed: 2023-03-03
 
 Installing the OSDF Cache
 =========================
@@ -6,6 +7,10 @@ Installing the OSDF Cache
 This document describes how to install an Open Science Data Federation (OSDF) cache service.  This service allows a site or regional
 network to cache data frequently used on the OSG, reducing data transfer over the wide-area network and
 decreasing access latency.
+
+!!! note "Minimum version for this documentation"
+    This document describes features introduced in XCache 3.3.0, released on 2022-12-08.
+    When installing, ensure that your version of the `stash-cache` RPM is at least 3.3.0.
 
 !!! note
     The OSDF cache was previously named "Stash Cache" and some documentation and software may use the old name.
@@ -20,11 +25,15 @@ Before starting the installation process, consider the following requirements:
   `xrootd`
 * __Host certificate:__ Required for authentication.
   See our [host certificate documentation](../../security/host-certs.md) for instructions on how to request and install host certificates.
-* __Network ports:__ The cache service requires the following ports open:
-    * Inbound TCP port 1094 for file access via the XRootD protocol
-    * Inbound TCP port 8000 for file access via HTTP and/or
-    * Inbound TCP port 8443 for authenticated file access via HTTPS
-    * Outbound UDP port 9930 for reporting to `xrd-report.osgstorage.org` and `xrd-mon.osgstorage.org` for monitoring
+* __Network ports:__ Your host may run a public cache instance (for serving public data only), an authenticated cache instance (for serving protected data), or both.
+    
+    * A public cache instance requires the following ports open:
+        * Inbound TCP port 1094 for file access via the XRootD protocol
+        * Inbound TCP port 8000 for file access via HTTP(S)
+        * Outbound UDP port 9930 for reporting to `xrd-report.osgstorage.org` and `xrd-mon.osgstorage.org` for monitoring
+    * An authenticated cache instance requires the following ports open:
+        * Inbound TCP port 8443 for authenticated file access via HTTPS
+        * Outbound UDP port 9930 for reporting to `xrd-report.osgstorage.org` and `xrd-mon.osgstorage.org` for monitoring
 * __Hardware requirements:__ We recommend that a cache has at least 10Gbps connectivity, 1TB of
  disk space for the cache directory, and 12GB of RAM.
 
@@ -33,7 +42,6 @@ As with all OSG software installations, there are some one-time steps to prepare
 * Obtain root access to the host
 * Prepare [the required Yum repositories](../../common/yum.md)
 * Install [CA certificates](../../common/ca.md)
-
 
 <!-- NOTE: Keep the "Registering the Cache" section below in sync with run-stashcache-container.md -->
 
@@ -110,8 +118,8 @@ This is an example registration for a cache server that serves all public data _
 
 #### Non-standard ports
 
-By default, an unauthenticated cache serves public data on port 8000,
-and an authenticated cache serves protected data on port 8443.
+By default, an unauthenticated cache instance serves public data on port 8000,
+and an authenticated cache instance serves protected data on port 8443.
 If you change the ports for your cache instances, you must specify the new endpoints under the service, as follows:
 
 ```yaml
@@ -209,6 +217,9 @@ the XRootD service will delete cached files until usage goes below the low water
 XRootD provides remote debugging via a read-only file system named digFS.
 This feature is disabled by default, but you may enable it if you need help troubleshooting your server.
 
+!!! warning
+    Remote debugging should only be enabled for long as it is needed to troubleshoot your server.
+
 To enable remote debugging, edit `/etc/xrootd/digauth.cfg` and specify the authorizations for reading digFS.
 An example of authorizations:
 ```
@@ -250,16 +261,17 @@ Manually Setting the FQDN (optional)
 ------------------------------------
 The FQDN of the cache server that you registered in [Topology](#registering-the-cache) may be different than its internal hostname
 (as reported by `hostname -f`).
-For example, this may be the case if your cache is behind a load balancer such as LVS or MetalLB.
+For example, this may be the case if your cache is behind a load balancer such as LVS.
 In this case, you must manually tell the cache services which FQDN to use for topology lookups.
 
-1.  Create the file `/etc/systemd/system/stash-cache-authfile.service.d/override.conf`
-    with the following contents:
+1.  Create the file `/etc/systemd/system/stash-authfile@.service.d/override.conf`
+    (note the `@` in the directory name) with the following contents:
    
         :::ini
         [Service]
         Environment=CACHE_FQDN=<Topology-registered FQDN>
 
+1.  Run `systemctl daemon-reload` after modifying the file.
 
 Managing OSDF services
 -------------------------------------------
@@ -281,19 +293,21 @@ As a reminder, here are common service commands (all run as `root`):
 | XRootD | `xrootd@stash-cache.service` | The XRootD daemon, which performs the data transfers |
 | XCache | `xcache-reporter.timer` | Reports usage information to collector.opensciencegrid.org |
 | Fetch CRL |EL8: `fetch-crl.timer` <br> EL7: `fetch-crl-boot` and `fetch-crl-cron` | Required to authenticate monitoring services.  See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info |
+| | `stash-authfile@stash-cache.service` | Generate authentication configuration files for XRootD (public cache instance) |
+| | `stash-authfile@stash-cache.timer` | Periodically run the above service (public cache instance) |
 
 
-### Authenticated cache services (optional)
+### Authenticated cache services
 
-In addition to the public cache services, there are three systemd units specific to the authenticated cache.
+
 
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
 | XRootD | `xrootd-renew-proxy.service` | Renew a proxy for authenticated downloads to the cache |
 |  | `xrootd@stash-cache-auth.service` | The xrootd daemon which performs authenticated data transfers |
 |  | `xrootd-renew-proxy.timer` | Trigger daily proxy renewal |
-|  | `stash-cache-authfile.service` | Generate the Authentication configuration file for XRootD |
-|  | `stash-cache-authfile.timer` | Periodically generate the Authentication configuration file for XRootD |
+|  | `stash-authfile@stash-cache-auth.service` | Generate the authentication configuration files for XRootD (authenticated cache instance) |
+|  | `stash-authfile@stash-cache-auth.timer` | Periodically run the above service (authenticated cache instance) |
 
 
 Validating the Cache

@@ -1,11 +1,15 @@
 title: Installing the OSDF Origin
-DateReviewed: 2022-12-16
+DateReviewed: 2023-03-03
 
 Installing the OSDF Origin
 ================================
 
 This document describes how to install an Open Science Data Federation (OSDF) origin service.  This service allows an organization
 to export its data to the data federation.
+
+!!! note "Minimum version for this documentation"
+    This document describes features introduced in XCache 3.3.0, released on 2022-12-08.
+    When installing, ensure that your version of the `stash-origin` RPM is at least 3.3.0.
 
 !!! note
     The OSDF Origin was previously named "Stash Origin" and some documentation and software may use the old name.
@@ -45,11 +49,6 @@ As with all OSG software installations, there are some one-time steps to prepare
 * Obtain root access to the host
 * Prepare [the required Yum repositories](../../common/yum.md)
 * Install [CA certificates](../../common/ca.md)
-
-!!! note
-    This document describes features introduced in XCache 3.2.2, released on 2022-09-29.
-    When installing, ensure that your version of the `stash-origin` RPM is at least 3.2.2.
-
 
 Installing the Origin
 ---------------------
@@ -107,7 +106,8 @@ If the HCC has a protected registered namespace at `/hcc/PROTECTED` then set the
 set AuthOriginExport = /hcc/PROTECTED
 ```
 If you are serving public data from the origin, you must set `PublicOriginExport` and use the `xrootd@stash-origin` service.
-If you are serving protected data from the origin, you must set `AuthOriginExport` and use the `xrootd@stash-origin-auth` service.
+If you are serving protected data from the origin, you must set `AuthOriginExport`
+and use the `xrootd@stash-origin-auth` service (if not using [xrootd-multiuser][multiuser]) or `xrootd-privileged@stash-origin-auth` service (if using [xrootd-multiuser][multiuser]).
 
 !!! warning
     The OSDF namespace is a *global* namespace.
@@ -119,16 +119,18 @@ Manually Setting the FQDN (optional)
 ------------------------------------
 The FQDN of the origin server that you registered in [Topology](#registering-the-origin) may be different than its internal hostname
 (as reported by `hostname -f`).
-For example, this may be the case if your origin is behind a load balancer such as LVS or MetalLB.
+For example, this may be the case if your origin is behind a load balancer such as LVS.
 In this case, you must manually tell the origin services which FQDN to use for topology lookups.
 
-1.  Create the file `/etc/systemd/system/stash-origin-authfile.service.d/override.conf`
+
+1.  Create the file `/etc/systemd/system/stash-authfile@.service.d/override.conf`
     with the following contents:
    
         :::ini
         [Service]
         Environment=ORIGIN_FQDN=<Topology-registered FQDN>
 
+1.  Run `systemctl daemon-reload` after modifying the file.
 
 Managing the Origin Services
 ----------------------------
@@ -138,12 +140,20 @@ The instance that serves unauthenticated data will run on port 1094.
 The instance that serves authenticated data will run on port 1095.
 If your origin serves both authenticated and unauthenticated data, you will run both instances.
 
+!!! note "Use of multiuser plugin"
+    Some of the service names are different if you have configured the [XRootD Multiuser plugin][multiuser]:
+    -   `xrootd-privileged` is used instead of `xrootd`
+    -   `cmsd-privileged` is used instead of `cmsd`
+
+    The privileged and non-privileged services are mutually exclusive.
+
 The origin services consist of the following SystemD units that you must directly manage:
 
 | **Service name** | **Notes** |
 |------------------|-----------|
 | `xrootd@stash-origin.service` | Performs data transfers (unauthenticated instance) |
-| `xrootd@stash-origin-auth.service` | Performs data transfers (authenticated instance) |
+| `xrootd@stash-origin-auth.service` | Performs data transfers (authenticated instance without [multiuser][multiuser]) |
+| `xrootd-privileged@stash-origin-auth.service` | Performs data transfers (authenticated instance with [multiuser][multiuser]) |
 
 These services must be managed with `systemctl` and may start additional services as dependencies.
 As a reminder, here are common service commands (all run as `root`):
@@ -160,8 +170,10 @@ In addition, the origin service automatically uses the following SystemD units:
 | **Service name** | **Notes** |
 |------------------|-----------|
 | `cmsd@stash-origin.service` | Integrates the origin into the data federation (unauthenticated instance) |
-| `cmsd@stash-origin-auth.service` | Integrates the origin into the data federation (authenticated instance) |
-| `stash-origin-authfile.timer` | Updates the authorization files periodically |
+| `cmsd@stash-origin-auth.service` | Integrates the origin into the data federation (authenticated instance without [multiuser][multiuser]) |
+| `cmsd-privileged@stash-origin-auth.service` | Integrates the origin into the data federation (authenticated instance with [multiuser][multiuser]) |
+| `stash-authfile@stash-origin.timer` | Updates the authorization files periodically (unauthenticated instance) |
+| `stash-authfile@stash-origin-auth.timer` | Updates the authorization files periodically (authenticated instance) |
 
 Verifying the Origin Server
 ---------------------------
@@ -312,3 +324,5 @@ Getting Help
 ------------
 
 To get assistance, please use the [this page](../../common/help.md).
+
+[multiuser]: https://github.com/opensciencegrid/xrootd-multiuser "XRootD Multiuser Plugin"
