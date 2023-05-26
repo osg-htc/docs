@@ -4,12 +4,11 @@ DateReviewed:
 Firewall Considerations
 =======================
 
-Services run at a site need to communicate with the distributed OSG fabric of
-services.
+Services run at a site need to communicate with the distributed OSG Fabric of
+Services, which may require changes in your firewall.
 For instance, the OSG Factory hosts need to communicate with CEs in order for
-the CEs to receive any work.
-In order for the OSG Factory hosts to communicate with your site's services,
-firewall rules should be added to your hosts to allow the following connections:
+your site to receive any work.
+This page contains information about ports and hosts that need to communicate with your site services.
 
 !!! note
     -   Inbound hosts only apply to certain collaborations (including the OSPool).
@@ -20,6 +19,7 @@ firewall rules should be added to your hosts to allow the following connections:
         glidein submission infrastructure evolves.
 
 ### Compute Entrypoints
+
 | **Destination Port** | **Direction** | **Hosts** |
 |:---------------------|---------------|-----------|
 | TCP 9619             | Inbound       | gfactory-2.opensciencegrid.org<br/>gfactory-itb-1.opensciencegrid.org<br/>vocms0207.cern.ch         |
