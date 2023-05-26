@@ -46,11 +46,14 @@ In order to successfully start payload jobs:
    If you are using Docker to launch the container, this is done with the command line flag
    `-v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org`.
    Replace `/path/to/token` with the full path to the token you obtained from the OSPool Token Registry.
-2. Set `GLIDEIN_Site` and `GLIDEIN_ResourceName` to match the site name and resource name that you registered in Topology,
+1. Set `GLIDEIN_Site` and `GLIDEIN_ResourceName` to match the site name and resource name that you registered in Topology,
    respectively.
-3. Set the `OSG_SQUID_LOCATION` environment variable to the HTTP address of your preferred Squid instance.
-4. _Strongly_recommended:_ Enable [CVMFS](#recommended-cvmfs) via one of the mechanisms described below.
-5. _Strongly recommended:_  If you want job I/O to be done in a separate directory outside of the container,
+1. Set the `OSG_SQUID_LOCATION` environment variable to the HTTP address of your preferred Squid instance.
+1. _If providing NVIDIA GPU resources:_ Bind-mount `/etc/OpenCL/vendors`, read-only.
+   If you are using Docker to launch the container, this is done with the command line flags
+   `-v /etc/OpenCL/vendors:/etc/OpenCL/vendors:ro`.
+1. _Strongly_recommended:_ Enable [CVMFS](#recommended-cvmfs) via one of the mechanisms described below.
+1. _Strongly recommended:_ If you want job I/O to be done in a separate directory outside of the container,
    volume mount the desired directory on the host to `/pilot` inside the container.
 
     Without this, user jobs may compete for disk space with other containers on your system.
@@ -60,12 +63,11 @@ In order to successfully start payload jobs:
     Replace `/worker-temp-dir` with a directory you created for jobs to write into.
     Make sure the user you run your container as has write access to this directory.
 
-6. _Optional:_ add an expression with the `GLIDEIN_Start_Extra` environment variable to append to the
+1. _Optional:_ add an expression with the `GLIDEIN_Start_Extra` environment variable to append to the
    [HTCondor `START` expression](https://htcondor.readthedocs.io/en/latest/admin-manual/policy-configuration.html#the-start-expression);
    this limits the pilot to only run certain jobs.
 
-7. _Optional:_ [limit OSG pilot container resource usage](#limiting-resource-usage)
-
+1. _Optional:_ [limit OSG pilot container resource usage](#limiting-resource-usage)
 
 Here is an example invocation using `docker run` by hand:
 
