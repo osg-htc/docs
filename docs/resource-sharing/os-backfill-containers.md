@@ -49,6 +49,9 @@ In order to successfully start payload jobs:
 2. Set `GLIDEIN_Site` and `GLIDEIN_ResourceName` to match the site name and resource name that you registered in Topology,
    respectively.
 3. Set the `OSG_SQUID_LOCATION` environment variable to the HTTP address of your preferred Squid instance.
+1. _If providing nVidia GPU resources:_ Bind-mount `/etc/OpenCL/vendors`, read-only.
+   If you are using Docker to launch the container, this is done with the command line flags
+   `-v /etc/OpenCL/vendors:/etc/OpenCL/vendors:ro`.
 4. _Strongly_recommended:_ Enable [CVMFS](#recommended-cvmfs) via one of the mechanisms described below.
 5. _Strongly recommended:_  If you want job I/O to be done in a separate directory outside of the container,
    volume mount the desired directory on the host to `/pilot` inside the container.
@@ -65,7 +68,6 @@ In order to successfully start payload jobs:
    this limits the pilot to only run certain jobs.
 
 7. _Optional:_ [limit OSG pilot container resource usage](#limiting-resource-usage)
-
 
 Here is an example invocation using `docker run` by hand:
 
