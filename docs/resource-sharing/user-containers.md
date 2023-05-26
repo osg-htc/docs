@@ -49,6 +49,7 @@ export GLIDEIN_Start_Extra="Owner == \"my_osgconnect_username\""
 module load singularity
 singularity run --contain \
                 --bind /cvmfs \
+                --bind /dev/fuse \
                 --scratch /pilot \
                 docker://opensciencegrid/osgvo-docker-pilot:3.6-release
 ```
@@ -64,11 +65,8 @@ $ singularity build osgvo-pilot.sif docker://opensciencegrid/osgvo-docker-pilot:
 In this case, the `singularity run` command should be changed to:
 
 ```
-singularity run --contain --bind /cvmfs --scratch /pilot osgvo-pilot.sif
+singularity run --contain --bind /cvmfs --bind /dev/fuse --scratch /pilot osgvo-pilot.sif
 ```
-
-Note, unlike the [site-launched container](os-backfill-containers.md), the Singularity container above
-_cannot_ run payloads inside a separate image.
 
 
 Limiting Resource Usage
