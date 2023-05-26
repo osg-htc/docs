@@ -1852,6 +1852,7 @@ following is given as an example for running on compute hosts with 24 cores:</p>
 module load singularity
 singularity run --contain <span class="se">\</span>
                 --bind /cvmfs <span class="se">\</span>
+                --bind /dev/fuse <span class="se">\</span>
                 --scratch /pilot <span class="se">\</span>
                 docker://opensciencegrid/osgvo-docker-pilot:3.6-release
 </code></pre></div>
@@ -1861,10 +1862,8 @@ Singularity image:</p>
 <div class="highlight"><pre><span></span><code>$ singularity build osgvo-pilot.sif docker://opensciencegrid/osgvo-docker-pilot:3.6-release
 </code></pre></div>
 <p>In this case, the <code>singularity run</code> command should be changed to:</p>
-<div class="highlight"><pre><span></span><code>singularity run --contain --bind /cvmfs --scratch /pilot osgvo-pilot.sif
+<div class="highlight"><pre><span></span><code>singularity run --contain --bind /cvmfs --bind /dev/fuse --scratch /pilot osgvo-pilot.sif
 </code></pre></div>
-<p>Note, unlike the <a href="../os-backfill-containers/">site-launched container</a>, the Singularity container above
-<em>cannot</em> run payloads inside a separate image.</p>
 <h2 id="limiting-resource-usage">Limiting Resource Usage<a class="headerlink" href="#limiting-resource-usage" title="Permanent link">&para;</a></h2>
 <p>By default, the OSG pilot container will allow jobs to utilize the entire machines's resources (CPUs, memory).
 This is regardless of how many cores or how much memory you requested in your SLURM batch job.
