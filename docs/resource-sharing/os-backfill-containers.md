@@ -49,7 +49,7 @@ In order to successfully start payload jobs:
 1. Set `GLIDEIN_Site` and `GLIDEIN_ResourceName` to match the site name and resource name that you registered in Topology,
    respectively.
 1. Set the `OSG_SQUID_LOCATION` environment variable to the HTTP address of your preferred Squid instance.
-1. _If providing nVidia GPU resources:_ Bind-mount `/etc/OpenCL/vendors`, read-only.
+1. _If providing NVIDIA GPU resources:_ Bind-mount `/etc/OpenCL/vendors`, read-only.
    If you are using Docker to launch the container, this is done with the command line flags
    `-v /etc/OpenCL/vendors:/etc/OpenCL/vendors:ro`.
 1. _Strongly_recommended:_ Enable [CVMFS](#recommended-cvmfs) via one of the mechanisms described below.
