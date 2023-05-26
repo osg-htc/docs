@@ -16,56 +16,43 @@ Installation is done with the `yum install` command. Each of the individual inst
 
 ```console
 root@host # sudo yum install osg-ca-certs
-Loaded plugins: kernel-module, priorities
-epel                                                                                         | 3.7 kB     00:00     
-epel/primary_db                                                                              | 3.8 MB     00:00     
-fermi-base                                                                                   | 2.1 kB     00:00     
-fermi-base/primary_db                                                                        |  48 kB     00:00     
-fermi-security                                                                               | 1.9 kB     00:00     
-fermi-security/primary_db                                                                    | 1.7 MB     00:00     
-osg                                                                                          | 1.9 kB     00:00     
-osg/primary_db                                                                               |  65 kB     00:00     
-sl-base                                                                                      | 2.1 kB     00:00     
-sl-base/primary_db                                                                           | 2.0 MB     00:00     
-957 packages excluded due to repository priority protections
-Setting up Install Process
-Resolving Dependencies
---> Running transaction check
----> Package osg-ca-certs.noarch 0:1.23-1 set to be updated
---> Finished Dependency Resolution
-Beginning Kernel Module Plugin
-Finished Kernel Module Plugin
-
-Dependencies Resolved
-
+OSG Software for Enterprise Linux 9 - x86_64                                        668 kB/s | 438 kB     00:00    
+Dependencies resolved.
 ====================================================================================================================
- Package                         Arch                      Version                     Repository              Size
+ Package                      Architecture           Version                              Repository           Size
 ====================================================================================================================
 Installing:
- osg-ca-certs                    noarch                    1.23-1                      osg                    450 k
+ osg-ca-certs                 noarch                 1.110-1.2.osg36.el9                  osg                 244 k
 
 Transaction Summary
 ====================================================================================================================
-Install       1 Package(s)
-Upgrade       0 Package(s)
+Install  1 Package
 
-Total download size: 450 k
+Total download size: 244 k
+Installed size: 340 k
 Is this ok [y/N]: y
 Downloading Packages:
-osg-ca-certs-1.23-1.noarch.rpm                                                               | 450 kB     00:00     
-warning: rpmts_HdrFromFdno: Header V3 DSA signature: NOKEY, key ID 824b8603
-osg/gpgkey                                                                                   | 1.7 kB     00:00     
-Importing GPG key 0x824B8603 "OSG Software Team (RPM Signing Key for Koji Packages) <vdt-support@opensciencegrid.org>" from /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
+osg-ca-certs-1.110-1.2.osg36.el9.noarch.rpm                                         1.5 MB/s | 244 kB     00:00    
+--------------------------------------------------------------------------------------------------------------------
+Total                                                                               1.0 MB/s | 244 kB     00:00     
+OSG Software for Enterprise Linux 9 - x86_64                                        3.0 MB/s | 3.1 kB     00:00    
+Importing GPG key 0x1887C61A:
+ Userid     : "OSG Software 3.6 for EL9 RSA <help@osg-htc.org>"
+ Fingerprint: B77E 70A6 0537 1D3B E109 A18E 3170 E150 1887 C61A
+ From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-4
 Is this ok [y/N]: y
-Running rpm_check_debug
-Running Transaction Test
-Finished Transaction Test
-Transaction Test Succeeded
-Running Transaction
-  Installing     : osg-ca-certs                                                                                 1/1 
+Key imported successfully
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                            1/1 
+  Installing       : osg-ca-certs-1.110-1.2.osg36.el9.noarch                                                    1/1 
+  Verifying        : osg-ca-certs-1.110-1.2.osg36.el9.noarch                                                    1/1 
 
 Installed:
-  osg-ca-certs.noarch 0:1.23-1                                                                                      
+  osg-ca-certs-1.110-1.2.osg36.el9.noarch                                                                           
 
 Complete!
 ```
@@ -126,61 +113,53 @@ If you want to know what package a file belongs to, you can ask rpm. For instanc
 
     :::console
     # 1. Find the exact path
-    user@host $ which srm-ls
-    /usr/bin/srm-ls
+    user@host $ which osg-cert-request
+    /usr/bin/osg-cert-request
 
     # 2. Ask rpm what package it is part of:
-    user@host $ rpm -q --file /usr/bin/srm-ls
-    bestman2-client-2.2.0-14.osg.el5.noarch
+    user@host $ rpm -q --file /usr/bin/osg-cert-request 
+    osg-pki-tools-3.5.2-2.osg36.el9.noarch
 
 
 If you want to know what other things are in a package--perhaps the other available tools or configuration files--you can do that as well:
 
     :::console
-    user@host $ rpm -ql bestman2-client
-    /etc/bestman2/conf/bestman2.rc
-    /etc/bestman2/conf/bestman2.rc.samples
-    /etc/bestman2/conf/srmclient.conf
-    /etc/sysconfig/bestman2
-    /usr/bin/srm-copy
-    /usr/bin/srm-copy-status
-    /usr/bin/srm-extendfilelifetime
-    /usr/bin/srm-ls
-    /usr/bin/srm-ls-status
+    user@host $ rpm -ql osg-pki-tools
+    /usr/bin/osg-cert-request
+    /usr/bin/osg-incommon-cert-request
+    /usr/lib/python3.9/site-packages/osgpkitools
+    /usr/lib/python3.9/site-packages/osgpkitools/ExceptionDefinitions.py
+    /usr/lib/python3.9/site-packages/osgpkitools/__init__.py
     ... output trimmed ...
 
 
 What else does a package install?
 ---------------------------------
 
-Sometimes you need to understand what other software is installed by a package. This can be particularly useful for understanding *meta-packages*, which are packages such as the `osg-wn-client` (worker node client) that contain nothing by themselves but only depend on other RPMs. To do this, use the `--requires` option to rpm. For example, you can see that the worker node client (as of OSG 3.1.8 in early September, 2012) will install `curl`, `uberftp`, `lcg-utils`, and a dozen or so other packages.
+Sometimes you need to understand what other software is installed by a package. This can be particularly useful for understanding *meta-packages*, which are packages such as the `osg-wn-client` (worker node client) that contain nothing by themselves but only depend on other RPMs. To do this, use the `--requires` option to rpm. For example, you can see that the worker node client (as of OSG 3.6.0 in early June, 2023) will install `curl`, `uberftp`, `wget`, and a dozen or so other packages.
 
     :::console
     user@host $ rpm -q --requires osg-wn-client
-    /usr/bin/curl  
-    /usr/bin/dccp  
-    /usr/bin/ldapsearch  
-    /usr/bin/uberftp  
-    /usr/bin/wget  
-    bestman2-client  
-    config(osg-wn-client) = 3.0.0-16.osg.el5
-    dcache-srmclient  
-    dcap-tunnel-gsi  
-    edg-gridftp-client  
-    fetch-crl  
-    glite-fts-client  
-    globus-gass-copy-progs  
-    grid-certificates  
-    java-1.6.0-sun-compat  
-    lcg-utils  
-    lfc-client  
-    lfc-python  
-    myproxy  
-    osg-system-profiler  
-    osg-version  
+    /usr/bin/curl
+    /usr/bin/ldapsearch
+    /usr/bin/wget
+    /usr/bin/xrdcp
+    config(osg-wn-client) = 3.6-6.osg36.el9
+    fetch-crl
+    gfal2
+    gfal2-plugin-file
+    gfal2-plugin-http
+    gfal2-plugin-xrootd
+    grid-certificates >= 7
+    osg-system-profiler
+    python3-gfal2-util
     rpmlib(CompressedFileNames) <= 3.0.4-1
+    rpmlib(FileDigests) <= 4.6.0-1
     rpmlib(PayloadFilesHavePrefix) <= 4.0-1
-    vo-client  
+    rpmlib(PayloadIsZstd) <= 5.4.18-1
+    stashcp
+    vo-client
+    voms-clients-cpp
 
 Finding RPM Packages
 --------------------
@@ -189,49 +168,56 @@ It is normally best to read the OSG documentation to decide which packages to in
 
     :::console
     user@host $ yum list "voms*"
-    Loaded plugins: kernel-module, priorities
-    957 packages excluded due to repository priority protections
     Available Packages
-    voms.i386                                                    2.0.6-3.osg                                        osg 
-    voms.x86_64                                                  2.0.6-3.osg                                        osg 
-    voms-admin-client.x86_64                                     2.0.16-1                                           osg 
-    voms-admin-server.noarch                                     2.6.1-9                                            osg 
-    voms-clients.x86_64                                          2.0.6-3.osg                                        osg 
-    voms-compat.i386                                             1.9.19.2-6.osg                                     osg 
-    voms-compat.x86_64                                           1.9.19.2-6.osg                                     osg 
-    voms-devel.i386                                              2.0.6-3.osg                                        osg 
-    voms-devel.x86_64                                            2.0.6-3.osg                                        osg 
-    voms-doc.x86_64                                              2.0.6-3.osg                                        osg 
-    voms-mysql-plugin.x86_64                                     3.1.5.1-1.el5                                      epel
-    voms-server.x86_64                                           2.0.6-3.osg                                        osg 
-    vomsjapi.x86_64                                              2.0.6-3.osg                                        osg 
-    vomsjapi-javadoc.x86_64                                      2.0.6-3.osg                                        osg 
+    voms.x86_64                                                 2.1.0-0.27.rc3.el9                                 epel
+    voms-clients-cpp.x86_64                                     2.1.0-0.27.rc3.el9                                 epel
+    voms-api-java.noarch                                        3.3.2-11.el9                                       epel 
+    voms-api-java-javadoc.noarch                                3.3.2-11.el9                                       epel 
+    voms-clients-java.noarch                                    3.3.2-5.el9                                        epel 
+    voms-devel.x86_64                                           2.1.0-0.27.rc3.el9                                 epel 
+    voms-doc.noarch                                             2.1.0-0.27.rc3.el9                                 epel 
+    voms-mysql-plugin.x86_64                                    3.1.7-13.el9                                       epel 
+    voms-server.x86_64                                          2.1.0-0.27.rc3.el9                                 epel 
+
 
 If you want to search for packages that contain VOMS anywhere in the name or description, you can use `yum search`:
 
     :::console
     user@host $ yum search voms
-    Loaded plugins: kernel-module, priorities
-    957 packages excluded due to repository priority protections
-    ================================================== Matched: voms ===================================================
-    osg-voms.noarch : OSG VOMS
-    perl-VOMS-Lite.noarch : Perl extension for VOMS Attribute certificate creation
-    perl-voms-server.noarch : Perl extension for VOMS Attribute certificate creation
-    php-voms-admin.noarch : Web based interface to control VOMS parameters written in PHP
-    voms.i386 : Virtual Organization Membership Service
+    ============================================ Name Exactly Matched: voms ============================================
     voms.x86_64 : Virtual Organization Membership Service
+    =========================================== Name & Summary Matched: voms ===========================================
+    vo-client-lcmaps-voms.noarch : Provides a voms-mapfile-default file, mapping VOMS FQANs to Unix users suitable for
+                                : use by the LCMAPS VOMS plugin
+    voms-mysql-plugin.x86_64 : VOMS server plugin for MySQL
+    xrootd-voms.x86_64 : VOMS attribute extractor plug-in for XRootD
+    ================================================ Name Matched: voms ================================================
+    voms-doc.noarch : Virtual Organization Membership Service Documentation
+    voms-server.x86_64 : Virtual Organization Membership Service Server
+    ============================================== Summary Matched: voms ===============================================
+    vo-client.noarch : Contains vomses file for use with user authentication
+    vo-client-dcache.noarch : Provides a grid-vorolemap file for use by dCache, similar to voms-mapfile-default
     ... etc ...
 
 One last example, if you want to know what RPM would give you the `voms-proxy-init` command, you can ask `yum`. The **`*`** indicates that you don't know the full pathname of `voms-proxy-init`.
 
     :::console
     user@host $ yum whatprovides "*voms-proxy-init"
-    Loaded plugins: kernel-module, priorities
-    957 packages excluded due to repository priority protections
-    voms-clients-2.0.6-3.osg.x86_64 : Virtual Organization Membership Service Clients
-    Repo        : osg
+    voms-clients-cpp-2.1.0-0.27.rc3.el9.x86_64 : Virtual Organization Membership Service Clients
+    Repo        : @System
     Matched from:
-    Filename    : /usr/bin/voms-proxy-init
+    Other       : *voms-proxy-init
+
+    voms-clients-cpp-2.1.0-0.27.rc3.el9.x86_64 : Virtual Organization Membership Service Clients
+    Repo        : epel
+    Matched from:
+    Other       : *voms-proxy-init
+
+    voms-clients-java-3.3.2-5.el9.noarch : Virtual Organization Membership Service Java clients
+    Repo        : epel
+    Matched from:
+    Other       : *voms-proxy-init
+
 
 Removing Packages
 -----------------
@@ -240,50 +226,29 @@ To remove a single RPM, you can use `yum remove`. Not only will it uninstall the
 
 ``` console
 user@host $ sudo yum remove voms
-Loaded plugins: kernel-module, priorities
-Setting up Remove Process
-Resolving Dependencies
---> Running transaction check
----> Package voms.x86_64 0:2.0.6-3.osg set to be erased
---> Processing Dependency: libvomsapi.so.1()(64bit) for package: voms-clients
---> Processing Dependency: voms = 2.0.6-3.osg for package: voms-clients
---> Running transaction check
----> Package voms-clients.x86_64 0:2.0.6-3.osg set to be erased
---> Finished Dependency Resolution
-Beginning Kernel Module Plugin
-Finished Kernel Module Plugin
-
-Dependencies Resolved
-
+Dependencies resolved.
 ====================================================================================================================
- Package                      Arch                   Version                        Repository                 Size
+ Package                                Architecture     Version                         Repository            Size
 ====================================================================================================================
 Removing:
- voms                         x86_64                 2.0.6-3.osg                    installed                 407 k
-Removing for dependencies:
- voms-clients                 x86_64                 2.0.6-3.osg                    installed                 373 k
+ voms                                   x86_64           2.1.0-0.27.rc3.el9              @epel                432 k
+Removing dependent packages:
+ osg-wn-client                          noarch           3.6-6.osg36.el9                 @osg                 211  
 
 Transaction Summary
 ====================================================================================================================
 Remove        2 Package(s)
-Reinstall     0 Package(s)
-Downgrade     0 Package(s)
 
 Is this ok [y/N]: y
-Downloading Packages:
-Running rpm_check_debug
-Running Transaction Test
-Finished Transaction Test
-Transaction Test Succeeded
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
 Running Transaction
-  Erasing        : voms                                                                                         1/2 
-  Erasing        : voms-clients                                                                                 2/2 
+  ... etc ...
 
 Removed:
-  voms.x86_64 0:2.0.6-3.osg                                                                                         
-
-Dependency Removed:
-  voms-clients.x86_64 0:2.0.6-3.osg                                                                                 
+  voms-2.1.0-0.27.rc3.el9.x86_64
 
 Complete!
 ```

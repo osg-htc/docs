@@ -69,6 +69,7 @@ The definitive list of software in the contrib repository can be found here:
 
 -   [OSG 3.6 EL7 contrib software repository](https://repo.opensciencegrid.org/osg/3.6/el7/contrib/x86_64/)
 -   [OSG 3.6 EL8 contrib software repository](https://repo.opensciencegrid.org/osg/3.6/el8/contrib/x86_64/)
+-   [OSG 3.6 EL9 contrib software repository](https://repo.opensciencegrid.org/osg/3.6/el9/contrib/x86_64/)
 
 If you would like to distribute your software in the OSG `contrib` repository, please [contact us](../common/help.md) with a
 description of your software, what users it serves, and relevant RPM packaging.
@@ -82,7 +83,7 @@ The Yum priorities plugin is used to tell Yum to prefer OSG packages over EPEL o
 It is important to install and enable the Yum priorities plugin before installing OSG Software to ensure that you are
 getting the OSG-supported versions.
 
-This plugin is built into Yum on EL8 distributions.
+This plugin is built into Yum on EL8 and EL9 distributions.
 
 1.  Install the Yum priorities package:
 
