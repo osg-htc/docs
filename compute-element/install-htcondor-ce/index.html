@@ -2022,15 +2022,18 @@ we suggest <a href="../hosted-ce/">requesting an OSG Hosted CE</a>.</p>
 <li>If using an IGTF cert, install these as
    <code>/etc/grid-security/hostcert.pem</code> and <code>/etc/grid-security/hostkey.pem</code></li>
 </ul>
-<p>See details in the <a href="../../security/host-certs/overview/">Host Certificates overview</a>.
--   <strong>DNS entries:</strong> Forward and reverse DNS must resolve for the HTCondor-CE host
--   <strong>Network ports:</strong> The pilot factories must be able to contact your HTCondor-CE service on port 9619 (TCP)
--   <strong>Access point/login node:</strong> HTCondor-CE should be installed on a host that already has the ability to submit jobs
-into your local cluster
--   <strong>File Systems</strong>: Non-HTCondor batch systems require a
-<a href="https://htcondor.com/htcondor-ce/v5/configuration/local-batch-system/#sharing-the-spool-directory">shared file system</a>
-between the HTCondor-CE host and the batch system worker nodes.</p>
+<p>See details in the <a href="../../security/host-certs/overview/">Host Certificates overview</a>.</p>
 </li>
+<li>
+<p><strong>DNS entries:</strong> Forward and reverse DNS must resolve for the HTCondor-CE host</p>
+</li>
+<li><strong>Network ports:</strong> The <a href="../../other/firewall/#compute-entrypoints">pilot factories</a> must be able to contact your 
+    HTCondor-CE service on port 9619 (TCP)</li>
+<li><strong>Access point/login node:</strong> HTCondor-CE should be installed on a host that already has the ability to submit jobs
+    into your local cluster</li>
+<li><strong>File Systems</strong>: Non-HTCondor batch systems require a
+    <a href="https://htcondor.com/htcondor-ce/v5/configuration/local-batch-system/#sharing-the-spool-directory">shared file system</a>
+    between the HTCondor-CE host and the batch system worker nodes.</li>
 </ul>
 <p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
 <ul>
