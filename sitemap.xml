@@ -171,6 +171,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://osg-htc.org/docs/other/firewall/</loc>
+         <lastmod>2023-05-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://osg-htc.org/docs/other/install-cvmfs-stratum1/</loc>
          <lastmod>2023-05-26</lastmod>
          <changefreq>daily</changefreq>
