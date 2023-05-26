@@ -1967,6 +1967,11 @@
 <p>This document describes how to install an Open Science Data Federation (OSDF) origin service.  This service allows an organization
 to export its data to the data federation.</p>
 <div class="admonition note">
+<p class="admonition-title">Minimum version for this documentation</p>
+<p>This document describes features introduced in XCache 3.3.0, released on 2022-12-08.
+When installing, ensure that your version of the <code>stash-origin</code> RPM is at least 3.3.0.</p>
+</div>
+<div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The OSDF Origin was previously named "Stash Origin" and some documentation and software may use the old name.</p>
 </div>
@@ -2006,11 +2011,6 @@ along with information like:</p>
 <li>Prepare <a href="../../../common/yum/">the required Yum repositories</a></li>
 <li>Install <a href="../../../common/ca/">CA certificates</a></li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This document describes features introduced in XCache 3.2.2, released on 2022-09-29.
-When installing, ensure that your version of the <code>stash-origin</code> RPM is at least 3.2.2.</p>
-</div>
 <h2 id="installing-the-origin">Installing the Origin<a class="headerlink" href="#installing-the-origin" title="Permanent link">&para;</a></h2>
 <p>The origin service consists of one or more XRootD daemons and their dependencies for the authentication infrastructure.
 To simplify installation, OSG provides convenience RPMs that install all required
@@ -2073,7 +2073,8 @@ set resourcename = HCC_OSDF_ORIGIN
 <div class="highlight"><pre><span></span><code>set AuthOriginExport = /hcc/PROTECTED
 </code></pre></div>
 If you are serving public data from the origin, you must set <code>PublicOriginExport</code> and use the <code>xrootd@stash-origin</code> service.
-If you are serving protected data from the origin, you must set <code>AuthOriginExport</code> and use the <code>xrootd@stash-origin-auth</code> service.</p>
+If you are serving protected data from the origin, you must set <code>AuthOriginExport</code>
+and use the <code>xrootd@stash-origin-auth</code> service (if not using <a href="https://github.com/opensciencegrid/xrootd-multiuser" title="XRootD Multiuser Plugin">xrootd-multiuser</a>) or <code>xrootd-privileged@stash-origin-auth</code> service (if using <a href="https://github.com/opensciencegrid/xrootd-multiuser" title="XRootD Multiuser Plugin">xrootd-multiuser</a>).</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The OSDF namespace is a <em>global</em> namespace.
@@ -2083,14 +2084,19 @@ why the explicit registration is required.</p>
 <h2 id="manually-setting-the-fqdn-optional">Manually Setting the FQDN (optional)<a class="headerlink" href="#manually-setting-the-fqdn-optional" title="Permanent link">&para;</a></h2>
 <p>The FQDN of the origin server that you registered in <a href="#registering-the-origin">Topology</a> may be different than its internal hostname
 (as reported by <code>hostname -f</code>).
-For example, this may be the case if your origin is behind a load balancer such as LVS or MetalLB.
+For example, this may be the case if your origin is behind a load balancer such as LVS.
 In this case, you must manually tell the origin services which FQDN to use for topology lookups.</p>
 <ol>
-<li>Create the file <code>/etc/systemd/system/stash-origin-authfile.service.d/override.conf</code>
-    with the following contents:<div class="codehilite"><pre><span></span><code><span class="k">[Service]</span><span class="w"></span>
+<li>
+<p>Create the file <code>/etc/systemd/system/stash-authfile@.service.d/override.conf</code>
+    with the following contents:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">[Service]</span><span class="w"></span>
 <span class="na">Environment</span><span class="o">=</span><span class="s">ORIGIN_FQDN=&lt;Topology-registered FQDN&gt;</span><span class="w"></span>
 </code></pre></div>
 
+</li>
+<li>
+<p>Run <code>systemctl daemon-reload</code> after modifying the file.</p>
 </li>
 </ol>
 <h2 id="managing-the-origin-services">Managing the Origin Services<a class="headerlink" href="#managing-the-origin-services" title="Permanent link">&para;</a></h2>
@@ -2099,6 +2105,13 @@ There can be multiple instances of <code>xrootd</code>, running on different por
 The instance that serves unauthenticated data will run on port 1094.
 The instance that serves authenticated data will run on port 1095.
 If your origin serves both authenticated and unauthenticated data, you will run both instances.</p>
+<div class="admonition note">
+<p class="admonition-title">Use of multiuser plugin</p>
+<p>Some of the service names are different if you have configured the <a href="https://github.com/opensciencegrid/xrootd-multiuser" title="XRootD Multiuser Plugin">XRootD Multiuser plugin</a>:
+-   <code>xrootd-privileged</code> is used instead of <code>xrootd</code>
+-   <code>cmsd-privileged</code> is used instead of <code>cmsd</code></p>
+<p>The privileged and non-privileged services are mutually exclusive.</p>
+</div>
 <p>The origin services consist of the following SystemD units that you must directly manage:</p>
 <table>
 <thead>
@@ -2114,7 +2127,11 @@ If your origin serves both authenticated and unauthenticated data, you will run 
 </tr>
 <tr>
 <td><code>xrootd@stash-origin-auth.service</code></td>
-<td>Performs data transfers (authenticated instance)</td>
+<td>Performs data transfers (authenticated instance without <a href="https://github.com/opensciencegrid/xrootd-multiuser" title="XRootD Multiuser Plugin">multiuser</a>)</td>
+</tr>
+<tr>
+<td><code>xrootd-privileged@stash-origin-auth.service</code></td>
+<td>Performs data transfers (authenticated instance with <a href="https://github.com/opensciencegrid/xrootd-multiuser" title="XRootD Multiuser Plugin">multiuser</a>)</td>
 </tr>
 </tbody>
 </table>
@@ -2161,11 +2178,19 @@ As a reminder, here are common service commands (all run as <code>root</code>):<
 </tr>
 <tr>
 <td><code>cmsd@stash-origin-auth.service</code></td>
-<td>Integrates the origin into the data federation (authenticated instance)</td>
+<td>Integrates the origin into the data federation (authenticated instance without <a href="https://github.com/opensciencegrid/xrootd-multiuser" title="XRootD Multiuser Plugin">multiuser</a>)</td>
 </tr>
 <tr>
-<td><code>stash-origin-authfile.timer</code></td>
-<td>Updates the authorization files periodically</td>
+<td><code>cmsd-privileged@stash-origin-auth.service</code></td>
+<td>Integrates the origin into the data federation (authenticated instance with <a href="https://github.com/opensciencegrid/xrootd-multiuser" title="XRootD Multiuser Plugin">multiuser</a>)</td>
+</tr>
+<tr>
+<td><code>stash-authfile@stash-origin.timer</code></td>
+<td>Updates the authorization files periodically (unauthenticated instance)</td>
+</tr>
+<tr>
+<td><code>stash-authfile@stash-origin-auth.timer</code></td>
+<td>Updates the authorization files periodically (authenticated instance)</td>
 </tr>
 </tbody>
 </table>
