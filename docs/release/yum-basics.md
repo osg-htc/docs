@@ -41,20 +41,9 @@ Importing GPG key 0x1887C61A:
  Fingerprint: B77E 70A6 0537 1D3B E109 A18E 3170 E150 1887 C61A
  From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-4
 Is this ok [y/N]: y
-Key imported successfully
-Running transaction check
-Transaction check succeeded.
-Running transaction test
-Transaction test succeeded.
-Running transaction
-  Preparing        :                                                                                            1/1 
-  Installing       : osg-ca-certs-1.110-1.2.osg36.el9.noarch                                                    1/1 
-  Verifying        : osg-ca-certs-1.110-1.2.osg36.el9.noarch                                                    1/1 
-
+...
 Installed:
   osg-ca-certs-1.110-1.2.osg36.el9.noarch                                                                           
-
-Complete!
 ```
 
 **Please Note**: When you first install a package from the OSG repository, you will be prompted to import the GPG key. We use this key to sign our RPMs as a security measure. You should double-check the key id (above it is 824B8603) with the [information on our signed RPMs](signing.md). If it doesn't match, there is a problem somewhere and you should report it to the OSG via help@opensciencegrid.org.
@@ -403,43 +392,68 @@ Installing the debuginfo package requires three steps.
 1.  Enable the installation of debuginfo packages. This only needs to be done once. Edit the yum repo file, usually `/etc/yum.repos.d/osg.repo` to enable the separate debuginfo repository. Near the bottom of the file, you'll see the `osg-debug` repo: 
 
         [osg-debuginfo]
-        name=OSG Software for Enterprise Linux 7 - $basearch - Debug
+        name=OSG Software for Enterprise Linux 9 - $basearch - Debug
         baseurl=https://repo.opensciencegrid.org/osg/3.6/el7/release/$basearch/debug
         priority=98 
         enabled=1
         gpgcheck=1 
-        gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
-               file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-2
+        gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-4
 
     Make sure that "enabled" is set to 1.
 
-2.  Figure out which package installed the program you want to debug. One way to figure it out is to ask RPM. For example, if you want to debug grid-proxy-init:
+1. Install the `yum-utils` package, which contains the `debuginfo-install` utility.
 
         :::console
-        user@host $ rpm -qf `which grid-proxy-init`
-        globus-proxy-utils-5.0-5.osg.x86_64
-
-3.  Install the debugging information for that package. Continuing this example: 
-
-        :::console
-        root@host # debuginfo-install globus-proxy-utils
+        root@host # yum install yum-utils
         ...
-        =================================================================================================================================
-         Package                                      Arch                   Version                     Repository                 Size
-        =================================================================================================================================
+        ====================================================================================================================
+        Package                    Architecture            Version                           Repository               Size
+        ====================================================================================================================
         Installing:
-         globus-proxy-utils-debuginfo                 x86_64                 5.0-5.osg                   osg-debug                  61 k
+        yum-utils                  noarch                  4.3.0-5.el9_2                     baseos                   35 k
 
         Transaction Summary
-        =================================================================================================================================
-        Install       1 Package(s)
-        Upgrade       0 Package(s)
+        ====================================================================================================================
+        Install  1 Package
 
-        Total download size: 61 k
+        Total download size: 35 k
+        Installed size: 23 k
         Is this ok [y/N]: y
         ...
         Installed:
-          globus-proxy-utils-debuginfo.x86_64 0:5.0-5.osg     
+          yum-utils-4.3.0-5.el9_2.noarch  
+
+1.  Figure out which package installed the program you want to debug. One way to figure it out is to ask RPM. For example, if you want to debug grid-proxy-init:
+
+        :::console
+        user@host $ rpm -qf `which voms-proxy-init`
+        voms-clients-cpp-2.1.0-0.27.rc3.el9.x86_64
+
+1.  Install the debugging information for that package. Continuing this example: 
+
+        :::console
+        root@host # debuginfo-install voms-clients-cpp
+        ...
+        ====================================================================================================================
+        Package                              Architecture     Version                       Repository                Size
+        ====================================================================================================================
+        Installing:
+        voms-clients-cpp-debuginfo           x86_64           2.1.0-0.27.rc3.el9            epel-debuginfo           437 k
+        voms-debugsource                     x86_64           2.1.0-0.27.rc3.el9            epel-debuginfo           195 k
+        Installing dependencies:
+        voms-debuginfo                       x86_64           2.1.0-0.27.rc3.el9            epel-debuginfo           928 k
+
+        Transaction Summary
+        ====================================================================================================================
+        Install  3 Packages
+
+        Total download size: 1.5 M
+        Installed size: 6.0 M
+        Is this ok [y/N]: y
+        ...
+        Installed:
+          voms-clients-cpp-debuginfo-2.1.0-0.27.rc3.el9.x86_64           voms-debuginfo-2.1.0-0.27.rc3.el9.x86_64          
+          voms-debugsource-2.1.0-0.27.rc3.el9.x86_64     
 
     This last step will select the right package name, then use `yum` to install it.
 
