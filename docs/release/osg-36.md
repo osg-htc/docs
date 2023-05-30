@@ -18,6 +18,35 @@ Known Issues
 
 The following issues are known to currently affect packages distributed in OSG 3.6:
 
+### Preparing for HTCondor 10.0 ###
+
+We plan to release HTCondor version 10.0 into the OSG repositories soon.
+
+Administrators should install the `condor-upgrade-checks` RPM and run the
+`/usr/bin/upgrade9to10checks.py` script to check for actions that need to be
+taken before upgrading to HTCondor version 10. This script checks for three
+possible issues:
+
+-   HTCondor upgrade causing a change in TRUST\_DOMAIN which would invalidate existing IDTOKENS
+-   Recent and current GPU jobs that will no longer match, because the new "require\_gpus" condor\_submit command must be used for GPU matching
+-   HTCondor map files that have regular expressions that the new PCRE2 library will not accept
+
+To check your Access Point configuration run:
+
+    :::console
+    root@access-point # upgrade9to10checks.py
+
+To check your Compute Entrypoint configuration run:
+
+    :::console
+    root@htcondor-ce # upgrade9to10checks.py -ce
+
+!!! note
+    Don't forget to check to HTCondor batch system as well
+
+
+For more information, consult the [HTCondor documentation](https://htcondor.readthedocs.io/en/v10_0/version-history/upgrading-from-9-0-to-10-0-versions.html)
+
 ### CA Certificates on EL9 ###
 
 EL9 operating systems have a tighter default cryptographic policy that can cause services to reject certificates issued
@@ -49,6 +78,13 @@ excludepkgs=rrdtool
 
 Latest News
 -----------
+
+### **May 30, 2023:** HTCondor 9.0.17-3, osdf-client 6.11.0
+-   HTCondor 9.0.17-3
+    -   Provides script to assist updating from HTCondor version 9 to version 10
+-   osdf-client 6.11.0
+    -   Distinguish between slow and stopped transfers
+    -   Fix token finding bug introduced in 6.10.0
 
 ### **May 18, 2023:** XRootD 5.5.5, vault 1.13.2, htvault-config 1.15, VOMS 2.0.6-1.6 + 2.1.0-0.14.rc2.6
 -   [XRootD 5.5.5](https://github.com/xrootd/xrootd/releases/tag/v5.5.5): Bug fix release
