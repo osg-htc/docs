@@ -1439,6 +1439,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#preparing-for-htcondor-100" class="md-nav__link">
+    Preparing for HTCondor 10.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#ca-certificates-on-el9" class="md-nav__link">
     CA Certificates on EL9
   </a>
@@ -1464,6 +1471,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#may-30-2023-htcondor-9017-3-osdf-client-6110" class="md-nav__link">
+    May 30, 2023: HTCondor 9.0.17-3, osdf-client 6.11.0
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#may-18-2023-xrootd-555-vault-1132-htvault-config-115-voms-206-16-210-014rc26" class="md-nav__link">
@@ -2283,6 +2297,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#preparing-for-htcondor-100" class="md-nav__link">
+    Preparing for HTCondor 10.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#ca-certificates-on-el9" class="md-nav__link">
     CA Certificates on EL9
   </a>
@@ -2308,6 +2329,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#may-30-2023-htcondor-9017-3-osdf-client-6110" class="md-nav__link">
+    May 30, 2023: HTCondor 9.0.17-3, osdf-client 6.11.0
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#may-18-2023-xrootd-555-vault-1132-htvault-config-115-voms-206-16-210-014rc26" class="md-nav__link">
@@ -2825,6 +2853,30 @@ GSI proxies and HTTP is used for data transfer instead of GridFTP.</p>
 We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
 <h2 id="known-issues">Known Issues<a class="headerlink" href="#known-issues" title="Permanent link">&para;</a></h2>
 <p>The following issues are known to currently affect packages distributed in OSG 3.6:</p>
+<h3 id="preparing-for-htcondor-100">Preparing for HTCondor 10.0<a class="headerlink" href="#preparing-for-htcondor-100" title="Permanent link">&para;</a></h3>
+<p>We plan to release HTCondor version 10.0 into the OSG repositories soon.</p>
+<p>Administrators should install the <code>condor-upgrade-checks</code> RPM and run the
+<code>/usr/bin/upgrade9to10checks.py</code> script to check for actions that need to be
+taken before upgrading to HTCondor version 10. This script checks for three
+possible issues:</p>
+<ul>
+<li>HTCondor upgrade causing a change in TRUST_DOMAIN which would invalidate existing IDTOKENS</li>
+<li>Recent and current GPU jobs that will no longer match, because the new "require_gpus" condor_submit command must be used for GPU matching</li>
+<li>HTCondor map files that have regular expressions that the new PCRE2 library will not accept</li>
+</ul>
+<p>To check your Access Point configuration run:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@access-point # </span>upgrade9to10checks.py
+</code></pre></div>
+
+<p>To check your Compute Entrypoint configuration run:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@htcondor-ce # </span>upgrade9to10checks.py -ce
+</code></pre></div>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Don't forget to check to HTCondor batch system as well</p>
+</div>
+<p>For more information, consult the <a href="https://htcondor.readthedocs.io/en/v10_0/version-history/upgrading-from-9-0-to-10-0-versions.html">HTCondor documentation</a></p>
 <h3 id="ca-certificates-on-el9">CA Certificates on EL9<a class="headerlink" href="#ca-certificates-on-el9" title="Permanent link">&para;</a></h3>
 <p>EL9 operating systems have a tighter default cryptographic policy that can cause services to reject certificates issued
 by SHA-1 signed CAs.
@@ -2848,6 +2900,18 @@ of <code>/etc/yum.repos.d/osg.repo</code>:</p>
 <div class="highlight"><pre><span></span><code>excludepkgs=rrdtool
 </code></pre></div>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="may-30-2023-htcondor-9017-3-osdf-client-6110"><strong>May 30, 2023:</strong> HTCondor 9.0.17-3, osdf-client 6.11.0<a class="headerlink" href="#may-30-2023-htcondor-9017-3-osdf-client-6110" title="Permanent link">&para;</a></h3>
+<ul>
+<li>HTCondor 9.0.17-3<ul>
+<li>Provides script to assist updating from HTCondor version 9 to version 10</li>
+</ul>
+</li>
+<li>osdf-client 6.11.0<ul>
+<li>Distinguish between slow and stopped transfers</li>
+<li>Fix token finding bug introduced in 6.10.0</li>
+</ul>
+</li>
+</ul>
 <h3 id="may-18-2023-xrootd-555-vault-1132-htvault-config-115-voms-206-16-210-014rc26"><strong>May 18, 2023:</strong> XRootD 5.5.5, vault 1.13.2, htvault-config 1.15, VOMS 2.0.6-1.6 + 2.1.0-0.14.rc2.6<a class="headerlink" href="#may-18-2023-xrootd-555-vault-1132-htvault-config-115-voms-206-16-210-014rc26" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://github.com/xrootd/xrootd/releases/tag/v5.5.5">XRootD 5.5.5</a>: Bug fix release</li>
