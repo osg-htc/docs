@@ -1810,9 +1810,8 @@
 <span class="go">    V3 DSA signature: OK, key ID 824b8603</span>
 </code></pre></div>
 <h2 id="the-osg-packaging-signing-keys">The OSG Packaging Signing Keys<a class="headerlink" href="#the-osg-packaging-signing-keys" title="Permanent link">&para;</a></h2>
-<p>The OSG Software Team has two GPG keys for signing RPMs;
-the first key is used for packages before the 3.6 release series,
-and the second key is used for packages in the 3.6 release series and afterward.</p>
+<p>The OSG Software Team has several GPG keys for signing RPMs;
+The key used depends on the OSG version and EL variant used, as documented below:</p>
 <table>
 <thead>
 <tr>
@@ -1842,7 +1841,7 @@ and the second key is used for packages in the 3.6 release series and afterward.
 <table>
 <thead>
 <tr>
-<th>Key 2 (3.6 and on)</th>
+<th>Key 2 (3.6 and on, EL &lt;= 8)</th>
 <th></th>
 </tr>
 </thead>
@@ -1862,6 +1861,32 @@ and the second key is used for packages in the 3.6 release series and afterward.
 <tr>
 <td>Key ID</td>
 <td><code>96d2b90f</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Key 4 (3.6 and on, EL &gt;= 9)</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Location</td>
+<td><code>/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-4</code></td>
+</tr>
+<tr>
+<td>Download</td>
+<td><a href="https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-4">GitHub</a></td>
+</tr>
+<tr>
+<td>Fingerprint</td>
+<td><code>B77E 70A6 0537 1D3B E109  A18E 3170 E150 1887 C61A</code></td>
+</tr>
+<tr>
+<td>Key ID</td>
+<td><code>1887c61a</code></td>
 </tr>
 </tbody>
 </table>
@@ -1894,6 +1919,12 @@ On EL 7 and older (GnuPG &lt; 2.1.13):</p>
 <span class="go">      1216FF68897A77EA222FC96127DC686496D2B90F</span>
 <span class="go">uid                      Open Science Grid Software &lt;help@opensciencegrid.org&gt;</span>
 <span class="go">sub   rsa4096 2021-02-24 [E]</span>
+
+<span class="gp">$  </span>gpg --import-options show-only --import &lt; /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-4 
+<span class="go">pub   rsa4096 2022-12-28 [SC]</span>
+<span class="go">      B77E70A605371D3BE109A18E3170E1501887C61A</span>
+<span class="go">uid                      OSG Software 3.6 for EL9 RSA &lt;help@osg-htc.org&gt;</span>
+<span class="go">sub   rsa4096 2022-12-28 [E]</span>
 </code></pre></div></p>
 
               

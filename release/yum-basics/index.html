@@ -1981,58 +1981,34 @@
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <p>Installation is done with the <code>yum install</code> command. Each of the individual installation guide shows you the correct command to use to do an installation. Here is an example installation with all of the output from yum.</p>
 <div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>sudo yum install osg-ca-certs
-<span class="go">Loaded plugins: kernel-module, priorities</span>
-<span class="go">epel                                                                                         | 3.7 kB     00:00     </span>
-<span class="go">epel/primary_db                                                                              | 3.8 MB     00:00     </span>
-<span class="go">fermi-base                                                                                   | 2.1 kB     00:00     </span>
-<span class="go">fermi-base/primary_db                                                                        |  48 kB     00:00     </span>
-<span class="go">fermi-security                                                                               | 1.9 kB     00:00     </span>
-<span class="go">fermi-security/primary_db                                                                    | 1.7 MB     00:00     </span>
-<span class="go">osg                                                                                          | 1.9 kB     00:00     </span>
-<span class="go">osg/primary_db                                                                               |  65 kB     00:00     </span>
-<span class="go">sl-base                                                                                      | 2.1 kB     00:00     </span>
-<span class="go">sl-base/primary_db                                                                           | 2.0 MB     00:00     </span>
-<span class="go">957 packages excluded due to repository priority protections</span>
-<span class="go">Setting up Install Process</span>
-<span class="go">Resolving Dependencies</span>
-<span class="go">--&gt; Running transaction check</span>
-<span class="go">---&gt; Package osg-ca-certs.noarch 0:1.23-1 set to be updated</span>
-<span class="go">--&gt; Finished Dependency Resolution</span>
-<span class="go">Beginning Kernel Module Plugin</span>
-<span class="go">Finished Kernel Module Plugin</span>
-
-<span class="go">Dependencies Resolved</span>
-
+<span class="go">OSG Software for Enterprise Linux 9 - x86_64                                        668 kB/s | 438 kB     00:00    </span>
+<span class="go">Dependencies resolved.</span>
 <span class="go">====================================================================================================================</span>
-<span class="go"> Package                         Arch                      Version                     Repository              Size</span>
+<span class="go"> Package                      Architecture           Version                              Repository           Size</span>
 <span class="go">====================================================================================================================</span>
 <span class="go">Installing:</span>
-<span class="go"> osg-ca-certs                    noarch                    1.23-1                      osg                    450 k</span>
+<span class="go"> osg-ca-certs                 noarch                 1.110-1.2.osg36.el9                  osg                 244 k</span>
 
 <span class="go">Transaction Summary</span>
 <span class="go">====================================================================================================================</span>
-<span class="go">Install       1 Package(s)</span>
-<span class="go">Upgrade       0 Package(s)</span>
+<span class="go">Install  1 Package</span>
 
-<span class="go">Total download size: 450 k</span>
+<span class="go">Total download size: 244 k</span>
+<span class="go">Installed size: 340 k</span>
 <span class="go">Is this ok [y/N]: y</span>
 <span class="go">Downloading Packages:</span>
-<span class="go">osg-ca-certs-1.23-1.noarch.rpm                                                               | 450 kB     00:00     </span>
-<span class="go">warning: rpmts_HdrFromFdno: Header V3 DSA signature: NOKEY, key ID 824b8603</span>
-<span class="go">osg/gpgkey                                                                                   | 1.7 kB     00:00     </span>
-<span class="go">Importing GPG key 0x824B8603 &quot;OSG Software Team (RPM Signing Key for Koji Packages) &lt;vdt-support@opensciencegrid.org&gt;&quot; from /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG</span>
+<span class="go">osg-ca-certs-1.110-1.2.osg36.el9.noarch.rpm                                         1.5 MB/s | 244 kB     00:00    </span>
+<span class="go">--------------------------------------------------------------------------------------------------------------------</span>
+<span class="go">Total                                                                               1.0 MB/s | 244 kB     00:00     </span>
+<span class="go">OSG Software for Enterprise Linux 9 - x86_64                                        3.0 MB/s | 3.1 kB     00:00    </span>
+<span class="go">Importing GPG key 0x1887C61A:</span>
+<span class="go"> Userid     : &quot;OSG Software 3.6 for EL9 RSA &lt;help@osg-htc.org&gt;&quot;</span>
+<span class="go"> Fingerprint: B77E 70A6 0537 1D3B E109 A18E 3170 E150 1887 C61A</span>
+<span class="go"> From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-4</span>
 <span class="go">Is this ok [y/N]: y</span>
-<span class="go">Running rpm_check_debug</span>
-<span class="go">Running Transaction Test</span>
-<span class="go">Finished Transaction Test</span>
-<span class="go">Transaction Test Succeeded</span>
-<span class="go">Running Transaction</span>
-<span class="go">  Installing     : osg-ca-certs                                                                                 1/1 </span>
-
+<span class="go">...</span>
 <span class="go">Installed:</span>
-<span class="go">  osg-ca-certs.noarch 0:1.23-1                                                                                      </span>
-
-<span class="go">Complete!</span>
+<span class="go">  osg-ca-certs-1.110-1.2.osg36.el9.noarch                                                                           </span>
 </code></pre></div>
 <p><strong>Please Note</strong>: When you first install a package from the OSG repository, you will be prompted to import the GPG key. We use this key to sign our RPMs as a security measure. You should double-check the key id (above it is 824B8603) with the <a href="../signing/">information on our signed RPMs</a>. If it doesn't match, there is a problem somewhere and you should report it to the OSG via help@opensciencegrid.org.</p>
 <h2 id="verifying-packages-and-installations">Verifying Packages and Installations<a class="headerlink" href="#verifying-packages-and-installations" title="Permanent link">&para;</a></h2>
@@ -2105,150 +2081,126 @@
 <h2 id="understanding-a-package">Understanding a package<a class="headerlink" href="#understanding-a-package" title="Permanent link">&para;</a></h2>
 <p>If you want to know what package a file belongs to, you can ask rpm. For instance, if you're curious what package contains the <code>srm-ls</code> command, you can do:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp"># </span><span class="m">1</span>. Find the exact path
-<span class="gp">user@host $ </span>which srm-ls
-<span class="go">/usr/bin/srm-ls</span>
+<span class="gp">user@host $ </span>which osg-cert-request
+<span class="go">/usr/bin/osg-cert-request</span>
 
 <span class="gp"># </span><span class="m">2</span>. Ask rpm what package it is part of:
-<span class="gp">user@host $ </span>rpm -q --file /usr/bin/srm-ls
-<span class="go">bestman2-client-2.2.0-14.osg.el5.noarch</span>
+<span class="gp">user@host $ </span>rpm -q --file /usr/bin/osg-cert-request 
+<span class="go">osg-pki-tools-3.5.2-2.osg36.el9.noarch</span>
 </code></pre></div>
 
 <p>If you want to know what other things are in a package--perhaps the other available tools or configuration files--you can do that as well:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>rpm -ql bestman2-client
-<span class="go">/etc/bestman2/conf/bestman2.rc</span>
-<span class="go">/etc/bestman2/conf/bestman2.rc.samples</span>
-<span class="go">/etc/bestman2/conf/srmclient.conf</span>
-<span class="go">/etc/sysconfig/bestman2</span>
-<span class="go">/usr/bin/srm-copy</span>
-<span class="go">/usr/bin/srm-copy-status</span>
-<span class="go">/usr/bin/srm-extendfilelifetime</span>
-<span class="go">/usr/bin/srm-ls</span>
-<span class="go">/usr/bin/srm-ls-status</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>rpm -ql osg-pki-tools
+<span class="go">/usr/bin/osg-cert-request</span>
+<span class="go">/usr/bin/osg-incommon-cert-request</span>
+<span class="go">/usr/lib/python3.9/site-packages/osgpkitools</span>
+<span class="go">/usr/lib/python3.9/site-packages/osgpkitools/ExceptionDefinitions.py</span>
+<span class="go">/usr/lib/python3.9/site-packages/osgpkitools/__init__.py</span>
 <span class="go">... output trimmed ...</span>
 </code></pre></div>
 
 <h2 id="what-else-does-a-package-install">What else does a package install?<a class="headerlink" href="#what-else-does-a-package-install" title="Permanent link">&para;</a></h2>
-<p>Sometimes you need to understand what other software is installed by a package. This can be particularly useful for understanding <em>meta-packages</em>, which are packages such as the <code>osg-wn-client</code> (worker node client) that contain nothing by themselves but only depend on other RPMs. To do this, use the <code>--requires</code> option to rpm. For example, you can see that the worker node client (as of OSG 3.1.8 in early September, 2012) will install <code>curl</code>, <code>uberftp</code>, <code>lcg-utils</code>, and a dozen or so other packages.</p>
+<p>Sometimes you need to understand what other software is installed by a package. This can be particularly useful for understanding <em>meta-packages</em>, which are packages such as the <code>osg-wn-client</code> (worker node client) that contain nothing by themselves but only depend on other RPMs. To do this, use the <code>--requires</code> option to rpm. For example, you can see that the worker node client (as of OSG 3.6.0 in early June, 2023) will install <code>curl</code>, <code>uberftp</code>, <code>wget</code>, and a dozen or so other packages.</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>rpm -q --requires osg-wn-client
-<span class="go">/usr/bin/curl  </span>
-<span class="go">/usr/bin/dccp  </span>
-<span class="go">/usr/bin/ldapsearch  </span>
-<span class="go">/usr/bin/uberftp  </span>
-<span class="go">/usr/bin/wget  </span>
-<span class="go">bestman2-client  </span>
-<span class="go">config(osg-wn-client) = 3.0.0-16.osg.el5</span>
-<span class="go">dcache-srmclient  </span>
-<span class="go">dcap-tunnel-gsi  </span>
-<span class="go">edg-gridftp-client  </span>
-<span class="go">fetch-crl  </span>
-<span class="go">glite-fts-client  </span>
-<span class="go">globus-gass-copy-progs  </span>
-<span class="go">grid-certificates  </span>
-<span class="go">java-1.6.0-sun-compat  </span>
-<span class="go">lcg-utils  </span>
-<span class="go">lfc-client  </span>
-<span class="go">lfc-python  </span>
-<span class="go">myproxy  </span>
-<span class="go">osg-system-profiler  </span>
-<span class="go">osg-version  </span>
+<span class="go">/usr/bin/curl</span>
+<span class="go">/usr/bin/ldapsearch</span>
+<span class="go">/usr/bin/wget</span>
+<span class="go">/usr/bin/xrdcp</span>
+<span class="go">config(osg-wn-client) = 3.6-6.osg36.el9</span>
+<span class="go">fetch-crl</span>
+<span class="go">gfal2</span>
+<span class="go">gfal2-plugin-file</span>
+<span class="go">gfal2-plugin-http</span>
+<span class="go">gfal2-plugin-xrootd</span>
+<span class="go">grid-certificates &gt;= 7</span>
+<span class="go">osg-system-profiler</span>
+<span class="go">python3-gfal2-util</span>
 <span class="go">rpmlib(CompressedFileNames) &lt;= 3.0.4-1</span>
+<span class="go">rpmlib(FileDigests) &lt;= 4.6.0-1</span>
 <span class="go">rpmlib(PayloadFilesHavePrefix) &lt;= 4.0-1</span>
+<span class="go">rpmlib(PayloadIsZstd) &lt;= 5.4.18-1</span>
+<span class="go">stashcp</span>
 <span class="go">vo-client</span>
+<span class="go">voms-clients-cpp</span>
 </code></pre></div>
 
 <h2 id="finding-rpm-packages">Finding RPM Packages<a class="headerlink" href="#finding-rpm-packages" title="Permanent link">&para;</a></h2>
 <p>It is normally best to read the OSG documentation to decide which packages to install because it may not be obvious what the correct packages to install are. That said, you can use yum to find out all sort of things. For instance, you can list packages that begin with "voms":</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>yum list <span class="s2">&quot;voms*&quot;</span>
-<span class="go">Loaded plugins: kernel-module, priorities</span>
-<span class="go">957 packages excluded due to repository priority protections</span>
 <span class="go">Available Packages</span>
-<span class="go">voms.i386                                                    2.0.6-3.osg                                        osg </span>
-<span class="go">voms.x86_64                                                  2.0.6-3.osg                                        osg </span>
-<span class="go">voms-admin-client.x86_64                                     2.0.16-1                                           osg </span>
-<span class="go">voms-admin-server.noarch                                     2.6.1-9                                            osg </span>
-<span class="go">voms-clients.x86_64                                          2.0.6-3.osg                                        osg </span>
-<span class="go">voms-compat.i386                                             1.9.19.2-6.osg                                     osg </span>
-<span class="go">voms-compat.x86_64                                           1.9.19.2-6.osg                                     osg </span>
-<span class="go">voms-devel.i386                                              2.0.6-3.osg                                        osg </span>
-<span class="go">voms-devel.x86_64                                            2.0.6-3.osg                                        osg </span>
-<span class="go">voms-doc.x86_64                                              2.0.6-3.osg                                        osg </span>
-<span class="go">voms-mysql-plugin.x86_64                                     3.1.5.1-1.el5                                      epel</span>
-<span class="go">voms-server.x86_64                                           2.0.6-3.osg                                        osg </span>
-<span class="go">vomsjapi.x86_64                                              2.0.6-3.osg                                        osg </span>
-<span class="go">vomsjapi-javadoc.x86_64                                      2.0.6-3.osg                                        osg</span>
+<span class="go">voms.x86_64                                                 2.1.0-0.27.rc3.el9                                 epel</span>
+<span class="go">voms-clients-cpp.x86_64                                     2.1.0-0.27.rc3.el9                                 epel</span>
+<span class="go">voms-api-java.noarch                                        3.3.2-11.el9                                       epel </span>
+<span class="go">voms-api-java-javadoc.noarch                                3.3.2-11.el9                                       epel </span>
+<span class="go">voms-clients-java.noarch                                    3.3.2-5.el9                                        epel </span>
+<span class="go">voms-devel.x86_64                                           2.1.0-0.27.rc3.el9                                 epel </span>
+<span class="go">voms-doc.noarch                                             2.1.0-0.27.rc3.el9                                 epel </span>
+<span class="go">voms-mysql-plugin.x86_64                                    3.1.7-13.el9                                       epel </span>
+<span class="go">voms-server.x86_64                                          2.1.0-0.27.rc3.el9                                 epel</span>
 </code></pre></div>
 
 <p>If you want to search for packages that contain VOMS anywhere in the name or description, you can use <code>yum search</code>:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>yum search voms
-<span class="go">Loaded plugins: kernel-module, priorities</span>
-<span class="go">957 packages excluded due to repository priority protections</span>
-<span class="go">================================================== Matched: voms ===================================================</span>
-<span class="go">osg-voms.noarch : OSG VOMS</span>
-<span class="go">perl-VOMS-Lite.noarch : Perl extension for VOMS Attribute certificate creation</span>
-<span class="go">perl-voms-server.noarch : Perl extension for VOMS Attribute certificate creation</span>
-<span class="go">php-voms-admin.noarch : Web based interface to control VOMS parameters written in PHP</span>
-<span class="go">voms.i386 : Virtual Organization Membership Service</span>
+<span class="go">============================================ Name Exactly Matched: voms ============================================</span>
 <span class="go">voms.x86_64 : Virtual Organization Membership Service</span>
+<span class="go">=========================================== Name &amp; Summary Matched: voms ===========================================</span>
+<span class="go">vo-client-lcmaps-voms.noarch : Provides a voms-mapfile-default file, mapping VOMS FQANs to Unix users suitable for</span>
+<span class="go">                            : use by the LCMAPS VOMS plugin</span>
+<span class="go">voms-mysql-plugin.x86_64 : VOMS server plugin for MySQL</span>
+<span class="go">xrootd-voms.x86_64 : VOMS attribute extractor plug-in for XRootD</span>
+<span class="go">================================================ Name Matched: voms ================================================</span>
+<span class="go">voms-doc.noarch : Virtual Organization Membership Service Documentation</span>
+<span class="go">voms-server.x86_64 : Virtual Organization Membership Service Server</span>
+<span class="go">============================================== Summary Matched: voms ===============================================</span>
+<span class="go">vo-client.noarch : Contains vomses file for use with user authentication</span>
+<span class="go">vo-client-dcache.noarch : Provides a grid-vorolemap file for use by dCache, similar to voms-mapfile-default</span>
 <span class="go">... etc ...</span>
 </code></pre></div>
 
 <p>One last example, if you want to know what RPM would give you the <code>voms-proxy-init</code> command, you can ask <code>yum</code>. The <strong><code>*</code></strong> indicates that you don't know the full pathname of <code>voms-proxy-init</code>.</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>yum whatprovides <span class="s2">&quot;*voms-proxy-init&quot;</span>
-<span class="go">Loaded plugins: kernel-module, priorities</span>
-<span class="go">957 packages excluded due to repository priority protections</span>
-<span class="go">voms-clients-2.0.6-3.osg.x86_64 : Virtual Organization Membership Service Clients</span>
-<span class="go">Repo        : osg</span>
+<span class="go">voms-clients-cpp-2.1.0-0.27.rc3.el9.x86_64 : Virtual Organization Membership Service Clients</span>
+<span class="go">Repo        : @System</span>
 <span class="go">Matched from:</span>
-<span class="go">Filename    : /usr/bin/voms-proxy-init</span>
+<span class="go">Other       : *voms-proxy-init</span>
+
+<span class="go">voms-clients-cpp-2.1.0-0.27.rc3.el9.x86_64 : Virtual Organization Membership Service Clients</span>
+<span class="go">Repo        : epel</span>
+<span class="go">Matched from:</span>
+<span class="go">Other       : *voms-proxy-init</span>
+
+<span class="go">voms-clients-java-3.3.2-5.el9.noarch : Virtual Organization Membership Service Java clients</span>
+<span class="go">Repo        : epel</span>
+<span class="go">Matched from:</span>
+<span class="go">Other       : *voms-proxy-init</span>
 </code></pre></div>
 
 <h2 id="removing-packages">Removing Packages<a class="headerlink" href="#removing-packages" title="Permanent link">&para;</a></h2>
 <p>To remove a single RPM, you can use <code>yum remove</code>. Not only will it uninstall the RPM you requested, but it will uninstall anything that depends on it. For example, if I previously installed the <code>voms-clients</code> package, I also installed another package it depends on called <code>voms</code>. If I remove <code>voms</code>, yum will also remove <code>voms-clients</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>sudo yum remove voms
-<span class="go">Loaded plugins: kernel-module, priorities</span>
-<span class="go">Setting up Remove Process</span>
-<span class="go">Resolving Dependencies</span>
-<span class="go">--&gt; Running transaction check</span>
-<span class="go">---&gt; Package voms.x86_64 0:2.0.6-3.osg set to be erased</span>
-<span class="go">--&gt; Processing Dependency: libvomsapi.so.1()(64bit) for package: voms-clients</span>
-<span class="go">--&gt; Processing Dependency: voms = 2.0.6-3.osg for package: voms-clients</span>
-<span class="go">--&gt; Running transaction check</span>
-<span class="go">---&gt; Package voms-clients.x86_64 0:2.0.6-3.osg set to be erased</span>
-<span class="go">--&gt; Finished Dependency Resolution</span>
-<span class="go">Beginning Kernel Module Plugin</span>
-<span class="go">Finished Kernel Module Plugin</span>
-
-<span class="go">Dependencies Resolved</span>
-
+<span class="go">Dependencies resolved.</span>
 <span class="go">====================================================================================================================</span>
-<span class="go"> Package                      Arch                   Version                        Repository                 Size</span>
+<span class="go"> Package                                Architecture     Version                         Repository            Size</span>
 <span class="go">====================================================================================================================</span>
 <span class="go">Removing:</span>
-<span class="go"> voms                         x86_64                 2.0.6-3.osg                    installed                 407 k</span>
-<span class="go">Removing for dependencies:</span>
-<span class="go"> voms-clients                 x86_64                 2.0.6-3.osg                    installed                 373 k</span>
+<span class="go"> voms                                   x86_64           2.1.0-0.27.rc3.el9              @epel                432 k</span>
+<span class="go">Removing dependent packages:</span>
+<span class="go"> osg-wn-client                          noarch           3.6-6.osg36.el9                 @osg                 211  </span>
 
 <span class="go">Transaction Summary</span>
 <span class="go">====================================================================================================================</span>
 <span class="go">Remove        2 Package(s)</span>
-<span class="go">Reinstall     0 Package(s)</span>
-<span class="go">Downgrade     0 Package(s)</span>
 
 <span class="go">Is this ok [y/N]: y</span>
-<span class="go">Downloading Packages:</span>
-<span class="go">Running rpm_check_debug</span>
-<span class="go">Running Transaction Test</span>
-<span class="go">Finished Transaction Test</span>
-<span class="go">Transaction Test Succeeded</span>
+<span class="go">Running transaction check</span>
+<span class="go">Transaction check succeeded.</span>
+<span class="go">Running transaction test</span>
+<span class="go">Transaction test succeeded.</span>
 <span class="go">Running Transaction</span>
-<span class="go">  Erasing        : voms                                                                                         1/2 </span>
-<span class="go">  Erasing        : voms-clients                                                                                 2/2 </span>
+<span class="go">  ... etc ...</span>
 
 <span class="go">Removed:</span>
-<span class="go">  voms.x86_64 0:2.0.6-3.osg                                                                                         </span>
-
-<span class="go">Dependency Removed:</span>
-<span class="go">  voms-clients.x86_64 0:2.0.6-3.osg                                                                                 </span>
+<span class="go">  voms-2.1.0-0.27.rc3.el9.x86_64</span>
 
 <span class="go">Complete!</span>
 </code></pre></div>
@@ -2384,46 +2336,59 @@
 <p>Installing the debuginfo package requires three steps.</p>
 <ol>
 <li>
-<p>Enable the installation of debuginfo packages. This only needs to be done once. Edit the yum repo file, usually <code>/etc/yum.repos.d/osg.repo</code> to enable the separate debuginfo repository. Near the bottom of the file, you'll see the <code>osg-debug</code> repo: </p>
-<div class="codehilite"><pre><span></span><code>[osg-debuginfo]
-name=OSG Software for Enterprise Linux 7 - $basearch - Debug
-baseurl=https://repo.opensciencegrid.org/osg/3.6/el7/release/$basearch/debug
-priority=98 
-enabled=1
-gpgcheck=1 
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
-       file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-2
+<p>Install the <code>yum-utils</code> package, which contains the <code>debuginfo-install</code> utility.</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install yum-utils
+<span class="go">...</span>
+<span class="go">====================================================================================================================</span>
+<span class="go">Package                    Architecture            Version                           Repository               Size</span>
+<span class="go">====================================================================================================================</span>
+<span class="go">Installing:</span>
+<span class="go">yum-utils                  noarch                  4.3.0-5.el9_2                     baseos                   35 k</span>
+
+<span class="go">Transaction Summary</span>
+<span class="go">====================================================================================================================</span>
+<span class="go">Install  1 Package</span>
+
+<span class="go">Total download size: 35 k</span>
+<span class="go">Installed size: 23 k</span>
+<span class="go">Is this ok [y/N]: y</span>
+<span class="go">...</span>
+<span class="go">Installed:</span>
+<span class="go">  yum-utils-4.3.0-5.el9_2.noarch</span>
 </code></pre></div>
 
-<p>Make sure that "enabled" is set to 1.</p>
 </li>
 <li>
 <p>Figure out which package installed the program you want to debug. One way to figure it out is to ask RPM. For example, if you want to debug grid-proxy-init:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>rpm -qf <span class="sb">`</span>which grid-proxy-init<span class="sb">`</span>
-<span class="go">globus-proxy-utils-5.0-5.osg.x86_64</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>rpm -qf <span class="sb">`</span>which voms-proxy-init<span class="sb">`</span>
+<span class="go">voms-clients-cpp-2.1.0-0.27.rc3.el9.x86_64</span>
 </code></pre></div>
 
 </li>
 <li>
 <p>Install the debugging information for that package. Continuing this example: </p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>debuginfo-install globus-proxy-utils
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>debuginfo-install voms-clients-cpp
 <span class="go">...</span>
-<span class="go">=================================================================================================================================</span>
-<span class="go"> Package                                      Arch                   Version                     Repository                 Size</span>
-<span class="go">=================================================================================================================================</span>
+<span class="go">====================================================================================================================</span>
+<span class="go">Package                              Architecture     Version                       Repository                Size</span>
+<span class="go">====================================================================================================================</span>
 <span class="go">Installing:</span>
-<span class="go"> globus-proxy-utils-debuginfo                 x86_64                 5.0-5.osg                   osg-debug                  61 k</span>
+<span class="go">voms-clients-cpp-debuginfo           x86_64           2.1.0-0.27.rc3.el9            epel-debuginfo           437 k</span>
+<span class="go">voms-debugsource                     x86_64           2.1.0-0.27.rc3.el9            epel-debuginfo           195 k</span>
+<span class="go">Installing dependencies:</span>
+<span class="go">voms-debuginfo                       x86_64           2.1.0-0.27.rc3.el9            epel-debuginfo           928 k</span>
 
 <span class="go">Transaction Summary</span>
-<span class="go">=================================================================================================================================</span>
-<span class="go">Install       1 Package(s)</span>
-<span class="go">Upgrade       0 Package(s)</span>
+<span class="go">====================================================================================================================</span>
+<span class="go">Install  3 Packages</span>
 
-<span class="go">Total download size: 61 k</span>
+<span class="go">Total download size: 1.5 M</span>
+<span class="go">Installed size: 6.0 M</span>
 <span class="go">Is this ok [y/N]: y</span>
 <span class="go">...</span>
 <span class="go">Installed:</span>
-<span class="go">  globus-proxy-utils-debuginfo.x86_64 0:5.0-5.osg</span>
+<span class="go">  voms-clients-cpp-debuginfo-2.1.0-0.27.rc3.el9.x86_64           voms-debuginfo-2.1.0-0.27.rc3.el9.x86_64          </span>
+<span class="go">  voms-debugsource-2.1.0-0.27.rc3.el9.x86_64</span>
 </code></pre></div>
 
 <p>This last step will select the right package name, then use <code>yum</code> to install it.</p>
