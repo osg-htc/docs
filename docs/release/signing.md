@@ -29,9 +29,8 @@ globus-core-8.0-2.osg.x86_64.rpm:
 The OSG Packaging Signing Keys
 ------------------------------
 
-The OSG Software Team has two GPG keys for signing RPMs;
-the first key is used for packages before the 3.6 release series,
-and the second key is used for packages in the 3.6 release series and afterward.
+The OSG Software Team has several GPG keys for signing RPMs;
+The key used depends on the OSG version and EL variant used, as documented below:
 
 | Key 1 (3.0 to 3.5) |                                                        |
 |--------------------|--------------------------------------------------------|
@@ -40,12 +39,19 @@ and the second key is used for packages in the 3.6 release series and afterward.
 | Fingerprint        | `6459 !D9D2 AAA9 AB67 A251  FB44 2110 !B1C8 824B 8603` |
 | Key ID             | `824b8603`                                             |
 
-| Key 2 (3.6 and on) |                                                        |
+| Key 2 (3.6 and on, EL <= 8) |                                               |
 |--------------------|--------------------------------------------------------|
 | Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-2`                   |
 | Download           | [UW-Madison](https://vdt.cs.wisc.edu/RPM-GPG-KEY-OSG-2), [GitHub](https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-2) |
 | Fingerprint        | `1216 FF68 897A 77EA 222F  C961 27DC 6864 96D2 B90F`   |
 | Key ID             | `96d2b90f`                                             |
+
+| Key 4 (3.6 and on, EL >= 9) |                                               |
+|--------------------|--------------------------------------------------------|
+| Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-4`                   |
+| Download           | [GitHub](https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-4) |
+| Fingerprint        | `B77E 70A6 0537 1D3B E109  A18E 3170 E150 1887 C61A`   |
+| Key ID             | `1887c61a`                                             |
 
 !!! note
     Some packages in the 3.6 repos may still be signed with the old key;
@@ -79,5 +85,12 @@ pub   rsa4096 2021-02-24 [SC]
       1216FF68897A77EA222FC96127DC686496D2B90F
 uid                      Open Science Grid Software <help@opensciencegrid.org>
 sub   rsa4096 2021-02-24 [E]
+
+$  gpg --import-options show-only --import < /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-4 
+pub   rsa4096 2022-12-28 [SC]
+      B77E70A605371D3BE109A18E3170E1501887C61A
+uid                      OSG Software 3.6 for EL9 RSA <help@osg-htc.org>
+sub   rsa4096 2022-12-28 [E]
+
 ```
 

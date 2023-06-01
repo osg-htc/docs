@@ -69,6 +69,7 @@ The definitive list of software in the contrib repository can be found here:
 
 -   [OSG 3.6 EL7 contrib software repository](https://repo.opensciencegrid.org/osg/3.6/el7/contrib/x86_64/)
 -   [OSG 3.6 EL8 contrib software repository](https://repo.opensciencegrid.org/osg/3.6/el8/contrib/x86_64/)
+-   [OSG 3.6 EL9 contrib software repository](https://repo.opensciencegrid.org/osg/3.6/el9/contrib/x86_64/)
 
 If you would like to distribute your software in the OSG `contrib` repository, please [contact us](../common/help.md) with a
 description of your software, what users it serves, and relevant RPM packaging.
@@ -82,7 +83,7 @@ The Yum priorities plugin is used to tell Yum to prefer OSG packages over EPEL o
 It is important to install and enable the Yum priorities plugin before installing OSG Software to ensure that you are
 getting the OSG-supported versions.
 
-This plugin is built into Yum on EL8 distributions.
+This plugin is built into Yum on EL8 and EL9 distributions.
 
 1.  Install the Yum priorities package:
 
@@ -161,6 +162,8 @@ You must install and enable these first.
         root@host # yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
         ## EPEL 8 (For RHEL 8 and CentOS Stream 8, Rocky Linux 8, AlmaLinux 8)
         root@host # yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+        ## EPEL 9 (For RHEL 9 and CentOS Stream 9, Rocky Linux 9, AlmaLinux 9)
+        root@host # yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 
 -   Verify that `/etc/yum.repos.d/epel.repo` exists; the `[epel]` section should contain:
 
@@ -193,6 +196,11 @@ For instructions on upgrading from one OSG series to another, see the
             :::console
             root@host # yum install https://repo.opensciencegrid.org/osg/3.6/osg-3.6-el8-release-latest.rpm
 
+    - OSG 3.6 EL9:
+
+            :::console
+            root@host # yum install https://repo.opensciencegrid.org/osg/3.6/osg-3.6-el9-release-latest.rpm
+
 1. The only OSG repository enabled by default is the release one.
    If you want to [enable another one](#repositories) (e.g. `osg-testing`), then edit its file
    (e.g. `/etc/yum.repos.d/osg-testing.repo`) and change the `enabled` option from 0 to 1:
@@ -218,25 +226,26 @@ For production services, we suggest only changing software versions during contr
 Therefore we recommend security-only automatic updates or disabling automatic updates entirely.
 
 !!! note
-    RHEL/CentOS Stream 8 automatic updates are provided in the `dnf-automatic` RPM, which is not installed by default.
+    Automatic updates for EL8 and EL9 variants are provided in the `dnf-automatic` RPM, 
+    which is not installed by default.
 
 To enable only security related automatic updates:
 
--   On RHEL 7/SL 7, edit `/etc/yum/yum-cron.conf` and set `update_cmd = security`
+-   On EL 7 variants, edit `/etc/yum/yum-cron.conf` and set `update_cmd = security`
 
--   On RHEL 8, Rocky Linux 8, AlmaLinux 8, edit `/etc/dnf/automatic.conf` and set `upgrade_type = security`
+-   On EL8 and EL9 variants, edit `/etc/dnf/automatic.conf` and set `upgrade_type = security`
 
-CentOS 7 and CentOS Stream 8 do not support security-only automatic updates;
+CentOS 7, CentOS Stream 8, and CentOS Stream 9 do not support security-only automatic updates;
 doing any of the above steps will prevent automatic updates from happening at all.
 
 To disable automatic updates entirely:
 
--   On EL7, run:
+-   On EL7 variants, run:
 
         :::console
         root@host # service yum-cron stop
 
--   On EL8, run:
+-   On EL8 and EL9 variants, run:
 
         :::console
         root@host # systemctl disable --now dnf-automatic.timer
