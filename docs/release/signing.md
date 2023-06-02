@@ -67,7 +67,7 @@ pub  1024D/824B8603 2011-09-15 OSG Software Team (RPM Signing Key for Koji Packa
 sub  2048g/28E5857C 2011-09-15
 
 $ gpg --with-fingerprint /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-2
-pub  4096R/96D2B90F 2021-02-24 Open Science Grid Software <help@opensciencegrid.org>
+pub  4096R/96D2B90F 2021-02-24 Open Science Grid Software <help@osg-htc.org>
       Key fingerprint = 1216 FF68 897A 77EA 222F  C961 27DC 6864 96D2 B90F
 sub  4096R/49E9ACC2 2021-02-24
 ```
@@ -83,7 +83,7 @@ sub   elg2048 2011-09-15 [E]
 $ gpg --import-options show-only --import  < /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-2
 pub   rsa4096 2021-02-24 [SC]
       1216FF68897A77EA222FC96127DC686496D2B90F
-uid                      Open Science Grid Software <help@opensciencegrid.org>
+uid                      Open Science Grid Software <help@osg-htc.org>
 sub   rsa4096 2021-02-24 [E]
 
 $  gpg --import-options show-only --import < /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-4 

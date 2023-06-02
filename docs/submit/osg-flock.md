@@ -62,7 +62,7 @@ Scheduling a Planning Consultation
 ----------------------------------
 
 Before participating in the OSG, either as a computational resource contributor or consumer,
-we ask that you [contact us](mailto:help@opensciencegrid.org) to set up a consultation.
+we ask that you [contact us](mailto:help@osg-htc.org) to set up a consultation.
 During this consultation, OSG staff will introduce you and your team to the OSG and develop a plan to meet your resource
 contribution and/or research goals.
 
