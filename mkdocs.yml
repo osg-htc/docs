@@ -67,7 +67,7 @@ nav:
 - Access Point:
   - 'Install an OSPool Access Point': 'submit/osg-flock.md'
   - 'Acceptable Use Policy': 'submit/ap-ospool-aup.md'
-- Data Federation:
+- 'Data Federation (OSDF)':
   - 'Overview': 'data/stashcache/overview.md'
   - Data Cache:
       - 'Install from container': 'data/stashcache/run-stashcache-container.md'
