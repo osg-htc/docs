@@ -66,7 +66,7 @@ list.
 Notify OSG of Major Changes
 ---------------------------
 
-To avoid potential issues with OSG job submissions, please [notify us](mailto:help@opensciencegrid.org) of major changes
+To avoid potential issues with OSG job submissions, please [notify us](mailto:help@osg-htc.org) of major changes
 to your site, including:
 
 - Major OS version changes on the worker nodes (e.g., upgraded from EL 7 to EL 8)
