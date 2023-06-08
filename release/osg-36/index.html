@@ -1473,6 +1473,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#june-8-2023-htcondor-1004-xcache-350-frontier-squid-58-igtf-1120-upcoming-htcondor-1051" class="md-nav__link">
+    June 8, 2023: HTCondor 10.0.4, XCache 3.5.0, frontier-squid 5.8, IGTF 1.120; Upcoming HTCondor 10.5.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#may-30-2023-htcondor-9017-3-osdf-client-6110" class="md-nav__link">
     May 30, 2023: HTCondor 9.0.17-3, osdf-client 6.11.0
   </a>
@@ -2331,6 +2338,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#june-8-2023-htcondor-1004-xcache-350-frontier-squid-58-igtf-1120-upcoming-htcondor-1051" class="md-nav__link">
+    June 8, 2023: HTCondor 10.0.4, XCache 3.5.0, frontier-squid 5.8, IGTF 1.120; Upcoming HTCondor 10.5.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#may-30-2023-htcondor-9017-3-osdf-client-6110" class="md-nav__link">
     May 30, 2023: HTCondor 9.0.17-3, osdf-client 6.11.0
   </a>
@@ -2900,6 +2914,61 @@ of <code>/etc/yum.repos.d/osg.repo</code>:</p>
 <div class="highlight"><pre><span></span><code>excludepkgs=rrdtool
 </code></pre></div>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="june-8-2023-htcondor-1004-xcache-350-frontier-squid-58-igtf-1120-upcoming-htcondor-1051"><strong>June 8, 2023:</strong> HTCondor 10.0.4, XCache 3.5.0, frontier-squid 5.8, IGTF 1.120; Upcoming HTCondor 10.5.1<a class="headerlink" href="#june-8-2023-htcondor-1004-xcache-350-frontier-squid-58-igtf-1120-upcoming-htcondor-1051" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://htcondor.readthedocs.io/en/v10/version-history/upgrading-from-9-0-to-10-0-versions.html">HTCondor 10.0.4</a>: EL7, EL8<ul>
+<li>Users can prevent runaway jobs by specifying an allowed duration</li>
+<li>Able to extend submit commands and create job submit templates</li>
+<li>Initial implementation of htcondor <noun> <verb> command line interface</li>
+<li>Initial implementation of Job Sets in the htcondor CLI tool</li>
+<li>Users can supply a container image without concern for which container runtime is used</li>
+<li>Add the ability to select a particular model of GPU when the execution points have heterogeneous GPU cards installed or cards that support nVidia MIG</li>
+<li>File transfer error messages are now returned and clearly indicate where the error occurred</li>
+<li>HTCondor now utilizes ARC-CE's REST interface</li>
+<li>Support for ARM and PowerPC for Enterprise Linux 8</li>
+<li>Security Enhancements<ul>
+<li>For IDTOKENS, signing key not required on every execution point</li>
+<li>Trust on first use ability for SSL connections</li>
+<li>Improvements against replay attacks</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>XCache 3.5.0<ul>
+<li>The authfile updater pulls a grid-mapfile from Topology</li>
+</ul>
+</li>
+<li><a href="http://www.squid-cache.org/Versions/v5/squid-5.8-RELEASENOTES.html">frontier-squid 5.8</a><ul>
+<li>Add predefined ACL named "to_linklocal"</li>
+<li>Bug fix for the cache manager returning "mgr_index" rather than data</li>
+</ul>
+</li>
+<li>CA certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.120</a><ul>
+<li>Added transitional CDP mirror URLs for retiring DigitalTrust CAs (AE)</li>
+<li>Removed discontinued NIIF-Root-CA-2 (HU)</li>
+<li>Removed expiring GermanGrid (GridKA CrossGrid) CA (DE)</li>
+</ul>
+</li>
+<li>htgettoken 1.18<ul>
+<li>Fixes bug with --nobearertoken when invoked by HTCondor</li>
+<li>EL9 support</li>
+</ul>
+</li>
+<li><a href="https://github.com/opensciencegrid/osg-token-renewer/releases/tag/v0.8.3-2">osg-token-renewer 0.8.3-2</a>: Remove X11 UI dependencies</li>
+<li>osg-update-vos 1.4.1: Remove Python 2 dependencies</li>
+<li>cigetcert 1.21: Remove warning on EL9</li>
+<li><a href="https://htcondor.readthedocs.io/en/v10_x/version-history/feature-versions-10-x.html#version-10-5-1">HTCondor 10.5.1</a>: EL7 Upcoming, EL8 Upcoming, EL9<ul>
+<li>Can now define DAGMan save points to be able to rerun DAGs from there</li>
+<li>Expand environment variables passed by default to the DAGMan manager</li>
+<li>Administrators can prevent users using "getenv = true" in submit files</li>
+<li>Improved throughput when submitting a large number of ARC-CE jobs</li>
+<li>Execute events contain the slot name, sandbox path, resource quantities</li>
+<li>Can add attributes of the execution point to be recorded in the user log</li>
+<li>Enhanced condor_transform_ads tool to ease offline job transform testing</li>
+<li>Fix bug where memory limits over 2 GiB might not be correctly enforced</li>
+</ul>
+</li>
+</ul>
 <h3 id="may-30-2023-htcondor-9017-3-osdf-client-6110"><strong>May 30, 2023:</strong> HTCondor 9.0.17-3, osdf-client 6.11.0<a class="headerlink" href="#may-30-2023-htcondor-9017-3-osdf-client-6110" title="Permanent link">&para;</a></h3>
 <ul>
 <li>HTCondor 9.0.17-3<ul>
@@ -3511,7 +3580,7 @@ If not, pilots will not arrive or jobs will have storage access issues.</p>
 </li>
 <li>osg-release 3.6-5: Add osg-next yum repository</li>
 <li>Upcoming<ul>
-<li><a href="https://htcondor.readthedocs.io/en/update/version-history/development-release-series-91.html#version-9-9-1">HTCondor 9.9.1</a><ul>
+<li><a href="https://htcondor.readthedocs.io/en/v9_1/version-history/development-release-series-91.html#version-9-9-1">HTCondor 9.9.1</a><ul>
 <li>A new authentication method for remote HTCondor administration</li>
 <li>Several changes to improve the security of connections</li>
 <li>Fix issue where DAGMan direct submission failed when using Kerberos</li>
@@ -3592,7 +3661,7 @@ If not, pilots will not arrive or jobs will have storage access issues.</p>
 </ul>
 </li>
 <li>VOMS 2: Update default proxy certificate key length to 2048 bits</li>
-<li>Upcoming: <a href="https://htcondor.readthedocs.io/en/update/version-history/development-release-series-91.html#version-9-8-1">HTCondor 9.8.1</a><ul>
+<li>Upcoming: <a href="https://htcondor.readthedocs.io/en/v9_1/version-history/development-release-series-91.html#version-9-8-1">HTCondor 9.8.1</a><ul>
 <li>Support for Heterogeneous GPUs, some configuration required</li>
 <li>Allow HTCondor to use grid sites requiring multi-factor authentication</li>
 <li>Technology preview: bring your own resources from HPC clusters</li>
