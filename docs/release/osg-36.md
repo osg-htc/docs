@@ -79,6 +79,46 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### **June 8, 2023:** HTCondor 10.0.4, XCache 3.5.0, frontier-squid 5.8, IGTF 1.120; Upcoming HTCondor 10.5.1
+  -   [HTCondor 10.0.4](https://htcondor.readthedocs.io/en/v10/version-history/upgrading-from-9-0-to-10-0-versions.html): EL7, EL8
+      -   Users can prevent runaway jobs by specifying an allowed duration
+      -   Able to extend submit commands and create job submit templates
+      -   Initial implementation of htcondor <noun> <verb> command line interface
+      -   Initial implementation of Job Sets in the htcondor CLI tool
+      -   Users can supply a container image without concern for which container runtime is used
+      -   Add the ability to select a particular model of GPU when the execution points have heterogeneous GPU cards installed or cards that support nVidia MIG
+      -   File transfer error messages are now returned and clearly indicate where the error occurred
+      -   HTCondor now utilizes ARC-CE's REST interface
+      -   Support for ARM and PowerPC for Enterprise Linux 8
+      -   Security Enhancements
+          -   For IDTOKENS, signing key not required on every execution point
+          -   Trust on first use ability for SSL connections
+          -   Improvements against replay attacks
+-   XCache 3.5.0
+    -   The authfile updater pulls a grid-mapfile from Topology
+-   [frontier-squid 5.8](http://www.squid-cache.org/Versions/v5/squid-5.8-RELEASENOTES.html)
+    -   Add predefined ACL named "to\_linklocal"
+    -   Bug fix for the cache manager returning "mgr\_index" rather than data
+-   CA certificates based on [IGTF 1.120](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Added transitional CDP mirror URLs for retiring DigitalTrust CAs (AE)
+    -   Removed discontinued NIIF-Root-CA-2 (HU)
+    -   Removed expiring GermanGrid (GridKA CrossGrid) CA (DE)
+-   htgettoken 1.18
+    -   Fixes bug with --nobearertoken when invoked by HTCondor
+    -   EL9 support
+-   [osg-token-renewer 0.8.3-2](https://github.com/opensciencegrid/osg-token-renewer/releases/tag/v0.8.3-2): Remove X11 UI dependencies
+-   osg-update-vos 1.4.1: Remove Python 2 dependencies
+-   cigetcert 1.21: Remove warning on EL9
+-   [HTCondor 10.5.1](https://htcondor.readthedocs.io/en/v10_x/version-history/feature-versions-10-x.html#version-10-5-1): EL7 Upcoming, EL8 Upcoming, EL9
+    -   Can now define DAGMan save points to be able to rerun DAGs from there
+    -   Expand environment variables passed by default to the DAGMan manager
+    -   Administrators can prevent users using "getenv = true" in submit files
+    -   Improved throughput when submitting a large number of ARC-CE jobs
+    -   Execute events contain the slot name, sandbox path, resource quantities
+    -   Can add attributes of the execution point to be recorded in the user log
+    -   Enhanced condor\_transform\_ads tool to ease offline job transform testing
+    -   Fix bug where memory limits over 2 GiB might not be correctly enforced
+
 ### **May 30, 2023:** HTCondor 9.0.17-3, osdf-client 6.11.0
 -   HTCondor 9.0.17-3
     -   Provides script to assist updating from HTCondor version 9 to version 10
@@ -486,7 +526,7 @@ Latest News
     -   Fix crash on Enterprise Linux 8
 -   osg-release 3.6-5: Add osg-next yum repository
 -   Upcoming
-    -   [HTCondor 9.9.1](https://htcondor.readthedocs.io/en/update/version-history/development-release-series-91.html#version-9-9-1)
+    -   [HTCondor 9.9.1](https://htcondor.readthedocs.io/en/v9_1/version-history/development-release-series-91.html#version-9-9-1)
         -   A new authentication method for remote HTCondor administration
         -   Several changes to improve the security of connections
         -   Fix issue where DAGMan direct submission failed when using Kerberos
@@ -542,7 +582,7 @@ Latest News
     -   Update from upstream software and change httokendecode to also
           verify tokens if scitokens-verify is present
 -   VOMS 2: Update default proxy certificate key length to 2048 bits
--   Upcoming: [HTCondor 9.8.1](https://htcondor.readthedocs.io/en/update/version-history/development-release-series-91.html#version-9-8-1)
+-   Upcoming: [HTCondor 9.8.1](https://htcondor.readthedocs.io/en/v9_1/version-history/development-release-series-91.html#version-9-8-1)
     -   Support for Heterogeneous GPUs, some configuration required
     -   Allow HTCondor to use grid sites requiring multi-factor authentication
     -   Technology preview: bring your own resources from HPC clusters
