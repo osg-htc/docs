@@ -80,7 +80,7 @@ Latest News
 -----------
 
 ### **June 8, 2023:** HTCondor 10.0.4, XCache 3.5.0, frontier-squid 5.8, IGTF 1.120; Upcoming HTCondor 10.5.1
-  -   [HTCondor 10.0.4](https://htcondor.readthedocs.io/en/v10/version-history/lts-versions-10-0.html)
+  -   [HTCondor 10.0.4](https://htcondor.readthedocs.io/en/v10/version-history/upgrading-from-9-0-to-10-0-versions.html)
       -   Users can prevent runaway jobs by specifying an allowed duration
       -   Able to extend submit commands and create job submit templates
       -   Initial implementation of htcondor <noun> <verb> command line interface
