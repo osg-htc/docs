@@ -80,7 +80,7 @@ Latest News
 -----------
 
 ### **June 8, 2023:** HTCondor 10.0.4, XCache 3.5.0, frontier-squid 5.8, IGTF 1.120; Upcoming HTCondor 10.5.1
-  -   [HTCondor 10.0.4](https://htcondor.readthedocs.io/en/v10/version-history/upgrading-from-9-0-to-10-0-versions.html)
+  -   [HTCondor 10.0.4](https://htcondor.readthedocs.io/en/v10/version-history/upgrading-from-9-0-to-10-0-versions.html): EL7, EL8
       -   Users can prevent runaway jobs by specifying an allowed duration
       -   Able to extend submit commands and create job submit templates
       -   Initial implementation of htcondor <noun> <verb> command line interface
@@ -109,7 +109,7 @@ Latest News
 -   [osg-token-renewer 0.8.3-2](https://github.com/opensciencegrid/osg-token-renewer/releases/tag/v0.8.3-2): Remove X11 UI dependencies
 -   osg-update-vos 1.4.1: Remove Python 2 dependencies
 -   cigetcert 1.21: Remove warning on EL9
--   Upcoming: [HTCondor 10.5.1](https://htcondor.readthedocs.io/en/v10_x/version-history/feature-versions-10-x.html#version-10-5-1)
+-   [HTCondor 10.5.1](https://htcondor.readthedocs.io/en/v10_x/version-history/feature-versions-10-x.html#version-10-5-1): EL7 Upcoming, EL8 Upcoming, EL9
     -   Can now define DAGMan save points to be able to rerun DAGs from there
     -   Expand environment variables passed by default to the DAGMan manager
     -   Administrators can prevent users using "getenv = true" in submit files
