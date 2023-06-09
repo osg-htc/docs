@@ -1473,6 +1473,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#june-9-2023-htcondor-1005" class="md-nav__link">
+    June 9, 2023: HTCondor 10.0.5
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#june-8-2023-htcondor-1004-xcache-350-frontier-squid-58-igtf-1120-upcoming-htcondor-1051" class="md-nav__link">
     June 8, 2023: HTCondor 10.0.4, XCache 3.5.0, frontier-squid 5.8, IGTF 1.120; Upcoming HTCondor 10.5.1
   </a>
@@ -2338,6 +2345,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#june-9-2023-htcondor-1005" class="md-nav__link">
+    June 9, 2023: HTCondor 10.0.5
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#june-8-2023-htcondor-1004-xcache-350-frontier-squid-58-igtf-1120-upcoming-htcondor-1051" class="md-nav__link">
     June 8, 2023: HTCondor 10.0.4, XCache 3.5.0, frontier-squid 5.8, IGTF 1.120; Upcoming HTCondor 10.5.1
   </a>
@@ -2869,8 +2883,13 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
 <p>The following issues are known to currently affect packages distributed in OSG 3.6:</p>
 <h3 id="preparing-for-htcondor-100">Preparing for HTCondor 10.0<a class="headerlink" href="#preparing-for-htcondor-100" title="Permanent link">&para;</a></h3>
 <p>We plan to release HTCondor version 10.0 into the OSG repositories soon.</p>
-<p>Administrators should install the <code>condor-upgrade-checks</code> RPM and run the
-<code>/usr/bin/upgrade9to10checks.py</code> script to check for actions that need to be
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The condor-upgrade-checks RPM version 10.0.5 works with existing HTCondor 9.0.x installations.
+It can be install with either HTCondor version 9 or 10.</p>
+</div>
+<p>HTCondor-CE and HTCondor pool administrators should install the <code>condor-upgrade-checks</code> RPM and run the
+<code>condor_upgrade_check</code> script to check for actions that need to be
 taken before upgrading to HTCondor version 10. This script checks for three
 possible issues:</p>
 <ul>
@@ -2879,11 +2898,11 @@ possible issues:</p>
 <li>HTCondor map files that have regular expressions that the new PCRE2 library will not accept</li>
 </ul>
 <p>To check your Access Point configuration run:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@access-point # </span>upgrade9to10checks.py
+<div class="codehilite"><pre><span></span><code><span class="gp">root@access-point # </span>condor_upgrade_check
 </code></pre></div>
 
 <p>To check your Compute Entrypoint configuration run:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@htcondor-ce # </span>upgrade9to10checks.py -ce
+<div class="codehilite"><pre><span></span><code><span class="gp">root@htcondor-ce # </span>condor_upgrade_check -ce
 </code></pre></div>
 
 <div class="admonition note">
@@ -2914,6 +2933,14 @@ of <code>/etc/yum.repos.d/osg.repo</code>:</p>
 <div class="highlight"><pre><span></span><code>excludepkgs=rrdtool
 </code></pre></div>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="june-9-2023-htcondor-1005"><strong>June 9, 2023:</strong> HTCondor 10.0.5<a class="headerlink" href="#june-9-2023-htcondor-1005" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://htcondor.readthedocs.io/en/v10_0/version-history/lts-versions-10-0.html#version-10-0-5">HTCondor 10.0.5</a>: EL7, EL8<ul>
+<li>Rename <code>upgrade9to10checks.py</code> script to <code>condor_upgrade_check</code></li>
+<li>Fix spurious warning from <code>condor_upgrade_check</code> about regular expression that contain a space</li>
+</ul>
+</li>
+</ul>
 <h3 id="june-8-2023-htcondor-1004-xcache-350-frontier-squid-58-igtf-1120-upcoming-htcondor-1051"><strong>June 8, 2023:</strong> HTCondor 10.0.4, XCache 3.5.0, frontier-squid 5.8, IGTF 1.120; Upcoming HTCondor 10.5.1<a class="headerlink" href="#june-8-2023-htcondor-1004-xcache-350-frontier-squid-58-igtf-1120-upcoming-htcondor-1051" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://htcondor.readthedocs.io/en/v10/version-history/upgrading-from-9-0-to-10-0-versions.html">HTCondor 10.0.4</a>: EL7, EL8<ul>
