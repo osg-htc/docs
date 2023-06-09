@@ -83,7 +83,7 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
-### **June 8, 2023:** HTCondor 10.0.5
+### **June 9, 2023:** HTCondor 10.0.5
   -   [HTCondor 10.0.5](https://htcondor.readthedocs.io/en/v10_0/version-history/lts-versions-10-0.html#version-10-0-5): EL7, EL8
       -   Rename `upgrade9to10checks.py` script to `condor_upgrade_check`
       -   Fix spurious warning from `condor_upgrade_check` about regular expression that contain a space
