@@ -22,8 +22,12 @@ The following issues are known to currently affect packages distributed in OSG 3
 
 We plan to release HTCondor version 10.0 into the OSG repositories soon.
 
-Administrators should install the `condor-upgrade-checks` RPM and run the
-`/usr/bin/upgrade9to10checks.py` script to check for actions that need to be
+!!! note
+    The condor-upgrade-checks RPM version 10.0.5 works with existing HTCondor 9.0.x installations.
+    It can be install with either HTCondor version 9 or 10.
+
+HTCondor-CE and HTCondor pool administrators should install the `condor-upgrade-checks` RPM and run the
+`condor_upgrade_check` script to check for actions that need to be
 taken before upgrading to HTCondor version 10. This script checks for three
 possible issues:
 
@@ -34,12 +38,12 @@ possible issues:
 To check your Access Point configuration run:
 
     :::console
-    root@access-point # upgrade9to10checks.py
+    root@access-point # condor_upgrade_check
 
 To check your Compute Entrypoint configuration run:
 
     :::console
-    root@htcondor-ce # upgrade9to10checks.py -ce
+    root@htcondor-ce # condor_upgrade_check -ce
 
 !!! note
     Don't forget to check to HTCondor batch system as well
@@ -78,6 +82,11 @@ excludepkgs=rrdtool
 
 Latest News
 -----------
+
+### **June 8, 2023:** HTCondor 10.0.5
+  -   [HTCondor 10.0.5](https://htcondor.readthedocs.io/en/v10_0/version-history/lts-versions-10-0.html#version-10-0-5): EL7, EL8
+      -   Rename `upgrade9to10checks.py` script to `condor_upgrade_check`
+      -   Fix spurious warning from `condor_upgrade_check` about regular expression that contain a space
 
 ### **June 8, 2023:** HTCondor 10.0.4, XCache 3.5.0, frontier-squid 5.8, IGTF 1.120; Upcoming HTCondor 10.5.1
   -   [HTCondor 10.0.4](https://htcondor.readthedocs.io/en/v10/version-history/upgrading-from-9-0-to-10-0-versions.html): EL7, EL8
