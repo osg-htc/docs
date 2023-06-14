@@ -3,7 +3,7 @@ title: OSG 3.6 News
 OSG 3.6 News
 ============
 
-**Supported OS Versions:** EL7, EL8
+**Supported OS Versions:** EL7, EL8, EL9
 
 The OSG 3.6 release series is a major overhaul of the OSG software stack compared to previous release series with
 changes to core protocols used for authentication and data transfer:
