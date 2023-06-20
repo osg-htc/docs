@@ -1473,6 +1473,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#june-20-2023-igtf-1121" class="md-nav__link">
+    June 20, 2023: IGTF 1.121
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#june-9-2023-htcondor-1005" class="md-nav__link">
     June 9, 2023: HTCondor 10.0.5
   </a>
@@ -2345,6 +2352,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#june-20-2023-igtf-1121" class="md-nav__link">
+    June 20, 2023: IGTF 1.121
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#june-9-2023-htcondor-1005" class="md-nav__link">
     June 9, 2023: HTCondor 10.0.5
   </a>
@@ -2882,7 +2896,7 @@ We also dropped support for the GridFTP, GSI authentication, and Hadoop.</p>
 <h2 id="known-issues">Known Issues<a class="headerlink" href="#known-issues" title="Permanent link">&para;</a></h2>
 <p>The following issues are known to currently affect packages distributed in OSG 3.6:</p>
 <h3 id="preparing-for-htcondor-100">Preparing for HTCondor 10.0<a class="headerlink" href="#preparing-for-htcondor-100" title="Permanent link">&para;</a></h3>
-<p>We plan to release HTCondor version 10.0 into the OSG repositories soon.</p>
+<p>We have released HTCondor version 10.0 into the OSG repositories.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The <code>condor-upgrade-checks</code> RPM version 10.0.5 works with existing HTCondor 9.0.x installations.
@@ -2893,8 +2907,8 @@ It can be installed with either HTCondor version 9 or 10.</p>
 taken before upgrading to HTCondor version 10. This script checks for three
 possible issues:</p>
 <ul>
-<li>HTCondor upgrade causing a change in TRUST_DOMAIN which would invalidate existing IDTOKENS</li>
-<li>Recent and current GPU jobs that will no longer match, because the new "require_gpus" condor_submit command must be used for GPU matching</li>
+<li>HTCondor upgrade causing a change in <code>TRUST_DOMAIN</code> which would invalidate existing IDTOKENS</li>
+<li>Recent and current GPU jobs that will no longer match, because the new <code>require_gpus</code> <code>condor_submit</code> command must be used for GPU matching</li>
 <li>HTCondor map files that have regular expressions that the new PCRE2 library will not accept</li>
 </ul>
 <p>To check your Access Point configuration run:</p>
@@ -2933,6 +2947,13 @@ of <code>/etc/yum.repos.d/osg.repo</code>:</p>
 <div class="highlight"><pre><span></span><code>excludepkgs=rrdtool
 </code></pre></div>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="june-20-2023-igtf-1121"><strong>June 20, 2023:</strong> IGTF 1.121<a class="headerlink" href="#june-20-2023-igtf-1121" title="Permanent link">&para;</a></h3>
+<ul>
+<li>CA certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.121</a><ul>
+<li>Added accredited (classic) InCommon RSA IGTF Server CA 3 under the Sectigo USERTrust RSA root, for which namespaces have been updated (US)</li>
+</ul>
+</li>
+</ul>
 <h3 id="june-9-2023-htcondor-1005"><strong>June 9, 2023:</strong> HTCondor 10.0.5<a class="headerlink" href="#june-9-2023-htcondor-1005" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://htcondor.readthedocs.io/en/v10_0/version-history/lts-versions-10-0.html#version-10-0-5">HTCondor 10.0.5</a>: EL7, EL8<ul>
