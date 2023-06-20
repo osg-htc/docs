@@ -20,7 +20,7 @@ The following issues are known to currently affect packages distributed in OSG 3
 
 ### Preparing for HTCondor 10.0 ###
 
-We plan to release HTCondor version 10.0 into the OSG repositories soon.
+We have released HTCondor version 10.0 into the OSG repositories.
 
 !!! note
     The `condor-upgrade-checks` RPM version 10.0.5 works with existing HTCondor 9.0.x installations.
@@ -31,8 +31,8 @@ HTCondor-CE and HTCondor pool administrators should install the `condor-upgrade-
 taken before upgrading to HTCondor version 10. This script checks for three
 possible issues:
 
--   HTCondor upgrade causing a change in TRUST\_DOMAIN which would invalidate existing IDTOKENS
--   Recent and current GPU jobs that will no longer match, because the new "require\_gpus" condor\_submit command must be used for GPU matching
+-   HTCondor upgrade causing a change in `TRUST_DOMAIN` which would invalidate existing IDTOKENS
+-   Recent and current GPU jobs that will no longer match, because the new `require_gpus` `condor_submit` command must be used for GPU matching
 -   HTCondor map files that have regular expressions that the new PCRE2 library will not accept
 
 To check your Access Point configuration run:
@@ -83,30 +83,34 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### **June 20, 2023:** IGTF 1.121
+-   CA certificates based on [IGTF 1.121](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Added accredited (classic) InCommon RSA IGTF Server CA 3 under the Sectigo USERTrust RSA root, for which namespaces have been updated (US)
+
 ### **June 9, 2023:** HTCondor 10.0.5
-  -   [HTCondor 10.0.5](https://htcondor.readthedocs.io/en/v10_0/version-history/lts-versions-10-0.html#version-10-0-5): EL7, EL8
-      -   Rename `upgrade9to10checks.py` script to `condor_upgrade_check`
-      -   Fix spurious warning from `condor_upgrade_check` about regular expression that contain a space
+-   [HTCondor 10.0.5](https://htcondor.readthedocs.io/en/v10_0/version-history/lts-versions-10-0.html#version-10-0-5): EL7, EL8
+    -   Rename `upgrade9to10checks.py` script to `condor_upgrade_check`
+    -   Fix spurious warning from `condor_upgrade_check` about regular expression that contain a space
 
 !!! note
     The `condor-upgrade-checks` RPM version 10.0.5 works with existing HTCondor 9.0.x installations.
     It can be installed with either HTCondor version 9 or 10.
 
 ### **June 8, 2023:** HTCondor 10.0.4, XCache 3.5.0, frontier-squid 5.8, IGTF 1.120; Upcoming HTCondor 10.5.1
-  -   [HTCondor 10.0.4](https://htcondor.readthedocs.io/en/v10/version-history/upgrading-from-9-0-to-10-0-versions.html): EL7, EL8
-      -   Users can prevent runaway jobs by specifying an allowed duration
-      -   Able to extend submit commands and create job submit templates
-      -   Initial implementation of htcondor <noun> <verb> command line interface
-      -   Initial implementation of Job Sets in the htcondor CLI tool
-      -   Users can supply a container image without concern for which container runtime is used
-      -   Add the ability to select a particular model of GPU when the execution points have heterogeneous GPU cards installed or cards that support nVidia MIG
-      -   File transfer error messages are now returned and clearly indicate where the error occurred
-      -   HTCondor now utilizes ARC-CE's REST interface
-      -   Support for ARM and PowerPC for Enterprise Linux 8
-      -   Security Enhancements
-          -   For IDTOKENS, signing key not required on every execution point
-          -   Trust on first use ability for SSL connections
-          -   Improvements against replay attacks
+-   [HTCondor 10.0.4](https://htcondor.readthedocs.io/en/v10/version-history/upgrading-from-9-0-to-10-0-versions.html): EL7, EL8
+    -   Users can prevent runaway jobs by specifying an allowed duration
+    -   Able to extend submit commands and create job submit templates
+    -   Initial implementation of htcondor <noun> <verb> command line interface
+    -   Initial implementation of Job Sets in the htcondor CLI tool
+    -   Users can supply a container image without concern for which container runtime is used
+    -   Add the ability to select a particular model of GPU when the execution points have heterogeneous GPU cards installed or cards that support nVidia MIG
+    -   File transfer error messages are now returned and clearly indicate where the error occurred
+    -   HTCondor now utilizes ARC-CE's REST interface
+    -   Support for ARM and PowerPC for Enterprise Linux 8
+    -   Security Enhancements
+        -   For IDTOKENS, signing key not required on every execution point
+        -   Trust on first use ability for SSL connections
+        -   Improvements against replay attacks
 -   XCache 3.5.0
     -   The authfile updater pulls a grid-mapfile from Topology
 -   [frontier-squid 5.8](http://www.squid-cache.org/Versions/v5/squid-5.8-RELEASENOTES.html)
