@@ -16,7 +16,7 @@ jobs:
             --strict
 
       - id: format-github-repo
-        run: echo "repo-name=${GITHUB_REPOSITORY#*\/}" >> $GITHUB_OUPUT
+        run: echo "repo-name=${GITHUB_REPOSITORY#*\/}" >> $GITHUB_OUTPUT
 
       - name: Test links
         timeout-minutes: 10
