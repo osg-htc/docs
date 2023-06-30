@@ -83,6 +83,16 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### **June 29, 2023:** XRootD 5.5.5-1.2, osdf-client 6.12.1, hosted-ce-tools 1.0
+-   XRootD 5.5.5-1.2
+    -   Patched to allow Diffie-Hellman key exchange between Enterprise Linux 7 clients and Enterprise Linux 9 servers
+-   [osdf-client 6.12.1](https://github.com/htcondor/osdf-client/releases/tag/v6.12.1)
+    -   Bug fixes and improvements, notably with regard to authenticated access
+-   hosted-ce-tools 1.0
+    -   Dereference hardlinks when extracting the cvmfsexec tarball
+    -   More aggressively kill timed out rsync processes
+    -   Convert update worker node client scripts to Python 3
+
 ### **June 20, 2023:** IGTF 1.121
 -   CA certificates based on [IGTF 1.121](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   Added accredited (classic) InCommon RSA IGTF Server CA 3 under the Sectigo USERTrust RSA root, for which namespaces have been updated (US)
