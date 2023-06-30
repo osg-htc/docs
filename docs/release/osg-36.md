@@ -107,7 +107,7 @@ Latest News
     It can be installed with either HTCondor version 9 or 10.
 
 ### **June 8, 2023:** HTCondor 10.0.4, XCache 3.5.0, frontier-squid 5.8, IGTF 1.120; Upcoming HTCondor 10.5.1
--   [HTCondor 10.0.4](https://htcondor.readthedocs.io/en/v10/version-history/upgrading-from-9-0-to-10-0-versions.html): EL7, EL8
+-   [HTCondor 10.0.4](https://htcondor.readthedocs.io/en/v10_0/version-history/upgrading-from-9-0-to-10-0-versions.html): EL7, EL8
     -   Users can prevent runaway jobs by specifying an allowed duration
     -   Able to extend submit commands and create job submit templates
     -   Initial implementation of htcondor <noun> <verb> command line interface
