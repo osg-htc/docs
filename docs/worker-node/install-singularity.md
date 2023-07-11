@@ -18,4 +18,4 @@ Singularity via RPM
 -------------------
 
 See instead
-[Apptainer via RPM](../install-apptainer#apptainer-via-rpm).
+[Apptainer via RPM](../install-apptainer#installing-apptainer-via-rpm).
