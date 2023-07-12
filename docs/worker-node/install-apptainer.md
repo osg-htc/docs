@@ -55,25 +55,31 @@ access to Apptainer itself:
 
 - Install [CVMFS](install-cvmfs.md)
 
-Choosing whether or not to install the RPM
-------------------------------------------
+Choosing whether or not to install Apptainer
+--------------------------------------------
 
 There are two sets of instructions on this page:
 
 - [Enabling Unprivileged Apptainer](#enabling-unprivileged-apptainer)
-- [Apptainer via RPM](#apptainer-via-rpm)
+- [Installing Apptainer](#installing-apptainer)
 
-OSG VOs all support running apptainer directly from CVMFS when unprivileged
-user namespaces are enabled.
+OSG VOs all support running apptainer directly from CVMFS, when CVMFS
+is available and unprivileged user namespaces are enabled.
 Unprivileged user namespaces are enabled by default on EL 8, and OSG
 recommends that system administrators enable it on EL 7 worker nodes.
 When unprivileged user namespaces are enabled, OSG
-recommends that sites not install the apptainer RPM unless they have
+recommends that sites not install Apptainer unless they have
 non-OSG users that require it.
-Sites that do install the RPM will by default still only get a
+
+Sites that do want to install apptainer locally have two choices on
+how to do it.  They can install it with a script which creates an
+unprivileged relocatable installation directory, or they can install
+it by RPM.
+Sites that install the RPM will by default still only get a
 non-setuid installation that makes use of unprivileged user namespaces
 and will need to install an additional apptainer-suid RPM if they
-want a setuid installation.
+want a setuid installation that does not require unprivileged user
+namespaces.
 
 Enabling Unprivileged Apptainer
 -------------------------------
@@ -188,16 +194,17 @@ operation; see the
 [Apptainer documentation](https://apptainer.org/docs/user/main/appendix.html)
 for details.
 
-### Validating Unprivileged Apptainer ###
+### Validating Unprivileged Apptainer in CVMFS ###
 
-If you haven't yet installed [CVMFS](install-cvmfs.md), please do so.
+If you will not be installing Apptainer locally and
+you haven't yet installed [CVMFS](install-cvmfs.md), please do so.
 Alternatively, use the
 [cvmfsexec package](https://github.com/cvmfs-contrib/cvmfsexec)
 configured for osg as an unprivileged user and mount the
 oasis.opensciencegrid.org and singularity.opensciencegrid.org
 repositories.
 
-As an unprivileged user verify that Apptainer in OASIS works with this
+Then as an unprivileged user verify that Apptainer in CVMFS works with this
 command:
 
 ```console
@@ -211,12 +218,17 @@ user          11       1  0 10:51 console  00:00:00 /usr/bin/ps -ef
 ```
 
 
-Apptainer via RPM
------------------
+Installing Apptainer
+--------------------
 
-The instructions in this section are for the apptainer RPM, which only
-includes the setuid-root executable if you install the additional
-apptainer-suid RPM.
+The instructions in this section are for installing a local copy
+of Apptainer, either an unprivileged installation or an RPM installation.
+
+### Installing Apptainer via unprivileged script ###
+
+To install a relocatable unprivileged installation of Apptainer,
+follow the instructions in the
+[upstream documentation](https://apptainer.org/docs/admin/main/installation.html#install-unprivileged-from-pre-built-binaries).
 
 ### Installing Apptainer via RPM ###
 
@@ -246,7 +258,7 @@ before installing the required packages:
         :::console
         root@host # yum install apptainer-suid
 
-### Configuring Apptainer RPM ###
+#### Configuring Apptainer RPM ###
 
 Generally Apptainer requires no configuration, but if you install it by
 RPM the primary configuration is done in `/etc/apptainer/apptainer.conf`.
@@ -302,15 +314,13 @@ thing as the default in a non-setuid installation)
 and still be able to mount images unprivileged,
 although they will get an error if they don't use the option.
 
-### Validating Apptainer RPM ###
+### Validating Apptainer installation ###
 
 After apptainer is installed, as an ordinary user run the following
 command to verify it:
 
 ```console
-user@host $ apptainer exec --contain --ipc --pid --bind /cvmfs \
-                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el7:latest \
-                ps -ef
+user@host $ apptainer exec --contain --ipc --pid docker://centos:7 ps -ef
 UID          PID    PPID  C STIME TTY          TIME CMD
 user           1       0  0 11:07 console  00:00:00 appinit
 user          12       1  0 11:07 console  00:00:00 /usr/bin/ps -ef
