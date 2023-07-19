@@ -84,6 +84,13 @@ Latest News
 -----------
 
 ### **July 19, 2023:** HTCondor 10.0.6, osg-xrootd 3.6-20, XCache 3.5.0-2, osg-ca-scripts 1.2.4-2; Upcoming: HTCondor 10.6.0
+
+!!! note
+    The format of the HTCondor job queue log has changed. Once you have updated
+    the condor_schedd to HTCondor 10.6.0, you may only downgrade to a version
+    that can parse this new format.
+    (LTS: 10.0.4 and later, feature: 10.5.0 and later)
+
 -   [HTCondor 10.0.6](https://htcondor.readthedocs.io/en/v10_0/version-history/lts-versions-10-0.html#version-10-0-6): EL7, EL8
     -   In SSL Authentication, use the identity instead of the X.509 proxy subject
     -   Can use environment variable to locate the client's SSL X.509 credential
