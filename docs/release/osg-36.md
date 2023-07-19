@@ -83,6 +83,28 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### **July 19, 2023:** HTCondor 10.0.6, osg-xrootd 3.6-20, XCache 3.5.0-2, osg-ca-scripts 1.2.4-2; Upcoming: HTCondor 10.6.0
+-   [HTCondor 10.0.6](https://htcondor.readthedocs.io/en/v10_0/version-history/lts-versions-10-0.html#version-10-0-6): EL7, EL8
+    -   In SSL Authentication, use the identity instead of the X.509 proxy subject
+    -   Can use environment variable to locate the client's SSL X.509 credential
+    -   ClassAd aggregate functions now tolerate undefined values
+    -   Fix Python binding bug where accounting ads were omitted from the result
+    -   The Python bindings now properly report the HTCondor version
+    -   `remote_initial_dir` works when submitting remote grid batch jobs via ssh
+    -   Add a ClassAd stringlist subset match function
+-   osg-xrootd 3.6-20
+    -   Allow `create_macaroon_secret` to be run as a non-root user
+-   XCache 3.5.0-2
+    -   Add dependency on the `xrdcl-http` package
+-   osg-ca-scripts 1.2.4-2
+    -   Update package dependencies for Enterprise Linux 9
+-   [HTCondor 10.6.0](https://htcondor.readthedocs.io/en/v10_x/version-history/feature-versions-10-x.html#version-10-6-0): EL7 Upcoming, EL8 Upcoming, EL9
+    -   Administrators can enable and disable job submission for a specific user
+    -   Work around memory leak in libcurl on EL7 when using the ARC-CE GAHP
+    -   Container images may now be transferred via a file transfer plugin
+    -   Add submit file macro `$(JobId)` which expands to full ID of the job
+    -   The job's executable is no longer renamed to `condor_exec.exe`
+
 ### **June 29, 2023:** XRootD 5.5.5-1.2, osdf-client 6.12.1, hosted-ce-tools 1.0
 -   XRootD 5.5.5-1.2
     -   Patched to allow Diffie-Hellman key exchange between Enterprise Linux 7 clients and Enterprise Linux 9 servers
@@ -106,7 +128,7 @@ Latest News
     The `condor-upgrade-checks` RPM version 10.0.5 works with existing HTCondor 9.0.x installations.
     It can be installed with either HTCondor version 9 or 10.
 
-### **June 8, 2023:** HTCondor 10.0.4, XCache 3.5.0, frontier-squid 5.8, IGTF 1.120; Upcoming HTCondor 10.5.1
+### **June 8, 2023:** HTCondor 10.0.4, XCache 3.5.0, frontier-squid 5.8, IGTF 1.120; Upcoming: HTCondor 10.5.1
 -   [HTCondor 10.0.4](https://htcondor.readthedocs.io/en/v10_0/version-history/upgrading-from-9-0-to-10-0-versions.html): EL7, EL8
     -   Users can prevent runaway jobs by specifying an allowed duration
     -   Able to extend submit commands and create job submit templates
