@@ -85,7 +85,7 @@ Latest News
 
 ### **July 19, 2023:** HTCondor 10.0.6, osg-xrootd 3.6-20, XCache 3.5.0-2, osg-ca-scripts 1.2.4-2; Upcoming: HTCondor 10.6.0
 
-!!! note
+!!! danger
     The format of the HTCondor job queue log has changed. Once you have updated
     the condor_schedd to HTCondor 10.6.0, you may only downgrade to a version
     that can parse this new format.
