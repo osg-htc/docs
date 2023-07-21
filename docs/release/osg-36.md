@@ -92,8 +92,6 @@ Latest News
     new format.
     (LTS: 10.0.4 and later, feature: 10.5.0 and later)
 
-    We recommend upgrading your Access Points and HTCondor-CE hosts to 10.0.4 or
-    10.5.0 first, then proceeding with an upgrade to 10.6.0.
     We recommend upgrading your Access Points and HTCondor-CE hosts to the latest 10.0
     release or 10.5.0 first, then proceeding with an upgrade to 10.6.0.
 -   [HTCondor 10.0.6](https://htcondor.readthedocs.io/en/v10_0/version-history/lts-versions-10-0.html#version-10-0-6): EL7, EL8
