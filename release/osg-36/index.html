@@ -2979,9 +2979,12 @@ of <code>/etc/yum.repos.d/osg.repo</code>:</p>
 <div class="admonition danger">
 <p class="admonition-title">Danger</p>
 <p>The format of the HTCondor job queue log has changed. Once you have updated
-the condor_schedd to HTCondor 10.6.0, you may only downgrade to a version
-that can parse this new format.
+the Access Point and HTCondor-CE (i.e., hosts with a <code>condor_schedd</code> daemon)
+to HTCondor 10.6.0, you may only downgrade to a version that can parse this
+new format.
 (LTS: 10.0.4 and later, feature: 10.5.0 and later)</p>
+<p>We recommend upgrading your Access Points and HTCondor-CE hosts to the latest 10.0
+release or 10.5.0 first, then proceeding with an upgrade to 10.6.0.</p>
 </div>
 <ul>
 <li><a href="https://htcondor.readthedocs.io/en/v10_0/version-history/lts-versions-10-0.html#version-10-0-6">HTCondor 10.0.6</a>: EL7, EL8<ul>
