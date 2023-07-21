@@ -94,6 +94,7 @@ Latest News
 
     We recommend upgrading your Access Points and HTCondor-CE hosts to the latest 10.0
     release or 10.5.0 first, then proceeding with an upgrade to 10.6.0.
+
 -   [HTCondor 10.0.6](https://htcondor.readthedocs.io/en/v10_0/version-history/lts-versions-10-0.html#version-10-0-6): EL7, EL8
     -   In SSL Authentication, use the identity instead of the X.509 proxy subject
     -   Can use environment variable to locate the client's SSL X.509 credential
