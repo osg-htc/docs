@@ -87,9 +87,13 @@ Latest News
 
 !!! danger
     The format of the HTCondor job queue log has changed. Once you have updated
-    the condor_schedd to HTCondor 10.6.0, you may only downgrade to a version
-    that can parse this new format.
+    the Access Point and HTCondor-CE (i.e., hosts with a `condor_schedd` daemon)
+    to HTCondor 10.6.0, you may only downgrade to a version that can parse this
+    new format.
     (LTS: 10.0.4 and later, feature: 10.5.0 and later)
+
+    We recommend upgrading your Access Points and HTCondor-CE hosts to 10.0.4 or
+    10.5.0 first, then proceeding with an upgrade to 10.6.0.
 
 -   [HTCondor 10.0.6](https://htcondor.readthedocs.io/en/v10_0/version-history/lts-versions-10-0.html#version-10-0-6): EL7, EL8
     -   In SSL Authentication, use the identity instead of the X.509 proxy subject
