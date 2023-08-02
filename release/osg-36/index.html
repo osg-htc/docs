@@ -1473,6 +1473,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#august-2-2023-htcondor-1007-upcoming-htcondor-1070" class="md-nav__link">
+    August 2, 2023: HTCondor 10.0.7; Upcoming: HTCondor 10.7.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#july-19-2023-htcondor-1006-osg-xrootd-36-20-xcache-350-2-osg-ca-scripts-124-2-upcoming-htcondor-1060" class="md-nav__link">
     July 19, 2023: HTCondor 10.0.6, osg-xrootd 3.6-20, XCache 3.5.0-2, osg-ca-scripts 1.2.4-2; Upcoming: HTCondor 10.6.0
   </a>
@@ -2366,6 +2373,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#august-2-2023-htcondor-1007-upcoming-htcondor-1070" class="md-nav__link">
+    August 2, 2023: HTCondor 10.0.7; Upcoming: HTCondor 10.7.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#july-19-2023-htcondor-1006-osg-xrootd-36-20-xcache-350-2-osg-ca-scripts-124-2-upcoming-htcondor-1060" class="md-nav__link">
     July 19, 2023: HTCondor 10.0.6, osg-xrootd 3.6-20, XCache 3.5.0-2, osg-ca-scripts 1.2.4-2; Upcoming: HTCondor 10.6.0
   </a>
@@ -2975,6 +2989,36 @@ of <code>/etc/yum.repos.d/osg.repo</code>:</p>
 <div class="highlight"><pre><span></span><code>excludepkgs=rrdtool
 </code></pre></div>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="august-2-2023-htcondor-1007-upcoming-htcondor-1070"><strong>August 2, 2023:</strong> HTCondor 10.0.7; Upcoming: HTCondor 10.7.0<a class="headerlink" href="#august-2-2023-htcondor-1007-upcoming-htcondor-1070" title="Permanent link">&para;</a></h3>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>The format of the HTCondor job queue log has changed. Once you have updated
+the Access Point and HTCondor-CE (i.e., hosts with a <code>condor_schedd</code> daemon)
+to HTCondor 10.7.0, you may only downgrade to a version that can parse this
+new format.
+(LTS: 10.0.4 and later, feature: 10.5.0 and later)</p>
+<p>We recommend upgrading your Access Points and HTCondor-CE hosts to the latest 10.0.x
+release or 10.5.0 first, then proceeding with an upgrade to 10.7.0.</p>
+</div>
+<ul>
+<li><a href="https://htcondor.readthedocs.io/en/v10_0/version-history/lts-versions-10-0.html#version-10-0-7">HTCondor 10.0.7</a>: EL7, EL8<ul>
+<li>Fixed bug where held condor cron jobs would never run when released</li>
+<li>Improved daemon IDTOKENS logging to make useful messages more prominent</li>
+<li>Remove limit on certificate chain length in SSL authentication</li>
+<li><code>condor_config_val -summary</code> now works with a remote configuration query</li>
+<li>Prints detailed message when <code>condor_remote_cluster</code> fails to fetch a URL</li>
+<li>Improvements to <code>condor_preen</code></li>
+</ul>
+</li>
+<li><a href="https://htcondor.readthedocs.io/en/v10_x/version-history/feature-versions-10-x.html#version-10-7-0">HTCondor 10.7.0</a>: EL7 Upcoming, EL8 Upcoming, EL9<ul>
+<li>Can run defrag daemons with different policies on distinct sets of nodes</li>
+<li>Added <code>want_io_proxy</code> submit command</li>
+<li>Apptainer is now included in the HTCondor tarballs</li>
+<li>Fix 10.5.0 bug where reported CPU time is very low when using cgroups v1</li>
+<li>Fix 10.5.0 bug where .job.ad and .machine.ad were missing for local jobs</li>
+</ul>
+</li>
+</ul>
 <h3 id="july-19-2023-htcondor-1006-osg-xrootd-36-20-xcache-350-2-osg-ca-scripts-124-2-upcoming-htcondor-1060"><strong>July 19, 2023:</strong> HTCondor 10.0.6, osg-xrootd 3.6-20, XCache 3.5.0-2, osg-ca-scripts 1.2.4-2; Upcoming: HTCondor 10.6.0<a class="headerlink" href="#july-19-2023-htcondor-1006-osg-xrootd-36-20-xcache-350-2-osg-ca-scripts-124-2-upcoming-htcondor-1060" title="Permanent link">&para;</a></h3>
 <div class="admonition danger">
 <p class="admonition-title">Danger</p>
@@ -2983,7 +3027,7 @@ the Access Point and HTCondor-CE (i.e., hosts with a <code>condor_schedd</code> 
 to HTCondor 10.6.0, you may only downgrade to a version that can parse this
 new format.
 (LTS: 10.0.4 and later, feature: 10.5.0 and later)</p>
-<p>We recommend upgrading your Access Points and HTCondor-CE hosts to the latest 10.0
+<p>We recommend upgrading your Access Points and HTCondor-CE hosts to the latest 10.0.x
 release or 10.5.0 first, then proceeding with an upgrade to 10.6.0.</p>
 </div>
 <ul>
