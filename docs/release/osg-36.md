@@ -83,6 +83,32 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### **August 2, 2023:** HTCondor 10.0.7; Upcoming: HTCondor 10.7.0
+
+!!! danger
+    The format of the HTCondor job queue log has changed. Once you have updated
+    the Access Point and HTCondor-CE (i.e., hosts with a `condor_schedd` daemon)
+    to HTCondor 10.7.0, you may only downgrade to a version that can parse this
+    new format.
+    (LTS: 10.0.4 and later, feature: 10.5.0 and later)
+
+    We recommend upgrading your Access Points and HTCondor-CE hosts to the latest 10.0.x
+    release or 10.5.0 first, then proceeding with an upgrade to 10.7.0.
+
+-   [HTCondor 10.0.7](https://htcondor.readthedocs.io/en/v10_0/version-history/lts-versions-10-0.html#version-10-0-7): EL7, EL8
+    -   Fixed bug where held condor cron jobs would never run when released
+    -   Improved daemon IDTOKENS logging to make useful messages more prominent
+    -   Remove limit on certificate chain length in SSL authentication
+    -   `condor_config_val -summary` now works with a remote configuration query
+    -   Prints detailed message when `condor_remote_cluster` fails to fetch a URL
+    -   Improvements to `condor_preen`
+-   [HTCondor 10.7.0](https://htcondor.readthedocs.io/en/v10_x/version-history/feature-versions-10-x.html#version-10-7-0): EL7 Upcoming, EL8 Upcoming, EL9
+    -   Can run defrag daemons with different policies on distinct sets of nodes
+    -   Added `want_io_proxy` submit command
+    -   Apptainer is now included in the HTCondor tarballs
+    -   Fix 10.5.0 bug where reported CPU time is very low when using cgroups v1
+    -   Fix 10.5.0 bug where .job.ad and .machine.ad were missing for local jobs
+
 ### **July 19, 2023:** HTCondor 10.0.6, osg-xrootd 3.6-20, XCache 3.5.0-2, osg-ca-scripts 1.2.4-2; Upcoming: HTCondor 10.6.0
 
 !!! danger
@@ -92,7 +118,7 @@ Latest News
     new format.
     (LTS: 10.0.4 and later, feature: 10.5.0 and later)
 
-    We recommend upgrading your Access Points and HTCondor-CE hosts to the latest 10.0
+    We recommend upgrading your Access Points and HTCondor-CE hosts to the latest 10.0.x
     release or 10.5.0 first, then proceeding with an upgrade to 10.6.0.
 
 -   [HTCondor 10.0.6](https://htcondor.readthedocs.io/en/v10_0/version-history/lts-versions-10-0.html#version-10-0-6): EL7, EL8
