@@ -5,7 +5,7 @@ OSG Site Documentation
 
 !!!tip "User documentation"
     If you are a **researcher** interested in accessing OSG computational capacity, please consult our
-    [user documentation](https://support.opensciencegrid.org/support/home) instead.
+    [user documentation](https://portal.osg-htc.org/documentation/) instead.
 
 The [OSG Consortium](https://www.opensciencegrid.org) provides common service and support for capacity
 providers and scientific institutions (i.e., "sites") using a [distributed fabric](https://map.opensciencegrid.org) of
