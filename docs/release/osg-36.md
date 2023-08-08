@@ -83,6 +83,12 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### **August 8, 2023:** IGTF 1.122
+-   CA certificates based on [IGTF 1.122](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Added private trust hierarchy for GEANT (Research and Education) TCS (EU) (RSA variants only)
+    -   Added accredited eMudhra joint public trust root and issuing CAs (IN)
+    -   Added private trust eMudhra IGTF root and issuers as experimental (IN, US)
+
 ### **August 2, 2023:** HTCondor 10.0.7; Upcoming: HTCondor 10.7.0
 
 !!! danger
