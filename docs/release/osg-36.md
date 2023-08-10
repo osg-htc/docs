@@ -83,6 +83,15 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### **August 10, 2023:** frontier-squid 5.9-1.1, xrootd-multiuser 2.1.3-1.3
+-   [frontier-squid 5.9-1.1](http://www.squid-cache.org/Versions/v5/squid-5.9-RELEASENOTES.html)
+    -   Improvement of debug logging related to the `reply_body_max_size` parameter
+    -   Consistent with squid5, disallow the combination of multiple workers, ufs cache, and `memory_cache_shared` even if `collapsed_forwarding` is off.
+    -   Limit the maximum number of file descriptors to 65536 even if the OS would allow a higher number
+-    xrootd-multiuser 2.1.3-1.3
+    -   Add support for supplementary groups
+-   First release of worker node tarballs for EL9
+
 ### **August 8, 2023:** IGTF 1.122
 -   CA certificates based on [IGTF 1.122](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   Added private trust hierarchy for GEANT (Research and Education) TCS (EU) (RSA variants only)
