@@ -19,6 +19,24 @@ If you are a member of a collaboration with an OIDC provider (such as [CILogon](
 This client tool is available either as [a container](#using-a-container) or as
 [an RPM installation](#using-an-rpm-installation).
 
+Alternatively, a collaboration may choose to set up a shared 
+[htvault-config](https://github.com/fermitools/htvault-config)
+service that is registered as the OIDC client or clients and enables
+each user to have a simpler experience to obtain tokens using the
+[htgettoken](https://github.com/fermitools/htgettoken)
+command while at the same time keeping long-lived refresh tokens stored
+more securely.
+Both of those can be installed as RPMs from OSG as described at the
+above links, and they are also
+[integrated with HTCondor](https://htcondor.readthedocs.io/en/latest/admin-manual/file-and-cred-transfer.html#using-vault-as-the-oauth-client).
+OSG recommends those tools as documented at those links for when
+collaborations are ready to use tokens in production, 
+but the rest of this page gives instructions for `oidc-agent` which
+is better for early experimentation with tokens.
+At the [end of the page](#examining-tokens) we also recommend installing
+the `htgettoken` package just for its additional `htdecodetoken` command
+which is useful for looking inside tokens.
+
 !!! tip "Alternative tokens for testing"
     If you are not a member of a collaboration with access to an OIDC provider, you can generate test SciTokens using
     [these instructions](#generating-scitokens-for-testing)
@@ -255,5 +273,11 @@ You can use the tools in the `scitokens-cpp` RPM to validate a SciToken or WLCG 
 
             # yum install htgettoken
 
-    2.  Write the token to a file named `tok`.
-    3.  Run `httokendecode -H tok`
+    2.  Write the token to a file named `tok` or store it in one of the
+        default WLCG Bearer Token Discovery locations described above.
+    3.  Run `htdecodetoken -H tok` or leave off the `tok` filename if
+        it is in one of the default locations.
+
+    `htdecodetoken` is one of the
+    [additional commands](https://github.com/fermitools/htgettoken#additional-commands)
+    that come with the `htgettoken` package.
