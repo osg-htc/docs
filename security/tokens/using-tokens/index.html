@@ -2023,6 +2023,23 @@ for validating your OSG services.</p>
 <a href="https://indigo-dc.gitbook.io/oidc-agent/">oidc-agent</a> client to request tokens.
 This client tool is available either as <a href="#using-a-container">a container</a> or as
 <a href="#using-an-rpm-installation">an RPM installation</a>.</p>
+<p>Alternatively, a collaboration may choose to set up a shared 
+<a href="https://github.com/fermitools/htvault-config">htvault-config</a>
+service that is registered as the OIDC client or clients and enables
+each user to have a simpler experience to obtain tokens using the
+<a href="https://github.com/fermitools/htgettoken">htgettoken</a>
+command while at the same time keeping long-lived refresh tokens stored
+more securely.
+Both of those can be installed as RPMs from OSG repos as described at the
+above links, and they are also
+<a href="https://htcondor.readthedocs.io/en/latest/admin-manual/file-and-cred-transfer.html#using-vault-as-the-oauth-client">integrated with HTCondor</a>.
+OSG Software recommends those tools as documented at those links for when
+collaborations are ready to use tokens in production, 
+but the rest of this page gives instructions for <code>oidc-agent</code> which
+is better for early experimentation with tokens.
+At the <a href="#examining-tokens">end of the page</a> we also recommend installing
+the <code>htgettoken</code> package just for its additional <code>htdecodetoken</code> command
+which is useful for looking inside tokens.</p>
 <div class="admonition tip">
 <p class="admonition-title">Alternative tokens for testing</p>
 <p>If you are not a member of a collaboration with access to an OIDC provider, you can generate test SciTokens using
@@ -2372,10 +2389,15 @@ You can use the tools in the <code>scitokens-cpp</code> RPM to validate a SciTok
 
 </li>
 <li>
-<p>Write the token to a file named <code>tok</code>.</p>
+<p>Write the token to a file named <code>tok</code> or store it in one of the
+    default WLCG Bearer Token Discovery locations described above.</p>
 </li>
-<li>Run <code>httokendecode -H tok</code></li>
+<li>Run <code>htdecodetoken -H tok</code> or leave off the <code>tok</code> filename if
+    it is in one of the default locations.</li>
 </ol>
+<p><code>htdecodetoken</code> is one of the
+<a href="https://github.com/fermitools/htgettoken#additional-commands">additional commands</a>
+that come with the <code>htgettoken</code> package.</p>
 </li>
 </ul>
 
