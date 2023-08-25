@@ -106,5 +106,17 @@ pub   rsa4096 2022-12-28 [SC]
 uid                      OSG Software 3.6 for EL9 RSA <help@osg-htc.org>
 sub   rsa4096 2022-12-28 [E]
 
+$  gpg --import-options show-only --import < /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-23-auto
+pub   rsa4096 2023-06-23 [SC]
+      E2AF9F6E239FD62B537705C01760EDF64D4384D0
+uid                      OSG 23 Automated Signing Key <help@osg-htc.org>
+sub   rsa4096 2023-06-23 [E]
+
+$  gpg --import-options show-only --import < /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-23-developer
+pub   rsa4096 2023-08-15 [SC]
+      4A56C5BBCDB0AAA2DDE9A690BDEEE24C92897C00
+uid                      OSG 23 Developer Signing Key <help@osg-chtc.org>
+sub   rsa4096 2023-08-15 [E]
+
 ```
 
