@@ -53,6 +53,20 @@ The key used depends on the OSG version and EL variant used, as documented below
 | Fingerprint        | `B77E 70A6 0537 1D3B E109  A18E 3170 E150 1887 C61A`   |
 | Key ID             | `1887c61a`                                             |
 
+| OSG 23 Automated Signing Key |                                              |
+|--------------------|--------------------------------------------------------|
+| Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-23-auto`             |
+| Download           | [GitHub](https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-23-auto) |
+| Fingerprint        | `E2AF 9F6E 239F D62B 5377  05C0 1760 EDF6 4D43 84D0`   |
+| Key ID             | `4d4384d0`                                             |
+
+| OSG 23 Developer Signing Key |                                              |
+|--------------------|--------------------------------------------------------|
+| Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-23-developer`        |
+| Download           | [GitHub](https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-23-developer) |
+| Fingerprint        | `4A56 C5BB CDB0 AAA2 DDE9  A690 BDEE E24C 9289 7C00`   |
+| Key ID             | `92897c00`                                             |
+
 !!! note
     Some packages in the 3.6 repos may still be signed with the old key;
     the `osg-release` RPM contains both keys so you can verify old packages.
@@ -91,6 +105,18 @@ pub   rsa4096 2022-12-28 [SC]
       B77E70A605371D3BE109A18E3170E1501887C61A
 uid                      OSG Software 3.6 for EL9 RSA <help@osg-htc.org>
 sub   rsa4096 2022-12-28 [E]
+
+$  gpg --import-options show-only --import < /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-23-auto
+pub   rsa4096 2023-06-23 [SC]
+      E2AF9F6E239FD62B537705C01760EDF64D4384D0
+uid                      OSG 23 Automated Signing Key <help@osg-htc.org>
+sub   rsa4096 2023-06-23 [E]
+
+$  gpg --import-options show-only --import < /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-23-developer
+pub   rsa4096 2023-08-15 [SC]
+      4A56C5BBCDB0AAA2DDE9A690BDEEE24C92897C00
+uid                      OSG 23 Developer Signing Key <help@osg-chtc.org>
+sub   rsa4096 2023-08-15 [E]
 
 ```
 
