@@ -170,7 +170,10 @@ and data transfer may be more complicated.
 The [OSG Helpdesk Solutions](https://portal.osg-htc.org/documentation) page has information about
 what users should know;
 the [Organizing and Submitting HTC Workloads Tutorial](https://portal.osg-htc.org/documentation/htc_workloads/submitting_workloads/tutorial-organizing/) and
+<!---
 [Data Management Guide](https://portal.osg-htc.org/documentation/htc_workloads/managing_data/osgconnect-storage/)
+--->
+[Policies for Using OSG Services and the OSPool](https://portal.osg-htc.org/documentation/overview/references/policy/)
 are particularly relevant.
 
 ### Specifying a project

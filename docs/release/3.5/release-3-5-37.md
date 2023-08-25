@@ -28,7 +28,7 @@ Summary of Changes
 
 This release contains:
 
--   [HTCondor-CE 4.5.2](https://htcondor.github.io/htcondor-ce/v4/installation/htcondor-ce/): Upgrade from version 4.4.1
+-   [HTCondor-CE 4.5.2](https://htcondor.github.io/htcondor-ce/v5/installation/htcondor-ce/): Upgrade from version 4.4.1
     -   [HTCondor-CE 4.5.0 Version History](https://github.com/htcondor/htcondor-ce/releases/tag/v4.5.0): New feature release
     -   [HTCondor-CE 4.5.1 Version History](https://github.com/htcondor/htcondor-ce/releases/tag/v4.5.1): Bug fix release
     -   [HTCondor-CE 4.5.2 Version History](https://github.com/htcondor/htcondor-ce/releases/tag/v4.5.2): Bug fix release
