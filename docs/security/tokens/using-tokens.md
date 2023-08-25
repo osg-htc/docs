@@ -26,10 +26,10 @@ each user to have a simpler experience to obtain tokens using the
 [htgettoken](https://github.com/fermitools/htgettoken)
 command while at the same time keeping long-lived refresh tokens stored
 more securely.
-Both of those can be installed as RPMs from OSG as described at the
+Both of those can be installed as RPMs from OSG repos as described at the
 above links, and they are also
 [integrated with HTCondor](https://htcondor.readthedocs.io/en/latest/admin-manual/file-and-cred-transfer.html#using-vault-as-the-oauth-client).
-OSG recommends those tools as documented at those links for when
+OSG Software recommends those tools as documented at those links for when
 collaborations are ready to use tokens in production, 
 but the rest of this page gives instructions for `oidc-agent` which
 is better for early experimentation with tokens.
