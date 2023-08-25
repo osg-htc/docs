@@ -1,30 +1,40 @@
+DateReviewed: 2023-08-25
 title: Release Series
 
 Release Series
 ==============
 
-An OSG release series is a sequence of OSG software releases that are intended to provide a painless upgrade path.
-For example, the 3.2 release series contains OSG software 3.2.0, 3.2.1, 3.2.2, and so forth.
-A release series corresponds to a set of Yum software repositories, including ones for development, testing, and
-production use.
-The Yum repositories for one release series are completely distinct from the repositories for a different release
-series, even though they share many common packages.
-A particular release within a series is a snapshot of packages and their exact versions at one point in time.
-When you install software from a release series, say 3.2, you get the most current versions of software packages within
-that series, regardless of the current release version.
+OSG Software releases are organized into release series, with the intent that software updates within a series do will
+not take require manual configuration updates, cause significant downtime, or break dependent software.
 
-When a new series is released, it is an opportunity for the OSG Technology area to add major new software packages, make
+New series can be more disruptive, allowing OSG to add, substantially change, and remove software components.
+
+Support Policy
+--------------
+
+The OSG Software Team supports at most two concurrent release series, __current__ and __previous__, where the goal is to
+begin a new release series about every 12 months.
+Once a new series starts, the Software Team will support the previous series until the __next__ release series and will
+announce its end-of-life date at least 6 months in advance.
+
+When support ends for a release series, it means that the Software Team no longer updates the software, fixes issues, or
+troubleshoots installations for releases within the series.
+The plan is to maintain interoperability between supported series, but there is no guarantee that unsupported series
+will continue to function.
+
+Files for release series older than current or previous will be removed from the OSG Software repositories no earlier
+than when support ends for the previous release.
+For example, files for OSG 3.2 were not removed until May 2018, when support ended for OSG 3.3 in May 2018.
+
+When a new series is released, it is an opportunity for the OSG Software Team to add major new software packages, make
 substantial updates to existing packages, and remove obsolete packages.
 When a new series is initially released, most packages are identical to the previous release, but two adjacent series
 will diverge over time.
 
-Our goal is, within a series, that one may upgrade their OSG services via `yum update` cleanly and without any necessary
-config file changes or excessive downtime.
-
 Series Overviews
 ----------------
 
-Since the start of the RPM-based OSG software stack, we have offered the following release series:
+Since the start of the RPM-based OSG Software Stack, we have offered the following release series:
 
 -   **OSG 3.6** (started February 2021) overhauls the authentication and data transfer protocols used in the OSG
     software stack:
@@ -54,6 +64,21 @@ Since the start of the RPM-based OSG software stack, we have offered the followi
 -   **OSG 3.1** started in April 2012, and was end-of-lifed in April 2015.
     Historically, there were 3.0.x releases as well, but there was no separate release series for 3.0 and 3.1;
     we simply went from 3.0.10 to 3.1.0 in the same repositories.
+
+Series Life-cycle
+-----------------
+
+Support ends at the end of the month of the following dates unless otherwise specified:
+
+| Release Series | Initial Release | End of Regular Support | End of Critical Bug/Security Support |
+|:--------------:|-----------------|------------------------|--------------------------------------|
+| 3.6            | Februrary 2021  | Not set                | Not set                              |
+| 3.5            | August 2019     | August 2021            | 1 May 2022                           |
+| 3.4            | June 2017       | February 2020          | November 2020                        |
+| 3.3            | August 2015     | December 2017          | May 2018                             |
+| 3.2            | November 2013   | February 2016          | August 2016                          |
+| 3.1            | April 2012      | October 2014           | April 2015                           |
+
 
 Installing an OSG Release Series
 --------------------------------
