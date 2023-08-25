@@ -53,6 +53,20 @@ The key used depends on the OSG version and EL variant used, as documented below
 | Fingerprint        | `B77E 70A6 0537 1D3B E109  A18E 3170 E150 1887 C61A`   |
 | Key ID             | `1887c61a`                                             |
 
+| OSG 23 Automated Signing Key |                                              |
+|--------------------|--------------------------------------------------------|
+| Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-23-auto`             |
+| Download           | [GitHub](https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-23-auto) |
+| Fingerprint        | `E2AF 9F6E 239F D62B 5377  05C0 1760 EDF6 4D43 84D0`   |
+| Key ID             | `4d4384d0`                                             |
+
+| OSG 23 Developer Signing Key |                                              |
+|--------------------|--------------------------------------------------------|
+| Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-23-developer`        |
+| Download           | [GitHub](https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-23-developer) |
+| Fingerprint        | `4A56 C5BB CDB0 AAA2 DDE9  A690 BDEE E24C 9289 7C00`   |
+| Key ID             | `92897c00`                                             |
+
 !!! note
     Some packages in the 3.6 repos may still be signed with the old key;
     the `osg-release` RPM contains both keys so you can verify old packages.
