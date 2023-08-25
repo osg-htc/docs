@@ -67,11 +67,11 @@ supported by the OSG.
 
 The definitive list of software in the contrib repository can be found here:
 
+-   [OSG 23 EL8 contrib software repository](https://repo.opensciencegrid.org/osg/23-contrib/el8/contrib/x86_64/)
+-   [OSG 23 EL9 contrib software repository](https://repo.opensciencegrid.org/osg/23-contrib/el9/contrib/x86_64/)
 -   [OSG 3.6 EL7 contrib software repository](https://repo.opensciencegrid.org/osg/3.6/el7/contrib/x86_64/)
 -   [OSG 3.6 EL8 contrib software repository](https://repo.opensciencegrid.org/osg/3.6/el8/contrib/x86_64/)
 -   [OSG 3.6 EL9 contrib software repository](https://repo.opensciencegrid.org/osg/3.6/el9/contrib/x86_64/)
--   [OSG 23 EL8 contrib software repository](https://repo.opensciencegrid.org/osg/23-contrib/el8/contrib/x86_64/)
--   [OSG 23 EL9 contrib software repository](https://repo.opensciencegrid.org/osg/23-contrib/el9/contrib/x86_64/)
 
 If you would like to distribute your software in the OSG `contrib` repository, please [contact us](../common/help.md) with a
 description of your software, what users it serves, and relevant RPM packaging.
@@ -188,6 +188,16 @@ For instructions on upgrading from one OSG series to another, see the
 1. Install the OSG repository for your OS version and the [OSG release series](../release/release_series.md) that you wish to
    use:
 
+    - OSG 23 EL8:
+
+            :::console
+            root@host # yum install https://repo.opensciencegrid.org/osg/23-main/osg-23-main-el8-release-latest.rpm
+
+    - OSG 23 EL9:
+
+            :::console
+            root@host # yum install https://repo.opensciencegrid.org/osg/23-main/osg-23-main-el9-release-latest.rpm
+
     - OSG 3.6 EL7:
 
             :::console
@@ -202,16 +212,6 @@ For instructions on upgrading from one OSG series to another, see the
 
             :::console
             root@host # yum install https://repo.opensciencegrid.org/osg/3.6/osg-3.6-el9-release-latest.rpm
-
-    - OSG 23 EL8:
-
-            :::console
-            root@host # yum install https://repo.opensciencegrid.org/osg/23-main/osg-23-main-el8-release-latest.rpm
-
-    - OSG 23 EL9:
-
-            :::console
-            root@host # yum install https://repo.opensciencegrid.org/osg/23-main/osg-23-main-el9-release-latest.rpm
 
 1. The only OSG repository enabled by default is the release one.
    If you want to [enable another one](#repositories) (e.g. `osg-testing`), then edit its file
