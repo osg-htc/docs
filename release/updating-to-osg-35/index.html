@@ -1911,7 +1911,7 @@ To update your HTCondor-CE host(s), perform the following steps:</p>
 
 </li>
 <li>
-<p>For non-HTCondor sites that use <a href="https://htcondor.github.io/htcondor-ce/v4/batch-system-integration/#setting-batch-system-directives">remote CE requirements</a>,
+<p>For non-HTCondor sites that use <a href="https://htcondor.com/htcondor-ce/v5/configuration/local-batch-system/#non-htcondor-batch-systems">remote CE requirements</a>,
   the new version of HTCondor-CE accepts a simplified format.
   For example, a snippet from an example job route in the old format:</p>
 <div class="codehilite"><pre><span></span><code>set_default_remote_cerequirements = strcat(&quot;Walltime == 3600 &amp;&amp; AccountingGroup ==&quot;&quot;, x509UserProxyFirstFQAN, &quot;\&quot;&quot;);
@@ -2043,7 +2043,7 @@ To update HTCondor on your HTCondor-CE and/or HTCondor pool hosts, perform the f
 </li>
 <li>
 <p><strong>HTCondor-CE hosts only:</strong> The HTCondor 8.8 series changed the default job route matching order
-   <a href="https://htcondor.github.io/htcondor-ce/v4/batch-system-integration/#how-jobs-match-to-job-routes">from round-robin to first matching route</a>.
+   <a href="https://htcondor.com/htcondor-ce/v5/configuration/job-router-overview/#how-jobs-match-to-routes">from round-robin to first matching route</a>.
    To use the old round-robin matching order, add the following configuration to <code>/etc/condor-ce/config.d/99-local.conf</code>:</p>
 <div class="codehilite"><pre><span></span><code>JOB_ROUTER_ROUND_ROBIN_SELECTION = True
 </code></pre></div>
