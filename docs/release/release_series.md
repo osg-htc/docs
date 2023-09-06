@@ -7,7 +7,10 @@ Release Series
 OSG Software releases are organized into release series, with the intent that software updates within a series do will
 not take require manual configuration updates, cause significant downtime, or break dependent software.
 
-New series can be more disruptive, allowing OSG to add, substantially change, and remove software components.
+When a new series is released, it is an opportunity for the OSG Software Team to add major new software packages, make
+substantial updates to existing packages, and remove obsolete packages.
+When a new series is initially released, most packages are identical to the previous release, but two adjacent series
+will diverge over time.
 
 Support Policy
 --------------
@@ -25,11 +28,6 @@ will continue to function.
 Files for release series older than current or previous will be removed from the OSG Software repositories no earlier
 than when support ends for the previous release.
 For example, files for OSG 3.2 were not removed until May 2018, when support ended for OSG 3.3 in May 2018.
-
-When a new series is released, it is an opportunity for the OSG Software Team to add major new software packages, make
-substantial updates to existing packages, and remove obsolete packages.
-When a new series is initially released, most packages are identical to the previous release, but two adjacent series
-will diverge over time.
 
 Series Overviews
 ----------------
