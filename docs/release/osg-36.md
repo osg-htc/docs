@@ -51,23 +51,6 @@ To check your Compute Entrypoint configuration run:
 
 For more information, consult the [HTCondor documentation](https://htcondor.readthedocs.io/en/v10_0/version-history/upgrading-from-9-0-to-10-0-versions.html)
 
-### CA Certificates on EL9 ###
-
-EL9 operating systems have a tighter default cryptographic policy that can cause services to reject certificates issued
-by SHA-1 signed CAs.
-Some CAs in the `igtf-ca-certs` and `osg-ca-certs` packages are affected and you may see service issues if your server
-certificate or certificates presented by clients are issued by these CAs.
-The Software Team is investigating solutions but in the meantime, we recommend running the following command on XRootD
-hosts to accept certificates issued by SHA-1 signed CAs:
-
-```
-root@host # update-crypto-policies --set DEFAULT:SHA1
-```
-
-!!! note "Do I need to run this on my Compute Entrypoint (CE) hosts?"
-    No. At this time, the Software Team believes that CE hosts are unaffected since their clients only present tokens
-    and token issuers present modern CAs.
-
 ### rrdtool ###
 
 To improve support for Python 3 based GlideinWMS in EL7,
@@ -82,6 +65,18 @@ excludepkgs=rrdtool
 
 Latest News
 -----------
+
+### **September 7, 2023:** IGTF 1.123, htgettoken 1.20, Pegasus 5.0.6
+-   CA certificates based on [IGTF 1.122](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Add ECC private trust hierarchy for GEANT (Research and Education) TCS (EU)
+    -   Added accredited private trust eMudhra IGTF root and issuers (IN)
+    -   Resolved issue on EL9 with SHA1 signed Certificate Authorities
+-   [htgettoken 1.20](https://github.com/fermitools/htgettoken/releases/tag/v1.20)
+    -   Adds `httokensh` command to automatically renew access tokens as long a subshell runs
+    -   Update `httokensh` to by default set the minimum vault token time to live to 6 days, and to make sure that the background refresh never gets a new vault token
+    -   Changed the preferred name of `httokendecode` to `htdecodetoken`, keeping links in the opposite direction
+    -   Add man pages for `httokensh`, `htdestroytoken`, and `htdecodetoken`
+-   [Pegasus 5.0.6](https://pegasus.isi.edu/2023/06/30/pegasus-5-0-6-released/): Bug fix release
 
 ### **August 10, 2023:** frontier-squid 5.9-1.1, xrootd-multiuser 2.1.3-1.3
 -   [frontier-squid 5.9-1.1](http://www.squid-cache.org/Versions/v5/squid-5.9-RELEASENOTES.html)
@@ -204,7 +199,7 @@ Latest News
     -   Added transitional CDP mirror URLs for retiring DigitalTrust CAs (AE)
     -   Removed discontinued NIIF-Root-CA-2 (HU)
     -   Removed expiring GermanGrid (GridKA CrossGrid) CA (DE)
--   htgettoken 1.18
+-   [htgettoken 1.18](https://github.com/fermitools/htgettoken/releases/tag/v1.18)
     -   Fixes bug with --nobearertoken when invoked by HTCondor
     -   EL9 support
 -   [osg-token-renewer 0.8.3-2](https://github.com/opensciencegrid/osg-token-renewer/releases/tag/v0.8.3-2): Remove X11 UI dependencies
@@ -243,13 +238,13 @@ Latest News
 -   [VO Package v131](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-131)
     -   New CLAS2 and EIC certificates
 
-### **April 20, 2023:** HTCondor-CE 6.0.0, htgettoken; Upcoming: HTCondor 10.4.0
+### **April 20, 2023:** HTCondor-CE 6.0.0, htgettoken 1.17; Upcoming: HTCondor 10.4.0
 -   [HTCondor-CE 6.0.0](https://htcondor.com/htcondor-ce/v6/releases/#600)
     -   Align HTCondor-CE security configuration with HTCondor defaults
     -   Add example configuration on how to ban users
     -   Add `condor_ce_transform_ads` command
     -   Improve essential directory checking and creation at startup
--   htgettoken 1.17
+-   [htgettoken 1.17](https://github.com/fermitools/htgettoken/releases/tag/v1.17)
     -   Make `--showbearerurl` work properly in combination with `--nobearertoken`
     -   `httokendecode`'s error message for missing token file now goes to `stderr`
 -   EL7/EL8 upcoming and EL9 release: [HTCondor 10.4.0](https://htcondor.readthedocs.io/en/latest/version-history/feature-versions-10-x.html#version-10-4-0) - new feature release
@@ -395,11 +390,12 @@ Latest News
     -   Update HCC, GLOW, and OSG VOMS certificates
 
 ### ** January 3, 2023:** htgettoken 1.16
--   Fix ``httokendecode -H`` functionality to only attempt to convert a parsed word
-    if it is entirely numeric, not if it just contains one digit
--   At the same time, rewrite this functionality in native ``bash`` instead of using ``grep`` and ``sed``
--   Add ``htdestroytoken`` command
--   Add ``htdecodetoken`` symbolic link that points to ``httokendecode``
+-   [htgettoken 1.16](https://github.com/fermitools/htgettoken/releases/tag/v1.16)
+    -   Fix ``httokendecode -H`` functionality to only attempt to convert a parsed word
+        if it is entirely numeric, not if it just contains one digit
+    -   At the same time, rewrite this functionality in native ``bash`` instead of using ``grep`` and ``sed``
+    -   Add ``htdestroytoken`` command
+    -   Add ``htdecodetoken`` symbolic link that points to ``httokendecode``
 
 ### ** December 22, 2022:** VO Package v127
 -   [VO Package v127](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-127)
@@ -567,7 +563,7 @@ Latest News
     -   Add ability to turn off VOMS support via environment variable
 -  XRootD 5.4.3-1.2
     -   Improve logging for xrootd-scitokens
--  htgettoken 1.15
+-   [htgettoken 1.15](https://github.com/fermitools/htgettoken/releases/tag/v1.15)
     -   Improve support for vault service using round-robin DNS
 -  Upcoming: [HTCondor 9.10.1](https://htcondor.readthedocs.io/en/v9_1/version-history/development-release-series-91.html#version-9-10-1)
     -   ActivationSetupDuration is now correct for jobs that checkpoint
@@ -614,7 +610,7 @@ Latest News
     -   Multiple bug fixes
 -   htvault-config 1.13
     -   Removes support for old style secret storage; requires htgettoken >= 1.7
--   htgettoken 1.12
+-   [htgettoken 1.12](https://github.com/fermitools/htgettoken/releases/tag/v1.12)
     -   Avoids crash when verbose output includes UTF-8
 -   osg-pki-tools 3.5.2
     -   Bug fix for osg-incommon-cert-request when using host file
