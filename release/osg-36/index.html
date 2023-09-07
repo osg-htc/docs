@@ -1446,13 +1446,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ca-certificates-on-el9" class="md-nav__link">
-    CA Certificates on EL9
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#rrdtool" class="md-nav__link">
     rrdtool
   </a>
@@ -1471,6 +1464,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#september-7-2023-igtf-1123-htgettoken-120-pegasus-506" class="md-nav__link">
+    September 7, 2023: IGTF 1.123, htgettoken 1.20, Pegasus 5.0.6
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#august-10-2023-frontier-squid-59-11-xrootd-multiuser-213-13" class="md-nav__link">
@@ -1550,8 +1550,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#april-20-2023-htcondor-ce-600-htgettoken-upcoming-htcondor-1040" class="md-nav__link">
-    April 20, 2023: HTCondor-CE 6.0.0, htgettoken; Upcoming: HTCondor 10.4.0
+  <a href="#april-20-2023-htcondor-ce-600-htgettoken-117-upcoming-htcondor-1040" class="md-nav__link">
+    April 20, 2023: HTCondor-CE 6.0.0, htgettoken 1.17; Upcoming: HTCondor 10.4.0
   </a>
   
 </li>
@@ -2360,13 +2360,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ca-certificates-on-el9" class="md-nav__link">
-    CA Certificates on EL9
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#rrdtool" class="md-nav__link">
     rrdtool
   </a>
@@ -2385,6 +2378,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#september-7-2023-igtf-1123-htgettoken-120-pegasus-506" class="md-nav__link">
+    September 7, 2023: IGTF 1.123, htgettoken 1.20, Pegasus 5.0.6
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#august-10-2023-frontier-squid-59-11-xrootd-multiuser-213-13" class="md-nav__link">
@@ -2464,8 +2464,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#april-20-2023-htcondor-ce-600-htgettoken-upcoming-htcondor-1040" class="md-nav__link">
-    April 20, 2023: HTCondor-CE 6.0.0, htgettoken; Upcoming: HTCondor 10.4.0
+  <a href="#april-20-2023-htcondor-ce-600-htgettoken-117-upcoming-htcondor-1040" class="md-nav__link">
+    April 20, 2023: HTCondor-CE 6.0.0, htgettoken 1.17; Upcoming: HTCondor 10.4.0
   </a>
   
 </li>
@@ -2994,20 +2994,6 @@ possible issues:</p>
 <p>Don't forget to check to HTCondor batch system as well</p>
 </div>
 <p>For more information, consult the <a href="https://htcondor.readthedocs.io/en/v10_0/version-history/upgrading-from-9-0-to-10-0-versions.html">HTCondor documentation</a></p>
-<h3 id="ca-certificates-on-el9">CA Certificates on EL9<a class="headerlink" href="#ca-certificates-on-el9" title="Permanent link">&para;</a></h3>
-<p>EL9 operating systems have a tighter default cryptographic policy that can cause services to reject certificates issued
-by SHA-1 signed CAs.
-Some CAs in the <code>igtf-ca-certs</code> and <code>osg-ca-certs</code> packages are affected and you may see service issues if your server
-certificate or certificates presented by clients are issued by these CAs.
-The Software Team is investigating solutions but in the meantime, we recommend running the following command on XRootD
-hosts to accept certificates issued by SHA-1 signed CAs:</p>
-<div class="highlight"><pre><span></span><code>root@host # update-crypto-policies --set DEFAULT:SHA1
-</code></pre></div>
-<div class="admonition note">
-<p class="admonition-title">Do I need to run this on my Compute Entrypoint (CE) hosts?</p>
-<p>No. At this time, the Software Team believes that CE hosts are unaffected since their clients only present tokens
-and token issuers present modern CAs.</p>
-</div>
 <h3 id="rrdtool">rrdtool<a class="headerlink" href="#rrdtool" title="Permanent link">&para;</a></h3>
 <p>To improve support for Python 3 based GlideinWMS in EL7,
 the EL7 OSG Yum repositories contain a newer version of <code>rrdtool</code> than the operating system repositories.
@@ -3017,6 +3003,23 @@ of <code>/etc/yum.repos.d/osg.repo</code>:</p>
 <div class="highlight"><pre><span></span><code>excludepkgs=rrdtool
 </code></pre></div>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="september-7-2023-igtf-1123-htgettoken-120-pegasus-506"><strong>September 7, 2023:</strong> IGTF 1.123, htgettoken 1.20, Pegasus 5.0.6<a class="headerlink" href="#september-7-2023-igtf-1123-htgettoken-120-pegasus-506" title="Permanent link">&para;</a></h3>
+<ul>
+<li>CA certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.122</a><ul>
+<li>Add ECC private trust hierarchy for GEANT (Research and Education) TCS (EU)</li>
+<li>Added accredited private trust eMudhra IGTF root and issuers (IN)</li>
+<li>Resolved issue on EL9 with SHA1 signed Certificate Authorities</li>
+</ul>
+</li>
+<li><a href="https://github.com/fermitools/htgettoken/releases/tag/v1.20">htgettoken 1.20</a><ul>
+<li>Adds <code>httokensh</code> command to automatically renew access tokens as long a subshell runs</li>
+<li>Update <code>httokensh</code> to by default set the minimum vault token time to live to 6 days, and to make sure that the background refresh never gets a new vault token</li>
+<li>Changed the preferred name of <code>httokendecode</code> to <code>htdecodetoken</code>, keeping links in the opposite direction</li>
+<li>Add man pages for <code>httokensh</code>, <code>htdestroytoken</code>, and <code>htdecodetoken</code></li>
+</ul>
+</li>
+<li><a href="https://pegasus.isi.edu/2023/06/30/pegasus-5-0-6-released/">Pegasus 5.0.6</a>: Bug fix release</li>
+</ul>
 <h3 id="august-10-2023-frontier-squid-59-11-xrootd-multiuser-213-13"><strong>August 10, 2023:</strong> frontier-squid 5.9-1.1, xrootd-multiuser 2.1.3-1.3<a class="headerlink" href="#august-10-2023-frontier-squid-59-11-xrootd-multiuser-213-13" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="http://www.squid-cache.org/Versions/v5/squid-5.9-RELEASENOTES.html">frontier-squid 5.9-1.1</a><ul>
@@ -3185,7 +3188,7 @@ It can be installed with either HTCondor version 9 or 10.</p>
 <li>Removed expiring GermanGrid (GridKA CrossGrid) CA (DE)</li>
 </ul>
 </li>
-<li>htgettoken 1.18<ul>
+<li><a href="https://github.com/fermitools/htgettoken/releases/tag/v1.18">htgettoken 1.18</a><ul>
 <li>Fixes bug with --nobearertoken when invoked by HTCondor</li>
 <li>EL9 support</li>
 </ul>
@@ -3243,7 +3246,7 @@ It can be installed with either HTCondor version 9 or 10.</p>
 </ul>
 </li>
 </ul>
-<h3 id="april-20-2023-htcondor-ce-600-htgettoken-upcoming-htcondor-1040"><strong>April 20, 2023:</strong> HTCondor-CE 6.0.0, htgettoken; Upcoming: HTCondor 10.4.0<a class="headerlink" href="#april-20-2023-htcondor-ce-600-htgettoken-upcoming-htcondor-1040" title="Permanent link">&para;</a></h3>
+<h3 id="april-20-2023-htcondor-ce-600-htgettoken-117-upcoming-htcondor-1040"><strong>April 20, 2023:</strong> HTCondor-CE 6.0.0, htgettoken 1.17; Upcoming: HTCondor 10.4.0<a class="headerlink" href="#april-20-2023-htcondor-ce-600-htgettoken-117-upcoming-htcondor-1040" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://htcondor.com/htcondor-ce/v6/releases/#600">HTCondor-CE 6.0.0</a><ul>
 <li>Align HTCondor-CE security configuration with HTCondor defaults</li>
@@ -3252,7 +3255,7 @@ It can be installed with either HTCondor version 9 or 10.</p>
 <li>Improve essential directory checking and creation at startup</li>
 </ul>
 </li>
-<li>htgettoken 1.17<ul>
+<li><a href="https://github.com/fermitools/htgettoken/releases/tag/v1.17">htgettoken 1.17</a><ul>
 <li>Make <code>--showbearerurl</code> work properly in combination with <code>--nobearertoken</code></li>
 <li><code>httokendecode</code>'s error message for missing token file now goes to <code>stderr</code></li>
 </ul>
@@ -3466,11 +3469,14 @@ This will affect certificates issued by IGTF CAs.</p>
 </ul>
 <h3 id="january-3-2023-htgettoken-116"><strong> January 3, 2023:</strong> htgettoken 1.16<a class="headerlink" href="#january-3-2023-htgettoken-116" title="Permanent link">&para;</a></h3>
 <ul>
+<li><a href="https://github.com/fermitools/htgettoken/releases/tag/v1.16">htgettoken 1.16</a><ul>
 <li>Fix <code>httokendecode -H</code> functionality to only attempt to convert a parsed word
     if it is entirely numeric, not if it just contains one digit</li>
 <li>At the same time, rewrite this functionality in native <code>bash</code> instead of using <code>grep</code> and <code>sed</code></li>
 <li>Add <code>htdestroytoken</code> command</li>
 <li>Add <code>htdecodetoken</code> symbolic link that points to <code>httokendecode</code></li>
+</ul>
+</li>
 </ul>
 <h3 id="december-22-2022-vo-package-v127"><strong> December 22, 2022:</strong> VO Package v127<a class="headerlink" href="#december-22-2022-vo-package-v127" title="Permanent link">&para;</a></h3>
 <ul>
@@ -3725,7 +3731,7 @@ If not, pilots will not arrive or jobs will have storage access issues.</p>
 <li>Improve logging for xrootd-scitokens</li>
 </ul>
 </li>
-<li>htgettoken 1.15<ul>
+<li><a href="https://github.com/fermitools/htgettoken/releases/tag/v1.15">htgettoken 1.15</a><ul>
 <li>Improve support for vault service using round-robin DNS</li>
 </ul>
 </li>
@@ -3793,7 +3799,7 @@ If not, pilots will not arrive or jobs will have storage access issues.</p>
 <li>Removes support for old style secret storage; requires htgettoken &gt;= 1.7</li>
 </ul>
 </li>
-<li>htgettoken 1.12<ul>
+<li><a href="https://github.com/fermitools/htgettoken/releases/tag/v1.12">htgettoken 1.12</a><ul>
 <li>Avoids crash when verbose output includes UTF-8</li>
 </ul>
 </li>
