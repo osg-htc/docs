@@ -51,6 +51,23 @@ To check your Compute Entrypoint configuration run:
 
 For more information, consult the [HTCondor documentation](https://htcondor.readthedocs.io/en/v10_0/version-history/upgrading-from-9-0-to-10-0-versions.html)
 
+### CA Certificates on EL9 ###
+
+EL9 operating systems have a tighter default cryptographic policy that can cause services to reject certificates issued
+by SHA-1 signed CAs.
+Some CAs in the `igtf-ca-certs` and `osg-ca-certs` packages are affected and you may see service issues if your server
+certificate or certificates presented by clients are issued by these CAs.
+The Software Team is investigating solutions but in the meantime, we recommend running the following command on XRootD
+hosts to accept certificates issued by SHA-1 signed CAs:
+
+```
+root@host # update-crypto-policies --set DEFAULT:SHA1
+```
+
+!!! note "Do I need to run this on my Compute Entrypoint (CE) hosts?"
+    No. At this time, the Software Team believes that CE hosts are unaffected since their clients only present tokens
+    and token issuers present modern CAs.
+
 ### rrdtool ###
 
 To improve support for Python 3 based GlideinWMS in EL7,
@@ -65,6 +82,16 @@ excludepkgs=rrdtool
 
 Latest News
 -----------
+
+### **September 8, 2023:** IGTF 1.123-2
+
+!!! warning
+    If you updated to osg-ca-certs-1.114-1.1 or igtf-ca-certs-1.123-1.1,
+    update to osg-ca-certs-1.114-2 or igtf-ca-certs-123-2 as soon a possible.
+    Java-based services may need to be restarted to pick up the new
+    certificates.
+
+-   Reverted work around for supporting SHA1-signed CA certificates on systems with tight cryptographic policies (i.e., the EL9 default)
 
 ### **September 7, 2023:** IGTF 1.123, htgettoken 1.20, Pegasus 5.0.6
 -   CA certificates based on [IGTF 1.122](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
