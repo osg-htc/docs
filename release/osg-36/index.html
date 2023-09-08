@@ -1446,6 +1446,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ca-certificates-on-el9" class="md-nav__link">
+    CA Certificates on EL9
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#rrdtool" class="md-nav__link">
     rrdtool
   </a>
@@ -1464,6 +1471,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#september-8-2023-igtf-1123-2" class="md-nav__link">
+    September 8, 2023: IGTF 1.123-2
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#september-7-2023-igtf-1123-htgettoken-120-pegasus-506" class="md-nav__link">
@@ -2360,6 +2374,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ca-certificates-on-el9" class="md-nav__link">
+    CA Certificates on EL9
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#rrdtool" class="md-nav__link">
     rrdtool
   </a>
@@ -2378,6 +2399,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#september-8-2023-igtf-1123-2" class="md-nav__link">
+    September 8, 2023: IGTF 1.123-2
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#september-7-2023-igtf-1123-htgettoken-120-pegasus-506" class="md-nav__link">
@@ -2994,6 +3022,20 @@ possible issues:</p>
 <p>Don't forget to check to HTCondor batch system as well</p>
 </div>
 <p>For more information, consult the <a href="https://htcondor.readthedocs.io/en/v10_0/version-history/upgrading-from-9-0-to-10-0-versions.html">HTCondor documentation</a></p>
+<h3 id="ca-certificates-on-el9">CA Certificates on EL9<a class="headerlink" href="#ca-certificates-on-el9" title="Permanent link">&para;</a></h3>
+<p>EL9 operating systems have a tighter default cryptographic policy that can cause services to reject certificates issued
+by SHA-1 signed CAs.
+Some CAs in the <code>igtf-ca-certs</code> and <code>osg-ca-certs</code> packages are affected and you may see service issues if your server
+certificate or certificates presented by clients are issued by these CAs.
+The Software Team is investigating solutions but in the meantime, we recommend running the following command on XRootD
+hosts to accept certificates issued by SHA-1 signed CAs:</p>
+<div class="highlight"><pre><span></span><code>root@host # update-crypto-policies --set DEFAULT:SHA1
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Do I need to run this on my Compute Entrypoint (CE) hosts?</p>
+<p>No. At this time, the Software Team believes that CE hosts are unaffected since their clients only present tokens
+and token issuers present modern CAs.</p>
+</div>
 <h3 id="rrdtool">rrdtool<a class="headerlink" href="#rrdtool" title="Permanent link">&para;</a></h3>
 <p>To improve support for Python 3 based GlideinWMS in EL7,
 the EL7 OSG Yum repositories contain a newer version of <code>rrdtool</code> than the operating system repositories.
@@ -3003,6 +3045,17 @@ of <code>/etc/yum.repos.d/osg.repo</code>:</p>
 <div class="highlight"><pre><span></span><code>excludepkgs=rrdtool
 </code></pre></div>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="september-8-2023-igtf-1123-2"><strong>September 8, 2023:</strong> IGTF 1.123-2<a class="headerlink" href="#september-8-2023-igtf-1123-2" title="Permanent link">&para;</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you updated to osg-ca-certs-1.114-1.1 or igtf-ca-certs-1.123-1.1,
+update to osg-ca-certs-1.114-2 or igtf-ca-certs-123-2 as soon a possible.
+Java-based services may need to be restarted to pick up the new
+certificates.</p>
+</div>
+<ul>
+<li>Reverted work around for supporting SHA1-signed CA certificates on systems with tight cryptographic policies (i.e., the EL9 default)</li>
+</ul>
 <h3 id="september-7-2023-igtf-1123-htgettoken-120-pegasus-506"><strong>September 7, 2023:</strong> IGTF 1.123, htgettoken 1.20, Pegasus 5.0.6<a class="headerlink" href="#september-7-2023-igtf-1123-htgettoken-120-pegasus-506" title="Permanent link">&para;</a></h3>
 <ul>
 <li>CA certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.122</a><ul>
