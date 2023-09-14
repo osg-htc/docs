@@ -71,11 +71,11 @@ Support ends at the end of the month of the following dates unless otherwise spe
 | Release Series | Initial Release | End of Regular Support | End of Critical Bug/Security Support |
 |:--------------:|-----------------|------------------------|--------------------------------------|
 | 3.6            | Februrary 2021  | Not set                | Not set                              |
-| 3.5            | August 2019     | August 2021            | 1 May 2022                           |
-| 3.4            | June 2017       | February 2020          | November 2020                        |
-| 3.3            | August 2015     | December 2017          | May 2018                             |
-| 3.2            | November 2013   | February 2016          | August 2016                          |
-| 3.1            | April 2012      | October 2014           | April 2015                           |
+| 3.5            | August 2019     | 30 August 2021         | 1 May 2022                           |
+| 3.4            | June 2017       | 29 February 2020       | 30 November 2020                     |
+| 3.3            | August 2015     | 31 December 2017       | 31 May 2018                          |
+| 3.2            | November 2013   | 29 February 2016       | 31 August 2016                       |
+| 3.1            | April 2012      | 31 October 2014        | 30 April 2015                        |
 
 
 Installing an OSG Release Series
