@@ -14,7 +14,8 @@ As with OSG 3.6, we will continue to release OSG 23 package updates in a rolling
 Additionally, OSG 23 aligns the OSG and HTCondor Software Suite (HTCSS) release cycles:
 
 -   OSG 23 main Yum repositories will contain HTCSS LTS series
-    ([HTCondor 23.0](https://htcondor.readthedocs.io/en/23.0/index.html), HTCondor-CE 23.0)
+    ([HTCondor 23.0](https://htcondor.readthedocs.io/en/23.0/index.html),
+    [HTCondor-CE 23.0](https://htcondor.com/htcondor-ce/v23/installation/htcondor-ce/))
 -   OSG 23 upcoming Yum repositories will contain HTCSS feature series (HTCondor 23.x, HTCondor-CE 23.x)
 
 Latest News
@@ -66,7 +67,7 @@ This release contains the following major package updates compared to the curren
             `condor_schedd`
         -   Fixed a bug where the condor_startd could crash if a new match is made at the end a drain request
 
--   HTCondor-CE 23.0.0:
+-   [HTCondor-CE 23.0.0](https://htcondor.com/htcondor-ce/v23/installation/htcondor-ce/):
     an update from 6.0.0 in OSG 3.6 main.
 
     !!! warning "Job router configuration deprecation"
