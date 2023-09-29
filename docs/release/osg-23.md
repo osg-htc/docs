@@ -57,9 +57,9 @@ This release contains the following major package updates compared to the curren
         -   Fixed a bug where if a user-level checkpoint could not be transferred from the starter to the AP, the job
             would go on hold
             Now it will retry, or go back to idle
-        -   Fixed a bug where the CommittedTime attribute was not set correctly for Docker Universe jobs doing user
+        -   Fixed a bug where the `CommittedTime` attribute was not set correctly for Docker Universe jobs doing user
             level check-pointing
-        -   Fixed a bug where condor_preen was deleting files named ‘OfflineAds’ in the spool directory
+        -   Fixed a bug where `condor_preen` was deleting files named 'OfflineAds' in the spool directory
         -   Fixed a bug where the blahpd would incorrectly believe that an LSF batch scheduler was not working
         -   Fixed the Execution Point’s detection of whether libvirt is working properly for the VM universe
         -   Fixed a bug where container universe did not work for late materialization jobs submitted to the
