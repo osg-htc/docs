@@ -133,7 +133,7 @@ This release contains the following major package updates compared to the curren
 
 The following packages were removed from OSG 23 compared to OSG 3.6:
 
--  `blahp`: available as `condor-blahp`
+-  `blahp`: available as part of the `condor` package
 -  `oidc-agent`: available in EPEL
 -  `python-jwt`: available in EPEL
 -  `python-scitokens`: available in EPEL
