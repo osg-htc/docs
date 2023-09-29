@@ -34,6 +34,9 @@ Series Overviews
 
 Since the start of the RPM-based OSG Software Stack, we have offered the following release series:
 
+-   **OSG 23** (started September 2023) aligns the OSG release series and HTCondor Software Suite release cycles.
+    The initial release includes GlideinWMS 3.10.5, HTCondor 23.0, HTCondor-CE 23.0, and XRootD 5.6.2
+
 -   **OSG 3.6** (started February 2021) overhauls the authentication and data transfer protocols used in the OSG
     software stack:
     bearer tokens, such as [SciTokens](https://scitokens.org/) or WLCG tokens, are used for authentication instead of
