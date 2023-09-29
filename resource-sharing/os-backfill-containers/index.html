@@ -1998,8 +1998,8 @@ In order to successfully start payload jobs:</p>
    If you are using Docker to launch the container, this is done with the command line flag
    <code>-v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org</code>.
    Replace <code>/path/to/token</code> with the full path to the token you obtained from the OSPool Token Registry.</li>
-<li>Set <code>GLIDEIN_Site</code> and <code>GLIDEIN_ResourceName</code> to match the site name and resource name that you registered in Topology,
-   respectively.</li>
+<li>Set <code>GLIDEIN_Site</code> and <code>GLIDEIN_ResourceName</code> to match the resource group name and resource name that you registered
+   in Topology, respectively.</li>
 <li>Set the <code>OSG_SQUID_LOCATION</code> environment variable to the HTTP address of your preferred Squid instance.</li>
 <li><em>If providing NVIDIA GPU resources:</em> Bind-mount <code>/etc/OpenCL/vendors</code>, read-only.
    If you are using Docker to launch the container, this is done with the command line flags
