@@ -85,7 +85,7 @@ This release contains the following major package updates compared to the curren
     -   Adds an option to allow running `condor_ce_trace` without a SciToken for testing batch system integration
 
 -   [XRootD 5.6.2](https://github.com/xrootd/xrootd/blob/v5.6.2/docs/ReleaseNotes.txt#L1-L123):
-    an update from XRootD 5.5.1 in OSG 3.6 main.
+    an update from XRootD 5.5.5 in OSG 3.6 main.
     -  New Features
         -   Add xrdfs cache subcommand to allow for cache evictions
         -   Better handling of unicode strings in the API
