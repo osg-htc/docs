@@ -28,6 +28,9 @@ Latest News
     2024 to align with the EL7 end-of-life.
     See our [release series life-cycle](release_series.md#series-life-cycle) table for details.
 
+!!! question "Where are the container images and tarballs?"
+    We expect to release container images and WN client tarballs next week!
+
 The initial release of OSG 23 contains [major package updates](#major-package-updates) and
 [package removals](#package-removals).
 All other packages may have received minor version and/or packaging updates compared to OSG 3.6.
