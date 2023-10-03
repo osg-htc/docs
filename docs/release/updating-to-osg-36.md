@@ -15,8 +15,7 @@ See the list of services below for any special considerations for the OSG 3.6 up
 -   [Compute Entrypoints](../compute-element/htcondor-ce-overview.md) should be updated to OSG 3.6 with care:
 
     -   If the collaborations that you support have NOT moved to bearer token pilot job submission, update to
-        HTCondor-CE 5 available in [OSG 3.5 upcoming](updating-to-osg-35.md#updating-to-htcondor-ce-5) to help your
-        collaborations transition to bearer tokens.
+        HTCondor-CE 5 available in OSG 3.5 upcoming to help your collaborations transition to bearer tokens.
 
         !!! warning "OSG 3.5 end-of-life"
             OSG 3.5 support is scheduled to end on [May 1, 2022](https://osg-htc.org/technology/policy/release-series/#life-cycle-dates).
@@ -168,7 +167,7 @@ Updating Your OSG Compute Entrypoint
 
 In OSG 3.6, OSG Compute Entrypoints (CEs) only accept token-based pilot job submissions.
 If you need to support token-based and GSI proxy-based pilot job submission,
-you must install or remain on [OSG 3.5, with the osg-upcoming repositories enabled](notes.md).
+you must install or remain on OSG 3.5, with the osg-upcoming repositories enabled.
 If the collaborations that you support have the capability to submit token-based pilots, you may update your CE to OSG 3.6.
 
 In addition to the change in authentication protocol, OSG 3.6 CEs include new major versions of software that require
@@ -317,7 +316,7 @@ To update OSG-Configure, perform the following steps:
     `/usr/share/condor-ce/config.d/01-ce-router-defaults.conf`.
     The next release of HTCondor-CE will contain this fix and will not require any additional action post-update.
 
-The OSG 3.6 release series contains [HTCondor-CE 5](https://htcondor.github.io/htcondor-ce/v5/releases/), a major
+The OSG 3.6 release series contains HTCondor-CE 5, a major
 version upgrade from HTCondor-CE 4, which was available in the OSG 3.5 release repositories.
 To update HTCondor-CE, perform the following steps:
 
@@ -328,8 +327,7 @@ To update HTCondor-CE, perform the following steps:
         by the `osg-scitokens-mapfile` package) to a file in `/etc/condor-ce/mapfiles.d/`
     1.  Replacing the third field with the local Unix account.
 
-1.  Also consult the [upgrade documentation](https://htcondor.github.io/htcondor-ce/v5/releases/#updating-to-htcondor-ce-5)
-    for other required configuration updates.
+1.  Also consult the upgrade documentation for other required configuration updates.
 
 !!! note "For OSG CEs serving an HTCondor pool"
     If your OSG CE routes pilot jobs to a local HTCondor pool, also
