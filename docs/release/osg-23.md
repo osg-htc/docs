@@ -36,11 +36,8 @@ Latest News
     2024 to align with the EL7 end-of-life.
     See our [release series life-cycle](release_series.md#series-life-cycle) table for details.
 
-!!! question "Where are the container images and tarballs?"
-    We expect to release container images and WN client tarballs next week!
-
-The initial release of OSG 23 contains [major package updates](#major-package-updates) and
-[package removals](#package-removals).
+The initial release of OSG 23 contains [major package updates](#major-package-updates),
+[package removals](#package-removals), and [new container images](#container-images).
 All other packages may have received minor version and/or packaging updates compared to OSG 3.6.
 
 #### Major package updates ####
@@ -149,6 +146,29 @@ The following packages were removed from OSG 23 compared to OSG 3.6:
 -  `python-jwt`: available in EPEL
 -  `python-scitokens`: available in EPEL
 -  `rrdtool` available from OS repositories
+
+#### Container Images ####
+
+The following container images have new tags for OSG 23:
+
+| Image name                                                   | Tags                       |
+|:-------------------------------------------------------------|:---------------------------|
+| `hub.opensciencegrid.org/opensciencegrid/atlas-xcache`       | `23-release`, `23-testing` |
+| `hub.opensciencegrid.org/opensciencegrid/cms-xcache`         | `23-release`, `23-testing` |
+| `hub.opensciencegrid.org/opensciencegrid/frontier-squid`     | `23-release`, `23-testing` |
+| `hub.opensciencegrid.org/opensciencegrid/oidc-agent`         | `23-release`, `23-testing` |
+| `hub.opensciencegrid.org/opensciencegrid/osgvo-docker-pilot` | `23-release`, `23-testing` |
+| `hub.opensciencegrid.org/opensciencegrid/stash-cache`        | `23-release`, `23-testing` |
+| `hub.opensciencegrid.org/opensciencegrid/stash-origin`       | `23-release`, `23-testing` |
+
+For example, to retreive an OSG 23 backfill container image, run the following command:
+
+```
+docker pull hub.opensciencegrid.org/opensciencegrid/osgvo-docker-pilot:23-release
+```
+
+For more details on OSG container images,
+see our [policy document](https://osg-htc.org/technology/policy/container-release/).
 
 Announcements
 -------------
