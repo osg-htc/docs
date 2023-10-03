@@ -15,8 +15,7 @@ See the list of services below for any special considerations for the OSG 3.6 up
 -   [Compute Entrypoints](../compute-element/htcondor-ce-overview.md) should be updated to OSG 3.6 with care:
 
     -   If the collaborations that you support have NOT moved to bearer token pilot job submission, update to
-        HTCondor-CE 5 available in [OSG 3.5 upcoming](updating-to-osg-35.md#updating-to-htcondor-ce-5) to help your
-        collaborations transition to bearer tokens.
+        HTCondor-CE 5 available in OSG 3.5 upcoming to help your collaborations transition to bearer tokens.
 
         !!! warning "OSG 3.5 end-of-life"
             OSG 3.5 support is scheduled to end on [May 1, 2022](https://osg-htc.org/technology/policy/release-series/#life-cycle-dates).
@@ -168,7 +167,7 @@ Updating Your OSG Compute Entrypoint
 
 In OSG 3.6, OSG Compute Entrypoints (CEs) only accept token-based pilot job submissions.
 If you need to support token-based and GSI proxy-based pilot job submission,
-you must install or remain on [OSG 3.5, with the osg-upcoming repositories enabled](notes.md).
+you must install or remain on OSG 3.5, with the osg-upcoming repositories enabled.
 If the collaborations that you support have the capability to submit token-based pilots, you may update your CE to OSG 3.6.
 
 In addition to the change in authentication protocol, OSG 3.6 CEs include new major versions of software that require

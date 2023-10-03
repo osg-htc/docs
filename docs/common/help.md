@@ -19,7 +19,9 @@ If you are experiencing issues with OSG software or services, please consult the
 support inquiry:
 
 *  Troubleshooting sections or pages for the problematic software
-*  Recent OSG Software [release notes](../release/notes.md)
+*  Recent OSG Software release notes
+    -   [OSG 23](../release/osg-23.md)
+    -   [OSG 3.6](../release/osg-36.md)
 *  [Outage](https://status.opensciencegrid.org/) information for OSG services
 
 ### Submitting support inquiries ###
