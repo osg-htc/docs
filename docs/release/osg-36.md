@@ -307,7 +307,7 @@ Latest News
             If you have any other packages that have files in `/etc/init.d`, they may also need to be reinstalled and
             cleaned up in a similar fashion.
 
-    -   HTCondor 10.3.0: see [upstream documentation](https://htcondor.readthedocs.io/en/V10_x/version-history/upgrading-from-9-0-to-10-0-versions.html)
+    -   HTCondor 10.3.0: see [upstream documentation](https://htcondor.readthedocs.io/en/v10_x/version-history/upgrading-from-9-0-to-10-0-versions.html)
         for manual update steps.
     -   HTCondor-CE 6.0.0: see [upstream documentation](https://htcondor.com/htcondor-ce/v6/releases/#updating-to-htcondor-ce-6)
         for manual update steps.
