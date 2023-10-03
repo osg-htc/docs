@@ -274,7 +274,7 @@ Latest News
 -   [htgettoken 1.17](https://github.com/fermitools/htgettoken/releases/tag/v1.17)
     -   Make `--showbearerurl` work properly in combination with `--nobearertoken`
     -   `httokendecode`'s error message for missing token file now goes to `stderr`
--   EL7/EL8 upcoming and EL9 release: [HTCondor 10.4.0](https://htcondor.readthedocs.io/en/v10_0/version-history/feature-versions-10-x.html#version-10-4-0) - new feature release
+-   EL7/EL8 upcoming and EL9 release: [HTCondor 10.4.0](https://htcondor.readthedocs.io/en/v10_x/version-history/feature-versions-10-x.html#version-10-4-0) - new feature release
     -   Please review the [upgrade documentation](https://htcondor.readthedocs.io/en/v10_0/version-history/upgrading-from-9-0-to-10-0-versions.html) for any manual steps
 
 ### **March 30, 2023:** EL9 and Gratia Probe 2.8.4 (all operating systems)
@@ -307,7 +307,7 @@ Latest News
             If you have any other packages that have files in `/etc/init.d`, they may also need to be reinstalled and
             cleaned up in a similar fashion.
 
-    -   HTCondor 10.3.0: see [upstream documentation](https://htcondor.readthedocs.io/en/latest/version-history/upgrading-from-9-0-to-10-0-versions.html)
+    -   HTCondor 10.3.0: see [upstream documentation](https://htcondor.readthedocs.io/en/V10_x/version-history/upgrading-from-9-0-to-10-0-versions.html)
         for manual update steps.
     -   HTCondor-CE 6.0.0: see [upstream documentation](https://htcondor.com/htcondor-ce/v6/releases/#updating-to-htcondor-ce-6)
         for manual update steps.
