@@ -23,7 +23,7 @@ Before Starting
 ---------------
 
 Before starting the installation process, consider the following points, consulting the upstream references as needed
-([HTCondor-CE 5](https://htcondor.com/htcondor-ce/v5 /reference/)):
+([HTCondor-CE 23](https://htcondor.com/htcondor-ce/v23/reference/)):
 
 -   **User IDs:** If they do not exist already, the installation will create the Linux users `condor` (UID 4716) and
     `gratia`

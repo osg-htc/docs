@@ -49,7 +49,7 @@ To check your Compute Entrypoint configuration run:
     Don't forget to check to HTCondor batch system as well
 
 
-For more information, consult the [HTCondor documentation](https://htcondor.readthedocs.io/en/v10_0/version-history/upgrading-from-9-0-to-10-0-versions.html)
+For more information, consult the HTCondor documentation
 
 ### CA Certificates on EL9 ###
 

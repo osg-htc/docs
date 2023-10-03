@@ -316,7 +316,7 @@ To update OSG-Configure, perform the following steps:
     `/usr/share/condor-ce/config.d/01-ce-router-defaults.conf`.
     The next release of HTCondor-CE will contain this fix and will not require any additional action post-update.
 
-The OSG 3.6 release series contains [HTCondor-CE 5](https://htcondor.github.io/htcondor-ce/v5/releases/), a major
+The OSG 3.6 release series contains HTCondor-CE 5, a major
 version upgrade from HTCondor-CE 4, which was available in the OSG 3.5 release repositories.
 To update HTCondor-CE, perform the following steps:
 
@@ -327,8 +327,7 @@ To update HTCondor-CE, perform the following steps:
         by the `osg-scitokens-mapfile` package) to a file in `/etc/condor-ce/mapfiles.d/`
     1.  Replacing the third field with the local Unix account.
 
-1.  Also consult the [upgrade documentation](https://htcondor.github.io/htcondor-ce/v5/releases/#updating-to-htcondor-ce-5)
-    for other required configuration updates.
+1.  Also consult the upgrade documentation for other required configuration updates.
 
 !!! note "For OSG CEs serving an HTCondor pool"
     If your OSG CE routes pilot jobs to a local HTCondor pool, also
