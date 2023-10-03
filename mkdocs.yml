@@ -80,6 +80,7 @@ nav:
   - 'Release Series': 'release/release_series.md'
   - OSG 23:
      - 'News': 'release/osg-23.md'
+     - 'Updating to OSG 23': 'release/updating-to-osg-23.md'
   - OSG 3.6:
      - 'News': 'release/osg-36.md'
      - 'Updating to OSG 3.6': 'release/updating-to-osg-36.md'
