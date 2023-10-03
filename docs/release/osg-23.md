@@ -21,7 +21,7 @@ Additionally, OSG 23 aligns the OSG and HTCondor Software Suite (HTCSS) release 
 Latest News
 -----------
 
-### **September 29, 2023**: Initial Release
+### **October 3, 2023**: Initial Release
 
 !!! info "OSG 3.6 retirement"
     As part of our transition to our new series release cadence, we are planning to end support for OSG 3.6 on 30 June
