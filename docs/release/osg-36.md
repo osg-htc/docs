@@ -1060,7 +1060,7 @@ This release of OSG 3.6 contains the following packages:
     -   Fix exit code and retry checking when a job exits because of a signal
     -   Fix a memory leak in the job router when a job is removed via job policy
     -   Fixed the back-end support for the 'bosco\_cluster --add' command
--   [HTCondor-CE 5.1.1](https://htcondor.github.io/htcondor-ce/v5/releases/#511)
+-   HTCondor-CE 5.1.1
     -   Improve restart time of HTCondor-CE View
     -   Fix bug that caused HTCondor-CE to ignore incoming BatchRuntime requests
     -   Fixed error that occurred during RPM installation of non-HTCondor batch systems regarding missing file batch\_gahp
@@ -1092,7 +1092,7 @@ This release of OSG 3.6 contains the following packages:
 
 -   [HTCondor 9.0.0-1.5](https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00006.shtml): Major new release with enhanced security
 -   [Blahp 2.0.2](https://github.com/htcondor/BLAH/releases): GPU Support, Converted to Python 3
--   [HTCondor-CE 5.1.0](https://htcondor.github.io/htcondor-ce/v5/releases/#510)
+-   HTCondor-CE 5.1.0
     -   Support for Job Router Transform configuration syntax
     -   Credential mapping changes
     -   Converted to Python 3
@@ -1151,7 +1151,7 @@ Here is a list of the differences in this initial release:
 -   Added packages to support token-based authentication
 -   [HTCondor 8.9.11](https://htcondor.readthedocs.io/en/v9_0/version-history/development-release-series-89.html#version-8-9-11):
     initial token support (8.9.12, which will contain default configuration using tokens, was delayed)
--   [HTCondor-CE 5.0.0](https://htcondor.github.io/htcondor-ce/v5/releases/):
+-   HTCondor-CE 5.0.0:
     support for Python 3
 -   [Gratia Probe 2.0.0](https://github.com/opensciencegrid/gratia-probe/releases/tag/v2.0.0-2):
     replace all batch system probes with the non-root HTCondor-CE probe
