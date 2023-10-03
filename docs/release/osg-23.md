@@ -18,6 +18,14 @@ Additionally, OSG 23 aligns the OSG and HTCondor Software Suite (HTCSS) release 
     [HTCondor-CE 23.0](https://htcondor.com/htcondor-ce/v23/installation/htcondor-ce/))
 -   OSG 23 upcoming Yum repositories will contain HTCSS feature series (HTCondor 23.x, HTCondor-CE 23.x)
 
+Known Issues
+------------
+
+### HTCondor-CE and Torque
+
+We have noticed issues with our HTCondor-CE + Torque batch system automated tests for Torque RPMs installed out of EPEL.
+This issue is still under investigation.
+
 Latest News
 -----------
 
