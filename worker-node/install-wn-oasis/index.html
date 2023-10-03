@@ -1457,12 +1457,73 @@
       
       
         <label class="md-nav__link" for="__nav_10_2">
+          OSG 23
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="OSG 23" data-md-level="2">
+        <label class="md-nav__title" for="__nav_10_2">
+          <span class="md-nav__icon md-icon"></span>
+          OSG 23
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../release/osg-23/" class="md-nav__link">
+        News
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../release/updating-to-osg-23/" class="md-nav__link">
+        Updating to OSG 23
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_3" type="checkbox" id="__nav_10_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10_3">
           OSG 3.6
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="OSG 3.6" data-md-level="2">
-        <label class="md-nav__title" for="__nav_10_2">
+        <label class="md-nav__title" for="__nav_10_3">
           <span class="md-nav__icon md-icon"></span>
           OSG 3.6
         </label>
@@ -1906,7 +1967,7 @@ This may result in extra network activity, especially on first use of the client
 <h2 id="validating-the-worker-node-client">Validating the Worker Node Client<a class="headerlink" href="#validating-the-worker-node-client" title="Permanent link">&para;</a></h2>
 <p>To verify functionality of the worker node client, you will need to submit a test job against your CE and verify the job's output.</p>
 <ol>
-<li>Submit a job that executes the <code>env</code> command (e.g. Run <a href="https://htcondor.github.io/htcondor-ce/v5/troubleshooting/debugging-tools/#condor_ce_trace">condor_ce_trace</a> with the <code>-d</code> flag from your HTCondor CE)</li>
+<li>Submit a job that executes the <code>env</code> command (e.g. Run <a href="https://htcondor.github.io/htcondor-ce/v6/troubleshooting/debugging-tools/#condor_ce_trace">condor_ce_trace</a> with the <code>-d</code> flag from your HTCondor CE)</li>
 <li>Verify that the value of <code>OSG_GRID</code> is set to the directory of your WN Client installation</li>
 </ol>
 <h3 id="manually-using-the-worker-node-client-from-oasis">Manually Using the Worker Node Client From OASIS<a class="headerlink" href="#manually-using-the-worker-node-client-from-oasis" title="Permanent link">&para;</a></h3>

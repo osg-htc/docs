@@ -1367,6 +1367,67 @@
               
   
   
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_2" type="checkbox" id="__nav_10_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10_2">
+          OSG 23
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="OSG 23" data-md-level="2">
+        <label class="md-nav__title" for="__nav_10_2">
+          <span class="md-nav__icon md-icon"></span>
+          OSG 23
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../osg-23/" class="md-nav__link">
+        News
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../updating-to-osg-23/" class="md-nav__link">
+        Updating to OSG 23
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
     
   
   
@@ -1374,18 +1435,18 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_2" type="checkbox" id="__nav_10_2" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_3" type="checkbox" id="__nav_10_3" checked>
       
       
       
       
-        <label class="md-nav__link" for="__nav_10_2">
+        <label class="md-nav__link" for="__nav_10_3">
           OSG 3.6
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="OSG 3.6" data-md-level="2">
-        <label class="md-nav__title" for="__nav_10_2">
+        <label class="md-nav__title" for="__nav_10_3">
           <span class="md-nav__icon md-icon"></span>
           OSG 3.6
         </label>
@@ -2123,8 +2184,7 @@ See the list of services below for any special considerations for the OSG 3.6 up
 <ul>
 <li>
 <p>If the collaborations that you support have NOT moved to bearer token pilot job submission, update to
-    HTCondor-CE 5 available in <a href="../updating-to-osg-35/#updating-to-htcondor-ce-5">OSG 3.5 upcoming</a> to help your
-    collaborations transition to bearer tokens.</p>
+    HTCondor-CE 5 available in OSG 3.5 upcoming to help your collaborations transition to bearer tokens.</p>
 <div class="admonition warning">
 <p class="admonition-title">OSG 3.5 end-of-life</p>
 <p>OSG 3.5 support is scheduled to end on <a href="https://osg-htc.org/technology/policy/release-series/#life-cycle-dates">May 1, 2022</a>.
@@ -2288,7 +2348,7 @@ Instead, the default CE configuration runs its Gratia Probe as a periodic proces
 <h2 id="updating-your-osg-compute-entrypoint">Updating Your OSG Compute Entrypoint<a class="headerlink" href="#updating-your-osg-compute-entrypoint" title="Permanent link">&para;</a></h2>
 <p>In OSG 3.6, OSG Compute Entrypoints (CEs) only accept token-based pilot job submissions.
 If you need to support token-based and GSI proxy-based pilot job submission,
-you must install or remain on <a href="../notes/">OSG 3.5, with the osg-upcoming repositories enabled</a>.
+you must install or remain on OSG 3.5, with the osg-upcoming repositories enabled.
 If the collaborations that you support have the capability to submit token-based pilots, you may update your CE to OSG 3.6.</p>
 <p>In addition to the change in authentication protocol, OSG 3.6 CEs include new major versions of software that require
 manual updates.
@@ -2472,7 +2532,7 @@ To fix this, apply the change in <a href="https://github.com/htcondor/htcondor-c
 <code>/usr/share/condor-ce/config.d/01-ce-router-defaults.conf</code>.
 The next release of HTCondor-CE will contain this fix and will not require any additional action post-update.</p>
 </div>
-<p>The OSG 3.6 release series contains <a href="https://htcondor.github.io/htcondor-ce/v5/releases/">HTCondor-CE 5</a>, a major
+<p>The OSG 3.6 release series contains HTCondor-CE 5, a major
 version upgrade from HTCondor-CE 4, which was available in the OSG 3.5 release repositories.
 To update HTCondor-CE, perform the following steps:</p>
 <ol>
@@ -2486,8 +2546,7 @@ To update HTCondor-CE, perform the following steps:</p>
 </ol>
 </li>
 <li>
-<p>Also consult the <a href="https://htcondor.github.io/htcondor-ce/v5/releases/#updating-to-htcondor-ce-5">upgrade documentation</a>
-    for other required configuration updates.</p>
+<p>Also consult the upgrade documentation for other required configuration updates.</p>
 </li>
 </ol>
 <div class="admonition note">

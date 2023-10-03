@@ -1367,6 +1367,67 @@
               
   
   
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_2" type="checkbox" id="__nav_10_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10_2">
+          OSG 23
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="OSG 23" data-md-level="2">
+        <label class="md-nav__title" for="__nav_10_2">
+          <span class="md-nav__icon md-icon"></span>
+          OSG 23
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../osg-23/" class="md-nav__link">
+        News
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../updating-to-osg-23/" class="md-nav__link">
+        Updating to OSG 23
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
     
   
   
@@ -1374,18 +1435,18 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_2" type="checkbox" id="__nav_10_2" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_3" type="checkbox" id="__nav_10_3" checked>
       
       
       
       
-        <label class="md-nav__link" for="__nav_10_2">
+        <label class="md-nav__link" for="__nav_10_3">
           OSG 3.6
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="OSG 3.6" data-md-level="2">
-        <label class="md-nav__title" for="__nav_10_2">
+        <label class="md-nav__title" for="__nav_10_3">
           <span class="md-nav__icon md-icon"></span>
           OSG 3.6
         </label>
@@ -3021,7 +3082,7 @@ possible issues:</p>
 <p class="admonition-title">Note</p>
 <p>Don't forget to check to HTCondor batch system as well</p>
 </div>
-<p>For more information, consult the <a href="https://htcondor.readthedocs.io/en/v10_0/version-history/upgrading-from-9-0-to-10-0-versions.html">HTCondor documentation</a></p>
+<p>For more information, consult the HTCondor documentation</p>
 <h3 id="ca-certificates-on-el9">CA Certificates on EL9<a class="headerlink" href="#ca-certificates-on-el9" title="Permanent link">&para;</a></h3>
 <p>EL9 operating systems have a tighter default cryptographic policy that can cause services to reject certificates issued
 by SHA-1 signed CAs.
@@ -4420,7 +4481,7 @@ Encrypt certificates with a "certificate has expired" message.</p>
 <li>Fixed the back-end support for the 'bosco_cluster --add' command</li>
 </ul>
 </li>
-<li><a href="https://htcondor.github.io/htcondor-ce/v5/releases/#511">HTCondor-CE 5.1.1</a><ul>
+<li>HTCondor-CE 5.1.1<ul>
 <li>Improve restart time of HTCondor-CE View</li>
 <li>Fix bug that caused HTCondor-CE to ignore incoming BatchRuntime requests</li>
 <li>Fixed error that occurred during RPM installation of non-HTCondor batch systems regarding missing file batch_gahp</li>
@@ -4450,7 +4511,7 @@ Encrypt certificates with a "certificate has expired" message.</p>
 <ul>
 <li><a href="https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00006.shtml">HTCondor 9.0.0-1.5</a>: Major new release with enhanced security</li>
 <li><a href="https://github.com/htcondor/BLAH/releases">Blahp 2.0.2</a>: GPU Support, Converted to Python 3</li>
-<li><a href="https://htcondor.github.io/htcondor-ce/v5/releases/#510">HTCondor-CE 5.1.0</a><ul>
+<li>HTCondor-CE 5.1.0<ul>
 <li>Support for Job Router Transform configuration syntax</li>
 <li>Credential mapping changes</li>
 <li>Converted to Python 3</li>
@@ -4509,7 +4570,7 @@ Here is a list of the differences in this initial release:</p>
 <li>Added packages to support token-based authentication</li>
 <li><a href="https://htcondor.readthedocs.io/en/v9_0/version-history/development-release-series-89.html#version-8-9-11">HTCondor 8.9.11</a>:
     initial token support (8.9.12, which will contain default configuration using tokens, was delayed)</li>
-<li><a href="https://htcondor.github.io/htcondor-ce/v5/releases/">HTCondor-CE 5.0.0</a>:
+<li>HTCondor-CE 5.0.0:
     support for Python 3</li>
 <li><a href="https://github.com/opensciencegrid/gratia-probe/releases/tag/v2.0.0-2">Gratia Probe 2.0.0</a>:
     replace all batch system probes with the non-root HTCondor-CE probe</li>
@@ -4553,7 +4614,7 @@ closely track our OSG 3.6 repositories.</p>
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../release_series/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Release Series" rel="prev">
+        <a href="../updating-to-osg-23/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Updating to OSG 23" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -4562,7 +4623,7 @@ closely track our OSG 3.6 repositories.</p>
               <span class="md-footer__direction">
                 Previous
               </span>
-              Release Series
+              Updating to OSG 23
             </div>
           </div>
         </a>
