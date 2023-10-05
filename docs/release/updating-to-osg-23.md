@@ -89,9 +89,8 @@ To upgrade your CE to OSG 23, follow the sections below.
 ### Check for possible incompatibilities ###
 
 1.  Ensure that you have the latest HTCondor installed (either HTCondor 10.9.0 or HTCondor 10.0.9)
-    and the latest HTCondor-CE installed (version 6.0.1)
 
-1.  Run the `condor_ce_upgrade_check` script and address any issues found.
+1.  Run the `condor_upgrade_check -ce` script and address any issues found.
 
 1.  If you have an HTCondor batch system, also run the `condor_upgrade_check` script and address any issues found.
 
