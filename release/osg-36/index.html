@@ -1534,6 +1534,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#october-5-2023-htcondor-1009-htcondor-1090-xrootd-562-glideinwms-3105-cvmfs-2110-cvmfs-x509-helper-23-osg-pki-tools-361-oidc-agent-452" class="md-nav__link">
+    October 5, 2023: HTCondor 10.0.9, HTCondor 10.9.0, XRootD 5.6.2, GlideinWMS 3.10.5, CVMFS 2.11.0, cvmfs-x509-helper 2.3, osg-pki-tools 3.6.1, oidc-agent 4.5.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#september-8-2023-igtf-1123-2" class="md-nav__link">
     September 8, 2023: IGTF 1.123-2
   </a>
@@ -2462,6 +2469,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#october-5-2023-htcondor-1009-htcondor-1090-xrootd-562-glideinwms-3105-cvmfs-2110-cvmfs-x509-helper-23-osg-pki-tools-361-oidc-agent-452" class="md-nav__link">
+    October 5, 2023: HTCondor 10.0.9, HTCondor 10.9.0, XRootD 5.6.2, GlideinWMS 3.10.5, CVMFS 2.11.0, cvmfs-x509-helper 2.3, osg-pki-tools 3.6.1, oidc-agent 4.5.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#september-8-2023-igtf-1123-2" class="md-nav__link">
     September 8, 2023: IGTF 1.123-2
   </a>
@@ -3106,6 +3120,59 @@ of <code>/etc/yum.repos.d/osg.repo</code>:</p>
 <div class="highlight"><pre><span></span><code>excludepkgs=rrdtool
 </code></pre></div>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="october-5-2023-htcondor-1009-htcondor-1090-xrootd-562-glideinwms-3105-cvmfs-2110-cvmfs-x509-helper-23-osg-pki-tools-361-oidc-agent-452"><strong>October 5, 2023:</strong> HTCondor 10.0.9, HTCondor 10.9.0, XRootD 5.6.2, GlideinWMS 3.10.5, CVMFS 2.11.0, cvmfs-x509-helper 2.3, osg-pki-tools 3.6.1, oidc-agent 4.5.2<a class="headerlink" href="#october-5-2023-htcondor-1009-htcondor-1090-xrootd-562-glideinwms-3105-cvmfs-2110-cvmfs-x509-helper-23-osg-pki-tools-361-oidc-agent-452" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://htcondor.readthedocs.io/en/v10_0/version-history/lts-versions-10-0.html#version-10-0-9">HTCondor 10.0.9</a>: EL7, EL8<ul>
+<li>The condor_upgrade_check script now provides guidance on updating to 23.0</li>
+<li>Avoid kernel panic on some Enterprise Linux 8 systems</li>
+<li>Fix bug where early termination of service nodes could crash DAGMan</li>
+<li>The htchirp Python binding now properly locates the chirp configuration</li>
+<li>Limit email about long file transfer queue to once daily</li>
+<li>Various fixes to condor_adstash</li>
+</ul>
+</li>
+<li><a href="https://htcondor.readthedocs.io/en/v10_x/version-history/feature-versions-10-x.html#version-10-9-0">HTCondor 10.9.0</a>: EL7 Upcoming, EL8 Upcoming, EL9<ul>
+<li>Fold the classads, blahp, and procd RPMs into the main condor RPM</li>
+<li>On Linux, the default configuration enforces memory limits with cgroups</li>
+<li>condor_status -gpus shows nodes with GPUs and the GPU properties</li>
+<li>condor_status -compact shows a row for each slot type</li>
+<li>New ENV command controls which environment variables are present in DAGMan</li>
+<li>All the fixes from HTCondor 10.0.9 (listed above)</li>
+</ul>
+</li>
+<li>XRootD 5.6.2<ul>
+<li>New feature release: <a href="https://listserv.slac.stanford.edu/cgi-bin/wa?A2=ind2307&amp;L=XROOTD-L&amp;P=68">XRootD 5.6.0</a> with many improvements</li>
+<li>Plus two bug fix releases: <a href="https://github.com/xrootd/xrootd/releases/tag/v5.6.1">XRootD 5.6.1</a> and <a href="https://github.com/xrootd/xrootd/releases/tag/v5.6.2">XRootD 5.6.2</a></li>
+</ul>
+</li>
+<li><a href="https://glideinwms.fnal.gov/doc.v3_10_5/history.html#stable">GlideinWMS 3.10.5</a><ul>
+<li>Enterprise Linux 9 and Python 3.9 support</li>
+<li>Added structured logging</li>
+</ul>
+</li>
+<li><a href="https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html">CVMFS 2.11.0</a><ul>
+<li>Support for symlink kernel caching</li>
+<li>A new reference-counted cache manager mode that reduces the number of open file descriptors </li>
+<li>A bug fix for an issue that could slow down client startup</li>
+<li>A new telemetry option to send client performance counters to influx</li>
+</ul>
+</li>
+<li><a href="https://github.com/cvmfs-contrib/cvmfs-x509-helper/releases/tag/2.3">cvmfs-x509-helper 2.3</a><ul>
+<li>Fixes to support Enterprise Linux 9</li>
+<li>Fix for tokens that are bigger than 1024 bytes</li>
+<li>Fix usage of $BEARER_TOKEN when accessing data</li>
+</ul>
+</li>
+<li>osg-pki-tools 3.6.1<ul>
+<li>Add configuration file for osg-incommon-cert-request</li>
+<li>Update default CSR key length to 4096, add CLI option </li>
+</ul>
+</li>
+<li>oidc-agent 4.5.2<ul>
+<li>Update to a recent release that has timeouts to prevent hangs</li>
+</ul>
+</li>
+</ul>
 <h3 id="september-8-2023-igtf-1123-2"><strong>September 8, 2023:</strong> IGTF 1.123-2<a class="headerlink" href="#september-8-2023-igtf-1123-2" title="Permanent link">&para;</a></h3>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>

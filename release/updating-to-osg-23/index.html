@@ -2095,11 +2095,10 @@ version upgrade from HTCondor-CE 6, which was available in the OSG 3.6 release r
 <h3 id="check-for-possible-incompatibilities">Check for possible incompatibilities<a class="headerlink" href="#check-for-possible-incompatibilities" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
-<p>Ensure that you have the latest HTCondor installed (either HTCondor 10.9.0 or HTCondor 10.0.9)
-    and the latest HTCondor-CE installed (version 6.0.1)</p>
+<p>Ensure that you have the latest HTCondor installed (either HTCondor 10.9.0 or HTCondor 10.0.9)</p>
 </li>
 <li>
-<p>Run the <code>condor_ce_upgrade_check</code> script and address any issues found.</p>
+<p>Run the <code>condor_upgrade_check -ce</code> script and address any issues found.</p>
 </li>
 <li>
 <p>If you have an HTCondor batch system, also run the <code>condor_upgrade_check</code> script and address any issues found.</p>
