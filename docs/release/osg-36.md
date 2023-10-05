@@ -83,6 +83,42 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### **October 5, 2023:** HTCondor 10.0.9, HTCondor 10.9.0, XRootD 5.6.2, GlideinWMS 3.10.5, CVMFS 2.11.0, cvmfs-x509-helper 2.3, osg-pki-tools 3.6.1, oidc-agent 4.5.2
+-   [HTCondor 10.0.9](https://htcondor.readthedocs.io/en/v10_0/version-history/lts-versions-10-0.html#version-10-0-9): EL7, EL8
+    -   The condor\_upgrade\_check script now provides guidance on updating to 23.0
+    -   Avoid kernel panic on some Enterprise Linux 8 systems
+    -   Fix bug where early termination of service nodes could crash DAGMan
+    -   The htchirp Python binding now properly locates the chirp configuration
+    -   Limit email about long file transfer queue to once daily
+    -   Various fixes to condor\_adstash
+-   [HTCondor 10.9.0](https://htcondor.readthedocs.io/en/v10_x/version-history/feature-versions-10-x.html#version-10-9-0): EL7 Upcoming, EL8 Upcoming, EL9
+    -   Fold the classads, blahp, and procd RPMs into the main condor RPM
+    -   On Linux, the default configuration enforces memory limits with cgroups
+    -   condor\_status -gpus shows nodes with GPUs and the GPU properties
+    -   condor\_status -compact shows a row for each slot type
+    -   New ENV command controls which environment variables are present in DAGMan
+    -   All the fixes from HTCondor 10.0.9 (listed above)
+-   XRootD 5.6.2
+    -   New feature release: [XRootD 5.6.0](https://listserv.slac.stanford.edu/cgi-bin/wa?A2=ind2307&L=XROOTD-L&P=68) with many improvements
+    -   Plus two bug fix releases: [XRootD 5.6.1](https://github.com/xrootd/xrootd/releases/tag/v5.6.1) and [XRootD 5.6.2](https://github.com/xrootd/xrootd/releases/tag/v5.6.2)
+-   [GlideinWMS 3.10.5](https://glideinwms.fnal.gov/doc.v3_10_5/history.html#stable)
+    -   Enterprise Linux 9 and Python 3.9 support
+    -   Added structured logging
+-   [CVMFS 2.11.0](https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html)
+    -   Support for symlink kernel caching
+    -   A new reference-counted cache manager mode that reduces the number of open file descriptors 
+    -   A bug fix for an issue that could slow down client startup
+    -   A new telemetry option to send client performance counters to influx
+-   [cvmfs-x509-helper 2.3](https://github.com/cvmfs-contrib/cvmfs-x509-helper/releases/tag/2.3)
+    -   Fixes to support Enterprise Linux 9
+    -   Fix for tokens that are bigger than 1024 bytes
+    -   Fix usage of $BEARER\_TOKEN when accessing data
+-   osg-pki-tools 3.6.1
+    -   Add configuration file for osg-incommon-cert-request
+    -   Update default CSR key length to 4096, add CLI option 
+-   oidc-agent 4.5.2
+    -   Update to a recent release that has timeouts to prevent hangs
+
 ### **September 8, 2023:** IGTF 1.123-2
 
 !!! warning
