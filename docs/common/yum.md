@@ -67,8 +67,8 @@ supported by the OSG.
 
 The definitive list of software in the contrib repository can be found here:
 
--   [OSG 23 EL8 contrib software repository](https://repo.opensciencegrid.org/osg/23-contrib/el8/contrib/x86_64/)
--   [OSG 23 EL9 contrib software repository](https://repo.opensciencegrid.org/osg/23-contrib/el9/contrib/x86_64/)
+-   [OSG 23 EL8 contrib software repository](https://repo.opensciencegrid.org/osg/23-contrib/el8/x86_64/)
+-   [OSG 23 EL9 contrib software repository](https://repo.opensciencegrid.org/osg/23-contrib/el9/x86_64/)
 -   [OSG 3.6 EL7 contrib software repository](https://repo.opensciencegrid.org/osg/3.6/el7/contrib/x86_64/)
 -   [OSG 3.6 EL8 contrib software repository](https://repo.opensciencegrid.org/osg/3.6/el8/contrib/x86_64/)
 -   [OSG 3.6 EL9 contrib software repository](https://repo.opensciencegrid.org/osg/3.6/el9/contrib/x86_64/)
