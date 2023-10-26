@@ -129,7 +129,7 @@ Latest News
 -   [cvmfs-x509-helper 2.3](https://github.com/cvmfs-contrib/cvmfs-x509-helper/releases/tag/2.3)
     -   Fixes to support Enterprise Linux 9
     -   Fix for tokens that are bigger than 1024 bytes
-    -   Fix usage of `$BEARER_TOKEN `when accessing data
+    -   Fix usage of `$BEARER_TOKEN` when accessing data
 -   osg-pki-tools 3.6.1
     -   Add configuration file for osg-incommon-cert-request
     -   Update default CSR key length to 4096, add CLI option 
