@@ -1534,6 +1534,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#october-26-2023-cvmfs-2111-13-xrootd-562-23-htcondor-ce-601-osg-update-vos-142-2" class="md-nav__link">
+    October 26, 2023: CVMFS 2.11.1-1.3, XRootD 5.6.2-2.3, HTCondor-CE 6.0.1, osg-update-vos 1.4.2-2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#october-5-2023-htcondor-1009-htcondor-1090-xrootd-562-glideinwms-3105-cvmfs-2110-cvmfs-x509-helper-23-osg-pki-tools-361-oidc-agent-452" class="md-nav__link">
     October 5, 2023: HTCondor 10.0.9, HTCondor 10.9.0, XRootD 5.6.2, GlideinWMS 3.10.5, CVMFS 2.11.0, cvmfs-x509-helper 2.3, osg-pki-tools 3.6.1, oidc-agent 4.5.2
   </a>
@@ -2469,6 +2476,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#october-26-2023-cvmfs-2111-13-xrootd-562-23-htcondor-ce-601-osg-update-vos-142-2" class="md-nav__link">
+    October 26, 2023: CVMFS 2.11.1-1.3, XRootD 5.6.2-2.3, HTCondor-CE 6.0.1, osg-update-vos 1.4.2-2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#october-5-2023-htcondor-1009-htcondor-1090-xrootd-562-glideinwms-3105-cvmfs-2110-cvmfs-x509-helper-23-osg-pki-tools-361-oidc-agent-452" class="md-nav__link">
     October 5, 2023: HTCondor 10.0.9, HTCondor 10.9.0, XRootD 5.6.2, GlideinWMS 3.10.5, CVMFS 2.11.0, cvmfs-x509-helper 2.3, osg-pki-tools 3.6.1, oidc-agent 4.5.2
   </a>
@@ -3120,22 +3134,48 @@ of <code>/etc/yum.repos.d/osg.repo</code>:</p>
 <div class="highlight"><pre><span></span><code>excludepkgs=rrdtool
 </code></pre></div>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="october-26-2023-cvmfs-2111-13-xrootd-562-23-htcondor-ce-601-osg-update-vos-142-2"><strong>October 26, 2023:</strong> CVMFS 2.11.1-1.3, XRootD 5.6.2-2.3, HTCondor-CE 6.0.1, osg-update-vos 1.4.2-2<a class="headerlink" href="#october-26-2023-cvmfs-2111-13-xrootd-562-23-htcondor-ce-601-osg-update-vos-142-2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-11-1">CVMFS 2.11.1-1.3</a><ul>
+<li>Important fix to bug impacting osgstorage.org repositories introduced in 2.11.0 --
+        all 2.11.0 installations should upgrade urgently</li>
+<li>Fix race conditions on concurrent fuse3 mounts</li>
+</ul>
+</li>
+<li>XRootD 5.6.2-2.3<ul>
+<li>Update to -2.3 release to avoid confusion with upstream -2 release</li>
+<li>Fix a bug with parsing compound IDs in authfiles</li>
+</ul>
+</li>
+<li><a href="https://htcondor.com/htcondor-ce/v6/releases/#601">HTCondor-CE 6.0.1</a><ul>
+<li>Add grid CA and host certificate/key locations to default SSL search paths</li>
+<li>Verifies that HTCondor-CE can access the local HTCondor's SPOOL directory</li>
+<li>Can use <code>condor_ce_trace</code> without SciToken to test batch system integration</li>
+<li><code>condor_ce_upgrade_check</code> checks compatibility with HTCondor 23.0</li>
+<li>Adds deprecation warnings for old job router configuration syntax</li>
+</ul>
+</li>
+<li>osg-update-vos 1.4.2-2<ul>
+<li>tarballs now contain cpio, so osg-update-vos will work</li>
+</ul>
+</li>
+</ul>
 <h3 id="october-5-2023-htcondor-1009-htcondor-1090-xrootd-562-glideinwms-3105-cvmfs-2110-cvmfs-x509-helper-23-osg-pki-tools-361-oidc-agent-452"><strong>October 5, 2023:</strong> HTCondor 10.0.9, HTCondor 10.9.0, XRootD 5.6.2, GlideinWMS 3.10.5, CVMFS 2.11.0, cvmfs-x509-helper 2.3, osg-pki-tools 3.6.1, oidc-agent 4.5.2<a class="headerlink" href="#october-5-2023-htcondor-1009-htcondor-1090-xrootd-562-glideinwms-3105-cvmfs-2110-cvmfs-x509-helper-23-osg-pki-tools-361-oidc-agent-452" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://htcondor.readthedocs.io/en/v10_0/version-history/lts-versions-10-0.html#version-10-0-9">HTCondor 10.0.9</a>: EL7, EL8<ul>
-<li>The condor_upgrade_check script now provides guidance on updating to 23.0</li>
+<li>The <code>condor_upgrade_check</code> script now provides guidance on updating to 23.0</li>
 <li>Avoid kernel panic on some Enterprise Linux 8 systems</li>
 <li>Fix bug where early termination of service nodes could crash DAGMan</li>
 <li>The htchirp Python binding now properly locates the chirp configuration</li>
 <li>Limit email about long file transfer queue to once daily</li>
-<li>Various fixes to condor_adstash</li>
+<li>Various fixes to <code>condor_adstash</code></li>
 </ul>
 </li>
 <li><a href="https://htcondor.readthedocs.io/en/v10_x/version-history/feature-versions-10-x.html#version-10-9-0">HTCondor 10.9.0</a>: EL7 Upcoming, EL8 Upcoming, EL9<ul>
 <li>Fold the classads, blahp, and procd RPMs into the main condor RPM</li>
 <li>On Linux, the default configuration enforces memory limits with cgroups</li>
-<li>condor_status -gpus shows nodes with GPUs and the GPU properties</li>
-<li>condor_status -compact shows a row for each slot type</li>
+<li><code>condor_status -gpus</code> shows nodes with GPUs and the GPU properties</li>
+<li><code>condor_status -compact</code> shows a row for each slot type</li>
 <li>New ENV command controls which environment variables are present in DAGMan</li>
 <li>All the fixes from HTCondor 10.0.9 (listed above)</li>
 </ul>
@@ -3160,7 +3200,7 @@ of <code>/etc/yum.repos.d/osg.repo</code>:</p>
 <li><a href="https://github.com/cvmfs-contrib/cvmfs-x509-helper/releases/tag/2.3">cvmfs-x509-helper 2.3</a><ul>
 <li>Fixes to support Enterprise Linux 9</li>
 <li>Fix for tokens that are bigger than 1024 bytes</li>
-<li>Fix usage of $BEARER_TOKEN when accessing data</li>
+<li>Fix usage of <code>$BEARER_TOKEN</code> when accessing data</li>
 </ul>
 </li>
 <li>osg-pki-tools 3.6.1<ul>
@@ -3359,8 +3399,8 @@ It can be installed with either HTCondor version 9 or 10.</p>
 </ul>
 </li>
 <li><a href="http://www.squid-cache.org/Versions/v5/squid-5.8-RELEASENOTES.html">frontier-squid 5.8</a><ul>
-<li>Add predefined ACL named "to_linklocal"</li>
-<li>Bug fix for the cache manager returning "mgr_index" rather than data</li>
+<li>Add predefined ACL named <code>to_linklocal</code></li>
+<li>Bug fix for the cache manager returning <code>mgr_index</code> rather than data</li>
 </ul>
 </li>
 <li>CA certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.120</a><ul>
@@ -3384,7 +3424,7 @@ It can be installed with either HTCondor version 9 or 10.</p>
 <li>Improved throughput when submitting a large number of ARC-CE jobs</li>
 <li>Execute events contain the slot name, sandbox path, resource quantities</li>
 <li>Can add attributes of the execution point to be recorded in the user log</li>
-<li>Enhanced condor_transform_ads tool to ease offline job transform testing</li>
+<li>Enhanced <code>condor_transform_ads</code> tool to ease offline job transform testing</li>
 <li>Fix bug where memory limits over 2 GiB might not be correctly enforced</li>
 </ul>
 </li>
@@ -3538,9 +3578,9 @@ cleaned up in a similar fashion.</p>
 </ul>
 </li>
 <li><a href="http://www.squid-cache.org/Versions/v5/squid-5.7-RELEASENOTES.html">frontier-squid-5.7-2.1</a><ul>
-<li>Uses first destination IP address that responds (dns_v4_first removed)</li>
-<li>Add MAJOR_CVMFS sites cvmfs-stratum-one.cc.kek.jp, cvmfs*.sdcc.bnl.gov</li>
-<li>Remove obsolete sites frontier*.racf.bnl.gov from ATLAS_FRONTIER</li>
+<li>Uses first destination IP address that responds (<code>dns_v4_first</code> removed)</li>
+<li>Add <code>MAJOR_CVMFS</code> sites cvmfs-stratum-one.cc.kek.jp, cvmfs*.sdcc.bnl.gov</li>
+<li>Remove obsolete sites frontier*.racf.bnl.gov from <code>ATLAS_FRONTIER</code></li>
 <li>Fix bug where old caches may not be cleaned up</li>
 </ul>
 </li>
@@ -3625,7 +3665,7 @@ This will affect certificates issued by IGTF CAs.</p>
 <li>Production release supporting tokens and Python 3</li>
 <li>Fix monitoring by including Glidein IDs with SciTokens</li>
 <li>Add Python module to help with custom scripts</li>
-<li>Custom setup scripts written in shell should always use the gconfig_* functions introduced in
+<li>Custom setup scripts written in shell should always use the <code>gconfig_*</code> functions introduced in
     <a href="https://glideinwms.fnal.gov/doc.v3_10_1/history.html#development">3.9.6</a> to read and write glidein configuration.
     See the release notes for details.</li>
 </ul>
@@ -3732,7 +3772,7 @@ If not, pilots will not arrive or jobs will have storage access issues.</p>
 <li>Fix crash in HTCondor-CE View</li>
 </ul>
 </li>
-<li>osdf-client 6.9.2 (includes stashcp and condor_stash_plugin)<ul>
+<li>osdf-client 6.9.2 (includes stashcp and <code>condor_stash_plugin</code>)<ul>
 <li>Add support for osdf:// URLs</li>
 <li>Fix zero-byte file upload error</li>
 </ul>
@@ -3748,12 +3788,12 @@ If not, pilots will not arrive or jobs will have storage access issues.</p>
 <li>Upcoming: <a href="https://htcondor.readthedocs.io/en/v9_1/version-history/development-release-series-91.html#version-9-12-0">HTCondor 9.12.0</a><ul>
 <li>Provide a mechanism to bootstrap secure authentication within a pool</li>
 <li>Add the ability to define submit templates</li>
-<li>Administrators can now extend the help offered by condor_submit</li>
+<li>Administrators can now extend the help offered by <code>condor_submit</code></li>
 <li>Add DAGMan ClassAd attributes to record more information about jobs</li>
-<li>On Linux, advertise the x86_64 micro-architecture in a slot attribute</li>
-<li>Added -drain option to condor_off and condor_restart</li>
+<li>On Linux, advertise the <code>x86_64</code> micro-architecture in a slot attribute</li>
+<li>Added -drain option to <code>condor_off</code> and <code>condor_restart</code></li>
 <li>Administrators can now set the shared memory size for Docker jobs</li>
-<li>Multiple improvements to condor_adstash</li>
+<li>Multiple improvements to <code>condor_adstash</code></li>
 <li>HAD daemons now use SHA-256 checksums by default</li>
 </ul>
 </li>
@@ -3947,15 +3987,15 @@ If not, pilots will not arrive or jobs will have storage access issues.</p>
 <li>Support for CVMFS on-demand</li>
 <li>Configurable idtokens lifetime</li>
 <li>Improved frontend logging</li>
-<li>Improved default SHARED_PORT configuration</li>
+<li>Improved default <code>SHARED_PORT</code> configuration</li>
 <li>Special handling of multiline condor config values</li>
 <li>Several bug fixes</li>
 </ul>
 </li>
 <li><a href="https://htcondor.readthedocs.io/en/v9_0/version-history/stable-release-series-90.html#version-9-0-13">HTCondor 9.0.13</a>: Bug fix release<ul>
 <li>Schedd and startd cron jobs can now log output upon non-zero exit</li>
-<li>condor_config_val now produces correct syntax for multi-line values</li>
-<li>The condor_run tool now reports submit errors and warnings to the terminal</li>
+<li><code>condor_config_val</code> now produces correct syntax for multi-line values</li>
+<li>The <code>condor_run</code> tool now reports submit errors and warnings to the terminal</li>
 <li>Fix issue where Kerberos authentication would fail within DAGMan</li>
 <li>Fix HTCondor startup failure with certain complex network configurations</li>
 </ul>
@@ -4069,8 +4109,8 @@ If not, pilots will not arrive or jobs will have storage access issues.</p>
 <li><a href="https://cvmfs.readthedocs.io/en/2.9/cpt-releasenotes.html">CVMFS 2.9.2</a>: Bug fix release</li>
 <li>cigetcert 1.20: works better with CILogon's AWS infrastructure</li>
 <li>osg-ce 3.6-5<ul>
-<li>Add OSG_SERIES = 3.6 as a schedd attribute</li>
-<li>Remove default BATCH_GAHP configuration now provided by upstream</li>
+<li>Add <code>OSG_SERIES = 3.6</code> as a schedd attribute</li>
+<li>Remove default <code>BATCH_GAHP</code> configuration now provided by upstream</li>
 </ul>
 </li>
 <li>osg-pki-tools 3.5.1: Python 3 fixes for osg-incommon-cert-request</li>
@@ -4095,7 +4135,7 @@ If not, pilots will not arrive or jobs will have storage access issues.</p>
 <h3 id="april-14-2022-osg-configure-411-osg-scitokens-mapfile-8"><strong>April 14, 2022:</strong> osg-configure 4.1.1, osg-scitokens-mapfile 8<a class="headerlink" href="#april-14-2022-osg-configure-411-osg-scitokens-mapfile-8" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://github.com/opensciencegrid/osg-configure/releases/tag/v4.1.1">OSG-Configure 4.1.1</a><ul>
-<li>Fix gratia DataFolder/PER_JOB_HISTORY_DIR check for HTCondor-CE with an HTCondor batch system</li>
+<li>Fix gratia <code>DataFolder/PER_JOB_HISTORY_DIR</code> check for HTCondor-CE with an HTCondor batch system</li>
 </ul>
 </li>
 <li>osg-scitokens-mapfile 8<ul>
@@ -4311,7 +4351,7 @@ You may turn off asyncio (<code>async off</code>) on either end to avoid the pro
 <li><a href="https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00027.shtml">HTCondor 9.0.8 LTS</a><ul>
 <li>X.509 proxy delegation now works in OSG 3.6</li>
 <li>Fix bug where huge values of ImageSize and others would end up negative</li>
-<li>Fix bug in how MAX_JOBS_PER_OWNER applied to late materialization jobs</li>
+<li>Fix bug in how <code>MAX_JOBS_PER_OWNER</code> applied to late materialization jobs</li>
 <li>Fix bug where the schedd could choose a slot with insufficient disk space</li>
 <li>Fix crash in ClassAd substr() function when the offset is out of range</li>
 <li>Fix bug in Kerberos code that can crash on macOS and could leak memory</li>
@@ -4330,9 +4370,9 @@ You may turn off asyncio (<code>async off</code>) on either end to avoid the pro
 </ul>
 </li>
 <li><a href="https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00025.shtml">HTCondor 9.0.7</a>: Bug fix release<ul>
-<li>Fix bug where condor_gpu_discovery could crash with older CUDA libraries</li>
-<li>Fix bug where condor_watch_q would fail on machines with older kernels</li>
-<li>condor_watch_q no longer has a limit on the number of job event log files</li>
+<li>Fix bug where <code>condor_gpu_discovery</code> could crash with older CUDA libraries</li>
+<li>Fix bug where <code>condor_watch_q</code> would fail on machines with older kernels</li>
+<li><code>condor_watch_q</code> no longer has a limit on the number of job event log files</li>
 <li>Fix bug where a startd could crash claiming a slot with p-slot preemption</li>
 <li>Fix bug where a job start would not be recorded when a shadow reconnects</li>
 </ul>
@@ -4343,7 +4383,7 @@ You may turn off asyncio (<code>async off</code>) on either end to avoid the pro
 </ul>
 </li>
 <li><a href="https://glideinwms.fnal.gov/doc.v3_9_3/history.html#development">GlideinWMS 3.9.3</a><ul>
-<li>Type validation support to the check_python3_expr.py script</li>
+<li>Type validation support to the <code>check_python3_expr.py</code> script</li>
 <li>Drops the encondingSupport.py module and its unit tests</li>
 <li>Fixes an encoding problem affecting cloud submissions</li>
 </ul>
@@ -4403,7 +4443,7 @@ Encrypt certificates with a "certificate has expired" message.</p>
 <li><a href="https://cvmfs.readthedocs.io/en/2.8/cpt-releasenotes.html">CVMFS 2.8.2</a>: Bug fix release</li>
 <li>cvmfs-x509-helper 2.2-2: Fix a number of issues with SciTokens support</li>
 <li><a href="https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00021.shtml">HTCondor 9.0.6</a><ul>
-<li>CUDA_VISIBLE_DEVICES can now contain GPU-<uuid> formatted values</li>
+<li><code>CUDA_VISIBLE_DEVICES</code> can now contain GPU-<uuid> formatted values</li>
 <li>Fix a bug that caused jobs to fail when using Singularity versions &gt; 3.7</li>
 <li>Fix bugs relating to the transfer of standard output and error logs</li>
 </ul>
@@ -4428,9 +4468,9 @@ Encrypt certificates with a "certificate has expired" message.</p>
 <li>Fixed the default memory and CPU requests when using job router transforms</li>
 <li>Apply default MaxJobs and MaxJobsIdle when using job router transforms</li>
 <li>Improved SciTokens support in submission tools</li>
-<li>Fixed --debug flag in condor_ce_run</li>
+<li>Fixed --debug flag in <code>condor_ce_run</code></li>
 <li>Update configuration verification script to handle job router transforms</li>
-<li>Corrected ownership of the HTCondor PER_JOBS_HISTORY_DIR</li>
+<li>Corrected ownership of the HTCondor <code>PER_JOBS_HISTORY_DIR</code></li>
 <li>Fix bug passing maximum wall time requests to the local batch system</li>
 </ul>
 </li>
@@ -4440,12 +4480,12 @@ Encrypt certificates with a "certificate has expired" message.</p>
 <ul>
 <li><a href="https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00017.shtml">HTCondor 9.0.5</a>: Bug fix release<ul>
 <li>Other authentication methods are tried if mapping fails using SciTokens</li>
-<li>Fix rare crashes from successful condor_submit, which caused DAGMan issues</li>
+<li>Fix rare crashes from successful <code>condor_submit</code>, which caused DAGMan issues</li>
 <li>Fix bug where ExitCode attribute would be suppressed when OnExitHold fired</li>
-<li>condor_who now suppresses spurious warnings coming from netstat</li>
+<li><code>condor_who</code> now suppresses spurious warnings coming from netstat</li>
 <li>The online manual now has detailed instructions for installing on MacOS</li>
 <li>Fix bug where misconfigured MIG devices would cause no GPUs to be detected</li>
-<li>The transfer_checkpoint_file list may now include input files</li>
+<li>The <code>transfer_checkpoint_file</code> list may now include input files</li>
 </ul>
 </li>
 <li><a href="https://github.com/htcondor/BLAH/releases/tag/v2.1.1">blahp 2.1.1</a>: Bug fix release<ul>
@@ -4464,7 +4504,7 @@ Encrypt certificates with a "certificate has expired" message.</p>
 <h3 id="august-12-2021-gratia-probes-210"><strong>August 12, 2021:</strong> Gratia probes 2.1.0<a class="headerlink" href="#august-12-2021-gratia-probes-210" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Gratia probes 2.1.0<ul>
-<li>Fix a problem that caused a traceback message in the condor_meter</li>
+<li>Fix a problem that caused a traceback message in the <code>condor_meter</code></li>
 <li>Fix a traceback caused by missing LogLevel in ProbeConfig</li>
 <li>Ensure that Gratia accounts for SciTokens-based pilots</li>
 </ul>
@@ -4545,13 +4585,13 @@ Encrypt certificates with a "certificate has expired" message.</p>
 <li>Fix problem where a job matched a machine it can't use, delaying job start</li>
 <li>Fix exit code and retry checking when a job exits because of a signal</li>
 <li>Fix a memory leak in the job router when a job is removed via job policy</li>
-<li>Fixed the back-end support for the 'bosco_cluster --add' command</li>
+<li>Fixed the back-end support for the <code>bosco_cluster --add</code> command</li>
 </ul>
 </li>
 <li>HTCondor-CE 5.1.1<ul>
 <li>Improve restart time of HTCondor-CE View</li>
 <li>Fix bug that caused HTCondor-CE to ignore incoming BatchRuntime requests</li>
-<li>Fixed error that occurred during RPM installation of non-HTCondor batch systems regarding missing file batch_gahp</li>
+<li>Fixed error that occurred during RPM installation of non-HTCondor batch systems regarding missing file <code>batch_gahp</code></li>
 </ul>
 </li>
 </ul>
