@@ -29,6 +29,17 @@ This issue is still under investigation.
 Latest News
 -----------
 
+### **October 26, 2023:** CVMFS 2.11.1-1.3, XRootD 5.6.2-2.3, osg-update-vos 1.4.2-2
+-   [CVMFS 2.11.1-1.3](https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-11-1)
+    -   Important fix to bug impacting osgstorage.org repositories introduced in 2.11.0 --
+            all 2.11.0 installations should upgrade urgently
+    -   Fix race conditions on concurrent fuse3 mounts
+-   XRootD 5.6.2-2.3
+    -   Update to -2.3 release to avoid confusion with upstream -2 release
+    -   Fix a bug with parsing compound IDs in authfiles
+-   osg-update-vos 1.4.2-2
+    -   tarballs now contain cpio, so osg-update-vos will work
+
 ### **October 3, 2023**: Initial Release
 
 !!! info "OSG 3.6 retirement"
