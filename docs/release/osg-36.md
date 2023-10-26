@@ -83,19 +83,36 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### **October 26, 2023:** CVMFS 2.11.1-1.3, XRootD 5.6.2-2.3, HTCondor-CE 6.0.1, osg-update-vos 1.4.2-2
+-   [CVMFS 2.11.1-1.3](https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-11-1)
+    -   Important fix to bug impacting osgstorage.org repositories introduced in 2.11.0 --
+            all 2.11.0 installations should upgrade urgently
+    -   Fix race conditions on concurrent fuse3 mounts
+-   XRootD 5.6.2-2.3
+    -   Update to -2.3 release to avoid confusion with upstream -2 release
+    -   Fix a bug with parsing compound IDs in authfiles
+-   [HTCondor-CE 6.0.1](https://htcondor.com/htcondor-ce/v6/releases/#601)
+    -   Add grid CA and host certificate/key locations to default SSL search paths
+    -   Verifies that HTCondor-CE can access the local HTCondor's SPOOL directory
+    -   Can use `condor_ce_trace` without SciToken to test batch system integration
+    -   `condor_ce_upgrade_check` checks compatibility with HTCondor 23.0
+    -   Adds deprecation warnings for old job router configuration syntax
+-   osg-update-vos 1.4.2-2
+    -   tarballs now contain cpio, so osg-update-vos will work
+
 ### **October 5, 2023:** HTCondor 10.0.9, HTCondor 10.9.0, XRootD 5.6.2, GlideinWMS 3.10.5, CVMFS 2.11.0, cvmfs-x509-helper 2.3, osg-pki-tools 3.6.1, oidc-agent 4.5.2
 -   [HTCondor 10.0.9](https://htcondor.readthedocs.io/en/v10_0/version-history/lts-versions-10-0.html#version-10-0-9): EL7, EL8
-    -   The condor\_upgrade\_check script now provides guidance on updating to 23.0
+    -   The `condor_upgrade_check` script now provides guidance on updating to 23.0
     -   Avoid kernel panic on some Enterprise Linux 8 systems
     -   Fix bug where early termination of service nodes could crash DAGMan
     -   The htchirp Python binding now properly locates the chirp configuration
     -   Limit email about long file transfer queue to once daily
-    -   Various fixes to condor\_adstash
+    -   Various fixes to `condor_adstash`
 -   [HTCondor 10.9.0](https://htcondor.readthedocs.io/en/v10_x/version-history/feature-versions-10-x.html#version-10-9-0): EL7 Upcoming, EL8 Upcoming, EL9
     -   Fold the classads, blahp, and procd RPMs into the main condor RPM
     -   On Linux, the default configuration enforces memory limits with cgroups
-    -   condor\_status -gpus shows nodes with GPUs and the GPU properties
-    -   condor\_status -compact shows a row for each slot type
+    -   `condor_status -gpus` shows nodes with GPUs and the GPU properties
+    -   `condor_status -compact` shows a row for each slot type
     -   New ENV command controls which environment variables are present in DAGMan
     -   All the fixes from HTCondor 10.0.9 (listed above)
 -   XRootD 5.6.2
@@ -112,7 +129,7 @@ Latest News
 -   [cvmfs-x509-helper 2.3](https://github.com/cvmfs-contrib/cvmfs-x509-helper/releases/tag/2.3)
     -   Fixes to support Enterprise Linux 9
     -   Fix for tokens that are bigger than 1024 bytes
-    -   Fix usage of $BEARER\_TOKEN when accessing data
+    -   Fix usage of `$BEARER_TOKEN `when accessing data
 -   osg-pki-tools 3.6.1
     -   Add configuration file for osg-incommon-cert-request
     -   Update default CSR key length to 4096, add CLI option 
@@ -256,8 +273,8 @@ Latest News
 -   XCache 3.5.0
     -   The authfile updater pulls a grid-mapfile from Topology
 -   [frontier-squid 5.8](http://www.squid-cache.org/Versions/v5/squid-5.8-RELEASENOTES.html)
-    -   Add predefined ACL named "to\_linklocal"
-    -   Bug fix for the cache manager returning "mgr\_index" rather than data
+    -   Add predefined ACL named `to_linklocal`
+    -   Bug fix for the cache manager returning `mgr_index` rather than data
 -   CA certificates based on [IGTF 1.120](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   Added transitional CDP mirror URLs for retiring DigitalTrust CAs (AE)
     -   Removed discontinued NIIF-Root-CA-2 (HU)
@@ -275,7 +292,7 @@ Latest News
     -   Improved throughput when submitting a large number of ARC-CE jobs
     -   Execute events contain the slot name, sandbox path, resource quantities
     -   Can add attributes of the execution point to be recorded in the user log
-    -   Enhanced condor\_transform\_ads tool to ease offline job transform testing
+    -   Enhanced `condor_transform_ads` tool to ease offline job transform testing
     -   Fix bug where memory limits over 2 GiB might not be correctly enforced
 
 ### **May 30, 2023:** HTCondor 9.0.17-3, osdf-client 6.11.0
@@ -379,9 +396,9 @@ Latest News
     -   Fix bug where GFAL davs writes fail on EL7 redirectors after eight hours
     -   XRootD 5.5.2 was not released because of critical bugs that are fixed in XRootD 5.5.3
 -   [frontier-squid-5.7-2.1](http://www.squid-cache.org/Versions/v5/squid-5.7-RELEASENOTES.html)
-    -   Uses first destination IP address that responds (dns\_v4\_first removed)
-    -   Add MAJOR\_CVMFS sites cvmfs-stratum-one.cc.kek.jp, cvmfs*.sdcc.bnl.gov
-    -   Remove obsolete sites frontier*.racf.bnl.gov from ATLAS\_FRONTIER
+    -   Uses first destination IP address that responds (`dns_v4_first` removed)
+    -   Add `MAJOR_CVMFS` sites cvmfs-stratum-one.cc.kek.jp, cvmfs*.sdcc.bnl.gov
+    -   Remove obsolete sites frontier*.racf.bnl.gov from `ATLAS_FRONTIER`
     -   Fix bug where old caches may not be cleaned up
 
 !!! note
@@ -438,7 +455,7 @@ Latest News
     -   Production release supporting tokens and Python 3
     -   Fix monitoring by including Glidein IDs with SciTokens
     -   Add Python module to help with custom scripts
-    -   Custom setup scripts written in shell should always use the gconfig\_\* functions introduced in
+    -   Custom setup scripts written in shell should always use the `gconfig_*` functions introduced in
         [3.9.6](https://glideinwms.fnal.gov/doc.v3_10_1/history.html#development) to read and write glidein configuration.
         See the release notes for details.
 -   [osdf-client 6.9.5](https://github.com/htcondor/osdf-client/releases/tag/v6.9.5)
@@ -454,11 +471,11 @@ Latest News
 
 ### ** January 3, 2023:** htgettoken 1.16
 -   [htgettoken 1.16](https://github.com/fermitools/htgettoken/releases/tag/v1.16)
-    -   Fix ``httokendecode -H`` functionality to only attempt to convert a parsed word
+    -   Fix `httokendecode -H` functionality to only attempt to convert a parsed word
         if it is entirely numeric, not if it just contains one digit
-    -   At the same time, rewrite this functionality in native ``bash`` instead of using ``grep`` and ``sed``
-    -   Add ``htdestroytoken`` command
-    -   Add ``htdecodetoken`` symbolic link that points to ``httokendecode``
+    -   At the same time, rewrite this functionality in native `bash` instead of using `grep` and `sed`
+    -   Add `htdestroytoken` command
+    -   Add `htdecodetoken` symbolic link that points to `httokendecode`
 
 ### ** December 22, 2022:** VO Package v127
 -   [VO Package v127](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-127)
@@ -508,7 +525,7 @@ Latest News
     -   Add support for multiple APEL accounting scaling factors
     -   Suppress spurious log message about a missing negotiator
     -   Fix crash in HTCondor-CE View
--   osdf-client 6.9.2 (includes stashcp and condor\_stash\_plugin)
+-   osdf-client 6.9.2 (includes stashcp and `condor_stash_plugin`)
     -   Add support for osdf:// URLs
     -   Fix zero-byte file upload error
 -   xrootd-multiuser 2.1.2
@@ -518,12 +535,12 @@ Latest News
 -   Upcoming: [HTCondor 9.12.0](https://htcondor.readthedocs.io/en/v9_1/version-history/development-release-series-91.html#version-9-12-0)
     -   Provide a mechanism to bootstrap secure authentication within a pool
     -   Add the ability to define submit templates
-    -   Administrators can now extend the help offered by condor\_submit
+    -   Administrators can now extend the help offered by `condor_submit`
     -   Add DAGMan ClassAd attributes to record more information about jobs
-    -   On Linux, advertise the x86\_64 micro-architecture in a slot attribute
-    -   Added -drain option to condor\_off and condor\_restart
+    -   On Linux, advertise the `x86_64` micro-architecture in a slot attribute
+    -   Added -drain option to `condor_off` and `condor_restart`
     -   Administrators can now set the shared memory size for Docker jobs
-    -   Multiple improvements to condor\_adstash
+    -   Multiple improvements to `condor_adstash`
     -   HAD daemons now use SHA-256 checksums by default
 
 ### ** October 13, 2022:** HTCondor 9.0.17
@@ -554,7 +571,7 @@ Latest News
     -   Fix WLCG token discovery
     -   Dynamically obtain list of caches based on the source file's namespace
 -   [osg-token-renewer 0.8.3](https://github.com/opensciencegrid/osg-token-renewer/releases/tag/v0.8.3)
-    -   Doesn't check for password file when ``--pw-fd`` is being used
+    -   Doesn't check for password file when `--pw-fd` is being used
 
 ### ** September 9, 2022:** VO Package v124
 -   [VO Package v124](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-124)
@@ -652,13 +669,13 @@ Latest News
     -   Support for CVMFS on-demand
     -   Configurable idtokens lifetime
     -   Improved frontend logging
-    -   Improved default SHARED\_PORT configuration
+    -   Improved default `SHARED_PORT` configuration
     -   Special handling of multiline condor config values
     -   Several bug fixes
 -   [HTCondor 9.0.13](https://htcondor.readthedocs.io/en/v9_0/version-history/stable-release-series-90.html#version-9-0-13): Bug fix release
     -   Schedd and startd cron jobs can now log output upon non-zero exit
-    -   condor\_config\_val now produces correct syntax for multi-line values
-    -   The condor\_run tool now reports submit errors and warnings to the terminal
+    -   `condor_config_val` now produces correct syntax for multi-line values
+    -   The `condor_run` tool now reports submit errors and warnings to the terminal
     -   Fix issue where Kerberos authentication would fail within DAGMan
     -   Fix HTCondor startup failure with certain complex network configurations
 -   [VO Package v122](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-122)
@@ -733,8 +750,8 @@ Latest News
 -   [CVMFS 2.9.2](https://cvmfs.readthedocs.io/en/2.9/cpt-releasenotes.html): Bug fix release
 -   cigetcert 1.20: works better with CILogon's AWS infrastructure
 -   osg-ce 3.6-5
-    -   Add OSG\_SERIES = 3.6 as a schedd attribute
-    -   Remove default BATCH\_GAHP configuration now provided by upstream
+    -   Add `OSG_SERIES = 3.6` as a schedd attribute
+    -   Remove default `BATCH_GAHP` configuration now provided by upstream
 -   osg-pki-tools 3.5.1: Python 3 fixes for osg-incommon-cert-request
 -   osg-xrootd 3.6-16
     -   Fix stash-cache: enabling VOMS causes unauth cache to crash
@@ -751,7 +768,7 @@ Latest News
 ### **April 14, 2022:** osg-configure 4.1.1, osg-scitokens-mapfile 8
 
 -   [OSG-Configure 4.1.1](https://github.com/opensciencegrid/osg-configure/releases/tag/v4.1.1)
-    -   Fix gratia DataFolder/PER\_JOB\_HISTORY\_DIR check for HTCondor-CE with an HTCondor batch system
+    -   Fix gratia `DataFolder/PER_JOB_HISTORY_DIR` check for HTCondor-CE with an HTCondor batch system
 -   osg-scitokens-mapfile 8
     -   New token mappings for CMS local and USCMS local pilots.
     -   New token mappings for HCC pilots
@@ -904,7 +921,7 @@ This release contains updated CA Certificates based on [IGTF 1.115](http://dist.
 -   [HTCondor 9.0.8 LTS](https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00027.shtml)
     -   X.509 proxy delegation now works in OSG 3.6
     -   Fix bug where huge values of ImageSize and others would end up negative
-    -   Fix bug in how MAX\_JOBS\_PER\_OWNER applied to late materialization jobs
+    -   Fix bug in how `MAX_JOBS_PER_OWNER` applied to late materialization jobs
     -   Fix bug where the schedd could choose a slot with insufficient disk space
     -   Fix crash in ClassAd substr() function when the offset is out of range
     -   Fix bug in Kerberos code that can crash on macOS and could leak memory
@@ -917,16 +934,16 @@ This release contains updated CA Certificates based on [IGTF 1.115](http://dist.
 -   XCache 3.0.0
     -   Initial release of XCache in OSG 3.6
 -   [HTCondor 9.0.7](https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00025.shtml): Bug fix release
-    -   Fix bug where condor\_gpu\_discovery could crash with older CUDA libraries
-    -   Fix bug where condor\_watch\_q would fail on machines with older kernels
-    -   condor\_watch\_q no longer has a limit on the number of job event log files
+    -   Fix bug where `condor_gpu_discovery` could crash with older CUDA libraries
+    -   Fix bug where `condor_watch_q` would fail on machines with older kernels
+    -   `condor_watch_q` no longer has a limit on the number of job event log files
     -   Fix bug where a startd could crash claiming a slot with p-slot preemption
     -   Fix bug where a job start would not be recorded when a shadow reconnects
 -   [VO Package v115](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-115)
     -   Add CMS IAM vomses entry
     -   Update WLCG VO certificate
 -   [GlideinWMS 3.9.3](https://glideinwms.fnal.gov/doc.v3_9_3/history.html#development)
-    -   Type validation support to the check\_python3\_expr.py script
+    -   Type validation support to the `check_python3_expr.py` script
     -   Drops the encondingSupport.py module and its unit tests
     -   Fixes an encoding problem affecting cloud submissions
 -   [Pegasus 5.0.1](https://pegasus.isi.edu/2021/10/07/pegasus-5-0-1-released/)
@@ -974,7 +991,7 @@ This release of OSG 3.6 contains the following packages:
 -   [CVMFS 2.8.2](https://cvmfs.readthedocs.io/en/2.8/cpt-releasenotes.html): Bug fix release
 -   cvmfs-x509-helper 2.2-2: Fix a number of issues with SciTokens support
 -   [HTCondor 9.0.6](https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00021.shtml)
-    -   CUDA\_VISIBLE\_DEVICES can now contain GPU-<uuid> formatted values
+    -   `CUDA_VISIBLE_DEVICES` can now contain GPU-<uuid> formatted values
     -   Fix a bug that caused jobs to fail when using Singularity versions > 3.7
     -   Fix bugs relating to the transfer of standard output and error logs
 -   vault 1.8.2, htvault-config 1.6, htgettoken 1.6: Minor improvements
@@ -994,9 +1011,9 @@ This release of OSG 3.6 contains the following packages:
     -   Fixed the default memory and CPU requests when using job router transforms
     -   Apply default MaxJobs and MaxJobsIdle when using job router transforms
     -   Improved SciTokens support in submission tools
-    -   Fixed --debug flag in condor\_ce\_run
+    -   Fixed --debug flag in `condor_ce_run`
     -   Update configuration verification script to handle job router transforms
-    -   Corrected ownership of the HTCondor PER\_JOBS\_HISTORY\_DIR
+    -   Corrected ownership of the HTCondor `PER_JOBS_HISTORY_DIR`
     -   Fix bug passing maximum wall time requests to the local batch system
 
 ### **September 9, 2021:** HTCondor 9.0.5 and blahp 2.1.1
@@ -1005,12 +1022,12 @@ This release of OSG 3.6 contains the following packages:
 
 -   [HTCondor 9.0.5](https://www-auth.cs.wisc.edu/lists/htcondor-world/2021/msg00017.shtml): Bug fix release
     -   Other authentication methods are tried if mapping fails using SciTokens
-    -   Fix rare crashes from successful condor\_submit, which caused DAGMan issues
+    -   Fix rare crashes from successful `condor_submit`, which caused DAGMan issues
     -   Fix bug where ExitCode attribute would be suppressed when OnExitHold fired
-    -   condor\_who now suppresses spurious warnings coming from netstat
+    -   `condor_who` now suppresses spurious warnings coming from netstat
     -   The online manual now has detailed instructions for installing on MacOS
     -   Fix bug where misconfigured MIG devices would cause no GPUs to be detected
-    -   The transfer\_checkpoint\_file list may now include input files
+    -   The `transfer_checkpoint_file` list may now include input files
 -   [blahp 2.1.1](https://github.com/htcondor/BLAH/releases/tag/v2.1.1): Bug fix release
     -   Add Python 2 support back for Enterprise Linux 7
     -   Allow the user to override system configuration files
@@ -1026,7 +1043,7 @@ This release contains updated CA Certificates based on [IGTF 1.112](http://dist.
 ### **August 12, 2021:** Gratia probes 2.1.0
 
 -   Gratia probes 2.1.0
-    -   Fix a problem that caused a traceback message in the condor\_meter
+    -   Fix a problem that caused a traceback message in the `condor_meter`
     -   Fix a traceback caused by missing LogLevel in ProbeConfig
     -   Ensure that Gratia accounts for SciTokens-based pilots
 
@@ -1095,11 +1112,11 @@ This release of OSG 3.6 contains the following packages:
     -   Fix problem where a job matched a machine it can't use, delaying job start
     -   Fix exit code and retry checking when a job exits because of a signal
     -   Fix a memory leak in the job router when a job is removed via job policy
-    -   Fixed the back-end support for the 'bosco\_cluster --add' command
+    -   Fixed the back-end support for the `bosco_cluster --add` command
 -   HTCondor-CE 5.1.1
     -   Improve restart time of HTCondor-CE View
     -   Fix bug that caused HTCondor-CE to ignore incoming BatchRuntime requests
-    -   Fixed error that occurred during RPM installation of non-HTCondor batch systems regarding missing file batch\_gahp
+    -   Fixed error that occurred during RPM installation of non-HTCondor batch systems regarding missing file `batch_gahp`
 
 ### **June 16, 2021:** VO Package v113
 
