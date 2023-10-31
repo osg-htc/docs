@@ -29,6 +29,24 @@ This issue is still under investigation.
 Latest News
 -----------
 
+### **October 31, 2023:** HTCondor 23.0.1 LTS; Upcoming: HTCondor 23.1.0
+-   [HTCondor 23.0.1 LTS](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-1)
+    -   Update to apptainer version 1.2.4 in the HTCondor tarballs
+    -   Fix 10.6.0 bug that broke PID namespaces
+    -   Fix bug where execution times for ARC CE jobs were 60 times too large
+    -   Fix bug where a failed 'Service' node would crash DAGMan
+    -   Condor-C and Job Router jobs now get resources provisioned updates
+-   Upcoming: [HTCondor 23.1.0](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-1-0)
+    -   Enhanced filtering with `condor_watch_q`
+    -   The Access Point can now be told to use a non-standard ssh port when
+        sending jobs to a remote scheduling system (such as Slurm)
+    -   Laid groundwork to allow an Execution Point running without root access
+        to accurately limit the job's usage of CPU and Memory in real time via
+        Linux kernel cgroups; this is particularly interesting for glidein pools
+    -   HTCondor file transfers using HTTPS can now utilize CA certificates
+        in a non-standard location
+    -   All the fixes from HTCondor 23.0.1
+
 ### **October 26, 2023:** CVMFS 2.11.1-1.3, XRootD 5.6.2-2.3, osg-update-vos 1.4.2-2
 -   [CVMFS 2.11.1-1.3](https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-11-1)
     -   Important fix to bug impacting osgstorage.org repositories introduced in 2.11.0 --
