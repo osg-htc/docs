@@ -1534,6 +1534,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#november-2-2023-igtf-1124-cvmfs-2112-cvmfs-x509-helper-24" class="md-nav__link">
+    November 2, 2023: IGTF 1.124, CVMFS 2.11.2, cvmfs-x509-helper 2.4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#october-26-2023-cvmfs-2111-13-xrootd-562-23-htcondor-ce-601-osg-update-vos-142-2" class="md-nav__link">
     October 26, 2023: CVMFS 2.11.1-1.3, XRootD 5.6.2-2.3, HTCondor-CE 6.0.1, osg-update-vos 1.4.2-2
   </a>
@@ -2476,6 +2483,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#november-2-2023-igtf-1124-cvmfs-2112-cvmfs-x509-helper-24" class="md-nav__link">
+    November 2, 2023: IGTF 1.124, CVMFS 2.11.2, cvmfs-x509-helper 2.4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#october-26-2023-cvmfs-2111-13-xrootd-562-23-htcondor-ce-601-osg-update-vos-142-2" class="md-nav__link">
     October 26, 2023: CVMFS 2.11.1-1.3, XRootD 5.6.2-2.3, HTCondor-CE 6.0.1, osg-update-vos 1.4.2-2
   </a>
@@ -3134,6 +3148,27 @@ of <code>/etc/yum.repos.d/osg.repo</code>:</p>
 <div class="highlight"><pre><span></span><code>excludepkgs=rrdtool
 </code></pre></div>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="november-2-2023-igtf-1124-cvmfs-2112-cvmfs-x509-helper-24"><strong>November 2, 2023:</strong> IGTF 1.124, CVMFS 2.11.2, cvmfs-x509-helper 2.4<a class="headerlink" href="#november-2-2023-igtf-1124-cvmfs-2112-cvmfs-x509-helper-24" title="Permanent link">&para;</a></h3>
+<ul>
+<li>CA certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.124</a><ul>
+<li>Updated contact meta-data for ArmeSFo authority (AM)</li>
+<li>Removed discontinued AEGIS authority (RS)</li>
+<li>Removed suspended KENET Root and issuing CAs (KE)</li>
+<li>Removed suspended SDG-G2 authority (CN)</li>
+<li>Removed suspended CNIC authority (CN)</li>
+<li>Removed all four discontinued DigitalTrust CAs operated by their issuer (AE)</li>
+</ul>
+</li>
+<li><a href="https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-11-2">CVMFS 2.11.2</a><ul>
+<li>Bug fix release</li>
+</ul>
+</li>
+<li><a href="https://github.com/cvmfs-contrib/cvmfs-x509-helper/releases/tag/2.4">cvmfs-x509-helper 2.4</a><ul>
+<li>Important bug fix for reading credentials from within an unprivileged user namespace such
+    as unprivileged apptainer users.  This is needed due to a change in recent el8 &amp; el9 kernels.</li>
+</ul>
+</li>
+</ul>
 <h3 id="october-26-2023-cvmfs-2111-13-xrootd-562-23-htcondor-ce-601-osg-update-vos-142-2"><strong>October 26, 2023:</strong> CVMFS 2.11.1-1.3, XRootD 5.6.2-2.3, HTCondor-CE 6.0.1, osg-update-vos 1.4.2-2<a class="headerlink" href="#october-26-2023-cvmfs-2111-13-xrootd-562-23-htcondor-ce-601-osg-update-vos-142-2" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-11-1">CVMFS 2.11.1-1.3</a><ul>
@@ -3226,7 +3261,7 @@ certificates.</p>
 </ul>
 <h3 id="september-7-2023-igtf-1123-htgettoken-120-pegasus-506"><strong>September 7, 2023:</strong> IGTF 1.123, htgettoken 1.20, Pegasus 5.0.6<a class="headerlink" href="#september-7-2023-igtf-1123-htgettoken-120-pegasus-506" title="Permanent link">&para;</a></h3>
 <ul>
-<li>CA certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.122</a><ul>
+<li>CA certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.123</a><ul>
 <li>Add ECC private trust hierarchy for GEANT (Research and Education) TCS (EU)</li>
 <li>Added accredited private trust eMudhra IGTF root and issuers (IN)</li>
 <li>Resolved issue on EL9 with SHA1 signed Certificate Authorities</li>
