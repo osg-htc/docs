@@ -29,6 +29,20 @@ This issue is still under investigation.
 Latest News
 -----------
 
+### **November 2, 2023:** IGTF 1.124, CVMFS 2.11.2, cvmfs-x509-helper 2.4
+-   CA certificates based on [IGTF 1.124](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Updated contact meta-data for ArmeSFo authority (AM)
+    -   Removed discontinued AEGIS authority (RS)
+    -   Removed suspended KENET Root and issuing CAs (KE)
+    -   Removed suspended SDG-G2 authority (CN)
+    -   Removed suspended CNIC authority (CN)
+    -   Removed all four discontinued DigitalTrust CAs operated by their issuer (AE)
+-   [CVMFS 2.11.2](https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-11-2)
+    -   Bug fix release
+-   [cvmfs-x509-helper 2.4](https://github.com/cvmfs-contrib/cvmfs-x509-helper/releases/tag/2.4)
+    -   Important bug fix for reading credentials from within an unprivileged user namespace such
+        as unprivileged apptainer users.  This is needed due to a change in recent el8 & el9 kernels.
+
 ### **October 31, 2023:** HTCondor 23.0.1 LTS; Upcoming: HTCondor 23.1.0
 -   [HTCondor 23.0.1 LTS](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-1)
     -   Update to apptainer version 1.2.4 in the HTCondor tarballs

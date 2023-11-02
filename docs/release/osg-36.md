@@ -83,6 +83,20 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### **November 2, 2023:** IGTF 1.124, CVMFS 2.11.2, cvmfs-x509-helper 2.4
+-   CA certificates based on [IGTF 1.124](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Updated contact meta-data for ArmeSFo authority (AM)
+    -   Removed discontinued AEGIS authority (RS)
+    -   Removed suspended KENET Root and issuing CAs (KE)
+    -   Removed suspended SDG-G2 authority (CN)
+    -   Removed suspended CNIC authority (CN)
+    -   Removed all four discontinued DigitalTrust CAs operated by their issuer (AE)
+-   [CVMFS 2.11.2](https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-11-2)
+    -   Bug fix release
+-   [cvmfs-x509-helper 2.4](https://github.com/cvmfs-contrib/cvmfs-x509-helper/releases/tag/2.4)
+    -   Important bug fix for reading credentials from within an unprivileged user namespace such
+        as unprivileged apptainer users.  This is needed due to a change in recent el8 & el9 kernels.
+
 ### **October 26, 2023:** CVMFS 2.11.1-1.3, XRootD 5.6.2-2.3, HTCondor-CE 6.0.1, osg-update-vos 1.4.2-2
 -   [CVMFS 2.11.1-1.3](https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-11-1)
     -   Important fix to bug impacting osgstorage.org repositories introduced in 2.11.0 --
@@ -147,7 +161,7 @@ Latest News
 -   Reverted work around for supporting SHA1-signed CA certificates on systems with tight cryptographic policies (i.e., the EL9 default)
 
 ### **September 7, 2023:** IGTF 1.123, htgettoken 1.20, Pegasus 5.0.6
--   CA certificates based on [IGTF 1.122](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+-   CA certificates based on [IGTF 1.123](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   Add ECC private trust hierarchy for GEANT (Research and Education) TCS (EU)
     -   Added accredited private trust eMudhra IGTF root and issuers (IN)
     -   Resolved issue on EL9 with SHA1 signed Certificate Authorities
