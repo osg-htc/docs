@@ -60,7 +60,7 @@ Example EL9 installation (in `/home/user/test-install`, the **`<PATH_TO_CLIENT>/
 ```console
 user@host $ mkdir /home/user/test-install
 user@host $ cd /home/user/test-install
-user@host $ wget https://repo.opensciencegrid.org/tarball-install/23/osg-wn-client-latest.el9.x86_64.tar.gz
+user@host $ wget https://repo.opensciencegrid.org/tarball-install/23-main/osg-wn-client-latest.el9.x86_64.tar.gz
 user@host $ tar xzf osg-wn-client-latest.el9.x86_64.tar.gz
 user@host $ cd osg-wn-client
 user@host $ ./osg/osg-post-install
