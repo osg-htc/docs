@@ -27,10 +27,16 @@ Download the WN Client
 
 Please pick the `osg-wn-client` tarball that is appropriate for your distribution and architecture. You will find them in <https://repo.opensciencegrid.org/tarball-install/> .
 
+For OSG 23:
+
+-   [Binaries for RHEL8-compatible](https://repo.opensciencegrid.org/tarball-install/23/osg-wn-client-latest.el8.x86_64.tar.gz)
+-   [Binaries for RHEL9-compatible](https://repo.opensciencegrid.org/tarball-install/23/osg-wn-client-latest.el9.x86_64.tar.gz)
+
 For OSG 3.6:
 
--   [Binaries for RHEL7](https://repo.opensciencegrid.org/tarball-install/3.6/osg-wn-client-latest.el7.x86_64.tar.gz)
--   [Binaries for RHEL8](https://repo.opensciencegrid.org/tarball-install/3.6/osg-wn-client-latest.el8.x86_64.tar.gz)
+-   [Binaries for RHEL7-compatible](https://repo.opensciencegrid.org/tarball-install/3.6/osg-wn-client-latest.el7.x86_64.tar.gz)
+-   [Binaries for RHEL8-compatible](https://repo.opensciencegrid.org/tarball-install/3.6/osg-wn-client-latest.el8.x86_64.tar.gz)
+-   [Binaries for RHEL9-compatible](https://repo.opensciencegrid.org/tarball-install/3.6/osg-wn-client-latest.el9.x86_64.tar.gz)
 
 Install the WN Client
 ---------------------
@@ -49,13 +55,13 @@ Install the WN Client
 !!! warning
     Once `osg-post-install` is run to relocate the install, it cannot be run again.  You will need to unpack a fresh copy.
 
-Example installation (in `/home/user/test-install`, the **`<PATH_TO_CLIENT>/`** is `/home/user/test-install/osg-wn-client` ):
+Example EL9 installation (in `/home/user/test-install`, the **`<PATH_TO_CLIENT>/`** is `/home/user/test-install/osg-wn-client` ):
 
 ```console
 user@host $ mkdir /home/user/test-install
 user@host $ cd /home/user/test-install
-user@host $ wget https://repo.opensciencegrid.org/tarball-install/3.6/osg-wn-client-latest.el7.x86_64.tar.gz
-user@host $ tar xzf osg-wn-client-latest.el7.x86_64.tar.gz
+user@host $ wget https://repo.opensciencegrid.org/tarball-install/23/osg-wn-client-latest.el9.x86_64.tar.gz
+user@host $ tar xzf osg-wn-client-latest.el9.x86_64.tar.gz
 user@host $ cd osg-wn-client
 user@host $ ./osg/osg-post-install
 user@host $ source setup.sh
