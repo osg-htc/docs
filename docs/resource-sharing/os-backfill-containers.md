@@ -227,9 +227,9 @@ For example:
 
 ```
 # The Kubernetes namespace this pod is running under
-Kubernetes_Namespace = "path-osgdev"
+KUBERNETES_NAMESPACE = "path-osgdev"
 # The deployment for this pilot
-Kubernetes_Deployment = "osgvo-docker-pilot-gpu"
+KUBERNETES_DEPLOYMENT = "osgvo-docker-pilot-gpu"
 ```
 
 
