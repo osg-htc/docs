@@ -216,8 +216,8 @@ the `--memory` argument tells Docker to kill the container if its total memory u
 
 ### Advanced: Advertising additional pilot attributes
 
-You can put arbitrary additional attributes in the machine ads that you advertise to the OSPool.
-These attributes will show up when you do `condor_status -l` on your machine.
+You can put arbitrary additional attributes in the machine ads that the pilot advertises to the OSPool.
+These attributes will show up when users run `condor_status -l` against your pilot.
 This could be useful for advertising something about the way the pilot was provisioned.
 To do this, volume-mount a file containing `key=value` pairs to `/etc/osg/extra-attributes.cfg`.
 Keys must be valid classad attribute names and values must be valid classad expressions.
