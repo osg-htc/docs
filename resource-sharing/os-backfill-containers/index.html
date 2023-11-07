@@ -564,6 +564,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#advanced-advertising-additional-pilot-attributes" class="md-nav__link">
+    Advanced: Advertising additional pilot attributes
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1985,6 +1992,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#advanced-advertising-additional-pilot-attributes" class="md-nav__link">
+    Advanced: Advertising additional pilot attributes
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2203,6 +2217,20 @@ but it may not notice high memory usage immediately.
 Additionally, the processes that manage jobs also use some amount of memory.
 Therefore, it is important to give the container some extra room.</p>
 </div>
+<h3 id="advanced-advertising-additional-pilot-attributes">Advanced: Advertising additional pilot attributes<a class="headerlink" href="#advanced-advertising-additional-pilot-attributes" title="Permanent link">&para;</a></h3>
+<p>You can put arbitrary additional attributes in the machine ads that the pilot advertises to the OSPool.
+These attributes will show up when users run <code>condor_status -l</code> against your pilot.
+This could be useful for advertising something about the way the pilot was provisioned.
+To do this, volume-mount a file containing <code>key=value</code> pairs to <code>/etc/osg/extra-attributes.cfg</code>.
+Keys must be valid classad attribute names and values must be valid classad expressions.
+Multi-line strings are not supported.
+A line starting with <code>#</code> will be treated as a comment.
+For example:</p>
+<div class="highlight"><pre><span></span><code># The Kubernetes namespace this pod is running under
+KUBERNETES_NAMESPACE = &quot;path-osgdev&quot;
+# The deployment for this pilot
+KUBERNETES_DEPLOYMENT = &quot;osgvo-docker-pilot-gpu&quot;
+</code></pre></div>
 <h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
 <p>We recommend pulling new versions of backfill containers at least every 72 hours.
 This ensures that your containers will have the latest bug and security fixes as well as the configurations to match the
