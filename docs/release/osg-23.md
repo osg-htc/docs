@@ -29,6 +29,19 @@ This issue is still under investigation.
 Latest News
 -----------
 
+!!! warning "Incoming changes to `osg-ca-certs`"
+    To address an issue with certificates issued by SHA1 CAs on EL9 systems and EL8 systems configured to use the
+    `FUTURE` system crypto policy,
+    the OSG Software Team intends to release a fix to the `osg-ca-certs` package during the **week of November 27,
+    2023** (<https://opensciencegrid.atlassian.net/browse/SOFTWARE-5745>).
+
+    -   If you are running OSG-supported software (e.g., HTCondor, XRootD),
+        update to the new version of `osg-ca-certs`.
+
+    -   If you are running non-OSG-supported, Java-based software (e.g., dCache) with `osg-ca-certs`,
+        install `osg-ca-certs-java` instead of `osg-ca-certs`.
+        `osg-ca-certs-java` is compatible with Java-based software but does not include the aforementioned fix.
+
 ### **November 2, 2023:** IGTF 1.124, CVMFS 2.11.2, cvmfs-x509-helper 2.4
 -   CA certificates based on [IGTF 1.124](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   Updated contact meta-data for ArmeSFo authority (AM)
