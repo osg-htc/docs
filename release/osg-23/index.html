@@ -2039,6 +2039,24 @@ As with OSG 3.6, we will continue to release OSG 23 package updates in a rolling
 <p>We have noticed issues with our HTCondor-CE + Torque batch system automated tests for Torque RPMs installed out of EPEL.
 This issue is still under investigation.</p>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Incoming changes to <code>osg-ca-certs</code></p>
+<p>To address an issue with certificates issued by SHA1 CAs on EL9 systems and EL8 systems configured to use the
+<code>FUTURE</code> system crypto policy,
+the OSG Software Team intends to release a fix to the <code>osg-ca-certs</code> package during the <strong>week of November 27,
+2023</strong> (<a href="https://opensciencegrid.atlassian.net/browse/SOFTWARE-5745">https://opensciencegrid.atlassian.net/browse/SOFTWARE-5745</a>).</p>
+<ul>
+<li>
+<p>If you are running OSG-supported software (e.g., HTCondor, XRootD),
+    update to the new version of <code>osg-ca-certs</code>.</p>
+</li>
+<li>
+<p>If you are running non-OSG-supported, Java-based software (e.g., dCache) with <code>osg-ca-certs</code>,
+    install <code>osg-ca-certs-java</code> instead of <code>osg-ca-certs</code>.
+    <code>osg-ca-certs-java</code> is compatible with Java-based software but does not include the aforementioned fix.</p>
+</li>
+</ul>
+</div>
 <h3 id="november-2-2023-igtf-1124-cvmfs-2112-cvmfs-x509-helper-24"><strong>November 2, 2023:</strong> IGTF 1.124, CVMFS 2.11.2, cvmfs-x509-helper 2.4<a class="headerlink" href="#november-2-2023-igtf-1124-cvmfs-2112-cvmfs-x509-helper-24" title="Permanent link">&para;</a></h3>
 <ul>
 <li>CA certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.124</a><ul>
