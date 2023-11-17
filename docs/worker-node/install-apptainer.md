@@ -334,4 +334,4 @@ Apptainer has no services to start or stop.
 References
 ----------
 - [Apptainer Documentation](https://apptainer.org/docs/)
-- [Apptainer Support](https://apptainer.org/help/)
+- [Apptainer Support](https://apptainer.org/support/)
