@@ -1439,8 +1439,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#htcondor-ce-and-torque" class="md-nav__link">
-    HTCondor-CE and Torque
+  <a href="#ca-certificates-on-el9" class="md-nav__link">
+    CA Certificates on EL9
   </a>
   
 </li>
@@ -1457,6 +1457,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#november-16-2023-vo-package-v132-xrootd-563-osg-ce-23-2-htcondor-ce-2301-osg-system-profiler-170" class="md-nav__link">
+    November 16, 2023: VO Package v132, XRootD 5.6.3, osg-ce 23-2, HTCondor-CE 23.0.1, osg-system-profiler 1.7.0
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#november-2-2023-igtf-1124-cvmfs-2112-cvmfs-x509-helper-24" class="md-nav__link">
@@ -1916,8 +1923,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#htcondor-ce-and-torque" class="md-nav__link">
-    HTCondor-CE and Torque
+  <a href="#ca-certificates-on-el9" class="md-nav__link">
+    CA Certificates on EL9
   </a>
   
 </li>
@@ -1934,6 +1941,13 @@
   
     <nav class="md-nav" aria-label="Latest News">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#november-16-2023-vo-package-v132-xrootd-563-osg-ce-23-2-htcondor-ce-2301-osg-system-profiler-170" class="md-nav__link">
+    November 16, 2023: VO Package v132, XRootD 5.6.3, osg-ce 23-2, HTCondor-CE 23.0.1, osg-system-profiler 1.7.0
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#november-2-2023-igtf-1124-cvmfs-2112-cvmfs-x509-helper-24" class="md-nav__link">
@@ -2035,9 +2049,21 @@ As with OSG 3.6, we will continue to release OSG 23 package updates in a rolling
 <li>OSG 23 upcoming Yum repositories will contain HTCSS feature series (HTCondor 23.x, HTCondor-CE 23.x)</li>
 </ul>
 <h2 id="known-issues">Known Issues<a class="headerlink" href="#known-issues" title="Permanent link">&para;</a></h2>
-<h3 id="htcondor-ce-and-torque">HTCondor-CE and Torque<a class="headerlink" href="#htcondor-ce-and-torque" title="Permanent link">&para;</a></h3>
-<p>We have noticed issues with our HTCondor-CE + Torque batch system automated tests for Torque RPMs installed out of EPEL.
-This issue is still under investigation.</p>
+<p>The following issues are known to currently affect packages distributed in OSG 23:</p>
+<h3 id="ca-certificates-on-el9">CA Certificates on EL9<a class="headerlink" href="#ca-certificates-on-el9" title="Permanent link">&para;</a></h3>
+<p>EL9 operating systems have a tighter default cryptographic policy that can cause services to reject certificates issued
+by SHA-1 signed CAs.
+Some CAs in the <code>igtf-ca-certs</code> and <code>osg-ca-certs</code> packages are affected and you may see service issues if your server
+certificate or certificates presented by clients are issued by these CAs.
+The Software Team is investigating solutions but in the meantime, we recommend running the following command on XRootD
+hosts to accept certificates issued by SHA-1 signed CAs:</p>
+<div class="highlight"><pre><span></span><code>root@host # update-crypto-policies --set DEFAULT:SHA1
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Do I need to run this on my Compute Entrypoint (CE) hosts?</p>
+<p>No. At this time, the Software Team believes that CE hosts are unaffected since their clients only present tokens
+and token issuers present modern CAs.</p>
+</div>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Incoming changes to <code>osg-ca-certs</code></p>
@@ -2057,6 +2083,35 @@ the OSG Software Team intends to release a fix to the <code>osg-ca-certs</code> 
 </li>
 </ul>
 </div>
+<h3 id="november-16-2023-vo-package-v132-xrootd-563-osg-ce-23-2-htcondor-ce-2301-osg-system-profiler-170"><strong>November 16, 2023:</strong> VO Package v132, XRootD 5.6.3, osg-ce 23-2, HTCondor-CE 23.0.1, osg-system-profiler 1.7.0<a class="headerlink" href="#november-16-2023-vo-package-v132-xrootd-563-osg-ce-23-2-htcondor-ce-2301-osg-system-profiler-170" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-132">VO Package v132</a><ul>
+<li>Update certificates for FNAL and SLAC VOMS servers</li>
+<li>Update certificates for CLAS12, EIC, GLOW, and HCC</li>
+<li>Drop stale certificates for nanohub, STAR, and wisc.edu lz</li>
+</ul>
+</li>
+<li><a href="https://listserv.slac.stanford.edu/cgi-bin/wa?A2=ind2310&amp;L=XROOTD-L&amp;P=1554">XRootD 5.6.3</a><ul>
+<li>Fix parsing of chunked PUT requests</li>
+<li>Add HTTP TPC packet marking</li>
+<li>Differentiate between push and pull TPC error messages</li>
+<li>Use configured CA path for the SciTokens plugin</li>
+</ul>
+</li>
+<li>osg-ce meta package<ul>
+<li>Correctly set value of <code>OSG_RELEASE_SERIES</code> attribute for OSG 23</li>
+</ul>
+</li>
+<li><a href="https://htcondor.com/htcondor-ce/v23/releases/#2301">HTCondor-CE 23.0.1</a><ul>
+<li>Add <code>condor_ce_test_token</code> command</li>
+</ul>
+</li>
+<li>osg-system-profiler 1.7.0<ul>
+<li>Add system cryptographic policy</li>
+<li>Better XRootD configuration information for generated profile</li>
+</ul>
+</li>
+</ul>
 <h3 id="november-2-2023-igtf-1124-cvmfs-2112-cvmfs-x509-helper-24"><strong>November 2, 2023:</strong> IGTF 1.124, CVMFS 2.11.2, cvmfs-x509-helper 2.4<a class="headerlink" href="#november-2-2023-igtf-1124-cvmfs-2112-cvmfs-x509-helper-24" title="Permanent link">&para;</a></h3>
 <ul>
 <li>CA certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.124</a><ul>
