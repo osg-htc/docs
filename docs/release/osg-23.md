@@ -21,10 +21,25 @@ Additionally, OSG 23 aligns the OSG and HTCondor Software Suite (HTCSS) release 
 Known Issues
 ------------
 
-### HTCondor-CE and Torque
+The following issues are known to currently affect packages distributed in OSG 23:
 
-We have noticed issues with our HTCondor-CE + Torque batch system automated tests for Torque RPMs installed out of EPEL.
-This issue is still under investigation.
+### CA Certificates on EL9 ###
+
+EL9 operating systems have a tighter default cryptographic policy that can cause services to reject certificates issued
+by SHA-1 signed CAs.
+Some CAs in the `igtf-ca-certs` and `osg-ca-certs` packages are affected and you may see service issues if your server
+certificate or certificates presented by clients are issued by these CAs.
+The Software Team is investigating solutions but in the meantime, we recommend running the following command on XRootD
+hosts to accept certificates issued by SHA-1 signed CAs:
+
+```
+root@host # update-crypto-policies --set DEFAULT:SHA1
+```
+
+!!! note "Do I need to run this on my Compute Entrypoint (CE) hosts?"
+    No. At this time, the Software Team believes that CE hosts are unaffected since their clients only present tokens
+    and token issuers present modern CAs.
+
 
 Latest News
 -----------
@@ -41,6 +56,24 @@ Latest News
     -   If you are running non-OSG-supported, Java-based software (e.g., dCache) with `osg-ca-certs`,
         install `osg-ca-certs-java` instead of `osg-ca-certs`.
         `osg-ca-certs-java` is compatible with Java-based software but does not include the aforementioned fix.
+
+### **November 16, 2023:** VO Package v132, XRootD 5.6.3, osg-ce 23-2, HTCondor-CE 23.0.1, osg-system-profiler 1.7.0
+-   [VO Package v132](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-132)
+    -   Update certificates for FNAL and SLAC VOMS servers
+    -   Update certificates for CLAS12, EIC, GLOW, and HCC
+    -   Drop stale certificates for nanohub, STAR, and wisc.edu lz
+-   [XRootD 5.6.3](https://listserv.slac.stanford.edu/cgi-bin/wa?A2=ind2310&L=XROOTD-L&P=1554)
+    -   Fix parsing of chunked PUT requests
+    -   Add HTTP TPC packet marking
+    -   Differentiate between push and pull TPC error messages
+    -   Use configured CA path for the SciTokens plugin
+-   osg-ce meta package
+    -   Correctly set value of `OSG_RELEASE_SERIES` attribute for OSG 23
+-   [HTCondor-CE 23.0.1](https://htcondor.com/htcondor-ce/v23/releases/#2301)
+    -   Add `condor_ce_test_token` command
+-   osg-system-profiler 1.7.0
+    -   Add system cryptographic policy
+    -   Better XRootD configuration information for generated profile
 
 ### **November 2, 2023:** IGTF 1.124, CVMFS 2.11.2, cvmfs-x509-helper 2.4
 -   CA certificates based on [IGTF 1.124](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)

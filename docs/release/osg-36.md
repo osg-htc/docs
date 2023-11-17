@@ -83,6 +83,20 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### **November 16, 2023:** VO Package v132, XRootD 5.6.3, osg-system-profiler 1.7.0
+-   [VO Package v132](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-132)
+    -   Update certificates for FNAL and SLAC VOMS servers
+    -   Update certificates for CLAS12, EIC, GLOW, and HCC
+    -   Drop stale certificates for nanohub, STAR, and wisc.edu lz
+-   [XRootD 5.6.3](https://listserv.slac.stanford.edu/cgi-bin/wa?A2=ind2310&L=XROOTD-L&P=1554)
+    -   Fix parsing of chunked PUT requests
+    -   Add HTTP TPC packet marking
+    -   Differentiate between push and pull TPC error messages
+    -   Use configured CA path for the SciTokens plugin
+-   osg-system-profiler 1.7.0
+    -   Add system cryptographic policy
+    -   Better XRootD configuration information for generated profile
+
 ### **November 2, 2023:** IGTF 1.124, CVMFS 2.11.2, cvmfs-x509-helper 2.4
 -   CA certificates based on [IGTF 1.124](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   Updated contact meta-data for ArmeSFo authority (AM)
