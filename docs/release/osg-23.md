@@ -47,15 +47,24 @@ Latest News
 !!! warning "Incoming changes to `osg-ca-certs`"
     To address an issue with certificates issued by SHA1 CAs on EL9 systems and EL8 systems configured to use the
     `FUTURE` system crypto policy,
-    the OSG Software Team intends to release a fix to the `osg-ca-certs` package during the **week of November 27,
-    2023** (<https://opensciencegrid.atlassian.net/browse/SOFTWARE-5745>).
+    the OSG Software Team intends to release a fix to the `osg-ca-certs` package in the near future.
 
     -   If you are running OSG-supported software (e.g., HTCondor, XRootD),
         update to the new version of `osg-ca-certs`.
 
     -   If you are running non-OSG-supported, Java-based software (e.g., dCache) with `osg-ca-certs`,
-        install `osg-ca-certs-java` instead of `osg-ca-certs`.
+        repleace `osg-ca-certs` with `osg-ca-certs-java` with the following command:s
+
+    ```
+    root@host # yum swap osg-ca-certs osg-ca-certs-java
+    ```
         `osg-ca-certs-java` is compatible with Java-based software but does not include the aforementioned fix.
+
+### **November 30, 2023:** VO Package v133, IGTF 1.125
+-   [VO Package v133](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-133)
+    -   Update certificates for FNAL and GlueX VOMS servers
+-   CA certificates based on [IGTF 1.125](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Updated root certificate ArmeSFo CA with extended validity (AM)
 
 ### **November 16, 2023:** VO Package v132, XRootD 5.6.3, osg-ce 23-2, HTCondor-CE 23.0.1, osg-system-profiler 1.7.0
 -   [VO Package v132](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-132)
@@ -208,7 +217,7 @@ This release contains the following major package updates compared to the curren
 
 -   [GlideinWMS 3.10.5](http://glideinwms.fnal.gov/doc.v3_10_5/history.html):
     an update from 3.10.1 in OSG 3.6 main
-    
+
     !!! warning "If you are using custom setup scripts..."
         If you are using custom setup scripts please change the use of `glidein_config`:
 

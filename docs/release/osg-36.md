@@ -83,6 +83,28 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+!!! warning "Incoming changes to `osg-ca-certs`"
+    To address an issue with certificates issued by SHA1 CAs on EL9 systems and EL8 systems configured to use the
+    `FUTURE` system crypto policy,
+    the OSG Software Team intends to release a fix to the `osg-ca-certs` package in the near future.
+
+    -   If you are running OSG-supported software (e.g., HTCondor, XRootD),
+        update to the new version of `osg-ca-certs`.
+
+    -   If you are running non-OSG-supported, Java-based software (e.g., dCache) with `osg-ca-certs`,
+        repleace `osg-ca-certs` with `osg-ca-certs-java` with the following command:
+
+    ```
+    root@host # yum swap osg-ca-certs osg-ca-certs-java
+    ```
+        `osg-ca-certs-java` is compatible with Java-based software but does not include the aforementioned fix.
+
+### **November 30, 2023:** VO Package v133, IGTF 1.125
+-   [VO Package v133](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-133)
+    -   Update certificates for FNAL and GlueX VOMS servers
+-   CA certificates based on [IGTF 1.125](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Updated root certificate ArmeSFo CA with extended validity (AM)
+
 ### **November 16, 2023:** VO Package v132, XRootD 5.6.3, osg-system-profiler 1.7.0
 -   [VO Package v132](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-132)
     -   Update certificates for FNAL and SLAC VOMS servers
@@ -151,7 +173,7 @@ Latest News
     -   Added structured logging
 -   [CVMFS 2.11.0](https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html)
     -   Support for symlink kernel caching
-    -   A new reference-counted cache manager mode that reduces the number of open file descriptors 
+    -   A new reference-counted cache manager mode that reduces the number of open file descriptors
     -   A bug fix for an issue that could slow down client startup
     -   A new telemetry option to send client performance counters to influx
 -   [cvmfs-x509-helper 2.3](https://github.com/cvmfs-contrib/cvmfs-x509-helper/releases/tag/2.3)
@@ -160,7 +182,7 @@ Latest News
     -   Fix usage of `$BEARER_TOKEN` when accessing data
 -   osg-pki-tools 3.6.1
     -   Add configuration file for osg-incommon-cert-request
-    -   Update default CSR key length to 4096, add CLI option 
+    -   Update default CSR key length to 4096, add CLI option
 -   oidc-agent 4.5.2
     -   Update to a recent release that has timeouts to prevent hangs
 
@@ -585,7 +607,7 @@ Latest News
     -   Allow specifying separate export paths for unauthenticated and authenticated origin instances
     -   Allow local scitokens.conf additions
     -   Fix authfile generation on origins that serve no public data
-    
+
 !!! note
     XRootD services should be restarted after this update
 

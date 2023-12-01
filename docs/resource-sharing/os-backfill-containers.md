@@ -64,7 +64,7 @@ In order to successfully start payload jobs:
     Make sure the user you run your container as has write access to this directory.
 
 1. _Optional:_ add an expression with the `GLIDEIN_Start_Extra` environment variable to append to the
-   [HTCondor `START` expression](https://htcondor.readthedocs.io/en/latest/admin-manual/policy-configuration.html#the-start-expression);
+   [HTCondor `START` expression](https://htcondor.readthedocs.io/en/latest/admin-manual/ep-policy-configuration.html#the-start-expression);
    this limits the pilot to only run certain jobs.
 
 1. _Optional:_ [limit OSG pilot container resource usage](#limiting-resource-usage)
