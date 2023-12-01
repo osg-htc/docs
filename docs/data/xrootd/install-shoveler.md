@@ -149,6 +149,7 @@ sequenceDiagram
 1. Get your unique CILogon User Identifier from [CILogon](https://cilogon.org/).
     It is under User Attributes, and follows the pattern http://cilogon.org/serverA/users/12345.
 1. Open a ticket at <mailto:help@osg-htc.org> with your CILogon User Identifier to authorize your login with the renewer.
+    Mention in the ticket that you want authorization for setting up a Shoveler.
 1. Install the [OSG Token Renewal Service](https://opensciencegrid.org/docs/other/osg-token-renewer/)
 1. When installing, the issuer is `https://lw-issuer.osgdev.chtc.io/scitokens-server/`
 1. When asked about scopes, accept the default.
