@@ -99,11 +99,12 @@ On EL hosts, the pilot container can also be managed via a systemctl service pro
 
 1. [Enable OSG yum repos](../common/yum.md).
 
-    **Note**: The RPM is currently only available in the development repo. Set `enabled = 1` in `/etc/yum.repos.d/osg-development.repo`
+    !! note "Under active development"
+        The RPM is currently only available in the development repo.
 
 1. Install the service
 
-    `$ sudo yum install ospool-ep`
+    `root@host # yum install ospool-ep --enablerepo=osg-development`
 
 1. Copy your OSPool Access Token to `/etc/osg/ospool-ep.tkn`
 
