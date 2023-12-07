@@ -503,6 +503,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#running-the-container-via-rpm" class="md-nav__link">
+    Running the Container via RPM
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#optional-configuration" class="md-nav__link">
     Optional Configuration
   </a>
@@ -1931,6 +1938,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#running-the-container-via-rpm" class="md-nav__link">
+    Running the Container via RPM
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#optional-configuration" class="md-nav__link">
     Optional Configuration
   </a>
@@ -2117,6 +2131,49 @@ Make sure the user you run your container as has write access to this directory.
 Privileged mode (<code>--privileged</code>) requested in the above <code>docker run</code> allows the container
 to mount <a href="#cvmfsexec">CVMFS using cvmfsexec</a> and invoke <code>singularity</code> for user jobs.
 Singularity (now known as Apptainer) allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).</p>
+<h2 id="running-the-container-via-rpm">Running the Container via RPM<a class="headerlink" href="#running-the-container-via-rpm" title="Permanent link">&para;</a></h2>
+<p>On EL hosts, the pilot container can also be managed via a systemctl service provided by the <code>ospool-ep</code> rpm. To install this RPM:</p>
+<ol>
+<li>
+<p><a href="../../common/yum/">Enable OSG yum repos</a>.</p>
+<p>!! note "Under active development"
+    The RPM is currently only available in the development repo.</p>
+</li>
+<li>
+<p>Install the service</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install ospool-ep --enablerepo<span class="o">=</span>osg-development
+</code></pre></div>
+
+</li>
+<li>
+<p>Copy your OSPool Access Token to <code>/etc/osg/ospool-ep.tkn</code></p>
+<p>!! note "Token file ownership"
+    The EP is run under uid 1000.
+    Ensure this user has read access to the token file.</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>chown <span class="m">1000</span>:1000 /etc/osg/ospool-ep.tkn
+</code></pre></div>
+
+</li>
+<li>
+<p>Configure the container service by editing <code>/etc/osg/ospool-ep.cfg</code></p>
+<ul>
+<li>Set <code>GLIDEIN_Site</code> to your OSG Topology Site identifier</li>
+<li>Set <code>GLIDEIN_ResourceName</code> to your OSG Topology Resource Name identifier</li>
+</ul>
+</li>
+<li>
+<p>Start the OSPool EP container service:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>systemctl start ospool-ep
+</code></pre></div>
+
+</li>
+<li>
+<p>(Optional) monitor the systemctl service logs to see if the container starts successfully:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>journalctl -f -u ospool-ep
+</code></pre></div>
+
+</li>
+</ol>
 <h2 id="optional-configuration">Optional Configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h2>
 <h3 id="recommended-cvmfs">(Recommended) CVMFS<a class="headerlink" href="#recommended-cvmfs" title="Permanent link">&para;</a></h3>
 <p><a href="https://cernvm.cern.ch/fs/">CernVM-FS</a> (CVMFS) is a read-only remote filesystem that many OSG jobs depend on for software and data.

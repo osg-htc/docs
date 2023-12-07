@@ -2,347 +2,347 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://osg-htc.org/docs/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/site-maintenance/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/site-planning/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/site-verification/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/common/ca/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/common/contact-registration/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/common/help/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/common/registration/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/common/yum/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/compute-element/covid-19/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/compute-element/hosted-ce/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/compute-element/htcondor-ce-overview/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/compute-element/install-htcondor-ce/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/compute-element/job-router-recipes/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/compute-element/slurm-recipes/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/compute-element/submit-htcondor-ce/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/compute-element/troubleshoot-htcondor-ce/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/data/external-oasis-repos/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/data/frontier-squid/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/data/run-frontier-squid-container/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/data/update-oasis/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/data/stashcache/install-cache/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/data/stashcache/install-origin/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/data/stashcache/overview/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/data/stashcache/run-stash-origin-container/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/data/stashcache/run-stashcache-container/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/data/stashcache/vo-data/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/data/xrootd/install-client/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/data/xrootd/install-cms-xcache/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/data/xrootd/install-shoveler/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/data/xrootd/install-standalone/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/data/xrootd/install-storage-element/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/data/xrootd/overview/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/data/xrootd/xrootd-authorization/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/other/configuration-with-osg-configure/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/other/firewall/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/other/install-cvmfs-stratum1/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/other/install-gwms-frontend/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/other/osg-token-renewer/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/other/schedd-filebeats/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/other/troubleshooting-gratia/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/release/osg-23/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/release/osg-36/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/release/release_series/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/release/signing/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/release/supported_platforms/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/release/updating-to-osg-23/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/release/updating-to-osg-36/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/release/yum-basics/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/resource-sharing/os-backfill-containers/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/resource-sharing/overview/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/resource-sharing/user-containers/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/security/certificate-management/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/security/host-certs/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/security/host-certs/incommon/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/security/host-certs/lets-encrypt/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/security/host-certs/overview/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/security/tokens/overview/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/security/tokens/using-tokens/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/submit/ap-ospool-aup/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/submit/osg-flock/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/worker-node/install-apptainer/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/worker-node/install-cvmfs/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/worker-node/install-singularity/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/worker-node/install-wn-oasis/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/worker-node/install-wn-tarball/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/worker-node/install-wn/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/worker-node/using-wn-containers/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://osg-htc.org/docs/worker-node/using-wn/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
