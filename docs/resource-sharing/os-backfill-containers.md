@@ -104,7 +104,8 @@ On EL hosts, the pilot container can also be managed via a systemctl service pro
 
 1. Install the service
 
-    `root@host # yum install ospool-ep --enablerepo=osg-development`
+        :::console
+        root@host # yum install ospool-ep --enablerepo=osg-development
 
 1. Copy your OSPool Access Token to `/etc/osg/ospool-ep.tkn`
 
@@ -112,7 +113,8 @@ On EL hosts, the pilot container can also be managed via a systemctl service pro
         The EP is run under uid 1000.
         Ensure this user has read access to the token file.
 
-    `root@host # chown 1000:1000 /etc/osg/ospool-ep.tkn`
+        :::console
+        root@host# chown 1000:1000 /etc/osg/ospool-ep.tkn
 
 1. Configure the container service by editing `/etc/osg/ospool-ep.cfg`
 
@@ -121,11 +123,13 @@ On EL hosts, the pilot container can also be managed via a systemctl service pro
 
 1. Start the OSPool EP container service:
 
-    `root@host # systemctl start ospool-ep`
+        :::console
+        root@host# systemctl start ospool-ep
 
 1. (Optional) monitor the systemctl service logs to see if the container starts successfully:
 
-    `root@host # journalctl -f -u ospool-ep`
+        :::console
+        root@host# journalctl -f -u ospool-ep
 
 
 Optional Configuration
