@@ -113,8 +113,8 @@ On EL hosts, the pilot container can also be managed via a systemctl service pro
         The EP is run under uid 1000.
         Ensure this user has read access to the token file.
 
-        :::console
-        root@host # chown 1000:1000 /etc/osg/ospool-ep.tkn
+            :::console
+            root@host # chown 1000:1000 /etc/osg/ospool-ep.tkn
 
 1. Configure the container service by editing `/etc/osg/ospool-ep.cfg`
 
