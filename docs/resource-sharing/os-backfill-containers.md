@@ -114,7 +114,7 @@ On EL hosts, the pilot container can also be managed via a systemctl service pro
         Ensure this user has read access to the token file.
 
         :::console
-        root@host# chown 1000:1000 /etc/osg/ospool-ep.tkn
+        root@host # chown 1000:1000 /etc/osg/ospool-ep.tkn
 
 1. Configure the container service by editing `/etc/osg/ospool-ep.cfg`
 
@@ -124,12 +124,12 @@ On EL hosts, the pilot container can also be managed via a systemctl service pro
 1. Start the OSPool EP container service:
 
         :::console
-        root@host# systemctl start ospool-ep
+        root@host # systemctl start ospool-ep
 
 1. (Optional) monitor the systemctl service logs to see if the container starts successfully:
 
         :::console
-        root@host# journalctl -f -u ospool-ep
+        root@host # journalctl -f -u ospool-ep
 
 
 Optional Configuration
