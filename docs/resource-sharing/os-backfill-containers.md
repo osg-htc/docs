@@ -120,6 +120,10 @@ On EL hosts, the pilot container can also be managed via a systemctl service pro
 
     - Set `GLIDEIN_Site` to your OSG Topology Site identifier
     - Set `GLIDEIN_ResourceName` to your OSG Topology Resource Name identifier
+    - **If** you have dedicated scratch disk space for OSPool payload jobs (which is recommended),
+      then set `WORKER_TEMP_DIR` to the scratch directory; e.g.:
+
+            WORKER_TEMP_DIR=/scratch
 
 1. Start the OSPool EP container service:
 
