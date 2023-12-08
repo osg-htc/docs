@@ -2163,6 +2163,11 @@ Ensure this user has read access to the token file.</p>
 <ul>
 <li>Set <code>GLIDEIN_Site</code> to your OSG Topology Site identifier</li>
 <li>Set <code>GLIDEIN_ResourceName</code> to your OSG Topology Resource Name identifier</li>
+<li><strong>If</strong> you have dedicated scratch disk space for OSPool payload jobs (which is recommended),
+  then set <code>WORKER_TEMP_DIR</code> to the scratch directory; e.g.:<div class="codehilite"><pre><span></span><code>WORKER_TEMP_DIR=/scratch
+</code></pre></div>
+
+</li>
 </ul>
 </li>
 <li>
