@@ -60,6 +60,17 @@ Latest News
     ```
         `osg-ca-certs-java` is compatible with Java-based software but does not include the aforementioned fix.
 
+### **December 14, 2023:** XRootD 5.6.4, XCache 3.6.0, xrootd-multiuser 2.2.0
+-   [XRootD 5.6.4](https://github.com/xrootd/xrootd/releases/tag/v5.6.4)
+    -   Fix segfault with macaroons
+    -   Fix segfault if pss.origin uses https protocol with no port
+    -   Switch from using a certificate file to a certificate chain file
+-   [XCache 3.6.0](https://github.com/opensciencegrid/xcache/releases/tag/v3.6.0)
+    -   Allow overriding redirector in caches with the environment variable ``XC_REDIRECTOR``
+    -   Allow adding local additions to ``Authfile`` and ``scitokens.conf`` file in ``/etc/xrootd``
+-   [xrootd-multiuser 2.2.0](https://github.com/opensciencegrid/xrootd-multiuser/releases/tag/v2.2.0-1)
+    -   Add ability to enable/disable xrootd-multiuser with the ``XC_ENABLE_MULTIUSER`` environment variable
+
 ### **November 30, 2023:** VO Package v133, IGTF 1.125
 -   [VO Package v133](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-133)
     -   Update certificates for FNAL and GlueX VOMS servers
@@ -71,7 +82,7 @@ Latest News
     -   Update certificates for FNAL and SLAC VOMS servers
     -   Update certificates for CLAS12, EIC, GLOW, and HCC
     -   Drop stale certificates for nanohub, STAR, and wisc.edu lz
--   [XRootD 5.6.3](https://listserv.slac.stanford.edu/cgi-bin/wa?A2=ind2310&L=XROOTD-L&P=1554)
+-   [XRootD 5.6.3](https://github.com/xrootd/xrootd/releases/tag/v5.6.3)
     -   Fix parsing of chunked PUT requests
     -   Add HTTP TPC packet marking
     -   Differentiate between push and pull TPC error messages
