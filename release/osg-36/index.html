@@ -1534,6 +1534,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#december-14-2023-xrootd-564-xcache-360-xrootd-multiuser-220" class="md-nav__link">
+    December 14, 2023: XRootD 5.6.4, XCache 3.6.0, xrootd-multiuser 2.2.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#november-30-2023-vo-package-v133-igtf-1125" class="md-nav__link">
     November 30, 2023: VO Package v133, IGTF 1.125
   </a>
@@ -2497,6 +2504,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#december-14-2023-xrootd-564-xcache-360-xrootd-multiuser-220" class="md-nav__link">
+    December 14, 2023: XRootD 5.6.4, XCache 3.6.0, xrootd-multiuser 2.2.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#november-30-2023-vo-package-v133-igtf-1125" class="md-nav__link">
     November 30, 2023: VO Package v133, IGTF 1.125
   </a>
@@ -3195,6 +3209,24 @@ the OSG Software Team intends to release a fix to the <code>osg-ca-certs</code> 
 </code></pre></div>
     <code>osg-ca-certs-java</code> is compatible with Java-based software but does not include the aforementioned fix.</p>
 </div>
+<h3 id="december-14-2023-xrootd-564-xcache-360-xrootd-multiuser-220"><strong>December 14, 2023:</strong> XRootD 5.6.4, XCache 3.6.0, xrootd-multiuser 2.2.0<a class="headerlink" href="#december-14-2023-xrootd-564-xcache-360-xrootd-multiuser-220" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://github.com/xrootd/xrootd/releases/tag/v5.6.4">XRootD 5.6.4</a><ul>
+<li>Fix segfault with macaroons</li>
+<li>Fix segfault if pss.origin uses https protocol with no port</li>
+<li>Switch from using a certificate file to a certificate chain file</li>
+</ul>
+</li>
+<li><a href="https://github.com/opensciencegrid/xcache/releases/tag/v3.6.0">XCache 3.6.0</a><ul>
+<li>Allow overriding redirector in caches with the environment variable <code>XC_REDIRECTOR</code></li>
+<li>Allow adding local additions to <code>Authfile</code> and <code>scitokens.conf</code> file in <code>/etc/xrootd</code></li>
+</ul>
+</li>
+<li><a href="https://github.com/opensciencegrid/xrootd-multiuser/releases/tag/v2.2.0-1">xrootd-multiuser 2.2.0</a><ul>
+<li>Add ability to enable/disable xrootd-multiuser with the <code>XC_ENABLE_MULTIUSER</code> environment variable</li>
+</ul>
+</li>
+</ul>
 <h3 id="november-30-2023-vo-package-v133-igtf-1125"><strong>November 30, 2023:</strong> VO Package v133, IGTF 1.125<a class="headerlink" href="#november-30-2023-vo-package-v133-igtf-1125" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-133">VO Package v133</a><ul>
@@ -3214,7 +3246,7 @@ the OSG Software Team intends to release a fix to the <code>osg-ca-certs</code> 
 <li>Drop stale certificates for nanohub, STAR, and wisc.edu lz</li>
 </ul>
 </li>
-<li><a href="https://listserv.slac.stanford.edu/cgi-bin/wa?A2=ind2310&amp;L=XROOTD-L&amp;P=1554">XRootD 5.6.3</a><ul>
+<li><a href="https://github.com/xrootd/xrootd/releases/tag/v5.6.3">XRootD 5.6.3</a><ul>
 <li>Fix parsing of chunked PUT requests</li>
 <li>Add HTTP TPC packet marking</li>
 <li>Differentiate between push and pull TPC error messages</li>
