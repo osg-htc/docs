@@ -30,7 +30,7 @@ For the HTCondor batch system, we say that users log on to an Access Point (AP)
 to submit their jobs to HTCondor, where the jobs wait ("are queued") until computing capacity is available to run them.
 In a purely local HTCondor system, there are one to a few Access Points and many computing resources.
 
-An HTCondor Access Point can also be configured to forward excess jobs to the Open Science Pool.
+An HTCondor Access Point can also be configured to forward excess jobs to the OSPool.
 This process is called [flocking](https://htcondor.readthedocs.io/en/latest/grid-computing/connecting-pools-with-flocking.html).
 If you already have an HTCondor pool, we recommend that you install this software
 on top of one of your existing HTCondor Access Points.
@@ -77,7 +77,7 @@ Be aware that hosting an access point comes with responsibilities, both for the 
 well as end users of the system. The polices can be found in the [Acceptable Usage Policy document](ap-ospool-aup.md).
 
 ### Register your Access Point in OSG Topology
-To be part of the OSPool, your AP must be registered in the OSG Topology system.
+To make use of OSPool capacity, your AP must be registered in the OSG Topology system.
 You will need information like the hostname, and the administrative and security contacts.
 Follow the [general registration instructions](../common/registration.md#new-resources).
 For historical reasons, the service type is `Submit Node`. We also request that you tag
@@ -94,7 +94,7 @@ Once your Access Point is registered in OSG Topology and you are registered with
 you can obtain a token from the [OSG Token Registration page](https://os-registry.opensciencegrid.org/).
 
 You will need a host with Docker to run the software used for retrieving the token.
-Please use your COManage registered and approved identity to log into the
+Use your COManage registered and approved identity to log into the
 OSG Token Registration page.
 Follow the instructions on the website; in the list of hosts,
 select the hostname of the Access Point that you registered earlier.
