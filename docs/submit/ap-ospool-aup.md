@@ -77,6 +77,14 @@ Additionally, the statistics about jobs (aggregated per-user-per-project) will b
 throughput of the pool;
 staff may follow up with APs in light of poor resource utilization.
 
+The AP operator agrees to keep the installed HTCondor Software Suite (HTCSS) versions up-to-date:
+
+1.  An OSPool AP must run on a [supported release series of HTCSS](https://htcondor.org/htcondor/release-plan/).
+1.  The release may be no more than 4 months behind the
+    [latest version in the release series](https://htcondor.org/htcondor/release-highlights/).
+1.  The release may be no more than 1 month behind the
+    [latest security patch](https://htcondor.org/htcondor/release-highlights/) in the release series.
+
 As the OSPool operations staff has a responsibility to the entire pool, the OSPool operations staff may disable the AP’s
 connection to the OSPool, as necessary, to maintain operational integrity and resource utilization.
 When disabled, the AP will no longer receive resources from the OSPool (but may still use other non-OSPool resources).
