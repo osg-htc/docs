@@ -5,7 +5,7 @@ Installing an Open Science Pool Access Point
 ============================================
 
 This document explains how to add a path for user jobs to flow from your local site out to the OSG,
-which in most cases means that the jobs will have far more resources available to run on than locally.
+which in most cases means that the jobs will have far more capacity available to run on than locally.
 If your local batch system frequently has many jobs waiting to run for a long time,
 you do not have a local batch system,
 or if you simply want to provide a local entry point for OSG-bound jobs,
@@ -25,7 +25,7 @@ Background
 Every batch computing system has one or more entry points that users log on to and use to hand over their computing work
 to the batch system for completion.
 For the HTCondor batch system, we say that users log on to a access point (i.e., submit node, submit host) to submit
-their jobs to HTCondor, where the jobs wait ("are queued") until computing resources are available to run them.
+their jobs to HTCondor, where the jobs wait ("are queued") until computing capacity is available to run them.
 In a purely local HTCondor system, there are one to a few access points and many computing resources.
 
 An HTCondor access point can also be configured to forward excess jobs to an OSG-managed pool.
@@ -33,7 +33,7 @@ This process is called [flocking](https://htcondor.readthedocs.io/en/latest/grid
 If you already have an HTCondor pool, we recommend that you install this software
 on top of one of your existing HTCondor access points.
 This approach allows a user to submit locally and have their jobs run locally or,
-if the user chooses and if local resources are unavailable, have their jobs automatically flock to OSG.
+if the user chooses and if local capacity is unavailable, have their jobs automatically flock to OSG.
 If you do not have an HTCondor batch system, following these instructions will install the HTCondor submit service
 and configure it only to forward jobs to the OSG.
 In other words, you do not need a whole HTCondor batch system just to have a local OSG access point.
@@ -61,9 +61,9 @@ Also consider the following configuration requirements:
 Scheduling a Planning Consultation
 ----------------------------------
 
-Before participating in the OSG, either as a computational resource contributor or consumer,
+Before participating in the OSG, either as a computational capacity contributor or consumer,
 we ask that you [contact us](mailto:help@osg-htc.org) to set up a consultation.
-During this consultation, OSG staff will introduce you and your team to the OSG and develop a plan to meet your resource
+During this consultation, OSG staff will introduce you and your team to the OSG and develop a plan to meet your capacity
 contribution and/or research goals.
 
 
