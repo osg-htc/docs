@@ -4,19 +4,20 @@ title: Installing an Open Science Pool Access Point
 Installing an Open Science Pool Access Point
 ============================================
 
-This document explains how to add a path for user jobs to flow from your local site out to the OSG,
+This document explains how to add a path for user jobs to flow from your local site out to the Open Science Pool (OSPool),
 which in most cases means that the jobs will have far more capacity available to run on than locally.
-If your local batch system frequently has many jobs waiting to run for a long time,
-you do not have a local batch system,
-or if you simply want to provide a local entry point for OSG-bound jobs,
-adding a path to OSG may result in less waiting for your users.
+This is useful if:
+
+- your local batch system frequently has many jobs waiting to run for a long time
+- you do not have a local batch system
+- you want to provide a local entry point for OSPool-bound jobs
 
 Note that if you do not have a local batch system, consider having your users use
 [OSG Connect](https://portal.osg-htc.org/documentation), which will require less
 infrastructure work at your site.
 
 !!!note
-    Flocking to the OSG requires some modification to user workflows.
+    Flocking to OSPool resources requires some modification to user workflows.
     After installation, see the [usage](#usage) section for instructions on what your users will need to do.
 
 
@@ -24,24 +25,25 @@ Background
 ----------
 Every batch computing system has one or more entry points that users log on to and use to hand over their computing work
 to the batch system for completion.
-For the HTCondor batch system, we say that users log on to a access point (i.e., submit node, submit host) to submit
-their jobs to HTCondor, where the jobs wait ("are queued") until computing capacity is available to run them.
-In a purely local HTCondor system, there are one to a few access points and many computing resources.
+For the HTCondor batch system, we say that users log on to an Access Point (AP)
+(also known as a submit node or submit host)
+to submit their jobs to HTCondor, where the jobs wait ("are queued") until computing capacity is available to run them.
+In a purely local HTCondor system, there are one to a few Access Points and many computing resources.
 
-An HTCondor access point can also be configured to forward excess jobs to an OSG-managed pool.
+An HTCondor Access Point can also be configured to forward excess jobs to the Open Science Pool.
 This process is called [flocking](https://htcondor.readthedocs.io/en/latest/grid-computing/connecting-pools-with-flocking.html).
 If you already have an HTCondor pool, we recommend that you install this software
-on top of one of your existing HTCondor access points.
+on top of one of your existing HTCondor Access Points.
 This approach allows a user to submit locally and have their jobs run locally or,
-if the user chooses and if local capacity is unavailable, have their jobs automatically flock to OSG.
+if the user chooses and if local capacity is unavailable, have their jobs automatically flock to the OSPool.
 If you do not have an HTCondor batch system, following these instructions will install the HTCondor submit service
-and configure it only to forward jobs to the OSG.
-In other words, you do not need a whole HTCondor batch system just to have a local OSG access point.
+and configure it only to forward jobs to the OSPool.
+In other words, you do not need a whole HTCondor batch system just to have a local OSPool Access Point.
 
 
 System Requirements
 -------------------
-The hardware requirement for an OSG access point depends on several factors such as number of users,
+The hardware requirement for an OSPool Access Pool depends on several factors such as number of users,
 number of jobs and for example how I/O intensity of those jobs.
 Our minimum recommended configuration is 6 cores, 12 GB RAM and 1 TB of local disk.
 The hardware can be bare metal or virtual machine, but we do not recommend containers as these submit host are running
@@ -61,7 +63,7 @@ Also consider the following configuration requirements:
 Scheduling a Planning Consultation
 ----------------------------------
 
-Before participating in the OSG, either as a computational capacity contributor or consumer,
+Before participating in the OSPool, either as a computational capacity contributor or consumer,
 we ask that you [contact us](mailto:help@osg-htc.org) to set up a consultation.
 During this consultation, OSG staff will introduce you and your team to the OSG and develop a plan to meet your capacity
 contribution and/or research goals.
@@ -74,8 +76,8 @@ Initial Steps
 Be aware that hosting an access point comes with responsibilities, both for the administrators as
 well as end users of the system. The polices can be found in the [Acceptable Usage Policy document](ap-ospool-aup.md).
 
-### Register your access point in OSG Topology
-To be part of OSG, your access point should be registered with the OSG.
+### Register your Access Point in OSG Topology
+To be part of the OSPool, your AP must be registered in the OSG Topology system.
 You will need information like the hostname, and the administrative and security contacts.
 Follow the [general registration instructions](../common/registration.md#new-resources).
 For historical reasons, the service type is `Submit Node`. We also request that you tag
@@ -83,13 +85,13 @@ the resources with `OSPool`. An example of a registration is
 [the osg-vo.isi.edu entry](https://github.com/opensciencegrid/topology/blob/7a71dd4731bb5259f5d9d4004b2df1ddb2bd22ce/topology/University%20of%20Southern%20California/Information%20Sciences%20Institute/ISI.yaml#L32-L57)
 
 ### Register with COManage 
-The adminstrative contact from the the topology entry needs to register with COManage. 
+The adminstrative contact from the the Topology entry needs to register with COManage. 
 Instructions can be found [here](https://osg-htc.org/technology/policy/comanage-instructions-user/)
 
-Next is to retrive a token so that the new submit host can authenticate with the Open
-Science Pool manager. Please use your COManage registered and approved identity to
+Next is to retrive a token so that the new Access Point can authenticate with the OSPool manager.
+Please use your COManage registered and approved identity to
 log into the [OSG Token Registration](https://os-registry.opensciencegrid.org/). Once
-logged in, select `Token on Docker`, and find your registered submit node in the list.
+logged in, select `Token on Docker`, and find your registered AP in the list.
 Follow the instructions (you probably have to do the steps on a host with Docker and as
 root), and once you have the token generated, keep that for later steps.
 
@@ -98,7 +100,7 @@ Installing Required Software
 ----------------------------
 Flocking requires HTCondor software as well as software for reporting to the OSG accounting system.
 Start by setting up the EPEL and OSG YUM repositories following the
-[Installing Yum Repositories](../common/yum.md) document. __Note that you have to use OSG 3.6__. Earlier
+[Installing Yum Repositories](../common/yum.md) document. __Note that you have to use OSG 3.6 or newer__. Earlier
 versions will not work.
 
 Once the YUM repositories are setup, install the `osg-flock` convenience RPM that installs all
@@ -110,17 +112,17 @@ required packages. Example on a RHEL 7 host:
 # yum install osg-flock
 ```
 
-### Upgrading
+### Upgrading from OSG 3.5 or earlier
 
-Upgrading from previous versions should be as simple as switching to OSG 3.6, and then
+Upgrading from previous versions should be as simple as switching to OSG 3.6 or newer, and then
 issuing `yum upgrade`. If you made local config changes, please verify that the files under
 `/etc/condor/config.d` were renamed/disabled during the upgrade.
 
 Note that in some older versions of the package, the Gratia config was kept in 
 `/etc/gratia/condor/ProbeConfig`. The new location is `/etc/gratia/condor-ap/ProbeConfig`.
 
-The Open Science Pool will no longer accept GSI authentcation. Access points still configured
-with GSI, will have to be upgraded to OSG 3.6 and switched over to token authentication as
+The Open Science Pool will no longer accept GSI authentcation. Access Points still configured
+with GSI, will have to be upgraded to OSG 3.6 or newer and switched over to token authentication as
 described in this document.
 
 Configuring Reporting via Gratia
@@ -162,9 +164,9 @@ The only service which is required to be running is `condor`. Enable and restart
 
 Usage
 -----
-### Running jobs in OSG
-If your users are accustomed to running jobs locally, they may encounter some significant differences when running jobs in OSG.
-Users should be aware that OSG jobs are distributed across multiple institutions across a large geographical area.
+### Running jobs in the OSPool
+If your users are accustomed to running jobs locally, they may encounter some significant differences when running jobs in the OSPool.
+Users should be aware that OSPool jobs are distributed across multiple institutions across a large geographical area.
 Each institution will have its own policy about the kinds of jobs that are allowed to run,
 and data transfer may be more complicated.
 The [OSG Helpdesk Solutions](https://portal.osg-htc.org/documentation) page has information about
@@ -177,20 +179,20 @@ the [Organizing and Submitting HTC Workloads Tutorial](https://portal.osg-htc.or
 are particularly relevant.
 
 ### Specifying a project
-OSG will only run jobs that have a registered *project* associated with them.
+OSPool resources will only run jobs that have a registered *project* associated with them.
 Users must follow the
 [instructions for starting a project in OSG-Connect](https://portal.osg-htc.org/documentation/overview/account_setup/starting-project/)
 to register a project.
 
-A project is associated with a job by adding a ProjectName line to the user's submit file.
+A project is associated with a job by adding a `+ProjectName` line to the user's submit file.
 For example:
 
 ```file
 +ProjectName = "My_Project"
 ```
 
-__The double quotes are necessary__. If not quoted, *My_Project* will be interpreted as an expression,
-and most likely evaluate to undefined, and prevent your job from running.
+__The `+` and the double quotes are necessary__.
+Otherwise, the job will fail to submit or it will not run in the OSPool.
 
 
 Get Help
