@@ -122,6 +122,7 @@ OSG 23 supports RHEL 8- and 9-compatible operating systems.
 OSG 3.6 supports RHEL 7-, 8-, and 9-compatible operating systems.
 
 See the instructions for upgrading to the appropriate series:
+
 - [Upgrading to the OSG 23 series](https://osg-htc.org/docs/release/updating-to-osg-23/)
 - [Upgrading to the OSG 3.6 series](https://osg-htc.org/docs/release/updating-to-osg-36/)
 
@@ -132,7 +133,7 @@ Note that in some older versions of the package, the Gratia config was kept in
 `/etc/gratia/condor/ProbeConfig`. The new location is `/etc/gratia/condor-ap/ProbeConfig`.
 
 The Open Science Pool does not accept GSI authentication.
-If your Access Point is configured with GSI authentication,
+If your Access Point was configured with GSI authentication,
 you will need to switch to token authentication after upgrading, as described in this document.
 
 Configuring Reporting via Gratia
