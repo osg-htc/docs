@@ -1915,12 +1915,12 @@ singularity run --contain <span class="se">\</span>
                 --bind /cvmfs <span class="se">\</span>
                 --bind /dev/fuse <span class="se">\</span>
                 --scratch /pilot <span class="se">\</span>
-                docker://opensciencegrid/osgvo-docker-pilot:3.6-release
+                docker://opensciencegrid/osgvo-docker-pilot:23-release
 </code></pre></div>
 <p>The above example rebuilds the Docker container on each host.
 If you plan to run large numbers of these jobs, you can download the Docker container once and create a local
 Singularity image:</p>
-<div class="highlight"><pre><span></span><code>$ singularity build osgvo-pilot.sif docker://opensciencegrid/osgvo-docker-pilot:3.6-release
+<div class="highlight"><pre><span></span><code>$ singularity build osgvo-pilot.sif docker://opensciencegrid/osgvo-docker-pilot:23-release
 </code></pre></div>
 <p>In this case, the <code>singularity run</code> command should be changed to:</p>
 <div class="highlight"><pre><span></span><code>singularity run --contain --bind /cvmfs --bind /dev/fuse --scratch /pilot osgvo-pilot.sif

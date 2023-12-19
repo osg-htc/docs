@@ -2125,7 +2125,7 @@ Make sure the user you run your container as has write access to this directory.
        -e CVMFSEXEC_REPOS=&quot;                     \
             oasis.opensciencegrid.org           \
             singularity.opensciencegrid.org&quot;    \
-       opensciencegrid/osgvo-docker-pilot:3.6-release
+       opensciencegrid/osgvo-docker-pilot:23-release
 </code></pre></div>
 <p>Replace <code>/path/to/token</code> with the location you saved the token obtained from the OSPool Token Registry.
 Privileged mode (<code>--privileged</code>) requested in the above <code>docker run</code> allows the container
@@ -2250,7 +2250,7 @@ modified to volume mount CVMFS instead of using cvmfsexec, and using reduced pri
         -e GLIDEIN_ResourceName=&quot;...&quot;   \
         -e GLIDEIN_Start_Extra=&quot;True&quot;   \
         -e OSG_SQUID_LOCATION=&quot;...&quot;     \
-        opensciencegrid/osgvo-docker-pilot:3.6-release
+        opensciencegrid/osgvo-docker-pilot:23-release
 </code></pre></div>
 <p>Fill in the values for <code>/path/to/token</code>, <code>/worker-temp-dir</code>, <code>GLIDEIN_Site</code>, <code>GLIDEIN_ResourceName</code>, and <code>OSG_SQUID_LOCATION</code> <a href="#running-the-container-with-docker">as above</a>.</p>
 <h3 id="limiting-resource-usage">Limiting resource usage<a class="headerlink" href="#limiting-resource-usage" title="Permanent link">&para;</a></h3>

@@ -2055,7 +2055,7 @@ production-appropriate method using systemd.</p>
              --volume &lt;HOST CERT&gt;:/etc/grid-security/hostcert.pem <span class="se">\</span>
              --volume &lt;HOST KEY&gt;:/etc/grid-security/hostkey.pem <span class="se">\</span>
              --env-file<span class="o">=</span>/opt/origin/.env <span class="se">\</span>
-             opensciencegrid/stash-origin:3.6-release
+             opensciencegrid/stash-origin:23-release
 </code></pre></div>
 <p>Replacing <code>&lt;HOST PARTITION&gt;</code> with the host directory containing data that your origin should serve.
 See <a href="#populating-origin-data">this section</a> for details.</p>
@@ -2091,7 +2091,7 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
-ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin:3.6-release
+ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin:23-release
 ExecStart=/usr/bin/docker run --rm --name %n \
   --publish 1094:1094 \
   --publish 1095:1095 \
@@ -2099,7 +2099,7 @@ ExecStart=/usr/bin/docker run --rm --name %n \
   --volume /etc/ssl/host.crt:/etc/grid-security/hostcert.pem \
   --volume /etc/ssl/host.key:/etc/grid-security/hostkey.pem \
   --env-file /opt/origin/.env \
-  opensciencegrid/stash-origin:3.6-release
+  opensciencegrid/stash-origin:23-release
 
 [Install]
 WantedBy=multi-user.target

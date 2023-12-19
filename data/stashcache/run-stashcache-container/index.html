@@ -2220,7 +2220,7 @@ Instead, the partition stores symlinks to the files in the metadata and data par
 <span class="go">             ...</span>
 <span class="go">             --volume &lt;DATA PARTITION N&gt;:/xcache/dataN</span>
 <span class="go">             --env-file=/opt/xcache/.env \</span>
-<span class="go">             opensciencegrid/stash-cache:3.6-release</span>
+<span class="go">             opensciencegrid/stash-cache:23-release</span>
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -2236,7 +2236,7 @@ solid state disks or NVMe.</p>
              --volume &lt;HOST CERT&gt;:/etc/grid-security/hostcert.pem <span class="se">\</span>
              --volume &lt;HOST KEY&gt;:/etc/grid-security/hostkey.pem <span class="se">\</span>
              --env-file<span class="o">=</span>/opt/xcache/.env <span class="se">\</span>
-             opensciencegrid/stash-cache:3.6-release
+             opensciencegrid/stash-cache:23-release
 </code></pre></div>
 <h3 id="running-a-cache-on-container-with-systemd">Running a cache on container with systemd<a class="headerlink" href="#running-a-cache-on-container-with-systemd" title="Permanent link">&para;</a></h3>
 <p>An example systemd service file for the OSDF cache.
@@ -2258,7 +2258,7 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
-ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-cache:3.6-release
+ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-cache:23-release
 ExecStart=/usr/bin/docker run --rm --name %n \
   --publish 8000:8000 \
   --publish 8443:8443 \
@@ -2266,7 +2266,7 @@ ExecStart=/usr/bin/docker run --rm --name %n \
   --volume /etc/ssl/host.crt:/etc/grid-security/hostcert.pem \
   --volume /etc/ssl/host.key:/etc/grid-security/hostkey.pem \
   --env-file /opt/xcache/.env \
-  opensciencegrid/stash-cache:3.6-release
+  opensciencegrid/stash-cache:23-release
 
 [Install]
 WantedBy=multi-user.target
@@ -2288,7 +2288,7 @@ container to the host network:</p>
              --volume &lt;HOST CERT&gt;:/etc/grid-security/hostcert.pem <span class="se">\</span>
              --volume &lt;HOST KEY&gt;:/etc/grid-security/hostkey.pem <span class="se">\</span>
              --env-file<span class="o">=</span>/opt/xcache/.env <span class="se">\</span>
-             opensciencegrid/stash-cache:3.6-release
+             opensciencegrid/stash-cache:23-release
 </code></pre></div>
 <h3 id="memory-optimization">Memory optimization<a class="headerlink" href="#memory-optimization" title="Permanent link">&para;</a></h3>
 <p>The cache uses the host's memory for two purposes:</p>
