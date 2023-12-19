@@ -101,30 +101,39 @@ Installing Required Software
 ----------------------------
 Flocking requires HTCondor software as well as software for reporting to the OSG accounting system.
 Start by setting up the EPEL and OSG YUM repositories following the
-[Installing Yum Repositories](../common/yum.md) document. __Note that you have to use OSG 3.6 or newer__. Earlier
-versions will not work.
+[Installing Yum Repositories](../common/yum.md) document.
 
-Once the YUM repositories are setup, install the `osg-flock` convenience RPM that installs all
-required packages. Example on a RHEL 7 host:
+Once the Yum repositories are setup, install the `osg-flock` convenience RPM that installs all
+required packages. Example on a RHEL 9 host:
 
 ```console
-# yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-# yum install https://repo.opensciencegrid.org/osg/3.6/osg-3.6-el7-release-latest.rpm
+# yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+# yum install https://repo.opensciencegrid.org/osg/23/osg-23-el9-release-latest.rpm
 # yum install osg-flock
 ```
 
 ### Upgrading from OSG 3.5 or earlier
 
-Upgrading from previous versions should be as simple as switching to OSG 3.6 or newer, and then
-issuing `yum upgrade`. If you made local config changes, please verify that the files under
+The Access Point must be running a supported version of the OSG Software Stack;
+the currently supported versions as of December 2023 are OSG 23 and OSG 3.6.
+If you are running an earlier version, you should upgrade to the most recent version
+of the OSG Software Stack that your operating system supports.
+OSG 23 supports RHEL 8- and 9-compatible operating systems.
+OSG 3.6 supports RHEL 7-, 8-, and 9-compatible operating systems.
+
+See the instructions for upgrading to the appropriate series:
+- [Upgrading to the OSG 23 series](https://osg-htc.org/docs/release/updating-to-osg-23/)
+- [Upgrading to the OSG 3.6 series](https://osg-htc.org/docs/release/updating-to-osg-36/)
+
+If you made local config changes, please verify that the files under
 `/etc/condor/config.d` were renamed/disabled during the upgrade.
 
 Note that in some older versions of the package, the Gratia config was kept in 
 `/etc/gratia/condor/ProbeConfig`. The new location is `/etc/gratia/condor-ap/ProbeConfig`.
 
-The Open Science Pool will no longer accept GSI authentcation. Access Points still configured
-with GSI, will have to be upgraded to OSG 3.6 or newer and switched over to token authentication as
-described in this document.
+The Open Science Pool does not accept GSI authentication.
+If your Access Point is configured with GSI authentication,
+you will need to switch to token authentication after upgrading, as described in this document.
 
 Configuring Reporting via Gratia
 --------------------------------
