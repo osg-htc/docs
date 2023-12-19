@@ -195,7 +195,7 @@ the [Organizing and Submitting HTC Workloads Tutorial](https://portal.osg-htc.or
 are particularly relevant.
 
 ### Specifying a project
-OSPool resources will only run jobs that have a registered *project* associated with them.
+OSPool Execution Points (EPs) will only run jobs that have a registered *project* associated with them.
 Users must follow the
 [instructions for starting a project in OSG-Connect](https://portal.osg-htc.org/documentation/overview/account_setup/starting-project/)
 to register a project.
