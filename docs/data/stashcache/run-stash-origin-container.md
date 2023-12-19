@@ -118,7 +118,7 @@ user@host $ docker run --rm --publish 1094:1094 --publish 1095:1095 \
              --volume <HOST CERT>:/etc/grid-security/hostcert.pem \
              --volume <HOST KEY>:/etc/grid-security/hostkey.pem \
              --env-file=/opt/origin/.env \
-             opensciencegrid/stash-origin:3.6-release
+             opensciencegrid/stash-origin:23-release
 ```
 
 Replacing `<HOST PARTITION>` with the host directory containing data that your origin should serve.
@@ -157,7 +157,7 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
-ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin:3.6-release
+ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin:23-release
 ExecStart=/usr/bin/docker run --rm --name %n \
   --publish 1094:1094 \
   --publish 1095:1095 \
@@ -165,7 +165,7 @@ ExecStart=/usr/bin/docker run --rm --name %n \
   --volume /etc/ssl/host.crt:/etc/grid-security/hostcert.pem \
   --volume /etc/ssl/host.key:/etc/grid-security/hostkey.pem \
   --env-file /opt/origin/.env \
-  opensciencegrid/stash-origin:3.6-release
+  opensciencegrid/stash-origin:23-release
 
 [Install]
 WantedBy=multi-user.target
