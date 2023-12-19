@@ -65,7 +65,7 @@ nav:
     - 'Install Transfer Log Filebeats': 'other/schedd-filebeats.md'
     - 'Install OSG Token Renewal Service': 'other/osg-token-renewer.md'
 - Access Point:
-  - 'Install an OSPool Access Point': 'submit/osg-flock.md'
+  - 'Install an OSPool Access Point': 'submit/install-ospool-ap.md'
   - 'Acceptable Use Policy': 'submit/ap-ospool-aup.md'
 - 'Data Federation (OSDF)':
   - 'Overview': 'data/stashcache/overview.md'
@@ -118,3 +118,5 @@ plugins:
   - redirects:
       redirect_maps:
         site-responsibilities.md: site-maintenance.md
+        submit/osg-flock.md: submit/install-ospool-ap.md
+
