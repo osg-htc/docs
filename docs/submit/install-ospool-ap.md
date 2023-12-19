@@ -89,12 +89,13 @@ The adminstrative contact from the the Topology entry needs to register with COM
 Instructions can be found [here](https://osg-htc.org/technology/policy/comanage-instructions-user/)
 
 Next is to retrive a token so that the new Access Point can authenticate with the OSPool manager.
-Please use your COManage registered and approved identity to
-log into the [OSG Token Registration](https://os-registry.opensciencegrid.org/). Once
-logged in, select `Token on Docker`, and find your registered AP in the list.
-Follow the instructions (you probably have to do the steps on a host with Docker and as
-root), and once you have the token generated, keep that for later steps.
+You will need a host with Docker to run the software used for retrieving the token.
+Please use your COManage registered and approved identity to log into the
+[OSG Token Registration](https://os-registry.opensciencegrid.org/).
+Follow the instructions on the website; in the list of hosts,
+select the hostname of the Access Point that you registered earlier.
 
+Save this token file; you will use it later when [configuring authentication](#configuring-authentication).
 
 Installing Required Software
 ----------------------------
