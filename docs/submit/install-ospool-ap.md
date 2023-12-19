@@ -88,10 +88,14 @@ the resources with `OSPool`. An example of a registration is
 The adminstrative contact from the the Topology entry needs to register with COManage. 
 Instructions can be found [here](https://osg-htc.org/technology/policy/comanage-instructions-user/)
 
-Next is to retrive a token so that the new Access Point can authenticate with the OSPool manager.
+### Obtain an Authentication Token
+The new Access Point will need an authentication token to authenticate to the OSPool Central Manager.
+Once your Access Point is registered in OSG Topology and you are registered with COManage,
+you can obtain a token from the [OSG Token Registration page](https://os-registry.opensciencegrid.org/).
+
 You will need a host with Docker to run the software used for retrieving the token.
 Please use your COManage registered and approved identity to log into the
-[OSG Token Registration](https://os-registry.opensciencegrid.org/).
+OSG Token Registration page.
 Follow the instructions on the website; in the list of hosts,
 select the hostname of the Access Point that you registered earlier.
 
@@ -146,11 +150,12 @@ see [this section](../other/troubleshooting-gratia.md#access-points_1) for more 
 
 Configuring Authentication
 --------------------------
-Create a file named `/etc/condor/tokens.d/ospool.token` with the IDTOKEN you received earlier.
+Copy the token that you obtained from the [authentication token step](#obtain-an-authentication-token) above,
+to the location `/etc/condor/tokens.d/ospool.token` on the Access Point.
 Ensure that there aren't any line breaks in this file (i.e., the entire token should only take up one line).
 
-Change the ownership to `condor:condor` and the permissions to `0600`. Verify this with
-`ls -l /etc/condor/tokens.d/ospool.token`:
+Change the ownership of the `ospool.token` file to `condor:condor` and the permissions to `0600`.
+Verify this with `ls -l /etc/condor/tokens.d/ospool.token`:
 
 ```console
 # ls -l /etc/condor/tokens.d/ospool.token
