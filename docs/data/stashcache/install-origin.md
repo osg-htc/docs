@@ -175,6 +175,23 @@ In addition, the origin service automatically uses the following SystemD units:
 | `stash-authfile@stash-origin.timer` | Updates the authorization files periodically (unauthenticated instance) |
 | `stash-authfile@stash-origin-auth.timer` | Updates the authorization files periodically (authenticated instance) |
 
+
+Making custom additions to authorization files (optional)
+---------------------------------------------------------
+
+The `stash-authfile` services on the origin generate files that configure authorization for XRootD.
+You can put local additions to this configuration into separate files, according to this table:
+
+| **Purpose**                                                    | **Generated file**                      | **Local additions file**                             |
+| :------------------------------------------------------------- | :-------------------------------------- | :--------------------------------------------------- |
+| VOMS/SSL/X.509 auth config for unauthenticated origin instance | `/run/stash-origin/Authfile`            | `/etc/xrootd/stash-origin-Authfile.local`            |
+| VOMS/SSL/X.509 auth config for authenticated origin instance   | `/run/stash-origin-auth/Authfile`       | `/etc/xrootd/stash-origin-auth-Authfile.local`       |
+| SciTokens config for authenticated origin instance             | `/run/stash-origin-auth/scitokens.conf` | `/etc/xrootd/stash-origin-auth-scitokens.conf.local` |
+
+!!! note
+    These local additions files are only used in XCache 3.5.0 and newer.
+
+
 Verifying the Origin Server
 ---------------------------
 
