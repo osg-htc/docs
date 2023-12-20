@@ -36,7 +36,7 @@ If you already have an HTCondor pool, we recommend that you install this softwar
 on top of one of your existing HTCondor Access Points.
 This approach allows a user to submit locally and have their jobs run locally or,
 if the user chooses and if local capacity is unavailable, have their jobs automatically flock to the OSPool.
-If you do not have an HTCondor batch system, following these instructions will install the HTCondor submit service
+If you do not have an HTCondor batch system, following these instructions will install the HTCondor AP software
 and configure it only to forward jobs to the OSPool.
 In other words, you do not need a whole HTCondor batch system just to have a local OSPool Access Point.
 
