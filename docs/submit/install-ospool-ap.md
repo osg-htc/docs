@@ -1,4 +1,4 @@
-DateReviewed: 2021-11-12
+DateReviewed: 2023-12-20
 title: Installing an Open Science Pool Access Point
 
 Installing an Open Science Pool Access Point
@@ -115,30 +115,6 @@ required packages. Example on a RHEL 9 host:
 # yum install https://repo.opensciencegrid.org/osg/23/osg-23-el9-release-latest.rpm
 # yum install osg-flock
 ```
-
-### Upgrading from OSG 3.5 or earlier
-
-The Access Point must be running a supported version of the OSG Software Stack;
-the currently supported versions as of December 2023 are OSG 23 and OSG 3.6.
-If you are running an earlier version, you should upgrade to the most recent version
-of the OSG Software Stack that your operating system supports.
-OSG 23 supports RHEL 8- and 9-compatible operating systems.
-OSG 3.6 supports RHEL 7-, 8-, and 9-compatible operating systems.
-
-See the instructions for upgrading to the appropriate series:
-
-- [Upgrading to the OSG 23 series](https://osg-htc.org/docs/release/updating-to-osg-23/)
-- [Upgrading to the OSG 3.6 series](https://osg-htc.org/docs/release/updating-to-osg-36/)
-
-If you made local config changes, please verify that the files under
-`/etc/condor/config.d` were renamed/disabled during the upgrade.
-
-Note that in some older versions of the package, the Gratia config was kept in 
-`/etc/gratia/condor/ProbeConfig`. The new location is `/etc/gratia/condor-ap/ProbeConfig`.
-
-The Open Science Pool does not accept GSI authentication.
-If your Access Point was configured with GSI authentication,
-you will need to switch to token authentication after upgrading, as described in this document.
 
 Configuring Reporting via Gratia
 --------------------------------
