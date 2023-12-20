@@ -274,11 +274,11 @@ In this case, you must manually tell the cache services which FQDN to use for to
 1.  Run `systemctl daemon-reload` after modifying the file.
 
 
-Making custom additions to authorization files (optional)
+Adding to Authorization Files (Optional)
 ---------------------------------------------------------
 
 The `stash-authfile` services on the cache generate files that configure authorization for XRootD.
-You can put local additions to this configuration into separate files, according to this table:
+Put local additions to this configuration into separate files, according to this table:
 
 | **Purpose**                                                   | **Generated file**                     | **Local additions file**                            |
 | :------------------------------------------------------------ | :------------------------------------- | :-------------------------------------------------- |
@@ -287,7 +287,7 @@ You can put local additions to this configuration into separate files, according
 | SciTokens config for authenticated cache instance             | `/run/stash-cache-auth/scitokens.conf` | `/etc/xrootd/stash-cache-auth-scitokens.conf.local` |
 
 !!! note
-    These local additions files are only used in XCache 3.5.0 and newer.
+    Use of these local additions files require XCache 3.5.0 and newer.
 
 
 Managing OSDF services
