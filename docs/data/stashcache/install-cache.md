@@ -273,6 +273,23 @@ In this case, you must manually tell the cache services which FQDN to use for to
 
 1.  Run `systemctl daemon-reload` after modifying the file.
 
+
+Adding to Authorization Files (Optional)
+---------------------------------------------------------
+
+The `stash-authfile` services on the cache generate files that configure authorization for XRootD.
+Put local additions to this configuration into separate files, according to this table:
+
+| **Purpose**                                                   | **Generated file**                     | **Local additions file**                            |
+| :------------------------------------------------------------ | :------------------------------------- | :-------------------------------------------------- |
+| VOMS/SSL/X.509 auth config for unauthenticated cache instance | `/run/stash-cache/Authfile`            | `/etc/xrootd/stash-cache-Authfile.local`            |
+| VOMS/SSL/X.509 auth config for authenticated cache instance   | `/run/stash-cache-auth/Authfile`       | `/etc/xrootd/stash-cache-auth-Authfile.local`       |
+| SciTokens config for authenticated cache instance             | `/run/stash-cache-auth/scitokens.conf` | `/etc/xrootd/stash-cache-auth-scitokens.conf.local` |
+
+!!! note
+    Use of these local additions files require XCache 3.5.0 and newer.
+
+
 Managing OSDF services
 -------------------------------------------
 
