@@ -1205,19 +1205,6 @@
     Installing Required Software
   </a>
   
-    <nav class="md-nav" aria-label="Installing Required Software">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#upgrading-from-osg-35-or-earlier" class="md-nav__link">
-    Upgrading from OSG 3.5 or earlier
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -2014,19 +2001,6 @@
     Installing Required Software
   </a>
   
-    <nav class="md-nav" aria-label="Installing Required Software">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#upgrading-from-osg-35-or-earlier" class="md-nav__link">
-    Upgrading from OSG 3.5 or earlier
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -2192,25 +2166,6 @@ required packages. Example on a RHEL 9 host:</p>
 <span class="gp"># </span>yum install https://repo.opensciencegrid.org/osg/23/osg-23-el9-release-latest.rpm
 <span class="gp"># </span>yum install osg-flock
 </code></pre></div>
-<h3 id="upgrading-from-osg-35-or-earlier">Upgrading from OSG 3.5 or earlier<a class="headerlink" href="#upgrading-from-osg-35-or-earlier" title="Permanent link">&para;</a></h3>
-<p>The Access Point must be running a supported version of the OSG Software Stack;
-the currently supported versions as of December 2023 are OSG 23 and OSG 3.6.
-If you are running an earlier version, you should upgrade to the most recent version
-of the OSG Software Stack that your operating system supports.
-OSG 23 supports RHEL 8- and 9-compatible operating systems.
-OSG 3.6 supports RHEL 7-, 8-, and 9-compatible operating systems.</p>
-<p>See the instructions for upgrading to the appropriate series:</p>
-<ul>
-<li><a href="https://osg-htc.org/docs/release/updating-to-osg-23/">Upgrading to the OSG 23 series</a></li>
-<li><a href="https://osg-htc.org/docs/release/updating-to-osg-36/">Upgrading to the OSG 3.6 series</a></li>
-</ul>
-<p>If you made local config changes, please verify that the files under
-<code>/etc/condor/config.d</code> were renamed/disabled during the upgrade.</p>
-<p>Note that in some older versions of the package, the Gratia config was kept in 
-<code>/etc/gratia/condor/ProbeConfig</code>. The new location is <code>/etc/gratia/condor-ap/ProbeConfig</code>.</p>
-<p>The Open Science Pool does not accept GSI authentication.
-If your Access Point was configured with GSI authentication,
-you will need to switch to token authentication after upgrading, as described in this document.</p>
 <h2 id="configuring-reporting-via-gratia">Configuring Reporting via Gratia<a class="headerlink" href="#configuring-reporting-via-gratia" title="Permanent link">&para;</a></h2>
 <p>Reporting to the OSG accounting system is done using the <em>Gratia</em> service, which consists of <em>probes</em>.
 HTCondor uses the "condor-ap" probe, which is configured in <code>/etc/gratia/condor-ap/ProbeConfig</code>:
