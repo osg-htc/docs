@@ -1176,7 +1176,7 @@
         
           <li class="md-nav__item">
   <a href="#register-your-access-point-in-osg-topology" class="md-nav__link">
-    Register your access point in OSG Topology
+    Register your Access Point in OSG Topology
   </a>
   
 </li>
@@ -1184,6 +1184,13 @@
           <li class="md-nav__item">
   <a href="#register-with-comanage" class="md-nav__link">
     Register with COManage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obtain-an-authentication-token" class="md-nav__link">
+    Obtain an Authentication Token
   </a>
   
 </li>
@@ -1202,8 +1209,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#upgrading" class="md-nav__link">
-    Upgrading
+  <a href="#upgrading-from-osg-35-or-earlier" class="md-nav__link">
+    Upgrading from OSG 3.5 or earlier
   </a>
   
 </li>
@@ -1243,8 +1250,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#running-jobs-in-osg" class="md-nav__link">
-    Running jobs in OSG
+  <a href="#running-jobs-in-the-ospool" class="md-nav__link">
+    Running jobs in the OSPool
   </a>
   
 </li>
@@ -1978,7 +1985,7 @@
         
           <li class="md-nav__item">
   <a href="#register-your-access-point-in-osg-topology" class="md-nav__link">
-    Register your access point in OSG Topology
+    Register your Access Point in OSG Topology
   </a>
   
 </li>
@@ -1986,6 +1993,13 @@
           <li class="md-nav__item">
   <a href="#register-with-comanage" class="md-nav__link">
     Register with COManage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obtain-an-authentication-token" class="md-nav__link">
+    Obtain an Authentication Token
   </a>
   
 </li>
@@ -2004,8 +2018,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#upgrading" class="md-nav__link">
-    Upgrading
+  <a href="#upgrading-from-osg-35-or-earlier" class="md-nav__link">
+    Upgrading from OSG 3.5 or earlier
   </a>
   
 </li>
@@ -2045,8 +2059,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#running-jobs-in-osg" class="md-nav__link">
-    Running jobs in OSG
+  <a href="#running-jobs-in-the-ospool" class="md-nav__link">
+    Running jobs in the OSPool
   </a>
   
 </li>
@@ -2089,37 +2103,40 @@
 
 
 <h1 id="installing-an-open-science-pool-access-point">Installing an Open Science Pool Access Point<a class="headerlink" href="#installing-an-open-science-pool-access-point" title="Permanent link">&para;</a></h1>
-<p>This document explains how to add a path for user jobs to flow from your local site out to the OSG,
-which in most cases means that the jobs will have far more resources available to run on than locally.
-If your local batch system frequently has many jobs waiting to run for a long time,
-you do not have a local batch system,
-or if you simply want to provide a local entry point for OSG-bound jobs,
-adding a path to OSG may result in less waiting for your users.</p>
+<p>This document explains how to add a path for user jobs to flow from your local site out to the Open Science Pool (OSPool),
+which in most cases means that the jobs will have far more capacity available to run on than locally.
+This is useful if:</p>
+<ul>
+<li>your local batch system frequently has many jobs waiting to run for a long time</li>
+<li>you do not have a local batch system</li>
+<li>you want to provide a local entry point for OSPool-bound jobs</li>
+</ul>
 <p>Note that if you do not have a local batch system, consider having your users use
 <a href="https://portal.osg-htc.org/documentation">OSG Connect</a>, which will require less
 infrastructure work at your site.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Flocking to the OSG requires some modification to user workflows.
+<p>Flocking to OSPool resources requires some modification to user workflows.
 After installation, see the <a href="#usage">usage</a> section for instructions on what your users will need to do.</p>
 </div>
 <h2 id="background">Background<a class="headerlink" href="#background" title="Permanent link">&para;</a></h2>
 <p>Every batch computing system has one or more entry points that users log on to and use to hand over their computing work
 to the batch system for completion.
-For the HTCondor batch system, we say that users log on to a access point (i.e., submit node, submit host) to submit
-their jobs to HTCondor, where the jobs wait ("are queued") until computing resources are available to run them.
-In a purely local HTCondor system, there are one to a few access points and many computing resources.</p>
-<p>An HTCondor access point can also be configured to forward excess jobs to an OSG-managed pool.
+For the HTCondor batch system, we say that users log on to an Access Point (AP)
+(also known as a submit node or submit host)
+to submit their jobs to HTCondor, where the jobs wait ("are queued") until computing capacity is available to run them.
+In a purely local HTCondor system, there are one to a few Access Points and many computing resources.</p>
+<p>An HTCondor Access Point can also be configured to forward excess jobs to the OSPool.
 This process is called <a href="https://htcondor.readthedocs.io/en/latest/grid-computing/connecting-pools-with-flocking.html">flocking</a>.
 If you already have an HTCondor pool, we recommend that you install this software
-on top of one of your existing HTCondor access points.
+on top of one of your existing HTCondor Access Points.
 This approach allows a user to submit locally and have their jobs run locally or,
-if the user chooses and if local resources are unavailable, have their jobs automatically flock to OSG.
-If you do not have an HTCondor batch system, following these instructions will install the HTCondor submit service
-and configure it only to forward jobs to the OSG.
-In other words, you do not need a whole HTCondor batch system just to have a local OSG access point.</p>
+if the user chooses and if local capacity is unavailable, have their jobs automatically flock to the OSPool.
+If you do not have an HTCondor batch system, following these instructions will install the HTCondor AP software
+and configure it only to forward jobs to the OSPool.
+In other words, you do not need a whole HTCondor batch system just to have a local OSPool Access Point.</p>
 <h2 id="system-requirements">System Requirements<a class="headerlink" href="#system-requirements" title="Permanent link">&para;</a></h2>
-<p>The hardware requirement for an OSG access point depends on several factors such as number of users,
+<p>The hardware requirement for an OSPool Access Pool depends on several factors such as number of users,
 number of jobs and for example how I/O intensity of those jobs.
 Our minimum recommended configuration is 6 cores, 12 GB RAM and 1 TB of local disk.
 The hardware can be bare metal or virtual machine, but we do not recommend containers as these submit host are running
@@ -2137,59 +2154,73 @@ many system services which can be difficult to configure in a container.</p>
 </li>
 </ul>
 <h2 id="scheduling-a-planning-consultation">Scheduling a Planning Consultation<a class="headerlink" href="#scheduling-a-planning-consultation" title="Permanent link">&para;</a></h2>
-<p>Before participating in the OSG, either as a computational resource contributor or consumer,
+<p>Before participating in the OSPool, either as a computational capacity contributor or consumer,
 we ask that you <a href="mailto:help@osg-htc.org">contact us</a> to set up a consultation.
-During this consultation, OSG staff will introduce you and your team to the OSG and develop a plan to meet your resource
+During this consultation, OSG staff will introduce you and your team to the OSG and develop a plan to meet your capacity
 contribution and/or research goals.</p>
 <h2 id="initial-steps">Initial Steps<a class="headerlink" href="#initial-steps" title="Permanent link">&para;</a></h2>
 <h3 id="read-the-acceptable-usage-policy">Read the Acceptable Usage Policy<a class="headerlink" href="#read-the-acceptable-usage-policy" title="Permanent link">&para;</a></h3>
 <p>Be aware that hosting an access point comes with responsibilities, both for the administrators as
 well as end users of the system. The polices can be found in the <a href="../ap-ospool-aup/">Acceptable Usage Policy document</a>.</p>
-<h3 id="register-your-access-point-in-osg-topology">Register your access point in OSG Topology<a class="headerlink" href="#register-your-access-point-in-osg-topology" title="Permanent link">&para;</a></h3>
-<p>To be part of OSG, your access point should be registered with the OSG.
+<h3 id="register-your-access-point-in-osg-topology">Register your Access Point in OSG Topology<a class="headerlink" href="#register-your-access-point-in-osg-topology" title="Permanent link">&para;</a></h3>
+<p>To make use of OSPool capacity, your AP must be registered in the OSG Topology system.
 You will need information like the hostname, and the administrative and security contacts.
 Follow the <a href="../../common/registration/#new-resources">general registration instructions</a>.
 For historical reasons, the service type is <code>Submit Node</code>. We also request that you tag
 the resources with <code>OSPool</code>. An example of a registration is
 <a href="https://github.com/opensciencegrid/topology/blob/7a71dd4731bb5259f5d9d4004b2df1ddb2bd22ce/topology/University%20of%20Southern%20California/Information%20Sciences%20Institute/ISI.yaml#L32-L57">the osg-vo.isi.edu entry</a></p>
 <h3 id="register-with-comanage">Register with COManage<a class="headerlink" href="#register-with-comanage" title="Permanent link">&para;</a></h3>
-<p>The adminstrative contact from the the topology entry needs to register with COManage. 
+<p>The adminstrative contact from the the Topology entry needs to register with COManage. 
 Instructions can be found <a href="https://osg-htc.org/technology/policy/comanage-instructions-user/">here</a></p>
-<p>Next is to retrive a token so that the new submit host can authenticate with the Open
-Science Pool manager. Please use your COManage registered and approved identity to
-log into the <a href="https://os-registry.opensciencegrid.org/">OSG Token Registration</a>. Once
-logged in, select <code>Token on Docker</code>, and find your registered submit node in the list.
-Follow the instructions (you probably have to do the steps on a host with Docker and as
-root), and once you have the token generated, keep that for later steps.</p>
+<h3 id="obtain-an-authentication-token">Obtain an Authentication Token<a class="headerlink" href="#obtain-an-authentication-token" title="Permanent link">&para;</a></h3>
+<p>The new Access Point will need an authentication token to authenticate to the OSPool Central Manager.
+Once your Access Point is registered in OSG Topology and you are registered with COManage,
+you can obtain a token from the <a href="https://os-registry.opensciencegrid.org/">OSG Token Registration page</a>.</p>
+<p>You will need a host with Docker to run the software used for retrieving the token.
+Use your COManage registered and approved identity to log into the
+OSG Token Registration page.
+Follow the instructions on the website; in the list of hosts,
+select the hostname of the Access Point that you registered earlier.</p>
+<p>Save this token file; you will use it later when <a href="#configuring-authentication">configuring authentication</a>.</p>
 <h2 id="installing-required-software">Installing Required Software<a class="headerlink" href="#installing-required-software" title="Permanent link">&para;</a></h2>
 <p>Flocking requires HTCondor software as well as software for reporting to the OSG accounting system.
 Start by setting up the EPEL and OSG YUM repositories following the
-<a href="../../common/yum/">Installing Yum Repositories</a> document. <strong>Note that you have to use OSG 3.6</strong>. Earlier
-versions will not work.</p>
-<p>Once the YUM repositories are setup, install the <code>osg-flock</code> convenience RPM that installs all
-required packages. Example on a RHEL 7 host:</p>
-<div class="highlight"><pre><span></span><code><span class="gp"># </span>yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-<span class="gp"># </span>yum install https://repo.opensciencegrid.org/osg/3.6/osg-3.6-el7-release-latest.rpm
+<a href="../../common/yum/">Installing Yum Repositories</a> document.</p>
+<p>Once the Yum repositories are setup, install the <code>osg-flock</code> convenience RPM that installs all
+required packages. Example on a RHEL 9 host:</p>
+<div class="highlight"><pre><span></span><code><span class="gp"># </span>yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+<span class="gp"># </span>yum install https://repo.opensciencegrid.org/osg/23/osg-23-el9-release-latest.rpm
 <span class="gp"># </span>yum install osg-flock
 </code></pre></div>
-<h3 id="upgrading">Upgrading<a class="headerlink" href="#upgrading" title="Permanent link">&para;</a></h3>
-<p>Upgrading from previous versions should be as simple as switching to OSG 3.6, and then
-issuing <code>yum upgrade</code>. If you made local config changes, please verify that the files under
+<h3 id="upgrading-from-osg-35-or-earlier">Upgrading from OSG 3.5 or earlier<a class="headerlink" href="#upgrading-from-osg-35-or-earlier" title="Permanent link">&para;</a></h3>
+<p>The Access Point must be running a supported version of the OSG Software Stack;
+the currently supported versions as of December 2023 are OSG 23 and OSG 3.6.
+If you are running an earlier version, you should upgrade to the most recent version
+of the OSG Software Stack that your operating system supports.
+OSG 23 supports RHEL 8- and 9-compatible operating systems.
+OSG 3.6 supports RHEL 7-, 8-, and 9-compatible operating systems.</p>
+<p>See the instructions for upgrading to the appropriate series:</p>
+<ul>
+<li><a href="https://osg-htc.org/docs/release/updating-to-osg-23/">Upgrading to the OSG 23 series</a></li>
+<li><a href="https://osg-htc.org/docs/release/updating-to-osg-36/">Upgrading to the OSG 3.6 series</a></li>
+</ul>
+<p>If you made local config changes, please verify that the files under
 <code>/etc/condor/config.d</code> were renamed/disabled during the upgrade.</p>
 <p>Note that in some older versions of the package, the Gratia config was kept in 
 <code>/etc/gratia/condor/ProbeConfig</code>. The new location is <code>/etc/gratia/condor-ap/ProbeConfig</code>.</p>
-<p>The Open Science Pool will no longer accept GSI authentcation. Access points still configured
-with GSI, will have to be upgraded to OSG 3.6 and switched over to token authentication as
-described in this document.</p>
+<p>The Open Science Pool does not accept GSI authentication.
+If your Access Point was configured with GSI authentication,
+you will need to switch to token authentication after upgrading, as described in this document.</p>
 <h2 id="configuring-reporting-via-gratia">Configuring Reporting via Gratia<a class="headerlink" href="#configuring-reporting-via-gratia" title="Permanent link">&para;</a></h2>
 <p>Reporting to the OSG accounting system is done using the <em>Gratia</em> service, which consists of <em>probes</em>.
 HTCondor uses the "condor-ap" probe, which is configured in <code>/etc/gratia/condor-ap/ProbeConfig</code>:
 see <a href="../../other/troubleshooting-gratia/#access-points_1">this section</a> for more details.</p>
 <h2 id="configuring-authentication">Configuring Authentication<a class="headerlink" href="#configuring-authentication" title="Permanent link">&para;</a></h2>
-<p>Create a file named <code>/etc/condor/tokens.d/ospool.token</code> with the IDTOKEN you received earlier.
+<p>Copy the token that you obtained from the <a href="#obtain-an-authentication-token">authentication token step</a> above,
+to the location <code>/etc/condor/tokens.d/ospool.token</code> on the Access Point.
 Ensure that there aren't any line breaks in this file (i.e., the entire token should only take up one line).</p>
-<p>Change the ownership to <code>condor:condor</code> and the permissions to <code>0600</code>. Verify this with
-<code>ls -l /etc/condor/tokens.d/ospool.token</code>:</p>
+<p>Change the ownership of the <code>ospool.token</code> file to <code>condor:condor</code> and the permissions to <code>0600</code>.
+Verify this with <code>ls -l /etc/condor/tokens.d/ospool.token</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="gp"># </span>ls -l /etc/condor/tokens.d/ospool.token
 <span class="go">-rw------- 1 condor condor 288 Nov 11 09:03 /etc/condor/tokens.d/ospool.token</span>
 </code></pre></div>
@@ -2203,9 +2234,9 @@ Ensure that there aren't any line breaks in this file (i.e., the entire token sh
 <span class="gp"># </span>systemctl restart condor
 </code></pre></div>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="running-jobs-in-osg">Running jobs in OSG<a class="headerlink" href="#running-jobs-in-osg" title="Permanent link">&para;</a></h3>
-<p>If your users are accustomed to running jobs locally, they may encounter some significant differences when running jobs in OSG.
-Users should be aware that OSG jobs are distributed across multiple institutions across a large geographical area.
+<h3 id="running-jobs-in-the-ospool">Running jobs in the OSPool<a class="headerlink" href="#running-jobs-in-the-ospool" title="Permanent link">&para;</a></h3>
+<p>If your users are accustomed to running jobs locally, they may encounter some significant differences when running jobs in the OSPool.
+Users should be aware that OSPool jobs are distributed across multiple institutions across a large geographical area.
 Each institution will have its own policy about the kinds of jobs that are allowed to run,
 and data transfer may be more complicated.
 The <a href="https://portal.osg-htc.org/documentation">OSG Helpdesk Solutions</a> page has information about
@@ -2217,16 +2248,16 @@ the <a href="https://portal.osg-htc.org/documentation/htc_workloads/submitting_w
 <p><a href="https://portal.osg-htc.org/documentation/overview/references/policy/">Policies for Using OSG Services and the OSPool</a>
 are particularly relevant.</p>
 <h3 id="specifying-a-project">Specifying a project<a class="headerlink" href="#specifying-a-project" title="Permanent link">&para;</a></h3>
-<p>OSG will only run jobs that have a registered <em>project</em> associated with them.
+<p>OSPool Execution Points (EPs) will only run jobs that have a registered <em>project</em> associated with them.
 Users must follow the
 <a href="https://portal.osg-htc.org/documentation/overview/account_setup/starting-project/">instructions for starting a project in OSG-Connect</a>
 to register a project.</p>
-<p>A project is associated with a job by adding a ProjectName line to the user's submit file.
+<p>A project is associated with a job by adding a <code>+ProjectName</code> line to the user's submit file.
 For example:</p>
 <div class="highlight"><pre><span></span><code>+ProjectName = &quot;My_Project&quot;
 </code></pre></div>
-<p><strong>The double quotes are necessary</strong>. If not quoted, <em>My_Project</em> will be interpreted as an expression,
-and most likely evaluate to undefined, and prevent your job from running.</p>
+<p><strong>The <code>+</code> and the double quotes are necessary</strong>.
+Otherwise, the job will fail to submit or it will not run in the OSPool.</p>
 <h2 id="get-help">Get Help<a class="headerlink" href="#get-help" title="Permanent link">&para;</a></h2>
 <p>If you need help with setup or troubleshooting, see our <a href="../../common/help/">help procedure</a>.</p>
 
