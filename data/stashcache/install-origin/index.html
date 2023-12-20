@@ -1355,6 +1355,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#adding-to-authorization-files-optional" class="md-nav__link">
+    Adding to Authorization Files (Optional)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#verifying-the-origin-server" class="md-nav__link">
     Verifying the Origin Server
   </a>
@@ -1945,6 +1952,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#adding-to-authorization-files-optional" class="md-nav__link">
+    Adding to Authorization Files (Optional)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#verifying-the-origin-server" class="md-nav__link">
     Verifying the Origin Server
   </a>
@@ -2255,6 +2269,39 @@ As a reminder, here are common service commands (all run as <code>root</code>):<
 </tr>
 </tbody>
 </table>
+<h2 id="adding-to-authorization-files-optional">Adding to Authorization Files (Optional)<a class="headerlink" href="#adding-to-authorization-files-optional" title="Permanent link">&para;</a></h2>
+<p>The <code>stash-authfile</code> services on the origin generate files that configure authorization for XRootD.
+Put local additions to this configuration into separate files, according to this table:</p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>Purpose</strong></th>
+<th align="left"><strong>Generated file</strong></th>
+<th align="left"><strong>Local additions file</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">VOMS/SSL/X.509 auth config for unauthenticated origin instance</td>
+<td align="left"><code>/run/stash-origin/Authfile</code></td>
+<td align="left"><code>/etc/xrootd/stash-origin-Authfile.local</code></td>
+</tr>
+<tr>
+<td align="left">VOMS/SSL/X.509 auth config for authenticated origin instance</td>
+<td align="left"><code>/run/stash-origin-auth/Authfile</code></td>
+<td align="left"><code>/etc/xrootd/stash-origin-auth-Authfile.local</code></td>
+</tr>
+<tr>
+<td align="left">SciTokens config for authenticated origin instance</td>
+<td align="left"><code>/run/stash-origin-auth/scitokens.conf</code></td>
+<td align="left"><code>/etc/xrootd/stash-origin-auth-scitokens.conf.local</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use of these local additions files requires XCache 3.5.0 and newer.</p>
+</div>
 <h2 id="verifying-the-origin-server">Verifying the Origin Server<a class="headerlink" href="#verifying-the-origin-server" title="Permanent link">&para;</a></h2>
 <p>Once your server has been registered with the OSG and started,
 perform the following steps to verify that it is functional.</p>

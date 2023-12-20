@@ -1374,6 +1374,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#adding-to-authorization-files-optional" class="md-nav__link">
+    Adding to Authorization Files (Optional)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#managing-osdf-services" class="md-nav__link">
     Managing OSDF services
   </a>
@@ -2104,6 +2111,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#adding-to-authorization-files-optional" class="md-nav__link">
+    Adding to Authorization Files (Optional)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#managing-osdf-services" class="md-nav__link">
     Managing OSDF services
   </a>
@@ -2417,6 +2431,39 @@ In this case, you must manually tell the cache services which FQDN to use for to
 <p>Run <code>systemctl daemon-reload</code> after modifying the file.</p>
 </li>
 </ol>
+<h2 id="adding-to-authorization-files-optional">Adding to Authorization Files (Optional)<a class="headerlink" href="#adding-to-authorization-files-optional" title="Permanent link">&para;</a></h2>
+<p>The <code>stash-authfile</code> services on the cache generate files that configure authorization for XRootD.
+Put local additions to this configuration into separate files, according to this table:</p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>Purpose</strong></th>
+<th align="left"><strong>Generated file</strong></th>
+<th align="left"><strong>Local additions file</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">VOMS/SSL/X.509 auth config for unauthenticated cache instance</td>
+<td align="left"><code>/run/stash-cache/Authfile</code></td>
+<td align="left"><code>/etc/xrootd/stash-cache-Authfile.local</code></td>
+</tr>
+<tr>
+<td align="left">VOMS/SSL/X.509 auth config for authenticated cache instance</td>
+<td align="left"><code>/run/stash-cache-auth/Authfile</code></td>
+<td align="left"><code>/etc/xrootd/stash-cache-auth-Authfile.local</code></td>
+</tr>
+<tr>
+<td align="left">SciTokens config for authenticated cache instance</td>
+<td align="left"><code>/run/stash-cache-auth/scitokens.conf</code></td>
+<td align="left"><code>/etc/xrootd/stash-cache-auth-scitokens.conf.local</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use of these local additions files require XCache 3.5.0 and newer.</p>
+</div>
 <h2 id="managing-osdf-services">Managing OSDF services<a class="headerlink" href="#managing-osdf-services" title="Permanent link">&para;</a></h2>
 <p>These services must be managed by <code>systemctl</code> and may start additional services as dependencies.
 As a reminder, here are common service commands (all run as <code>root</code>):</p>
