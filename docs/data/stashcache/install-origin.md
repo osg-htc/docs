@@ -190,7 +190,7 @@ Put local additions to this configuration into separate files, according to this
 | SciTokens config for authenticated origin instance             | `/run/stash-origin-auth/scitokens.conf` | `/etc/xrootd/stash-origin-auth-scitokens.conf.local` |
 
 !!! note
-    Use of these local additions files requires XCache 3.5.0 and newer.
+    Use of these local additions files requires XCache 3.5.0 or newer.
 
 
 Verifying the Origin Server
