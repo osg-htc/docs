@@ -2182,9 +2182,11 @@ The instance that serves authenticated data will run on port 1095.
 If your origin serves both authenticated and unauthenticated data, you will run both instances.</p>
 <div class="admonition note">
 <p class="admonition-title">Use of multiuser plugin</p>
-<p>Some of the service names are different if you have configured the <a href="https://github.com/opensciencegrid/xrootd-multiuser" title="XRootD Multiuser Plugin">XRootD Multiuser plugin</a>:
--   <code>xrootd-privileged</code> is used instead of <code>xrootd</code>
--   <code>cmsd-privileged</code> is used instead of <code>cmsd</code></p>
+<p>Some of the service names are different if you have configured the <a href="https://github.com/opensciencegrid/xrootd-multiuser" title="XRootD Multiuser Plugin">XRootD Multiuser plugin</a>:</p>
+<ul>
+<li><code>xrootd-privileged</code> is used instead of <code>xrootd</code></li>
+<li><code>cmsd-privileged</code> is used instead of <code>cmsd</code></li>
+</ul>
 <p>The privileged and non-privileged services are mutually exclusive.</p>
 </div>
 <p>The origin services consist of the following SystemD units that you must directly manage:</p>
