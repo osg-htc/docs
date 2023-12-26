@@ -142,6 +142,7 @@ If your origin serves both authenticated and unauthenticated data, you will run 
 
 !!! note "Use of multiuser plugin"
     Some of the service names are different if you have configured the [XRootD Multiuser plugin][multiuser]:
+    
     -   `xrootd-privileged` is used instead of `xrootd`
     -   `cmsd-privileged` is used instead of `cmsd`
 
