@@ -143,7 +143,7 @@ it.
     - If you use SELinux, then the new cache directory must be labeled with SELinux type `cvmfs_cache_t`.
       This can be done by executing the following command:
 
-        :::console
+        ::console
         user@host $ chcon -R -t cvmfs_cache_t <CVMFS_CACHE_BASE>
 
 ## Validating CVMFS
