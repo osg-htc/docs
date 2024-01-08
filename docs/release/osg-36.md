@@ -104,7 +104,7 @@ Latest News
     -   Removed replaced InCommon IGTF Server CA and associated Comodo RSA CA (US)
     -   Removed discontinued UNLPGrid CA (CL)
 -   ospool-ep 1.0
-    -   [Automatically manage to the OSPool EP Docker container with systemd](https://osg-htc.org/docs/resource-sharing/os-backfill-containers/#running-the-container-via-rpm)
+    -   [Automatically manage the OSPool EP Docker container with systemd](https://osg-htc.org/docs/resource-sharing/os-backfill-containers/#running-the-container-via-rpm)
 
 ### **December 14, 2023:** XRootD 5.6.4, XCache 3.6.0, xrootd-multiuser 2.2.0
 -   [XRootD 5.6.4](https://github.com/xrootd/xrootd/releases/tag/v5.6.4)
