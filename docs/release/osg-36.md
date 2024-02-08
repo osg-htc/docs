@@ -99,6 +99,24 @@ Latest News
     ```
         `osg-ca-certs-java` is compatible with Java-based software but does not include the aforementioned fix.
 
+### **February 8, 2024:** Frontier-squid 5.9-2.1, HTCondor 23.0.4, htvault-config 1.16, vault 1.15.4, osg-configure 4.1.1-3
+-   [Frontier-squid 5.9-2.1](http://frontier.cern.ch/dist/frontier-squid-releasenotes.txt)
+    -   Fixed several security vulnerabilities
+    -   Improved support for SELinux
+-   [HTCondor 23.0.4 LTS](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-4)
+    -   `NVIDIA_VISIBLE_DEVICES` environment variable lists full uuid of slot GPUs
+    -   Fix problem where some container jobs would see GPUs not assigned to them
+    -   Restore condor keyboard monitoring that was broken since HTCondor 23.0.0
+    -   In `condor_adstash`, the search engine timeouts now apply to all operations
+    -   Ensure the prerequisite perl modules are installed for `condor_gather_info`
+-   htvault-config 1.16
+    -   Support rate limits
+    -   Support '@' in ssh authentication key names
+-   vault 1.15.4
+    -   Update to latest upstream version
+-   osg-configure 4.1.1-3
+    -   Create necessary directories for CE on Enterprise Linux 8 and 9
+
 ### **January 4, 2024:** IGTF 1.126, ospool-ep 1.0
 -   CA certificates based on [IGTF 1.126](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   Removed replaced InCommon IGTF Server CA and associated Comodo RSA CA (US)

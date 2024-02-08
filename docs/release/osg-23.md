@@ -60,6 +60,35 @@ Latest News
     ```
         `osg-ca-certs-java` is compatible with Java-based software but does not include the aforementioned fix.
 
+### **February 8, 2024:** Frontier-squid 5.9-2.1, HTCondor 23.0.4, htvault-config 1.16, vault 1.15.4, osg-configure 4.1.1-3; Upcoming: HTCondor 23.4.0, Pelican 7.5.0
+-   [Frontier-squid 5.9-2.1](http://frontier.cern.ch/dist/frontier-squid-releasenotes.txt)
+    -   Fixed several security vulnerabilities
+    -   Improved support for SELinux
+-   [HTCondor 23.0.4 LTS](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-4)
+    -   `NVIDIA_VISIBLE_DEVICES` environment variable lists full uuid of slot GPUs
+    -   Fix problem where some container jobs would see GPUs not assigned to them
+    -   Restore condor keyboard monitoring that was broken since HTCondor 23.0.0
+    -   In `condor_adstash`, the search engine timeouts now apply to all operations
+    -   Ensure the prerequisite perl modules are installed for `condor_gather_info`
+-   htvault-config 1.16
+    -   Support rate limits
+    -   Support '@' in ssh authentication key names
+-   vault 1.15.4
+    -   Update to latest upstream version
+-   osg-configure 4.1.1-3
+    -   Create necessary directories for CE on Enterprise Linux 8 and 9
+-   Upcoming
+    -   [HTCONDOR 23.4.0](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-4-0)
+        -   `condor_submit` warns about unit-less `request_disk` and `request_memory`
+        -   Separate `condor-credmon-local` RPM package provides local SciTokens issuer
+        -   Fix bug where `NEGOTIATOR_SLOT_CONSTRAINT` was ignored since version 23.3.0
+        -   The `htcondor` command line tool can process multiple event logs at once
+        -   Prevent Docker daemon from keeping a duplicate copy of the job's stdout
+    -   [Pelican 7.5.0](https://github.com/PelicanPlatform/pelican/releases/tag/v7.5.0)
+        -   The plugin now downloads files in parallel
+        -   Improved file unpacking
+        -   Origins now support public namespaces
+
 ### **January 4, 2024:** IGTF 1.126, ospool-ep 1.0
 -   CA certificates based on [IGTF 1.126](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   Removed replaced InCommon IGTF Server CA and associated Comodo RSA CA (US)
