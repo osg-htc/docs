@@ -1534,6 +1534,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#february-8-2024-frontier-squid-59-21-htcondor-2304-htvault-config-116-vault-1154-osg-configure-411-3" class="md-nav__link">
+    February 8, 2024: Frontier-squid 5.9-2.1, HTCondor 23.0.4, htvault-config 1.16, vault 1.15.4, osg-configure 4.1.1-3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#january-4-2024-igtf-1126-ospool-ep-10" class="md-nav__link">
     January 4, 2024: IGTF 1.126, ospool-ep 1.0
   </a>
@@ -2511,6 +2518,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#february-8-2024-frontier-squid-59-21-htcondor-2304-htvault-config-116-vault-1154-osg-configure-411-3" class="md-nav__link">
+    February 8, 2024: Frontier-squid 5.9-2.1, HTCondor 23.0.4, htvault-config 1.16, vault 1.15.4, osg-configure 4.1.1-3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#january-4-2024-igtf-1126-ospool-ep-10" class="md-nav__link">
     January 4, 2024: IGTF 1.126, ospool-ep 1.0
   </a>
@@ -3223,6 +3237,35 @@ the OSG Software Team intends to release a fix to the <code>osg-ca-certs</code> 
 </code></pre></div>
     <code>osg-ca-certs-java</code> is compatible with Java-based software but does not include the aforementioned fix.</p>
 </div>
+<h3 id="february-8-2024-frontier-squid-59-21-htcondor-2304-htvault-config-116-vault-1154-osg-configure-411-3"><strong>February 8, 2024:</strong> Frontier-squid 5.9-2.1, HTCondor 23.0.4, htvault-config 1.16, vault 1.15.4, osg-configure 4.1.1-3<a class="headerlink" href="#february-8-2024-frontier-squid-59-21-htcondor-2304-htvault-config-116-vault-1154-osg-configure-411-3" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="http://frontier.cern.ch/dist/frontier-squid-releasenotes.txt">Frontier-squid 5.9-2.1</a><ul>
+<li>Fixed several security vulnerabilities</li>
+<li>Improved support for SELinux</li>
+</ul>
+</li>
+<li><a href="https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-4">HTCondor 23.0.4 LTS</a><ul>
+<li><code>NVIDIA_VISIBLE_DEVICES</code> environment variable lists full uuid of slot GPUs</li>
+<li>Fix problem where some container jobs would see GPUs not assigned to them</li>
+<li>Restore condor keyboard monitoring that was broken since HTCondor 23.0.0</li>
+<li>In <code>condor_adstash</code>, the search engine timeouts now apply to all operations</li>
+<li>Ensure the prerequisite perl modules are installed for <code>condor_gather_info</code></li>
+</ul>
+</li>
+<li>htvault-config 1.16<ul>
+<li>Support rate limits</li>
+<li>Support '@' in ssh authentication key names</li>
+</ul>
+</li>
+<li>vault 1.15.4<ul>
+<li>Update to latest upstream version</li>
+</ul>
+</li>
+<li>osg-configure 4.1.1-3<ul>
+<li>Create necessary directories for CE on Enterprise Linux 8 and 9</li>
+</ul>
+</li>
+</ul>
 <h3 id="january-4-2024-igtf-1126-ospool-ep-10"><strong>January 4, 2024:</strong> IGTF 1.126, ospool-ep 1.0<a class="headerlink" href="#january-4-2024-igtf-1126-ospool-ep-10" title="Permanent link">&para;</a></h3>
 <ul>
 <li>CA certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.126</a><ul>

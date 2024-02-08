@@ -1459,6 +1459,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#february-8-2024-frontier-squid-59-21-htcondor-2304-htvault-config-116-vault-1154-osg-configure-411-3-upcoming-htcondor-2340-pelican-750" class="md-nav__link">
+    February 8, 2024: Frontier-squid 5.9-2.1, HTCondor 23.0.4, htvault-config 1.16, vault 1.15.4, osg-configure 4.1.1-3; Upcoming: HTCondor 23.4.0, Pelican 7.5.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#january-4-2024-igtf-1126-ospool-ep-10" class="md-nav__link">
     January 4, 2024: IGTF 1.126, ospool-ep 1.0
   </a>
@@ -1964,6 +1971,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#february-8-2024-frontier-squid-59-21-htcondor-2304-htvault-config-116-vault-1154-osg-configure-411-3-upcoming-htcondor-2340-pelican-750" class="md-nav__link">
+    February 8, 2024: Frontier-squid 5.9-2.1, HTCondor 23.0.4, htvault-config 1.16, vault 1.15.4, osg-configure 4.1.1-3; Upcoming: HTCondor 23.4.0, Pelican 7.5.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#january-4-2024-igtf-1126-ospool-ep-10" class="md-nav__link">
     January 4, 2024: IGTF 1.126, ospool-ep 1.0
   </a>
@@ -2126,6 +2140,52 @@ the OSG Software Team intends to release a fix to the <code>osg-ca-certs</code> 
 </code></pre></div>
     <code>osg-ca-certs-java</code> is compatible with Java-based software but does not include the aforementioned fix.</p>
 </div>
+<h3 id="february-8-2024-frontier-squid-59-21-htcondor-2304-htvault-config-116-vault-1154-osg-configure-411-3-upcoming-htcondor-2340-pelican-750"><strong>February 8, 2024:</strong> Frontier-squid 5.9-2.1, HTCondor 23.0.4, htvault-config 1.16, vault 1.15.4, osg-configure 4.1.1-3; Upcoming: HTCondor 23.4.0, Pelican 7.5.0<a class="headerlink" href="#february-8-2024-frontier-squid-59-21-htcondor-2304-htvault-config-116-vault-1154-osg-configure-411-3-upcoming-htcondor-2340-pelican-750" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="http://frontier.cern.ch/dist/frontier-squid-releasenotes.txt">Frontier-squid 5.9-2.1</a><ul>
+<li>Fixed several security vulnerabilities</li>
+<li>Improved support for SELinux</li>
+</ul>
+</li>
+<li><a href="https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-4">HTCondor 23.0.4 LTS</a><ul>
+<li><code>NVIDIA_VISIBLE_DEVICES</code> environment variable lists full uuid of slot GPUs</li>
+<li>Fix problem where some container jobs would see GPUs not assigned to them</li>
+<li>Restore condor keyboard monitoring that was broken since HTCondor 23.0.0</li>
+<li>In <code>condor_adstash</code>, the search engine timeouts now apply to all operations</li>
+<li>Ensure the prerequisite perl modules are installed for <code>condor_gather_info</code></li>
+</ul>
+</li>
+<li>htvault-config 1.16<ul>
+<li>Support rate limits</li>
+<li>Support '@' in ssh authentication key names</li>
+</ul>
+</li>
+<li>vault 1.15.4<ul>
+<li>Update to latest upstream version</li>
+</ul>
+</li>
+<li>osg-configure 4.1.1-3<ul>
+<li>Create necessary directories for CE on Enterprise Linux 8 and 9</li>
+</ul>
+</li>
+<li>Upcoming<ul>
+<li><a href="https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-4-0">HTCONDOR 23.4.0</a><ul>
+<li><code>condor_submit</code> warns about unit-less <code>request_disk</code> and <code>request_memory</code></li>
+<li>Separate <code>condor-credmon-local</code> RPM package provides local SciTokens issuer</li>
+<li>Fix bug where <code>NEGOTIATOR_SLOT_CONSTRAINT</code> was ignored since version 23.3.0</li>
+<li>The <code>htcondor</code> command line tool can process multiple event logs at once</li>
+<li>Prevent Docker daemon from keeping a duplicate copy of the job's stdout</li>
+</ul>
+</li>
+<li><a href="https://github.com/PelicanPlatform/pelican/releases/tag/v7.5.0">Pelican 7.5.0</a><ul>
+<li>The plugin now downloads files in parallel</li>
+<li>Improved file unpacking</li>
+<li>Origins now support public namespaces</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="january-4-2024-igtf-1126-ospool-ep-10"><strong>January 4, 2024:</strong> IGTF 1.126, ospool-ep 1.0<a class="headerlink" href="#january-4-2024-igtf-1126-ospool-ep-10" title="Permanent link">&para;</a></h3>
 <ul>
 <li>CA certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.126</a><ul>
