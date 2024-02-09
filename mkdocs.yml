@@ -52,7 +52,6 @@ nav:
     - XRootD:
       - 'XRootD Overview': 'data/xrootd/overview.md'
       - 'Install XRootD Standalone': 'data/xrootd/install-standalone.md'
-      - 'Install XRootD SE': 'data/xrootd/install-storage-element.md'
       - 'Configure Authorization': 'data/xrootd/xrootd-authorization.md'
       - 'Using XRootD': 'data/xrootd/install-client.md'
       - 'Install CMS XCache': 'data/xrootd/install-cms-xcache.md'
