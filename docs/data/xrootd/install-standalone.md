@@ -143,7 +143,7 @@ see the [upstream documentation](https://github.com/xrootd/xrootd/tree/master/sr
 For CMS sites, there is a package available to integrate rule-based name lookup using a `storage.xml` file.
 If you are not setting up a service for CMS, skip this section.
 
-To install an `xrootd-cmstfc` on OSG 3.6, run the following command:
+To install an `xrootd-cmstfc`, run the following command:
 
 ``` console
 root@xrootd-standalone # yum install --enablerepo=osg-contrib xrootd-cmstfc
@@ -172,7 +172,7 @@ The specific services are:
 
 | Software          | Service Name                          | Notes                                                                                                       |
 |:------------------|:--------------------------------------|:------------------------------------------------------------------------------------------------------------|
-| Fetch CRL         | EL8: `fetch-crl.timer` <br> EL7: `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info                        |
+| Fetch CRL         | EL8,EL9: `fetch-crl.timer` <br> EL7: `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info                        |
 | XRootD            | `xrootd@standalone`                   | Primary xrootd service if _not_ running in [multi-user mode](#enabling-multi-user-support)                |
 | XRootD Multi-user | `xrootd-privileged@standalone`        | Primary xrootd service to start _instead of_ `xrootd@standalone` if running in [multi-user mode](#enabling-multi-user-support) |
 
@@ -282,5 +282,4 @@ root@host # systemctl start xrootd@standalone
 
 | Service/Process          | Log File                                | Description                                 |
 |:-------------------------|:----------------------------------------|:--------------------------------------------|
-| `xrootd`                 | `/var/log/xrootd/server/xrootd.log`     | XRootD server daemon log                    |
-| `cmsd`                   | `/var/log/xrootd/server/cmsd.log`       | Cluster management log                      |
+| `xrootd`                 | `/var/log/xrootd/standalone/xrootd.log` | XRootD server daemon log                    |
