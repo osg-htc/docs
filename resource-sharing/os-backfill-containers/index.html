@@ -2136,19 +2136,15 @@ Singularity (now known as Apptainer) allows OSPool users to use their own contai
 <ol>
 <li>
 <p><a href="../../common/yum/">Enable OSG yum repos</a>.</p>
-<div class="admonition note">
-<p class="admonition-title">Under active development</p>
-<p>The RPM is currently only available in the development repo.</p>
-</div>
 </li>
 <li>
-<p>Install the service</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install ospool-ep --enablerepo<span class="o">=</span>osg-development
+<p>Install the service:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install ospool-ep
 </code></pre></div>
 
 </li>
 <li>
-<p>Copy your OSPool Access Token to <code>/etc/osg/ospool-ep.tkn</code></p>
+<p>Copy your OSPool Access Token to <code>/etc/osg/ospool-ep.tkn</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Token file ownership</p>
 <p>The EP is run under uid 1000.
@@ -2159,10 +2155,10 @@ Ensure this user has read access to the token file.</p>
 </div>
 </li>
 <li>
-<p>Configure the container service by editing <code>/etc/osg/ospool-ep.cfg</code></p>
+<p>Configure the container service by editing <code>/etc/osg/ospool-ep.cfg</code>:</p>
 <ul>
-<li>Set <code>GLIDEIN_Site</code> to your OSG Topology Site identifier</li>
-<li>Set <code>GLIDEIN_ResourceName</code> to your OSG Topology Resource Name identifier</li>
+<li>Set <code>GLIDEIN_Site</code> to your OSG Topology Site identifier.</li>
+<li>Set <code>GLIDEIN_ResourceName</code> to your OSG Topology Resource Name identifier.</li>
 <li><strong>If</strong> you have dedicated scratch disk space for OSPool payload jobs (which is recommended),
   then set <code>WORKER_TEMP_DIR</code> to the scratch directory; e.g.:<div class="codehilite"><pre><span></span><code>WORKER_TEMP_DIR=/scratch
 </code></pre></div>
