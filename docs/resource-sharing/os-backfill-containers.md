@@ -99,15 +99,12 @@ On EL hosts, the pilot container can also be managed via a systemctl service pro
 
 1. [Enable OSG yum repos](../common/yum.md).
 
-    !!! note "Under active development"
-        The RPM is currently only available in the development repo.
-
-1. Install the service
+1. Install the service:
 
         :::console
-        root@host # yum install ospool-ep --enablerepo=osg-development
+        root@host # yum install ospool-ep
 
-1. Copy your OSPool Access Token to `/etc/osg/ospool-ep.tkn`
+1. Copy your OSPool Access Token to `/etc/osg/ospool-ep.tkn`.
 
     !!! note "Token file ownership"
         The EP is run under uid 1000.
@@ -116,10 +113,10 @@ On EL hosts, the pilot container can also be managed via a systemctl service pro
             :::console
             root@host # chown 1000:1000 /etc/osg/ospool-ep.tkn
 
-1. Configure the container service by editing `/etc/osg/ospool-ep.cfg`
+1. Configure the container service by editing `/etc/osg/ospool-ep.cfg`:
 
-    - Set `GLIDEIN_Site` to your OSG Topology Site identifier
-    - Set `GLIDEIN_ResourceName` to your OSG Topology Resource Name identifier
+    - Set `GLIDEIN_Site` to your OSG Topology Site identifier.
+    - Set `GLIDEIN_ResourceName` to your OSG Topology Resource Name identifier.
     - **If** you have dedicated scratch disk space for OSPool payload jobs (which is recommended),
       then set `WORKER_TEMP_DIR` to the scratch directory; e.g.:
 
