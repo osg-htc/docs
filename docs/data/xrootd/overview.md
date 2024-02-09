@@ -31,11 +31,3 @@ An [XRootD standalone server](install-standalone.md) exports data from an existi
 such as HDFS or Lustre, using both the XRootD and WebDAV protocols.
 Generally, only sites affiliated with large VOs would need to install an XRootD standalone server so consult your VO if
 you are interested in contributing storage.
-
-XRootD Storage Element
-----------------------
-
-For an [XRootD storage element (SE)](install-storage-element.md), the XRootD software acts as the network
-storage technology, exporting data from multiple, distributed hosts using both the XRootD and WebDAV protocols.
-Generally, only sites affiliated with large VOs would need to install an XRootD SE so consult your VO if you are
-interested in contributing storage.
