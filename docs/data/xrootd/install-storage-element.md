@@ -354,19 +354,18 @@ root@host # systemctl start xrootd@standalone
 The services are:
 
 
-| Service                            | Service name                 |
-|:-----------------------------------|:-----------------------------|
-| XRootD (standalone config)         | `xrootd@standalone`          |
-| XRootD (clustered config)          | `xrootd@clustered`           |
-| XRootD (multiuser)                 | `xrootd-privileged@clustered`|
-| CMSD (clustered config)            | `cmsd@clustered`             |
-| CMSD (clustered config, multiuser) | `cmsd-privileged@clustered`  |
+| Service                    | EL 7 & 8 service name        |
+|:---------------------------|:-----------------------------|
+| XRootD (standalone config) | `xrootd@standalone`          |
+| XRootD (clustered config)  | `xrootd@clustered`           |
+| XRootD (multiuser)         | `xrootd-privileged@clustered`|
+| CMSD (clustered config)    | `cmsd@clustered`             |
 
 
 As a reminder, here are common service commands (all run as `root`):
 
 
-| To ...                                      | Run the command...               |
+| To ...                                      | On EL 7 & 8, run the command...  |
 |:--------------------------------------------|:---------------------------------|
 | Start a service                             | `systemctl start SERVICE-NAME`   |
 | Stop a service                              | `systemctl stop SERVICE-NAME`    |
@@ -381,24 +380,21 @@ To get assistance. please use the [Help Procedure](../../common/help.md) page.
 Reference
 ---------
 
-### File locations (standalone setup)
-
-See [the file locations section of the Install XRootD Standalone doc](install-standalone.md#file-locations)
+### File locations
 
 
-### File locations (clustered setup)
 
 | Service/Process | Configuration File                 | Description                              |
 |:----------------|:-----------------------------------|:-----------------------------------------|
 | `xrootd`        | `/etc/xrootd/xrootd-clustered.cfg` | Main clustered mode XRootD configuration |
 |                 | `/etc/xrootd/auth_file`            | Authorized users file                    |
 
-| Service/Process          | Log File                                   | Description                                 |
-|:-------------------------|:-------------------------------------------|:--------------------------------------------|
-| `xrootd`                 | `/var/log/xrootd/clustered/xrootd.log`     | XRootD server daemon log                    |
-| `cmsd`                   | `/var/log/xrootd/clustered/cmsd.log`       | Cluster management log                      |
-| `cns`                    | `/var/log/xrootd/clustered/cns/xrootd.log` | Server inventory (composite name space) log |
-| `frm_xfrd`, `frm_purged` | `/var/log/xrootd/clustered/frmd.log`       | File Residency Manager log                  |
+| Service/Process          | Log File                         | Description                                 |
+|:-------------------------|:---------------------------------|:--------------------------------------------|
+| `xrootd`                 | `/var/log/xrootd/xrootd.log`     | XRootD server daemon log                    |
+| `cmsd`                   | `/var/log/xrootd/cmsd.log`       | Cluster management log                      |
+| `cns`                    | `/var/log/xrootd/cns/xrootd.log` | Server inventory (composite name space) log |
+| `frm_xfrd`, `frm_purged` | `/var/log/xrootd/frmd.log`       | File Residency Manager log                  |
 
 
 
