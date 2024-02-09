@@ -85,6 +85,18 @@ and the key to `/etc/grid-security/hostkey.pem`.
     [on the Certbot site](https://certbot.eff.org/docs/using.html#renewing-certificates).
 
 
+!!! note
+    A small number of CAs in the IGTF and OSG CA cert distributions were signed with the SHA1 algorithm,
+    which is not accepted by default starting with Enterprise Linux 9.
+    If you are running an origin image based on OSG 23 or newer, and your situation includes any of the following:
+    
+    -   Your origin's host certificate was signed by a SHA1-signed-CA
+    -   You are expecting connections from clients or caches that authenticate themselves
+        with a cert from a SHA1-signed-CA
+    
+    then you must add `ENABLE_SHA1=yes` to the environment variable file.
+
+
 Populating Origin Data
 ----------------------
 
