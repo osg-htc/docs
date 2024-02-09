@@ -109,9 +109,7 @@ set EnableVoms = 1
     so this step is not necessary there.
 
 !!! warning "Requirements for XRootD-Multiuser with VOMS FQANs"
-    Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a `voms-mapfile`.
-    Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, or XRootD 5.5.0 or newer.
-    If you want to use multiuser, ensure you are getting `xrootd-voms` from the OSG repos.
+    Using XRootD-Multiuser with a VOMS FQAN requires XRootD 5.5.0 or newer.
 
 !!! warning "Key length requirements"
     Servers on EL 8 or newer will reject proxies that are not at least 2048 bits long.
@@ -146,9 +144,7 @@ i.e. authorize access to clients presenting the above proxy with `u blin ...` in
 #### Mapping VOMS attributes ####
 
 !!! warning "Requirements for XRootD-Multiuser with VOMS FQANs"
-    Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a `voms-mapfile`.
-    Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, or XRootD 5.5.0 or newer.
-    If you want to use multiuser, ensure you are getting `xrootd-voms` from the OSG repos.
+    Using XRootD-Multiuser with a VOMS FQAN requires XRootD 5.5.0 or newer.
 
 In OSG 3.6, if the XRootD-VOMS plugin is enabled,
 an incoming VOMS proxy will authenticate the first VOMS FQAN and map it to an organization name (`o`),
