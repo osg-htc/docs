@@ -4,6 +4,9 @@ title: Installing an XRootD Storage Element
 Installing an XRootD Storage Element
 ====================================
 
+!!! warning
+    This page is out of date and is not known to work with XRootD 5; parts of it do not work with EL 7+.
+
 [XRootD](http://xrootd.org/) is a hierarchical storage system that can be used in a variety of ways to access data,
 typically distributed among actual storage resources. 
 One way to use XRootD is to have it refer to many data resources at a single site, and another way to use it is to refer

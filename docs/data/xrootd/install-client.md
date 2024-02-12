@@ -138,9 +138,22 @@ If you are planning on using a FUSE mount, you'll need to install the xrootd-fus
 
 ### Configuring the FUSE Mount 
 
-Once the appropriate rpms are installed, the FUSE setup will need further configuration.
-See [this](install-storage-element.md#optional-enabling-a-fuse-mount) for instructions on updating your
-`fstab` file.
+Once the appropriate RPMs are installed, the FUSE setup will need further configuration.
+
+Modify `/etc/fstab` by adding the following entries:
+
+    :::file
+    ....
+    xrootdfs                /mnt/xrootd              fuse    rdr=xroot://<REDIRECTOR FQDN>:1094/<PATH TO FILE>,uid=xrootd 0 0
+
+
+Replace `/mnt/xrootd` with the path that you would like to access with. 
+Create `/mnt/xrootd` directory. Make sure the xrootd user exists on the system. Once you are finished, you can mount it:
+
+    :::file
+    mount /mnt/xrootd
+
+You should now be able to run UNIX commands such as `ls /mnt/xrootd` to see the contents of the XRootD server.
 
 ### Using the XRootDFS FUSE Mount
 
