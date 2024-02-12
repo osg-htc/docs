@@ -872,20 +872,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../install-storage-element/" class="md-nav__link">
-        Install XRootD SE
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../xrootd-authorization/" class="md-nav__link">
         Configure Authorization
       </a>
@@ -2207,9 +2193,18 @@ This method of accessing XRootD only works when accessing a local XRootD system.
 </li>
 </ol>
 <h3 id="configuring-the-fuse-mount">Configuring the FUSE Mount<a class="headerlink" href="#configuring-the-fuse-mount" title="Permanent link">&para;</a></h3>
-<p>Once the appropriate rpms are installed, the FUSE setup will need further configuration.
-See <a href="../install-storage-element/#optional-enabling-a-fuse-mount">this</a> for instructions on updating your
-<code>fstab</code> file.</p>
+<p>Once the appropriate RPMs are installed, the FUSE setup will need further configuration.</p>
+<p>Modify <code>/etc/fstab</code> by adding the following entries:</p>
+<div class="codehilite"><pre><span></span><code>....
+xrootdfs                /mnt/xrootd              fuse    rdr=xroot://&lt;REDIRECTOR FQDN&gt;:1094/&lt;PATH TO FILE&gt;,uid=xrootd 0 0
+</code></pre></div>
+
+<p>Replace <code>/mnt/xrootd</code> with the path that you would like to access with. 
+Create <code>/mnt/xrootd</code> directory. Make sure the xrootd user exists on the system. Once you are finished, you can mount it:</p>
+<div class="codehilite"><pre><span></span><code>mount /mnt/xrootd
+</code></pre></div>
+
+<p>You should now be able to run UNIX commands such as <code>ls /mnt/xrootd</code> to see the contents of the XRootD server.</p>
 <h3 id="using-the-xrootdfs-fuse-mount">Using the XRootDFS FUSE Mount<a class="headerlink" href="#using-the-xrootdfs-fuse-mount" title="Permanent link">&para;</a></h3>
 <p>The directory mounted using XRootDFS can be used as any other directory mounted on your file system. 
 All the normal Unix commands should work out of the box.
