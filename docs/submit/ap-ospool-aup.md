@@ -81,10 +81,17 @@ The AP operator agrees to keep the installed HTCondor Software Suite (HTCSS) ver
 
 1.  An OSPool AP must run on a
     [supported release series of HTCSS](https://htcondor.readthedocs.io/en/latest/version-history/introduction-version-history.html#support-life-cycle).
-1.  The release may be no more than 4 months behind the
-    [latest version in the release series](https://htcondor.org/htcondor/release-highlights/).
-1.  The release may be no more than 1 month behind the
-    [latest security patch](https://htcondor.org/htcondor/release-highlights/) in the release series.
+    Supported release series include series that are under regular or security support.
+1.  The release may be no more than 4 months behind the latest version in the release series.
+1.  The release may be no more than 1 month behind the latest security patch in the release series.
+
+In practice, the minimum required versions for each of the supported release series are as follows:
+
+| **HTCondor Release Series** | **Required Minimum Version** |
+|-----------------------------|------------------------------|
+| 23.x.y                      | 23.1.0                       |
+| 23.0.y                      | 23.0.1                       |
+| 10.0.y                      | 10.0.4                       |
 
 As the OSPool operations staff has a responsibility to the entire pool, the OSPool operations staff may disable the AP’s
 connection to the OSPool, as necessary, to maintain operational integrity and resource utilization.
