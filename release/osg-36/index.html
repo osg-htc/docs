@@ -3143,6 +3143,14 @@
 
 
 <h1 id="osg-36-news">OSG 3.6 News<a class="headerlink" href="#osg-36-news" title="Permanent link">&para;</a></h1>
+<div class="admonition danger">
+<p class="admonition-title">Upcoming OSG 3.6 end-of-support dates</p>
+<p>OSG 3.6 reaches the "End of Regular Support" on March 31, 2024 and will start receiving critical bug-fix and
+security only updates until it's end-of-life on June 30, 2024.
+See our <a href="../release_series/#series-life-cycle">Release Series documentation</a> for more details.</p>
+<p>Note that the OSG 3.6 end-of-life coincides with the wider Enterprise Linux 7 end-of-life.
+We recommend upgrading to OSG 23 and an Enteprise Linux 9 distribution at your earliest convenience.</p>
+</div>
 <p><strong>Supported OS Versions:</strong> EL7, EL8, EL9</p>
 <p>The OSG 3.6 release series is a major overhaul of the OSG software stack compared to previous release series with
 changes to core protocols used for authentication and data transfer:
@@ -3204,25 +3212,6 @@ of <code>/etc/yum.repos.d/osg.repo</code>:</p>
 <div class="highlight"><pre><span></span><code>excludepkgs=rrdtool
 </code></pre></div>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
-<div class="admonition warning">
-<p class="admonition-title">Incoming changes to <code>osg-ca-certs</code></p>
-<p>To address an issue with certificates issued by SHA1 CAs on EL9 systems and EL8 systems configured to use the
-<code>FUTURE</code> system crypto policy,
-the OSG Software Team intends to release a fix to the <code>osg-ca-certs</code> package in the near future.</p>
-<ul>
-<li>
-<p>If you are running OSG-supported software (e.g., HTCondor, XRootD),
-    update to the new version of <code>osg-ca-certs</code>.</p>
-</li>
-<li>
-<p>If you are running non-OSG-supported, Java-based software (e.g., dCache) with <code>osg-ca-certs</code>,
-    repleace <code>osg-ca-certs</code> with <code>osg-ca-certs-java</code> with the following command:</p>
-</li>
-</ul>
-<p><div class="highlight"><pre><span></span><code>root@host # yum swap osg-ca-certs osg-ca-certs-java
-</code></pre></div>
-    <code>osg-ca-certs-java</code> is compatible with Java-based software but does not include the aforementioned fix.</p>
-</div>
 <h3 id="february-8-2024-frontier-squid-59-21-htcondor-2304-htvault-config-116-vault-1154-osg-configure-411-3"><strong>February 8, 2024:</strong> Frontier-squid 5.9-2.1, HTCondor 23.0.4, htvault-config 1.16, vault 1.15.4, osg-configure 4.1.1-3<a class="headerlink" href="#february-8-2024-frontier-squid-59-21-htcondor-2304-htvault-config-116-vault-1154-osg-configure-411-3" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="http://frontier.cern.ch/dist/frontier-squid-releasenotes.txt">Frontier-squid 5.9-2.1</a><ul>
