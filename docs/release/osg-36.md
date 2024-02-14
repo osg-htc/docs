@@ -3,6 +3,15 @@ title: OSG 3.6 News
 OSG 3.6 News
 ============
 
+!!! danger "Upcoming OSG 3.6 end-of-support dates"
+    OSG 3.6 reaches the "End of Regular Support" on March 31, 2024 and will start receiving critical bug-fix and
+    security only updates until it's end-of-life on June 30, 2024.
+    See our [Release Series documentation](./release_series.md#series-life-cycle) for more details.
+
+    Note that the OSG 3.6 end-of-life coincides with the wider Enterprise Linux 7 end-of-life.
+    We recommend upgrading to OSG 23 and an Enteprise Linux 9 distribution at your earliest convenience.
+
+
 **Supported OS Versions:** EL7, EL8, EL9
 
 The OSG 3.6 release series is a major overhaul of the OSG software stack compared to previous release series with
@@ -82,22 +91,6 @@ excludepkgs=rrdtool
 
 Latest News
 -----------
-
-!!! warning "Incoming changes to `osg-ca-certs`"
-    To address an issue with certificates issued by SHA1 CAs on EL9 systems and EL8 systems configured to use the
-    `FUTURE` system crypto policy,
-    the OSG Software Team intends to release a fix to the `osg-ca-certs` package in the near future.
-
-    -   If you are running OSG-supported software (e.g., HTCondor, XRootD),
-        update to the new version of `osg-ca-certs`.
-
-    -   If you are running non-OSG-supported, Java-based software (e.g., dCache) with `osg-ca-certs`,
-        repleace `osg-ca-certs` with `osg-ca-certs-java` with the following command:
-
-    ```
-    root@host # yum swap osg-ca-certs osg-ca-certs-java
-    ```
-        `osg-ca-certs-java` is compatible with Java-based software but does not include the aforementioned fix.
 
 ### **February 8, 2024:** Frontier-squid 5.9-2.1, HTCondor 23.0.4, htvault-config 1.16, vault 1.15.4, osg-configure 4.1.1-3
 -   [Frontier-squid 5.9-2.1](http://frontier.cern.ch/dist/frontier-squid-releasenotes.txt)
