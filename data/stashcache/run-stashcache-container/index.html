@@ -2166,6 +2166,18 @@ If you automate certificate renewal, you should automate restarts as well.
 For example, if you are using Certbot for Let's Encrypt, you should write a "deploy hook" as documented
 <a href="https://certbot.eff.org/docs/using.html#renewing-certificates">on the Certbot site</a>.</p>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A small number of CAs in the IGTF and OSG CA cert distributions were signed with the SHA1 algorithm,
+which is not accepted by default starting with Enterprise Linux 9.
+If you are running a cache image based on OSG 23 or newer, and your situation includes any of the following:</p>
+<ul>
+<li>Your cache's host certificate was signed by a SHA1-signed-CA</li>
+<li>You are expecting connections from clients that authenticate themselves with a cert from a SHA1-signed-CA</li>
+<li>Your cache serves data from an origin whose host certificate was signed by a SHA1-signed-CA</li>
+</ul>
+<p>then you must add <code>ENABLE_SHA1=yes</code> to the environment variable file.</p>
+</div>
 <h3 id="optional-configuration">Optional configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h3>
 <p>Further behavior of the cache can be configured by setting the following in the environment variable file:</p>
 <ul>
