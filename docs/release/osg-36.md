@@ -92,6 +92,26 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### **February 22, 2024:** XRootD 5.6.7, xrdcl-pelican 0.9.3, IGTF 1.127, VOMS 2.10.0-0.31.rc3.1; Upcoming: osg-token-renewer 0.9.0, oidc-agent 5.1.0
+-   [XRootD 5.6.7](https://github.com/xrootd/xrootd/releases/tag/v5.6.7)
+    -   Add pelican:// support
+    -   Fix potential segmentation fault in third-party copy
+-   [xrdcl-pelican 0.9.3](https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v0.9.2)
+    -   A Pelican platform-based plugin for the XrdCl interface
+-   CA certificates based on [IGTF 1.127](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   added supplementary issuing CA Issuing CA IGTF - C5 - 1 for eMudhra (IN)
+    -   removed discontinued QuoVadis CAs: QuoVadis-Grid-ICA-G2,
+        QuoVadis-Root-CA2G3, QuoVadis-Root-CA2, and QuoVadis-Root-CA3G3 (BM)
+-   VOMS 2.10.0-0.31.rc3.1
+    -   Rebuild with latest source to get Enterprise Linux 9 support
+- Upcoming
+    -   [osg-token-renewer 0.9.0](https://github.com/opensciencegrid/osg-token-renewer/releases/tag/v0.9.0)
+        -   Utilize oidc-agent 5.1.0 to use new '--skip-check' option
+    -   [oidc-agent 5.1.0](https://github.com/indigo-dc/oidc-agent/releases/tag/v5.1.0)
+        -   Fix issue where osg-token-renewer would get 'No scopes found' error
+        -   Note: This is in upcoming because it requires redoing OIDC token
+                  authentication for any existing refresh tokens
+
 ### **February 8, 2024:** Frontier-squid 5.9-2.1, HTCondor 23.0.4, htvault-config 1.16, vault 1.15.4, osg-configure 4.1.1-3
 -   [Frontier-squid 5.9-2.1](http://frontier.cern.ch/dist/frontier-squid-releasenotes.txt)
     -   Fixed several security vulnerabilities
