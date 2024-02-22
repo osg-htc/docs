@@ -44,6 +44,34 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **February 22, 2024:** XRootD 5.6.7, xrdcl-pelican 0.9.3, IGTF 1.127, GlideinWMS 3.10.6, VOMS 2.10.0-0.31.rc3.1; Upcoming: osg-token-renewer 0.9.0, oidc-agent 5.1.0, osdf-server 7.5.6
+-   [XRootD 5.6.7](https://github.com/xrootd/xrootd/releases/tag/v5.6.7)
+    -   Add pelican:// support
+    -   Fix potential segmentation fault in third-party copy
+-   [xrdcl-pelican 0.9.3](https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v0.9.2)
+    -   A Pelican platform-based plugin for the XrdCl interface
+-   CA certificates based on [IGTF 1.127](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   added supplementary issuing CA Issuing CA IGTF - C5 - 1 for eMudhra (IN)
+    -   removed discontinued QuoVadis CAs: QuoVadis-Grid-ICA-G2,
+        QuoVadis-Root-CA2G3, QuoVadis-Root-CA2, and QuoVadis-Root-CA3G3 (BM)
+-   VOMS 2.10.0-0.31.rc3.1
+    -   Rebuild with latest source to get Enterprise Linux 9 support
+-   [GlideinWMS 3.10.6](http://glideinwms.fnal.gov/doc.v3_10_6/history.html): Enterprise Linux 9 only
+    -   Knobs to overload memory and CPU
+    -   HTCondor tarball downloader
+    -   Advertising of Factory's HTCondor submit parameters
+    -   Fixed match policy\_file import failure
+    -   Fixed syntax error in ClassAd used for gangliad configuration
+    -   Fixed writing of missing dict files during upgrade
+- Upcoming
+    -   [osg-token-renewer 0.9.0](https://github.com/opensciencegrid/osg-token-renewer/releases/tag/v0.9.0)
+        -   Utilize oidc-agent 5.1.0 to use new '--skip-check' option
+    -   [oidc-agent 5.1.0](https://github.com/indigo-dc/oidc-agent/releases/tag/v5.1.0)
+        -   Fix issue where osg-token-renewer would get 'No scopes found' error
+        -   Note: This is in upcoming because it requires redoing OIDC token
+                  authentication for any existing refresh tokens
+    -   osdf-server 7.5.6
+
 ### **February 8, 2024:** Frontier-squid 5.9-2.1, HTCondor 23.0.4, htvault-config 1.16, vault 1.15.4, osg-configure 4.1.1-3; Upcoming: HTCondor 23.4.0, Pelican 7.5.0
 -   [Frontier-squid 5.9-2.1](http://frontier.cern.ch/dist/frontier-squid-releasenotes.txt)
     -   Fixed several security vulnerabilities
