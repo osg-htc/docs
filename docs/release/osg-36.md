@@ -92,6 +92,21 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### **February 28, 2024:** VO Package v134, osg-pki-tools 3.7.1, osg-xrootd 3.6-22, GlideinWMS 3.10.6
+-   [VO Package v134](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-134)
+    -   Update OSG VOMS certificate used by the LIGO VO
+-   osg-pki-tools 3.7.1
+    -   Fix `osg-incommon-cert-request` to work on Enterprise Linux 9
+-   osg-xrootd 3.6-22
+    -   Enable HTTP directory listings for authenticated caches and all origins
+-   [GlideinWMS 3.10.6](http://glideinwms.fnal.gov/doc.v3_10_6/history.html): Enterprise Linux 7 and 9
+    -   Knobs to overload memory and CPU
+    -   HTCondor tarball downloader
+    -   Advertising of Factory's HTCondor submit parameters
+    -   Fixed match policy\_file import failure
+    -   Fixed syntax error in ClassAd used for gangliad configuration
+    -   Fixed writing of missing dict files during upgrade
+
 ### **February 22, 2024:** XRootD 5.6.7, xrdcl-pelican 0.9.3, IGTF 1.127, VOMS 2.10.0-0.31.rc3.1; Upcoming: osg-token-renewer 0.9.0, oidc-agent 5.1.0
 -   [XRootD 5.6.7](https://github.com/xrootd/xrootd/releases/tag/v5.6.7)
     -   Add pelican:// support

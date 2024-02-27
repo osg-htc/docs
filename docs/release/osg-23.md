@@ -44,6 +44,14 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **February 28, 2024:** VO Package v134, osg-pki-tools 3.7.1, osg-xrootd 3.6-22, GlideinWMS 3.10.6
+-   [VO Package v134](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-134)
+    -   Update OSG VOMS certificate used by the LIGO VO
+-   osg-pki-tools 3.7.1
+    -   Fix `osg-incommon-cert-request` to work on Enterprise Linux 9
+-   osg-xrootd 3.6-22
+    -   Enable HTTP directory listings for authenticated caches and all origins
+
 ### **February 22, 2024:** XRootD 5.6.7, xrdcl-pelican 0.9.3, IGTF 1.127, GlideinWMS 3.10.6, VOMS 2.10.0-0.31.rc3.1; Upcoming: osg-token-renewer 0.9.0, oidc-agent 5.1.0, osdf-server 7.5.6
 -   [XRootD 5.6.7](https://github.com/xrootd/xrootd/releases/tag/v5.6.7)
     -   Add pelican:// support
