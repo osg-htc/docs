@@ -92,7 +92,7 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
-### **February 28, 2024:** VO Package v134, osg-pki-tools 3.7.1, osg-xrootd 3.6-22, GlideinWMS 3.10.6
+### **February 27, 2024:** VO Package v134, osg-pki-tools 3.7.1, osg-xrootd 3.6-22, GlideinWMS 3.10.6
 -   [VO Package v134](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-134)
     -   Update OSG VOMS certificate used by the LIGO VO
 -   osg-pki-tools 3.7.1
