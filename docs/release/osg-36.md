@@ -92,6 +92,11 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### **February 29, 2024:** XRootD 5.6.8
+-   [XRootD 5.6.8](https://github.com/xrootd/xrootd/releases/tag/v5.6.8)
+    -   Fix automatic renewal of server certificate with OpenSSL>=1.1
+    -   Other minor bug fixes
+
 ### **February 27, 2024:** VO Package v134, osg-pki-tools 3.7.1, osg-xrootd 3.6-22, GlideinWMS 3.10.6
 -   [VO Package v134](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-134)
     -   Update OSG VOMS certificate used by the LIGO VO
