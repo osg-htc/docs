@@ -3,6 +3,14 @@ title: Supported Platforms
 Supported Platforms
 ===================
 
+!!! danger "Upcoming OSG 3.6 end-of-support dates"
+    OSG 3.6 reaches the "End of Regular Support" on March 31, 2024 and will only receive critical bug-fix and
+    security update until it's end-of-life on June 30, 2024.
+    See our [Release Series documentation](./release_series.md#series-life-cycle) for more details.
+
+    Note that the OSG 3.6 end-of-life coincides with the wider Enterprise Linux 7 end-of-life.
+    **We recommend upgrading to OSG 23 and an Enteprise Linux 9 distribution at your earliest convenience.**
+
 The OSG [release series](../release/release_series.md) are supported on Red Hat Enterprise Linux (RHEL) compatible
 platforms for 64-bit Intel architectures according to the following table:
 
