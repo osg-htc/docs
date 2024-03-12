@@ -1048,6 +1048,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#updating-to-osg-23" class="md-nav__link">
+    Updating to OSG 23
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#updating-to-osg-36" class="md-nav__link">
     Updating to OSG 3.6
   </a>
@@ -2159,6 +2166,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#updating-to-osg-23" class="md-nav__link">
+    Updating to OSG 23
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#updating-to-osg-36" class="md-nav__link">
     Updating to OSG 3.6
   </a>
@@ -2264,8 +2278,7 @@ to, but, internally, the data node files will be owned by the <code>xrootd</code
 <a href="../install-standalone/#enabling-multi-user-support">XRootD multi-user support</a>. </p>
 </div>
 <h2 id="authorizing-bearer-tokens">Authorizing Bearer Tokens<a class="headerlink" href="#authorizing-bearer-tokens" title="Permanent link">&para;</a></h2>
-<p>The <a href="../../../release/release_series/#series-overviews">OSG 3.6</a> configurations of XRootD support authorization of bearer
-tokens such as macaroons, SciTokens, or WLCG tokens.
+<p>XRootD supports authorization of bearer tokens such as macaroons, SciTokens, or WLCG tokens.
 Encoded in the bearer tokens themselves are information about the files that they should have read/write access to and
 in the case of SciTokens and WLCG tokens, you may configure XRootD to further restrict access.</p>
 <h3 id="configuring-scitokenswlcg-tokens">Configuring SciTokens/WLCG Tokens<a class="headerlink" href="#configuring-scitokenswlcg-tokens" title="Permanent link">&para;</a></h3>
@@ -2351,9 +2364,7 @@ so this step is not necessary there.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Requirements for XRootD-Multiuser with VOMS FQANs</p>
-<p>Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a <code>voms-mapfile</code>.
-Support is available in <code>xrootd-voms 5.4.2-1.1</code>, in the OSG 3.6 repos, or XRootD 5.5.0 or newer.
-If you want to use multiuser, ensure you are getting <code>xrootd-voms</code> from the OSG repos.</p>
+<p>Using XRootD-Multiuser with a VOMS FQAN requires XRootD 5.5.0 or newer.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Key length requirements</p>
@@ -2367,7 +2378,7 @@ if necessary, have them add the argument <code>-bits 2048</code> to their <code>
 <p>If you have mapped the subject Distinguished Name (DN) of an incoming proxy with VOMS attributes,
 XRootD will map it to a username.</p>
 </div>
-<p>In OSG 3.6, X.509 proxies are mapped using the built-in XRootD GSI plug-in.
+<p>X.509 proxies are mapped using the built-in XRootD GSI plug-in.
 To map an incoming proxy's subject DN to an <a href="#authorization-database">XRootD username</a>,
 add lines of the following format to <code>/etc/grid-security/grid-mapfile</code>:</p>
 <div class="highlight"><pre><span></span><code>&quot;&lt;SUBJECT DN&gt;&quot; &lt;AUTHDB USERNAME&gt;
@@ -2382,11 +2393,9 @@ i.e. authorize access to clients presenting the above proxy with <code>u blin ..
 <h4 id="mapping-voms-attributes">Mapping VOMS attributes<a class="headerlink" href="#mapping-voms-attributes" title="Permanent link">&para;</a></h4>
 <div class="admonition warning">
 <p class="admonition-title">Requirements for XRootD-Multiuser with VOMS FQANs</p>
-<p>Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a <code>voms-mapfile</code>.
-Support is available in <code>xrootd-voms 5.4.2-1.1</code>, in the OSG 3.6 repos, or XRootD 5.5.0 or newer.
-If you want to use multiuser, ensure you are getting <code>xrootd-voms</code> from the OSG repos.</p>
+<p>Using XRootD-Multiuser with a VOMS FQAN requires XRootD 5.5.0 or newer.</p>
 </div>
-<p>In OSG 3.6, if the XRootD-VOMS plugin is enabled,
+<p>If the XRootD-VOMS plugin is enabled,
 an incoming VOMS proxy will authenticate the first VOMS FQAN and map it to an organization name (<code>o</code>),
 groupname (<code>g</code>), and role name (<code>r</code>) in the <a href="#authorization-database">authorization database</a>.
 For example, a proxy from the OSPool whose first VOMS FQAN is <code>/osg/Role=NULL/Capability=NULL</code> will be authenticated to
@@ -2515,8 +2524,7 @@ XRootD will take the user (<code>u</code>) attribute of the incoming request, an
 <a href="../install-standalone/#using-xrootd">relevant services</a>.</p>
 <h2 id="verifying-xrootd-authorization">Verifying XRootD Authorization<a class="headerlink" href="#verifying-xrootd-authorization" title="Permanent link">&para;</a></h2>
 <h3 id="bearer-tokens">Bearer tokens<a class="headerlink" href="#bearer-tokens" title="Permanent link">&para;</a></h3>
-<p>To test read access using macaroon, SciTokens, and WLCG token authorization with an OSG 3.6 installation,
-run the following command:</p>
+<p>To test read access using macaroon, SciTokens, and WLCG token authorization, run the following command:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>curl -v <span class="se">\</span>
                  -H <span class="s1">&#39;Authorization: Bearer &lt;TOKEN&gt;&#39;</span> <span class="se">\</span>
                  https://host.example.com//path/to/directory/hello_world
@@ -2569,6 +2577,9 @@ pair, <code>xrootd-client</code>, and <code>voms-clients-cpp</code> installed:</
 <p>If your transfer does not succeed, re-run <code>xrdcp</code>  with <code>--debug 2</code> for more information.</p>
 </li>
 </ol>
+<h2 id="updating-to-osg-23">Updating to OSG 23<a class="headerlink" href="#updating-to-osg-23" title="Permanent link">&para;</a></h2>
+<p>There are no manual steps necessary for authentication to work when upgrading from OSG 3.6 to OSG 23.
+If you are upgrading from an earlier release series, see the <a href="#updating-to-osg-36">updating to OSG 3.6</a> section below.</p>
 <h2 id="updating-to-osg-36">Updating to OSG 3.6<a class="headerlink" href="#updating-to-osg-36" title="Permanent link">&para;</a></h2>
 <p>There are some manual steps that need to be taken for authentication to work in OSG 3.6.</p>
 <h3 id="ensure-osg-xrootd-packages-are-fully-up-to-date">Ensure OSG XRootD packages are fully up-to-date<a class="headerlink" href="#ensure-osg-xrootd-packages-are-fully-up-to-date" title="Permanent link">&para;</a></h3>

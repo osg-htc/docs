@@ -2090,12 +2090,6 @@ In its standalone configuration, XRootD acts as a simple layer exporting data fr
 <li>Install <a href="../../../common/ca/">CA certificates</a></li>
 </ul>
 <h2 id="installing-xrootd">Installing XRootD<a class="headerlink" href="#installing-xrootd" title="Permanent link">&para;</a></h2>
-<div class="admonition warning">
-<p class="admonition-title">Requirements for XRootD-Multiuser with VOMS FQANs</p>
-<p>Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a <code>voms-mapfile</code>.
-Support is available in <code>xrootd-voms 5.4.2-1.1</code>, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
-If you want to use multiuser, ensure you are getting <code>xrootd-voms</code> from the OSG repos.</p>
-</div>
 <p>To install an XRootD Standalone server, run the following command:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">root@xrootd-standalone # </span>yum install osg-xrootd-standalone
 </code></pre></div>
@@ -2155,18 +2149,16 @@ including validating credentials and mapping them to users if desired.</p>
 If you do not need any of the following special configurations, skip to
 <a href="#using-xrootd">the section on using XRootD</a>.</p>
 <h4 id="enabling-multi-user-support">Enabling multi-user support<a class="headerlink" href="#enabling-multi-user-support" title="Permanent link">&para;</a></h4>
-<div class="admonition warning">
-<p class="admonition-title">Requirements for XRootD-Multiuser with VOMS FQANs</p>
-<p>Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a <code>voms-mapfile</code>.
-Support is available in <code>xrootd-voms 5.4.2-1.1</code>, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
-If you want to use multiuser, ensure you are getting <code>xrootd-voms</code> from the OSG repos.</p>
-</div>
 <p>The <code>xrootd-multiuser</code> plugin allows XRootD to write files on the storage system as the
 <a href="../xrootd-authorization/">authenticated</a> user instead of the <code>xrootd</code> user.
 If your XRootD service only allows read-only access, you should skip installation of this plugin.</p>
 <p>To set up XRootD in multi-user mode, install the <code>xrootd-multiuser</code> package:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">root@xrootd-standalone # </span>yum install xrootd-multiuser
 </code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are using XRootD-Multiuser with a VOMS FQAN, you need XRootD 5.5.0 or greater.</p>
+</div>
 <h4 id="throttling-io-requests">Throttling IO requests<a class="headerlink" href="#throttling-io-requests" title="Permanent link">&para;</a></h4>
 <p>XRootD allows throttling of requests to the underlying filesystem.
 To enable this,</p>
@@ -2200,7 +2192,7 @@ see the <a href="https://github.com/xrootd/xrootd/tree/master/src/XrdThrottle">u
 <h4 id="enabling-cms-tfc-support-cms-sites-only">Enabling CMS TFC support (CMS sites only)<a class="headerlink" href="#enabling-cms-tfc-support-cms-sites-only" title="Permanent link">&para;</a></h4>
 <p>For CMS sites, there is a package available to integrate rule-based name lookup using a <code>storage.xml</code> file.
 If you are not setting up a service for CMS, skip this section.</p>
-<p>To install an <code>xrootd-cmstfc</code> on OSG 3.6, run the following command:</p>
+<p>To install an <code>xrootd-cmstfc</code>, run the following command:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">root@xrootd-standalone # </span>yum install --enablerepo<span class="o">=</span>osg-contrib xrootd-cmstfc
 </code></pre></div>
 <p>You will need to add your <code>storage.xml</code> to <code>/etc/xrootd/storage.xml</code> and then add the following line to your XRootD
@@ -2228,7 +2220,7 @@ The specific services are:</p>
 <tbody>
 <tr>
 <td align="left">Fetch CRL</td>
-<td align="left">EL8: <code>fetch-crl.timer</code> <br> EL7: <code>fetch-crl-boot</code> and <code>fetch-crl-cron</code></td>
+<td align="left">EL8,EL9: <code>fetch-crl.timer</code> <br> EL7: <code>fetch-crl-boot</code> and <code>fetch-crl-cron</code></td>
 <td align="left">See <a href="../../../common/ca/#managing-fetch-crl-services">CA documentation</a> for more info</td>
 </tr>
 <tr>
@@ -2391,13 +2383,8 @@ To use the standalone config, you would start XRootD with the following command:
 <tbody>
 <tr>
 <td align="left"><code>xrootd</code></td>
-<td align="left"><code>/var/log/xrootd/server/xrootd.log</code></td>
+<td align="left"><code>/var/log/xrootd/standalone/xrootd.log</code></td>
 <td align="left">XRootD server daemon log</td>
-</tr>
-<tr>
-<td align="left"><code>cmsd</code></td>
-<td align="left"><code>/var/log/xrootd/server/cmsd.log</code></td>
-<td align="left">Cluster management log</td>
 </tr>
 </tbody>
 </table>
