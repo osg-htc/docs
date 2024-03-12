@@ -30,7 +30,7 @@ If the network usage regularly peaks at over one third of the bandwidth capacity
 
 Before starting the installation process, consider the following points (consulting [the Reference section below](#reference) as needed):
 
--   **Host choice:** If you will be supporting the Frontier application at your site, review the
+-   **Hardware requirements:** If you will be supporting the Frontier application at your site, review the
     [hardware recommendations](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Hardware)
     to determine how to size your equipment.
 -   **User IDs:** If it does not exist already, the installation will create the `squid` Linux user
