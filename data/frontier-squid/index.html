@@ -2059,13 +2059,14 @@ If the network usage regularly peaks at over one third of the bandwidth capacity
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following points (consulting <a href="#reference">the Reference section below</a> as needed):</p>
 <ul>
+<li><strong>Hardware requirements:</strong> If you will be supporting the Frontier application at your site, review the
+    <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Hardware">hardware recommendations</a>
+    to determine how to size your equipment.</li>
 <li><strong>User IDs:</strong> If it does not exist already, the installation will create the <code>squid</code> Linux user</li>
 <li><strong>Network ports:</strong>
     Clients within your cluster (e.g., OSG user jobs) will communicate with Frontier Squid on port 3128 (TCP).
     Additionally, central infrastructure will monitor Frontier Squid through port 3401 (UDP);
     see <a href="#networking">this section</a> for more details.</li>
-<li><strong>Host choice:</strong> If you will be supporting the Frontier application at your site, review the
-<a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Hardware">upstream documentation</a> to determine how to size your equipment.</li>
 </ul>
 <p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
 <ul>
