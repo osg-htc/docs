@@ -11,8 +11,8 @@ Supported Platforms
     Note that the OSG 3.6 end-of-life coincides with the wider Enterprise Linux 7 end-of-life.
     **We recommend upgrading to OSG 23 and an Enteprise Linux 9 distribution at your earliest convenience.**
 
-The OSG [release series](../release/release_series.md) are supported on Red Hat Enterprise Linux (RHEL) compatible
-platforms for 64-bit Intel architectures according to the following table:
+The OSG Software [Release Series](../release/release_series.md) are supported on Red Hat Enterprise Linux (RHEL)
+compatible platforms for 64-bit Intel architectures according to the following table:
 
 | Platform                   | OSG 3.6 | OSG 23  |
 |----------------------------|---------|---------|
