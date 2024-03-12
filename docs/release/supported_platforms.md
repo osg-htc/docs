@@ -38,3 +38,14 @@ In particular, versions of RHEL/CentOS/SL 7 less than 7.5 have known issues with
 `osg-oasis` and `xrootd-lcmaps`.
 In addition, versions of RHEL/CentOS/SL 7 less than 7.8 do not have Python 3, which is required to run HTCondor 9 and
 HTCondor-CE 5.
+
+Future Release Series Plans
+---------------------------
+
+The OSG Software Team expects to support the following Enterprise Linux (EL) major operating system versions for future
+OSG Software [Release Series](../release/release_series.md):
+
+| Release Series | Expected Release | EL8     | EL9     |
+|----------------|------------------|---------|---------|
+| OSG 24         | Q3 2024          | &#9989; | &#9989; |
+| OSG 25         | Q3 2025          | &#9989; | &#9989; |
