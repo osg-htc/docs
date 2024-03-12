@@ -108,7 +108,8 @@ To set up XRootD in multi-user mode, install the `xrootd-multiuser` package:
 root@xrootd-standalone # yum install xrootd-multiuser
 ```
 
-If you are using XRootD-Multiuser with a VOMS FQAN, you need XRootD 5.5.0 or greater.
+!!! note
+    If you are using XRootD-Multiuser with a VOMS FQAN, you need XRootD 5.5.0 or greater.
 
 #### Throttling IO requests
 
