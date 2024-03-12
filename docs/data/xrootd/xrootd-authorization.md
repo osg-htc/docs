@@ -354,7 +354,7 @@ Updating to OSG 23
 ------------------
 
 There are no manual steps necessary for authentication to work when upgrading from OSG 3.6 to OSG 23.
-If you are upgrading from an earlier release series, see the [updating to OSG 3.6](#updating-to-osg-3-6) section below.
+If you are upgrading from an earlier release series, see the [updating to OSG 3.6](#updating-to-osg-36) section below.
 
 Updating to OSG 3.6
 --------------------
