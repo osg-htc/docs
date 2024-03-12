@@ -20,8 +20,7 @@ In the case of X.509 and VOMS proxies, after the incoming credential has been ma
 Authorizing Bearer Tokens
 -------------------------
 
-The [OSG 3.6](../../release/release_series.md#series-overviews) configurations of XRootD support authorization of bearer
-tokens such as macaroons, SciTokens, or WLCG tokens.
+XRootD supports authorization of bearer tokens such as macaroons, SciTokens, or WLCG tokens.
 Encoded in the bearer tokens themselves are information about the files that they should have read/write access to and
 in the case of SciTokens and WLCG tokens, you may configure XRootD to further restrict access.
 
@@ -109,9 +108,7 @@ set EnableVoms = 1
     so this step is not necessary there.
 
 !!! warning "Requirements for XRootD-Multiuser with VOMS FQANs"
-    Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a `voms-mapfile`.
-    Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, or XRootD 5.5.0 or newer.
-    If you want to use multiuser, ensure you are getting `xrootd-voms` from the OSG repos.
+    Using XRootD-Multiuser with a VOMS FQAN requires XRootD 5.5.0 or newer.
 
 !!! warning "Key length requirements"
     Servers on EL 8 or newer will reject proxies that are not at least 2048 bits long.
@@ -124,7 +121,7 @@ set EnableVoms = 1
     If you have mapped the subject Distinguished Name (DN) of an incoming proxy with VOMS attributes,
     XRootD will map it to a username.
 
-In OSG 3.6, X.509 proxies are mapped using the built-in XRootD GSI plug-in.
+X.509 proxies are mapped using the built-in XRootD GSI plug-in.
 To map an incoming proxy's subject DN to an [XRootD username](#authorization-database),
 add lines of the following format to `/etc/grid-security/grid-mapfile`:
 
@@ -146,11 +143,9 @@ i.e. authorize access to clients presenting the above proxy with `u blin ...` in
 #### Mapping VOMS attributes ####
 
 !!! warning "Requirements for XRootD-Multiuser with VOMS FQANs"
-    Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a `voms-mapfile`.
-    Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, or XRootD 5.5.0 or newer.
-    If you want to use multiuser, ensure you are getting `xrootd-voms` from the OSG repos.
+    Using XRootD-Multiuser with a VOMS FQAN requires XRootD 5.5.0 or newer.
 
-In OSG 3.6, if the XRootD-VOMS plugin is enabled,
+If the XRootD-VOMS plugin is enabled,
 an incoming VOMS proxy will authenticate the first VOMS FQAN and map it to an organization name (`o`),
 groupname (`g`), and role name (`r`) in the [authorization database](#authorization-database).
 For example, a proxy from the OSPool whose first VOMS FQAN is `/osg/Role=NULL/Capability=NULL` will be authenticated to
@@ -296,8 +291,7 @@ Verifying XRootD Authorization
 
 ### Bearer tokens ###
 
-To test read access using macaroon, SciTokens, and WLCG token authorization with an OSG 3.6 installation,
-run the following command:
+To test read access using macaroon, SciTokens, and WLCG token authorization, run the following command:
 
 ```console
 user@host $ curl -v \
@@ -356,6 +350,11 @@ pair, `xrootd-client`, and `voms-clients-cpp` installed:
     If your transfer does not succeed, re-run `xrdcp`  with `--debug 2` for more information.
 
 
+Updating to OSG 23
+------------------
+
+There are no manual steps necessary for authentication to work when upgrading from OSG 3.6 to OSG 23.
+If you are upgrading from an earlier release series, see the [updating to OSG 3.6](#updating-to-osg-36) section below.
 
 Updating to OSG 3.6
 --------------------

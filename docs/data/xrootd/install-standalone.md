@@ -34,11 +34,6 @@ As with all OSG software installations, there are some one-time (per host) steps
 Installing XRootD
 -----------------
 
-!!! warning "Requirements for XRootD-Multiuser with VOMS FQANs"
-    Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a `voms-mapfile`.
-    Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
-    If you want to use multiuser, ensure you are getting `xrootd-voms` from the OSG repos.
-
 To install an XRootD Standalone server, run the following command:
 
 ```console
@@ -103,11 +98,6 @@ If you do not need any of the following special configurations, skip to
 
 #### Enabling multi-user support
 
-!!! warning "Requirements for XRootD-Multiuser with VOMS FQANs"
-    Using XRootD-Multiuser with a VOMS FQAN requires mapping the FQAN to a username, which requires a `voms-mapfile`.
-    Support is available in `xrootd-voms 5.4.2-1.1`, in the OSG 3.6 repos, though it is expected in XRootD 5.5.0.
-    If you want to use multiuser, ensure you are getting `xrootd-voms` from the OSG repos.
-
 The `xrootd-multiuser` plugin allows XRootD to write files on the storage system as the
 [authenticated](xrootd-authorization.md) user instead of the `xrootd` user.
 If your XRootD service only allows read-only access, you should skip installation of this plugin.
@@ -117,6 +107,9 @@ To set up XRootD in multi-user mode, install the `xrootd-multiuser` package:
 ``` console
 root@xrootd-standalone # yum install xrootd-multiuser
 ```
+
+!!! note
+    If you are using XRootD-Multiuser with a VOMS FQAN, you need XRootD 5.5.0 or greater.
 
 #### Throttling IO requests
 
@@ -151,7 +144,7 @@ see the [upstream documentation](https://github.com/xrootd/xrootd/tree/master/sr
 For CMS sites, there is a package available to integrate rule-based name lookup using a `storage.xml` file.
 If you are not setting up a service for CMS, skip this section.
 
-To install an `xrootd-cmstfc` on OSG 3.6, run the following command:
+To install an `xrootd-cmstfc`, run the following command:
 
 ``` console
 root@xrootd-standalone # yum install --enablerepo=osg-contrib xrootd-cmstfc
@@ -180,7 +173,7 @@ The specific services are:
 
 | Software          | Service Name                          | Notes                                                                                                       |
 |:------------------|:--------------------------------------|:------------------------------------------------------------------------------------------------------------|
-| Fetch CRL         | EL8: `fetch-crl.timer` <br> EL7: `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info                        |
+| Fetch CRL         | EL8,EL9: `fetch-crl.timer` <br> EL7: `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info                        |
 | XRootD            | `xrootd@standalone`                   | Primary xrootd service if _not_ running in [multi-user mode](#enabling-multi-user-support)                |
 | XRootD Multi-user | `xrootd-privileged@standalone`        | Primary xrootd service to start _instead of_ `xrootd@standalone` if running in [multi-user mode](#enabling-multi-user-support) |
 
@@ -290,5 +283,4 @@ root@host # systemctl start xrootd@standalone
 
 | Service/Process          | Log File                                | Description                                 |
 |:-------------------------|:----------------------------------------|:--------------------------------------------|
-| `xrootd`                 | `/var/log/xrootd/server/xrootd.log`     | XRootD server daemon log                    |
-| `cmsd`                   | `/var/log/xrootd/server/cmsd.log`       | Cluster management log                      |
+| `xrootd`                 | `/var/log/xrootd/standalone/xrootd.log` | XRootD server daemon log                    |
