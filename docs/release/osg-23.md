@@ -53,7 +53,7 @@ Latest News
     -   Fix DAGMan where descendants of removed retry-able jobs are marked futile
     -   Ensure the `condor_test_token` works correctly when invoked as root
     -   Fix bug where empty multi-line values could cause a crash
-    -   `condor_qusers` returns proper exit code for errors in formatting options
+    -   Return proper exit code in `condor_qusers` for errors in formatting options
     -   Fix crash in job router when a job transform is missing an argument
 -   Upcoming
     -   [HTCONDOR 23.5.2](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-5_2)
