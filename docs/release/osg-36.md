@@ -91,6 +91,12 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### **March 14, 2024:** IGTF 1.128, osg-xrootd 3.6-23
+-   CA certificates based on [IGTF 1.128](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Update CRL download URL for ArmeSFo (AM)
+-   osg-xrootd 3.6-23
+    -   Automatically log DN of incoming user
+
 ### **February 29, 2024:** XRootD 5.6.8
 -   [XRootD 5.6.8](https://github.com/xrootd/xrootd/releases/tag/v5.6.8)
     -   Fix automatic renewal of server certificate with OpenSSL>=1.1
