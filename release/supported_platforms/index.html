@@ -1486,9 +1486,40 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Supported Platforms
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         Supported Platforms
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#future-release-series-plans" class="md-nav__link">
+    Future Release Series Plans
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1766,6 +1797,21 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#future-release-series-plans" class="md-nav__link">
+    Future Release Series Plans
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1783,8 +1829,16 @@
 
 
 <h1 id="supported-platforms">Supported Platforms<a class="headerlink" href="#supported-platforms" title="Permanent link">&para;</a></h1>
-<p>The OSG <a href="../release_series/">release series</a> are supported on Red Hat Enterprise Linux (RHEL) compatible platforms
-for 64-bit Intel architectures according to the following table:</p>
+<div class="admonition danger">
+<p class="admonition-title">Upcoming OSG 3.6 end-of-support dates</p>
+<p>OSG 3.6 reaches the "End of Regular Support" on March 31, 2024 and will only receive critical bug-fix and
+security updates until its end-of-life on June 30, 2024.
+See our <a href="../release_series/#series-life-cycle">Release Series documentation</a> for more details.</p>
+<p>Note that the OSG 3.6 end-of-life coincides with the wider Enterprise Linux 7 end-of-life.
+<strong>We recommend upgrading to OSG 23 and an Enteprise Linux 9 distribution at your earliest convenience.</strong></p>
+</div>
+<p>The OSG Software <a href="../release_series/">Release Series</a> are supported on Red Hat Enterprise Linux (RHEL)
+compatible platforms for 64-bit Intel architectures according to the following table:</p>
 <table>
 <thead>
 <tr>
@@ -1795,12 +1849,7 @@ for 64-bit Intel architectures according to the following table:</p>
 </thead>
 <tbody>
 <tr>
-<td>CentOS 7</td>
-<td>&#9989;</td>
-<td></td>
-</tr>
-<tr>
-<td>CentOS Stream 8</td>
+<td>Alma Linux 9</td>
 <td>&#9989;</td>
 <td>&#9989;</td>
 </tr>
@@ -1810,32 +1859,7 @@ for 64-bit Intel architectures according to the following table:</p>
 <td>&#9989;</td>
 </tr>
 <tr>
-<td>Alma Linux 8</td>
-<td>&#9989;</td>
-<td>&#9989;</td>
-</tr>
-<tr>
-<td>Alma Linux 9</td>
-<td>&#9989;</td>
-<td>&#9989;</td>
-</tr>
-<tr>
-<td>Red Hat Enterprise Linux 7</td>
-<td>&#9989;</td>
-<td></td>
-</tr>
-<tr>
-<td>Red Hat Enterprise Linux 8</td>
-<td>&#9989;</td>
-<td>&#9989;</td>
-</tr>
-<tr>
 <td>Red Hat Enterprise Linux 9</td>
-<td>&#9989;</td>
-<td>&#9989;</td>
-</tr>
-<tr>
-<td>Rocky Linux 8</td>
 <td>&#9989;</td>
 <td>&#9989;</td>
 </tr>
@@ -1845,17 +1869,78 @@ for 64-bit Intel architectures according to the following table:</p>
 <td>&#9989;</td>
 </tr>
 <tr>
+<td>Alma Linux 8</td>
+<td>&#9989;</td>
+<td>&#9989;</td>
+</tr>
+<tr>
+<td>CentOS Stream 8</td>
+<td>&#9989;</td>
+<td>&#9989;</td>
+</tr>
+<tr>
+<td>Red Hat Enterprise Linux 8</td>
+<td>&#9989;</td>
+<td>&#9989;</td>
+</tr>
+<tr>
+<td>Rocky Linux 8</td>
+<td>&#9989;</td>
+<td>&#9989;</td>
+</tr>
+<tr>
+<td>CentOS 7</td>
+<td>&#9989;</td>
+<td></td>
+</tr>
+<tr>
+<td>Red Hat Enterprise Linux 7</td>
+<td>&#9989;</td>
+<td></td>
+</tr>
+<tr>
 <td>Scientifix Linux 7</td>
 <td>&#9989;</td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<p>OSG builds and tests its RPMs on the latest releases of the relevant platforms (e.g., in 2023, the RHEL 9 builds were based on RHEL 9.2).
+<p>OSG builds and tests its RPMs on the latest releases of the relevant platforms (e.g., in 2023, the RHEL 9 builds were
+based on RHEL 9.2).
 Older platform release versions may not receive thorough testing and may have subtle bugs.
-In particular, versions of RHEL/CentOS/SL 7 less than 7.5 have known issues with several pieces of software, including <code>osg-oasis</code> and <code>xrootd-lcmaps</code>.
-In addition, versions of RHEL/CentOS/SL 7 less than 7.8 do not have Python 3, which is required to run HTCondor 9 and HTCondor-CE 5.
-If sites run into problems with one of those versions, we will ask them to update to the latest operating system packages as part of the support process.</p>
+If you run into problems with an older OS version, you will be asked them to update to the latest operating system
+packages as part of the support process.</p>
+<p>In particular, versions of RHEL/CentOS/SL 7 less than 7.5 have known issues with several pieces of software, including
+<code>osg-oasis</code> and <code>xrootd-lcmaps</code>.
+In addition, versions of RHEL/CentOS/SL 7 less than 7.8 do not have Python 3, which is required to run HTCondor 9 and
+HTCondor-CE 5.</p>
+<h2 id="future-release-series-plans">Future Release Series Plans<a class="headerlink" href="#future-release-series-plans" title="Permanent link">&para;</a></h2>
+<p>The OSG Software Team expects to support the following Enterprise Linux (EL) major operating system versions for future
+OSG Software <a href="../release_series/">Release Series</a>:</p>
+<table>
+<thead>
+<tr>
+<th>Release Series</th>
+<th>Expected Release</th>
+<th>EL8</th>
+<th>EL9</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OSG 24</td>
+<td>Q3 2024</td>
+<td>&#9989;</td>
+<td>&#9989;</td>
+</tr>
+<tr>
+<td>OSG 25</td>
+<td>Q3 2025</td>
+<td>&#9989;</td>
+<td>&#9989;</td>
+</tr>
+</tbody>
+</table>
 
               
             </article>
