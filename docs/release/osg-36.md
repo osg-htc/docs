@@ -5,7 +5,7 @@ OSG 3.6 News
 
 !!! danger "Upcoming OSG 3.6 end-of-support dates"
     OSG 3.6 reaches the "End of Regular Support" on March 31, 2024 and will only receive critical bug-fix and
-    security update until it's end-of-life on June 30, 2024.
+    security updates until its end-of-life on June 30, 2024.
     See our [Release Series documentation](./release_series.md#series-life-cycle) for more details.
 
     Note that the OSG 3.6 end-of-life coincides with the wider Enterprise Linux 7 end-of-life.
