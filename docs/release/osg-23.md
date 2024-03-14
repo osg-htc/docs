@@ -57,14 +57,14 @@ Latest News
     -   Fix crash in job router when a job transform is missing an argument
 -   Upcoming
     -   [HTCONDOR 23.5.2](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-5_2)
-        -   Old ClassAd based syntax is disabled by default for the job router
-        -   Can efficiently manage/enforce disk space using LVM partitions
-        -   GPU discovery is enabled on all Execution Points by default
-        -   Prevents accessing unallocated GPUs using cgroup v1 enforcement
-        -   New `condor_submit` commands for constraining GPU properties
+        -   Disable old ClassAd-based syntax by default for the job router
+        -   Add ability to use LVM partitions to efficiently manage/enforce disk space
+        -   Enable GPU discovery on all Execution Points by default
+        -   Use cgroups v1 enforcement to prevent accessing unallocated GPUs
+        -   Add new `condor_submit` commands for constraining GPU properties
         -   Add ability to transfer EP's starter log back to the Access Point
-        -   Can use VOMS attributes when mapping identities of SSL connections
-        -   The CondorVersion string contains the source git SHA
+        -   Enable use of VOMS attributes when mapping identities of SSL connections
+        -   Add the Git SHA of the HTCondor sources to the CondorVersion string
 
 ### **February 29, 2024:** XRootD 5.6.8
 -   [XRootD 5.6.8](https://github.com/xrootd/xrootd/releases/tag/v5.6.8)
