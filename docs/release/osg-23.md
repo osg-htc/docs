@@ -44,6 +44,28 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **March 14, 2024:** IGTF 1.128, osg-xrootd 23-5, HTCondor 23.0.6 LTS, HTCondor-CE 23.0.6; Upcoming: HTCondor 23.5.2
+-   CA certificates based on [IGTF 1.128](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Update CRL download URL for ArmeSFo (AM)
+-   osg-xrootd 23-5
+    -   Automatically log DN of incoming user
+-   [HTCondor 23.0.6 LTS](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-6)
+    -   Fix DAGMan where descendants of removed retry-able jobs are marked futile
+    -   Ensure the `condor_test_token` works correctly when invoked as root
+    -   Fix bug where empty multi-line values could cause a crash
+    -   Return proper exit code in `condor_qusers` for errors in formatting options
+    -   Fix crash in job router when a job transform is missing an argument
+-   Upcoming
+    -   [HTCONDOR 23.5.2](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-5_2)
+        -   Disable old ClassAd-based syntax by default for the job router
+        -   Add ability to use LVM partitions to efficiently manage/enforce disk space
+        -   Enable GPU discovery on all Execution Points by default
+        -   Use cgroups v1 enforcement to prevent accessing unallocated GPUs
+        -   Add new `condor_submit` commands for constraining GPU properties
+        -   Add ability to transfer EP's starter log back to the Access Point
+        -   Enable use of VOMS attributes when mapping identities of SSL connections
+        -   Add the Git SHA of the HTCondor sources to the CondorVersion string
+
 ### **February 29, 2024:** XRootD 5.6.8
 -   [XRootD 5.6.8](https://github.com/xrootd/xrootd/releases/tag/v5.6.8)
     -   Fix automatic renewal of server certificate with OpenSSL>=1.1
