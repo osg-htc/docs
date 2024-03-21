@@ -94,7 +94,7 @@ Latest News
 ### **March 21, 2024:** osg-scitokens-mapfile 13-2, vo-client 135-1
 -   osg-scitokens-mapfile 13-2
     -   Add the new CERN IAM instances for ATLAS and CMS to the default CE token to local user mapfiles
--   vo-client-135-1
+-   vo-client 135-1
     -   Adds LSC files for new LHC IAM hosts for ALICE, ATLAS, CMS, DTEAM, and LHCb 
 
 ### **March 14, 2024:** IGTF 1.128, osg-xrootd 3.6-23
