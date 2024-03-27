@@ -118,11 +118,11 @@ As any user on another computer, do the following (where
 squid server):
 
 ``` console hl_lines="1"
-user@host $ export http_proxy=http://`<MY.SQUID.HOST.EDU>`:3128
+user@host $ export http_proxy=http://<MY.SQUID.HOST.EDU>:3128
 user@host $ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep X-Cache
-X-Cache: MISS from `<MY.SQUID.HOST.EDU>`
+X-Cache: MISS from <MY.SQUID.HOST.EDU>
 user@host $ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep X-Cache
-X-Cache: HIT from `<MY.SQUID.HOST.EDU>`
+X-Cache: HIT from <MY.SQUID.HOST.EDU>
 ```
 
 If the grep doesn't print anything, try removing it from the pipeline
@@ -130,10 +130,6 @@ to see if errors are obvious. If the second try says MISS again,
 something is probably wrong with the squid cache writes. Look at the squid
 [access.log file](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Log_file_contents)
 to try to see what's wrong.
-
-If your squid will be supporting the Frontier application, it is also
-good to do the test in the
-[upstream documentation Testing the installation section](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Testing_the_installation).
 
 ## Registering Frontier Squid
 
