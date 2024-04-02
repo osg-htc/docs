@@ -2167,20 +2167,17 @@ services.</p>
 <p>As any user on another computer, do the following (where
 <code>&lt;MY.SQUID.HOST.EDU&gt;</code> is the fully qualified domain name of your
 squid server):</p>
-<div class="highlight"><pre><span></span><code><span class="hll"><span class="gp">user@host $ </span><span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span>http://<span class="sb">`</span>&lt;MY.SQUID.HOST.EDU&gt;<span class="sb">`</span>:3128
+<div class="highlight"><pre><span></span><code><span class="hll"><span class="gp">user@host $ </span><span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span>http://&lt;MY.SQUID.HOST.EDU&gt;:3128
 </span><span class="gp">user@host $ </span>wget -qdO/dev/null http://frontier.cern.ch <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">|</span>grep X-Cache
-<span class="go">X-Cache: MISS from `&lt;MY.SQUID.HOST.EDU&gt;`</span>
+<span class="go">X-Cache: MISS from &lt;MY.SQUID.HOST.EDU&gt;</span>
 <span class="gp">user@host $ </span>wget -qdO/dev/null http://frontier.cern.ch <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">|</span>grep X-Cache
-<span class="go">X-Cache: HIT from `&lt;MY.SQUID.HOST.EDU&gt;`</span>
+<span class="go">X-Cache: HIT from &lt;MY.SQUID.HOST.EDU&gt;</span>
 </code></pre></div>
 <p>If the grep doesn't print anything, try removing it from the pipeline
 to see if errors are obvious. If the second try says MISS again,
 something is probably wrong with the squid cache writes. Look at the squid
 <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Log_file_contents">access.log file</a>
 to try to see what's wrong.</p>
-<p>If your squid will be supporting the Frontier application, it is also
-good to do the test in the
-<a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Testing_the_installation">upstream documentation Testing the installation section</a>.</p>
 <h2 id="registering-frontier-squid">Registering Frontier Squid<a class="headerlink" href="#registering-frontier-squid" title="Permanent link">&para;</a></h2>
 <p>To register your Frontier Squid host, follow the general registration instructions
 <a href="../../common/registration/#new-resources">here</a> with the following Frontier Squid-specific details.
