@@ -44,6 +44,10 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **April 4, 2024:** XRootD 5.6.9
+-   [XRootD 5.6.9](https://listserv.slac.stanford.edu/cgi-bin/wa?A2=ind2403&L=XROOTD-L&P=816)
+    -   Various minor bug fixes; see upstream release notes for details
+
 ### **March 21, 2024:** osg-scitokens-mapfile 13-2, vo-client 135-1
 -   osg-scitokens-mapfile 13-2
     -   Add the new CERN IAM instances for ATLAS and CMS to the default CE token to local user mapfiles
