@@ -44,6 +44,15 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **April 11, 2024:** HTCondor 23.0.8, HTCondor-CE 23.0.8
+-   [HTCondor 23.0.8 LTS](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-8)
+    -   Fix bug where ssh-agent processes were leaked with grid universe jobs
+    -   Fix DAGMan crash when a provisioner node was given a parent
+    -   Fix bug that prevented use of ftp: URLs in file transfer
+    -   Fix bug where jobs that matched an offline slot never start
+-   [HTCondor-CE 23.0.8](https://htcondor.com/htcondor-ce/v23/releases/#2308)
+    -   Fix memory request being ignored for whole node jobs
+
 ### **April 4, 2024:** XRootD 5.6.9
 -   [XRootD 5.6.9](https://listserv.slac.stanford.edu/cgi-bin/wa?A2=ind2403&L=XROOTD-L&P=816)
     -   Various minor bug fixes; see upstream release notes for details
