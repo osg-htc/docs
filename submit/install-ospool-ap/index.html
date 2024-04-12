@@ -2160,10 +2160,10 @@ see <a href="../../other/troubleshooting-gratia/#access-points_1">this section</
 <p>Copy the token that you obtained from the <a href="#obtain-an-authentication-token">authentication token step</a> above,
 to the location <code>/etc/condor/tokens.d/ospool.token</code> on the Access Point.
 Ensure that there aren't any line breaks in this file (i.e., the entire token should only take up one line).</p>
-<p>Change the ownership of the <code>ospool.token</code> file to <code>condor:condor</code> and the permissions to <code>0600</code>.
+<p>Change the ownership of the <code>ospool.token</code> file to <code>root:root</code> and the permissions to <code>0600</code>.
 Verify this with <code>ls -l /etc/condor/tokens.d/ospool.token</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="gp"># </span>ls -l /etc/condor/tokens.d/ospool.token
-<span class="go">-rw------- 1 condor condor 288 Nov 11 09:03 /etc/condor/tokens.d/ospool.token</span>
+<span class="go">-rw------- 1 root root 288 Nov 11 09:03 /etc/condor/tokens.d/ospool.token</span>
 </code></pre></div>
 <p>You can also list the token with the <code>condor_token_list</code> command:</p>
 <div class="highlight"><pre><span></span><code><span class="gp"># </span>condor_token_list 
