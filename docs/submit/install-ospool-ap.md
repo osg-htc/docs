@@ -1,4 +1,4 @@
-DateReviewed: 2023-12-20
+DateReviewed: 2024-04-12
 title: Installing an Open Science Pool Access Point
 
 Installing an Open Science Pool Access Point
@@ -130,12 +130,12 @@ Copy the token that you obtained from the [authentication token step](#obtain-an
 to the location `/etc/condor/tokens.d/ospool.token` on the Access Point.
 Ensure that there aren't any line breaks in this file (i.e., the entire token should only take up one line).
 
-Change the ownership of the `ospool.token` file to `condor:condor` and the permissions to `0600`.
+Change the ownership of the `ospool.token` file to `root:root` and the permissions to `0600`.
 Verify this with `ls -l /etc/condor/tokens.d/ospool.token`:
 
 ```console
 # ls -l /etc/condor/tokens.d/ospool.token
--rw------- 1 condor condor 288 Nov 11 09:03 /etc/condor/tokens.d/ospool.token
+-rw------- 1 root root 288 Nov 11 09:03 /etc/condor/tokens.d/ospool.token
 ```
 
 You can also list the token with the `condor_token_list` command:
