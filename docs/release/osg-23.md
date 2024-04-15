@@ -44,7 +44,14 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
-### **April 11, 2024:** HTCondor 23.0.8, HTCondor-CE 23.0.8
+### **April 15, 2024:** Upcoming: HTCondor 23.6.1
+-   Upcoming
+    -   [HTCONDOR 23.6.1](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-6-1)
+        -   Add the ability to force vanilla universe jobs to run in a container
+        -   Add the ability to override the entrypoint for a Docker image
+        -   `condor_q -better-analyze` includes units for memory and disk quantities
+
+### **April 11, 2024:** HTCondor 23.0.8 LTS, HTCondor-CE 23.0.8
 -   [HTCondor 23.0.8 LTS](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-8)
     -   Fix bug where ssh-agent processes were leaked with grid universe jobs
     -   Fix DAGMan crash when a provisioner node was given a parent
@@ -75,7 +82,7 @@ Latest News
     -   Return proper exit code in `condor_qusers` for errors in formatting options
     -   Fix crash in job router when a job transform is missing an argument
 -   Upcoming
-    -   [HTCONDOR 23.5.2](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-5_2)
+    -   [HTCONDOR 23.5.2](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-5-2)
         -   Disable old ClassAd-based syntax by default for the job router
         -   Add ability to use LVM partitions to efficiently manage/enforce disk space
         -   Enable GPU discovery on all Execution Points by default
