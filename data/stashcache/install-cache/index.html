@@ -2555,7 +2555,7 @@ As a reminder, here are common service commands (all run as <code>root</code>):<
 </table>
 <h2 id="validating-the-cache">Validating the Cache<a class="headerlink" href="#validating-the-cache" title="Permanent link">&para;</a></h2>
 <p>The cache server functions as a normal HTTP server and can interact with typical HTTP clients, such as <code>curl</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>curl -O http://cache_host:8000/osgconnect/public/rynge/test.data
+<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>curl -O http://cache_host:8000/ospool/uc-shared/public/OSG-Staff/validation/test.txt
 </code></pre></div>
 <p><code>curl</code> may not correctly report a failure, so verify that the contents of the file are:
 <div class="highlight"><pre><span></span><code>hello world!
