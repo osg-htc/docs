@@ -2300,10 +2300,10 @@ make sure it is at least twice the value of <code>XC_RAMSIZE</code>.</p>
 <h2 id="validating-the-cache">Validating the Cache<a class="headerlink" href="#validating-the-cache" title="Permanent link">&para;</a></h2>
 <p>The cache server functions as a normal HTTP server and can interact with typical HTTP clients, such as <code>curl</code>.
 Here, <code>&lt;HTTP HOST PORT&gt;</code> is the port chosen in the <code>docker run</code> command, <code>8000</code> by default.</p>
-<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>curl -O http://cache_host:&lt;HTTP HOST PORT&gt;/osgconnect/public/rynge/test.data
+<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>curl -O http://cache_host:&lt;HTTP HOST PORT&gt;/ospool/uc-shared/public/OSG-Staff/validation/test.txt
 </code></pre></div>
 <p><code>curl</code> may not correctly report a failure, so verify that the contents of the file are:
-<div class="highlight"><pre><span></span><code>hello world!
+<div class="highlight"><pre><span></span><code>Hello, World!
 </code></pre></div></p>
 <h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
 <p>To get assistance, please use the <a href="../../../common/help/">this page</a>.</p>
