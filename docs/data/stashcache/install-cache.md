@@ -334,7 +334,7 @@ The cache server functions as a normal HTTP server and can interact with typical
 
 
 ```console
-user@host $ curl -O http://cache_host:8000/osgconnect/public/rynge/test.data
+user@host $ curl -O http://cache_host:8000/ospool/uc-shared/public/OSG-Staff/validation/test.txt
 ```
 
 `curl` may not correctly report a failure, so verify that the contents of the file are:
