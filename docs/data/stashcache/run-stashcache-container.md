@@ -307,12 +307,12 @@ Here, `<HTTP HOST PORT>` is the port chosen in the `docker run` command, `8000` 
 
 
 ```console
-user@host $ curl -O http://cache_host:<HTTP HOST PORT>/osgconnect/public/rynge/test.data
+user@host $ curl -O http://cache_host:<HTTP HOST PORT>/ospool/uc-shared/public/OSG-Staff/validation/test.txt
 ```
 
 `curl` may not correctly report a failure, so verify that the contents of the file are:
 ```
-hello world!
+Hello, World!
 ```
 
 Getting Help
