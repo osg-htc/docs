@@ -91,6 +91,12 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### **May 2, 2024:** XCache 3.7.0, osg-xrootd 3.6-24
+-   [XCache 3.7.0](https://github.com/opensciencegrid/xcache/releases/tag/v3.7.0) and osg-xrootd 3.6-24
+    -   Security update for OSDF caches and origins
+        -   Require explicit mapping of DNs to avoid hash collisions
+        -   Get mappings for cache and origin DNs from Topology
+
 ### **March 21, 2024:** osg-scitokens-mapfile 13-2, vo-client 135-1
 -   osg-scitokens-mapfile 13-2
     -   Add the new CERN IAM instances for ATLAS and CMS to the default CE token to local user mapfiles
