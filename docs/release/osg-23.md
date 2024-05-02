@@ -44,6 +44,12 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **May 2, 2024:** XCache 3.7.0, osg-xrootd 23-6
+-   [XCache 3.7.0](https://github.com/opensciencegrid/xcache/releases/tag/v3.7.0) and osg-xrootd 23-6
+    -   Security update for OSDF caches and origins
+        -   Require explicit mapping of DNs to avoid hash collisions
+        -   Get mappings for cache and origin DNs from Topology
+
 ### **April 15, 2024:** Upcoming: HTCondor 23.6.1
 -   Upcoming
     -   [HTCONDOR 23.6.1](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-6-1)
