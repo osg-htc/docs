@@ -28,8 +28,8 @@ nav:
 - Resource Sharing:
   - Compute:
     - 'Overview': 'resource-sharing/overview.md'
-    - Pilot Containers:
-      - 'Site Backfill': 'resource-sharing/os-backfill-containers.md'
+    - Containers:
+      - 'OSPool Containers': 'resource-sharing/os-backfill-containers.md'
       - 'User Allocations': 'resource-sharing/user-containers.md'
     - Compute Entrypoint:
       - 'HTCondor-CE Overview': 'compute-element/htcondor-ce-overview.md'
