@@ -44,6 +44,21 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **May 9, 2024:** VO Package v136
+-   [VO Package v136](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-136)
+    -   Transition to new IAM-based VOMS signing servers for LHC experiments
+-   [HTCondor 23.0.10 LTS](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-10)
+    -   Preliminary support for Ubuntu 22.04 (Noble Numbat)
+    -   Warns about deprecated multiple queue statements in a submit file
+    -   Fix bug where plugins could not signify to retry a file transfer
+    -   The `condor_upgrade_check` script checks for proper token file permissions
+    -   Fix bug where the `condor_upgrade_check` script crashes on older platforms
+    -   The bundled version of apptainer was moved to libexec in the tarball
+-   XRootD 5.6.9-1.3:
+    -   Add g-stream monitoring for IO time for Pelican
+-   [CVMFS 2.11.3](https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-11-3)
+    -   Update method of downloading the MaxMind GeoIP, including requiring new configuration parameter `CVMFS_GEO_ACCOUNT_ID`
+
 ### **May 2, 2024:** XCache 3.7.0, osg-xrootd 23-6
 -   [XCache 3.7.0](https://github.com/opensciencegrid/xcache/releases/tag/v3.7.0) and osg-xrootd 23-6
     -   Security update for OSDF caches and origins
