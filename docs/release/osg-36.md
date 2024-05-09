@@ -91,6 +91,10 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### **May 9, 2024:** VO Package v136
+-   [VO Package v136](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-136)
+    -   Transition to new IAM-based VOMS signing servers for LHC experiments
+
 ### **May 2, 2024:** XCache 3.7.0, osg-xrootd 3.6-24
 -   [XCache 3.7.0](https://github.com/opensciencegrid/xcache/releases/tag/v3.7.0) and osg-xrootd 3.6-24
     -   Security update for OSDF caches and origins
