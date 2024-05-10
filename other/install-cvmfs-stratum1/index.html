@@ -2074,9 +2074,10 @@
 <p>Use this command to install cvmfs-server and httpd:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum -y install cvmfs-server cvmfs-config mod_wsgi
 </code></pre></div>
+<p>On EL8 use <code>python3-mod_wsgi</code> instead of <code>mod_wsgi</code>.</p>
 <h3 id="installing-frontier-squid-and-frontier-awstats">Installing frontier-squid and frontier-awstats<a class="headerlink" href="#installing-frontier-squid-and-frontier-awstats" title="Permanent link">&para;</a></h3>
 <p><a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallAwstats">frontier-awstats</a> is not distributed by OSG so these instructions get it from its original source.  Do these commands to install frontier-squid and frontier-awstats:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>rpm -i http://frontier.cern.ch/dist/rpms/RPMS/noarch/frontier-release-1.1-1.noarch.rpm
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>rpm -i http://frontier.cern.ch/dist/rpms/RPMS/noarch/frontier-release-1.2-1.noarch.rpm
 <span class="gp">root@host # </span>yum -y install frontier-squid frontier-awstats
 </code></pre></div>
 <h2 id="configuring">Configuring<a class="headerlink" href="#configuring" title="Permanent link">&para;</a></h2>
@@ -2148,21 +2149,9 @@ KeepAlive On
 <span class="s1">print</span>
 <span class="s1">}&#39;</span>
 </code></pre></div>
-<p>On EL7 and EL8 systems, make sure that firewalld is disabled and iptables-services is installed and enabled:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>systemctl stop firewalld
-<span class="gp">root@host # </span>systemctl disable firewalld
-<span class="gp">root@host # </span>systemctl mask --now firewalld
-<span class="gp">root@host # </span>yum -y install iptables-services 
-<span class="gp">root@host # </span>systemctl start iptables
-<span class="gp">root@host # </span>systemctl <span class="nb">enable</span> iptables
-<span class="gp">root@host # </span>systemctl start ip6tables
-<span class="gp">root@host # </span>systemctl <span class="nb">enable</span> ip6tables
-</code></pre></div>
 <p>Forward port 80 to port 8000:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>iptables -t nat -A PREROUTING -p tcp -m tcp --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8000</span> 
-<span class="gp">root@host # </span>service iptables save
-<span class="gp">root@host # </span>ip6tables -t nat -A PREROUTING -p tcp -m tcp --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8000</span>
-<span class="gp">root@host # </span>service ip6tables save
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>firewall-cmd --permanent --add-forward-port<span class="o">=</span><span class="nv">port</span><span class="o">=</span><span class="m">80</span>:proto<span class="o">=</span>tcp:toport<span class="o">=</span><span class="m">8000</span>
+<span class="gp">root@host # </span>firewall-cmd --reload
 </code></pre></div>
 <p>Enable frontier-squid:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>systemctl <span class="nb">enable</span> frontier-squid
