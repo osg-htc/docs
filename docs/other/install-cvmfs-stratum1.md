@@ -34,12 +34,14 @@ Use this command to install cvmfs-server and httpd:
 root@host # yum -y install cvmfs-server cvmfs-config mod_wsgi
 ```
 
+On EL8 use `python3-mod_wsgi` instead of `mod_wsgi`.
+
 ### Installing frontier-squid and frontier-awstats
 
 [frontier-awstats](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallAwstats) is not distributed by OSG so these instructions get it from its original source.  Do these commands to install frontier-squid and frontier-awstats:
 
 ```console
-root@host # rpm -i http://frontier.cern.ch/dist/rpms/RPMS/noarch/frontier-release-1.1-1.noarch.rpm
+root@host # rpm -i http://frontier.cern.ch/dist/rpms/RPMS/noarch/frontier-release-1.2-1.noarch.rpm
 root@host # yum -y install frontier-squid frontier-awstats
 ```
 
@@ -142,26 +144,11 @@ print
 }'
 ```
 
-On EL7 and EL8 systems, make sure that firewalld is disabled and iptables-services is installed and enabled:
-
-```console
-root@host # systemctl stop firewalld
-root@host # systemctl disable firewalld
-root@host # systemctl mask --now firewalld
-root@host # yum -y install iptables-services 
-root@host # systemctl start iptables
-root@host # systemctl enable iptables
-root@host # systemctl start ip6tables
-root@host # systemctl enable ip6tables
-```
-
 Forward port 80 to port 8000:
 
 ```console
-root@host # iptables -t nat -A PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8000 
-root@host # service iptables save
-root@host # ip6tables -t nat -A PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8000
-root@host # service ip6tables save
+root@host # firewall-cmd --permanent --add-forward-port=port=80:proto=tcp:toport=8000
+root@host # firewall-cmd --reload
 ```
 
 Enable frontier-squid:
