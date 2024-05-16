@@ -91,6 +91,10 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### **May 16, 2024:** VOMS 2.1.0-0.31.rc3.2
+-   VOMS 2.1.0-0.31.rc3.2
+    -   Fix `voms-proxy-init` incompatibility with new LHC IAM servers
+
 ### **May 9, 2024:** VO Package v136
 -   [VO Package v136](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-136)
     -   Transition to new IAM-based VOMS signing servers for LHC experiments

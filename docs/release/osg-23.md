@@ -44,6 +44,22 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **May 16, 2024:** VOMS 2.1.0-0.31.rc3.2; Upcoming: HTCondor 23.7.2, Pelican 7.8.2
+-   VOMS 2.1.0-0.31.rc3.2
+    -   Fix `voms-proxy-init` incompatibility with new LHC IAM servers
+-   Upcoming
+    -   [HTCONDOR 23.7.2](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-7-2)
+        -   Warns about deprecated multiple `queue` statements in a submit file
+        -   The semantics of `skip_if_dataflow` have been improved
+        -   Removing large DAGs is now non-blocking, preserving schedd performance
+        -   Periodic policy expressions are now checked during input file transfer
+        -   Local universe jobs can now specify a container image
+        -   File transfer plugins can now advertise extra attributes
+        -   DAGMan can rescue and abort if pending jobs are missing from the job queue
+        -   Fix so `condor_submit -interactive` works on cgroup v2 execution points
+    -   [Pelican 7.8.2](https://github.com/PelicanPlatform/pelican/releases/tag/v7.8.2)
+
+
 ### **May 9, 2024:** VO Package v136
 -   [VO Package v136](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-136)
     -   Transition to new IAM-based VOMS signing servers for LHC experiments
