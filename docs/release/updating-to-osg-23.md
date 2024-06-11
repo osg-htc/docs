@@ -118,8 +118,8 @@ After turning off your CE's services, you may proceed with the [repository and R
 
 After updating your RPMs and updating your configuration, turn on the HTCondor-CE service:
 
-        :::console
-        root@host # systemctl start condor-ce
+    :::console
+    root@host # systemctl start condor-ce
 
 Updating Your HTCondor Hosts
 ----------------------------
