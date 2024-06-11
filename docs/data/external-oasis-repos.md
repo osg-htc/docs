@@ -216,7 +216,7 @@ Once the repository is fully replicated on the OSG, the VO may proceed in publis
 
 Finally, if the new repository will be used outside of the U.S., the
 VO should open a [GGUS](https://ggus.eu) ticket following EGI's
-[PROC20](https://confluence.egi.eu/display/EGIPP/PROC20+Support+for+CVMFS+replication+across+the+EGI+and+OSG+CVMFS+services)
+[PROC20](https://confluence.egi.eu/display/EGIPP/PROC20+Support+for+CVMFS+replication+across+the+EGI+and+other+partner+collaboration+CVMFS+services)
 to get the repository replicated onto worldwide Stratum 1s.
 
 Replacing an Existing OASIS Repository Server

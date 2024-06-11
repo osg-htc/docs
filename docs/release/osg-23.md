@@ -44,6 +44,13 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **June 11, 2024:** XRootD 5.6.9-1.6
+-   XRootD 5.6.9-1.6
+    -   Add `gateway timeout` error code for unresponsive origins
+    -   Add g-stream monitoring for I/O time
+    -   Add ability to disable or defer TLS authentication
+    -   Fix timers used for I/O throttling
+
 ### **May 16, 2024:** VOMS 2.1.0-0.31.rc3.2; Upcoming: HTCondor 23.7.2, Pelican 7.8.2
 -   VOMS 2.1.0-0.31.rc3.2
     -   Fix `voms-proxy-init` incompatibility with new LHC IAM servers
