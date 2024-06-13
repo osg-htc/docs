@@ -44,6 +44,13 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **June 13, 2024:** HTCondor 23.0.12
+-   [HTCondor 23.0.12 LTS](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-12)
+    -   Remote `condor_history` queries now work the same as local queries
+    -   Improve error handling when submitting to a remote scheduler via ssh
+    -   Fix bug on Windows where `condor_procd` may crash when suspending a job
+    -   Fix Python binding crash when submitting a DAG which has empty lines
+
 ### **June 11, 2024:** XRootD 5.6.9-1.6
 -   XRootD 5.6.9-1.6
     -   Add `gateway timeout` error code for unresponsive origins
@@ -55,7 +62,7 @@ Latest News
 -   VOMS 2.1.0-0.31.rc3.2
     -   Fix `voms-proxy-init` incompatibility with new LHC IAM servers
 -   Upcoming
-    -   [HTCONDOR 23.7.2](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-7-2)
+    -   [HTCondor 23.7.2](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-7-2)
         -   Warns about deprecated multiple `queue` statements in a submit file
         -   The semantics of `skip_if_dataflow` have been improved
         -   Removing large DAGs is now non-blocking, preserving schedd performance
@@ -90,7 +97,7 @@ Latest News
 
 ### **April 15, 2024:** Upcoming: HTCondor 23.6.1
 -   Upcoming
-    -   [HTCONDOR 23.6.1](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-6-1)
+    -   [HTCondor 23.6.1](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-6-1)
         -   Add the ability to force vanilla universe jobs to run in a container
         -   Add the ability to override the entrypoint for a Docker image
         -   `condor_q -better-analyze` includes units for memory and disk quantities
@@ -126,7 +133,7 @@ Latest News
     -   Return proper exit code in `condor_qusers` for errors in formatting options
     -   Fix crash in job router when a job transform is missing an argument
 -   Upcoming
-    -   [HTCONDOR 23.5.2](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-5-2)
+    -   [HTCondor 23.5.2](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-5-2)
         -   Disable old ClassAd-based syntax by default for the job router
         -   Add ability to use LVM partitions to efficiently manage/enforce disk space
         -   Enable GPU discovery on all Execution Points by default
@@ -195,7 +202,7 @@ Latest News
 -   osg-configure 4.1.1-3
     -   Create necessary directories for CE on Enterprise Linux 8 and 9
 -   Upcoming
-    -   [HTCONDOR 23.4.0](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-4-0)
+    -   [HTCondor 23.4.0](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-4-0)
         -   `condor_submit` warns about unit-less `request_disk` and `request_memory`
         -   Separate `condor-credmon-local` RPM package provides local SciTokens issuer
         -   Fix bug where `NEGOTIATOR_SLOT_CONSTRAINT` was ignored since version 23.3.0
