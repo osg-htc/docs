@@ -1445,6 +1445,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#june-13-2024-htcondor-23012" class="md-nav__link">
+    June 13, 2024: HTCondor 23.0.12
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#june-11-2024-xrootd-569-16" class="md-nav__link">
     June 11, 2024: XRootD 5.6.9-1.6
   </a>
@@ -2041,6 +2048,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#june-13-2024-htcondor-23012" class="md-nav__link">
+    June 13, 2024: HTCondor 23.0.12
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#june-11-2024-xrootd-569-16" class="md-nav__link">
     June 11, 2024: XRootD 5.6.9-1.6
   </a>
@@ -2275,6 +2289,16 @@ hosts to accept certificates issued by SHA-1 signed CAs:</p>
 and token issuers present modern CAs.</p>
 </div>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="june-13-2024-htcondor-23012"><strong>June 13, 2024:</strong> HTCondor 23.0.12<a class="headerlink" href="#june-13-2024-htcondor-23012" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-12">HTCondor 23.0.12 LTS</a><ul>
+<li>Remote <code>condor_history</code> queries now work the same as local queries</li>
+<li>Improve error handling when submitting to a remote scheduler via ssh</li>
+<li>Fix bug on Windows where <code>condor_procd</code> may crash when suspending a job</li>
+<li>Fix Python binding crash when submitting a DAG which has empty lines</li>
+</ul>
+</li>
+</ul>
 <h3 id="june-11-2024-xrootd-569-16"><strong>June 11, 2024:</strong> XRootD 5.6.9-1.6<a class="headerlink" href="#june-11-2024-xrootd-569-16" title="Permanent link">&para;</a></h3>
 <ul>
 <li>XRootD 5.6.9-1.6<ul>
@@ -2292,7 +2316,7 @@ and token issuers present modern CAs.</p>
 </ul>
 </li>
 <li>Upcoming<ul>
-<li><a href="https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-7-2">HTCONDOR 23.7.2</a><ul>
+<li><a href="https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-7-2">HTCondor 23.7.2</a><ul>
 <li>Warns about deprecated multiple <code>queue</code> statements in a submit file</li>
 <li>The semantics of <code>skip_if_dataflow</code> have been improved</li>
 <li>Removing large DAGs is now non-blocking, preserving schedd performance</li>
@@ -2345,7 +2369,7 @@ and token issuers present modern CAs.</p>
 <h3 id="april-15-2024-upcoming-htcondor-2361"><strong>April 15, 2024:</strong> Upcoming: HTCondor 23.6.1<a class="headerlink" href="#april-15-2024-upcoming-htcondor-2361" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Upcoming<ul>
-<li><a href="https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-6-1">HTCONDOR 23.6.1</a><ul>
+<li><a href="https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-6-1">HTCondor 23.6.1</a><ul>
 <li>Add the ability to force vanilla universe jobs to run in a container</li>
 <li>Add the ability to override the entrypoint for a Docker image</li>
 <li><code>condor_q -better-analyze</code> includes units for memory and disk quantities</li>
@@ -2405,7 +2429,7 @@ and token issuers present modern CAs.</p>
 </ul>
 </li>
 <li>Upcoming<ul>
-<li><a href="https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-5-2">HTCONDOR 23.5.2</a><ul>
+<li><a href="https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-5-2">HTCondor 23.5.2</a><ul>
 <li>Disable old ClassAd-based syntax by default for the job router</li>
 <li>Add ability to use LVM partitions to efficiently manage/enforce disk space</li>
 <li>Enable GPU discovery on all Execution Points by default</li>
@@ -2516,7 +2540,7 @@ and token issuers present modern CAs.</p>
 </ul>
 </li>
 <li>Upcoming<ul>
-<li><a href="https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-4-0">HTCONDOR 23.4.0</a><ul>
+<li><a href="https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-4-0">HTCondor 23.4.0</a><ul>
 <li><code>condor_submit</code> warns about unit-less <code>request_disk</code> and <code>request_memory</code></li>
 <li>Separate <code>condor-credmon-local</code> RPM package provides local SciTokens issuer</li>
 <li>Fix bug where <code>NEGOTIATOR_SLOT_CONSTRAINT</code> was ignored since version 23.3.0</li>
