@@ -1445,6 +1445,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#june-27-2024-igtf-1129-osg-configure-420-upcoming-htcondor-2381" class="md-nav__link">
+    June 27, 2024: IGTF 1.129, osg-configure 4.2.0; Upcoming: HTCondor 23.8.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#june-13-2024-htcondor-23012" class="md-nav__link">
     June 13, 2024: HTCondor 23.0.12
   </a>
@@ -2048,6 +2055,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#june-27-2024-igtf-1129-osg-configure-420-upcoming-htcondor-2381" class="md-nav__link">
+    June 27, 2024: IGTF 1.129, osg-configure 4.2.0; Upcoming: HTCondor 23.8.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#june-13-2024-htcondor-23012" class="md-nav__link">
     June 13, 2024: HTCondor 23.0.12
   </a>
@@ -2289,6 +2303,39 @@ hosts to accept certificates issued by SHA-1 signed CAs:</p>
 and token issuers present modern CAs.</p>
 </div>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="june-27-2024-igtf-1129-osg-configure-420-upcoming-htcondor-2381"><strong>June 27, 2024:</strong> IGTF 1.129, osg-configure 4.2.0; Upcoming: HTCondor 23.8.1<a class="headerlink" href="#june-27-2024-igtf-1129-osg-configure-420-upcoming-htcondor-2381" title="Permanent link">&para;</a></h3>
+<ul>
+<li>CA certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.129</a><ul>
+<li>Updated CRL URL location for MREN CA (ME)</li>
+<li>Removed discontinued TSU-GE GRENA CA (GE)</li>
+<li>Removed suspended BYGCA (BY)</li>
+<li>Removed discontinued LIP CA (PT)</li>
+<li>Removed obsolete DT transitional CAs (AE)</li>
+<li>Additions to OSG CA Bundle (osg-ca-certs)<ul>
+<li>Add Let's Encrypt Intermediate CAs to support XRootD</li>
+<li>Add Let's Encrypt root CA (ISRG Root X2)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>osg-configure 4.2.0<ul>
+<li>Add "queue" to <code>OSG_ResourceCatalog</code> for Pilot sections</li>
+<li>Remove osg-configure-rsv</li>
+</ul>
+</li>
+<li>Upcoming<ul>
+<li><a href="https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-8-1">HTCondor 23.8.1</a><ul>
+<li>HTCondor Docker images are now based on Alma Linux 9</li>
+<li>HTCondor Docker images are now available for the arm64 CPU architecture</li>
+<li>The user can now choose which submit method DAGMan will use</li>
+<li>Can add custom attributes to the User ClassAd with <code>condor_qusers -edit</code></li>
+<li>Add use-projection option to <code>condor_gangliad</code> to reduce memory footprint</li>
+<li>Fix bug where interactive submit does not work on cgroup v2 systems (EL9)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="june-13-2024-htcondor-23012"><strong>June 13, 2024:</strong> HTCondor 23.0.12<a class="headerlink" href="#june-13-2024-htcondor-23012" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-12">HTCondor 23.0.12 LTS</a><ul>
