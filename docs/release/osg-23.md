@@ -44,6 +44,29 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **June 27, 2024:** IGTF 1.129, osg-configure 4.2.0; Upcoming: HTCondor 23.8.1
+-   CA certificates based on [IGTF 1.129](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Updated CRL URL location for MREN CA (ME)
+    -   Removed discontinued TSU-GE GRENA CA (GE)
+    -   Removed suspended BYGCA (BY)
+    -   Removed discontinued LIP CA (PT)
+    -   Removed obsolete DT transitional CAs (AE)
+    -   Additions to OSG CA Bundle (osg-ca-certs)
+        -   Add Let's Encrypt Intermediate CAs to support XRootD
+        -   Add Let's Encrypt root CA (ISRG Root X2)
+-   osg-configure 4.2.0
+    -   Add "queue" to `OSG_ResourceCatalog` for Pilot sections
+    -   Remove osg-configure-rsv
+-   Upcoming
+    -   [HTCondor 23.8.1](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-8-1)
+        -   HTCondor Docker images are now based on Alma Linux 9
+        -   HTCondor Docker images are now available for the arm64 CPU architecture
+        -   The user can now choose which submit method DAGMan will use
+        -   Can add custom attributes to the User ClassAd with `condor_qusers -edit`
+        -   Add use-projection option to `condor_gangliad` to reduce memory footprint
+        -   Fix bug where interactive submit does not work on cgroup v2 systems (EL9)
+
+
 ### **June 13, 2024:** HTCondor 23.0.12
 -   [HTCondor 23.0.12 LTS](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-12)
     -   Remote `condor_history` queries now work the same as local queries
