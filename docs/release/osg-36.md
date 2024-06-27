@@ -91,6 +91,17 @@ excludepkgs=rrdtool
 Latest News
 -----------
 
+### **June 27, 2024:** IGTF 1.129
+-   CA certificates based on [IGTF 1.129](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Updated CRL URL location for MREN CA (ME)
+    -   Removed discontinued TSU-GE GRENA CA (GE)
+    -   Removed suspended BYGCA (BY)
+    -   Removed discontinued LIP CA (PT)
+    -   Removed obsolete DT transitional CAs (AE)
+    -   Additions to OSG CA Bundle (osg-ca-certs)
+        -   Add Let's Encrypt Intermediate CAs to support XRootD
+        -   Add Let's Encrypt root CA (ISRG Root X2)
+
 ### **May 16, 2024:** VOMS 2.1.0-0.31.rc3.2
 -   VOMS 2.1.0-0.31.rc3.2
     -   Fix `voms-proxy-init` incompatibility with new LHC IAM servers
