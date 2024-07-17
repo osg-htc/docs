@@ -44,6 +44,18 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **July 17, 2024:** HTCondor-CE 23.0.12, IGTF 1.130; Upcoming: osdf-server 7.9.3
+-   [HTCondor-CE 23.0.12](https://htcondor.com/htcondor-ce/v23/releases/#23012)
+    -   Fix whole node GPU request expression for non-HTCondor batch systems
+-   CA certificates based on [IGTF 1.130](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   osg-ca-certs version number matches igft-ca-certs version number
+    -   resolve subjectDN nameformat compatibility issues trust anchor metadata
+-   Upcoming
+    -   osdf-server 7.9.3
+        -   Updated to upstream Pelican 7.9.3
+        -   Added logrotate config
+        -   Raised minimum XRootD version requirement to 5.6.9-1.6
+
 ### **June 27, 2024:** IGTF 1.129, osg-configure 4.2.0; Upcoming: HTCondor 23.8.1
 -   CA certificates based on [IGTF 1.129](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   Updated CRL URL location for MREN CA (ME)
