@@ -112,7 +112,7 @@ required packages. Example on a RHEL 9 host:
 
 ```console
 # yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
-# yum install https://repo.opensciencegrid.org/osg/23/osg-23-el9-release-latest.rpm
+# yum install https://repo.opensciencegrid.org/osg/23-main/osg-23-main-el9-release-latest.rpm
 # yum install osg-flock
 ```
 
