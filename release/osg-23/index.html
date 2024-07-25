@@ -1445,6 +1445,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#july-25-2024-htcondor-ce-23013-glideinwms-3107-hosted-ce-tools-21" class="md-nav__link">
+    July 25, 2024: HTCondor-CE 23.0.13, GlideinWMS 3.10.7, hosted-ce-tools 2.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#july-17-2024-htcondor-ce-23012-igtf-1130-upcoming-osdf-server-793" class="md-nav__link">
     July 17, 2024: HTCondor-CE 23.0.12, IGTF 1.130; Upcoming: osdf-server 7.9.3
   </a>
@@ -2062,6 +2069,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#july-25-2024-htcondor-ce-23013-glideinwms-3107-hosted-ce-tools-21" class="md-nav__link">
+    July 25, 2024: HTCondor-CE 23.0.13, GlideinWMS 3.10.7, hosted-ce-tools 2.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#july-17-2024-htcondor-ce-23012-igtf-1130-upcoming-osdf-server-793" class="md-nav__link">
     July 17, 2024: HTCondor-CE 23.0.12, IGTF 1.130; Upcoming: osdf-server 7.9.3
   </a>
@@ -2317,6 +2331,30 @@ hosts to accept certificates issued by SHA-1 signed CAs:</p>
 and token issuers present modern CAs.</p>
 </div>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="july-25-2024-htcondor-ce-23013-glideinwms-3107-hosted-ce-tools-21"><strong>July 25, 2024:</strong> HTCondor-CE 23.0.13, GlideinWMS 3.10.7, hosted-ce-tools 2.1<a class="headerlink" href="#july-25-2024-htcondor-ce-23013-glideinwms-3107-hosted-ce-tools-21" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://htcondor.com/htcondor-ce/v23/releases/#23013">HTCondor-CE 23.0.13</a><ul>
+<li>Include <code>condor_ce_upgrade_check</code> script</li>
+</ul>
+</li>
+<li><a href="http://glideinwms.fnal.gov/doc.v3_10_7/history.html">GlideinWMS 3.10.7</a><ul>
+<li>Apptainer cache and temp directory set in the Glidein working directory</li>
+<li>Ability to set a minimum required memory for partitionable Glideins</li>
+<li>Blackhole Detection<ul>
+<li>Stop accepting jobs if they are consumed at a high rate</li>
+</ul>
+</li>
+<li>Fix Apptainer validation not considering <code>uid_map</code> w/o initial blank</li>
+<li>Flatten error messages in HTCondor error file and <code>JobWrapperFailure</code> Ad</li>
+<li>Fix problem when <code>check_signature</code> in <code>glidein_startup</code> is not defined</li>
+<li><code>get_tarballs</code> also looks for HTCondor tarballs in the update directory</li>
+</ul>
+</li>
+<li>hosted-ce-tools 2.1<ul>
+<li><code>cvmfsexec-osg-wrapper</code> now detects Red Hat Enterprise Linux as RHEL-like</li>
+</ul>
+</li>
+</ul>
 <h3 id="july-17-2024-htcondor-ce-23012-igtf-1130-upcoming-osdf-server-793"><strong>July 17, 2024:</strong> HTCondor-CE 23.0.12, IGTF 1.130; Upcoming: osdf-server 7.9.3<a class="headerlink" href="#july-17-2024-htcondor-ce-23012-igtf-1130-upcoming-osdf-server-793" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://htcondor.com/htcondor-ce/v23/releases/#23012">HTCondor-CE 23.0.12</a><ul>
