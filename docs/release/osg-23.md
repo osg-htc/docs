@@ -44,6 +44,21 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **July 25, 2024:** HTCondor-CE 23.0.13, GlideinWMS 3.10.7, hosted-ce-tools 2.1
+-   [HTCondor-CE 23.0.13](https://htcondor.com/htcondor-ce/v23/releases/#23013)
+    -   Include `condor_ce_upgrade_check` script
+-   [GlideinWMS 3.10.7](http://glideinwms.fnal.gov/doc.v3_10_7/history.html)
+    -   Apptainer cache and temp directory set in the Glidein working directory
+    -   Ability to set a minimum required memory for partitionable Glideins
+    -   Blackhole Detection
+        -   Stop accepting jobs if they are consumed at a high rate
+    -   Fix Apptainer validation not considering `uid_map` w/o initial blank
+    -   Flatten error messages in HTCondor error file and `JobWrapperFailure` Ad
+    -   Fix problem when `check_signature` in `glidein_startup` is not defined
+    -   `get_tarballs` also looks for HTCondor tarballs in the update directory
+-   hosted-ce-tools 2.1
+    -   `cvmfsexec-osg-wrapper` now detects Red Hat Enterprise Linux as RHEL-like
+
 ### **July 17, 2024:** HTCondor-CE 23.0.12, IGTF 1.130; Upcoming: osdf-server 7.9.3
 -   [HTCondor-CE 23.0.12](https://htcondor.com/htcondor-ce/v23/releases/#23012)
     -   Fix whole node GPU request expression for non-HTCondor batch systems
