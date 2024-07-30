@@ -44,6 +44,18 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **July 30, 2024:** XRootD 5.7.0
+-   [XRootD 5.7.0](https://xrootd.slac.stanford.edu/2024/07/01/announcement_5_7_0.html)
+    -   New feature release
+    -   Support for Python 2.x is now deprecated
+    -   Support for CentOS 7 is now deprecated (although official RPMs for 5.7.0 are available)
+    -   Add support for pelican:// protocol
+    -   Update min/default RSA bits to 2048
+    -   Add option to force the destination IP address on a HTTP-TPC
+    -   Always create directory path when opening dest file for HTTP TPC
+    -   HTTP header parsing is now case-insensitive
+    -   See upstream release notes for details
+
 ### **July 25, 2024:** HTCondor-CE 23.0.13, GlideinWMS 3.10.7, hosted-ce-tools 2.1
 -   [HTCondor-CE 23.0.13](https://htcondor.com/htcondor-ce/v23/releases/#23013)
     -   Include `condor_ce_upgrade_check` script
@@ -162,7 +174,7 @@ Latest News
     -   Fix memory request being ignored for whole node jobs
 
 ### **April 4, 2024:** XRootD 5.6.9
--   [XRootD 5.6.9](https://listserv.slac.stanford.edu/cgi-bin/wa?A2=ind2403&L=XROOTD-L&P=816)
+-   [XRootD 5.6.9](https://xrootd.slac.stanford.edu/2024/03/08/announcement_5_6_9.html)
     -   Various minor bug fixes; see upstream release notes for details
 
 ### **March 21, 2024:** osg-scitokens-mapfile 13-2, vo-client 135-1
