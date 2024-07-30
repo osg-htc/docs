@@ -271,7 +271,7 @@ Latest News
     -   New ENV command controls which environment variables are present in DAGMan
     -   All the fixes from HTCondor 10.0.9 (listed above)
 -   XRootD 5.6.2
-    -   New feature release: [XRootD 5.6.0](https://listserv.slac.stanford.edu/cgi-bin/wa?A2=ind2307&L=XROOTD-L&P=68) with many improvements
+    -   New feature release: [XRootD 5.6.0](https://xrootd.slac.stanford.edu/2023/06/30/announcement_5_6_0.html) with many improvements
     -   Plus two bug fix releases: [XRootD 5.6.1](https://github.com/xrootd/xrootd/releases/tag/v5.6.1) and [XRootD 5.6.2](https://github.com/xrootd/xrootd/releases/tag/v5.6.2)
 -   [GlideinWMS 3.10.5](https://glideinwms.fnal.gov/doc.v3_10_5/history.html#stable)
     -   Enterprise Linux 9 and Python 3.9 support
