@@ -248,7 +248,7 @@ This section is contained in `/etc/osg/config.d/30-infoservices.ini`, which is p
 
 Subcluster and Resource Entry configuration is for reporting about the worker resources on your site. A **subcluster** is a homogeneous set of worker node hardware; a **resource** is a set of subcluster(s) with common capabilities that will be reported to the ATLAS AGIS system.
 
-**At least one Subcluster or Resource Entry section** is required on a CE; please populate the information for all your subclusters. This information will be reported to a central collector and will be used to send GlideIns / pilot jobs to your site; having accurate information is necessary for OSG jobs to effectively use your resources.
+**At least one Subcluster, Resource Entry, or Pilot section** is required on a CE; please populate the information for all your subclusters. This information will be reported to a central collector and will be used to send GlideIns / pilot jobs to your site; having accurate information is necessary for OSG jobs to effectively use your resources.
 
 These configuration files are provided by the `osg-configure-cluster` RPM.
 
@@ -256,7 +256,7 @@ This configuration uses multiple sections of the OSG configuration files:
 
 -   [Subcluster\*](#subcluster-configuration) in `/etc/osg/config.d/31-cluster.ini`: options about homogeneous subclusters
 -   [Resource Entry\*](#resource-entry-configuration-atlas-only) in `/etc/osg/config.d/31-cluster.ini`: options for specifying ATLAS queues for AGIS
--   [GlideinWMS Entry\*](#glideinwms-entry-cms-and-osg-pilot-factories) in `/etc/osg/config.d/35-pilot.ini`: options for specifying queues for the CMS and OSG GlideinWMS factories
+-   [Pilot\*](#pilot-cms-and-osg-glideinwms-pilot-factories) in `/etc/osg/config.d/35-pilot.ini`: options for specifying queues for the CMS and OSG GlideinWMS factories
 
 #### Notes for multi-CE sites. ####
 
@@ -307,7 +307,7 @@ The following attributes are optional:
 | vo\_tag     | String               | An arbitrary label that is added to jobs routed through this resource                                               |
 
 
-#### GlideinWMS Entry (CMS and OSG pilot factories) ####
+#### Pilot (CMS and OSG GlideinWMS pilot factories) ####
 
 If you are configuring a CE that is going to receive pilot jobs from the CMS or the OSG factories (CMS, OSG, LIGO, CLAS12, DUNE, Glow, IceCube, ...), you can provide pilot job specifications to help operators automatically configure the factory entries in GlideinWMS. For each pilot type, create a new `Pilot` section with a unique name in the following format: `[Pilot NAME]` where NAME is a string describing the pilot type (e.g.: GPU, WholeNode, default). The following options can be specified in the `Pilot` section:
 
