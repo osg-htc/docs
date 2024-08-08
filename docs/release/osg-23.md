@@ -45,7 +45,7 @@ Latest News
 -----------
 
 ### **August 8, 2024:** HTCondor 23.0.14; HTCondor-CE 23.9.1, HTCondor 23.9.6
--   [HTCondor 23.0.12 LTS](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-14)
+-   [HTCondor 23.0.14 LTS](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-14)
     -   Docker and Container jobs run on EPs that match the AP's CPU architecture
     -   Fixed premature cleanup of credentials by the `condor_credd`
     -   Fixed bug where a malformed SciToken could cause a `condor_schedd` crash
@@ -55,9 +55,8 @@ Latest News
     -   [HTCondor-CE 23.9.1](https://htcondor.com/htcondor-ce/v23/releases/#2391)
         -   Use new Job Router syntax by default
         -   Update configuration files to work with HTCondor 23.9.1 and later
-
-    -   [HTCondor 23.8.1](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-8-1)
-        -   Add config knob to not have cgroups count kernel memory for jobs on EL9
+    -   [HTCondor 23.9.6](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-9-6)
+        -   Add configuration knob to have cgroups not count kernel memory for jobs on EL9
         -   Remove support for numeric unit suffixes (k,M,G) in ClassAd expressions
         -   In submit files, `request_disk` & `request_memory` still accept unit suffixes
         -   Hide GPUs not allocated to the job on cgroup v2 systems such as EL9
