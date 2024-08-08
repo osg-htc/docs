@@ -44,6 +44,27 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **August 8, 2024:** HTCondor 23.0.14; HTCondor-CE 23.9.1, HTCondor 23.9.6
+-   [HTCondor 23.0.14 LTS](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-14)
+    -   Docker and Container jobs run on EPs that match the AP's CPU architecture
+    -   Fixed premature cleanup of credentials by the `condor_credd`
+    -   Fixed bug where a malformed SciToken could cause a `condor_schedd` crash
+    -   Fixed crash in `condor_annex` script
+    -   Fixed daemon crash after IDTOKEN request is approved by the collector
+-   Upcoming
+    -   [HTCondor-CE 23.9.1](https://htcondor.com/htcondor-ce/v23/releases/#2391)
+        -   Use new Job Router syntax by default
+        -   Update configuration files to work with HTCondor 23.9.1 and later
+    -   [HTCondor 23.9.6](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-9-6)
+        -   Add configuration knob to have cgroups not count kernel memory for jobs on EL9
+        -   Remove support for numeric unit suffixes (k,M,G) in ClassAd expressions
+        -   In submit files, `request_disk` & `request_memory` still accept unit suffixes
+        -   Hide GPUs not allocated to the job on cgroup v2 systems such as EL9
+        -   DAGMan can now produce credentials when using direct submission
+        -   Singularity jobs have a contained home directory when file transfer is on
+        -   Avoid using IPv6 link local addresses when resolving hostname to IP addr
+        -   New 'htcondor credential' command to aid in debugging
+
 ### **July 30, 2024:** XRootD 5.7.0
 -   [XRootD 5.7.0](https://xrootd.slac.stanford.edu/2024/07/01/announcement_5_7_0.html)
     -   New feature release
