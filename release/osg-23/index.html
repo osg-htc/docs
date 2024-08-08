@@ -1445,6 +1445,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#august-8-2024-htcondor-23014-htcondor-ce-2391-htcondor-2396" class="md-nav__link">
+    August 8, 2024: HTCondor 23.0.14; HTCondor-CE 23.9.1, HTCondor 23.9.6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#july-30-2024-xrootd-570" class="md-nav__link">
     July 30, 2024: XRootD 5.7.0
   </a>
@@ -2076,6 +2083,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#august-8-2024-htcondor-23014-htcondor-ce-2391-htcondor-2396" class="md-nav__link">
+    August 8, 2024: HTCondor 23.0.14; HTCondor-CE 23.9.1, HTCondor 23.9.6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#july-30-2024-xrootd-570" class="md-nav__link">
     July 30, 2024: XRootD 5.7.0
   </a>
@@ -2345,6 +2359,36 @@ hosts to accept certificates issued by SHA-1 signed CAs:</p>
 and token issuers present modern CAs.</p>
 </div>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="august-8-2024-htcondor-23014-htcondor-ce-2391-htcondor-2396"><strong>August 8, 2024:</strong> HTCondor 23.0.14; HTCondor-CE 23.9.1, HTCondor 23.9.6<a class="headerlink" href="#august-8-2024-htcondor-23014-htcondor-ce-2391-htcondor-2396" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-14">HTCondor 23.0.14 LTS</a><ul>
+<li>Docker and Container jobs run on EPs that match the AP's CPU architecture</li>
+<li>Fixed premature cleanup of credentials by the <code>condor_credd</code></li>
+<li>Fixed bug where a malformed SciToken could cause a <code>condor_schedd</code> crash</li>
+<li>Fixed crash in <code>condor_annex</code> script</li>
+<li>Fixed daemon crash after IDTOKEN request is approved by the collector</li>
+</ul>
+</li>
+<li>Upcoming<ul>
+<li><a href="https://htcondor.com/htcondor-ce/v23/releases/#2391">HTCondor-CE 23.9.1</a><ul>
+<li>Use new Job Router syntax by default</li>
+<li>Update configuration files to work with HTCondor 23.9.1 and later</li>
+</ul>
+</li>
+<li><a href="https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-9-6">HTCondor 23.9.6</a><ul>
+<li>Add configuration knob to have cgroups not count kernel memory for jobs on EL9</li>
+<li>Remove support for numeric unit suffixes (k,M,G) in ClassAd expressions</li>
+<li>In submit files, <code>request_disk</code> &amp; <code>request_memory</code> still accept unit suffixes</li>
+<li>Hide GPUs not allocated to the job on cgroup v2 systems such as EL9</li>
+<li>DAGMan can now produce credentials when using direct submission</li>
+<li>Singularity jobs have a contained home directory when file transfer is on</li>
+<li>Avoid using IPv6 link local addresses when resolving hostname to IP addr</li>
+<li>New 'htcondor credential' command to aid in debugging</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="july-30-2024-xrootd-570"><strong>July 30, 2024:</strong> XRootD 5.7.0<a class="headerlink" href="#july-30-2024-xrootd-570" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://xrootd.slac.stanford.edu/2024/07/01/announcement_5_7_0.html">XRootD 5.7.0</a><ul>
