@@ -3,6 +3,12 @@ title: Getting VO Data into the OSDF
 Getting VO Data into the OSDF
 ======================================
 
+!!! warning
+    This document is outdated and describes the procedure for hosting data with an XCache-based OSDF Origin install, which is deprecated.
+    Future OSDF Origins should be based on Pelican; documentation for getting VO Data into OSDF using a Pelican-based OSDF Origin install is forthcoming.
+
+
+
 This document describes the steps required to manage a VO's role
 in the Open Science Data Federation (OSDF) including selecting a namespace, registration,
 and selecting which resources are allowed to host or cache your data.

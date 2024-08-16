@@ -4,6 +4,10 @@ DateReviewed: 2023-03-03
 Installing the OSDF Cache
 =========================
 
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+    Future OSDF Caches should be based on Pelican; documentation for a Pelican-based OSDF Cache install is forthcoming.
+
 This document describes how to install an Open Science Data Federation (OSDF) cache service.  This service allows a site or regional
 network to cache data frequently used on the OSG, reducing data transfer over the wide-area network and
 decreasing access latency.

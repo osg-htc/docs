@@ -4,6 +4,10 @@ DateReviewed: 2023-03-03
 Installing the OSDF Origin
 ================================
 
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Origin install, which deprecated.
+    Future OSDF Origins should be based on Pelican; documentation for a Pelican-based OSDF Origin install is forthcoming.
+
 This document describes how to install an Open Science Data Federation (OSDF) origin service.  This service allows an organization
 to export its data to the data federation.
 
