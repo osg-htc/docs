@@ -27,6 +27,12 @@ graph LR
   end;
 ```
 
+
+!!! note
+    The Shoveler is for use by XRootD standalone installs and XCache-based cache and origin installs.
+    It is not necessary to install it for a Pelican-based cache or origin.
+
+
 Installing the Shoveler
 -----------------------
 
