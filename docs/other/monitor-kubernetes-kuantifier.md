@@ -4,20 +4,22 @@ DateReviewed: 2024-08-16
 Monitoring Kubernetes Workloads with Kuantifier
 ===============================================
 
-
+Workload jobs run via Kubernetes will not integrate with [Gratia accounting](./troubleshooting-gratia/) by default.
+To report contributions to OSG made via Kubernetes, the [Kuantifier](kuantifier-github) helm chart can be installed
+into your cluster.
 
 Before Starting
 ---------------
 
 ### Confirm access to a running Kubernetes cluster
 
-All subsequent instructions assume you have access to a running Kuberenetes cluster, and can run [kubectl](kubectl)
+All subsequent instructions assume you have access to a running Kubernetes cluster, and can run [kubectl](kubectl)
 against that cluster.
 
 ### Install the Helm command line tools 
 
 Kuantifier itself, and several of its prerequisites, are installed via [helm chart](https://helm.sh/). The helm
-command line tools are used to install helm charts against a running kuberentes cluster, and can be installed
+command line tools are used to install helm charts against a running kubernetes cluster, and can be installed
 as follows:
 
 1. Download the latest [helm release](helm-release)
@@ -26,8 +28,8 @@ as follows:
 
 ### Install Prometheus and kube-state-metrics in your Kubernetes cluster
 
-Kuantifier relies on [Prometheus](prometheus) with [kube-state-metrics](kube-state-metrics) to gather raw pod metrics. 
-There are a number of ways to install both, such as via the [promethus community helm charts](prometheus-community):
+Kuantifier relies on [Prometheus](prometheus) with [kube-state-metrics](kube-state-metrics) to account for pod resource usage. 
+There are a number of ways to install both, such as via the [prometheus community helm charts](prometheus-community):
 
 1. Add the prometheus community helm repository to your local helm 
 
@@ -48,7 +50,7 @@ There are a number of ways to install both, such as via the [promethus community
 1. Ensure that the namespace where your workload pods run is properly configured.
 
     - Kuantifier relies on the `spec.containers[].resources.requests.cpu` field in workload pods
-      to determine proccessor count for GRACC reporting. Ensure a cpu request is set for pods in
+      to determine processor count for GRACC reporting. Ensure a cpu request is set for pods in
       your workspace.
     
     - Kuantifier relies on the Prometheus pod completion time metric to calculate workload job run times.
@@ -92,7 +94,7 @@ must be made prior to installation. For full documentation of the values in the 
         - `NAMESPACE`: The namespace of the pods for which Kuantifier will collect and report metrics.
 
               !!! note
-              Each installation of kuantifier only reports on pods in a single namespaece. You must
+              Each installation of kuantifier only reports on pods in a single namespace. You must
               install multiple instances of the chart to support reporting on multiple namespaces.
 
         - `SITE_NAME`: The name of the site being reported.
@@ -116,7 +118,7 @@ must be made prior to installation. For full documentation of the values in the 
                SUBMIT_HOST: tiger-cluster.chtc.wisc.edu
                PROMETHEUS_SERVER: prometheus-server.monitoring.svc.cluster.local
 
-1. (Optional) If Prometheus in your cluster is configured to require authentiation, an
+1. (Optional) If Prometheus in your cluster is configured to require authentication, an
    authentication header can be specified via a key within an already-existing [Secret](kubernetes-secret) in the namespace:
 
        :::yaml
@@ -169,15 +171,16 @@ If the helm chart artifacts are present as expected, run a test instance of the 
        :::console
        kubectl -n monitoring logs <test-job-pod-name> -c processor
 
-1. Inspect the logs from the gratia-output contaier, which sends the output records to GRACC.
+1. Inspect the logs from the gratia-output container, which sends the output records to GRACC.
 
        :::console
        kubectl -n monitoring logs <test-job-pod-name> -c gratia-output
 
-If both the procesor initContainer and gratia-output container run to completion without error, the next step
+If both the processor initContainer and gratia-output container run to completion without error, the next step
 is to confirm with a member of the OSG technology team that the results are visible in GRACC.
 
 
+[kuantifier-github]: <https://github.com/rptaylor/kapel/>
 [helm-values-readme]: <https://github.com/rptaylor/kapel/blob/master/chart/README.md>
 [values-yaml]: <https://github.com/rptaylor/kapel/blob/master/chart/values.yaml>
 [values-file]: <https://helm.sh/docs/chart_template_guide/values_files/>
