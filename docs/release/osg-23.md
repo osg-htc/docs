@@ -44,6 +44,11 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **Septemer 5, 2024:** XRootD 5.7.0-1.6
+-   XRootD 5.7.0-1.6
+    -   Fix file descriptor leak causing "too many open files" error in XCache
+    -   Improve performance by reducing stat calls on HTTP GET
+
 ### **August 8, 2024:** HTCondor 23.0.14; HTCondor-CE 23.9.1, HTCondor 23.9.6
 -   [HTCondor 23.0.14 LTS](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-14)
     -   Docker and Container jobs run on EPs that match the AP's CPU architecture
