@@ -1445,6 +1445,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#septemer-12-2024-cvmfs-2115-vault-1172-htvault-config-118-htgettoken-20-xrootd-multiuser-220-11-xrdcl-pelican-093-21" class="md-nav__link">
+    Septemer 12, 2024: CVMFS 2.11.5, vault 1.17.2, htvault-config 1.18, htgettoken 2.0, xrootd-multiuser 2.2.0-1.1, xrdcl-pelican 0.9.3-2.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#septemer-5-2024-xrootd-570-16" class="md-nav__link">
     Septemer 5, 2024: XRootD 5.7.0-1.6
   </a>
@@ -2090,6 +2097,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#septemer-12-2024-cvmfs-2115-vault-1172-htvault-config-118-htgettoken-20-xrootd-multiuser-220-11-xrdcl-pelican-093-21" class="md-nav__link">
+    Septemer 12, 2024: CVMFS 2.11.5, vault 1.17.2, htvault-config 1.18, htgettoken 2.0, xrootd-multiuser 2.2.0-1.1, xrdcl-pelican 0.9.3-2.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#septemer-5-2024-xrootd-570-16" class="md-nav__link">
     Septemer 5, 2024: XRootD 5.7.0-1.6
   </a>
@@ -2373,6 +2387,43 @@ hosts to accept certificates issued by SHA-1 signed CAs:</p>
 and token issuers present modern CAs.</p>
 </div>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="septemer-12-2024-cvmfs-2115-vault-1172-htvault-config-118-htgettoken-20-xrootd-multiuser-220-11-xrdcl-pelican-093-21"><strong>Septemer 12, 2024:</strong> CVMFS 2.11.5, vault 1.17.2, htvault-config 1.18, htgettoken 2.0, xrootd-multiuser 2.2.0-1.1, xrdcl-pelican 0.9.3-2.1<a class="headerlink" href="#septemer-12-2024-cvmfs-2115-vault-1172-htvault-config-118-htgettoken-20-xrootd-multiuser-220-11-xrdcl-pelican-093-21" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-11-5">CVMFS 2.11.5</a><ul>
+<li>Fix blocking behavior in repositories when pipe reads take longer than a timeout</li>
+<li>Fix streaming cache manager with secure repositories</li>
+<li>Fix handling of network errors in streaming cache manager</li>
+<li>Fix rare stuck condition after cache manager crashes</li>
+</ul>
+</li>
+<li>vault 1.17.2<ul>
+<li>Update to latest upstream version</li>
+</ul>
+</li>
+<li>htvault-config 1.18<ul>
+<li>Add caching of exchanged tokens</li>
+<li>Give vault tokens the ability to delete secrets and revoke themselves</li>
+<li>Update dependencies</li>
+</ul>
+</li>
+<li>htgettoken 2.0<ul>
+<li>Major update replacing some libraries with modern equivalents</li>
+<li>Remove use of PyInstaller</li>
+<li>Make htgettoken directly callable from Python</li>
+<li>Add use of a newer API to access vault secrets</li>
+<li>Fix the -o option to work with relative paths</li>
+<li>Change the --nobearertoken option to always save a vault token</li>
+</ul>
+</li>
+<li>xrootd-multiuser 2.2.0-1.1<ul>
+<li>Rebuild for ARM64 (aarch64)</li>
+</ul>
+</li>
+<li>xrdcl-pelican 0.9.3-2.1<ul>
+<li>Rebuild for ARM64 (aarch64)</li>
+</ul>
+</li>
+</ul>
 <h3 id="septemer-5-2024-xrootd-570-16"><strong>Septemer 5, 2024:</strong> XRootD 5.7.0-1.6<a class="headerlink" href="#septemer-5-2024-xrootd-570-16" title="Permanent link">&para;</a></h3>
 <ul>
 <li>XRootD 5.7.0-1.6<ul>
