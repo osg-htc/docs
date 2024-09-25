@@ -44,7 +44,7 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
-### **Septemer 12, 2024:** CVMFS 2.11.5, vault 1.17.2, htvault-config 1.18, htgettoken 2.0, xrootd-multiuser 2.2.0-1.1, xrdcl-pelican 0.9.3-2.1
+### **September 12, 2024:** CVMFS 2.11.5, vault 1.17.2, htvault-config 1.18, htgettoken 2.0, xrootd-multiuser 2.2.0-1.1, xrdcl-pelican 0.9.3-2.1
 -   [CVMFS 2.11.5](https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-11-5)
     -   Fix blocking behavior in repositories when pipe reads take longer than a timeout
     -   Fix streaming cache manager with secure repositories
@@ -68,7 +68,7 @@ Latest News
 -   xrdcl-pelican 0.9.3-2.1
     -   Rebuild for ARM64 (aarch64)
 
-### **Septemer 5, 2024:** XRootD 5.7.0-1.6
+### **September 5, 2024:** XRootD 5.7.0-1.6
 -   XRootD 5.7.0-1.6
     -   Fix file descriptor leak causing "too many open files" error in XCache
     -   Improve performance by reducing stat calls on HTTP GET
