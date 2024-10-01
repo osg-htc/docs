@@ -44,6 +44,29 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **October 1, 2024:** HTCondor 23.0.15, XRootD 5.7.1-1.1, xrdcl-pelican 0.9.6
+-   HTCondor 23.0.15
+    -   Fix bug where Docker universe jobs reported zero memory usage on EL9
+    -   Fix bug where Docker universe images would not be removed from EP cache
+    -   Fix bug where `condor_watch_q` could crash
+    -   Fix bug that could cause the file transfer hold reason to be truncated
+-   XRootD 5.7.1
+    -   New Features
+        -   Allow cconfig to write out combined config file
+        -   Allow for API endpoints for fixed remote origins
+        -   Allow server to assume an arbitrary network identity
+        -   Allow a redirector to be configured read-only
+        -   Add "OSS Statistics" plugin to enable file system load monitoring
+        -   Defer client TLS authentication for XRootD to avoid unnecessary browser popups
+    -   Major bug fixes
+        -   Do not leak file pointer on open error
+        -   Fix memory leaks when creating Python objects
+        -   Ensure correct certificate is used when passed via cgi with `xrd.gsiusrproxy=...`
+        -   Fix too few arguments to formatting function
+-   xrdcl-pelican 0.9.4
+    -   Allow X.509 client authentication
+    -   Provide an error code on metadata lookup failure
+
 ### **September 12, 2024:** CVMFS 2.11.5, vault 1.17.2, htvault-config 1.18, htgettoken 2.0, xrootd-multiuser 2.2.0-1.1, xrdcl-pelican 0.9.3-2.1
 -   [CVMFS 2.11.5](https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-11-5)
     -   Fix blocking behavior in repositories when pipe reads take longer than a timeout
