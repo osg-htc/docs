@@ -1445,6 +1445,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#october-1-2024-htcondor-23015-xrootd-571-11-xrdcl-pelican-096" class="md-nav__link">
+    October 1, 2024: HTCondor 23.0.15, XRootD 5.7.1-1.1, xrdcl-pelican 0.9.6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#september-12-2024-cvmfs-2115-vault-1172-htvault-config-118-htgettoken-20-xrootd-multiuser-220-11-xrdcl-pelican-093-21" class="md-nav__link">
     September 12, 2024: CVMFS 2.11.5, vault 1.17.2, htvault-config 1.18, htgettoken 2.0, xrootd-multiuser 2.2.0-1.1, xrdcl-pelican 0.9.3-2.1
   </a>
@@ -2097,6 +2104,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#october-1-2024-htcondor-23015-xrootd-571-11-xrdcl-pelican-096" class="md-nav__link">
+    October 1, 2024: HTCondor 23.0.15, XRootD 5.7.1-1.1, xrdcl-pelican 0.9.6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#september-12-2024-cvmfs-2115-vault-1172-htvault-config-118-htgettoken-20-xrootd-multiuser-220-11-xrdcl-pelican-093-21" class="md-nav__link">
     September 12, 2024: CVMFS 2.11.5, vault 1.17.2, htvault-config 1.18, htgettoken 2.0, xrootd-multiuser 2.2.0-1.1, xrdcl-pelican 0.9.3-2.1
   </a>
@@ -2387,6 +2401,40 @@ hosts to accept certificates issued by SHA-1 signed CAs:</p>
 and token issuers present modern CAs.</p>
 </div>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="october-1-2024-htcondor-23015-xrootd-571-11-xrdcl-pelican-096"><strong>October 1, 2024:</strong> HTCondor 23.0.15, XRootD 5.7.1-1.1, xrdcl-pelican 0.9.6<a class="headerlink" href="#october-1-2024-htcondor-23015-xrootd-571-11-xrdcl-pelican-096" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-15">HTCondor 23.0.15 LTS</a><ul>
+<li>Fix bug where Docker universe jobs reported zero memory usage on EL9</li>
+<li>Fix bug where Docker universe images would not be removed from EP cache</li>
+<li>Fix bug where <code>condor_watch_q</code> could crash</li>
+<li>Fix bug that could cause the file transfer hold reason to be truncated</li>
+</ul>
+</li>
+<li><a href="https://xrootd.slac.stanford.edu/2024/09/03/announcement_5_7_1.html">XRootD 5.7.1</a><ul>
+<li>New Features<ul>
+<li>Allow cconfig to write out combined config file</li>
+<li>Allow for API endpoints for fixed remote origins</li>
+<li>Allow server to assume an arbitrary network identity</li>
+<li>Allow a redirector to be configured read-only</li>
+<li>Add "OSS Statistics" plugin to enable file system load monitoring</li>
+<li>Defer client TLS authentication for XRootD to avoid unnecessary browser popups</li>
+</ul>
+</li>
+<li>Major bug fixes<ul>
+<li>Do not leak file pointer on open error</li>
+<li>Fix memory leaks when creating Python objects</li>
+<li>Ensure correct certificate is used when passed via cgi with <code>xrd.gsiusrproxy=...</code></li>
+<li>Fix too few arguments to formatting function</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>xrdcl-pelican 0.9.4<ul>
+<li>Allow X.509 client authentication</li>
+<li>Provide an error code on metadata lookup failure</li>
+</ul>
+</li>
+</ul>
 <h3 id="september-12-2024-cvmfs-2115-vault-1172-htvault-config-118-htgettoken-20-xrootd-multiuser-220-11-xrdcl-pelican-093-21"><strong>September 12, 2024:</strong> CVMFS 2.11.5, vault 1.17.2, htvault-config 1.18, htgettoken 2.0, xrootd-multiuser 2.2.0-1.1, xrdcl-pelican 0.9.3-2.1<a class="headerlink" href="#september-12-2024-cvmfs-2115-vault-1172-htvault-config-118-htgettoken-20-xrootd-multiuser-220-11-xrdcl-pelican-093-21" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-11-5">CVMFS 2.11.5</a><ul>
