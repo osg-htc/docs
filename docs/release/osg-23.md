@@ -45,12 +45,12 @@ Latest News
 -----------
 
 ### **October 1, 2024:** HTCondor 23.0.15, XRootD 5.7.1-1.1, xrdcl-pelican 0.9.6
--   HTCondor 23.0.15
+-   [HTCondor 23.0.15 LTS](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-15)
     -   Fix bug where Docker universe jobs reported zero memory usage on EL9
     -   Fix bug where Docker universe images would not be removed from EP cache
     -   Fix bug where `condor_watch_q` could crash
     -   Fix bug that could cause the file transfer hold reason to be truncated
--   XRootD 5.7.1
+-   [XRootD 5.7.1](https://xrootd.slac.stanford.edu/2024/09/03/announcement_5_7_1.html)
     -   New Features
         -   Allow cconfig to write out combined config file
         -   Allow for API endpoints for fixed remote origins
