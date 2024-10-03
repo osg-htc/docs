@@ -1445,6 +1445,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#october-3-2024-igtf-1131-upcoming-htcondor-23101-pelican-7107" class="md-nav__link">
+    October 3, 2024: IGTF 1.131; Upcoming: HTCondor 23.10.1, Pelican 7.10.7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#october-1-2024-htcondor-23015-xrootd-571-11-xrdcl-pelican-096" class="md-nav__link">
     October 1, 2024: HTCondor 23.0.15, XRootD 5.7.1-1.1, xrdcl-pelican 0.9.6
   </a>
@@ -1466,8 +1473,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#august-8-2024-htcondor-23014-htcondor-ce-2391-htcondor-2396" class="md-nav__link">
-    August 8, 2024: HTCondor 23.0.14; HTCondor-CE 23.9.1, HTCondor 23.9.6
+  <a href="#august-8-2024-htcondor-23014-upcoming-htcondor-ce-2391-htcondor-2396" class="md-nav__link">
+    August 8, 2024: HTCondor 23.0.14; Upcoming: HTCondor-CE 23.9.1, HTCondor 23.9.6
   </a>
   
 </li>
@@ -2104,6 +2111,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#october-3-2024-igtf-1131-upcoming-htcondor-23101-pelican-7107" class="md-nav__link">
+    October 3, 2024: IGTF 1.131; Upcoming: HTCondor 23.10.1, Pelican 7.10.7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#october-1-2024-htcondor-23015-xrootd-571-11-xrdcl-pelican-096" class="md-nav__link">
     October 1, 2024: HTCondor 23.0.15, XRootD 5.7.1-1.1, xrdcl-pelican 0.9.6
   </a>
@@ -2125,8 +2139,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#august-8-2024-htcondor-23014-htcondor-ce-2391-htcondor-2396" class="md-nav__link">
-    August 8, 2024: HTCondor 23.0.14; HTCondor-CE 23.9.1, HTCondor 23.9.6
+  <a href="#august-8-2024-htcondor-23014-upcoming-htcondor-ce-2391-htcondor-2396" class="md-nav__link">
+    August 8, 2024: HTCondor 23.0.14; Upcoming: HTCondor-CE 23.9.1, HTCondor 23.9.6
   </a>
   
 </li>
@@ -2401,6 +2415,50 @@ hosts to accept certificates issued by SHA-1 signed CAs:</p>
 and token issuers present modern CAs.</p>
 </div>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="october-3-2024-igtf-1131-upcoming-htcondor-23101-pelican-7107"><strong>October 3, 2024:</strong> IGTF 1.131; Upcoming: HTCondor 23.10.1, Pelican 7.10.7<a class="headerlink" href="#october-3-2024-igtf-1131-upcoming-htcondor-23101-pelican-7107" title="Permanent link">&para;</a></h3>
+<ul>
+<li>CA Certificates based on IGTF 1.131</li>
+<li>removed discontinued HKU-CA-2 authority (HK)</li>
+<li>removed obsolete 3rd generation TCS intermediates (EU)</li>
+<li>Upcoming<ul>
+<li><a href="https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-10-1">HTCondor 23.10.1</a><ul>
+<li>Improvements to disk usage enforcement when using LVM<ul>
+<li>Can encrypt job sandboxes when using LVM</li>
+<li>More precise tracking of disk usage when using LVM</li>
+<li>Reduced disk usage tracking overhead</li>
+</ul>
+</li>
+<li>Improvements tracking CPU and memory usage with cgroup v2 (on EL9)<ul>
+<li>Don't count kernel cache pages against job's memory usage</li>
+<li>Avoid rare inclusion of previous job's CPU and peak memory usage</li>
+</ul>
+</li>
+<li>HTCondor now re-checks DNS before re-connecting to a collector</li>
+<li>HTCondor now writes out per job epoch history</li>
+<li>HTCondor can encrypt network connections without authentication</li>
+<li>htcondor CLI can now show status for local server, AP, and CM</li>
+<li>htcondor CLI can now display OAUTH2 credentials</li>
+<li>Uses job's sandbox to convert image format for Singularity/Apptainer</li>
+<li>Bug fix to not lose GPUs in Docker job on systemd reconfig</li>
+<li>Bug fix for PID namespaces and <code>condor_ssh_to_job</code> on EL9</li>
+</ul>
+</li>
+<li><a href="https://github.com/PelicanPlatform/pelican/releases/tag/v7.10.7">Pelican 7.10.7</a><ul>
+<li>Stopped file transfers are now retryable errors</li>
+<li>General improvements to error messages within the client and the plugin</li>
+<li>Put requests now work with Origins using OA4MP Issuers</li>
+<li>Retries metadata lookup failures</li>
+<li>Fixed naming issue with queries on get/copy</li>
+<li>Director supports server sorting on distance, server load, and objects</li>
+<li>Add object availability test for cache access</li>
+<li>Caches can fetch objects from other caches when there's a cache miss</li>
+<li>Site name is populated in the Origin/Cache auto-registration process</li>
+<li>Origins and Caches advertise their storage backend type to the director</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="october-1-2024-htcondor-23015-xrootd-571-11-xrdcl-pelican-096"><strong>October 1, 2024:</strong> HTCondor 23.0.15, XRootD 5.7.1-1.1, xrdcl-pelican 0.9.6<a class="headerlink" href="#october-1-2024-htcondor-23015-xrootd-571-11-xrdcl-pelican-096" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-15">HTCondor 23.0.15 LTS</a><ul>
@@ -2480,7 +2538,7 @@ and token issuers present modern CAs.</p>
 </ul>
 </li>
 </ul>
-<h3 id="august-8-2024-htcondor-23014-htcondor-ce-2391-htcondor-2396"><strong>August 8, 2024:</strong> HTCondor 23.0.14; HTCondor-CE 23.9.1, HTCondor 23.9.6<a class="headerlink" href="#august-8-2024-htcondor-23014-htcondor-ce-2391-htcondor-2396" title="Permanent link">&para;</a></h3>
+<h3 id="august-8-2024-htcondor-23014-upcoming-htcondor-ce-2391-htcondor-2396"><strong>August 8, 2024:</strong> HTCondor 23.0.14; Upcoming: HTCondor-CE 23.9.1, HTCondor 23.9.6<a class="headerlink" href="#august-8-2024-htcondor-23014-upcoming-htcondor-ce-2391-htcondor-2396" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-14">HTCondor 23.0.14 LTS</a><ul>
 <li>Docker and Container jobs run on EPs that match the AP's CPU architecture</li>
