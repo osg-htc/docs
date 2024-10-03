@@ -44,6 +44,39 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **October 3, 2024:** IGTF 1.131; Upcoming: HTCondor 23.10.1, Pelican 7.10.7
+-   CA Certificates based on IGTF 1.131
+  -   removed discontinued HKU-CA-2 authority (HK)
+  -   removed obsolete 3rd generation TCS intermediates (EU)
+-   Upcoming
+    -   [HTCondor 23.10.1](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-10-1)
+        -   Improvements to disk usage enforcement when using LVM
+            -   Can encrypt job sandboxes when using LVM
+            -   More precise tracking of disk usage when using LVM
+            -   Reduced disk usage tracking overhead
+        -   Improvements tracking CPU and memory usage with cgroup v2 (on EL9)
+            -   Don't count kernel cache pages against job's memory usage
+            -   Avoid rare inclusion of previous job's CPU and peak memory usage
+        -   HTCondor now re-checks DNS before re-connecting to a collector
+        -   HTCondor now writes out per job epoch history
+        -   HTCondor can encrypt network connections without authentication
+        -   htcondor CLI can now show status for local server, AP, and CM
+        -   htcondor CLI can now display OAUTH2 credentials
+        -   Uses job's sandbox to convert image format for Singularity/Apptainer
+        -   Bug fix to not lose GPUs in Docker job on systemd reconfig
+        -   Bug fix for PID namespaces and `condor_ssh_to_job` on EL9
+    -   [Pelican 7.10.7](https://github.com/PelicanPlatform/pelican/releases/tag/v7.10.7)
+        -   Stopped file transfers are now retryable errors
+        -   General improvements to error messages within the client and the plugin
+        -   Put requests now work with Origins using OA4MP Issuers
+        -   Retries metadata lookup failures
+        -   Fixed naming issue with queries on get/copy
+        -   Director supports server sorting on distance, server load, and objects
+        -   Add object availability test for cache access
+        -   Caches can fetch objects from other caches when there's a cache miss
+        -   Site name is populated in the Origin/Cache auto-registration process
+        -   Origins and Caches advertise their storage backend type to the director
+
 ### **October 1, 2024:** HTCondor 23.0.15, XRootD 5.7.1-1.1, xrdcl-pelican 0.9.6
 -   [HTCondor 23.0.15 LTS](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-15)
     -   Fix bug where Docker universe jobs reported zero memory usage on EL9
@@ -96,7 +129,7 @@ Latest News
     -   Fix file descriptor leak causing "too many open files" error in XCache
     -   Improve performance by reducing stat calls on HTTP GET
 
-### **August 8, 2024:** HTCondor 23.0.14; HTCondor-CE 23.9.1, HTCondor 23.9.6
+### **August 8, 2024:** HTCondor 23.0.14; Upcoming: HTCondor-CE 23.9.1, HTCondor 23.9.6
 -   [HTCondor 23.0.14 LTS](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-14)
     -   Docker and Container jobs run on EPs that match the AP's CPU architecture
     -   Fixed premature cleanup of credentials by the `condor_credd`
