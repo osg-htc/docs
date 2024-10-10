@@ -44,10 +44,18 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **October 10, 2024:** HTCondor 23.0.16; Upcoming: osdf-server 7.10.7
+-   [HTCondor 23.0.16](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-16)
+    -   Back-port all cgroup v2 fixes and enhancements from the 23.10.1 release
+-   Upcoming
+    -   osdf-server 7.10.7
+        -   Update to require Pelican 7.10.7
+        -   Restart services when Pelican or XRootD are upgraded.
+
 ### **October 3, 2024:** IGTF 1.131; Upcoming: HTCondor 23.10.1, Pelican 7.10.7
 -   CA Certificates based on IGTF 1.131
-  -   removed discontinued HKU-CA-2 authority (HK)
-  -   removed obsolete 3rd generation TCS intermediates (EU)
+    -   removed discontinued HKU-CA-2 authority (HK)
+    -   removed obsolete 3rd generation TCS intermediates (EU)
 -   Upcoming
     -   [HTCondor 23.10.1](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-10-1)
         -   Improvements to disk usage enforcement when using LVM
