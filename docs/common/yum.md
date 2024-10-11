@@ -52,8 +52,8 @@ Their names start with `osg-upcoming` and have the same structure as our standar
 as well as the same guarantees of quality and production-readiness.
 
 There are separate sets of upcoming repositories for each release series.
-For example, the [OSG 23 repos](https://repo.opensciencegrid.org/osg/23-main/) have corresponding
-[23-upcoming repos](https://repo.opensciencegrid.org/osg/23-upcoming/).
+For example, the [OSG 24 repos](https://repo.osg-htc.org/osg/24-main/) have corresponding
+[24-upcoming repos](https://repo.osg-htc.org/osg/24-upcoming/).
 The upcoming repositories are meant to be layered on top of our standard repositories:
 installing software from the upcoming repositories requires also enabling the standard repositories from the same release.
 
@@ -67,8 +67,8 @@ supported by the OSG.
 
 The definitive list of software in the contrib repository can be found here:
 
--   [OSG 23 EL8 contrib software repository](https://repo.opensciencegrid.org/osg/23-contrib/el8/x86_64/)
--   [OSG 23 EL9 contrib software repository](https://repo.opensciencegrid.org/osg/23-contrib/el9/x86_64/)
+-   [OSG 24 EL8 contrib software repository](https://repo.opensciencegrid.org/osg/24-contrib/el8/x86_64/)
+-   [OSG 24 EL9 contrib software repository](https://repo.opensciencegrid.org/osg/24-contrib/el9/x86_64/)
 
 If you would like to distribute your software in the OSG `contrib` repository, please [contact us](../common/help.md) with a
 description of your software, what users it serves, and relevant RPM packaging.
@@ -185,15 +185,15 @@ For instructions on upgrading from one OSG series to another, see the
 1. Install the OSG repository for your OS version and the [OSG release series](../release/release_series.md) that you wish to
    use:
 
-    - OSG 23 EL8:
+    - OSG 24 EL8:
 
             :::console
-            root@host # yum install https://repo.opensciencegrid.org/osg/23-main/osg-23-main-el8-release-latest.rpm
+            root@host # yum install https://repo.opensciencegrid.org/osg/24-main/osg-24-main-el8-release-latest.rpm
 
-    - OSG 23 EL9:
+    - OSG 24 EL9:
 
             :::console
-            root@host # yum install https://repo.opensciencegrid.org/osg/23-main/osg-23-main-el9-release-latest.rpm
+            root@host # yum install https://repo.opensciencegrid.org/osg/24-main/osg-24-main-el9-release-latest.rpm
 
 
 1. The only OSG repository enabled by default is the release one.
@@ -202,15 +202,14 @@ For instructions on upgrading from one OSG series to another, see the
 
         :::file hl_lines="7"
         [osg-testing]
-        name=OSG Software for Enterprise Linux 7 - Testing - $basearch
-        #baseurl=https://repo.opensciencegrid.org/osg/23-main/el8/testing/$basearch
-        mirrorlist=https://repo.opensciencegrid.org/osg/23-main/el8/testing/$basearch
+        name=OSG Software for Enterprise Linux 9 - Testing - $basearch
+        #baseurl=https://repo.opensciencegrid.org/osg/24-main/el9/testing/$basearch
+        mirrorlist=https://repo.opensciencegrid.org/osg/24-main/el9/testing/$basearch
         failovermethod=priority
         priority=98
         enabled=1
         gpgcheck=1
-        gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
-               file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-2
+        gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-24-developer
 
 Optional Configuration
 ----------------------
@@ -273,7 +272,7 @@ Or, to mirror only a single repository:
     <RANDOM> * * * * root rsync -aH rsync://repo-rsync.opensciencegrid.org/osg/<OSG_RELEASE>/el9/development /var/www/html/osg/<OSG_RELEASE>/el7
 
 
-Replace `<OSG_RELEASE>` with the OSG release you would like to use (e.g. `23-main`) and `<RANDOM>` with a number between 0
+Replace `<OSG_RELEASE>` with the OSG release you would like to use (e.g. `24-main`) and `<RANDOM>` with a number between 0
 and 59.
 
 On your worker node, you can replace the `baseurl` line of `/etc/yum.repos.d/osg.repo` with the appropriate URL for your

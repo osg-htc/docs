@@ -78,7 +78,7 @@ type of host that you are troubleshooting:
 If they are not running, consult the relevant documentation to enable and start the appropriate service:
 
 -   [Access Point](../submit/install-ospool-ap.md#managing-services)
--   [Compute Entrypoint](https://htcondor.com/htcondor-ce/v23/operation/#managing-htcondor-ce-services)
+-   [Compute Entrypoint](https://htcondor.com/htcondor-ce/v24/operation/#managing-htcondor-ce-services)
 
 ### Identifying failures ###
 

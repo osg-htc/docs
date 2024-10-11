@@ -34,6 +34,9 @@ Series Overviews
 
 Since the start of the RPM-based OSG Software Stack, we have offered the following release series:
 
+-   **OSG 24** (started October 2024) aligns the OSG release series and HTCondor Software Suite release cycles.
+    The initial release includes GlideinWMS 3.10.7, HTCondor 24.0, HTCondor-CE 24.0, and XRootD 5.7.0
+
 -   **OSG 23** (started October 2023) aligns the OSG release series and HTCondor Software Suite release cycles.
     The initial release includes GlideinWMS 3.10.5, HTCondor 23.0, HTCondor-CE 23.0, and XRootD 5.6.2
 
@@ -73,6 +76,7 @@ Support ends at the end of the month of the following dates unless otherwise spe
 
 | Release Series | Initial Release | End of Regular Support | End of Critical Bug/Security Support |
 |:--------------:|-----------------|------------------------|--------------------------------------|
+| 24             | October 2024    | Not set                | Not set                              |
 | 23             | October 2023    | Not set                | Not set                              |
 | 3.6            | Februrary 2021  | 31 March 2024          | 30 June 2024                         |
 | 3.5            | August 2019     | 30 August 2021         | 1 May 2022                           |

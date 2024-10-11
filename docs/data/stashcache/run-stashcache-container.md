@@ -206,7 +206,7 @@ user@host $ docker run --rm \
              ...
              --volume <DATA PARTITION N>:/xcache/dataN
              --env-file=/opt/xcache/.env \
-             opensciencegrid/stash-cache:23-release
+             opensciencegrid/stash-cache:24-release
 ```
 
 !!! warning
@@ -225,7 +225,7 @@ user@host $ docker run --rm \
              --volume <HOST CERT>:/etc/grid-security/hostcert.pem \
              --volume <HOST KEY>:/etc/grid-security/hostkey.pem \
              --env-file=/opt/xcache/.env \
-             opensciencegrid/stash-cache:23-release
+             opensciencegrid/stash-cache:24-release
 ```
 
 ### Running a cache on container with systemd
@@ -251,7 +251,7 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
-ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-cache:23-release
+ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-cache:24-release
 ExecStart=/usr/bin/docker run --rm --name %n \
   --publish 8000:8000 \
   --publish 8443:8443 \
@@ -259,7 +259,7 @@ ExecStart=/usr/bin/docker run --rm --name %n \
   --volume /etc/ssl/host.crt:/etc/grid-security/hostcert.pem \
   --volume /etc/ssl/host.key:/etc/grid-security/hostkey.pem \
   --env-file /opt/xcache/.env \
-  opensciencegrid/stash-cache:23-release
+  opensciencegrid/stash-cache:24-release
 
 [Install]
 WantedBy=multi-user.target
@@ -289,7 +289,7 @@ user@host $ docker run --rm  \
              --volume <HOST CERT>:/etc/grid-security/hostcert.pem \
              --volume <HOST KEY>:/etc/grid-security/hostkey.pem \
              --env-file=/opt/xcache/.env \
-             opensciencegrid/stash-cache:23-release
+             opensciencegrid/stash-cache:24-release
 ```
 
 ### Memory optimization ###

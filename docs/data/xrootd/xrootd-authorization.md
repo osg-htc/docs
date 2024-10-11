@@ -350,6 +350,12 @@ pair, `xrootd-client`, and `voms-clients-cpp` installed:
     If your transfer does not succeed, re-run `xrdcp`  with `--debug 2` for more information.
 
 
+Updating to OSG 24
+------------------
+
+There are no manual steps necessary for authentication to work when upgrading from OSG 23 to OSG 24.
+If you are upgrading from an earlier release series, see the [updating to OSG 3.6](#updating-to-osg-36) section below.
+
 Updating to OSG 23
 ------------------
 

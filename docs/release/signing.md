@@ -67,6 +67,20 @@ The key used depends on the OSG version and EL variant used, as documented below
 | Fingerprint        | `4A56 C5BB CDB0 AAA2 DDE9  A690 BDEE E24C 9289 7C00`   |
 | Key ID             | `92897c00`                                             |
 
+| OSG 24 Automated Signing Key |                                              |
+|--------------------|--------------------------------------------------------|
+| Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-24-auto`             |
+| Download           | [GitHub](https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-24-auto) |
+| Fingerprint        | `E612 A4B4 2EE0 71C3 15D1  1CDB 51F0 C137 34E9 58B3`   |
+| Key ID             | `34e958b3`                                             |
+
+| OSG 24 Developer Signing Key |                                              |
+|--------------------|--------------------------------------------------------|
+| Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-24-developer`        |
+| Download           | [GitHub](https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-24-developer) |
+| Fingerprint        | `F77F E0C7 0A9B AA73 9FD3  52C9 9DF7 5B52 EFFC 3BE6`   |
+| Key ID             | `effc3be6`                                             |
+
 !!! note
     Some packages in the 3.6 repos may still be signed with the old key;
     the `osg-release` RPM contains both keys so you can verify old packages.
@@ -117,6 +131,18 @@ pub   rsa4096 2023-08-15 [SC]
       4A56C5BBCDB0AAA2DDE9A690BDEEE24C92897C00
 uid                      OSG 23 Developer Signing Key <help@osg-chtc.org>
 sub   rsa4096 2023-08-15 [E]
+
+$  gpg --import-options show-only --import < /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-24-auto
+pub   rsa4096 2024-08-20 [SC]
+      Key fingerprint = E612A4B42EE071C315D11CDB51F0C13734E958B3
+uid                      OSG 24 Automated Signing Key <help@osg-htc.org>
+sub   rsa4096 2024-08-20 [E]
+
+$  gpg --import-options show-only --import < /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-24-developer
+pub   rsa4096 2024-08-20 [SC]
+      F77FE0C70A9BAA739FD352C99DF75B52EFFC3BE6
+uid                      OSG 24 Developer Signing Key <help@osg-htc.org>
+sub   rsa4096 2024-08-20 [E]
 
 ```
 
