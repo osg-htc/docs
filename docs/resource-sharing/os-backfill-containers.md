@@ -4,6 +4,8 @@ DateReviewed: 2021-12-17
 Open Science Pool Containers
 ============================
 
+!!! info "For assistance starting a new OSG integration, please reach out to support@osg-htc.org"
+
 In order to [share compute resources](overview.md) with the Open Science Pool (OSPool),
 sites can launch pilot jobs directly by starting an OSG-provided Docker container.
 The container includes a worker node environment and an embedded pilot;

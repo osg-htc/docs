@@ -3,6 +3,8 @@ title: Compute Resource Sharing Overview
 Compute Resource Sharing Overview
 =================================
 
+!!! info "For assistance starting a new OSG integration, please reach out to support@osg-htc.org"
+
 OSG uses a resource-overlay ("pilot") model to share resources from your local cluster:
 compute resources are added to a large central resource pool in the OSG through the use of a bootstrap process, often called a
 _pilot_ or a _glidein_.

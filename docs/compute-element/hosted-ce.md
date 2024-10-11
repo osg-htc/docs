@@ -4,6 +4,8 @@ DateReviewed: 2021-01-28
 Requesting an OSG Hosted CE
 ===========================
 
+!!! info "For assistance starting a new OSG integration, please reach out to support@osg-htc.org"
+
 An OSG Hosted Compute Entrypoint (CE) is the entry point for [resource requests](../resource-sharing/overview.md) coming
 from the OSG;
 it handles authorization and delegation of resource requests to your existing campus HPC/HTC cluster.
