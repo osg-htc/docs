@@ -323,7 +323,7 @@ This section is contained in `/etc/osg/config.d/35-pilot.ini`
 | **max\_wall\_time**                       | Positive Integer            | The maximum wall-clock time a job is allowed to run for this pilot type, in minutes                                                                                  |
 | **queue**                                 | String                      | The queue or partition which jobs should be submitted to in order to run on this resource. Equivalent to the HTCondor grid universe classad attribute `remote_queue` |
 | **require\_singularity**                  | true, false                 | True if the pilot should require singularity or apptainer on the workers.                                                                                                         |
-| **os**                                    | Comma-separated List        | The OS of the workers; allowed values are `rhel6`, `rhel7`, `rhel8`, or `ubuntu18`. This is required unless require_singularity = true                               |
+| **os**                                    | Comma-separated List        | The OS of the workers; allowed values are `rhel8` and `rhel9`. This is required unless require_singularity = true                               |
 | **send\_tests*                            | true, false                 | Send test pilots? Currently not working, placeholder                                                                                                                 |
 | **allowed\_vos**                          | Comma-separated List or `*` | A comma-separated list of collaborations that are allowed to submit to this subcluster                                                                               |
 

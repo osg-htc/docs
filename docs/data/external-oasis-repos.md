@@ -21,7 +21,7 @@ Before Starting
 
 The host OS must be:
 
--   RHEL7 or RHEL8 (or equivalent).
+-   RHEL8 or RHEL9 (or equivalent).
 
 Additionally,
 
@@ -35,13 +35,6 @@ Additionally,
 -   **Root access** will be needed to install.  Installation of software into the
     repository itself will be done as an unprivileged user.
 -   **Yum** will need to be [configured to use the OSG repositories](../common/yum.md).
-
-!!! warning "Overlay-FS limitations"
-    CVMFS on RHEL7 only supports Overlay-FS if the underlying filesystem is `ext3` or `ext4`; make sure
-    `/var/spool/cvmfs` is one of these filesystem types.
-
-    If this is not possible, add `CVMFS_DONT_CHECK_OVERLAYFS_VERSION=yes` to your CVMFS configuration.  Using
-    `xfs` will work if it was created with `ftype=1`
 
 Installation
 ------------

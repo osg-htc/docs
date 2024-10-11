@@ -48,7 +48,7 @@ which is useful for looking inside tokens.
 1. Start an agent container in the background and name it `my-agent` to easily run subsequent commands against it:
 
         :::console
-        docker run -d --name my-agent opensciencegrid/oidc-agent:23-release
+        docker run -d --name my-agent hub.opensciencegrid.org/osg-htc/oidc-agent:23-release
 
 1. Generate a local client profile and follow the prompts:
 

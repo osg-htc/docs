@@ -46,13 +46,7 @@ Fetch-CRL is the only service required to support the WN Client.
 
 | Software  | Service name                          | Notes                                                                                  |
 |:----------|:--------------------------------------|:---------------------------------------------------------------------------------------|
-| Fetch CRL | EL8: `fetch-crl.timer` <br> EL7: `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca.md) for more info |
-
-!!! note
-    `fetch-crl-boot` will begin fetching CRLS, which can take a few minutes and fail on transient errors. You can add configuration to ignore these transient errors in `/etc/fetch-crl.conf`:
-
-        :::file
-        noerrors
+| Fetch CRL | `fetch-crl.timer`                     | See [CA documentation](../common/ca.md) for more info |
 
 As a reminder, here are common service commands (all run as `root`):
 

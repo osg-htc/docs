@@ -9,7 +9,7 @@ OSG 3.6 News
     See our [Release Series documentation](./release_series.md#series-life-cycle) for more details.
 
     Note that the OSG 3.6 end-of-life coincides with the wider Enterprise Linux 7 end-of-life.
-    **We recommend upgrading to OSG 23 and an Enteprise Linux 9 distribution at your earliest convenience.**
+    **We recommend upgrading to OSG 24 and an Enteprise Linux 9 distribution at your earliest convenience.**
 
 **Supported OS Versions:** EL7, EL8, EL9
 

@@ -338,7 +338,11 @@ For most installations create a new file named `/etc/condor/config.d/92_local_co
 
 The above procedure will work if you are using the OSG HTCondor RPMS. You can
 verify that you used the OSG HTCondor RPM by using `yum list condor`. The
-version name should include "osg", e.g. `8.6.4-3.osg.el7`.
+package repository should be "osg", e.g. 
+``` console
+Available Packages
+condor.x86_64                          24.0.16-1.el9                           osg
+```
 
 If you are using the UW Madison HTCondor RPMS, be aware of the following changes:
 
@@ -663,7 +667,6 @@ groupwould only match jobs that have the `+is_itb=True` ClassAd.
 6. Reconfigure the Frontend (see the [section below](#reconfiguring-glideinwms)):
 
         :::console
-        # on EL7 systems
         systemctl reload gwms-frontend
         
 Using GlideinWMS
@@ -675,7 +678,7 @@ In addition to the GlideinWMS service itself, there are a number of supporting s
 
 | Software   | Service name                          | Notes                                                                             |
 |:-----------|:--------------------------------------|:----------------------------------------------------------------------------------|
-| Fetch CRL  | EL8: `fetch-crl.timer` <br> EL7: `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca.md#managing-fetch-crl-services) for more info |
+| Fetch CRL  | `fetch-crl.timer`                     | See [CA documentation](../common/ca.md#managing-fetch-crl-services) for more info |
 | Gratia     | `gratia-probes-cron`                  | Accounting software                                                               |
 | HTCondor   | `condor`                              |                                                                                   |
 | HTTPD      | `httpd`                               | GlideinWMS monitoring and staging                                                 |

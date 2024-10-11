@@ -20,7 +20,7 @@ Let's Encrypt host certs expire every three months so it is important to set up 
 Installation and Obtaining the Initial Certificate
 --------------------------------------------------
 
-1. Install the `certbot` package (available from the EPEL 7 repository):
+1. Install the `certbot` package (available from the EPEL repository):
 
         :::console
         root@host # yum install certbot

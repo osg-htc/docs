@@ -58,6 +58,7 @@ Keep OSG Software Updated
 It is important to keep your software and data (e.g., CAs and VO client) up-to-date with the latest OSG release.
 See the release notes for your installed release series:
 
+-  [OSG 24 release notes](release/osg-24.md)
 -  [OSG 23 release notes](release/osg-23.md)
 
 To stay abreast of software releases, we recommend subscribing to the <mailto:osg-sites@opensciencegrid.org> mailing
@@ -69,7 +70,7 @@ Notify OSG of Major Changes
 To avoid potential issues with OSG job submissions, please [notify us](mailto:help@osg-htc.org) of major changes
 to your site, including:
 
-- Major OS version changes on the worker nodes (e.g., upgraded from EL 7 to EL 8)
+- Major OS version changes on the worker nodes (e.g., upgraded from EL 8 to EL 9)
 - Adding or removing [container support through singularity or apptainer](worker-node/install-apptainer.md)
 - Policy changes regarding OSG resource requests (e.g., number of cores or GPUs, memory usage, or maximum walltime)
 - Scheduled or unscheduled [downtimes](common/registration.md#registering-resource-downtimes)

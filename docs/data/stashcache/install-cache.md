@@ -247,19 +247,6 @@ To use HTTPS:
 
 1.  Uncomment `set EnableVoms = 1` in `/etc/xrootd/config.d/10-osg-xrdvoms.cfg`
 
-!!! note "Upgrading from OSG 3.5"
-    If upgrading from OSG 3.5, you may have a file with the following contents in `/etc/xrootd/config.d`:
-
-           # Support HTTPS access to unauthenticated cache
-           if named stash-cache
-             http.cadir /etc/grid-security/certificates
-             http.cert /etc/grid-security/xrd/xrdcert.pem
-             http.key /etc/grid-security/xrd/xrdkey.pem
-             http.secxtractor /usr/lib64/libXrdLcmaps.so
-           fi
-
-    You must delete this config block or XRootD will fail to start.
-
 
 Manually Setting the FQDN (optional)
 ------------------------------------
@@ -313,7 +300,7 @@ As a reminder, here are common service commands (all run as `root`):
 |--------------|------------------|-----------|
 | XRootD | `xrootd@stash-cache.service` | The XRootD daemon, which performs the data transfers |
 | XCache | `xcache-reporter.timer` | Reports usage information to collector.opensciencegrid.org |
-| Fetch CRL |EL8: `fetch-crl.timer` <br> EL7: `fetch-crl-boot` and `fetch-crl-cron` | Required to authenticate monitoring services.  See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info |
+| Fetch CRL | `fetch-crl.timer` | Required to authenticate monitoring services.  See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info |
 | | `stash-authfile@stash-cache.service` | Generate authentication configuration files for XRootD (public cache instance) |
 | | `stash-authfile@stash-cache.timer` | Periodically run the above service (public cache instance) |
 
@@ -373,24 +360,6 @@ ping_response_status = "ok"
 STASHCACHE_DaemonVersion = "1.0.0"
 ...
 ```
-
-
-Updating to OSG 3.6
--------------------
-
-The OSG 3.5 series reached end-of-life on May 1, 2022.
-Admins are strongly encouraged to move their caches to OSG 3.6.
-
-See [general update instructions](../../release/updating-to-osg-36.md).
-
-Unauthenticated caches (`xrootd@stash-cache` service) do not need any configuration changes,
-unless HTTPS access has been enabled.
-See the ["enable HTTPS on the unauthenticated cache" section](#enable-https-on-the-unauthenticated-cache))
-for the necessary configuration changes.
-
-Authenticated caches (`xrootd@stash-cache-auth` service) may need the configuration changes described in the
-[updating to OSG 3.6 section](../xrootd/xrootd-authorization.md#updating-to-osg-36)
-of the XRootD authorization configuration document.
 
 
 Getting Help
