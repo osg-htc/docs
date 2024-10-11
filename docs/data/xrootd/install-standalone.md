@@ -173,7 +173,7 @@ The specific services are:
 
 | Software          | Service Name                          | Notes                                                                                                       |
 |:------------------|:--------------------------------------|:------------------------------------------------------------------------------------------------------------|
-| Fetch CRL         | EL8,EL9: `fetch-crl.timer` <br> EL7: `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info                        |
+| Fetch CRL         | `fetch-crl.timer` | See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info                        |
 | XRootD            | `xrootd@standalone`                   | Primary xrootd service if _not_ running in [multi-user mode](#enabling-multi-user-support)                |
 | XRootD Multi-user | `xrootd-privileged@standalone`        | Primary xrootd service to start _instead of_ `xrootd@standalone` if running in [multi-user mode](#enabling-multi-user-support) |
 

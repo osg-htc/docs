@@ -150,12 +150,10 @@ but the container will need fewer privileges.
 #### cvmfsexec
 
 !!! info "cvmfsexec System Requirements"
-    -   On EL7, you must have kernel version >= 3.10.0-1127 (run `uname -vr` to check), and user namespaces enabled.
-        See step 1 in the
-        [Apptainer Install document](https://osg-htc.org/docs/worker-node/install-apptainer/#enabling-unprivileged-apptainer)
-        for details.
 
     -   On EL8, you must have kernel version >= 4.18 (run `uname -vr` to check).
+
+    -   On EL9, all kernel versions >= 5.0 should be supported.
 
     See the [cvmfsexec README](https://github.com/cvmfs/cvmfsexec#readme) details.
 

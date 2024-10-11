@@ -300,7 +300,7 @@ As a reminder, here are common service commands (all run as `root`):
 |--------------|------------------|-----------|
 | XRootD | `xrootd@stash-cache.service` | The XRootD daemon, which performs the data transfers |
 | XCache | `xcache-reporter.timer` | Reports usage information to collector.opensciencegrid.org |
-| Fetch CRL |EL8: `fetch-crl.timer` <br> EL7: `fetch-crl-boot` and `fetch-crl-cron` | Required to authenticate monitoring services.  See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info |
+| Fetch CRL | `fetch-crl.timer` | Required to authenticate monitoring services.  See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info |
 | | `stash-authfile@stash-cache.service` | Generate authentication configuration files for XRootD (public cache instance) |
 | | `stash-authfile@stash-cache.timer` | Periodically run the above service (public cache instance) |
 
