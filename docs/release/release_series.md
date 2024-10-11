@@ -34,14 +34,13 @@ Series Overviews
 
 Since the start of the RPM-based OSG Software Stack, we have offered the following release series:
 
--   **OSG 24** (started October 2024) aligns the OSG release series and HTCondor Software Suite release cycles.
-    The initial release includes GlideinWMS 3.10.7, HTCondor 24.0, HTCondor-CE 24.0, and XRootD 5.7.0
+-   **OSG 24** (started October 2024) introduces support for the ARM architecture.
 
 -   **OSG 23** (started October 2023) aligns the OSG release series and HTCondor Software Suite release cycles.
     The initial release includes GlideinWMS 3.10.5, HTCondor 23.0, HTCondor-CE 23.0, and XRootD 5.6.2
 
--   **OSG 3.6** (started February 2021) overhauls the authentication and data transfer protocols used in the OSG
-    software stack:
+-   **OSG 3.6** (started February 2021, end-of-lifed June 2024) overhauled the authentication and data transfer 
+    protocols used in the OSG software stack:
     bearer tokens, such as [SciTokens](https://scitokens.org/) or WLCG tokens, are used for authentication instead of
     GSI proxies and HTTP is used for data transfer instead of GridFTP.
     See the [OSG GridFTP and GSI migration plan](https://osg-htc.org/technology/policy/gridftp-gsi-migration/)

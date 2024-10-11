@@ -46,7 +46,7 @@ If you are still not sure, you can run the following command to determine if thi
 
 ``` console
 $ rpm -q osg-ce
-osg-ce-3.6-4.osg36.el7.x86_64
+osg-ce-24-1.osg24.el9.x86_64
 ```
 
 If the output is blank, then you are not working with a CE host.
@@ -141,7 +141,6 @@ When troubleshooting Gratia, there are two different configurations to investiga
 
 The HTCondor and/or HTCondor-CE configuration determines where job history files are written and how often the Gratia
 probe Schedd cron job are run.
-If you recently updated your host to OSG 3.6, it's important to verify the location of the job history files.
 
 ##### Access Points ####
 
@@ -255,18 +254,6 @@ Verify that your Gratia configuration is correct in `/etc/gratia/condor-ap/Probe
 
         :::xml
         EnableProbe="1"
-
-1.  If you are updating an existing ProbeConfig from a pre-OSG 3.6 installation,
-    also ensure that the following values are set:
-
-    | Option                     | Value                                                                     |
-    |:---------------------------|---------------------------------------------------------------------------|
-    | `VOOverrides`              | The collaboration's resource pool of your AP, e.g. `osg` for an OSPool AP |
-    | `SuppressGridLocalRecords` | `"1"`                                                                     |
-    | `MapUnknownToGroup`        | `"1"`                                                                     |
-    | `DataFolder`               | `"/var/lib/condor/gratia/data/"`                                          |
-    | `WorkingFolder`            | `"/var/lib/condor/gratia/tmp/"`                                           |
-    | `LogFolder`                | `"/var/log/condor/gratia/"`                                               |
 
 #### Compute Entrypoints ####
 
@@ -398,7 +385,6 @@ The most common RPMs you will see are:
 | RPM                        | Purpose                                                                       |
 |:---------------------------|:------------------------------------------------------------------------------|
 | `gratia-probe-common`      | Code shared between all Gratia probes                                         |
-| `gratia-probe-condor`      | An empty probe to ease updates from OSG 3.5 to OSG 3.6. Can be safely removed |
 | `gratia-probe-condor-ap`   | The probe that tracks Access Point usage                                      |
 | `gratia-probe-htcondor-ce` | Probe that tracks HTCondor-CE usage                                           |
 

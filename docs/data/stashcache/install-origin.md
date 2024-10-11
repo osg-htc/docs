@@ -328,19 +328,6 @@ See the page on [getting your VO's data into OSDF](vo-data.md).
 
 Specifying the DN of your origin is not required but it is useful for testing.
 
-Updating to OSG 3.6
--------------------
-
-The OSG 3.5 series reached end-of-life on May 1, 2022.
-Admins are strongly encouraged to move their origins to OSG 3.6.
-
-See [general update instructions](../../release/updating-to-osg-36.md).
-
-Unauthenticated origins (`xrootd@stash-origin` service) do not need any configuration changes.
-
-Authenticated origins (`xrootd@stash-origin-auth` service) may need the configuration changes described in the
-[updating to OSG 3.6 section](../xrootd/xrootd-authorization.md#updating-to-osg-36)
-of the XRootD authorization configuration document.
 
 Getting Help
 ------------

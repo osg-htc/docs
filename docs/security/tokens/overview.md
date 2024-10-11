@@ -193,10 +193,6 @@ The following collaborations support support file transfer using WebDAV or XRoot
 | LIGO          | Undergoing testing*       |
 | OSG           | Yes                       |
 
-\* Currently, collaborations testing WebDAV or XRootD support will continue to support other file transfer protocols so
-it should it should be safe to update your OSG WN clients to OSG 3.6.
-If you have any questions, please contact your collaboration directly.
-
 Help
 ----
 
