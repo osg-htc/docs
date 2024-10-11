@@ -47,10 +47,11 @@ As with all OSG software installations, there are some one-time steps to prepare
     Origins should use a CA that is accepted by major browsers and operating systems,
     such as InCommon RSA or [Let's Encrypt](../../security/host-certs/lets-encrypt).
     IGTF certs are not recommended because clients are not configured to accept them by default.
+    Note that you will need the full certificate chain, not just the certificate.
     
     The following locations should be used (note that they are in separate directories):
     
-    * **Host Certificate**: `/etc/pki/tls/certs/pelican.crt`
+    * **Host Certificate Chain**: `/etc/pki/tls/certs/pelican.crt`
     * **Host Key**: `/etc/pki/tls/private/pelican.key`
 
 
