@@ -24,7 +24,7 @@ Building Upon the Container
 You may base the container on the OSG worker node by including it inside your `Dockerfile`:
 
 ```
-FROM opensciencegrid/osg-wn:latest
+FROM hub.opensciencegrid.org/osg-htc/osg-wn:latest
 ```
 
 You can replace `latest` with any tag listed above.
@@ -35,6 +35,6 @@ Perform Testing
 You may perform testing from within the OSG worker node envionment by running the command:
 
 ```
-root@host # docker run -ti --rm opensciencegrid/osg-wn:latest /bin/bash
+root@host # docker run -ti --rm hub.opensciencegrid.org/osg-htc/osg-wn:latest /bin/bash
 ```
 
