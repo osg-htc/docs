@@ -32,13 +32,21 @@ Before starting the installation process, consider the following requirements:
      * Inbound TCP port 8000 for unauthenticated file access via HTTP(S) and/or
      * Inbound TCP port 8443 for authenticated file access via HTTPS
      * Outbound UDP port 9930 for reporting to `xrd-report.osgstorage.org` and `xrd-mon.osgstorage.org` for monitoring
-1. **File Systems:** The cache needs host partitions to store user data.
-   For improved performance and storage, we recommend multiple partitions for handling namespaces (HDD, SSD, or NVMe),
-   data (HDDs), and metadata (SSDs or NVMe).
+1. **File Systems:** The cache should have a partition of its own for storing data and metadata.
 1. **Host certificate:** Required for authentication.
    See our [host certificate documentation](../../security/host-certs.md) for instructions on how to request host certificates.
-1. **Hardware requirements:** We recommend that a cache has at least 10Gbps connectivity,
-   1 TB of disk space for the cache directory, and 12GB of RAM.
+1. **Hardware requirements:**
+    * A cache serving the OSDF federation as a regional cache should have at least:
+        * 8 cores
+        * 40 Gbps connectivity
+        * 50-200 TB of NVMe disk for the cache partition; you may distribute the disk, e.g., by using an NVMe-backed Ceph pool,
+            if you cannot fit that much disk into a single chassis
+        * 24 GB of RAM
+    * A cache being used to serve data from the OSDF to a single site should have at least:
+        * 8 cores
+        * 40 Gbps connectivity
+        * 2 TB of NVMe disk for the cache partition
+        * 24 GB of RAM
 
 <!-- NOTE: Keep the "Registering the Cache" section below in sync with install-cache.md -->
 
