@@ -261,7 +261,7 @@ Verify that your Gratia configuration is correct in `/etc/gratia/condor-ap/Probe
 
     | Option                     | Value                                                                     |
     |:---------------------------|---------------------------------------------------------------------------|
-    | `VOOverrides`              | The collaboration's resource pool of your AP, e.g. `osg` for an OSPool AP |
+    | `VOOverride`               | The collaboration's resource pool of your AP, e.g. `osg` for an OSPool AP |
     | `SuppressGridLocalRecords` | `"1"`                                                                     |
     | `MapUnknownToGroup`        | `"1"`                                                                     |
     | `DataFolder`               | `"/var/lib/condor/gratia/data/"`                                          |
