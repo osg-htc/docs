@@ -1,10 +1,14 @@
 title: Installing the OSDF Origin by RPM
 
-Installing the OSDF Origin
-==========================
+Installing the OSDF Origin by RPM
+=================================
 
-This document describes how to install a Pelican-based Open Science Data Federation (OSDF) Origin service via RPMs.
-This service allows an organization to export its data to the OSDF.
+!!! warning "OSG 24"
+    This installation guide requires OSG 24
+
+This document describes how to install an Open Science Data Federation (OSDF) Origin service via RPM.
+This service, based on the [Pelican Platform](https://docs.pelicanplatform.org/federating-your-data), allows an
+administrator to serve data from a POSIX filesystem or S3 endpoint through the global OSDF infrastructure.
 
 !!! note
     The origin must be registered with the OSG prior to joining the data federation.
@@ -20,7 +24,7 @@ Before Starting
 
 Before starting the installation process, consider the following requirements:
 
-* __Operating system:__ A RHEL 8 or RHEL 9 or compatible operating systems.
+* __Operating system:__ A RHEL 8 or RHEL 9 or [compatible operating system](../../release/supported_platforms.md).
 * __User IDs:__ If they do not exist already, the installation will create the Linux user ID `xrootd` for running daemons.
 * __Host certificate:__ Required for authentication.  See note below.
 * __Network ports:__ The origin service requires the following ports open:
@@ -34,11 +38,8 @@ Before starting the installation process, consider the following requirements:
 As with all OSG software installations, there are some one-time steps to prepare in advance:
 
 * Obtain root access to the host
-* Prepare [the required Yum repositories](../../common/yum.md)
-
-
-!!! note "OSG 23"
-    In OSG 23, the Pelican-based OSDF RPMs are only available in the "osg-upcoming" repositories.
+* Prepare [the required Yum repositories](../../common/yum.md),
+  including the [OSG 24 repositories](../../common/yum.md#install-the-osg-repositories)
 
 !!! note "Host certificates"
     Origins should use a CA that is accepted by major browsers and operating systems,
