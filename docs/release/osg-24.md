@@ -1,0 +1,74 @@
+title: OSG 24 News
+
+OSG 24 News
+===========
+
+**Supported OS Versions:** EL8, EL9 (see [this document](supported_platforms.md) for details)
+
+OSG 24 is the second release series following our [annual release schedule](release_series.md) and includes support for
+the ARM CPU architecture.
+The initial release includes GlideinWMS 3.10.7, HTCondor 24.0.1, HTCondor 24.1.1, HTCondor-CE 24.0, and XRootD 5.7.0.
+
+OSG 24 will be supported for [approximately two years total](release_series.md#series-life-cycle).
+
+Latest News
+-----------
+
+### October 31, 2024: Initial Release ###
+
+This initial release contains the following notable changes compared to the current OSG 23 release:
+
+-   [HTCondor 24.0.1](https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-1)
+
+-   [HTCondor-CE 24.0.0](https://htcondor.com/htcondor-ce/v24/installation/)
+
+-   [Pelican 7.10.11](https://github.com/PelicanPlatform/pelican/releases/tag/v7.10.11):
+    the initial release of Pelican in the main line of the OSG Software Stack.
+    Pelican is the new foundational software for the [OSDF](../data/stashcache/overview.md).
+    Administrators of hosts installing `pelican` for the client are encouraged to upgrade to 7.10.11.
+
+    !!! warning "OSDF origins / caches"
+        For operators of existing OSDF caches or origins (formerly `stash-cache` or `stash-origin`, respectively),
+        we recommend waiting for the release of Pelican 7.11 and accompanying `osdf-server` RPMs before upgrading.
+
+-   [HTCondor 24.1.1](https://htcondor.readthedocs.io/en/24.x/version-history/feature-versions-24-x.html#version-24-1-1)
+    in [OSG Upcoming](../common/yum.md#upcoming-software)
+
+-   OSG PKI tools 3.7.1-2: fix an issue with missing `python3-*` dependencies
+
+-   `ospool-ap` replaces the `osg-flock` RPM
+
+#### Package removals ####
+
+The following packages were removed from OSG 24:
+
+-  `hosted-ce-tools`: moved into relevant container images
+-  `voms`: available in EPEL
+-  `x509-token-issuer`: removed due to lack of demand
+
+#### Container images ####
+
+!!! question "Where are the other OSG images?"
+    We intend to release `atlas-xcache`, `cms-xcache`, `frontier-squid`, `oidc-agent`, `osg-wn` container images by the
+    end of the year.
+
+    `stash-cache` and `stash-origin` images will be replaced by `pelican_platform/osdf-cache` and
+    `/pelican_platform/osdf-origin` images, respectively.
+
+The following container images have new tags for OSG 24:
+
+| Image name                                               | Tags         |
+|:---------------------------------------------------------|:-------------|
+| `hub.opensciencegrid.org/osg-htc/ospool-ep`              | `24-release` |
+
+Announcements
+-------------
+
+Updates to critical packages also announced by email and are sent to the following recipients and lists:
+
+-   [Registered administrative contacts](../common/registration.md#registering-resources)
+-   [osg-general@opensciencegrid.org](https://listserv.fnal.gov/scripts/wa.exe?A0=OSG-GENERAL)
+-   [operations@osg-htc.org](https://listserv.fnal.gov/scripts/wa.exe?A0=OSG-OPERATIONS)
+-   [osg-sites@opensciencegrid.org](https://listserv.fnal.gov/scripts/wa.exe?A0=OSG-SITES)
+-   [site-announce@opensciencegrid.org](https://listserv.fnal.gov/scripts/wa.exe?A0=site-announce)
+-   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
