@@ -1544,14 +1544,14 @@
       
       
         <label class="md-nav__link" for="__nav_10_2">
-          OSG 23
+          OSG 24
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="OSG 23" data-md-level="2">
+      <nav class="md-nav" aria-label="OSG 24" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_2">
           <span class="md-nav__icon md-icon"></span>
-          OSG 23
+          OSG 24
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -1561,22 +1561,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../release/osg-23/" class="md-nav__link">
+      <a href="../../../release/osg-24/" class="md-nav__link">
         News
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../release/updating-to-osg-23/" class="md-nav__link">
-        Updating to OSG 23
       </a>
     </li>
   
@@ -1605,14 +1591,14 @@
       
       
         <label class="md-nav__link" for="__nav_10_3">
-          OSG 3.6
+          OSG 23
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="OSG 3.6" data-md-level="2">
+      <nav class="md-nav" aria-label="OSG 23" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_3">
           <span class="md-nav__icon md-icon"></span>
-          OSG 3.6
+          OSG 23
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -1622,7 +1608,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../release/osg-36/" class="md-nav__link">
+      <a href="../../../release/osg-23/" class="md-nav__link">
         News
       </a>
     </li>
@@ -1636,8 +1622,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../release/updating-to-osg-36/" class="md-nav__link">
-        Updating to OSG 3.6
+      <a href="../../../release/updating-to-osg-23/" class="md-nav__link">
+        Updating to OSG 23
       </a>
     </li>
   
@@ -2109,7 +2095,7 @@ decreasing access latency. The are two types of installations described in this 
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following requirements:</p>
 <ul>
-<li><strong>Operating system:</strong> A RHEL 7 or compatible operating systems.</li>
+<li><strong>Operating system:</strong> An RHEL 8, RHEL 9, or compatible operating systems.</li>
 <li><strong>User IDs:</strong> If they do not exist already, the installation will create the Linux user IDs <code>xrootd</code></li>
 <li><strong>Host certificate:</strong> Required for client authentication and authentication with CMS VOMS Server
   See our <a href="../../../security/host-certs/">documentation</a> for instructions on how to request and install host certificates.</li>
@@ -2291,12 +2277,12 @@ As soon as your issue has been resolved, revert any changes you have made to <co
 </table>
 <h2 id="managing-cms-xcache-and-associated-services">Managing CMS XCache and associated services<a class="headerlink" href="#managing-cms-xcache-and-associated-services" title="Permanent link">&para;</a></h2>
 <p>These services must be managed by <code>systemctl</code> and may start additional services as dependencies.
-As a reminder, here are common service commands (all run as <code>root</code>) for EL7:</p>
+As a reminder, here are common service commands (all run as <code>root</code>) for EL8+:</p>
 <table>
 <thead>
 <tr>
 <th align="left">To...</th>
-<th align="left">On EL7, run the command...</th>
+<th align="left">On EL8+, run the command...</th>
 </tr>
 </thead>
 <tbody>
@@ -2340,7 +2326,7 @@ As a reminder, here are common service commands (all run as <code>root</code>) f
 </tr>
 <tr>
 <td>Fetch CRL</td>
-<td>EL8: <code>fetch-crl.timer</code> <br> EL7: <code>fetch-crl-boot</code> and <code>fetch-crl-cron</code></td>
+<td><code>fetch-crl.timer</code></td>
 <td>Required to authenticate monitoring services.  See <a href="../../../common/ca/#managing-fetch-crl-services">CA documentation</a> for more info</td>
 </tr>
 <tr>

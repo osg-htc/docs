@@ -1511,14 +1511,14 @@
       
       
         <label class="md-nav__link" for="__nav_10_2">
-          OSG 23
+          OSG 24
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="OSG 23" data-md-level="2">
+      <nav class="md-nav" aria-label="OSG 24" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_2">
           <span class="md-nav__icon md-icon"></span>
-          OSG 23
+          OSG 24
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -1528,22 +1528,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../release/osg-23/" class="md-nav__link">
+      <a href="../../release/osg-24/" class="md-nav__link">
         News
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../release/updating-to-osg-23/" class="md-nav__link">
-        Updating to OSG 23
       </a>
     </li>
   
@@ -1572,14 +1558,14 @@
       
       
         <label class="md-nav__link" for="__nav_10_3">
-          OSG 3.6
+          OSG 23
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="OSG 3.6" data-md-level="2">
+      <nav class="md-nav" aria-label="OSG 23" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_3">
           <span class="md-nav__icon md-icon"></span>
-          OSG 3.6
+          OSG 23
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -1589,7 +1575,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../release/osg-36/" class="md-nav__link">
+      <a href="../../release/osg-23/" class="md-nav__link">
         News
       </a>
     </li>
@@ -1603,8 +1589,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../release/updating-to-osg-36/" class="md-nav__link">
-        Updating to OSG 3.6
+      <a href="../../release/updating-to-osg-23/" class="md-nav__link">
+        Updating to OSG 23
       </a>
     </li>
   
@@ -2055,7 +2041,7 @@ we suggest <a href="../hosted-ce/">requesting an OSG Hosted CE</a>.</p>
 </div>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following points, consulting the upstream references as needed
-(<a href="https://htcondor.com/htcondor-ce/v23/reference/">HTCondor-CE 23</a>):</p>
+(<a href="https://htcondor.com/htcondor-ce/v24/reference/">HTCondor-CE 24</a>):</p>
 <ul>
 <li><strong>User IDs:</strong> If they do not exist already, the installation will create the Linux users <code>condor</code> (UID 4716) and
     <code>gratia</code>
@@ -2079,7 +2065,7 @@ we suggest <a href="../hosted-ce/">requesting an OSG Hosted CE</a>.</p>
 <li><strong>Access point/login node:</strong> HTCondor-CE should be installed on a host that already has the ability to submit jobs
     into your local cluster</li>
 <li><strong>File Systems</strong>: Non-HTCondor batch systems require a
-    <a href="https://htcondor.com/htcondor-ce/v23/configuration/local-batch-system/#sharing-the-spool-directory">shared file system</a>
+    <a href="https://htcondor.com/htcondor-ce/v24/configuration/local-batch-system/#sharing-the-spool-directory">shared file system</a>
     between the HTCondor-CE host and the batch system worker nodes.</li>
 </ul>
 <p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
@@ -2184,7 +2170,7 @@ To simplify installation, OSG provides convenience RPMs that install all require
 For more advanced configuration, see the section on <a href="#optional-configuration">optional configurations</a>.</p>
 <h3 id="configuring-the-local-batch-system">Configuring the local batch system<a class="headerlink" href="#configuring-the-local-batch-system" title="Permanent link">&para;</a></h3>
 <p>To configure HTCondor-CE to integrate with your local batch system,
-please refer to the <a href="https://htcondor.com/htcondor-ce/v23/configuration/local-batch-system/">upstream documentation</a>.</p>
+please refer to the <a href="https://htcondor.com/htcondor-ce/v24/configuration/local-batch-system/">upstream documentation</a>.</p>
 <h3 id="configuring-authentication">Configuring authentication<a class="headerlink" href="#configuring-authentication" title="Permanent link">&para;</a></h3>
 <p>HTCondor-CE clients will submit RARs accompanied by <a href="../../security/tokens/overview/">bearer tokens</a> declaring their
 association with a given collaboration and what permissions the collaboration has given the client
@@ -2210,7 +2196,7 @@ SCITOKENS /^https\:\/\/scitokens\.org\/osg\-connect,/ osgpilot
 </li>
 </ol>
 <p>For more details of the mapfile format, consult the "SciTokens" section of the
-<a href="https://htcondor.com/htcondor-ce/v23/configuration/authentication/#scitokens">upstream documentation</a>.</p>
+<a href="https://htcondor.com/htcondor-ce/v24/configuration/authentication/#scitokens">upstream documentation</a>.</p>
 <h4 id="bannning-a-collaboration">Bannning a collaboration<a class="headerlink" href="#bannning-a-collaboration" title="Permanent link">&para;</a></h4>
 <div class="admonition tip">
 <p class="admonition-title">Implicit banning</p>
@@ -2264,8 +2250,8 @@ the different pieces of software required for an OSG HTCondor-CE:</p>
 before they are submitted to your local batch system or otherwise change the behavior of your CE.
 For detailed instructions, please refer to the upstream documentation:</p>
 <ul>
-<li><a href="https://htcondor.com/htcondor-ce/v23/configuration/job-router-overview/">Configuring the Job Router</a></li>
-<li><a href="https://htcondor.com/htcondor-ce/v23/configuration/optional-configuration/">Optional configuration</a></li>
+<li><a href="https://htcondor.com/htcondor-ce/v24/configuration/job-router-overview/">Configuring the Job Router</a></li>
+<li><a href="https://htcondor.com/htcondor-ce/v24/configuration/optional-configuration/">Optional configuration</a></li>
 </ul>
 <h4 id="accounting-with-multiple-ces-or-local-user-jobs">Accounting with multiple CEs or local user jobs<a class="headerlink" href="#accounting-with-multiple-ces-or-local-user-jobs" title="Permanent link">&para;</a></h4>
 <div class="admonition note">
@@ -2281,13 +2267,13 @@ reads:</p>
 
 <h2 id="starting-and-validating-htcondor-ce">Starting and Validating HTCondor-CE<a class="headerlink" href="#starting-and-validating-htcondor-ce" title="Permanent link">&para;</a></h2>
 <p>For information on how to start and validate the core HTCondor-CE services, please refer to the
-<a href="https://htcondor.com/htcondor-ce/v23/operation/">upstream documentation</a></p>
+<a href="https://htcondor.com/htcondor-ce/v24/operation/">upstream documentation</a></p>
 <h2 id="troubleshooting-htcondor-ce">Troubleshooting HTCondor-CE<a class="headerlink" href="#troubleshooting-htcondor-ce" title="Permanent link">&para;</a></h2>
 <p>For information on how to troubleshoot your HTCondor-CE, please refer to the upstream documentation:</p>
 <ul>
-<li><a href="https://htcondor.com/htcondor-ce/v23/troubleshooting/common-issues/">Common issues</a></li>
-<li><a href="https://htcondor.com/htcondor-ce/v23/troubleshooting/debugging-tools/">Debugging tools</a></li>
-<li><a href="https://htcondor.com/htcondor-ce/v23/troubleshooting/logs/">Helpful logs</a></li>
+<li><a href="https://htcondor.com/htcondor-ce/v24/troubleshooting/common-issues/">Common issues</a></li>
+<li><a href="https://htcondor.com/htcondor-ce/v24/troubleshooting/debugging-tools/">Debugging tools</a></li>
+<li><a href="https://htcondor.com/htcondor-ce/v24/troubleshooting/logs/">Helpful logs</a></li>
 </ul>
 <h2 id="registering-the-ce">Registering the CE<a class="headerlink" href="#registering-the-ce" title="Permanent link">&para;</a></h2>
 <p>To contribute capacity, your CE must be

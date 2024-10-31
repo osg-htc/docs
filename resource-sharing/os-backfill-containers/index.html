@@ -1511,14 +1511,14 @@
       
       
         <label class="md-nav__link" for="__nav_10_2">
-          OSG 23
+          OSG 24
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="OSG 23" data-md-level="2">
+      <nav class="md-nav" aria-label="OSG 24" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_2">
           <span class="md-nav__icon md-icon"></span>
-          OSG 23
+          OSG 24
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -1528,22 +1528,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../release/osg-23/" class="md-nav__link">
+      <a href="../../release/osg-24/" class="md-nav__link">
         News
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../release/updating-to-osg-23/" class="md-nav__link">
-        Updating to OSG 23
       </a>
     </li>
   
@@ -1572,14 +1558,14 @@
       
       
         <label class="md-nav__link" for="__nav_10_3">
-          OSG 3.6
+          OSG 23
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="OSG 3.6" data-md-level="2">
+      <nav class="md-nav" aria-label="OSG 23" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_3">
           <span class="md-nav__icon md-icon"></span>
-          OSG 3.6
+          OSG 23
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -1589,7 +1575,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../release/osg-36/" class="md-nav__link">
+      <a href="../../release/osg-23/" class="md-nav__link">
         News
       </a>
     </li>
@@ -1603,8 +1589,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../release/updating-to-osg-36/" class="md-nav__link">
-        Updating to OSG 3.6
+      <a href="../../release/updating-to-osg-23/" class="md-nav__link">
+        Updating to OSG 23
       </a>
     </li>
   
@@ -2111,7 +2097,7 @@ Make sure the user you run your container as has write access to this directory.
        -e CVMFSEXEC_REPOS=&quot;                     \
             oasis.opensciencegrid.org           \
             singularity.opensciencegrid.org&quot;    \
-       opensciencegrid/osgvo-docker-pilot:23-release
+       hub.opensciencegrid.org/osg-htc/ospool-ep:24-release
 </code></pre></div>
 <p>Replace <code>/path/to/token</code> with the location you saved the token obtained from the OSPool Token Registry.
 Privileged mode (<code>--privileged</code>) requested in the above <code>docker run</code> allows the container
@@ -2178,13 +2164,10 @@ but the container will need fewer privileges.</p>
 <p class="admonition-title">cvmfsexec System Requirements</p>
 <ul>
 <li>
-<p>On EL7, you must have kernel version &gt;= 3.10.0-1127 (run <code>uname -vr</code> to check), and user namespaces enabled.
-    See step 1 in the
-    <a href="https://osg-htc.org/docs/worker-node/install-apptainer/#enabling-unprivileged-apptainer">Apptainer Install document</a>
-    for details.</p>
+<p>On EL8, you must have kernel version &gt;= 4.18 (run <code>uname -vr</code> to check).</p>
 </li>
 <li>
-<p>On EL8, you must have kernel version &gt;= 4.18 (run <code>uname -vr</code> to check).</p>
+<p>On EL9, all kernel versions &gt;= 5.0 should be supported.</p>
 </li>
 </ul>
 <p>See the <a href="https://github.com/cvmfs/cvmfsexec#readme">cvmfsexec README</a> details.</p>
@@ -2232,7 +2215,7 @@ modified to volume mount CVMFS instead of using cvmfsexec, and using reduced pri
         -e GLIDEIN_ResourceName=&quot;...&quot;   \
         -e GLIDEIN_Start_Extra=&quot;True&quot;   \
         -e OSG_SQUID_LOCATION=&quot;...&quot;     \
-        opensciencegrid/osgvo-docker-pilot:23-release
+        hub.opensciencegrid.org/osg-htc/ospool-ep:24-release
 </code></pre></div>
 <p>Fill in the values for <code>/path/to/token</code>, <code>/worker-temp-dir</code>, <code>GLIDEIN_Site</code>, <code>GLIDEIN_ResourceName</code>, and <code>OSG_SQUID_LOCATION</code> <a href="#running-the-container-with-docker">as above</a>.</p>
 <h3 id="limiting-resource-usage">Limiting resource usage<a class="headerlink" href="#limiting-resource-usage" title="Permanent link">&para;</a></h3>

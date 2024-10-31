@@ -1477,14 +1477,14 @@
       
       
         <label class="md-nav__link" for="__nav_10_2">
-          OSG 23
+          OSG 24
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="OSG 23" data-md-level="2">
+      <nav class="md-nav" aria-label="OSG 24" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_2">
           <span class="md-nav__icon md-icon"></span>
-          OSG 23
+          OSG 24
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -1494,22 +1494,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../release/osg-23/" class="md-nav__link">
+      <a href="../../release/osg-24/" class="md-nav__link">
         News
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../release/updating-to-osg-23/" class="md-nav__link">
-        Updating to OSG 23
       </a>
     </li>
   
@@ -1538,14 +1524,14 @@
       
       
         <label class="md-nav__link" for="__nav_10_3">
-          OSG 3.6
+          OSG 23
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="OSG 3.6" data-md-level="2">
+      <nav class="md-nav" aria-label="OSG 23" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_3">
           <span class="md-nav__icon md-icon"></span>
-          OSG 3.6
+          OSG 23
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -1555,7 +1541,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../release/osg-36/" class="md-nav__link">
+      <a href="../../release/osg-23/" class="md-nav__link">
         News
       </a>
     </li>
@@ -1569,8 +1555,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../release/updating-to-osg-36/" class="md-nav__link">
-        Updating to OSG 3.6
+      <a href="../../release/updating-to-osg-23/" class="md-nav__link">
+        Updating to OSG 23
       </a>
     </li>
   
@@ -1982,7 +1968,7 @@ on what repositories OSG is willing to distribute.</p>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>The host OS must be:</p>
 <ul>
-<li>RHEL7 or RHEL8 (or equivalent).</li>
+<li>RHEL8 or RHEL9 (or equivalent).</li>
 </ul>
 <p>Additionally,</p>
 <ul>
@@ -1997,13 +1983,6 @@ on what repositories OSG is willing to distribute.</p>
     repository itself will be done as an unprivileged user.</li>
 <li><strong>Yum</strong> will need to be <a href="../../common/yum/">configured to use the OSG repositories</a>.</li>
 </ul>
-<div class="admonition warning">
-<p class="admonition-title">Overlay-FS limitations</p>
-<p>CVMFS on RHEL7 only supports Overlay-FS if the underlying filesystem is <code>ext3</code> or <code>ext4</code>; make sure
-<code>/var/spool/cvmfs</code> is one of these filesystem types.</p>
-<p>If this is not possible, add <code>CVMFS_DONT_CHECK_OVERLAYFS_VERSION=yes</code> to your CVMFS configuration.  Using
-<code>xfs</code> will work if it was created with <code>ftype=1</code></p>
-</div>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <p>Installation is a straightforward install via <code>yum</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum install cvmfs-server osg-oasis 

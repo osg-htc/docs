@@ -1437,14 +1437,14 @@
       
       
         <label class="md-nav__link" for="__nav_10_2">
-          OSG 23
+          OSG 24
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="OSG 23" data-md-level="2">
+      <nav class="md-nav" aria-label="OSG 24" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_2">
           <span class="md-nav__icon md-icon"></span>
-          OSG 23
+          OSG 24
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -1454,22 +1454,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../release/osg-23/" class="md-nav__link">
+      <a href="../../release/osg-24/" class="md-nav__link">
         News
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../release/updating-to-osg-23/" class="md-nav__link">
-        Updating to OSG 23
       </a>
     </li>
   
@@ -1498,14 +1484,14 @@
       
       
         <label class="md-nav__link" for="__nav_10_3">
-          OSG 3.6
+          OSG 23
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="OSG 3.6" data-md-level="2">
+      <nav class="md-nav" aria-label="OSG 23" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_3">
           <span class="md-nav__icon md-icon"></span>
-          OSG 3.6
+          OSG 23
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -1515,7 +1501,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../release/osg-36/" class="md-nav__link">
+      <a href="../../release/osg-23/" class="md-nav__link">
         News
       </a>
     </li>
@@ -1529,8 +1515,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../release/updating-to-osg-36/" class="md-nav__link">
-        Updating to OSG 3.6
+      <a href="../../release/updating-to-osg-23/" class="md-nav__link">
+        Updating to OSG 23
       </a>
     </li>
   
@@ -1930,18 +1916,11 @@ Node Client software available from an RPM.</p>
 <tbody>
 <tr>
 <td align="left">Fetch CRL</td>
-<td align="left">EL8: <code>fetch-crl.timer</code> <br> EL7: <code>fetch-crl-boot</code> and <code>fetch-crl-cron</code></td>
+<td align="left"><code>fetch-crl.timer</code></td>
 <td align="left">See <a href="../../common/ca/">CA documentation</a> for more info</td>
 </tr>
 </tbody>
 </table>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><code>fetch-crl-boot</code> will begin fetching CRLS, which can take a few minutes and fail on transient errors. You can add configuration to ignore these transient errors in <code>/etc/fetch-crl.conf</code>:</p>
-<div class="codehilite"><pre><span></span><code>noerrors
-</code></pre></div>
-
-</div>
 <p>As a reminder, here are common service commands (all run as <code>root</code>):</p>
 <table>
 <thead>

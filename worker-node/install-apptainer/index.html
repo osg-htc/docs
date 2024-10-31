@@ -709,40 +709,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#enabling-unprivileged-apptainer" class="md-nav__link">
-    Enabling Unprivileged Apptainer
-  </a>
-  
-    <nav class="md-nav" aria-label="Enabling Unprivileged Apptainer">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#configuring-docker-to-work-with-apptainer" class="md-nav__link">
-    Configuring Docker to work with Apptainer
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#configuring-unprivileged-apptainer" class="md-nav__link">
-    Configuring Unprivileged Apptainer
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#validating-unprivileged-apptainer-in-cvmfs" class="md-nav__link">
-    Validating Unprivileged Apptainer in CVMFS
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#installing-apptainer" class="md-nav__link">
     Installing Apptainer
   </a>
@@ -1525,14 +1491,14 @@
       
       
         <label class="md-nav__link" for="__nav_10_2">
-          OSG 23
+          OSG 24
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="OSG 23" data-md-level="2">
+      <nav class="md-nav" aria-label="OSG 24" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_2">
           <span class="md-nav__icon md-icon"></span>
-          OSG 23
+          OSG 24
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -1542,22 +1508,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../release/osg-23/" class="md-nav__link">
+      <a href="../../release/osg-24/" class="md-nav__link">
         News
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../release/updating-to-osg-23/" class="md-nav__link">
-        Updating to OSG 23
       </a>
     </li>
   
@@ -1586,14 +1538,14 @@
       
       
         <label class="md-nav__link" for="__nav_10_3">
-          OSG 3.6
+          OSG 23
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="OSG 3.6" data-md-level="2">
+      <nav class="md-nav" aria-label="OSG 23" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_3">
           <span class="md-nav__icon md-icon"></span>
-          OSG 3.6
+          OSG 23
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -1603,7 +1555,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../release/osg-36/" class="md-nav__link">
+      <a href="../../release/osg-23/" class="md-nav__link">
         News
       </a>
     </li>
@@ -1617,8 +1569,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../release/updating-to-osg-36/" class="md-nav__link">
-        Updating to OSG 3.6
+      <a href="../../release/updating-to-osg-23/" class="md-nav__link">
+        Updating to OSG 23
       </a>
     </li>
   
@@ -1938,40 +1890,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#enabling-unprivileged-apptainer" class="md-nav__link">
-    Enabling Unprivileged Apptainer
-  </a>
-  
-    <nav class="md-nav" aria-label="Enabling Unprivileged Apptainer">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#configuring-docker-to-work-with-apptainer" class="md-nav__link">
-    Configuring Docker to work with Apptainer
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#configuring-unprivileged-apptainer" class="md-nav__link">
-    Configuring Unprivileged Apptainer
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#validating-unprivileged-apptainer-in-cvmfs" class="md-nav__link">
-    Validating Unprivileged Apptainer in CVMFS
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#installing-apptainer" class="md-nav__link">
     Installing Apptainer
   </a>
@@ -2079,9 +1997,7 @@ or with a setuid-root assist program.
 By default it does not install the setuid-root assist program
 and it uses only unprivileged user namespaces.
 Unprivileged user namespaces are available on all OS versions that
-OSG supports, although it is not enabled by default on EL 7;
-instructions to enable it are <a href="#enabling-unprivileged-apptainer">below</a>.
-The feature is enabled by default on EL 8.</p>
+OSG supports.</p>
 <div class="admonition danger">
 <p class="admonition-title">Kernel vs. Userspace Security</p>
 <p>Enabling unprivileged user namespaces increases the risk to the
@@ -2120,8 +2036,7 @@ access to Apptainer itself:</p>
 </ul>
 <p>OSG VOs all support running apptainer directly from CVMFS, when CVMFS
 is available and unprivileged user namespaces are enabled.
-Unprivileged user namespaces are enabled by default on EL 8, and OSG
-recommends that system administrators enable it on EL 7 worker nodes.
+Unprivileged user namespaces are enabled by default on EL 8+.
 When unprivileged user namespaces are enabled, OSG
 recommends that sites not install Apptainer unless they have
 non-OSG users that require it.</p>
@@ -2134,126 +2049,6 @@ non-setuid installation that makes use of unprivileged user namespaces
 and will need to install an additional apptainer-suid RPM if they
 want a setuid installation that does not require unprivileged user
 namespaces.</p>
-<h2 id="enabling-unprivileged-apptainer">Enabling Unprivileged Apptainer<a class="headerlink" href="#enabling-unprivileged-apptainer" title="Permanent link">&para;</a></h2>
-<p>The instructions in this section are for enabling Apptainer to run
-unprivileged by enabling unprivileged user namespaces.</p>
-<ol>
-<li>
-<p>Enable user namespaces via <code>sysctl</code> on EL 7:</p>
-<p>If the operating system is an EL 7, enable unprivileged Apptainer
-with the following steps.
-This step is not needed on EL 8 because it is enabled by default.</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span><span class="nb">echo</span> <span class="s2">&quot;user.max_user_namespaces = 15000&quot;</span> <span class="se">\</span>
-    &gt; /etc/sysctl.d/90-max_user_namespaces.conf
-<span class="gp">root@host # </span>sysctl -p /etc/sysctl.d/90-max_user_namespaces.conf
-</code></pre></div>
-
-</li>
-<li>
-<p>(Recommended) Disable network namespaces:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span><span class="nb">echo</span> <span class="s2">&quot;user.max_net_namespaces = 0&quot;</span> <span class="se">\</span>
-    &gt; /etc/sysctl.d/90-max_net_namespaces.conf
-<span class="gp">root@host # </span>sysctl -p /etc/sysctl.d/90-max_net_namespaces.conf
-</code></pre></div>
-
-<p>OSG VOs do not need network namespaces with Apptainer, and
-disabling them significantly lowers the risk profile of enabling user
-namespaces and reduces the frequency of needing to apply urgent updates.
-Most of the kernel vulnerabilities related to unprivileged user
-namespaces over the last few years have been in combination with
-network namespaces.</p>
-<p>Network namespaces are, however, utilized by other software,
-such as Docker or Podman.
-Disabling network namespaces may break other
-software, or limit its capabilities (such as requiring the
-<code>--net=host</code> option in Docker or Podman).</p>
-<p>Disabling network namespaces blocks the systemd PrivateNetwork
-feature, which is a feature that is used by some EL 8 services.
-It is also configured for some EL 7 services but they are all
-disabled by default.  To check them all, look for PrivateNetwork in
-<code>/lib/systemd/system/*.service</code> and see which of those services are
-enabled but failed to start.  The only default such service on EL 8
-is systemd-hostnamed, and a popular non-default such service is
-mlocate-updatedb.  The PrivateNetwork feature can be turned off for
-a service without modifying an RPM-installed file through a
-<code>&lt;service&gt;.d/*.conf</code> file, for example for systemd-hostnamed:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span><span class="nb">cd</span> /etc/systemd/system
-<span class="gp">root@host # </span>mkdir -p systemd-hostnamed.service.d
-<span class="gp">root@host # </span><span class="o">(</span><span class="nb">echo</span> <span class="s2">&quot;[Service]&quot;</span><span class="p">;</span> <span class="nb">echo</span> <span class="s2">&quot;PrivateNetwork=no&quot;</span><span class="o">)</span> <span class="se">\</span>
-        &gt;systemd-hostnamed.service.d/no-private-network.conf
-<span class="gp">root@host # </span>systemctl daemon-reload
-<span class="gp">root@host # </span>systemctl start systemd-hostnamed
-<span class="gp">root@host # </span>systemctl status systemd-hostnamed
-</code></pre></div>
-
-</li>
-</ol>
-<h3 id="configuring-docker-to-work-with-apptainer">Configuring Docker to work with Apptainer<a class="headerlink" href="#configuring-docker-to-work-with-apptainer" title="Permanent link">&para;</a></h3>
-<p>If docker is being used to run jobs, the following options are 
-recommended to allow unprivileged Apptainer to run (it does not
-need <code>--privileged</code> or any added capabilities):</p>
-<div class="codehilite"><pre><span></span><code><span class="go">--security-opt seccomp=unconfined --security-opt systempaths=unconfined</span>
-</code></pre></div>
-
-<p><code>--security-opt seccomp=unconfined</code> enables unshare to be called
-(which is needed to create namespaces),
-and <code>--security-opt systempaths=unconfined</code> allows <code>/proc</code> to be mounted
-in an unprivileged process namespace (as is done by apptainer exec -p).
-<code>--security-opt systempaths=unconfined</code> requires Docker 19.03 or later.
-The options are secure as long as the system administrator controls
-the images and does not allow user code to run as root, and are
-generally more secure than adding capabilities.  If at this point no
-setuid or setcap programs needs to be run within the container, adding the
-following option will improve security by preventing any privilege
-escalation (Apptainer uses the same feature on its containers):</p>
-<div class="codehilite"><pre><span></span><code><span class="go">--security-opt no-new-privileges</span>
-</code></pre></div>
-
-<p>In addition, the following option is recommended for allowing
-unprivileged fuse mounts:</p>
-<div class="codehilite"><pre><span></span><code><span class="go">--device=/dev/fuse</span>
-</code></pre></div>
-
-<h3 id="configuring-unprivileged-apptainer">Configuring Unprivileged Apptainer<a class="headerlink" href="#configuring-unprivileged-apptainer" title="Permanent link">&para;</a></h3>
-<p>When unprivileged user namespaces are enabled and VOs run apptainer from
-CVMFS, the Apptainer configuration file also comes from CVMFS so local
-sites have no control over changing the configuration.  However, the
-most common local configuration change to the apptainer RPM is to add
-additional local "bind path" options to map extra local file paths into
-containers.  This can instead be accomplished by setting the
-<code>APPTAINER_BINDPATH</code> variable in the environment of jobs, for
-example through
-<a href="../../other/configuration-with-osg-configure/#local-settings">configuration</a>
-on your compute entrypoint.
-This is a comma-separated list of paths to bind, following the syntax of the
-<code>apptainer exec --bind</code> option.
-In order to be backward compatible with Singularity, also set
-<code>SINGULARITY_BINDPATH</code> to the same value.
-Apptainer also recognizes that variable but it prints a deprecation
-warning if only a <code>SINGULARITY_</code> variable is set without the
-corresponding <code>APPTAINER_</code> variable.</p>
-<p>There are also other environment variables that can affect Apptainer
-operation; see the
-<a href="https://apptainer.org/docs/user/main/appendix.html">Apptainer documentation</a>
-for details.</p>
-<h3 id="validating-unprivileged-apptainer-in-cvmfs">Validating Unprivileged Apptainer in CVMFS<a class="headerlink" href="#validating-unprivileged-apptainer-in-cvmfs" title="Permanent link">&para;</a></h3>
-<p>If you will not be installing Apptainer locally and
-you haven't yet installed <a href="../install-cvmfs/">CVMFS</a>, please do so.
-Alternatively, use the
-<a href="https://github.com/cvmfs-contrib/cvmfsexec">cvmfsexec package</a>
-configured for osg as an unprivileged user and mount the
-oasis.opensciencegrid.org and singularity.opensciencegrid.org
-repositories.</p>
-<p>Then as an unprivileged user verify that Apptainer in CVMFS works with this
-command:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>/cvmfs/oasis.opensciencegrid.org/mis/apptainer/bin/apptainer <span class="se">\</span>
-                <span class="nb">exec</span> --contain --ipc --pid --bind /cvmfs <span class="se">\</span>
-                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el7:latest <span class="se">\</span>
-                ps -ef
-<span class="go">UID          PID    PPID  C STIME TTY          TIME CMD</span>
-<span class="go">user           1       0  0 10:51 console  00:00:00 appinit</span>
-<span class="go">user          11       1  0 10:51 console  00:00:00 /usr/bin/ps -ef</span>
-</code></pre></div>
 <h2 id="installing-apptainer">Installing Apptainer<a class="headerlink" href="#installing-apptainer" title="Permanent link">&para;</a></h2>
 <p>The instructions in this section are for installing a local copy
 of Apptainer, either an unprivileged installation or an RPM installation.</p>

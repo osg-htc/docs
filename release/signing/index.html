@@ -1364,14 +1364,14 @@
       
       
         <label class="md-nav__link" for="__nav_10_2">
-          OSG 23
+          OSG 24
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="OSG 23" data-md-level="2">
+      <nav class="md-nav" aria-label="OSG 24" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_2">
           <span class="md-nav__icon md-icon"></span>
-          OSG 23
+          OSG 24
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -1381,22 +1381,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../osg-23/" class="md-nav__link">
+      <a href="../osg-24/" class="md-nav__link">
         News
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../updating-to-osg-23/" class="md-nav__link">
-        Updating to OSG 23
       </a>
     </li>
   
@@ -1425,14 +1411,14 @@
       
       
         <label class="md-nav__link" for="__nav_10_3">
-          OSG 3.6
+          OSG 23
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="OSG 3.6" data-md-level="2">
+      <nav class="md-nav" aria-label="OSG 23" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_3">
           <span class="md-nav__icon md-icon"></span>
-          OSG 3.6
+          OSG 23
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -1442,7 +1428,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../osg-36/" class="md-nav__link">
+      <a href="../osg-23/" class="md-nav__link">
         News
       </a>
     </li>
@@ -1456,8 +1442,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../updating-to-osg-36/" class="md-nav__link">
-        Updating to OSG 3.6
+      <a href="../updating-to-osg-23/" class="md-nav__link">
+        Updating to OSG 23
       </a>
     </li>
   
@@ -1849,94 +1835,19 @@
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>rpm --checksig -v &lt;NAME.RPM&gt;
 </code></pre></div>
 <p>For example:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>rpm --checksig -v globus-core-8.0-2.osg.x86_64.rpm
-<span class="go">globus-core-8.0-2.osg.x86_64.rpm:</span>
-<span class="go">    Header V3 DSA signature: OK, key ID 824b8603</span>
-<span class="go">    Header SHA1 digest: OK (2b5af4348c548c27f10e2e47e1ec80500c4f85d7)</span>
-<span class="go">    MD5 digest: OK (d11503a229a1a0e02262034efe0f7e46)</span>
-<span class="go">    V3 DSA signature: OK, key ID 824b8603</span>
+<div class="highlight"><pre><span></span><code><span class="gp"># </span>rpm --import https://repo.osg-htc.org/osg/RPM-GPG-KEY-OSG-24-developer
+<span class="gp"># </span>rpm --checksig -v https://repo.opensciencegrid.org/osg/24-main/osg-24-main-el9-release-latest.rpm
+<span class="go">https://repo.opensciencegrid.org/osg/24-main/osg-24-main-el9-release-latest.rpm:</span>
+<span class="go">    Header V4 RSA/SHA256 Signature, key ID effc3be6: OK</span>
+<span class="go">    Header SHA256 digest: OK</span>
+<span class="go">    Header SHA1 digest: OK</span>
+<span class="go">    Payload SHA256 digest: OK</span>
+<span class="go">    V4 RSA/SHA256 Signature, key ID effc3be6: OK</span>
+<span class="go">    MD5 digest: OK</span>
 </code></pre></div>
 <h2 id="the-osg-packaging-signing-keys">The OSG Packaging Signing Keys<a class="headerlink" href="#the-osg-packaging-signing-keys" title="Permanent link">&para;</a></h2>
 <p>The OSG Software Team has several GPG keys for signing RPMs;
-The key used depends on the OSG version and EL variant used, as documented below:</p>
-<table>
-<thead>
-<tr>
-<th>Key 1 (3.0 to 3.5)</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Location</td>
-<td><code>/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG</code></td>
-</tr>
-<tr>
-<td>Download</td>
-<td><a href="https://vdt.cs.wisc.edu/RPM-GPG-KEY-OSG">UW-Madison</a>, <a href="https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG">GitHub</a></td>
-</tr>
-<tr>
-<td>Fingerprint</td>
-<td><code>6459 !D9D2 AAA9 AB67 A251  FB44 2110 !B1C8 824B 8603</code></td>
-</tr>
-<tr>
-<td>Key ID</td>
-<td><code>824b8603</code></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>Key 2 (3.6 and on, EL &lt;= 8)</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Location</td>
-<td><code>/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-2</code></td>
-</tr>
-<tr>
-<td>Download</td>
-<td><a href="https://vdt.cs.wisc.edu/RPM-GPG-KEY-OSG-2">UW-Madison</a>, <a href="https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-2">GitHub</a></td>
-</tr>
-<tr>
-<td>Fingerprint</td>
-<td><code>1216 FF68 897A 77EA 222F  C961 27DC 6864 96D2 B90F</code></td>
-</tr>
-<tr>
-<td>Key ID</td>
-<td><code>96d2b90f</code></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>Key 4 (3.6 and on, EL &gt;= 9)</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Location</td>
-<td><code>/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-4</code></td>
-</tr>
-<tr>
-<td>Download</td>
-<td><a href="https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-4">GitHub</a></td>
-</tr>
-<tr>
-<td>Fingerprint</td>
-<td><code>B77E 70A6 0537 1D3B E109  A18E 3170 E150 1887 C61A</code></td>
-</tr>
-<tr>
-<td>Key ID</td>
-<td><code>1887c61a</code></td>
-</tr>
-</tbody>
-</table>
+The key used depends on the OSG version and software repository used, as documented below:</p>
 <table>
 <thead>
 <tr>
@@ -1960,6 +1871,10 @@ The key used depends on the OSG version and EL variant used, as documented below
 <tr>
 <td>Key ID</td>
 <td><code>4d4384d0</code></td>
+</tr>
+<tr>
+<td>Repositories</td>
+<td>osg-23-development</td>
 </tr>
 </tbody>
 </table>
@@ -1987,45 +1902,75 @@ The key used depends on the OSG version and EL variant used, as documented below
 <td>Key ID</td>
 <td><code>92897c00</code></td>
 </tr>
+<tr>
+<td>Repositories</td>
+<td>All non-development osg-23 repositories</td>
+</tr>
 </tbody>
 </table>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Some packages in the 3.6 repos may still be signed with the old key;
-the <code>osg-release</code> RPM contains both keys so you can verify old packages.</p>
-</div>
-<p>You can see the fingerprint for yourself.
-On EL 7 and older (GnuPG &lt; 2.1.13):</p>
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>gpg --with-fingerprint /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
-<span class="go">pub  1024D/824B8603 2011-09-15 OSG Software Team (RPM Signing Key for Koji Packages) &lt;vdt-support@opensciencegrid.org&gt;</span>
-<span class="go">      Key fingerprint = 6459 D9D2 AAA9 AB67 A251  FB44 2110 B1C8 824B 8603</span>
-<span class="go">sub  2048g/28E5857C 2011-09-15</span>
-
-<span class="gp">$ </span>gpg --with-fingerprint /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-2
-<span class="go">pub  4096R/96D2B90F 2021-02-24 Open Science Grid Software &lt;help@osg-htc.org&gt;</span>
-<span class="go">      Key fingerprint = 1216 FF68 897A 77EA 222F  C961 27DC 6864 96D2 B90F</span>
-<span class="go">sub  4096R/49E9ACC2 2021-02-24</span>
-</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>OSG 24 Automated Signing Key</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Location</td>
+<td><code>/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-24-auto</code></td>
+</tr>
+<tr>
+<td>Download</td>
+<td><a href="https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-24-auto">GitHub</a></td>
+</tr>
+<tr>
+<td>Fingerprint</td>
+<td><code>E612 A4B4 2EE0 71C3 15D1  1CDB 51F0 C137 34E9 58B3</code></td>
+</tr>
+<tr>
+<td>Key ID</td>
+<td><code>34e958b3</code></td>
+</tr>
+<tr>
+<td>Repositories</td>
+<td>osg-24-development</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>OSG 24 Developer Signing Key</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Location</td>
+<td><code>/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-24-developer</code></td>
+</tr>
+<tr>
+<td>Download</td>
+<td><a href="https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-24-developer">GitHub</a></td>
+</tr>
+<tr>
+<td>Fingerprint</td>
+<td><code>F77F E0C7 0A9B AA73 9FD3  52C9 9DF7 5B52 EFFC 3BE6</code></td>
+</tr>
+<tr>
+<td>Key ID</td>
+<td><code>effc3be6</code></td>
+</tr>
+<tr>
+<td>Repositories</td>
+<td>All non-development osg-24 repositories</td>
+</tr>
+</tbody>
+</table>
+<p>You can see the fingerprint for yourself.</p>
 <p>On EL 8 and newer (GnuPG &gt;= 2.1.13):
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>gpg --import-options show-only --import  &lt; /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
-<span class="go">pub   dsa1024 2011-09-15 [SC]</span>
-<span class="go">      6459D9D2AAA9AB67A251FB442110B1C8824B8603</span>
-<span class="go">uid                      OSG Software Team (RPM Signing Key for Koji Packages) &lt;vdt-support@opensciencegrid.org&gt;</span>
-<span class="go">sub   elg2048 2011-09-15 [E]</span>
-
-<span class="gp">$ </span>gpg --import-options show-only --import  &lt; /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-2
-<span class="go">pub   rsa4096 2021-02-24 [SC]</span>
-<span class="go">      1216FF68897A77EA222FC96127DC686496D2B90F</span>
-<span class="go">uid                      Open Science Grid Software &lt;help@osg-htc.org&gt;</span>
-<span class="go">sub   rsa4096 2021-02-24 [E]</span>
-
-<span class="gp">$  </span>gpg --import-options show-only --import &lt; /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-4 
-<span class="go">pub   rsa4096 2022-12-28 [SC]</span>
-<span class="go">      B77E70A605371D3BE109A18E3170E1501887C61A</span>
-<span class="go">uid                      OSG Software 3.6 for EL9 RSA &lt;help@osg-htc.org&gt;</span>
-<span class="go">sub   rsa4096 2022-12-28 [E]</span>
-
-<span class="gp">$  </span>gpg --import-options show-only --import &lt; /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-23-auto
+<div class="highlight"><pre><span></span><code><span class="gp">$  </span>gpg --import-options show-only --import &lt; /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-23-auto
 <span class="go">pub   rsa4096 2023-06-23 [SC]</span>
 <span class="go">      E2AF9F6E239FD62B537705C01760EDF64D4384D0</span>
 <span class="go">uid                      OSG 23 Automated Signing Key &lt;help@osg-htc.org&gt;</span>
@@ -2036,6 +1981,18 @@ On EL 7 and older (GnuPG &lt; 2.1.13):</p>
 <span class="go">      4A56C5BBCDB0AAA2DDE9A690BDEEE24C92897C00</span>
 <span class="go">uid                      OSG 23 Developer Signing Key &lt;help@osg-chtc.org&gt;</span>
 <span class="go">sub   rsa4096 2023-08-15 [E]</span>
+
+<span class="gp">$  </span>gpg --import-options show-only --import &lt; /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-24-auto
+<span class="go">pub   rsa4096 2024-08-20 [SC]</span>
+<span class="go">      Key fingerprint = E612A4B42EE071C315D11CDB51F0C13734E958B3</span>
+<span class="go">uid                      OSG 24 Automated Signing Key &lt;help@osg-htc.org&gt;</span>
+<span class="go">sub   rsa4096 2024-08-20 [E]</span>
+
+<span class="gp">$  </span>gpg --import-options show-only --import &lt; /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-24-developer
+<span class="go">pub   rsa4096 2024-08-20 [SC]</span>
+<span class="go">      F77FE0C70A9BAA739FD352C99DF75B52EFFC3BE6</span>
+<span class="go">uid                      OSG 24 Developer Signing Key &lt;help@osg-htc.org&gt;</span>
+<span class="go">sub   rsa4096 2024-08-20 [E]</span>
 </code></pre></div></p>
 
               
