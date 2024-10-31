@@ -79,7 +79,6 @@ nav:
   - 'Release Series': 'release/release_series.md'
   - OSG 24:
      - 'News': 'release/osg-24.md'
-     - 'Updating to OSG 24': 'release/updating-to-osg-24.md'
   - OSG 23:
      - 'News': 'release/osg-23.md'
      - 'Updating to OSG 23': 'release/updating-to-osg-23.md'
