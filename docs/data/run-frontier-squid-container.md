@@ -78,13 +78,17 @@ on configuration customization.
 Running a Frontier Squid Container
 ----------------------------------
 
+!!! info "Where is the OSG 24 container?"
+    We are actively reworking our image build infrastructure for OSG 24 and expect to have all OSG Software containers
+    available by the end of 2024.
+
 To run a Frontier Squid container with the defaults:
 
 ```console
 user@host $ docker run --rm --name frontier-squid \
              -v <HOST CACHE PARTITION>:/var/cache/squid \
              -v <HOST LOG PARTITION>:/var/log/squid \
-             -p <HOST PORT>:3128 hub.opensciencegrid.org/osg-htc/frontier-squid:24-release
+             -p <HOST PORT>:3128 opensciencegrid/frontier-squid:23-release
 ```
 
 You may pass configuration variables in `KEY=VALUE` format with either
@@ -112,8 +116,8 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
-ExecStartPre=/usr/bin/docker pull hub.opensciencegrid.org/osg-htc/frontier-squid:24-release
-ExecStart=/usr/bin/docker run --rm --name %n --publish 3128:3128 -v /tmp/squid:/var/cache/squid -v /tmp/log:/var/log/squid --env-file /opt/xcache/.env hub.opensciencegrid.org/osg-htc/frontier-squid:24-release
+ExecStartPre=/usr/bin/docker pull opensciencegrid/frontier-squid:23-release
+ExecStart=/usr/bin/docker run --rm --name %n --publish 3128:3128 -v /tmp/squid:/var/cache/squid -v /tmp/log:/var/log/squid --env-file /opt/xcache/.env opensciencegrid/frontier-squid:23-release
 
 
 [Install]
