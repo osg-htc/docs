@@ -67,6 +67,8 @@ The definitive list of software in the contrib repository can be found here:
 
 -   [OSG 24 EL9 contrib software repository](https://repo.opensciencegrid.org/osg/24-contrib/el9/x86_64/)
 -   [OSG 24 EL8 contrib software repository](https://repo.opensciencegrid.org/osg/24-contrib/el8/x86_64/)
+-   [OSG 23 EL9 contrib software repository](https://repo.opensciencegrid.org/osg/23-contrib/el9/x86_64/)
+-   [OSG 23 EL8 contrib software repository](https://repo.opensciencegrid.org/osg/23-contrib/el8/x86_64/)
 
 If you would like to distribute your software in the OSG `contrib` repository, please [contact us](../common/help.md) with a
 description of your software, what users it serves, and relevant RPM packaging.
@@ -159,6 +161,16 @@ For instructions on upgrading from one OSG series to another, see the
 
             :::console
             root@host # yum install https://repo.opensciencegrid.org/osg/24-main/osg-24-main-el8-release-latest.rpm
+
+    - OSG 23 EL9:
+
+            :::console
+            root@host # yum install https://repo.opensciencegrid.org/osg/23-main/osg-23-main-el9-release-latest.rpm
+
+    - OSG 23 EL8:
+
+            :::console
+            root@host # yum install https://repo.opensciencegrid.org/osg/23-main/osg-23-main-el8-release-latest.rpm
 
 
 1. The only OSG repository enabled by default is the release one.
