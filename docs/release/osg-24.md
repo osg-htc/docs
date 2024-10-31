@@ -16,6 +16,9 @@ Latest News
 
 ### October 31, 2024: Initial Release ###
 
+!!! info "Where is the OSG 24 worker node tarball?"
+    We plan to distribute the worker node tarball within the next week. Stay tuned for updates!
+
 This initial release contains the following notable changes compared to the current OSG 23 release:
 
 -   [HTCondor 24.0.1](https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-1)
