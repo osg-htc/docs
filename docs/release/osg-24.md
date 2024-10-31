@@ -23,7 +23,7 @@ This initial release contains the following notable changes compared to the curr
 
 -   [HTCondor 24.0.1](https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-1)
 
--   [HTCondor-CE 24.0.0](https://htcondor.com/htcondor-ce/v24/installation/)
+-   [HTCondor-CE 24.0.0](https://htcondor.com/htcondor-ce/v24/installation/htcondor-ce)
 
 -   [Pelican 7.10.11](https://github.com/PelicanPlatform/pelican/releases/tag/v7.10.11):
     the initial release of Pelican in the main line of the OSG Software Stack.
