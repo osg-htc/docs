@@ -84,7 +84,7 @@ docker run -it --rm --user osg  \
        -e CVMFSEXEC_REPOS="                     \
             oasis.opensciencegrid.org           \
             singularity.opensciencegrid.org"    \
-       opensciencegrid/osgvo-docker-pilot:23-release
+       hub.opensciencegrid.org/osg-htc/ospool-ep:24-release
 ```
 
 Replace `/path/to/token` with the location you saved the token obtained from the OSPool Token Registry.
@@ -150,12 +150,10 @@ but the container will need fewer privileges.
 #### cvmfsexec
 
 !!! info "cvmfsexec System Requirements"
-    -   On EL7, you must have kernel version >= 3.10.0-1127 (run `uname -vr` to check), and user namespaces enabled.
-        See step 1 in the
-        [Apptainer Install document](https://osg-htc.org/docs/worker-node/install-apptainer/#enabling-unprivileged-apptainer)
-        for details.
 
     -   On EL8, you must have kernel version >= 4.18 (run `uname -vr` to check).
+
+    -   On EL9, all kernel versions >= 5.0 should be supported.
 
     See the [cvmfsexec README](https://github.com/cvmfs/cvmfsexec#readme) details.
 
@@ -205,7 +203,7 @@ docker run -it --rm --user osg      \
         -e GLIDEIN_ResourceName="..."   \
         -e GLIDEIN_Start_Extra="True"   \
         -e OSG_SQUID_LOCATION="..."     \
-        opensciencegrid/osgvo-docker-pilot:23-release
+        hub.opensciencegrid.org/osg-htc/ospool-ep:24-release
 ```
 
 Fill in the values for `/path/to/token`, `/worker-temp-dir`, `GLIDEIN_Site`, `GLIDEIN_ResourceName`, and `OSG_SQUID_LOCATION` [as above](#running-the-container-with-docker).
