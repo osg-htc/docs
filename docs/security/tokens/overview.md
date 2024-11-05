@@ -165,7 +165,7 @@ To see which authentication method was used for a job:
     -   Authentication via a token will say `AuthMethod=SCITOKENS`.
     -   Authentication via a proxy will say `AuthMethod=GSI`.
 
-See the [upstream documentation](https://htcondor.com/htcondor-ce/v6/troubleshooting/common-issues/#jobs-fail-to-submit-verify-scitoken-contents)
+See the [upstream documentation](https://htcondor.com/htcondor-ce/v24/troubleshooting/common-issues/#jobs-fail-to-submit-verify-scitoken-contents)
 for more details.
 
 Collaboration support
@@ -192,10 +192,6 @@ The following collaborations support support file transfer using WebDAV or XRoot
 | IceCube       | Undergoing testing*       |
 | LIGO          | Undergoing testing*       |
 | OSG           | Yes                       |
-
-\* Currently, collaborations testing WebDAV or XRootD support will continue to support other file transfer protocols so
-it should it should be safe to update your OSG WN clients to OSG 3.6.
-If you have any questions, please contact your collaboration directly.
 
 Help
 ----

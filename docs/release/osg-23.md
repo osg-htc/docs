@@ -44,6 +44,14 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **October 10, 2024:** XRootD 5.7.1-1.3, HTCondor 23.0.16
+-   XRootD 5.7.1-1.3
+    -   Urgent fix for S3 caches to avoid near-infinite loop
+    -   Change cache age logic to only indicate fully cached files
+-   [HTCondor 23.0.17](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-17)
+    -   Bug fix for PID namespaces and `condor_ssh_to_job` on EL9
+    -   Augment `condor_upgrade_check` to find unit suffixes in ClassAd expressions
+
 ### **October 10, 2024:** HTCondor 23.0.16; Upcoming: osdf-server 7.10.7
 -   [HTCondor 23.0.16](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-16)
     -   Back-port all cgroup v2 fixes and enhancements from the 23.10.1 release

@@ -214,7 +214,7 @@ Here is the resulting file after add
 install_dir = /etc/grid-security
 
 ## cacerts_url is the URL of your certificate distribution
-cacerts_url = https://repo.opensciencegrid.org/cadist/ca-certs-version-igtf-new
+cacerts_url = https://repo.osg-htc.org/cadist/ca-certs-version-igtf-new
 
 ## log specifies where logging output will go
 log = /var/log/osg-update-certs.log
@@ -267,7 +267,7 @@ The resulting config file after the remove is as follows
 install_dir = /etc/grid-security
 
 ## cacerts_url is the URL of your certificate distribution
-cacerts_url = https://repo.opensciencegrid.org/cadist/ca-certs-version-igtf-new
+cacerts_url = https://repo.osg-htc.org/cadist/ca-certs-version-igtf-new
 
 ## log specifies where logging output will go
 log = /var/log/osg-update-certs.log
@@ -300,8 +300,8 @@ You can inspect the list of CA Certificates that have been installed:
 
 ``` console
 user@host $ osg-ca-manage listCA
-Hash=09ff08b7; Subject= /C=FR/O=CNRS/CN=CNRS2-Projets; Issuer= /C=FR/O=CNRS/CN=CNRS2; Accreditation=Unknown; Status=https://repo.opensciencegrid.org/cadist/ca-certs-version-new
-Hash=0a12b607; Subject= /DC=org/DC=ugrid/CN=UGRID CA; Issuer= /DC=org/DC=ugrid/CN=UGRID CA; Accreditation=Unknown; Status=https://repo.opensciencegrid.org/cadist/ca-certs-version-new
+Hash=09ff08b7; Subject= /C=FR/O=CNRS/CN=CNRS2-Projets; Issuer= /C=FR/O=CNRS/CN=CNRS2; Accreditation=Unknown; Status=https://repo.osg-htc.org/cadist/ca-certs-version-new
+Hash=0a12b607; Subject= /DC=org/DC=ugrid/CN=UGRID CA; Issuer= /DC=org/DC=ugrid/CN=UGRID CA; Accreditation=Unknown; Status=https://repo.osg-htc.org/cadist/ca-certs-version-new
 [...]
 ```
 

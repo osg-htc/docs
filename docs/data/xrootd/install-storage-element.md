@@ -5,7 +5,7 @@ Installing an XRootD Storage Element
 ====================================
 
 !!! warning
-    This page is out of date and is not known to work with XRootD 5; parts of it do not work with EL 7+.
+    This page is out of date.
 
 [XRootD](http://xrootd.org/) is a hierarchical storage system that can be used in a variety of ways to access data,
 typically distributed among actual storage resources. 
@@ -354,7 +354,7 @@ root@host # systemctl start xrootd@standalone
 The services are:
 
 
-| Service                    | EL 7 & 8 service name        |
+| Service                    | EL 8 & 9 service name        |
 |:---------------------------|:-----------------------------|
 | XRootD (standalone config) | `xrootd@standalone`          |
 | XRootD (clustered config)  | `xrootd@clustered`           |
@@ -365,7 +365,7 @@ The services are:
 As a reminder, here are common service commands (all run as `root`):
 
 
-| To ...                                      | On EL 7 & 8, run the command...  |
+| To ...                                      | On EL 8 & 9, run the command...  |
 |:--------------------------------------------|:---------------------------------|
 | Start a service                             | `systemctl start SERVICE-NAME`   |
 | Stop a service                              | `systemctl stop SERVICE-NAME`    |

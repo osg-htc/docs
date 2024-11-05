@@ -9,7 +9,7 @@ If you are unfamiliar with Yum, see the [documentation on using Yum and RPM](../
 Repositories
 ------------
 
-The OSG hosts multiple repositories at [repo.opensciencegrid.org](https://repo.opensciencegrid.org/osg/) that are
+The OSG hosts multiple repositories at [repo.osg-htc.org](https://repo.osg-htc.org/osg/) that are
 intended for public use:
 
 | The OSG Yum repositories...                    | Contain RPMs that...                                                                                                                 |
@@ -28,8 +28,6 @@ OSG's RPM packages also rely on external packages provided by supported OSes and
 You must have the following repositories available and enabled:
 
 -   OS repositories, including the following ones that aren't enabled by default:
-    -   `extras` (SL 7, CentOS 7, CentOS Stream 8, Rocky Linux 8, AlmaLinux 8)
-    -   `Server-Extras` (RHEL 7)
     -   `powertools` (CentOS Stream 8, Rocky Linux 8, AlmaLinux 8)
     -   `CodeReady Builder` (RHEL 8) or `crb` (all EL9 variants)
 -   EPEL repositories
@@ -52,8 +50,8 @@ Their names start with `osg-upcoming` and have the same structure as our standar
 as well as the same guarantees of quality and production-readiness.
 
 There are separate sets of upcoming repositories for each release series.
-For example, the [OSG 23 repos](https://repo.opensciencegrid.org/osg/23-main/) have corresponding
-[23-upcoming repos](https://repo.opensciencegrid.org/osg/23-upcoming/).
+For example, the [OSG 24 repos](https://repo.osg-htc.org/osg/24-main/) have corresponding
+[24-upcoming repos](https://repo.osg-htc.org/osg/24-upcoming/).
 The upcoming repositories are meant to be layered on top of our standard repositories:
 installing software from the upcoming repositories requires also enabling the standard repositories from the same release.
 
@@ -67,32 +65,16 @@ supported by the OSG.
 
 The definitive list of software in the contrib repository can be found here:
 
--   [OSG 23 EL8 contrib software repository](https://repo.opensciencegrid.org/osg/23-contrib/el8/x86_64/)
--   [OSG 23 EL9 contrib software repository](https://repo.opensciencegrid.org/osg/23-contrib/el9/x86_64/)
+-   [OSG 24 EL9 contrib software repository](https://repo.osg-htc.org/osg/24-contrib/el9/x86_64/)
+-   [OSG 24 EL8 contrib software repository](https://repo.osg-htc.org/osg/24-contrib/el8/x86_64/)
+-   [OSG 23 EL9 contrib software repository](https://repo.osg-htc.org/osg/23-contrib/el9/x86_64/)
+-   [OSG 23 EL8 contrib software repository](https://repo.osg-htc.org/osg/23-contrib/el8/x86_64/)
 
 If you would like to distribute your software in the OSG `contrib` repository, please [contact us](../common/help.md) with a
 description of your software, what users it serves, and relevant RPM packaging.
 
 Installing Yum Repositories
 ---------------------------
-
-### Install the Yum priorities plugin (EL7)
-
-The Yum priorities plugin is used to tell Yum to prefer OSG packages over EPEL or OS packages.
-It is important to install and enable the Yum priorities plugin before installing OSG Software to ensure that you are
-getting the OSG-supported versions.
-
-This plugin is built into Yum on EL8 and EL9 distributions.
-
-1.  Install the Yum priorities package:
-
-        :::console
-        root@host # yum install yum-plugin-priorities
-
-1.  Ensure that `/etc/yum.conf` has the following line in the `[main]` section:
-
-        :::file
-        plugins=1
 
 ### Enable additional OS repositories
 
@@ -103,15 +85,6 @@ The repositories to enable, as well as the instructions to enable them, are OS-d
     A repository is enabled if it has `enabled=1` in its definition,
     or if the `enabled` line is missing
     (i.e. it is enabled unless specified otherwise.)
-
-#### SL 7
-
--   Install the `yum-conf-extras` RPM package.
--   Ensure that the `sl-extras` repo in `/etc/yum.repos.d/sl-extras.repo` is enabled.
-
-#### CentOS 7
-
--   Ensure that the `extras` repo in `/etc/yum.repos.d/CentOS-Base.repo` is enabled.
 
 #### CentOS Stream 8
 
@@ -127,10 +100,6 @@ The repositories to enable, as well as the instructions to enable them, are OS-d
 
 -   Ensure that the `extras` repo in `/etc/yum.repos.d/almalinux.repo` is enabled.
 -   Ensure that the `powertools` repo in `/etc/yum.repos.d/almalinux-powertools.repo` is enabled.
-
-#### RHEL 7
-
--   Ensure that the `Server-Extras` channel is enabled.
 
 #### RHEL 8
 
@@ -157,8 +126,6 @@ You must install and enable these first.
 -   Install the EPEL repository, if not already present.  Choose the right version to match your OS version.
 
         :::console
-        ## EPEL 7 (For RHEL 7, CentOS 7, and SL 7)
-        root@host # yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
         ## EPEL 8 (For RHEL 8 and CentOS Stream 8, Rocky Linux 8, AlmaLinux 8)
         root@host # yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
         ## EPEL 9 (For RHEL 9 and CentOS Stream 9, Rocky Linux 9, AlmaLinux 9)
@@ -185,15 +152,25 @@ For instructions on upgrading from one OSG series to another, see the
 1. Install the OSG repository for your OS version and the [OSG release series](../release/release_series.md) that you wish to
    use:
 
-    - OSG 23 EL8:
+    - OSG 24 EL9:
 
             :::console
-            root@host # yum install https://repo.opensciencegrid.org/osg/23-main/osg-23-main-el8-release-latest.rpm
+            root@host # yum install https://repo.osg-htc.org/osg/24-main/osg-24-main-el9-release-latest.rpm
+
+    - OSG 24 EL8:
+
+            :::console
+            root@host # yum install https://repo.osg-htc.org/osg/24-main/osg-24-main-el8-release-latest.rpm
 
     - OSG 23 EL9:
 
             :::console
-            root@host # yum install https://repo.opensciencegrid.org/osg/23-main/osg-23-main-el9-release-latest.rpm
+            root@host # yum install https://repo.osg-htc.org/osg/23-main/osg-23-main-el9-release-latest.rpm
+
+    - OSG 23 EL8:
+
+            :::console
+            root@host # yum install https://repo.osg-htc.org/osg/23-main/osg-23-main-el8-release-latest.rpm
 
 
 1. The only OSG repository enabled by default is the release one.
@@ -202,15 +179,14 @@ For instructions on upgrading from one OSG series to another, see the
 
         :::file hl_lines="7"
         [osg-testing]
-        name=OSG Software for Enterprise Linux 7 - Testing - $basearch
-        #baseurl=https://repo.opensciencegrid.org/osg/23-main/el8/testing/$basearch
-        mirrorlist=https://repo.opensciencegrid.org/osg/23-main/el8/testing/$basearch
+        name=OSG Software for Enterprise Linux 9 - Testing - $basearch
+        #baseurl=https://repo.osg-htc.org/osg/24-main/el9/testing/$basearch
+        mirrorlist=https://repo.osg-htc.org/osg/24-main/el9/testing/$basearch
         failovermethod=priority
         priority=98
         enabled=1
         gpgcheck=1
-        gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
-               file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-2
+        gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-24-developer
 
 Optional Configuration
 ----------------------
@@ -226,19 +202,12 @@ Therefore we recommend security-only automatic updates or disabling automatic up
 
 To enable only security related automatic updates:
 
--   On EL 7 variants, edit `/etc/yum/yum-cron.conf` and set `update_cmd = security`
-
 -   On EL8 and EL9 variants, edit `/etc/dnf/automatic.conf` and set `upgrade_type = security`
 
 CentOS 7, CentOS Stream 8, and CentOS Stream 9 do not support security-only automatic updates;
 doing any of the above steps will prevent automatic updates from happening at all.
 
 To disable automatic updates entirely:
-
--   On EL7 variants, run:
-
-        :::console
-        root@host # service yum-cron stop
 
 -   On EL8 and EL9 variants, run:
 
@@ -270,10 +239,10 @@ Add the following to a file in `/etc/cron.d`:
 Or, to mirror only a single repository:
 
     :::file
-    <RANDOM> * * * * root rsync -aH rsync://repo-rsync.opensciencegrid.org/osg/<OSG_RELEASE>/el9/development /var/www/html/osg/<OSG_RELEASE>/el7
+    <RANDOM> * * * * root rsync -aH rsync://repo-rsync.opensciencegrid.org/osg/<OSG_RELEASE>/el9/development /var/www/html/osg/<OSG_RELEASE>/el9
 
 
-Replace `<OSG_RELEASE>` with the OSG release you would like to use (e.g. `23-main`) and `<RANDOM>` with a number between 0
+Replace `<OSG_RELEASE>` with the OSG release you would like to use (e.g. `24-main`) and `<RANDOM>` with a number between 0
 and 59.
 
 On your worker node, you can replace the `baseurl` line of `/etc/yum.repos.d/osg.repo` with the appropriate URL for your

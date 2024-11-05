@@ -3,6 +3,10 @@ title: Using the Worker Node Containers
 Using the Worker Node Containers
 ================================
 
+!!! info "Where is the OSG 24 container?"
+    We are actively reworking our image build infrastructure for OSG 24 and expect to have all OSG Software containers
+    available by the end of 2024.
+
 The OSG worker node containers contain the suggested base environment for worker nodes.  They can be used as a base image to build containers or to perform testing.
 
 The containers are available on [Docker Hub](https://hub.docker.com/r/opensciencegrid/osg-wn/).
@@ -37,4 +41,3 @@ You may perform testing from within the OSG worker node envionment by running th
 ```
 root@host # docker run -ti --rm opensciencegrid/osg-wn:latest /bin/bash
 ```
-

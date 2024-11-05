@@ -15,35 +15,47 @@ Installation
 Installation is done with the `yum install` command. Each of the individual installation guide shows you the correct command to use to do an installation. Here is an example installation with all of the output from yum.
 
 ```console
-root@host # sudo yum install osg-ca-certs
-OSG Software for Enterprise Linux 9 - x86_64                                        668 kB/s | 438 kB     00:00    
+root@host# yum install osg-ca-certs
+OSG Software for Enterprise Linux 9 - x86_64                       5.1 kB/s | 1.4 kB     00:00    
+OSG Software for Enterprise Linux 9 - Development - x86_64         1.4 MB/s | 470 kB     00:00    
 Dependencies resolved.
-====================================================================================================================
- Package                      Architecture           Version                              Repository           Size
-====================================================================================================================
+===================================================================================================
+ Package               Architecture    Version                      Repository                Size
+===================================================================================================
 Installing:
- osg-ca-certs                 noarch                 1.110-1.2.osg36.el9                  osg                 244 k
+ osg-ca-certs          noarch          1.131-1.osg24.el9            osg                       242 k
 
 Transaction Summary
-====================================================================================================================
+===================================================================================================
 Install  1 Package
 
-Total download size: 244 k
-Installed size: 340 k
+Total download size: 242 k
+Installed size: 483 k
 Is this ok [y/N]: y
 Downloading Packages:
-osg-ca-certs-1.110-1.2.osg36.el9.noarch.rpm                                         1.5 MB/s | 244 kB     00:00    
---------------------------------------------------------------------------------------------------------------------
-Total                                                                               1.0 MB/s | 244 kB     00:00     
-OSG Software for Enterprise Linux 9 - x86_64                                        3.0 MB/s | 3.1 kB     00:00    
-Importing GPG key 0x1887C61A:
- Userid     : "OSG Software 3.6 for EL9 RSA <help@osg-htc.org>"
- Fingerprint: B77E 70A6 0537 1D3B E109 A18E 3170 E150 1887 C61A
- From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-4
+osg-ca-certs-1.131-1.osg24.el9.noarch.rpm                          1.8 MB/s | 242 kB     00:00    
+---------------------------------------------------------------------------------------------------
+Total                                                              1.2 MB/s | 242 kB     00:00     
+OSG Software for Enterprise Linux 9 - Development - x86_64         3.0 MB/s | 3.1 kB     00:00    
+Importing GPG key 0xEFFC3BE6:
+ Userid     : "OSG 24 Developer Signing Key <help@osg-htc.org>"
+ Fingerprint: F77F E0C7 0A9B AA73 9FD3  52C9 9DF7 5B52 EFFC 3BE6
+ From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-24-developer
 Is this ok [y/N]: y
-...
+Key imported successfully
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                           1/1 
+  Installing       : osg-ca-certs-1.131-1.osg24.el9.noarch                                     1/1 
+  Verifying        : osg-ca-certs-1.131-1.osg24.el9.noarch                                     1/1 
+
 Installed:
-  osg-ca-certs-1.110-1.2.osg36.el9.noarch                                                                           
+  osg-ca-certs-1.131-1.osg24.el9.noarch                                                            
+
+Complete! 
 ```
 
 **Please Note**: When you first install a package from the OSG repository, you will be prompted to import the GPG key. We use this key to sign our RPMs as a security measure. You should double-check the key id (above it is 824B8603) with the [information on our signed RPMs](signing.md). If it doesn't match, there is a problem somewhere and you should report it to the OSG via help@osg-htc.org.
@@ -125,7 +137,7 @@ If you want to know what other things are in a package--perhaps the other availa
 What else does a package install?
 ---------------------------------
 
-Sometimes you need to understand what other software is installed by a package. This can be particularly useful for understanding *meta-packages*, which are packages such as the `osg-wn-client` (worker node client) that contain nothing by themselves but only depend on other RPMs. To do this, use the `--requires` option to rpm. For example, you can see that the worker node client (as of OSG 3.6.0 in early June, 2023) will install `curl`, `uberftp`, `wget`, and a dozen or so other packages.
+Sometimes you need to understand what other software is installed by a package. This can be particularly useful for understanding *meta-packages*, which are packages such as the `osg-wn-client` (worker node client) that contain nothing by themselves but only depend on other RPMs. To do this, use the `--requires` option to rpm. For example, you can see that the worker node client (as of OSG 24 in October, 2024) will install `curl`, `uberftp`, `wget`, and a dozen or so other packages.
 
     :::console
     user@host $ rpm -q --requires osg-wn-client
@@ -133,7 +145,7 @@ Sometimes you need to understand what other software is installed by a package. 
     /usr/bin/ldapsearch
     /usr/bin/wget
     /usr/bin/xrdcp
-    config(osg-wn-client) = 3.6-6.osg36.el9
+    config(osg-wn-client) = 24-1.osg24.el9
     fetch-crl
     gfal2
     gfal2-plugin-file
@@ -158,16 +170,19 @@ It is normally best to read the OSG documentation to decide which packages to in
     :::console
     user@host $ yum list "voms*"
     Available Packages
-    voms.x86_64                                                 2.1.0-0.27.rc3.el9                                 epel
-    voms-clients-cpp.x86_64                                     2.1.0-0.27.rc3.el9                                 epel
-    voms-api-java.noarch                                        3.3.2-11.el9                                       epel 
-    voms-api-java-javadoc.noarch                                3.3.2-11.el9                                       epel 
-    voms-clients-java.noarch                                    3.3.2-5.el9                                        epel 
-    voms-devel.x86_64                                           2.1.0-0.27.rc3.el9                                 epel 
-    voms-doc.noarch                                             2.1.0-0.27.rc3.el9                                 epel 
-    voms-mysql-plugin.x86_64                                    3.1.7-13.el9                                       epel 
-    voms-server.x86_64                                          2.1.0-0.27.rc3.el9                                 epel 
-
+    voms.x86_64                                      2.1.0-0.31.rc3.2.osg24.el9                osg 
+    voms-api-java.noarch                             3.3.3-1.el9                               epel
+    voms-api-java-javadoc.noarch                     3.3.3-1.el9                               epel
+    voms-clients-cpp.x86_64                          2.1.0-0.31.rc3.2.osg24.el9                osg 
+    voms-clients-cpp-debuginfo.x86_64                2.1.0-0.31.rc3.2.osg24.el9                osg 
+    voms-clients-java.noarch                         3.3.3-1.el9                               epel
+    voms-debuginfo.x86_64                            2.1.0-0.31.rc3.2.osg24.el9                osg 
+    voms-debugsource.x86_64                          2.1.0-0.31.rc3.2.osg24.el9                osg 
+    voms-devel.x86_64                                2.1.0-0.31.rc3.2.osg24.el9                osg 
+    voms-doc.noarch                                  2.1.0-0.31.rc3.2.osg24.el9                osg 
+    voms-mysql-plugin.x86_64                         3.1.7-13.el9                              epel
+    voms-server.x86_64                               2.1.0-0.31.rc3.2.osg24.el9                osg 
+    voms-server-debuginfo.x86_64                     2.1.0-0.31.rc3.2.osg24.el9                osg
 
 If you want to search for packages that contain VOMS anywhere in the name or description, you can use `yum search`:
 
@@ -192,21 +207,25 @@ One last example, if you want to know what RPM would give you the `voms-proxy-in
 
     :::console
     user@host $ yum whatprovides "*voms-proxy-init"
-    voms-clients-cpp-2.1.0-0.27.rc3.el9.x86_64 : Virtual Organization Membership Service Clients
-    Repo        : @System
+    voms-clients-cpp-2.1.0-0.31.rc3.1.osg24.el9.x86_64 : Virtual Organization Membership Service Clients
+    Repo        : osg
     Matched from:
     Other       : *voms-proxy-init
 
-    voms-clients-cpp-2.1.0-0.27.rc3.el9.x86_64 : Virtual Organization Membership Service Clients
+    voms-clients-cpp-2.1.0-0.31.rc3.2.osg24.el9.x86_64 : Virtual Organization Membership Service Clients
+    Repo        : osg
+    Matched from:
+    Other       : *voms-proxy-init
+
+    voms-clients-cpp-2.1.0-1.el9.x86_64 : Virtual Organization Membership Service Clients
     Repo        : epel
     Matched from:
     Other       : *voms-proxy-init
 
-    voms-clients-java-3.3.2-5.el9.noarch : Virtual Organization Membership Service Java clients
+    voms-clients-java-3.3.3-1.el9.noarch : Virtual Organization Membership Service Java clients
     Repo        : epel
     Matched from:
     Other       : *voms-proxy-init
-
 
 Removing Packages
 -----------------
@@ -220,9 +239,9 @@ Dependencies resolved.
  Package                                Architecture     Version                         Repository            Size
 ====================================================================================================================
 Removing:
- voms                                   x86_64           2.1.0-0.27.rc3.el9              @epel                432 k
+ voms                                   x86_64           2.1.0-0.31.rc3.2.osg24.el9      @epel                432 k
 Removing dependent packages:
- osg-wn-client                          noarch           3.6-6.osg36.el9                 @osg                 211  
+ osg-wn-client                          noarch           23-1.osg24.el9                 @osg                 211  
 
 Transaction Summary
 ====================================================================================================================
@@ -237,7 +256,7 @@ Running Transaction
   ... etc ...
 
 Removed:
-  voms-2.1.0-0.27.rc3.el9.x86_64
+  voms-2.1.0-0.31.rc3.2.osg24.el9.x86_64
 
 Complete!
 ```

@@ -18,40 +18,22 @@ $ rpm --checksig -v <NAME.RPM>
 For example:
 
 ```console
-$ rpm --checksig -v globus-core-8.0-2.osg.x86_64.rpm
-globus-core-8.0-2.osg.x86_64.rpm:
-    Header V3 DSA signature: OK, key ID 824b8603
-    Header SHA1 digest: OK (2b5af4348c548c27f10e2e47e1ec80500c4f85d7)
-    MD5 digest: OK (d11503a229a1a0e02262034efe0f7e46)
-    V3 DSA signature: OK, key ID 824b8603
+# rpm --import https://repo.osg-htc.org/osg/RPM-GPG-KEY-OSG-24-developer
+# rpm --checksig -v https://repo.osg-htc.org/osg/24-main/osg-24-main-el9-release-latest.rpm
+https://repo.osg-htc.org/osg/24-main/osg-24-main-el9-release-latest.rpm:
+    Header V4 RSA/SHA256 Signature, key ID effc3be6: OK
+    Header SHA256 digest: OK
+    Header SHA1 digest: OK
+    Payload SHA256 digest: OK
+    V4 RSA/SHA256 Signature, key ID effc3be6: OK
+    MD5 digest: OK
 ```
 
 The OSG Packaging Signing Keys
 ------------------------------
 
 The OSG Software Team has several GPG keys for signing RPMs;
-The key used depends on the OSG version and EL variant used, as documented below:
-
-| Key 1 (3.0 to 3.5) |                                                        |
-|--------------------|--------------------------------------------------------|
-| Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG`                     |
-| Download           | [UW-Madison](https://vdt.cs.wisc.edu/RPM-GPG-KEY-OSG), [GitHub](https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG) |
-| Fingerprint        | `6459 !D9D2 AAA9 AB67 A251  FB44 2110 !B1C8 824B 8603` |
-| Key ID             | `824b8603`                                             |
-
-| Key 2 (3.6 and on, EL <= 8) |                                               |
-|--------------------|--------------------------------------------------------|
-| Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-2`                   |
-| Download           | [UW-Madison](https://vdt.cs.wisc.edu/RPM-GPG-KEY-OSG-2), [GitHub](https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-2) |
-| Fingerprint        | `1216 FF68 897A 77EA 222F  C961 27DC 6864 96D2 B90F`   |
-| Key ID             | `96d2b90f`                                             |
-
-| Key 4 (3.6 and on, EL >= 9) |                                               |
-|--------------------|--------------------------------------------------------|
-| Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-4`                   |
-| Download           | [GitHub](https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-4) |
-| Fingerprint        | `B77E 70A6 0537 1D3B E109  A18E 3170 E150 1887 C61A`   |
-| Key ID             | `1887c61a`                                             |
+The key used depends on the OSG version and software repository used, as documented below:
 
 | OSG 23 Automated Signing Key |                                              |
 |--------------------|--------------------------------------------------------|
@@ -59,6 +41,7 @@ The key used depends on the OSG version and EL variant used, as documented below
 | Download           | [GitHub](https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-23-auto) |
 | Fingerprint        | `E2AF 9F6E 239F D62B 5377  05C0 1760 EDF6 4D43 84D0`   |
 | Key ID             | `4d4384d0`                                             |
+| Repositories       | osg-23-development                                     |
 
 | OSG 23 Developer Signing Key |                                              |
 |--------------------|--------------------------------------------------------|
@@ -66,46 +49,28 @@ The key used depends on the OSG version and EL variant used, as documented below
 | Download           | [GitHub](https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-23-developer) |
 | Fingerprint        | `4A56 C5BB CDB0 AAA2 DDE9  A690 BDEE E24C 9289 7C00`   |
 | Key ID             | `92897c00`                                             |
+| Repositories       | All non-development osg-23 repositories                |
 
-!!! note
-    Some packages in the 3.6 repos may still be signed with the old key;
-    the `osg-release` RPM contains both keys so you can verify old packages.
+| OSG 24 Automated Signing Key |                                              |
+|--------------------|--------------------------------------------------------|
+| Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-24-auto`             |
+| Download           | [GitHub](https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-24-auto) |
+| Fingerprint        | `E612 A4B4 2EE0 71C3 15D1  1CDB 51F0 C137 34E9 58B3`   |
+| Key ID             | `34e958b3`                                             |
+| Repositories       | osg-24-development                                     |
+
+| OSG 24 Developer Signing Key |                                              |
+|--------------------|--------------------------------------------------------|
+| Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-24-developer`        |
+| Download           | [GitHub](https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-24-developer) |
+| Fingerprint        | `F77F E0C7 0A9B AA73 9FD3  52C9 9DF7 5B52 EFFC 3BE6`   |
+| Key ID             | `effc3be6`                                             |
+| Repositories       | All non-development osg-24 repositories                |
 
 You can see the fingerprint for yourself.
-On EL 7 and older (GnuPG &lt; 2.1.13):
-
-```console
-$ gpg --with-fingerprint /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
-pub  1024D/824B8603 2011-09-15 OSG Software Team (RPM Signing Key for Koji Packages) <vdt-support@opensciencegrid.org>
-      Key fingerprint = 6459 D9D2 AAA9 AB67 A251  FB44 2110 B1C8 824B 8603
-sub  2048g/28E5857C 2011-09-15
-
-$ gpg --with-fingerprint /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-2
-pub  4096R/96D2B90F 2021-02-24 Open Science Grid Software <help@osg-htc.org>
-      Key fingerprint = 1216 FF68 897A 77EA 222F  C961 27DC 6864 96D2 B90F
-sub  4096R/49E9ACC2 2021-02-24
-```
 
 On EL 8 and newer (GnuPG &gt;= 2.1.13):
 ```console
-$ gpg --import-options show-only --import  < /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
-pub   dsa1024 2011-09-15 [SC]
-      6459D9D2AAA9AB67A251FB442110B1C8824B8603
-uid                      OSG Software Team (RPM Signing Key for Koji Packages) <vdt-support@opensciencegrid.org>
-sub   elg2048 2011-09-15 [E]
-
-$ gpg --import-options show-only --import  < /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-2
-pub   rsa4096 2021-02-24 [SC]
-      1216FF68897A77EA222FC96127DC686496D2B90F
-uid                      Open Science Grid Software <help@osg-htc.org>
-sub   rsa4096 2021-02-24 [E]
-
-$  gpg --import-options show-only --import < /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-4 
-pub   rsa4096 2022-12-28 [SC]
-      B77E70A605371D3BE109A18E3170E1501887C61A
-uid                      OSG Software 3.6 for EL9 RSA <help@osg-htc.org>
-sub   rsa4096 2022-12-28 [E]
-
 $  gpg --import-options show-only --import < /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-23-auto
 pub   rsa4096 2023-06-23 [SC]
       E2AF9F6E239FD62B537705C01760EDF64D4384D0
@@ -117,6 +82,18 @@ pub   rsa4096 2023-08-15 [SC]
       4A56C5BBCDB0AAA2DDE9A690BDEEE24C92897C00
 uid                      OSG 23 Developer Signing Key <help@osg-chtc.org>
 sub   rsa4096 2023-08-15 [E]
+
+$  gpg --import-options show-only --import < /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-24-auto
+pub   rsa4096 2024-08-20 [SC]
+      Key fingerprint = E612A4B42EE071C315D11CDB51F0C13734E958B3
+uid                      OSG 24 Automated Signing Key <help@osg-htc.org>
+sub   rsa4096 2024-08-20 [E]
+
+$  gpg --import-options show-only --import < /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-24-developer
+pub   rsa4096 2024-08-20 [SC]
+      F77FE0C70A9BAA739FD352C99DF75B52EFFC3BE6
+uid                      OSG 24 Developer Signing Key <help@osg-htc.org>
+sub   rsa4096 2024-08-20 [E]
 
 ```
 

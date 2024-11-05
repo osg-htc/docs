@@ -46,7 +46,7 @@ If you are still not sure, you can run the following command to determine if thi
 
 ``` console
 $ rpm -q osg-ce
-osg-ce-3.6-4.osg36.el7.x86_64
+osg-ce-24-1.osg24.el9.x86_64
 ```
 
 If the output is blank, then you are not working with a CE host.
@@ -78,7 +78,7 @@ type of host that you are troubleshooting:
 If they are not running, consult the relevant documentation to enable and start the appropriate service:
 
 -   [Access Point](../submit/install-ospool-ap.md#managing-services)
--   [Compute Entrypoint](https://htcondor.com/htcondor-ce/v23/operation/#managing-htcondor-ce-services)
+-   [Compute Entrypoint](https://htcondor.com/htcondor-ce/v24/operation/#managing-htcondor-ce-services)
 
 ### Identifying failures ###
 
@@ -128,7 +128,20 @@ host you are troubleshooting:
 | Access Point       | `rpm -q --verify gratia-probe-condor-ap`   |
 | Compute Entrypoint | `rpm -q --verify gratia-probe-htcondor-ce` |
 
-
+893b60ba6 * origin/SOFTWARE-6012-osg-24 Add estimated EOL for OSG 23 and 24
+42672b78c * OSG 24 initial release notes (SOFTWARE-6012)
+95a018d88 * Use new ospool-ep image name
+737343b49 * Restore out-of-date OSG WN client doc
+5c35225b2 * Fix squid, OIDC agent, and stash-* container references
+dc5e9323b * Add missing period
+01de6cd3b * Add initial major packages for OSG 24
+55dd7f800 * Add OSG 23 references back since it's still supported
+f923d3e14 * Prefer EL9 over EL8
+8604829b8 * mwestphall/SOFTWARE-6012-osg-24 rename docker repo prefixes to osg-htc
+a6ae410ee * remove references to el7 in most docs
+e7e60ec31 * remove most references to OSG <23 from non-release-history docs
+c1e458ac2 * Update docs to reference OSG-24 as the latest series
+e11c452a9 *   origin/master mat/master Merge pull request #199 from timtheisen/master
 ### Verifying configuration ###
 
 When troubleshooting Gratia, there are two different configurations to investigate:
@@ -141,7 +154,6 @@ When troubleshooting Gratia, there are two different configurations to investiga
 
 The HTCondor and/or HTCondor-CE configuration determines where job history files are written and how often the Gratia
 probe Schedd cron job are run.
-If you recently updated your host to OSG 3.6, it's important to verify the location of the job history files.
 
 ##### Access Points ####
 
@@ -255,18 +267,6 @@ Verify that your Gratia configuration is correct in `/etc/gratia/condor-ap/Probe
 
         :::xml
         EnableProbe="1"
-
-1.  If you are updating an existing ProbeConfig from a pre-OSG 3.6 installation,
-    also ensure that the following values are set:
-
-    | Option                     | Value                                                                     |
-    |:---------------------------|---------------------------------------------------------------------------|
-    | `VOOverrides`              | The collaboration's resource pool of your AP, e.g. `osg` for an OSPool AP |
-    | `SuppressGridLocalRecords` | `"1"`                                                                     |
-    | `MapUnknownToGroup`        | `"1"`                                                                     |
-    | `DataFolder`               | `"/var/lib/condor/gratia/data/"`                                          |
-    | `WorkingFolder`            | `"/var/lib/condor/gratia/tmp/"`                                           |
-    | `LogFolder`                | `"/var/log/condor/gratia/"`                                               |
 
 #### Compute Entrypoints ####
 
@@ -398,7 +398,6 @@ The most common RPMs you will see are:
 | RPM                        | Purpose                                                                       |
 |:---------------------------|:------------------------------------------------------------------------------|
 | `gratia-probe-common`      | Code shared between all Gratia probes                                         |
-| `gratia-probe-condor`      | An empty probe to ease updates from OSG 3.5 to OSG 3.6. Can be safely removed |
 | `gratia-probe-condor-ap`   | The probe that tracks Access Point usage                                      |
 | `gratia-probe-htcondor-ce` | Probe that tracks HTCondor-CE usage                                           |
 
