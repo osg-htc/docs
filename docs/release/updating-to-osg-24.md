@@ -6,7 +6,7 @@ Updating to OSG 24
 [OSG 24](release_series.md#series-overviews) (the *new series*) introduces support for the ARM architecture. Changes
 required to upgrade from OSG 23 are relatively minor.
 
-Updating Docker-based EP Deployments
+Updating Container-based OSPool EP Deployments
 -----------------------------
 
 In OSG 24, the `opensciencegrid/osgvo-docker-pilot` worker node docker image has been renamed to `osg-htc/ospool-ep`.
@@ -24,20 +24,10 @@ root@host # docker run <existing docker args> hub.opensciencegrid.org/osg-htc/os
 
 #### Via RPM ####
 
-For sites running the ep container [via rpm installation](../resource-sharing/os-backfill-containers.md#running-the-container-via-rpm),
+For sites running the EP container [via rpm installation](../resource-sharing/os-backfill-containers.md#running-the-container-via-rpm),
 the container can be upgraded by updating the RPM.
 
-1. [Install](../common/yum.md#install-the-osg-repositories) the new OSG release series RPMs.
-
-    - OSG 24 EL9:
-
-            :::console
-            root@host # yum install https://repo.opensciencegrid.org/osg/24-main/osg-24-main-el9-release-latest.rpm
-
-    - OSG 24 EL8:
-
-            :::console
-            root@host # yum install https://repo.opensciencegrid.org/osg/24-main/osg-24-main-el8-release-latest.rpm
+1. [Install](../common/yum.md#install-the-osg-repositories) the OSG 24 Yum repositories
 
 2. Upgrade the `ospool-ep` rpm:
 
