@@ -19,8 +19,8 @@ For example:
 
 ```console
 # rpm --import https://repo.osg-htc.org/osg/RPM-GPG-KEY-OSG-24-developer
-# rpm --checksig -v https://repo.opensciencegrid.org/osg/24-main/osg-24-main-el9-release-latest.rpm
-https://repo.opensciencegrid.org/osg/24-main/osg-24-main-el9-release-latest.rpm:
+# rpm --checksig -v https://repo.osg-htc.org/osg/24-main/osg-24-main-el9-release-latest.rpm
+https://repo.osg-htc.org/osg/24-main/osg-24-main-el9-release-latest.rpm:
     Header V4 RSA/SHA256 Signature, key ID effc3be6: OK
     Header SHA256 digest: OK
     Header SHA1 digest: OK

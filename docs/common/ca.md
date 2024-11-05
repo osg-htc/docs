@@ -143,8 +143,8 @@ To verify that your CA certificates are on the latest version on a given host, d
 versions and the method by which your CA certificates have been installed:
 
 1.  Retrieve the versions of the most recently released
-    [IGTF CA certificates](https://repo.opensciencegrid.org/cadist/index.html) and
-    [OSG CA certificates](https://repo.opensciencegrid.org/cadist/index-new.html)
+    [IGTF CA certificates](https://repo.osg-htc.org/cadist/index.html) and
+    [OSG CA certificates](https://repo.osg-htc.org/cadist/index-new.html)
 
 1.  Determine which of the three CA certificate installation methods you are using:
 
@@ -257,11 +257,11 @@ Related software:
 | Package                       | File Description                        | Location                                                                                    | Comment                                                                                                         |
 |:------------------------------|:----------------------------------------|:--------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------|
 | All CA Packages               | CA File Location                        | `/etc/grid-security/certificates`                                                           |                                                                                                                 |
-| All CA Packages               | Index files                             | `/etc/grid-security/certificates/INDEX.html` or `/etc/grid-security/certificates/INDEX.txt` | Latest version also available at <http://repo.opensciencegrid.org/cadist/>                                       |
-| All CA Packages               | Change Log                              | `/etc/grid-security/certificates/CHANGES`                                                   | Latest version also available at <http://repo.opensciencegrid.org/cadist/CHANGES>                                |
+| All CA Packages               | Index files                             | `/etc/grid-security/certificates/INDEX.html` or `/etc/grid-security/certificates/INDEX.txt` | Latest version also available at <http://repo.osg-htc.org/cadist/>                                              |
+| All CA Packages               | Change Log                              | `/etc/grid-security/certificates/CHANGES`                                                   | Latest version also available at <http://repo.osg-htc.org/cadist/CHANGES>                                       |
 | osg-ca-certs or igtf-ca-certs | contain only CA files                   |                                                                                             |                                                                                                                 |
 | osg-ca-scripts                | Configuration File for osg-update-certs | `/etc/osg/osg-update-certs.conf`                                                            | This file may be edited by hand, though it is recommended to use osg-ca-manage to set configuration parameters. |
-| fetch-crl-3.x                 | Configuration file                      | `/etc/fetch-crl.conf`                                                                      |                                                                                                                  |
+| fetch-crl-3.x                 | Configuration file                      | `/etc/fetch-crl.conf`                                                                       |                                                                                                                 |
 
 The index and change log files contain a summary of all the CA distributed and their version.
 
