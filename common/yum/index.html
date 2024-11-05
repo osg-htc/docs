@@ -2118,7 +2118,7 @@
 <p>This document introduces Yum repositories and how they are used in the OSG.
 If you are unfamiliar with Yum, see the <a href="../../release/yum-basics/">documentation on using Yum and RPM</a>.</p>
 <h2 id="repositories">Repositories<a class="headerlink" href="#repositories" title="Permanent link">&para;</a></h2>
-<p>The OSG hosts multiple repositories at <a href="https://repo.opensciencegrid.org/osg/">repo.opensciencegrid.org</a> that are
+<p>The OSG hosts multiple repositories at <a href="https://repo.osg-htc.org/osg/">repo.osg-htc.org</a> that are
 intended for public use:</p>
 <table>
 <thead>
@@ -2189,10 +2189,10 @@ Particularly, contrib software is not guaranteed to be compatible with the rest 
 supported by the OSG.</p>
 <p>The definitive list of software in the contrib repository can be found here:</p>
 <ul>
-<li><a href="https://repo.opensciencegrid.org/osg/24-contrib/el9/x86_64/">OSG 24 EL9 contrib software repository</a></li>
-<li><a href="https://repo.opensciencegrid.org/osg/24-contrib/el8/x86_64/">OSG 24 EL8 contrib software repository</a></li>
-<li><a href="https://repo.opensciencegrid.org/osg/23-contrib/el9/x86_64/">OSG 23 EL9 contrib software repository</a></li>
-<li><a href="https://repo.opensciencegrid.org/osg/23-contrib/el8/x86_64/">OSG 23 EL8 contrib software repository</a></li>
+<li><a href="https://repo.osg-htc.org/osg/24-contrib/el9/x86_64/">OSG 24 EL9 contrib software repository</a></li>
+<li><a href="https://repo.osg-htc.org/osg/24-contrib/el8/x86_64/">OSG 24 EL8 contrib software repository</a></li>
+<li><a href="https://repo.osg-htc.org/osg/23-contrib/el9/x86_64/">OSG 23 EL9 contrib software repository</a></li>
+<li><a href="https://repo.osg-htc.org/osg/23-contrib/el8/x86_64/">OSG 23 EL8 contrib software repository</a></li>
 </ul>
 <p>If you would like to distribute your software in the OSG <code>contrib</code> repository, please <a href="../help/">contact us</a> with a
 description of your software, what users it serves, and relevant RPM packaging.</p>
@@ -2281,25 +2281,25 @@ For instructions on upgrading from one OSG series to another, see the
 <ul>
 <li>
 <p>OSG 24 EL9:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install https://repo.opensciencegrid.org/osg/24-main/osg-24-main-el9-release-latest.rpm
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install https://repo.osg-htc.org/osg/24-main/osg-24-main-el9-release-latest.rpm
 </code></pre></div>
 
 </li>
 <li>
 <p>OSG 24 EL8:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install https://repo.opensciencegrid.org/osg/24-main/osg-24-main-el8-release-latest.rpm
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install https://repo.osg-htc.org/osg/24-main/osg-24-main-el8-release-latest.rpm
 </code></pre></div>
 
 </li>
 <li>
 <p>OSG 23 EL9:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install https://repo.opensciencegrid.org/osg/23-main/osg-23-main-el9-release-latest.rpm
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install https://repo.osg-htc.org/osg/23-main/osg-23-main-el9-release-latest.rpm
 </code></pre></div>
 
 </li>
 <li>
 <p>OSG 23 EL8:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install https://repo.opensciencegrid.org/osg/23-main/osg-23-main-el8-release-latest.rpm
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum install https://repo.osg-htc.org/osg/23-main/osg-23-main-el8-release-latest.rpm
 </code></pre></div>
 
 </li>
@@ -2311,8 +2311,8 @@ For instructions on upgrading from one OSG series to another, see the
    (e.g. <code>/etc/yum.repos.d/osg-testing.repo</code>) and change the <code>enabled</code> option from 0 to 1:</p>
 <div class="codehilite"><pre><span></span><code>[osg-testing]
 name=OSG Software for Enterprise Linux 9 - Testing - $basearch
-#baseurl=https://repo.opensciencegrid.org/osg/24-main/el9/testing/$basearch
-mirrorlist=https://repo.opensciencegrid.org/osg/24-main/el9/testing/$basearch
+#baseurl=https://repo.osg-htc.org/osg/24-main/el9/testing/$basearch
+mirrorlist=https://repo.osg-htc.org/osg/24-main/el9/testing/$basearch
 failovermethod=priority
 priority=98
 <span class="hll">enabled=1
