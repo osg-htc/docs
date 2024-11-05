@@ -28,12 +28,12 @@ Download the WN Client
 !!! info "Where is the OSG 24 worker node tarball?"
     We plan to distribute the worker node tarball in the coming weeks.
 
-Please pick the `osg-wn-client` tarball that is appropriate for your distribution and architecture. You will find them in <https://repo.opensciencegrid.org/tarball-install/> .
+Please pick the `osg-wn-client` tarball that is appropriate for your distribution and architecture. You will find them in <https://repo.osg-htc.org/tarball-install/> .
 
 For OSG 23:
 
--   [Binaries for RHEL8-compatible](https://repo.opensciencegrid.org/tarball-install/23-main/osg-wn-client-latest.el8.x86_64.tar.gz)
--   [Binaries for RHEL9-compatible](https://repo.opensciencegrid.org/tarball-install/23-main/osg-wn-client-latest.el9.x86_64.tar.gz)
+-   [Binaries for RHEL8-compatible](https://repo.osg-htc.org/tarball-install/23-main/osg-wn-client-latest.el8.x86_64.tar.gz)
+-   [Binaries for RHEL9-compatible](https://repo.osg-htc.org/tarball-install/23-main/osg-wn-client-latest.el9.x86_64.tar.gz)
 
 Install the WN Client
 ---------------------
@@ -57,7 +57,7 @@ Example EL9 installation (in `/home/user/test-install`, the **`<PATH_TO_CLIENT>/
 ```console
 user@host $ mkdir /home/user/test-install
 user@host $ cd /home/user/test-install
-user@host $ wget https://repo.opensciencegrid.org/tarball-install/24-main/osg-wn-client-latest.el9.x86_64.tar.gz
+user@host $ wget https://repo.osg-htc.org/tarball-install/24-main/osg-wn-client-latest.el9.x86_64.tar.gz
 user@host $ tar xzf osg-wn-client-latest.el9.x86_64.tar.gz
 user@host $ cd osg-wn-client
 user@host $ ./osg/osg-post-install
