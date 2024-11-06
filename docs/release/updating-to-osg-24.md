@@ -31,10 +31,10 @@ the container can be upgraded by updating the RPM.
 
 2. Upgrade the `ospool-ep` rpm:
 
-       :::console
-       root@host # yum install ospool-ep
+        :::console
+        root@host # yum install ospool-ep
 
 3. Restart the ospool-ep systemctl service:
 
-       :::console
-       root@host # systemctl restart ospool-ep
+        :::console
+        root@host # systemctl restart ospool-ep
