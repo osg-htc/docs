@@ -29,12 +29,16 @@ the container can be upgraded by updating the RPM.
 
 1. [Install](../common/yum.md#install-the-osg-repositories) the OSG 24 Yum repositories
 
-2. Upgrade the `ospool-ep` rpm:
+1. Upgrade the `ospool-ep` rpm:
 
         :::console
         root@host # yum install ospool-ep
 
-3. Restart the ospool-ep systemctl service:
+1. (Optional) Clean up `/etc/osg/ospool-ep.cfg`:
+    - A bug in the OSG 23 release of ospool-ep required users to add a `WORK_TEMP_DIR` config field as a copy of the default `WORKER_TEMP_DIR`.
+    When upgrading to OSG 24, remove the duplicated `WORK_TEMP_DIR` field.
+
+1. Restart the ospool-ep systemctl service:
 
         :::console
         root@host # systemctl restart ospool-ep
