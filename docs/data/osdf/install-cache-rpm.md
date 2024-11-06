@@ -7,14 +7,6 @@ This document describes how to install a Pelican-based Open Science Data Federat
 This service allows a site or regional network to cache data frequently used in Open Science Pool jobs,
 reducing data transfer over the wide-area network and decreasing access latency.
 
-!!! note
-    The cache must be registered with the OSG prior to joining the data federation.
-    You may start the registration process prior to finishing the installation by [using this link](#registering-the-cache) 
-    along with information like:
-
-    * Resource name and hostname
-    * Administrative and security contact(s)
-
 
 Before Starting
 ---------------
@@ -93,12 +85,6 @@ Configuration for a Pelican-based OSDF Cache is located in files in `/etc/pelica
 
 You must set the following config options:
 
-In `/etc/pelican/config.d/15-osdf.yaml`, set `XRootD.Sitename`:
-```
-XRootD:
-  Sitename: <RESOURCE NAME REGISTERED WITH OSG>
-```
-
 In `/etc/pelican/config.d/20-cache.yaml`, set `Cache.LocalRoot`, `Cache.DataLocation` and `Cache.MetaLocation` as follows,
 replacing `<CACHE PARTITION>` with the mount point of the partition you will use for the cache.
 ```
@@ -113,9 +99,9 @@ Preparing for Initial Startup
 -----------------------------
 
 1.  The cache identifies itself to the federation via public key authentication;
-before starting the cache for the first time, it is recommended to generate a keypair.
+before starting the cache for the first time, it is generate a keypair.
 
-    :::command
+    :::console
     root@host$ cd /etc/pelican
     root@host$ pelican generate keygen
 
@@ -123,9 +109,49 @@ before starting the cache for the first time, it is recommended to generate a ke
     The newly created files, `issuer.jwk` and `issuer-pub.jwks` are the private and public keys, respectively.
     **Save these files**; if you lose them, your cache will need to be re-approved.
 
-1.  Contact OSG Staff and let them know that you are about to start your cache,
-    and what the hostname of the cache is.
-    OSG Staff will need to approve the cache's registration.
+
+Validating the Cache Installation
+---------------------------------
+
+Do the following steps to verify that the cache is functional:
+
+1.  Start the cache using the following command:
+
+        :::console
+        root@host$ systemctl start osdf-cache
+
+1.  Download a test file from the OSDF through your cache (replacing `CACHE_HOSTNAME` with the host name of your cache)
+
+        :::console
+        root@host$ osdf object get -c CACHE_HOSTNAME:8443 /ospool/uc-shared/public/OSG-Staff/validation/test.txt /tmp/test.txt
+        root@host$ cat /tmp/test.txt
+
+        Hello, World!
+
+
+Joining the Cache to the Federation
+-----------------------------------
+
+The cache must be registered with the OSG prior to joining the data federation.
+Send mail to <help@osg-htc.org> requesting registration; provide the following information:
+
+*   Cache hostname
+*   Administrative and security contact(s)
+*   Institution that the cache belongs to
+
+OSG Staff will register the cache and respond with the Resource Name that the cache was registered as.
+
+Once you have that information, edit `/etc/pelican/config.d/15-osdf.yaml`, and set `XRootD.Sitename`:
+```
+XRootD:
+  Sitename: <RESOURCE NAME REGISTERED WITH OSG>
+```
+
+Then, restart the cache by running
+
+```console
+root@host$ systemctl restart osdf-cache
+```
 
 
 Managing the Cache Service
@@ -138,13 +164,6 @@ Use the following SystemD commands as root to start, stop, enable, and disable t
 | Stop the cache                           | `systemctl stop osdf-cache`        |
 | Enable the cache to start on boot        | `systemctl enable osdf-cache`      |
 | Disable the cache from starting on boot  | `systemctl disable osdf-cache`     |
-
-
-Registering the Cache in OSG Topology
--------------------------------------
-To be part of the Open Science Data Federation, your cache must be
-[registered in the OSG Topology system](../../common/registration.md).
-The service type is `Pelican cache`.
 
 
 Getting Help
