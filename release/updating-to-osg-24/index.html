@@ -1817,6 +1817,13 @@ the container can be upgraded by updating the RPM.</p>
 
 </li>
 <li>
+<p>(Optional) Clean up <code>/etc/osg/ospool-ep.cfg</code>:</p>
+<ul>
+<li>A bug in the OSG 23 release of ospool-ep required users to add a <code>WORK_TEMP_DIR</code> config field as a copy of the default <code>WORKER_TEMP_DIR</code>.
+When upgrading to OSG 24, remove the duplicated <code>WORK_TEMP_DIR</code> field.</li>
+</ul>
+</li>
+<li>
 <p>Restart the ospool-ep systemctl service:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>systemctl restart ospool-ep
 </code></pre></div>
