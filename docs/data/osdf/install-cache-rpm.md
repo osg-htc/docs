@@ -29,7 +29,7 @@ Before starting the installation process, consider the following requirements:
   * Inbound TCP port 8443 for file access via the HTTP(S) and XRoot protocols.
   * (Optional) Inbound TCP port 8444 for access to the web interface for monitoring and configuration;
     if enabled, this should be restricted to the LAN.
-* __Hardware requirements:__
+* __Service requirements:__
     * A cache serving the OSDF federation as a regional cache should have at least:
         * 8 cores
         * 40 Gbps connectivity
@@ -80,6 +80,7 @@ OSG 24:
 ```console
 root@host # yum install osdf-cache
 ```
+
 
 Configuring the Cache Server
 ----------------------------
