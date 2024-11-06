@@ -4,7 +4,8 @@ Installing the OSDF Cache
 =========================
 
 This document describes how to install a Pelican-based Open Science Data Federation (OSDF) Cache service via RPMs.
-This service allows a site or regional network to cache data 
+This service allows a site or regional network to cache data frequently used in Open Science Pool jobs,
+reducing data transfer over the wide-area network and decreasing access latency.
 
 !!! note
     The cache must be registered with the OSG prior to joining the data federation.
@@ -27,8 +28,19 @@ Before starting the installation process, consider the following requirements:
 * __Network ports:__ The cache service requires the following ports open:
   * Inbound TCP port 8443 for file access via the HTTP(S) and XRoot protocols.
   * (Optional) Inbound TCP port cache for access to the web interface for monitoring and configuration;
-    if enabled, this should be restricted to the LAN or management network.
-* __Hardware requirements:__ We recommend that an origin has at least 1Gbps connectivity and 12GB of RAM.
+    if enabled, this should be restricted to the LAN.
+* __Hardware requirements:__
+    * A cache serving the OSDF federation as a regional cache should have at least:
+        * 8 cores
+        * 40 Gbps connectivity
+        * 50-200 TB of NVMe disk for the cache partition; you may distribute the disk, e.g., by using an NVMe-backed Ceph pool,
+            if you cannot fit that much disk into a single chassis
+        * 24 GB of RAM
+    * A cache being used to serve data from the OSDF to a single site should have at least:
+        * 8 cores
+        * 40 Gbps connectivity
+        * 2 TB of NVMe disk for the cache partition
+        * 24 GB of RAM
   We suggest that several gigabytes of local disk space be available for log files,
   although some logging verbosity can be reduced.
 
@@ -57,29 +69,43 @@ Installing the Cache
 --------------------
 
 The cache service is provided by the `osdf-cache` RPM.
-Install it using the following command:
+Install it using one of the following commands:
 
-
+OSG 23:
 ```console
 root@host # yum install --enablerepo=osg-upcoming osdf-cache
 ```
 
+OSG 24:
+```console
+root@host # yum install osdf-cache
+```
 
 Configuring the Cache Server
 ----------------------------
 
-Configuration for a Pelican-based OSDF Cache is located in `/etc/pelican/osdf-cache.yaml`.
+!!! note "osdf-cache 7.11.1"
+    This configuration requires version 7.11.1 or newer of the `osdf-cache`
+    and `pelican` RPMs.
+    
+Configuration for a Pelican-based OSDF Cache is located in files in `/etc/pelican/config.d`.
 
-You must configure the following:
+You must set the following config options:
+
+In `/etc/pelican/config.d/15-osdf.yaml`, set `XRootD.Sitename`:
 ```
 XRootD:
   Sitename: <RESOURCE NAME REGISTERED WITH OSG>
-Cache:
-  DataLocation: "<TOP OF CACHE DIRECTORY>"
 ```
 
-If you are using a separate partition for the cached data, which is strongly recommended,
-then use the mount point of the cache partition as `Cache.DataLocation`.
+In `/etc/pelican/config.d/20-cache.yaml`, set `Cache.LocalRoot`, `Cache.DataLocation` and `Cache.MetaLocation` as follows,
+replacing `<CACHE PARTITION>` with the mount point of the partition you will use for the cache.
+```
+Cache:
+  LocalRoot: "<CACHE PARTITION>/namespaces"
+  DataLocation: "<CACHE PARTITION>/data"
+  MetaLocation: "<CACHE PARTITION>/meta"
+```
 
 
 Preparing for Initial Startup
