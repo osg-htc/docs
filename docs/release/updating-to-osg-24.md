@@ -38,7 +38,6 @@ the container can be upgraded by updating the RPM.
     - A bug in the OSG 23 release of ospool-ep required users to add a `WORK_TEMP_DIR` config field as a copy of the default `WORKER_TEMP_DIR`.
     When upgrading to OSG 24, remove the duplicated `WORK_TEMP_DIR` field.
 
-
 1. Restart the ospool-ep systemctl service:
 
         :::console
