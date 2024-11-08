@@ -13,14 +13,14 @@ Before Starting
 
 Before starting the installation process, consider the following requirements:
 
-* __Operating system:__ A RHEL 8 or RHEL 9 or compatible operating systems.
-* __User IDs:__ If they do not exist already, the installation will create the Linux user named `xrootd` for running daemons.
+* __Operating system:__ A RHEL 8 or RHEL 9 or [compatible operating system](../../release/supported_platforms.md).
+* __User IDs:__ If it does not exist already, the installation will create the Linux user named `xrootd` for running daemons.
 * __File Systems:__ The cache should have a partition of its own for storing data and metadata.
 * __Host certificate:__ Required for authentication.  See note below.
 * __Network ports:__ The cache service requires the following ports open:
   * Inbound TCP port 8443 for file access via the HTTP(S) and XRoot protocols.
   * (Optional) Inbound TCP port 8444 for access to the web interface for monitoring and configuration;
-    if enabled, this should be restricted to the LAN.
+    if enabled, access to this port should be restricted to the LAN.
 * __Service requirements:__
     * A cache serving the OSDF federation as a regional cache should have at least:
         * 8 cores
@@ -70,7 +70,7 @@ root@host # yum install --enablerepo=osg-upcoming osdf-cache
 
 OSG 24:
 ```console
-root@host # yum install osdf-cache
+root@host # yum install osdf-cache --enablerepo=osg-testing
 ```
 
 
@@ -82,8 +82,6 @@ Configuring the Cache Server
     and `pelican` RPMs.
     
 Configuration for a Pelican-based OSDF Cache is located in files in `/etc/pelican/config.d`.
-
-You must set the following config options:
 
 In `/etc/pelican/config.d/20-cache.yaml`, set `Cache.LocalRoot`, `Cache.DataLocation` and `Cache.MetaLocation` as follows,
 replacing `<CACHE PARTITION>` with the mount point of the partition you will use for the cache.
