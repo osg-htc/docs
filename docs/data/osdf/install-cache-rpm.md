@@ -63,14 +63,15 @@ Installing the Cache
 The cache service is provided by the `osdf-cache` RPM.
 Install it using one of the following commands:
 
-OSG 23:
-```console
-root@host # yum install --enablerepo=osg-upcoming osdf-cache
-```
 
 OSG 24:
 ```console
 root@host # yum install osdf-cache --enablerepo=osg-testing
+```
+
+OSG 23:
+```console
+root@host # yum install --enablerepo=osg-upcoming-testing osdf-cache
 ```
 
 
@@ -105,7 +106,8 @@ before starting the cache for the first time, it is generate a keypair.
 
 
     The newly created files, `issuer.jwk` and `issuer-pub.jwks` are the private and public keys, respectively.
-    **Save these files**; if you lose them, your cache will need to be re-approved.
+
+1.  **Save these files**; if you lose them, your cache will need to be re-approved.
 
 
 Validating the Cache Installation
