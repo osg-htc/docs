@@ -47,7 +47,7 @@ As with all OSG software installations, there are some one-time steps to prepare
 
 !!! note "Host certificates"
     Caches should use a CA that is accepted by major browsers and operating systems,
-    such as InCommon RSA or [Let's Encrypt](../../security/host-certs/lets-encrypt).
+    such as InCommon RSA or [Let's Encrypt](../../security/host-certs/lets-encrypt.md).
     IGTF certs are not recommended because clients are not configured to accept them by default.
     Note that you will need the full certificate chain, not just the certificate.
 
