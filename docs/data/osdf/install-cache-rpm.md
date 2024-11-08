@@ -126,6 +126,11 @@ Do the following steps to verify that the cache is functional:
 
         Hello, World!
 
+    If the download fails, rerun the above `osdf object get` command with the `-d` flag added;
+    additional debugging information is located in `/var/log/pelican/osdf-cache.log`.
+    See [this page](../../common/help.md) for requesting assistance; please include the log file
+    and the `osdf object get -d` output in your request.
+
 
 Joining the Cache to the Federation
 -----------------------------------
