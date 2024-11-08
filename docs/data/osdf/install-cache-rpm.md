@@ -82,8 +82,6 @@ Configuring the Cache Server
     This configuration requires version 7.11.1 or newer of the `osdf-cache`
     and `pelican` RPMs.
     
-Configuration for a Pelican-based OSDF Cache is located in files in `/etc/pelican/config.d`.
-
 In `/etc/pelican/config.d/20-cache.yaml`, set `Cache.LocalRoot`, `Cache.DataLocation` and `Cache.MetaLocation` as follows,
 replacing `<CACHE PARTITION>` with the mount point of the partition you will use for the cache.
 ```
@@ -152,6 +150,9 @@ Then, restart the cache by running
 ```console
 root@host$ systemctl restart osdf-cache
 ```
+
+Let OSG Staff know that you have restarted the cache with the updated sitename,
+so they can approve the new cache.
 
 
 Managing the Cache Service
