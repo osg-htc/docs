@@ -1956,11 +1956,21 @@ Let's Encrypt host certs expire every three months so it is important to set up 
 </li>
 <li>
 <p>Set up hostcert/hostkey links:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>ln -sf /etc/letsencrypt/live/*/cert.pem /etc/grid-security/hostcert.pem
-<span class="gp">root@host # </span>ln -sf /etc/letsencrypt/live/*/privkey.pem /etc/grid-security/hostkey.pem
-<span class="gp">root@host # </span>chmod <span class="m">0600</span> /etc/letsencrypt/archive/*/privkey*.pem
+<div class="codehilite"><pre><span></span><code>If using host certificates for Pelican/OSDF:
+:::console
+root@host # ln -sf /etc/letsencrypt/live/*/fullchain.pem /etc/pki/tls/certs/pelican.crt
+root@host # ln -sf /etc/letsencrypt/live/*/privkey.pem /etc/pki/tls/private/pelican.key
+root@host # chmod 0600 /etc/letsencrypt/archive/*/privkey*.pem
+
+If using host certificates for other software:
+:::console
+root@host # ln -sf /etc/letsencrypt/live/*/cert.pem /etc/grid-security/hostcert.pem
+root@host # ln -sf /etc/letsencrypt/live/*/privkey.pem /etc/grid-security/hostkey.pem
+root@host # chmod 0600 /etc/letsencrypt/archive/*/privkey*.pem
 </code></pre></div>
 
+<p>Note that Pelican requires the full certificate chain, not just the certificate,
+so the pelican.crt symlink needs to point to fullchain.pem, not cert.pem.</p>
 </li>
 <li>
 <p>Restart services running on port 80 if there were any.</p>
