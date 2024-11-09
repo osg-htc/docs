@@ -34,10 +34,21 @@ Installation and Obtaining the Initial Certificate
 
 1. Set up hostcert/hostkey links:
 
+        If using host certificates for Pelican/OSDF:
+        :::console
+        root@host # ln -sf /etc/letsencrypt/live/*/fullchain.pem /etc/pki/tls/certs/pelican.crt
+        root@host # ln -sf /etc/letsencrypt/live/*/privkey.pem /etc/pki/tls/private/pelican.key
+        root@host # chmod 0600 /etc/letsencrypt/archive/*/privkey*.pem
+
+        If using host certificates for other software:
         :::console
         root@host # ln -sf /etc/letsencrypt/live/*/cert.pem /etc/grid-security/hostcert.pem
         root@host # ln -sf /etc/letsencrypt/live/*/privkey.pem /etc/grid-security/hostkey.pem
         root@host # chmod 0600 /etc/letsencrypt/archive/*/privkey*.pem
+
+
+    Note that Pelican requires the full certificate chain, not just the certificate,
+    so the pelican.crt symlink needs to point to fullchain.pem, not cert.pem.
 
 1. Restart services running on port 80 if there were any.
 
