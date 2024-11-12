@@ -3,9 +3,9 @@ title: Installing the OSDF Cache by RPM
 Installing the OSDF Cache
 =========================
 
-This document describes how to install a Pelican-based Open Science Data Federation (OSDF) Cache service via RPMs.
+This document describes how to install an Open Science Data Federation (OSDF) Cache service via RPMs.
 This service allows a site or regional network to cache data frequently used in Open Science Pool jobs,
-reducing data transfer over the wide-area network and decreasing access latency.
+reducing data transfer over the wide-area network and increasing throughput to jobs.
 
 
 Before Starting
@@ -19,8 +19,7 @@ Before starting the installation process, consider the following requirements:
 * __Host certificate:__ Required for authentication.  See note below.
 * __Network ports:__ The cache service requires the following ports open:
   * Inbound TCP port 8443 for file access via the HTTP(S) and XRoot protocols.
-  * (Optional) Inbound TCP port 8444 for access to the web interface for monitoring and configuration;
-    if enabled, access to this port should be restricted to the LAN.
+  * Inbound TCP port 8444 for access to the web interface for monitoring and configuration.
 * __Service requirements:__
     * A cache serving the OSDF federation as a regional cache should have at least:
         * 8 cores
@@ -33,6 +32,7 @@ Before starting the installation process, consider the following requirements:
         * 40 Gbps connectivity
         * 2 TB of NVMe disk for the cache partition
         * 24 GB of RAM
+    * The cache should be a mounted filesystem; its mount location is referred to as `<CACHE PARTITION>` in the documentation below.
   We suggest that several gigabytes of local disk space be available for log files,
   although some logging verbosity can be reduced.
 
@@ -42,14 +42,12 @@ As with all OSG software installations, there are some one-time steps to prepare
 * Prepare [the required Yum repositories](../../common/yum.md)
 
 
-!!! note "OSG 23"
-    In OSG 23, the Pelican-based OSDF RPMs are only available in the "osg-upcoming" repositories.
-
 !!! note "Host certificates"
-    Caches should use a CA that is accepted by major browsers and operating systems,
-    such as InCommon RSA or [Let's Encrypt](../../security/host-certs/lets-encrypt.md).
-    IGTF certs are not recommended because clients are not configured to accept them by default.
-    Note that you will need the full certificate chain, not just the certificate.
+    Caches are accessed by users through browsers, meaning caches need a certificate from a CA acceptable to a standard browser.
+    Examples include [Let's Encrypt](../../security/host-certs/lets-encrypt.md) or the InCommon IGTF CA.
+    Caches without a valid certificate for the browser cannot be added to the OSDF.
+    Note that, unlike legacy grid software, the public certificate file will need to contain the "full chain", including any
+    intermediate CAs (if you're unsure about your setup, try accessing your cache from your browser).
 
     The following locations should be used (note that they are in separate directories):
     
@@ -74,13 +72,12 @@ OSG 23:
 root@host # yum install --enablerepo=osg-upcoming-testing osdf-cache
 ```
 
+!!! note "osdf-cache 7.11.1"
+    This document covers versions 7.11.1 and later of the `osdf-cache` package; ensure the above installation
+    results in an appropriate version.
 
 Configuring the Cache Server
 ----------------------------
-
-!!! note "osdf-cache 7.11.1"
-    This configuration requires version 7.11.1 or newer of the `osdf-cache`
-    and `pelican` RPMs.
     
 In `/etc/pelican/config.d/20-cache.yaml`, set `Cache.LocalRoot`, `Cache.DataLocation` and `Cache.MetaLocation` as follows,
 replacing `<CACHE PARTITION>` with the mount point of the partition you will use for the cache.
@@ -90,7 +87,6 @@ Cache:
   DataLocation: "<CACHE PARTITION>/data"
   MetaLocation: "<CACHE PARTITION>/meta"
 ```
-
 
 Preparing for Initial Startup
 -----------------------------
@@ -105,7 +101,7 @@ before starting the cache for the first time, it is generate a keypair.
 
     The newly created files, `issuer.jwk` and `issuer-pub.jwks` are the private and public keys, respectively.
 
-1.  **Save these files**; if you lose them, your cache will need to be re-approved.
+1.  **Save these files**; if you lose the `issuer.jwk`, your cache will need to be re-approved.
 
 
 Validating the Cache Installation
