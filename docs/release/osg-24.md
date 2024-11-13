@@ -14,6 +14,10 @@ OSG 24 will be supported for [approximately two years total](release_series.md#s
 Latest News
 -----------
 
+### **November 13, 2024:** XRootD 5.7.1-1.4
+-   XRootD 5.7.1-1.4
+    -   Reduce XCache error rate under load
+
 ### October 31, 2024: Initial Release ###
 
 !!! info "Where is the OSG 24 worker node tarball?"
