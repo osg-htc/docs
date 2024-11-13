@@ -44,6 +44,10 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **November 13, 2024:** XRootD 5.7.1-1.4
+-   XRootD 5.7.1-1.4
+    -   Reduce XCache error rate under load
+
 ### **October 10, 2024:** XRootD 5.7.1-1.3, HTCondor 23.0.16
 -   XRootD 5.7.1-1.3
     -   Urgent fix for S3 caches to avoid near-infinite loop
