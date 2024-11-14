@@ -120,7 +120,7 @@ Updating Your OSG Compute Entrypoint
 
 The OSG 24 release series contains [HTCondor-CE 24](https://htcondor.github.io/htcondor-ce/v24/releases/).
 HTCondor-CE 24 no longer accepts the original job router syntax.
-If you have custom job routes, you must be using the new, more flexible,
+If you have custom job routes, you must use the new, more flexible,
 [ClassAd transform](https://htcondor.com/htcondor-ce/v24/configuration/job-router-overview/#classad-transforms)
 job router syntax.
 
