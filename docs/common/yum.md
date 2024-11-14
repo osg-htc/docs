@@ -147,7 +147,7 @@ You must install and enable these first.
 
 This document assumes a fresh install.
 For instructions on upgrading from one OSG series to another, see the
-[release series document](../release/updating-to-osg-36.md).
+[release series document](../release/updating-to-osg-24.md).
 
 1. Install the OSG repository for your OS version and the [OSG release series](../release/release_series.md) that you wish to
    use:
