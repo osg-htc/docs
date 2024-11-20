@@ -44,11 +44,23 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **November 19, 2024:** HTCondor 23.0.18; Upcoming: HTCondor 23.10.18
+-   [HTCondor 23.0.18](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-18)
+    -   Proper error message and hold when Docker emits multi-line error message
+-   Upcoming
+    -   [HTCondor 23.10.18](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-10-18)
+        -   Fix issue where an unresponsive libvirtd blocked an EP from starting up
+
 ### **November 13, 2024:** XRootD 5.7.1-1.4
 -   XRootD 5.7.1-1.4
     -   Reduce XCache error rate under load
 
-### **October 10, 2024:** XRootD 5.7.1-1.3, HTCondor 23.0.16
+### **October 30, 2024:** Upcoming: HTCondor 23.10.2
+-   Upcoming
+    -   [HTCondor 23.10.2](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-10-1)
+        -   Fix for output file transfer errors obscuring input file transfer errors
+
+### **October 10, 2024:** XRootD 5.7.1-1.3, HTCondor 23.0.17
 -   XRootD 5.7.1-1.3
     -   Urgent fix for S3 caches to avoid near-infinite loop
     -   Change cache age logic to only indicate fully cached files
