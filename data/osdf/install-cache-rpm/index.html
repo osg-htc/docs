@@ -1821,9 +1821,9 @@
 
 
 <h1 id="installing-the-osdf-cache">Installing the OSDF Cache<a class="headerlink" href="#installing-the-osdf-cache" title="Permanent link">&para;</a></h1>
-<p>This document describes how to install a Pelican-based Open Science Data Federation (OSDF) Cache service via RPMs.
+<p>This document describes how to install an Open Science Data Federation (OSDF) Cache service via RPMs.
 This service allows a site or regional network to cache data frequently used in Open Science Pool jobs,
-reducing data transfer over the wide-area network and decreasing access latency.</p>
+reducing data transfer over the wide-area network and increasing throughput to jobs.</p>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following requirements:</p>
 <ul>
@@ -1848,11 +1848,12 @@ reducing data transfer over the wide-area network and decreasing access latency.
 <li>8 cores</li>
 <li>40 Gbps connectivity</li>
 <li>2 TB of NVMe disk for the cache partition</li>
-<li>24 GB of RAM
-  We suggest that several gigabytes of local disk space be available for log files,
-  although some logging verbosity can be reduced.</li>
+<li>24 GB of RAM</li>
 </ul>
 </li>
+<li>The cache should be a mounted filesystem; its mount location is referred to as <code>&lt;CACHE PARTITION&gt;</code> in the documentation below.
+  We suggest that several gigabytes of local disk space be available for log files,
+  although some logging verbosity can be reduced.</li>
 </ul>
 </li>
 </ul>
@@ -1862,15 +1863,12 @@ reducing data transfer over the wide-area network and decreasing access latency.
 <li>Prepare <a href="../../../common/yum/">the required Yum repositories</a></li>
 </ul>
 <div class="admonition note">
-<p class="admonition-title">OSG 23</p>
-<p>In OSG 23, the Pelican-based OSDF RPMs are only available in the "osg-upcoming" repositories.</p>
-</div>
-<div class="admonition note">
 <p class="admonition-title">Host certificates</p>
-<p>Caches should use a CA that is accepted by major browsers and operating systems,
-such as InCommon RSA or <a href="../../../security/host-certs/lets-encrypt/">Let's Encrypt</a>.
-IGTF certs are not recommended because clients are not configured to accept them by default.
-Note that you will need the full certificate chain, not just the certificate.</p>
+<p>Caches are accessed by users through browsers, meaning caches need a certificate from a CA acceptable to a standard browser.
+Examples include <a href="../../../security/host-certs/lets-encrypt/">Let's Encrypt</a> or the InCommon IGTF CA.
+Caches without a valid certificate for the browser cannot be added to the OSDF.
+Note that, unlike legacy grid software, the public certificate file will need to contain the "full chain", including any
+intermediate CAs (if you're unsure about your setup, try accessing your cache from your browser).</p>
 <p>The following locations should be used (note that they are in separate directories):</p>
 <ul>
 <li><strong>Host Certificate Chain</strong>: <code>/etc/pki/tls/certs/pelican.crt</code></li>
@@ -1886,12 +1884,12 @@ Install it using one of the following commands:</p>
 <p>OSG 23:
 <div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum install --enablerepo<span class="o">=</span>osg-upcoming-testing osdf-cache
 </code></pre></div></p>
-<h2 id="configuring-the-cache-server">Configuring the Cache Server<a class="headerlink" href="#configuring-the-cache-server" title="Permanent link">&para;</a></h2>
 <div class="admonition note">
 <p class="admonition-title">osdf-cache 7.11.1</p>
-<p>This configuration requires version 7.11.1 or newer of the <code>osdf-cache</code>
-and <code>pelican</code> RPMs.</p>
+<p>This document covers versions 7.11.1 and later of the <code>osdf-cache</code> package; ensure the above installation
+results in an appropriate version.</p>
 </div>
+<h2 id="configuring-the-cache-server">Configuring the Cache Server<a class="headerlink" href="#configuring-the-cache-server" title="Permanent link">&para;</a></h2>
 <p>In <code>/etc/pelican/config.d/20-cache.yaml</code>, set <code>Cache.LocalRoot</code>, <code>Cache.DataLocation</code> and <code>Cache.MetaLocation</code> as follows,
 replacing <code>&lt;CACHE PARTITION&gt;</code> with the mount point of the partition you will use for the cache.
 <div class="highlight"><pre><span></span><code>Cache:
@@ -1911,7 +1909,7 @@ before starting the cache for the first time, it is generate a keypair.</p>
 <p>The newly created files, <code>issuer.jwk</code> and <code>issuer-pub.jwks</code> are the private and public keys, respectively.</p>
 </li>
 <li>
-<p><strong>Save these files</strong>; if you lose them, your cache will need to be re-approved.</p>
+<p><strong>Save these files</strong>; if you lose the <code>issuer.jwk</code>, your cache will need to be re-approved.</p>
 </li>
 </ol>
 <h2 id="validating-the-cache-installation">Validating the Cache Installation<a class="headerlink" href="#validating-the-cache-installation" title="Permanent link">&para;</a></h2>
