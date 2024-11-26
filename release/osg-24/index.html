@@ -1425,6 +1425,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#november-26-2024-htcondor-2402-upcoming-htcondor-2421" class="md-nav__link">
+    November 26, 2024: HTCondor 24.0.2; Upcoming: HTCondor 24.2.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#november-13-2024-xrootd-571-14" class="md-nav__link">
     November 13, 2024: XRootD 5.7.1-1.4
   </a>
@@ -1847,6 +1854,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#november-26-2024-htcondor-2402-upcoming-htcondor-2421" class="md-nav__link">
+    November 26, 2024: HTCondor 24.0.2; Upcoming: HTCondor 24.2.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#november-13-2024-xrootd-571-14" class="md-nav__link">
     November 13, 2024: XRootD 5.7.1-1.4
   </a>
@@ -1917,6 +1931,31 @@ the ARM CPU architecture.
 The initial release includes GlideinWMS 3.10.7, HTCondor 24.0.1, HTCondor 24.1.1, HTCondor-CE 24.0, and XRootD 5.7.0.</p>
 <p>OSG 24 will be supported for <a href="../release_series/#series-life-cycle">approximately two years total</a>.</p>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="november-26-2024-htcondor-2402-upcoming-htcondor-2421"><strong>November 26, 2024:</strong> HTCondor 24.0.2; Upcoming: HTCondor 24.2.1<a class="headerlink" href="#november-26-2024-htcondor-2402-upcoming-htcondor-2421" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-2">HTCondor 24.0.2</a><ul>
+<li>Add <code>STARTER_ALWAYS_HOLD_ON_OOM</code> to minimize confusion about memory usage</li>
+<li>Fix bug that caused <code>condor_ssh_to_job</code> <code>sftp</code> and <code>scp</code> modes to fail</li>
+<li>Fix <code>KeyboardIdle</code> attribute in dynamic slots that could prevent job start</li>
+<li>No longer signals the OAuth credmon when there is no work to do</li>
+<li>Fix rare <code>condor_schedd crash</code> when a <code>$$()</code> macro could not be expanded</li>
+<li>By default, put Docker jobs on hold when CPU architecture doesn't match</li>
+</ul>
+</li>
+<li>Upcoming<ul>
+<li><a href="https://htcondor.readthedocs.io/en/24.x/version-history/feature-versions-24-x.html#version-24-2-1">HTCondor 24.2.1</a><ul>
+<li>Fixed DAGMan's direct submission of late materialization jobs</li>
+<li>New <code>primary_unix_group</code> submit command that sets the job's primary group</li>
+<li>Initial implementation of broken slot detection and reporting</li>
+<li>New job attributes <code>FirstJobMatchDate</code> and <code>InitialWaitDuration</code></li>
+<li><code>condor_ssh_to_job</code> now sets the supplemental groups in Apptainer</li>
+<li><code>MASTER_NEW_BINARY_RESTART</code> now accepts the <code>FAST</code> parameter</li>
+<li>Avoid blocking on dead collectors at shutdown</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="november-13-2024-xrootd-571-14"><strong>November 13, 2024:</strong> XRootD 5.7.1-1.4<a class="headerlink" href="#november-13-2024-xrootd-571-14" title="Permanent link">&para;</a></h3>
 <ul>
 <li>XRootD 5.7.1-1.4<ul>
@@ -1924,7 +1963,7 @@ The initial release includes GlideinWMS 3.10.7, HTCondor 24.0.1, HTCondor 24.1.1
 </ul>
 </li>
 </ul>
-<h3 id="october-31-2024-initial-release">October 31, 2024: Initial Release<a class="headerlink" href="#october-31-2024-initial-release" title="Permanent link">&para;</a></h3>
+<h3 id="october-31-2024-initial-release"><strong>October 31, 2024:</strong> Initial Release<a class="headerlink" href="#october-31-2024-initial-release" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
 <p class="admonition-title">Where is the OSG 24 worker node tarball?</p>
 <p>We plan to distribute the worker node tarball within the next week. Stay tuned for updates!</p>
