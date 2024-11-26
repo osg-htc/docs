@@ -14,11 +14,29 @@ OSG 24 will be supported for [approximately two years total](release_series.md#s
 Latest News
 -----------
 
+### **November 26, 2024:** HTCondor 24.0.2; Upcoming: HTCondor 24.2.1
+-   [HTCondor 24.0.2](https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-2)
+    -   Add `STARTER_ALWAYS_HOLD_ON_OOM` to minimize confusion about memory usage
+    -   Fix bug that caused `condor_ssh_to_job` `sftp` and `scp` modes to fail
+    -   Fix `KeyboardIdle` attribute in dynamic slots that could prevent job start
+    -   No longer signals the OAuth credmon when there is no work to do
+    -   Fix rare `condor_schedd crash` when a `$$()` macro could not be expanded
+    -   By default, put Docker jobs on hold when CPU architecture doesn't match
+-   Upcoming
+    -   [HTCondor 24.2.1](https://htcondor.readthedocs.io/en/24.x/version-history/feature-versions-24-x.html#version-24-2-1)
+        - Fixed DAGMan's direct submission of late materialization jobs
+        - New `primary_unix_group` submit command that sets the job's primary group
+        - Initial implementation of broken slot detection and reporting
+        - New job attributes `FirstJobMatchDate` and `InitialWaitDuration`
+        - `condor_ssh_to_job` now sets the supplemental groups in Apptainer
+        - `MASTER_NEW_BINARY_RESTART` now accepts the `FAST` parameter
+        - Avoid blocking on dead collectors at shutdown
+
 ### **November 13, 2024:** XRootD 5.7.1-1.4
 -   XRootD 5.7.1-1.4
     -   Reduce XCache error rate under load
 
-### October 31, 2024: Initial Release ###
+### **October 31, 2024:** Initial Release ###
 
 !!! info "Where is the OSG 24 worker node tarball?"
     We plan to distribute the worker node tarball within the next week. Stay tuned for updates!
