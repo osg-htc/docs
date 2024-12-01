@@ -4,6 +4,9 @@ DateReviewed: 2021-01-28
 Requesting an OSG Hosted CE
 ===========================
 
+!!! info "Schedule a consultation"
+    To ensure that we can meet your research computing goals needs, please contact us at <support@osg-htc.org> to schedule a consultation.
+
 An OSG Hosted Compute Entrypoint (CE) is the entry point for [resource requests](../resource-sharing/overview.md) coming
 from the OSG;
 it handles authorization and delegation of resource requests to your existing campus HPC/HTC cluster.
