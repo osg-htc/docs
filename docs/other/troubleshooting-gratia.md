@@ -128,20 +128,6 @@ host you are troubleshooting:
 | Access Point       | `rpm -q --verify gratia-probe-condor-ap`   |
 | Compute Entrypoint | `rpm -q --verify gratia-probe-htcondor-ce` |
 
-893b60ba6 * origin/SOFTWARE-6012-osg-24 Add estimated EOL for OSG 23 and 24
-42672b78c * OSG 24 initial release notes (SOFTWARE-6012)
-95a018d88 * Use new ospool-ep image name
-737343b49 * Restore out-of-date OSG WN client doc
-5c35225b2 * Fix squid, OIDC agent, and stash-* container references
-dc5e9323b * Add missing period
-01de6cd3b * Add initial major packages for OSG 24
-55dd7f800 * Add OSG 23 references back since it's still supported
-f923d3e14 * Prefer EL9 over EL8
-8604829b8 * mwestphall/SOFTWARE-6012-osg-24 rename docker repo prefixes to osg-htc
-a6ae410ee * remove references to el7 in most docs
-e7e60ec31 * remove most references to OSG <23 from non-release-history docs
-c1e458ac2 * Update docs to reference OSG-24 as the latest series
-e11c452a9 *   origin/master mat/master Merge pull request #199 from timtheisen/master
 ### Verifying configuration ###
 
 When troubleshooting Gratia, there are two different configurations to investigate:
