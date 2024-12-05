@@ -27,6 +27,7 @@ Before starting the installation process, consider the following requirements:
 * __Operating system:__ Ensure the host has [a supported operating system](../../release/supported_platforms.md)
 * __User IDs:__ If they do not exist already, the installation will create the Linux user IDs `condor` and
   `xrootd`
+* __File Systems:__ The cache should have a partition of its own for storing data and metadata.
 * __Host certificate:__ Required for authentication.
   See our [host certificate documentation](../../security/host-certs.md) for instructions on how to request and install host certificates.
 * __Network ports:__ Your host may run a public cache instance (for serving public data only), an authenticated cache instance (for serving protected data), or both.
@@ -38,8 +39,19 @@ Before starting the installation process, consider the following requirements:
     * An authenticated cache instance requires the following ports open:
         * Inbound TCP port 8443 for authenticated file access via HTTPS
         * Outbound UDP port 9930 for reporting to `xrd-report.osgstorage.org` and `xrd-mon.osgstorage.org` for monitoring
-* __Hardware requirements:__ We recommend that a cache has at least 10Gbps connectivity, 1TB of
- disk space for the cache directory, and 12GB of RAM.
+* __Hardware requirements:__
+    * A cache serving the OSDF federation as a regional cache should have at least:
+        * 8 cores
+        * 40 Gbps connectivity
+        * 50-200 TB of NVMe disk for the cache partition; you may distribute the disk, e.g., by using an NVMe-backed Ceph pool,
+            if you cannot fit that much disk into a single chassis
+        * 24 GB of RAM
+    * A cache being used to serve data from the OSDF to a single site should have at least:
+        * 8 cores
+        * 40 Gbps connectivity
+        * 2 TB of NVMe disk for the cache partition
+        * 24 GB of RAM
+
 
 As with all OSG software installations, there are some one-time steps to prepare in advance:
 
