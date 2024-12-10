@@ -65,12 +65,12 @@ Install it using one of the following commands:
 
 OSG 24:
 ```console
-root@host # yum install osdf-cache --enablerepo=osg-testing
+root@host # yum install osdf-cache
 ```
 
 OSG 23:
 ```console
-root@host # yum install --enablerepo=osg-upcoming-testing osdf-cache
+root@host # yum install --enablerepo=osg-upcoming osdf-cache
 ```
 
 !!! note "osdf-cache 7.11.1"
