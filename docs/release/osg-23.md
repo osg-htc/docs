@@ -44,7 +44,124 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
-### **August 8, 2024:** HTCondor 23.0.14; HTCondor-CE 23.9.1, HTCondor 23.9.6
+### **November 19, 2024:** HTCondor 23.0.18; Upcoming: HTCondor 23.10.18
+-   [HTCondor 23.0.18](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-18)
+    -   Proper error message and hold when Docker emits multi-line error message
+-   Upcoming
+    -   [HTCondor 23.10.18](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-10-18)
+        -   Fix issue where an unresponsive libvirtd blocked an EP from starting up
+
+### **November 13, 2024:** XRootD 5.7.1-1.4
+-   XRootD 5.7.1-1.4
+    -   Reduce XCache error rate under load
+
+### **October 30, 2024:** Upcoming: HTCondor 23.10.2
+-   Upcoming
+    -   [HTCondor 23.10.2](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-10-1)
+        -   Fix for output file transfer errors obscuring input file transfer errors
+
+### **October 10, 2024:** XRootD 5.7.1-1.3, HTCondor 23.0.17
+-   XRootD 5.7.1-1.3
+    -   Urgent fix for S3 caches to avoid near-infinite loop
+    -   Change cache age logic to only indicate fully cached files
+-   [HTCondor 23.0.17](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-17)
+    -   Bug fix for PID namespaces and `condor_ssh_to_job` on EL9
+    -   Augment `condor_upgrade_check` to find unit suffixes in ClassAd expressions
+
+### **October 10, 2024:** HTCondor 23.0.16; Upcoming: osdf-server 7.10.7
+-   [HTCondor 23.0.16](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-16)
+    -   Back-port all cgroup v2 fixes and enhancements from the 23.10.1 release
+-   Upcoming
+    -   osdf-server 7.10.7
+        -   Update to require Pelican 7.10.7
+        -   Restart services when Pelican or XRootD are upgraded.
+
+### **October 3, 2024:** IGTF 1.131; Upcoming: HTCondor 23.10.1, Pelican 7.10.7
+-   CA Certificates based on IGTF 1.131
+    -   removed discontinued HKU-CA-2 authority (HK)
+    -   removed obsolete 3rd generation TCS intermediates (EU)
+-   Upcoming
+    -   [HTCondor 23.10.1](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-10-1)
+        -   Improvements to disk usage enforcement when using LVM
+            -   Can encrypt job sandboxes when using LVM
+            -   More precise tracking of disk usage when using LVM
+            -   Reduced disk usage tracking overhead
+        -   Improvements tracking CPU and memory usage with cgroup v2 (on EL9)
+            -   Don't count kernel cache pages against job's memory usage
+            -   Avoid rare inclusion of previous job's CPU and peak memory usage
+        -   HTCondor now re-checks DNS before re-connecting to a collector
+        -   HTCondor now writes out per job epoch history
+        -   HTCondor can encrypt network connections without authentication
+        -   htcondor CLI can now show status for local server, AP, and CM
+        -   htcondor CLI can now display OAUTH2 credentials
+        -   Uses job's sandbox to convert image format for Singularity/Apptainer
+        -   Bug fix to not lose GPUs in Docker job on systemd reconfig
+        -   Bug fix for PID namespaces and `condor_ssh_to_job` on EL9
+    -   [Pelican 7.10.7](https://github.com/PelicanPlatform/pelican/releases/tag/v7.10.7)
+        -   Stopped file transfers are now retryable errors
+        -   General improvements to error messages within the client and the plugin
+        -   Put requests now work with Origins using OA4MP Issuers
+        -   Retries metadata lookup failures
+        -   Fixed naming issue with queries on get/copy
+        -   Director supports server sorting on distance, server load, and objects
+        -   Add object availability test for cache access
+        -   Caches can fetch objects from other caches when there's a cache miss
+        -   Site name is populated in the Origin/Cache auto-registration process
+        -   Origins and Caches advertise their storage backend type to the director
+
+### **October 1, 2024:** HTCondor 23.0.15, XRootD 5.7.1-1.1, xrdcl-pelican 0.9.6
+-   [HTCondor 23.0.15 LTS](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-15)
+    -   Fix bug where Docker universe jobs reported zero memory usage on EL9
+    -   Fix bug where Docker universe images would not be removed from EP cache
+    -   Fix bug where `condor_watch_q` could crash
+    -   Fix bug that could cause the file transfer hold reason to be truncated
+-   [XRootD 5.7.1](https://xrootd.slac.stanford.edu/2024/09/03/announcement_5_7_1.html)
+    -   New Features
+        -   Allow cconfig to write out combined config file
+        -   Allow for API endpoints for fixed remote origins
+        -   Allow server to assume an arbitrary network identity
+        -   Allow a redirector to be configured read-only
+        -   Add "OSS Statistics" plugin to enable file system load monitoring
+        -   Defer client TLS authentication for XRootD to avoid unnecessary browser popups
+    -   Major bug fixes
+        -   Do not leak file pointer on open error
+        -   Fix memory leaks when creating Python objects
+        -   Ensure correct certificate is used when passed via cgi with `xrd.gsiusrproxy=...`
+        -   Fix too few arguments to formatting function
+-   xrdcl-pelican 0.9.4
+    -   Allow X.509 client authentication
+    -   Provide an error code on metadata lookup failure
+
+### **September 12, 2024:** CVMFS 2.11.5, vault 1.17.2, htvault-config 1.18, htgettoken 2.0, xrootd-multiuser 2.2.0-1.1, xrdcl-pelican 0.9.3-2.1
+-   [CVMFS 2.11.5](https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-11-5)
+    -   Fix blocking behavior in repositories when pipe reads take longer than a timeout
+    -   Fix streaming cache manager with secure repositories
+    -   Fix handling of network errors in streaming cache manager
+    -   Fix rare stuck condition after cache manager crashes
+-   vault 1.17.2
+    -   Update to latest upstream version
+-   htvault-config 1.18
+    -   Add caching of exchanged tokens
+    -   Give vault tokens the ability to delete secrets and revoke themselves
+    -   Update dependencies
+-   htgettoken 2.0
+    -   Major update replacing some libraries with modern equivalents
+    -   Remove use of PyInstaller
+    -   Make htgettoken directly callable from Python
+    -   Add use of a newer API to access vault secrets
+    -   Fix the -o option to work with relative paths
+    -   Change the --nobearertoken option to always save a vault token
+-   xrootd-multiuser 2.2.0-1.1
+    -   Rebuild for ARM64 (aarch64)
+-   xrdcl-pelican 0.9.3-2.1
+    -   Rebuild for ARM64 (aarch64)
+
+### **September 5, 2024:** XRootD 5.7.0-1.6
+-   XRootD 5.7.0-1.6
+    -   Fix file descriptor leak causing "too many open files" error in XCache
+    -   Improve performance by reducing stat calls on HTTP GET
+
+### **August 8, 2024:** HTCondor 23.0.14; Upcoming: HTCondor-CE 23.9.1, HTCondor 23.9.6
 -   [HTCondor 23.0.14 LTS](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-14)
     -   Docker and Container jobs run on EPs that match the AP's CPU architecture
     -   Fixed premature cleanup of credentials by the `condor_credd`
