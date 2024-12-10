@@ -1,10 +1,14 @@
 title: Installing the OSDF Origin by RPM
 
-Installing the OSDF Origin
-==========================
+Installing the OSDF Origin by RPM
+=================================
 
-This document describes how to install a Pelican-based Open Science Data Federation (OSDF) Origin service via RPMs.
-This service allows an organization to export its data to the Data Federation.
+!!! warning "OSG 24"
+    This installation guide requires OSG 24
+
+This document describes how to install an Open Science Data Federation (OSDF) Origin service via RPM.
+This service, based on the [Pelican Platform](https://docs.pelicanplatform.org/federating-your-data), allows an
+administrator to serve data from a POSIX filesystem or S3 endpoint through the global OSDF infrastructure.
 
 !!! note
     The origin must be registered with the OSG prior to joining the data federation.
@@ -12,10 +16,7 @@ This service allows an organization to export its data to the Data Federation.
     along with information like:
 
     * Resource name and hostname
-    * VO associated with this origin server (which will be used to determine the origin's namespace prefix)
     * Administrative and security contact(s)
-    * Who (or what) will be allowed to access the VO's data
-    * Which caches will be allowed to cache the VO data
 
 
 Before Starting
@@ -23,13 +24,13 @@ Before Starting
 
 Before starting the installation process, consider the following requirements:
 
-* __Operating system:__ A RHEL 8 or RHEL 9 or compatible operating systems.
+* __Operating system:__ A RHEL 8 or RHEL 9 or [compatible operating system](../../release/supported_platforms.md).
 * __User IDs:__ If they do not exist already, the installation will create the Linux user ID `xrootd` for running daemons.
 * __Host certificate:__ Required for authentication.  See note below.
 * __Network ports:__ The origin service requires the following ports open:
   * Inbound TCP port 8443 for file access via the HTTP(S) and XRoot protocols.
   * (Optional) Inbound TCP port 8444 for access to the web interface for monitoring and configuration;
-    if enabled, this should be restricted to the LAN or management network.
+    if enabled, consider restricting access from your LAN
 * __Hardware requirements:__ We recommend that an origin has at least 1Gbps connectivity and 12GB of RAM.
   We suggest that several gigabytes of local disk space be available for log files,
   although some logging verbosity can be reduced.
@@ -37,11 +38,8 @@ Before starting the installation process, consider the following requirements:
 As with all OSG software installations, there are some one-time steps to prepare in advance:
 
 * Obtain root access to the host
-* Prepare [the required Yum repositories](../../common/yum.md)
-
-
-!!! note "OSG 23"
-    In OSG 23, the Pelican-based OSDF RPMs are only available in the "osg-upcoming" repositories.
+* Prepare [the required Yum repositories](../../common/yum.md),
+  including the [OSG 24 repositories](../../common/yum.md#install-the-osg-repositories)
 
 !!! note "Host certificates"
     Origins should use a CA that is accepted by major browsers and operating systems,
@@ -53,6 +51,38 @@ As with all OSG software installations, there are some one-time steps to prepare
     
     * **Host Certificate Chain**: `/etc/pki/tls/certs/pelican.crt`
     * **Host Key**: `/etc/pki/tls/private/pelican.key`
+
+Upgrading a Non-Pelican Origin
+------------------------------
+
+If you are running a non-Pelican origin, e.g. one that was installed before OSG 24, there are special consideratiosn for
+the upgrade to ensure minimal downtime for your users.
+
+1.  Verify that you are not already running a Pelican-based origin, run the following on your origin host:
+
+        :::console
+        root@host # systemctl status osdf-origin
+        Unit osdf-origin.service could not be found.
+
+    If you see the following, then you are not running a Pelican-based origin and should proceed with the rest of the
+    instructions in this section
+
+1.  Install the origin
+
+1.  Configure the origin
+
+1.  Directly verify the origin
+
+1.  Register the origin in the Director and Topology
+
+    !!! danger ""
+
+1.  Verify the origin through the OSDF director
+
+1.  Uninstall the old service:
+
+        :::console
+        root@host # yum remove stash-origin
 
 
 Installing the Origin
@@ -80,7 +110,7 @@ XRootD:
 
 In addition, you must tell Pelican the data to export to the federation.
 An origin may export one or more directory trees, or one or more S3 buckets -- follow one of the sections below.
-(An single origin cannot export both a bucket and a directory tree.)
+A single origin cannot export both a bucket and a directory tree.
 
 
 
@@ -98,36 +128,15 @@ Origin:
       Capabilities:    # Add or remove as desired
         - Reads        # Enable authenticated reading of objects from under the directory tree through a cache
         - PublicReads  # Enable unauthenticated reading of objects from under the directory tree through a cache
-        - DirectReads  # Enable reading objects from under the directory tree
-                       # without going through a cache
+        - DirectReads  # Enable reading objects from under the directory tree without going through a cache
         - Listings     # Enable directory listings
         - Writes       # Enable writing to files in the directory tree
 ```
 
 ### Configuring S3 export
 
-Set these options to export one or more S3 buckets to the federation
-
-```
-Origin:
-  StorageType: "s3"
-  S3Region: "<S3 REGION IF APPLICABLE>"
-  S3ServiceUrl: "<URL OF S3 SERVER>"
-  S3UrlStyle: "path"
-  Exports:
-    # You may have one or more of the following block:
-    - FederationPrefix: "<EXTERNAL OSDF NAMESPACE>"
-      S3Bucket:         "<NAME OF S3 BUCKET>"
-      S3AccessKeyfile:  "<PATH TO S3 BUCKET ACCESS KEY>"
-      S3SecretKeyfile:  "<PATH TO S3 BUCKET SECRET KEY>"
-      Capabilities:     # Add or remove as desired
-        - Reads         # Enable authenticated reading of objects from the bucket through a cache
-        - PublicReads   # Enable unauthenticated reading of objects from the bucket through a cache
-        - DirectReads   # Enable reading objects from the bucket
-                        # without going through a cache
-        - Listings      # Enable listing bucket items
-        - Writes        # Enable writing to objects in the bucket
-```
+To configure your origin to serve objects from an S3 endpoint, see the
+[upstream documentation](https://docs.pelicanplatform.org/federating-your-data/s3-backend).
 
 
 Preparing for Initial Startup
