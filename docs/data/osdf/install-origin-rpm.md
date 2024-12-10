@@ -58,23 +58,22 @@ The origin service is provided by the `osdf-origin` RPM.
 Install it using the following command:
 
 
+OSG 24:
 ```console
-root@host # yum install --enablerepo=osg-upcoming osdf-origin
+root@host # yum install osdf-origin
 ```
 
+
+!!! note "osdf-cache 7.11.1"
+    This document covers versions 7.11.1 and later of the `osdf-cache` package; ensure the above installation
+    results in an appropriate version.
 
 Configuring the Origin Server
 -----------------------------
 
-Configuration for a Pelican-based OSDF Origin is located in `/etc/pelican/osdf-origin.yaml`.
+Create a file named `/etc/pelican/config.d/20-origin.yaml`
 
-You must configure the following:
-```
-XRootD:
-  Sitename: <RESOURCE NAME REGISTERED WITH OSG>
-```
-
-In addition, you must tell Pelican the data to export to the federation.
+You must tell Pelican the data to export to the federation.
 An origin may export one or more directory trees, or one or more S3 buckets -- follow one of the sections below.
 A single origin cannot export both a bucket and a directory tree.
 
@@ -111,17 +110,67 @@ Preparing for Initial Startup
 1.  The origin identifies itself to the federation via public key authentication;
 before starting the origin for the first time, it is recommended to generate a keypair.
 
-    :::command
-    root@host$ cd /etc/pelican
-    root@host$ pelican generate keygen
+        :::console
+        root@host$ cd /etc/pelican
+        root@host$ pelican generate keygen
 
 
     The newly created files, `issuer.jwk` and `issuer-pub.jwks` are the private and public keys, respectively.
-    **Save these files**; if you lose them, you will have to re-register the origin.
 
-1.  Contact OSG Staff and let them know that you are about to start your origin,
-    and what namespace(s) the origin will serve.
-    OSG Staff will need to approve the origin's registration.
+1.  **Save these files**; if you lose the `issuer.jwk`, your origin will need to be re-approved.
+
+
+Validating the Origin Installation
+----------------------------------
+
+Do the following steps to verify that the cache is functional:
+
+1.  Start the origin using the following command:
+
+        :::console
+        root@host$ systemctl start osdf-origin
+
+1.  Download a test file (POSIX) or object (S3) from your origin (replacing `ORIGIN_HOSTNAME` with the host name of your origin,
+    and TEST_PATH with the OSDF path to the test file or object
+
+        :::console
+        user@host$ curl -L https://ORIGIN_HOSTNAME:8443/TEST_PATH -o /tmp/testfile
+
+    Verify the contents of `/tmp/testfile` match the test file or object your origin was serving.
+
+    If the download fails, debugging information is located in `/var/log/pelican/osdf-origin.log`.
+    See [this page](../../common/help.md) for requesting assistance; please include the log file
+    in your request.
+
+
+Joining the Origin to the Federation
+------------------------------------
+
+The origin must be registered with the OSG prior to joining the data federation.
+Send mail to <help@osg-htc.org> requesting registration; provide the following information:
+
+*   Origin hostname
+*   Administrative and security contact(s)
+*   Institution that the cache belongs to
+
+OSG Staff will register the origin and respond with the Resource Name that the origin was registered as.
+
+Once you have that information, edit `/etc/pelican/config.d/15-osdf.yaml`, and set `XRootD.Sitename`:
+```
+XRootD:
+  Sitename: <RESOURCE NAME REGISTERED WITH OSG>
+```
+
+Then, restart the origin by running
+
+```console
+root@host$ systemctl restart osdf-origin
+```
+
+Let OSG Staff know that you have restarted the origin with the updated sitename,
+so they can approve the new origin.
+
+
 
 <!--
 
