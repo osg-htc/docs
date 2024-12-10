@@ -6,17 +6,9 @@ Installing the OSDF Origin by RPM
 !!! warning "OSG 24"
     This installation guide requires OSG 24
 
-This document describes how to install an Open Science Data Federation (OSDF) Origin service via RPM.
+This document describes how to install an Open Science Data Federation (OSDF) Origin service via RPMs.
 This service, based on the [Pelican Platform](https://docs.pelicanplatform.org/federating-your-data), allows an
 administrator to serve data from a POSIX filesystem or S3 endpoint through the global OSDF infrastructure.
-
-!!! note
-    The origin must be registered with the OSG prior to joining the data federation.
-    You may start the registration process prior to finishing the installation by [using this link](#registering-the-origin) 
-    along with information like:
-
-    * Resource name and hostname
-    * Administrative and security contact(s)
 
 
 Before Starting
@@ -25,27 +17,32 @@ Before Starting
 Before starting the installation process, consider the following requirements:
 
 * __Operating system:__ A RHEL 8 or RHEL 9 or [compatible operating system](../../release/supported_platforms.md).
-* __User IDs:__ If they do not exist already, the installation will create the Linux user ID `xrootd` for running daemons.
+* __User IDs:__ If it does not exist already, the installation will create the Linux user named `xrootd` for running daemons.
 * __Host certificate:__ Required for authentication.  See note below.
 * __Network ports:__ The origin service requires the following ports open:
   * Inbound TCP port 8443 for file access via the HTTP(S) and XRoot protocols.
   * (Optional) Inbound TCP port 8444 for access to the web interface for monitoring and configuration;
-    if enabled, consider restricting access from your LAN
-* __Hardware requirements:__ We recommend that an origin has at least 1Gbps connectivity and 12GB of RAM.
+    if enabled, access to this port should be restricted to the LAN.
+* __Service requirements:__
+    * An origin in the OSDF should have at least:
+        * 1 core
+        * 1 Gbps connectivity
+        * 12 GB of RAM
   We suggest that several gigabytes of local disk space be available for log files,
   although some logging verbosity can be reduced.
 
 As with all OSG software installations, there are some one-time steps to prepare in advance:
 
 * Obtain root access to the host
-* Prepare [the required Yum repositories](../../common/yum.md),
-  including the [OSG 24 repositories](../../common/yum.md#install-the-osg-repositories)
+* Prepare [the required Yum repositories](../../common/yum.md);
+  the [OSG 24 repositories](../../common/yum.md#install-the-osg-repositories) should be used.
 
 !!! note "Host certificates"
-    Origins should use a CA that is accepted by major browsers and operating systems,
-    such as InCommon RSA or [Let's Encrypt](../../security/host-certs/lets-encrypt).
-    IGTF certs are not recommended because clients are not configured to accept them by default.
-    Note that you will need the full certificate chain, not just the certificate.
+    Origins are accessed by users through browsers, meaning origins need a certificate from a CA acceptable to a standard browser.
+    Examples include [Let's Encrypt](../../security/host-certs/lets-encrypt.md) or the InCommon RSA CA.
+    Origins without a valid certificate for the browser cannot be added to the OSDF.
+    Note that, unlike legacy grid software, the public certificate file will need to contain the "full chain", including any
+    intermediate CAs (if you're unsure about your setup, try accessing your origin from your browser).
     
     The following locations should be used (note that they are in separate directories):
     
