@@ -151,7 +151,7 @@ Send mail to <help@osg-htc.org> requesting registration; provide the following i
 
 *   Origin hostname
 *   Administrative and security contact(s)
-*   Institution that the cache belongs to
+*   Institution that the origin belongs to
 
 OSG Staff will register the origin and respond with the Resource Name that the origin was registered as.
 
