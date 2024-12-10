@@ -93,7 +93,7 @@ Preparing for Initial Startup
 -----------------------------
 
 1.  The cache identifies itself to the federation via public key authentication;
-before starting the cache for the first time, it is generate a keypair.
+before starting the cache for the first time, it is recommended to generate a keypair.
 
         :::console
         root@host$ cd /etc/pelican
