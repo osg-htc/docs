@@ -49,37 +49,6 @@ As with all OSG software installations, there are some one-time steps to prepare
     * **Host Certificate Chain**: `/etc/pki/tls/certs/pelican.crt`
     * **Host Key**: `/etc/pki/tls/private/pelican.key`
 
-Upgrading a Non-Pelican Origin
-------------------------------
-
-If you are running a non-Pelican origin, e.g. one that was installed before OSG 24, there are special consideratiosn for
-the upgrade to ensure minimal downtime for your users.
-
-1.  Verify that you are not already running a Pelican-based origin, run the following on your origin host:
-
-        :::console
-        root@host # systemctl status osdf-origin
-        Unit osdf-origin.service could not be found.
-
-    If you see the following, then you are not running a Pelican-based origin and should proceed with the rest of the
-    instructions in this section
-
-1.  Install the origin
-
-1.  Configure the origin
-
-1.  Directly verify the origin
-
-1.  Register the origin in the Director and Topology
-
-    !!! danger ""
-
-1.  Verify the origin through the OSDF director
-
-1.  Uninstall the old service:
-
-        :::console
-        root@host # yum remove stash-origin
 
 
 Installing the Origin
@@ -154,6 +123,41 @@ before starting the origin for the first time, it is recommended to generate a k
     and what namespace(s) the origin will serve.
     OSG Staff will need to approve the origin's registration.
 
+<!--
+
+Upgrading a Non-Pelican Origin
+------------------------------
+
+If you are running a non-Pelican origin, e.g. one that was installed before OSG 24, there are special consideratiosn for
+the upgrade to ensure minimal downtime for your users.
+
+1.  Verify that you are not already running a Pelican-based origin, run the following on your origin host:
+
+        :::console
+        root@host # systemctl status osdf-origin
+        Unit osdf-origin.service could not be found.
+
+    If you see the following, then you are not running a Pelican-based origin and should proceed with the rest of the
+    instructions in this section
+
+1.  Install the origin
+
+1.  Configure the origin
+
+1.  Directly verify the origin
+
+1.  Register the origin in the Director and Topology
+
+    !!! danger ""
+
+1.  Verify the origin through the OSDF director
+
+1.  Uninstall the old service:
+
+        :::console
+        root@host # yum remove stash-origin
+
+-->
 
 Managing the Origin Service
 ---------------------------
