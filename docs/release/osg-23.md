@@ -44,6 +44,19 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **December 11, 2024:** XRootD 5.7.2-1.1, GlideinWMS 3.10.8 Upcoming: osdf-server 7.11.7
+-   [XRootD 5.7.2-1.1](https://xrootd.github.io/2024/11/29/announcement_5_7_2.html)
+    -   Various major bug fixes
+-   [GlideinWMS 3.10.8](https://glideinwms.fnal.gov/doc.v3_10_8/history.html)
+    -   Bug fix: Fixed root unable to remove other users jobs in the Factory
+    -   Bug fix: Disabled shebang mangling in `rpm_build` to avoid gwms-python not finding the shell
+    -   Bug fix: Dynamic creation of HTCondor IDTOKEN password so it is not in the images
+    -   Bug fix: Failed log rotation due to wrong file creation time
+-   Upcoming
+    -   osdf-server 7.11.7
+        -   Updated to Pelican 7.11.7
+        -   Use config.d Pelican configuration layout
+
 ### **November 13, 2024:** XRootD 5.7.1-1.4
 -   XRootD 5.7.1-1.4
     -   Reduce XCache error rate under load
