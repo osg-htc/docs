@@ -14,6 +14,20 @@ OSG 24 will be supported for [approximately two years total](release_series.md#s
 Latest News
 -----------
 
+### **December 11, 2024:** XRootD 5.7.2-1.1, GlideinWMS 3.10.8 Upcoming: osdf-server 7.11.7
+-   [XRootD 5.7.2-1.1](https://xrootd.github.io/2024/11/29/announcement_5_7_2.html)
+    -   Various major bug fixes
+-   [GlideinWMS 3.10.8](https://glideinwms.fnal.gov/doc.v3_10_8/history.html)
+    -   Bug fix: Fixed root unable to remove other users jobs in the Factory
+    -   Bug fix: Disabled shebang mangling in `rpm_build` to avoid gwms-python not finding the shell
+    -   Bug fix: Dynamic creation of HTCondor IDTOKEN password so it is not in the images
+    -   Bug fix: Failed log rotation due to wrong file creation time
+-   osdf-server 7.11.7
+    -   Updated to Pelican 7.11.7
+    -   Use config.d Pelican configuration layout
+-   osg-ce 24-2
+    -   Rebuild to not depend on obsolete hosted-ce-tools package
+
 ### **November 26, 2024:** HTCondor 24.0.2; Upcoming: HTCondor 24.2.1
 -   [HTCondor 24.0.2](https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-2)
     -   Add `STARTER_ALWAYS_HOLD_ON_OOM` to minimize confusion about memory usage
