@@ -64,8 +64,8 @@ root@host # yum install osdf-origin
 ```
 
 
-!!! note "osdf-cache 7.11.1"
-    This document covers versions 7.11.1 and later of the `osdf-cache` package; ensure the above installation
+!!! note "osdf-origin 7.11.1"
+    This document covers versions 7.11.1 and later of the `osdf-origin` package; ensure the above installation
     results in an appropriate version.
 
 Configuring the Origin Server
@@ -123,7 +123,7 @@ before starting the origin for the first time, it is recommended to generate a k
 Validating the Origin Installation
 ----------------------------------
 
-Do the following steps to verify that the cache is functional:
+Do the following steps to verify that the origin is functional:
 
 1.  Start the origin using the following command:
 
