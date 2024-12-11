@@ -68,7 +68,9 @@ nav:
   - 'Acceptable Use Policy': 'submit/ap-ospool-aup.md'
 - 'Data Federation (OSDF)':
   - 'Overview': 'data/stashcache/overview.md'
-  - Data Cache:
+  - Pelican-based Data Cache:
+      - 'Install from RPM': 'data/osdf/install-cache-rpm.md'
+  - Data Cache (old):
       - 'Install from container': 'data/stashcache/run-stashcache-container.md'
       - 'Install from RPM': 'data/stashcache/install-cache.md'
   - Data Origin:
