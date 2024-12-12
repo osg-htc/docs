@@ -68,10 +68,11 @@ nav:
   - 'Acceptable Use Policy': 'submit/ap-ospool-aup.md'
 - 'Data Federation (OSDF)':
   - 'Overview': 'data/stashcache/overview.md'
-  - Pelican-based Data Cache:
+  - Data Cache:
       - 'Install from RPM': 'data/osdf/install-cache-rpm.md'
-  - Data Cache (old):
+  - Data Cache (deprecated):
       - 'Install from container': 'data/stashcache/run-stashcache-container.md'
+      - 'Install from RPM': 'data/stashcache/install-cache.md'
   - Data Origin:
       - 'Install from container': 'data/stashcache/run-stash-origin-container.md'
       - 'Install from RPM': 'data/stashcache/install-origin.md'
@@ -97,9 +98,6 @@ nav:
     - 'Overview': 'security/host-certs/overview.md'
     - 'Using InCommon': 'security/host-certs/incommon.md'
     - "Using Let's Encrypt": 'security/host-certs/lets-encrypt.md'
-- Archive:
-  - Data Cache (old):
-      - 'Install from RPM': 'data/stashcache/install-cache.md'
 
 markdown_extensions:
   - admonition
