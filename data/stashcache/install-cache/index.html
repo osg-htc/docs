@@ -1167,14 +1167,12 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_2" type="checkbox" id="__nav_9_2" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_2" type="checkbox" id="__nav_9_2" >
       
       
       
@@ -1188,6 +1186,55 @@
         <label class="md-nav__title" for="__nav_9_2">
           <span class="md-nav__icon md-icon"></span>
           Data Cache
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../osdf/install-cache-rpm/" class="md-nav__link">
+        Install from RPM
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_3" type="checkbox" id="__nav_9_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_3">
+          Data Cache (deprecated)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data Cache (deprecated)" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_3">
+          <span class="md-nav__icon md-icon"></span>
+          Data Cache (deprecated)
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -1445,18 +1492,18 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_3" type="checkbox" id="__nav_9_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_4" type="checkbox" id="__nav_9_4" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_9_3">
+        <label class="md-nav__link" for="__nav_9_4">
           Data Origin
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Data Origin" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_3">
+        <label class="md-nav__title" for="__nav_9_4">
           <span class="md-nav__icon md-icon"></span>
           Data Origin
         </label>
@@ -2158,7 +2205,8 @@
 <div class="admonition warning">
 <p class="admonition-title">Deprecation warning</p>
 <p>This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
-Future OSDF Caches should be based on Pelican; documentation for a Pelican-based OSDF Cache install is forthcoming.</p>
+Future OSDF Caches should be based on Pelican.</p>
+<p>See the <a href="../../osdf/install-cache-rpm">Pelican-based Installing the OSDF Cache by RPM</a> document</p>
 </div>
 <p>This document describes how to install an Open Science Data Federation (OSDF) cache service.  This service allows a site or regional
 network to cache data frequently used on the OSG, reducing data transfer over the wide-area network and
@@ -2208,6 +2256,12 @@ When installing, ensure that your version of the <code>stash-cache</code> RPM is
 <!-- NOTE: Keep the "Registering the Cache" section below in sync with run-stashcache-container.md -->
 
 <h2 id="registering-the-cache">Registering the Cache<a class="headerlink" href="#registering-the-cache" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Deprecation warning</p>
+<p>This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+Future OSDF Caches should be based on Pelican.</p>
+<p>See the <a href="../../osdf/install-cache-rpm">Pelican-based Installing the OSDF Cache by RPM</a> document</p>
+</div>
 <p>To be part of the OSDF, your cache must be registered with the OSG.
 You will need basic information like the resource name, hostname,
 host certificate DN, and the administrative and security contacts.</p>
@@ -2285,12 +2339,24 @@ Mention in your ticket that you would like to "Finalize the cache registration."
 <!-- NOTE: Keep the "Registering the Cache" section above in sync with run-stashcache-container.md -->
 
 <h2 id="installing-the-cache">Installing the Cache<a class="headerlink" href="#installing-the-cache" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Deprecation warning</p>
+<p>This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+Future OSDF Caches should be based on Pelican.</p>
+<p>See the <a href="../../osdf/install-cache-rpm">Pelican-based Installing the OSDF Cache by RPM</a> document</p>
+</div>
 <p>The OSDF software consists of an XRootD server with special configuration and supporting services.
 To simplify installation, OSG provides convenience RPMs that install all required
 packages with a single command:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum install stash-cache
 </code></pre></div>
 <h2 id="configuring-the-cache">Configuring the Cache<a class="headerlink" href="#configuring-the-cache" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Deprecation warning</p>
+<p>This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+Future OSDF Caches should be based on Pelican.</p>
+<p>See the <a href="../../osdf/install-cache-rpm">Pelican-based Installing the OSDF Cache by RPM</a> document</p>
+</div>
 <p>First, you must create a "cache directory", which will be used to store downloaded files.
 By default this is <code>/mnt/stash</code>.
 We recommend using a separate file system for the cache directory,
@@ -2327,6 +2393,12 @@ For example, if you are using Certbot for Let's Encrypt, you should write a "dep
 <a href="https://certbot.eff.org/docs/using.html#renewing-certificates">on the Certbot site</a>.</p>
 </div>
 <h2 id="configuring-optional-features">Configuring Optional Features<a class="headerlink" href="#configuring-optional-features" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Deprecation warning</p>
+<p>This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+Future OSDF Caches should be based on Pelican.</p>
+<p>See the <a href="../../osdf/install-cache-rpm">Pelican-based Installing the OSDF Cache by RPM</a> document</p>
+</div>
 <h3 id="adjust-disk-utilization">Adjust disk utilization<a class="headerlink" href="#adjust-disk-utilization" title="Permanent link">&para;</a></h3>
 <p>To adjust the disk utilization of your cache, create or edit a file named <code>/etc/xrootd/config.d/90-local.cfg</code>
 and set the values of <code>pfc.diskusage</code>.</p>
@@ -2363,6 +2435,12 @@ To use HTTPS:</p>
 </li>
 </ol>
 <h2 id="manually-setting-the-fqdn-optional">Manually Setting the FQDN (optional)<a class="headerlink" href="#manually-setting-the-fqdn-optional" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Deprecation warning</p>
+<p>This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+Future OSDF Caches should be based on Pelican.</p>
+<p>See the <a href="../../osdf/install-cache-rpm">Pelican-based Installing the OSDF Cache by RPM</a> document</p>
+</div>
 <p>The FQDN of the cache server that you registered in <a href="#registering-the-cache">Topology</a> may be different than its internal hostname
 (as reported by <code>hostname -f</code>).
 For example, this may be the case if your cache is behind a load balancer such as LVS.
@@ -2381,6 +2459,12 @@ In this case, you must manually tell the cache services which FQDN to use for to
 </li>
 </ol>
 <h2 id="adding-to-authorization-files-optional">Adding to Authorization Files (Optional)<a class="headerlink" href="#adding-to-authorization-files-optional" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Deprecation warning</p>
+<p>This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+Future OSDF Caches should be based on Pelican.</p>
+<p>See the <a href="../../osdf/install-cache-rpm">Pelican-based Installing the OSDF Cache by RPM</a> document</p>
+</div>
 <p>The <code>stash-authfile</code> services on the cache generate files that configure authorization for XRootD.
 Put local additions to this configuration into separate files, according to this table:</p>
 <table>
@@ -2414,6 +2498,12 @@ Put local additions to this configuration into separate files, according to this
 <p>Use of these local additions files require XCache 3.5.0 and newer.</p>
 </div>
 <h2 id="managing-osdf-services">Managing OSDF services<a class="headerlink" href="#managing-osdf-services" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Deprecation warning</p>
+<p>This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+Future OSDF Caches should be based on Pelican.</p>
+<p>See the <a href="../../osdf/install-cache-rpm">Pelican-based Installing the OSDF Cache by RPM</a> document</p>
+</div>
 <p>These services must be managed by <code>systemctl</code> and may start additional services as dependencies.
 As a reminder, here are common service commands (all run as <code>root</code>):</p>
 <table>
@@ -2517,6 +2607,12 @@ As a reminder, here are common service commands (all run as <code>root</code>):<
 </tbody>
 </table>
 <h2 id="validating-the-cache">Validating the Cache<a class="headerlink" href="#validating-the-cache" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Deprecation warning</p>
+<p>This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+Future OSDF Caches should be based on Pelican.</p>
+<p>See the <a href="../../osdf/install-cache-rpm">Pelican-based Installing the OSDF Cache by RPM</a> document</p>
+</div>
 <p>The cache server functions as a normal HTTP server and can interact with typical HTTP clients, such as <code>curl</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>curl -O http://cache_host:8000/ospool/uc-shared/public/OSG-Staff/validation/test.txt
 </code></pre></div>
