@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://osg-htc.org/docs/data/osdf/install-cache-rpm/">
+        <link rel="canonical" href="https://osg-htc.org/docs/data/osdf/install-origin-rpm/">
       
       <link rel="icon" href="../../../img/favicon.ico">
       <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.8">
     
     
       
-        <title>Installing the OSDF Cache by RPM - OSG Site Documentation</title>
+        <title>Installing the OSDF Origin by RPM - OSG Site Documentation</title>
       
     
     
@@ -73,7 +73,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#installing-the-osdf-cache-by-rpm" class="md-skip">
+        <a href="#installing-the-osdf-origin-by-rpm" class="md-skip">
           Skip to content
         </a>
       
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Installing the OSDF Cache by RPM
+              Installing the OSDF Origin by RPM
             
           </span>
         </div>
@@ -1754,16 +1754,36 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installing-the-cache" class="md-nav__link">
-    Installing the Cache
+  <a href="#installing-the-origin" class="md-nav__link">
+    Installing the Origin
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuring-the-cache-server" class="md-nav__link">
-    Configuring the Cache Server
+  <a href="#configuring-the-origin-server" class="md-nav__link">
+    Configuring the Origin Server
   </a>
+  
+    <nav class="md-nav" aria-label="Configuring the Origin Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuring-posix-directory-export" class="md-nav__link">
+    Configuring POSIX (directory) export
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-s3-export" class="md-nav__link">
+    Configuring S3 export
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1775,22 +1795,29 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validating-the-cache-installation" class="md-nav__link">
-    Validating the Cache Installation
+  <a href="#validating-the-origin-installation" class="md-nav__link">
+    Validating the Origin Installation
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#joining-the-cache-to-the-federation" class="md-nav__link">
-    Joining the Cache to the Federation
+  <a href="#joining-the-origin-to-the-federation" class="md-nav__link">
+    Joining the Origin to the Federation
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#managing-the-cache-service" class="md-nav__link">
-    Managing the Cache Service
+  <a href="#managing-the-origin-service" class="md-nav__link">
+    Managing the Origin Service
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registering-the-origin" class="md-nav__link">
+    Registering the Origin
   </a>
   
 </li>
@@ -1814,94 +1841,100 @@
             <article class="md-content__inner md-typeset">
               
                 
-<a href="https://github.com/osg-htc/docs/edit/master/docs/data/osdf/install-cache-rpm.md" title="Edit this page" class="md-content__button md-icon">
+<a href="https://github.com/osg-htc/docs/edit/master/docs/data/osdf/install-origin-rpm.md" title="Edit this page" class="md-content__button md-icon">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
 </a>
 
 
 
-<h1 id="installing-the-osdf-cache-by-rpm">Installing the OSDF Cache by RPM<a class="headerlink" href="#installing-the-osdf-cache-by-rpm" title="Permanent link">&para;</a></h1>
-<p>This document describes how to install an Open Science Data Federation (OSDF) Cache service via RPMs.
-This service allows a site or regional network to cache data frequently used in Open Science Pool jobs,
-reducing data transfer over the wide-area network and increasing throughput to jobs.</p>
+<h1 id="installing-the-osdf-origin-by-rpm">Installing the OSDF Origin by RPM<a class="headerlink" href="#installing-the-osdf-origin-by-rpm" title="Permanent link">&para;</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">OSG 24</p>
+<p>This installation guide requires OSG 24</p>
+</div>
+<p>This document describes how to install an Open Science Data Federation (OSDF) Origin service via RPMs.
+This service, based on the <a href="https://docs.pelicanplatform.org/federating-your-data">Pelican Platform</a>, allows an
+administrator to serve data from a POSIX filesystem or S3 endpoint through the global OSDF infrastructure.</p>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following requirements:</p>
 <ul>
 <li><strong>Operating system:</strong> A RHEL 8 or RHEL 9 or <a href="../../../release/supported_platforms/">compatible operating system</a>.</li>
 <li><strong>User IDs:</strong> If it does not exist already, the installation will create the Linux user named <code>xrootd</code> for running daemons.</li>
-<li><strong>File Systems:</strong> The cache should have a partition of its own for storing data and metadata.</li>
 <li><strong>Host certificate:</strong> Required for authentication.  See note below.</li>
-<li><strong>Network ports:</strong> The cache service requires the following ports open:</li>
+<li><strong>Network ports:</strong> The origin service requires the following ports open:</li>
 <li>Inbound TCP port 8443 for file access via the HTTP(S) and XRoot protocols.</li>
 <li>(Optional) Inbound TCP port 8444 for access to the web interface for monitoring and configuration;
     if enabled, access to this port should be restricted to the LAN.</li>
 <li><strong>Service requirements:</strong><ul>
-<li>A cache serving the OSDF federation as a regional cache should have at least:<ul>
-<li>8 cores</li>
-<li>40 Gbps connectivity</li>
-<li>50-200 TB of NVMe disk for the cache partition; you may distribute the disk, e.g., by using an NVMe-backed Ceph pool,
-    if you cannot fit that much disk into a single chassis</li>
-<li>24 GB of RAM</li>
-</ul>
-</li>
-<li>A cache being used to serve data from the OSDF to a single site should have at least:<ul>
-<li>8 cores</li>
-<li>40 Gbps connectivity</li>
-<li>2 TB of NVMe disk for the cache partition</li>
-<li>24 GB of RAM</li>
-</ul>
-</li>
-<li>The cache should be a mounted filesystem; its mount location is referred to as <code>&lt;CACHE PARTITION&gt;</code> in the documentation below.
+<li>An origin in the OSDF should have at least:<ul>
+<li>1 core</li>
+<li>1 Gbps connectivity</li>
+<li>12 GB of RAM
   We suggest that several gigabytes of local disk space be available for log files,
   although some logging verbosity can be reduced.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 <p>As with all OSG software installations, there are some one-time steps to prepare in advance:</p>
 <ul>
 <li>Obtain root access to the host</li>
-<li>Prepare <a href="../../../common/yum/">the required Yum repositories</a></li>
+<li>Prepare <a href="../../../common/yum/">the required Yum repositories</a>;
+  the <a href="../../../common/yum/#install-the-osg-repositories">OSG 24 repositories</a> should be used.</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Host certificates</p>
-<p>Caches are accessed by users through browsers, meaning caches need a certificate from a CA acceptable to a standard browser.
+<p>Origins are accessed by users through browsers, meaning origins need a certificate from a CA acceptable to a standard browser.
 Examples include <a href="../../../security/host-certs/lets-encrypt/">Let's Encrypt</a> or the InCommon RSA CA.
-Caches without a valid certificate for the browser cannot be added to the OSDF.
+Origins without a valid certificate for the browser cannot be added to the OSDF.
 Note that, unlike legacy grid software, the public certificate file will need to contain the "full chain", including any
-intermediate CAs (if you're unsure about your setup, try accessing your cache from your browser).</p>
+intermediate CAs (if you're unsure about your setup, try accessing your origin from your browser).</p>
 <p>The following locations should be used (note that they are in separate directories):</p>
 <ul>
 <li><strong>Host Certificate Chain</strong>: <code>/etc/pki/tls/certs/pelican.crt</code></li>
 <li><strong>Host Key</strong>: <code>/etc/pki/tls/private/pelican.key</code></li>
 </ul>
 </div>
-<h2 id="installing-the-cache">Installing the Cache<a class="headerlink" href="#installing-the-cache" title="Permanent link">&para;</a></h2>
-<p>The cache service is provided by the <code>osdf-cache</code> RPM.
-Install it using one of the following commands:</p>
+<h2 id="installing-the-origin">Installing the Origin<a class="headerlink" href="#installing-the-origin" title="Permanent link">&para;</a></h2>
+<p>The origin service is provided by the <code>osdf-origin</code> RPM.
+Install it using the following command:</p>
 <p>OSG 24:
-<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum install osdf-cache --enablerepo<span class="o">=</span>osg-testing
-</code></pre></div></p>
-<p>OSG 23:
-<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum install --enablerepo<span class="o">=</span>osg-upcoming-testing osdf-cache
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum install osdf-origin
 </code></pre></div></p>
 <div class="admonition note">
-<p class="admonition-title">osdf-cache 7.11.1</p>
-<p>This document covers versions 7.11.1 and later of the <code>osdf-cache</code> package; ensure the above installation
+<p class="admonition-title">osdf-origin 7.11.1</p>
+<p>This document covers versions 7.11.1 and later of the <code>osdf-origin</code> package; ensure the above installation
 results in an appropriate version.</p>
 </div>
-<h2 id="configuring-the-cache-server">Configuring the Cache Server<a class="headerlink" href="#configuring-the-cache-server" title="Permanent link">&para;</a></h2>
-<p>In <code>/etc/pelican/config.d/20-cache.yaml</code>, set <code>Cache.LocalRoot</code>, <code>Cache.DataLocation</code> and <code>Cache.MetaLocation</code> as follows,
-replacing <code>&lt;CACHE PARTITION&gt;</code> with the mount point of the partition you will use for the cache.
-<div class="highlight"><pre><span></span><code>Cache:
-  LocalRoot: &quot;&lt;CACHE PARTITION&gt;/namespaces&quot;
-  DataLocation: &quot;&lt;CACHE PARTITION&gt;/data&quot;
-  MetaLocation: &quot;&lt;CACHE PARTITION&gt;/meta&quot;
-</code></pre></div></p>
+<h2 id="configuring-the-origin-server">Configuring the Origin Server<a class="headerlink" href="#configuring-the-origin-server" title="Permanent link">&para;</a></h2>
+<p>Create a file named <code>/etc/pelican/config.d/20-origin.yaml</code></p>
+<p>You must tell Pelican the data to export to the federation.
+An origin may export one or more directory trees, or one or more S3 buckets -- follow one of the sections below.
+A single origin cannot export both a bucket and a directory tree.</p>
+<h3 id="configuring-posix-directory-export">Configuring POSIX (directory) export<a class="headerlink" href="#configuring-posix-directory-export" title="Permanent link">&para;</a></h3>
+<p>Set these options to export one or more directory trees to the federation.</p>
+<div class="highlight"><pre><span></span><code>Origin:
+  StorageType: &quot;posix&quot;
+  Exports:
+    # You may have one or more of the following block:
+    - FederationPrefix: &quot;&lt;EXTERNAL OSDF NAMESPACE&gt;&quot;
+      StoragePrefix:    &quot;&lt;LOCAL FILESYSTEM DIRECTORY&gt;&quot;
+      Capabilities:    # Add or remove as desired
+        - Reads        # Enable authenticated reading of objects from under the directory tree through a cache
+        - PublicReads  # Enable unauthenticated reading of objects from under the directory tree through a cache
+        - DirectReads  # Enable reading objects from under the directory tree without going through a cache
+        - Listings     # Enable directory listings
+        - Writes       # Enable writing to files in the directory tree
+</code></pre></div>
+<h3 id="configuring-s3-export">Configuring S3 export<a class="headerlink" href="#configuring-s3-export" title="Permanent link">&para;</a></h3>
+<p>To configure your origin to serve objects from an S3 endpoint, see the
+<a href="https://docs.pelicanplatform.org/federating-your-data/s3-backend">upstream documentation</a>.</p>
 <h2 id="preparing-for-initial-startup">Preparing for Initial Startup<a class="headerlink" href="#preparing-for-initial-startup" title="Permanent link">&para;</a></h2>
 <ol>
 <li>
-<p>The cache identifies itself to the federation via public key authentication;
-before starting the cache for the first time, it is recommended to generate a keypair.</p>
+<p>The origin identifies itself to the federation via public key authentication;
+before starting the origin for the first time, it is recommended to generate a keypair.</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span><span class="nb">cd</span> /etc/pelican
 <span class="gp">root@host$ </span>pelican generate keygen
 </code></pre></div>
@@ -1909,52 +1942,86 @@ before starting the cache for the first time, it is recommended to generate a ke
 <p>The newly created files, <code>issuer.jwk</code> and <code>issuer-pub.jwks</code> are the private and public keys, respectively.</p>
 </li>
 <li>
-<p><strong>Save these files</strong>; if you lose the <code>issuer.jwk</code>, your cache will need to be re-approved.</p>
+<p><strong>Save these files</strong>; if you lose the <code>issuer.jwk</code>, your origin will need to be re-approved.</p>
 </li>
 </ol>
-<h2 id="validating-the-cache-installation">Validating the Cache Installation<a class="headerlink" href="#validating-the-cache-installation" title="Permanent link">&para;</a></h2>
-<p>Do the following steps to verify that the cache is functional:</p>
+<h2 id="validating-the-origin-installation">Validating the Origin Installation<a class="headerlink" href="#validating-the-origin-installation" title="Permanent link">&para;</a></h2>
+<p>Do the following steps to verify that the origin is functional:</p>
 <ol>
 <li>
-<p>Start the cache using the following command:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span>systemctl start osdf-cache
+<p>Start the origin using the following command:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span>systemctl start osdf-origin
 </code></pre></div>
 
 </li>
 <li>
-<p>Download a test file from the OSDF through your cache (replacing <code>CACHE_HOSTNAME</code> with the host name of your cache)</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span>osdf object get -c CACHE_HOSTNAME:8443 /ospool/uc-shared/public/OSG-Staff/validation/test.txt /tmp/test.txt
-<span class="gp">root@host$ </span>cat /tmp/test.txt
-
-<span class="go">Hello, World!</span>
+<p>Download a test file (POSIX) or object (S3) from your origin (replacing <code>ORIGIN_HOSTNAME</code> with the host name of your origin,
+    and TEST_PATH with the OSDF path to the test file or object</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">user@host$ </span>curl -L https://ORIGIN_HOSTNAME:8443/TEST_PATH -o /tmp/testfile
 </code></pre></div>
 
-<p>If the download fails, rerun the above <code>osdf object get</code> command with the <code>-d</code> flag added;
-additional debugging information is located in <code>/var/log/pelican/osdf-cache.log</code>.
+<p>Verify the contents of <code>/tmp/testfile</code> match the test file or object your origin was serving.</p>
+<p>If the download fails, debugging information is located in <code>/var/log/pelican/osdf-origin.log</code>.
 See <a href="../../../common/help/">this page</a> for requesting assistance; please include the log file
-and the <code>osdf object get -d</code> output in your request.</p>
+in your request.</p>
 </li>
 </ol>
-<h2 id="joining-the-cache-to-the-federation">Joining the Cache to the Federation<a class="headerlink" href="#joining-the-cache-to-the-federation" title="Permanent link">&para;</a></h2>
-<p>The cache must be registered with the OSG prior to joining the data federation.
+<h2 id="joining-the-origin-to-the-federation">Joining the Origin to the Federation<a class="headerlink" href="#joining-the-origin-to-the-federation" title="Permanent link">&para;</a></h2>
+<p>The origin must be registered with the OSG prior to joining the data federation.
 Send mail to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#115;&#103;&#45;&#104;&#116;&#99;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#115;&#103;&#45;&#104;&#116;&#99;&#46;&#111;&#114;&#103;</a> requesting registration; provide the following information:</p>
 <ul>
-<li>Cache hostname</li>
+<li>Origin hostname</li>
 <li>Administrative and security contact(s)</li>
-<li>Institution that the cache belongs to</li>
+<li>Institution that the origin belongs to</li>
 </ul>
-<p>OSG Staff will register the cache and respond with the Resource Name that the cache was registered as.</p>
+<p>OSG Staff will register the origin and respond with the Resource Name that the origin was registered as.</p>
 <p>Once you have that information, edit <code>/etc/pelican/config.d/15-osdf.yaml</code>, and set <code>XRootD.Sitename</code>:
 <div class="highlight"><pre><span></span><code>XRootD:
   Sitename: &lt;RESOURCE NAME REGISTERED WITH OSG&gt;
 </code></pre></div></p>
-<p>Then, restart the cache by running</p>
-<div class="highlight"><pre><span></span><code><span class="gp">root@host$ </span>systemctl restart osdf-cache
+<p>Then, restart the origin by running</p>
+<div class="highlight"><pre><span></span><code><span class="gp">root@host$ </span>systemctl restart osdf-origin
 </code></pre></div>
-<p>Let OSG Staff know that you have restarted the cache with the updated sitename,
-so they can approve the new cache.</p>
-<h2 id="managing-the-cache-service">Managing the Cache Service<a class="headerlink" href="#managing-the-cache-service" title="Permanent link">&para;</a></h2>
-<p>Use the following SystemD commands as root to start, stop, enable, and disable the OSDF Cache.</p>
+<p>Let OSG Staff know that you have restarted the origin with the updated sitename,
+so they can approve the new origin.</p>
+<!--
+
+Upgrading a Non-Pelican Origin
+------------------------------
+
+If you are running a non-Pelican origin, e.g. one that was installed before OSG 24, there are special consideratiosn for
+the upgrade to ensure minimal downtime for your users.
+
+1.  Verify that you are not already running a Pelican-based origin, run the following on your origin host:
+
+        :::console
+        root@host # systemctl status osdf-origin
+        Unit osdf-origin.service could not be found.
+
+    If you see the following, then you are not running a Pelican-based origin and should proceed with the rest of the
+    instructions in this section
+
+1.  Install the origin
+
+1.  Configure the origin
+
+1.  Directly verify the origin
+
+1.  Register the origin in the Director and Topology
+
+    !!! danger ""
+
+1.  Verify the origin through the OSDF director
+
+1.  Uninstall the old service:
+
+        :::console
+        root@host # yum remove stash-origin
+
+-->
+
+<h2 id="managing-the-origin-service">Managing the Origin Service<a class="headerlink" href="#managing-the-origin-service" title="Permanent link">&para;</a></h2>
+<p>Use the following SystemD commands as root to start, stop, enable, and disable the OSDF Origin.</p>
 <table>
 <thead>
 <tr>
@@ -1964,23 +2031,26 @@ so they can approve the new cache.</p>
 </thead>
 <tbody>
 <tr>
-<td align="left">Start the cache</td>
-<td align="left"><code>systemctl start osdf-cache</code></td>
+<td align="left">Start the origin</td>
+<td align="left"><code>systemctl start osdf-origin</code></td>
 </tr>
 <tr>
-<td align="left">Stop the cache</td>
-<td align="left"><code>systemctl stop osdf-cache</code></td>
+<td align="left">Stop the origin</td>
+<td align="left"><code>systemctl stop osdf-origin</code></td>
 </tr>
 <tr>
-<td align="left">Enable the cache to start on boot</td>
-<td align="left"><code>systemctl enable osdf-cache</code></td>
+<td align="left">Enable the origin to start on boot</td>
+<td align="left"><code>systemctl enable osdf-origin</code></td>
 </tr>
 <tr>
-<td align="left">Disable the cache from starting on boot</td>
-<td align="left"><code>systemctl disable osdf-cache</code></td>
+<td align="left">Disable the origin from starting on boot</td>
+<td align="left"><code>systemctl disable osdf-origin</code></td>
 </tr>
 </tbody>
 </table>
+<h2 id="registering-the-origin">Registering the Origin<a class="headerlink" href="#registering-the-origin" title="Permanent link">&para;</a></h2>
+<p>To be part of the Open Science Data Federation, your origin must be
+<a href="../../../common/registration/">registered with the OSG</a>.  The service type is <code>Pelican origin</code>.</p>
 <h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
 <p>To get assistance, please use the <a href="../../../common/help/">this page</a>.</p>
 
