@@ -54,6 +54,12 @@ As with all OSG software installations, there are some one-time steps to prepare
 Registering the Cache
 ---------------------
 
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+    Future OSDF Caches should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Cache by RPM](../../osdf/install-cache-rpm) document
+
 To be part of the OSDF, your cache must be registered with the OSG.
 You will need basic information like the resource name, hostname,
 host certificate DN, and the administrative and security contacts.
@@ -150,6 +156,12 @@ Mention in your ticket that you would like to "Finalize the cache registration."
 
 Installing the Cache
 --------------------
+
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+    Future OSDF Caches should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Cache by RPM](../../osdf/install-cache-rpm) document
 
 The OSDF software consists of an XRootD server with special configuration and supporting services.
 To simplify installation, OSG provides convenience RPMs that install all required
@@ -252,6 +264,7 @@ To use HTTPS:
 
 Manually Setting the FQDN (optional)
 ------------------------------------
+
 The FQDN of the cache server that you registered in [Topology](#registering-the-cache) may be different than its internal hostname
 (as reported by `hostname -f`).
 For example, this may be the case if your cache is behind a load balancer such as LVS.
