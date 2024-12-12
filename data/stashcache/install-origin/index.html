@@ -1225,12 +1225,59 @@
       
       
         <label class="md-nav__link" for="__nav_9_3">
+          Data Origin
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data Origin" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_3">
+          <span class="md-nav__icon md-icon"></span>
+          Data Origin
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../osdf/install-origin-rpm/" class="md-nav__link">
+        Install from RPM
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_4" type="checkbox" id="__nav_9_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_4">
           Data Cache (deprecated)
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Data Cache (deprecated)" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_3">
+        <label class="md-nav__title" for="__nav_9_4">
           <span class="md-nav__icon md-icon"></span>
           Data Cache (deprecated)
         </label>
@@ -1282,20 +1329,20 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_4" type="checkbox" id="__nav_9_4" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" checked>
       
       
       
       
-        <label class="md-nav__link" for="__nav_9_4">
-          Data Origin
+        <label class="md-nav__link" for="__nav_9_5">
+          Data Origin (deprecated)
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="Data Origin" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_4">
+      <nav class="md-nav" aria-label="Data Origin (deprecated)" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
           <span class="md-nav__icon md-icon"></span>
-          Data Origin
+          Data Origin (deprecated)
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -2047,7 +2094,8 @@
 <div class="admonition warning">
 <p class="admonition-title">Deprecation warning</p>
 <p>This document is outdated and describes an XCache-based OSDF Origin install, which is deprecated.
-Future OSDF Origins should be based on Pelican; documentation for a Pelican-based OSDF Origin install is forthcoming.</p>
+Future OSDF Origins should be based on Pelican.</p>
+<p>See the <a href="../../osdf/install-origin-rpm">Pelican-based Installing the OSDF Origin by RPM</a> document</p>
 </div>
 <p>This document describes how to install an Open Science Data Federation (OSDF) origin service.  This service allows an organization
 to export its data to the data federation.</p>
@@ -2074,6 +2122,12 @@ along with information like:</p>
 </ul>
 </div>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Deprecation warning</p>
+<p>This document is outdated and describes an XCache-based OSDF Origin install, which is deprecated.
+Future OSDF Origins should be based on Pelican.</p>
+<p>See the <a href="../../osdf/install-origin-rpm">Pelican-based Installing the OSDF Origin by RPM</a> document</p>
+</div>
 <p>Before starting the installation process, consider the following requirements:</p>
 <ul>
 <li><strong>Operating system:</strong> A RHEL 8 or RHEL 9 or compatible operating systems.</li>
@@ -2097,6 +2151,12 @@ along with information like:</p>
 <li>Install <a href="../../../common/ca/">CA certificates</a></li>
 </ul>
 <h2 id="installing-the-origin">Installing the Origin<a class="headerlink" href="#installing-the-origin" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Deprecation warning</p>
+<p>This document is outdated and describes an XCache-based OSDF Origin install, which is deprecated.
+Future OSDF Origins should be based on Pelican.</p>
+<p>See the <a href="../../osdf/install-origin-rpm">Pelican-based Installing the OSDF Origin by RPM</a> document</p>
+</div>
 <p>The origin service consists of one or more XRootD daemons and their dependencies for the authentication infrastructure.
 To simplify installation, OSG provides convenience RPMs that install all required
 software with a single command:</p>
@@ -2105,6 +2165,12 @@ software with a single command:</p>
 <p>For this installation guide, we assume that the data to be exported to the federation is mounted at <code>/mnt/stash</code>
 and owned by the <code>xrootd:xrootd</code> user.</p>
 <h2 id="configuring-the-origin-server">Configuring the Origin Server<a class="headerlink" href="#configuring-the-origin-server" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Deprecation warning</p>
+<p>This document is outdated and describes an XCache-based OSDF Origin install, which is deprecated.
+Future OSDF Origins should be based on Pelican.</p>
+<p>See the <a href="../../osdf/install-origin-rpm">Pelican-based Installing the OSDF Origin by RPM</a> document</p>
+</div>
 <p>The <code>stash-origin</code> package provides a default configuration files in
 <code>/etc/xrootd/xrootd-stash-origin.cfg</code> and <code>/etc/xrootd/config.d</code>.
 Administrators may provide additional configuration by placing files in <code>/etc/xrootd/config.d</code>
@@ -2167,6 +2233,12 @@ Directories you export <strong>must not</strong> collide with directories provid
 why the explicit registration is required.</p>
 </div>
 <h2 id="manually-setting-the-fqdn-optional">Manually Setting the FQDN (optional)<a class="headerlink" href="#manually-setting-the-fqdn-optional" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Deprecation warning</p>
+<p>This document is outdated and describes an XCache-based OSDF Origin install, which is deprecated.
+Future OSDF Origins should be based on Pelican.</p>
+<p>See the <a href="../../osdf/install-origin-rpm">Pelican-based Installing the OSDF Origin by RPM</a> document</p>
+</div>
 <p>The FQDN of the origin server that you registered in <a href="#registering-the-origin">Topology</a> may be different than its internal hostname
 (as reported by <code>hostname -f</code>).
 For example, this may be the case if your origin is behind a load balancer such as LVS.
@@ -2185,6 +2257,12 @@ In this case, you must manually tell the origin services which FQDN to use for t
 </li>
 </ol>
 <h2 id="managing-the-origin-services">Managing the Origin Services<a class="headerlink" href="#managing-the-origin-services" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Deprecation warning</p>
+<p>This document is outdated and describes an XCache-based OSDF Origin install, which is deprecated.
+Future OSDF Origins should be based on Pelican.</p>
+<p>See the <a href="../../osdf/install-origin-rpm">Pelican-based Installing the OSDF Origin by RPM</a> document</p>
+</div>
 <p>Serving data for an origin is done by the <code>xrootd</code> daemon.
 There can be multiple instances of <code>xrootd</code>, running on different ports.
 The instance that serves unauthenticated data will run on port 1094.
@@ -2282,6 +2360,12 @@ As a reminder, here are common service commands (all run as <code>root</code>):<
 </tbody>
 </table>
 <h2 id="adding-to-authorization-files-optional">Adding to Authorization Files (Optional)<a class="headerlink" href="#adding-to-authorization-files-optional" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Deprecation warning</p>
+<p>This document is outdated and describes an XCache-based OSDF Origin install, which is deprecated.
+Future OSDF Origins should be based on Pelican.</p>
+<p>See the <a href="../../osdf/install-origin-rpm">Pelican-based Installing the OSDF Origin by RPM</a> document</p>
+</div>
 <p>The <code>stash-authfile</code> services on the origin generate files that configure authorization for XRootD.
 Put local additions to this configuration into separate files, according to this table:</p>
 <table>
@@ -2315,6 +2399,12 @@ Put local additions to this configuration into separate files, according to this
 <p>Use of these local additions files requires XCache 3.5.0 or newer.</p>
 </div>
 <h2 id="verifying-the-origin-server">Verifying the Origin Server<a class="headerlink" href="#verifying-the-origin-server" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Deprecation warning</p>
+<p>This document is outdated and describes an XCache-based OSDF Origin install, which is deprecated.
+Future OSDF Origins should be based on Pelican.</p>
+<p>See the <a href="../../osdf/install-origin-rpm">Pelican-based Installing the OSDF Origin by RPM</a> document</p>
+</div>
 <p>Once your server has been registered with the OSG and started,
 perform the following steps to verify that it is functional.</p>
 <h3 id="testing-availability">Testing availability<a class="headerlink" href="#testing-availability" title="Permanent link">&para;</a></h3>
@@ -2388,6 +2478,12 @@ Run the following command:</p>
 <p>If successful, there should be a file at <code>/tmp/testfile</code> with the contents of the test file on your origin server.
 If unsuccessful, you can pass the <code>-d</code> flag to <code>stashcp</code> for debug info.</p>
 <h2 id="registering-the-origin">Registering the Origin<a class="headerlink" href="#registering-the-origin" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Deprecation warning</p>
+<p>This document is outdated and describes an XCache-based OSDF Origin install, which is deprecated.
+Future OSDF Origins should be based on Pelican.</p>
+<p>See the <a href="../../osdf/install-origin-rpm">Pelican-based Installing the OSDF Origin by RPM</a> document</p>
+</div>
 <p>To be part of the Open Science Data Federation, your origin must be
 <a href="../../../common/registration/">registered with the OSG</a>.  The service type is <code>XRootD origin server</code>.</p>
 <p>The resource must also specify which VOs it will serve data from.
