@@ -1,7 +1,7 @@
 title: Installing the OSDF Cache by RPM
 
-Installing the OSDF Cache
-=========================
+Installing the OSDF Cache by RPM
+================================
 
 This document describes how to install an Open Science Data Federation (OSDF) Cache service via RPMs.
 This service allows a site or regional network to cache data frequently used in Open Science Pool jobs,
@@ -45,7 +45,7 @@ As with all OSG software installations, there are some one-time steps to prepare
 
 !!! note "Host certificates"
     Caches are accessed by users through browsers, meaning caches need a certificate from a CA acceptable to a standard browser.
-    Examples include [Let's Encrypt](../../security/host-certs/lets-encrypt.md) or the InCommon IGTF CA.
+    Examples include [Let's Encrypt](../../security/host-certs/lets-encrypt.md) or the InCommon RSA CA.
     Caches without a valid certificate for the browser cannot be added to the OSDF.
     Note that, unlike legacy grid software, the public certificate file will need to contain the "full chain", including any
     intermediate CAs (if you're unsure about your setup, try accessing your cache from your browser).
@@ -93,7 +93,7 @@ Preparing for Initial Startup
 -----------------------------
 
 1.  The cache identifies itself to the federation via public key authentication;
-before starting the cache for the first time, it is generate a keypair.
+before starting the cache for the first time, it is recommended to generate a keypair.
 
         :::console
         root@host$ cd /etc/pelican
