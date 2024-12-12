@@ -72,7 +72,6 @@ nav:
       - 'Install from RPM': 'data/osdf/install-cache-rpm.md'
   - Data Cache (old):
       - 'Install from container': 'data/stashcache/run-stashcache-container.md'
-      - 'Install from RPM': 'data/stashcache/install-cache.md'
   - Data Origin:
       - 'Install from container': 'data/stashcache/run-stash-origin-container.md'
       - 'Install from RPM': 'data/stashcache/install-origin.md'
@@ -98,6 +97,9 @@ nav:
     - 'Overview': 'security/host-certs/overview.md'
     - 'Using InCommon': 'security/host-certs/incommon.md'
     - "Using Let's Encrypt": 'security/host-certs/lets-encrypt.md'
+- Archive:
+  - Data Cache (old):
+      - 'Install from RPM': 'data/stashcache/install-cache.md'
 
 markdown_extensions:
   - admonition
