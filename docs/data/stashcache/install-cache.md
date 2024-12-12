@@ -174,6 +174,12 @@ root@host # yum install stash-cache
 Configuring the Cache
 ---------------------
 
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+    Future OSDF Caches should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Cache by RPM](../../osdf/install-cache-rpm) document
+
 First, you must create a "cache directory", which will be used to store downloaded files.
 By default this is `/mnt/stash`.
 We recommend using a separate file system for the cache directory,
@@ -215,6 +221,12 @@ The easiest solution for this is to use your host certificate and key as follows
 
 Configuring Optional Features
 -----------------------------
+
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+    Future OSDF Caches should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Cache by RPM](../../osdf/install-cache-rpm) document
 
 ### Adjust disk utilization
 
@@ -265,6 +277,12 @@ To use HTTPS:
 Manually Setting the FQDN (optional)
 ------------------------------------
 
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+    Future OSDF Caches should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Cache by RPM](../../osdf/install-cache-rpm) document
+
 The FQDN of the cache server that you registered in [Topology](#registering-the-cache) may be different than its internal hostname
 (as reported by `hostname -f`).
 For example, this may be the case if your cache is behind a load balancer such as LVS.
@@ -283,6 +301,12 @@ In this case, you must manually tell the cache services which FQDN to use for to
 Adding to Authorization Files (Optional)
 ---------------------------------------------------------
 
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+    Future OSDF Caches should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Cache by RPM](../../osdf/install-cache-rpm) document
+
 The `stash-authfile` services on the cache generate files that configure authorization for XRootD.
 Put local additions to this configuration into separate files, according to this table:
 
@@ -298,6 +322,12 @@ Put local additions to this configuration into separate files, according to this
 
 Managing OSDF services
 -------------------------------------------
+
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+    Future OSDF Caches should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Cache by RPM](../../osdf/install-cache-rpm) document
 
 These services must be managed by `systemctl` and may start additional services as dependencies.
 As a reminder, here are common service commands (all run as `root`):
@@ -335,6 +365,12 @@ As a reminder, here are common service commands (all run as `root`):
 
 Validating the Cache
 ---------------------
+
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+    Future OSDF Caches should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Cache by RPM](../../osdf/install-cache-rpm) document
 
 The cache server functions as a normal HTTP server and can interact with typical HTTP clients, such as `curl`.
 
