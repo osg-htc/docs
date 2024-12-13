@@ -220,12 +220,6 @@ Use the following SystemD commands as root to start, stop, enable, and disable t
 | Disable the origin from starting on boot | `systemctl disable osdf-origin`    |
 
 
-Registering the Origin
-----------------------
-To be part of the Open Science Data Federation, your origin must be
-[registered with the OSG](../../common/registration.md).  The service type is `Pelican origin`.
-
-
 Getting Help
 ------------
 To get assistance, please use the [this page](../../common/help.md).
