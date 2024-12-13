@@ -17,19 +17,10 @@ required to upgrade from OSG 23 are relatively minor.
 Updating the OSG Repositories
 -----------------------------
 
-!!! note
-    Because configuration updates will be necessary, be sure to turn off any OSG services
-    before updating them. Consult the sections below that match your situation.
-
 1.  Clean the yum cache:
 
         :::console
         root@host # yum clean all --enablerepo=*
-
-1.  Disable to upcoming repository:
-
-        :::console
-        yum-config-manager --disable osg-upcoming
 
 1.  Remove the old series Yum repositories:
 
@@ -42,6 +33,10 @@ Updating the OSG Repositories
     files to the new `*.repo` files.
 
 1.  Update your [Yum repositories](../common/yum.md#install-the-osg-repositories) to OSG 24
+
+!!! note
+    Because configuration updates will be necessary, be sure to turn off any OSG services
+    before updating them. Consult the sections below that match your situation.
 
 1.  Update software:
 
