@@ -17,6 +17,10 @@ required to upgrade from OSG 23 are relatively minor.
 Updating the OSG Repositories
 -----------------------------
 
+1.  Prerequisites:
+
+    -   Consult the [access point](#updating-your-osg-access-point), [compute entrypoint](#updating-your-osg-compute-entrypoint), and/or [HTCondor hosts](#updating-your-htcondor-hosts) upgrade notes before updating the OSG repositories.
+
 1.  Clean the yum cache:
 
         :::console
@@ -27,18 +31,20 @@ Updating the OSG Repositories
         :::console
         root@host # yum erase osg-release
 
-    This step ensures that any local modifications to `*.repo` files will not prevent installing the new series repos.
+    This step ensures that any local modifications to `*.repo` files will not prevent installing the new series repositories.
     Any modified `*.repo` files should appear under `/etc/yum.repos.d/` with the `*.rpmsave` extension.
     After installing the new OSG repositories (the next step) you may want to apply any changes made in the `*.rpmsave`
     files to the new `*.repo` files.
 
 1.  Update your [Yum repositories](../common/yum.md#install-the-osg-repositories) to OSG 24
 
-!!! note
-    Because configuration updates will be necessary, be sure to turn off any OSG services
-    before updating them. Consult the sections below that match your situation.
-
 1.  Update software:
+
+    !!! note
+        Because configuration updates will be necessary, be sure to turn off any OSG services
+        before updating them. Consult the sections below that match your situation.
+
+    <!-- comment -->
 
         :::console
         root@host # yum update
@@ -85,7 +91,7 @@ the container can be upgraded by updating the RPM.
         root@host # yum install ospool-ep
 
 1. (Optional) Clean up `/etc/osg/ospool-ep.cfg`:
-    - A bug in the OSG 23 release of ospool-ep required users to add a `WORK_TEMP_DIR` config field as a copy of the default `WORKER_TEMP_DIR`.
+    - A bug in the OSG 23 release of ospool-ep required users to add a `WORK_TEMP_DIR` configuration field as a copy of the default `WORKER_TEMP_DIR`.
     When upgrading to OSG 24, remove the duplicated `WORK_TEMP_DIR` field.
 
 1. Restart the ospool-ep systemctl service:
