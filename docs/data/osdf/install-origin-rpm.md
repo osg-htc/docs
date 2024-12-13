@@ -23,13 +23,12 @@ Before starting the installation process, consider the following requirements:
   * Inbound TCP port 8443 for file access via the HTTP(S) and XRoot protocols.
   * (Optional) Inbound TCP port 8444 for access to the web interface for monitoring and configuration;
     if enabled, access to this port should be restricted to the LAN.
-* __Service requirements:__
-    * An origin in the OSDF should have at least:
-        * 1 core
-        * 1 Gbps connectivity
-        * 12 GB of RAM
-  We suggest that several gigabytes of local disk space be available for log files,
-  although some logging verbosity can be reduced.
+* __Service requirements:__ An origin in the OSDF should have at least:
+    * 1 core
+    * 1 Gbps connectivity
+    * 12 GB of RAM
+    * Several GB of local disk space be available for log files,
+      although some logging verbosity can be reduced.
 
 As with all OSG software installations, there are some one-time steps to prepare in advance:
 
