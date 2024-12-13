@@ -2090,19 +2090,18 @@ administrator to serve data from a POSIX filesystem or S3 endpoint through the g
 <li><strong>Operating system:</strong> A RHEL 8 or RHEL 9 or <a href="../../../release/supported_platforms/">compatible operating system</a>.</li>
 <li><strong>User IDs:</strong> If it does not exist already, the installation will create the Linux user named <code>xrootd</code> for running daemons.</li>
 <li><strong>Host certificate:</strong> Required for authentication.  See note below.</li>
-<li><strong>Network ports:</strong> The origin service requires the following ports open:</li>
+<li><strong>Network ports:</strong> The origin service requires the following ports open:<ul>
 <li>Inbound TCP port 8443 for file access via the HTTP(S) and XRoot protocols.</li>
 <li>(Optional) Inbound TCP port 8444 for access to the web interface for monitoring and configuration;
-    if enabled, access to this port should be restricted to the LAN.</li>
-<li><strong>Service requirements:</strong><ul>
-<li>An origin in the OSDF should have at least:<ul>
-<li>1 core</li>
-<li>1 Gbps connectivity</li>
-<li>12 GB of RAM
-  We suggest that several gigabytes of local disk space be available for log files,
-  although some logging verbosity can be reduced.</li>
+  if enabled, access to this port should be restricted to the LAN.</li>
 </ul>
 </li>
+<li><strong>Service requirements:</strong> An origin in the OSDF should have at least:<ul>
+<li>1 core</li>
+<li>1 Gbps connectivity</li>
+<li>12 GB of RAM</li>
+<li>Several GB of local disk space be available for log files,
+  although some logging verbosity can be reduced.</li>
 </ul>
 </li>
 </ul>
