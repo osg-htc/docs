@@ -3,6 +3,9 @@ title: User-launched Containers with Singularity/Apptainer
 User-launched Containers with Singularity/Apptainer
 ===================================================
 
+!!! info "Schedule a consultation"
+    To ensure that we can meet your research computing goals needs, please contact us at <support@osg-htc.org> to schedule a consultation.
+
 The [OSG pilot container](os-backfill-containers.md) can be launched by users in order to run jobs on resources they
 have access to.
 The most common use case, documented here, is to start the pilot container inside a Slurm batch job that is launched by
