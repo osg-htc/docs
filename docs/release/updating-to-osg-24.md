@@ -18,8 +18,8 @@ Updating the OSG Repositories
 -----------------------------
 
 !!! note
-    Before updating the OSG repository, be sure to turn off any OSG services. Consult the sections below
-    that match your situation.
+    Because configuration updates will be necessary, be sure to turn off any OSG services
+    before updating them. Consult the sections below that match your situation.
 
 1.  Clean the yum cache:
 
@@ -34,7 +34,7 @@ Updating the OSG Repositories
 1.  Remove the old series Yum repositories:
 
         :::console
-        root@host # rpm -e osg-release
+        root@host # yum erase osg-release
 
     This step ensures that any local modifications to `*.repo` files will not prevent installing the new series repos.
     Any modified `*.repo` files should appear under `/etc/yum.repos.d/` with the `*.rpmsave` extension.
@@ -101,7 +101,7 @@ the container can be upgraded by updating the RPM.
 Updating Your OSG Access Point
 ------------------------------
 
-In OSG 23, some manual configuration changes may be required for an OSG Access Point (APs).
+In OSG 24, some manual configuration changes may be required for an OSG Access Point (APs).
 
 #### HTCondor ####
 
@@ -147,7 +147,7 @@ To upgrade your CE to OSG 24, follow the sections below.
 
 1.  Register a [downtime](../common/registration.md#registering-resource-downtimes)
 
-1.  During the update, turn off the following services on your HTCondor-CE host:
+1.  Before the update, turn off the following services on your HTCondor-CE host:
 
         :::console
         root@host # systemctl stop condor-ce
