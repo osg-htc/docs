@@ -12,15 +12,16 @@ Before Starting
 
 Before starting the installation process, consider the following requirements:
 
-* __Docker:__ For the purpose of this guide, the host must have a running docker service
+* __Container runtime:__ The examples in this guide assume using Docker as the container runtime,
+    for which the host must have a running `docker` service,
    and you must have the ability to start containers (i.e., belong to the `docker` Unix group).
-* __File Systems:__ The cache should have a partition of its own for storing data and metadata.
+* __File systems:__ The cache should have a partition of its own for storing data and metadata.
+* __Host certificate:__ Required for authentication.  See note below.
 * __Network ports:__ The cache service requires the following open ports:
   * Inbound TCP port 8443 for authenticated file access via the HTTP(S) and XRoot protocols.
   * (Optional) Inbound TCP port 8444 for access to the web interface for monitoring and configuration;
     if enabled, access to this port should be restricted to the LAN.
   * Outbound UDP port 9930 for reporting to `xrd-report.osgstorage.org` and `xrd-mon.osgstorage.org` for monitoring
-* __Host certificate:__ Required for authentication.  See note below.
 * __Service requirements:__
   * A cache serving the OSDF federation as a regional cache should have at least:
     * 8 cores
@@ -51,46 +52,26 @@ Before starting the installation process, consider the following requirements:
 !!! note "osdf-cache 7.12"
     This document covers versions 7.12 and later of the `osdf-cache` container image.
 
+!!! note "root"
+    The paths used as examples on this page (e.g., `/etc/pelican`) require root to edit;
+    if you do not have root on the host, modify the directories to a path you do have access to.
+
 
 Configuring the Cache Server
 ----------------------------
 
-In addition to the required configuration above (ports and file systems),
-you may also configure the behavior of your cache with the following variables using an environment variable file:
+The preferred method of configuring a Pelican-based OSDF cache is via a YAML file that will be 
+mounted into the container into the `/etc/pelican/config.d` directory.
+This document will use `/etc/pelican/cache-config.yaml` as the name of the configuration file outside of the container.
 
-Where the environment file on the docker host, `/opt/osdf-cache/.env`, has (at least) the following contents,
-replacing `<YOUR_RESOURCE_NAME>` with the name of your resource as
-[registered in Topology](install-cache.md#registering-the-cache)
-and `<FQDN>` with the public DNS name that should be used to contact your cache:
-
+Create `/etc/pelican/cache-config.yaml` with the following contents:
 ```file
-PELICAN_XROOTD_SITENAME=<YOUR_RESOURCE_NAME>
-PELICAN_CACHE_PORT=8443
+Cache:
+  Port: 8443
+# XRootD:
+#   Sitename: <RESOURCE NAME REGISTERED WITH OSG>
 ```
-
-
-
-
-
-
-Migrating from XCache-based OSDF cache (OSG 23 or earlier)
-----------------------------------------------------------
-
-
-
-
-
-### Optional configuration ###
-
-Further behavior of the cache can be configured by setting the following in the environment variable file:
-
-- `XC_SPACE_HIGH_WM`, `XC_SPACE_LOW_WM`: High-water and low-water marks for disk usage,
-  as numbers between 0.00 (0%) and 1.00 (100%);
-  when usage goes above the high-water mark, the cache will delete files until it hits the low-water mark.
-- `XC_RAMSIZE`: Amount of memory to use for storing blocks before writting them to disk. (Use higher for slower disks).
-- `XC_BLOCKSIZE`: Size of the blocks in the cache.
-- `XC_PREFETCH`: Number of blocks to prefetch from a file at once.
-       This controls how aggressive the cache is to request portions of a file.
+You will uncomment and fill in the value for `XRootD.Sitename` in a later step, after registration is complete.
 
 
 Preparing for Initial Startup
@@ -101,7 +82,8 @@ before starting the cache for the first time, it is recommended to generate a ke
 Download the Pelican client from <https://github.com/PelicanPlatform/pelican/releases> and run:
 
         :::console
-        user@host$ pelican generate keygen
+        root@host$ cd /etc/pelican
+        root@host$ pelican generate keygen
 
 
     The newly created files, `issuer.jwk` and `issuer-pub.jwks` are the private and public keys, respectively.
@@ -112,130 +94,101 @@ Download the Pelican client from <https://github.com/PelicanPlatform/pelican/rel
 Running a Cache
 ---------------
 
-Cache containers may be run with either multiple mounted host partitions (recommended) or a single host
-partition.
+This section describes how the cache may be run using the Docker command-line.
+For production, we recommend using a container orchestration service such as
+[Docker Compose](https://docs.docker.com/compose/),
+or [Kubernetes](https://kubernetes.io/).
 
-It is recommended to use a container orchestration service such as [docker-compose](https://docs.docker.com/compose/)
-or [kubernetes](https://kubernetes.io/) whose details are beyond the scope of this document.
-The following sections provide examples for starting cache containers from the command-line as well as a more
-production-appropriate method using systemd.
+This table provides a reminder of the parameters that will be used in the examples:
 
-### Multiple host partitions (recommended) ###
+| Parameter             | Example value                    | Description                                                                             | 
+|-----------------------|----------------------------------|-----------------------------------------------------------------------------------------|
+| `CACHE_HOST_PORT`     | `8443`                           | The host port used for data transfer via HTTP(S)                                        | 
+| `WEB_INTERFACE_PORT`  | `8444`                           | The host port used for service management via the web interface                         | 
+| `ISSUER_JWK`          | `/etc/pelican/issuer.jwk`        | The private key generated by `pelican generate keygen`                                  | 
+| `HOST_CERT_CHAIN`     | `/etc/pelican/hostcert.pem`      | The host certificate, with full chain                                                   | 
+| `HOST_KEY`            | `/etc/pelican/hostkey.pem`       | The private key matching the host certificate                                           | 
+| `CACHE_CONFIG_FILE`   | `/etc/pelican/cache-config.yaml` | The YAML file containing various cache settings                                         | 
+| `CACHE_PARTITION`     | `/mnt/cache`                     | The partition to be used for storing cached data (single partition setup only)          | 
+| `NAMESPACE_PARTITION` | `/mnt/cache-namespace`           | The partition to be used for storing namespace information (multi-partition setup only) | 
+| `METADATA_PARTITION`  | `/mnt/cache-meta`                | The partition to be used for storing metadata (multi-partition setup only)              | 
+| `DATA_PARTITION`      | `/mnt/cache-data`                | The partition to be used for storing cached file contents (multi-partition setup only)  | 
 
-For improved performance and storage,
-especially if your cache is serving over 10 TB of data,
-we recommend multiple partitions for handling namespaces (HDD, SSD, or NVMe), data (HDDs), and metadata (SSDs or NVMe).
 
-!!! note
-    Under this configuration the `<NAMESPACE PARTITION>` is not used to store the files.
-    Instead, the partition stores symlinks to the files in the metadata and data partitions.
+### Single host partition
+
+A cache may be configured to use a single host partition only;
+this is a simpler setup than using multiple host partitions, but may have worse performance,
+and is not recommended for caches with more than 10 TB of capacity.
+
 
 ```console
 user@host $ docker run --rm \
-             --publish <HTTPS HOST PORT>:8443 \
-             --publish <WEB INTERFACE HOST PORT>:8444 \
-             --volume <ISSUER JWK>:/etc/pelican/issuer.jwk \
-             --volume <HOST CERT>:/etc/pelican/certificates/tls.crt \
-             --volume <HOST KEY>:/etc/pelican/certificates/tls.key \
-             --volume <NAMESPACE PARTITION>:/run/pelican/cache/namespace \
-             --volume <METADATA PARTITION>:/run/pelican/cache/meta \
-             --volume <DATA PARTITION>:/run/pelican/cache/data \
+             --publish <CACHE_HOST_PORT>:8443 \
+             --publish <WEB_INTERFACE_HOST PORT>:8444 \
+             --volume <ISSUER_JWK>:/etc/pelican/issuer.jwk \
+             --volume <HOST_CERT_CHAIN>:/etc/pelican/certificates/tls.crt \
+             --volume <HOST_KEY>:/etc/pelican/certificates/tls.key \
+             --volume <CACHE_CONFIG_FILE>:/etc/pelican/config.d/99-local.yaml \
+             --volume <CACHE_PARTITION>:/run/pelican/cache \
              --name osdf-cache \
-             --env-file=/opt/osdf-cache/.env \
              hub.opensciencegrid.org/pelican_platform/osdf-cache:latest
 ```
 
-### Single host partition ###
-
-For a simpler installation, you may use a single host partition mounted to `/run/pelican/cache/`:
+Using the example values from the table, this is
 
 ```console
 user@host $ docker run --rm \
-             --publish <HTTPS HOST PORT>:8443 \
-             --publish <WEB INTERFACE HOST PORT>:8443 \
-             --volume <HOST PARTITION>:/run/pelican/cache \
-             --volume <HOST CERT>:/etc/pelican/certificates/tls.crt \
-             --volume <HOST KEY>:/etc/pelican/certificates/tls.key \
+             --publish 8443:8443 \
+             --publish 8444:8444 \
+             --volume /etc/pelican/issuer.jwk:/etc/pelican/issuer.jwk \
+             --volume /etc/pelican/hostcert.pem:/etc/pelican/certificates/tls.crt \
+             --volume /etc/pelican/hostkey.pem:/etc/pelican/certificates/tls.key \
+             --volume /etc/pelican/cache-config.yaml:/etc/pelican/config.d/99-local.yaml \
+             --volume /mnt/cache:/run/pelican/cache \
              --name osdf-cache \
-             --env-file=/opt/xcache/.env \
              hub.opensciencegrid.org/pelican_platform/osdf-cache:latest
 ```
 
-### Running a cache on container with systemd (TODO)
 
-An example systemd service file for the OSDF cache.
-This will require creating the environment file in the directory `/opt/xcache/.env`.
+### Multiple host partitions
 
-!!! note
-    This example systemd file assumes `<HTTP HOST PORT>` is `8000`, `<HTTPS HOST PORT>` is `8443`, 
-    `<HOST PARTITION>` is `/srv/cache`, and the cert and key to use are in `/etc/ssl/host.crt` and `/etc/ssl/host.key`,
-    respectively.
+A cache may be configured to store namespace information, data, and metadata on separate partitions.
+This improves performance and is recommended for caches with more than 10 TB of capacity.
 
-Create the systemd service file `/etc/systemd/system/docker.stash-cache.service` as follows:
-
-```file
-[Unit]
-Description=Cache Container
-After=docker.service
-Requires=docker.service
-
-[Service]
-TimeoutStartSec=0
-Restart=always
-ExecStartPre=-/usr/bin/docker stop %n
-ExecStartPre=-/usr/bin/docker rm %n
-ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-cache:23-release
-ExecStart=/usr/bin/docker run --rm --name %n \
-  --publish 8000:8000 \
-  --publish 8443:8443 \
-  --volume /srv/cache:/xcache \
-  --volume /etc/ssl/host.crt:/etc/grid-security/hostcert.pem \
-  --volume /etc/ssl/host.key:/etc/grid-security/hostkey.pem \
-  --env-file /opt/xcache/.env \
-  opensciencegrid/stash-cache:23-release
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Enable and start the service with:
 
 ```console
-root@host $ systemctl enable docker.stash-cache
-root@host $ systemctl start docker.stash-cache
-```
-
-!!! warning
-    You must [register](install-cache.md#registering-the-cache) the cache before starting it up.
-
-
-
-### Network optimization ###
-
-For caches that are connected to NICs over 40 Gbps we recommend that you disable the virtualized network and "bind" the
-container to the host network:
-
-```console
-user@host $ docker run --rm  \
-             --network="host" \
-             --volume <HOST PARTITION>:/cache \
-             --volume <HOST CERT>:/etc/grid-security/hostcert.pem \
-             --volume <HOST KEY>:/etc/grid-security/hostkey.pem \
+user@host $ docker run --rm \
+             --publish <CACHE_HOST_PORT>:8443 \
+             --publish <WEB_INTERFACE_PORT>:8444 \
+             --volume <ISSUER_JWK>:/etc/pelican/issuer.jwk \
+             --volume <HOST_CERT_CHAIN>:/etc/pelican/certificates/tls.crt \
+             --volume <HOST_KEY>:/etc/pelican/certificates/tls.key \
+             --volume <CACHE_CONFIG_FILE>:/etc/pelican/config.d/99-local.yaml \
+             --volume <NAMESPACE_PARTITION>:/run/pelican/cache/namespace \
+             --volume <METADATA_PARTITION>:/run/pelican/cache/meta \
+             --volume <DATA_PARTITION>:/run/pelican/cache/data \
              --name osdf-cache \
-             --env-file=/opt/xcache/.env \
              hub.opensciencegrid.org/pelican_platform/osdf-cache:latest
 ```
 
-### Memory optimization ###
+Using the example values from the table, this is
 
-The cache uses the host's memory for two purposes:
+```console
+user@host $ docker run --rm \
+             --publish 8443:8443 \
+             --publish 8444:8444 \
+             --volume /etc/pelican/issuer.jwk:/etc/pelican/issuer.jwk \
+             --volume /etc/pelican/hostcert.pem:/etc/pelican/certificates/tls.crt \
+             --volume /etc/pelican/hostkey.pem:/etc/pelican/certificates/tls.key \
+             --volume /etc/pelican/cache-config.yaml:/etc/pelican/config.d/99-local.yaml \
+             --volume /mnt/cache-namespace:/run/pelican/cache/namespace \
+             --volume /mnt/cache-meta:/run/pelican/cache/meta \
+             --volume /mnt/cache-data:/run/pelican/cache/data \
+             --name osdf-cache \
+             hub.opensciencegrid.org/pelican_platform/osdf-cache:latest
+```
 
-1. Caching files recently read from disk (via the kernel page cache).
-1. Buffering files recently received from the network before writing them to disk (to compensate for slow disks).
-
-An easy way to increase the performance of the cache is to assign it more memory.
-If you set a limit on the container's memory usage via the docker option `--memory` or Kubernetes resource limits,
-make sure it is at least twice the value of `XC_RAMSIZE`.
 
 Validating the Cache
 ---------------------
@@ -251,14 +204,141 @@ user@host $ cat /tmp/test.txt
 
 Hello, World!
 ```
+
 If the download fails, rerun the above `pelican object get` command with the `-d` flag added.
 Additional debugging information is located in the logs of your cache container.
 
 ```console
-root@host $ docker logs osdf-cache
+user@host $ docker logs osdf-cache
+```
+
+To increase the debugging information in the cache, edit your cache configuration file and set:
+```
+Debug: true
 ```
 
 See [this page](../../common/help.md) for requesting assistance; please include the logs and the `pelican object get -d` output in your request.
+
+
+Joining the Cache to the Federation
+-----------------------------------
+
+The cache must be registered with the OSG prior to joining the data federation.
+Send mail to <help@osg-htc.org> requesting registration; provide the following information:
+
+*   Cache hostname
+*   Administrative and security contact(s)
+*   Institution that the cache belongs to
+
+OSG Staff will register the cache and respond with the Resource Name that the cache was registered as.
+Edit your cache configuration file (`/etc/pelican/cache-config.yaml` in the example above):
+uncomment `XRootD.Sitename` and change the value to the Resource Name that OSG Staff responded with.
+Then, restart your cache.
+
+
+<!--
+Migrating from XCache-based OSDF cache (OSG 23 or earlier) (TODO)
+----------------------------------------------------------
+-->
+
+
+
+
+Advanced topics
+---------------
+
+### Persisting logs
+
+By default, the cache sends logs to the console, where it is captured by the container runtime's logging mechanism.
+To save logs to a file instead, set the log location in your cache config file (e.g., `/etc/pelican/cache-config.yaml`)
+as follows:
+
+```file
+Logging:
+  LogLocation: <LOG_FILE_PATH>
+```
+
+Note: the osdf-cache image does not come with log rotation; if you save logs to a file, you must
+set up logration yourself to avoid running the cache out of disk space.
+
+
+<!--
+
+### Optional configuration (TODO)
+
+Further behavior of the cache can be configured by setting the following in the environment variable file:
+
+- `XC_SPACE_HIGH_WM`, `XC_SPACE_LOW_WM`: High-water and low-water marks for disk usage,
+  as numbers between 0.00 (0%) and 1.00 (100%);
+  when usage goes above the high-water mark, the cache will delete files until it hits the low-water mark.
+- `XC_RAMSIZE`: Amount of memory to use for storing blocks before writting them to disk. (Use higher for slower disks).
+- `XC_BLOCKSIZE`: Size of the blocks in the cache.
+- `XC_PREFETCH`: Number of blocks to prefetch from a file at once.
+       This controls how aggressive the cache is to request portions of a file.
+
+-->
+
+### Managing a cache with systemd
+
+If you do not have a container orchestration service but still want to manage a container-based cache,
+you may run the container via a systemd service.
+The following example uses the 'single host partition' setup from [above](#single-host-partition).
+
+Create the systemd service file `/etc/systemd/system/docker-osdf-cache.service` as follows:
+
+```file
+[Unit]
+Description=OSDF Cache Container
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+ExecStartPre=-/usr/bin/docker stop osdf-cache
+ExecStartPre=-/usr/bin/docker rm osdf-cache
+ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-cache:23-release
+ExecStart=/usr/bin/docker run --rm --name osdf-cache \
+  --publish 8443:8443 \
+  --publish 8444:8444 \
+  --volume /etc/pelican/issuer.jwk:/etc/pelican/issuer.jwk \
+  --volume /etc/pelican/hostcert.pem:/etc/pelican/certificates/tls.crt \
+  --volume /etc/pelican/hostkey.pem:/etc/pelican/certificates/tls.key \
+  --volume /etc/pelican/cache-config.yaml:/etc/pelican/config.d/99-local.yaml \
+  --volume /mnt/cache:/run/pelican/cache \
+  --name osdf-cache \
+  hub.opensciencegrid.org/pelican_platform/osdf-cache:latest
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Enable and start the service with:
+
+```console
+root@host $ systemctl enable docker-osdf-cache
+root@host $ systemctl start docker-osdf-cache
+```
+
+
+### Network optimization ###
+
+For caches that are connected to NICs over 40 Gbps we recommend that you disable the virtualized network and "bind" the
+container to the host network.
+The following example uses the 'single host partition' setup from [above](#single-host-partition):
+
+```console
+user@host $ docker run --rm  \
+             --network="host" \
+             --volume /etc/pelican/issuer.jwk:/etc/pelican/issuer.jwk \
+             --volume /etc/pelican/hostcert.pem:/etc/pelican/certificates/tls.crt \
+             --volume /etc/pelican/hostkey.pem:/etc/pelican/certificates/tls.key \
+             --volume /etc/pelican/cache-config.yaml:/etc/pelican/config.d/99-local.yaml \
+             --volume /mnt/cache:/run/pelican/cache \
+             --name osdf-cache \
+             hub.opensciencegrid.org/pelican_platform/osdf-cache:latest
+```
+
 
 
 Getting Help
