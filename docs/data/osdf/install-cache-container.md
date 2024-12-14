@@ -297,7 +297,7 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker stop osdf-cache
 ExecStartPre=-/usr/bin/docker rm osdf-cache
-ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-cache:23-release
+ExecStartPre=/usr/bin/docker pull hub.opensciencegrid.org/pelican_platform/osdf-cache:latest
 ExecStart=/usr/bin/docker run --rm --name osdf-cache \
   --publish 8443:8443 \
   --publish 8444:8444 \
