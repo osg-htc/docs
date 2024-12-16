@@ -69,6 +69,7 @@ nav:
 - 'Data Federation (OSDF)':
   - 'Overview': 'data/stashcache/overview.md'
   - Data Cache:
+      - 'Install from container': 'data/osdf/install-cache-container.md'
       - 'Install from RPM': 'data/osdf/install-cache-rpm.md'
   - Data Origin:
       - 'Install from RPM': 'data/osdf/install-origin-rpm.md'
