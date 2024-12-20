@@ -39,8 +39,6 @@ Updating the OSG Repositories
         Because configuration updates will be necessary, be sure to turn off any OSG services
         before updating them. Consult the sections below that match your situation.
 
-    <!-- comment -->
-
         :::console
         root@host # yum update
 
