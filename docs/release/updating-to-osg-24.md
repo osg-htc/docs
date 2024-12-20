@@ -17,9 +17,11 @@ required to upgrade from OSG 23 are relatively minor.
 Updating the OSG Repositories
 -----------------------------
 
-1.  Prerequisites:
+1.  Consult the relevant section for the service you're upgrading before updating the OSG Yum repositories:
 
-    -   Consult the [access point](#updating-your-osg-access-point), [compute entrypoint](#updating-your-osg-compute-entrypoint), and/or [HTCondor hosts](#updating-your-htcondor-hosts) upgrade notes before updating the OSG repositories.
+    -   [Access Point](#updating-your-osg-access-point)
+    -   [Compute Entrypoint](#updating-your-osg-compute-entrypoint)
+    -   [HTCondor hosts](#updating-your-htcondor-hosts)
 
 1.  Clean the yum cache:
 
