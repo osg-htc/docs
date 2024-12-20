@@ -18,22 +18,22 @@ Before starting the installation process, consider the following requirements:
 * __File systems:__ The cache should have a partition of its own for storing data and metadata.
 * __Host certificate:__ Required for authentication.  See note below.
 * __Network ports:__ The cache service requires the following open ports:
-  * Inbound TCP port 8443 for authenticated file access via the HTTP(S) and XRoot protocols.
-  * (Optional) Inbound TCP port 8444 for access to the web interface for monitoring and configuration;
-    if enabled, access to this port should be restricted to the LAN.
-  * Outbound UDP port 9930 for reporting to `xrd-report.osgstorage.org` and `xrd-mon.osgstorage.org` for monitoring
+    * Inbound TCP port 8443 for authenticated file access via the HTTP(S) and XRoot protocols.
+    * (Optional) Inbound TCP port 8444 for access to the web interface for monitoring and configuration;
+      if enabled, access to this port should be restricted to the LAN.
+    * Outbound UDP port 9930 for reporting to `xrd-report.osgstorage.org` and `xrd-mon.osgstorage.org` for monitoring
 * __Service requirements:__
-  * A cache serving the OSDF federation as a regional cache should have at least:
-    * 8 cores
-    * 40 Gbps connectivity
-    * 50-200 TB of NVMe disk for the cache partition; you may distribute the disk, e.g., by using an NVMe-backed Ceph pool,
-        if you cannot fit that much disk into a single chassis
-    * 24 GB of RAM
-  * A cache being used to serve data from the OSDF to a single site should have at least:
-    * 8 cores
-    * 40 Gbps connectivity
-    * 2 TB of NVMe disk for the cache partition
-    * 24 GB of RAM
+    * A cache serving the OSDF federation as a regional cache should have at least:
+        * 8 cores
+        * 40 Gbps connectivity
+        * 50-200 TB of NVMe disk for the cache partition; you may distribute the disk, e.g., by using an NVMe-backed Ceph pool,
+          if you cannot fit that much disk into a single chassis
+        * 24 GB of RAM
+    * A cache being used to serve data from the OSDF to a single site should have at least:
+        * 8 cores
+        * 40 Gbps connectivity
+        * 2 TB of NVMe disk for the cache partition
+        * 24 GB of RAM
 
 
 !!! note "Host certificates"
