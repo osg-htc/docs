@@ -14,6 +14,15 @@ OSG 24 will be supported for [approximately two years total](release_series.md#s
 Latest News
 -----------
 
+### **December 19, 2024:** IGTF 1.132, gratia-probe 2.5.8, HTCondor-CE 24.0.2, XCache 3.7.0-2
+-   CA certificates based on [IGTF 1.132](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   added new trust anchor for TRGRID transition (TR)
+-   gratia-probe 2.8.5
+    -   Log HTCondor schedd cron stdout/stderr for easier debugging
+-   [HTCondor-CE 24.0.2](https://htcondor.com/htcondor-ce/v24/releases/#december-19-2024-2402)
+    -   Does not pass WholeNode request expressions to non-HTCondor batch systems
+    -   Fix certificate subject parsing in `condor_ce_host_network_check`
+
 ### **December 11, 2024:** XRootD 5.7.2-1.1, GlideinWMS 3.10.8 Upcoming: osdf-server 7.11.7
 -   [XRootD 5.7.2-1.1](https://xrootd.github.io/2024/11/29/announcement_5_7_2.html)
     -   Various major bug fixes
