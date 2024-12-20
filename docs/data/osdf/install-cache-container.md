@@ -54,7 +54,7 @@ Before starting the installation process, consider the following requirements:
 
 !!! note "root"
     The paths used as examples on this page (e.g., `/etc/pelican`) require root to edit;
-    if you do not have root on the host, modify the directories to a path you do have access to.
+    if you do not have root on the host, choose new locations where you have modification permissions.
 
 
 Configuring the Cache Server
@@ -323,9 +323,9 @@ root@host $ systemctl start docker-osdf-cache
 
 ### Network optimization ###
 
-For caches that are connected to NICs over 40 Gbps we recommend that you disable the virtualized network and "bind" the
+For caches that are connected to NICs over 40 Gbps we recommend that you disable the virtualized network and bind the
 container to the host network.
-The following example uses the 'single host partition' setup from [above](#single-host-partition):
+The following example uses the [single host partition](#single-host-partition) documented above.
 
 ```console
 user@host $ docker run --rm  \
