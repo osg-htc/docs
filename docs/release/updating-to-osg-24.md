@@ -5,14 +5,7 @@ Updating to OSG 24
 
 [OSG 24](release_series.md#series-overviews) (the *new series*) introduces support for the ARM architecture. Changes
 required to upgrade from OSG 23 are relatively minor.
-
--   [Compute Entrypoints](../compute-element/htcondor-ce-overview.md) should be updated to OSG 24 as soon as possible.
-
--   [HTCondor pools](#updating-your-htcondor-hosts) and [access points](#updating-your-osg-access-point) should be
-    updated to OSG 24 as soon as possible.
-
--   All other services (e.g., OSG Worker Node clients, Frontier Squids) should be updated to
-    [OSG 24](#updating-the-osg-repositories) as soon as possible.
+Please update all services to OSG 24 as soon as possible.
 
 Updating the OSG Repositories
 -----------------------------
