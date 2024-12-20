@@ -91,7 +91,6 @@ The origin service is provided by the `osdf-origin` RPM.
 Install it using the following command:
 
 
-OSG 24:
 ```console
 root@host # yum install osdf-origin
 ```
