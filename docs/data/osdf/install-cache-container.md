@@ -260,7 +260,7 @@ Logging:
 
 !!! danger
     Note: the osdf-cache image does not come with log rotation; if you save logs to a file, you must
-    set up logration yourself to avoid running the cache out of disk space.
+    set up log rotation yourself to avoid running the cache out of disk space.
 
 
 <!--
@@ -283,7 +283,7 @@ Further behavior of the cache can be configured by setting the following in the 
 
 If you do not have a container orchestration service but still want to manage a container-based cache,
 you may run the container via a systemd service.
-The following example uses the 'single partition' setup from [above](#single-partition).
+The following example uses the [single partition](#single-partition) setup documented above.
 
 Create the systemd service file `/etc/systemd/system/docker-osdf-cache.service` as follows:
 
