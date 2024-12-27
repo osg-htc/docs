@@ -258,8 +258,9 @@ Logging:
   LogLocation: <LOG_FILE_PATH>
 ```
 
-Note: the osdf-cache image does not come with log rotation; if you save logs to a file, you must
-set up logration yourself to avoid running the cache out of disk space.
+!!! danger
+    Note: the osdf-cache image does not come with log rotation; if you save logs to a file, you must
+    set up logration yourself to avoid running the cache out of disk space.
 
 
 <!--
