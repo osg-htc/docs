@@ -115,10 +115,10 @@ This table provides a reminder of the parameters that will be used in the exampl
 | `DATA_PARTITION`      | `/mnt/cache-data`                | The partition to be used for storing cached file contents (multi-partition setup only)  | 
 
 
-### Single host partition
+### Single partition
 
-A cache may be configured to use a single host partition only;
-this is a simpler setup than using multiple host partitions, but may have worse performance,
+A cache may be configured to use a single partition only;
+this is a simpler setup than using multiple partitions, but may have worse performance,
 and is not recommended for caches with more than 10 TB of capacity.
 
 
@@ -151,7 +151,7 @@ user@host $ docker run --rm \
 ```
 
 
-### Multiple host partitions
+### Multiple partitions
 
 A cache may be configured to store namespace information, data, and metadata on separate partitions.
 This improves performance and is recommended for caches with more than 10 TB of capacity.
@@ -283,7 +283,7 @@ Further behavior of the cache can be configured by setting the following in the 
 
 If you do not have a container orchestration service but still want to manage a container-based cache,
 you may run the container via a systemd service.
-The following example uses the 'single host partition' setup from [above](#single-host-partition).
+The following example uses the 'single partition' setup from [above](#single-partition).
 
 Create the systemd service file `/etc/systemd/system/docker-osdf-cache.service` as follows:
 
@@ -326,7 +326,7 @@ root@host $ systemctl start docker-osdf-cache
 
 For caches that are connected to NICs over 40 Gbps we recommend that you disable the virtualized network and "bind" the
 container to the host network.
-The following example uses the 'single host partition' setup from [above](#single-host-partition):
+The following example uses the 'single partition' setup from [above](#single-partition):
 
 ```console
 user@host $ docker run --rm  \
