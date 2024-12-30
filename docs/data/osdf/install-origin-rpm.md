@@ -82,7 +82,7 @@ user@host $ systemctl status xrootd@stash-origin-auth \
     out for special instructions related to the upgrade:
 
     !!! danger "Upgrading to a Pelican origin"
-        You will find upgrade-specific instructions here
+        You will find upgrade-specific instructions here.
 
 Installing the Origin
 ---------------------
@@ -207,10 +207,10 @@ root@host$ systemctl restart osdf-origin
 Validating the Origin Through the Federation
 ----------------------------------
 
-Once your origin has been registered in the federation
+Once your origin has been registered in the federation:
 
 1.  Download a test file (POSIX) or object (S3) from your origin (replacing `ORIGIN_HOSTNAME` with the host name of your origin,
-    and TEST_PATH with the OSDF path to the test file or object
+    and TEST_PATH with the OSDF path to the test file or object:
 
         :::console
         user@host $ curl -L https://osdf-director.osg-htc.org:8443/TEST_PATH -o /tmp/testfile
@@ -228,7 +228,7 @@ Once your origin has been registered in the federation
 
     Replacing `<TEST PATH>` with the same path that you used in step (1).
     If you see output, then the OSDF is directing client requests to your Pelican origin!
-    If you do not see output, please [contact us](#getting-help)
+    If you do not see output, please [contact us](#getting-help).
 
 !!! danger "Upgrading to a Pelican origin"
     Congratulations, you have fully verified the functionality of your Pelican origin!
