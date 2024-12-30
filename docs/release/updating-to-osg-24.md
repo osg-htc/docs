@@ -5,21 +5,17 @@ Updating to OSG 24
 
 [OSG 24](release_series.md#series-overviews) (the *new series*) introduces support for the ARM architecture. Changes
 required to upgrade from OSG 23 are relatively minor.
-
--   [Compute Entrypoints](../compute-element/htcondor-ce-overview.md) should be updated to OSG 24 as soon as possible.
-
--   [HTCondor pools](#updating-your-htcondor-hosts) and [access points](#updating-your-osg-access-point) should be
-    updated to OSG 24 as soon as possible.
-
--   All other services (e.g., OSG Worker Node clients, Frontier Squids) should be updated to
-    [OSG 24](#updating-the-osg-repositories) as soon as possible.
+Please update all services to OSG 24 as soon as possible.
 
 Updating the OSG Repositories
 -----------------------------
 
-1.  Prerequisites:
+1.  Consult the relevant section for the service you're upgrading before updating the OSG Yum repositories:
 
-    -   Consult the [access point](#updating-your-osg-access-point), [compute entrypoint](#updating-your-osg-compute-entrypoint), and/or [HTCondor hosts](#updating-your-htcondor-hosts) upgrade notes before updating the OSG repositories.
+    -   [Access Point](#updating-your-osg-access-point)
+    -   [Compute Entrypoint](#updating-your-osg-compute-entrypoint)
+    -   [HTCondor hosts](#updating-your-htcondor-hosts)
+    -   [OSDF Origin](#updating-your-osdf-origin)
 
 1.  Clean the yum cache:
 
@@ -43,8 +39,6 @@ Updating the OSG Repositories
     !!! note
         Because configuration updates will be necessary, be sure to turn off any OSG services
         before updating them. Consult the sections below that match your situation.
-
-    <!-- comment -->
 
         :::console
         root@host # yum update
@@ -184,6 +178,23 @@ If you are running an HTCondor pool, consult the following instructions to updat
 1.  Also consult the [HTCondor 24.0 upgrade instructions](https://htcondor.readthedocs.io/en/24.0/version-history/upgrading-from-23-0-to-24-0-versions.html).
 
 You may proceed with the [repository and RPM update process](#updating-the-osg-repositories).
+
+
+Updating Your OSDF Origin
+-------------------------
+
+In OSG 24, the OSDF Origin has been updated to use the [Pelican Platform](https://pelicanplatform.org/).
+To update your OSG 23 OSDF Origin, follow the instructions below to minimize service disruptions.
+
+1.  Before installing the OSG 24 Yum repositories,
+    update your OSG packages (see [warnings above](#updating-the-osg-repositories)):
+
+        :::console
+        root@host # yum update
+
+1.  Follow the documentation in the [OSDF origin installation guide](../data/osdf/install-origin-rpm.md) and watch out
+    for upgrade-specific instructions.
+
 
 Getting Help
 ------------
