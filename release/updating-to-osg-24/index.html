@@ -1634,6 +1634,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#updating-your-osdf-origin" class="md-nav__link">
+    Updating Your OSDF Origin
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#getting-help" class="md-nav__link">
     Getting Help
   </a>
@@ -2118,6 +2125,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#updating-your-osdf-origin" class="md-nav__link">
+    Updating Your OSDF Origin
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#getting-help" class="md-nav__link">
     Getting Help
   </a>
@@ -2144,26 +2158,17 @@
 
 <h1 id="updating-to-osg-24">Updating to OSG 24<a class="headerlink" href="#updating-to-osg-24" title="Permanent link">&para;</a></h1>
 <p><a href="../release_series/#series-overviews">OSG 24</a> (the <em>new series</em>) introduces support for the ARM architecture. Changes
-required to upgrade from OSG 23 are relatively minor.</p>
-<ul>
-<li>
-<p><a href="../../compute-element/htcondor-ce-overview/">Compute Entrypoints</a> should be updated to OSG 24 as soon as possible.</p>
-</li>
-<li>
-<p><a href="#updating-your-htcondor-hosts">HTCondor pools</a> and <a href="#updating-your-osg-access-point">access points</a> should be
-    updated to OSG 24 as soon as possible.</p>
-</li>
-<li>
-<p>All other services (e.g., OSG Worker Node clients, Frontier Squids) should be updated to
-    <a href="#updating-the-osg-repositories">OSG 24</a> as soon as possible.</p>
-</li>
-</ul>
+required to upgrade from OSG 23 are relatively minor.
+Please update all services to OSG 24 as soon as possible.</p>
 <h2 id="updating-the-osg-repositories">Updating the OSG Repositories<a class="headerlink" href="#updating-the-osg-repositories" title="Permanent link">&para;</a></h2>
 <ol>
 <li>
-<p>Prerequisites:</p>
+<p>Consult the relevant section for the service you're upgrading before updating the OSG Yum repositories:</p>
 <ul>
-<li>Consult the <a href="#updating-your-osg-access-point">access point</a>, <a href="#updating-your-osg-compute-entrypoint">compute entrypoint</a>, and/or <a href="#updating-your-htcondor-hosts">HTCondor hosts</a> upgrade notes before updating the OSG repositories.</li>
+<li><a href="#updating-your-osg-access-point">Access Point</a></li>
+<li><a href="#updating-your-osg-compute-entrypoint">Compute Entrypoint</a></li>
+<li><a href="#updating-your-htcondor-hosts">HTCondor hosts</a></li>
+<li><a href="#updating-your-osdf-origin">OSDF Origin</a></li>
 </ul>
 </li>
 <li>
@@ -2191,11 +2196,9 @@ files to the new <code>*.repo</code> files.</p>
 <p class="admonition-title">Note</p>
 <p>Because configuration updates will be necessary, be sure to turn off any OSG services
 before updating them. Consult the sections below that match your situation.</p>
+<p>:::console
+root@host # yum update</p>
 </div>
-<!-- comment -->
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum update
-</code></pre></div>
-
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <ul>
@@ -2332,6 +2335,22 @@ HTCondor-CE hosts.</p>
 </li>
 </ol>
 <p>You may proceed with the <a href="#updating-the-osg-repositories">repository and RPM update process</a>.</p>
+<h2 id="updating-your-osdf-origin">Updating Your OSDF Origin<a class="headerlink" href="#updating-your-osdf-origin" title="Permanent link">&para;</a></h2>
+<p>In OSG 24, the OSDF Origin has been updated to use the <a href="https://pelicanplatform.org/">Pelican Platform</a>.
+To update your OSG 23 OSDF Origin, follow the instructions below to minimize service disruptions.</p>
+<ol>
+<li>
+<p>Before installing the OSG 24 Yum repositories,
+    update your OSG packages (see <a href="#updating-the-osg-repositories">warnings above</a>):</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum update
+</code></pre></div>
+
+</li>
+<li>
+<p>Follow the documentation in the <a href="../../data/osdf/install-origin-rpm/">OSDF origin installation guide</a> and watch out
+    for upgrade-specific instructions.</p>
+</li>
+</ol>
 <h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
 <p>To get assistance, please use the <a href="../../common/help/">this page</a>.</p>
 

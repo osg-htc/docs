@@ -1285,6 +1285,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#upgrading-a-non-pelican-origin" class="md-nav__link">
+    Upgrading a Non-Pelican Origin
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#installing-the-origin" class="md-nav__link">
     Installing the Origin
   </a>
@@ -1335,6 +1342,13 @@
         <li class="md-nav__item">
   <a href="#joining-the-origin-to-the-federation" class="md-nav__link">
     Joining the Origin to the Federation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validating-the-origin-through-the-federation" class="md-nav__link">
+    Validating the Origin Through the Federation
   </a>
   
 </li>
@@ -1976,6 +1990,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#upgrading-a-non-pelican-origin" class="md-nav__link">
+    Upgrading a Non-Pelican Origin
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#installing-the-origin" class="md-nav__link">
     Installing the Origin
   </a>
@@ -2026,6 +2047,13 @@
         <li class="md-nav__item">
   <a href="#joining-the-origin-to-the-federation" class="md-nav__link">
     Joining the Origin to the Federation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validating-the-origin-through-the-federation" class="md-nav__link">
+    Validating the Origin Through the Federation
   </a>
   
 </li>
@@ -2094,8 +2122,18 @@ administrator to serve data from a POSIX filesystem or S3 endpoint through the g
 <p>As with all OSG software installations, there are some one-time steps to prepare in advance:</p>
 <ul>
 <li>Obtain root access to the host</li>
-<li>Prepare <a href="../../../common/yum/">the required Yum repositories</a>;
-  the <a href="../../../common/yum/#install-the-osg-repositories">OSG 24 repositories</a> should be used.</li>
+<li>
+<p>Prepare <a href="../../../common/yum/">the required Yum repositories</a>;
+  the <a href="../../../common/yum/#install-the-osg-repositories">OSG 24 repositories</a> should be used.</p>
+<div class="admonition danger">
+<p class="admonition-title">Upgrading to a Pelican origin</p>
+<p>If you are upgrading from a pre-Pelican OSDF origin, update all of your OSG 23 packages before installing the OSG 24
+repositories:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum update
+</code></pre></div>
+
+</div>
+</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Host certificates</p>
@@ -2110,12 +2148,40 @@ intermediate CAs (if you're unsure about your setup, try accessing your origin f
 <li><strong>Host Key</strong>: <code>/etc/pki/tls/private/pelican.key</code></li>
 </ul>
 </div>
+<h2 id="upgrading-a-non-pelican-origin">Upgrading a Non-Pelican Origin<a class="headerlink" href="#upgrading-a-non-pelican-origin" title="Permanent link">&para;</a></h2>
+<p>If you are running a non-Pelican origin, e.g. one that was installed before OSG 24, there are special considerations for
+the upgrade to ensure minimal downtime for your users.
+This document will guide you through the upgrade process by installing and configuring a Pelican origin alongside your
+non-Pelican origin.</p>
+<div class="admonition note">
+<p class="admonition-title">Using different hosts</p>
+<p>You may install your new Pelican origin on a separate host if your underlying data store is shared between hosts.</p>
+</div>
+<p>First, determine if you have an active non-Pelican origin service running:</p>
+<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>systemctl status xrootd@stash-origin-auth <span class="se">\</span>
+                             xrootd@stash-origin <span class="se">\</span>
+                             xrootd-privileged@stash-origin-auth <span class="se">\</span>
+            <span class="p">|</span> grep -F <span class="s1">&#39;Active: active&#39;</span>
+<span class="go">   Active: active (running) since Wed 2024-12-04 17:46:17 CST; 1 weeks 1 days ago</span>
+</code></pre></div>
+<ul>
+<li>
+<p><strong>If you do not see any output from the above command</strong>, you may proceed with the rest of the documentation.</p>
+</li>
+<li>
+<p><strong>If you see any output from the above command</strong>, you may proceed with the rest of the documentation but keep an eye
+    out for special instructions related to the upgrade:</p>
+<div class="admonition danger">
+<p class="admonition-title">Upgrading to a Pelican origin</p>
+<p>You will find upgrade-specific instructions here.</p>
+</div>
+</li>
+</ul>
 <h2 id="installing-the-origin">Installing the Origin<a class="headerlink" href="#installing-the-origin" title="Permanent link">&para;</a></h2>
 <p>The origin service is provided by the <code>osdf-origin</code> RPM.
 Install it using the following command:</p>
-<p>OSG 24:
 <div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum install osdf-origin
-</code></pre></div></p>
+</code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">osdf-origin 7.11.1</p>
 <p>This document covers versions 7.11.1 and later of the <code>osdf-origin</code> package; ensure the above installation
@@ -2181,6 +2247,12 @@ in your request.</p>
 </li>
 </ol>
 <h2 id="joining-the-origin-to-the-federation">Joining the Origin to the Federation<a class="headerlink" href="#joining-the-origin-to-the-federation" title="Permanent link">&para;</a></h2>
+<div class="admonition danger">
+<p class="admonition-title">Upgrading to a Pelican origin</p>
+<p>Once registered, all OSDF clients of your namespace will be directed to your Pelican origin.
+Before initiating this process, ensure that your Pelican origin is functioning and that you are ready to migrate
+production transfers.</p>
+</div>
 <p>The origin must be registered with the OSG prior to joining the data federation.
 Send mail to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#115;&#103;&#45;&#104;&#116;&#99;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#115;&#103;&#45;&#104;&#116;&#99;&#46;&#111;&#114;&#103;</a> requesting registration; provide the following information:</p>
 <ul>
@@ -2188,7 +2260,7 @@ Send mail to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;
 <li>Administrative and security contact(s)</li>
 <li>Institution that the origin belongs to</li>
 </ul>
-<p>OSG Staff will register the origin and respond with the Resource Name that the origin was registered as.</p>
+<p>OSG Staff will register the origin and respond with the Resource Name.</p>
 <p>Once you have that information, edit <code>/etc/pelican/config.d/15-osdf.yaml</code>, and set <code>XRootD.Sitename</code>:
 <div class="highlight"><pre><span></span><code>XRootD:
   Sitename: &lt;RESOURCE NAME REGISTERED WITH OSG&gt;
@@ -2196,44 +2268,38 @@ Send mail to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;
 <p>Then, restart the origin by running</p>
 <div class="highlight"><pre><span></span><code><span class="gp">root@host$ </span>systemctl restart osdf-origin
 </code></pre></div>
-<p>Let OSG Staff know that you have restarted the origin with the updated sitename,
-so they can approve the new origin.</p>
-<!--
+<h2 id="validating-the-origin-through-the-federation">Validating the Origin Through the Federation<a class="headerlink" href="#validating-the-origin-through-the-federation" title="Permanent link">&para;</a></h2>
+<p>Once your origin has been registered in the federation:</p>
+<ol>
+<li>
+<p>Download a test file (POSIX) or object (S3) from your origin (replacing <code>ORIGIN_HOSTNAME</code> with the host name of your origin,
+    and TEST_PATH with the OSDF path to the test file or object:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>curl -L https://osdf-director.osg-htc.org:8443/TEST_PATH -o /tmp/testfile
+</code></pre></div>
 
-Upgrading a Non-Pelican Origin
-------------------------------
+<p>Verify the contents of <code>/tmp/testfile</code> match the test file or object your origin was serving.</p>
+<p>If the download fails, debugging information is located in <code>/var/log/pelican/osdf-origin.log</code>.
+See <a href="../../../common/help/">this page</a> for requesting assistance; please include the log file
+in your request.</p>
+</li>
+<li>
+<p>Verify that your test is running against your Pelican origin:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>grep &lt;TEST_PATH&gt; /var/log/pelican/osdf-origin.log
+</code></pre></div>
 
-If you are running a non-Pelican origin, e.g. one that was installed before OSG 24, there are special consideratiosn for
-the upgrade to ensure minimal downtime for your users.
+<p>Replacing <code>&lt;TEST PATH&gt;</code> with the same path that you used in step (1).
+If you see output, then the OSDF is directing client requests to your Pelican origin!
+If you do not see output, please <a href="#getting-help">contact us</a>.</p>
+</li>
+</ol>
+<div class="admonition danger">
+<p class="admonition-title">Upgrading to a Pelican origin</p>
+<p>Congratulations, you have fully verified the functionality of your Pelican origin!
+You may uninstall the non-Pelican origin:</p>
+<div class="codehilite"><pre><span></span><code>root@host $ yum remove stash-origin
+</code></pre></div>
 
-1.  Verify that you are not already running a Pelican-based origin, run the following on your origin host:
-
-        :::console
-        root@host # systemctl status osdf-origin
-        Unit osdf-origin.service could not be found.
-
-    If you see the following, then you are not running a Pelican-based origin and should proceed with the rest of the
-    instructions in this section
-
-1.  Install the origin
-
-1.  Configure the origin
-
-1.  Directly verify the origin
-
-1.  Register the origin in the Director and Topology
-
-    !!! danger ""
-
-1.  Verify the origin through the OSDF director
-
-1.  Uninstall the old service:
-
-        :::console
-        root@host # yum remove stash-origin
-
--->
-
+</div>
 <h2 id="managing-the-origin-service">Managing the Origin Service<a class="headerlink" href="#managing-the-origin-service" title="Permanent link">&para;</a></h2>
 <p>Use the following SystemD commands as root to start, stop, enable, and disable the OSDF Origin.</p>
 <table>
