@@ -44,6 +44,10 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **January 2, 2025:** XRootD 5.7.2-1.2
+-   XRootD 5.7.2-1.2
+    -   Fixes file descriptor leak when using the caching plugin
+
 ### **December 19, 2024:** IGTF 1.132, gratia-probe 2.5.8, HTCondor-CE 23.0.18, XCache 3.7.0-2
 -   CA certificates based on [IGTF 1.132](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   added new trust anchor for TRGRID transition (TR)
