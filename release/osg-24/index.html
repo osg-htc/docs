@@ -1519,6 +1519,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#january-6-2025-htcondor-2403-upcoming-htcondor-2430" class="md-nav__link">
+    January 6, 2025: HTCondor 24.0.3; Upcoming: HTCondor 24.3.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#january-2-2025-xrootd-572-12" class="md-nav__link">
     January 2, 2025: XRootD 5.7.2-1.2
   </a>
@@ -1983,6 +1990,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#january-6-2025-htcondor-2403-upcoming-htcondor-2430" class="md-nav__link">
+    January 6, 2025: HTCondor 24.0.3; Upcoming: HTCondor 24.3.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#january-2-2025-xrootd-572-12" class="md-nav__link">
     January 2, 2025: XRootD 5.7.2-1.2
   </a>
@@ -2081,6 +2095,55 @@ the ARM CPU architecture.
 The initial release includes GlideinWMS 3.10.7, HTCondor 24.0.1, HTCondor 24.1.1, HTCondor-CE 24.0, and XRootD 5.7.0.</p>
 <p>OSG 24 will be supported for <a href="../release_series/#series-life-cycle">approximately two years total</a>.</p>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="january-6-2025-htcondor-2403-upcoming-htcondor-2430"><strong>January 6, 2025:</strong> HTCondor 24.0.3; Upcoming: HTCondor 24.3.0<a class="headerlink" href="#january-6-2025-htcondor-2403-upcoming-htcondor-2430" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-3">HTCondor 24.0.3</a><ul>
+<li>Numerous updates in memory tracking with cgroups<ul>
+<li>Fix bug in reporting peak memory</li>
+<li>Made cgroup v1 and v2 memory tracking consistent with each other</li>
+<li>Fix bug where cgroup v1 usage included disk cache pages</li>
+<li>Fix bug where cgroup v1 jobs killed by OOM were not held</li>
+<li>Polls cgroups for memory usage more often</li>
+<li>Can configure to always hold jobs killed by OOM</li>
+</ul>
+</li>
+<li>Make <code>condor_adstash</code> work with OpenSearch Python Client v2.x</li>
+<li>Restore case insensitivity to <code>condor_status -subsystem</code></li>
+<li>Fix bug where jobs would match but not start when using KeyboardIdle</li>
+<li>Fix bug when trying to avoid IPv6 link local addresses</li>
+<li>EPs spawned by 'htcondor annex' no longer crash on startup</li>
+</ul>
+</li>
+<li>Upcoming<ul>
+<li><a href="https://htcondor.readthedocs.io/en/24.x/version-history/feature-versions-24-x.html#version-24-3-0">HTCondor 24.3.0</a><ul>
+<li>Allow local issuer credmon and Vault credmon to coexist</li>
+<li>Add Singularity launcher to distinguish runtime failure from job failure</li>
+<li>Advertises when the EP is enforcing disk usage via LVM</li>
+<li>By default, LVM disk enforcement hides mounts when possible</li>
+<li>Container Universe jobs can now mount a writable directory under scratch</li>
+<li>Pass <code>PELICAN_*</code> job environment variables to pelican file transfer plugin</li>
+<li>Fix HTCondor startup when network interface has no IPv6 address</li>
+<li>VacateReason is set in the job ad under more circumstances</li>
+<li><code>htcondor job submit</code> now issues credentials like <code>condor_submit</code> does</li>
+<li>Numerous updates in memory tracking with cgroups<ul>
+<li>Fix bug in reporting peak memory</li>
+<li>Made cgroup v1 and v2 memory tracking consistent with each other</li>
+<li>Fix bug where cgroup v1 usage included disk cache pages</li>
+<li>Fix bug where cgroup v1 jobs killed by OOM were not held</li>
+<li>Polls cgroups for memory usage more often</li>
+<li>Can configure to always hold jobs killed by OOM</li>
+</ul>
+</li>
+<li>Make <code>condor_adstash</code> work with OpenSearch Python Client v2.x</li>
+<li>Restore case insensitivity to <code>condor_status -subsystem</code></li>
+<li>Fix bug where jobs would match but not start when using KeyboardIdle</li>
+<li>Fix bug when trying to avoid IPv6 link local addresses</li>
+<li>EPs spawned by 'htcondor annex' no longer crash on startup</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="january-2-2025-xrootd-572-12"><strong>January 2, 2025:</strong> XRootD 5.7.2-1.2<a class="headerlink" href="#january-2-2025-xrootd-572-12" title="Permanent link">&para;</a></h3>
 <ul>
 <li>XRootD 5.7.2-1.2<ul>
