@@ -44,6 +44,35 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **January 6, 2025:** HTCondor 23.0.19; Upcoming: HTCondor 23.10.19
+-   [HTCondor 23.0.19](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-19)
+    -   Numerous updates in memory tracking with cgroups
+        -   Fix bug in reporting peak memory
+        -   Made cgroup v1 and v2 memory tracking consistent with each other
+        -   Fix bug where cgroup v1 usage included disk cache pages
+        -   Fix bug where cgroup v1 jobs killed by OOM were not held
+        -   Polls cgroups for memory usage more often
+        -   Can configure to always hold jobs killed by OOM
+    -   Make `condor_adstash` work with OpenSearch Python Client v2.x
+    -   Avoid OAUTH credmon errors by only signaling it when necessary
+    -   Restore case insensitivity to `condor_status -subsystem`
+    -   Fix rare `condor_schedd` crash when a `$$()` macro could not be expanded
+-   Upcoming
+    -   [HTCondor 23.10.19](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-10-19)
+        -   Numerous updates in memory tracking with cgroups
+            -   Fix bug in reporting peak memory
+            -   Made cgroup v1 and v2 memory tracking consistent with each other
+            -   Fix bug where cgroup v1 usage included disk cache pages
+            -   Fix bug where cgroup v1 jobs killed by OOM were not held
+            -   Polls cgroups for memory usage more often
+            -   Can configure to always hold jobs killed by OOM
+        -   Make `condor_adstash` work with OpenSearch Python Client v2.x
+        -   Avoid OAUTH credmon errors by only signaling it when necessary
+        -   Restore case insensitivity to `condor_status -subsystem`
+        -   Fix rare `condor_schedd` crash when a `$$()` macro could not be expanded
+        -   Fix bug where jobs would match but not start when using KeyboardIdle
+        -   Fix bug when trying to avoid IPv6 link local addresses
+
 ### **January 2, 2025:** XRootD 5.7.2-1.2
 -   XRootD 5.7.2-1.2
     -   Fixes file descriptor leak when using the caching plugin
