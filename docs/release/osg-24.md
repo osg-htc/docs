@@ -14,6 +14,44 @@ OSG 24 will be supported for [approximately two years total](release_series.md#s
 Latest News
 -----------
 
+### **January 6, 2025:** HTCondor 24.0.3; Upcoming: HTCondor 24.3.0
+-   [HTCondor 24.0.3](https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-3)
+    -   Numerous updates in memory tracking with cgroups
+        -   Fix bug in reporting peak memory
+        -   Made cgroup v1 and v2 memory tracking consistent with each other
+        -   Fix bug where cgroup v1 usage included disk cache pages
+        -   Fix bug where cgroup v1 jobs killed by OOM were not held
+        -   Polls cgroups for memory usage more often
+        -   Can configure to always hold jobs killed by OOM
+    -   Make `condor_adstash` work with OpenSearch Python Client v2.x
+    -   Restore case insensitivity to `condor_status -subsystem`
+    -   Fix bug where jobs would match but not start when using KeyboardIdle
+    -   Fix bug when trying to avoid IPv6 link local addresses
+    -   EPs spawned by 'htcondor annex' no longer crash on startup
+-   Upcoming
+    -   [HTCondor 24.3.0](https://htcondor.readthedocs.io/en/24.x/version-history/feature-versions-24-x.html#version-24-3-0)
+        -   Allow local issuer credmon and Vault credmon to coexist
+        -   Add Singularity launcher to distinguish runtime failure from job failure
+        -   Advertises when the EP is enforcing disk usage via LVM
+        -   By default, LVM disk enforcement hides mounts when possible
+        -   Container Universe jobs can now mount a writable directory under scratch
+        -   Pass `PELICAN_*` job environment variables to pelican file transfer plugin
+        -   Fix HTCondor startup when network interface has no IPv6 address
+        -   VacateReason is set in the job ad under more circumstances
+        -   `htcondor job submit` now issues credentials like `condor_submit` does
+        -   Numerous updates in memory tracking with cgroups
+            -   Fix bug in reporting peak memory
+            -   Made cgroup v1 and v2 memory tracking consistent with each other
+            -   Fix bug where cgroup v1 usage included disk cache pages
+            -   Fix bug where cgroup v1 jobs killed by OOM were not held
+            -   Polls cgroups for memory usage more often
+            -   Can configure to always hold jobs killed by OOM
+        -   Make `condor_adstash` work with OpenSearch Python Client v2.x
+        -   Restore case insensitivity to `condor_status -subsystem`
+        -   Fix bug where jobs would match but not start when using KeyboardIdle
+        -   Fix bug when trying to avoid IPv6 link local addresses
+        -   EPs spawned by 'htcondor annex' no longer crash on startup
+
 ### **January 2, 2025:** XRootD 5.7.2-1.2
 -   XRootD 5.7.2-1.2
     -   Fixes file descriptor leak when using the caching plugin
