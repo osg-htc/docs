@@ -81,7 +81,7 @@ Preparing for Initial Startup
 1.  The cache identifies itself to the federation via public key authentication;
 before starting the cache for the first time, it is recommended to generate a keypair.
 Download the Pelican client from <https://github.com/PelicanPlatform/pelican/releases>,
-place it somewhere in PATH, and run:
+install the executable as /usr/local/bin/pelican, and run:
 
         :::console
         root@host$ cd /etc/osdf-cache
