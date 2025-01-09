@@ -44,6 +44,11 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **January 9, 2025:** frontier-squid 5.9-3.2
+-   frontier-squid 5.9-3.2
+    -   Add site `*.eessi.science` to the `MAJOR_CVMFS` list of allowed CVMFS Stratum 1s
+    -   Move the `frontier-squid` start/stop script from `/etc/init.d` to `/usr/libexec/squid`
+
 ### **January 6, 2025:** HTCondor 23.0.19; Upcoming: HTCondor 23.10.19
 -   [HTCondor 23.0.19](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-19)
     -   Numerous updates in memory tracking with cgroups
