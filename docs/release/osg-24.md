@@ -14,6 +14,11 @@ OSG 24 will be supported for [approximately two years total](release_series.md#s
 Latest News
 -----------
 
+### **January 9, 2025:** frontier-squid 5.9-3.2
+-   frontier-squid 5.9-3.2
+    -   Add site `*.eessi.science` to the `MAJOR_CVMFS` list of allowed CVMFS Stratum 1s
+    -   Move the `frontier-squid` start/stop script from `/etc/init.d` to `/usr/libexec/squid`
+
 ### **January 6, 2025:** HTCondor 24.0.3; Upcoming: HTCondor 24.3.0
 -   [HTCondor 24.0.3](https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-3)
     -   Numerous updates in memory tracking with cgroups
