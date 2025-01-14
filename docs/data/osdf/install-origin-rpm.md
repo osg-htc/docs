@@ -27,7 +27,7 @@ Before starting the installation process, consider the following requirements:
     * 1 core
     * 1 Gbps connectivity
     * 12 GB of RAM
-    * Several GB of local disk space be available for log files,
+    * 10 GB of local disk space in `/var/log` for log files,
       although some logging verbosity can be reduced.
 
 As with all OSG software installations, there are some one-time steps to prepare in advance:
