@@ -6,6 +6,10 @@ Installing the OSDF Origin by RPM
 !!! warning "OSG 24"
     This installation guide requires OSG 24
 
+!!! tip "Upgrading from a non-Pelican origin?"
+    This installation guide also walks you through upgrading an origin that you installed prior to OSG 24.
+    See [this section](#upgrading-a-non-pelican-origin) for more details.
+
 This document describes how to install an Open Science Data Federation (OSDF) Origin service via RPMs.
 This service, based on the [Pelican Platform](https://docs.pelicanplatform.org/federating-your-data), allows an
 administrator to serve data from a POSIX filesystem or S3 endpoint through the global OSDF infrastructure.
