@@ -14,6 +14,18 @@ OSG 24 will be supported for [approximately two years total](release_series.md#s
 Latest News
 -----------
 
+### **January 23, 2025:** VO Package v137-4, osg-scitokens-mapfile 14, osg-ce, osg-wn-client, osg-xrootd, xcache
+-   [VO Package v137-4](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-137-4)
+    -   Add new production IAM endpoints to vomses file for ATLAS, Alice, and LHCb
+-   osg-scitokens-mapfile 14
+    -   Fix capitalization in URL for the new CMS issuer
+-   Use weak RPM dependencies to prefer osg-ca-certs for grid-certificates in the following packages:
+    -   osg-ce
+    -   osg-wn-client
+    -   osg-xrootd
+    -   vo-client
+    -   xcache
+
 ### **January 9, 2025:** frontier-squid 5.9-3.2
 -   frontier-squid 5.9-3.2
     -   Add site `*.eessi.science` to the `MAJOR_CVMFS` list of allowed CVMFS Stratum 1s
