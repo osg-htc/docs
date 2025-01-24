@@ -17,8 +17,9 @@ Apptainer works either by making use of unprivileged user namespaces
 or with a setuid-root assist program. 
 By default it does not install the setuid-root assist program
 and it uses only unprivileged user namespaces.
-Unprivileged user namespaces are available on all OS versions that
-OSG supports.
+Unprivileged user namespaces are enabled by default on all OS versions that
+OSG supports, although some system administrators may have disabled them.
+Instructions to enable it are [below](#enabling-unprivileged-apptainer).
 
 !!! danger "Kernel vs. Userspace Security"
     Enabling unprivileged user namespaces increases the risk to the
@@ -63,7 +64,8 @@ There are two sets of instructions on this page:
 
 OSG VOs all support running apptainer directly from CVMFS, when CVMFS
 is available and unprivileged user namespaces are enabled.
-Unprivileged user namespaces are enabled by default on EL 8+.
+Unprivileged user namespaces are enabled by default on all OS versions
+that OSG supports.
 When unprivileged user namespaces are enabled, OSG
 recommends that sites not install Apptainer unless they have
 non-OSG users that require it.
@@ -77,6 +79,138 @@ non-setuid installation that makes use of unprivileged user namespaces
 and will need to install an additional apptainer-suid RPM if they
 want a setuid installation that does not require unprivileged user
 namespaces.
+
+Enabling Unprivileged Apptainer
+-------------------------------
+
+The instructions in this section are for enabling Apptainer to run
+unprivileged.
+
+1. Make sure unprivileged user namespaces are enabled.  They are
+   enabled by default on EL 8 and EL 9, but some system administrators
+   may have disabled them, possibly because of worries about a need for
+   frequent kernel patching (regarding that see step 2).  Look for a
+   `sysctl` setting for `user.max_user_namespaces` which needs to be
+   non-zero.  Examples for when it was disabled often showed setting
+   it to a value of 15000.
+
+1. (Recommended) Disable network namespaces:
+
+        :::console
+        root@host # echo "user.max_net_namespaces = 0" \
+            > /etc/sysctl.d/90-max_net_namespaces.conf
+        root@host # sysctl -p /etc/sysctl.d/90-max_net_namespaces.conf
+
+    OSG VOs do not need network namespaces with Apptainer, and
+    disabling them significantly lowers the risk profile of user
+    namespaces and reduces the frequency of needing to apply urgent updates.
+    Most of the kernel vulnerabilities related to unprivileged user
+    namespaces over the last several years have been in combination with
+    network namespaces.
+
+    Network namespaces are, however, utilized by other software,
+    such as Docker or Podman.
+    Disabling network namespaces may break other
+    software, or limit its capabilities (such as requiring the
+    `--net=host` option in Docker or Podman).
+    
+    Disabling network namespaces blocks the systemd PrivateNetwork
+    feature, which is a feature that is used by some EL 8 & 9 services
+    by default.  To check them all, look for PrivateNetwork in
+    `/lib/systemd/system/*.service` and see which of those services are
+    enabled but failed to start.  The only default such service on EL 8
+    is systemd-hostnamed, and a popular non-default such service is
+    mlocate-updatedb.  The PrivateNetwork feature can be turned off for
+    a service without modifying an RPM-installed file through a
+    `<service>.d/*.conf` file, for example for systemd-hostnamed:
+
+        :::console
+        root@host # cd /etc/systemd/system
+        root@host # mkdir -p systemd-hostnamed.service.d
+        root@host # (echo "[Service]"; echo "PrivateNetwork=no") \
+                >systemd-hostnamed.service.d/no-private-network.conf
+        root@host # systemctl daemon-reload
+        root@host # systemctl start systemd-hostnamed
+        root@host # systemctl status systemd-hostnamed
+
+
+### Configuring Docker to work with Apptainer ###
+
+If docker is being used to run jobs, the following options are 
+recommended to allow unprivileged Apptainer to run (it does not
+need `--privileged` or any added capabilities):
+
+    ::console
+    --security-opt seccomp=unconfined --security-opt systempaths=unconfined
+
+`--security-opt seccomp=unconfined` enables unshare to be called
+(which is needed to create namespaces),
+and `--security-opt systempaths=unconfined` allows `/proc` to be mounted
+in an unprivileged process namespace (as is done by apptainer exec -p).
+`--security-opt systempaths=unconfined` requires Docker 19.03 or later.
+The options are secure as long as the system administrator controls
+the images and does not allow user code to run as root, and are
+generally more secure than adding capabilities.  If at this point no
+setuid or setcap programs needs to be run within the container, adding the
+following option will improve security by preventing any privilege
+escalation (Apptainer uses the same feature on its containers):
+
+    ::console
+    --security-opt no-new-privileges
+
+In addition, the following option is recommended for allowing
+unprivileged fuse mounts:
+
+    ::console
+    --device=/dev/fuse
+
+### Configuring Unprivileged Apptainer ###
+
+When unprivileged user namespaces are enabled and VOs run apptainer from
+CVMFS, the Apptainer configuration file also comes from CVMFS so local
+sites have no control over changing the configuration.  However, the
+most common local configuration change to the apptainer RPM is to add
+additional local "bind path" options to map extra local file paths into
+containers.  This can instead be accomplished by setting the
+`APPTAINER_BINDPATH` variable in the environment of jobs, for
+example through
+[configuration](../other/configuration-with-osg-configure.md#local-settings)
+on your compute entrypoint.
+This is a comma-separated list of paths to bind, following the syntax of the
+`apptainer exec --bind` option.
+In order to be backward compatible with Singularity, also set
+`SINGULARITY_BINDPATH` to the same value.
+Apptainer also recognizes that variable but it prints a deprecation
+warning if only a `SINGULARITY_` variable is set without the
+corresponding `APPTAINER_` variable.
+
+There are also other environment variables that can affect Apptainer
+operation; see the
+[Apptainer documentation](https://apptainer.org/docs/user/main/appendix.html)
+for details.
+
+### Validating Unprivileged Apptainer in CVMFS ###
+
+If you will not be installing Apptainer locally and
+you haven't yet installed [CVMFS](install-cvmfs.md), please do so.
+Alternatively, use the
+[cvmfsexec package](https://github.com/cvmfs-contrib/cvmfsexec)
+configured for osg as an unprivileged user and mount the
+oasis.opensciencegrid.org and singularity.opensciencegrid.org
+repositories.
+
+Then as an unprivileged user verify that Apptainer in CVMFS works with this
+command:
+
+```console
+user@host $ /cvmfs/oasis.opensciencegrid.org/mis/apptainer/bin/apptainer \
+                exec --contain --ipc --pid --bind /cvmfs \
+                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el8:latest \
+                ps -ef
+UID          PID    PPID  C STIME TTY          TIME CMD
+user           1       0  0 10:51 console  00:00:00 appinit
+user          11       1  0 10:51 console  00:00:00 /usr/bin/ps -ef
+```
 
 
 Installing Apptainer
