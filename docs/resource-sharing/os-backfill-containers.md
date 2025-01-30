@@ -125,6 +125,10 @@ On EL hosts, the pilot container can also be managed via a systemctl service pro
 
             WORKER_TEMP_DIR=/scratch
 
+    !!! note "Scratch space ownership"
+        The EP is run under uid 1000.
+        Ensure this user has read, write, and execute access to the scratch space.
+
 1. Start the OSPool EP container service:
 
         :::console
