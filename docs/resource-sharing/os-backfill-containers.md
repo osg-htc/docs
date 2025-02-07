@@ -27,6 +27,10 @@ Before Starting
 In order to configure the container, you will need:
 
 1. A system that can run containers, such as Docker or Kubernetes
+1. Appropriate user permissions configured on the system.
+   1. Launching a container manually via docker requires membership in the [`docker` group](https://docs.docker.com/engine/install/linux-postinstall/).
+   2. Installing the container via RPM and launching it via systemd both require `root` privileges.
+   3. A scratch directory on the system must be writable by uid 1000.
 1. A [registered administrative contact](../common/contact-registration.md)
 1. A [registered resource](../common/registration.md) in OSG Topology;
    resource registration allows OSG to do proper usage accounting and maintain contacts in case of security incidents
@@ -107,7 +111,9 @@ On EL hosts, the pilot container can also be managed via a systemctl service pro
         :::console
         root@host # yum install ospool-ep
 
-1. Copy your OSPool Access Token to `/etc/osg/ospool-ep.tkn`.
+1. [Obtain an OSPool Access Token](https://os-registry.opensciencegrid.org/) for the pilot.
+   
+1. Copy the OSPool Access Token obtained in the previous step to `/etc/osg/ospool-ep.tkn`.
 
     !!! note "Token file ownership"
         The EP is run under uid 1000.
@@ -124,10 +130,26 @@ On EL hosts, the pilot container can also be managed via a systemctl service pro
       then set `WORKER_TEMP_DIR` to the scratch directory; e.g.:
 
             WORKER_TEMP_DIR=/scratch
+    
+      Ensure that the directory is writable by uid 1000.
 
     !!! note "Scratch space ownership"
         The EP is run under uid 1000.
         Ensure this user has read, write, and execute access to the scratch space.
+
+1.  _Highly Recommended_: Configure CVMFS via `/etc/osg/ospool-ep.cfg`:
+
+    - If [CVMFS is installed](https://osg-htc.org/docs/worker-node/install-cvmfs/) on the host system,
+      set `BIND_MOUNT_CVMFS=true`
+    - Otherwise, set `CVMFSEXEC_REPOS`, `CVMFS_HTTP_PROXY`, and `CVMFS_QUOTA_LIMIT` in accordance with the
+      [Configure cvmfsexec](#cvmfsexec) documentation.
+
+1. Configure additional variables in `/etc/osg/ospool-ep.cfg`:
+
+    - If your site has a [Squid HTTP Caching Proxy](https://osg-htc.org/docs/data/run-frontier-squid-container/) configured,
+      set `OSG_SQUID_LOCATION` to that proxy's HTTP address.
+
+    - If providing NVIDIA GPU resources, set `PROVIDE_NVIDIA_GPU=true`
 
 1. Start the OSPool EP container service:
 
