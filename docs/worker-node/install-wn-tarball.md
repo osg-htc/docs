@@ -25,10 +25,12 @@ Before starting, ensure the host has [a supported operating system](../release/s
 Download the WN Client
 ----------------------
 
-!!! info "Where is the OSG 24 worker node tarball?"
-    We plan to distribute the worker node tarball in the coming weeks.
-
 Please pick the `osg-wn-client` tarball that is appropriate for your distribution and architecture. You will find them in <https://repo.osg-htc.org/tarball-install/> .
+
+For OSG 24:
+
+-   [Binaries for RHEL8-compatible](https://repo.osg-htc.org/tarball-install/24-main/osg-wn-client-latest.el8.x86_64.tar.gz)
+-   [Binaries for RHEL9-compatible](https://repo.osg-htc.org/tarball-install/24-main/osg-wn-client-latest.el9.x86_64.tar.gz)
 
 For OSG 23:
 
