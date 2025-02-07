@@ -145,7 +145,7 @@ install the executable as `/usr/local/bin/pelican`, and run:
 
     The newly created files, `issuer.jwk` and `issuer-pub.jwks` are the private and public keys, respectively.
 
-1.  **Save these files**; if you lose the `issuer.jwk`, your cache will need to be re-approved.
+1.  **Save these files**; if you lose the `issuer.jwk`, your origin will need to be re-approved.
 
 
 Running an Origin
