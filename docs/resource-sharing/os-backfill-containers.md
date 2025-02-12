@@ -29,8 +29,8 @@ In order to configure the container, you will need:
 1. A system that can run containers, such as Docker or Kubernetes
 1. Appropriate user permissions configured on the system.
    1. Launching a container manually via docker requires membership in the [`docker` group](https://docs.docker.com/engine/install/linux-postinstall/).
-   2. Installing the container via RPM and launching it via systemd both require `root` privileges.
-   3. A scratch directory on the system must be writable by uid 1000.
+   1. Installing the container via RPM and launching it via systemd both require `root` privileges.
+   1. A scratch directory on the system must be writable by uid 1000.
 1. A [registered administrative contact](../common/contact-registration.md)
 1. A [registered resource](../common/registration.md) in OSG Topology;
    resource registration allows OSG to do proper usage accounting and maintain contacts in case of security incidents
