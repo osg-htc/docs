@@ -15,7 +15,7 @@ Latest News
 -----------
 
 ### **February 13, 2025:** VO Package v138-1, GlideinWMS 3.10.10, XRootD Monitoring Shoveler 1.4.0, XRDCL Pelican 1.0.5
--   [VO Package v138-1](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-137-4)
+-   [VO Package v138-1](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-138)
     - Include voms-cms-auth.cern.ch in `/etc/vomses`
     - Remove `{lcg-,}voms2.cern.ch` LSC files and from `/etc/vomses`
 - GlideinWMS 3.10.10
