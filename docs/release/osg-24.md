@@ -16,8 +16,8 @@ Latest News
 
 ### **February 13, 2025:** VO Package v138-1, GlideinWMS 3.10.10, XRootD Monitoring Shoveler 1.4.0, XRDCL Pelican 1.0.5
 -   [VO Package v138-1](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-137-4)
-    - Include voms-cms-auth.cern.ch in /etc/vomses
-    - Remove {lcg-,}voms2.cern.ch LSC files and from /etc/vomses
+    - Include voms-cms-auth.cern.ch in `/etc/vomses`
+    - Remove `{lcg-,}voms2.cern.ch` LSC files and from `/etc/vomses`
 - GlideinWMS 3.10.10
     - Now using also Apptainer included in the HTCondor tar ball (Issue#364, PR#473)
     - Added custom JWT-authenticated log server example (new RPM glideinwms-logging) (Issue#398, PR#467)
@@ -27,7 +27,7 @@ Latest News
     - Bug fix: Fixed further log files errors and inconsistent documentation (Issue#464, PR#462, PR#463)
 - XRootD Monitoring Shoveler 1.4.0
     - Updated from v1.1.2; see upstream release notes at https://github.com/opensciencegrid/xrootd-monitoring-shoveler/releases for details.
-- XRDCL Pelican
+- XRootD Pelican client plugin (`xrdcl-pelican`)
     - Fixes crash under load due to director information caching.
 
 
