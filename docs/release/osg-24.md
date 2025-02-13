@@ -26,7 +26,7 @@ Latest News
     - Bug fix: Allow anonymous SSL authentication for the dynamically generated client config (Issue#222, PR#470)
     - Bug fix: Fixed further log files errors and inconsistent documentation (Issue#464, PR#462, PR#463)
 - XRootD Monitoring Shoveler 1.4.0
-    - Updated from v1.1.2; see upstream release notes at https://github.com/opensciencegrid/xrootd-monitoring-shoveler/releases for details.
+    - Updated from v1.1.2; see upstream release notes at <https://github.com/opensciencegrid/xrootd-monitoring-shoveler/releases> for details.
 - XRootD Pelican client plugin (`xrdcl-pelican`)
     - Fixes crash under load due to director information caching.
 
