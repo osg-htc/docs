@@ -146,6 +146,16 @@ On EL hosts, the pilot container can also be managed via a systemctl service pro
 
     - If your site has a [Squid HTTP Caching Proxy](https://osg-htc.org/docs/data/run-frontier-squid-container/) configured,
       set `OSG_SQUID_LOCATION` to that proxy's HTTP address.
+
+    - If providing NVIDIA GPU resources, set `PROVIDE_NVIDIA_GPU=true`
+      - This automatically sets variables in accordance with section [Providing GPU Resources](#providing-gpu-resources).
+
+    !!! note "GPU Configuration Minimum Version"
+        The first version of the ospool-ep RPM to provide support for GPU configuration is
+        24-2, which is currently available via the osg-development repository. It can be
+        installed using
+        `yum install --enablerepo=osg-development ospool-ep`
+
 1. Start the OSPool EP container service:
 
         :::console
