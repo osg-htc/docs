@@ -56,9 +56,7 @@ In order to successfully start payload jobs:
 1. Set `GLIDEIN_Site` and `GLIDEIN_ResourceName` to match the resource group name and resource name that you registered
    in Topology, respectively.
 1. Set the `OSG_SQUID_LOCATION` environment variable to the HTTP address of your preferred Squid instance.
-1. _If providing NVIDIA GPU resources:_ Bind-mount `/etc/OpenCL/vendors`, read-only.
-   If you are using Docker to launch the container, this is done with the command line flags
-   `-v /etc/OpenCL/vendors:/etc/OpenCL/vendors:ro`.
+1. _If providing NVIDIA GPU resources:_ See section [Providing GPU Resources](#providing-gpu-resources)
 1. _Strongly_recommended:_ Enable [CVMFS](#recommended-cvmfs) via one of the mechanisms described below.
 1. _Strongly recommended:_ If you want job I/O to be done in a separate directory outside of the container,
    volume mount the desired directory on the host to `/pilot` inside the container.
@@ -234,6 +232,45 @@ docker run -it --rm --user osg      \
 
 Fill in the values for `/path/to/token`, `/worker-temp-dir`, `GLIDEIN_Site`, `GLIDEIN_ResourceName`, and `OSG_SQUID_LOCATION` [as above](#running-the-container-with-docker).
 
+
+### Providing GPU Resources
+
+By default, the container will not detect NVIDIA GPU resources available on its host. To configure
+the container for access to its hosts' resources, set the following:
+
+1. Replace the default `24-release` docker image tag with the [CUDA-enabled](https://developer.nvidia.com/cuda-toolkit)
+   `24-cuda-11_8_0-release` tag
+
+1. Bind-mount `/etc/OpenCL/vendors`, read-only. If you are using Docker to launch the container, 
+   this is done with the command line flags `-v /etc/OpenCL/vendors:/etc/OpenCL/vendors:ro`.
+
+
+1. Ensure the `singularity.opensciencegrid.org` CVMFS repo is enabled by following one of the methods
+   described in [CVMFS](#recommended-cvmfs)
+
+1. The NVIDIA runtime is known to conflict with Singularity [PID Namespaces](https://man7.org/linux/man-pages/man7/pid_namespaces.7.html)
+   Disable PID namespaces by adding the flag `-e SINGULARITY_DISABLE_PID_NAMESPACES=True`
+
+This is the [example at the top of the page](#running-the-container-with-docker), modified
+to provide NVIDIA GPU resources:
+
+```hl_lines="6 11 13 15"
+docker run -it --rm --user osg  \
+       --pull=always            \
+       --privileged             \
+       -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
+       -v /worker-temp-dir:/pilot               \
+       -v /etc/OpenCL/vendors:/etc/OpenCL/vendors:ro \
+       -e GLIDEIN_Site="..."                    \
+       -e GLIDEIN_ResourceName="..."            \
+       -e GLIDEIN_Start_Extra="True"            \
+       -e OSG_SQUID_LOCATION="..."              \
+       -e SINGULARITY_DISABLE_NAMESPACES=True   \
+       -e CVMFSEXEC_REPOS="                     \
+            oasis.opensciencegrid.org           \
+            singularity.opensciencegrid.org"    \
+       hub.opensciencegrid.org/osg-htc/ospool-ep:24-cuda_11_8_0-release
+```
 
 ### Limiting resource usage
 
