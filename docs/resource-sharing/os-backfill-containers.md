@@ -148,9 +148,6 @@ On EL hosts, the pilot container can also be managed via a systemctl service pro
 
     - If your site has a [Squid HTTP Caching Proxy](https://osg-htc.org/docs/data/run-frontier-squid-container/) configured,
       set `OSG_SQUID_LOCATION` to that proxy's HTTP address.
-
-    - If providing NVIDIA GPU resources, set `PROVIDE_NVIDIA_GPU=true`
-
 1. Start the OSPool EP container service:
 
         :::console
