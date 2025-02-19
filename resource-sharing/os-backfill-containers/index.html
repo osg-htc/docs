@@ -2166,6 +2166,10 @@ the pilots may remain idle.</p>
 <p>In order to configure the container, you will need:</p>
 <ol>
 <li>A system that can run containers, such as Docker or Kubernetes</li>
+<li>Appropriate user permissions configured on the system.</li>
+<li>Launching a container manually via docker requires membership in the <a href="https://docs.docker.com/engine/install/linux-postinstall/"><code>docker</code> group</a>.</li>
+<li>Installing the container via RPM and launching it via systemd both require <code>root</code> privileges.</li>
+<li>A scratch directory on the system must be writable by uid 1000.</li>
 <li>A <a href="../../common/contact-registration/">registered administrative contact</a></li>
 <li>A <a href="../../common/registration/">registered resource</a> in OSG Topology;
    resource registration allows OSG to do proper usage accounting and maintain contacts in case of security incidents
@@ -2242,7 +2246,10 @@ Singularity (now known as Apptainer) allows OSPool users to use their own contai
 
 </li>
 <li>
-<p>Copy your OSPool Access Token to <code>/etc/osg/ospool-ep.tkn</code>.</p>
+<p><a href="https://os-registry.opensciencegrid.org/">Obtain an OSPool Access Token</a> for the pilot.</p>
+</li>
+<li>
+<p>Copy the OSPool Access Token obtained in the previous step to <code>/etc/osg/ospool-ep.tkn</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Token file ownership</p>
 <p>The EP is run under uid 1000.
@@ -2263,6 +2270,7 @@ Ensure this user has read access to the token file.</p>
 
 </li>
 </ul>
+<p>Ensure that the directory is writable by uid 1000.</p>
 <div class="admonition note">
 <p class="admonition-title">Scratch space ownership</p>
 <p>The EP is run under uid 1000.
@@ -2270,10 +2278,25 @@ Ensure this user has read, write, and execute access to the scratch space.</p>
 </div>
 </li>
 <li>
+<p><em>Highly Recommended</em>: Configure CVMFS via <code>/etc/osg/ospool-ep.cfg</code>:</p>
+<ul>
+<li>If <a href="https://osg-htc.org/docs/worker-node/install-cvmfs/">CVMFS is installed</a> on the host system,
+  set <code>BIND_MOUNT_CVMFS=true</code></li>
+<li>Otherwise, set <code>CVMFSEXEC_REPOS</code>, <code>CVMFS_HTTP_PROXY</code>, and <code>CVMFS_QUOTA_LIMIT</code> in accordance with the
+  <a href="#cvmfsexec">Configure cvmfsexec</a> documentation.</li>
+</ul>
+</li>
+<li>
+<p>Configure additional variables in <code>/etc/osg/ospool-ep.cfg</code>:</p>
+<ul>
+<li>If your site has a <a href="https://osg-htc.org/docs/data/run-frontier-squid-container/">Squid HTTP Caching Proxy</a> configured,
+  set <code>OSG_SQUID_LOCATION</code> to that proxy's HTTP address.</li>
+<li>
 <p>Start the OSPool EP container service:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>systemctl start ospool-ep
-</code></pre></div>
-
+<p>:::console
+root@host # systemctl start ospool-ep</p>
+</li>
+</ul>
 </li>
 <li>
 <p>(Optional) monitor the systemctl service logs to see if the container starts successfully:</p>
