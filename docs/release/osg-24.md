@@ -14,6 +14,24 @@ OSG 24 will be supported for [approximately two years total](release_series.md#s
 Latest News
 -----------
 
+### **February 27, 2025:** , XRootD 5.7.3, CVMFS 2.12.6, IGTF 1.133, OSG Token Renewer 0.9.0, OSPool EP 24-2
+- [XRootD v5.7.3](https://github.com/xrootd/xrootd/releases/tag/v5.7.3)
+    - Various major and minor bugfixes
+- [CVMFS 2.12.6](https://cvmfs.readthedocs.io/en/stable/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-12-6-2-12-5)
+    - \[client\] Revert CVMFS_PATCH_LEVEL to 0 for check_cvmfs.sh
+    - \[rpm\] fix package install on wsl2 and other non-systemd platforms
+- CA certificates based on [IGTF 1.133](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    - Updated re-issued GridCanada root with extended validity period (CA)
+    - Added GEANT TCS Generation 5 TLS and Auth ICAs and corresponding HARICA 
+      and private trust roots (EU)
+    - updated SHA-256 root CA for RDIG mitigating EL9/FedoraCore deprication
+    - MARGI put on hold due to domainname resolution issues (MK)
+- OSG Token Renewer 0.9.0
+    - Move the previously releasesd osg-upcoming package into osg-main
+- OSPool EP 24-2
+    - Update docker launch script to support providing NVIDIA GPU Resources
+
+
 ### **February 13, 2025:** VO Package v138-1, GlideinWMS 3.10.10, XRootD Monitoring Shoveler 1.4.0, XRDCL Pelican 1.0.5
 -   [VO Package v138-1](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-138)
     - Include voms-cms-auth.cern.ch in `/etc/vomses`
