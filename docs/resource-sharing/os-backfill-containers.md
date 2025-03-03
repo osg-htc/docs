@@ -39,63 +39,6 @@ In order to configure the container, you will need:
    through the [OSPool Token Registry](https://os-registry.opensciencegrid.org/)
 1. An [HTTP caching proxy](../data/run-frontier-squid-container.md) at or near your site.
 
-Running the Container with Docker
----------------------------------
-
-The Docker image is kept in [DockerHub](https://hub.docker.com/r/opensciencegrid/osgvo-docker-pilot).
-In order to successfully start payload jobs:
-
-
-1. **Configure authentication:**
-   Authentication with the OSPool is performed using tokens retrieved from the
-   [OSPool Token Registry](https://os-registry.opensciencegrid.org/)
-   which you can then pass to the container by volume mounting it as a file under `/etc/condor/tokens-orig.d/`.
-   If you are using Docker to launch the container, this is done with the command line flag
-   `-v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org`.
-   Replace `/path/to/token` with the full path to the token you obtained from the OSPool Token Registry.
-1. Set `GLIDEIN_Site` and `GLIDEIN_ResourceName` to match the resource group name and resource name that you registered
-   in Topology, respectively.
-1. Set the `OSG_SQUID_LOCATION` environment variable to the HTTP address of your preferred Squid instance.
-1. _If providing NVIDIA GPU resources:_ See section [Providing GPU Resources](#providing-gpu-resources)
-1. _Strongly_recommended:_ Enable [CVMFS](#recommended-cvmfs) via one of the mechanisms described below.
-1. _Strongly recommended:_ If you want job I/O to be done in a separate directory outside of the container,
-   volume mount the desired directory on the host to `/pilot` inside the container.
-
-    Without this, user jobs may compete for disk space with other containers on your system.
-
-    If you are using Docker to launch the container, this is done with the command line flag
-    `-v /worker-temp-dir:/pilot`.
-    Replace `/worker-temp-dir` with a directory you created for jobs to write into.
-    Make sure the user you run your container as has write access to this directory.
-
-1. _Optional:_ add an expression with the `GLIDEIN_Start_Extra` environment variable to append to the
-   [HTCondor `START` expression](https://htcondor.readthedocs.io/en/latest/admin-manual/ep-policy-configuration.html#the-start-expression);
-   this limits the pilot to only run certain jobs.
-
-1. _Optional:_ [limit OSG pilot container resource usage](#limiting-resource-usage)
-
-Here is an example invocation using `docker run` by hand:
-
-```
-docker run -it --rm --user osg  \
-       --pull=always            \
-       --privileged             \
-       -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
-       -v /worker-temp-dir:/pilot               \
-       -e GLIDEIN_Site="..."                    \
-       -e GLIDEIN_ResourceName="..."            \
-       -e GLIDEIN_Start_Extra="True"            \
-       -e OSG_SQUID_LOCATION="..."              \
-       -e CVMFSEXEC_REPOS="                     \
-            oasis.opensciencegrid.org           \
-            singularity.opensciencegrid.org"    \
-       hub.opensciencegrid.org/osg-htc/ospool-ep:24-release
-```
-
-Replace `/path/to/token` with the location you saved the token obtained from the OSPool Token Registry.
-Privileged mode (`--privileged`) requested in the above `docker run` allows the container
-to mount [CVMFS using cvmfsexec](#cvmfsexec) and invoke `singularity` for user jobs.
-Singularity (now known as Apptainer) allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).
 
 Running the Container via RPM
 ---------------------------------
@@ -164,6 +107,65 @@ On EL hosts, the pilot container can also be managed via a systemctl service pro
 
         :::console
         root@host # journalctl -f -u ospool-ep
+
+
+Running the Container with Docker
+---------------------------------
+
+The Docker image is kept in [DockerHub](https://hub.docker.com/r/opensciencegrid/osgvo-docker-pilot).
+In order to successfully start payload jobs:
+
+
+1. **Configure authentication:**
+   Authentication with the OSPool is performed using tokens retrieved from the
+   [OSPool Token Registry](https://os-registry.opensciencegrid.org/)
+   which you can then pass to the container by volume mounting it as a file under `/etc/condor/tokens-orig.d/`.
+   If you are using Docker to launch the container, this is done with the command line flag
+   `-v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org`.
+   Replace `/path/to/token` with the full path to the token you obtained from the OSPool Token Registry.
+1. Set `GLIDEIN_Site` and `GLIDEIN_ResourceName` to match the resource group name and resource name that you registered
+   in Topology, respectively.
+1. Set the `OSG_SQUID_LOCATION` environment variable to the HTTP address of your preferred Squid instance.
+1. _If providing NVIDIA GPU resources:_ See section [Providing GPU Resources](#providing-gpu-resources)
+1. _Strongly_recommended:_ Enable [CVMFS](#recommended-cvmfs) via one of the mechanisms described below.
+1. _Strongly recommended:_ If you want job I/O to be done in a separate directory outside of the container,
+   volume mount the desired directory on the host to `/pilot` inside the container.
+
+    Without this, user jobs may compete for disk space with other containers on your system.
+
+    If you are using Docker to launch the container, this is done with the command line flag
+    `-v /worker-temp-dir:/pilot`.
+    Replace `/worker-temp-dir` with a directory you created for jobs to write into.
+    Make sure the user you run your container as has write access to this directory.
+
+1. _Optional:_ add an expression with the `GLIDEIN_Start_Extra` environment variable to append to the
+   [HTCondor `START` expression](https://htcondor.readthedocs.io/en/latest/admin-manual/ep-policy-configuration.html#the-start-expression);
+   this limits the pilot to only run certain jobs.
+
+1. _Optional:_ [limit OSG pilot container resource usage](#limiting-resource-usage)
+
+Here is an example invocation using `docker run` by hand:
+
+```
+docker run -it --rm --user osg  \
+       --pull=always            \
+       --privileged             \
+       -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
+       -v /worker-temp-dir:/pilot               \
+       -e GLIDEIN_Site="..."                    \
+       -e GLIDEIN_ResourceName="..."            \
+       -e GLIDEIN_Start_Extra="True"            \
+       -e OSG_SQUID_LOCATION="..."              \
+       -e CVMFSEXEC_REPOS="                     \
+            oasis.opensciencegrid.org           \
+            singularity.opensciencegrid.org"    \
+       hub.opensciencegrid.org/osg-htc/ospool-ep:24-release
+```
+
+Replace `/path/to/token` with the location you saved the token obtained from the OSPool Token Registry.
+Privileged mode (`--privileged`) requested in the above `docker run` allows the container
+to mount [CVMFS using cvmfsexec](#cvmfsexec) and invoke `singularity` for user jobs.
+Singularity (now known as Apptainer) allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).
 
 
 Optional Configuration
