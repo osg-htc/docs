@@ -152,9 +152,8 @@ On EL hosts, the pilot container can also be managed via a systemctl service pro
 
     !!! note "GPU Configuration Minimum Version"
         The first version of the ospool-ep RPM to provide support for GPU configuration is
-        24-2, which is currently available via the osg-development repository. It can be
-        installed using
-        `yum install --enablerepo=osg-development ospool-ep`
+        24-2. Ensure your installation of the ospool-ep package is up to date using 
+        `yum update ospool-ep`.
 
 1. Start the OSPool EP container service:
 
