@@ -496,15 +496,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#running-the-container-with-docker" class="md-nav__link">
-    Running the Container with Docker
+  <a href="#running-the-container-via-rpm" class="md-nav__link">
+    Running the Container via RPM
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#running-the-container-via-rpm" class="md-nav__link">
-    Running the Container via RPM
+  <a href="#running-the-container-with-docker" class="md-nav__link">
+    Running the Container with Docker
   </a>
   
 </li>
@@ -541,6 +541,13 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#providing-gpu-resources" class="md-nav__link">
+    Providing GPU Resources
+  </a>
   
 </li>
         
@@ -2025,15 +2032,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#running-the-container-with-docker" class="md-nav__link">
-    Running the Container with Docker
+  <a href="#running-the-container-via-rpm" class="md-nav__link">
+    Running the Container via RPM
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#running-the-container-via-rpm" class="md-nav__link">
-    Running the Container via RPM
+  <a href="#running-the-container-with-docker" class="md-nav__link">
+    Running the Container with Docker
   </a>
   
 </li>
@@ -2070,6 +2077,13 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#providing-gpu-resources" class="md-nav__link">
+    Providing GPU Resources
+  </a>
   
 </li>
         
@@ -2178,61 +2192,6 @@ the pilots may remain idle.</p>
    through the <a href="https://os-registry.opensciencegrid.org/">OSPool Token Registry</a></li>
 <li>An <a href="../../data/run-frontier-squid-container/">HTTP caching proxy</a> at or near your site.</li>
 </ol>
-<h2 id="running-the-container-with-docker">Running the Container with Docker<a class="headerlink" href="#running-the-container-with-docker" title="Permanent link">&para;</a></h2>
-<p>The Docker image is kept in <a href="https://hub.docker.com/r/opensciencegrid/osgvo-docker-pilot">DockerHub</a>.
-In order to successfully start payload jobs:</p>
-<ol>
-<li><strong>Configure authentication:</strong>
-   Authentication with the OSPool is performed using tokens retrieved from the
-   <a href="https://os-registry.opensciencegrid.org/">OSPool Token Registry</a>
-   which you can then pass to the container by volume mounting it as a file under <code>/etc/condor/tokens-orig.d/</code>.
-   If you are using Docker to launch the container, this is done with the command line flag
-   <code>-v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org</code>.
-   Replace <code>/path/to/token</code> with the full path to the token you obtained from the OSPool Token Registry.</li>
-<li>Set <code>GLIDEIN_Site</code> and <code>GLIDEIN_ResourceName</code> to match the resource group name and resource name that you registered
-   in Topology, respectively.</li>
-<li>Set the <code>OSG_SQUID_LOCATION</code> environment variable to the HTTP address of your preferred Squid instance.</li>
-<li><em>If providing NVIDIA GPU resources:</em> Bind-mount <code>/etc/OpenCL/vendors</code>, read-only.
-   If you are using Docker to launch the container, this is done with the command line flags
-   <code>-v /etc/OpenCL/vendors:/etc/OpenCL/vendors:ro</code>.</li>
-<li><em>Strongly_recommended:</em> Enable <a href="#recommended-cvmfs">CVMFS</a> via one of the mechanisms described below.</li>
-<li>
-<p><em>Strongly recommended:</em> If you want job I/O to be done in a separate directory outside of the container,
-   volume mount the desired directory on the host to <code>/pilot</code> inside the container.</p>
-<p>Without this, user jobs may compete for disk space with other containers on your system.</p>
-<p>If you are using Docker to launch the container, this is done with the command line flag
-<code>-v /worker-temp-dir:/pilot</code>.
-Replace <code>/worker-temp-dir</code> with a directory you created for jobs to write into.
-Make sure the user you run your container as has write access to this directory.</p>
-</li>
-<li>
-<p><em>Optional:</em> add an expression with the <code>GLIDEIN_Start_Extra</code> environment variable to append to the
-   <a href="https://htcondor.readthedocs.io/en/latest/admin-manual/ep-policy-configuration.html#the-start-expression">HTCondor <code>START</code> expression</a>;
-   this limits the pilot to only run certain jobs.</p>
-</li>
-<li>
-<p><em>Optional:</em> <a href="#limiting-resource-usage">limit OSG pilot container resource usage</a></p>
-</li>
-</ol>
-<p>Here is an example invocation using <code>docker run</code> by hand:</p>
-<div class="highlight"><pre><span></span><code>docker run -it --rm --user osg  \
-       --pull=always            \
-       --privileged             \
-       -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
-       -v /worker-temp-dir:/pilot               \
-       -e GLIDEIN_Site=&quot;...&quot;                    \
-       -e GLIDEIN_ResourceName=&quot;...&quot;            \
-       -e GLIDEIN_Start_Extra=&quot;True&quot;            \
-       -e OSG_SQUID_LOCATION=&quot;...&quot;              \
-       -e CVMFSEXEC_REPOS=&quot;                     \
-            oasis.opensciencegrid.org           \
-            singularity.opensciencegrid.org&quot;    \
-       hub.opensciencegrid.org/osg-htc/ospool-ep:24-release
-</code></pre></div>
-<p>Replace <code>/path/to/token</code> with the location you saved the token obtained from the OSPool Token Registry.
-Privileged mode (<code>--privileged</code>) requested in the above <code>docker run</code> allows the container
-to mount <a href="#cvmfsexec">CVMFS using cvmfsexec</a> and invoke <code>singularity</code> for user jobs.
-Singularity (now known as Apptainer) allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).</p>
 <h2 id="running-the-container-via-rpm">Running the Container via RPM<a class="headerlink" href="#running-the-container-via-rpm" title="Permanent link">&para;</a></h2>
 <p>On EL hosts, the pilot container can also be managed via a systemctl service provided by the <code>ospool-ep</code> rpm. To install this RPM:</p>
 <ol>
@@ -2289,14 +2248,27 @@ Ensure this user has read, write, and execute access to the scratch space.</p>
 <li>
 <p>Configure additional variables in <code>/etc/osg/ospool-ep.cfg</code>:</p>
 <ul>
-<li>If your site has a <a href="https://osg-htc.org/docs/data/run-frontier-squid-container/">Squid HTTP Caching Proxy</a> configured,
-  set <code>OSG_SQUID_LOCATION</code> to that proxy's HTTP address.</li>
+<li>
+<p>If your site has a <a href="https://osg-htc.org/docs/data/run-frontier-squid-container/">Squid HTTP Caching Proxy</a> configured,
+  set <code>OSG_SQUID_LOCATION</code> to that proxy's HTTP address.</p>
+</li>
+<li>
+<p>If providing NVIDIA GPU resources, set <code>PROVIDE_NVIDIA_GPU=true</code></p>
+</li>
+<li>This automatically sets variables in accordance with section <a href="#providing-gpu-resources">Providing GPU Resources</a>.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">GPU Configuration Minimum Version</p>
+<p>The first version of the ospool-ep RPM to provide support for GPU configuration is
+24-2. Ensure your installation of the ospool-ep package is up to date using 
+<code>yum update ospool-ep</code>.</p>
+</div>
+</li>
 <li>
 <p>Start the OSPool EP container service:</p>
-<p>:::console
-root@host # systemctl start ospool-ep</p>
-</li>
-</ul>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>systemctl start ospool-ep
+</code></pre></div>
+
 </li>
 <li>
 <p>(Optional) monitor the systemctl service logs to see if the container starts successfully:</p>
@@ -2305,6 +2277,59 @@ root@host # systemctl start ospool-ep</p>
 
 </li>
 </ol>
+<h2 id="running-the-container-with-docker">Running the Container with Docker<a class="headerlink" href="#running-the-container-with-docker" title="Permanent link">&para;</a></h2>
+<p>The Docker image is kept in <a href="https://hub.docker.com/r/opensciencegrid/osgvo-docker-pilot">DockerHub</a>.
+In order to successfully start payload jobs:</p>
+<ol>
+<li><strong>Configure authentication:</strong>
+   Authentication with the OSPool is performed using tokens retrieved from the
+   <a href="https://os-registry.opensciencegrid.org/">OSPool Token Registry</a>
+   which you can then pass to the container by volume mounting it as a file under <code>/etc/condor/tokens-orig.d/</code>.
+   If you are using Docker to launch the container, this is done with the command line flag
+   <code>-v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org</code>.
+   Replace <code>/path/to/token</code> with the full path to the token you obtained from the OSPool Token Registry.</li>
+<li>Set <code>GLIDEIN_Site</code> and <code>GLIDEIN_ResourceName</code> to match the resource group name and resource name that you registered
+   in Topology, respectively.</li>
+<li>Set the <code>OSG_SQUID_LOCATION</code> environment variable to the HTTP address of your preferred Squid instance.</li>
+<li><em>If providing NVIDIA GPU resources:</em> See section <a href="#providing-gpu-resources">Providing GPU Resources</a></li>
+<li><em>Strongly_recommended:</em> Enable <a href="#recommended-cvmfs">CVMFS</a> via one of the mechanisms described below.</li>
+<li>
+<p><em>Strongly recommended:</em> If you want job I/O to be done in a separate directory outside of the container,
+   volume mount the desired directory on the host to <code>/pilot</code> inside the container.</p>
+<p>Without this, user jobs may compete for disk space with other containers on your system.</p>
+<p>If you are using Docker to launch the container, this is done with the command line flag
+<code>-v /worker-temp-dir:/pilot</code>.
+Replace <code>/worker-temp-dir</code> with a directory you created for jobs to write into.
+Make sure the user you run your container as has write access to this directory.</p>
+</li>
+<li>
+<p><em>Optional:</em> add an expression with the <code>GLIDEIN_Start_Extra</code> environment variable to append to the
+   <a href="https://htcondor.readthedocs.io/en/latest/admin-manual/ep-policy-configuration.html#the-start-expression">HTCondor <code>START</code> expression</a>;
+   this limits the pilot to only run certain jobs.</p>
+</li>
+<li>
+<p><em>Optional:</em> <a href="#limiting-resource-usage">limit OSG pilot container resource usage</a></p>
+</li>
+</ol>
+<p>Here is an example invocation using <code>docker run</code> by hand:</p>
+<div class="highlight"><pre><span></span><code>docker run -it --rm --user osg  \
+       --pull=always            \
+       --privileged             \
+       -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
+       -v /worker-temp-dir:/pilot               \
+       -e GLIDEIN_Site=&quot;...&quot;                    \
+       -e GLIDEIN_ResourceName=&quot;...&quot;            \
+       -e GLIDEIN_Start_Extra=&quot;True&quot;            \
+       -e OSG_SQUID_LOCATION=&quot;...&quot;              \
+       -e CVMFSEXEC_REPOS=&quot;                     \
+            oasis.opensciencegrid.org           \
+            singularity.opensciencegrid.org&quot;    \
+       hub.opensciencegrid.org/osg-htc/ospool-ep:24-release
+</code></pre></div>
+<p>Replace <code>/path/to/token</code> with the location you saved the token obtained from the OSPool Token Registry.
+Privileged mode (<code>--privileged</code>) requested in the above <code>docker run</code> allows the container
+to mount <a href="#cvmfsexec">CVMFS using cvmfsexec</a> and invoke <code>singularity</code> for user jobs.
+Singularity (now known as Apptainer) allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).</p>
 <h2 id="optional-configuration">Optional Configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h2>
 <h3 id="recommended-cvmfs">(Recommended) CVMFS<a class="headerlink" href="#recommended-cvmfs" title="Permanent link">&para;</a></h3>
 <p><a href="https://cernvm.cern.ch/fs/">CernVM-FS</a> (CVMFS) is a read-only remote filesystem that many OSG jobs depend on for software and data.
@@ -2372,6 +2397,45 @@ modified to volume mount CVMFS instead of using cvmfsexec, and using reduced pri
         hub.opensciencegrid.org/osg-htc/ospool-ep:24-release
 </code></pre></div>
 <p>Fill in the values for <code>/path/to/token</code>, <code>/worker-temp-dir</code>, <code>GLIDEIN_Site</code>, <code>GLIDEIN_ResourceName</code>, and <code>OSG_SQUID_LOCATION</code> <a href="#running-the-container-with-docker">as above</a>.</p>
+<h3 id="providing-gpu-resources">Providing GPU Resources<a class="headerlink" href="#providing-gpu-resources" title="Permanent link">&para;</a></h3>
+<p>By default, the container will not detect NVIDIA GPU resources available on its host. To configure
+the container for access to its hosts' resources, set the following:</p>
+<ol>
+<li>
+<p>Replace the default <code>24-release</code> docker image tag with the <a href="https://developer.nvidia.com/cuda-toolkit">CUDA-enabled</a>
+   <code>24-cuda-11_8_0-release</code> tag</p>
+</li>
+<li>
+<p>Bind-mount <code>/etc/OpenCL/vendors</code>, read-only. If you are using Docker to launch the container, 
+   this is done with the command line flags <code>-v /etc/OpenCL/vendors:/etc/OpenCL/vendors:ro</code>.</p>
+</li>
+<li>
+<p>Ensure the <code>singularity.opensciencegrid.org</code> CVMFS repo is enabled by following one of the methods
+   described in <a href="#recommended-cvmfs">CVMFS</a></p>
+</li>
+<li>
+<p>The NVIDIA runtime is known to conflict with Singularity <a href="https://man7.org/linux/man-pages/man7/pid_namespaces.7.html">PID Namespaces</a>
+   Disable PID namespaces by adding the flag <code>-e SINGULARITY_DISABLE_PID_NAMESPACES=True</code></p>
+</li>
+</ol>
+<p>This is the <a href="#running-the-container-with-docker">example at the top of the page</a>, modified
+to provide NVIDIA GPU resources:</p>
+<div class="highlight"><pre><span></span><code>docker run -it --rm --user osg  \
+       --pull=always            \
+       --privileged             \
+       -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
+       -v /worker-temp-dir:/pilot               \
+<span class="hll">       -v /etc/OpenCL/vendors:/etc/OpenCL/vendors:ro \
+</span>       -e GLIDEIN_Site=&quot;...&quot;                    \
+       -e GLIDEIN_ResourceName=&quot;...&quot;            \
+       -e GLIDEIN_Start_Extra=&quot;True&quot;            \
+       -e OSG_SQUID_LOCATION=&quot;...&quot;              \
+<span class="hll">       -e SINGULARITY_DISABLE_NAMESPACES=True   \
+</span>       -e CVMFSEXEC_REPOS=&quot;                     \
+<span class="hll">            oasis.opensciencegrid.org           \
+</span>            singularity.opensciencegrid.org&quot;    \
+<span class="hll">       hub.opensciencegrid.org/osg-htc/ospool-ep:24-cuda_11_8_0-release
+</span></code></pre></div>
 <h3 id="limiting-resource-usage">Limiting resource usage<a class="headerlink" href="#limiting-resource-usage" title="Permanent link">&para;</a></h3>
 <p>By default, the container allows jobs to utilize the entire node's resources (CPUs, memory).
 To limit a container's resource consumptions, you may specify limits, which must be set in the following ways:</p>
