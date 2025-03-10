@@ -2254,11 +2254,11 @@ select the hostname of the Access Point that you registered earlier.</p>
 <p>Flocking requires HTCondor software as well as software for reporting to the OSG accounting system.
 Start by setting up the EPEL and OSG YUM repositories following the
 <a href="../../common/yum/">Installing Yum Repositories</a> document.</p>
-<p>Once the Yum repositories are setup, install the <code>osg-flock</code> convenience RPM that installs all
+<p>Once the Yum repositories are setup, install the <code>ospool-ap</code> convenience RPM that installs all
 required packages. Example on a RHEL 9 host:</p>
 <div class="highlight"><pre><span></span><code><span class="gp"># </span>yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 <span class="gp"># </span>yum install https://repo.osg-htc.org/osg/24-main/osg-24-main-el9-release-latest.rpm
-<span class="gp"># </span>yum install osg-flock
+<span class="gp"># </span>yum install ospool-ap
 </code></pre></div>
 <h2 id="configuring-reporting-via-gratia">Configuring Reporting via Gratia<a class="headerlink" href="#configuring-reporting-via-gratia" title="Permanent link">&para;</a></h2>
 <p>Reporting to the OSG accounting system is done using the <em>Gratia</em> service, which consists of <em>probes</em>.
