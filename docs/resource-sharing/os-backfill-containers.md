@@ -247,7 +247,7 @@ Fill in the values for `/path/to/token`, `/worker-temp-dir`, `GLIDEIN_Site`, `GL
 ### Providing GPU Resources
 
 By default, the container will not detect NVIDIA GPU resources available on its host. To configure
-the container for access to its hosts' resources, set the following:
+the container for access to its host’s GPU resources, set the following:
 
 1. Replace the default `24-release` docker image tag with the [CUDA-enabled](https://developer.nvidia.com/cuda-toolkit)
    `24-cuda-11_8_0-release` tag
