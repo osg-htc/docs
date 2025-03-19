@@ -2399,7 +2399,7 @@ modified to volume mount CVMFS instead of using cvmfsexec, and using reduced pri
 <p>Fill in the values for <code>/path/to/token</code>, <code>/worker-temp-dir</code>, <code>GLIDEIN_Site</code>, <code>GLIDEIN_ResourceName</code>, and <code>OSG_SQUID_LOCATION</code> <a href="#running-the-container-with-docker">as above</a>.</p>
 <h3 id="providing-gpu-resources">Providing GPU Resources<a class="headerlink" href="#providing-gpu-resources" title="Permanent link">&para;</a></h3>
 <p>By default, the container will not detect NVIDIA GPU resources available on its host. To configure
-the container for access to its hosts' resources, set the following:</p>
+the container for access to its host’s GPU resources, set the following:</p>
 <ol>
 <li>
 <p>Replace the default <code>24-release</code> docker image tag with the <a href="https://developer.nvidia.com/cuda-toolkit">CUDA-enabled</a>
