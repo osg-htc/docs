@@ -78,7 +78,7 @@ On EL hosts, the pilot container can also be managed via a systemctl service pro
         The EP is run under uid 1000.
         Ensure this user has read, write, and execute access to the scratch space.
 
-1.  _Highly Recommended_: Configure CVMFS via `/etc/osg/ospool-ep.cfg`:
+1.  _Optional:_ Configure CVMFS via `/etc/osg/ospool-ep.cfg`:
 
     - If [CVMFS is installed](https://osg-htc.org/docs/worker-node/install-cvmfs/) on the host system,
       set `BIND_MOUNT_CVMFS=true`
@@ -103,7 +103,7 @@ On EL hosts, the pilot container can also be managed via a systemctl service pro
         :::console
         root@host # systemctl start ospool-ep
 
-1. (Optional) monitor the systemctl service logs to see if the container starts successfully:
+1. _Optional:_ monitor the systemctl service logs to see if the container starts successfully:
 
         :::console
         root@host # journalctl -f -u ospool-ep
@@ -127,7 +127,7 @@ In order to successfully start payload jobs:
    in Topology, respectively.
 1. Set the `OSG_SQUID_LOCATION` environment variable to the HTTP address of your preferred Squid instance.
 1. _If providing NVIDIA GPU resources:_ See section [Providing GPU Resources](#providing-gpu-resources)
-1. _Strongly_recommended:_ Enable [CVMFS](#recommended-cvmfs) via one of the mechanisms described below.
+1. _Optional:_ Enable [CVMFS](#recommended-cvmfs) via one of the mechanisms described below.
 1. _Strongly recommended:_ If you want job I/O to be done in a separate directory outside of the container,
    volume mount the desired directory on the host to `/pilot` inside the container.
 
@@ -171,10 +171,10 @@ Singularity (now known as Apptainer) allows OSPool users to use their own contai
 Optional Configuration
 ----------------------
 
-### (Recommended) CVMFS
+### CVMFS
 
-[CernVM-FS](https://cernvm.cern.ch/fs/) (CVMFS) is a read-only remote filesystem that many OSG jobs depend on for software and data.
-Supporting CVMFS inside your container will greatly increase the types of OSG jobs you can run.
+[CernVM-FS](https://cernvm.cern.ch/fs/) (CVMFS) is a read-only remote filesystem that some OSG jobs depend on for software and data.
+Supporting CVMFS inside your container will increase the types of OSG jobs you can run.
 
 There are two methods for making CVMFS available in your container: [enabling cvmfsexec](#cvmfsexec),
 or [bind mounting CVMFS from the host](#bind-mount).
@@ -255,16 +255,13 @@ the container for access to its host’s GPU resources, set the following:
 1. Bind-mount `/etc/OpenCL/vendors`, read-only. If you are using Docker to launch the container, 
    this is done with the command line flags `-v /etc/OpenCL/vendors:/etc/OpenCL/vendors:ro`.
 
-1. Ensure the `singularity.opensciencegrid.org` CVMFS repo is enabled by following one of the methods
-   described in [CVMFS](#recommended-cvmfs)
-
 1. The NVIDIA runtime is known to conflict with Singularity [PID Namespaces](https://man7.org/linux/man-pages/man7/pid_namespaces.7.html)
    Disable PID namespaces by adding the flag `-e SINGULARITY_DISABLE_PID_NAMESPACES=True`
 
 This is the [example at the top of the page](#running-the-container-with-docker), modified
 to provide NVIDIA GPU resources:
 
-```hl_lines="6 11 13 15"
+```hl_lines="6 11 12"
 docker run -it --rm --user osg  \
        --pull=always            \
        --privileged             \
@@ -275,10 +272,7 @@ docker run -it --rm --user osg  \
        -e GLIDEIN_ResourceName="..."            \
        -e GLIDEIN_Start_Extra="True"            \
        -e OSG_SQUID_LOCATION="..."              \
-       -e SINGULARITY_DISABLE_NAMESPACES=True   \
-       -e CVMFSEXEC_REPOS="                     \
-            oasis.opensciencegrid.org           \
-            singularity.opensciencegrid.org"    \
+       -e SINGULARITY_DISABLE_PID_NAMESPACES=True   \
        hub.opensciencegrid.org/osg-htc/ospool-ep:24-cuda_11_8_0-release
 ```
 
