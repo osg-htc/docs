@@ -61,11 +61,14 @@ Configuring the Cache Server
 ----------------------------
 
 The preferred method of configuring a Pelican-based OSDF cache is via a YAML file that will be 
-mounted into the container into the `/etc/pelican/config.d` directory.
+mounted into the container at `/etc/pelican/pelican.yaml`.
 This document will use `/etc/osdf-cache/config.yaml` as the name of the configuration file outside of the container.
 
 Create `/etc/osdf-cache/config.yaml` with the following contents:
 ```file
+Federation:
+  DiscoveryUrl: "https://osg-htc.org"
+
 Cache:
   Port: 8443
 # XRootD:
@@ -130,7 +133,7 @@ user@host $ docker run --rm \
              --volume <ISSUER_JWK>:/etc/pelican/issuer.jwk \
              --volume <HOST_CERT_CHAIN>:/etc/pelican/certificates/tls.crt \
              --volume <HOST_KEY>:/etc/pelican/certificates/tls.key \
-             --volume <CACHE_CONFIG_FILE>:/etc/pelican/config.d/99-local.yaml \
+             --volume <CACHE_CONFIG_FILE>:/etc/pelican/pelican.yaml \
              --volume <CACHE_PARTITION>:/run/pelican/cache \
              --name osdf-cache \
              hub.opensciencegrid.org/pelican_platform/osdf-cache:latest
@@ -145,7 +148,7 @@ user@host $ docker run --rm \
              --volume /etc/osdf-cache/issuer.jwk:/etc/pelican/issuer.jwk \
              --volume /etc/osdf-cache/hostcert.pem:/etc/pelican/certificates/tls.crt \
              --volume /etc/osdf-cache/hostkey.pem:/etc/pelican/certificates/tls.key \
-             --volume /etc/osdf-cache/config.yaml:/etc/pelican/config.d/99-local.yaml \
+             --volume /etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml \
              --volume /mnt/cache:/run/pelican/cache \
              --name osdf-cache \
              hub.opensciencegrid.org/pelican_platform/osdf-cache:latest
@@ -165,7 +168,7 @@ user@host $ docker run --rm \
              --volume <ISSUER_JWK>:/etc/pelican/issuer.jwk \
              --volume <HOST_CERT_CHAIN>:/etc/pelican/certificates/tls.crt \
              --volume <HOST_KEY>:/etc/pelican/certificates/tls.key \
-             --volume <CACHE_CONFIG_FILE>:/etc/pelican/config.d/99-local.yaml \
+             --volume <CACHE_CONFIG_FILE>:/etc/pelican/pelican.yaml \
              --volume <NAMESPACE_PARTITION>:/run/pelican/cache/namespace \
              --volume <METADATA_PARTITION>:/run/pelican/cache/meta \
              --volume <DATA_PARTITION>:/run/pelican/cache/data \
@@ -182,7 +185,7 @@ user@host $ docker run --rm \
              --volume /etc/osdf-cache/issuer.jwk:/etc/pelican/issuer.jwk \
              --volume /etc/osdf-cache/hostcert.pem:/etc/pelican/certificates/tls.crt \
              --volume /etc/osdf-cache/hostkey.pem:/etc/pelican/certificates/tls.key \
-             --volume /etc/osdf-cache/config.yaml:/etc/pelican/config.d/99-local.yaml \
+             --volume /etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml \
              --volume /mnt/cache-namespace:/run/pelican/cache/namespace \
              --volume /mnt/cache-meta:/run/pelican/cache/meta \
              --volume /mnt/cache-data:/run/pelican/cache/data \
@@ -306,7 +309,7 @@ ExecStart=/usr/bin/docker run --rm --name osdf-cache \
   --volume /etc/osdf-cache/issuer.jwk:/etc/pelican/issuer.jwk \
   --volume /etc/osdf-cache/hostcert.pem:/etc/pelican/certificates/tls.crt \
   --volume /etc/osdf-cache/hostkey.pem:/etc/pelican/certificates/tls.key \
-  --volume /etc/osdf-cache/config.yaml:/etc/pelican/config.d/99-local.yaml \
+  --volume /etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml \
   --volume /mnt/cache:/run/pelican/cache \
   --name osdf-cache \
   hub.opensciencegrid.org/pelican_platform/osdf-cache:latest
@@ -335,7 +338,7 @@ user@host $ docker run --rm  \
              --volume /etc/osdf-cache/issuer.jwk:/etc/pelican/issuer.jwk \
              --volume /etc/osdf-cache/hostcert.pem:/etc/pelican/certificates/tls.crt \
              --volume /etc/osdf-cache/hostkey.pem:/etc/pelican/certificates/tls.key \
-             --volume /etc/osdf-cache/config.yaml:/etc/pelican/config.d/99-local.yaml \
+             --volume /etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml \
              --volume /mnt/cache:/run/pelican/cache \
              --name osdf-cache \
              hub.opensciencegrid.org/pelican_platform/osdf-cache:latest
