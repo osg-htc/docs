@@ -90,6 +90,9 @@ Origin:
         - Writes       # Enable writing to files in the directory tree
 ```
 
+!!! note
+    You should enable DirectReads during initial setup to make validation easier.
+
 
 #### Multiple volumes
 
@@ -120,6 +123,9 @@ Origin:
     ...
 ```
 where `<SUBDIRECTORY 1>`, `<SUBDIRECTORY 2>`, etc. will be mount points for volume that you want to export.
+
+!!! note
+    You should enable DirectReads during initial setup to make validation easier.
 
 
 ### Configuring S3 export
@@ -206,15 +212,21 @@ Download a test file (POSIX) or object (S3) from your origin (replacing `ORIGIN_
 and TEST_PATH with the OSDF path to the test file or object)
 
 ```
-user@host$ curl -L https://ORIGIN_HOSTNAME:8443/TEST_PATH -o /tmp/testfile
+user@host$ pelican object get -c ORIGIN_HOSTNAME:8443 'osdf:///<TEST_PATH>' -o /tmp/testfile
 ```
+(Note: this test will not work if DirectReads are not enabled.)
 
 Verify the contents of `/tmp/testfile` match the test file or object your origin was serving.
+
+If you get errors, add the `--debug` flag to the `pelican object get` invocation.
 
 Debugging information will be in your container logs e.g., `docker logs osdf-origin`.
 To increase the debugging information in the origin, edit your origin configuration file and set:
 ```
 Debug: true
+Logging:
+  Origin:
+    SciTokens: trace
 ```
 
 See [this page](../../common/help.md) for requesting assistance; please include the logs in your request.
@@ -254,16 +266,20 @@ docker logs osdf-origin
 To increase the debugging information in the origin, edit your origin configuration file and set:
 ```
 Debug: true
+Logging:
+  Origin:
+    SciTokens: trace
 ```
 See [this page](../../common/help.md) for requesting assistance; please include the logs in your request.
 
-1.  Optional, if DirectReads are enabled:  Download a test file (POSIX) or object (S3) directly from your origin,
+1.  Download a test file (POSIX) or object (S3) directly from your origin,
     (replacing `<TEST_PATH>` with the OSDF path to the test file or object):
 
         :::console
         user@host $ pelican object get 'osdf:///<TEST_PATH>?directread=1' -o /tmp/testfile
 
     Verify the contents of `/tmp/testfile` match the test file or object your origin was serving.
+    (Note: this test will not work if DirectReads are not enabled.)
 
 1.  Download a test file (POSIX) or object (S3) from your origin via a cache,
     (replacing `<TEST_PATH>` with the OSDF path to the test file or object):
