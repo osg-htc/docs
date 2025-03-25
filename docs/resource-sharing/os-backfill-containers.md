@@ -171,8 +171,9 @@ Adding the following line to `/etc/osg/ospool-ep.cfg` will enable the repos we r
 ```
 CVMFSEXEC_REPOS=oasis.opensciencegrid.org,singularity.opensciencegrid.org
 ```
-Note the absence of quotes around the definition. The startup scripts pass `/etc/osg/ospool-ep.cfg`
-into the container utility, and thus its definitions are not subject to shell syntax.
+
+!!! warning "Systemd environment files"
+    Systemd environment files do not honor shell syntax, i.e. variables are passed in directly as written
 
 Additionally, you may set the following environment variables to further control the behavior of cvmfsexec:
 
