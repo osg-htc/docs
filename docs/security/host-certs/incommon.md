@@ -86,7 +86,7 @@ volume mounting a local directory (`~/path_to_dir`) into the `/output` directory
     `bar.opensciencegrid.org` as SANs:
 
         :::console
-        user@host $ osg-cert-request --hostname <HOSTNAME> \
+        user@host $ osg-cert-request \
                      --country US \
                      --state Wisconsin \
                      --locality Madison \
