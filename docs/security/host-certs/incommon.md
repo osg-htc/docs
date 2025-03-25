@@ -80,6 +80,21 @@ volume mounting a local directory (`~/path_to_dir`) into the `/output` directory
                      --locality <LOCALITY> \
                      --organization <ORGANIZATION>
 
+    You may also add [DNS Subject Alternative Names](https://en.wikipedia.org/wiki/Subject_Alternative_Name) (SAN) to
+    the request by specifying any number of `--altname <SAN>`.
+    For example, the following generates a CSR for `test.opensciencegrid.org` with `foo.opensciencegrid.org` and
+    `bar.opensciencegrid.org` as SANs:
+
+        :::console
+        user@host $ osg-cert-request --hostname <HOSTNAME> \
+                     --country US \
+                     --state Wisconsin \
+                     --locality Madison \
+                     --organization 'University of Wisconsin-Madison' \
+                     --hostname test.opensciencegrid.org \
+                     --altname  foo.opensciencegrid.org \
+                     --altname  bar.opensciencegrid.org
+
     If successful, the CSR will be named `<HOSTNAME>.req` and the private key will be named `<HOSTNAME>-key.pem`.
     Additional options and descriptions can be found [here](https://github.com/opensciencegrid/osg-pki-tools#options).
 
