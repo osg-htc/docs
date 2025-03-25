@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://osg-htc.org/docs/data/osdf/install-origin-rpm/">
+        <link rel="canonical" href="https://osg-htc.org/docs/data/osdf/install-origin-container/">
       
       <link rel="icon" href="../../../img/favicon.ico">
       <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.8">
     
     
       
-        <title>Installing the OSDF Origin by RPM - OSG Site Documentation</title>
+        <title>Installing the OSDF Origin by Container - OSG Site Documentation</title>
       
     
     
@@ -73,7 +73,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#installing-the-osdf-origin-by-rpm" class="md-skip">
+        <a href="#installing-the-osdf-origin-by-container" class="md-skip">
           Skip to content
         </a>
       
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Installing the OSDF Origin by RPM
+              Installing the OSDF Origin by Container
             
           </span>
         </div>
@@ -1123,16 +1123,14 @@
 
   
   
-    
-  
   
     
       
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
       
       
       
@@ -1228,14 +1226,12 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_3" type="checkbox" id="__nav_9_3" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_3" type="checkbox" id="__nav_9_3" >
       
       
       
@@ -1256,135 +1252,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Install from RPM
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../install-origin-rpm/" class="md-nav__link">
         Install from RPM
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#before-starting" class="md-nav__link">
-    Before Starting
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#upgrading-a-non-pelican-origin" class="md-nav__link">
-    Upgrading a Non-Pelican Origin
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#installing-the-origin" class="md-nav__link">
-    Installing the Origin
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configuring-the-origin-server" class="md-nav__link">
-    Configuring the Origin Server
-  </a>
-  
-    <nav class="md-nav" aria-label="Configuring the Origin Server">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#configuring-posix-directory-export" class="md-nav__link">
-    Configuring POSIX (directory) export
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#configuring-s3-export" class="md-nav__link">
-    Configuring S3 export
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#preparing-for-initial-startup" class="md-nav__link">
-    Preparing for Initial Startup
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#validating-the-origin-installation" class="md-nav__link">
-    Validating the Origin Installation
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#joining-the-origin-to-the-federation" class="md-nav__link">
-    Joining the Origin to the Federation
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#validating-the-origin-through-the-federation" class="md-nav__link">
-    Validating the Origin Through the Federation
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#managing-the-origin-service" class="md-nav__link">
-    Managing the Origin Service
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#getting-help" class="md-nav__link">
-    Getting Help
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2004,20 +1876,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#upgrading-a-non-pelican-origin" class="md-nav__link">
-    Upgrading a Non-Pelican Origin
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#installing-the-origin" class="md-nav__link">
-    Installing the Origin
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#configuring-the-origin-server" class="md-nav__link">
     Configuring the Origin Server
   </a>
@@ -2029,6 +1887,26 @@
   <a href="#configuring-posix-directory-export" class="md-nav__link">
     Configuring POSIX (directory) export
   </a>
+  
+    <nav class="md-nav" aria-label="Configuring POSIX (directory) export">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-volume" class="md-nav__link">
+    Single volume
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-volumes" class="md-nav__link">
+    Multiple volumes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2052,8 +1930,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validating-the-origin-installation" class="md-nav__link">
-    Validating the Origin Installation
+  <a href="#running-an-origin" class="md-nav__link">
+    Running an Origin
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validating-the-origin" class="md-nav__link">
+    Validating the Origin
   </a>
   
 </li>
@@ -2073,9 +1958,29 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#managing-the-origin-service" class="md-nav__link">
-    Managing the Origin Service
+  <a href="#advanced-topics" class="md-nav__link">
+    Advanced topics
   </a>
+  
+    <nav class="md-nav" aria-label="Advanced topics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#persisting-logs" class="md-nav__link">
+    Persisting logs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#managing-an-origin-with-systemd" class="md-nav__link">
+    Managing an origin with systemd
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2098,30 +2003,22 @@
             <article class="md-content__inner md-typeset">
               
                 
-<a href="https://github.com/osg-htc/docs/edit/master/docs/data/osdf/install-origin-rpm.md" title="Edit this page" class="md-content__button md-icon">
+<a href="https://github.com/osg-htc/docs/edit/master/docs/data/osdf/install-origin-container.md" title="Edit this page" class="md-content__button md-icon">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
 </a>
 
 
 
-<h1 id="installing-the-osdf-origin-by-rpm">Installing the OSDF Origin by RPM<a class="headerlink" href="#installing-the-osdf-origin-by-rpm" title="Permanent link">&para;</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">OSG 24</p>
-<p>This installation guide requires OSG 24</p>
-</div>
-<div class="admonition tip">
-<p class="admonition-title">Upgrading from a non-Pelican origin?</p>
-<p>This installation guide also walks you through upgrading an origin that you installed prior to OSG 24.
-See <a href="#upgrading-a-non-pelican-origin">this section</a> for more details.</p>
-</div>
-<p>This document describes how to install an Open Science Data Federation (OSDF) Origin service via RPMs.
-This service, based on the <a href="https://docs.pelicanplatform.org/federating-your-data">Pelican Platform</a>, allows an
-administrator to serve data from a POSIX filesystem or S3 endpoint through the global OSDF infrastructure.</p>
+<h1 id="installing-the-osdf-origin-by-container">Installing the OSDF Origin by Container<a class="headerlink" href="#installing-the-osdf-origin-by-container" title="Permanent link">&para;</a></h1>
+<p>This document describes how to run an Open Science Data Federation (OSDF) Origin service via containers.
+This service allows projects and organizations to distribute their data in a scalable manner to distributed high-throughput computing jobs,
+reducing data transfer over the wide-area network and increasing throughput to jobs.</p>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following requirements:</p>
 <ul>
-<li><strong>Operating system:</strong> A RHEL 8 or RHEL 9 or <a href="../../../release/supported_platforms/">compatible operating system</a>.</li>
-<li><strong>User IDs:</strong> If it does not exist already, the installation will create the Linux user named <code>xrootd</code> for running daemons.</li>
+<li><strong>Container runtime:</strong> The examples in this guide assume using Docker as the container runtime,
+    for which the host must have a running <code>docker</code> service,
+   and you must have the ability to start containers (i.e., belong to the <code>docker</code> Unix group).</li>
 <li><strong>Host certificate:</strong> Required for authentication.  See note below.</li>
 <li><strong>Network ports:</strong> The origin service requires the following ports open:<ul>
 <li>Inbound TCP port 8443 for file access via the HTTP(S) and XRoot protocols.</li>
@@ -2132,25 +2029,7 @@ administrator to serve data from a POSIX filesystem or S3 endpoint through the g
 <li>1 core</li>
 <li>1 Gbps connectivity</li>
 <li>12 GB of RAM</li>
-<li>10 GB of local disk space in <code>/var/log</code> for log files,
-  although some logging verbosity can be reduced.</li>
 </ul>
-</li>
-</ul>
-<p>As with all OSG software installations, there are some one-time steps to prepare in advance:</p>
-<ul>
-<li>Obtain root access to the host</li>
-<li>
-<p>Prepare <a href="../../../common/yum/">the required Yum repositories</a>;
-  the <a href="../../../common/yum/#install-the-osg-repositories">OSG 24 repositories</a> should be used.</p>
-<div class="admonition danger">
-<p class="admonition-title">Upgrading to a Pelican origin</p>
-<p>If you are upgrading from a pre-Pelican OSDF origin, update all of your OSG 23 packages before installing the OSG 24
-repositories:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum update
-</code></pre></div>
-
-</div>
 </li>
 </ul>
 <div class="admonition note">
@@ -2160,71 +2039,85 @@ Examples include <a href="../../../security/host-certs/lets-encrypt/">Let's Encr
 Origins without a valid certificate for the browser cannot be added to the OSDF.
 Note that, unlike legacy grid software, the public certificate file will need to contain the "full chain", including any
 intermediate CAs (if you're unsure about your setup, try accessing your origin from your browser).</p>
-<p>The following locations should be used (note that they are in separate directories):</p>
+<p>The certificate chain and key should be mounted into the following locations:</p>
 <ul>
-<li><strong>Host Certificate Chain</strong>: <code>/etc/pki/tls/certs/pelican.crt</code></li>
-<li><strong>Host Key</strong>: <code>/etc/pki/tls/private/pelican.key</code></li>
+<li><strong>Host Certificate Chain</strong>: <code>/etc/pelican/certificates/tls.crt</code></li>
+<li><strong>Host Key</strong>: <code>/etc/pelican/certificates/tls.key</code></li>
 </ul>
 </div>
-<h2 id="upgrading-a-non-pelican-origin">Upgrading a Non-Pelican Origin<a class="headerlink" href="#upgrading-a-non-pelican-origin" title="Permanent link">&para;</a></h2>
-<p>If you are running a non-Pelican origin, e.g. one that was installed before OSG 24, there are special considerations for
-the upgrade to ensure minimal downtime for your users.
-This document will guide you through the upgrade process by installing and configuring a Pelican origin alongside your
-non-Pelican origin.</p>
 <div class="admonition note">
-<p class="admonition-title">Using different hosts</p>
-<p>You may install your new Pelican origin on a separate host if your underlying data store is shared between hosts.</p>
+<p class="admonition-title">osdf-origin 7.12</p>
+<p>This document covers versions 7.12 and later of the <code>osdf-origin</code> container image.</p>
 </div>
-<p>First, determine if you have an active non-Pelican origin service running:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>systemctl status xrootd@stash-origin-auth <span class="se">\</span>
-                             xrootd@stash-origin <span class="se">\</span>
-                             xrootd-privileged@stash-origin-auth <span class="se">\</span>
-            <span class="p">|</span> grep -F <span class="s1">&#39;Active: active&#39;</span>
-<span class="go">   Active: active (running) since Wed 2024-12-04 17:46:17 CST; 1 weeks 1 days ago</span>
-</code></pre></div>
-<ul>
-<li>
-<p><strong>If you do not see any output from the above command</strong>, you may proceed with the rest of the documentation.</p>
-</li>
-<li>
-<p><strong>If you see any output from the above command</strong>, you may proceed with the rest of the documentation but keep an eye
-    out for special instructions related to the upgrade:</p>
-<div class="admonition danger">
-<p class="admonition-title">Upgrading to a Pelican origin</p>
-<p>You will find upgrade-specific instructions here.</p>
-</div>
-</li>
-</ul>
-<h2 id="installing-the-origin">Installing the Origin<a class="headerlink" href="#installing-the-origin" title="Permanent link">&para;</a></h2>
-<p>The origin service is provided by the <code>osdf-origin</code> RPM.
-Install it using the following command:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum install osdf-origin
-</code></pre></div>
 <div class="admonition note">
-<p class="admonition-title">osdf-origin 7.11.1</p>
-<p>This document covers versions 7.11.1 and later of the <code>osdf-origin</code> package; ensure the above installation
-results in an appropriate version.</p>
+<p class="admonition-title">root</p>
+<p>The paths used as examples on this page (e.g., <code>/etc/osdf-origin</code>) require root to edit;
+if you do not have root on the host, choose new locations where you have modification permissions.</p>
 </div>
 <h2 id="configuring-the-origin-server">Configuring the Origin Server<a class="headerlink" href="#configuring-the-origin-server" title="Permanent link">&para;</a></h2>
-<p>Create a file named <code>/etc/pelican/config.d/20-origin.yaml</code></p>
+<p>The preferred method of configuring a Pelican-based OSDF Origin is via a YAML file that will be
+mounted into the container into the <code>/etc/pelican/config.d</code> directory.
+This document will use <code>/etc/osdf-origin/config.yaml</code> as the name of the configuration file outside of the container.</p>
+<p>Create <code>/etc/osdf-origin/config.yaml</code> with the following contents:
+<div class="highlight"><pre><span></span><code>Origin:
+# XRootD:
+#   Sitename: &lt;RESOURCE NAME REGISTERED WITH OSG&gt;
+</code></pre></div>
+You will uncomment and fill in the value for <code>XRootD.Sitename</code> in a later step, after registration is complete.</p>
 <p>You must tell Pelican the data to export to the federation.
 An origin may export one or more directory trees, or one or more S3 buckets -- follow one of the sections below.
 A single origin cannot export both a bucket and a directory tree.</p>
 <h3 id="configuring-posix-directory-export">Configuring POSIX (directory) export<a class="headerlink" href="#configuring-posix-directory-export" title="Permanent link">&para;</a></h3>
 <p>Set these options to export one or more directory trees to the federation.</p>
+<h4 id="single-volume">Single volume<a class="headerlink" href="#single-volume" title="Permanent link">&para;</a></h4>
+<p>The simplest POSIX setup is to export a single directory tree to the federation.
+Use the following configuration to do that:</p>
 <div class="highlight"><pre><span></span><code>Origin:
   StorageType: &quot;posix&quot;
   Exports:
-    # You may have one or more of the following block:
     - FederationPrefix: &quot;&lt;EXTERNAL OSDF NAMESPACE&gt;&quot;
-      StoragePrefix:    &quot;&lt;LOCAL FILESYSTEM DIRECTORY&gt;&quot;
-      Capabilities:    # Add or remove as desired
+      StoragePrefix:    &quot;/pelican&quot;
+      Capabilities:    # Add or remove individual capabilities as desired
         - Reads        # Enable authenticated reading of objects from under the directory tree through a cache
         - PublicReads  # Enable unauthenticated reading of objects from under the directory tree through a cache
         - DirectReads  # Enable reading objects from under the directory tree without going through a cache
         - Listings     # Enable directory listings
         - Writes       # Enable writing to files in the directory tree
 </code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You should enable DirectReads during initial setup to make validation easier.</p>
+</div>
+<h4 id="multiple-volumes">Multiple volumes<a class="headerlink" href="#multiple-volumes" title="Permanent link">&para;</a></h4>
+<p>You may want to export multiple directory trees to the federation,
+for example if you export data from multiple filesystems,
+or want to have different permissions for the different directory trees.</p>
+<p><div class="highlight"><pre><span></span><code>Origin:
+  StorageType: &quot;posix&quot;
+  Exports:
+    - FederationPrefix: &quot;&lt;EXTERNAL OSDF NAMESPACE 1&gt;&quot;
+      StoragePrefix:    &quot;/pelican/&lt;SUBDIRECTORY 1&gt;&quot;
+      Capabilities:    # Add or remove individual capabilities as desired
+        - Reads        # Enable authenticated reading of objects from under the directory tree through a cache
+        - PublicReads  # Enable unauthenticated reading of objects from under the directory tree through a cache
+        - DirectReads  # Enable reading objects from under the directory tree without going through a cache
+        - Listings     # Enable directory listings
+        - Writes       # Enable writing to files in the directory tree
+    - FederationPrefix: &quot;&lt;EXTERNAL OSDF NAMESPACE 2&gt;&quot;
+      StoragePrefix:    &quot;/pelican/&lt;SUBDIRECTORY 2&gt;&quot;
+      Capabilities:    # Add or remove individual capabilities as desired
+        - Reads        # Enable authenticated reading of objects from under the directory tree through a cache
+        - PublicReads  # Enable unauthenticated reading of objects from under the directory tree through a cache
+        - DirectReads  # Enable reading objects from under the directory tree without going through a cache
+        - Listings     # Enable directory listings
+        - Writes       # Enable writing to files in the directory tree
+    ...
+</code></pre></div>
+where <code>&lt;SUBDIRECTORY 1&gt;</code>, <code>&lt;SUBDIRECTORY 2&gt;</code>, etc. will be mount points for volume that you want to export.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You should enable DirectReads during initial setup to make validation easier.</p>
+</div>
 <h3 id="configuring-s3-export">Configuring S3 export<a class="headerlink" href="#configuring-s3-export" title="Permanent link">&para;</a></h3>
 <p>To configure your origin to serve objects from an S3 endpoint, see the
 <a href="https://docs.pelicanplatform.org/federating-your-data/s3-backend">upstream documentation</a>.</p>
@@ -2232,8 +2125,10 @@ A single origin cannot export both a bucket and a directory tree.</p>
 <ol>
 <li>
 <p>The origin identifies itself to the federation via public key authentication;
-before starting the origin for the first time, it is recommended to generate a keypair.</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span><span class="nb">cd</span> /etc/pelican
+before starting the origin for the first time, it is recommended to generate a keypair.
+Download the Pelican client from <a href="https://github.com/PelicanPlatform/pelican/releases">https://github.com/PelicanPlatform/pelican/releases</a>,
+install the executable as <code>/usr/local/bin/pelican</code>, and run:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span><span class="nb">cd</span> /etc/osdf-origin
 <span class="gp">root@host$ </span>pelican generate keygen
 </code></pre></div>
 
@@ -2243,34 +2138,104 @@ before starting the origin for the first time, it is recommended to generate a k
 <p><strong>Save these files</strong>; if you lose the <code>issuer.jwk</code>, your origin will need to be re-approved.</p>
 </li>
 </ol>
-<h2 id="validating-the-origin-installation">Validating the Origin Installation<a class="headerlink" href="#validating-the-origin-installation" title="Permanent link">&para;</a></h2>
-<p>Do the following steps to verify that the origin is functional:</p>
-<ol>
-<li>
-<p>Start the origin using the following command:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span>systemctl start osdf-origin
+<h2 id="running-an-origin">Running an Origin<a class="headerlink" href="#running-an-origin" title="Permanent link">&para;</a></h2>
+<p>This section describes how the origin may be run using the Docker command-line.
+For production, we recommend using a container orchestration service such as
+<a href="https://docs.docker.com/compose/">Docker Compose</a>,
+or <a href="https://kubernetes.io/">Kubernetes</a>.</p>
+<p>This example uses the single-volume POSIX setup.</p>
+<p>This table provides a reminder of the parameters that will be used in the examples:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Example value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ORIGIN_HOST_PORT</code></td>
+<td><code>8443</code></td>
+<td>The host port used for data transfer via HTTP(S)</td>
+</tr>
+<tr>
+<td><code>WEB_INTERFACE_PORT</code></td>
+<td><code>8444</code></td>
+<td>The host port used for service management via the web interface</td>
+</tr>
+<tr>
+<td><code>ISSUER_JWK</code></td>
+<td><code>/etc/osdf-origin/issuer.jwk</code></td>
+<td>The private key generated by <code>pelican generate keygen</code></td>
+</tr>
+<tr>
+<td><code>HOST_CERT_CHAIN</code></td>
+<td><code>/etc/osdf-origin/hostcert.pem</code></td>
+<td>The host certificate, with full chain</td>
+</tr>
+<tr>
+<td><code>HOST_KEY</code></td>
+<td><code>/etc/osdf-origin/hostkey.pem</code></td>
+<td>The private key matching the host certificate</td>
+</tr>
+<tr>
+<td><code>ORIGIN_CONFIG_FILE</code></td>
+<td><code>/etc/osdf-origin/config.yaml</code></td>
+<td>The YAML file containing various origin settings</td>
+</tr>
+<tr>
+<td><code>OUTSIDE_DIRECTORY</code></td>
+<td><code>/mnt/origin</code></td>
+<td>The directory outside the container that stores the data to be served</td>
+</tr>
+<tr>
+<td><code>INSIDE_DIRECTORY</code></td>
+<td><code>/pelican</code></td>
+<td>The path inside the container corresponding to StoragePrefix in your origin config file</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>docker run --rm <span class="se">\</span>
+             --publish &lt;ORIGIN_HOST_PORT&gt;:8443 <span class="se">\</span>
+             --publish &lt;WEB_INTERFACE_HOST PORT&gt;:8444 <span class="se">\</span>
+             --volume &lt;ISSUER_JWK&gt;:/etc/pelican/issuer.jwk <span class="se">\</span>
+             --volume &lt;HOST_CERT_CHAIN&gt;:/etc/pelican/certificates/tls.crt <span class="se">\</span>
+             --volume &lt;HOST_KEY&gt;:/etc/pelican/certificates/tls.key <span class="se">\</span>
+             --volume &lt;ORIGIN_CONFIG_FILE&gt;:/etc/pelican/config.d/99-local.yaml <span class="se">\</span>
+             --volume &lt;OUTSIDE_DIRECTORY&gt;:&lt;INSIDE_DIRECTORY&gt; <span class="se">\</span>
+             --name osdf-origin <span class="se">\</span>
+             hub.opensciencegrid.org/pelican_platform/osdf-origin:latest
 </code></pre></div>
-
-</li>
-<li>
+<p>Using the example values from the table, this is</p>
+<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>docker run --rm <span class="se">\</span>
+             --publish <span class="m">8443</span>:8443 <span class="se">\</span>
+             --publish <span class="m">8444</span>:8444 <span class="se">\</span>
+             --volume /etc/osdf-origin/issuer.jwk:/etc/pelican/issuer.jwk <span class="se">\</span>
+             --volume /etc/osdf-origin/hostcert.pem:/etc/pelican/certificates/tls.crt <span class="se">\</span>
+             --volume /etc/osdf-origin/hostkey.pem:/etc/pelican/certificates/tls.key <span class="se">\</span>
+             --volume /etc/osdf-origin/config.yaml:/etc/pelican/config.d/99-local.yaml <span class="se">\</span>
+             --volume /mnt/origin:/pelican <span class="se">\</span>
+             --name osdf-origin <span class="se">\</span>
+             hub.opensciencegrid.org/pelican_platform/osdf-origin:latest
+</code></pre></div>
+<h2 id="validating-the-origin">Validating the Origin<a class="headerlink" href="#validating-the-origin" title="Permanent link">&para;</a></h2>
 <p>Download a test file (POSIX) or object (S3) from your origin (replacing <code>ORIGIN_HOSTNAME</code> with the host name of your origin,
-    and TEST_PATH with the OSDF path to the test file or object</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">user@host$ </span>curl -L https://ORIGIN_HOSTNAME:8443/TEST_PATH -o /tmp/testfile
+and TEST_PATH with the OSDF path to the test file or object)</p>
+<p><div class="highlight"><pre><span></span><code>user@host$ pelican object get -c ORIGIN_HOSTNAME:8443 &#39;osdf:///&lt;TEST_PATH&gt;&#39; -o /tmp/testfile
 </code></pre></div>
-
+(Note: this test will not work if DirectReads are not enabled.)</p>
 <p>Verify the contents of <code>/tmp/testfile</code> match the test file or object your origin was serving.</p>
-<p>If the download fails, debugging information is located in <code>/var/log/pelican/osdf-origin.log</code>.
-See <a href="../../../common/help/">this page</a> for requesting assistance; please include the log file
-in your request.</p>
-</li>
-</ol>
+<p>If you get errors, add the <code>--debug</code> flag to the <code>pelican object get</code> invocation.</p>
+<p>Debugging information will be in your container logs e.g., <code>docker logs osdf-origin</code>.
+To increase the debugging information in the origin, edit your origin configuration file and set:
+<div class="highlight"><pre><span></span><code>Debug: true
+Logging:
+  Origin:
+    SciTokens: trace
+</code></pre></div></p>
+<p>See <a href="../../../common/help/">this page</a> for requesting assistance; please include the logs in your request.</p>
 <h2 id="joining-the-origin-to-the-federation">Joining the Origin to the Federation<a class="headerlink" href="#joining-the-origin-to-the-federation" title="Permanent link">&para;</a></h2>
-<div class="admonition danger">
-<p class="admonition-title">Upgrading to a Pelican origin</p>
-<p>Once registered, all OSDF clients of your namespace will be directed to your Pelican origin.
-Before initiating this process, ensure that your Pelican origin is functioning and that you are ready to migrate
-production transfers.</p>
-</div>
 <p>The origin must be registered with the OSG prior to joining the data federation.
 Send mail to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#115;&#103;&#45;&#104;&#116;&#99;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#115;&#103;&#45;&#104;&#116;&#99;&#46;&#111;&#114;&#103;</a> requesting registration; provide the following information:</p>
 <ul>
@@ -2279,84 +2244,100 @@ Send mail to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;
 <li>Institution that the origin belongs to</li>
 </ul>
 <p>OSG Staff will register the origin and respond with the Resource Name.</p>
-<p>Once you have that information, edit <code>/etc/pelican/config.d/15-osdf.yaml</code>, and set <code>XRootD.Sitename</code>:
+<p>Once you have that information, edit <code>/etc/osdf-origin/config.yaml</code>, and set <code>XRootD.Sitename</code>:
 <div class="highlight"><pre><span></span><code>XRootD:
   Sitename: &lt;RESOURCE NAME REGISTERED WITH OSG&gt;
 </code></pre></div></p>
-<p>Then, restart the origin by running</p>
-<div class="highlight"><pre><span></span><code><span class="gp">root@host$ </span>systemctl restart osdf-origin
-</code></pre></div>
 <h2 id="validating-the-origin-through-the-federation">Validating the Origin Through the Federation<a class="headerlink" href="#validating-the-origin-through-the-federation" title="Permanent link">&para;</a></h2>
-<p>Once your origin has been registered in the federation:</p>
+<p>Once your origin has been registered in the federation,
+perform the following actions to verify that it can be used through the federation.
+These steps will use the Pelican client
+(which you can download from <a href="https://github.com/PelicanPlatform/pelican/releases">https://github.com/PelicanPlatform/pelican/releases</a>).</p>
+<p>If the actions fail, see debugging information in your container logs,
+which are accessible via
+<div class="highlight"><pre><span></span><code>docker logs osdf-origin
+</code></pre></div>
+To increase the debugging information in the origin, edit your origin configuration file and set:
+<div class="highlight"><pre><span></span><code>Debug: true
+Logging:
+  Origin:
+    SciTokens: trace
+</code></pre></div>
+See <a href="../../../common/help/">this page</a> for requesting assistance; please include the logs in your request.</p>
 <ol>
 <li>
-<p>Optional, if DirectReads are enabled:  Download a test file (POSIX) or object (S3) directly from your origin,
+<p>Download a test file (POSIX) or object (S3) directly from your origin,
     (replacing <code>&lt;TEST_PATH&gt;</code> with the OSDF path to the test file or object):</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>pelican object get <span class="s1">&#39;osdf:///&lt;TEST_PATH&gt;?directread=1&#39;</span> -o /tmp/testfile
 </code></pre></div>
 
-<p>Verify the contents of <code>/tmp/testfile</code> match the test file or object your origin was serving.</p>
-<p>If the download fails, debugging information is located in <code>/var/log/pelican/osdf-origin.log</code>.
-See <a href="../../../common/help/">this page</a> for requesting assistance; please include the log file
-in your request.</p>
+<p>Verify the contents of <code>/tmp/testfile</code> match the test file or object your origin was serving.
+(Note: this test will not work if DirectReads are not enabled.)</p>
 </li>
 <li>
-<p>Download a test file (POSIX) or object (S3) from your origin via a cache, 
+<p>Download a test file (POSIX) or object (S3) from your origin via a cache,
     (replacing <code>&lt;TEST_PATH&gt;</code> with the OSDF path to the test file or object):</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>pelican object get <span class="s1">&#39;osdf:///&lt;TEST_PATH&gt;&#39;</span> -o /tmp/testfile2
 </code></pre></div>
 
 <p>Verify the contents of <code>/tmp/testfile2</code> match the test file or object your origin was serving.</p>
-<p>If the download fails, debugging information is located in <code>/var/log/pelican/osdf-origin.log</code>.
-See <a href="../../../common/help/">this page</a> for requesting assistance; please include the log file
-in your request.</p>
 </li>
 <li>
 <p>Verify that your test is running against your Pelican origin:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>grep &lt;TEST_PATH&gt; /var/log/pelican/osdf-origin.log
+<div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>docker logs osdf-origin <span class="p">|</span> grep &lt;TEST_PATH&gt;
 </code></pre></div>
 
 <p>Replacing <code>&lt;TEST PATH&gt;</code> with the same path that you used in step (1) or (2).
-If you see output, then the OSDF is directing client requests to your Pelican origin!
-If you do not see output, please <a href="#getting-help">contact us</a>.</p>
+If you see output, then the OSDF is directing client requests to your Pelican origin!</p>
 </li>
 </ol>
-<div class="admonition danger">
-<p class="admonition-title">Upgrading to a Pelican origin</p>
-<p>Congratulations, you have fully verified the functionality of your Pelican origin!
-You may uninstall the non-Pelican origin:</p>
-<div class="codehilite"><pre><span></span><code>root@host $ yum remove stash-origin
+<h2 id="advanced-topics">Advanced topics<a class="headerlink" href="#advanced-topics" title="Permanent link">&para;</a></h2>
+<h3 id="persisting-logs">Persisting logs<a class="headerlink" href="#persisting-logs" title="Permanent link">&para;</a></h3>
+<p>By default, the origin sends logs to the console, where it is captured by the container runtime's logging mechanism.
+To save logs to a file instead, set the log location in your origin config file (e.g., <code>/etc/osdf-origin/config.yaml</code>)
+as follows:</p>
+<div class="highlight"><pre><span></span><code>Logging:
+  LogLocation: &lt;LOG_FILE_PATH&gt;
 </code></pre></div>
-
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Note: the osdf-origin image does not come with log rotation; if you save logs to a file, you must
+set up log rotation yourself to avoid running the origin out of disk space.</p>
 </div>
-<h2 id="managing-the-origin-service">Managing the Origin Service<a class="headerlink" href="#managing-the-origin-service" title="Permanent link">&para;</a></h2>
-<p>Use the following SystemD commands as root to start, stop, enable, and disable the OSDF Origin.</p>
-<table>
-<thead>
-<tr>
-<th align="left">To...</th>
-<th align="left">Run the command...</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">Start the origin</td>
-<td align="left"><code>systemctl start osdf-origin</code></td>
-</tr>
-<tr>
-<td align="left">Stop the origin</td>
-<td align="left"><code>systemctl stop osdf-origin</code></td>
-</tr>
-<tr>
-<td align="left">Enable the origin to start on boot</td>
-<td align="left"><code>systemctl enable osdf-origin</code></td>
-</tr>
-<tr>
-<td align="left">Disable the origin from starting on boot</td>
-<td align="left"><code>systemctl disable osdf-origin</code></td>
-</tr>
-</tbody>
-</table>
+<h3 id="managing-an-origin-with-systemd">Managing an origin with systemd<a class="headerlink" href="#managing-an-origin-with-systemd" title="Permanent link">&para;</a></h3>
+<p>If you do not have a container orchestration service but still want to manage a container-based origin,
+you may run the container via a systemd service.
+The following example uses the values from the setup documented in the <a href="#running-an-origin">Running an Origin</a> section above.</p>
+<p>Create the systemd service file <code>/etc/systemd/system/docker-osdf-origin.service</code> as follows:</p>
+<div class="highlight"><pre><span></span><code>[Unit]
+Description=OSDF Origin Container
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+ExecStartPre=-/usr/bin/docker stop osdf-origin
+ExecStartPre=-/usr/bin/docker rm osdf-origin
+ExecStartPre=/usr/bin/docker pull hub.opensciencegrid.org/pelican_platform/osdf-origin:latest
+ExecStart=/usr/bin/docker run --rm --name osdf-origin \
+  --publish 8443:8443 \
+  --publish 8444:8444 \
+  --volume /etc/osdf-origin/issuer.jwk:/etc/pelican/issuer.jwk \
+  --volume /etc/osdf-origin/hostcert.pem:/etc/pelican/certificates/tls.crt \
+  --volume /etc/osdf-origin/hostkey.pem:/etc/pelican/certificates/tls.key \
+  --volume /etc/osdf-origin/config.yaml:/etc/pelican/config.d/99-local.yaml \
+  --volume /mnt/origin:/pelican \
+  --name osdf-origin \
+  hub.opensciencegrid.org/pelican_platform/osdf-origin:latest
+
+[Install]
+WantedBy=multi-user.target
+</code></pre></div>
+<p>Enable and start the service with:</p>
+<div class="highlight"><pre><span></span><code><span class="gp">root@host $ </span>systemctl <span class="nb">enable</span> docker-osdf-origin
+<span class="gp">root@host $ </span>systemctl start docker-osdf-origin
+</code></pre></div>
 <h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
 <p>To get assistance, please use the <a href="../../../common/help/">this page</a>.</p>
 
@@ -2373,41 +2354,6 @@ You may uninstall the non-Pelican origin:</p>
       </main>
       
         <footer class="md-footer">
-  
-    <nav class="md-footer__inner md-grid" aria-label="Footer">
-      
-        
-        <a href="../install-cache-rpm/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Install from RPM" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              Install from RPM
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../../stashcache/run-stashcache-container/" class="md-footer__link md-footer__link--next" aria-label="Next: Install from container" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Install from container
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

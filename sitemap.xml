@@ -116,6 +116,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://osg-htc.org/docs/data/osdf/install-origin-container/</loc>
+         <lastmod>2025-03-25</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://osg-htc.org/docs/data/osdf/install-origin-rpm/</loc>
          <lastmod>2025-03-25</lastmod>
          <changefreq>daily</changefreq>
