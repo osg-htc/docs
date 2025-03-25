@@ -127,7 +127,6 @@ In order to successfully start payload jobs:
    in Topology, respectively.
 1. Set the `OSG_SQUID_LOCATION` environment variable to the HTTP address of your preferred Squid instance.
 1. _If providing NVIDIA GPU resources:_ See section [Providing GPU Resources](#providing-gpu-resources)
-1. _Optional:_ Enable [CVMFS](#recommended-cvmfs) via one of the mechanisms described below.
 1. _Strongly recommended:_ If you want job I/O to be done in a separate directory outside of the container,
    volume mount the desired directory on the host to `/pilot` inside the container.
 
@@ -143,6 +142,8 @@ In order to successfully start payload jobs:
    this limits the pilot to only run certain jobs.
 
 1. _Optional:_ [limit OSG pilot container resource usage](#limiting-resource-usage)
+
+1. _Optional:_ Enable [CVMFS](#cvmfs) via one of the mechanisms described below.
 
 Here is an example invocation using `docker run` by hand:
 
@@ -194,11 +195,14 @@ but the container will need fewer privileges.
 
 [cvmfsexec](https://github.com/CVMFS/cvmfsexec#readme) is a tool that can be used to mount CVMFS inside the container
 without requiring CVMFS on the host.
-To enable cvmfsexec, specify a space-separated list of repos in the `CVMFSEXEC_REPOS` environment variable.
-At a minimum, we recommend enabling the following repos:
+To enable cvmfsexec, specify a comma-separated list of repos in the `CVMFSEXEC_REPOS` environment variable.
+Adding the following line to `/etc/osg/ospool-ep.cfg` will enable the repos we recommend:
+```
+CVMFSEXEC_REPOS=oasis.opensciencegrid.org,singularity.opensciencegrid.org
+```
 
--   `oasis.opensciencegrid.org`
--   `singularity.opensciencegrid.org`
+!!! warning "Systemd environment files"
+    Systemd environment files do not honor shell syntax, i.e. variables are passed in directly as written
 
 Additionally, you may set the following environment variables to further control the behavior of cvmfsexec:
 

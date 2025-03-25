@@ -23,7 +23,7 @@ it could have a token for read access to an input dataset, and a token for write
 Token Components
 ----------------
 
-Bearer tokens are credential strings in the [JSON Web Token (JWT)](https://jwt.io) format.
+Bearer tokens are credential strings in the JSON Web Token (JWT) format.
 A JWT consists of a JSON header, a JSON payload, and a signature that can be verified.
 The payload contains a number of fields, called "claims", that describe the token and what it can access.
 
@@ -204,7 +204,6 @@ References
 
 -   [Troubleshooting Tokens](using-tokens.md#troubleshooting-tokens)
 -   [OSG Technology - Collaborations and Bearer Tokens](https://opensciencegrid.org/technology/policy/collab-bearer-tokens/)
--   [JSON Web Tokens](https://jwt.io) - includes token decoder
 -   [SciTokens](https://scitokens.org)
     -   [SciToken Claims and Scopes Language](https://scitokens.org/technical_docs/Claims)
     -   [SciTokens Demo](https://demo.scitokens.org/) - includes token generator, verifier, and links to libraries
