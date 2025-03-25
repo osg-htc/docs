@@ -18,8 +18,7 @@ Before starting the installation process, consider the following requirements:
 * __Host certificate:__ Required for authentication.  See note below.
 * __Network ports:__ The origin service requires the following ports open:
     * Inbound TCP port 8443 for file access via the HTTP(S) and XRoot protocols.
-    * (Optional) Inbound TCP port 8444 for access to the web interface for monitoring and configuration;
-      if enabled, access to this port should be restricted to the LAN.
+    * Inbound TCP port 8444 for access to the web interface and API.
 * __Service requirements:__ An origin in the OSDF should have at least:
     * 1 core
     * 1 Gbps connectivity
