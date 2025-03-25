@@ -194,11 +194,14 @@ but the container will need fewer privileges.
 
 [cvmfsexec](https://github.com/CVMFS/cvmfsexec#readme) is a tool that can be used to mount CVMFS inside the container
 without requiring CVMFS on the host.
-To enable cvmfsexec, specify a space-separated list of repos in the `CVMFSEXEC_REPOS` environment variable.
-At a minimum, we recommend enabling the following repos:
+To enable cvmfsexec, specify a comma-separated list of repos in the `CVMFSEXEC_REPOS` environment variable.
+Adding the following line to `/etc/osg/ospool-ep.cfg` will enable the repos we recommend:
+```
+CVMFSEXEC_REPOS=oasis.opensciencegrid.org,singularity.opensciencegrid.org
+```
 
--   `oasis.opensciencegrid.org`
--   `singularity.opensciencegrid.org`
+!!! warning "Systemd environment files"
+    Systemd environment files do not honor shell syntax, i.e. variables are passed in directly as written
 
 Additionally, you may set the following environment variables to further control the behavior of cvmfsexec:
 
