@@ -228,7 +228,6 @@ If you cannot resolve the problem, there are several ways to receive help:
 
 ## References
 
--  <http://cernvm.cern.ch/portal/filesystem/techinformation>
 -  <https://cvmfs.readthedocs.io/en/latest/>
 
 ### Users and Groups
