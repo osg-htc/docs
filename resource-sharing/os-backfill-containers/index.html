@@ -2292,7 +2292,6 @@ In order to successfully start payload jobs:</p>
    in Topology, respectively.</li>
 <li>Set the <code>OSG_SQUID_LOCATION</code> environment variable to the HTTP address of your preferred Squid instance.</li>
 <li><em>If providing NVIDIA GPU resources:</em> See section <a href="#providing-gpu-resources">Providing GPU Resources</a></li>
-<li><em>Optional:</em> Enable <a href="#recommended-cvmfs">CVMFS</a> via one of the mechanisms described below.</li>
 <li>
 <p><em>Strongly recommended:</em> If you want job I/O to be done in a separate directory outside of the container,
    volume mount the desired directory on the host to <code>/pilot</code> inside the container.</p>
@@ -2309,6 +2308,9 @@ Make sure the user you run your container as has write access to this directory.
 </li>
 <li>
 <p><em>Optional:</em> <a href="#limiting-resource-usage">limit OSG pilot container resource usage</a></p>
+</li>
+<li>
+<p><em>Optional:</em> Enable <a href="#cvmfs">CVMFS</a> via one of the mechanisms described below.</p>
 </li>
 </ol>
 <p>Here is an example invocation using <code>docker run</code> by hand:</p>

@@ -2101,7 +2101,7 @@ Instead of using a single proxy, a job may have multiple tokens.
 For example the job could have one token granting it the ability to be run;
 it could have a token for read access to an input dataset, and a token for write access to a results directory.</p>
 <h2 id="token-components">Token Components<a class="headerlink" href="#token-components" title="Permanent link">&para;</a></h2>
-<p>Bearer tokens are credential strings in the <a href="https://jwt.io">JSON Web Token (JWT)</a> format.
+<p>Bearer tokens are credential strings in the JSON Web Token (JWT) format.
 A JWT consists of a JSON header, a JSON payload, and a signature that can be verified.
 The payload contains a number of fields, called "claims", that describe the token and what it can access.</p>
 <p>There are two JWT-based token standards that can be used with OSG software: <a href="https://scitokens.org">SciTokens</a>
@@ -2320,7 +2320,6 @@ directly to verify that this information is up-to-date.</p>
 <ul>
 <li><a href="../using-tokens/#troubleshooting-tokens">Troubleshooting Tokens</a></li>
 <li><a href="https://opensciencegrid.org/technology/policy/collab-bearer-tokens/">OSG Technology - Collaborations and Bearer Tokens</a></li>
-<li><a href="https://jwt.io">JSON Web Tokens</a> - includes token decoder</li>
 <li><a href="https://scitokens.org">SciTokens</a><ul>
 <li><a href="https://scitokens.org/technical_docs/Claims">SciToken Claims and Scopes Language</a></li>
 <li><a href="https://demo.scitokens.org/">SciTokens Demo</a> - includes token generator, verifier, and links to libraries</li>

@@ -231,11 +231,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://osg-htc.org/docs/release/osg-36/</loc>
-         <lastmod>2025-03-25</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://osg-htc.org/docs/release/release_series/</loc>
          <lastmod>2025-03-25</lastmod>
          <changefreq>daily</changefreq>
@@ -257,11 +252,6 @@
     </url>
     <url>
          <loc>https://osg-htc.org/docs/release/updating-to-osg-24/</loc>
-         <lastmod>2025-03-25</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://osg-htc.org/docs/release/updating-to-osg-36/</loc>
          <lastmod>2025-03-25</lastmod>
          <changefreq>daily</changefreq>
     </url>
