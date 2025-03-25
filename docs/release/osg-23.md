@@ -473,7 +473,7 @@ Latest News
         QuoVadis-Root-CA2G3, QuoVadis-Root-CA2, and QuoVadis-Root-CA3G3 (BM)
 -   VOMS 2.10.0-0.31.rc3.1
     -   Rebuild with latest source to get Enterprise Linux 9 support
--   [GlideinWMS 3.10.6](http://glideinwms.fnal.gov/doc.v3_10_6/history.html): Enterprise Linux 9 only
+-   GlideinWMS 3.10.6: Enterprise Linux 9 only
     -   Knobs to overload memory and CPU
     -   HTCondor tarball downloader
     -   Advertising of Factory's HTCondor submit parameters
@@ -691,7 +691,7 @@ This release contains the following major package updates compared to the curren
         -   Fix memory leaks in GSI authentication
         -   Fix chunked PUT creating empty files
 
--   [GlideinWMS 3.10.5](http://glideinwms.fnal.gov/doc.v3_10_5/history.html):
+-   GlideinWMS 3.10.5:
     an update from 3.10.1 in OSG 3.6 main
 
     !!! warning "If you are using custom setup scripts..."

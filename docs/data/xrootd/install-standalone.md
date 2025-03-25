@@ -259,7 +259,7 @@ To get assistance. please use the [Help Procedure](../../common/help.md) page.
 Reference
 ---------
 
-- [XRootD documentation](https://xrootd.slac.stanford.edu/docs.html)
+- [XRootD documentation](https://xrootd.org/docs.html)
 - [Export directive](https://xrootd.web.cern.ch/doc/dev56/ofs_config.htm#_Toc136617316) in the XRootD
   configuration and [relevant options](https://xrootd.web.cern.ch/doc/dev56/ofs_config.htm#_defaults)
 
