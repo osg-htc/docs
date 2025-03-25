@@ -4,7 +4,7 @@ Installing the OSDF Origin by Container
 =======================================
 
 This document describes how to run an Open Science Data Federation (OSDF) Origin service via containers.
-This service allows an organization to distribute their data in a scalable manner to Open Science Pool jobs,
+This service allows projects and organizations to distribute their data in a scalable manner to distributed high-throughput computing jobs,
 reducing data transfer over the wide-area network and increasing throughput to jobs.
 
 Before Starting
