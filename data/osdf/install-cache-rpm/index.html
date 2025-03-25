@@ -2049,7 +2049,8 @@ reducing data transfer over the wide-area network and increasing throughput to j
 <li><strong>Host certificate:</strong> Required for authentication.  See note below.</li>
 <li><strong>Network ports:</strong> The cache service requires the following ports open:</li>
 <li>Inbound TCP port 8443 for file access via the HTTP(S) and XRoot protocols.</li>
-<li>Inbound TCP port 8444 for access to the web interface and API.</li>
+<li>Inbound TCP port 8444 for access to web endpoints such as origin-based token issuers, federation health checks, and
+    metrics</li>
 <li><strong>Service requirements:</strong><ul>
 <li>A cache serving the OSDF federation as a regional cache should have at least:<ul>
 <li>8 cores</li>
@@ -2138,16 +2139,16 @@ before starting the cache for the first time, it is recommended to generate a ke
 </li>
 <li>
 <p>Download a test file from the OSDF through your cache (replacing <code>CACHE_HOSTNAME</code> with the host name of your cache)</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span>osdf object get -c CACHE_HOSTNAME:8443 /ospool/uc-shared/public/OSG-Staff/validation/test.txt /tmp/test.txt
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span>pelican object get -c CACHE_HOSTNAME:8443 osdf:///ospool/uc-shared/public/OSG-Staff/validation/test.txt /tmp/test.txt
 <span class="gp">root@host$ </span>cat /tmp/test.txt
 
 <span class="go">Hello, World!</span>
 </code></pre></div>
 
-<p>If the download fails, rerun the above <code>osdf object get</code> command with the <code>-d</code> flag added;
+<p>If the download fails, rerun the above <code>pelican object get</code> command with the <code>-d</code> flag added;
 additional debugging information is located in <code>/var/log/pelican/osdf-cache.log</code>.
 See <a href="../../../common/help/">this page</a> for requesting assistance; please include the log file
-and the <code>osdf object get -d</code> output in your request.</p>
+and the <code>pelican object get -d</code> output in your request.</p>
 </li>
 </ol>
 <h2 id="joining-the-cache-to-the-federation">Joining the Cache to the Federation<a class="headerlink" href="#joining-the-cache-to-the-federation" title="Permanent link">&para;</a></h2>

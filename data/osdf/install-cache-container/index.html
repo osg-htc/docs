@@ -2144,7 +2144,8 @@ reducing data transfer over the wide-area network and increasing throughput to j
 <li><strong>Host certificate:</strong> Required for authentication.  See note below.</li>
 <li><strong>Network ports:</strong> The cache service requires the following open ports:<ul>
 <li>Inbound TCP port 8443 for authenticated file access via the HTTP(S) and XRoot protocols.</li>
-<li>Inbound TCP port 8444 for access to the web interface and API.</li>
+<li>Inbound TCP port 8444 for access to web endpoints such as origin-based token issuers, federation health checks,
+  and metrics</li>
 <li>Outbound UDP port 9930 for reporting to <code>xrd-report.osgstorage.org</code> and <code>xrd-mon.osgstorage.org</code> for monitoring</li>
 </ul>
 </li>
