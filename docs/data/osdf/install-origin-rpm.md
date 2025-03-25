@@ -25,8 +25,7 @@ Before starting the installation process, consider the following requirements:
 * __Host certificate:__ Required for authentication.  See note below.
 * __Network ports:__ The origin service requires the following ports open:
     * Inbound TCP port 8443 for file access via the HTTP(S) and XRoot protocols.
-    * (Optional) Inbound TCP port 8444 for access to the web interface for monitoring and configuration;
-      if enabled, access to this port should be restricted to the LAN.
+    * Inbound TCP port 8444 for access to the web interface and API.
 * __Service requirements:__ An origin in the OSDF should have at least:
     * 1 core
     * 1 Gbps connectivity
@@ -209,17 +208,29 @@ root@host$ systemctl restart osdf-origin
 ```
 
 Validating the Origin Through the Federation
-----------------------------------
+--------------------------------------------
 
 Once your origin has been registered in the federation:
 
-1.  Download a test file (POSIX) or object (S3) from your origin (replacing `ORIGIN_HOSTNAME` with the host name of your origin,
-    and TEST_PATH with the OSDF path to the test file or object:
+1.  Optional, if DirectReads are enabled:  Download a test file (POSIX) or object (S3) directly from your origin,
+    (replacing `<TEST_PATH>` with the OSDF path to the test file or object):
 
         :::console
-        user@host $ curl -L https://osdf-director.osg-htc.org:8443/TEST_PATH -o /tmp/testfile
+        user@host $ pelican object get 'osdf:///<TEST_PATH>?directread=1' -o /tmp/testfile
 
     Verify the contents of `/tmp/testfile` match the test file or object your origin was serving.
+
+    If the download fails, debugging information is located in `/var/log/pelican/osdf-origin.log`.
+    See [this page](../../common/help.md) for requesting assistance; please include the log file
+    in your request.
+
+1.  Download a test file (POSIX) or object (S3) from your origin via a cache, 
+    (replacing `<TEST_PATH>` with the OSDF path to the test file or object):
+
+        :::console
+        user@host $ pelican object get 'osdf:///<TEST_PATH>' -o /tmp/testfile2
+
+    Verify the contents of `/tmp/testfile2` match the test file or object your origin was serving.
 
     If the download fails, debugging information is located in `/var/log/pelican/osdf-origin.log`.
     See [this page](../../common/help.md) for requesting assistance; please include the log file
@@ -230,7 +241,7 @@ Once your origin has been registered in the federation:
         :::console
         user@host $ grep <TEST_PATH> /var/log/pelican/osdf-origin.log
 
-    Replacing `<TEST PATH>` with the same path that you used in step (1).
+    Replacing `<TEST PATH>` with the same path that you used in step (1) or (2).
     If you see output, then the OSDF is directing client requests to your Pelican origin!
     If you do not see output, please [contact us](#getting-help).
 
