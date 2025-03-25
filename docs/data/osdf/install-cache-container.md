@@ -19,8 +19,8 @@ Before starting the installation process, consider the following requirements:
 * __Host certificate:__ Required for authentication.  See note below.
 * __Network ports:__ The cache service requires the following open ports:
     * Inbound TCP port 8443 for authenticated file access via the HTTP(S) and XRoot protocols.
-    * (Optional) Inbound TCP port 8444 for access to the web interface for monitoring and configuration;
-      if enabled, access to this port should be restricted to the LAN.
+    * Inbound TCP port 8444 for access to web endpoints such as origin-based token issuers, federation health checks,
+      and metrics
     * Outbound UDP port 9930 for reporting to `xrd-report.osgstorage.org` and `xrd-mon.osgstorage.org` for monitoring
 * __Service requirements:__
     * A cache serving the OSDF federation as a regional cache should have at least:
