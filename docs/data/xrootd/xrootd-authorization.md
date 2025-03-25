@@ -4,7 +4,7 @@ DateReviewed: 2022-05-06
 Configuring XRootD Authorization
 ================================
 
-XRootD offers several authentication options using [security plugins](https://xrootd.slac.stanford.edu/doc/dev50/sec_config.htm)
+XRootD offers several authentication options using [security plugins](https://xrootd.web.cern.ch/doc/dev56/sec_config.htm#_Toc119617427)
 to validate incoming credentials, such as bearer tokens, X.509 proxies, and VOMS proxies.
 
 In the case of X.509 and VOMS proxies, after the incoming credential has been mapped to a username or groupname, the
@@ -255,7 +255,7 @@ idtype id path privs
 | privs  | Letter list of privileges: `a` - all ; `l` - lookup ; `d` - delete ; `n` - rename ; `i` - insert ; `r` - read ; `k` - lock (not used) ; `w` - write ; `-` - prefix to remove specified privileges |
 
 For more details or examples on how to use templated user options, see
-[XRootD authorization database](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606599).
+[XRootD authorization database](https://xrootd.web.cern.ch/doc/dev56/sec_config.htm#_Toc119617472).
 
 #### Verifying file ownership and permissions ####
 

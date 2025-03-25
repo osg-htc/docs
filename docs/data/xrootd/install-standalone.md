@@ -260,8 +260,8 @@ Reference
 ---------
 
 - [XRootD documentation](https://xrootd.slac.stanford.edu/docs.html)
-- [Export directive](https://xrootd.slac.stanford.edu/doc/dev49/ofs_config.htm#_Toc522916544) in the XRootD
-  configuration and [relevant options](https://xrootd.slac.stanford.edu/doc/dev49/ofs_config.htm#_defaults)
+- [Export directive](https://xrootd.web.cern.ch/doc/dev56/ofs_config.htm#_Toc136617316) in the XRootD
+  configuration and [relevant options](https://xrootd.web.cern.ch/doc/dev56/ofs_config.htm#_defaults)
 
 
 ### Service Configuration
