@@ -2192,10 +2192,13 @@ if you do not have root on the host, choose new locations where you have modific
 </div>
 <h2 id="configuring-the-cache-server">Configuring the Cache Server<a class="headerlink" href="#configuring-the-cache-server" title="Permanent link">&para;</a></h2>
 <p>The preferred method of configuring a Pelican-based OSDF cache is via a YAML file that will be 
-mounted into the container into the <code>/etc/pelican/config.d</code> directory.
+mounted into the container at <code>/etc/pelican/pelican.yaml</code>.
 This document will use <code>/etc/osdf-cache/config.yaml</code> as the name of the configuration file outside of the container.</p>
 <p>Create <code>/etc/osdf-cache/config.yaml</code> with the following contents:
-<div class="highlight"><pre><span></span><code>Cache:
+<div class="highlight"><pre><span></span><code>Federation:
+  DiscoveryUrl: &quot;https://osg-htc.org&quot;
+
+Cache:
   Port: 8443
 # XRootD:
 #   Sitename: &lt;RESOURCE NAME REGISTERED WITH OSG&gt;
@@ -2295,7 +2298,7 @@ and is not recommended for caches with more than 10 TB of capacity.</p>
              --volume &lt;ISSUER_JWK&gt;:/etc/pelican/issuer.jwk <span class="se">\</span>
              --volume &lt;HOST_CERT_CHAIN&gt;:/etc/pelican/certificates/tls.crt <span class="se">\</span>
              --volume &lt;HOST_KEY&gt;:/etc/pelican/certificates/tls.key <span class="se">\</span>
-             --volume &lt;CACHE_CONFIG_FILE&gt;:/etc/pelican/config.d/99-local.yaml <span class="se">\</span>
+             --volume &lt;CACHE_CONFIG_FILE&gt;:/etc/pelican/pelican.yaml <span class="se">\</span>
              --volume &lt;CACHE_PARTITION&gt;:/run/pelican/cache <span class="se">\</span>
              --name osdf-cache <span class="se">\</span>
              hub.opensciencegrid.org/pelican_platform/osdf-cache:latest
@@ -2307,7 +2310,7 @@ and is not recommended for caches with more than 10 TB of capacity.</p>
              --volume /etc/osdf-cache/issuer.jwk:/etc/pelican/issuer.jwk <span class="se">\</span>
              --volume /etc/osdf-cache/hostcert.pem:/etc/pelican/certificates/tls.crt <span class="se">\</span>
              --volume /etc/osdf-cache/hostkey.pem:/etc/pelican/certificates/tls.key <span class="se">\</span>
-             --volume /etc/osdf-cache/config.yaml:/etc/pelican/config.d/99-local.yaml <span class="se">\</span>
+             --volume /etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml <span class="se">\</span>
              --volume /mnt/cache:/run/pelican/cache <span class="se">\</span>
              --name osdf-cache <span class="se">\</span>
              hub.opensciencegrid.org/pelican_platform/osdf-cache:latest
@@ -2321,7 +2324,7 @@ This improves performance and is recommended for caches with more than 10 TB of 
              --volume &lt;ISSUER_JWK&gt;:/etc/pelican/issuer.jwk <span class="se">\</span>
              --volume &lt;HOST_CERT_CHAIN&gt;:/etc/pelican/certificates/tls.crt <span class="se">\</span>
              --volume &lt;HOST_KEY&gt;:/etc/pelican/certificates/tls.key <span class="se">\</span>
-             --volume &lt;CACHE_CONFIG_FILE&gt;:/etc/pelican/config.d/99-local.yaml <span class="se">\</span>
+             --volume &lt;CACHE_CONFIG_FILE&gt;:/etc/pelican/pelican.yaml <span class="se">\</span>
              --volume &lt;NAMESPACE_PARTITION&gt;:/run/pelican/cache/namespace <span class="se">\</span>
              --volume &lt;METADATA_PARTITION&gt;:/run/pelican/cache/meta <span class="se">\</span>
              --volume &lt;DATA_PARTITION&gt;:/run/pelican/cache/data <span class="se">\</span>
@@ -2335,7 +2338,7 @@ This improves performance and is recommended for caches with more than 10 TB of 
              --volume /etc/osdf-cache/issuer.jwk:/etc/pelican/issuer.jwk <span class="se">\</span>
              --volume /etc/osdf-cache/hostcert.pem:/etc/pelican/certificates/tls.crt <span class="se">\</span>
              --volume /etc/osdf-cache/hostkey.pem:/etc/pelican/certificates/tls.key <span class="se">\</span>
-             --volume /etc/osdf-cache/config.yaml:/etc/pelican/config.d/99-local.yaml <span class="se">\</span>
+             --volume /etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml <span class="se">\</span>
              --volume /mnt/cache-namespace:/run/pelican/cache/namespace <span class="se">\</span>
              --volume /mnt/cache-meta:/run/pelican/cache/meta <span class="se">\</span>
              --volume /mnt/cache-data:/run/pelican/cache/data <span class="se">\</span>
@@ -2426,7 +2429,7 @@ ExecStart=/usr/bin/docker run --rm --name osdf-cache \
   --volume /etc/osdf-cache/issuer.jwk:/etc/pelican/issuer.jwk \
   --volume /etc/osdf-cache/hostcert.pem:/etc/pelican/certificates/tls.crt \
   --volume /etc/osdf-cache/hostkey.pem:/etc/pelican/certificates/tls.key \
-  --volume /etc/osdf-cache/config.yaml:/etc/pelican/config.d/99-local.yaml \
+  --volume /etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml \
   --volume /mnt/cache:/run/pelican/cache \
   --name osdf-cache \
   hub.opensciencegrid.org/pelican_platform/osdf-cache:latest
@@ -2447,7 +2450,7 @@ The following example uses the <a href="#single-partition">single partition</a> 
              --volume /etc/osdf-cache/issuer.jwk:/etc/pelican/issuer.jwk <span class="se">\</span>
              --volume /etc/osdf-cache/hostcert.pem:/etc/pelican/certificates/tls.crt <span class="se">\</span>
              --volume /etc/osdf-cache/hostkey.pem:/etc/pelican/certificates/tls.key <span class="se">\</span>
-             --volume /etc/osdf-cache/config.yaml:/etc/pelican/config.d/99-local.yaml <span class="se">\</span>
+             --volume /etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml <span class="se">\</span>
              --volume /mnt/cache:/run/pelican/cache <span class="se">\</span>
              --name osdf-cache <span class="se">\</span>
              hub.opensciencegrid.org/pelican_platform/osdf-cache:latest
