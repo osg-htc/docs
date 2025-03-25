@@ -321,7 +321,7 @@ CMSD_INSTANCES="default"
 FRMD_INSTANCES="default"
 ```
 
-1.  Modify `/etc/xrootd/xrootd-clustered.cfg` on both nodes to specify options for `frm_xfrd` (File Transfer Daemon) and `frm_purged` (File Purging Daemon). For more information, you can visit the [FRM Documentation](http://xrootd.org/doc/dev4/frm_config.htm)
+1.  Modify `/etc/xrootd/xrootd-clustered.cfg` on both nodes to specify options for `frm_xfrd` (File Transfer Daemon) and `frm_purged` (File Purging Daemon). For more information, you can visit the [FRM Documentation](https://xrootd.web.cern.ch/doc/man/frm_xfrd.8.html)
 2.  Start frm daemons on data server:
 
 ```console

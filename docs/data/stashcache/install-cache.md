@@ -258,7 +258,7 @@ all allow gsi g=/glow h=*.cs.wisc.edu
 This gives access to the config file, log files, core files, and process information
 to anyone from `*.cs.wisc.edu` in the `/glow` VOMS group.
 
-See [the XRootD manual](http://xrootd.org/doc/dev48/xrd_config.htm#_Toc496911334) for the full syntax.
+See the XRootD manual for the full syntax.
 
 Remote debugging should only be enabled for as long as you need assistance.
 As soon as your issue has been resolved, revert any changes you have made to `/etc/xrootd/digauth.cfg`.

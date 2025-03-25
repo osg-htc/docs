@@ -270,18 +270,15 @@ You can use the tools in the `scitokens-cpp` RPM to validate a SciToken or WLCG 
 
 ### Examining tokens
 
--   Online: paste the token into <https://jwt.io>.
+1.  Install `htgettoken`:
 
--   Offline:
-    1.  Install `htgettoken`:
+        # yum install htgettoken
 
-            # yum install htgettoken
+2.  Write the token to a file named `tok` or store it in one of the
+    default WLCG Bearer Token Discovery locations described above.
+3.  Run `htdecodetoken -H tok` or leave off the `tok` filename if
+    it is in one of the default locations.
 
-    2.  Write the token to a file named `tok` or store it in one of the
-        default WLCG Bearer Token Discovery locations described above.
-    3.  Run `htdecodetoken -H tok` or leave off the `tok` filename if
-        it is in one of the default locations.
-
-    `htdecodetoken` is one of the
-    [additional commands](https://github.com/fermitools/htgettoken#additional-commands)
-    that come with the `htgettoken` package.
+`htdecodetoken` is one of the
+[additional commands](https://github.com/fermitools/htgettoken#additional-commands)
+that come with the `htgettoken` package.
