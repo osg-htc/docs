@@ -23,7 +23,6 @@ Before starting the installation process, consider the following requirements:
     * 1 core
     * 1 Gbps connectivity
     * 12 GB of RAM
-    * 10 GB of local disk space in `/var/log` for log files
 
 !!! note "Host certificates"
     Origins are accessed by users through browsers, meaning origins need a certificate from a CA acceptable to a standard browser.
