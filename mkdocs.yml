@@ -72,6 +72,7 @@ nav:
       - 'Install from container': 'data/osdf/install-cache-container.md'
       - 'Install from RPM': 'data/osdf/install-cache-rpm.md'
   - Data Origin:
+      - 'Install from container': 'data/osdf/install-origin-container.md'
       - 'Install from RPM': 'data/osdf/install-origin-rpm.md'
   - Data Cache (deprecated):
       - 'Install from container': 'data/stashcache/run-stashcache-container.md'
