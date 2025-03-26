@@ -27,12 +27,18 @@ Before starting the installation process, consider the following requirements:
     * Inbound TCP port 8443 for file access via the HTTP(S) and XRoot protocols.
     * Inbound TCP port 8444 for access to web endpoints such as origin-based token issuers, federation health checks, and
       metrics
-* __Service requirements:__ An origin in the OSDF should have at least:
+* __Service requirements:__ The recommended resources for an origin in the OSDF are:
+    * 4 cores
+    * 25 Gbps connectivity
+    * 20 GB of RAM
+    * 10 GB of local disk space in `/var/log` for log files
+
+    At a minumum, an origin in the OSDF should have:
+
     * 1 core
     * 1 Gbps connectivity
     * 12 GB of RAM
-    * 10 GB of local disk space in `/var/log` for log files,
-      although some logging verbosity can be reduced.
+    * 10 GB of local disk space in `/var/log` for log files
 
 As with all OSG software installations, there are some one-time steps to prepare in advance:
 

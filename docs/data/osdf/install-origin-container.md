@@ -20,7 +20,13 @@ Before starting the installation process, consider the following requirements:
     * Inbound TCP port 8443 for file access via the HTTP(S) and XRoot protocols.
     * Inbound TCP port 8444 for access to web endpoints such as origin-based token issuers, federation health checks, and
       metrics
-* __Service requirements:__ An origin in the OSDF should have at least:
+* __Service requirements:__ The recommended resources for an origin in the OSDF are:
+    * 4 cores
+    * 25 Gbps connectivity
+    * 20 GB of RAM
+
+    At a minumum, an origin in the OSDF should have:
+
     * 1 core
     * 1 Gbps connectivity
     * 12 GB of RAM
