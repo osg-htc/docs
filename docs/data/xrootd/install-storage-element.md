@@ -101,7 +101,7 @@ You will need to customize the following lines:
 | `set xrdr=<RDRNODE>`           | Change to the hostname of the redirector                                                                                                                                                                                                                                            |
 | `cms.space min 2g 5g`          | Reserve this amount of free space on the node. For this example, if space falls below 2GB, xrootd will not store further files on this node until space climbs above 5GB. You can use `k`, `m`, `g`, or `t` to indicate kilobyte, megabytes, gigabytes, or terabytes, respectively. |
 
-Further information can be found at <https://xrootd.slac.stanford.edu/docs.html>
+Further information can be found at <https://xrootd.org/docs.html>
 
 #### Verifying the clustered config
 
@@ -186,7 +186,6 @@ else
       oss.localroot /local/xrootd
       ofs.notify closew create mkdir mv rm rmdir trunc | /usr/bin/XrdCnsd -d -D 2 -i 90 -b $(xrdr):1095:/data/inventory
       #add cms.space if you have less the 11GB
-      # cms.space options https://xrootd.slac.stanford.edu/doc/dev410/cms_config.htm
       cms.space min 2g 5g
 fi
 ```
@@ -401,4 +400,4 @@ Reference
 Links
 -----
 
--   [XRootD documentation](https://xrootd.slac.stanford.edu/docs.html)
+-   [XRootD documentation](https://xrootd.org/docs.html)

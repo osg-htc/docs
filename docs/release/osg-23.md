@@ -220,7 +220,7 @@ Latest News
     -   Fix bug where Docker universe images would not be removed from EP cache
     -   Fix bug where `condor_watch_q` could crash
     -   Fix bug that could cause the file transfer hold reason to be truncated
--   [XRootD 5.7.1](https://xrootd.slac.stanford.edu/2024/09/03/announcement_5_7_1.html)
+-   XRootD 5.7.1
     -   New Features
         -   Allow cconfig to write out combined config file
         -   Allow for API endpoints for fixed remote origins
@@ -288,7 +288,7 @@ Latest News
         -   New 'htcondor credential' command to aid in debugging
 
 ### **July 30, 2024:** XRootD 5.7.0
--   [XRootD 5.7.0](https://xrootd.slac.stanford.edu/2024/07/01/announcement_5_7_0.html)
+-   XRootD 5.7.0
     -   New feature release
     -   Support for Python 2.x is now deprecated
     -   Support for CentOS 7 is now deprecated (although official RPMs for 5.7.0 are available)
@@ -417,7 +417,7 @@ Latest News
     -   Fix memory request being ignored for whole node jobs
 
 ### **April 4, 2024:** XRootD 5.6.9
--   [XRootD 5.6.9](https://xrootd.slac.stanford.edu/2024/03/08/announcement_5_6_9.html)
+-   XRootD 5.6.9
     -   Various minor bug fixes; see upstream release notes for details
 
 ### **March 21, 2024:** osg-scitokens-mapfile 13-2, vo-client 135-1
@@ -473,7 +473,7 @@ Latest News
         QuoVadis-Root-CA2G3, QuoVadis-Root-CA2, and QuoVadis-Root-CA3G3 (BM)
 -   VOMS 2.10.0-0.31.rc3.1
     -   Rebuild with latest source to get Enterprise Linux 9 support
--   [GlideinWMS 3.10.6](http://glideinwms.fnal.gov/doc.v3_10_6/history.html): Enterprise Linux 9 only
+-   GlideinWMS 3.10.6: Enterprise Linux 9 only
     -   Knobs to overload memory and CPU
     -   HTCondor tarball downloader
     -   Advertising of Factory's HTCondor submit parameters
@@ -691,7 +691,7 @@ This release contains the following major package updates compared to the curren
         -   Fix memory leaks in GSI authentication
         -   Fix chunked PUT creating empty files
 
--   [GlideinWMS 3.10.5](http://glideinwms.fnal.gov/doc.v3_10_5/history.html):
+-   GlideinWMS 3.10.5:
     an update from 3.10.1 in OSG 3.6 main
 
     !!! warning "If you are using custom setup scripts..."
