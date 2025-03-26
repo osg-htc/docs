@@ -2129,12 +2129,20 @@ administrator to serve data from a POSIX filesystem or S3 endpoint through the g
   metrics</li>
 </ul>
 </li>
-<li><strong>Service requirements:</strong> An origin in the OSDF should have at least:<ul>
+<li>
+<p><strong>Service requirements:</strong> The recommended resources for an origin in the OSDF are:</p>
+<ul>
+<li>4 cores</li>
+<li>25 Gbps connectivity</li>
+<li>20 GB of RAM</li>
+<li>10 GB of local disk space in <code>/var/log</code> for log files</li>
+</ul>
+<p>At a minumum, an origin in the OSDF should have:</p>
+<ul>
 <li>1 core</li>
 <li>1 Gbps connectivity</li>
 <li>12 GB of RAM</li>
-<li>10 GB of local disk space in <code>/var/log</code> for log files,
-  although some logging verbosity can be reduced.</li>
+<li>10 GB of local disk space in <code>/var/log</code> for log files</li>
 </ul>
 </li>
 </ul>
