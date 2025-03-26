@@ -1849,6 +1849,33 @@
     Requesting certificates from a registration authority
   </a>
   
+    <nav class="md-nav" aria-label="Requesting certificates from a registration authority">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generating-a-csr-via-the-container" class="md-nav__link">
+    Generating a CSR via the Container
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-a-csr-via-the-rpm" class="md-nav__link">
+    Generating a CSR via the RPM
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-a-certificate-using-a-csr" class="md-nav__link">
+    Generating a Certificate using a CSR
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1932,6 +1959,33 @@
     Requesting certificates from a registration authority
   </a>
   
+    <nav class="md-nav" aria-label="Requesting certificates from a registration authority">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generating-a-csr-via-the-container" class="md-nav__link">
+    Generating a CSR via the Container
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-a-csr-via-the-rpm" class="md-nav__link">
+    Generating a CSR via the RPM
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-a-certificate-using-a-csr" class="md-nav__link">
+    Generating a Certificate using a CSR
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1972,11 +2026,16 @@ If your institution is in the list of <a href="https://www.incommon.org/federati
 continue with the instructions below.
 If your institution is not in the list, Let's Encrypt certificates do not meet your needs, and you do not have access to
 another IGTF CA subscription, please <a href="../../../common/help/">contact us</a>.</p>
-<p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
+<p>Before you can request a certificate, ensure your host has one of the following:</p>
 <ul>
-<li>Ensure the host has <a href="../../../release/supported_platforms/">a supported operating system</a></li>
-<li>Obtain root access to the host</li>
-<li>Prepare the <a href="../../../common/yum/">required Yum repositories</a></li>
+<li>The ability to run containers through tools like <code>docker</code> or <code>podman</code></li>
+<li>An installation of the  <code>osg-pki-tools</code> RPM:</li>
+<li>Select a host with <a href="../../../release/supported_platforms/">a supported operating system</a>.</li>
+<li>Ensure root access on the host.</li>
+<li>Configure the <a href="../../../common/yum/">required Yum repositories</a>.</li>
+<li>Install the RPM via:
+     <div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum install osg-pki-tools
+</code></pre></div></li>
 </ul>
 <p>From a host that meets the above requirements, there are two options to get InCommon IGTF-accredited host certificates:</p>
 <ol>
@@ -1986,10 +2045,44 @@ another IGTF CA subscription, please <a href="../../../common/help/">contact us<
    As an RA, you can request, approve, and retrieve certificates yourself through the InCommon REST API using the
    <code>osg-incommon-cert-request</code> tool .</li>
 </ol>
-<p>Install the <code>osg-pki-tools</code> where both command line tools are available:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum install osg-pki-tools
-</code></pre></div>
 <h2 id="requesting-certificates-from-a-registration-authority">Requesting certificates from a registration authority<a class="headerlink" href="#requesting-certificates-from-a-registration-authority" title="Permanent link">&para;</a></h2>
+<h3 id="generating-a-csr-via-the-container">Generating a CSR via the Container<a class="headerlink" href="#generating-a-csr-via-the-container" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Generate a Certificate Signing Request (CSR) and private key using the  <code>hub.opensciencegrid.org/opensciencegrid/pki-tools</code> container,
+volume mounting a local directory (<code>~/path_to_dir</code>) into the <code>/output</code> directory of the container.</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>docker run --rm  <span class="se">\</span>
+             -v ~/path_to_dir:/output <span class="se">\</span>
+             hub.opensciencegrid.org/opensciencegrid/pki-tools:24-release <span class="se">\</span>
+             --hostname &lt;HOSTNAME&gt; <span class="se">\</span>
+             --country &lt;COUNTRY&gt; <span class="se">\</span>
+             --state &lt;STATE&gt; <span class="se">\</span>
+             --locality &lt;LOCALITY&gt; <span class="se">\</span>
+             --organization &lt;ORGANIZATION&gt;
+</code></pre></div>
+
+<p>You may also add <a href="https://en.wikipedia.org/wiki/Subject_Alternative_Name">DNS Subject Alternative Names</a> (SAN) to
+the request by specifying any number of <code>--altname &lt;SAN&gt;</code>.
+For example, the following generates a CSR for <code>test.opensciencegrid.org</code> with <code>foo.opensciencegrid.org</code> and
+<code>bar.opensciencegrid.org</code> as SANs:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>docker run --rm  <span class="se">\</span>
+             -v ~/path_to_dir:/output <span class="se">\</span>
+             hub.opensciencegrid.org/opensciencegrid/pki-tools:24-release <span class="se">\</span>
+             --country US <span class="se">\</span>
+             --state Wisconsin <span class="se">\</span>
+             --locality Madison <span class="se">\</span>
+             --organization <span class="s1">&#39;University of Wisconsin-Madison&#39;</span> <span class="se">\</span>
+             --hostname test.opensciencegrid.org <span class="se">\</span>
+             --altname  foo.opensciencegrid.org <span class="se">\</span>
+             --altname  bar.opensciencegrid.org
+</code></pre></div>
+
+<p>If successful, the CSR will be named <code>~/path_to_dir/&lt;HOSTNAME&gt;.req</code> and the private key will be named 
+<code>~/path_to_dir/&lt;HOSTNAME&gt;-key.pem</code>.  Additional options and descriptions can be found 
+<a href="https://github.com/opensciencegrid/osg-pki-tools#options">here</a>.</p>
+</li>
+</ol>
+<h3 id="generating-a-csr-via-the-rpm">Generating a CSR via the RPM<a class="headerlink" href="#generating-a-csr-via-the-rpm" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
 <p>Generate a Certificate Signing Request (CSR) and private key using the <code>osg-cert-request</code> tool:</p>
@@ -2004,22 +2097,25 @@ another IGTF CA subscription, please <a href="../../../common/help/">contact us<
 the request by specifying any number of <code>--altname &lt;SAN&gt;</code>.
 For example, the following generates a CSR for <code>test.opensciencegrid.org</code> with <code>foo.opensciencegrid.org</code> and
 <code>bar.opensciencegrid.org</code> as SANs:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>osg-cert-request --hostname test.opensciencegrid.org <span class="se">\</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>osg-cert-request <span class="se">\</span>
              --country US <span class="se">\</span>
              --state Wisconsin <span class="se">\</span>
              --locality Madison <span class="se">\</span>
              --organization <span class="s1">&#39;University of Wisconsin-Madison&#39;</span> <span class="se">\</span>
-             --altname foo.opensciencegrid.org <span class="se">\</span>
-             --altname bar.opensciencegrid.org
+             --hostname test.opensciencegrid.org <span class="se">\</span>
+             --altname  foo.opensciencegrid.org <span class="se">\</span>
+             --altname  bar.opensciencegrid.org
 </code></pre></div>
 
 <p>If successful, the CSR will be named <code>&lt;HOSTNAME&gt;.req</code> and the private key will be named <code>&lt;HOSTNAME&gt;-key.pem</code>.
 Additional options and descriptions can be found <a href="https://github.com/opensciencegrid/osg-pki-tools#options">here</a>.</p>
 </li>
-<li>
-<p>Find your institution-specific InCommon contact and  submit the CSR that you generated above.
-   Make sure to request a 1-year <code>IGTF Server Certificate</code> for <code>OTHER</code> server software.</p>
-</li>
+</ol>
+<h3 id="generating-a-certificate-using-a-csr">Generating a Certificate using a CSR<a class="headerlink" href="#generating-a-certificate-using-a-csr" title="Permanent link">&para;</a></h3>
+<p>Once you have obtained a CSR and private key using either the container or RPM:</p>
+<ol>
+<li>Find your institution-specific InCommon contact and  submit the CSR that you generated above.
+   Make sure to request a 1-year <code>IGTF Server Certificate</code> for <code>OTHER</code> server software.</li>
 <li>After the certificate has been issued by your institution, download the host certificate only (not the full chain) to
    its intended host and copy over the key you generated above.</li>
 <li>
