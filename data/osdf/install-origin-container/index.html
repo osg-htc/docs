@@ -1123,14 +1123,16 @@
 
   
   
+    
+  
   
     
       
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" checked>
       
       
       
@@ -1226,12 +1228,14 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_3" type="checkbox" id="__nav_9_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_3" type="checkbox" id="__nav_9_3" checked>
       
       
       
@@ -1247,6 +1251,177 @@
           Data Origin
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Install from container
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Install from container
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#before-starting" class="md-nav__link">
+    Before Starting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-the-origin-server" class="md-nav__link">
+    Configuring the Origin Server
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring the Origin Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuring-posix-directory-export" class="md-nav__link">
+    Configuring POSIX (directory) export
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring POSIX (directory) export">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-volume" class="md-nav__link">
+    Single volume
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-volumes" class="md-nav__link">
+    Multiple volumes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-s3-export" class="md-nav__link">
+    Configuring S3 export
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparing-for-initial-startup" class="md-nav__link">
+    Preparing for Initial Startup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-an-origin" class="md-nav__link">
+    Running an Origin
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validating-the-origin" class="md-nav__link">
+    Validating the Origin
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#joining-the-origin-to-the-federation" class="md-nav__link">
+    Joining the Origin to the Federation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validating-the-origin-through-the-federation" class="md-nav__link">
+    Validating the Origin Through the Federation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-topics" class="md-nav__link">
+    Advanced topics
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced topics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#persisting-logs" class="md-nav__link">
+    Persisting logs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#managing-an-origin-with-systemd" class="md-nav__link">
+    Managing an origin with systemd
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" class="md-nav__link">
+    Getting Help
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
           
             
               
@@ -2363,6 +2538,41 @@ WantedBy=multi-user.target
       </main>
       
         <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../install-cache-rpm/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Install from RPM" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Install from RPM
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../install-origin-rpm/" class="md-footer__link md-footer__link--next" aria-label="Next: Install from RPM" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Install from RPM
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
