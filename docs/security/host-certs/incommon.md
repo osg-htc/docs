@@ -9,11 +9,18 @@ continue with the instructions below.
 If your institution is not in the list, Let's Encrypt certificates do not meet your needs, and you do not have access to
 another IGTF CA subscription, please [contact us](../../common/help.md).
 
-As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-- Ensure the host has [a supported operating system](../../release/supported_platforms.md)
-- Obtain root access to the host
-- Prepare the [required Yum repositories](../../common/yum.md)
+Before you can request a certificate, ensure your host has one of the following:
+
+- The ability to run containers through tools like `docker` or `podman`
+- An installation of the  `osg-pki-tools` RPM:
+   - Select a host with [a supported operating system](../../release/supported_platforms.md).
+   - Ensure root access on the host.
+   - Configure the [required Yum repositories](../../common/yum.md).
+   - Install the RPM via:
+     ```console
+     root@host # yum install osg-pki-tools
+     ```
 
 From a host that meets the above requirements, there are two options to get InCommon IGTF-accredited host certificates:
 
@@ -23,14 +30,46 @@ From a host that meets the above requirements, there are two options to get InCo
    As an RA, you can request, approve, and retrieve certificates yourself through the InCommon REST API using the
    `osg-incommon-cert-request` tool .
 
-Install the `osg-pki-tools` where both command line tools are available:
 
-```console
-root@host # yum install osg-pki-tools
-```
+## Requesting certificates from a registration authority
 
-Requesting certificates from a registration authority
------------------------------------------------------
+### Generating a CSR via the Container
+
+1. Generate a Certificate Signing Request (CSR) and private key using the  `hub.opensciencegrid.org/opensciencegrid/pki-tools` container,
+volume mounting a local directory (`~/path_to_dir`) into the `/output` directory of the container.
+
+        :::console
+        user@host $ docker run --rm  \
+                     -v ~/path_to_dir:/output \
+                     hub.opensciencegrid.org/opensciencegrid/pki-tools:24-release \
+                     --hostname <HOSTNAME> \
+                     --country <COUNTRY> \
+                     --state <STATE> \
+                     --locality <LOCALITY> \
+                     --organization <ORGANIZATION>
+
+    You may also add [DNS Subject Alternative Names](https://en.wikipedia.org/wiki/Subject_Alternative_Name) (SAN) to
+    the request by specifying any number of `--altname <SAN>`.
+    For example, the following generates a CSR for `test.opensciencegrid.org` with `foo.opensciencegrid.org` and
+    `bar.opensciencegrid.org` as SANs:
+
+        :::console
+        user@host $ docker run --rm  \
+                     -v ~/path_to_dir:/output \
+                     hub.opensciencegrid.org/opensciencegrid/pki-tools:24-release \
+                     --country US \
+                     --state Wisconsin \
+                     --locality Madison \
+                     --organization 'University of Wisconsin-Madison' \
+                     --hostname test.opensciencegrid.org \
+                     --altname  foo.opensciencegrid.org \
+                     --altname  bar.opensciencegrid.org
+
+    If successful, the CSR will be named `~/path_to_dir/<HOSTNAME>.req` and the private key will be named 
+    `~/path_to_dir/<HOSTNAME>-key.pem`.  Additional options and descriptions can be found 
+    [here](https://github.com/opensciencegrid/osg-pki-tools#options).
+
+### Generating a CSR via the RPM
 
 1. Generate a Certificate Signing Request (CSR) and private key using the `osg-cert-request` tool:
 
@@ -47,16 +86,22 @@ Requesting certificates from a registration authority
     `bar.opensciencegrid.org` as SANs:
 
         :::console
-        user@host $ osg-cert-request --hostname test.opensciencegrid.org \
+        user@host $ osg-cert-request \
                      --country US \
                      --state Wisconsin \
                      --locality Madison \
                      --organization 'University of Wisconsin-Madison' \
-                     --altname foo.opensciencegrid.org \
-                     --altname bar.opensciencegrid.org
+                     --hostname test.opensciencegrid.org \
+                     --altname  foo.opensciencegrid.org \
+                     --altname  bar.opensciencegrid.org
 
     If successful, the CSR will be named `<HOSTNAME>.req` and the private key will be named `<HOSTNAME>-key.pem`.
     Additional options and descriptions can be found [here](https://github.com/opensciencegrid/osg-pki-tools#options).
+
+
+### Generating a Certificate using a CSR
+
+Once you have obtained a CSR and private key using either the container or RPM:
 
 1. Find your institution-specific InCommon contact and  submit the CSR that you generated above.
    Make sure to request a 1-year `IGTF Server Certificate` for `OTHER` server software.
@@ -81,8 +126,7 @@ Requesting certificates from a registration authority
     Where `<PATH TO KEY>` is the ".key" file you created in the first step
 
 
-Requesting certificates as a registration authority
----------------------------------------------------
+## Requesting certificates as a registration authority
 
 If you are a Registration Authority for your institution, skip ahead to [this section](#osg-incommon-cert-request).
 If you are not already a Registration Authority (RA) for your institution, you must request to be made one:
