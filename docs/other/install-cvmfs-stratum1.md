@@ -12,7 +12,7 @@ This document describes how to install a CVMFS Stratum 1. There are many differe
 Before starting the installation process, consider the following points:
 
 - **User IDs and Group IDs:** If your machine is also going to be a repository server like OSG Operations, the installation will create the same user and group IDs as the [cvmfs client](../worker-node/install-cvmfs.md).  If you are installing frontier-squid, the installation will also create the same user id as [frontier-squid](../data/frontier-squid.md).
--  **Network ports:** This installation will host the stratum 1 on ports 80, 8000 and 8080, and if squid is installed it will host the uncached apache on port 8081.  Port 80 is default but sometimes runs into operational problems, port 8000 is the alternate for most production use, and port 8080 is for Cloudflare (https://openhtc.io).
+-  **Network ports:** This installation will host the stratum 1 on ports 80, 8000 and 8080, and if squid is installed it will host the uncached apache on port 8081.  Port 80 is default but sometimes runs into operational problems, port 8000 is the alternate for most production use, and port 8080 is for Cloudflare (https://openhtc.io).  UDP port 3401 also needs to be opened for SNMP monitoring by the WLCG.
 - **Host choice:** -  Make sure there is adequate disk space for all the repositories that will be served, at `/srv/cvmfs`. In addition, about 100GB should be reserved for apache and squid logs under /var/log on a production server, although they normally will not get that large.  Apache logs get larger than squid logs because by default they are rotated much less frequently.  Many installations share that space with the filesystem used for /srv/cvmfs by turning that directory along with /var/log/squid and /var/log/httpd into symlinks pointing to directories on the big filesystem.
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
@@ -143,12 +143,22 @@ print
 }'
 ```
 
-Forward port 80 to port 8000:
+Set up the firewall to allow incoming tcp ports 8000 & 8080, 
+incoming udp port 3401, and forward port 80 to 8000.
+There are various ways to do it, but these instructions assume that
+firewalld is enabled and started:
 
 ```console
+root@host # firewall-cmd --permanent --add-port=8000/tcp
+root@host # firewall-cmd --permanent --add-port=8080/tcp
+root@host # firewall-cmd --permanent --add-port=3401/udp
 root@host # firewall-cmd --permanent --add-forward-port=port=80:proto=tcp:toport=8000
 root@host # firewall-cmd --reload
 ```
+
+For nftables or iptables see these alternate
+[instructions for having squid listen on a privileged
+port](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Having_squid_listen_on_a_privile).
 
 Enable frontier-squid:
 
