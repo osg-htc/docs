@@ -143,12 +143,22 @@ print
 }'
 ```
 
-Forward port 80 to port 8000:
+Set up the firewall to allow incoming tcp ports 8000 & 8080, 
+incoming udp port 3401, and forward port 80 to 8000.
+There are various ways to do it, but these instructions assume that
+firewalld is enabled and started:
 
 ```console
+root@host # firewall-cmd --permanent --add-port=8000/tcp
+root@host # firewall-cmd --permanent --add-port=8080/tcp
+root@host # firewall-cmd --permanent --add-port=3401/udp
 root@host # firewall-cmd --permanent --add-forward-port=port=80:proto=tcp:toport=8000
 root@host # firewall-cmd --reload
 ```
+
+For nftables or iptables see these alternate
+[instructions for having squid listen on a privileged
+port](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Having_squid_listen_on_a_privile).
 
 Enable frontier-squid:
 
