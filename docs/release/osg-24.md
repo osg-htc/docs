@@ -14,11 +14,43 @@ OSG 24 will be supported for [approximately two years total](release_series.md#s
 Latest News
 -----------
 
+### **March 27, 2025:** HTCondor 24.0.6, XRootD 5.7.3-1.5, htgettoken 2.2; Upcoming: HTCondor 24.6.1
+-   [HTCondor 24.0.6](https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-6): Important Security Fix
+    -   More details on the security issue are in the [Vulnerability Report](https://htcondor.org/security/vulnerabilities/HTCONDOR-2025-0001)
+-   XRootD 5.7.3-1.5
+    -   Fix gstream configuration processing
+    -   Add support for purge plugins
+-   htgettoken 2.2
+    -   Fix htdecodetoken to work with token files that do not end in a newline
+    -   Support args in htgettoken.main() Python entry point
+-   Upcoming
+    -   [HTCondor 24.6.1](https://htcondor.readthedocs.io/en/24.x/version-history/feature-versions-24-x.html#version-24-6-1): Important Security Fix
+        -   More details on the security issue are in the [Vulnerability Report](https://htcondor.org/security/vulnerabilities/HTCONDOR-2025-0001)
+
+### **March 13, 2025:** IGTF-1.134, osg-pki-tools 3.7.2, xrdhttp-pelican 0.0.3; Upcoming: GlideinWMS 3.11.0
+-   CA certificates based on [IGTF 1.134](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   New ANSPGrid CA 2 roll-over for root-issuer key pair (BR)
+    -   Withdrawn discontinued AC-GRID-FR series authorities (FR)
+-   osg-pki-tools 3.7.2
+    -   Fix bug sometimes preventing certificate retrieval with `osg-incommon-cert-request`
+    -   Add `python3-m2crpyto` and `python3-urllib3` as runtime requirements
+-   xrdhttp-pelican 0.0.3: Support Pelican 7.14+
+-   Upcoming
+    -   [GlideinWMS 3.11.0](https://glideinwms.fnal.gov/doc.v3_11_0/history.html)
+        -   Credentials Refactoring
+            -   Introduced new hierarchical credential classes
+            -   Added new security parameters that are handled independently of credentials
+            -   Introduced the a new generators framework that supports credentials and parameters generation
+            -   Introduced built-in generators such as RoundRobinGenerator and LegacyGenerator
+            -   Reintroduced credential renewal scripts (creation_script and update_frequency parameters)
+        -   Changed Defaults / Behaviors
+            -   Glideclient advertising is now skipped if there are no Glideins to request or actively running in a given group
+
 ### **February 27, 2025:** , XRootD 5.7.3, CVMFS 2.12.6, IGTF 1.133, OSG Token Renewer 0.9.0, OSPool EP 24-2
 - [XRootD v5.7.3](https://github.com/xrootd/xrootd/releases/tag/v5.7.3)
     - Various major and minor bugfixes
 - [CVMFS 2.12.6](https://cvmfs.readthedocs.io/en/stable/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-12-6-2-12-5)
-    - \[client\] Revert CVMFS_PATCH_LEVEL to 0 for check_cvmfs.sh
+    - \[client\] Revert `CVMFS_PATCH_LEVEL` to 0 for `check_cvmfs.sh`
     - \[rpm\] fix package install on wsl2 and other non-systemd platforms
 - CA certificates based on [IGTF 1.133](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     - Updated re-issued GridCanada root with extended validity period (CA)
@@ -36,10 +68,10 @@ Latest News
 -   [VO Package v138-1](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-138)
     - Include voms-cms-auth.cern.ch in `/etc/vomses`
     - Remove `{lcg-,}voms2.cern.ch` LSC files and from `/etc/vomses`
-- GlideinWMS 3.10.10
+-   [GlideinWMS 3.10.10](https://glideinwms.fnal.gov/doc.v3_10_10/history.html)
     - Now using also Apptainer included in the HTCondor tar ball (Issue#364, PR#473)
     - Added custom JWT-authenticated log server example (new RPM glideinwms-logging) (Issue#398, PR#467)
-    - Improvements of gfdiff and get_tarballs
+    - Improvements of gfdiff and `get_tarballs`
     - Bug fix: Fixed and updated Glidein JWT logging (Issue#398, PR#467)
     - Bug fix: Allow anonymous SSL authentication for the dynamically generated client config (Issue#222, PR#470)
     - Bug fix: Fixed further log files errors and inconsistent documentation (Issue#464, PR#462, PR#463)
