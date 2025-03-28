@@ -1547,6 +1547,20 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#march-27-2025-htcondor-2406-xrootd-573-15-htgettoken-22-upcoming-htcondor-2461" class="md-nav__link">
+    March 27, 2025: HTCondor 24.0.6, XRootD 5.7.3-1.5, htgettoken 2.2; Upcoming: HTCondor 24.6.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#march-13-2025-igtf-1134-osg-pki-tools-372-xrdhttp-pelican-003-upcoming-glideinwms-3110" class="md-nav__link">
+    March 13, 2025: IGTF-1.134, osg-pki-tools 3.7.2, xrdhttp-pelican 0.0.3; Upcoming: GlideinWMS 3.11.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#february-27-2025-xrootd-573-cvmfs-2126-igtf-1133-osg-token-renewer-090-ospool-ep-24-2" class="md-nav__link">
     February 27, 2025: , XRootD 5.7.3, CVMFS 2.12.6, IGTF 1.133, OSG Token Renewer 0.9.0, OSPool EP 24-2
   </a>
@@ -2046,6 +2060,20 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#march-27-2025-htcondor-2406-xrootd-573-15-htgettoken-22-upcoming-htcondor-2461" class="md-nav__link">
+    March 27, 2025: HTCondor 24.0.6, XRootD 5.7.3-1.5, htgettoken 2.2; Upcoming: HTCondor 24.6.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#march-13-2025-igtf-1134-osg-pki-tools-372-xrdhttp-pelican-003-upcoming-glideinwms-3110" class="md-nav__link">
+    March 13, 2025: IGTF-1.134, osg-pki-tools 3.7.2, xrdhttp-pelican 0.0.3; Upcoming: GlideinWMS 3.11.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#february-27-2025-xrootd-573-cvmfs-2126-igtf-1133-osg-token-renewer-090-ospool-ep-24-2" class="md-nav__link">
     February 27, 2025: , XRootD 5.7.3, CVMFS 2.12.6, IGTF 1.133, OSG Token Renewer 0.9.0, OSPool EP 24-2
   </a>
@@ -2179,6 +2207,62 @@ the ARM CPU architecture.
 The initial release includes GlideinWMS 3.10.7, HTCondor 24.0.1, HTCondor 24.1.1, HTCondor-CE 24.0, and XRootD 5.7.0.</p>
 <p>OSG 24 will be supported for <a href="../release_series/#series-life-cycle">approximately two years total</a>.</p>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="march-27-2025-htcondor-2406-xrootd-573-15-htgettoken-22-upcoming-htcondor-2461"><strong>March 27, 2025:</strong> HTCondor 24.0.6, XRootD 5.7.3-1.5, htgettoken 2.2; Upcoming: HTCondor 24.6.1<a class="headerlink" href="#march-27-2025-htcondor-2406-xrootd-573-15-htgettoken-22-upcoming-htcondor-2461" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-6">HTCondor 24.0.6</a>: Important Security Fix<ul>
+<li>More details on the security issue are in the <a href="https://htcondor.org/security/vulnerabilities/HTCONDOR-2025-0001">Vulnerability Report</a></li>
+</ul>
+</li>
+<li>XRootD 5.7.3-1.5<ul>
+<li>Fix gstream configuration processing</li>
+<li>Add support for purge plugins</li>
+</ul>
+</li>
+<li>htgettoken 2.2<ul>
+<li>Fix htdecodetoken to work with token files that do not end in a newline</li>
+<li>Support args in htgettoken.main() Python entry point</li>
+</ul>
+</li>
+<li>Upcoming<ul>
+<li><a href="https://htcondor.readthedocs.io/en/24.x/version-history/feature-versions-24-x.html#version-24-6-1">HTCondor 24.6.1</a>: Important Security Fix<ul>
+<li>More details on the security issue are in the <a href="https://htcondor.org/security/vulnerabilities/HTCONDOR-2025-0001">Vulnerability Report</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="march-13-2025-igtf-1134-osg-pki-tools-372-xrdhttp-pelican-003-upcoming-glideinwms-3110"><strong>March 13, 2025:</strong> IGTF-1.134, osg-pki-tools 3.7.2, xrdhttp-pelican 0.0.3; Upcoming: GlideinWMS 3.11.0<a class="headerlink" href="#march-13-2025-igtf-1134-osg-pki-tools-372-xrdhttp-pelican-003-upcoming-glideinwms-3110" title="Permanent link">&para;</a></h3>
+<ul>
+<li>CA certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.134</a><ul>
+<li>New ANSPGrid CA 2 roll-over for root-issuer key pair (BR)</li>
+<li>Withdrawn discontinued AC-GRID-FR series authorities (FR)</li>
+</ul>
+</li>
+<li>osg-pki-tools 3.7.2<ul>
+<li>Fix bug sometimes preventing certificate retrieval with <code>osg-incommon-cert-request</code></li>
+<li>Add <code>python3-m2crpyto</code> and <code>python3-urllib3</code> as runtime requirements</li>
+</ul>
+</li>
+<li>xrdhttp-pelican 0.0.3: Support Pelican 7.14+</li>
+<li>Upcoming<ul>
+<li><a href="https://glideinwms.fnal.gov/doc.v3_11_0/history.html">GlideinWMS 3.11.0</a><ul>
+<li>Credentials Refactoring<ul>
+<li>Introduced new hierarchical credential classes</li>
+<li>Added new security parameters that are handled independently of credentials</li>
+<li>Introduced the a new generators framework that supports credentials and parameters generation</li>
+<li>Introduced built-in generators such as RoundRobinGenerator and LegacyGenerator</li>
+<li>Reintroduced credential renewal scripts (creation_script and update_frequency parameters)</li>
+</ul>
+</li>
+<li>Changed Defaults / Behaviors<ul>
+<li>Glideclient advertising is now skipped if there are no Glideins to request or actively running in a given group</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="february-27-2025-xrootd-573-cvmfs-2126-igtf-1133-osg-token-renewer-090-ospool-ep-24-2"><strong>February 27, 2025:</strong> , XRootD 5.7.3, CVMFS 2.12.6, IGTF 1.133, OSG Token Renewer 0.9.0, OSPool EP 24-2<a class="headerlink" href="#february-27-2025-xrootd-573-cvmfs-2126-igtf-1133-osg-token-renewer-090-ospool-ep-24-2" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://github.com/xrootd/xrootd/releases/tag/v5.7.3">XRootD v5.7.3</a><ul>
@@ -2186,7 +2270,7 @@ The initial release includes GlideinWMS 3.10.7, HTCondor 24.0.1, HTCondor 24.1.1
 </ul>
 </li>
 <li><a href="https://cvmfs.readthedocs.io/en/stable/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-12-6-2-12-5">CVMFS 2.12.6</a><ul>
-<li>[client] Revert CVMFS_PATCH_LEVEL to 0 for check_cvmfs.sh</li>
+<li>[client] Revert <code>CVMFS_PATCH_LEVEL</code> to 0 for <code>check_cvmfs.sh</code></li>
 <li>[rpm] fix package install on wsl2 and other non-systemd platforms</li>
 </ul>
 </li>
@@ -2214,10 +2298,10 @@ The initial release includes GlideinWMS 3.10.7, HTCondor 24.0.1, HTCondor 24.1.1
 <li>Remove <code>{lcg-,}voms2.cern.ch</code> LSC files and from <code>/etc/vomses</code></li>
 </ul>
 </li>
-<li>GlideinWMS 3.10.10<ul>
+<li><a href="https://glideinwms.fnal.gov/doc.v3_10_10/history.html">GlideinWMS 3.10.10</a><ul>
 <li>Now using also Apptainer included in the HTCondor tar ball (Issue#364, PR#473)</li>
 <li>Added custom JWT-authenticated log server example (new RPM glideinwms-logging) (Issue#398, PR#467)</li>
-<li>Improvements of gfdiff and get_tarballs</li>
+<li>Improvements of gfdiff and <code>get_tarballs</code></li>
 <li>Bug fix: Fixed and updated Glidein JWT logging (Issue#398, PR#467)</li>
 <li>Bug fix: Allow anonymous SSL authentication for the dynamically generated client config (Issue#222, PR#470)</li>
 <li>Bug fix: Fixed further log files errors and inconsistent documentation (Issue#464, PR#462, PR#463)</li>
