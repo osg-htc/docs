@@ -51,11 +51,25 @@ root@host # yum -y install frontier-squid frontier-awstats
 Increase the default number of open file descriptors:
 
 ```console
-root@host # echo -e "*\t\t-\tnofile\t\t16384" >>/etc/security/limits.conf 
-root@host # ulimit -n 16384
+root@host # (echo '# limit increased for cvmfs'
+    echo -e "*\t\t-\tnofile\t\t65536") >/etc/security/limits.d/90-nofile.conf 
+root@host # systemctl edit crond
 ```
 
-In order for this to apply also interactively when logging in over ssh, the option `UsePAM` has to be set to `yes` in `/etc/ssh/sshd_config`.
+Inside the crond override file put the following lines in the space
+between the delimiting comments:
+```
+# limit increased for cvmfs
+[Service]
+LimitNOFILE=65536:262144
+```
+
+and after exiting there do
+
+```console
+root@host # systemctl restart crond
+root@host # ulimit -n 65536
+```
 
 ### Configuring cron 
 First, create the log directory: 
