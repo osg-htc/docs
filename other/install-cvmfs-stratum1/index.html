@@ -2204,10 +2204,20 @@
 <h2 id="configuring">Configuring<a class="headerlink" href="#configuring" title="Permanent link">&para;</a></h2>
 <h3 id="configuring-the-system">Configuring the system<a class="headerlink" href="#configuring-the-system" title="Permanent link">&para;</a></h3>
 <p>Increase the default number of open file descriptors:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span><span class="nb">echo</span> -e <span class="s2">&quot;*\t\t-\tnofile\t\t16384&quot;</span> &gt;&gt;/etc/security/limits.conf 
-<span class="gp">root@host # </span><span class="nb">ulimit</span> -n <span class="m">16384</span>
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span><span class="o">(</span><span class="nb">echo</span> <span class="s1">&#39;# limit increased for cvmfs&#39;</span>
+<span class="go">    echo -e &quot;*\t\t-\tnofile\t\t65536&quot;) &gt;/etc/security/limits.d/90-nofile.conf </span>
+<span class="gp">root@host # </span>systemctl edit crond
 </code></pre></div>
-<p>In order for this to apply also interactively when logging in over ssh, the option <code>UsePAM</code> has to be set to <code>yes</code> in <code>/etc/ssh/sshd_config</code>.</p>
+<p>Inside the crond override file put the following lines in the space
+between the delimiting comments:
+<div class="highlight"><pre><span></span><code># limit increased for cvmfs
+[Service]
+LimitNOFILE=65536:262144
+</code></pre></div></p>
+<p>and after exiting there do</p>
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>systemctl restart crond
+<span class="gp">root@host # </span><span class="nb">ulimit</span> -n <span class="m">65536</span>
+</code></pre></div>
 <h3 id="configuring-cron">Configuring cron<a class="headerlink" href="#configuring-cron" title="Permanent link">&para;</a></h3>
 <p>First, create the log directory: </p>
 <div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>mkdir -p /var/log/cvmfs
