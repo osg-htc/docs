@@ -44,6 +44,17 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **April 3, 2025:** GlideinWMS 3.10.11
+-   [GlideinWMS 3.10.11](https://glideinwms.fnal.gov/doc.v3_10_11/history.html)
+    -   New features
+        -   Add new knob, `stale_age`, for Factory entries to control Glidein age
+        -   Configurable default Apptainer testing image
+    -   Bug fixes
+        -   More robust custom start-up script execution
+        -   Blacklist search by IP address when host command is not available
+        -   Unset `CONDOR_INHERIT` before HTCondor start up
+    -   See the [CHANGELOG](https://github.com/glideinWMS/glideinwms/blob/master/CHANGELOG.md#v31011-2025-03-24) for important default changes
+
 ### **March 27, 2025:** HTCondor 23.0.22, XRootD 5.7.3-1.5, htgettoken 2.2; Upcoming: HTCondor 23.10.22
 -   [HTCondor 23.0.22](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-22): Important Security Fix
     -   More details on the security issue are in the [Vulnerability Report](https://htcondor.org/security/vulnerabilities/HTCONDOR-2025-0001)
@@ -86,7 +97,7 @@ Latest News
 -   [VO Package v138-1](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-138)
     - Include voms-cms-auth.cern.ch in `/etc/vomses`
     - Remove `{lcg-,}voms2.cern.ch` LSC files and from `/etc/vomses`
-- GlideinWMS 3.10.10
+-   [GlideinWMS 3.10.10](https://glideinwms.fnal.gov/doc.v3_10_10/history.html)
     - Now using also Apptainer included in the HTCondor tar ball (Issue#364, PR#473)
     - Added custom JWT-authenticated log server example (new RPM glideinwms-logging) (Issue#398, PR#467)
     - Improvements of gfdiff and `get_tarballs`
