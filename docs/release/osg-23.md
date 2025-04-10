@@ -44,6 +44,25 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **April 10, 2025:** vo-client 138-2, osg-ca-cert-updater 2.2, ospool-ep 23-7, frontier-squid 5.9-3.3; Upcoming: Pelican 7.15.0
+-   vo-client 138-2
+    -   Remove OpenShift Legacy IAM servers for ATLAS and CMS
+-   osg-ca-certs-updater 2.2
+    -   Now started via systemd timer
+-   ospool-ep 24-3 and 23-7
+    -   Make ospool-ep service more resilient to Docker service restart
+-   frontier-squid 5.9-3.3
+    -   Initial support for ARM (no shoal agent support)
+-   Upcoming
+    -   [Pelican 7.15.0](https://pelicanplatform.org/releases)
+        -   Pelican origins can now specify multiple issuers per namespace
+        -   Added support for a Federation to have multiple Directors
+        -   Director can optionally report cache redirection reasoning
+        -   Integrate XRootD OSS statistics
+        -   Add API Token Listing endpoint
+        -   Client now correctly reports the start time for uploads
+        -   Several bug fixes for the client
+
 ### **April 3, 2025:** GlideinWMS 3.10.11
 -   [GlideinWMS 3.10.11](https://glideinwms.fnal.gov/doc.v3_10_11/history.html)
     -   New features
