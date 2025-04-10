@@ -1874,8 +1874,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#starting-and-enabling-services" class="md-nav__link">
-    Starting and Enabling Services
+  <a href="#starting-and-enabling-systemd-services" class="md-nav__link">
+    Starting and Enabling Systemd Services
   </a>
   
 </li>
@@ -1916,8 +1916,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#configuration-file" class="md-nav__link">
-    Configuration file
+  <a href="#configuration-entries" class="md-nav__link">
+    Configuration Entries
   </a>
   
 </li>
@@ -2247,8 +2247,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#starting-and-enabling-services" class="md-nav__link">
-    Starting and Enabling Services
+  <a href="#starting-and-enabling-systemd-services" class="md-nav__link">
+    Starting and Enabling Systemd Services
   </a>
   
 </li>
@@ -2289,8 +2289,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#configuration-file" class="md-nav__link">
-    Configuration file
+  <a href="#configuration-entries" class="md-nav__link">
+    Configuration Entries
   </a>
   
 </li>
@@ -2492,24 +2492,26 @@ CA certificates.</p>
 <div class="highlight"><pre><span></span><code><span class="gp">root@host# </span>yum install osg-ca-certs-updater
 </code></pre></div>
 <h3 id="services">Services<a class="headerlink" href="#services" title="Permanent link">&para;</a></h3>
-<h4 id="starting-and-enabling-services">Starting and Enabling Services<a class="headerlink" href="#starting-and-enabling-services" title="Permanent link">&para;</a></h4>
+<h4 id="starting-and-enabling-systemd-services">Starting and Enabling Systemd Services<a class="headerlink" href="#starting-and-enabling-systemd-services" title="Permanent link">&para;</a></h4>
 <p>Run the following to enable the updater. This will persist until the machine is rebooted.</p>
-<div class="highlight"><pre><span></span><code><span class="gp">root@host# </span>service osg-ca-certs-updater-cron start
+<div class="highlight"><pre><span></span><code><span class="gp">root@host# </span>systemctl start osg-ca-certs-updater.timer
 </code></pre></div>
 <p>Run the following to enable the updater when the machine is rebooted.</p>
-<div class="highlight"><pre><span></span><code><span class="gp">root@host# </span>chkconfig osg-ca-certs-updater-cron on
+<div class="highlight"><pre><span></span><code><span class="gp">root@host# </span>systemctl <span class="nb">enable</span> osg-ca-certs-updater.timer
 </code></pre></div>
 <p>Run both commands if you wish for the service to activate immediately and remain active throughout reboots.</p>
 <h4 id="stopping-and-disabling-services">Stopping and Disabling Services<a class="headerlink" href="#stopping-and-disabling-services" title="Permanent link">&para;</a></h4>
 <p>Enter the following to disable the updater. This will persist until the machine is rebooted.</p>
-<div class="highlight"><pre><span></span><code><span class="gp">root@host# </span>service osg-ca-certs-updater-cron stop
+<div class="highlight"><pre><span></span><code><span class="gp">root@host# </span>systemctl stop osg-ca-certs-updater.timer
 </code></pre></div>
 <p>Enter the following to disable the updater when the machine is rebooted.</p>
-<div class="highlight"><pre><span></span><code><span class="gp">root@host# </span>chkconfig osg-ca-certs-updater-cron off
+<div class="highlight"><pre><span></span><code><span class="gp">root@host# </span>systemctl disable osg-ca-certs-updater.timer
 </code></pre></div>
 <p>Run both commands if you wish for the service to deactivate immediately and not get reactivated during reboots.</p>
 <h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
-<p>While there is no configuration file, the behavior of the updater can be adjusted by command-line arguments that are specified in the <code>cron</code> entry of the service. This entry is located in the file <code>/etc/cron.d/osg-ca-certs-updater</code>. Please see the Unix manual page for <code>crontab</code> in section 5 for an explanation of the format. The manual page can be accessed by the command <code>man 5 crontab</code>. The valid command-line arguments can be listed by running <code>osg-ca-certs-updater --help</code>. Reasonable defaults have been provided, namely:</p>
+<p>While there is no configuration file, the behavior of the updater can be adjusted by command-line arguments that are specified in the <code>systemd</code> entry of the service. The command-line configuration 
+for the service can be edited using <code>systemctl edit osg-ca-certs-updater.service</code>, while its timer configuration can be edited using <code>systemctl edit osg-ca-certs-updater.timer</code>. 
+The valid command-line arguments can be listed by running <code>osg-ca-certs-updater --help</code>. Reasonable defaults have been provided, namely:</p>
 <ul>
 <li>Attempt an update no more often than every 23 hours. Due to the random wait (see below), having a 24-hour minimum time between updates would cause the update time to slowly slide back every day.</li>
 <li>Run the script every 6 hours. We run the script more often than we update so that downtime at the wrong moment does not cause the update to be delayed for a full day.</li>
@@ -2519,33 +2521,39 @@ CA certificates.</p>
 </ul>
 <h3 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h3>
 <h4 id="useful-configuration-and-log-files">Useful configuration and log files<a class="headerlink" href="#useful-configuration-and-log-files" title="Permanent link">&para;</a></h4>
-<h5 id="configuration-file">Configuration file<a class="headerlink" href="#configuration-file" title="Permanent link">&para;</a></h5>
+<h5 id="configuration-entries">Configuration Entries<a class="headerlink" href="#configuration-entries" title="Permanent link">&para;</a></h5>
 <table>
 <thead>
 <tr>
-<th align="left">Package</th>
-<th align="left">File Description</th>
-<th align="left">Location</th>
+<th align="left">Service</th>
+<th align="left">Description</th>
+<th align="left">Edit Command</th>
 <th align="left">Comment</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">osg-ca-certs-updater</td>
-<td align="left">Cron entry for periodically launching the updater</td>
-<td align="left"><code>/etc/cron.d/osg-ca-certs-updater</code></td>
+<td align="left">osg-ca-certs-updater.service</td>
+<td align="left">Runtime configuration for the updater</td>
+<td align="left"><code>systemctl edit osg-ca-certs-updater.service</code></td>
+<td align="left">Command-line arguments to the updater can be specified here</td>
+</tr>
+<tr>
+<td align="left">osg-ca-certs-updater.timer</td>
+<td align="left">Systemd timer for periodically launching the updater</td>
+<td align="left"><code>systemctl edit osg-ca-certs-updater.timer</code></td>
 <td align="left">Command-line arguments to the updater can be specified here</td>
 </tr>
 <tr>
 <td align="left">osg-release</td>
 <td align="left">Repo definition files for production OSG repositories</td>
-<td align="left"><code>/etc/yum.repos.d/osg.repo</code></td>
+<td align="left"><code>$EDITOR /etc/yum.repos.d/osg.repo</code></td>
 <td align="left">Make sure these repositories are enabled and reachable from the host you are trying to update</td>
 </tr>
 </tbody>
 </table>
 <h4 id="log-files">Log files<a class="headerlink" href="#log-files" title="Permanent link">&para;</a></h4>
-<p>Logging is performed to the console by default. Please see the manual for your <code>cron</code> daemon to find out how it handles console output.</p>
+<p>Logging is performed to the systemd journal by default. Please see the manual for <code>journalctl</code> to find out how it handles console output.</p>
 <p>A logfile can be specified via the <code>-l</code> / <code>--logfile</code> command-line option.</p>
 <p>If logging to syslog via the <code>-s</code> / <code>--log-to-syslog</code> option, the updater will write to the <code>user</code> section of the syslog. The file <code>/etc/syslog.conf</code> determines where syslog messages are saved.</p>
 <h3 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h3>
