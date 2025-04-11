@@ -68,15 +68,20 @@ This document will use `/etc/osdf-cache/config.yaml` as the name of the configur
 Create `/etc/osdf-cache/config.yaml` with the following contents:
 ```file
 Federation:
-  DiscoveryUrl: "https://osg-htc.org"
+  DiscoveryUrl: "osg-htc.org"
 
 Cache:
   Port: 8443
 # XRootD:
 #   Sitename: <RESOURCE NAME REGISTERED WITH OSG>
-```
-You will uncomment and fill in the value for `XRootD.Sitename` in a later step, after registration is complete.
 
+Server:
+  Hostname: "https://<FQDN>"
+```
+
+Replacing `<FQDN>` with the externally-accessible FQDN of your cache service
+(this should match one of the SANs in your host certificate).
+You will also uncomment and fill in the value for `XRootD.Sitename` in a later step, after registration is complete.
 
 Preparing for Initial Startup
 -----------------------------
