@@ -2246,8 +2246,13 @@ This document will use <code>/etc/osdf-origin/config.yaml</code> as the name of 
 <div class="highlight"><pre><span></span><code>Origin:
 # XRootD:
 #   Sitename: &lt;RESOURCE NAME REGISTERED WITH OSG&gt;
+
+Server:
+  Hostname: &quot;&lt;FQDN&gt;&quot;
 </code></pre></div>
-You will uncomment and fill in the value for <code>XRootD.Sitename</code> in a later step, after registration is complete.</p>
+Replacing <code>&lt;FQDN&gt;</code> with the externally-accessible FQDN of your cache service
+(this should match one of the SANs in your host certificate).
+You will also uncomment and fill in the value for <code>XRootD.Sitename</code> in a later step, after registration is complete.</p>
 <p>You must tell Pelican the data to export to the federation.
 An origin may export one or more directory trees, or one or more S3 buckets -- follow one of the sections below.
 A single origin cannot export both a bucket and a directory tree.</p>

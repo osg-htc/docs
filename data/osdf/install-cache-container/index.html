@@ -2211,14 +2211,19 @@ mounted into the container at <code>/etc/pelican/pelican.yaml</code>.
 This document will use <code>/etc/osdf-cache/config.yaml</code> as the name of the configuration file outside of the container.</p>
 <p>Create <code>/etc/osdf-cache/config.yaml</code> with the following contents:
 <div class="highlight"><pre><span></span><code>Federation:
-  DiscoveryUrl: &quot;https://osg-htc.org&quot;
+  DiscoveryUrl: &quot;osg-htc.org&quot;
 
 Cache:
   Port: 8443
 # XRootD:
 #   Sitename: &lt;RESOURCE NAME REGISTERED WITH OSG&gt;
-</code></pre></div>
-You will uncomment and fill in the value for <code>XRootD.Sitename</code> in a later step, after registration is complete.</p>
+
+Server:
+  Hostname: &quot;https://&lt;FQDN&gt;&quot;
+</code></pre></div></p>
+<p>Replacing <code>&lt;FQDN&gt;</code> with the externally-accessible FQDN of your cache service
+(this should match one of the SANs in your host certificate).
+You will also uncomment and fill in the value for <code>XRootD.Sitename</code> in a later step, after registration is complete.</p>
 <h2 id="preparing-for-initial-startup">Preparing for Initial Startup<a class="headerlink" href="#preparing-for-initial-startup" title="Permanent link">&para;</a></h2>
 <ol>
 <li>
