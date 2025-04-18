@@ -68,7 +68,7 @@ This document will use `/etc/osdf-cache/config.yaml` as the name of the configur
 Create `/etc/osdf-cache/config.yaml` with the following contents:
 ```file
 Federation:
-  DiscoveryUrl: "osg-htc.org"
+  DiscoveryUrl: "https://osg-htc.org"
 
 Cache:
   Port: 8443
