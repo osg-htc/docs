@@ -2232,10 +2232,9 @@ This improves performance and is recommended for caches with more than 10 TB of 
 <h2 id="validating-the-cache">Validating the Cache<a class="headerlink" href="#validating-the-cache" title="Permanent link">&para;</a></h2>
 <p>You can use the Pelican client (from <a href="https://github.com/PelicanPlatform/pelican/releases">https://github.com/PelicanPlatform/pelican/releases</a>) to verify that the cache is functional.</p>
 <p>Download a test file from the OSDF through your cache (replacing <code>CACHE_HOSTNAME</code> with the host name of your cache)</p>
-<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>pelican object get -c CACHE_HOSTNAME:8443 osdf://ospool/uc-shared/public/OSG-Staff/validation/test.txt /tmp/test.txt
+<div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>pelican object get -c CACHE_HOSTNAME:8443 osdf:///pelicanplatform/test/hello-world.txt /tmp/test.txt
 <span class="gp">user@host $ </span>cat /tmp/test.txt
-
-<span class="go">Hello, World!</span>
+<span class="go">If you are seeing this message, getting an object from OSDF was successful.</span>
 </code></pre></div>
 <p>If the download fails, rerun the above <code>pelican object get</code> command with the <code>-d</code> flag added.
 Additional debugging information is located in the logs of your cache container.</p>

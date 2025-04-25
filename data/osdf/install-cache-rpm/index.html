@@ -2017,10 +2017,9 @@ before starting the cache for the first time, it is recommended to generate a ke
 </li>
 <li>
 <p>Download a test file from the OSDF through your cache (replacing <code>CACHE_HOSTNAME</code> with the host name of your cache)</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span>pelican object get -c CACHE_HOSTNAME:8443 osdf:///ospool/uc-shared/public/OSG-Staff/validation/test.txt /tmp/test.txt
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span>pelican object get -c CACHE_HOSTNAME:8443 osdf:///pelicanplatform/test/hello-world.txt /tmp/test.txt
 <span class="gp">root@host$ </span>cat /tmp/test.txt
-
-<span class="go">Hello, World!</span>
+<span class="go">If you are seeing this message, getting an object from OSDF was successful.</span>
 </code></pre></div>
 
 <p>If the download fails, rerun the above <code>pelican object get</code> command with the <code>-d</code> flag added;
