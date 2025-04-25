@@ -209,10 +209,9 @@ Download a test file from the OSDF through your cache (replacing `CACHE_HOSTNAME
 
 
 ```console
-user@host $ pelican object get -c CACHE_HOSTNAME:8443 osdf://ospool/uc-shared/public/OSG-Staff/validation/test.txt /tmp/test.txt
+user@host $ pelican object get -c CACHE_HOSTNAME:8443 osdf:///pelicanplatform/test/hello-world.txt /tmp/test.txt
 user@host $ cat /tmp/test.txt
-
-Hello, World!
+If you are seeing this message, getting an object from OSDF was successful.
 ```
 
 If the download fails, rerun the above `pelican object get` command with the `-d` flag added.
