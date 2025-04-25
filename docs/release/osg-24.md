@@ -14,6 +14,30 @@ OSG 24 will be supported for [approximately two years total](release_series.md#s
 Latest News
 -----------
 
+### **April 22, 2025:** HTCondor 24.0.7; Upcoming: HTCondor 24.7.3, Pelican 7.15.2
+-   [HTCondor 24.0.7](https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-7)
+    -   With delegated cgroups v2, job out-of-memory no longer affects the pilot
+    -   HTCondor tarballs now contain Pelican 7.15.1 and Apptainer 1.4.0
+    -   Fix inflated cgroups v2 memory usage reporting for Docker jobs
+-   [Pelican 7.15.2](https://github.com/PelicanPlatform/pelican/releases/tag/v7.15.2)
+    -   Now sanity checks size for client GETs
+    -   Enabled multiuser origins to cache public keys for validating tokens
+    -   Made Origin throttling configurable
+    -   XRootD now uses xldcl-pelican v1.2.0 which contains bug fixes for the cache
+-   Upcoming
+    -   [HTCondor 24.7.3](https://htcondor.readthedocs.io/en/24.x/version-history/feature-versions-24-x.html#version-24-7-3)
+        -   `condor_who` now works for Glideins
+        -   Can add arbitrary credentials to be used by the file transfer plugins
+        -   Fixed WLCG token generation in the local credmon
+        -   Can limit the number of times that a job can be released
+        -   EP administrators can enforce no outbound networking for jobs
+        -   Add ability to use authentication when fetching Docker images
+        -   `condor_watch_q` now displays when file transfer is happening
+        -   To provide more consistency, using swap for jobs is disabled by default
+        -   With delegated cgroups v2, job out-of-memory no longer affects the pilot
+        -   HTCondor tarballs now contain Pelican 7.15.1 and Apptainer 1.4.0
+        -   Fix inflated cgroups v2 memory usage reporting for Docker jobs
+
 ### **April 10, 2025:** Pelican 7.15.0, vo-client 138-2, osg-ca-cert-updater 2.2, ospool-ep 23-7, frontier-squid 5.9-3.3
 -   [Pelican 7.15.0](https://pelicanplatform.org/releases)
     -   Pelican origins can now specify multiple issuers per namespace
@@ -56,7 +80,7 @@ Latest News
     -   [HTCondor 24.6.1](https://htcondor.readthedocs.io/en/24.x/version-history/feature-versions-24-x.html#version-24-6-1): Important Security Fix
         -   More details on the security issue are in the [Vulnerability Report](https://htcondor.org/security/vulnerabilities/HTCONDOR-2025-0001)
 
-### **March 13, 2025:** IGTF-1.134, osg-pki-tools 3.7.2, xrdhttp-pelican 0.0.3; Upcoming: GlideinWMS 3.11.0
+### **March 13, 2025:** IGTF-1.134, osg-pki-tools 3.7.2, xrdhttp-pelican 0.0.3, Pelican 7.14.1; Upcoming: GlideinWMS 3.11.0
 -   CA certificates based on [IGTF 1.134](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   New ANSPGrid CA 2 roll-over for root-issuer key pair (BR)
     -   Withdrawn discontinued AC-GRID-FR series authorities (FR)
@@ -64,6 +88,7 @@ Latest News
     -   Fix bug sometimes preventing certificate retrieval with `osg-incommon-cert-request`
     -   Add `python3-m2crpyto` and `python3-urllib3` as runtime requirements
 -   xrdhttp-pelican 0.0.3: Support Pelican 7.14+
+-   [Pelican 7.14.1](https://github.com/PelicanPlatform/pelican/releases/tag/v7.14.0)
 -   Upcoming
     -   [GlideinWMS 3.11.0](https://glideinwms.fnal.gov/doc.v3_11_0/history.html)
         -   Credentials Refactoring
@@ -75,7 +100,7 @@ Latest News
         -   Changed Defaults / Behaviors
             -   Glideclient advertising is now skipped if there are no Glideins to request or actively running in a given group
 
-### **February 27, 2025:** , XRootD 5.7.3, CVMFS 2.12.6, IGTF 1.133, OSG Token Renewer 0.9.0, OSPool EP 24-2
+### **February 27, 2025:** XRootD 5.7.3, CVMFS 2.12.6, IGTF 1.133, OSG Token Renewer 0.9.0, OSPool EP 24-2, Pelican 7.13.0
 - [XRootD v5.7.3](https://github.com/xrootd/xrootd/releases/tag/v5.7.3)
     - Various major and minor bugfixes
 - [CVMFS 2.12.6](https://cvmfs.readthedocs.io/en/stable/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-12-6-2-12-5)
@@ -91,6 +116,7 @@ Latest News
     - Move the previously releasesd osg-upcoming package into osg-main
 - OSPool EP 24-2
     - Update docker launch script to support providing NVIDIA GPU Resources
+-   [Pelican 7.13.0](https://github.com/PelicanPlatform/pelican/releases/tag/v7.13.0)
 
 
 ### **February 13, 2025:** VO Package v138-1, GlideinWMS 3.10.10, XRootD Monitoring Shoveler 1.4.0, XRDCL Pelican 1.0.5
@@ -110,7 +136,7 @@ Latest News
     - Fixes crash under load due to director information caching.
 
 
-### **January 23, 2025:** VO Package v137-4, osg-scitokens-mapfile 14, osg-ce, osg-wn-client, osg-xrootd, xcache
+### **January 23, 2025:** VO Package v137-4, osg-scitokens-mapfile 14, osg-ce, osg-wn-client, osg-xrootd, xcache, Pelican 7.12.0
 -   [VO Package v137-4](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-137-4)
     -   Add new production IAM endpoints to vomses file for ATLAS, Alice, and LHCb
 -   osg-scitokens-mapfile 14
@@ -121,6 +147,7 @@ Latest News
     -   osg-xrootd
     -   vo-client
     -   xcache
+-   [Pelican 7.12.0](https://github.com/PelicanPlatform/pelican/releases/tag/v7.12.0)
 
 ### **January 9, 2025:** frontier-squid 5.9-3.2
 -   frontier-squid 5.9-3.2
@@ -178,7 +205,7 @@ Latest News
     -   Does not pass WholeNode request expressions to non-HTCondor batch systems
     -   Fix certificate subject parsing in `condor_ce_host_network_check`
 
-### **December 11, 2024:** XRootD 5.7.2-1.1, GlideinWMS 3.10.8 Upcoming: osdf-server 7.11.7
+### **December 11, 2024:** XRootD 5.7.2-1.1, GlideinWMS 3.10.8, osdf-server 7.11.7, osg-ce 24-2, Pelican 7.11.7
 -   [XRootD 5.7.2-1.1](https://xrootd.github.io/2024/11/29/announcement_5_7_2.html)
     -   Various major bug fixes
 -   [GlideinWMS 3.10.8](https://glideinwms.fnal.gov/doc.v3_10_8/history.html)
@@ -191,6 +218,7 @@ Latest News
     -   Use config.d Pelican configuration layout
 -   osg-ce 24-2
     -   Rebuild to not depend on obsolete hosted-ce-tools package
+-   [Pelican 7.11.7](https://github.com/PelicanPlatform/pelican/releases/tag/v7.11.0)
 
 ### **November 26, 2024:** HTCondor 24.0.2; Upcoming: HTCondor 24.2.1
 -   [HTCondor 24.0.2](https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-2)
