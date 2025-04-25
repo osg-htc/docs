@@ -118,10 +118,9 @@ Do the following steps to verify that the cache is functional:
 1.  Download a test file from the OSDF through your cache (replacing `CACHE_HOSTNAME` with the host name of your cache)
 
         :::console
-        root@host$ pelican object get -c CACHE_HOSTNAME:8443 osdf:///ospool/uc-shared/public/OSG-Staff/validation/test.txt /tmp/test.txt
+        root@host$ pelican object get -c CACHE_HOSTNAME:8443 osdf:///pelicanplatform/test/hello-world.txt /tmp/test.txt
         root@host$ cat /tmp/test.txt
-
-        Hello, World!
+        If you are seeing this message, getting an object from OSDF was successful.
 
     If the download fails, rerun the above `pelican object get` command with the `-d` flag added;
     additional debugging information is located in `/var/log/pelican/osdf-cache.log`.
