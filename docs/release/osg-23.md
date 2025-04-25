@@ -44,6 +44,19 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **April 22, 2025:** HTCondor 23.0.24; Upcoming: HTCondor 23.10.24, Pelican 7.15.2
+-   [HTCondor 23.0.22](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-22)
+    -   Fix inflated cgroups v2 memory usage reporting for Docker jobs
+-   Upcoming
+    -   [HTCondor 23.10.22](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-10-22)
+        -   HTCondor tarballs now contain Pelican 7.15.1 and Apptainer 1.4.0
+        -   Fix inflated cgroups v2 memory usage reporting for Docker jobs
+    -   [Pelican 7.15.2](https://github.com/PelicanPlatform/pelican/releases/tag/v7.15.2)
+        -   Now sanity checks size for client GETs
+        -   Enabled multiuser origins to cache public keys for validating tokens
+        -   Made Origin throttling configurable
+        -   XRootD now uses xldcl-pelican v1.2.0 which contains bug fixes for the cache
+
 ### **April 10, 2025:** vo-client 138-2, osg-ca-cert-updater 2.2, ospool-ep 23-7, frontier-squid 5.9-3.3; Upcoming: Pelican 7.15.0
 -   vo-client 138-2
     -   Remove OpenShift Legacy IAM servers for ATLAS and CMS
@@ -54,7 +67,7 @@ Latest News
 -   frontier-squid 5.9-3.3
     -   Initial support for ARM (no shoal agent support)
 -   Upcoming
-    -   [Pelican 7.15.0](https://pelicanplatform.org/releases)
+    -   [Pelican 7.15.0](https://github.com/PelicanPlatform/pelican/releases/tag/v7.15.0)
         -   Pelican origins can now specify multiple issuers per namespace
         -   Added support for a Federation to have multiple Directors
         -   Director can optionally report cache redirection reasoning
@@ -87,7 +100,7 @@ Latest News
     -   [HTCondor 23.10.22](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-10-22): Important Security Fix
         -   More details on the security issue are in the [Vulnerability Report](https://htcondor.org/security/vulnerabilities/HTCONDOR-2025-0001)
 
-### **March 13, 2025:** IGTF-1.134, osg-pki-tools 3.7.2; Upcoming: xrdhttp-pelican 0.0.3
+### **March 13, 2025:** IGTF-1.134, osg-pki-tools 3.7.2; Upcoming: xrdhttp-pelican 0.0.3, Pelican 7.14.1
 -   CA certificates based on [IGTF 1.134](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   New ANSPGrid CA 2 roll-over for root-issuer key pair (BR)
     -   Withdrawn discontinued AC-GRID-FR series authorities (FR)
@@ -96,8 +109,9 @@ Latest News
     -   Add `python3-m2crpyto` and `python3-urllib3` as runtime requirements
 -   Upcoming
     -   xrdhttp-pelican 0.0.3: Support Pelican 7.14+
+    -   [Pelican 7.14.1](https://github.com/PelicanPlatform/pelican/releases/tag/v7.14.0)
 
-### **February 27, 2025:** XRootD 5.7.3, CVMFS 2.12.6, IGTF 1.133, OSPool EP 1.0-6
+### **February 27, 2025:** XRootD 5.7.3, CVMFS 2.12.6, IGTF 1.133, OSPool EP 1.0-6; Upcoming Pelican 7.13.0
 - [XRootD v5.7.3](https://github.com/xrootd/xrootd/releases/tag/v5.7.3)
     - Various major and minor bugfixes
 - [CVMFS 2.12.6](https://cvmfs.readthedocs.io/en/stable/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-12-6-2-12-5)
@@ -111,6 +125,8 @@ Latest News
     - MARGI put on hold due to domainname resolution issues (MK)
 - OSPool EP 1.0-6
     - Update docker launch script to support providing NVIDIA GPU Resources
+-   Upcoming
+    -   [Pelican 7.13.0](https://github.com/PelicanPlatform/pelican/releases/tag/v7.13.0)
 
 ### **February 13, 2025:** VO Package v138-1, GlideinWMS 3.10.10, XRootD Monitoring Shoveler 1.4.0, XRDCL Pelican 1.0.5
 -   [VO Package v138-1](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-138)
@@ -128,7 +144,7 @@ Latest News
 - XRootD Pelican client plugin (`xrdcl-pelican`)
     - Fixes crash under load due to director information caching.
 
-### **January 23, 2025:** VO Package v137-4, osg-scitokens-mapfile 14, osg-ce, osg-wn-client, osg-xrootd, xcache
+### **January 23, 2025:** VO Package v137-4, osg-scitokens-mapfile 14, osg-ce, osg-wn-client, osg-xrootd, xcache; Upcoming: Pelican 7.12.0
 -   [VO Package v137-4](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-137-4)
     -   Add new production IAM endpoints to vomses file for ATLAS, Alice, and LHCb
 -   osg-scitokens-mapfile 14
@@ -139,6 +155,8 @@ Latest News
     -   osg-xrootd
     -   vo-client
     -   xcache
+-   Upcoming
+    -   [Pelican 7.12.0](https://github.com/PelicanPlatform/pelican/releases/tag/v7.12.0)
 
 ### **January 9, 2025:** frontier-squid 5.9-3.2
 -   frontier-squid 5.9-3.2
@@ -189,7 +207,7 @@ Latest News
 -   XCache 3.7.0-2
     -   Relax RPM package requirement to ease upgrade to OSG 24
 
-### **December 11, 2024:** XRootD 5.7.2-1.1, GlideinWMS 3.10.8 Upcoming: osdf-server 7.11.7
+### **December 11, 2024:** XRootD 5.7.2-1.1, GlideinWMS 3.10.8 Upcoming: osdf-server 7.11.7, Pelican 7.11.7
 -   [XRootD 5.7.2-1.1](https://xrootd.github.io/2024/11/29/announcement_5_7_2.html)
     -   Various major bug fixes
 -   [GlideinWMS 3.10.8](https://glideinwms.fnal.gov/doc.v3_10_8/history.html)
@@ -201,6 +219,7 @@ Latest News
     -   osdf-server 7.11.7
         -   Updated to Pelican 7.11.7
         -   Use config.d Pelican configuration layout
+    -   [Pelican 7.11.7](https://github.com/PelicanPlatform/pelican/releases/tag/v7.11.0)
 
 ### **November 19, 2024:** HTCondor 23.0.18; Upcoming: HTCondor 23.10.18
 -   [HTCondor 23.0.18](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-18)
@@ -213,10 +232,11 @@ Latest News
 -   XRootD 5.7.1-1.4
     -   Reduce XCache error rate under load
 
-### **October 30, 2024:** Upcoming: HTCondor 23.10.2
+### **October 30, 2024:** Upcoming: HTCondor 23.10.2, Pelican 7.10.11
 -   Upcoming
     -   [HTCondor 23.10.2](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-10-1)
         -   Fix for output file transfer errors obscuring input file transfer errors
+    -   [Pelican 7.10.11](https://github.com/PelicanPlatform/pelican/releases/tag/v7.10.11)
 
 ### **October 24, 2024:** XRootD 5.7.1-1.3, HTCondor 23.0.17
 -   XRootD 5.7.1-1.3
@@ -255,7 +275,7 @@ Latest News
         -   Uses job's sandbox to convert image format for Singularity/Apptainer
         -   Bug fix to not lose GPUs in Docker job on systemd reconfig
         -   Bug fix for PID namespaces and `condor_ssh_to_job` on EL9
-    -   [Pelican 7.10.7](https://github.com/PelicanPlatform/pelican/releases/tag/v7.10.7)
+    -   [Pelican 7.10.7](https://github.com/PelicanPlatform/pelican/releases/tag/v7.10.0)
         -   Stopped file transfers are now retryable errors
         -   General improvements to error messages within the client and the plugin
         -   Put requests now work with Origins using OA4MP Issuers
@@ -319,7 +339,7 @@ Latest News
     -   Fix file descriptor leak causing "too many open files" error in XCache
     -   Improve performance by reducing stat calls on HTTP GET
 
-### **August 8, 2024:** HTCondor 23.0.14; Upcoming: HTCondor-CE 23.9.1, HTCondor 23.9.6
+### **August 8, 2024:** HTCondor 23.0.14; Upcoming: HTCondor-CE 23.9.1, HTCondor 23.9.6, Pelican 7.9.9
 -   [HTCondor 23.0.14 LTS](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-14)
     -   Docker and Container jobs run on EPs that match the AP's CPU architecture
     -   Fixed premature cleanup of credentials by the `condor_credd`
@@ -339,6 +359,7 @@ Latest News
         -   Singularity jobs have a contained home directory when file transfer is on
         -   Avoid using IPv6 link local addresses when resolving hostname to IP addr
         -   New 'htcondor credential' command to aid in debugging
+    -   [Pelican 7.9.9](https://github.com/PelicanPlatform/pelican/releases/tag/v7.9.9)
 
 ### **July 30, 2024:** XRootD 5.7.0
 -   XRootD 5.7.0
@@ -352,7 +373,7 @@ Latest News
     -   HTTP header parsing is now case-insensitive
     -   See upstream release notes for details
 
-### **July 25, 2024:** HTCondor-CE 23.0.13, GlideinWMS 3.10.7, hosted-ce-tools 2.1
+### **July 25, 2024:** HTCondor-CE 23.0.13, GlideinWMS 3.10.7, hosted-ce-tools 2.1: Upcoming: Pelican 7.9.5
 -   [HTCondor-CE 23.0.13](https://htcondor.com/htcondor-ce/v23/releases/#23013)
     -   Include `condor_ce_upgrade_check` script
 -   [GlideinWMS 3.10.7](http://glideinwms.fnal.gov/doc.v3_10_7/history.html)
@@ -366,8 +387,10 @@ Latest News
     -   `get_tarballs` also looks for HTCondor tarballs in the update directory
 -   hosted-ce-tools 2.1
     -   `cvmfsexec-osg-wrapper` now detects Red Hat Enterprise Linux as RHEL-like
+-   Upcoming
+    -   [Pelican 7.9.5](https://github.com/PelicanPlatform/pelican/releases/tag/v7.9.5)
 
-### **July 17, 2024:** HTCondor-CE 23.0.12, IGTF 1.130; Upcoming: osdf-server 7.9.3
+### **July 17, 2024:** HTCondor-CE 23.0.12, IGTF 1.130; Upcoming: osdf-server 7.9.3, Pelican 7.9.3
 -   [HTCondor-CE 23.0.12](https://htcondor.com/htcondor-ce/v23/releases/#23012)
     -   Fix whole node GPU request expression for non-HTCondor batch systems
 -   CA certificates based on [IGTF 1.130](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
@@ -378,6 +401,7 @@ Latest News
         -   Updated to upstream Pelican 7.9.3
         -   Added logrotate config
         -   Raised minimum XRootD version requirement to 5.6.9-1.6
+    -   [Pelican 7.9.3](https://github.com/PelicanPlatform/pelican/releases/tag/v7.9.2)
 
 ### **June 27, 2024:** IGTF 1.129, osg-configure 4.2.0; Upcoming: HTCondor 23.8.1
 -   CA certificates based on [IGTF 1.129](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
@@ -446,12 +470,16 @@ Latest News
     -   Add g-stream monitoring for IO time for Pelican
 -   [CVMFS 2.11.3](https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-11-3)
     -   Update method of downloading the MaxMind GeoIP, including requiring new configuration parameter `CVMFS_GEO_ACCOUNT_ID`
+-   Upcoming
+    -   [Pelican 7.8.1](https://github.com/PelicanPlatform/pelican/releases/tag/v7.8.0)
 
-### **May 2, 2024:** XCache 3.7.0, osg-xrootd 23-6
+### **May 2, 2024:** XCache 3.7.0, osg-xrootd 23-6; Upcoming: Pelican 7.7.3
 -   [XCache 3.7.0](https://github.com/opensciencegrid/xcache/releases/tag/v3.7.0) and osg-xrootd 23-6
     -   Security update for OSDF caches and origins
         -   Require explicit mapping of DNs to avoid hash collisions
         -   Get mappings for cache and origin DNs from Topology
+-   Upcoming
+    -   [Pelican 7.7.3](https://github.com/PelicanPlatform/pelican/releases/tag/v7.7.0)
 
 ### **April 15, 2024:** Upcoming: HTCondor 23.6.1
 -   Upcoming
@@ -469,9 +497,11 @@ Latest News
 -   [HTCondor-CE 23.0.8](https://htcondor.com/htcondor-ce/v23/releases/#2308)
     -   Fix memory request being ignored for whole node jobs
 
-### **April 4, 2024:** XRootD 5.6.9
+### **April 4, 2024:** XRootD 5.6.9; Upcoming: Pelican 7.6.2
 -   XRootD 5.6.9
     -   Various minor bug fixes; see upstream release notes for details
+-   Upcoming
+    -   [Pelican 7.6.2](https://github.com/PelicanPlatform/pelican/releases/tag/v7.6.2)
 
 ### **March 21, 2024:** osg-scitokens-mapfile 13-2, vo-client 135-1
 -   osg-scitokens-mapfile 13-2
@@ -479,7 +509,7 @@ Latest News
 -   vo-client 135-1
     -   Adds LSC files for new LHC IAM hosts for ALICE, ATLAS, CMS, DTEAM, and LHCb 
 
-### **March 14, 2024:** IGTF 1.128, osg-xrootd 23-5, HTCondor 23.0.6 LTS, HTCondor-CE 23.0.6; Upcoming: HTCondor 23.5.2
+### **March 14, 2024:** IGTF 1.128, osg-xrootd 23-5, HTCondor 23.0.6 LTS, HTCondor-CE 23.0.6; Upcoming: HTCondor 23.5.2, Pelican 7.5.8
 -   CA certificates based on [IGTF 1.128](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   Update CRL download URL for ArmeSFo (AM)
 -   osg-xrootd 23-5
@@ -500,11 +530,14 @@ Latest News
         -   Add ability to transfer EP's starter log back to the Access Point
         -   Enable use of VOMS attributes when mapping identities of SSL connections
         -   Add the Git SHA of the HTCondor sources to the CondorVersion string
+    -   [Pelican 7.5.8](https://github.com/PelicanPlatform/pelican/releases/tag/v7.5.8)
 
-### **February 29, 2024:** XRootD 5.6.8
+### **February 29, 2024:** XRootD 5.6.8; Upcoming: Pelican 7.5.7
 -   [XRootD 5.6.8](https://github.com/xrootd/xrootd/releases/tag/v5.6.8)
     -   Fix automatic renewal of server certificate with OpenSSL>=1.1
     -   Other minor bug fixes
+-   Upcoming
+    -   [Pelican 7.5.7](https://github.com/PelicanPlatform/pelican/releases/tag/v7.5.7)
 
 ### **February 27, 2024:** VO Package v134, osg-pki-tools 3.7.1, osg-xrootd 3.6-22, GlideinWMS 3.10.6
 -   [VO Package v134](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-134)
@@ -542,7 +575,7 @@ Latest News
                   authentication for any existing refresh tokens
     -   osdf-server 7.5.6
 
-### **February 8, 2024:** Frontier-squid 5.9-2.1, HTCondor 23.0.4, htvault-config 1.16, vault 1.15.4, osg-configure 4.1.1-3; Upcoming: HTCondor 23.4.0, Pelican 7.5.0
+### **February 8, 2024:** Frontier-squid 5.9-2.1, HTCondor 23.0.4, htvault-config 1.16, vault 1.15.4, osg-configure 4.1.1-3; Upcoming: HTCondor 23.4.0, Pelican 7.5.1
 -   [Frontier-squid 5.9-2.1](http://frontier.cern.ch/dist/frontier-squid-releasenotes.txt)
     -   Fixed several security vulnerabilities
     -   Improved support for SELinux
@@ -566,19 +599,21 @@ Latest News
         -   Fix bug where `NEGOTIATOR_SLOT_CONSTRAINT` was ignored since version 23.3.0
         -   The `htcondor` command line tool can process multiple event logs at once
         -   Prevent Docker daemon from keeping a duplicate copy of the job's stdout
-    -   [Pelican 7.5.0](https://github.com/PelicanPlatform/pelican/releases/tag/v7.5.0)
+    -   [Pelican 7.5.1](https://github.com/PelicanPlatform/pelican/releases/tag/v7.5.0)
         -   The plugin now downloads files in parallel
         -   Improved file unpacking
         -   Origins now support public namespaces
 
-### **January 4, 2024:** IGTF 1.126, ospool-ep 1.0
+### **January 4, 2024:** IGTF 1.126, ospool-ep 1.0; Pelican 7.3.1
 -   CA certificates based on [IGTF 1.126](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   Removed replaced InCommon IGTF Server CA and associated Comodo RSA CA (US)
     -   Removed discontinued UNLPGrid CA (CL)
 -   ospool-ep 1.0
     -   [Automatically manage the OSPool EP Docker container with systemd](https://osg-htc.org/docs/resource-sharing/os-backfill-containers/#running-the-container-via-rpm)
+-   Upcoming
+    -   [Pelican 7.3.1](https://github.com/PelicanPlatform/pelican/releases/tag/v7.3.1)
 
-### **December 14, 2023:** XRootD 5.6.4, XCache 3.6.0, xrootd-multiuser 2.2.0
+### **December 14, 2023:** XRootD 5.6.4, XCache 3.6.0, xrootd-multiuser 2.2.0; Pelican 7.3.0
 -   [XRootD 5.6.4](https://github.com/xrootd/xrootd/releases/tag/v5.6.4)
     -   Fix segfault with macaroons
     -   Fix segfault if pss.origin uses https protocol with no port
@@ -588,14 +623,18 @@ Latest News
     -   Allow adding local additions to ``Authfile`` and ``scitokens.conf`` file in ``/etc/xrootd``
 -   [xrootd-multiuser 2.2.0](https://github.com/opensciencegrid/xrootd-multiuser/releases/tag/v2.2.0-1)
     -   Add ability to enable/disable xrootd-multiuser with the ``XC_ENABLE_MULTIUSER`` environment variable
+-   Upcoming
+    -   [Pelican 7.3.0](https://github.com/PelicanPlatform/pelican/releases/tag/v7.3.0)
 
-### **November 30, 2023:** VO Package v133, IGTF 1.125
+### **November 30, 2023:** VO Package v133, IGTF 1.125; Upcoming: Pelican 7.2.1
 -   [VO Package v133](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-133)
     -   Update certificates for FNAL and GlueX VOMS servers
 -   CA certificates based on [IGTF 1.125](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   Updated root certificate ArmeSFo CA with extended validity (AM)
+-   Upcoming
+    -   [Pelican 7.2.1](https://github.com/PelicanPlatform/pelican/releases/tag/v7.2.1)
 
-### **November 16, 2023:** VO Package v132, XRootD 5.6.3, osg-ce 23-2, HTCondor-CE 23.0.1, osg-system-profiler 1.7.0
+### **November 16, 2023:** VO Package v132, XRootD 5.6.3, osg-ce 23-2, HTCondor-CE 23.0.1, osg-system-profiler 1.7.0; Upcoming: Pelican 7.2.0
 -   [VO Package v132](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-132)
     -   Update certificates for FNAL and SLAC VOMS servers
     -   Update certificates for CLAS12, EIC, GLOW, and HCC
@@ -612,6 +651,8 @@ Latest News
 -   osg-system-profiler 1.7.0
     -   Add system cryptographic policy
     -   Better XRootD configuration information for generated profile
+-   Upcoming
+    -   [Pelican 7.2.0](https://github.com/PelicanPlatform/pelican/releases/tag/v7.2.0)
 
 ### **November 2, 2023:** IGTF 1.124, CVMFS 2.11.2, cvmfs-x509-helper 2.4
 -   CA certificates based on [IGTF 1.124](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
