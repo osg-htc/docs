@@ -150,7 +150,10 @@ Here is an example invocation using `docker run` by hand:
 ```
 docker run -it --rm --user osg  \
        --pull=always            \
-       --privileged             \
+       --security-opt seccomp=unconfined        \
+       --security-opt systempaths=unconfined    \
+       --security-opt no-new-privileges         \
+       --device /dev/fuse                       \
        -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
        -v /worker-temp-dir:/pilot               \
        -e GLIDEIN_Site="..."                    \
@@ -164,7 +167,7 @@ docker run -it --rm --user osg  \
 ```
 
 Replace `/path/to/token` with the location you saved the token obtained from the OSPool Token Registry.
-Privileged mode (`--privileged`) requested in the above `docker run` allows the container
+The `--security-opt` options and device mount requested in the above `docker run` allow the container
 to mount [CVMFS using cvmfsexec](#cvmfsexec) and invoke `singularity` for user jobs.
 Singularity (now known as Apptainer) allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).
 
@@ -222,12 +225,10 @@ Similarly, logs may be stored outside of the container by volume mounting a dire
 
 As an alternative to using cvmfsexec, you may [install CVMFS](../worker-node/install-cvmfs.md) on the host,
 and volume mount it into the container.
-Containers with bind mounted CVMFS can be run without `--privileged` but still require the following capabilities:
-`DAC_OVERRIDE`, `DAC_READ_SEARCH`, `SETGID`, `SETUID`, `SYS_ADMIN`, `SYS_CHROOT`, and `SYS_PTRACE`.
 
 Once you have CVMFS installed and mounted on your host, add `-v /cvmfs:/cvmfs:shared` to your `docker run` invocation.
 This is the [example at the top of the page](#running-the-container-with-docker),
-modified to volume mount CVMFS instead of using cvmfsexec, and using reduced privileges:
+modified to volume mount CVMFS instead of using cvmfsexec:
 
 ```hl_lines="6"
 docker run -it --rm --user osg      \
@@ -268,7 +269,10 @@ to provide NVIDIA GPU resources:
 ```hl_lines="6 11 12"
 docker run -it --rm --user osg  \
        --pull=always            \
-       --privileged             \
+       --security-opt seccomp=unconfined        \
+       --security-opt systempaths=unconfined    \
+       --security-opt no-new-privileges         \
+       --device /dev/fuse                       \
        -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
        -v /worker-temp-dir:/pilot               \
        -v /etc/OpenCL/vendors:/etc/OpenCL/vendors:ro \
