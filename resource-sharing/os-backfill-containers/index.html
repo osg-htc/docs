@@ -2194,7 +2194,10 @@ Make sure the user you run your container as has write access to this directory.
 <p>Here is an example invocation using <code>docker run</code> by hand:</p>
 <div class="highlight"><pre><span></span><code>docker run -it --rm --user osg  \
        --pull=always            \
-       --privileged             \
+       --security-opt seccomp=unconfined        \
+       --security-opt systempaths=unconfined    \
+       --security-opt no-new-privileges         \
+       --device /dev/fuse                       \
        -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
        -v /worker-temp-dir:/pilot               \
        -e GLIDEIN_Site=&quot;...&quot;                    \
@@ -2207,7 +2210,7 @@ Make sure the user you run your container as has write access to this directory.
        hub.opensciencegrid.org/osg-htc/ospool-ep:24-release
 </code></pre></div>
 <p>Replace <code>/path/to/token</code> with the location you saved the token obtained from the OSPool Token Registry.
-Privileged mode (<code>--privileged</code>) requested in the above <code>docker run</code> allows the container
+The <code>--security-opt</code> options and device mount requested in the above <code>docker run</code> allow the container
 to mount <a href="#cvmfsexec">CVMFS using cvmfsexec</a> and invoke <code>singularity</code> for user jobs.
 Singularity (now known as Apptainer) allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).</p>
 <h2 id="optional-configuration">Optional Configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h2>
@@ -2258,12 +2261,10 @@ note that options in environment variables take precedence over options in <code
 Similarly, logs may be stored outside of the container by volume mounting a directory to <code>/cvmfs-logs</code>.</p>
 <h4 id="bind-mount">Bind mount<a class="headerlink" href="#bind-mount" title="Permanent link">&para;</a></h4>
 <p>As an alternative to using cvmfsexec, you may <a href="../../worker-node/install-cvmfs/">install CVMFS</a> on the host,
-and volume mount it into the container.
-Containers with bind mounted CVMFS can be run without <code>--privileged</code> but still require the following capabilities:
-<code>DAC_OVERRIDE</code>, <code>DAC_READ_SEARCH</code>, <code>SETGID</code>, <code>SETUID</code>, <code>SYS_ADMIN</code>, <code>SYS_CHROOT</code>, and <code>SYS_PTRACE</code>.</p>
+and volume mount it into the container.</p>
 <p>Once you have CVMFS installed and mounted on your host, add <code>-v /cvmfs:/cvmfs:shared</code> to your <code>docker run</code> invocation.
 This is the <a href="#running-the-container-with-docker">example at the top of the page</a>,
-modified to volume mount CVMFS instead of using cvmfsexec, and using reduced privileges:</p>
+modified to volume mount CVMFS instead of using cvmfsexec:</p>
 <div class="highlight"><pre><span></span><code>docker run -it --rm --user osg      \
         --pull=always            \
         --security-opt seccomp=unconfined \
@@ -2300,17 +2301,20 @@ the container for access to its host’s GPU resources, set the following:</p>
 to provide NVIDIA GPU resources:</p>
 <div class="highlight"><pre><span></span><code>docker run -it --rm --user osg  \
        --pull=always            \
-       --privileged             \
-       -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
+       --security-opt seccomp=unconfined        \
+       --security-opt systempaths=unconfined    \
+       --security-opt no-new-privileges         \
+<span class="hll">       --device /dev/fuse                       \
+</span>       -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
        -v /worker-temp-dir:/pilot               \
-<span class="hll">       -v /etc/OpenCL/vendors:/etc/OpenCL/vendors:ro \
-</span>       -e GLIDEIN_Site=&quot;...&quot;                    \
-       -e GLIDEIN_ResourceName=&quot;...&quot;            \
-       -e GLIDEIN_Start_Extra=&quot;True&quot;            \
-       -e OSG_SQUID_LOCATION=&quot;...&quot;              \
-<span class="hll">       -e SINGULARITY_DISABLE_PID_NAMESPACES=True   \
-</span><span class="hll">       hub.opensciencegrid.org/osg-htc/ospool-ep:24-cuda_11_8_0-release
-</span></code></pre></div>
+       -v /etc/OpenCL/vendors:/etc/OpenCL/vendors:ro \
+       -e GLIDEIN_Site=&quot;...&quot;                    \
+<span class="hll">       -e GLIDEIN_ResourceName=&quot;...&quot;            \
+</span><span class="hll">       -e GLIDEIN_Start_Extra=&quot;True&quot;            \
+</span>       -e OSG_SQUID_LOCATION=&quot;...&quot;              \
+       -e SINGULARITY_DISABLE_PID_NAMESPACES=True   \
+       hub.opensciencegrid.org/osg-htc/ospool-ep:24-cuda_11_8_0-release
+</code></pre></div>
 <h3 id="limiting-resource-usage">Limiting resource usage<a class="headerlink" href="#limiting-resource-usage" title="Permanent link">&para;</a></h3>
 <p>By default, the container allows jobs to utilize the entire node's resources (CPUs, memory).
 To limit a container's resource consumptions, you may specify limits, which must be set in the following ways:</p>
