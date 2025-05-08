@@ -23,7 +23,7 @@ Latest News
     -   Fix bug in metrics collection
 -   [XRootD 5.8.1](https://github.com/xrootd/xrootd/releases/tag/v5.8.1)
     -   Packet marking crash and other various bug fixes
--   [xrdcl-pelican 1.2.1](https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v1.2.1) - This is an urgent update to caches
+-   [xrdcl-pelican 1.2.1](https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v1.2.1) - This is an urgent update for caches
     -   Including changes from [xrdcl-pelican 1.1.0](https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v1.1.0) and [xrdcl-pelican 1.2.0](https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v1.2.0)
 -   [xrdhttp-pelican 0.0.6](https://github.com/PelicanPlatform/xrdhttp-pelican/releases/tag/v0.0.6)
     -   Adds XRootD 5.8 support and APIs for cache management
