@@ -50,7 +50,7 @@ Latest News
     -   Withdrawn discontinued HPCI CA (JP)
 -   [XRootD 5.8.1](https://github.com/xrootd/xrootd/releases/tag/v5.8.1)
     -   Packet marking crash and other various bug fixes
--   [xrdcl-pelican 1.2.1](https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v1.2.1)
+-   [xrdcl-pelican 1.2.1](https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v1.2.1) - This is an urgent update to caches
     -   Including changes from [xrdcl-pelican 1.1.0](https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v1.1.0) and [xrdcl-pelican 1.2.0](https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v1.2.0)
 -   [OpenBao 2.2.0](https://openbao.org/docs/release-notes/2-2-0/#220)
     -   Open source replacement for Hashicorp's Vault
