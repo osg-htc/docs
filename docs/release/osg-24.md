@@ -14,6 +14,26 @@ OSG 24 will be supported for [approximately two years total](release_series.md#s
 Latest News
 -----------
 
+### **May 8, 2025:** IGTF 1.135, Pelican 7.15.3, XRootD 5.8.1-1.3, xrdcl-pelican 1.2.1, xrdhttp-pelican 0.0.6, OpenBao 2.2.0, htvault-config 2.0.0, Decision Engine 2.0.5
+-   CA certificates based on [IGTF 1.135](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Updated SlovakGrid trust anchor with extended validity (SK)
+    -   Withdrawn discontinued HPCI CA (JP)
+-   [Pelican 7.15.3](https://github.com/PelicanPlatform/pelican/releases/tag/v7.15.3)
+    -   Fix throttling in cache
+    -   Fix bug in metrics collection
+-   [XRootD 5.8.1](https://github.com/xrootd/xrootd/releases/tag/v5.8.1)
+    -   Packet marking crash and other various bug fixes
+-   [xrdcl-pelican 1.2.1](https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v1.2.1) - This is an urgent update to caches
+    -   Including changes from [xrdcl-pelican 1.1.0](https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v1.1.0) and [xrdcl-pelican 1.2.0](https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v1.2.0)
+-   [xrdhttp-pelican 0.0.6](https://github.com/PelicanPlatform/xrdhttp-pelican/releases/tag/v0.0.6)
+    -   Adds XRootD 5.8 support and APIs for cache management
+-   [OpenBao 2.2.0](https://openbao.org/docs/release-notes/2-2-0/#220)
+    -   Open source replacement for Hashicorp's Vault
+-   htvault-config 2.0.0
+    -   Take advantage of improved integration with OpenBao
+-   HEPCloud's [Decision Engine 2.0.5](https://hepcloud.github.io/decisionengine/release_notes/release_notes_2.0.html) on EL9 only
+    -   Initial version in OSG Repositories
+
 ### **April 22, 2025:** HTCondor 24.0.7; Upcoming: HTCondor 24.7.3, Pelican 7.15.2
 -   [HTCondor 24.0.7](https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-7)
     -   With delegated cgroups v2, job out-of-memory no longer affects the pilot
