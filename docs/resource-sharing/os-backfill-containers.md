@@ -170,6 +170,7 @@ Replace `/path/to/token` with the location you saved the token obtained from the
 The `--security-opt` options and device mount requested in the above `docker run` allow the container
 to mount [CVMFS using cvmfsexec](#cvmfsexec) and invoke `singularity` for user jobs.
 Singularity (now known as Apptainer) allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).
+See [Advanced: Pod Security](#advanced-pod-security-configuration) for more details.
 
 
 Optional Configuration
@@ -346,6 +347,81 @@ KUBERNETES_NAMESPACE = "path-osgdev"
 KUBERNETES_DEPLOYMENT = "osgvo-docker-pilot-gpu"
 ```
 
+### Advanced: Pod Security Configuration
+
+#### Recommended Privileges
+
+The EP container can run vanilla universe jobs using the default docker security profile, which proivdes a large degree
+of isolation from the host system. Several additional security flags must be enabled to support container universe jobs. 
+The recommended security flags for this configuration are as follows:
+
+- `--security-opt seccomp=unconfined`:
+  The Apptainer containerization library used to launch container universe jobs invokes several [syscalls](https://man7.org/linux/man-pages/man2/syscalls.2.html) 
+  that are blocked by the [default docker seccomp profile](https://docs.docker.com/engine/security/seccomp/). 
+  The `seccomp=unconfined` security option allows the container to make all syscalls, though it will still be denied 
+  access to syscalls that require [Linux Capabilities](https://man7.org/linux/man-pages/man7/capabilities.7.html).
+
+- `--security-opt systempaths=unconfined`:
+  Apptainer must write to the [procfs file system](https://man7.org/linux/man-pages/man5/proc.5.html) to create an isolated 
+  [pid namespace](https://man7.org/linux/man-pages/man7/pid_namespaces.7.html) for its containerized processes. This action
+  is disabled by default by docker, but can be enabled using `systempaths=unconfined`. 
+
+- `--device /dev/fuse`:
+  Apptainer must write to the [FUSE](https://man7.org/linux/man-pages/man4/fuse.4.html) device to create
+  isolated filesystems for container universe jobs. Device access is denied to docker containers by default.
+
+#### Minimum Privileges
+
+The reccommended security configuration can be further reduced in scope with the following configuration options:
+
+- Define a custom seccomp profile for the EP container: Rather than disabling seccomp entirely, a custom set of seccomp filters may
+  be defined. It is recommended to begin with the [default seccomp JSON configuration](https://github.com/moby/moby/blob/master/profiles/seccomp/default.json)
+  and add an additional section to enable the following syscalls:
+  ```
+  {
+    "names": [
+      "mount",
+      "pivot_root",
+      "setns",
+      "umount2",
+      "unshare"
+    ],
+    "action": "SCMP_ACT_ALLOW"
+  },
+  ```
+
+!!! warning "Warning: Potential errors in container universe jobs"
+    The majority of container universe jobs run in the OSPool are run using an unconfined seccomp profile. While the above
+    syscalls allow Apptainer to start successfully inside of Docker, some user jobs that depend on other syscalls
+    may fail inside the container.
+
+
+- Disable PID namespaces in Apptainer: 
+  PID namespaces can be disabled in Apptainer using the `SINGULARITY_DISABLE_PID_NAMESPACES=True`
+  environment variable. This allows the EP container to run container universe jobs without `--security-opt systempaths=unconfined`
+
+!!! warning "Warning: Reduced isolation between jobs"
+    While the above configuration increases the degree of isolation between the host and the EP container, it decreases security
+    between jobs running inside the EP by allowing them to read each other's process trees.
+
+
+Taken together, a minimally privileged EP container that still supports container universe jobs might look like:
+
+```hl_lines="3 12"
+docker run -it --rm --user osg  \
+       --pull=always            \
+       --security-opt seccomp=/path/to/apptainer/profile.json \
+       --security-opt no-new-privileges         \
+       --device /dev/fuse                       \
+       -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
+       -v /worker-temp-dir:/pilot               \
+       -e GLIDEIN_Site="..."                    \
+       -e GLIDEIN_ResourceName="..."            \
+       -e GLIDEIN_Start_Extra="True"            \
+       -e OSG_SQUID_LOCATION="..."              \
+       -e SINGULARITY_DISABLE_PID_NAMESPACES=True   \
+       hub.opensciencegrid.org/osg-htc/ospool-ep:24-release
+```
 
 Best Practices
 --------------
