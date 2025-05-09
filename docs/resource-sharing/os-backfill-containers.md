@@ -347,7 +347,7 @@ KUBERNETES_NAMESPACE = "path-osgdev"
 KUBERNETES_DEPLOYMENT = "osgvo-docker-pilot-gpu"
 ```
 
-### Advanced: Pod Security Configuration
+### Advanced: Container Security Configuration
 
 #### Recommended Privileges
 
