@@ -63,8 +63,8 @@ To create a new client account named `<ACCOUNT_SHORTNAME>`:
         :::console
         root@server # osg-token-renewer-setup myaccount123
 
-   That will use dynamic client registration.  If you instead have a
-   predefined client id and secret, add a `--manual` option, for example,
+    That will use dynamic client registration.  If you instead have a
+    predefined client id and secret, add a `--manual` option, for example,
 
         :::console
         root@server # osg-token-renewer-setup --manual myaccount123
