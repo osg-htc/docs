@@ -50,6 +50,9 @@ Latest News
     -   Avoid `condor_starter` crash when evicting job during input file transfer
     -   `condor_watch_q` now properly displays job id ranges using numeric sort
 -   [XRootD 5.8.2-1.5](https://github.com/xrootd/xrootd/releases/tag/v5.8.2)
+    -   Experimental fair-share for throttling plugin [PelicanPlatform #23](https://github.com/PelicanPlatform/xrootd/issues/23)
+    -   Fix deadlock in caching plugin when starting up [XRootD #2505](https://github.com/xrootd/xrootd/issues/2505)
+    -   Fix race condition in callback handler [XRootD #2517](https://github.com/xrootd/xrootd/issues/2517)
     -   Various bug fixes - see release notes
 -   [xrdcl-pelican 1.2.3](https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v1.2.3)
     -   Fixes potential crashing or data corruption issue
