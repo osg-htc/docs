@@ -1,12 +1,12 @@
 title: Monitor Kubernetes Workloads with Kuantifier
-DateReviewed: 2024-08-16
+DateReviewed: 2024-02-07
 
 Monitoring Kubernetes Workloads with Kuantifier
 ===============================================
 
 Workload jobs run via Kubernetes will not integrate with [Gratia accounting](./troubleshooting-gratia/) by default.
-To report contributions to OSG made via Kubernetes, the [Kuantifier](kuantifier-github) helm chart can be installed
-into your cluster.
+To report contributions to OSG made via Kubernetes, install the [Kuantifier](kuantifier-github) helm chart
+on your cluster.
 
 Before Starting
 ---------------
@@ -18,11 +18,11 @@ against that cluster.
 
 ### Install the Helm command line tools 
 
-Kuantifier itself, and several of its prerequisites, are installed via [helm chart](https://helm.sh/). The helm
+Kuantifier itself, and several of its prerequisites, are installed via [Helm chart](https://helm.sh/). The Helm
 command line tools are used to install helm charts against a running kubernetes cluster, and can be installed
 as follows:
 
-1. Download the latest [helm release](helm-release)
+1. Download the latest [Helm release](helm-release)
 1. Unpack the release blob (eg. `tar -zxvf helm-v3.0.0-linux-amd64.tar.gz`)
 1. Move the `helm` binary from the archive into a location along your `$PATH` (eg. `mv linux-amd64/helm ~/.local/bin`) 
 
@@ -50,7 +50,7 @@ There are a number of ways to install both, such as via the [prometheus communit
 1. Ensure that the namespace where your workload pods run is properly configured.
 
     - Kuantifier relies on the `spec.containers[].resources.requests.cpu` field in workload pods
-      to determine processor count for GRACC reporting. Ensure a cpu request is set for pods in
+      to determine processor count for GRACC reporting. Ensure a CPU request is set for pods in
       your workspace.
     
     - Kuantifier relies on the Prometheus pod completion time metric to calculate workload job run times.
@@ -63,16 +63,16 @@ There are a number of ways to install both, such as via the [prometheus communit
 Installation
 ------------
 
-Kuantifier itself is also installed via a helm chart, hosted at hub.opensciencegrid.org/iris-hep/kuantifier.
+Kuantifier itself is also installed via a Helm chart, hosted on [OSG Harbor](https://hub.opensciencegrid.org)
 
 
 ### Configuring Kuantifier's Values File
 
 Several instance-specific modifications to the default [Values File](values-file) provided with the chart 
 must be made prior to installation. For full documentation of the values in the values file, see the 
-[helm chart README on Github](helm-values-readme).
+[Helm chart README on Github](helm-values-readme).
 
-1. Fetch the default values.yaml for kuantifier. This file can be obtained in several ways.
+1. Fetch the default values.yaml for Kuantifier. This file can be obtained in several ways.
     - Via the helm cli:
 
           :::console
@@ -102,8 +102,8 @@ must be made prior to installation. For full documentation of the values in the 
         - `VO_NAME`: Virtual Organization (VO) of jobs.
 
     - Additionally, the following may need to be set:
-        - `PROMETHEUS_SERVER`: The DNS name of the prometheus server installed in your kubernetes cluster. 
-            - If Prometheus was installed in your cluster via the prometheus community helm chart in the monitoring
+        - `PROMETHEUS_SERVER`: The DNS name of the Prometheus server installed in your Kubernetes cluster. 
+            - If Prometheus was installed in your cluster via the prometheus-community Helm chart in the monitoring
               namespace, the DNS name will be `prometheus-server.monitoring.svc.cluster.local` 
             - Otherwise, [construct](https://kubernetes.io/docs/concepts/services-networking/service/#dns) the URL based on the standard Kubernetes service discovery mechanism (i.e. service name and namespace).
     
@@ -143,10 +143,10 @@ After configuring an appropriate values file for your instance, install the char
 Validation
 ----------
 
-After running helm install, ensure that the expected kubernetes objects have been created. The following commands assume
-that kuantifier has been installed in the monitoring namespace.
+After running `helm install`, ensure that the expected Kubernetes objects have been created. The following commands assume
+that Kuantifier has been installed in the monitoring namespace.
 
-1. Check that a CronJob was created for running the kuantifier processor:
+1. Check that a CronJob was created for running the Kuantifier processor:
 
        :::console
        kubectl -n monitoring get cronjob kuantifier-cronjob
@@ -158,7 +158,7 @@ that kuantifier has been installed in the monitoring namespace.
        kubectl -n monitoring get configmap kuantifier-processor-config -o yaml
 
 
-If the helm chart artifacts are present as expected, run a test instance of the CronJob and inspect its output.
+If the Helm chart artifacts are present as expected, run a test instance of the CronJob and inspect its output.
 
 1. Create a new job from the CronJob, then find the Pod created by the job
 
@@ -166,17 +166,17 @@ If the helm chart artifacts are present as expected, run a test instance of the 
        kubectl -n monitoring create job --from=cronjob/kuantifier-cronjob kuantifier-test-job
        kubectl -n monitoring get pod | grep kuantifier-test-job
 
-1. Inspect the logs from the processor initContainer, which queries prometheus to generate output records.
+1. Inspect the logs from the processor initContainer, which queries Prometheus to generate output records.
 
        :::console
        kubectl -n monitoring logs <test-job-pod-name> -c processor
 
-1. Inspect the logs from the gratia-output container, which sends the output records to GRACC.
+1. Inspect the logs from the `gratia-output` container, which sends the output records to GRACC.
 
        :::console
        kubectl -n monitoring logs <test-job-pod-name> -c gratia-output
 
-If both the processor initContainer and gratia-output container run to completion without error, the next step
+If both the processor initContainer and `gratia-output` container run to completion without error, the next step
 is to confirm with a member of the OSG technology team that the results are visible in GRACC.
 
 
