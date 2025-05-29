@@ -44,6 +44,29 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **May 29, 2025:** HTCondor 23.0.25, XRootD 5.8.2-1.5, xrdcl-pelican 1.2.3, frontier-squid 5.10-1.2, htgettoken 2.2-2; Upcoming: HTCondor 23.10.25, Pelican 7.16.5
+-   [HTCondor 23.0.25](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-25)
+    -   Fix problems where parallel universe jobs could crash the `condor_schedd`
+    -   Avoid `condor_starter` crash when evicting job during input file transfer
+    -   `condor_watch_q` now properly displays job id ranges using numeric sort
+-   [XRootD 5.8.2-1.5](https://github.com/xrootd/xrootd/releases/tag/v5.8.2)
+    -   Various bug fixes - see release notes
+-   [xrdcl-pelican 1.2.3](https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v1.2.3)
+    -   Fixes potential crashing or data corruption issue
+-   [Frontier-squid 5.10-1.2](http://frontier.cern.ch/dist/frontier-squid-releasenotes.txt)
+    -   Fixes for minor bugs and three security issues
+-   htgettoken 2.2-2
+    -   Update `htgettoken` command to ignore the local Python environment
+-   Upcoming
+    -   [HTCondor 23.10.25](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-10-25)
+        -   Fix bug where `DAGMAN_MAX_JOBS_IDLE` was being ignored
+        -   HTCondor tarballs now contain Pelican 7.16.5 and Apptainer 1.4.1
+        -   Fix problems where parallel universe jobs could crash the `condor_schedd`
+        -   Avoid `condor_starter` crash when evicting job during input file transfer
+        -   `condor_watch_q` now properly displays job id ranges using numeric sort
+    -   [Pelican 7.16.5](https://pelicanplatform.org/releases)
+        -   Now includes end-to-end integrity checks for clients
+
 ### **May 8, 2025:** IGTF 1.135, XRootD 5.8.1-1.3, xrdcl-pelican 1.2.1, OpenBao 2.2.0, htvault-config 2.0.0, Decision Engine 2.0.5; Upcoming: Pelican 7.15.3, xrdhttp-pelican 0.0.6
 -   CA certificates based on [IGTF 1.135](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   Updated SlovakGrid trust anchor with extended validity (SK)
@@ -66,10 +89,10 @@ Latest News
         -   Adds XRootD 5.8 support and APIs for cache management
 
 ### **April 22, 2025:** HTCondor 23.0.24; Upcoming: HTCondor 23.10.24, Pelican 7.15.2
--   [HTCondor 23.0.22](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-22)
+-   [HTCondor 23.0.24](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-24)
     -   Fix inflated cgroups v2 memory usage reporting for Docker jobs
 -   Upcoming
-    -   [HTCondor 23.10.22](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-10-22)
+    -   [HTCondor 23.10.24](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-10-24)
         -   HTCondor tarballs now contain Pelican 7.15.1 and Apptainer 1.4.0
         -   Fix inflated cgroups v2 memory usage reporting for Docker jobs
     -   [Pelican 7.15.2](https://github.com/PelicanPlatform/pelican/releases/tag/v7.15.2)
