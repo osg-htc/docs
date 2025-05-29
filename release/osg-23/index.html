@@ -1492,6 +1492,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#may-29-2025-htcondor-23025-xrootd-582-15-xrdcl-pelican-123-frontier-squid-510-12-htgettoken-22-2-upcoming-htcondor-231025-pelican-7165" class="md-nav__link">
+    May 29, 2025: HTCondor 23.0.25, XRootD 5.8.2-1.5, xrdcl-pelican 1.2.3, frontier-squid 5.10-1.2, htgettoken 2.2-2; Upcoming: HTCondor 23.10.25, Pelican 7.16.5
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#may-8-2025-igtf-1135-xrootd-581-13-xrdcl-pelican-121-openbao-220-htvault-config-200-decision-engine-205-upcoming-pelican-7153-xrdhttp-pelican-006" class="md-nav__link">
     May 8, 2025: IGTF 1.135, XRootD 5.8.1-1.3, xrdcl-pelican 1.2.1, OpenBao 2.2.0, htvault-config 2.0.0, Decision Engine 2.0.5; Upcoming: Pelican 7.15.3, xrdhttp-pelican 0.0.6
   </a>
@@ -2230,6 +2237,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#may-29-2025-htcondor-23025-xrootd-582-15-xrdcl-pelican-123-frontier-squid-510-12-htgettoken-22-2-upcoming-htcondor-231025-pelican-7165" class="md-nav__link">
+    May 29, 2025: HTCondor 23.0.25, XRootD 5.8.2-1.5, xrdcl-pelican 1.2.3, frontier-squid 5.10-1.2, htgettoken 2.2-2; Upcoming: HTCondor 23.10.25, Pelican 7.16.5
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#may-8-2025-igtf-1135-xrootd-581-13-xrdcl-pelican-121-openbao-220-htvault-config-200-decision-engine-205-upcoming-pelican-7153-xrdhttp-pelican-006" class="md-nav__link">
     May 8, 2025: IGTF 1.135, XRootD 5.8.1-1.3, xrdcl-pelican 1.2.1, OpenBao 2.2.0, htvault-config 2.0.0, Decision Engine 2.0.5; Upcoming: Pelican 7.15.3, xrdhttp-pelican 0.0.6
   </a>
@@ -2667,6 +2681,49 @@ hosts to accept certificates issued by SHA-1 signed CAs:</p>
 and token issuers present modern CAs.</p>
 </div>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="may-29-2025-htcondor-23025-xrootd-582-15-xrdcl-pelican-123-frontier-squid-510-12-htgettoken-22-2-upcoming-htcondor-231025-pelican-7165"><strong>May 29, 2025:</strong> HTCondor 23.0.25, XRootD 5.8.2-1.5, xrdcl-pelican 1.2.3, frontier-squid 5.10-1.2, htgettoken 2.2-2; Upcoming: HTCondor 23.10.25, Pelican 7.16.5<a class="headerlink" href="#may-29-2025-htcondor-23025-xrootd-582-15-xrdcl-pelican-123-frontier-squid-510-12-htgettoken-22-2-upcoming-htcondor-231025-pelican-7165" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-25">HTCondor 23.0.25</a><ul>
+<li>Fix problems where parallel universe jobs could crash the <code>condor_schedd</code></li>
+<li>Avoid <code>condor_starter</code> crash when evicting job during input file transfer</li>
+<li><code>condor_watch_q</code> now properly displays job id ranges using numeric sort</li>
+</ul>
+</li>
+<li><a href="https://github.com/xrootd/xrootd/releases/tag/v5.8.2">XRootD 5.8.2-1.5</a><ul>
+<li>Experimental fair-share for throttling plugin <a href="https://github.com/PelicanPlatform/xrootd/issues/23">PelicanPlatform #23</a></li>
+<li>Fix deadlock in caching plugin when starting up <a href="https://github.com/xrootd/xrootd/issues/2505">XRootD #2505</a></li>
+<li>Fix race condition in callback handler <a href="https://github.com/xrootd/xrootd/issues/2517">XRootD #2517</a></li>
+<li>Various bug fixes - see release notes</li>
+</ul>
+</li>
+<li><a href="https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v1.2.3">xrdcl-pelican 1.2.3</a><ul>
+<li>Fixes potential crashing or data corruption issue</li>
+</ul>
+</li>
+<li><a href="http://frontier.cern.ch/dist/frontier-squid-releasenotes.txt">Frontier-squid 5.10-1.2</a><ul>
+<li>Fixes for minor bugs and three security issues</li>
+</ul>
+</li>
+<li>htgettoken 2.2-2<ul>
+<li>Update <code>htgettoken</code> command to ignore the local Python environment</li>
+</ul>
+</li>
+<li>Upcoming<ul>
+<li><a href="https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-10-25">HTCondor 23.10.25</a><ul>
+<li>Fix bug where <code>DAGMAN_MAX_JOBS_IDLE</code> was being ignored</li>
+<li>HTCondor tarballs now contain Pelican 7.16.5 and Apptainer 1.4.1</li>
+<li>Fix problems where parallel universe jobs could crash the <code>condor_schedd</code></li>
+<li>Avoid <code>condor_starter</code> crash when evicting job during input file transfer</li>
+<li><code>condor_watch_q</code> now properly displays job id ranges using numeric sort</li>
+</ul>
+</li>
+<li><a href="https://pelicanplatform.org/releases">Pelican 7.16.5</a><ul>
+<li>Now includes end-to-end integrity checks for clients</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="may-8-2025-igtf-1135-xrootd-581-13-xrdcl-pelican-121-openbao-220-htvault-config-200-decision-engine-205-upcoming-pelican-7153-xrdhttp-pelican-006"><strong>May 8, 2025:</strong> IGTF 1.135, XRootD 5.8.1-1.3, xrdcl-pelican 1.2.1, OpenBao 2.2.0, htvault-config 2.0.0, Decision Engine 2.0.5; Upcoming: Pelican 7.15.3, xrdhttp-pelican 0.0.6<a class="headerlink" href="#may-8-2025-igtf-1135-xrootd-581-13-xrdcl-pelican-121-openbao-220-htvault-config-200-decision-engine-205-upcoming-pelican-7153-xrdhttp-pelican-006" title="Permanent link">&para;</a></h3>
 <ul>
 <li>CA certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.135</a><ul>
@@ -2709,12 +2766,12 @@ and token issuers present modern CAs.</p>
 </ul>
 <h3 id="april-22-2025-htcondor-23024-upcoming-htcondor-231024-pelican-7152"><strong>April 22, 2025:</strong> HTCondor 23.0.24; Upcoming: HTCondor 23.10.24, Pelican 7.15.2<a class="headerlink" href="#april-22-2025-htcondor-23024-upcoming-htcondor-231024-pelican-7152" title="Permanent link">&para;</a></h3>
 <ul>
-<li><a href="https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-22">HTCondor 23.0.22</a><ul>
+<li><a href="https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-24">HTCondor 23.0.24</a><ul>
 <li>Fix inflated cgroups v2 memory usage reporting for Docker jobs</li>
 </ul>
 </li>
 <li>Upcoming<ul>
-<li><a href="https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-10-22">HTCondor 23.10.22</a><ul>
+<li><a href="https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-10-24">HTCondor 23.10.24</a><ul>
 <li>HTCondor tarballs now contain Pelican 7.15.1 and Apptainer 1.4.0</li>
 <li>Fix inflated cgroups v2 memory usage reporting for Docker jobs</li>
 </ul>
