@@ -14,6 +14,21 @@ OSG 24 will be supported for [approximately two years total](release_series.md#s
 Latest News
 -----------
 
+### **May 29, 2025:** XRootD 5.8.2-1.5, xrdcl-pelican 1.2.3, frontier-squid 5.10-1.2, Pelican 7.16.5, htgettoken 2.2-2
+-   [XRootD 5.8.2-1.5](https://github.com/xrootd/xrootd/releases/tag/v5.8.2)
+    -   Experimental fair-share for throttling plugin [PelicanPlatform #23](https://github.com/PelicanPlatform/xrootd/issues/23)
+    -   Fix deadlock in caching plugin when starting up [XRootD #2505](https://github.com/xrootd/xrootd/issues/2505)
+    -   Fix race condition in callback handler [XRootD #2517](https://github.com/xrootd/xrootd/issues/2517)
+    -   Various bug fixes - see release notes
+-   [xrdcl-pelican 1.2.3](https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v1.2.3)
+    -   Fixes potential crashing or data corruption issue
+-   [Frontier-squid 5.10-1.2](http://frontier.cern.ch/dist/frontier-squid-releasenotes.txt)
+    -   Fixes for minor bugs and three security issues
+-   [Pelican 7.16.5](https://pelicanplatform.org/releases)
+    -   Now includes end-to-end integrity checks for clients
+-   htgettoken 2.2-2
+    -   Update `htgettoken` command to ignore the local Python environment
+
 ### **May 8, 2025:** IGTF 1.135, Pelican 7.15.3, XRootD 5.8.1-1.3, xrdcl-pelican 1.2.1, xrdhttp-pelican 0.0.6, OpenBao 2.2.0, htvault-config 2.0.0, Decision Engine 2.0.5
 -   CA certificates based on [IGTF 1.135](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   Updated SlovakGrid trust anchor with extended validity (SK)
