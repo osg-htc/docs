@@ -68,18 +68,18 @@ root@host# yum install osg-ca-certs-updater
 
 ### Services
 
-#### Starting and Enabling Services
+#### Starting and Enabling Systemd Services
 
 Run the following to enable the updater. This will persist until the machine is rebooted.
 
 ``` console
-root@host# service osg-ca-certs-updater-cron start
+root@host# systemctl start osg-ca-certs-updater.timer
 ```
 
 Run the following to enable the updater when the machine is rebooted.
 
 ``` console
-root@host# chkconfig osg-ca-certs-updater-cron on
+root@host# systemctl enable osg-ca-certs-updater.timer
 ```
 
 Run both commands if you wish for the service to activate immediately and remain active throughout reboots.
@@ -89,20 +89,22 @@ Run both commands if you wish for the service to activate immediately and remain
 Enter the following to disable the updater. This will persist until the machine is rebooted.
 
 ``` console
-root@host# service osg-ca-certs-updater-cron stop
+root@host# systemctl stop osg-ca-certs-updater.timer
 ```
 
 Enter the following to disable the updater when the machine is rebooted.
 
 ``` console
-root@host# chkconfig osg-ca-certs-updater-cron off
+root@host# systemctl disable osg-ca-certs-updater.timer
 ```
 
 Run both commands if you wish for the service to deactivate immediately and not get reactivated during reboots.
 
 ### Configuration
 
-While there is no configuration file, the behavior of the updater can be adjusted by command-line arguments that are specified in the `cron` entry of the service. This entry is located in the file `/etc/cron.d/osg-ca-certs-updater`. Please see the Unix manual page for `crontab` in section 5 for an explanation of the format. The manual page can be accessed by the command `man 5 crontab`. The valid command-line arguments can be listed by running `osg-ca-certs-updater --help`. Reasonable defaults have been provided, namely:
+While there is no configuration file, the behavior of the updater can be adjusted by command-line arguments that are specified in the `systemd` entry of the service. The command-line configuration 
+for the service can be edited using `systemctl edit osg-ca-certs-updater.service`, while its timer configuration can be edited using `systemctl edit osg-ca-certs-updater.timer`. 
+The valid command-line arguments can be listed by running `osg-ca-certs-updater --help`. Reasonable defaults have been provided, namely:
 
 -   Attempt an update no more often than every 23 hours. Due to the random wait (see below), having a 24-hour minimum time between updates would cause the update time to slowly slide back every day.
 -   Run the script every 6 hours. We run the script more often than we update so that downtime at the wrong moment does not cause the update to be delayed for a full day.
@@ -114,16 +116,17 @@ While there is no configuration file, the behavior of the updater can be adjuste
 
 #### Useful configuration and log files
 
-##### Configuration file
+##### Configuration Entries
 
-| Package              | File Description                                      | Location                           | Comment                                                                                       |
+| Service              | Description                                      | Edit Command                           | Comment                                                                                       |
 |:---------------------|:------------------------------------------------------|:-----------------------------------|:----------------------------------------------------------------------------------------------|
-| osg-ca-certs-updater | Cron entry for periodically launching the updater     | `/etc/cron.d/osg-ca-certs-updater` | Command-line arguments to the updater can be specified here                                   |
-| osg-release          | Repo definition files for production OSG repositories | `/etc/yum.repos.d/osg.repo`        | Make sure these repositories are enabled and reachable from the host you are trying to update |
+| osg-ca-certs-updater.service | Runtime configuration for the updater     | `systemctl edit osg-ca-certs-updater.service` | Command-line arguments to the updater can be specified here                                   |
+| osg-ca-certs-updater.timer | Systemd timer for periodically launching the updater     | `systemctl edit osg-ca-certs-updater.timer` | Command-line arguments to the updater can be specified here                                   |
+| osg-release          | Repo definition files for production OSG repositories | `$EDITOR /etc/yum.repos.d/osg.repo`        | Make sure these repositories are enabled and reachable from the host you are trying to update |
 
 #### Log files
 
-Logging is performed to the console by default. Please see the manual for your `cron` daemon to find out how it handles console output.
+Logging is performed to the systemd journal by default. Please see the manual for `journalctl` to find out how it handles console output.
 
 A logfile can be specified via the `-l` / `--logfile` command-line option.
 
@@ -214,7 +217,7 @@ Here is the resulting file after add
 install_dir = /etc/grid-security
 
 ## cacerts_url is the URL of your certificate distribution
-cacerts_url = https://repo.opensciencegrid.org/cadist/ca-certs-version-igtf-new
+cacerts_url = https://repo.osg-htc.org/cadist/ca-certs-version-igtf-new
 
 ## log specifies where logging output will go
 log = /var/log/osg-update-certs.log
@@ -267,7 +270,7 @@ The resulting config file after the remove is as follows
 install_dir = /etc/grid-security
 
 ## cacerts_url is the URL of your certificate distribution
-cacerts_url = https://repo.opensciencegrid.org/cadist/ca-certs-version-igtf-new
+cacerts_url = https://repo.osg-htc.org/cadist/ca-certs-version-igtf-new
 
 ## log specifies where logging output will go
 log = /var/log/osg-update-certs.log
@@ -300,8 +303,8 @@ You can inspect the list of CA Certificates that have been installed:
 
 ``` console
 user@host $ osg-ca-manage listCA
-Hash=09ff08b7; Subject= /C=FR/O=CNRS/CN=CNRS2-Projets; Issuer= /C=FR/O=CNRS/CN=CNRS2; Accreditation=Unknown; Status=https://repo.opensciencegrid.org/cadist/ca-certs-version-new
-Hash=0a12b607; Subject= /DC=org/DC=ugrid/CN=UGRID CA; Issuer= /DC=org/DC=ugrid/CN=UGRID CA; Accreditation=Unknown; Status=https://repo.opensciencegrid.org/cadist/ca-certs-version-new
+Hash=09ff08b7; Subject= /C=FR/O=CNRS/CN=CNRS2-Projets; Issuer= /C=FR/O=CNRS/CN=CNRS2; Accreditation=Unknown; Status=https://repo.osg-htc.org/cadist/ca-certs-version-new
+Hash=0a12b607; Subject= /DC=org/DC=ugrid/CN=UGRID CA; Issuer= /DC=org/DC=ugrid/CN=UGRID CA; Accreditation=Unknown; Status=https://repo.osg-htc.org/cadist/ca-certs-version-new
 [...]
 ```
 

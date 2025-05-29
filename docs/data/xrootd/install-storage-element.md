@@ -5,7 +5,7 @@ Installing an XRootD Storage Element
 ====================================
 
 !!! warning
-    This page is out of date and is not known to work with XRootD 5; parts of it do not work with EL 7+.
+    This page is out of date.
 
 [XRootD](http://xrootd.org/) is a hierarchical storage system that can be used in a variety of ways to access data,
 typically distributed among actual storage resources. 
@@ -101,7 +101,7 @@ You will need to customize the following lines:
 | `set xrdr=<RDRNODE>`           | Change to the hostname of the redirector                                                                                                                                                                                                                                            |
 | `cms.space min 2g 5g`          | Reserve this amount of free space on the node. For this example, if space falls below 2GB, xrootd will not store further files on this node until space climbs above 5GB. You can use `k`, `m`, `g`, or `t` to indicate kilobyte, megabytes, gigabytes, or terabytes, respectively. |
 
-Further information can be found at <https://xrootd.slac.stanford.edu/docs.html>
+Further information can be found at <https://xrootd.org/docs.html>
 
 #### Verifying the clustered config
 
@@ -186,7 +186,6 @@ else
       oss.localroot /local/xrootd
       ofs.notify closew create mkdir mv rm rmdir trunc | /usr/bin/XrdCnsd -d -D 2 -i 90 -b $(xrdr):1095:/data/inventory
       #add cms.space if you have less the 11GB
-      # cms.space options https://xrootd.slac.stanford.edu/doc/dev410/cms_config.htm
       cms.space min 2g 5g
 fi
 ```
@@ -321,7 +320,7 @@ CMSD_INSTANCES="default"
 FRMD_INSTANCES="default"
 ```
 
-1.  Modify `/etc/xrootd/xrootd-clustered.cfg` on both nodes to specify options for `frm_xfrd` (File Transfer Daemon) and `frm_purged` (File Purging Daemon). For more information, you can visit the [FRM Documentation](http://xrootd.org/doc/dev4/frm_config.htm)
+1.  Modify `/etc/xrootd/xrootd-clustered.cfg` on both nodes to specify options for `frm_xfrd` (File Transfer Daemon) and `frm_purged` (File Purging Daemon). For more information, you can visit the [FRM Documentation](https://xrootd.web.cern.ch/doc/man/frm_xfrd.8.html)
 2.  Start frm daemons on data server:
 
 ```console
@@ -354,7 +353,7 @@ root@host # systemctl start xrootd@standalone
 The services are:
 
 
-| Service                    | EL 7 & 8 service name        |
+| Service                    | EL 8 & 9 service name        |
 |:---------------------------|:-----------------------------|
 | XRootD (standalone config) | `xrootd@standalone`          |
 | XRootD (clustered config)  | `xrootd@clustered`           |
@@ -365,7 +364,7 @@ The services are:
 As a reminder, here are common service commands (all run as `root`):
 
 
-| To ...                                      | On EL 7 & 8, run the command...  |
+| To ...                                      | On EL 8 & 9, run the command...  |
 |:--------------------------------------------|:---------------------------------|
 | Start a service                             | `systemctl start SERVICE-NAME`   |
 | Stop a service                              | `systemctl stop SERVICE-NAME`    |
@@ -401,4 +400,4 @@ Reference
 Links
 -----
 
--   [XRootD documentation](https://xrootd.slac.stanford.edu/docs.html)
+-   [XRootD documentation](https://xrootd.org/docs.html)

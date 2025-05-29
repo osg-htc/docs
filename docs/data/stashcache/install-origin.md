@@ -5,8 +5,10 @@ Installing the OSDF Origin
 ================================
 
 !!! warning "Deprecation warning"
-    This document is outdated and describes an XCache-based OSDF Origin install, which deprecated.
-    Future OSDF Origins should be based on Pelican; documentation for a Pelican-based OSDF Origin install is forthcoming.
+    This document is outdated and describes an XCache-based OSDF Origin install, which is deprecated.
+    Future OSDF Origins should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Origin by RPM](../../osdf/install-origin-rpm) document
 
 This document describes how to install an Open Science Data Federation (OSDF) origin service.  This service allows an organization
 to export its data to the data federation.
@@ -32,9 +34,15 @@ to export its data to the data federation.
 Before Starting
 ---------------
 
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Origin install, which is deprecated.
+    Future OSDF Origins should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Origin by RPM](../../osdf/install-origin-rpm) document
+
 Before starting the installation process, consider the following requirements:
 
-* __Operating system:__ A RHEL 7 or RHEL 8 or compatible operating systems.
+* __Operating system:__ A RHEL 8 or RHEL 9 or compatible operating systems.
 * __User IDs:__ If they do not exist already, the installation will create the Linux user IDs `condor` and `xrootd`;
   only the `xrootd` user is utilized for the running daemons.
 * __Host certificate:__ Required for authentication.
@@ -57,6 +65,12 @@ As with all OSG software installations, there are some one-time steps to prepare
 Installing the Origin
 ---------------------
 
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Origin install, which is deprecated.
+    Future OSDF Origins should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Origin by RPM](../../osdf/install-origin-rpm) document
+
 The origin service consists of one or more XRootD daemons and their dependencies for the authentication infrastructure.
 To simplify installation, OSG provides convenience RPMs that install all required
 software with a single command:
@@ -70,6 +84,12 @@ and owned by the `xrootd:xrootd` user.
 
 Configuring the Origin Server
 -----------------------------
+
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Origin install, which is deprecated.
+    Future OSDF Origins should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Origin by RPM](../../osdf/install-origin-rpm) document
 
 The `stash-origin` package provides a default configuration files in
 `/etc/xrootd/xrootd-stash-origin.cfg` and `/etc/xrootd/config.d`.
@@ -121,6 +141,13 @@ and use the `xrootd@stash-origin-auth` service (if not using [xrootd-multiuser][
 
 Manually Setting the FQDN (optional)
 ------------------------------------
+
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Origin install, which is deprecated.
+    Future OSDF Origins should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Origin by RPM](../../osdf/install-origin-rpm) document
+
 The FQDN of the origin server that you registered in [Topology](#registering-the-origin) may be different than its internal hostname
 (as reported by `hostname -f`).
 For example, this may be the case if your origin is behind a load balancer such as LVS.
@@ -138,6 +165,13 @@ In this case, you must manually tell the origin services which FQDN to use for t
 
 Managing the Origin Services
 ----------------------------
+
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Origin install, which is deprecated.
+    Future OSDF Origins should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Origin by RPM](../../osdf/install-origin-rpm) document
+
 Serving data for an origin is done by the `xrootd` daemon.
 There can be multiple instances of `xrootd`, running on different ports.
 The instance that serves unauthenticated data will run on port 1094.
@@ -184,6 +218,12 @@ In addition, the origin service automatically uses the following SystemD units:
 Adding to Authorization Files (Optional)
 ----------------------------------------
 
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Origin install, which is deprecated.
+    Future OSDF Origins should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Origin by RPM](../../osdf/install-origin-rpm) document
+
 The `stash-authfile` services on the origin generate files that configure authorization for XRootD.
 Put local additions to this configuration into separate files, according to this table:
 
@@ -199,6 +239,12 @@ Put local additions to this configuration into separate files, according to this
 
 Verifying the Origin Server
 ---------------------------
+
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Origin install, which is deprecated.
+    Future OSDF Origins should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Origin by RPM](../../osdf/install-origin-rpm) document
 
 Once your server has been registered with the OSG and started,
 perform the following steps to verify that it is functional.
@@ -303,6 +349,13 @@ If unsuccessful, you can pass the `-d` flag to `stashcp` for debug info.
 
 Registering the Origin
 ----------------------
+
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Origin install, which is deprecated.
+    Future OSDF Origins should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Origin by RPM](../../osdf/install-origin-rpm) document
+
 To be part of the Open Science Data Federation, your origin must be
 [registered with the OSG](../../common/registration.md).  The service type is `XRootD origin server`.
 
@@ -328,19 +381,6 @@ See the page on [getting your VO's data into OSDF](vo-data.md).
 
 Specifying the DN of your origin is not required but it is useful for testing.
 
-Updating to OSG 3.6
--------------------
-
-The OSG 3.5 series reached end-of-life on May 1, 2022.
-Admins are strongly encouraged to move their origins to OSG 3.6.
-
-See [general update instructions](../../release/updating-to-osg-36.md).
-
-Unauthenticated origins (`xrootd@stash-origin` service) do not need any configuration changes.
-
-Authenticated origins (`xrootd@stash-origin-auth` service) may need the configuration changes described in the
-[updating to OSG 3.6 section](../xrootd/xrootd-authorization.md#updating-to-osg-36)
-of the XRootD authorization configuration document.
 
 Getting Help
 ------------

@@ -69,20 +69,19 @@ nav:
 - 'Data Federation (OSDF)':
   - 'Overview': 'data/stashcache/overview.md'
   - Data Cache:
-      - 'Install from container': 'data/stashcache/run-stashcache-container.md'
-      - 'Install from RPM': 'data/stashcache/install-cache.md'
+      - 'Install from container': 'data/osdf/install-cache-container.md'
+      - 'Install from RPM': 'data/osdf/install-cache-rpm.md'
   - Data Origin:
-      - 'Install from container': 'data/stashcache/run-stash-origin-container.md'
-      - 'Install from RPM': 'data/stashcache/install-origin.md'
-      - 'Publishing VO data': 'data/stashcache/vo-data.md'
+      - 'Install from container': 'data/osdf/install-origin-container.md'
+      - 'Install from RPM': 'data/osdf/install-origin-rpm.md'
 - Releases:
   - 'Release Series': 'release/release_series.md'
+  - OSG 24:
+     - 'News': 'release/osg-24.md'
+     - 'Updating to OSG 24': 'release/updating-to-osg-24.md'
   - OSG 23:
      - 'News': 'release/osg-23.md'
      - 'Updating to OSG 23': 'release/updating-to-osg-23.md'
-  - OSG 3.6:
-     - 'News': 'release/osg-36.md'
-     - 'Updating to OSG 3.6': 'release/updating-to-osg-36.md'
   - 'Supported Platforms': 'release/supported_platforms.md'
   - 'OSG Yum Repos': 'common/yum.md'
   - 'Yum Basics': 'release/yum-basics.md'

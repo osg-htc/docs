@@ -17,10 +17,9 @@ Apptainer works either by making use of unprivileged user namespaces
 or with a setuid-root assist program. 
 By default it does not install the setuid-root assist program
 and it uses only unprivileged user namespaces.
-Unprivileged user namespaces are available on all OS versions that
-OSG supports, although it is not enabled by default on EL 7;
-instructions to enable it are [below](#enabling-unprivileged-apptainer).
-The feature is enabled by default on EL 8.
+Unprivileged user namespaces are enabled by default on all OS versions that
+OSG supports, although some system administrators may have disabled them.
+Instructions to enable it are [below](#enabling-unprivileged-apptainer).
 
 !!! danger "Kernel vs. Userspace Security"
     Enabling unprivileged user namespaces increases the risk to the
@@ -65,8 +64,8 @@ There are two sets of instructions on this page:
 
 OSG VOs all support running apptainer directly from CVMFS, when CVMFS
 is available and unprivileged user namespaces are enabled.
-Unprivileged user namespaces are enabled by default on EL 8, and OSG
-recommends that system administrators enable it on EL 7 worker nodes.
+Unprivileged user namespaces are enabled by default on all OS versions
+that OSG supports.
 When unprivileged user namespaces are enabled, OSG
 recommends that sites not install Apptainer unless they have
 non-OSG users that require it.
@@ -85,18 +84,15 @@ Enabling Unprivileged Apptainer
 -------------------------------
 
 The instructions in this section are for enabling Apptainer to run
-unprivileged by enabling unprivileged user namespaces.
+unprivileged.
 
-1. Enable user namespaces via `sysctl` on EL 7:
-
-    If the operating system is an EL 7, enable unprivileged Apptainer
-    with the following steps.
-    This step is not needed on EL 8 because it is enabled by default.
-
-        :::console
-        root@host # echo "user.max_user_namespaces = 15000" \
-            > /etc/sysctl.d/90-max_user_namespaces.conf
-        root@host # sysctl -p /etc/sysctl.d/90-max_user_namespaces.conf
+1. Make sure unprivileged user namespaces are enabled.  They are
+   enabled by default on EL 8 and EL 9, but some system administrators
+   may have disabled them, possibly because of worries about a need for
+   frequent kernel patching (regarding that see step 2).  Look for a
+   `sysctl` setting for `user.max_user_namespaces` which needs to be
+   non-zero.  Examples for when it was disabled often showed setting
+   it to a value of 15000.
 
 1. (Recommended) Disable network namespaces:
 
@@ -106,10 +102,10 @@ unprivileged by enabling unprivileged user namespaces.
         root@host # sysctl -p /etc/sysctl.d/90-max_net_namespaces.conf
 
     OSG VOs do not need network namespaces with Apptainer, and
-    disabling them significantly lowers the risk profile of enabling user
+    disabling them significantly lowers the risk profile of user
     namespaces and reduces the frequency of needing to apply urgent updates.
     Most of the kernel vulnerabilities related to unprivileged user
-    namespaces over the last few years have been in combination with
+    namespaces over the last several years have been in combination with
     network namespaces.
 
     Network namespaces are, however, utilized by other software,
@@ -119,9 +115,8 @@ unprivileged by enabling unprivileged user namespaces.
     `--net=host` option in Docker or Podman).
     
     Disabling network namespaces blocks the systemd PrivateNetwork
-    feature, which is a feature that is used by some EL 8 services.
-    It is also configured for some EL 7 services but they are all
-    disabled by default.  To check them all, look for PrivateNetwork in
+    feature, which is a feature that is used by some EL 8 & 9 services
+    by default.  To check them all, look for PrivateNetwork in
     `/lib/systemd/system/*.service` and see which of those services are
     enabled but failed to start.  The only default such service on EL 8
     is systemd-hostnamed, and a popular non-default such service is
@@ -210,7 +205,7 @@ command:
 ```console
 user@host $ /cvmfs/oasis.opensciencegrid.org/mis/apptainer/bin/apptainer \
                 exec --contain --ipc --pid --bind /cvmfs \
-                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el7:latest \
+                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el8:latest \
                 ps -ef
 UID          PID    PPID  C STIME TTY          TIME CMD
 user           1       0  0 10:51 console  00:00:00 appinit

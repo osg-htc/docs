@@ -6,7 +6,9 @@ Installing the OSDF Cache
 
 !!! warning "Deprecation warning"
     This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
-    Future OSDF Caches should be based on Pelican; documentation for a Pelican-based OSDF Cache install is forthcoming.
+    Future OSDF Caches should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Cache by RPM](../../osdf/install-cache-rpm) document
 
 This document describes how to install an Open Science Data Federation (OSDF) cache service.  This service allows a site or regional
 network to cache data frequently used on the OSG, reducing data transfer over the wide-area network and
@@ -51,6 +53,12 @@ As with all OSG software installations, there are some one-time steps to prepare
 
 Registering the Cache
 ---------------------
+
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+    Future OSDF Caches should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Cache by RPM](../../osdf/install-cache-rpm) document
 
 To be part of the OSDF, your cache must be registered with the OSG.
 You will need basic information like the resource name, hostname,
@@ -149,6 +157,12 @@ Mention in your ticket that you would like to "Finalize the cache registration."
 Installing the Cache
 --------------------
 
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+    Future OSDF Caches should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Cache by RPM](../../osdf/install-cache-rpm) document
+
 The OSDF software consists of an XRootD server with special configuration and supporting services.
 To simplify installation, OSG provides convenience RPMs that install all required
 packages with a single command:
@@ -159,6 +173,12 @@ root@host # yum install stash-cache
 
 Configuring the Cache
 ---------------------
+
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+    Future OSDF Caches should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Cache by RPM](../../osdf/install-cache-rpm) document
 
 First, you must create a "cache directory", which will be used to store downloaded files.
 By default this is `/mnt/stash`.
@@ -202,6 +222,12 @@ The easiest solution for this is to use your host certificate and key as follows
 Configuring Optional Features
 -----------------------------
 
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+    Future OSDF Caches should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Cache by RPM](../../osdf/install-cache-rpm) document
+
 ### Adjust disk utilization
 
 To adjust the disk utilization of your cache, create or edit a file named `/etc/xrootd/config.d/90-local.cfg`
@@ -232,7 +258,7 @@ all allow gsi g=/glow h=*.cs.wisc.edu
 This gives access to the config file, log files, core files, and process information
 to anyone from `*.cs.wisc.edu` in the `/glow` VOMS group.
 
-See [the XRootD manual](http://xrootd.org/doc/dev48/xrd_config.htm#_Toc496911334) for the full syntax.
+See the XRootD manual for the full syntax.
 
 Remote debugging should only be enabled for as long as you need assistance.
 As soon as your issue has been resolved, revert any changes you have made to `/etc/xrootd/digauth.cfg`.
@@ -247,22 +273,16 @@ To use HTTPS:
 
 1.  Uncomment `set EnableVoms = 1` in `/etc/xrootd/config.d/10-osg-xrdvoms.cfg`
 
-!!! note "Upgrading from OSG 3.5"
-    If upgrading from OSG 3.5, you may have a file with the following contents in `/etc/xrootd/config.d`:
-
-           # Support HTTPS access to unauthenticated cache
-           if named stash-cache
-             http.cadir /etc/grid-security/certificates
-             http.cert /etc/grid-security/xrd/xrdcert.pem
-             http.key /etc/grid-security/xrd/xrdkey.pem
-             http.secxtractor /usr/lib64/libXrdLcmaps.so
-           fi
-
-    You must delete this config block or XRootD will fail to start.
-
 
 Manually Setting the FQDN (optional)
 ------------------------------------
+
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+    Future OSDF Caches should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Cache by RPM](../../osdf/install-cache-rpm) document
+
 The FQDN of the cache server that you registered in [Topology](#registering-the-cache) may be different than its internal hostname
 (as reported by `hostname -f`).
 For example, this may be the case if your cache is behind a load balancer such as LVS.
@@ -281,6 +301,12 @@ In this case, you must manually tell the cache services which FQDN to use for to
 Adding to Authorization Files (Optional)
 ---------------------------------------------------------
 
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+    Future OSDF Caches should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Cache by RPM](../../osdf/install-cache-rpm) document
+
 The `stash-authfile` services on the cache generate files that configure authorization for XRootD.
 Put local additions to this configuration into separate files, according to this table:
 
@@ -296,6 +322,12 @@ Put local additions to this configuration into separate files, according to this
 
 Managing OSDF services
 -------------------------------------------
+
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+    Future OSDF Caches should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Cache by RPM](../../osdf/install-cache-rpm) document
 
 These services must be managed by `systemctl` and may start additional services as dependencies.
 As a reminder, here are common service commands (all run as `root`):
@@ -313,7 +345,7 @@ As a reminder, here are common service commands (all run as `root`):
 |--------------|------------------|-----------|
 | XRootD | `xrootd@stash-cache.service` | The XRootD daemon, which performs the data transfers |
 | XCache | `xcache-reporter.timer` | Reports usage information to collector.opensciencegrid.org |
-| Fetch CRL |EL8: `fetch-crl.timer` <br> EL7: `fetch-crl-boot` and `fetch-crl-cron` | Required to authenticate monitoring services.  See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info |
+| Fetch CRL | `fetch-crl.timer` | Required to authenticate monitoring services.  See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info |
 | | `stash-authfile@stash-cache.service` | Generate authentication configuration files for XRootD (public cache instance) |
 | | `stash-authfile@stash-cache.timer` | Periodically run the above service (public cache instance) |
 
@@ -333,6 +365,12 @@ As a reminder, here are common service commands (all run as `root`):
 
 Validating the Cache
 ---------------------
+
+!!! warning "Deprecation warning"
+    This document is outdated and describes an XCache-based OSDF Cache install, which is deprecated.
+    Future OSDF Caches should be based on Pelican.
+
+    See the [Pelican-based Installing the OSDF Cache by RPM](../../osdf/install-cache-rpm) document
 
 The cache server functions as a normal HTTP server and can interact with typical HTTP clients, such as `curl`.
 
@@ -373,24 +411,6 @@ ping_response_status = "ok"
 STASHCACHE_DaemonVersion = "1.0.0"
 ...
 ```
-
-
-Updating to OSG 3.6
--------------------
-
-The OSG 3.5 series reached end-of-life on May 1, 2022.
-Admins are strongly encouraged to move their caches to OSG 3.6.
-
-See [general update instructions](../../release/updating-to-osg-36.md).
-
-Unauthenticated caches (`xrootd@stash-cache` service) do not need any configuration changes,
-unless HTTPS access has been enabled.
-See the ["enable HTTPS on the unauthenticated cache" section](#enable-https-on-the-unauthenticated-cache))
-for the necessary configuration changes.
-
-Authenticated caches (`xrootd@stash-cache-auth` service) may need the configuration changes described in the
-[updating to OSG 3.6 section](../xrootd/xrootd-authorization.md#updating-to-osg-36)
-of the XRootD authorization configuration document.
 
 
 Getting Help

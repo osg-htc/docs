@@ -173,7 +173,7 @@ The specific services are:
 
 | Software          | Service Name                          | Notes                                                                                                       |
 |:------------------|:--------------------------------------|:------------------------------------------------------------------------------------------------------------|
-| Fetch CRL         | EL8,EL9: `fetch-crl.timer` <br> EL7: `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info                        |
+| Fetch CRL         | `fetch-crl.timer` | See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info                        |
 | XRootD            | `xrootd@standalone`                   | Primary xrootd service if _not_ running in [multi-user mode](#enabling-multi-user-support)                |
 | XRootD Multi-user | `xrootd-privileged@standalone`        | Primary xrootd service to start _instead of_ `xrootd@standalone` if running in [multi-user mode](#enabling-multi-user-support) |
 
@@ -259,9 +259,9 @@ To get assistance. please use the [Help Procedure](../../common/help.md) page.
 Reference
 ---------
 
-- [XRootD documentation](https://xrootd.slac.stanford.edu/docs.html)
-- [Export directive](https://xrootd.slac.stanford.edu/doc/dev49/ofs_config.htm#_Toc522916544) in the XRootD
-  configuration and [relevant options](https://xrootd.slac.stanford.edu/doc/dev49/ofs_config.htm#_defaults)
+- [XRootD documentation](https://xrootd.org/docs.html)
+- [Export directive](https://xrootd.web.cern.ch/doc/dev56/ofs_config.htm#_Toc136617316) in the XRootD
+  configuration and [relevant options](https://xrootd.web.cern.ch/doc/dev56/ofs_config.htm#_defaults)
 
 
 ### Service Configuration

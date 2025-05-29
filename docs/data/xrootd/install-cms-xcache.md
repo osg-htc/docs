@@ -13,7 +13,7 @@ Before Starting
 
 Before starting the installation process, consider the following requirements:
 
-* __Operating system:__ A RHEL 7 or compatible operating systems.
+* __Operating system:__ An RHEL 8, RHEL 9, or compatible operating systems.
 * __User IDs:__ If they do not exist already, the installation will create the Linux user IDs `xrootd`
 * __Host certificate:__ Required for client authentication and authentication with CMS VOMS Server
   See our [documentation](../../security/host-certs.md) for instructions on how to request and install host certificates.
@@ -133,7 +133,7 @@ all allow gsi g=/glow h=*.cs.wisc.edu
 This gives access to the config file, log files, core files, and process information
 to anyone from `*.cs.wisc.edu` in the `/glow` VOMS group.
 
-See [the XRootD manual](http://xrootd.org/doc/dev48/xrd_config.htm#_Toc496911334) for the full syntax.
+See the latest Xrd/XRootD Configuration Reference at the [XRootD documentation page](https://xrootd.org/docs) for the full syntax.
 
 Remote debugging should only be enabled for as long as you need assistance.
 As soon as your issue has been resolved, revert any changes you have made to `/etc/xrootd/digauth.cfg`.
@@ -191,9 +191,9 @@ Managing CMS XCache and associated services
 -------------------------------------------
 
 These services must be managed by `systemctl` and may start additional services as dependencies.
-As a reminder, here are common service commands (all run as `root`) for EL7:
+As a reminder, here are common service commands (all run as `root`) for EL8+:
 
-| To...                                   | On EL7, run the command...         |
+| To...                                   | On EL8+, run the command...         |
 | :-------------------------------------- | :--------------------------------- |
 | Start a service                         | `systemctl start <SERVICE-NAME>`   |
 | Stop a service                          | `systemctl stop <SERVICE-NAME>`    |
@@ -206,7 +206,7 @@ As a reminder, here are common service commands (all run as `root`) for EL7:
 |--------------|------------------|-----------|
 | XRootD | `xrootd@cms-xcache.service` | The XRootD daemon, which performs the data transfers |
 | XRootD (Optional)| `cmsd@cms-xcache.service` | The cmsd daemon that interact with the different xrootd servers |
-| Fetch CRL | EL8: `fetch-crl.timer` <br> EL7: `fetch-crl-boot` and `fetch-crl-cron` | Required to authenticate monitoring services.  See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info |
+| Fetch CRL | `fetch-crl.timer` | Required to authenticate monitoring services.  See [CA documentation](../../common/ca.md#managing-fetch-crl-services) for more info |
 |  |`xrootd-renew-proxy.service` | Renew a proxy for downloads to the cache |
 |  | `xrootd-renew-proxy.timer` | Trigger daily proxy renewal |
 

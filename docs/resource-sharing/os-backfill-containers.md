@@ -4,6 +4,9 @@ DateReviewed: 2021-12-17
 Open Science Pool Containers
 ============================
 
+!!! info "Schedule a consultation"
+    To ensure that we can meet your research computing goals needs, please contact us at <support@osg-htc.org> to schedule a consultation.
+
 In order to [share compute resources](overview.md) with the Open Science Pool (OSPool),
 sites can launch pilot jobs directly by starting an OSG-provided Docker container.
 The container includes a worker node environment and an embedded pilot;
@@ -24,6 +27,10 @@ Before Starting
 In order to configure the container, you will need:
 
 1. A system that can run containers, such as Docker or Kubernetes
+1. Appropriate user permissions configured on the system.
+   1. Launching a container manually via docker requires membership in the [`docker` group](https://docs.docker.com/engine/install/linux-postinstall/).
+   1. Installing the container via RPM and launching it via systemd both require `root` privileges.
+   1. A scratch directory on the system must be writable by uid 1000.
 1. A [registered administrative contact](../common/contact-registration.md)
 1. A [registered resource](../common/registration.md) in OSG Topology;
    resource registration allows OSG to do proper usage accounting and maintain contacts in case of security incidents
@@ -31,6 +38,76 @@ In order to configure the container, you will need:
 1. An authentication token from the OSG: once contact and resource registration are complete, you can retrieve a token
    through the [OSPool Token Registry](https://os-registry.opensciencegrid.org/)
 1. An [HTTP caching proxy](../data/run-frontier-squid-container.md) at or near your site.
+
+
+Running the Container via RPM
+---------------------------------
+
+On EL hosts, the pilot container can also be managed via a systemctl service provided by the `ospool-ep` rpm. To install this RPM:
+
+1. [Enable OSG yum repos](../common/yum.md).
+
+1. Install the service:
+
+        :::console
+        root@host # yum install ospool-ep
+
+1. [Obtain an OSPool Access Token](https://os-registry.opensciencegrid.org/) for the pilot.
+   
+1. Copy the OSPool Access Token obtained in the previous step to `/etc/osg/ospool-ep.tkn`.
+
+    !!! note "Token file ownership"
+        The EP is run under uid 1000.
+        Ensure this user has read access to the token file.
+
+            :::console
+            root@host # chown 1000:1000 /etc/osg/ospool-ep.tkn
+
+1. Configure the container service by editing `/etc/osg/ospool-ep.cfg`:
+
+    - Set `GLIDEIN_Site` to your OSG Topology Site identifier.
+    - Set `GLIDEIN_ResourceName` to your OSG Topology Resource Name identifier.
+    - **If** you have dedicated scratch disk space for OSPool payload jobs (which is recommended),
+      then set `WORKER_TEMP_DIR` to the scratch directory; e.g.:
+
+            WORKER_TEMP_DIR=/scratch
+    
+      Ensure that the directory is writable by uid 1000.
+
+    !!! note "Scratch space ownership"
+        The EP is run under uid 1000.
+        Ensure this user has read, write, and execute access to the scratch space.
+
+1.  _Optional:_ Configure CVMFS via `/etc/osg/ospool-ep.cfg`:
+
+    - If [CVMFS is installed](https://osg-htc.org/docs/worker-node/install-cvmfs/) on the host system,
+      set `BIND_MOUNT_CVMFS=true`
+    - Otherwise, set `CVMFSEXEC_REPOS`, `CVMFS_HTTP_PROXY`, and `CVMFS_QUOTA_LIMIT` in accordance with the
+      [Configure cvmfsexec](#cvmfsexec) documentation.
+
+1. Configure additional variables in `/etc/osg/ospool-ep.cfg`:
+
+    - If your site has a [Squid HTTP Caching Proxy](https://osg-htc.org/docs/data/run-frontier-squid-container/) configured,
+      set `OSG_SQUID_LOCATION` to that proxy's HTTP address.
+
+    - If providing NVIDIA GPU resources, set `PROVIDE_NVIDIA_GPU=true`
+      - This automatically sets variables in accordance with section [Providing GPU Resources](#providing-gpu-resources).
+
+    !!! note "GPU Configuration Minimum Version"
+        The first version of the ospool-ep RPM to provide support for GPU configuration is
+        24-2. Ensure your installation of the ospool-ep package is up to date using 
+        `yum update ospool-ep`.
+
+1. Start the OSPool EP container service:
+
+        :::console
+        root@host # systemctl start ospool-ep
+
+1. _Optional:_ monitor the systemctl service logs to see if the container starts successfully:
+
+        :::console
+        root@host # journalctl -f -u ospool-ep
+
 
 Running the Container with Docker
 ---------------------------------
@@ -49,10 +126,7 @@ In order to successfully start payload jobs:
 1. Set `GLIDEIN_Site` and `GLIDEIN_ResourceName` to match the resource group name and resource name that you registered
    in Topology, respectively.
 1. Set the `OSG_SQUID_LOCATION` environment variable to the HTTP address of your preferred Squid instance.
-1. _If providing NVIDIA GPU resources:_ Bind-mount `/etc/OpenCL/vendors`, read-only.
-   If you are using Docker to launch the container, this is done with the command line flags
-   `-v /etc/OpenCL/vendors:/etc/OpenCL/vendors:ro`.
-1. _Strongly_recommended:_ Enable [CVMFS](#recommended-cvmfs) via one of the mechanisms described below.
+1. _If providing NVIDIA GPU resources:_ See section [Providing GPU Resources](#providing-gpu-resources)
 1. _Strongly recommended:_ If you want job I/O to be done in a separate directory outside of the container,
    volume mount the desired directory on the host to `/pilot` inside the container.
 
@@ -69,12 +143,17 @@ In order to successfully start payload jobs:
 
 1. _Optional:_ [limit OSG pilot container resource usage](#limiting-resource-usage)
 
+1. _Optional:_ Enable [CVMFS](#cvmfs) via one of the mechanisms described below.
+
 Here is an example invocation using `docker run` by hand:
 
 ```
 docker run -it --rm --user osg  \
        --pull=always            \
-       --privileged             \
+       --security-opt seccomp=unconfined        \
+       --security-opt systempaths=unconfined    \
+       --security-opt no-new-privileges         \
+       --device /dev/fuse                       \
        -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
        -v /worker-temp-dir:/pilot               \
        -e GLIDEIN_Site="..."                    \
@@ -84,62 +163,22 @@ docker run -it --rm --user osg  \
        -e CVMFSEXEC_REPOS="                     \
             oasis.opensciencegrid.org           \
             singularity.opensciencegrid.org"    \
-       opensciencegrid/osgvo-docker-pilot:23-release
+       hub.opensciencegrid.org/osg-htc/ospool-ep:24-release
 ```
 
 Replace `/path/to/token` with the location you saved the token obtained from the OSPool Token Registry.
-Privileged mode (`--privileged`) requested in the above `docker run` allows the container
+The `--security-opt` options and device mount requested in the above `docker run` allow the container
 to mount [CVMFS using cvmfsexec](#cvmfsexec) and invoke `singularity` for user jobs.
 Singularity (now known as Apptainer) allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).
-
-Running the Container via RPM
----------------------------------
-
-On EL hosts, the pilot container can also be managed via a systemctl service provided by the `ospool-ep` rpm. To install this RPM:
-
-1. [Enable OSG yum repos](../common/yum.md).
-
-1. Install the service:
-
-        :::console
-        root@host # yum install ospool-ep
-
-1. Copy your OSPool Access Token to `/etc/osg/ospool-ep.tkn`.
-
-    !!! note "Token file ownership"
-        The EP is run under uid 1000.
-        Ensure this user has read access to the token file.
-
-            :::console
-            root@host # chown 1000:1000 /etc/osg/ospool-ep.tkn
-
-1. Configure the container service by editing `/etc/osg/ospool-ep.cfg`:
-
-    - Set `GLIDEIN_Site` to your OSG Topology Site identifier.
-    - Set `GLIDEIN_ResourceName` to your OSG Topology Resource Name identifier.
-    - **If** you have dedicated scratch disk space for OSPool payload jobs (which is recommended),
-      then set `WORKER_TEMP_DIR` to the scratch directory; e.g.:
-
-            WORKER_TEMP_DIR=/scratch
-
-1. Start the OSPool EP container service:
-
-        :::console
-        root@host # systemctl start ospool-ep
-
-1. (Optional) monitor the systemctl service logs to see if the container starts successfully:
-
-        :::console
-        root@host # journalctl -f -u ospool-ep
 
 
 Optional Configuration
 ----------------------
 
-### (Recommended) CVMFS
+### CVMFS
 
-[CernVM-FS](https://cernvm.cern.ch/fs/) (CVMFS) is a read-only remote filesystem that many OSG jobs depend on for software and data.
-Supporting CVMFS inside your container will greatly increase the types of OSG jobs you can run.
+[CernVM-FS](https://cernvm.cern.ch/fs/) (CVMFS) is a read-only remote filesystem that some OSG jobs depend on for software and data.
+Supporting CVMFS inside your container will increase the types of OSG jobs you can run.
 
 There are two methods for making CVMFS available in your container: [enabling cvmfsexec](#cvmfsexec),
 or [bind mounting CVMFS from the host](#bind-mount).
@@ -150,22 +189,23 @@ but the container will need fewer privileges.
 #### cvmfsexec
 
 !!! info "cvmfsexec System Requirements"
-    -   On EL7, you must have kernel version >= 3.10.0-1127 (run `uname -vr` to check), and user namespaces enabled.
-        See step 1 in the
-        [Apptainer Install document](https://osg-htc.org/docs/worker-node/install-apptainer/#enabling-unprivileged-apptainer)
-        for details.
 
     -   On EL8, you must have kernel version >= 4.18 (run `uname -vr` to check).
+
+    -   On EL9, all kernel versions >= 5.0 should be supported.
 
     See the [cvmfsexec README](https://github.com/cvmfs/cvmfsexec#readme) details.
 
 [cvmfsexec](https://github.com/CVMFS/cvmfsexec#readme) is a tool that can be used to mount CVMFS inside the container
 without requiring CVMFS on the host.
-To enable cvmfsexec, specify a space-separated list of repos in the `CVMFSEXEC_REPOS` environment variable.
-At a minimum, we recommend enabling the following repos:
+To enable cvmfsexec, specify a comma-separated list of repos in the `CVMFSEXEC_REPOS` environment variable.
+Adding the following line to `/etc/osg/ospool-ep.cfg` will enable the repos we recommend:
+```
+CVMFSEXEC_REPOS=oasis.opensciencegrid.org,singularity.opensciencegrid.org
+```
 
--   `oasis.opensciencegrid.org`
--   `singularity.opensciencegrid.org`
+!!! warning "Systemd environment files"
+    Systemd environment files do not honor shell syntax, i.e. variables are passed in directly as written
 
 Additionally, you may set the following environment variables to further control the behavior of cvmfsexec:
 
@@ -185,12 +225,10 @@ Similarly, logs may be stored outside of the container by volume mounting a dire
 
 As an alternative to using cvmfsexec, you may [install CVMFS](../worker-node/install-cvmfs.md) on the host,
 and volume mount it into the container.
-Containers with bind mounted CVMFS can be run without `--privileged` but still require the following capabilities:
-`DAC_OVERRIDE`, `DAC_READ_SEARCH`, `SETGID`, `SETUID`, `SYS_ADMIN`, `SYS_CHROOT`, and `SYS_PTRACE`.
 
 Once you have CVMFS installed and mounted on your host, add `-v /cvmfs:/cvmfs:shared` to your `docker run` invocation.
 This is the [example at the top of the page](#running-the-container-with-docker),
-modified to volume mount CVMFS instead of using cvmfsexec, and using reduced privileges:
+modified to volume mount CVMFS instead of using cvmfsexec:
 
 ```hl_lines="6"
 docker run -it --rm --user osg      \
@@ -205,11 +243,46 @@ docker run -it --rm --user osg      \
         -e GLIDEIN_ResourceName="..."   \
         -e GLIDEIN_Start_Extra="True"   \
         -e OSG_SQUID_LOCATION="..."     \
-        opensciencegrid/osgvo-docker-pilot:23-release
+        hub.opensciencegrid.org/osg-htc/ospool-ep:24-release
 ```
 
 Fill in the values for `/path/to/token`, `/worker-temp-dir`, `GLIDEIN_Site`, `GLIDEIN_ResourceName`, and `OSG_SQUID_LOCATION` [as above](#running-the-container-with-docker).
 
+
+### Providing GPU Resources
+
+By default, the container will not detect NVIDIA GPU resources available on its host. To configure
+the container for access to its host’s GPU resources, set the following:
+
+1. Replace the default `24-release` docker image tag with the [CUDA-enabled](https://developer.nvidia.com/cuda-toolkit)
+   `24-cuda-11_8_0-release` tag
+
+1. Bind-mount `/etc/OpenCL/vendors`, read-only. If you are using Docker to launch the container, 
+   this is done with the command line flags `-v /etc/OpenCL/vendors:/etc/OpenCL/vendors:ro`.
+
+1. The NVIDIA runtime is known to conflict with Singularity [PID Namespaces](https://man7.org/linux/man-pages/man7/pid_namespaces.7.html)
+   Disable PID namespaces by adding the flag `-e SINGULARITY_DISABLE_PID_NAMESPACES=True`
+
+This is the [example at the top of the page](#running-the-container-with-docker), modified
+to provide NVIDIA GPU resources:
+
+```hl_lines="6 11 12"
+docker run -it --rm --user osg  \
+       --pull=always            \
+       --security-opt seccomp=unconfined        \
+       --security-opt systempaths=unconfined    \
+       --security-opt no-new-privileges         \
+       --device /dev/fuse                       \
+       -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
+       -v /worker-temp-dir:/pilot               \
+       -v /etc/OpenCL/vendors:/etc/OpenCL/vendors:ro \
+       -e GLIDEIN_Site="..."                    \
+       -e GLIDEIN_ResourceName="..."            \
+       -e GLIDEIN_Start_Extra="True"            \
+       -e OSG_SQUID_LOCATION="..."              \
+       -e SINGULARITY_DISABLE_PID_NAMESPACES=True   \
+       hub.opensciencegrid.org/osg-htc/ospool-ep:24-cuda_11_8_0-release
+```
 
 ### Limiting resource usage
 

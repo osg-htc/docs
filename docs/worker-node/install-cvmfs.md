@@ -2,9 +2,6 @@ title: Installing and Maintaining the CernVM File System Client
 
 # Installing and Maintaining the CernVM File System Client
 
-!!!bug "EL7 version compatibility"
-    There is an incompatibility with EL7 < 7.5 due to an old version of the `selinux-policy` package
-
 
 The CernVM File System ([CVMFS](http://cernvm.cern.ch/portal/filesystem)) is an HTTP-based file distribution service
 used to provide data and software for jobs.
@@ -231,7 +228,6 @@ If you cannot resolve the problem, there are several ways to receive help:
 
 ## References
 
--  <http://cernvm.cern.ch/portal/filesystem/techinformation>
 -  <https://cvmfs.readthedocs.io/en/latest/>
 
 ### Users and Groups

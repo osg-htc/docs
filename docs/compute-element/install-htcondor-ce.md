@@ -23,7 +23,7 @@ Before Starting
 ---------------
 
 Before starting the installation process, consider the following points, consulting the upstream references as needed
-([HTCondor-CE 23](https://htcondor.com/htcondor-ce/v23/reference/)):
+([HTCondor-CE 24](https://htcondor.com/htcondor-ce/v24/reference/)):
 
 -   **User IDs:** If they do not exist already, the installation will create the Linux users `condor` (UID 4716) and
     `gratia`
@@ -43,7 +43,7 @@ Before starting the installation process, consider the following points, consult
 -   **Access point/login node:** HTCondor-CE should be installed on a host that already has the ability to submit jobs
     into your local cluster
 -   **File Systems**: Non-HTCondor batch systems require a
-    [shared file system](https://htcondor.com/htcondor-ce/v23/configuration/local-batch-system/#sharing-the-spool-directory)
+    [shared file system](https://htcondor.com/htcondor-ce/v24/configuration/local-batch-system/#sharing-the-spool-directory)
     between the HTCondor-CE host and the batch system worker nodes.
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
@@ -113,7 +113,7 @@ For more advanced configuration, see the section on [optional configurations](#o
 ### Configuring the local batch system ###
 
 To configure HTCondor-CE to integrate with your local batch system,
-please refer to the [upstream documentation](https://htcondor.com/htcondor-ce/v23/configuration/local-batch-system/).
+please refer to the [upstream documentation](https://htcondor.com/htcondor-ce/v24/configuration/local-batch-system/).
 
 ### Configuring authentication ###
 
@@ -137,7 +137,7 @@ To accept RARs from a particular collaboration:
         SCITOKENS /^https\:\/\/scitokens\.org\/osg\-connect,/ osgpilot
 
 For more details of the mapfile format, consult the "SciTokens" section of the
-[upstream documentation](https://htcondor.com/htcondor-ce/v23/configuration/authentication/#scitokens).
+[upstream documentation](https://htcondor.com/htcondor-ce/v24/configuration/authentication/#scitokens).
 
 #### Bannning a collaboration
 
@@ -188,8 +188,8 @@ In addition to the configurations above, you may need to further configure how p
 before they are submitted to your local batch system or otherwise change the behavior of your CE.
 For detailed instructions, please refer to the upstream documentation:
 
--   [Configuring the Job Router](https://htcondor.com/htcondor-ce/v23/configuration/job-router-overview/)
--   [Optional configuration](https://htcondor.com/htcondor-ce/v23/configuration/optional-configuration/)
+-   [Configuring the Job Router](https://htcondor.com/htcondor-ce/v24/configuration/job-router-overview/)
+-   [Optional configuration](https://htcondor.com/htcondor-ce/v24/configuration/optional-configuration/)
 
 #### Accounting with multiple CEs or local user jobs
 
@@ -208,16 +208,16 @@ Starting and Validating HTCondor-CE
 -----------------------------------
 
 For information on how to start and validate the core HTCondor-CE services, please refer to the
-[upstream documentation](https://htcondor.com/htcondor-ce/v23/operation/)
+[upstream documentation](https://htcondor.com/htcondor-ce/v24/operation/)
 
 Troubleshooting HTCondor-CE
 ---------------------------
 
 For information on how to troubleshoot your HTCondor-CE, please refer to the upstream documentation:
 
--   [Common issues](https://htcondor.com/htcondor-ce/v23/troubleshooting/common-issues/)
--   [Debugging tools](https://htcondor.com/htcondor-ce/v23/troubleshooting/debugging-tools/)
--   [Helpful logs](https://htcondor.com/htcondor-ce/v23/troubleshooting/logs/)
+-   [Common issues](https://htcondor.com/htcondor-ce/v24/troubleshooting/common-issues/)
+-   [Debugging tools](https://htcondor.com/htcondor-ce/v24/troubleshooting/debugging-tools/)
+-   [Helpful logs](https://htcondor.com/htcondor-ce/v24/troubleshooting/logs/)
 
 Registering the CE
 ------------------

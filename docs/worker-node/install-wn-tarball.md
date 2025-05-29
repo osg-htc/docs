@@ -25,18 +25,17 @@ Before starting, ensure the host has [a supported operating system](../release/s
 Download the WN Client
 ----------------------
 
-Please pick the `osg-wn-client` tarball that is appropriate for your distribution and architecture. You will find them in <https://repo.opensciencegrid.org/tarball-install/> .
+Please pick the `osg-wn-client` tarball that is appropriate for your distribution and architecture. You will find them in <https://repo.osg-htc.org/tarball-install/> .
+
+For OSG 24:
+
+-   [Binaries for RHEL8-compatible](https://repo.osg-htc.org/tarball-install/24-main/osg-wn-client-latest.el8.x86_64.tar.gz)
+-   [Binaries for RHEL9-compatible](https://repo.osg-htc.org/tarball-install/24-main/osg-wn-client-latest.el9.x86_64.tar.gz)
 
 For OSG 23:
 
--   [Binaries for RHEL8-compatible](https://repo.opensciencegrid.org/tarball-install/23-main/osg-wn-client-latest.el8.x86_64.tar.gz)
--   [Binaries for RHEL9-compatible](https://repo.opensciencegrid.org/tarball-install/23-main/osg-wn-client-latest.el9.x86_64.tar.gz)
-
-For OSG 3.6:
-
--   [Binaries for RHEL7-compatible](https://repo.opensciencegrid.org/tarball-install/3.6/osg-wn-client-latest.el7.x86_64.tar.gz)
--   [Binaries for RHEL8-compatible](https://repo.opensciencegrid.org/tarball-install/3.6/osg-wn-client-latest.el8.x86_64.tar.gz)
--   [Binaries for RHEL9-compatible](https://repo.opensciencegrid.org/tarball-install/3.6/osg-wn-client-latest.el9.x86_64.tar.gz)
+-   [Binaries for RHEL8-compatible](https://repo.osg-htc.org/tarball-install/23-main/osg-wn-client-latest.el8.x86_64.tar.gz)
+-   [Binaries for RHEL9-compatible](https://repo.osg-htc.org/tarball-install/23-main/osg-wn-client-latest.el9.x86_64.tar.gz)
 
 Install the WN Client
 ---------------------
@@ -60,7 +59,7 @@ Example EL9 installation (in `/home/user/test-install`, the **`<PATH_TO_CLIENT>/
 ```console
 user@host $ mkdir /home/user/test-install
 user@host $ cd /home/user/test-install
-user@host $ wget https://repo.opensciencegrid.org/tarball-install/23-main/osg-wn-client-latest.el9.x86_64.tar.gz
+user@host $ wget https://repo.osg-htc.org/tarball-install/24-main/osg-wn-client-latest.el9.x86_64.tar.gz
 user@host $ tar xzf osg-wn-client-latest.el9.x86_64.tar.gz
 user@host $ cd osg-wn-client
 user@host $ ./osg/osg-post-install
@@ -113,7 +112,7 @@ Validating the Worker Node Client
 
 To verify functionality of the worker node client, you will need to submit a test job against your CE and verify the job's output.
 
-1.  Submit a job that executes the `env` command (e.g. Run [`condor_ce_trace`](https://htcondor.github.io/htcondor-ce/v23/troubleshooting/debugging-tools/#condor_ce_trace) with the `-d` flag from your HTCondor CE)
+1.  Submit a job that executes the `env` command (e.g. Run [`condor_ce_trace`](https://htcondor.github.io/htcondor-ce/v24/troubleshooting/debugging-tools/#condor_ce_trace) with the `-d` flag from your HTCondor CE)
 2.  Verify that the value of `$OSG_GRID` is set to the directory of your worker node client installation
 
 How to get Help?

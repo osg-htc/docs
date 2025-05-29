@@ -63,8 +63,8 @@ To create a new client account named `<ACCOUNT_SHORTNAME>`:
         :::console
         root@server # osg-token-renewer-setup myaccount123
 
-   That will use dynamic client registration.  If you instead have a
-   predefined client id and secret, add a `--manual` option, for example,
+    That will use dynamic client registration.  If you instead have a
+    predefined client id and secret, add a `--manual` option, for example,
 
         :::console
         root@server # osg-token-renewer-setup --manual myaccount123
@@ -159,9 +159,9 @@ Managing the OSG Token Renewal Service
 
 These services are managed by `systemctl` and may start additional services as
 dependencies.
-As a reminder, here are common service commands (all run as `root`) for EL7:
+As a reminder, here are common service commands (all run as `root`):
 
-| To...                                   | On EL7, run the command...         |
+| To...                                   | Run the command...                 |
 | :-------------------------------------- | :--------------------------------- |
 | Start a service                         | `systemctl start <SERVICE-NAME>`   |
 | Stop a service                          | `systemctl stop <SERVICE-NAME>`    |

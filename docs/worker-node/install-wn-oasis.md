@@ -36,8 +36,8 @@ Determine the OASIS path to the Worker Node Client software for your worker node
 
 | Worker Node OS | Use…                                                                                 |
 |:---------------|:-------------------------------------------------------------------------------------|
-| EL 7 (64-bit)  | `/cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.6/current/el7-x86_64` |
-| EL 8 (64-bit)  | `/cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.6/current/el8-x86_64` |
+| EL 8 (64-bit)  |  `/cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/24/current/el8-x86_64` |
+| EL 9 (64-bit)  |  `/cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/24/current/el9-x86_64` |
 
 On the CE, in the `/etc/osg/config.d/10-storage.ini` file, set the `grid_dir` configuration setting to the path from the previous step.
 
@@ -56,7 +56,7 @@ Validating the Worker Node Client
 
 To verify functionality of the worker node client, you will need to submit a test job against your CE and verify the job's output.
 
-1.  Submit a job that executes the `env` command (e.g. Run [condor\_ce\_trace](https://htcondor.github.io/htcondor-ce/v6/troubleshooting/debugging-tools/#condor_ce_trace) with the `-d` flag from your HTCondor CE)
+1.  Submit a job that executes the `env` command (e.g. Run [condor\_ce\_trace](https://htcondor.github.io/htcondor-ce/v24/troubleshooting/debugging-tools/#condor_ce_trace) with the `-d` flag from your HTCondor CE)
 2.  Verify that the value of `OSG_GRID` is set to the directory of your WN Client installation
 
 ### Manually Using the Worker Node Client From OASIS
@@ -65,8 +65,8 @@ If you must log onto a worker node and use the Worker Node Client software direc
 
 | Worker Node OS | Run the following command…                                                                           |
 |:---------------|:-----------------------------------------------------------------------------------------------------|
-| EL 7 (64-bit)  | `source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.6/current/el7-x86_64/setup.sh` |
-| EL 8 (64-bit)  | `source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.6/current/el8-x86_64/setup.sh` |
+| EL 8 (64-bit)  |  `source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/24/current/el8-x86_64/setup.sh` |
+| EL 9 (64-bit)  |  `source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/24/current/el9-x86_64/setup.sh` |
 
 Getting Help
 ------------

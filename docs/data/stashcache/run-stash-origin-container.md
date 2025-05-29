@@ -5,7 +5,7 @@ Running OSDF Origin in a Container
 ========================================
 
 !!! warning "Deprecation warning"
-    This document is outdated and describes an XCache-based OSDF Origin install, which deprecated.
+    This document is outdated and describes an XCache-based OSDF Origin install, which is deprecated.
     Future OSDF Origins should be based on Pelican; documentation for a Pelican-based OSDF Origin install is forthcoming.
 
 The OSG operates the [Open Science Data Federation](overview.md) (OSDF), which
