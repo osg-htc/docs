@@ -29,36 +29,22 @@ as follows:
 ### Install Prometheus and kube-state-metrics in your Kubernetes cluster
 
 Kuantifier relies on [Prometheus](prometheus) with [kube-state-metrics](kube-state-metrics) to account for pod resource usage. 
-There are a number of ways to install both, such as via the [prometheus community helm charts](prometheus-community):
+There are a number of ways to install both, such as via the [prometheus community helm charts](prometheus-community) or
+[OpenShift user-defined project monitoring](openshift-monitoring).
 
-1. Add the prometheus community helm repository to your local helm 
 
-       :::console
-       helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-       helm repo update
+### Ensure that the namespace where your workload pods run is properly configured.
 
-1. Install the kube-state-metrics and prometheus helm charts into your kubernetes cluster.
+1. Kuantifier relies on the `spec.containers[].resources.requests.cpu` field in workload pods
+   to determine processor count for GRACC reporting. Ensure a CPU request is set for pods in
+   your workspace.
+ 
+1. Kuantifier relies on the Prometheus pod completion time metric to calculate workload job run times.
+   This metric is sometimes missed for pods that are spontaneously deleted, such as those created by
+   Deployments. For best results, run workload pods via Kubernetes Jobs.
 
-       :::console
-       helm install kube-state-metrics prometheus-community/kube-state-metrics
-       helm install prometheus prometheus-community/prometheus
-
-       !!! note
-       These commands will install into the `default` namespace by default. To install into a 
-       non-default namespace such as `monitoring`, use the `-n monitoring` flag in helm install.
-
-1. Ensure that the namespace where your workload pods run is properly configured.
-
-    - Kuantifier relies on the `spec.containers[].resources.requests.cpu` field in workload pods
-      to determine processor count for GRACC reporting. Ensure a CPU request is set for pods in
-      your workspace.
-    
-    - Kuantifier relies on the Prometheus pod completion time metric to calculate workload job run times.
-      This metric is sometimes missed for pods that are spontaneously deleted, such as those created by
-      Deployments. For best results, run workload pods via Kubernetes Jobs.
-
-    - (Known issue) Kuantifier currently doesn't support calculating usage metrics for workload pods
-      running multiple containers. Ensure that workload pods in your namespace have only one container.
+1. (Known issue) Kuantifier currently doesn't support calculating usage metrics for workload pods
+   running multiple containers. Ensure that workload pods in your namespace have only one container.
 
 Installation
 ------------
@@ -105,6 +91,8 @@ must be made prior to installation. For full documentation of the values in the 
         - `PROMETHEUS_SERVER`: The DNS name of the Prometheus server installed in your Kubernetes cluster. 
             - If Prometheus was installed in your cluster via the prometheus-community Helm chart in the monitoring
               namespace, the DNS name will be `prometheus-server.monitoring.svc.cluster.local` 
+            - If Prometheus was installed via OpenShift, the DNS name for the cluster Prometheus instance can be discovered
+              [via the `oc` command line tool](openshift-prometheus-url).
             - Otherwise, [construct](https://kubernetes.io/docs/concepts/services-networking/service/#dns) the URL based on the standard Kubernetes service discovery mechanism (i.e. service name and namespace).
     
     - A fully configured `.processor.config` might look like:
@@ -119,13 +107,18 @@ must be made prior to installation. For full documentation of the values in the 
                PROMETHEUS_SERVER: prometheus-server.monitoring.svc.cluster.local
 
 1. (Optional) If Prometheus in your cluster is configured to require authentication, an
-   authentication header can be specified via a key within an already-existing [Secret](kubernetes-secret) in the namespace:
+   authentication header can be specified via a key within an already-existing [Service Account API Token](kubernetes-secret) in the namespace:
 
        :::yaml
        processor:
          prometheus_auth:
-           secret: <secret name>
-           key: <key in secret containing auth header>
+           secret: <service account secret name>
+           key: token
+
+
+       !!! note
+       API Token-based authentication is required by default in OpenShift. Prometheus instances installed via the
+       community helm charts are unauthenticated by default.
 
 1. (Optional) Update the frequency of the Kuantifier Reporting job. This may be useful for debugging.
 
@@ -177,7 +170,12 @@ If the Helm chart artifacts are present as expected, run a test instance of the 
        kubectl -n monitoring logs <test-job-pod-name> -c gratia-output
 
 If both the processor initContainer and `gratia-output` container run to completion without error, the next step
-is to confirm with a member of the OSG technology team that the results are visible in GRACC.
+is to confirm that contributions from your site appear on the [GRACC dashboard](gracc-dashboard).
+
+Getting Help
+------------
+
+If you need help with configuring monitoring for your Kubernetes site, follow the [contact instructions](common/help.md).
 
 
 [kuantifier-github]: <https://github.com/rptaylor/kapel/>
@@ -187,5 +185,8 @@ is to confirm with a member of the OSG technology team that the results are visi
 [prometheus-community]: <https://github.com/prometheus-community/helm-charts/tree/main>
 [kubectl]: <https://kubernetes.io/docs/reference/kubectl/>
 [prometheus]: <https://prometheus.io/>
+[gracc-dashboard]: <https://gracc.opensciencegrid.org/d/000000079/site-summary?orgId=1>
+[openshift-monitoring]: <https://docs.redhat.com/en/documentation/openshift_container_platform/4.12/html/monitoring/enabling-monitoring-for-user-defined-projects>
+[openshift-prometheus-url]: <https://docs.redhat.com/en/documentation/openshift_container_platform/4.16/html/monitoring/accessing-metrics#accessing-metrics-as-a-developer>
 [kube-state-metrics]: <https://github.com/kubernetes/kube-state-metrics>
-[kubernetes-secret]: <https://kubernetes.io/docs/concepts/configuration/secret/>
+[kubernetes-secret]: <https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#manually-create-a-long-lived-api-token-for-a-serviceaccount>
