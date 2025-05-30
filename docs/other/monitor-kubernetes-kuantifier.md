@@ -13,7 +13,7 @@ Before Starting
 
 ### Confirm access to a running Kubernetes cluster
 
-All subsequent instructions assume you have access to a running Kubernetes cluster, and can run [kubectl][kubectl]
+All subsequent instructions assume you have administrative access to a running Kubernetes cluster, and can run [kubectl][kubectl]
 against that cluster.
 
 ### Install the Helm command line tools 
@@ -60,17 +60,10 @@ Several instance-specific modifications to the default [Values File][values-file
 must be made prior to installation. For full documentation of the values in the values file, see the 
 [Helm chart README on Github][helm-values-readme].
 
-1. Fetch the default values.yaml for Kuantifier. This file can be obtained in several ways.
-    - Via the helm cli:
+1. Fetch the default values.yaml for Kuantifier via the helm cli:
 
-            :::console
-            helm show values oci://hub.opensciencegrid.org/iris-hep/kuantifier
-    
-    - Via the [kuantifier Github repository][values-yaml].
-
-        !!! note "Release Tag"
-            Ensure that the release tag for values.yaml in the git repo corresponds to the version of the chart you're installing.
-
+        :::console
+        helm show values oci://hub.opensciencegrid.org/iris-hep/kuantifier
 
 1. Update the top-level `.outputFormat` in values.yaml to output records to [GRACC](https://gracc.opensciencegrid.org/):
       
