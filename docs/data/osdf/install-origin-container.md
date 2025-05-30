@@ -220,15 +220,64 @@ user@host $ docker run --rm \
 Validating the Origin
 ---------------------
 
-Download a test file (POSIX) or object (S3) from your origin (replacing `ORIGIN_HOSTNAME` with the host name of your origin,
-and TEST_PATH with the OSDF path to the test file or object)
+For each namespace in your `Origin.Exports` list, validate their functionality by using the following sections based on
+whether or not they have `PublicReads` in their `Capabilities` list.
 
-```
-user@host$ pelican object get -c ORIGIN_HOSTNAME:8443 'osdf:///<TEST_PATH>' -o /tmp/testfile
-```
-(Note: this test will not work if DirectReads are not enabled.)
+### Public namespaces ###
 
-Verify the contents of `/tmp/testfile` match the test file or object your origin was serving.
+If the your namespace has the `PublicReads` capability, perform the following steps to validate its functionality.
+
+1.  If your origin isn't already configured with `DirectReads` in the `Capabilities` list, add it and restart the container
+
+2.  Download a test file (POSIX) or object (S3) from your origin (replacing `ORIGIN_HOSTNAME` with the host name of your
+    origin, and TEST_PATH with the OSDF path to the test file or object)
+
+        :::console
+        user@host$ pelican object get -c ORIGIN_HOSTNAME:8443 'osdf:///<TEST_PATH>' -o /tmp/testfile
+
+3.  Verify the contents of `/tmp/testfile` match the test file or object your origin was serving.
+
+4.  If you enabled `DirectReads` in step (1) above, remove it and restart the container.
+
+### Private namespaces ###
+
+Origins without `PublicReads` are slightly more involved to test since they require a JSON Web Token (JWT):
+
+1.  If your origin isn't already configured with `DirectReads` in the `Capabilities` list, add it and restart the container
+
+1.  Retrieve or generate a JWT, depending on the output of the following command:
+
+        :::console
+        user@host$ docker exec osdf-origin pelican --config /etc/pelican/osdf-origin.yaml config get issuerurl
+
+    -   If the above command outputs a non-empty value (e.g., `server.issuerurl: "https://...`), you must retrieve a
+        token from this issuer and save it to a file outside of the container.
+        The details for retrieving such a token are dependent on your issuer and are beyond the scope of this document.
+
+    -   If the above command returns an empty value (e.g., `server.issuerurl: ""`), generate a token by running the
+        following inside the container:
+
+            :::console
+            user@host$ docker run osdf-origin \
+                                  pelican origin token create \
+                                          --config /etc/pelican/osdf-origin.yaml \
+                                          --subject "test" \  # set this to your Unix username if you've set Origin.Multiuser: true
+                                          --audience "https://wlcg.cern.ch/jwt/v1/any" \
+                                          --scope "storage.read:/" 
+
+        This will output a JWT that you must save to a file outside of the container.
+
+2.  Download a test file (POSIX) or object (S3) from your origin (replacing `ORIGIN_HOSTNAME` with the host name of your
+    origin, and TEST_PATH with the OSDF path to the test file or object)
+
+        :::console
+        user@host$ pelican object get -t <PATH TO TOKEN FILE> -c ORIGIN_HOSTNAME:8443 'osdf:///<TEST_PATH>' -o /tmp/testfile
+
+3.  Verify the contents of `/tmp/testfile` match the test file or object your origin was serving.
+
+4.  If you enabled `DirectReads` in step (1) above, remove it and restart the container.
+
+### Troubleshooting validation ###
 
 If you get errors, add the `--debug` flag to the `pelican object get` invocation.
 
