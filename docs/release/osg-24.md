@@ -14,6 +14,37 @@ OSG 24 will be supported for [approximately two years total](release_series.md#s
 Latest News
 -----------
 
+### **June 12, 2025:** IGTF 1.136, CVMFS 2.13.0, GlideinWMS 3.10.13, HTCONDOR 24.0.8; Upcoming; HTCondor 24.8.1
+-   CA certificates based on [IGTF 1.136](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Added new CESNET CA Gen5 hierarchy and new off-line Root 2 (CZ)
+    -   Withdrawn retired CILogon CAs cilogon-basic and cilogon-silver (US)
+    -   A new version of the generation-4 package signing key
+-   [CVMFS 2.13.0](https://cvmfs.readthedocs.io/en/2.13/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-13-0)
+    -   Various fixes and improvements in both the client and server packages
+-   [GlideinWMS 3.10.13](https://glideinwms.fnal.gov/doc.v3_10_13/history.html)
+    -   Able to upload custom files to a HTCondor config.d directory in the Glidein
+    -   Publishes `GLIDEIN_Name` and `GLIDEIN_UUID` to the Glidein environment
+-   [HTCondor 24.0.8](https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-8)
+    -   Fix 24.0.7 bug where cgroup v1 out-of-memory was not properly handled
+    -   Add Python wheel for Python 3.13, drop Python wheel for Python 3.7
+    -   Fix bug where `DAGMAN_MAX_JOBS_IDLE` was being ignored
+    -   Fix problems where parallel universe jobs could crash the `condor_schedd`
+    -   Prevent `condor_starter` crash when evicting job during input file transfer
+    -   `condor_watch_q` now properly displays job id ranges by using numeric sort
+-   Upcoming
+    -   [HTCondor 24.8.1](https://htcondor.readthedocs.io/en/24.x/version-history/feature-versions-24-x.html#version-24-8-1)
+        -   All changes in 24.0.8
+        -   Fix claim re-use, which was broken in HTCondor version 24.5.1
+        -   Add support for hierarchic and delegatable v2 cgroups
+        -   Add the ability to put each HTCondor daemon in its own cgroup
+        -   Always sets the execute bit on the executable regardless of its origin
+        -   The EP sets the HOME environment variable to match the /etc/passwd entry
+        -   Add new 'halt' and 'resume' verbs to "htcondor dag"
+        -   Add htcondor2.DAGMan class to send commands to a running DAG
+        -   htcondor ap status now reports the AP's RecentDaemonCoreDutyCycle
+        -   Can configure `condor_adstash` to fetch a custom projection of attributes
+
+
 ### **May 29, 2025:** XRootD 5.8.2-1.5, xrdcl-pelican 1.2.3, frontier-squid 5.10-1.2, Pelican 7.16.5, htgettoken 2.2-2
 -   [XRootD 5.8.2-1.5](https://github.com/xrootd/xrootd/releases/tag/v5.8.2)
     -   Experimental fair-share for throttling plugin [PelicanPlatform #23](https://github.com/PelicanPlatform/xrootd/issues/23)

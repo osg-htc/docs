@@ -44,6 +44,17 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **June 12, 2025:** IGTF 1.136, CVMFS 2.13.0, GlideinWMS 3.10.13
+-   CA certificates based on [IGTF 1.136](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Added new CESNET CA Gen5 hierarchy and new off-line Root 2 (CZ)
+    -   Withdrawn retired CILogon CAs cilogon-basic and cilogon-silver (US)
+    -   A new version of the generation-4 package signing key
+-   [CVMFS 2.13.0](https://cvmfs.readthedocs.io/en/2.13/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-13-0)
+    -   Various fixes and improvements in both the client and server packages
+-   [GlideinWMS 3.10.13](https://glideinwms.fnal.gov/doc.v3_10_13/history.html)
+    -   Able to upload custom files to a HTCondor config.d directory in the Glidein
+    -   Publishes `GLIDEIN_Name` and `GLIDEIN_UUID` to the Glidein environment
+
 ### **May 29, 2025:** HTCondor 23.0.25, XRootD 5.8.2-1.5, xrdcl-pelican 1.2.3, frontier-squid 5.10-1.2, htgettoken 2.2-2; Upcoming: HTCondor 23.10.25, Pelican 7.16.5
 -   [HTCondor 23.0.25](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-25)
     -   Fix problems where parallel universe jobs could crash the `condor_schedd`
