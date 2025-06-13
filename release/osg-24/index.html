@@ -1411,6 +1411,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#june-12-2025-igtf-1136-cvmfs-2130-glideinwms-31013-htcondor-2408-upcoming-htcondor-2481" class="md-nav__link">
+    June 12, 2025: IGTF 1.136, CVMFS 2.13.0, GlideinWMS 3.10.13, HTCONDOR 24.0.8; Upcoming; HTCondor 24.8.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#may-29-2025-xrootd-582-15-xrdcl-pelican-123-frontier-squid-510-12-pelican-7165-htgettoken-22-2" class="md-nav__link">
     May 29, 2025: XRootD 5.8.2-1.5, xrdcl-pelican 1.2.3, frontier-squid 5.10-1.2, Pelican 7.16.5, htgettoken 2.2-2
   </a>
@@ -1959,6 +1966,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#june-12-2025-igtf-1136-cvmfs-2130-glideinwms-31013-htcondor-2408-upcoming-htcondor-2481" class="md-nav__link">
+    June 12, 2025: IGTF 1.136, CVMFS 2.13.0, GlideinWMS 3.10.13, HTCONDOR 24.0.8; Upcoming; HTCondor 24.8.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#may-29-2025-xrootd-582-15-xrdcl-pelican-123-frontier-squid-510-12-pelican-7165-htgettoken-22-2" class="md-nav__link">
     May 29, 2025: XRootD 5.8.2-1.5, xrdcl-pelican 1.2.3, frontier-squid 5.10-1.2, Pelican 7.16.5, htgettoken 2.2-2
   </a>
@@ -2141,6 +2155,49 @@ the ARM CPU architecture.
 The initial release includes GlideinWMS 3.10.7, HTCondor 24.0.1, HTCondor 24.1.1, HTCondor-CE 24.0, and XRootD 5.7.0.</p>
 <p>OSG 24 will be supported for <a href="../release_series/#series-life-cycle">approximately two years total</a>.</p>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="june-12-2025-igtf-1136-cvmfs-2130-glideinwms-31013-htcondor-2408-upcoming-htcondor-2481"><strong>June 12, 2025:</strong> IGTF 1.136, CVMFS 2.13.0, GlideinWMS 3.10.13, HTCONDOR 24.0.8; Upcoming; HTCondor 24.8.1<a class="headerlink" href="#june-12-2025-igtf-1136-cvmfs-2130-glideinwms-31013-htcondor-2408-upcoming-htcondor-2481" title="Permanent link">&para;</a></h3>
+<ul>
+<li>CA certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.136</a><ul>
+<li>Added new CESNET CA Gen5 hierarchy and new off-line Root 2 (CZ)</li>
+<li>Withdrawn retired CILogon CAs cilogon-basic and cilogon-silver (US)</li>
+<li>A new version of the generation-4 package signing key</li>
+</ul>
+</li>
+<li><a href="https://cvmfs.readthedocs.io/en/2.13/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-13-0">CVMFS 2.13.0</a><ul>
+<li>Various fixes and improvements in both the client and server packages</li>
+</ul>
+</li>
+<li><a href="https://glideinwms.fnal.gov/doc.v3_10_13/history.html">GlideinWMS 3.10.13</a><ul>
+<li>Able to upload custom files to a HTCondor config.d directory in the Glidein</li>
+<li>Publishes <code>GLIDEIN_Name</code> and <code>GLIDEIN_UUID</code> to the Glidein environment</li>
+</ul>
+</li>
+<li><a href="https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-8">HTCondor 24.0.8</a><ul>
+<li>Fix 24.0.7 bug where cgroup v1 out-of-memory was not properly handled</li>
+<li>Add Python wheel for Python 3.13, drop Python wheel for Python 3.7</li>
+<li>Fix bug where <code>DAGMAN_MAX_JOBS_IDLE</code> was being ignored</li>
+<li>Fix problems where parallel universe jobs could crash the <code>condor_schedd</code></li>
+<li>Prevent <code>condor_starter</code> crash when evicting job during input file transfer</li>
+<li><code>condor_watch_q</code> now properly displays job id ranges by using numeric sort</li>
+</ul>
+</li>
+<li>Upcoming<ul>
+<li><a href="https://htcondor.readthedocs.io/en/24.x/version-history/feature-versions-24-x.html#version-24-8-1">HTCondor 24.8.1</a><ul>
+<li>All changes in 24.0.8</li>
+<li>Fix claim re-use, which was broken in HTCondor version 24.5.1</li>
+<li>Add support for hierarchic and delegatable v2 cgroups</li>
+<li>Add the ability to put each HTCondor daemon in its own cgroup</li>
+<li>Always sets the execute bit on the executable regardless of its origin</li>
+<li>The EP sets the HOME environment variable to match the /etc/passwd entry</li>
+<li>Add new 'halt' and 'resume' verbs to "htcondor dag"</li>
+<li>Add htcondor2.DAGMan class to send commands to a running DAG</li>
+<li>htcondor ap status now reports the AP's RecentDaemonCoreDutyCycle</li>
+<li>Can configure <code>condor_adstash</code> to fetch a custom projection of attributes</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="may-29-2025-xrootd-582-15-xrdcl-pelican-123-frontier-squid-510-12-pelican-7165-htgettoken-22-2"><strong>May 29, 2025:</strong> XRootD 5.8.2-1.5, xrdcl-pelican 1.2.3, frontier-squid 5.10-1.2, Pelican 7.16.5, htgettoken 2.2-2<a class="headerlink" href="#may-29-2025-xrootd-582-15-xrdcl-pelican-123-frontier-squid-510-12-pelican-7165-htgettoken-22-2" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://github.com/xrootd/xrootd/releases/tag/v5.8.2">XRootD 5.8.2-1.5</a><ul>
