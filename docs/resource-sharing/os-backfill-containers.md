@@ -266,7 +266,7 @@ the container for access to its host’s GPU resources, set the following:
 This is the [example at the top of the page](#running-the-container-with-docker), modified
 to provide NVIDIA GPU resources:
 
-```hl_lines="6 11 12"
+```hl_lines="9 14 15"
 docker run -it --rm --user osg  \
        --pull=always            \
        --security-opt seccomp=unconfined        \
