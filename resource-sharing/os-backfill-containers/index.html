@@ -2304,17 +2304,17 @@ to provide NVIDIA GPU resources:</p>
        --security-opt seccomp=unconfined        \
        --security-opt systempaths=unconfined    \
        --security-opt no-new-privileges         \
-<span class="hll">       --device /dev/fuse                       \
-</span>       -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
+       --device /dev/fuse                       \
+       -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
        -v /worker-temp-dir:/pilot               \
-       -v /etc/OpenCL/vendors:/etc/OpenCL/vendors:ro \
-       -e GLIDEIN_Site=&quot;...&quot;                    \
-<span class="hll">       -e GLIDEIN_ResourceName=&quot;...&quot;            \
-</span><span class="hll">       -e GLIDEIN_Start_Extra=&quot;True&quot;            \
-</span>       -e OSG_SQUID_LOCATION=&quot;...&quot;              \
-       -e SINGULARITY_DISABLE_PID_NAMESPACES=True   \
-       hub.opensciencegrid.org/osg-htc/ospool-ep:24-cuda_11_8_0-release
-</code></pre></div>
+<span class="hll">       -v /etc/OpenCL/vendors:/etc/OpenCL/vendors:ro \
+</span>       -e GLIDEIN_Site=&quot;...&quot;                    \
+       -e GLIDEIN_ResourceName=&quot;...&quot;            \
+       -e GLIDEIN_Start_Extra=&quot;True&quot;            \
+       -e OSG_SQUID_LOCATION=&quot;...&quot;              \
+<span class="hll">       -e SINGULARITY_DISABLE_PID_NAMESPACES=True   \
+</span><span class="hll">       hub.opensciencegrid.org/osg-htc/ospool-ep:24-cuda_11_8_0-release
+</span></code></pre></div>
 <h3 id="limiting-resource-usage">Limiting resource usage<a class="headerlink" href="#limiting-resource-usage" title="Permanent link">&para;</a></h3>
 <p>By default, the container allows jobs to utilize the entire node's resources (CPUs, memory).
 To limit a container's resource consumptions, you may specify limits, which must be set in the following ways:</p>
