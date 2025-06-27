@@ -44,6 +44,32 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **June 26, 2025:** Pelican 7.17.0, XRootD 5.8.3-1.2, HTCondor 23.0.26; Upcoming: HTCondor 23.10.26
+-   [Pelican 7.17.0](https://pelicanplatform.org/releases)
+    -   Improved TOKEN handling in the client
+    -   Graceful shutdown for origins and caches
+    -   Improved end-to-end checksum validation functionality
+    -   DEPRECATION: the `IssuerKey` configuration has been deprecated in favor of `IssuerKeysDirectory`
+    -   Adding the ability to enable throttling connections via `Cache.Concurrency` and `Origin.Concurrency`
+    -   Extended login cookie for web UI to 16 hours
+-   [XRootD 5.8.3-1.2](https://github.com/xrootd/xrootd/releases/tag/v5.8.3)
+    -   Fixes for various crashes and other bugs
+-   [HTCondor 23.0.26](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-26)
+    -   Fix ingestion of ads into Elasticsearch under very rare circumstances
+    -   DAGMan better handles being unable to write to a full filesystem
+    -   `kill_sig` submit commands are now ignored on the Windows platform
+-   Upcoming
+    -   [HTCondor 23.10.26](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-10-26)
+        -   Fix memory leak in the `condor_schedd` when using late materialization
+        -   Fix `condor_master` start up when file descriptor ulimit was huge
+        -   Fix ingestion of ads into Elasticsearch under very rare circumstances
+        -   DAGMan better handles being unable to write to a full filesystem
+        -   `kill_sig` submit commands are now ignored on the Windows platform
+
+### **June 19, 2025:** Pelican 7.16.6
+-   [Pelican 7.16.6](https://pelicanplatform.org/releases)
+    -   Avoid HTTPS proxies when putting objects
+
 ### **June 12, 2025:** IGTF 1.136, CVMFS 2.13.0, GlideinWMS 3.10.13
 -   CA certificates based on [IGTF 1.136](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   Added new CESNET CA Gen5 hierarchy and new off-line Root 2 (CZ)
