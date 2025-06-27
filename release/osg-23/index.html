@@ -1492,6 +1492,20 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#june-26-2025-pelican-7170-xrootd-583-12-htcondor-23026-upcoming-htcondor-231026" class="md-nav__link">
+    June 26, 2025: Pelican 7.17.0, XRootD 5.8.3-1.2, HTCondor 23.0.26; Upcoming: HTCondor 23.10.26
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#june-19-2025-pelican-7166" class="md-nav__link">
+    June 19, 2025: Pelican 7.16.6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#june-12-2025-igtf-1136-cvmfs-2130-glideinwms-31013" class="md-nav__link">
     June 12, 2025: IGTF 1.136, CVMFS 2.13.0, GlideinWMS 3.10.13
   </a>
@@ -2244,6 +2258,20 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#june-26-2025-pelican-7170-xrootd-583-12-htcondor-23026-upcoming-htcondor-231026" class="md-nav__link">
+    June 26, 2025: Pelican 7.17.0, XRootD 5.8.3-1.2, HTCondor 23.0.26; Upcoming: HTCondor 23.10.26
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#june-19-2025-pelican-7166" class="md-nav__link">
+    June 19, 2025: Pelican 7.16.6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#june-12-2025-igtf-1136-cvmfs-2130-glideinwms-31013" class="md-nav__link">
     June 12, 2025: IGTF 1.136, CVMFS 2.13.0, GlideinWMS 3.10.13
   </a>
@@ -2695,6 +2723,46 @@ hosts to accept certificates issued by SHA-1 signed CAs:</p>
 and token issuers present modern CAs.</p>
 </div>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="june-26-2025-pelican-7170-xrootd-583-12-htcondor-23026-upcoming-htcondor-231026"><strong>June 26, 2025:</strong> Pelican 7.17.0, XRootD 5.8.3-1.2, HTCondor 23.0.26; Upcoming: HTCondor 23.10.26<a class="headerlink" href="#june-26-2025-pelican-7170-xrootd-583-12-htcondor-23026-upcoming-htcondor-231026" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://pelicanplatform.org/releases">Pelican 7.17.0</a><ul>
+<li>Improved TOKEN handling in the client</li>
+<li>Graceful shutdown for origins and caches</li>
+<li>Improved end-to-end checksum validation functionality</li>
+<li>DEPRECATION: the <code>IssuerKey</code> configuration has been deprecated in favor of <code>IssuerKeysDirectory</code></li>
+<li>Adding the ability to enable throttling connections via <code>Cache.Concurrency</code> and <code>Origin.Concurrency</code></li>
+<li>Extended login cookie for web UI to 16 hours</li>
+</ul>
+</li>
+<li><a href="https://github.com/xrootd/xrootd/releases/tag/v5.8.3">XRootD 5.8.3-1.2</a><ul>
+<li>Fixes for various crashes and other bugs</li>
+</ul>
+</li>
+<li><a href="https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-26">HTCondor 23.0.26</a><ul>
+<li>Fix ingestion of ads into Elasticsearch under very rare circumstances</li>
+<li>DAGMan better handles being unable to write to a full filesystem</li>
+<li><code>kill_sig</code> submit commands are now ignored on the Windows platform</li>
+</ul>
+</li>
+<li>Upcoming<ul>
+<li><a href="https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-10-26">HTCondor 23.10.26</a><ul>
+<li>Fix memory leak in the <code>condor_schedd</code> when using late materialization</li>
+<li>Fix <code>condor_master</code> start up when file descriptor ulimit was huge</li>
+<li>Fix ingestion of ads into Elasticsearch under very rare circumstances</li>
+<li>DAGMan better handles being unable to write to a full filesystem</li>
+<li><code>kill_sig</code> submit commands are now ignored on the Windows platform</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="june-19-2025-pelican-7166"><strong>June 19, 2025:</strong> Pelican 7.16.6<a class="headerlink" href="#june-19-2025-pelican-7166" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://pelicanplatform.org/releases">Pelican 7.16.6</a><ul>
+<li>Avoid HTTPS proxies when putting objects</li>
+</ul>
+</li>
+</ul>
 <h3 id="june-12-2025-igtf-1136-cvmfs-2130-glideinwms-31013"><strong>June 12, 2025:</strong> IGTF 1.136, CVMFS 2.13.0, GlideinWMS 3.10.13<a class="headerlink" href="#june-12-2025-igtf-1136-cvmfs-2130-glideinwms-31013" title="Permanent link">&para;</a></h3>
 <ul>
 <li>CA certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.136</a><ul>
