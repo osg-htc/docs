@@ -119,14 +119,24 @@ squid server):
 
 ``` console hl_lines="1"
 user@host $ export http_proxy=http://<MY.SQUID.HOST.EDU>:3128
-user@host $ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep X-Cache
+user@host $ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep Cache
+Cache-Status: MY.SQUID.HOST.EDU;fwd=miss;detail=mismatch
+user@host $ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep Cache
+Cache-Status: MY.SQUID.HOST.EDU;hit;detail=match
+```
+
+The above is how the responses look starting with frontier-squid-6.
+For older versions they look like this:
+
+``` console
+user@host $ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep Cache
 X-Cache: MISS from <MY.SQUID.HOST.EDU>
-user@host $ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep X-Cache
+user@host $ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep Cache
 X-Cache: HIT from <MY.SQUID.HOST.EDU>
 ```
 
 If the grep doesn't print anything, try removing it from the pipeline
-to see if errors are obvious. If the second try says MISS again,
+to see if errors are obvious. If the second try is a miss again,
 something is probably wrong with the squid cache writes. Look at the squid
 [access.log file](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Log_file_contents)
 to try to see what's wrong.
