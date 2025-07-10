@@ -14,6 +14,16 @@ OSG 24 will be supported for [approximately two years total](release_series.md#s
 Latest News
 -----------
 
+### **July 10, 2025:** CVMFS 2.13.1, htgettoken 2.4
+-   [CVMFS 2.13.1](https://cvmfs.readthedocs.io/en/2.13/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-13-1)
+    -   Fixes a bug that has been present since cvmfs-2.12.0 which prevents
+        periodic resets to the closest stratum 1, causing performance
+        degradation. All who have upgraded to version 2.12.0 or later are
+        encouraged to update as soon as possible.
+-   htgettoken 2.4
+    -   Update htdecodetoken to not run scitokens-verify by default when stdout
+        is not a TTY
+
 ### **June 26, 2025:** Pelican 7.17.0, XRootD 5.8.3-1.2, HTCondor 23.0.26; Upcoming: HTCondor 23.10.26
 -   [Pelican 7.17.0](https://pelicanplatform.org/releases)
     -   Improved TOKEN handling in the client
