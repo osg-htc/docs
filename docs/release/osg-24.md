@@ -24,7 +24,7 @@ Latest News
     -   Update htdecodetoken to not run scitokens-verify by default when stdout
         is not a TTY
 
-### **June 26, 2025:** Pelican 7.17.0, XRootD 5.8.3-1.2, HTCondor 23.0.26; Upcoming: HTCondor 23.10.26
+### **June 26, 2025:** Pelican 7.17.0, XRootD 5.8.3-1.2, HTCondor 24.0.9; Upcoming: HTCondor 24.9.2
 -   [Pelican 7.17.0](https://pelicanplatform.org/releases)
     -   Improved TOKEN handling in the client
     -   Graceful shutdown for origins and caches
@@ -61,7 +61,7 @@ Latest News
 -   [Pelican 7.16.6](https://pelicanplatform.org/releases)
     -   Avoid HTTPS proxies when putting objects
 
-### **June 12, 2025:** IGTF 1.136, CVMFS 2.13.0, GlideinWMS 3.10.13, HTCONDOR 24.0.8; Upcoming; HTCondor 24.8.1
+### **June 12, 2025:** IGTF 1.136, CVMFS 2.13.0, GlideinWMS 3.10.13, HTCondor 24.0.8; Upcoming; HTCondor 24.8.1
 -   CA certificates based on [IGTF 1.136](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   Added new CESNET CA Gen5 hierarchy and new off-line Root 2 (CZ)
     -   Withdrawn retired CILogon CAs cilogon-basic and cilogon-silver (US)
