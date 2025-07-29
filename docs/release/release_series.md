@@ -77,7 +77,7 @@ Support ends at the end of the month of the following dates unless otherwise spe
 | Release Series | Initial Release | End of Regular Support | End of Critical Bug/Security Support |
 |:--------------:|-----------------|------------------------|--------------------------------------|
 | 24             | October 2024    | Estimated October 2026 | Estimated October 2026               |
-| 23             | October 2023    | Estimated October 2025 | Estimated October 2025               |
+| 23             | October 2023    | Estimated September 2025 | Estimated September 2025           |
 | 3.6            | Februrary 2021  | 31 March 2024          | 30 June 2024                         |
 | 3.5            | August 2019     | 30 August 2021         | 1 May 2022                           |
 | 3.4            | June 2017       | 29 February 2020       | 30 November 2020                     |
