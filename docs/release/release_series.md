@@ -74,17 +74,17 @@ Series Life-cycle
 
 Support ends at the end of the month of the following dates unless otherwise specified:
 
-| Release Series | Initial Release | End of Regular Support | End of Critical Bug/Security Support |
-|:--------------:|-----------------|------------------------|--------------------------------------|
-| 25             | Estimated September 2025  | Estimated September 2027 | Estimated September 2027               |
-| 24             | October 2024    | Estimated September 2026 | Estimated September 2026               |
-| 23             | October 2023    | Estimated September 2025 | Estimated September 2025           |
-| 3.6            | Februrary 2021  | 31 March 2024          | 30 June 2024                         |
-| 3.5            | August 2019     | 30 August 2021         | 1 May 2022                           |
-| 3.4            | June 2017       | 29 February 2020       | 30 November 2020                     |
-| 3.3            | August 2015     | 31 December 2017       | 31 May 2018                          |
-| 3.2            | November 2013   | 29 February 2016       | 31 August 2016                       |
-| 3.1            | April 2012      | 31 October 2014        | 30 April 2015                        |
+| Release Series | Initial Release          | End of Regular Support   | End of Critical Bug/Security Support |
+|:--------------:|--------------------------|--------------------------|--------------------------------------|
+| 25             | Estimated September 2025 | Estimated September 2027 | Estimated September 2027             |
+| 24             | October 2024             | Estimated September 2026 | Estimated September 2026             |
+| 23             | October 2023             | Estimated September 2025 | Estimated September 2025             |
+| 3.6            | Februrary 2021           | 31 March 2024            | 30 June 2024                         |
+| 3.5            | August 2019              | 30 August 2021           | 1 May 2022                           |
+| 3.4            | June 2017                | 29 February 2020         | 30 November 2020                     |
+| 3.3            | August 2015              | 31 December 2017         | 31 May 2018                          |
+| 3.2            | November 2013            | 29 February 2016         | 31 August 2016                       |
+| 3.1            | April 2012               | 31 October 2014          | 30 April 2015                        |
 
 
 Installing an OSG Release Series
