@@ -57,7 +57,6 @@ nav:
       - 'Install CMS XCache': 'data/xrootd/install-cms-xcache.md'
       - 'Install XRootD Shoveler': 'data/xrootd/install-shoveler.md'
   - Other:
-    - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
     - 'Install GlideinWMS Frontend': 'other/install-gwms-frontend.md'
     - 'Install a CVMFS Stratum 1': 'other/install-cvmfs-stratum1.md'
     - 'Troubleshooting Gratia': 'other/troubleshooting-gratia.md'
@@ -117,4 +116,5 @@ plugins:
       redirect_maps:
         site-responsibilities.md: site-maintenance.md
         submit/osg-flock.md: submit/install-ospool-ap.md
+        other/configuration-with-osg-configure.md: 'https://github.com/opensciencegrid/osg-configure?tab=readme-ov-file#osg-configure'
 

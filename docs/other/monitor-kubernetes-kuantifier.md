@@ -4,7 +4,7 @@ DateReviewed: 2024-02-07
 Monitoring Kubernetes Workloads with Kuantifier
 ===============================================
 
-Workload jobs run via Kubernetes will not integrate with [Gratia accounting](./troubleshooting-gratia/) by default.
+Workload jobs run via Kubernetes will not integrate with [Gratia accounting](./troubleshooting-gratia.md) by default.
 To report contributions to OSG made via Kubernetes, install the [Kuantifier][kuantifier-github] helm chart
 on your cluster.
 
