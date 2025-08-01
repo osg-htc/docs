@@ -258,7 +258,7 @@ Verify that your Gratia configuration is correct in `/etc/gratia/condor-ap/Probe
 
 In normal cases, `osg-configure` manages the relevant ProbeConfig and it can be configured by modifying
 `/etc/osg/config.d/30-gratia.ini`.
-Consult the [osg-configuration documentation](/other/configuration-with-osg-configure#30-gratiaini--gratia-section) for details.
+Consult the [osg-configuration documentation](/other/configuration-with-osg-configure) for details.
 
 If there are problems or special configuration, you might need to edit the Gratia configuration files yourself by
 modifying `/etc/gratia/htcondor-ce/ProbeConfig`.

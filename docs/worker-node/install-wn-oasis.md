@@ -49,7 +49,7 @@ root@host # osg-configure -c
 ```
 
 For more information, see the [OSG worker node environment documentation](../worker-node/using-wn.md) and the
-[CE configuration instructions](/other/configuration-with-osg-configure#10-storageini--storage-section).
+[CE configuration instructions](/other/configuration-with-osg-configure).
 
 Validating the Worker Node Client
 ---------------------------------
