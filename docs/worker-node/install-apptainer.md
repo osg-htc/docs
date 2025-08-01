@@ -174,7 +174,7 @@ additional local "bind path" options to map extra local file paths into
 containers.  This can instead be accomplished by setting the
 `APPTAINER_BINDPATH` variable in the environment of jobs, for
 example through
-[configuration](../other/configuration-with-osg-configure.md#local-settings)
+[configuration](/other/configuration-with-osg-configure#40-localsettingsini--local-settings)
 on your compute entrypoint.
 This is a comma-separated list of paths to bind, following the syntax of the
 `apptainer exec --bind` option.

@@ -168,7 +168,7 @@ the different pieces of software required for an OSG HTCondor-CE:
         enabled = True
 
 1.  Read through the other `.ini` files in the `/etc/osg/config.d` directory and make any necessary changes.
-    See the [osg-configure documentation](../other/configuration-with-osg-configure.md) for details.
+    See the [osg-configure documentation](/other/configuration-with-osg-configure#osg-configure) for details.
 
 1.  Validate the configuration settings
 
