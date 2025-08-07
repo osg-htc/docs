@@ -14,6 +14,39 @@ OSG 24 will be supported for [approximately two years total](release_series.md#s
 Latest News
 -----------
 
+### **August 7, 2025:** osg-scitokens-mapfile 15-2, ospool-ep 24-5, GlideinWMS 3.10.15
+-   osg-scitokens-mapfile 15-2
+    -   Add new scitokens issuer at JLAB to GLUEX mapping
+-   ospool-ep 24-5
+    -   Run in unprivileged mode by default
+    -   Explicitly use the nvidia docker runtime when GPUs are requested
+-   [GlideinWMS 3.10.15](https://glideinwms.fnal.gov/doc.v3_10_15/history.html)
+    -   Able to run containers without Bash
+    -   Able to query all known schedds without listing them
+    -   Improved control of apptainer containers environment
+    -   Early availability of cvmfsexec
+    -   3.10.15 is a recommended upgrade from any 3.10.x
+
+### **July 28, 2025:** HTCondor 24.0.10, Pelican 7.17.0; Upcoming: HTCondor 24.10.2
+-   [HTCondor 24.0.10](https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-10)
+    -   Fix bug where the vacate reason was not propagated back to the user
+    -   Fix bug where `condor_ssh_to_job` failed when EP scratch path is too long
+    -   Fix incorrect time reported by `htcondor status` for long running jobs
+    -   Fix bug where `.job.ad`, `.machine.ad` files were missing when LVM is in use
+-   [Pelican 7.17.2](https://pelicanplatform.org/releases)
+-   Upcoming
+    -   [HTCondor 24.10.2](https://htcondor.readthedocs.io/en/24.x/version-history/feature-versions-24-x.html#version-24-10-2)
+        -   Remove support for old JobRouter syntax
+        -   New `condor_dag_checker` tool finds syntax and logic errors before run
+        -   New `condor_q -hold-codes` produces a summary of held jobs
+        -   `condor_status -lvm` reports current disk usage by slots on the EPs
+        -   Fix bug where `condor_q` would truncate job counts to six digits
+        -   Fix bug where suspended jobs did not change state to idle when vacated
+        -   Fix bug where the vacate reason was not propagated back to the user
+        -   Fix bug where `condor_ssh_to_job` failed when EP scratch path is too long
+        -   Fix incorrect time reported by `htcondor status` for long running jobs
+        -   Fix bug where `.job.ad`, `.machine.ad` files were missing when LVM is in use
+
 ### **July 10, 2025:** CVMFS 2.13.1, htgettoken 2.4
 -   [CVMFS 2.13.1](https://cvmfs.readthedocs.io/en/2.13/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-13-1)
     -   Fixes a bug that has been present since cvmfs-2.12.0 which prevents
@@ -151,7 +184,7 @@ Latest News
         -   HTCondor tarballs now contain Pelican 7.15.1 and Apptainer 1.4.0
         -   Fix inflated cgroups v2 memory usage reporting for Docker jobs
 
-### **April 10, 2025:** Pelican 7.15.0, vo-client 138-2, osg-ca-cert-updater 2.2, ospool-ep 23-7, frontier-squid 5.9-3.3
+### **April 10, 2025:** Pelican 7.15.0, vo-client 138-2, osg-ca-cert-updater 2.2, ospool-ep 24-3, frontier-squid 5.9-3.3
 -   [Pelican 7.15.0](https://pelicanplatform.org/releases)
     -   Pelican origins can now specify multiple issuers per namespace
     -   Added support for a Federation to have multiple Directors
@@ -164,7 +197,7 @@ Latest News
     -   Remove OpenShift Legacy IAM servers for ATLAS and CMS
 -   osg-ca-certs-updater 2.2
     -   Now started via systemd timer
--   ospool-ep 24-3 and 23-7
+-   ospool-ep 24-3
     -   Make ospool-ep service more resilient to Docker service restart
 -   frontier-squid 5.9-3.3
     -   Initial support for ARM (no shoal agent support)
