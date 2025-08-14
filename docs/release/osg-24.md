@@ -14,6 +14,24 @@ OSG 24 will be supported for [approximately two years total](release_series.md#s
 Latest News
 -----------
 
+### **August 14, 2025:** CVMFS 2.13.2, XRootD 5.8.4-1.2; Upcoming: frontier-squid 6.13-1.5, GlideinWMS 3.11.1
+-   [CVMFS 2.13.2](https://cvmfs.readthedocs.io/en/2.13/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-13-2)
+    -   Includes important bug fixes to prevent client hangs and crashes
+        and to avoid multiple concurrent server snapshots.  Everyone who
+        has installed cvmfs client 2.12 or greater is especially encouraged
+        to upgrade promptly.
+-   [XRootD 5.8.4-1.2](https://github.com/xrootd/xrootd/releases/tag/v5.8.4)
+    -   Fixes for some memory leaks
+    -   Fix for a crash while computing checksums
+-   Upcoming
+    -   [Frontier-squid 6.13-1.5](http://frontier.cern.ch/dist/frontier-squid-releasenotes.txt)
+        -   Major update with breaking changes for sites using multiple workers.
+            Manual intervention is required in this case.
+            Must use the [rock cache](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Rock_cache)
+            instead of the previously recommended multi-ufs cache.
+    -   [GlideinWMS 3.11.1](https://glideinwms.fnal.gov/doc.v3_11_1/history.html#development)
+        -   Improvements and fixes to the refactored credentials
+
 ### **August 7, 2025:** osg-scitokens-mapfile 15-2, ospool-ep 24-5, GlideinWMS 3.10.15
 -   osg-scitokens-mapfile 15-2
     -   Add new scitokens issuer at JLAB to GLUEX mapping
