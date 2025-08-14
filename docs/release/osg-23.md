@@ -57,7 +57,7 @@ Latest News
     -   [Frontier-squid 6.13-1.5](http://frontier.cern.ch/dist/frontier-squid-releasenotes.txt)
         -   Major update with breaking changes for sites using multiple workers.
             Manual intervention is required in this case.
-            Must use the [rock cache](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Rock_cache)
+            Must use the [rock cache](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid6#Rock_cache)
             instead of the previously recommended multi-ufs cache.
     -   [GlideinWMS 3.11.1](https://glideinwms.fnal.gov/doc.v3_11_1/history.html#development)
         -   Improvements and fixes to the refactored credentials
