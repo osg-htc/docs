@@ -165,25 +165,82 @@ before starting the origin for the first time, it is recommended to generate a k
 Validating the Origin Installation
 ----------------------------------
 
-Do the following steps to verify that the origin is functional:
+For each namespace in your `Origin.Exports` list, validate their functionality by using the following sections based on
+whether or not they have `PublicReads` in their `Capabilities` list.
 
-1.  Start the origin using the following command:
+Before starting any validation steps, ensure that the origin is running using the following command:
+
+```console
+root@host$ systemctl start osdf-origin
+```
+
+### Public namespaces ###
+
+If the your namespace has the `PublicReads` capability, perform the following steps to validate its functionality.
+
+1.  If your origin isn't already configured with `DirectReads` in the `Capabilities` list, add it and restart the container
+
+2.  Download a test file (POSIX) or object (S3) from your origin (replacing `ORIGIN_HOSTNAME` with the host name of your
+    origin, and TEST_PATH with the OSDF path to the test file or object)
 
         :::console
-        root@host$ systemctl start osdf-origin
+        user@host$ pelican object get -c ORIGIN_HOSTNAME:8443 'osdf:///<TEST_PATH>' -o /tmp/testfile
 
-1.  Download a test file (POSIX) or object (S3) from your origin (replacing `ORIGIN_HOSTNAME` with the host name of your origin,
-    and TEST_PATH with the OSDF path to the test file or object
+3.  Verify the contents of `/tmp/testfile` match the test file or object your origin was serving.
+
+4.  If you enabled `DirectReads` in step (1) above, remove it and restart the container.
+
+### Private namespaces ###
+
+Origins without `PublicReads` are slightly more involved to test since they require a JSON Web Token (JWT):
+
+1.  If your origin isn't already configured with `DirectReads` in the `Capabilities` list, add it and restart the container
+
+1.  Retrieve or generate a JWT, depending on the output of the following command:
 
         :::console
-        user@host$ curl -L https://ORIGIN_HOSTNAME:8443/TEST_PATH -o /tmp/testfile
+        user@host$ docker exec osdf-origin pelican --config /etc/pelican/osdf-origin.yaml config get issuerurl
 
-    Verify the contents of `/tmp/testfile` match the test file or object your origin was serving.
+    -   If the above command outputs a non-empty value (e.g., `server.issuerurl: "https://...`), you must retrieve a
+        token from this issuer and save it to a file.
+        The details for retrieving such a token are dependent on your issuer and are beyond the scope of this document.
 
-    If the download fails, debugging information is located in `/var/log/pelican/osdf-origin.log`.
-    See [this page](../../common/help.md) for requesting assistance; please include the log file
-    in your request.
+    -   If the above command returns an empty value (e.g., `server.issuerurl: ""`), generate a token by running the
+        following inside the container:
 
+            :::console
+            user@container$ pelican origin token create \
+                                    --config /etc/pelican/osdf-origin.yaml \
+                                    --subject "test" \  # set this to your Unix username if you've set Origin.Multiuser: true
+                                    --audience "https://wlcg.cern.ch/jwt/v1/any" \
+                                    --scope "storage.read:/" 
+
+        This will output a JWT that you must save to a file.
+
+2.  Download a test file (POSIX) or object (S3) from your origin (replacing `ORIGIN_HOSTNAME` with the host name of your
+    origin, and TEST_PATH with the OSDF path to the test file or object)
+
+        :::console
+        user@host$ pelican object get -t <PATH TO TOKEN FILE> -c ORIGIN_HOSTNAME:8443 'osdf:///<TEST_PATH>' -o /tmp/testfile
+
+3.  Verify the contents of `/tmp/testfile` match the test file or object your origin was serving.
+
+4.  If you enabled `DirectReads` in step (1) above, remove it and restart the container.
+
+### Troubleshooting validation ###
+
+If you get errors, add the `--debug` flag to the `pelican object get` invocation.
+
+Debugging information will be in your container logs e.g., `docker logs osdf-origin`.
+To increase the debugging information in the origin, edit your origin configuration file and set:
+```
+Debug: true
+Logging:
+  Origin:
+    SciTokens: trace
+```
+
+See [this page](../../common/help.md) for requesting assistance; please include the logs in your request.
 
 Joining the Origin to the Federation
 ------------------------------------
