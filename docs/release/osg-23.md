@@ -44,6 +44,33 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **August 21, 2025:** OpenBao 2.3.2, htvault-config 2.1.0, HTCondor 23.0.28, xrdcl-pelican 1.4.2; Upcoming: HTCondor 23.10.28, Pelican 7.18.1, xrdhttp-pelican 0.0.7, osdf-server 7.18.0, xrootd-lotman 0.0.5
+-   [OpenBao 2.3.2](https://openbao.org/docs/release-notes/2-3-0/)
+    -   Fixes for seven CVEs, including one remote code execution issue
+    -   The htvault-config application is not vulnerable to any of the CVEs
+    -   NOTE: The user id, that openbao uses, changed from `vault` to `openbao`
+-   htvault-config 2.1.0
+    -   Update to automate the change in user id in openbao-2.3.2
+-   [HTCondor 23.0.28](https://htcondor.readthedocs.io/en/23.0/version-history/lts-versions-23-0.html#version-23-0-28)
+    -   Fix `condor_token_request` to accept automatically-approved tokens
+-   [xrdcl-pelican 1.4.2](https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v1.4.2): Update from version 1.2.3
+    -   Add XrdClS3 plugin
+    -   Add mkdir and delete support
+    -   Improved error reporting and speedups on cache misses
+-   Upcoming
+    -   [HTCondor 23.10.28](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-10-28)
+        -   Sets exit -code and -signal environment variables for Docker jobs
+        -   Fix issue where `ImageSize` was over-reported on the Windows platform
+        -   HTCondor tarballs now contain Pelican 7.18.1 and Apptainer 1.4.2
+        -   Fix `condor_token_request` to accept automatically-approved tokens
+    -   [Pelican 7.18.1](https://pelicanplatform.org/releases)
+        -   Add client transfer statistics
+        -   Marked certain transfer errors are retry-able
+    -   [xrdhttp-pelican 0.0.7](https://github.com/PelicanPlatform/xrdhttp-pelican/releases/tag/v0.0.7)
+        -   Make `Authfile` and `scitokens.conf` file readable by Pelican in "Drop Privileges" mode
+    -   osdf-server 7.18.0
+    -   xrootd-lotman 0.0.5
+
 ### **August 14, 2025:** CVMFS 2.13.2, XRootD 5.8.4-1.2; Upcoming: frontier-squid 6.13-1.5, GlideinWMS 3.11.1
 -   [CVMFS 2.13.2](https://cvmfs.readthedocs.io/en/2.13/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-13-2)
     -   Includes important bug fixes to prevent client hangs and crashes
