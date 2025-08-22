@@ -1397,6 +1397,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#august-21-2025-openbao-232-htvault-config-210-htcondor-24011-pelican-7181-xrdcl-pelican-142-xrdhttp-pelican-007-osdf-server-7180-xrootd-lotman-005-upcoming-htcondor-24112" class="md-nav__link">
+    August 21, 2025: OpenBao 2.3.2, htvault-config 2.1.0, HTCondor 24.0.11, Pelican 7.18.1, xrdcl-pelican 1.4.2, xrdhttp-pelican 0.0.7, osdf-server 7.18.0, xrootd-lotman 0.0.5; Upcoming: HTCondor 24.11.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#august-14-2025-cvmfs-2132-xrootd-584-12-upcoming-frontier-squid-613-15-glideinwms-3111" class="md-nav__link">
     August 14, 2025: CVMFS 2.13.2, XRootD 5.8.4-1.2; Upcoming: frontier-squid 6.13-1.5, GlideinWMS 3.11.1
   </a>
@@ -1994,6 +2001,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#august-21-2025-openbao-232-htvault-config-210-htcondor-24011-pelican-7181-xrdcl-pelican-142-xrdhttp-pelican-007-osdf-server-7180-xrootd-lotman-005-upcoming-htcondor-24112" class="md-nav__link">
+    August 21, 2025: OpenBao 2.3.2, htvault-config 2.1.0, HTCondor 24.0.11, Pelican 7.18.1, xrdcl-pelican 1.4.2, xrdhttp-pelican 0.0.7, osdf-server 7.18.0, xrootd-lotman 0.0.5; Upcoming: HTCondor 24.11.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#august-14-2025-cvmfs-2132-xrootd-584-12-upcoming-frontier-squid-613-15-glideinwms-3111" class="md-nav__link">
     August 14, 2025: CVMFS 2.13.2, XRootD 5.8.4-1.2; Upcoming: frontier-squid 6.13-1.5, GlideinWMS 3.11.1
   </a>
@@ -2225,6 +2239,57 @@ the ARM CPU architecture.
 The initial release includes GlideinWMS 3.10.7, HTCondor 24.0.1, HTCondor 24.1.1, HTCondor-CE 24.0, and XRootD 5.7.0.</p>
 <p>OSG 24 will be supported for <a href="../release_series/#series-life-cycle">approximately two years total</a>.</p>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="august-21-2025-openbao-232-htvault-config-210-htcondor-24011-pelican-7181-xrdcl-pelican-142-xrdhttp-pelican-007-osdf-server-7180-xrootd-lotman-005-upcoming-htcondor-24112"><strong>August 21, 2025:</strong> OpenBao 2.3.2, htvault-config 2.1.0, HTCondor 24.0.11, Pelican 7.18.1, xrdcl-pelican 1.4.2, xrdhttp-pelican 0.0.7, osdf-server 7.18.0, xrootd-lotman 0.0.5; Upcoming: HTCondor 24.11.2<a class="headerlink" href="#august-21-2025-openbao-232-htvault-config-210-htcondor-24011-pelican-7181-xrdcl-pelican-142-xrdhttp-pelican-007-osdf-server-7180-xrootd-lotman-005-upcoming-htcondor-24112" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://openbao.org/docs/release-notes/2-3-0/">OpenBao 2.3.2</a><ul>
+<li>Fixes for seven CVEs, including one remote code execution issue</li>
+<li>The htvault-config application is not vulnerable to any of the CVEs</li>
+<li>NOTE: The user id, that openbao uses, changed from <code>vault</code> to <code>openbao</code></li>
+</ul>
+</li>
+<li>htvault-config 2.1.0<ul>
+<li>Update to automate the change in user id in openbao-2.3.2</li>
+</ul>
+</li>
+<li><a href="https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-11">HTCondor 24.0.11</a><ul>
+<li>Sets exit -code and -signal environment variables for Docker jobs</li>
+<li>Fix issue where ImageSize was over-reported on the Windows platform</li>
+<li>HTCondor tarballs now contain Pelican 7.18.1 and Apptainer 1.4.2</li>
+<li>Fix <code>condor_token_request</code> to accept automatically-approved tokens</li>
+</ul>
+</li>
+<li><a href="https://pelicanplatform.org/releases">Pelican 7.18.1</a><ul>
+<li>Add client transfer statistics</li>
+<li>Marked certain transfer errors are retry-able</li>
+</ul>
+</li>
+<li><a href="https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v1.4.2">xrdcl-pelican 1.4.2</a>: Update from version 1.2.3<ul>
+<li>Add XrdClS3 plugin</li>
+<li>Add mkdir and delete support</li>
+<li>Improved error reporting and speedups on cache misses</li>
+</ul>
+</li>
+<li><a href="https://github.com/PelicanPlatform/xrdhttp-pelican/releases/tag/v0.0.7">xrdhttp-pelican 0.0.7</a><ul>
+<li>Make <code>Authfile</code> and <code>scitokens.conf</code> file readable by Pelican in "Drop Privileges" mode</li>
+</ul>
+</li>
+<li>osdf-server 7.18.0</li>
+<li>xrootd-lotman 0.0.5</li>
+<li>Upcoming<ul>
+<li><a href="https://htcondor.readthedocs.io/en/24.x/version-history/feature-versions-24-x.html#version-24-11-2">HTCondor 24.11.2</a><ul>
+<li>Add job attributes to track why and how often a job is vacated</li>
+<li>Add the ability to notify a user when their job first starts</li>
+<li>Can now specify which Vault servers are trusted</li>
+<li>Added <code>htcondor2.ping()</code> to the Python bindings</li>
+<li>Sets exit -code and -signal environment variables for Docker jobs</li>
+<li>Fix issue where <code>ImageSize</code> was over-reported on the Windows platform</li>
+<li>HTCondor tarballs now contain Pelican 7.18.1 and Apptainer 1.4.2</li>
+<li>Fix <code>condor_token_request</code> to accept automatically-approved tokens</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="august-14-2025-cvmfs-2132-xrootd-584-12-upcoming-frontier-squid-613-15-glideinwms-3111"><strong>August 14, 2025:</strong> CVMFS 2.13.2, XRootD 5.8.4-1.2; Upcoming: frontier-squid 6.13-1.5, GlideinWMS 3.11.1<a class="headerlink" href="#august-14-2025-cvmfs-2132-xrootd-584-12-upcoming-frontier-squid-613-15-glideinwms-3111" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://cvmfs.readthedocs.io/en/2.13/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-13-2">CVMFS 2.13.2</a><ul>
