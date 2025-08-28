@@ -44,6 +44,13 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **August 28, 2025:** XRootD 5.8.4-1.4
+-   XRootD 5.8.4-1.4
+    -   Allows configuring HTTP maximum delay
+    -   Adds `s3://` as a permitted proxy protocol
+    -   Add Third-Party Copy worker pool
+    -   Fix TLS shutdown for HTTPS
+
 ### **August 21, 2025:** OpenBao 2.3.2, htvault-config 2.1.0, HTCondor 23.0.28, xrdcl-pelican 1.4.2; Upcoming: HTCondor 23.10.28, Pelican 7.18.1, xrdhttp-pelican 0.0.7, osdf-server 7.18.0, xrootd-lotman 0.0.5
 -   [OpenBao 2.3.2](https://openbao.org/docs/release-notes/2-3-0/)
     -   Fixes for seven CVEs, including one remote code execution issue
