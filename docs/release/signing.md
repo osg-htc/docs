@@ -38,7 +38,7 @@ The key used depends on the OSG version and software repository used, as documen
 | OSG 23 Automated Signing Key |                                              |
 |--------------------|--------------------------------------------------------|
 | Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-23-auto`             |
-| Download           | [GitHub](https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-23-auto) |
+| Download           | [GitHub](https://raw.githubusercontent.com/osg-htc/docs/master/docs/release/RPM-GPG-KEY-OSG-23-auto) |
 | Fingerprint        | `E2AF 9F6E 239F D62B 5377  05C0 1760 EDF6 4D43 84D0`   |
 | Key ID             | `4d4384d0`                                             |
 | Repositories       | osg-23-development                                     |
@@ -46,7 +46,7 @@ The key used depends on the OSG version and software repository used, as documen
 | OSG 23 Developer Signing Key |                                              |
 |--------------------|--------------------------------------------------------|
 | Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-23-developer`        |
-| Download           | [GitHub](https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-23-developer) |
+| Download           | [GitHub](https://raw.githubusercontent.com/osg-htc/docs/master/docs/release/RPM-GPG-KEY-OSG-23-developer) |
 | Fingerprint        | `4A56 C5BB CDB0 AAA2 DDE9  A690 BDEE E24C 9289 7C00`   |
 | Key ID             | `92897c00`                                             |
 | Repositories       | All non-development osg-23 repositories                |
@@ -54,7 +54,7 @@ The key used depends on the OSG version and software repository used, as documen
 | OSG 24 Automated Signing Key |                                              |
 |--------------------|--------------------------------------------------------|
 | Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-24-auto`             |
-| Download           | [GitHub](https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-24-auto) |
+| Download           | [GitHub](https://raw.githubusercontent.com/osg-htc/docs/master/docs/release/RPM-GPG-KEY-OSG-24-auto) |
 | Fingerprint        | `E612 A4B4 2EE0 71C3 15D1  1CDB 51F0 C137 34E9 58B3`   |
 | Key ID             | `34e958b3`                                             |
 | Repositories       | osg-24-development                                     |
@@ -62,7 +62,7 @@ The key used depends on the OSG version and software repository used, as documen
 | OSG 24 Developer Signing Key |                                              |
 |--------------------|--------------------------------------------------------|
 | Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-24-developer`        |
-| Download           | [GitHub](https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-24-developer) |
+| Download           | [GitHub](https://raw.githubusercontent.com/osg-htc/docs/master/docs/release/RPM-GPG-KEY-OSG-24-developer) |
 | Fingerprint        | `F77F E0C7 0A9B AA73 9FD3  52C9 9DF7 5B52 EFFC 3BE6`   |
 | Key ID             | `effc3be6`                                             |
 | Repositories       | All non-development osg-24 repositories                |
@@ -70,7 +70,7 @@ The key used depends on the OSG version and software repository used, as documen
 | OSG 25 Automated Signing Key |                                              |
 |--------------------|--------------------------------------------------------|
 | Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-25-auto`             |
-| Download           | [GitHub](https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-25-auto) |
+| Download           | [GitHub](https://raw.githubusercontent.com/osg-htc/docs/master/docs/release/RPM-GPG-KEY-OSG-25-auto) |
 | Fingerprint        | `376C 81EE 1421 311A 0FF4  3C3C 467C D904 222C 5D49`   |
 | Key ID             | `222c5d49`                                             |
 | Repositories       | osg-25-development                                     |
@@ -78,7 +78,7 @@ The key used depends on the OSG version and software repository used, as documen
 | OSG 25 Developer Signing Key |                                              |
 |--------------------|--------------------------------------------------------|
 | Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-25-developer`        |
-| Download           | [GitHub](https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-25-developer) |
+| Download           | [GitHub](https://raw.githubusercontent.com/osg-htc/docs/master/docs/release/RPM-GPG-KEY-OSG-25-developer) |
 | Fingerprint        | `962A 9BCD D330 245F 2703  C88B 74E5 BE22 D4E9 B1FC`   |
 | Key ID             | `d4e9b1fc`                                             |
 | Repositories       | All non-development osg-25 repositories                |
