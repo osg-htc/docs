@@ -67,6 +67,22 @@ The key used depends on the OSG version and software repository used, as documen
 | Key ID             | `effc3be6`                                             |
 | Repositories       | All non-development osg-24 repositories                |
 
+| OSG 25 Automated Signing Key |                                              |
+|--------------------|--------------------------------------------------------|
+| Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-25-auto`             |
+| Download           | [GitHub](https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-25-auto) |
+| Fingerprint        | `376C 81EE 1421 311A 0FF4  3C3C 467C D904 222C 5D49`   |
+| Key ID             | `222c5d49`                                             |
+| Repositories       | osg-25-development                                     |
+
+| OSG 25 Developer Signing Key |                                              |
+|--------------------|--------------------------------------------------------|
+| Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-25-developer`        |
+| Download           | [GitHub](https://raw.githubusercontent.com/opensciencegrid/docs/master/docs/release/RPM-GPG-KEY-OSG-25-developer) |
+| Fingerprint        | `962A 9BCD D330 245F 2703  C88B 74E5 BE22 D4E9 B1FC`   |
+| Key ID             | `d4e9b1fc`                                             |
+| Repositories       | All non-development osg-25 repositories                |
+
 You can see the fingerprint for yourself.
 
 On EL 8 and newer (GnuPG &gt;= 2.1.13):
