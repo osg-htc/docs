@@ -44,6 +44,13 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **September 4, 2025:** Pegasus 5.1.1, osg-configure 4.3.0
+-   [Pegasus 5.1.1](https://pegasus.isi.edu/2025/05/29/pegasus-5-1-1-released/)
+    -   [Improvements to container (Docker and Apptainer) support](https://pegasus.isi.edu/2025/05/06/improvements-to-containers-support-in-5-1-0/)
+    -   Upgrade from Pegasus 5.0.6
+-   osg-configure 4.3.0
+    -   Advertise pilot estimated CPUs for whole node case
+
 ### **August 28, 2025:** XRootD 5.8.4-1.4
 -   XRootD 5.8.4-1.4
     -   Allows configuring HTTP maximum delay
