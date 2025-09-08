@@ -51,7 +51,7 @@ As with all OSG software installations, there are some one-time steps to prepare
     intermediate CAs (if you're unsure about your setup, try accessing your cache from your browser).
 
     The following locations should be used (note that they are in separate directories):
-    
+
     * **Host Certificate Chain**: `/etc/pki/tls/certs/pelican.crt`
     * **Host Key**: `/etc/pki/tls/private/pelican.key`
 
@@ -73,20 +73,18 @@ OSG 23:
 root@host # yum install --enablerepo=osg-upcoming osdf-cache
 ```
 
-!!! note "osdf-cache 7.11.1"
-    This document covers versions 7.11.1 and later of the `osdf-cache` package; ensure the above installation
+!!! note "osdf-cache 7.18.0"
+    This document covers versions 7.18.0 and later of the `osdf-cache` package; ensure the above installation
     results in an appropriate version.
 
 Configuring the Cache Server
 ----------------------------
-    
-In `/etc/pelican/config.d/20-cache.yaml`, set `Cache.LocalRoot`, `Cache.DataLocation` and `Cache.MetaLocation` as follows,
+
+In `/etc/pelican/config.d/20-cache.yaml`, set `Cache.StorageLocation`, as follows,
 replacing `<CACHE PARTITION>` with the mount point of the partition you will use for the cache.
 ```
 Cache:
-  LocalRoot: "<CACHE PARTITION>/namespaces"
-  DataLocation: "<CACHE PARTITION>/data"
-  MetaLocation: "<CACHE PARTITION>/meta"
+  StorageLocation: "<CACHE PARTITION>"
 ```
 
 Preparing for Initial Startup
