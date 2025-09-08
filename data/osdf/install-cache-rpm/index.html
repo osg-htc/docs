@@ -1965,17 +1965,15 @@ Install it using one of the following commands:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum install --enablerepo<span class="o">=</span>osg-upcoming osdf-cache
 </code></pre></div></p>
 <div class="admonition note">
-<p class="admonition-title">osdf-cache 7.11.1</p>
-<p>This document covers versions 7.11.1 and later of the <code>osdf-cache</code> package; ensure the above installation
+<p class="admonition-title">osdf-cache 7.18.0</p>
+<p>This document covers versions 7.18.0 and later of the <code>osdf-cache</code> package; ensure the above installation
 results in an appropriate version.</p>
 </div>
 <h2 id="configuring-the-cache-server">Configuring the Cache Server<a class="headerlink" href="#configuring-the-cache-server" title="Permanent link">&para;</a></h2>
-<p>In <code>/etc/pelican/config.d/20-cache.yaml</code>, set <code>Cache.LocalRoot</code>, <code>Cache.DataLocation</code> and <code>Cache.MetaLocation</code> as follows,
+<p>In <code>/etc/pelican/config.d/20-cache.yaml</code>, set <code>Cache.StorageLocation</code>, as follows,
 replacing <code>&lt;CACHE PARTITION&gt;</code> with the mount point of the partition you will use for the cache.
 <div class="highlight"><pre><span></span><code>Cache:
-  LocalRoot: &quot;&lt;CACHE PARTITION&gt;/namespaces&quot;
-  DataLocation: &quot;&lt;CACHE PARTITION&gt;/data&quot;
-  MetaLocation: &quot;&lt;CACHE PARTITION&gt;/meta&quot;
+  StorageLocation: &quot;&lt;CACHE PARTITION&gt;&quot;
 </code></pre></div></p>
 <h2 id="preparing-for-initial-startup">Preparing for Initial Startup<a class="headerlink" href="#preparing-for-initial-startup" title="Permanent link">&para;</a></h2>
 <ol>
