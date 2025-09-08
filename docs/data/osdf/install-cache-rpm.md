@@ -87,20 +87,38 @@ Cache:
   StorageLocation: "<CACHE PARTITION>"
 ```
 
+!!! warning "osdf-cache 7.18 bug"
+    Due to a bug in `osdf-cache` 7.18, you must set the federation manually as follows:
+
+    Edit `/etc/pelican/config.d/10-federation.yaml` and set `Federation.DiscoveryUrl`:
+
+        Federation:
+          DiscoveryUrl: "osg-htc.org"
+
+    This will be fixed in `osdf-cache` 7.19.0
+
+
 Preparing for Initial Startup
 -----------------------------
 
 1.  The cache identifies itself to the federation via public key authentication;
 before starting the cache for the first time, it is recommended to generate a keypair.
 
+1.  If it does not exist already, create `/etc/pelican/issuer-keys` as follows:
+
         :::console
-        root@host$ cd /etc/pelican
-        root@host$ pelican generate keygen
+        root@host$ mkdir -p /etc/pelican/issuer-keys
+        root@host$ chmod 0750 /etc/pelican/issuer-keys
+        root@host$ chown root:pelican /etc/pelican/issuer-keys
+
+        :::console
+        root@host$ cd /etc/pelican/issuer-keys
+        root@host$ pelican key create
 
 
-    The newly created files, `issuer.jwk` and `issuer-pub.jwks` are the private and public keys, respectively.
+    The newly created files, `private-key.pem` and `issuer-pub.jwks` are the private and public keys, respectively.
 
-1.  **Save these files**; if you lose the `issuer.jwk`, your cache will need to be re-approved.
+1.  **Save these files**; if you lose the `private-key.pem` file, your cache will need to be re-approved.
 
 
 Validating the Cache Installation
