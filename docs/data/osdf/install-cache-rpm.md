@@ -87,6 +87,10 @@ Cache:
   StorageLocation: "<CACHE PARTITION>"
 ```
 
+
+Preparing for Initial Startup
+-----------------------------
+
 !!! warning "osdf-cache 7.18 bug"
     Due to a bug in `osdf-cache` 7.18, you must set the federation manually as follows:
 
@@ -96,10 +100,6 @@ Cache:
           DiscoveryUrl: "osg-htc.org"
 
     This will be fixed in `osdf-cache` 7.19.0
-
-
-Preparing for Initial Startup
------------------------------
 
 1.  The cache identifies itself to the federation via public key authentication;
 before starting the cache for the first time, it is recommended to generate a keypair.

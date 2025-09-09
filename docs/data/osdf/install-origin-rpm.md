@@ -147,8 +147,20 @@ To configure your origin to serve objects from an S3 endpoint, see the
 [upstream documentation](https://docs.pelicanplatform.org/federating-your-data/s3-backend).
 
 
+
 Preparing for Initial Startup
 -----------------------------
+
+!!! warning "osdf-origin 7.18 bug"
+    Due to a bug in `osdf-origin` 7.18, you must set the federation manually as follows:
+
+    Edit `/etc/pelican/config.d/10-federation.yaml` and set `Federation.DiscoveryUrl`:
+
+        Federation:
+          DiscoveryUrl: "osg-htc.org"
+
+    This will be fixed in `osdf-cache` 7.19.0
+
 
 1.  The origin identifies itself to the federation via public key authentication;
 before starting the origin for the first time, it is recommended to generate a keypair.
@@ -157,6 +169,8 @@ before starting the origin for the first time, it is recommended to generate a k
         root@host$ mkdir -p /etc/pelican/issuer-keys
         root@host$ chmod 0750 /etc/pelican/issuer-keys
         root@host$ chown root:pelican /etc/pelican/issuer-keys
+
+        :::console
         root@host$ cd /etc/pelican/issuer-keys
         root@host$ pelican key create
 
