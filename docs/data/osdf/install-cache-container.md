@@ -12,7 +12,7 @@ Before Starting
 
 Before starting the installation process, consider the following requirements:
 
-* __Container runtime:__ The examples in this guide assume using Docker as the container runtime,
+* __Container runtime:__ This guide assumes Docker as the container runtime,
     for which the host must have a running `docker` service,
    and you must have the ability to start containers (i.e., belong to the `docker` Unix group).
 * __File systems:__ The cache should have a partition of its own for storing data and metadata.
