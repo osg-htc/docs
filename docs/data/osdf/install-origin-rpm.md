@@ -157,7 +157,7 @@ Preparing for Initial Startup
     Edit `/etc/pelican/config.d/10-federation.yaml` and set `Federation.DiscoveryUrl`:
 
         Federation:
-          DiscoveryUrl: "osg-htc.org"
+          DiscoveryUrl: "https://osg-htc.org"
 
     This will be fixed in `osdf-cache` 7.19.0
 
