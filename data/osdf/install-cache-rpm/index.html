@@ -1976,18 +1976,36 @@ replacing <code>&lt;CACHE PARTITION&gt;</code> with the mount point of the parti
   StorageLocation: &quot;&lt;CACHE PARTITION&gt;&quot;
 </code></pre></div></p>
 <h2 id="preparing-for-initial-startup">Preparing for Initial Startup<a class="headerlink" href="#preparing-for-initial-startup" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">osdf-cache 7.18 bug</p>
+<p>Due to a bug in <code>osdf-cache</code> 7.18, you must set the federation manually as follows:</p>
+<p>Edit <code>/etc/pelican/config.d/10-federation.yaml</code> and set <code>Federation.DiscoveryUrl</code>:</p>
+<div class="codehilite"><pre><span></span><code>Federation:
+  DiscoveryUrl: &quot;https://osg-htc.org&quot;
+</code></pre></div>
+
+<p>This will be fixed in <code>osdf-cache</code> 7.19.0</p>
+</div>
 <ol>
 <li>
 <p>The cache identifies itself to the federation via public key authentication;
 before starting the cache for the first time, it is recommended to generate a keypair.</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span><span class="nb">cd</span> /etc/pelican
-<span class="gp">root@host$ </span>pelican generate keygen
-</code></pre></div>
-
-<p>The newly created files, <code>issuer.jwk</code> and <code>issuer-pub.jwks</code> are the private and public keys, respectively.</p>
 </li>
 <li>
-<p><strong>Save these files</strong>; if you lose the <code>issuer.jwk</code>, your cache will need to be re-approved.</p>
+<p>If it does not exist already, create <code>/etc/pelican/issuer-keys</code> as follows:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span>mkdir -p /etc/pelican/issuer-keys
+<span class="gp">root@host$ </span>chmod <span class="m">0750</span> /etc/pelican/issuer-keys
+<span class="gp">root@host$ </span>chown root:pelican /etc/pelican/issuer-keys
+
+<span class="go">:::console</span>
+<span class="gp">root@host$ </span><span class="nb">cd</span> /etc/pelican/issuer-keys
+<span class="gp">root@host$ </span>pelican key create
+</code></pre></div>
+
+<p>The newly created files, <code>private-key.pem</code> and <code>issuer-pub.jwks</code> are the private and public keys, respectively.</p>
+</li>
+<li>
+<p><strong>Save these files</strong>; if you lose the <code>private-key.pem</code> file, your cache will need to be re-approved.</p>
 </li>
 </ol>
 <h2 id="validating-the-cache-installation">Validating the Cache Installation<a class="headerlink" href="#validating-the-cache-installation" title="Permanent link">&para;</a></h2>

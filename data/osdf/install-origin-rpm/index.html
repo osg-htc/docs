@@ -2074,8 +2074,8 @@ Install it using the following command:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum install osdf-origin
 </code></pre></div>
 <div class="admonition note">
-<p class="admonition-title">osdf-origin 7.11.1</p>
-<p>This document covers versions 7.11.1 and later of the <code>osdf-origin</code> package; ensure the above installation
+<p class="admonition-title">osdf-origin 7.18.0</p>
+<p>This document covers versions 7.18.0 and later of the <code>osdf-origin</code> package; ensure the above installation
 results in an appropriate version.</p>
 </div>
 <h2 id="configuring-the-origin-server">Configuring the Origin Server<a class="headerlink" href="#configuring-the-origin-server" title="Permanent link">&para;</a></h2>
@@ -2102,18 +2102,33 @@ A single origin cannot export both a bucket and a directory tree.</p>
 <p>To configure your origin to serve objects from an S3 endpoint, see the
 <a href="https://docs.pelicanplatform.org/federating-your-data/s3-backend">upstream documentation</a>.</p>
 <h2 id="preparing-for-initial-startup">Preparing for Initial Startup<a class="headerlink" href="#preparing-for-initial-startup" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">osdf-origin 7.18 bug</p>
+<p>Due to a bug in <code>osdf-origin</code> 7.18, you must set the federation manually as follows:</p>
+<p>Edit <code>/etc/pelican/config.d/10-federation.yaml</code> and set <code>Federation.DiscoveryUrl</code>:</p>
+<div class="codehilite"><pre><span></span><code>Federation:
+  DiscoveryUrl: &quot;https://osg-htc.org&quot;
+</code></pre></div>
+
+<p>This will be fixed in <code>osdf-cache</code> 7.19.0</p>
+</div>
 <ol>
 <li>
 <p>The origin identifies itself to the federation via public key authentication;
 before starting the origin for the first time, it is recommended to generate a keypair.</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span><span class="nb">cd</span> /etc/pelican
-<span class="gp">root@host$ </span>pelican generate keygen
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span>mkdir -p /etc/pelican/issuer-keys
+<span class="gp">root@host$ </span>chmod <span class="m">0750</span> /etc/pelican/issuer-keys
+<span class="gp">root@host$ </span>chown root:pelican /etc/pelican/issuer-keys
+
+<span class="go">:::console</span>
+<span class="gp">root@host$ </span><span class="nb">cd</span> /etc/pelican/issuer-keys
+<span class="gp">root@host$ </span>pelican key create
 </code></pre></div>
 
-<p>The newly created files, <code>issuer.jwk</code> and <code>issuer-pub.jwks</code> are the private and public keys, respectively.</p>
+<p>The newly created files, <code>private-key.pem</code> and <code>issuer-pub.jwks</code> are the private and public keys, respectively.</p>
 </li>
 <li>
-<p><strong>Save these files</strong>; if you lose the <code>issuer.jwk</code>, your origin will need to be re-approved.</p>
+<p><strong>Save these files</strong>; if you lose the <code>private-key.pem</code> file, your origin will need to be re-approved.</p>
 </li>
 </ol>
 <h2 id="validating-the-origin-installation">Validating the Origin Installation<a class="headerlink" href="#validating-the-origin-installation" title="Permanent link">&para;</a></h2>
