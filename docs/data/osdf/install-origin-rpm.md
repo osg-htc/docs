@@ -106,9 +106,10 @@ root@host # yum install osdf-origin
 ```
 
 
-!!! note "osdf-origin 7.11.1"
-    This document covers versions 7.11.1 and later of the `osdf-origin` package; ensure the above installation
+!!! note "osdf-origin 7.18.0"
+    This document covers versions 7.18.0 and later of the `osdf-origin` package; ensure the above installation
     results in an appropriate version.
+
 
 Configuring the Origin Server
 -----------------------------
@@ -146,20 +147,37 @@ To configure your origin to serve objects from an S3 endpoint, see the
 [upstream documentation](https://docs.pelicanplatform.org/federating-your-data/s3-backend).
 
 
+
 Preparing for Initial Startup
 -----------------------------
+
+!!! warning "osdf-origin 7.18 bug"
+    Due to a bug in `osdf-origin` 7.18, you must set the federation manually as follows:
+
+    Edit `/etc/pelican/config.d/10-federation.yaml` and set `Federation.DiscoveryUrl`:
+
+        Federation:
+          DiscoveryUrl: "https://osg-htc.org"
+
+    This will be fixed in `osdf-cache` 7.19.0
+
 
 1.  The origin identifies itself to the federation via public key authentication;
 before starting the origin for the first time, it is recommended to generate a keypair.
 
         :::console
-        root@host$ cd /etc/pelican
-        root@host$ pelican generate keygen
+        root@host$ mkdir -p /etc/pelican/issuer-keys
+        root@host$ chmod 0750 /etc/pelican/issuer-keys
+        root@host$ chown root:pelican /etc/pelican/issuer-keys
+
+        :::console
+        root@host$ cd /etc/pelican/issuer-keys
+        root@host$ pelican key create
 
 
-    The newly created files, `issuer.jwk` and `issuer-pub.jwks` are the private and public keys, respectively.
+    The newly created files, `private-key.pem` and `issuer-pub.jwks` are the private and public keys, respectively.
 
-1.  **Save these files**; if you lose the `issuer.jwk`, your origin will need to be re-approved.
+1.  **Save these files**; if you lose the `private-key.pem` file, your origin will need to be re-approved.
 
 
 Validating the Origin Installation
