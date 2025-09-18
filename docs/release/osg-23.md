@@ -44,6 +44,17 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **September 18, 2025:** xrdcl-pelican 1.5.4, IGTF 1.137, xrootd-monitoring-shoveler 1.4.0-2
+-   [xrdcl-pelican 1.5.4](https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v1.5.4)
+    -   Add extensive statistics about the performance of the XrdClCurl client for better detection of stuck threads
+-   CA certificates based on [IGTF 1.137](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Added accredited KEK-2024 classic issuing CA (JP)
+    -   Withdrawn superseded TRGrid CA 2005 (TR)
+    -   Removed expired Let's Encrypt R3
+    -   Removed expired Let's Encrypt R4
+-   xrootd-monitoring-shoveler 1.4.0-2
+    -   Add `shoveler-status` binary
+
 ### **September 4, 2025:** Pegasus 5.1.1, osg-configure 4.3.0
 -   [Pegasus 5.1.1](https://pegasus.isi.edu/2025/05/29/pegasus-5-1-1-released/)
     -   [Improvements to container (Docker and Apptainer) support](https://pegasus.isi.edu/2025/05/06/improvements-to-containers-support-in-5-1-0/)
