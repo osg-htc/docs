@@ -3,8 +3,8 @@ title: Installing the OSDF Origin by RPM
 Installing the OSDF Origin by RPM
 =================================
 
-!!! warning "OSG 24"
-    This installation guide requires OSG 24
+!!! warning "OSG 24+"
+    This installation guide requires OSG 24 or OSG 25
 
 !!! tip "Upgrading from a non-Pelican origin?"
     This installation guide also walks you through upgrading an origin that you installed prior to OSG 24.
@@ -44,10 +44,10 @@ As with all OSG software installations, there are some one-time steps to prepare
 
 * Obtain root access to the host
 * Prepare [the required Yum repositories](../../common/yum.md);
-  the [OSG 24 repositories](../../common/yum.md#install-the-osg-repositories) should be used.
+  the [OSG 25 repositories](../../common/yum.md#install-the-osg-repositories) should be used.
 
     !!! danger "Upgrading to a Pelican origin"
-        If you are upgrading from a pre-Pelican OSDF origin, update all of your OSG 23 packages before installing the OSG 24
+        If you are upgrading from a pre-Pelican OSDF origin, update all of your OSG 23 packages before installing the OSG 25
         repositories:
 
             :::console

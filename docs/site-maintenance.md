@@ -58,6 +58,7 @@ Keep OSG Software Updated
 It is important to keep your software and data (e.g., CAs and VO client) up-to-date with the latest OSG release.
 See the release notes for your installed release series:
 
+-  [OSG 25 release notes](release/osg-25.md)
 -  [OSG 24 release notes](release/osg-24.md)
 -  [OSG 23 release notes](release/osg-23.md)
 

@@ -75,6 +75,9 @@ nav:
       - 'Install from RPM': 'data/osdf/install-origin-rpm.md'
 - Releases:
   - 'Release Series': 'release/release_series.md'
+  - OSG 25:
+     - 'News': 'release/osg-25.md'
+     - 'Updating to OSG 25': 'release/updating-to-osg-25.md'
   - OSG 24:
      - 'News': 'release/osg-24.md'
      - 'Updating to OSG 24': 'release/updating-to-osg-24.md'

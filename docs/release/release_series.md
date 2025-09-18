@@ -34,6 +34,9 @@ Series Overviews
 
 Since the start of the RPM-based OSG Software Stack, we have offered the following release series:
 
+-   **OSG 25** (started September 2025) introduces support for EL10.
+    The initial release includes GlideinWMS 3.10.15, HTCondor 25.0.1, HTCondor 25.1.1, HTCondor-CE 25.0, and XRootD 5.8.4.
+
 -   **OSG 24** (started October 2024) introduces support for the ARM architecture.
     The initial release includes GlideinWMS 3.10.7, HTCondor 24.0.1, HTCondor 24.1.1, HTCondor-CE 24.0, and XRootD 5.7.0.
 

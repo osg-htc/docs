@@ -63,6 +63,11 @@ The cache service is provided by the `osdf-cache` RPM.
 Install it using one of the following commands:
 
 
+OSG 25:
+```console
+root@host # yum install osdf-cache
+```
+
 OSG 24:
 ```console
 root@host # yum install osdf-cache
