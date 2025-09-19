@@ -223,10 +223,14 @@ user@host $ docker logs osdf-cache
 
 To increase the debugging information in the cache, edit your cache configuration file and set:
 ```
-Debug: true
+Logging:
+  Level: debug
 ```
+Note that `debug` produces a lot of output and you should remove that setting or set it to `info`
+once the problem has been resolved.
 
-See [this page](../../common/help.md) for requesting assistance; please include the logs and the `pelican object get -d` output in your request.
+See [this page](../../common/help.md) for requesting assistance;
+please include the logs and the `pelican object get -d` output in your request.
 
 
 Joining the Cache to the Federation

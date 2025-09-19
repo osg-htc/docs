@@ -279,18 +279,21 @@ Origins without `PublicReads` are slightly more involved to test since they requ
 
 ### Troubleshooting validation ###
 
-If you get errors, add the `--debug` flag to the `pelican object get` invocation.
+If the download fails, rerun the above `pelican object get` command with the `-d` flag added;
 
 Debugging information will be in your container logs e.g., `docker logs osdf-origin`.
 To increase the debugging information in the origin, edit your origin configuration file and set:
 ```
-Debug: true
 Logging:
+  Level: debug
   Origin:
     SciTokens: trace
 ```
+Note that `debug` produces a lot of output and you should remove that line or set it to `info`
+once the problem has been resolved.
 
-See [this page](../../common/help.md) for requesting assistance; please include the logs in your request.
+See [this page](../../common/help.md) for requesting assistance;
+please include the logs and `pelican object get --debug` output in your request.
 
 
 Joining the Origin to the Federation
@@ -326,11 +329,14 @@ docker logs osdf-origin
 ```
 To increase the debugging information in the origin, edit your origin configuration file and set:
 ```
-Debug: true
 Logging:
+  Level: debug
   Origin:
     SciTokens: trace
 ```
+Note that `debug` produces a lot of output and you should remove that line or set it to `info`
+once the problem has been resolved.
+
 See [this page](../../common/help.md) for requesting assistance; please include the logs in your request.
 
 1.  Download a test file (POSIX) or object (S3) directly from your origin,
