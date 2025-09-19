@@ -1351,33 +1351,6 @@
     Validating the Origin Installation
   </a>
   
-    <nav class="md-nav" aria-label="Validating the Origin Installation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#public-namespaces" class="md-nav__link">
-    Public namespaces
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#private-namespaces" class="md-nav__link">
-    Private namespaces
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#troubleshooting-validation" class="md-nav__link">
-    Troubleshooting validation
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -1947,33 +1920,6 @@
     Validating the Origin Installation
   </a>
   
-    <nav class="md-nav" aria-label="Validating the Origin Installation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#public-namespaces" class="md-nav__link">
-    Public namespaces
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#private-namespaces" class="md-nav__link">
-    Private namespaces
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#troubleshooting-validation" class="md-nav__link">
-    Troubleshooting validation
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -2186,86 +2132,26 @@ before starting the origin for the first time, it is recommended to generate a k
 </li>
 </ol>
 <h2 id="validating-the-origin-installation">Validating the Origin Installation<a class="headerlink" href="#validating-the-origin-installation" title="Permanent link">&para;</a></h2>
-<p>For each namespace in your <code>Origin.Exports</code> list, validate their functionality by using the following sections based on
-whether or not they have <code>PublicReads</code> in their <code>Capabilities</code> list.</p>
-<p>Before starting any validation steps, ensure that the origin is running using the following command:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">root@host$ </span>systemctl start osdf-origin
-</code></pre></div>
-<h3 id="public-namespaces">Public namespaces<a class="headerlink" href="#public-namespaces" title="Permanent link">&para;</a></h3>
-<p>If the your namespace has the <code>PublicReads</code> capability, perform the following steps to validate its functionality.</p>
+<p>Do the following steps to verify that the origin is functional:</p>
 <ol>
 <li>
-<p>If your origin isn't already configured with <code>DirectReads</code> in the <code>Capabilities</code> list, add it and restart the container</p>
-</li>
-<li>
-<p>Download a test file (POSIX) or object (S3) from your origin (replacing <code>ORIGIN_HOSTNAME</code> with the host name of your
-    origin, and TEST_PATH with the OSDF path to the test file or object)</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">user@host$ </span>pelican object get -c ORIGIN_HOSTNAME:8443 <span class="s1">&#39;osdf:///&lt;TEST_PATH&gt;&#39;</span> -o /tmp/testfile
+<p>Start the origin using the following command:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span>systemctl start osdf-origin
 </code></pre></div>
 
 </li>
 <li>
+<p>Download a test file (POSIX) or object (S3) from your origin (replacing <code>ORIGIN_HOSTNAME</code> with the host name of your origin,
+    and TEST_PATH with the OSDF path to the test file or object</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">user@host$ </span>curl -L https://ORIGIN_HOSTNAME:8443/TEST_PATH -o /tmp/testfile
+</code></pre></div>
+
 <p>Verify the contents of <code>/tmp/testfile</code> match the test file or object your origin was serving.</p>
-</li>
-<li>
-<p>If you enabled <code>DirectReads</code> in step (1) above, remove it and restart the container.</p>
+<p>If the download fails, debugging information is located in <code>/var/log/pelican/osdf-origin.log</code>.
+See <a href="../../../common/help/">this page</a> for requesting assistance; please include the log file
+in your request.</p>
 </li>
 </ol>
-<h3 id="private-namespaces">Private namespaces<a class="headerlink" href="#private-namespaces" title="Permanent link">&para;</a></h3>
-<p>Origins without <code>PublicReads</code> are slightly more involved to test since they require a JSON Web Token (JWT):</p>
-<ol>
-<li>
-<p>If your origin isn't already configured with <code>DirectReads</code> in the <code>Capabilities</code> list, add it and restart the container</p>
-</li>
-<li>
-<p>Retrieve or generate a JWT, depending on the output of the following command:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">user@host$ </span>docker <span class="nb">exec</span> osdf-origin pelican --config /etc/pelican/osdf-origin.yaml config get issuerurl
-</code></pre></div>
-
-<ul>
-<li>
-<p>If the above command outputs a non-empty value (e.g., <code>server.issuerurl: "https://...</code>), you must retrieve a
-    token from this issuer and save it to a file.
-    The details for retrieving such a token are dependent on your issuer and are beyond the scope of this document.</p>
-</li>
-<li>
-<p>If the above command returns an empty value (e.g., <code>server.issuerurl: ""</code>), generate a token by running the
-    following inside the container:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">user@container$ </span>pelican origin token create <span class="se">\</span>
-                        --config /etc/pelican/osdf-origin.yaml <span class="se">\</span>
-                        --subject <span class="s2">&quot;test&quot;</span> <span class="se">\ </span> <span class="c1"># set this to your Unix username if you&#39;ve set Origin.Multiuser: true</span>
-<span class="go">                        --audience &quot;https://wlcg.cern.ch/jwt/v1/any&quot; \</span>
-<span class="go">                        --scope &quot;storage.read:/&quot;</span>
-</code></pre></div>
-
-<p>This will output a JWT that you must save to a file.</p>
-</li>
-</ul>
-</li>
-<li>
-<p>Download a test file (POSIX) or object (S3) from your origin (replacing <code>ORIGIN_HOSTNAME</code> with the host name of your
-    origin, and TEST_PATH with the OSDF path to the test file or object)</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">user@host$ </span>pelican object get -t &lt;PATH TO TOKEN FILE&gt; -c ORIGIN_HOSTNAME:8443 <span class="s1">&#39;osdf:///&lt;TEST_PATH&gt;&#39;</span> -o /tmp/testfile
-</code></pre></div>
-
-</li>
-<li>
-<p>Verify the contents of <code>/tmp/testfile</code> match the test file or object your origin was serving.</p>
-</li>
-<li>
-<p>If you enabled <code>DirectReads</code> in step (1) above, remove it and restart the container.</p>
-</li>
-</ol>
-<h3 id="troubleshooting-validation">Troubleshooting validation<a class="headerlink" href="#troubleshooting-validation" title="Permanent link">&para;</a></h3>
-<p>If you get errors, add the <code>--debug</code> flag to the <code>pelican object get</code> invocation.</p>
-<p>Debugging information will be in your container logs e.g., <code>docker logs osdf-origin</code>.
-To increase the debugging information in the origin, edit your origin configuration file and set:
-<div class="highlight"><pre><span></span><code>Debug: true
-Logging:
-  Origin:
-    SciTokens: trace
-</code></pre></div></p>
-<p>See <a href="../../../common/help/">this page</a> for requesting assistance; please include the logs in your request.</p>
 <h2 id="joining-the-origin-to-the-federation">Joining the Origin to the Federation<a class="headerlink" href="#joining-the-origin-to-the-federation" title="Permanent link">&para;</a></h2>
 <div class="admonition danger">
 <p class="admonition-title">Upgrading to a Pelican origin</p>
