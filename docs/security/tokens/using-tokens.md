@@ -45,10 +45,6 @@ which is useful for looking inside tokens.
 
 #### Registering an OIDC profile
 
-!!! info "Where is the OSG 24 container?"
-    We are actively reworking our image build infrastructure for OSG 24 and expect to have all OSG Software containers
-    available by the end of 2024.
-
 1. Start an agent container in the background and name it `my-agent` to easily run subsequent commands against it:
 
         :::console

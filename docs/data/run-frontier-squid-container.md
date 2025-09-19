@@ -78,10 +78,6 @@ on configuration customization.
 Running a Frontier Squid Container
 ----------------------------------
 
-!!! info "Where is the OSG 24 container?"
-    We are actively reworking our image build infrastructure for OSG 24 and expect to have all OSG Software containers
-    available by the end of 2024.
-
 To run a Frontier Squid container with the defaults:
 
 ```console
