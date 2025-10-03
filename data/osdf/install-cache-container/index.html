@@ -2227,9 +2227,13 @@ Additional debugging information is located in the logs of your cache container.
 <div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>docker logs osdf-cache
 </code></pre></div>
 <p>To increase the debugging information in the cache, edit your cache configuration file and set:
-<div class="highlight"><pre><span></span><code>Debug: true
-</code></pre></div></p>
-<p>See <a href="../../../common/help/">this page</a> for requesting assistance; please include the logs and the <code>pelican object get -d</code> output in your request.</p>
+<div class="highlight"><pre><span></span><code>Logging:
+  Level: debug
+</code></pre></div>
+Note that <code>debug</code> produces a lot of output and you should remove that setting or set it to <code>info</code>
+once the problem has been resolved.</p>
+<p>See <a href="../../../common/help/">this page</a> for requesting assistance;
+please include the logs and the <code>pelican object get -d</code> output in your request.</p>
 <h2 id="joining-the-cache-to-the-federation">Joining the Cache to the Federation<a class="headerlink" href="#joining-the-cache-to-the-federation" title="Permanent link">&para;</a></h2>
 <p>The cache must be registered with the OSG prior to joining the data federation.
 Send mail to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#115;&#103;&#45;&#104;&#116;&#99;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#115;&#103;&#45;&#104;&#116;&#99;&#46;&#111;&#114;&#103;</a> requesting registration; provide the following information:</p>

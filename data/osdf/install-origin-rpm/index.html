@@ -2143,13 +2143,21 @@ before starting the origin for the first time, it is recommended to generate a k
 <li>
 <p>Download a test file (POSIX) or object (S3) from your origin (replacing <code>ORIGIN_HOSTNAME</code> with the host name of your origin,
     and TEST_PATH with the OSDF path to the test file or object</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">user@host$ </span>curl -L https://ORIGIN_HOSTNAME:8443/TEST_PATH -o /tmp/testfile
+<div class="codehilite"><pre><span></span><code><span class="gp">user@host$ </span>pelican object get -c ORIGIN_HOSTNAME:8443 <span class="s1">&#39;osdf:///&lt;TEST_PATH&gt;&#39;</span> -o /tmp/testfile
 </code></pre></div>
 
+<p>(Note: this test will not work if DirectReads are not enabled.)</p>
 <p>Verify the contents of <code>/tmp/testfile</code> match the test file or object your origin was serving.</p>
-<p>If the download fails, debugging information is located in <code>/var/log/pelican/osdf-origin.log</code>.
-See <a href="../../../common/help/">this page</a> for requesting assistance; please include the log file
-in your request.</p>
+<p>If the download fails, rerun the above <code>pelican object get</code> command with the <code>-d</code> flag added;
+additional debugging information is located in <code>/var/log/pelican/osdf-origin.log</code>.</p>
+<p>To increase the debugging information in the log file, edit your cache configuration file and set:
+<div class="highlight"><pre><span></span><code>Logging:
+  Level: debug
+</code></pre></div>
+Note that <code>debug</code> produces a lot of output and you should remove that setting or set it to <code>info</code>
+once the problem has been resolved.</p>
+<p>See <a href="../../../common/help/">this page</a> for requesting assistance; please include the log file
+and the <code>pelican object get -d</code> output in your request.</p>
 </li>
 </ol>
 <h2 id="joining-the-origin-to-the-federation">Joining the Origin to the Federation<a class="headerlink" href="#joining-the-origin-to-the-federation" title="Permanent link">&para;</a></h2>

@@ -2382,15 +2382,18 @@ whether or not they have <code>PublicReads</code> in their <code>Capabilities</c
 </li>
 </ol>
 <h3 id="troubleshooting-validation">Troubleshooting validation<a class="headerlink" href="#troubleshooting-validation" title="Permanent link">&para;</a></h3>
-<p>If you get errors, add the <code>--debug</code> flag to the <code>pelican object get</code> invocation.</p>
+<p>If the download fails, rerun the above <code>pelican object get</code> command with the <code>-d</code> flag added;</p>
 <p>Debugging information will be in your container logs e.g., <code>docker logs osdf-origin</code>.
 To increase the debugging information in the origin, edit your origin configuration file and set:
-<div class="highlight"><pre><span></span><code>Debug: true
-Logging:
+<div class="highlight"><pre><span></span><code>Logging:
+  Level: debug
   Origin:
     SciTokens: trace
-</code></pre></div></p>
-<p>See <a href="../../../common/help/">this page</a> for requesting assistance; please include the logs in your request.</p>
+</code></pre></div>
+Note that <code>debug</code> produces a lot of output and you should remove that line or set it to <code>info</code>
+once the problem has been resolved.</p>
+<p>See <a href="../../../common/help/">this page</a> for requesting assistance;
+please include the logs and <code>pelican object get --debug</code> output in your request.</p>
 <h2 id="joining-the-origin-to-the-federation">Joining the Origin to the Federation<a class="headerlink" href="#joining-the-origin-to-the-federation" title="Permanent link">&para;</a></h2>
 <p>The origin must be registered with the OSG prior to joining the data federation.
 Send mail to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#115;&#103;&#45;&#104;&#116;&#99;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#115;&#103;&#45;&#104;&#116;&#99;&#46;&#111;&#114;&#103;</a> requesting registration; provide the following information:</p>
@@ -2414,12 +2417,14 @@ which are accessible via
 <div class="highlight"><pre><span></span><code>docker logs osdf-origin
 </code></pre></div>
 To increase the debugging information in the origin, edit your origin configuration file and set:
-<div class="highlight"><pre><span></span><code>Debug: true
-Logging:
+<div class="highlight"><pre><span></span><code>Logging:
+  Level: debug
   Origin:
     SciTokens: trace
 </code></pre></div>
-See <a href="../../../common/help/">this page</a> for requesting assistance; please include the logs in your request.</p>
+Note that <code>debug</code> produces a lot of output and you should remove that line or set it to <code>info</code>
+once the problem has been resolved.</p>
+<p>See <a href="../../../common/help/">this page</a> for requesting assistance; please include the logs in your request.</p>
 <ol>
 <li>
 <p>Download a test file (POSIX) or object (S3) directly from your origin,
