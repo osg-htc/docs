@@ -194,13 +194,25 @@ Do the following steps to verify that the origin is functional:
     and TEST_PATH with the OSDF path to the test file or object
 
         :::console
-        user@host$ curl -L https://ORIGIN_HOSTNAME:8443/TEST_PATH -o /tmp/testfile
+        user@host$ pelican object get -c ORIGIN_HOSTNAME:8443 'osdf:///<TEST_PATH>' -o /tmp/testfile
+
+    (Note: this test will not work if DirectReads are not enabled.)
 
     Verify the contents of `/tmp/testfile` match the test file or object your origin was serving.
 
-    If the download fails, debugging information is located in `/var/log/pelican/osdf-origin.log`.
+    If the download fails, rerun the above `pelican object get` command with the `-d` flag added;
+    additional debugging information is located in `/var/log/pelican/osdf-origin.log`.
+
+    To increase the debugging information in the log file, edit your cache configuration file and set:
+    ```
+    Logging:
+      Level: debug
+    ```
+    Note that `debug` produces a lot of output and you should remove that setting or set it to `info`
+    once the problem has been resolved.
+    
     See [this page](../../common/help.md) for requesting assistance; please include the log file
-    in your request.
+    and the `pelican object get -d` output in your request.
 
 
 Joining the Origin to the Federation

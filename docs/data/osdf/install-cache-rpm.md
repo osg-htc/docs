@@ -140,6 +140,15 @@ Do the following steps to verify that the cache is functional:
 
     If the download fails, rerun the above `pelican object get` command with the `-d` flag added;
     additional debugging information is located in `/var/log/pelican/osdf-cache.log`.
+
+    To increase the debugging information in the log file, edit your cache configuration file and set:
+    ```
+    Logging:
+      Level: debug
+    ```
+    Note that `debug` produces a lot of output and you should remove that setting or set it to `info`
+    once the problem has been resolved.
+
     See [this page](../../common/help.md) for requesting assistance; please include the log file
     and the `pelican object get -d` output in your request.
 
