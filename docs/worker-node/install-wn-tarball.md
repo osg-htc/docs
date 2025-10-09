@@ -38,11 +38,6 @@ For OSG 24:
 -   [Binaries for RHEL9-compatible](https://repo.osg-htc.org/tarball-install/24-main/osg-wn-client-latest.el9.x86_64.tar.gz)
 -   [Binaries for RHEL8-compatible](https://repo.osg-htc.org/tarball-install/24-main/osg-wn-client-latest.el8.x86_64.tar.gz)
 
-For OSG 23:
-
--   [Binaries for RHEL9-compatible](https://repo.osg-htc.org/tarball-install/23-main/osg-wn-client-latest.el9.x86_64.tar.gz)
--   [Binaries for RHEL8-compatible](https://repo.osg-htc.org/tarball-install/23-main/osg-wn-client-latest.el8.x86_64.tar.gz)
-
 Install the WN Client
 ---------------------
 

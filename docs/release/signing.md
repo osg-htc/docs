@@ -67,6 +67,10 @@ The key used depends on the OSG version and software repository used, as documen
 | Key ID             | `effc3be6`                                             |
 | Repositories       | All non-development osg-24 repositories                |
 
+### End-of-life Release Series ###
+
+The following keys are for release series that have reached their end-of-life.
+
 | OSG 23 Automated Signing Key |                                              |
 |--------------------|--------------------------------------------------------|
 | Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-23-auto`             |
