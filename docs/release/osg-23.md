@@ -44,6 +44,22 @@ root@host # update-crypto-policies --set DEFAULT:SHA1
 Latest News
 -----------
 
+### **October 9, 2025:** vo-client 139
+-   vo-client 139
+    -   update LSST VO with new entry for voms.hec.lancs.ac.uk
+
+### **October 2, 2025:** xrdcl-pelican 1.5.6
+-   [xrdcl-pelican 1.5.6](https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v1.5.6)
+
+### **September 23, 2025:** Upcoming: HTCondor 23.10.29, Pelican 7.19.3
+-   Upcoming
+    -   [HTCondor 23.10.29](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-10-29)
+        -   Fix flocking to pools when there are intermittent network issues
+        -   HTCondor tarballs now contain Pelican 7.19.3
+    -   [Pelican 7.19.3](https://pelicanplatform.org/releases)
+        -   Prevent overwriting objects on upload
+        -   Multiple file transfer bug fixes (see release notes)
+
 ### **September 18, 2025:** xrdcl-pelican 1.5.4, IGTF 1.137, xrootd-monitoring-shoveler 1.4.0-2
 -   [xrdcl-pelican 1.5.4](https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v1.5.4)
     -   Add extensive statistics about the performance of the XrdClCurl client for better detection of stuck threads

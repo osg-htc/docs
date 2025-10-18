@@ -14,6 +14,50 @@ OSG 24 will be supported for [approximately two years total](release_series.md#s
 Latest News
 -----------
 
+### **October 9, 2025:** vo-client 139, HTCondor 24.0.13, Pelican 7.20.2; Upcoming: HTCondor 24.12.13, Pelican 7.20.2
+-   vo-client 139
+    -   update LSST VO with new entry for voms.hec.lancs.ac.uk
+-   [HTCondor 24.0.13](https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-13)
+    -   Fix bug that could cause Python job submission to crash
+    -   HTCondor tarballs now contain Pelican 7.20.2
+-   [Pelican 7.20.2](https://pelicanplatform.org/releases)
+    -   Pelican now lets HTCondor EP know when an upgrade happens
+    -   Fixed rare client deadlock in the plugin
+-   Upcoming
+    -   [HTCondor 24.12.13](https://htcondor.readthedocs.io/en/24.x/version-history/feature-versions-24-x.html#version-24-12-13)
+        -   Fix annoying momentary text status flash in `condor_watch_q`
+        -   Fix bug that could cause Python job submission to crash
+        -   HTCondor tarballs now contain Pelican 7.20.2
+    -   [Pelican 7.20.2](https://pelicanplatform.org/releases)
+        -   Pelican now lets HTCondor EP know when an upgrade happens
+        -   Fixed rare client deadlock in the plugin
+
+### **October 2, 2025:** xrdcl-pelican 1.5.6
+-   [xrdcl-pelican 1.5.6](https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v1.5.6)
+-   XCache 4.1.0
+    -   Add ARM support for all subpackages except xcache-consistency-check
+
+### **September 23, 2025:** HTCondor 24.0.12, Pelican 7.19.3; Upcoming: HTCondor 24.12.4, Pelican 7.19.3
+-   [HTCondor 24.0.12](https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-12)
+    -   Fix flocking to pools when there are intermittent network issues
+    -   HTCondor tarballs now contain Pelican 7.19.3
+-   [Pelican 7.19.3](https://pelicanplatform.org/releases)
+    -   Prevent overwriting objects on upload
+    -   Multiple file transfer bug fixes (see release notes)
+-   Upcoming
+    -   [HTCondor 24.12.4](https://htcondor.readthedocs.io/en/24.x/version-history/feature-versions-24-x.html#version-24-12-4)
+        -   Add the ability to enforce memory and CPU limits on local universe jobs
+        -   Add the ability for `condor_chirp` to work within a Docker universe job
+        -   `condor_watch_q` now exits with any keyboard input
+        -   The `shell` submit keyword now works with interactive jobs
+        -   Update `condor_upgrade_check` to warn about v1 Python bindings retirement
+        -   Update `condor_upgrade_check` to look for old syntax job transforms
+        -   Fix flocking to pools when there are intermittent network issues
+        -   HTCondor tarballs now contain Pelican 7.19.3
+    -   [Pelican 7.19.3](https://pelicanplatform.org/releases)
+        -   Prevent overwriting objects on upload
+        -   Multiple file transfer bug fixes (see release notes)
+
 ### **September 18, 2025:** xrdcl-pelican 1.5.4, IGTF 1.137, xrootd-monitoring-shoveler 1.4.0-2
 -   [xrdcl-pelican 1.5.4](https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v1.5.4)
     -   Add extensive statistics about the performance of the XrdClCurl client for better detection of stuck threads
@@ -419,7 +463,7 @@ Latest News
 -   XRootD 5.7.2-1.2
     -   Fixes file descriptor leak when using the caching plugin
 
-### **December 19, 2024:** IGTF 1.132, gratia-probe 2.5.8, HTCondor-CE 24.0.2, XCache 3.7.0-2
+### **December 19, 2024:** IGTF 1.132, gratia-probe 2.5.8, HTCondor-CE 24.0.2
 -   CA certificates based on [IGTF 1.132](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   added new trust anchor for TRGRID transition (TR)
 -   gratia-probe 2.8.5
