@@ -6,7 +6,7 @@ OSG 25 News
 **Supported OS Versions:** EL8, EL9, EL10 (see [this document](supported_platforms.md) for details)
 
 OSG 25 is the third release series following our [annual release schedule](release_series.md) and includes support for
-EL10. The initial release includes GlideinWMS 3.10.15, HTCondor 25.0.1, HTCondor 25.1.1, HTCondor-CE 25.0, and XRootD 5.8.4.
+EL10. The initial release includes GlideinWMS 3.10.15, HTCondor 25.0.2, HTCondor 25.2.1, HTCondor-CE 25.0.1, and XRootD 5.8.4.
 
 OSG 25 will be supported for [approximately two years total](release_series.md#series-life-cycle).
 
@@ -61,20 +61,38 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
-**October 10, 2025:** Initial Release
+**October 21, 2025:** Initial Release
 -------------------------------------
 
 This initial release contains the following notable changes compared to the current OSG 24 release in [main](../common/yum.md):
 
--   [HTCondor 25.0.2 LTS](https://htcondor.readthedocs.io/en/latest/version-history/lts-versions-25-0.html#version-25-0-2)
-    -   Replaces the HTCondor v1 Python bindings (`htcondor` and `classad`) with v2 Python bindings (`htcondor2` and
-        `classad2`)
+-   [HTCondor 25.0.1](https://htcondor.readthedocs.io/en/latest/version-history/upgrading-from-24-0-to-25-0-versions.html)
+    -   New and improved Python bindings: classad2 and htcondor2
+        -   Python code must be migrated to the new bindings
+    -   New `condor_dag_checker` tool finds syntax and logic errors before run
+    -   Add the ability to enforce memory and CPU limits on local universe jobs
+    -   Add job attributes to track why and how often a job is vacated
+    -   New job attribute to report number of input files transferred by protocol
+    -   New `condor_q -hold-codes` produces a summary of held jobs
+    -   `condor_status -lvm` reports current disk usage by slots on the EPs
+    -   Add new 'halt' and 'resume' verbs to "htcondor dag"
+    -   htcondor ap status now reports the AP's RecentDaemonCoreDutyCycle
+    -   Can limit the number of times that a job can be released
+    -   `condor_watch_q` now displays when file transfer is happening
+    -   Add ability to use authentication when fetching Docker images
+    -   HTCondor marks slots as broken when the slot resources cannot be released
+    -   HTCondor now advertises NVIDIA driver version
+    -   Improved validation and cleanup of EXECUTE directories
+    -   New `primary_unix_group` submit command that sets the job's primary group
+    -   Add Singularity launcher to distinguish runtime failure from job failure
+    -   Container Universe jobs can now mount a writable directory under scratch
+    -   New job attributes FirstJobMatchDate and InitialWaitDuration
+-   [HTCondor 25.0.2](https://htcondor.readthedocs.io/en/latest/version-history/lts-versions-25-0.html#version-25-0-2)
     -   Update Python file transfer plugins to use the new Python bindings
     -   Fix incorrect environment when using Singularity and nested scratch
-    -   All changes in [HTCondor 24.12.13](https://htcondor.readthedocs.io/en/latest/version-history/feature-versions-24-x.html#version-24-12-13)
     -   Fix bug that could cause Python job submission to crash
 
--   [HTCondor-CE 25.0.2](https://htcondor.com/htcondor-ce/v25/releases/#september-29-2025-2501)
+-   [HTCondor-CE 25.0.1](https://htcondor.com/htcondor-ce/v25/releases/#september-29-2025-2501)
     -   If upgrading from HTCondor-CE 23, ensure that you have converted the old style Job Router configuration to
         [ClassAd transform syntax](https://htcondor.com/htcondor-ce/v25/releases/#updating-to-htcondor-ce-25)
 
@@ -107,11 +125,11 @@ And the following packages in [upcoming](../common/yum.md#upcoming-software):
     -   Several DAGMan improvements
     -   Several local credmon improvements
     -   Fix problem that could prevent logging of hung file transfer plugins
-    -   All changes in 25.0.2
+    -   Plus all the fixes from HTCondor 25.0.2
 
 ### Package removals ###
 
-The following packages were removed from OSG 25:
+The following packages were removed for OSG 25:
 
 -  `cigetcert`: CILogon CA retired
 -  `cilogon-openid-ca-cert`: CILogon CA retired
