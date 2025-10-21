@@ -20,10 +20,27 @@ OSG 25 will be supported for [approximately two years total](release_series.md#s
     In January 2026, we plan to remove the the `current` symlink for the CVMFS-based OSG WN client,
     i.e. `/cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/current`
 
+!!! danger "Local credmon not yet supported in EL10"
+    The local credmon depends on `python3-scitokens`, which is currently missing from EPEL10.
+    Users of the local credmon should wait to upgrade to EL10 until `python3-scitokens` becomes
+    available.
+
 Enterprise Linux 10
 -------------------
 
 ### Microarchitecture ###
+
+The x86-64 architecture contains multiple subversions with different CPU feature sets, referred to as
+[microarchitectures](https://en.wikipedia.org/wiki/X86-64#Microarchitecture_levels)
+Support for x86-64-v2, released in 2008, [has been dropped from RHEL 10](https://access.redhat.com/solutions/7066628), 
+Centos Stream 10, and Rocky Linux 10. Almalinux 10 continues support for v2 and has dedicated
+[Yum repositories](https://almalinux.org/blog/2025-06-26-epel-v2-now-covers-almalinux-10-stable/) for these packages.
+
+Before EL10, all OSG Software `x86_64` packages were built against the v2 microarchitecture.
+Starting in EL10, OSG Software `x86_64` architecture packages are built against the v3 microarchitecture,
+while a separate `x86_64_v2` architecture is maintained to support v2 Almalinux 10. 
+`yum` will automatically select the correct `$basearch` for your host when 
+[installing the OSG yum repos](../common/yum.md).
 
 ### EPEL ###
 
