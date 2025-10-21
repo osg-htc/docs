@@ -50,8 +50,8 @@ Their names start with `osg-upcoming` and have the same structure as our standar
 as well as the same guarantees of quality and production-readiness.
 
 There are separate sets of upcoming repositories for each release series.
-For example, the [OSG 24 repos](https://repo.osg-htc.org/osg/24-main/) have corresponding
-[24-upcoming repos](https://repo.osg-htc.org/osg/24-upcoming/).
+For example, the [OSG 25 repos](https://repo.osg-htc.org/osg/25-main/) have corresponding
+[25-upcoming repos](https://repo.osg-htc.org/osg/25-upcoming/).
 The upcoming repositories are meant to be layered on top of our standard repositories:
 installing software from the upcoming repositories requires also enabling the standard repositories from the same release.
 
@@ -65,10 +65,10 @@ supported by the OSG.
 
 The definitive list of software in the contrib repository can be found here:
 
+-   [OSG 25 EL9 contrib software repository](https://repo.osg-htc.org/osg/25-contrib/el9/x86_64/)
+-   [OSG 25 EL8 contrib software repository](https://repo.osg-htc.org/osg/25-contrib/el8/x86_64/)
 -   [OSG 24 EL9 contrib software repository](https://repo.osg-htc.org/osg/24-contrib/el9/x86_64/)
 -   [OSG 24 EL8 contrib software repository](https://repo.osg-htc.org/osg/24-contrib/el8/x86_64/)
--   [OSG 23 EL9 contrib software repository](https://repo.osg-htc.org/osg/23-contrib/el9/x86_64/)
--   [OSG 23 EL8 contrib software repository](https://repo.osg-htc.org/osg/23-contrib/el8/x86_64/)
 
 If you would like to distribute your software in the OSG `contrib` repository, please [contact us](../common/help.md) with a
 description of your software, what users it serves, and relevant RPM packaging.
@@ -85,6 +85,18 @@ The repositories to enable, as well as the instructions to enable them, are OS-d
     A repository is enabled if it has `enabled=1` in its definition,
     or if the `enabled` line is missing
     (i.e. it is enabled unless specified otherwise.)
+
+#### Rocky Linux 9/10
+
+-   Ensure that the `crb` repo in `/etc/yum.repos.d/rocky.repo` is enabled
+
+#### AlmaLinux 9/10
+
+-   Ensure that the `crb` repo in `/etc/yum.repos.d/almalinux-crb.repo` is enabled
+
+#### CentOS Stream 9/10
+
+-   Ensure that the `crb` repo in `/etc/yum.repos.d/centos.repo` is enabled
 
 #### CentOS Stream 8
 
@@ -106,18 +118,6 @@ The repositories to enable, as well as the instructions to enable them, are OS-d
 -   Ensure that the `CodeReady Linux Builder` channel is enabled.
     See [Red Hat's instructions](https://access.redhat.com/articles/4348511#enable) on how to enable this repo.
 
-#### Rocky Linux 9
-
--   Ensure that the `crb` repo in `/etc/yum.repos.d/rocky.repo` is enabled
-
-#### AlmaLinux 9
-
--   Ensure that the `crb` repo in `/etc/yum.repos.d/almalinux-crb.repo` is enabled
-
-#### CentOS Stream 9
-
--   Ensure that the `crb` repo in `/etc/yum.repos.d/centos.repo` is enabled
-
 ### Install the EPEL repositories
 
 OSG software depends on packages distributed via the [EPEL](https://fedoraproject.org/wiki/EPEL) repositories.
@@ -126,10 +126,12 @@ You must install and enable these first.
 -   Install the EPEL repository, if not already present.  Choose the right version to match your OS version.
 
         :::console
-        ## EPEL 8 (For RHEL 8 and CentOS Stream 8, Rocky Linux 8, AlmaLinux 8)
-        root@host # yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+        ## EPEL 10 (For RHEL 10 and CentOS Stream 10, Rocky Linux 10, AlmaLinux 10)
+        root@host # yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-10.noarch.rpm
         ## EPEL 9 (For RHEL 9 and CentOS Stream 9, Rocky Linux 9, AlmaLinux 9)
         root@host # yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+        ## EPEL 8 (For RHEL 8 and CentOS Stream 8, Rocky Linux 8, AlmaLinux 8)
+        root@host # yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 
 -   Verify that `/etc/yum.repos.d/epel.repo` exists; the `[epel]` section should contain:
 
@@ -152,6 +154,21 @@ For instructions on upgrading from one OSG series to another, see the
 1. Install the OSG repository for your OS version and the [OSG release series](../release/release_series.md) that you wish to
    use:
 
+    - OSG 25 EL10:
+
+            :::console
+            root@host # yum install https://repo.osg-htc.org/osg/25-main/osg-25-main-el10-release-latest.rpm
+
+    - OSG 25 EL9:
+
+            :::console
+            root@host # yum install https://repo.osg-htc.org/osg/25-main/osg-25-main-el9-release-latest.rpm
+
+    - OSG 25 EL8:
+
+            :::console
+            root@host # yum install https://repo.osg-htc.org/osg/25-main/osg-25-main-el8-release-latest.rpm
+
     - OSG 24 EL9:
 
             :::console
@@ -161,16 +178,6 @@ For instructions on upgrading from one OSG series to another, see the
 
             :::console
             root@host # yum install https://repo.osg-htc.org/osg/24-main/osg-24-main-el8-release-latest.rpm
-
-    - OSG 23 EL9:
-
-            :::console
-            root@host # yum install https://repo.osg-htc.org/osg/23-main/osg-23-main-el9-release-latest.rpm
-
-    - OSG 23 EL8:
-
-            :::console
-            root@host # yum install https://repo.osg-htc.org/osg/23-main/osg-23-main-el8-release-latest.rpm
 
 
 1. The only OSG repository enabled by default is the release one.
@@ -197,33 +204,22 @@ For production services, we suggest only changing software versions during contr
 Therefore we recommend security-only automatic updates or disabling automatic updates entirely.
 
 !!! note
-    Automatic updates for EL8 and EL9 variants are provided in the `dnf-automatic` RPM, 
+    Automatic updates for EL8+ variants are provided in the `dnf-automatic` RPM, 
     which is not installed by default.
 
 To enable only security related automatic updates:
 
--   On EL8 and EL9 variants, edit `/etc/dnf/automatic.conf` and set `upgrade_type = security`
+-   On EL8+ variants, edit `/etc/dnf/automatic.conf` and set `upgrade_type = security`
 
-CentOS 7, CentOS Stream 8, and CentOS Stream 9 do not support security-only automatic updates;
+CentOS Stream 8, 9, and 10 do not support security-only automatic updates;
 doing any of the above steps will prevent automatic updates from happening at all.
 
 To disable automatic updates entirely:
 
--   On EL8 and EL9 variants, run:
+-   On EL8+ variants, run:
 
         :::console
         root@host # systemctl disable --now dnf-automatic.timer
-
-### Configuring Spacewalk priorities ###
-
-Sites using [Spacewalk](https://spacewalkproject.github.io/) to manage RPM packages will need to configure OSG Yum
-repository priorities using their Spacewalk ID. For example, if the OSG 3.4 repository's Spacewalk ID is
-`centos_7_osg34_dev`, modify `/etc/yum/pluginconf.d/90-osg.conf` to include the following:
-
-```
-[centos_7_osg_34_dev]
-priority = 98
-```
 
 Repository Mirrors
 ------------------
