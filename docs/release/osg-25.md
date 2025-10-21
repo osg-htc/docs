@@ -66,7 +66,7 @@ Updates to critical packages are also announced by email and are sent to the fol
 
 This initial release contains the following notable changes compared to the current OSG 24 release in [main](../common/yum.md):
 
--   [HTCondor 25.0.1](https://htcondor.readthedocs.io/en/latest/version-history/upgrading-from-24-0-to-25-0-versions.html)
+-   [HTCondor 25.0.2](https://htcondor.readthedocs.io/en/latest/version-history/lts-versions-25-0.html) (see [upgrade notes](updating-to-osg-25.md#updating-your-htcondor-hosts))
     -   New and improved Python bindings: classad2 and htcondor2
         -   Python code must be migrated to the new bindings
     -   New `condor_dag_checker` tool finds syntax and logic errors before run
@@ -87,12 +87,11 @@ This initial release contains the following notable changes compared to the curr
     -   Add Singularity launcher to distinguish runtime failure from job failure
     -   Container Universe jobs can now mount a writable directory under scratch
     -   New job attributes FirstJobMatchDate and InitialWaitDuration
--   [HTCondor 25.0.2](https://htcondor.readthedocs.io/en/latest/version-history/lts-versions-25-0.html#version-25-0-2)
     -   Update Python file transfer plugins to use the new Python bindings
     -   Fix incorrect environment when using Singularity and nested scratch
     -   Fix bug that could cause Python job submission to crash
 
--   [HTCondor-CE 25.0.1](https://htcondor.com/htcondor-ce/v25/releases/#september-29-2025-2501)
+-   [HTCondor-CE 25.0.1](https://htcondor.com/htcondor-ce/v25/releases/#september-29-2025-2501) (see [upgrade notes](updating-to-osg-25.md#updating-your-osg-compute-entrypoint))
     -   If upgrading from HTCondor-CE 23, ensure that you have converted the old style Job Router configuration to
         [ClassAd transform syntax](https://htcondor.com/htcondor-ce/v25/releases/#updating-to-htcondor-ce-25)
 
