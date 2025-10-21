@@ -10,6 +10,12 @@ Please update all services to OSG 25 as soon as possible.
 Updating the OSG Repositories
 -----------------------------
 
+1.  Consult the relevant section for the service you're upgrading before updating the OSG Yum repositories:
+
+    -   [Access Point](#updating-your-osg-access-point)
+    -   [Compute Entrypoint](#updating-your-osg-compute-entrypoint)
+    -   [HTCondor hosts](#updating-your-htcondor-hosts)
+
 1.  Clean the yum cache:
 
         :::console
@@ -48,6 +54,92 @@ Updating the OSG Repositories
             into place (that is, without the `.rpmnew` extension).
 
 1.  Continue on to any update instructions that match the role(s) that the host performs.
+
+Updating Your OSG Access Point
+------------------------------
+
+In OSG 25, some manual configuration changes may be required for an OSG Access Point (APs).
+
+#### HTCondor ####
+
+Consult the [HTCondor upgrade section](#updating-your-htcondor-hosts) for details on updating your HTCondor configuration.
+
+### Restarting HTCondor ###
+
+After updating your RPMs, restart your HTCondor service:
+
+```console
+root@host # systemctl restart condor
+```
+
+Updating Your OSG Compute Entrypoint
+------------------------------------
+
+The OSG 25 release series contains [HTCondor-CE 25](https://htcondor.github.io/htcondor-ce/v25/releases/).
+
+To upgrade your CE to OSG 25, follow the sections below.
+
+### Check for possible incompatibilities ###
+
+1.  Ensure that you have the latest HTCondor installed (at least HTCondor 24.12.4 or HTCondor 24.0.13).
+
+!!! warning "New HTCondor Python Bindings"
+    The initial version of the HTCondor Python bindings were removed in HTCondor 25.
+    If you have any Python scripts using the HTCondor Python bindings, please refer to the
+    [migration guide](https://htcondor.readthedocs.io/en/25.0/apis/python-bindings/api/version2/migration-guide.html).
+
+1.  Run the `condor_ce_upgrade_check` script and address any issues found.
+
+1.  If you have an HTCondor batch system, also run the `condor_upgrade_check` script and address any issues found.
+
+1.  Also consult the [upgrade documentation](https://htcondor.github.io/htcondor-ce/v25/releases/#updating-to-htcondor-ce-25)
+    for more information.
+
+### Turning off CE services ###
+
+1.  Register a [downtime](../common/registration.md#registering-resource-downtimes)
+
+1.  Before the update, turn off the following services on your HTCondor-CE host:
+
+        :::console
+        root@host # systemctl stop condor-ce
+
+### Updating CE packages ###
+
+!!! note "For OSG CEs serving an HTCondor pool"
+    If your OSG CE routes pilot jobs to a local HTCondor pool, also
+    see the section for [updating your HTCondor hosts](#updating-your-htcondor-hosts)
+
+After turning off your CE's services, you may proceed with the [repository and RPM update process](#updating-the-osg-repositories).
+
+### Starting CE services ###
+
+After updating your RPMs and updating your configuration, turn on the HTCondor-CE service:
+
+    :::console
+    root@host # systemctl start condor-ce
+
+Updating Your HTCondor Hosts
+----------------------------
+
+!!! warning "HTCondor-CE hosts"
+    Consult [this section](#updating-your-osg-compute-entrypoint) before updating the `condor` package on your
+    HTCondor-CE hosts.
+
+If you are running an HTCondor pool, consult the following instructions to update to HTCondor from OSG 24.
+
+1.  Ensure that you have the latest HTCondor installed (at least HTCondor 24.12.4 or HTCondor 24.0.13).
+
+!!! warning "New HTCondor Python Bindings"
+    The initial version of the HTCondor Python bindings were removed in HTCondor 25.
+    If you have any Python scripts using the HTCondor Python bindings, please refer to the
+    [migration guide](https://htcondor.readthedocs.io/en/25.0/apis/python-bindings/api/version2/migration-guide.html).
+
+1.  Run the `condor_upgrade_check` script and address any issues found.
+
+1.  Also consult the [HTCondor 25.0 upgrade instructions](https://htcondor.readthedocs.io/en/25.0/version-history/upgrading-from-24-0-to-25-0-versions.html).
+
+You may proceed with the [repository and RPM update process](#updating-the-osg-repositories).
 
 Getting Help
 ------------
