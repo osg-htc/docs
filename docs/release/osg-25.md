@@ -50,12 +50,16 @@ Updates to critical packages are also announced by email and are sent to the fol
 This initial release contains the following notable changes compared to the current OSG 24 release in [main](../common/yum.md):
 
 -   [HTCondor 25.0.2 LTS](https://htcondor.readthedocs.io/en/latest/version-history/lts-versions-25-0.html#version-25-0-2)
+    -   Replaces the HTCondor v1 Python bindings (`htcondor` and `classad`) with v2 Python bindings (`htcondor2` and
+        `classad2`)
     -   Update Python file transfer plugins to use the new Python bindings
     -   Fix incorrect environment when using Singularity and nested scratch
     -   All changes in [HTCondor 24.12.13](https://htcondor.readthedocs.io/en/latest/version-history/feature-versions-24-x.html#version-24-12-13)
     -   Fix bug that could cause Python job submission to crash
 
--   [HTCondor-CE 25.0.2]()
+-   [HTCondor-CE 25.0.2](https://htcondor.com/htcondor-ce/v25/releases/#september-29-2025-2501)
+    -   If upgrading from HTCondor-CE 23, ensure that you have converted the old style Job Router configuration to
+        [ClassAd transform syntax](https://htcondor.com/htcondor-ce/v25/releases/#updating-to-htcondor-ce-25)
 
 !!! question "Where are the OSDF packages?"
     `osdf-cache`, `osdf-server`, `osdf-origin` are being reworked to align more closely with upstream Pelican configurations.
