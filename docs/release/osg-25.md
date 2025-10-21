@@ -20,6 +20,11 @@ OSG 25 will be supported for [approximately two years total](release_series.md#s
     In January 2026, we plan to remove the the `current` symlink for the CVMFS-based OSG WN client,
     i.e. `/cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/current`
 
+!!! danger "Local credmon not yet supported in EL10"
+    The local credmon depends on python3-scitokens, which is currently missing from EPEL10.
+    Users of the local credmon should wait to upgrade to EL10 until python3-scitokens becomes
+    available.
+
 Enterprise Linux 10
 -------------------
 
@@ -116,6 +121,7 @@ The following OSG packages are not yet available for Enterprise Linux 10:
 -   glideinwms
 -   python3-scitokens
 -   htvault-config
+
 
 The following changes were made to packages in EL10:
 
