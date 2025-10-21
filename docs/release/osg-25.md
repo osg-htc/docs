@@ -30,11 +30,15 @@ Enterprise Linux 10
 
 ### Microarchitecture ###
 
-The x86-64 architecture contains multiple subversions with different CPU feature sets. Support for x86-64-v2, 
-released in 2008, has been dropped from RHEL 10, Centos Stream 10, and Rocky Linux 10. Almalinux 10 continues
-support for v2. In EL<=9, OSG's `x86_64` architecture packages are built against the v2 microarchitecture.
-Starting in EL10, OSG's `x86_64` architecture packages are built against the v3 microarchitecture, while a separate
-`x86_64_v2` architecture is maintained to support v2 Almalinux 10.
+The x86-64 architecture contains multiple subversions with different CPU feature sets, referred to as
+[microarchitectures](https://en.wikipedia.org/wiki/X86-64#Microarchitecture_levels)
+Support for x86-64-v2, released in 2008, has been dropped from RHEL 10, Centos Stream 10, and Rocky Linux 10.
+Almalinux 10 continues support for v2 and have dedicated
+[Yum repositories](https://almalinux.org/blog/2025-06-26-epel-v2-now-covers-almalinux-10-stable/) for these packages.
+
+Before EL10, all OSG Software `x86_64` packages were built against the v2 microarchitecture.
+Starting in EL10, OSG Software `x86_64` architecture packages are built against the v3 microarchitecture,
+while a separate `x86_64_v2` architecture is maintained to support v2 Almalinux 10.
 
 ### EPEL ###
 
