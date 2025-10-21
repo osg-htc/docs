@@ -21,8 +21,8 @@ OSG 25 will be supported for [approximately two years total](release_series.md#s
     i.e. `/cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/current`
 
 !!! danger "Local credmon not yet supported in EL10"
-    The local credmon depends on python3-scitokens, which is currently missing from EPEL10.
-    Users of the local credmon should wait to upgrade to EL10 until python3-scitokens becomes
+    The local credmon depends on `python3-scitokens`, which is currently missing from EPEL10.
+    Users of the local credmon should wait to upgrade to EL10 until `python3-scitokens` becomes
     available.
 
 Enterprise Linux 10
