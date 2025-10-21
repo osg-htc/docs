@@ -1,5 +1,11 @@
 title: Installing the OSDF Cache by RPM
 
+!!! question "Where are the OSDF packages in OSG 25?"
+    `osdf-cache`, `osdf-server`, `osdf-origin` are being reworked in OSG 25 to align more closely with 
+    upstream Pelican configurations.  These updates will require manual intervention, which will be 
+    documented and announced upon release.
+
+
 Installing the OSDF Cache by RPM
 ================================
 
@@ -62,6 +68,11 @@ Installing the Cache
 The cache service is provided by the `osdf-cache` RPM.
 Install it using one of the following commands:
 
+
+OSG 25:
+```console
+root@host # yum install osdf-cache
+```
 
 OSG 24:
 ```console

@@ -27,15 +27,16 @@ Download the WN Client
 
 Please pick the `osg-wn-client` tarball that is appropriate for your distribution and architecture. You will find them in <https://repo.osg-htc.org/tarball-install/> .
 
+For OSG 25:
+
+-   [Binaries for RHEL10-compatible](https://repo.osg-htc.org/tarball-install/25-main/osg-wn-client-latest.el10.x86_64.tar.gz)
+-   [Binaries for RHEL9-compatible](https://repo.osg-htc.org/tarball-install/25-main/osg-wn-client-latest.el9.x86_64.tar.gz)
+-   [Binaries for RHEL8-compatible](https://repo.osg-htc.org/tarball-install/25-main/osg-wn-client-latest.el8.x86_64.tar.gz)
+
 For OSG 24:
 
--   [Binaries for RHEL8-compatible](https://repo.osg-htc.org/tarball-install/24-main/osg-wn-client-latest.el8.x86_64.tar.gz)
 -   [Binaries for RHEL9-compatible](https://repo.osg-htc.org/tarball-install/24-main/osg-wn-client-latest.el9.x86_64.tar.gz)
-
-For OSG 23:
-
--   [Binaries for RHEL8-compatible](https://repo.osg-htc.org/tarball-install/23-main/osg-wn-client-latest.el8.x86_64.tar.gz)
--   [Binaries for RHEL9-compatible](https://repo.osg-htc.org/tarball-install/23-main/osg-wn-client-latest.el9.x86_64.tar.gz)
+-   [Binaries for RHEL8-compatible](https://repo.osg-htc.org/tarball-install/24-main/osg-wn-client-latest.el8.x86_64.tar.gz)
 
 Install the WN Client
 ---------------------
