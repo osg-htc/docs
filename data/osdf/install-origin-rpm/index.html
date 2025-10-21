@@ -1462,14 +1462,14 @@
       
       
         <label class="md-nav__link" for="__nav_10_2">
-          OSG 24
+          OSG 25
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="OSG 24" data-md-level="2">
+      <nav class="md-nav" aria-label="OSG 25" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_2">
           <span class="md-nav__icon md-icon"></span>
-          OSG 24
+          OSG 25
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -1479,7 +1479,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../release/osg-24/" class="md-nav__link">
+      <a href="../../../release/osg-25/" class="md-nav__link">
         News
       </a>
     </li>
@@ -1493,8 +1493,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../release/updating-to-osg-24/" class="md-nav__link">
-        Updating to OSG 24
+      <a href="../../../release/updating-to-osg-25/" class="md-nav__link">
+        Updating to OSG 25
       </a>
     </li>
   
@@ -1523,14 +1523,14 @@
       
       
         <label class="md-nav__link" for="__nav_10_3">
-          OSG 23
+          OSG 24
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="OSG 23" data-md-level="2">
+      <nav class="md-nav" aria-label="OSG 24" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_3">
           <span class="md-nav__icon md-icon"></span>
-          OSG 23
+          OSG 24
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -1540,7 +1540,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../release/osg-23/" class="md-nav__link">
+      <a href="../../../release/osg-24/" class="md-nav__link">
         News
       </a>
     </li>
@@ -1554,8 +1554,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../release/updating-to-osg-23/" class="md-nav__link">
-        Updating to OSG 23
+      <a href="../../../release/updating-to-osg-24/" class="md-nav__link">
+        Updating to OSG 24
       </a>
     </li>
   
@@ -1968,10 +1968,16 @@
 
 
 
+<div class="admonition question">
+<p class="admonition-title">Where are the OSDF packages in OSG 25?</p>
+<p><code>osdf-cache</code>, <code>osdf-server</code>, <code>osdf-origin</code> are being reworked in OSG 25 to align more closely with 
+upstream Pelican configurations.  These updates will require manual intervention, which will be 
+documented and announced upon release.</p>
+</div>
 <h1 id="installing-the-osdf-origin-by-rpm">Installing the OSDF Origin by RPM<a class="headerlink" href="#installing-the-osdf-origin-by-rpm" title="Permanent link">&para;</a></h1>
 <div class="admonition warning">
-<p class="admonition-title">OSG 24</p>
-<p>This installation guide requires OSG 24</p>
+<p class="admonition-title">OSG 24+</p>
+<p>This installation guide requires OSG 24 or OSG 25</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Upgrading from a non-Pelican origin?</p>
@@ -2015,10 +2021,10 @@ administrator to serve data from a POSIX filesystem or S3 endpoint through the g
 <li>Obtain root access to the host</li>
 <li>
 <p>Prepare <a href="../../../common/yum/">the required Yum repositories</a>;
-  the <a href="../../../common/yum/#install-the-osg-repositories">OSG 24 repositories</a> should be used.</p>
+  the <a href="../../../common/yum/#install-the-osg-repositories">OSG 25 repositories</a> should be used.</p>
 <div class="admonition danger">
 <p class="admonition-title">Upgrading to a Pelican origin</p>
-<p>If you are upgrading from a pre-Pelican OSDF origin, update all of your OSG 23 packages before installing the OSG 24
+<p>If you are upgrading from a pre-Pelican OSDF origin, update all of your OSG 23 packages before installing the OSG 25
 repositories:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum update
 </code></pre></div>

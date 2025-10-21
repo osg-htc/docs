@@ -1281,14 +1281,16 @@
 
   
   
+    
+  
   
     
       
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" checked>
       
       
       
@@ -1323,25 +1325,27 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_2" type="checkbox" id="__nav_10_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_2" type="checkbox" id="__nav_10_2" checked>
       
       
       
       
         <label class="md-nav__link" for="__nav_10_2">
-          OSG 24
+          OSG 25
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="OSG 24" data-md-level="2">
+      <nav class="md-nav" aria-label="OSG 25" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_2">
           <span class="md-nav__icon md-icon"></span>
-          OSG 24
+          OSG 25
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -1351,7 +1355,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../osg-24/" class="md-nav__link">
+      <a href="../osg-25/" class="md-nav__link">
         News
       </a>
     </li>
@@ -1363,11 +1367,73 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../updating-to-osg-24/" class="md-nav__link">
-        Updating to OSG 24
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Updating to OSG 25
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Updating to OSG 25
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#updating-the-osg-repositories" class="md-nav__link">
+    Updating the OSG Repositories
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-your-osg-compute-entrypoint" class="md-nav__link">
+    Updating Your OSG Compute Entrypoint
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-your-htcondor-hosts" class="md-nav__link">
+    Updating Your HTCondor Hosts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" class="md-nav__link">
+    Getting Help
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1395,14 +1461,14 @@
       
       
         <label class="md-nav__link" for="__nav_10_3">
-          OSG 23
+          OSG 24
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="OSG 23" data-md-level="2">
+      <nav class="md-nav" aria-label="OSG 24" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_3">
           <span class="md-nav__icon md-icon"></span>
-          OSG 23
+          OSG 24
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -1412,7 +1478,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../osg-23/" class="md-nav__link">
+      <a href="../osg-24/" class="md-nav__link">
         News
       </a>
     </li>
@@ -1426,8 +1492,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../updating-to-osg-23/" class="md-nav__link">
-        Updating to OSG 23
+      <a href="../updating-to-osg-24/" class="md-nav__link">
+        Updating to OSG 24
       </a>
     </li>
   
@@ -1740,6 +1806,20 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#updating-your-osg-compute-entrypoint" class="md-nav__link">
+    Updating Your OSG Compute Entrypoint
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-your-htcondor-hosts" class="md-nav__link">
+    Updating Your HTCondor Hosts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#getting-help" class="md-nav__link">
     Getting Help
   </a>
@@ -1771,6 +1851,13 @@ Please update all services to OSG 25 as soon as possible.</p>
 <h2 id="updating-the-osg-repositories">Updating the OSG Repositories<a class="headerlink" href="#updating-the-osg-repositories" title="Permanent link">&para;</a></h2>
 <ol>
 <li>
+<p>Consult the relevant section for the service you're upgrading before updating the OSG Yum repositories:</p>
+<ul>
+<li><a href="#updating-your-osg-compute-entrypoint">Compute Entrypoint</a></li>
+<li><a href="#updating-your-htcondor-hosts">HTCondor hosts</a></li>
+</ul>
+</li>
+<li>
 <p>Clean the yum cache:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum clean all --enablerepo<span class="o">=</span>*
 </code></pre></div>
@@ -1795,8 +1882,9 @@ files to the new <code>*.repo</code> files.</p>
 <p class="admonition-title">Note</p>
 <p>Because configuration updates will be necessary, be sure to turn off any OSG services
 before updating them. Consult the sections below that match your situation.</p>
-<p>:::console
-root@host # yum update</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>yum update
+</code></pre></div>
+
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -1817,6 +1905,61 @@ root@host # yum update</p>
 <p>Continue on to any update instructions that match the role(s) that the host performs.</p>
 </li>
 </ol>
+<h2 id="updating-your-osg-compute-entrypoint">Updating Your OSG Compute Entrypoint<a class="headerlink" href="#updating-your-osg-compute-entrypoint" title="Permanent link">&para;</a></h2>
+<p>The OSG 25 release series contains <a href="https://htcondor.github.io/htcondor-ce/v25/releases/">HTCondor-CE 25</a>.</p>
+<p>To upgrade your CE to OSG 25, follow the sections below.</p>
+<ol>
+<li>
+<p>Ensure that you have the latest HTCondor installed (at least HTCondor 24.12.4 or HTCondor 24.0.13).</p>
+<div class="admonition warning">
+<p class="admonition-title">New HTCondor Python Bindings</p>
+<p>The initial version of the HTCondor Python bindings were removed in HTCondor 25.
+If you have any Python scripts using the HTCondor Python bindings, please refer to the
+<a href="https://htcondor.readthedocs.io/en/25.0/apis/python-bindings/api/version2/migration-guide.html">migration guide</a>.</p>
+</div>
+</li>
+<li>
+<p>Run the <code>condor_ce_upgrade_check</code> script and address any issues found.</p>
+</li>
+<li>
+<p>If you have an HTCondor batch system, also run the <code>condor_upgrade_check</code> script and address any issues found.</p>
+</li>
+<li>
+<p>Also consult the <a href="https://htcondor.github.io/htcondor-ce/v25/releases/#updating-to-htcondor-ce-25">upgrade documentation</a>
+    for more information.</p>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">For OSG CEs serving an HTCondor pool</p>
+<p>If your OSG CE routes pilot jobs to a local HTCondor pool, also
+see the section for <a href="#updating-your-htcondor-hosts">updating your HTCondor hosts</a></p>
+</div>
+<p>You may proceed with the <a href="#updating-the-osg-repositories">repository and RPM update process</a>.</p>
+<h2 id="updating-your-htcondor-hosts">Updating Your HTCondor Hosts<a class="headerlink" href="#updating-your-htcondor-hosts" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">HTCondor-CE hosts</p>
+<p>Consult <a href="#updating-your-osg-compute-entrypoint">this section</a> before updating the <code>condor</code> package on your
+HTCondor-CE hosts.</p>
+</div>
+<p>If you are running an HTCondor pool, consult the following instructions to update to HTCondor from OSG 24.</p>
+<ol>
+<li>
+<p>Ensure that you have the latest HTCondor installed (at least HTCondor 24.12.4 or HTCondor 24.0.13).</p>
+<div class="admonition warning">
+<p class="admonition-title">New HTCondor Python Bindings</p>
+<p>The initial version of the HTCondor Python bindings were removed in HTCondor 25.
+If you have any Python scripts using the HTCondor Python bindings, please refer to the
+<a href="https://htcondor.readthedocs.io/en/25.0/apis/python-bindings/api/version2/migration-guide.html">migration guide</a>.</p>
+</div>
+</li>
+<li>
+<p>Run the <code>condor_upgrade_check</code> script and address any issues found.</p>
+</li>
+<li>
+<p>Also consult the <a href="https://htcondor.readthedocs.io/en/25.0/version-history/upgrading-from-24-0-to-25-0-versions.html">HTCondor 25.0 upgrade instructions</a>.</p>
+</li>
+</ol>
+<p>You may proceed with the <a href="#updating-the-osg-repositories">repository and RPM update process</a>.</p>
 <h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
 <p>To get assistance, please use the <a href="../../common/help/">this page</a>.</p>
 
@@ -1833,6 +1976,41 @@ root@host # yum update</p>
       </main>
       
         <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../osg-25/" class="md-footer__link md-footer__link--prev" aria-label="Previous: News" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              News
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../osg-24/" class="md-footer__link md-footer__link--next" aria-label="Next: News" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              News
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

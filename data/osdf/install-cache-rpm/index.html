@@ -1428,14 +1428,14 @@
       
       
         <label class="md-nav__link" for="__nav_10_2">
-          OSG 24
+          OSG 25
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="OSG 24" data-md-level="2">
+      <nav class="md-nav" aria-label="OSG 25" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_2">
           <span class="md-nav__icon md-icon"></span>
-          OSG 24
+          OSG 25
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -1445,7 +1445,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../release/osg-24/" class="md-nav__link">
+      <a href="../../../release/osg-25/" class="md-nav__link">
         News
       </a>
     </li>
@@ -1459,8 +1459,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../release/updating-to-osg-24/" class="md-nav__link">
-        Updating to OSG 24
+      <a href="../../../release/updating-to-osg-25/" class="md-nav__link">
+        Updating to OSG 25
       </a>
     </li>
   
@@ -1489,14 +1489,14 @@
       
       
         <label class="md-nav__link" for="__nav_10_3">
-          OSG 23
+          OSG 24
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="OSG 23" data-md-level="2">
+      <nav class="md-nav" aria-label="OSG 24" data-md-level="2">
         <label class="md-nav__title" for="__nav_10_3">
           <span class="md-nav__icon md-icon"></span>
-          OSG 23
+          OSG 24
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -1506,7 +1506,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../release/osg-23/" class="md-nav__link">
+      <a href="../../../release/osg-24/" class="md-nav__link">
         News
       </a>
     </li>
@@ -1520,8 +1520,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../release/updating-to-osg-23/" class="md-nav__link">
-        Updating to OSG 23
+      <a href="../../../release/updating-to-osg-24/" class="md-nav__link">
+        Updating to OSG 24
       </a>
     </li>
   
@@ -1900,6 +1900,12 @@
 
 
 
+<div class="admonition question">
+<p class="admonition-title">Where are the OSDF packages in OSG 25?</p>
+<p><code>osdf-cache</code>, <code>osdf-server</code>, <code>osdf-origin</code> are being reworked in OSG 25 to align more closely with 
+upstream Pelican configurations.  These updates will require manual intervention, which will be 
+documented and announced upon release.</p>
+</div>
 <h1 id="installing-the-osdf-cache-by-rpm">Installing the OSDF Cache by RPM<a class="headerlink" href="#installing-the-osdf-cache-by-rpm" title="Permanent link">&para;</a></h1>
 <p>This document describes how to install an Open Science Data Federation (OSDF) Cache service via RPMs.
 This service allows a site or regional network to cache data frequently used in Open Science Pool jobs,
@@ -1958,6 +1964,9 @@ intermediate CAs (if you're unsure about your setup, try accessing your cache fr
 <h2 id="installing-the-cache">Installing the Cache<a class="headerlink" href="#installing-the-cache" title="Permanent link">&para;</a></h2>
 <p>The cache service is provided by the <code>osdf-cache</code> RPM.
 Install it using one of the following commands:</p>
+<p>OSG 25:
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum install osdf-cache
+</code></pre></div></p>
 <p>OSG 24:
 <div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum install osdf-cache
 </code></pre></div></p>
