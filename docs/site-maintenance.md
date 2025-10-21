@@ -60,7 +60,6 @@ See the release notes for your installed release series:
 
 -  [OSG 25 release notes](release/osg-25.md)
 -  [OSG 24 release notes](release/osg-24.md)
--  [OSG 23 release notes](release/osg-23.md)
 
 To stay abreast of software releases, we recommend subscribing to the <mailto:osg-sites@opensciencegrid.org> mailing
 list.

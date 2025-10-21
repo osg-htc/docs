@@ -22,7 +22,6 @@ support inquiry:
 *  Recent OSG Software release notes
     -   [OSG 25](../release/osg-25.md)
     -   [OSG 24](../release/osg-24.md)
-    -   [OSG 23](../release/osg-23.md)
 *  [Outage](https://status.opensciencegrid.org/) information for OSG services
 
 ### Submitting support inquiries ###
