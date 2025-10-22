@@ -40,8 +40,8 @@ Updating the OSG Repositories
         Because configuration updates will be necessary, be sure to turn off any OSG services
         before updating them. Consult the sections below that match your situation.
 
-        :::console
-        root@host # yum update
+            :::console
+            root@host # yum update
 
     !!! warning
         -   Please be aware that running `yum update` may also update other RPMs.
