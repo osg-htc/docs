@@ -61,6 +61,18 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
+### **October 30, 2025:** XRootD 5.9.0
+-   [XRootD 5.9.0-1.1](https://github.com/xrootd/xrootd/releases/tag/v5.9.0)
+    -   New redirect intercept plugin for SENSE
+    -   udprefresh option for xrd.network directive to allow detecting and following DNS changes when sending out monitoring information
+    -   New CORS plugin for XrdHttp
+    -   Per-file cache control of block size and number of blocks via CGI elements
+    -   Possibility to turn off client certificate authentication for HTTPS connections
+    -   Updates to registerable summary monitoring statistics
+    -   Optimization of HTTP requests with sequential I/O
+    -   Refactoring of the XrdThrottle plugin as an OSS plugin
+    -   As with previous releases, XRootD 5.9.0 is 100% [ABI compatible](https://xrootd.web.cern.ch/abi-tracker/timeline/xrootd/) with XRootD 5.8.x and earlier releases. There is a change in ABI in the XCache plugin due to new features, but it does not affect dependencies like EOS, ROOT, FTS, etc.
+
 **October 21, 2025:** Initial Release
 -------------------------------------
 
