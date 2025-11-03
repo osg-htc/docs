@@ -1458,6 +1458,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#november-3-2025-htcondor-24014-upcoming-htcondor-241214" class="md-nav__link">
+    November 3, 2025: HTCondor 24.0.14; Upcoming: HTCondor 24.12.14
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#october-30-2025-xrootd-590" class="md-nav__link">
     October 30, 2025: XRootD 5.9.0
   </a>
@@ -2050,6 +2057,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#november-3-2025-htcondor-24014-upcoming-htcondor-241214" class="md-nav__link">
+    November 3, 2025: HTCondor 24.0.14; Upcoming: HTCondor 24.12.14
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#october-30-2025-xrootd-590" class="md-nav__link">
     October 30, 2025: XRootD 5.9.0
   </a>
@@ -2337,6 +2351,25 @@ the ARM CPU architecture.
 The initial release includes GlideinWMS 3.10.7, HTCondor 24.0.1, HTCondor 24.1.1, HTCondor-CE 24.0, and XRootD 5.7.0.</p>
 <p>OSG 24 will be supported for <a href="../release_series/#series-life-cycle">approximately two years total</a>.</p>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h3 id="november-3-2025-htcondor-24014-upcoming-htcondor-241214"><strong>November 3, 2025:</strong> HTCondor 24.0.14; Upcoming: HTCondor 24.12.14<a class="headerlink" href="#november-3-2025-htcondor-24014-upcoming-htcondor-241214" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-14">HTCondor 24.0.14</a><ul>
+<li>Fix problem running PyTorch jobs on multiple GPUs with newer versions of the CUDA library by providing long GPU IDs in the <code>CUDA_VISIBLE_DEVICES</code> environment variable</li>
+<li>Other bug fixes (see the version history)</li>
+</ul>
+</li>
+<li>Upcoming<ul>
+<li><a href="https://htcondor.readthedocs.io/en/24.x/version-history/feature-versions-24-x.html#version-24-12-14">HTCondor 24.12.14</a><ul>
+<li>Fix interoperability problem between HTCondor-CE 24 and 25 which manifests as a Job Router crash when upgrading the CE to HTCondor 25</li>
+<li>Fix several issues when submitting jobs with itemdata in the htcondor2 Python bindings</li>
+<li>Fix bug when <code>using max_idle</code> and <code>transfer_input_files</code> that could result in the <code>container_image</code> to be only transferred with the first job</li>
+<li>Fix problem running PyTorch jobs on multiple GPUs with newer versions of the CUDA library by providing long GPU IDs in the <code>CUDA_VISIBLE_DEVICES</code> environment variable</li>
+<li>Other bug fixes (see the version history)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="october-30-2025-xrootd-590"><strong>October 30, 2025:</strong> XRootD 5.9.0<a class="headerlink" href="#october-30-2025-xrootd-590" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://github.com/xrootd/xrootd/releases/tag/v5.9.0">XRootD 5.9.0-1.1</a><ul>
