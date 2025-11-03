@@ -61,6 +61,21 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
+### **November 3, 2025:** HTCondor 25.0.3; Upcoming: HTCondor 25.3.1
+-   [HTCondor 25.0.3](https://htcondor.readthedocs.io/en/25.0/version-history/lts-versions-25-0.html#version-25-0-3)
+    -   Fix interoperability problem between HTCondor-CE 24 and 25 which manifests as a Job Router crash when upgrading the CE to HTCondor 25
+    -   Fix several issues when submitting jobs with itemdata in the htcondor2 Python bindings
+    -   Fix bug when `using max_idle` and `transfer_input_files` that could result in the `container_image` to be only transferred with the first job
+    -   Fix problem running PyTorch jobs on multiple GPUs with newer versions of the CUDA library by providing long GPU IDs in the `CUDA_VISIBLE_DEVICES` environment variable
+    -   Other bug fixes (see the version history)
+-   Upcoming
+    -   [HTCondor 25.3.1](https://htcondor.readthedocs.io/en/25.x/version-history/feature-versions-25-x.html#version-25-3-1)
+        -   Fix interoperability problem between HTCondor-CE 24 and 25 which manifests as a Job Router crash when upgrading the CE to HTCondor 25
+        -   Fix several issues when submitting jobs with itemdata in the htcondor2 Python bindings
+        -   Fix bug when `using max_idle` and `transfer_input_files` that could result in the `container_image` to be only transferred with the first job
+        -   Fix problem running PyTorch jobs on multiple GPUs with newer versions of the CUDA library by providing long GPU IDs in the `CUDA_VISIBLE_DEVICES` environment variable
+        -   Other bug fixes (see the version history)
+
 ### **October 30, 2025:** XRootD 5.9.0
 -   [XRootD 5.9.0-1.1](https://github.com/xrootd/xrootd/releases/tag/v5.9.0)
     -   New redirect intercept plugin for SENSE
