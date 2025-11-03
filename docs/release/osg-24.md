@@ -14,6 +14,18 @@ OSG 24 will be supported for [approximately two years total](release_series.md#s
 Latest News
 -----------
 
+### **November 3, 2025:** HTCondor 24.0.14; Upcoming: HTCondor 24.12.14
+-   [HTCondor 24.0.14](https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-14)
+    -   Fix problem running PyTorch jobs on multiple GPUs with newer versions of the CUDA library by providing long GPU IDs in the `CUDA_VISIBLE_DEVICES` environment variable
+    -   Other bug fixes (see the version history)
+-   Upcoming
+    -   [HTCondor 24.12.14](https://htcondor.readthedocs.io/en/24.x/version-history/feature-versions-24-x.html#version-24-12-14)
+        -   Fix interoperability problem between HTCondor-CE 24 and 25 which manifests as a Job Router crash when upgrading the CE to HTCondor 25
+        -   Fix several issues when submitting jobs with itemdata in the htcondor2 Python bindings
+        -   Fix bug when `using max_idle` and `transfer_input_files` that could result in the `container_image` to be only transferred with the first job
+        -   Fix problem running PyTorch jobs on multiple GPUs with newer versions of the CUDA library by providing long GPU IDs in the `CUDA_VISIBLE_DEVICES` environment variable
+        -   Other bug fixes (see the version history)
+
 ### **October 30, 2025:** XRootD 5.9.0
 -   [XRootD 5.9.0-1.1](https://github.com/xrootd/xrootd/releases/tag/v5.9.0)
     -   New redirect intercept plugin for SENSE
