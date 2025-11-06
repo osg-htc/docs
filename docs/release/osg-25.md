@@ -61,7 +61,21 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
-### **November 3, 2025:** HTCondor 25.0.3; Upcoming: HTCondor 25.3.1
+**November 6, 2025:** CVMFS 2.13.3, osg-configure 4.3.1, GlideinWMS 3.10.16; Upcoming: GlideinWMS 3.11.2
+----------------------------------------------------------------------------------------------------------------------
+-   [CVMFS 2.13.3](https://cvmfs.readthedocs.io/en/2.13/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-13-3)
+    -   Fixes a race condition with auto unmount/mount introduced in 2.13.0 that sometimes caused hung clients
+    -   Adds an extended `cvmfs_config status <repo>` command to help with debugging
+-   osg-configure 4.3.1
+    -   Update to use version 2 of HTCondor Python bindings to fix critical bug that prevented configuration of CEs on OSG 25
+-   [GlideinWMS 3.10.16](https://glideinwms.fnal.gov/doc.v3_10_16/history.html#stable)
+    -   Various bug fixes. See the [CHANGELOG](https://github.com/glideinWMS/glideinwms/blob/master/CHANGELOG.md#v31016-2025-09-29) for more details
+-   Upcoming
+    -   [GlideinWMS 3.11.2](https://glideinwms.fnal.gov/doc.v3_11_2/history.html#development)
+        -   Various bug fixes. See the [CHANGELOG](https://github.com/mambelli/glideinwms/blob/release_v3_11_2/CHANGELOG.md#v3112-2025-09-08) for more details
+
+**November 3, 2025:** HTCondor 25.0.3; Upcoming: HTCondor 25.3.1
+----------------------------------------------------------------
 -   [HTCondor 25.0.3](https://htcondor.readthedocs.io/en/25.0/version-history/lts-versions-25-0.html#version-25-0-3)
     -   Fix interoperability problem between HTCondor-CE 24 and 25 which manifests as a Job Router crash when upgrading the CE to HTCondor 25
     -   Fix several issues when submitting jobs with itemdata in the htcondor2 Python bindings
@@ -76,7 +90,8 @@ Updates to critical packages are also announced by email and are sent to the fol
         -   Fix problem running PyTorch jobs on multiple GPUs with newer versions of the CUDA library by providing long GPU IDs in the `CUDA_VISIBLE_DEVICES` environment variable
         -   Other bug fixes (see the version history)
 
-### **October 30, 2025:** XRootD 5.9.0
+**October 30, 2025:** XRootD 5.9.0
+----------------------------------
 -   [XRootD 5.9.0-1.1](https://github.com/xrootd/xrootd/releases/tag/v5.9.0)
     -   New redirect intercept plugin for SENSE
     -   udprefresh option for xrd.network directive to allow detecting and following DNS changes when sending out monitoring information
