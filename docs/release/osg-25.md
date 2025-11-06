@@ -65,13 +65,13 @@ Updates to critical packages are also announced by email and are sent to the fol
 ----------------------------------------------------------------------------------------------------------------------
 -   [CVMFS 2.13.3](https://cvmfs.readthedocs.io/en/2.13/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-13-3)
     -   Fixes a race condition with auto unmount/mount introduced in 2.13.0 that sometimes caused hung clients
-    -   Adds an extended `cvmfs_config status <repo>` command to help with debugging
--   osg-configure 4.3.1
-    -   Update to use version 2 of HTCondor Python bindings to fix critical bug that prevented configuration of CEs on OSG 25
 
     !!! note
           This fix only takes effect on a new mount, after a repository is unmounted.  It does not take effect on a live upgrade.
 
+    -   Adds an extended `cvmfs_config status <repo>` command to help with debugging
+-   osg-configure 4.3.1
+    -   Update to use version 2 of HTCondor Python bindings to fix critical bug that prevented configuration of CEs on OSG 25
 -   [GlideinWMS 3.10.16](https://glideinwms.fnal.gov/doc.v3_10_16/history.html#stable)
     -   Various bug fixes. See the [CHANGELOG](https://github.com/glideinWMS/glideinwms/blob/master/CHANGELOG.md#v31016-2025-09-29) for more details
 -   Upcoming
