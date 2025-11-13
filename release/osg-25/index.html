@@ -1423,6 +1423,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#november-13-2025-upcoming-htcondor-2540" class="md-nav__link">
+    November 13, 2025: Upcoming: HTCondor 25.4.0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#november-6-2025-cvmfs-2133-osg-configure-431-glideinwms-31016-upcoming-glideinwms-3112" class="md-nav__link">
     November 6, 2025: CVMFS 2.13.3, osg-configure 4.3.1, GlideinWMS 3.10.16; Upcoming: GlideinWMS 3.11.2
   </a>
@@ -1894,6 +1901,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#november-13-2025-upcoming-htcondor-2540" class="md-nav__link">
+    November 13, 2025: Upcoming: HTCondor 25.4.0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#november-6-2025-cvmfs-2133-osg-configure-431-glideinwms-31016-upcoming-glideinwms-3112" class="md-nav__link">
     November 6, 2025: CVMFS 2.13.3, osg-configure 4.3.1, GlideinWMS 3.10.16; Upcoming: GlideinWMS 3.11.2
   </a>
@@ -2013,30 +2027,40 @@ minor versions to access packages in newer EPEL sub-versions.</p>
 <li><a href="https://groups.google.com/u/1/a/osg-htc.org/g/site-announce">site-announce@osg-htc.org</a></li>
 <li><a href="https://groups.google.com/a/osg-htc.org/g/software-discuss">software-discuss@osg-htc.org</a></li>
 </ul>
-<h2 id="november-6-2025-cvmfs-2133-osg-configure-431-glideinwms-31016-upcoming-glideinwms-3112"><strong>November 6, 2025:</strong> CVMFS 2.13.3, osg-configure 4.3.1, GlideinWMS 3.10.16; Upcoming: GlideinWMS 3.11.2<a class="headerlink" href="#november-6-2025-cvmfs-2133-osg-configure-431-glideinwms-31016-upcoming-glideinwms-3112" title="Permanent link">&para;</a></h2>
+<h2 id="november-13-2025-upcoming-htcondor-2540"><strong>November 13, 2025:</strong> Upcoming: HTCondor 25.4.0<a class="headerlink" href="#november-13-2025-upcoming-htcondor-2540" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://cvmfs.readthedocs.io/en/2.13/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-13-3">CVMFS 2.13.3</a><ul>
-<li>Fixes a race condition with auto unmount/mount introduced in 2.13.0 that sometimes caused hung clients</li>
-<li>Adds an extended <code>cvmfs_config status &lt;repo&gt;</code> command to help with debugging</li>
+<li>Upcoming<ul>
+<li><a href="https://htcondor.readthedocs.io/en/25.x/version-history/feature-versions-25-x.html#version-25-4-0">HTCondor 25.4.0</a><ul>
+<li>Job scratch space is now in a sub-directory of the execute directory</li>
+<li>HTCondor EPs can now refresh credentials during output transfers</li>
+<li>HTCondor will now create intermediate directories with output remaps</li>
+<li><code>condor_watch_q</code> now correctly accounts for unmaterialized jobs</li>
+<li>Now able to control maximum jobs running by user on an AP</li>
+<li>HTCondor now tracks when jobs are vacated prior to running</li>
+<li>Disk space allocated to jobs now more closely matches the request</li>
 </ul>
 </li>
-<li>
-<p>osg-configure 4.3.1</p>
+</ul>
+</li>
+</ul>
+<h2 id="november-6-2025-cvmfs-2133-osg-configure-431-glideinwms-31016-upcoming-glideinwms-3112"><strong>November 6, 2025:</strong> CVMFS 2.13.3, osg-configure 4.3.1, GlideinWMS 3.10.16; Upcoming: GlideinWMS 3.11.2<a class="headerlink" href="#november-6-2025-cvmfs-2133-osg-configure-431-glideinwms-31016-upcoming-glideinwms-3112" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Update to use version 2 of HTCondor Python bindings to fix critical bug that prevented configuration of CEs on OSG 25</li>
+<li>
+<p><a href="https://cvmfs.readthedocs.io/en/2.13/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-13-3">CVMFS 2.13.3</a></p>
+<ul>
+<li>Fixes a race condition with auto unmount/mount introduced in 2.13.0 that sometimes caused hung clients</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This fix only takes effect on a new mount, after a repository is unmounted.  It does not take effect on a live upgrade.</p>
 </div>
-</li>
-<li>
-<p><a href="https://glideinwms.fnal.gov/doc.v3_10_16/history.html#stable">GlideinWMS 3.10.16</a></p>
 <ul>
+<li>Adds an extended <code>cvmfs_config status &lt;repo&gt;</code> command to help with debugging</li>
+<li>osg-configure 4.3.1</li>
+<li>Update to use version 2 of HTCondor Python bindings to fix critical bug that prevented configuration of CEs on OSG 25</li>
+<li><a href="https://glideinwms.fnal.gov/doc.v3_10_16/history.html#stable">GlideinWMS 3.10.16</a></li>
 <li>Various bug fixes. See the <a href="https://github.com/glideinWMS/glideinwms/blob/master/CHANGELOG.md#v31016-2025-09-29">CHANGELOG</a> for more details</li>
-</ul>
-</li>
-<li>Upcoming<ul>
+<li>Upcoming</li>
 <li><a href="https://glideinwms.fnal.gov/doc.v3_11_2/history.html#development">GlideinWMS 3.11.2</a><ul>
 <li>Various bug fixes. See the <a href="https://github.com/mambelli/glideinwms/blob/release_v3_11_2/CHANGELOG.md#v3112-2025-09-08">CHANGELOG</a> for more details</li>
 </ul>
