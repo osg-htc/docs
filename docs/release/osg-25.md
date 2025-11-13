@@ -61,6 +61,18 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
+**November 13, 2025:** Upcoming: HTCondor 25.4.0
+----------------------------------------------------------------------------------------------------------------------
+-   Upcoming
+    -   [HTCondor 25.4.0](https://htcondor.readthedocs.io/en/25.x/version-history/feature-versions-25-x.html#version-25-4-0)
+        -   Job scratch space is now in a sub-directory of the execute directory
+        -   HTCondor EPs can now refresh credentials during output transfers
+        -   HTCondor will now create intermediate directories with output remaps
+        -   `condor_watch_q` now correctly accounts for unmaterialized jobs
+        -   Now able to control maximum jobs running by user on an AP
+        -   HTCondor now tracks when jobs are vacated prior to running
+        -   Disk space allocated to jobs now more closely matches the request
+
 **November 6, 2025:** CVMFS 2.13.3, osg-configure 4.3.1, GlideinWMS 3.10.16; Upcoming: GlideinWMS 3.11.2
 ----------------------------------------------------------------------------------------------------------------------
 -   [CVMFS 2.13.3](https://cvmfs.readthedocs.io/en/2.13/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-13-3)
