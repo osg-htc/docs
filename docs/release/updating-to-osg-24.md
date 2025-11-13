@@ -128,7 +128,7 @@ To upgrade your CE to OSG 24, follow the sections below.
 1.  Run the `condor_ce_upgrade_check` script and address any issues found.
 
 1.  If you have added custom job routes, make sure that you
-    [convert](https://htcondor.com/htcondor-ce/v23/configuration/job-router-overview/#converting-to-classad-transforms)
+    [convert](https://htcondor.com/htcondor-ce/v24/configuration/job-router-overview/#converting-to-classad-transforms)
     any jobs routes to the new, more flexible,
     [ClassAd transform](https://htcondor.com/htcondor-ce/v24/configuration/job-router-overview/#classad-transforms)
     syntax.
