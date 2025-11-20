@@ -61,6 +61,13 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
+**November 20, 2025:** Pelican 7.21.1
+----------------------------------------------------------------------------------------------------------------------
+-   [Pelican 7.21.1](https://pelicanplatform.org/releases)
+    -   User interface improvements for Pelican Client, HTCondor plugin, and Pelican Servers
+    -   Provide a short circuit mechanism for Caches/Origins with outdated XRootD configuration files
+    -   Other useful updates (See release notes)
+
 **November 13, 2025:** Upcoming: HTCondor 25.4.0
 ----------------------------------------------------------------------------------------------------------------------
 -   Upcoming
