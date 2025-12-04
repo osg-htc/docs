@@ -67,7 +67,7 @@ Updates to critical packages are also announced by email and are sent to the fol
     -   Add new REUNA Issuing CA and updated RPDNC for HLCA emSign Trusted Root (CL)
     -   Withdraw superseded KEK CA (JP)
     -   Update RCauth Pilot ICA G1 with extended validity period (EU)
--   [GlideinWMS 3.10.17](https://glideinwms.fnal.gov/doc.v3_10_17/history.html#stable)
+-   [GlideinWMS 3.10.17](https://glideinwms.fnal.gov/doc.v3_10_17/history.html#stable) (EL8 and EL9 only)
     -   Support for HTCondor v2 Python bindings
     -   Updated Factory monitoring of client requests
     -   Other features and fixes. See the [CHANGELOG](https://github.com/glideinWMS/glideinwms/blob/master/CHANGELOG.md#v31017-2025-11-20) for more details
