@@ -61,6 +61,17 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
+**December 4, 2025:** IGTF 1.138, GlideinWMS 3.10.17
+----------------------------------------------------------------------------------------------------------------------
+-   CA certificates based on [IGTF 1.138](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Add new REUNA Issuing CA and updated RPDNC for HLCA emSign Trusted Root (CL)
+    -   Withdraw superseded KEK CA (JP)
+    -   Update RCauth Pilot ICA G1 with extended validity period (EU)
+-   [GlideinWMS 3.10.17](https://glideinwms.fnal.gov/doc.v3_10_17/history.html#stable)
+    -   Support for HTCondor v2 Python bindings
+    -   Updated Factory monitoring of client requests
+    -   Other features and fixes. See the [CHANGELOG](https://github.com/glideinWMS/glideinwms/blob/master/CHANGELOG.md#v31017-2025-11-20) for more details
+
 **November 20, 2025:** Pelican 7.21.1
 ----------------------------------------------------------------------------------------------------------------------
 -   [Pelican 7.21.1](https://pelicanplatform.org/releases)
