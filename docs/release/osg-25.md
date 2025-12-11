@@ -61,6 +61,19 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
+**December 11, 2025:** XRootD 5.9.1-1.2, xrdhttp-pelican 0.0.8, htgettoken 2.5
+----------------------------------------------------------------------------------------------------------------------
+-   [XRootD 5.9.1-1.2](https://github.com/xrootd/xrootd/releases/tag/v5.9.1)
+    -   Two bug fixes for deadlocks observed in XCache
+    -   Fix bug in XrdSecsss for a problem parsing keytabs with invalid keys
+    -   Several other minor bug fixes
+-   [xrdhttp-pelican 0.0.8](https://github.com/PelicanPlatform/xrdhttp-pelican/releases/tag/v0.0.8)
+    -   Rebuilt to use XRootD 5.9.x
+-   [htgettoken 2.5](https://github.com/fermitools/htgettoken/releases/tag/v2.5)
+    -   Add htgettoken `--novaulttoken` option
+    -   Add htdestroytoken `-f` option to force removal of a refresh token
+    -   Fixes a few issues with httokensh
+
 **December 4, 2025:** IGTF 1.138, GlideinWMS 3.10.17
 ----------------------------------------------------------------------------------------------------------------------
 -   CA certificates based on [IGTF 1.138](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
