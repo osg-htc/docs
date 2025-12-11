@@ -20,6 +20,19 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
+**December 11, 2025:** XRootD 5.9.1-1.2, xrdhttp-pelican 0.0.8, htgettoken 2.5
+----------------------------------------------------------------------------------------------------------------------
+-   [XRootD 5.9.1-1.2](https://github.com/xrootd/xrootd/releases/tag/v5.9.1)
+    -   Two bug fixes for deadlocks observed in XCache
+    -   Fix bug in XrdSecsss for a problem parsing keytabs with invalid keys
+    -   Several other minor bug fixes
+-   [xrdhttp-pelican 0.0.8](https://github.com/PelicanPlatform/xrdhttp-pelican/releases/tag/v0.0.8)
+    -   Rebuilt to use XRootD 5.9.x
+-   [htgettoken 2.5](https://github.com/fermitools/htgettoken/releases/tag/v2.5)
+    -   Add htgettoken `--novaulttoken` option
+    -   Add htdestroytoken `-f` option to force removal of a refresh token
+    -   Fixes a few issues with httokensh
+
 **December 4, 2025:** IGTF 1.138, GlideinWMS 3.10.17
 ----------------------------------------------------------------------------------------------------------------------
 -   CA certificates based on [IGTF 1.138](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
@@ -68,7 +81,7 @@ Updates to critical packages are also announced by email and are sent to the fol
         -   Fix problem running PyTorch jobs on multiple GPUs with newer versions of the CUDA library by providing long GPU IDs in the `CUDA_VISIBLE_DEVICES` environment variable
         -   Other bug fixes (see the version history)
 
-**October 30, 2025:** XRootD 5.9.0
+**October 30, 2025:** XRootD 5.9.0-1.1
 ----------------------------------------------------------------------------------------------------------------------
 -   [XRootD 5.9.0-1.1](https://github.com/xrootd/xrootd/releases/tag/v5.9.0)
     -   New redirect intercept plugin for SENSE
@@ -252,7 +265,7 @@ Updates to critical packages are also announced by email and are sent to the fol
         periodic resets to the closest stratum 1, causing performance
         degradation. All who have upgraded to version 2.12.0 or later are
         encouraged to update as soon as possible.
--   htgettoken 2.4
+-   [htgettoken 2.4](https://github.com/fermitools/htgettoken/releases/tag/v2.4)
     -   Update htdecodetoken to not run scitokens-verify by default when stdout
         is not a TTY
 
@@ -340,7 +353,7 @@ Updates to critical packages are also announced by email and are sent to the fol
     -   Fixes for minor bugs and three security issues
 -   [Pelican 7.16.5](https://pelicanplatform.org/releases)
     -   Now includes end-to-end integrity checks for clients
--   htgettoken 2.2-2
+-   [htgettoken 2.2-2](https://github.com/fermitools/htgettoken/releases/tag/v2.2-2)
     -   Update `htgettoken` command to ignore the local Python environment
 
 **May 8, 2025:** IGTF 1.135, Pelican 7.15.3, XRootD 5.8.1-1.3, xrdcl-pelican 1.2.1, xrdhttp-pelican 0.0.6, OpenBao 2.2.0, htvault-config 2.0.0, Decision Engine 2.0.5
@@ -427,7 +440,7 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   XRootD 5.7.3-1.5
     -   Fix gstream configuration processing
     -   Add support for purge plugins
--   htgettoken 2.2
+-   [htgettoken 2.2](https://github.com/fermitools/htgettoken/releases/tag/v2.2)
     -   Fix htdecodetoken to work with token files that do not end in a newline
     -   Support args in htgettoken.main() Python entry point
 -   Upcoming
