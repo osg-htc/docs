@@ -20,6 +20,23 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
+**December 15, 2025:** HTCondor 24.0.15; Upcoming: HTCondor 24.12.15
+----------------------------------------------------------------------------------------------------------------------
+-   [HTCondor 24.0.15](https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-15)
+    -   Fix bug where AP would fail to read job credential files
+    -   Fix bugs that could causes a crash in the authentication code
+    -   HTCondor tarballs now contain Pelican 7.21.1
+        -   User interface improvements for the HTCondor plugin
+    -   HTCondor tarballs now contain Apptainer 1.4.4
+-   Upcoming
+    -   [HTCondor 24.12.15](https://htcondor.readthedocs.io/en/24.x/version-history/feature-versions-24-x.html#version-24-12-15)
+        -   `condor_submit` checks that `output_destination` is properly specified
+        -   Fix bug where AP would fail to read job credential files
+        -   Fix bugs that could causes a crash in the authentication code
+        -   HTCondor tarballs now contain Pelican 7.21.1
+            -   User interface improvements for the HTCondor plugin
+        -   HTCondor tarballs now contain Apptainer 1.4.4
+
 **December 11, 2025:** XRootD 5.9.1-1.2, xrdhttp-pelican 0.0.8, htgettoken 2.5
 ----------------------------------------------------------------------------------------------------------------------
 -   [XRootD 5.9.1-1.2](https://github.com/xrootd/xrootd/releases/tag/v5.9.1)

@@ -61,6 +61,30 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
+**December 15, 2025:** HTCondor 25.0.5; Upcoming: HTCondor 25.5.1
+----------------------------------------------------------------
+-   [HTCondor 25.0.5](https://htcondor.readthedocs.io/en/25.0/version-history/lts-versions-25-0.html#version-25-0-5)
+    -   Initial support for Ubuntu 24.04 on the ARM64 platform
+    -   `condor_submit` checks that `output_destination` is properly specified
+    -   Fix bug where AP would fail to read job credential files
+    -   Fix bugs that could causes a crash in the authentication code
+    -   HTCondor tarballs now contain Pelican 7.21.1
+        -   User interface improvements for the HTCondor plugin
+    -   HTCondor tarballs now contain Apptainer 1.4.4
+-   Upcoming
+    -   [HTCondor 25.5.1](https://htcondor.readthedocs.io/en/25.x/version-history/feature-versions-25-x.html#version-25-5-1)
+        -   The negotiator can now use its own concept of slot weight (not the EP's)
+        -   A stuck LVM logical volume will cause the EP slot to be broken and
+            then later unbroken if and when the logical volume cleanup succeeds
+        -   Made the AP more efficient at building resource requests for matchmaking
+        -   Initial support for Ubuntu 24.04 on the ARM64 platform
+        -   `condor_submit` checks that `output_destination` is properly specified
+        -   Fix bug where AP would fail to read job credential files
+        -   Fix bugs that could causes a crash in the authentication code
+        -   HTCondor tarballs now contain Pelican 7.21.1
+            -   User interface improvements for the HTCondor plugin
+        -   HTCondor tarballs now contain Apptainer 1.4.4
+
 **December 11, 2025:** XRootD 5.9.1-1.2, xrdhttp-pelican 0.0.8, htgettoken 2.5
 ----------------------------------------------------------------------------------------------------------------------
 -   [XRootD 5.9.1-1.2](https://github.com/xrootd/xrootd/releases/tag/v5.9.1)
