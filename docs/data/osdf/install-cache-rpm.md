@@ -94,6 +94,10 @@ Cache:
   StorageLocation: "<CACHE PARTITION>"
 ```
 
+!!! note
+    `/etc/pelican/config.d` contains template files for multiple Pelican/OSDF services, not just a cache.
+    You may ignore the files for the services you are not using.
+
 
 Preparing for Initial Startup
 -----------------------------

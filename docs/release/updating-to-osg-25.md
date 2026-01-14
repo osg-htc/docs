@@ -134,8 +134,8 @@ update the configuration files accordingly.
           TLSCertificateChain: /etc/pki/tls/certs/pelican.crt
           TLSKey: /etc/pki/tls/private/pelican.key
 
-Note: `/etc/pelican/config.d` will template configuration files for both a cache and an origin;
-ignore or remove the files for the service you are not using.
+Note: `/etc/pelican/config.d` will contain template configuration files for both a cache and an origin;
+ignore the files for the service you are not using.
 
 
 ### For caches
@@ -152,10 +152,11 @@ ignore or remove the files for the service you are not using.
         Logging:
           LogLocation: /var/log/pelican/osdf-cache.log
 
-1.  The file `/etc/pelican/osdf-cache.yaml` has been replaced with `/etc/pelican/pelican-cache.yaml`.
-    Note that you should not edit this file -- all configuration changes should be made in `/etc/pelican/config.d`.
+1.  After making changes to the configuration, restart the service with `systemctl restart pelican-cache`.
 
-After making changes to the configuration, restart the service with `systemctl restart pelican-cache`.
+The file `/etc/pelican/osdf-cache.yaml` has been replaced with `/etc/pelican/pelican-cache.yaml`.
+Note that you should not edit `/etc/pelican/pelican-cache.yaml` --
+all configuration changes should be made in `/etc/pelican/config.d`.
 
 ### For origins
 
@@ -171,10 +172,12 @@ After making changes to the configuration, restart the service with `systemctl r
         Logging:
           LogLocation: /var/log/pelican/osdf-origin.log
 
-1.  The file `/etc/pelican/osdf-origin.yaml` has been replaced with `/etc/pelican/pelican-origin.yaml`.
-    Note that you should not edit this file -- all configuration changes should be made in `/etc/pelican/config.d`.
+1.  After making changes to the configuration, restart the service with `systemctl restart pelican-origin`.
 
-After making changes to the configuration, restart the service with `systemctl restart pelican-origin`.
+The file `/etc/pelican/osdf-origin.yaml` has been replaced with `/etc/pelican/pelican-origin.yaml`.
+Note that you should not edit `/etc/pelican/pelican-origin.yaml` --
+all configuration changes should be made in `/etc/pelican/config.d`.
+
 
 Getting Help
 ------------

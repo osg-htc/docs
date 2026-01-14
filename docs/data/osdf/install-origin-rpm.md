@@ -128,6 +128,9 @@ You must tell Pelican the data to export to the federation.
 An origin may export one or more directory trees, or one or more S3 buckets -- follow one of the sections below.
 A single origin cannot export both a bucket and a directory tree.
 
+!!! note
+    `/etc/pelican/config.d` contains template files for multiple Pelican/OSDF services, not just an origin.
+    You may ignore the files for the services you are not using.
 
 
 ### Configuring POSIX (directory) export
