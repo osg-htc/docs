@@ -117,25 +117,25 @@ After upgrading the RPMs using the [repository and RPM update process](#updating
 you will need to be aware of the following configuration and service changes and, if you are using configuration management,
 update the configuration files accordingly.
 
-
-### For both caches and origins
-
-!!! warning
-    The default location for the host certificate chain has moved from `/etc/pki/tls/certs/pelican.crt`
-    to `/etc/pelican/certificates/tls.crt`.
-
-    The default location for the host key has moved from `/etc/pki/tls/private/pelican.key`
-    to `/etc/pelican/certificates/tls.key`.
-    
-    To restore the previous locations, create a .yaml file in `/etc/pelican/config.d` containing:
-    
-        :::yaml
-        Server:
-          TLSCertificateChain: /etc/pki/tls/certs/pelican.crt
-          TLSKey: /etc/pki/tls/private/pelican.key
-
 Note: `/etc/pelican/config.d` will contain template configuration files for both a cache and an origin;
 ignore the files for the service you are not using.
+
+
+### For all OSDF services
+
+The default location for the host certificate chain has moved from `/etc/pki/tls/certs/pelican.crt`
+to `/etc/pelican/certificates/tls.crt`.
+
+The default location for the host key has moved from `/etc/pki/tls/private/pelican.key`
+to `/etc/pelican/certificates/tls.key`.
+
+To restore the previous locations, create a .yaml file in `/etc/pelican/config.d` containing:
+
+```yaml
+Server:
+  TLSCertificateChain: /etc/pki/tls/certs/pelican.crt
+  TLSKey: /etc/pki/tls/private/pelican.key
+```
 
 
 ### For caches
