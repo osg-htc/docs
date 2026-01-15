@@ -61,6 +61,15 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
+**January 15, 2026:** vo-client 1.140, osdf-server 25-2
+----------------------------------------------------------------------------------------------------------------------
+-   [vo-client 1.140](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-140)
+    -   Update DN of voms2.fnal.gov in des, dune, fermilab
+-   Initial OSG 25 release of OSDF server components (osdf-server)
+    -   This replaces the previous osdf-cache, osdf-origin, osdf-director, and osdf-registry packages.
+    -   NOTE: Manual actions are necessary when upgrading; please see the
+        [upgrade documentation](https://osg-htc.org/docs/release/updating-to-osg-25/#updating-your-osdf-cache-or-origin)
+
 **December 15, 2025:** HTCondor 25.0.5; Upcoming: HTCondor 25.5.1
 ----------------------------------------------------------------
 -   [HTCondor 25.0.5](https://htcondor.readthedocs.io/en/25.0/version-history/lts-versions-25-0.html#version-25-0-5)

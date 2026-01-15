@@ -20,6 +20,11 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
+**January 15, 2026:** vo-client 1.140
+----------------------------------------------------------------------------------------------------------------------
+-   [vo-client 1.140](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-140)
+    -   Update DN of voms2.fnal.gov in des, dune, fermilab
+
 **December 15, 2025:** HTCondor 24.0.15; Upcoming: HTCondor 24.12.15
 ----------------------------------------------------------------------------------------------------------------------
 -   [HTCondor 24.0.15](https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-15)
@@ -113,7 +118,7 @@ Updates to critical packages are also announced by email and are sent to the fol
 
 **October 9, 2025:** vo-client 139, HTCondor 24.0.13, Pelican 7.20.2; Upcoming: HTCondor 24.12.13, Pelican 7.20.2
 ----------------------------------------------------------------------------------------------------------------------
--   vo-client 139
+-   [vo-client 1.139](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-139)
     -   update LSST VO with new entry for voms.hec.lancs.ac.uk
 -   [HTCondor 24.0.13](https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-13)
     -   Fix bug that could cause Python job submission to crash
@@ -429,7 +434,7 @@ Updates to critical packages are also announced by email and are sent to the fol
     -   Add API Token Listing endpoint
     -   Client now correctly reports the start time for uploads
     -   Several bug fixes for the client
--   vo-client 138-2
+-   [vo-client 1.138-2](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-138-2)
     -   Remove OpenShift Legacy IAM servers for ATLAS and CMS
 -   osg-ca-certs-updater 2.2
     -   Now started via systemd timer
