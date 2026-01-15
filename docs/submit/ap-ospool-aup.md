@@ -89,10 +89,10 @@ In practice, the minimum required versions for each of the supported release ser
 
 | **HTCondor Release Series** | **Required Minimum Version** |
 |-----------------------------|------------------------------|
-| 24.x.y                      | 24.6.1                       |
-| 24.0.y                      | 24.0.6                       |
-| 23.x.y                      | 23.10.22                     |
-| 23.0.y                      | 23.0.22                      |
+| 25.x.y                      | 25.1.0                       |
+| 25.0.y                      | 25.0.1                       |
+| 24.x.y                      | 24.11.2                      |
+| 24.0.y                      | 24.0.11                      |
 
 As the OSPool operations staff has a responsibility to the entire pool, the OSPool operations staff may disable the AP’s
 connection to the OSPool, as necessary, to maintain operational integrity and resource utilization.
