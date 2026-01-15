@@ -14,6 +14,7 @@ Updating the OSG Repositories
 
     -   [Compute Entrypoint](#updating-your-osg-compute-entrypoint)
     -   [HTCondor hosts](#updating-your-htcondor-hosts)
+    -   [OSDF Cache or Origin](#updating-your-osdf-cache-or-origin)
 
 1.  Clean the yum cache:
 
@@ -102,6 +103,81 @@ If you are running an HTCondor pool, consult the following instructions to updat
 1.  Also consult the [HTCondor 25.0 upgrade instructions](https://htcondor.readthedocs.io/en/25.0/version-history/upgrading-from-24-0-to-25-0-versions.html).
 
 You may proceed with the [repository and RPM update process](#updating-the-osg-repositories).
+
+
+Updating Your OSDF Cache or Origin
+----------------------------------
+
+The `osdf-cache`, `osdf-origin`, `osdf-director`, and `osdf-registry` packages have been merged
+into a single package named `osdf-server`.
+In addition, the corresponding SystemD services have been renamed to `pelican-cache`,
+`pelican-origin`, `pelican-director`, and `pelican-registry`.
+
+After upgrading the RPMs using the [repository and RPM update process](#updating-the-osg-repositories),
+you will need to be aware of the following configuration and service changes and, if you are using configuration management,
+update the configuration files accordingly.
+
+Note: `/etc/pelican/config.d` will contain template configuration files for both a cache and an origin;
+ignore the files for the service you are not using.
+
+
+### For all OSDF services
+
+The default location for the host certificate chain has moved from `/etc/pki/tls/certs/pelican.crt`
+to `/etc/pelican/certificates/tls.crt`.
+
+The default location for the host key has moved from `/etc/pki/tls/private/pelican.key`
+to `/etc/pelican/certificates/tls.key`.
+
+To restore the previous locations, create a .yaml file in `/etc/pelican/config.d` containing:
+
+```yaml
+Server:
+  TLSCertificateChain: /etc/pki/tls/certs/pelican.crt
+  TLSKey: /etc/pki/tls/private/pelican.key
+```
+
+
+### For caches
+
+1.  If you had any SystemD overrides for `osdf-cache` in `/etc/systemd/system/osdf-cache.service.d`,
+    you must move them to `/etc/systemd/system/pelican-cache.service.d`.
+
+1.  If you had a sysconfig file at `/etc/sysconfig/osdf-cache`, you must move it to `/etc/sysconfig/pelican-cache`.
+
+1.  The default log file for a cache is now `/var/log/pelican/pelican-cache.log` instead of `/var/log/pelican/osdf-cache.log`.
+    To restore the previous log file location, create a .yaml file in `/etc/pelican/config.d` containing:
+    
+        :::yaml
+        Logging:
+          LogLocation: /var/log/pelican/osdf-cache.log
+
+1.  After making changes to the configuration, restart the service with `systemctl restart pelican-cache`.
+
+The file `/etc/pelican/osdf-cache.yaml` has been replaced with `/etc/pelican/pelican-cache.yaml`.
+Note that you should not edit `/etc/pelican/pelican-cache.yaml` --
+all configuration changes should be made in `/etc/pelican/config.d`.
+
+### For origins
+
+1.  If you had any SystemD overrides for `osdf-origin` in `/etc/systemd/system/osdf-origin.service.d`,
+    you must move them to `/etc/systemd/system/pelican-origin.service.d`.
+
+1.  If you had a sysconfig file at `/etc/sysconfig/osdf-origin`, you must move it to `/etc/sysconfig/pelican-origin`.
+
+1.  The default log file for a cache is now `/var/log/pelican/pelican-origin.log` instead of `/var/log/pelican/osdf-origin.log`.
+    To restore the previous log file location, create a .yaml file in `/etc/pelican/config.d` containing:
+    
+        :::yaml
+        Logging:
+          LogLocation: /var/log/pelican/osdf-origin.log
+
+1.  After making changes to the configuration, restart the service with `systemctl restart pelican-origin`.
+
+The file `/etc/pelican/osdf-origin.yaml` has been replaced with `/etc/pelican/pelican-origin.yaml`.
+Note that you should not edit `/etc/pelican/pelican-origin.yaml` --
+all configuration changes should be made in `/etc/pelican/config.d`.
+
 
 Getting Help
 ------------
