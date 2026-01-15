@@ -1900,20 +1900,19 @@
 
 
 
-<div class="admonition question">
-<p class="admonition-title">Where are the OSDF packages in OSG 25?</p>
-<p><code>osdf-cache</code>, <code>osdf-server</code>, <code>osdf-origin</code> are being reworked in OSG 25 to align more closely with 
-upstream Pelican configurations.  These updates will require manual intervention, which will be 
-documented and announced upon release.</p>
-</div>
 <h1 id="installing-the-osdf-cache-by-rpm">Installing the OSDF Cache by RPM<a class="headerlink" href="#installing-the-osdf-cache-by-rpm" title="Permanent link">&para;</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">OSG 24+</p>
+<p>This installation guide requires OSG 24 or OSG 25</p>
+</div>
 <p>This document describes how to install an Open Science Data Federation (OSDF) Cache service via RPMs.
 This service allows a site or regional network to cache data frequently used in Open Science Pool jobs,
 reducing data transfer over the wide-area network and increasing throughput to jobs.</p>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following requirements:</p>
 <ul>
-<li><strong>Operating system:</strong> A RHEL 8 or RHEL 9 or <a href="../../../release/supported_platforms/">compatible operating system</a>.</li>
+<li><strong>Operating system:</strong> A RHEL 8, RHEL 9, RHEL 10, or <a href="../../../release/supported_platforms/">compatible operating system</a>.
+  (RHEL 10 is not supported in OSG 24.)</li>
 <li><strong>User IDs:</strong> If it does not exist already, the installation will create the Linux user named <code>xrootd</code> for running daemons.</li>
 <li><strong>File Systems:</strong> The cache should have a partition of its own for storing data and metadata.</li>
 <li><strong>Host certificate:</strong> Required for authentication.  See note below.</li>
@@ -1955,46 +1954,39 @@ Examples include <a href="../../../security/host-certs/lets-encrypt/">Let's Encr
 Caches without a valid certificate for the browser cannot be added to the OSDF.
 Note that, unlike legacy grid software, the public certificate file will need to contain the "full chain", including any
 intermediate CAs (if you're unsure about your setup, try accessing your cache from your browser).</p>
-<p>The following locations should be used (note that they are in separate directories):</p>
+<p>In OSG 25, the following locations should be used:</p>
+<ul>
+<li><strong>Host Certificate Chain</strong>: <code>/etc/pelican/certificates/tls.crt</code></li>
+<li><strong>Host Key</strong>: <code>/etc/pelican/certificates/tls.key</code></li>
+</ul>
+<p>In OSG 24, the following locations should be used
+(note that they are in separate directories):</p>
 <ul>
 <li><strong>Host Certificate Chain</strong>: <code>/etc/pki/tls/certs/pelican.crt</code></li>
 <li><strong>Host Key</strong>: <code>/etc/pki/tls/private/pelican.key</code></li>
 </ul>
 </div>
 <h2 id="installing-the-cache">Installing the Cache<a class="headerlink" href="#installing-the-cache" title="Permanent link">&para;</a></h2>
-<p>The cache service is provided by the <code>osdf-cache</code> RPM.
-Install it using one of the following commands:</p>
-<p>OSG 25:
+<p>In OSG 25, the cache service is provided by the <code>osdf-server</code> RPM.
+Install it via the following command:</p>
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum install osdf-server
+</code></pre></div>
+<p>In OSG 24, the cache service is provided by the <code>osdf-cache</code> RPM.
+Install it via the following command:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum install osdf-cache
-</code></pre></div></p>
-<p>OSG 24:
-<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum install osdf-cache
-</code></pre></div></p>
-<p>OSG 23:
-<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum install --enablerepo<span class="o">=</span>osg-upcoming osdf-cache
-</code></pre></div></p>
-<div class="admonition note">
-<p class="admonition-title">osdf-cache 7.18.0</p>
-<p>This document covers versions 7.18.0 and later of the <code>osdf-cache</code> package; ensure the above installation
-results in an appropriate version.</p>
-</div>
+</code></pre></div>
 <h2 id="configuring-the-cache-server">Configuring the Cache Server<a class="headerlink" href="#configuring-the-cache-server" title="Permanent link">&para;</a></h2>
 <p>In <code>/etc/pelican/config.d/20-cache.yaml</code>, set <code>Cache.StorageLocation</code>, as follows,
 replacing <code>&lt;CACHE PARTITION&gt;</code> with the mount point of the partition you will use for the cache.
 <div class="highlight"><pre><span></span><code>Cache:
   StorageLocation: &quot;&lt;CACHE PARTITION&gt;&quot;
 </code></pre></div></p>
-<h2 id="preparing-for-initial-startup">Preparing for Initial Startup<a class="headerlink" href="#preparing-for-initial-startup" title="Permanent link">&para;</a></h2>
-<div class="admonition warning">
-<p class="admonition-title">osdf-cache 7.18 bug</p>
-<p>Due to a bug in <code>osdf-cache</code> 7.18, you must set the federation manually as follows:</p>
-<p>Edit <code>/etc/pelican/config.d/10-federation.yaml</code> and set <code>Federation.DiscoveryUrl</code>:</p>
-<div class="codehilite"><pre><span></span><code>Federation:
-  DiscoveryUrl: &quot;https://osg-htc.org&quot;
-</code></pre></div>
-
-<p>This will be fixed in <code>osdf-cache</code> 7.19.0</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>/etc/pelican/config.d</code> contains template files for multiple Pelican/OSDF services, not just a cache.
+You may ignore the files for the services you are not using.</p>
 </div>
+<h2 id="preparing-for-initial-startup">Preparing for Initial Startup<a class="headerlink" href="#preparing-for-initial-startup" title="Permanent link">&para;</a></h2>
 <ol>
 <li>
 <p>The cache identifies itself to the federation via public key authentication;
@@ -2006,7 +1998,6 @@ before starting the cache for the first time, it is recommended to generate a ke
 <span class="gp">root@host$ </span>chmod <span class="m">0750</span> /etc/pelican/issuer-keys
 <span class="gp">root@host$ </span>chown root:pelican /etc/pelican/issuer-keys
 
-<span class="go">:::console</span>
 <span class="gp">root@host$ </span><span class="nb">cd</span> /etc/pelican/issuer-keys
 <span class="gp">root@host$ </span>pelican key create
 </code></pre></div>
@@ -2021,7 +2012,12 @@ before starting the cache for the first time, it is recommended to generate a ke
 <p>Do the following steps to verify that the cache is functional:</p>
 <ol>
 <li>
-<p>Start the cache using the following command:</p>
+<p>Start the cache using one of the following commands:</p>
+<p>OSG 25:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span>systemctl start pelican-cache
+</code></pre></div>
+
+<p>OSG 24:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span>systemctl start osdf-cache
 </code></pre></div>
 
@@ -2033,8 +2029,9 @@ before starting the cache for the first time, it is recommended to generate a ke
 <span class="go">If you are seeing this message, getting an object from OSDF was successful.</span>
 </code></pre></div>
 
-<p>If the download fails, rerun the above <code>pelican object get</code> command with the <code>-d</code> flag added;
-additional debugging information is located in <code>/var/log/pelican/osdf-cache.log</code>.</p>
+<p>If the download fails, rerun the above <code>pelican object get</code> command with the <code>-d</code> flag added.</p>
+<p>In OSG 25, additional debugging information is located in <code>/var/log/pelican/pelican-cache.log</code>.<br>
+In OSG 24, additional debugging information is located in <code>/var/log/pelican/osdf-cache.log</code>.</p>
 <p>To increase the debugging information in the log file, edit your cache configuration file and set:
 <div class="highlight"><pre><span></span><code>Logging:
   Level: debug
@@ -2058,13 +2055,45 @@ Send mail to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;
 <div class="highlight"><pre><span></span><code>XRootD:
   Sitename: &lt;RESOURCE NAME REGISTERED WITH OSG&gt;
 </code></pre></div></p>
-<p>Then, restart the cache by running</p>
+<p>Then, restart the cache by running one of the following commands:</p>
+<p>OSG 25:</p>
+<div class="highlight"><pre><span></span><code><span class="gp">root@host$ </span>systemctl restart pelican-cache
+</code></pre></div>
+<p>OSG 24:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">root@host$ </span>systemctl restart osdf-cache
 </code></pre></div>
 <p>Let OSG Staff know that you have restarted the cache with the updated sitename,
 so they can approve the new cache.</p>
 <h2 id="managing-the-cache-service">Managing the Cache Service<a class="headerlink" href="#managing-the-cache-service" title="Permanent link">&para;</a></h2>
 <p>Use the following SystemD commands as root to start, stop, enable, and disable the OSDF Cache.</p>
+<p>OSG 25:</p>
+<table>
+<thead>
+<tr>
+<th align="left">To...</th>
+<th align="left">Run the command...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Start the cache</td>
+<td align="left"><code>systemctl start pelican-cache</code></td>
+</tr>
+<tr>
+<td align="left">Stop the cache</td>
+<td align="left"><code>systemctl stop pelican-cache</code></td>
+</tr>
+<tr>
+<td align="left">Enable the cache to start on boot</td>
+<td align="left"><code>systemctl enable pelican-cache</code></td>
+</tr>
+<tr>
+<td align="left">Disable the cache from starting on boot</td>
+<td align="left"><code>systemctl disable pelican-cache</code></td>
+</tr>
+</tbody>
+</table>
+<p>OSG 24:</p>
 <table>
 <thead>
 <tr>

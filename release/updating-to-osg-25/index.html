@@ -1424,6 +1424,40 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#updating-your-osdf-cache-or-origin" class="md-nav__link">
+    Updating Your OSDF Cache or Origin
+  </a>
+  
+    <nav class="md-nav" aria-label="Updating Your OSDF Cache or Origin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-all-osdf-services" class="md-nav__link">
+    For all OSDF services
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-caches" class="md-nav__link">
+    For caches
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-origins" class="md-nav__link">
+    For origins
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#getting-help" class="md-nav__link">
     Getting Help
   </a>
@@ -1820,6 +1854,40 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#updating-your-osdf-cache-or-origin" class="md-nav__link">
+    Updating Your OSDF Cache or Origin
+  </a>
+  
+    <nav class="md-nav" aria-label="Updating Your OSDF Cache or Origin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-all-osdf-services" class="md-nav__link">
+    For all OSDF services
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-caches" class="md-nav__link">
+    For caches
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-origins" class="md-nav__link">
+    For origins
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#getting-help" class="md-nav__link">
     Getting Help
   </a>
@@ -1855,6 +1923,7 @@ Please update all services to OSG 25 as soon as possible.</p>
 <ul>
 <li><a href="#updating-your-osg-compute-entrypoint">Compute Entrypoint</a></li>
 <li><a href="#updating-your-htcondor-hosts">HTCondor hosts</a></li>
+<li><a href="#updating-your-osdf-cache-or-origin">OSDF Cache or Origin</a></li>
 </ul>
 </li>
 <li>
@@ -1960,6 +2029,74 @@ If you have any Python scripts using the HTCondor Python bindings, please refer 
 </li>
 </ol>
 <p>You may proceed with the <a href="#updating-the-osg-repositories">repository and RPM update process</a>.</p>
+<h2 id="updating-your-osdf-cache-or-origin">Updating Your OSDF Cache or Origin<a class="headerlink" href="#updating-your-osdf-cache-or-origin" title="Permanent link">&para;</a></h2>
+<p>The <code>osdf-cache</code>, <code>osdf-origin</code>, <code>osdf-director</code>, and <code>osdf-registry</code> packages have been merged
+into a single package named <code>osdf-server</code>.
+In addition, the corresponding SystemD services have been renamed to <code>pelican-cache</code>,
+<code>pelican-origin</code>, <code>pelican-director</code>, and <code>pelican-registry</code>.</p>
+<p>After upgrading the RPMs using the <a href="#updating-the-osg-repositories">repository and RPM update process</a>,
+you will need to be aware of the following configuration and service changes and, if you are using configuration management,
+update the configuration files accordingly.</p>
+<p>Note: <code>/etc/pelican/config.d</code> will contain template configuration files for both a cache and an origin;
+ignore the files for the service you are not using.</p>
+<h3 id="for-all-osdf-services">For all OSDF services<a class="headerlink" href="#for-all-osdf-services" title="Permanent link">&para;</a></h3>
+<p>The default location for the host certificate chain has moved from <code>/etc/pki/tls/certs/pelican.crt</code>
+to <code>/etc/pelican/certificates/tls.crt</code>.</p>
+<p>The default location for the host key has moved from <code>/etc/pki/tls/private/pelican.key</code>
+to <code>/etc/pelican/certificates/tls.key</code>.</p>
+<p>To restore the previous locations, create a .yaml file in <code>/etc/pelican/config.d</code> containing:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Server</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">TLSCertificateChain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/pki/tls/certs/pelican.crt</span><span class="w"></span>
+<span class="w">  </span><span class="nt">TLSKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/pki/tls/private/pelican.key</span><span class="w"></span>
+</code></pre></div>
+<h3 id="for-caches">For caches<a class="headerlink" href="#for-caches" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>If you had any SystemD overrides for <code>osdf-cache</code> in <code>/etc/systemd/system/osdf-cache.service.d</code>,
+    you must move them to <code>/etc/systemd/system/pelican-cache.service.d</code>.</p>
+</li>
+<li>
+<p>If you had a sysconfig file at <code>/etc/sysconfig/osdf-cache</code>, you must move it to <code>/etc/sysconfig/pelican-cache</code>.</p>
+</li>
+<li>
+<p>The default log file for a cache is now <code>/var/log/pelican/pelican-cache.log</code> instead of <code>/var/log/pelican/osdf-cache.log</code>.
+    To restore the previous log file location, create a .yaml file in <code>/etc/pelican/config.d</code> containing:</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">Logging</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">LogLocation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/log/pelican/osdf-cache.log</span><span class="w"></span>
+</code></pre></div>
+
+</li>
+<li>
+<p>After making changes to the configuration, restart the service with <code>systemctl restart pelican-cache</code>.</p>
+</li>
+</ol>
+<p>The file <code>/etc/pelican/osdf-cache.yaml</code> has been replaced with <code>/etc/pelican/pelican-cache.yaml</code>.
+Note that you should not edit <code>/etc/pelican/pelican-cache.yaml</code> --
+all configuration changes should be made in <code>/etc/pelican/config.d</code>.</p>
+<h3 id="for-origins">For origins<a class="headerlink" href="#for-origins" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>If you had any SystemD overrides for <code>osdf-origin</code> in <code>/etc/systemd/system/osdf-origin.service.d</code>,
+    you must move them to <code>/etc/systemd/system/pelican-origin.service.d</code>.</p>
+</li>
+<li>
+<p>If you had a sysconfig file at <code>/etc/sysconfig/osdf-origin</code>, you must move it to <code>/etc/sysconfig/pelican-origin</code>.</p>
+</li>
+<li>
+<p>The default log file for a cache is now <code>/var/log/pelican/pelican-origin.log</code> instead of <code>/var/log/pelican/osdf-origin.log</code>.
+    To restore the previous log file location, create a .yaml file in <code>/etc/pelican/config.d</code> containing:</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">Logging</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">LogLocation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/log/pelican/osdf-origin.log</span><span class="w"></span>
+</code></pre></div>
+
+</li>
+<li>
+<p>After making changes to the configuration, restart the service with <code>systemctl restart pelican-origin</code>.</p>
+</li>
+</ol>
+<p>The file <code>/etc/pelican/osdf-origin.yaml</code> has been replaced with <code>/etc/pelican/pelican-origin.yaml</code>.
+Note that you should not edit <code>/etc/pelican/pelican-origin.yaml</code> --
+all configuration changes should be made in <code>/etc/pelican/config.d</code>.</p>
 <h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
 <p>To get assistance, please use the <a href="../../common/help/">this page</a>.</p>
 

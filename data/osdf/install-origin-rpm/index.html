@@ -1968,12 +1968,6 @@
 
 
 
-<div class="admonition question">
-<p class="admonition-title">Where are the OSDF packages in OSG 25?</p>
-<p><code>osdf-cache</code>, <code>osdf-server</code>, <code>osdf-origin</code> are being reworked in OSG 25 to align more closely with 
-upstream Pelican configurations.  These updates will require manual intervention, which will be 
-documented and announced upon release.</p>
-</div>
 <h1 id="installing-the-osdf-origin-by-rpm">Installing the OSDF Origin by RPM<a class="headerlink" href="#installing-the-osdf-origin-by-rpm" title="Permanent link">&para;</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">OSG 24+</p>
@@ -1990,7 +1984,8 @@ administrator to serve data from a POSIX filesystem or S3 endpoint through the g
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following requirements:</p>
 <ul>
-<li><strong>Operating system:</strong> A RHEL 8 or RHEL 9 or <a href="../../../release/supported_platforms/">compatible operating system</a>.</li>
+<li><strong>Operating system:</strong> A RHEL 8, RHEL 9, RHEL 10, or <a href="../../../release/supported_platforms/">compatible operating system</a>.
+  (RHEL 10 is not supported in OSG 24.)</li>
 <li><strong>User IDs:</strong> If it does not exist already, the installation will create the Linux user named <code>xrootd</code> for running daemons.</li>
 <li><strong>Host certificate:</strong> Required for authentication.  See note below.</li>
 <li><strong>Network ports:</strong> The origin service requires the following ports open:<ul>
@@ -2039,7 +2034,13 @@ Examples include <a href="../../../security/host-certs/lets-encrypt/">Let's Encr
 Origins without a valid certificate for the browser cannot be added to the OSDF.
 Note that, unlike legacy grid software, the public certificate file will need to contain the "full chain", including any
 intermediate CAs (if you're unsure about your setup, try accessing your origin from your browser).</p>
-<p>The following locations should be used (note that they are in separate directories):</p>
+<p>In OSG 25, the following locations should be used:</p>
+<ul>
+<li><strong>Host Certificate Chain</strong>: <code>/etc/pelican/certificates/tls.crt</code></li>
+<li><strong>Host Key</strong>: <code>/etc/pelican/certificates/tls.key</code></li>
+</ul>
+<p>In OSG 24, the following locations should be used
+(note that they are in separate directories):</p>
 <ul>
 <li><strong>Host Certificate Chain</strong>: <code>/etc/pki/tls/certs/pelican.crt</code></li>
 <li><strong>Host Key</strong>: <code>/etc/pki/tls/private/pelican.key</code></li>
@@ -2075,20 +2076,24 @@ non-Pelican origin.</p>
 </li>
 </ul>
 <h2 id="installing-the-origin">Installing the Origin<a class="headerlink" href="#installing-the-origin" title="Permanent link">&para;</a></h2>
-<p>The origin service is provided by the <code>osdf-origin</code> RPM.
-Install it using the following command:</p>
+<p>In OSG 25, the origin service is provided by the <code>osdf-server</code> RPM.
+Install it via the following command:</p>
+<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum install osdf-server
+</code></pre></div>
+<p>In OSG 24, the origin service is provided by the <code>osdf-origin</code> RPM.
+Install it via the following command:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum install osdf-origin
 </code></pre></div>
-<div class="admonition note">
-<p class="admonition-title">osdf-origin 7.18.0</p>
-<p>This document covers versions 7.18.0 and later of the <code>osdf-origin</code> package; ensure the above installation
-results in an appropriate version.</p>
-</div>
 <h2 id="configuring-the-origin-server">Configuring the Origin Server<a class="headerlink" href="#configuring-the-origin-server" title="Permanent link">&para;</a></h2>
-<p>Create a file named <code>/etc/pelican/config.d/20-origin.yaml</code></p>
+<p>Edit the file named <code>/etc/pelican/config.d/20-origin-exports.yaml</code></p>
 <p>You must tell Pelican the data to export to the federation.
 An origin may export one or more directory trees, or one or more S3 buckets -- follow one of the sections below.
 A single origin cannot export both a bucket and a directory tree.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>/etc/pelican/config.d</code> contains template files for multiple Pelican/OSDF services, not just an origin.
+You may ignore the files for the services you are not using.</p>
+</div>
 <h3 id="configuring-posix-directory-export">Configuring POSIX (directory) export<a class="headerlink" href="#configuring-posix-directory-export" title="Permanent link">&para;</a></h3>
 <p>Set these options to export one or more directory trees to the federation.</p>
 <div class="highlight"><pre><span></span><code>Origin:
@@ -2108,16 +2113,6 @@ A single origin cannot export both a bucket and a directory tree.</p>
 <p>To configure your origin to serve objects from an S3 endpoint, see the
 <a href="https://docs.pelicanplatform.org/federating-your-data/s3-backend">upstream documentation</a>.</p>
 <h2 id="preparing-for-initial-startup">Preparing for Initial Startup<a class="headerlink" href="#preparing-for-initial-startup" title="Permanent link">&para;</a></h2>
-<div class="admonition warning">
-<p class="admonition-title">osdf-origin 7.18 bug</p>
-<p>Due to a bug in <code>osdf-origin</code> 7.18, you must set the federation manually as follows:</p>
-<p>Edit <code>/etc/pelican/config.d/10-federation.yaml</code> and set <code>Federation.DiscoveryUrl</code>:</p>
-<div class="codehilite"><pre><span></span><code>Federation:
-  DiscoveryUrl: &quot;https://osg-htc.org&quot;
-</code></pre></div>
-
-<p>This will be fixed in <code>osdf-cache</code> 7.19.0</p>
-</div>
 <ol>
 <li>
 <p>The origin identifies itself to the federation via public key authentication;
@@ -2126,7 +2121,6 @@ before starting the origin for the first time, it is recommended to generate a k
 <span class="gp">root@host$ </span>chmod <span class="m">0750</span> /etc/pelican/issuer-keys
 <span class="gp">root@host$ </span>chown root:pelican /etc/pelican/issuer-keys
 
-<span class="go">:::console</span>
 <span class="gp">root@host$ </span><span class="nb">cd</span> /etc/pelican/issuer-keys
 <span class="gp">root@host$ </span>pelican key create
 </code></pre></div>
@@ -2141,7 +2135,12 @@ before starting the origin for the first time, it is recommended to generate a k
 <p>Do the following steps to verify that the origin is functional:</p>
 <ol>
 <li>
-<p>Start the origin using the following command:</p>
+<p>Start the origin using one of the following commands:</p>
+<p>OSG 25:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span>systemctl start pelican-origin
+</code></pre></div>
+
+<p>OSG 24:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span>systemctl start osdf-origin
 </code></pre></div>
 
@@ -2154,9 +2153,10 @@ before starting the origin for the first time, it is recommended to generate a k
 
 <p>(Note: this test will not work if DirectReads are not enabled.)</p>
 <p>Verify the contents of <code>/tmp/testfile</code> match the test file or object your origin was serving.</p>
-<p>If the download fails, rerun the above <code>pelican object get</code> command with the <code>-d</code> flag added;
-additional debugging information is located in <code>/var/log/pelican/osdf-origin.log</code>.</p>
-<p>To increase the debugging information in the log file, edit your cache configuration file and set:
+<p>If the download fails, rerun the above <code>pelican object get</code> command with the <code>-d</code> flag added.</p>
+<p>In OSG 25, additional debugging information is located in <code>/var/log/pelican/pelican-origin.log</code>.<br>
+In OSG 24, additional debugging information is located in <code>/var/log/pelican/osdf-origin.log</code>.</p>
+<p>To increase the debugging information in the log file, edit your origin configuration file and set:
 <div class="highlight"><pre><span></span><code>Logging:
   Level: debug
 </code></pre></div>
@@ -2185,9 +2185,13 @@ Send mail to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;
 <div class="highlight"><pre><span></span><code>XRootD:
   Sitename: &lt;RESOURCE NAME REGISTERED WITH OSG&gt;
 </code></pre></div></p>
-<p>Then, restart the origin by running</p>
+<p>Then, restart the origin by running one of the following commands:</p>
+<p>OSG 25:
+<div class="highlight"><pre><span></span><code><span class="gp">root@host$ </span>systemctl restart pelican-origin
+</code></pre></div></p>
+<p>OSG 24:
 <div class="highlight"><pre><span></span><code><span class="gp">root@host$ </span>systemctl restart osdf-origin
-</code></pre></div>
+</code></pre></div></p>
 <h2 id="validating-the-origin-through-the-federation">Validating the Origin Through the Federation<a class="headerlink" href="#validating-the-origin-through-the-federation" title="Permanent link">&para;</a></h2>
 <p>Once your origin has been registered in the federation:</p>
 <ol>
@@ -2215,6 +2219,11 @@ in your request.</p>
 </li>
 <li>
 <p>Verify that your test is running against your Pelican origin:</p>
+<p>In OSG 25:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>grep &lt;TEST_PATH&gt; /var/log/pelican/pelican-origin.log
+</code></pre></div>
+
+<p>In OSG 24:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>grep &lt;TEST_PATH&gt; /var/log/pelican/osdf-origin.log
 </code></pre></div>
 
@@ -2233,6 +2242,34 @@ You may uninstall the non-Pelican origin:</p>
 </div>
 <h2 id="managing-the-origin-service">Managing the Origin Service<a class="headerlink" href="#managing-the-origin-service" title="Permanent link">&para;</a></h2>
 <p>Use the following SystemD commands as root to start, stop, enable, and disable the OSDF Origin.</p>
+<p>OSG 25:</p>
+<table>
+<thead>
+<tr>
+<th align="left">To...</th>
+<th align="left">Run the command...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Start the origin</td>
+<td align="left"><code>systemctl start pelican-origin</code></td>
+</tr>
+<tr>
+<td align="left">Stop the origin</td>
+<td align="left"><code>systemctl stop pelican-origin</code></td>
+</tr>
+<tr>
+<td align="left">Enable the origin to start on boot</td>
+<td align="left"><code>systemctl enable pelican-origin</code></td>
+</tr>
+<tr>
+<td align="left">Disable the origin from starting on boot</td>
+<td align="left"><code>systemctl disable pelican-origin</code></td>
+</tr>
+</tbody>
+</table>
+<p>OSG 24:</p>
 <table>
 <thead>
 <tr>
