@@ -83,9 +83,11 @@ In this scenario, you deploy the service on either your storage system or an att
 There are multiple ways to deploy Pelican yourself: 
 
 1. Use the Pelican container. 
-	1. Documented here: [Installing the OSDF Origin by Container](run-stashcache-container.md).
+	1. [Installing the OSDF Origin by Container](../osdf/install-origin-container.md).
+	1. [Installing the OSDF Cache by Container](../osdf/insteall-cache-container.md).	
 1. Use the RPM. 
-	1. Documented here: [Installing the OSDF Origin by RPM](install-cache.md)
+	1. [Installing the OSDF Origin by RPM](../osdf/install-origin.md)
+	1. [Installing the OSDF Cache by RPM](../osdf/install-cache.md)
 
 The benefit of this approach is full control of the service - no one from the OSG team needs access to the service node.
 The trade-off is the time and effort to stand up the service, and then to maintain it (upgrades, configuration, etc.).
