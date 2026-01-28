@@ -3,7 +3,8 @@ title: Open Science Data Federation Overview
 Open Science Data Federation Overview
 ========================
 
-The OSG operates the Open Science Data Federation (OSDF), which connects disparate dataset repositories into a single, nation-wide data distribution network. Leveraging the OSDF, providers can make their datasets available to a wide variety of compute users, from browsers to Jupyter notebooks to high throughput computing environments like the OSPool. 
+The OSG operates the Open Science Data Federation (OSDF), which connects disparate dataset repositories into a single, nation-wide data distribution network. 
+OSDF providers can make their datasets available to a wide variety of compute users, from browsers to Jupyter notebooks to high throughput computing environments like the OSPool. 
 
 The OSDF is powered by the [Pelican Platform](https://pelicanplatform.org/). Sites can run a Pelican _origin_ service and/or a Pelican _cache_ service to connect local storage to the federation. 
 
@@ -31,9 +32,12 @@ We strongly recommend scheduling a consultation to discuss these options.
 
 ## Choose Integration Option
 
-To connect storage to the OSDF, an origin or cache service needs to be running with on a physical or virtual host with access to the backing store. Pelican services can access storage via a unix mount, an S3 endpoint, or a Globus endpoint. 
+To connect storage to the OSDF, an origin or cache service needs to be running with on a physical or virtual host with access to the backing store.
+Pelican services can access storage via Unix mount, S3 endpoint, or Globus endpoint. 
 
-There are two overall paths forward to operate the Pelican service. Many campus storage contributors use Option 1, as it simplifies the effort required on their side to keep the service operating. Again, please contact us to discuss these options before pursuing an integration path. 
+There are two overall paths forward to operate the Pelican service.
+Many campus storage contributors use Option 1, as it simplifies the effort required to keep the service operational. 
+Again, please contact us to discuss these options before pursuing an integration path. 
 
 The recommended resources for an origin in the OSDF are:
 
@@ -50,20 +54,23 @@ At a minumum, an origin in the OSDF should have:
 
 ### Option 1: We (OSDF) operate
 
-Currently, we can operate the Pelican services on a service node local to the institution via Kubernetes. It is conceptually described on our [home website](https://osg-htc.org/about/osdf/deploying_an_osdf_origin.html) for an origin. A cache would be deployed exactly the same way. 
+Currently, we can operate the Pelican services on a service node local to the institution via Kubernetes.
+It is conceptually described on our [home website](https://osg-htc.org/about/osdf/deploying_an_osdf_origin.html) for an origin.
+A cache would be deployed exactly the same way. 
 
 You can provide a node with Kubernetes in one of two ways: 
 
-1. Integrate with the National Research PLatform (NRP): [Joining a Server to NRP](https://nrp.ai/documentation/admindocs/participating/new-contributor-guide/). After your server is integrated with NRP, we will deploy the appropriate service. 
+1. Integrate with the National Research Platform (NRP): [Joining a Server to NRP](https://nrp.ai/documentation/admindocs/participating/new-contributor-guide/).
+    After your server is integrated with NRP, we will deploy the appropriate service. 
 
 1. If you have an existing Kutbernetes cluster on campus, and you can provide 
 a user account on that cluster, our staff can operate the service from there. 
 
 The benefit of this approach is that you don't need to learn anything about Pelican or be responsible for running the appropriate service. The trade-off is the work of either running Kubernetes yourself, or providing to the node so it can be integrated with NRP. 
 
-> We are developing a integration method where OSDF operations staff can run the 
-> appropriate Pelican service on your service node through **ssh access**, without 
-> requiring kubernetes or root access. Contact us (support@osg-htc.org) if you would 
+> We are developing an integration method where OSDF operations staff can run the 
+> appropriate Pelican service on your service node through **SSH access**, without 
+> requiring Kubernetes or root access. Contact us (support@osg-htc.org) if you would 
 > like to explore using this option. 
 
 > **If your data store has an S3 endpoint**, we can operate the origin without 
@@ -80,6 +87,8 @@ There are multiple ways to deploy Pelican yourself:
 1. Use the RPM. 
 	1. Documented here: [Installing the OSDF Origin by RPM](install-cache.md)
 
-The benefit of this approach is full control of the service - no one from the OSG team needs access to the service node. The trade-off is the time and effort to stand up the service, and then to maintain it (upgrades, configuration, etc.). OSG staff members are available to help with initial configuration and set up. 
+The benefit of this approach is full control of the service - no one from the OSG team needs access to the service node.
+The trade-off is the time and effort to stand up the service, and then to maintain it (upgrades, configuration, etc.).
+OSG staff members are available to help with initial configuration and set up. 
 
 
