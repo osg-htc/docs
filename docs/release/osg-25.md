@@ -61,6 +61,52 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
+**January 29, 2026:** vo-client 1.141, htgettoken 2.6, Pelican 7.22.0, HTCondor 25.0.6; Upcoming: HTCondor 25.6.1
+----------------------------------------------------------------------------------------------------------------------
+-   [vo-client 1.141](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-141)
+    -   Update DN of voms1.fnal.gov in des, dune, fermilab
+-   [htgettoken 2.6](https://github.com/fermitools/htgettoken/releases/tag/v2.6)
+    -   Update `htdecodetoken` to hide token from `ps` when the new `scitokens-verify` command is available
+    -   Update `htdestroytoken -f` to find the same CA certs that `htgettoken` does
+-   [Pelican 7.22.0](https://pelicanplatform.org/releases)
+    -   More robust error classification in the client
+    -   Fixed authentication loop issue in the client
+-   [HTCondor 25.0.6](https://htcondor.readthedocs.io/en/25.0/version-history/lts-versions-25-0.html#version-25-0-6)
+    -   Make HTCondor Python wheel usable with the python-slim Docker image
+    -   Fix problem specifying scope or audience with a Vault-managed credential
+    -   Fix late materialization bug when job transform sets immutable attribute
+    -   Fix problem where a backfill slot would refuse claims
+    -   Fix floating point memory or disk request not fitting into some slots
+    -   Fix `condor_rooster` crash when unhibernate rank was not constant
+    -   Fix memory leak in the `htcondor2.JobEventLog.events()` Python method
+    -   `condor_history -long` now prints attributes in alphabetical order
+    -   Fix LVM setup to not timeout when creating a large volume
+    -   LVM creation no longer saves meta data which eventually fills the disk
+    -   HTCondor tarballs now contain Pelican 7.22.0
+        -   More robust error classification in the client
+        -   Fixed authentication loop issue in the client
+    -   HTCondor tarballs now contain Apptainer 1.4.5
+-   Upcoming
+    -   [HTCondor 25.6.1](https://htcondor.readthedocs.io/en/25.x/version-history/feature-versions-25-x.html#version-25-6-1)
+        -   DAGMan now uses the new DAG file parser used by `condor_dag_checker`
+        -   The condor keyboard daemon now checks idle time via systemd and Mutter
+        -   Can now specify DAGMan rescue file by name
+        -   Adminstrators can now require units on `retry_request_memory`
+        -   Make HTCondor Python wheel usable with the python-slim Docker image
+        -   Fix problem specifying scope or audience with a Vault-managed credential
+        -   Fix late materialization bug when job transform sets immutable attribute
+        -   Fix problem where a backfill slot would refuse claims
+        -   Fix floating point memory or disk request not fitting into some slots
+        -   Fix `condor_rooster` crash when unhibernate rank was not constant
+        -   Fix memory leak in the `htcondor2.JobEventLog.events()` Python method
+        -   `condor_history -long` now prints attributes in alphabetical order
+        -   Fix LVM setup to not timeout when creating a large volume
+        -   LVM creation no longer saves meta data which eventually fills the disk
+        -   HTCondor tarballs now contain Pelican 7.22.0
+            -   More robust error classification in the client
+            -   Fixed authentication loop issue in the client
+        -   HTCondor tarballs now contain Apptainer 1.4.5
+
 **January 15, 2026:** vo-client 1.140, osdf-server 25-2
 ----------------------------------------------------------------------------------------------------------------------
 -   [vo-client 1.140](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-140)
