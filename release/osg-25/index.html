@@ -1423,6 +1423,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#january-29-2026-vo-client-1141-htgettoken-26-pelican-7220-htcondor-2506-upcoming-htcondor-2561" class="md-nav__link">
+    January 29, 2026: vo-client 1.141, htgettoken 2.6, Pelican 7.22.0, HTCondor 25.0.6; Upcoming: HTCondor 25.6.1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#january-15-2026-vo-client-1140-osdf-server-25-2" class="md-nav__link">
     January 15, 2026: vo-client 1.140, osdf-server 25-2
   </a>
@@ -1936,6 +1943,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#january-29-2026-vo-client-1141-htgettoken-26-pelican-7220-htcondor-2506-upcoming-htcondor-2561" class="md-nav__link">
+    January 29, 2026: vo-client 1.141, htgettoken 2.6, Pelican 7.22.0, HTCondor 25.0.6; Upcoming: HTCondor 25.6.1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#january-15-2026-vo-client-1140-osdf-server-25-2" class="md-nav__link">
     January 15, 2026: vo-client 1.140, osdf-server 25-2
   </a>
@@ -2096,6 +2110,68 @@ minor versions to access packages in newer EPEL sub-versions.</p>
 <li><a href="../../common/registration/#registering-resources">Registered administrative contacts</a></li>
 <li><a href="https://groups.google.com/u/1/a/osg-htc.org/g/site-announce">site-announce@osg-htc.org</a></li>
 <li><a href="https://groups.google.com/a/osg-htc.org/g/software-discuss">software-discuss@osg-htc.org</a></li>
+</ul>
+<h2 id="january-29-2026-vo-client-1141-htgettoken-26-pelican-7220-htcondor-2506-upcoming-htcondor-2561"><strong>January 29, 2026:</strong> vo-client 1.141, htgettoken 2.6, Pelican 7.22.0, HTCondor 25.0.6; Upcoming: HTCondor 25.6.1<a class="headerlink" href="#january-29-2026-vo-client-1141-htgettoken-26-pelican-7220-htcondor-2506-upcoming-htcondor-2561" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-141">vo-client 1.141</a><ul>
+<li>Update DN of voms1.fnal.gov in des, dune, fermilab</li>
+</ul>
+</li>
+<li><a href="https://github.com/fermitools/htgettoken/releases/tag/v2.6">htgettoken 2.6</a><ul>
+<li>Update <code>htdecodetoken</code> to hide token from <code>ps</code> when the new <code>scitokens-verify</code> command is available</li>
+<li>Update <code>htdestroytoken -f</code> to find the same CA certs that <code>htgettoken</code> does</li>
+</ul>
+</li>
+<li><a href="https://pelicanplatform.org/releases">Pelican 7.22.0</a><ul>
+<li>More robust error classification in the client</li>
+<li>Fixed authentication loop issue in the client</li>
+</ul>
+</li>
+<li><a href="https://htcondor.readthedocs.io/en/25.0/version-history/lts-versions-25-0.html#version-25-0-6">HTCondor 25.0.6</a><ul>
+<li>Make HTCondor Python wheel usable with the python-slim Docker image</li>
+<li>Fix problem specifying scope or audience with a Vault-managed credential</li>
+<li>Fix late materialization bug when job transform sets immutable attribute</li>
+<li>Fix problem where a backfill slot would refuse claims</li>
+<li>Fix floating point memory or disk request not fitting into some slots</li>
+<li>Fix <code>condor_rooster</code> crash when unhibernate rank was not constant</li>
+<li>Fix memory leak in the <code>htcondor2.JobEventLog.events()</code> Python method</li>
+<li><code>condor_history -long</code> now prints attributes in alphabetical order</li>
+<li>Fix LVM setup to not timeout when creating a large volume</li>
+<li>LVM creation no longer saves meta data which eventually fills the disk</li>
+<li>HTCondor tarballs now contain Pelican 7.22.0<ul>
+<li>More robust error classification in the client</li>
+<li>Fixed authentication loop issue in the client</li>
+</ul>
+</li>
+<li>HTCondor tarballs now contain Apptainer 1.4.5</li>
+</ul>
+</li>
+<li>Upcoming<ul>
+<li><a href="https://htcondor.readthedocs.io/en/25.x/version-history/feature-versions-25-x.html#version-25-6-1">HTCondor 25.6.1</a><ul>
+<li>DAGMan now uses the new DAG file parser used by <code>condor_dag_checker</code></li>
+<li>The condor keyboard daemon now checks idle time via systemd and Mutter</li>
+<li>Can now specify DAGMan rescue file by name</li>
+<li>Adminstrators can now require units on <code>retry_request_memory</code></li>
+<li>Make HTCondor Python wheel usable with the python-slim Docker image</li>
+<li>Fix problem specifying scope or audience with a Vault-managed credential</li>
+<li>Fix late materialization bug when job transform sets immutable attribute</li>
+<li>Fix problem where a backfill slot would refuse claims</li>
+<li>Fix floating point memory or disk request not fitting into some slots</li>
+<li>Fix <code>condor_rooster</code> crash when unhibernate rank was not constant</li>
+<li>Fix memory leak in the <code>htcondor2.JobEventLog.events()</code> Python method</li>
+<li><code>condor_history -long</code> now prints attributes in alphabetical order</li>
+<li>Fix LVM setup to not timeout when creating a large volume</li>
+<li>LVM creation no longer saves meta data which eventually fills the disk</li>
+<li>HTCondor tarballs now contain Pelican 7.22.0<ul>
+<li>More robust error classification in the client</li>
+<li>Fixed authentication loop issue in the client</li>
+</ul>
+</li>
+<li>HTCondor tarballs now contain Apptainer 1.4.5</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h2 id="january-15-2026-vo-client-1140-osdf-server-25-2"><strong>January 15, 2026:</strong> vo-client 1.140, osdf-server 25-2<a class="headerlink" href="#january-15-2026-vo-client-1140-osdf-server-25-2" title="Permanent link">&para;</a></h2>
 <ul>

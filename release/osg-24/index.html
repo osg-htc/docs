@@ -1457,6 +1457,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#january-29-2026-vo-client-1141-htgettoken-26-pelican-7220-htcondor-24016-upcoming-htcondor-241216" class="md-nav__link">
+    January 29, 2026: vo-client 1.141, htgettoken 2.6, Pelican 7.22.0, HTCondor 24.0.16; Upcoming: HTCondor 24.12.16
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#january-15-2026-vo-client-1140" class="md-nav__link">
     January 15, 2026: vo-client 1.140
   </a>
@@ -2085,6 +2092,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#january-29-2026-vo-client-1141-htgettoken-26-pelican-7220-htcondor-24016-upcoming-htcondor-241216" class="md-nav__link">
+    January 29, 2026: vo-client 1.141, htgettoken 2.6, Pelican 7.22.0, HTCondor 24.0.16; Upcoming: HTCondor 24.12.16
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#january-15-2026-vo-client-1140" class="md-nav__link">
     January 15, 2026: vo-client 1.140
   </a>
@@ -2414,6 +2428,59 @@ The initial release includes GlideinWMS 3.10.7, HTCondor 24.0.1, HTCondor 24.1.1
 <li><a href="../../common/registration/#registering-resources">Registered administrative contacts</a></li>
 <li><a href="https://groups.google.com/u/1/a/osg-htc.org/g/site-announce">site-announce@osg-htc.org</a></li>
 <li><a href="https://groups.google.com/a/osg-htc.org/g/software-discuss">software-discuss@osg-htc.org</a></li>
+</ul>
+<h2 id="january-29-2026-vo-client-1141-htgettoken-26-pelican-7220-htcondor-24016-upcoming-htcondor-241216"><strong>January 29, 2026:</strong> vo-client 1.141, htgettoken 2.6, Pelican 7.22.0, HTCondor 24.0.16; Upcoming: HTCondor 24.12.16<a class="headerlink" href="#january-29-2026-vo-client-1141-htgettoken-26-pelican-7220-htcondor-24016-upcoming-htcondor-241216" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-141">vo-client 1.141</a><ul>
+<li>Update DN of voms1.fnal.gov in des, dune, fermilab</li>
+</ul>
+</li>
+<li><a href="https://github.com/fermitools/htgettoken/releases/tag/v2.6">htgettoken 2.6</a><ul>
+<li>Update <code>htdecodetoken</code> to hide token from <code>ps</code> when the new <code>scitokens-verify</code> command is available</li>
+<li>Update <code>htdestroytoken -f</code> to find the same CA certs that <code>htgettoken</code> does</li>
+</ul>
+</li>
+<li><a href="https://pelicanplatform.org/releases">Pelican 7.22.0</a><ul>
+<li>More robust error classification in the client</li>
+<li>Fixed authentication loop issue in the client</li>
+</ul>
+</li>
+<li><a href="https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-16">HTCondor 24.0.16</a><ul>
+<li>Fix floating point memory or disk request not fitting into some slots</li>
+<li>Fix <code>condor_rooster</code> crash when unhibernate rank was not constant</li>
+<li>Fix memory leak in the <code>htcondor2.JobEventLog.events()</code> Python method</li>
+<li><code>condor_history -long</code> now prints attributes in alphabetical order</li>
+<li>Fix LVM setup to not timeout when creating a large volume</li>
+<li>LVM creation no longer saves meta data which eventually fills the disk</li>
+<li>HTCondor tarballs now contain Pelican 7.22.0<ul>
+<li>More robust error classification in the client</li>
+<li>Fixed authentication loop issue in the client</li>
+</ul>
+</li>
+<li>HTCondor tarballs now contain Apptainer 1.4.5</li>
+</ul>
+</li>
+<li>Upcoming<ul>
+<li><a href="https://htcondor.readthedocs.io/en/24.x/version-history/feature-versions-24-x.html#version-24-12-16">HTCondor 24.12.16</a><ul>
+<li>Fix problem specifying scope or audience with a Vault-managed credential</li>
+<li>Fix late materialization bug when job transform sets immutable attribute</li>
+<li>Fix problem where a backfill slot would refuse claims</li>
+<li>Fix floating point memory or disk request not fitting into some slots</li>
+<li>Fix <code>condor_rooster</code> crash when unhibernate rank was not constant</li>
+<li>Fix memory leak in the <code>htcondor2.JobEventLog.events()</code> Python method</li>
+<li><code>condor_history -long</code> now prints attributes in alphabetical order</li>
+<li>Fix LVM setup to not timeout when creating a large volume</li>
+<li>LVM creation no longer saves meta data which eventually fills the disk</li>
+<li>HTCondor tarballs now contain Pelican 7.22.0<ul>
+<li>More robust error classification in the client</li>
+<li>Fixed authentication loop issue in the client</li>
+</ul>
+</li>
+<li>HTCondor tarballs now contain Apptainer 1.4.5</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h2 id="january-15-2026-vo-client-1140"><strong>January 15, 2026:</strong> vo-client 1.140<a class="headerlink" href="#january-15-2026-vo-client-1140" title="Permanent link">&para;</a></h2>
 <ul>
