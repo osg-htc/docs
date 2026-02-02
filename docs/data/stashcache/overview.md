@@ -28,7 +28,9 @@ or
 
 Before joining the OSDF, you should identify a) what service you are offering (an origin or a cache) and b) if an origin, whether you plan to serve your own data, or share storage with OSG services. 
 
-!!! We strongly recommend scheduling a consultation to discuss these options. 
+!!! tip "Meet with us"
+	We strongly recommend scheduling a consultation to discuss these options. See 
+	the contact options above. 
 
 ## Choose Integration Option
 
@@ -44,10 +46,11 @@ Again, please contact us to discuss these options before pursuing an integration
     and [cache](../osdf/install-cache-container.md#before-starting) documentation
 
 
-### Option 1: We (OSDF) operate
+### Option 1: We (OSDF) operate the service
 
-!!! **If your data store has an S3 endpoint**, we can operate the origin without 
-!!! any local hardware requirements. Let us know if this applies to you. 
+!!! tip "No local hardware needed"
+	**If your data store has an S3 endpoint**, we can operate the origin without 
+	any local hardware requirements. Let us know if this applies to you. 
 
 Currently, we can operate the Pelican services on a service node local to the institution via Kubernetes.
 It is conceptually described on our [home website](https://osg-htc.org/about/osdf/deploying_an_osdf_origin.html) for an origin.
@@ -69,7 +72,7 @@ The benefit of this approach is that you don't need to learn anything about Peli
     requiring Kubernetes or root access.
     Contact us (support@osg-htc.org) if you would like to explore using this option. 
 
-### Option 2: You (the campus/site) operate
+### Option 2: You (the campus/site) operate the service
 
 In this scenario, you deploy the service on either your storage system or an attached service node as you would any other service, like a web server. 
 
