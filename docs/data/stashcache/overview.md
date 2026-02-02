@@ -39,17 +39,9 @@ There are two overall paths forward to operate the Pelican service.
 Many campus storage contributors use Option 1, as it simplifies the effort required to keep the service operational. 
 Again, please contact us to discuss these options before pursuing an integration path. 
 
-The recommended resources for an origin in the OSDF are:
-
-* 4 cores
-* 25 Gbps connectivity
-* 20 GB of RAM
-
-At a minumum, an origin in the OSDF should have:
-
-* 1 core
-* 1 Gbps connectivity
-* 12 GB of RAM
+!!! tip "Hardware recommendations"
+    See hardware recommendations for each service in the [origin](../osdf/install-origin-container.md#before-starting)
+    and [cache](../osdf/install-cache-container.md#before-starting) documentation
 
 
 ### Option 1: We (OSDF) operate
@@ -71,10 +63,11 @@ a user account on that cluster, our staff can operate the service from there.
 
 The benefit of this approach is that you don't need to learn anything about Pelican or be responsible for running the appropriate service. The trade-off is the work of either running Kubernetes yourself, or providing to the node so it can be integrated with NRP. 
 
-> We are developing an integration method where OSDF operations staff can run the 
-> appropriate Pelican service on your service node through **SSH access**, without 
-> requiring Kubernetes or root access. Contact us (support@osg-htc.org) if you would 
-> like to explore using this option. 
+!!! info "Under Development"
+    We are developing an integration method where OSDF operations staff can run the 
+    appropriate Pelican service on your service node through **SSH access**, without 
+    requiring Kubernetes or root access.
+    Contact us (support@osg-htc.org) if you would like to explore using this option. 
 
 ### Option 2: You (the campus/site) operate
 
