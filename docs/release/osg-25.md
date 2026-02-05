@@ -61,6 +61,12 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
+**February 5, 2026:** XRootD 5.9.1-1.3
+----------------------------------------------------------------------------------------------------------------------
+-   XRootD 5.9.1-1.3
+    -   Undo patch that changes 201 response code to 200
+    -   Add patch for pcks11 support
+
 **January 29, 2026:** vo-client 1.141, htgettoken 2.6, Pelican 7.22.0, HTCondor 25.0.6; Upcoming: HTCondor 25.6.1
 ----------------------------------------------------------------------------------------------------------------------
 -   [vo-client 1.141](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-141)
