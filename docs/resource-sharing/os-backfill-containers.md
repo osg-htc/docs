@@ -178,7 +178,7 @@ Singularity (now known as Apptainer) allows OSPool users to use their own contai
 
 ### Running with Docker on Ubuntu
 
-On Debian-based Systems, the default [Apparmor profile](https://apparmor.net/) may prevent Singularity jobs from running inside your
+On Debian-based systems, the default [Apparmor profile](https://apparmor.net/) may prevent Singularity jobs from running inside your
 EP containers. This is a confirmed issue on Ubuntu 24.04+. An unrestricted Apparmor profile for the OSPool EP may be configured as follows:
 
 1. Install `apparmor-utils` via apt.
