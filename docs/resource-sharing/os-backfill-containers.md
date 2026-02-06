@@ -112,6 +112,11 @@ On EL hosts, the pilot container can also be managed via a systemctl service pro
 Running the Container with Docker
 ---------------------------------
 
+!!! note "Linux Flavor"
+    The instructions in this section pertain to running the OSPool EP container on an EL-based
+    host such as AlmaLinux. [Additional considerations](#running-with-docker-on-ubuntu) 
+    are required for running on Debian-based Linux flavors.
+
 The Docker image is kept in [DockerHub](https://hub.docker.com/r/opensciencegrid/osgvo-docker-pilot).
 In order to successfully start payload jobs:
 
@@ -171,6 +176,62 @@ The `--security-opt` options and device mount requested in the above `docker run
 to mount [CVMFS using cvmfsexec](#cvmfsexec) and invoke `singularity` for user jobs.
 Singularity (now known as Apptainer) allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).
 
+### Running with Docker on Ubuntu
+
+On Debian-based Systems, the default [Apparmor profile](https://apparmor.net/) may prevent Singularity jobs from running inside your
+EP containers. This is a confirmed issue on Ubuntu 24.04+. An unrestricted Apparmor profile for the OSPool EP may be configured as follows:
+
+1. Install `apparmor-utils` via apt.
+
+        :::console
+        root@ubuntu # apt-get install apparmor-utils
+   
+1. Create a `docker-ep` apparmor profile with all restrictions lifted in `/etc/apparmor.d/docker-ep.profile`:
+
+        include <tunables/global>
+
+        profile docker-ep flags=(attach_disconnected, mediate_deleted) {
+            # Allow all rules
+            capability,
+            network,
+            mount,
+            remount,
+            umount,
+            pivot_root,
+            ptrace,
+            signal,
+            dbus,
+            unix,
+            file,
+        }
+
+1. Install the apparmor profile:
+
+        :::console
+        root@ubuntu # apparmor_parser -r /etc/apparmor.d/docker-ep.profile
+        root@ubuntu # aa-enforce /etc/apparmor.d/docker-ep.profile
+
+1. Update the docker command from the previous section to use this unrestricted apparmor profile.
+
+```hl_lines="6"
+docker run -it --rm --user osg  \
+       --pull=always            \
+       --security-opt seccomp=unconfined        \
+       --security-opt systempaths=unconfined    \
+       --security-opt no-new-privileges         \
+       --security-opt apparmor=docker-ep        \
+       --device /dev/fuse                       \
+       -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
+       -v /worker-temp-dir:/pilot               \
+       -e GLIDEIN_Site="..."                    \
+       -e GLIDEIN_ResourceName="..."            \
+       -e GLIDEIN_Start_Extra="True"            \
+       -e OSG_SQUID_LOCATION="..."              \
+       -e CVMFSEXEC_REPOS="                     \
+            oasis.opensciencegrid.org           \
+            singularity.opensciencegrid.org"    \
+       hub.opensciencegrid.org/osg-htc/ospool-ep:24-release
+```
 
 Optional Configuration
 ----------------------
