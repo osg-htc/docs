@@ -69,7 +69,7 @@ the EP container can be updated by changing the image name referenced in the `do
 `docker run` command may remain the same. 
 
 ```console
-root@host # docker run <existing docker args> hub.opensciencegrid.org/osg-htc/ospool-ep:24-release
+root@host # docker run <existing docker args> hub.osg-htc.org/osg-htc/ospool-ep:24-release
 ```
 
 #### Via RPM ####
