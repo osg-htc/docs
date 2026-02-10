@@ -163,7 +163,7 @@ docker run -it --rm --user osg  \
        -e CVMFSEXEC_REPOS="                     \
             oasis.opensciencegrid.org           \
             singularity.opensciencegrid.org"    \
-       hub.osg-htc.org/osg-htc/ospool-ep:24-release
+       hub.osg-htc.org/osg-htc/ospool-ep:25-release
 ```
 
 Replace `/path/to/token` with the location you saved the token obtained from the OSPool Token Registry.
@@ -243,7 +243,7 @@ docker run -it --rm --user osg      \
         -e GLIDEIN_ResourceName="..."   \
         -e GLIDEIN_Start_Extra="True"   \
         -e OSG_SQUID_LOCATION="..."     \
-        hub.osg-htc.org/osg-htc/ospool-ep:24-release
+        hub.osg-htc.org/osg-htc/ospool-ep:25-release
 ```
 
 Fill in the values for `/path/to/token`, `/worker-temp-dir`, `GLIDEIN_Site`, `GLIDEIN_ResourceName`, and `OSG_SQUID_LOCATION` [as above](#running-the-container-with-docker).
@@ -281,7 +281,7 @@ docker run -it --rm --user osg  \
        -e GLIDEIN_Start_Extra="True"            \
        -e OSG_SQUID_LOCATION="..."              \
        -e SINGULARITY_DISABLE_PID_NAMESPACES=True   \
-       hub.osg-htc.org/osg-htc/ospool-ep:24-cuda_11_8_0-release
+       hub.osg-htc.org/osg-htc/ospool-ep:25-cuda_11_8_0-release
 ```
 
 ### Limiting resource usage
