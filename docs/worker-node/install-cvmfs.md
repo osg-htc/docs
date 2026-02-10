@@ -12,7 +12,7 @@ For example, CVMFS provides easy access to the following:
 - The [worker node client](install-wn-oasis.md)
 - CA and VO security data
 - Software used by VOs
-- Data stored in [StashCache](../data/stashcache/overview.md).
+- Data stored in [StashCache](../data/osdf/overview.md).
 
 Use this page to learn how to install, configure, run, test, and troubleshoot the CVMFS client from the OSG software
 repositories.

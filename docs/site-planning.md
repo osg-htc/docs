@@ -93,7 +93,7 @@ cluster.
 
 Depending on the VOs you want to support, additional data services may be necessary:
 
-- Some VOs elect to stream their larger input data from offsite using OSG's [Data Federation](data/stashcache/overview.md).
+- Some VOs elect to stream their larger input data from offsite using OSG's [Data Federation](data/osdf/overview.md).
   User jobs can make use of the OSG Data Federation without any services at your site but you may wish to run one or
   more of the following services:
     -    [Data Cache](data/stashcache/run-stashcache-container.md) to further reduce load on your connection to the WAN.
