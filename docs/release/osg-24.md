@@ -714,7 +714,7 @@ This initial release contains the following notable changes compared to the curr
 
 -   [Pelican 7.10.11](https://github.com/PelicanPlatform/pelican/releases/tag/v7.10.11):
     the initial release of Pelican in the main line of the OSG Software Stack.
-    Pelican is the new foundational software for the [OSDF](../data/stashcache/overview.md).
+    Pelican is the new foundational software for the [OSDF](../data/osdf/overview.md).
     Administrators of hosts installing `pelican` for the client are encouraged to upgrade to 7.10.11.
 
     !!! warning "OSDF origins / caches"
