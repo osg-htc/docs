@@ -753,5 +753,5 @@ The following container images have new tags for OSG 24:
 
 | Image name                                               | Tags         |
 |:---------------------------------------------------------|:-------------|
-| `hub.opensciencegrid.org/osg-htc/ospool-ep`              | `24-release` |
+| `hub.osg-htc.org/osg-htc/ospool-ep`              | `24-release` |
 

@@ -1027,18 +1027,18 @@ The following container images have new tags for OSG 23:
 
 | Image name                                                   | Tags                       |
 |:-------------------------------------------------------------|:---------------------------|
-| `hub.opensciencegrid.org/opensciencegrid/atlas-xcache`       | `23-release`, `23-testing` |
-| `hub.opensciencegrid.org/opensciencegrid/cms-xcache`         | `23-release`, `23-testing` |
-| `hub.opensciencegrid.org/opensciencegrid/frontier-squid`     | `23-release`, `23-testing` |
-| `hub.opensciencegrid.org/opensciencegrid/oidc-agent`         | `23-release`, `23-testing` |
-| `hub.opensciencegrid.org/opensciencegrid/osgvo-docker-pilot` | `23-release`, `23-testing` |
-| `hub.opensciencegrid.org/opensciencegrid/stash-cache`        | `23-release`, `23-testing` |
-| `hub.opensciencegrid.org/opensciencegrid/stash-origin`       | `23-release`, `23-testing` |
+| `hub.osg-htc.org/opensciencegrid/atlas-xcache`       | `23-release`, `23-testing` |
+| `hub.osg-htc.org/opensciencegrid/cms-xcache`         | `23-release`, `23-testing` |
+| `hub.osg-htc.org/opensciencegrid/frontier-squid`     | `23-release`, `23-testing` |
+| `hub.osg-htc.org/opensciencegrid/oidc-agent`         | `23-release`, `23-testing` |
+| `hub.osg-htc.org/opensciencegrid/osgvo-docker-pilot` | `23-release`, `23-testing` |
+| `hub.osg-htc.org/opensciencegrid/stash-cache`        | `23-release`, `23-testing` |
+| `hub.osg-htc.org/opensciencegrid/stash-origin`       | `23-release`, `23-testing` |
 
 For example, to retreive an OSG 23 backfill container image, run the following command:
 
 ```
-docker pull hub.opensciencegrid.org/opensciencegrid/osgvo-docker-pilot:23-release
+docker pull hub.osg-htc.org/opensciencegrid/osgvo-docker-pilot:23-release
 ```
 
 For more details on OSG container images,
