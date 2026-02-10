@@ -161,14 +161,24 @@ For example, to ban OSPool pilots from your site, you could add the following to
 The OSG CE metapackage brings along a configuration tool, `osg-configure`, that is designed to automatically configure
 the different pieces of software required for an OSG HTCondor-CE:
 
-1.   Enable your batch system in the HTCondor-CE configuration by editing the `enabled` field in the
-    `/etc/osg/config.d/20-<YOUR BATCH SYSTEM>.ini`:
+Configuration for OSG-Configure is in the config files at `/etc/osg/config.d/*.ini`.
+At minimum, you will need to do the following:
 
-        :::file
+*   Edit `10-storage.ini` to set `worker_node_temp` or confirm that the default value is good.
+
+*   Edit the `20-<BATCH SYSTEM>.ini` file matching your batch system to set
+
+        :::ini
         enabled = True
 
-1.  Read through the other `.ini` files in the `/etc/osg/config.d` directory and make any necessary changes.
-    See the [osg-configure documentation](/other/configuration-with-osg-configure) for details.
+*   Edit `31-cluster.ini` and define one or more `[Subcluster]` sections that describe
+    the kinds of nodes available in your cluster.
+    See the comments in that file for examples.
+
+*   Edit `40-siteinfo.ini` and set `host_name`, `resource`, and `resource_group`.
+
+Review the other config files in that directory and make changes as applicable --
+see the [OSG-Configure documentation](/other/configuration-with-osg-configure) for details.
 
 1.  Validate the configuration settings
 
