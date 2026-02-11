@@ -115,7 +115,7 @@ Running the Container with Docker
 !!! note "Linux Flavor"
     The instructions in this section pertain to running the OSPool EP container on an EL-based
     host such as AlmaLinux. [Additional considerations](#running-with-docker-on-ubuntu) 
-    are required for running on Debian-based Linux flavors.
+    are required for running on Ubuntu and other Debian-based Linux flavors.
 
 The Docker image is kept in [DockerHub](https://hub.docker.com/r/opensciencegrid/osgvo-docker-pilot).
 In order to successfully start payload jobs:
@@ -178,7 +178,7 @@ Singularity (now known as Apptainer) allows OSPool users to use their own contai
 
 ### Running with Docker on Ubuntu
 
-On Debian-based systems, the default [Apparmor profile](https://apparmor.net/) may prevent Singularity jobs from running inside your
+On Ubuntu and other Debian-based systems, the default [AppArmor profile](https://apparmor.net/) may prevent Singularity jobs from running inside your
 EP containers. This is a confirmed issue on Ubuntu 24.04+. An unrestricted Apparmor profile for the OSPool EP may be configured as follows:
 
 1. Install `apparmor-utils` via apt.
@@ -205,13 +205,13 @@ EP containers. This is a confirmed issue on Ubuntu 24.04+. An unrestricted Appar
             file,
         }
 
-1. Install the apparmor profile:
+1. Install the AppArmor profile:
 
         :::console
         root@ubuntu # apparmor_parser -r /etc/apparmor.d/docker-ep.profile
         root@ubuntu # aa-enforce /etc/apparmor.d/docker-ep.profile
 
-1. Update the docker command from the previous section to use this unrestricted apparmor profile.
+1. Update the Docker command from the previous section to use this unrestricted AppArmor profile.
 
 ```hl_lines="6"
 docker run -it --rm --user osg  \
