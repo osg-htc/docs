@@ -585,6 +585,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#advanced-container-security-configuration" class="md-nav__link">
+    Advanced: Container Security Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced: Container Security Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recommended-privileges" class="md-nav__link">
+    Recommended Privileges
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minimum-privileges" class="md-nav__link">
+    Minimum Privileges
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1985,6 +2012,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#advanced-container-security-configuration" class="md-nav__link">
+    Advanced: Container Security Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced: Container Security Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recommended-privileges" class="md-nav__link">
+    Recommended Privileges
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minimum-privileges" class="md-nav__link">
+    Minimum Privileges
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2198,7 +2252,8 @@ Make sure the user you run your container as has write access to this directory.
 <p>Replace <code>/path/to/token</code> with the location you saved the token obtained from the OSPool Token Registry.
 The <code>--security-opt</code> options and device mount requested in the above <code>docker run</code> allow the container
 to mount <a href="#cvmfsexec">CVMFS using cvmfsexec</a> and invoke <code>singularity</code> for user jobs.
-Singularity (now known as Apptainer) allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).</p>
+Singularity (now known as Apptainer) allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).
+See <a href="#advanced-pod-security-configuration">Advanced: Pod Security</a> for more details.</p>
 <h2 id="optional-configuration">Optional Configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h2>
 <h3 id="cvmfs">CVMFS<a class="headerlink" href="#cvmfs" title="Permanent link">&para;</a></h3>
 <p><a href="https://cernvm.cern.ch/fs/">CernVM-FS</a> (CVMFS) is a read-only remote filesystem that some OSG jobs depend on for software and data.
@@ -2344,6 +2399,82 @@ For example:</p>
 KUBERNETES_NAMESPACE = &quot;path-osgdev&quot;
 # The deployment for this pilot
 KUBERNETES_DEPLOYMENT = &quot;osgvo-docker-pilot-gpu&quot;
+</code></pre></div>
+<h3 id="advanced-container-security-configuration">Advanced: Container Security Configuration<a class="headerlink" href="#advanced-container-security-configuration" title="Permanent link">&para;</a></h3>
+<h4 id="recommended-privileges">Recommended Privileges<a class="headerlink" href="#recommended-privileges" title="Permanent link">&para;</a></h4>
+<p>The EP container can run researcher jobs that directly launch executables inside the EP container using the default docker
+security profile. This profile proivdes a large degree of isolation from the host system. Several additional security flags must be enabled 
+to support Apptainer, which allows researchers to run their own containerized jobs nested within the EP container. Apptainer is widely
+utilized within the OSPool, and enabling it will broaden the variety of researcher jobs that can run at your site.
+The recommended security flags for this configuration are as follows:</p>
+<ul>
+<li>
+<p><code>--security-opt seccomp=unconfined</code>:
+  The Apptainer containerization library used to launch container jobs invokes several <a href="https://man7.org/linux/man-pages/man2/syscalls.2.html">syscalls</a> 
+  that are blocked by the <a href="https://docs.docker.com/engine/security/seccomp/">default docker seccomp profile</a>. 
+  The <code>seccomp=unconfined</code> security option allows the container to make all syscalls, though it will still be denied 
+  access to syscalls that require <a href="https://man7.org/linux/man-pages/man7/capabilities.7.html">Linux Capabilities</a>.</p>
+</li>
+<li>
+<p><code>--security-opt systempaths=unconfined</code>:
+  Apptainer must write to the <a href="https://man7.org/linux/man-pages/man5/proc.5.html">procfs file system</a> to create an isolated 
+  <a href="https://man7.org/linux/man-pages/man7/pid_namespaces.7.html">pid namespace</a> for its containerized processes. This action
+  is disabled by default by docker, but can be enabled using <code>systempaths=unconfined</code>. </p>
+</li>
+<li>
+<p><code>--device /dev/fuse</code>:
+  Apptainer must write to the <a href="https://man7.org/linux/man-pages/man4/fuse.4.html">FUSE</a> device to create
+  isolated filesystems for container jobs. Device access is denied to docker containers by default.</p>
+</li>
+</ul>
+<h4 id="minimum-privileges">Minimum Privileges<a class="headerlink" href="#minimum-privileges" title="Permanent link">&para;</a></h4>
+<p>The recommended security configuration can be further reduced in scope with the following configuration options:</p>
+<ul>
+<li>Define a custom seccomp profile for the EP container: Rather than disabling seccomp entirely, a custom set of seccomp filters may
+  be defined. It is recommended to begin with the <a href="https://github.com/moby/moby/blob/master/profiles/seccomp/default.json">default seccomp JSON configuration</a>
+  and add an additional section to enable the following syscalls:
+  <div class="highlight"><pre><span></span><code>{
+  &quot;names&quot;: [
+    &quot;mount&quot;,
+    &quot;pivot_root&quot;,
+    &quot;setns&quot;,
+    &quot;umount2&quot;,
+    &quot;unshare&quot;
+  ],
+  &quot;action&quot;: &quot;SCMP_ACT_ALLOW&quot;
+},
+</code></pre></div></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning: Potential errors in container jobs</p>
+<p>The majority of container jobs run in the OSPool are run using an unconfined seccomp profile. While the above
+syscalls allow Apptainer to start successfully inside of Docker, some user jobs that depend on other syscalls
+may fail inside the container.</p>
+</div>
+<ul>
+<li>Disable PID namespaces in Apptainer: 
+  PID namespaces can be disabled in Apptainer using the <code>SINGULARITY_DISABLE_PID_NAMESPACES=True</code>
+  environment variable. This allows the EP container to run container jobs without <code>--security-opt systempaths=unconfined</code></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning: Reduced isolation between jobs</p>
+<p>While <code>SINGULARITY_DISABLE_PID_NAMESPACES=True</code> increases the degree of isolation between the host and the EP container, 
+it decreases security between jobs running inside the EP by allowing them to read each other's process trees.</p>
+</div>
+<p>Taken together, a minimally privileged EP container that still supports container jobs might look like:</p>
+<div class="highlight"><pre><span></span><code>docker run -it --rm --user osg  \
+       --pull=always            \
+<span class="hll">       --security-opt seccomp=/path/to/apptainer/profile.json \
+</span>       --security-opt no-new-privileges         \
+       --device /dev/fuse                       \
+       -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
+       -v /worker-temp-dir:/pilot               \
+       -e GLIDEIN_Site=&quot;...&quot;                    \
+       -e GLIDEIN_ResourceName=&quot;...&quot;            \
+       -e GLIDEIN_Start_Extra=&quot;True&quot;            \
+       -e OSG_SQUID_LOCATION=&quot;...&quot;              \
+<span class="hll">       -e SINGULARITY_DISABLE_PID_NAMESPACES=True   \
+</span>       hub.opensciencegrid.org/osg-htc/ospool-ep:25-release
 </code></pre></div>
 <h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
 <p>We recommend pulling new versions of backfill containers at least every 72 hours.
