@@ -351,10 +351,10 @@ KUBERNETES_DEPLOYMENT = "osgvo-docker-pilot-gpu"
 
 #### Recommended Privileges
 
-The EP container can run researcher jobs that directly launch executables inside the container using the default docker
-security profile, which proivdes a large degree of isolation from the host system. Several additional security flags must be enabled 
-to support Apptainer, which allows researchers to run their own containerizwd jobs nested within the EP container. Apptainer is widely
-utilized within the OSPool, and enabling it will broaden the degree of researcher jobs that your EP can run.
+The EP container can run researcher jobs that directly launch executables inside the EP container using the default docker
+security profile. This profile proivdes a large degree of isolation from the host system. Several additional security flags must be enabled 
+to support Apptainer, which allows researchers to run their own containerized jobs nested within the EP container. Apptainer is widely
+utilized within the OSPool, and enabling it will broaden the variety of researcher jobs that can run at your site.
 The recommended security flags for this configuration are as follows:
 
 - `--security-opt seccomp=unconfined`:
