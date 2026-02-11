@@ -351,12 +351,14 @@ KUBERNETES_DEPLOYMENT = "osgvo-docker-pilot-gpu"
 
 #### Recommended Privileges
 
-The EP container can run vanilla universe jobs using the default docker security profile, which proivdes a large degree
-of isolation from the host system. Several additional security flags must be enabled to support container universe jobs. 
+The EP container can run researcher jobs that directly launch executables inside the container using the default docker
+security profile, which proivdes a large degree of isolation from the host system. Several additional security flags must be enabled 
+to support Apptainer, which allows researchers to run their own containerizwd jobs nested within the EP container. Apptainer is widely
+utilized within the OSPool, and enabling it will broaden the degree of researcher jobs that your EP can run.
 The recommended security flags for this configuration are as follows:
 
 - `--security-opt seccomp=unconfined`:
-  The Apptainer containerization library used to launch container universe jobs invokes several [syscalls](https://man7.org/linux/man-pages/man2/syscalls.2.html) 
+  The Apptainer containerization library used to launch container jobs invokes several [syscalls](https://man7.org/linux/man-pages/man2/syscalls.2.html) 
   that are blocked by the [default docker seccomp profile](https://docs.docker.com/engine/security/seccomp/). 
   The `seccomp=unconfined` security option allows the container to make all syscalls, though it will still be denied 
   access to syscalls that require [Linux Capabilities](https://man7.org/linux/man-pages/man7/capabilities.7.html).
@@ -368,11 +370,11 @@ The recommended security flags for this configuration are as follows:
 
 - `--device /dev/fuse`:
   Apptainer must write to the [FUSE](https://man7.org/linux/man-pages/man4/fuse.4.html) device to create
-  isolated filesystems for container universe jobs. Device access is denied to docker containers by default.
+  isolated filesystems for container jobs. Device access is denied to docker containers by default.
 
 #### Minimum Privileges
 
-The reccommended security configuration can be further reduced in scope with the following configuration options:
+The recommended security configuration can be further reduced in scope with the following configuration options:
 
 - Define a custom seccomp profile for the EP container: Rather than disabling seccomp entirely, a custom set of seccomp filters may
   be defined. It is recommended to begin with the [default seccomp JSON configuration](https://github.com/moby/moby/blob/master/profiles/seccomp/default.json)
@@ -390,22 +392,22 @@ The reccommended security configuration can be further reduced in scope with the
   },
   ```
 
-!!! warning "Warning: Potential errors in container universe jobs"
-    The majority of container universe jobs run in the OSPool are run using an unconfined seccomp profile. While the above
+!!! warning "Warning: Potential errors in container jobs"
+    The majority of container jobs run in the OSPool are run using an unconfined seccomp profile. While the above
     syscalls allow Apptainer to start successfully inside of Docker, some user jobs that depend on other syscalls
     may fail inside the container.
 
 
 - Disable PID namespaces in Apptainer: 
   PID namespaces can be disabled in Apptainer using the `SINGULARITY_DISABLE_PID_NAMESPACES=True`
-  environment variable. This allows the EP container to run container universe jobs without `--security-opt systempaths=unconfined`
+  environment variable. This allows the EP container to run container jobs without `--security-opt systempaths=unconfined`
 
 !!! warning "Warning: Reduced isolation between jobs"
-    While the above configuration increases the degree of isolation between the host and the EP container, it decreases security
-    between jobs running inside the EP by allowing them to read each other's process trees.
+    While `SINGULARITY_DISABLE_PID_NAMESPACES=True` increases the degree of isolation between the host and the EP container, 
+    it decreases security between jobs running inside the EP by allowing them to read each other's process trees.
 
 
-Taken together, a minimally privileged EP container that still supports container universe jobs might look like:
+Taken together, a minimally privileged EP container that still supports container jobs might look like:
 
 ```hl_lines="3 12"
 docker run -it --rm --user osg  \
@@ -420,7 +422,7 @@ docker run -it --rm --user osg  \
        -e GLIDEIN_Start_Extra="True"            \
        -e OSG_SQUID_LOCATION="..."              \
        -e SINGULARITY_DISABLE_PID_NAMESPACES=True   \
-       hub.opensciencegrid.org/osg-htc/ospool-ep:24-release
+       hub.opensciencegrid.org/osg-htc/ospool-ep:25-release
 ```
 
 Best Practices
