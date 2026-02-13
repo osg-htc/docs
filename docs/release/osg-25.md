@@ -61,6 +61,18 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
+**February 12, 2026:** xrdhttp-pelican 0.0.10, HTCondor 25.0.7; Upcoming: GlideinWMS 3.11.3
+----------------------------------------------------------------------------------------------------------------------
+-   xrdhttp-pelican 0.0.10
+    -   Fixed pre-stage permission handler to work with tokens
+-   [HTCondor 25.0.7](https://htcondor.readthedocs.io/en/25.0/version-history/lts-versions-25-0.html#version-25-0-7)
+    -   Fix the broken `htcondor2.Schedd.refreshGPIProxy()` Python method
+    -   Improve `condor_history` performance on filesystems with I/O rate limits
+-   Upcoming
+    -   [GlideinWMS 3.11.3](https://glideinwms.fnal.gov/doc.v3_11_3/history.html#development)
+        -   Improvements and fixes to the credentials generators
+        -   Able to create and advertise a key to sign SciTokens in the frontend
+
 **February 5, 2026:** XRootD 5.9.1-1.3
 ----------------------------------------------------------------------------------------------------------------------
 -   XRootD 5.9.1-1.3
