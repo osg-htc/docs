@@ -20,6 +20,11 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
+**February 19, 2026:** osg-configure 4.3.2
+----------------------------------------------------------------------------------------------------------------------
+-   osg-configure 4.3.2
+    -   Fix usage of EL10-incompatible deprecated ConfigParser method
+
 **February 12, 2026:** xrdhttp-pelican 0.0.10, HTCondor 24.0.17; Upcoming: GlideinWMS 3.11.3, HTCOndor 24.12.17
 ----------------------------------------------------------------------------------------------------------------------
 -   xrdhttp-pelican 0.0.10
