@@ -23,7 +23,7 @@ Updates to critical packages are also announced by email and are sent to the fol
 **February 19, 2026:** osg-configure 4.3.2
 ----------------------------------------------------------------------------------------------------------------------
 -   osg-configure 4.3.2
-    -   Fix usage of EL10-incompatible deprecated ConfigParser method
+    -   Fix crash on EL10 due to use of a deprecated ConfigParser method
 
 **February 12, 2026:** xrdhttp-pelican 0.0.10, HTCondor 24.0.17; Upcoming: GlideinWMS 3.11.3, HTCOndor 24.12.17
 ----------------------------------------------------------------------------------------------------------------------
