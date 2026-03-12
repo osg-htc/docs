@@ -178,8 +178,15 @@ Singularity (now known as Apptainer) allows OSPool users to use their own contai
 
 ### Running with Docker on Ubuntu
 
+!!! warning "Removing AppArmor Restrictions"
+    AppArmor is a security layer on Ubuntu and other Debian-based systems that interferes with container-based jobs
+    running inside the OSPool EP container. The section below describes removing all restrictions that AppArmor would
+    normally place on the OSPool EP container. While other isolation mechanisms that Docker places between the host
+    and container remain intact in this configuration, the degree of isolation is lessened by removing AppArmor.
+    
+
 On Ubuntu and other Debian-based systems, the default [AppArmor profile](https://apparmor.net/) may prevent Singularity jobs from running inside your
-EP containers. This is a confirmed issue on Ubuntu 24.04+. An unrestricted Apparmor profile for the OSPool EP may be configured as follows:
+EP containers. This is a confirmed issue on Ubuntu 24.04+. The restrictions that Appormpor places on the OSPool EP container may be removed as follows:
 
 1. Install `apparmor-utils` via apt.
 
