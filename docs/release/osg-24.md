@@ -20,6 +20,28 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
+**March 12, 2026:** Pelican 7.23.0, HTCondor 24.0.18; Upcoming: HTCOndor 24.12.18
+----------------------------------------------------------------------------------------------------------------------
+-   [Pelican 7.23.0](https://pelicanplatform.org/releases)
+    -   Can retrieve Pelican configuration variables from HTCondor ClassAds
+    -   There is now a CacheHit field in transfer output ClassAd
+    -   `PELICAN_CLIENT_PREFERREDCACHES` environment variable no longer ignored
+-   [HTCondor 24.0.18](https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-18)
+    -   Enable use of in-memory SciTokens cache, if disk cache not usable
+    -   Fix `condor_submit` using different executables with late materialization
+    -   HTCondor tarballs now contain Pelican 7.23.0
+-   Upcoming
+    -   [HTCondor 24.12.18](https://htcondor.readthedocs.io/en/24.x/version-history/feature-versions-24-x.html#version-24-12-18)
+        -   Improve AMD GPU detection when using RCOM6/HIP libraries
+        -   Fix for new jobs getting kicked off LVM EP due to quantization mismatch
+        -   `condor_submit` now reports an error for circular requirement expressions
+        -   `condor_status` now correctly reports offline GPUs
+        -   Can use use a string for `since` with `htcondor.Schedd.history()`
+        -   Fix for backfill GPUs disappearing on reconfig
+        -   Enable use of in-memory SciTokens cache, if disk cache not usable
+        -   Fix `condor_submit` using different executables with late materialization
+        -   HTCondor tarballs now contain Pelican 7.23.0
+
 **February 19, 2026:** osg-configure 4.3.2
 ----------------------------------------------------------------------------------------------------------------------
 -   osg-configure 4.3.2
