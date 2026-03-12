@@ -2203,18 +2203,35 @@ For example, to ban OSPool pilots from your site, you could add the following to
 <h3 id="automatic-configuration">Automatic configuration<a class="headerlink" href="#automatic-configuration" title="Permanent link">&para;</a></h3>
 <p>The OSG CE metapackage brings along a configuration tool, <code>osg-configure</code>, that is designed to automatically configure
 the different pieces of software required for an OSG HTCondor-CE:</p>
-<ol>
+<p>Configuration for OSG-Configure is in the config files at <code>/etc/osg/config.d/*.ini</code>.
+At minimum, you will need to do the following:</p>
+<ul>
 <li>
-<p>Enable your batch system in the HTCondor-CE configuration by editing the <code>enabled</code> field in the
-    <code>/etc/osg/config.d/20-&lt;YOUR BATCH SYSTEM&gt;.ini</code>:</p>
-<div class="codehilite"><pre><span></span><code>enabled = True
+<p>Edit <code>10-storage.ini</code> to set <code>worker_node_temp</code> or confirm that the default value is good.
+    See the
+    <a href="/worker-node/using-wn/#the-worker-node-environment">worker node environment page</a>
+    for information on <code>$OSG_WN_TMP</code>, which is the environment variable that this <code>worker_node_temp</code> option sets.</p>
+</li>
+<li>
+<p>Edit the <code>20-&lt;BATCH SYSTEM&gt;.ini</code> file matching your batch system to set</p>
+<div class="codehilite"><pre><span></span><code><span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">True</span><span class="w"></span>
 </code></pre></div>
 
 </li>
 <li>
-<p>Read through the other <code>.ini</code> files in the <code>/etc/osg/config.d</code> directory and make any necessary changes.
-    See the <a href="/other/configuration-with-osg-configure">osg-configure documentation</a> for details.</p>
+<p>Edit <code>31-cluster.ini</code> and define one or more <code>[Subcluster]</code> sections that describe
+    the kinds of nodes available in your cluster.
+    See the comments in that file for examples.</p>
 </li>
+<li>
+<p>Edit <code>40-siteinfo.ini</code> and set <code>host_name</code>, <code>resource</code>, and <code>resource_group</code>
+    to match your
+    <a href="/common/registration/#registering-resources">registration in OSG Topology</a>.</p>
+</li>
+</ul>
+<p>Review the other config files in that directory and make changes as applicable --
+see the <a href="/other/configuration-with-osg-configure">OSG-Configure documentation</a> for details.</p>
+<ol>
 <li>
 <p>Validate the configuration settings</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host # </span>osg-configure -v
