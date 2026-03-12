@@ -61,6 +61,39 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
+**March 12, 2026:** Pelican 7.23.0, HTCondor 25.0.8; Upcoming: HTCOndor 25.7.2
+----------------------------------------------------------------------------------------------------------------------
+-   [Pelican 7.23.0](https://pelicanplatform.org/releases)
+    -   Can retrieve Pelican configuration variables from HTCondor ClassAds
+    -   There is now a CacheHit field in transfer output ClassAd
+    -   `PELICAN_CLIENT_PREFERREDCACHES` environment variable no longer ignored
+-   [HTCondor 25.0.8](https://htcondor.readthedocs.io/en/25.0/version-history/lts-versions-25-0.html#version-25-0-8)
+    -   Improve AMD GPU detection when using RCOM6/HIP libraries
+    -   Fix for new jobs getting kicked off LVM EP due to quantization mismatch
+    -   `condor_submit` now reports an error for circular requirement expressions
+    -   `condor_status` now correctly reports offline GPUs
+    -   Can use use a string for `since` with `htcondor.Schedd.history()`
+    -   Fix for backfill GPUs disappearing on reconfig
+    -   Enable use of in-memory SciTokens cache, if disk cache not usable
+    -   Fix `condor_submit` using different executables with late materialization
+    -   HTCondor tarballs now contain Pelican 7.23.0
+-   Upcoming
+    -   [HTCondor 25.7.2](https://htcondor.readthedocs.io/en/25.x/version-history/feature-versions-25-x.html#version-25-7-2)
+        -   Improve schedd performance with large job records by sizing pipe buffers
+        -   `condor_watch_q` display improvements
+        -   When a job runs out of memory, report how much memory was provisioned
+        -   Fix the broken `htcondor2.Schedd.refreshGSIProxy()` Python method
+        -   Improve `condor_history` performance on filesystems with I/O rate limits
+        -   Improve AMD GPU detection when using RCOM6/HIP libraries
+        -   Fix for new jobs getting kicked off LVM EP due to quantization mismatch
+        -   `condor_submit` now reports an error for circular requirement expressions
+        -   `condor_status` now correctly reports offline GPUs
+        -   Can use use a string for `since` with `htcondor.Schedd.history()`
+        -   Fix for backfill GPUs disappearing on reconfig
+        -   Enable use of in-memory SciTokens cache, if disk cache not usable
+        -   Fix `condor_submit` using different executables with late materialization
+        -   HTCondor tarballs now contain Pelican 7.23.0
+
 **February 19, 2026:** osg-configure 4.3.2
 ----------------------------------------------------------------------------------------------------------------------
 -   osg-configure 4.3.2
