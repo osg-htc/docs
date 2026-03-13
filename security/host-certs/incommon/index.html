@@ -1913,11 +1913,11 @@ another IGTF CA subscription, please <a href="../../../common/help/">contact us<
 <h3 id="generating-a-csr-via-the-container">Generating a CSR via the Container<a class="headerlink" href="#generating-a-csr-via-the-container" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
-<p>Generate a Certificate Signing Request (CSR) and private key using the  <code>hub.opensciencegrid.org/opensciencegrid/pki-tools</code> container,
+<p>Generate a Certificate Signing Request (CSR) and private key using the  <code>hub.osg-htc.org/opensciencegrid/pki-tools</code> container,
 volume mounting a local directory (<code>~/path_to_dir</code>) into the <code>/output</code> directory of the container.</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>docker run --rm  <span class="se">\</span>
              -v ~/path_to_dir:/output <span class="se">\</span>
-             hub.opensciencegrid.org/opensciencegrid/pki-tools:24-release <span class="se">\</span>
+             hub.osg-htc.org/opensciencegrid/pki-tools:24-release <span class="se">\</span>
              --hostname &lt;HOSTNAME&gt; <span class="se">\</span>
              --country &lt;COUNTRY&gt; <span class="se">\</span>
              --state &lt;STATE&gt; <span class="se">\</span>
@@ -1931,7 +1931,7 @@ For example, the following generates a CSR for <code>test.opensciencegrid.org</c
 <code>bar.opensciencegrid.org</code> as SANs:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>docker run --rm  <span class="se">\</span>
              -v ~/path_to_dir:/output <span class="se">\</span>
-             hub.opensciencegrid.org/opensciencegrid/pki-tools:24-release <span class="se">\</span>
+             hub.osg-htc.org/opensciencegrid/pki-tools:24-release <span class="se">\</span>
              --country US <span class="se">\</span>
              --state Wisconsin <span class="se">\</span>
              --locality Madison <span class="se">\</span>

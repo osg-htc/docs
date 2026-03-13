@@ -2298,7 +2298,7 @@ or <a href="https://kubernetes.io/">Kubernetes</a>.</p>
              --volume &lt;ORIGIN_CONFIG_FILE&gt;:/etc/pelican/config.d/99-local.yaml <span class="se">\</span>
              --volume &lt;OUTSIDE_DIRECTORY&gt;:&lt;INSIDE_DIRECTORY&gt; <span class="se">\</span>
              --name osdf-origin <span class="se">\</span>
-             hub.opensciencegrid.org/pelican_platform/osdf-origin:latest
+             hub.osg-htc.org/pelican_platform/osdf-origin:latest
 </code></pre></div>
 <p>Using the example values from the table, this is</p>
 <div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>docker run --rm <span class="se">\</span>
@@ -2310,7 +2310,7 @@ or <a href="https://kubernetes.io/">Kubernetes</a>.</p>
              --volume /etc/osdf-origin/config.yaml:/etc/pelican/config.d/99-local.yaml <span class="se">\</span>
              --volume /mnt/origin:/pelican <span class="se">\</span>
              --name osdf-origin <span class="se">\</span>
-             hub.opensciencegrid.org/pelican_platform/osdf-origin:latest
+             hub.osg-htc.org/pelican_platform/osdf-origin:latest
 </code></pre></div>
 <h2 id="validating-the-origin">Validating the Origin<a class="headerlink" href="#validating-the-origin" title="Permanent link">&para;</a></h2>
 <p>For each namespace in your <code>Origin.Exports</code> list, validate their functionality by using the following sections based on
@@ -2480,7 +2480,7 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker stop osdf-origin
 ExecStartPre=-/usr/bin/docker rm osdf-origin
-ExecStartPre=/usr/bin/docker pull hub.opensciencegrid.org/pelican_platform/osdf-origin:latest
+ExecStartPre=/usr/bin/docker pull hub.osg-htc.org/pelican_platform/osdf-origin:latest
 ExecStart=/usr/bin/docker run --rm --name osdf-origin \
   --publish 8443:8443 \
   --publish 8444:8444 \
@@ -2490,7 +2490,7 @@ ExecStart=/usr/bin/docker run --rm --name osdf-origin \
   --volume /etc/osdf-origin/config.yaml:/etc/pelican/config.d/99-local.yaml \
   --volume /mnt/origin:/pelican \
   --name osdf-origin \
-  hub.opensciencegrid.org/pelican_platform/osdf-origin:latest
+  hub.osg-htc.org/pelican_platform/osdf-origin:latest
 
 [Install]
 WantedBy=multi-user.target
