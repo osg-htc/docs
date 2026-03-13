@@ -35,13 +35,13 @@ From a host that meets the above requirements, there are two options to get InCo
 
 ### Generating a CSR via the Container
 
-1. Generate a Certificate Signing Request (CSR) and private key using the  `hub.opensciencegrid.org/opensciencegrid/pki-tools` container,
+1. Generate a Certificate Signing Request (CSR) and private key using the  `hub.osg-htc.org/opensciencegrid/pki-tools` container,
 volume mounting a local directory (`~/path_to_dir`) into the `/output` directory of the container.
 
         :::console
         user@host $ docker run --rm  \
                      -v ~/path_to_dir:/output \
-                     hub.opensciencegrid.org/opensciencegrid/pki-tools:24-release \
+                     hub.osg-htc.org/opensciencegrid/pki-tools:24-release \
                      --hostname <HOSTNAME> \
                      --country <COUNTRY> \
                      --state <STATE> \
@@ -56,7 +56,7 @@ volume mounting a local directory (`~/path_to_dir`) into the `/output` directory
         :::console
         user@host $ docker run --rm  \
                      -v ~/path_to_dir:/output \
-                     hub.opensciencegrid.org/opensciencegrid/pki-tools:24-release \
+                     hub.osg-htc.org/opensciencegrid/pki-tools:24-release \
                      --country US \
                      --state Wisconsin \
                      --locality Madison \

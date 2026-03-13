@@ -63,7 +63,7 @@ must be made prior to installation. For full documentation of the values in the 
 1. Fetch the default values.yaml for Kuantifier via the helm cli:
 
         :::console
-        helm show values oci://hub.opensciencegrid.org/iris-hep/kuantifier
+        helm show values oci://hub.osg-htc.org/iris-hep/kuantifier
 
 1. Update the top-level `.outputFormat` in values.yaml to output records to [GRACC](https://gracc.opensciencegrid.org/):
       
@@ -127,7 +127,7 @@ must be made prior to installation. For full documentation of the values in the 
 After configuring an appropriate values file for your instance, install the chart via helm:
 
     :::console
-    helm install -f <values.yaml> -n <install namespace> kuantifier oci://hub.opensciencegrid.org/iris-hep/kuantifier
+    helm install -f <values.yaml> -n <install namespace> kuantifier oci://hub.osg-htc.org/iris-hep/kuantifier
 
 Validation
 ----------

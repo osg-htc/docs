@@ -142,7 +142,7 @@ user@host $ docker run --rm \
              --volume <CACHE_CONFIG_FILE>:/etc/pelican/pelican.yaml \
              --volume <CACHE_PARTITION>:/run/pelican/cache \
              --name osdf-cache \
-             hub.opensciencegrid.org/pelican_platform/osdf-cache:latest
+             hub.osg-htc.org/pelican_platform/osdf-cache:latest
 ```
 
 Using the example values from the table, this is
@@ -157,7 +157,7 @@ user@host $ docker run --rm \
              --volume /etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml \
              --volume /mnt/cache:/run/pelican/cache \
              --name osdf-cache \
-             hub.opensciencegrid.org/pelican_platform/osdf-cache:latest
+             hub.osg-htc.org/pelican_platform/osdf-cache:latest
 ```
 
 
@@ -179,7 +179,7 @@ user@host $ docker run --rm \
              --volume <METADATA_PARTITION>:/run/pelican/cache/meta \
              --volume <DATA_PARTITION>:/run/pelican/cache/data \
              --name osdf-cache \
-             hub.opensciencegrid.org/pelican_platform/osdf-cache:latest
+             hub.osg-htc.org/pelican_platform/osdf-cache:latest
 ```
 
 Using the example values from the table, this is
@@ -196,7 +196,7 @@ user@host $ docker run --rm \
              --volume /mnt/cache-meta:/run/pelican/cache/meta \
              --volume /mnt/cache-data:/run/pelican/cache/data \
              --name osdf-cache \
-             hub.opensciencegrid.org/pelican_platform/osdf-cache:latest
+             hub.osg-htc.org/pelican_platform/osdf-cache:latest
 ```
 
 
@@ -311,7 +311,7 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker stop osdf-cache
 ExecStartPre=-/usr/bin/docker rm osdf-cache
-ExecStartPre=/usr/bin/docker pull hub.opensciencegrid.org/pelican_platform/osdf-cache:latest
+ExecStartPre=/usr/bin/docker pull hub.osg-htc.org/pelican_platform/osdf-cache:latest
 ExecStart=/usr/bin/docker run --rm --name osdf-cache \
   --publish 8443:8443 \
   --publish 8444:8444 \
@@ -321,7 +321,7 @@ ExecStart=/usr/bin/docker run --rm --name osdf-cache \
   --volume /etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml \
   --volume /mnt/cache:/run/pelican/cache \
   --name osdf-cache \
-  hub.opensciencegrid.org/pelican_platform/osdf-cache:latest
+  hub.osg-htc.org/pelican_platform/osdf-cache:latest
 
 [Install]
 WantedBy=multi-user.target
@@ -350,7 +350,7 @@ user@host $ docker run --rm  \
              --volume /etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml \
              --volume /mnt/cache:/run/pelican/cache \
              --name osdf-cache \
-             hub.opensciencegrid.org/pelican_platform/osdf-cache:latest
+             hub.osg-htc.org/pelican_platform/osdf-cache:latest
 ```
 
 
