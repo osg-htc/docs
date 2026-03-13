@@ -507,19 +507,6 @@
     Running the Container with Docker
   </a>
   
-    <nav class="md-nav" aria-label="Running the Container with Docker">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#running-with-docker-on-ubuntu" class="md-nav__link">
-    Running with Docker on Ubuntu
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -1947,19 +1934,6 @@
     Running the Container with Docker
   </a>
   
-    <nav class="md-nav" aria-label="Running the Container with Docker">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#running-with-docker-on-ubuntu" class="md-nav__link">
-    Running with Docker on Ubuntu
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -2222,12 +2196,6 @@ Ensure this user has read, write, and execute access to the scratch space.</p>
 </li>
 </ol>
 <h2 id="running-the-container-with-docker">Running the Container with Docker<a class="headerlink" href="#running-the-container-with-docker" title="Permanent link">&para;</a></h2>
-<div class="admonition note">
-<p class="admonition-title">Linux Flavor</p>
-<p>The instructions in this section pertain to running the OSPool EP container on an EL-based
-host such as AlmaLinux. <a href="#running-with-docker-on-ubuntu">Additional considerations</a> 
-are required for running on Ubuntu and other Debian-based Linux flavors.</p>
-</div>
 <p>The Docker image is kept in <a href="https://hub.docker.com/r/opensciencegrid/osgvo-docker-pilot">DockerHub</a>.
 In order to successfully start payload jobs:</p>
 <ol>
@@ -2286,73 +2254,6 @@ The <code>--security-opt</code> options and device mount requested in the above 
 to mount <a href="#cvmfsexec">CVMFS using cvmfsexec</a> and invoke <code>singularity</code> for user jobs.
 Singularity (now known as Apptainer) allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).
 See <a href="#advanced-pod-security-configuration">Advanced: Pod Security</a> for more details.</p>
-<h3 id="running-with-docker-on-ubuntu">Running with Docker on Ubuntu<a class="headerlink" href="#running-with-docker-on-ubuntu" title="Permanent link">&para;</a></h3>
-<div class="admonition warning">
-<p class="admonition-title">Removing AppArmor Restrictions</p>
-<p>AppArmor is a security layer on Ubuntu and other Debian-based systems that interferes with container-based jobs
-running inside the OSPool EP container. The section below describes removing all restrictions that AppArmor would
-normally place on the OSPool EP container. While other isolation mechanisms that Docker places between the host
-and container remain intact in this configuration, the degree of isolation is lessened by removing AppArmor.</p>
-</div>
-<p>On Ubuntu and other Debian-based systems, the default <a href="https://apparmor.net/">AppArmor profile</a> may prevent Singularity jobs from running inside your
-EP containers. This is a confirmed issue on Ubuntu 24.04+. The restrictions that Appormpor places on the OSPool EP container may be removed as follows:</p>
-<ol>
-<li>
-<p>Install <code>apparmor-utils</code> via apt.</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@ubuntu # </span>apt-get install apparmor-utils
-</code></pre></div>
-
-</li>
-<li>
-<p>Create a <code>docker-ep</code> apparmor profile with all restrictions lifted in <code>/etc/apparmor.d/docker-ep.profile</code>:</p>
-<div class="codehilite"><pre><span></span><code>include &lt;tunables/global&gt;
-
-profile docker-ep flags=(attach_disconnected, mediate_deleted) {
-    # Allow all rules
-    capability,
-    network,
-    mount,
-    remount,
-    umount,
-    pivot_root,
-    ptrace,
-    signal,
-    dbus,
-    unix,
-    file,
-}
-</code></pre></div>
-
-</li>
-<li>
-<p>Install the AppArmor profile:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@ubuntu # </span>apparmor_parser -r /etc/apparmor.d/docker-ep.profile
-<span class="gp">root@ubuntu # </span>aa-enforce /etc/apparmor.d/docker-ep.profile
-</code></pre></div>
-
-</li>
-<li>
-<p>Update the Docker command from the previous section to use this unrestricted AppArmor profile.</p>
-</li>
-</ol>
-<div class="highlight"><pre><span></span><code>docker run -it --rm --user osg  \
-       --pull=always            \
-       --security-opt seccomp=unconfined        \
-       --security-opt systempaths=unconfined    \
-       --security-opt no-new-privileges         \
-<span class="hll">       --security-opt apparmor=docker-ep        \
-</span>       --device /dev/fuse                       \
-       -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
-       -v /worker-temp-dir:/pilot               \
-       -e GLIDEIN_Site=&quot;...&quot;                    \
-       -e GLIDEIN_ResourceName=&quot;...&quot;            \
-       -e GLIDEIN_Start_Extra=&quot;True&quot;            \
-       -e OSG_SQUID_LOCATION=&quot;...&quot;              \
-       -e CVMFSEXEC_REPOS=&quot;                     \
-            oasis.opensciencegrid.org           \
-            singularity.opensciencegrid.org&quot;    \
-       hub.opensciencegrid.org/osg-htc/ospool-ep:24-release
-</code></pre></div>
 <h2 id="optional-configuration">Optional Configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h2>
 <h3 id="cvmfs">CVMFS<a class="headerlink" href="#cvmfs" title="Permanent link">&para;</a></h3>
 <p><a href="https://cernvm.cern.ch/fs/">CernVM-FS</a> (CVMFS) is a read-only remote filesystem that some OSG jobs depend on for software and data.
