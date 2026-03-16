@@ -8,7 +8,7 @@ Running OSDF Origin in a Container
     This document is outdated and describes an XCache-based OSDF Origin install, which is deprecated.
     Future OSDF Origins should be based on Pelican; documentation for a Pelican-based OSDF Origin install is forthcoming.
 
-The OSG operates the [Open Science Data Federation](overview.md) (OSDF), which
+The OSG operates the [Open Science Data Federation](../osdf/overview.md) (OSDF), which
 provides organizations with a method to distribute their data in a scalable manner to thousands of jobs without needing
 to pre-stage data across sites or operate their own scalable infrastructure.
 
