@@ -166,7 +166,7 @@ At minimum, you will need to do the following:
 
 *   Edit `10-storage.ini` to set `worker_node_temp` or confirm that the default value is good.
     See the
-    [worker node environment page](/worker-node/using-wn/#the-worker-node-environment)
+    [worker node environment page](../../worker-node/using-wn/#the-worker-node-environment)
     for information on `$OSG_WN_TMP`, which is the environment variable that this `worker_node_temp` option sets.
 
 *   Edit the `20-<BATCH SYSTEM>.ini` file matching your batch system to set
@@ -180,10 +180,10 @@ At minimum, you will need to do the following:
 
 *   Edit `40-siteinfo.ini` and set `host_name`, `resource`, and `resource_group`
     to match your
-    [registration in OSG Topology](/common/registration/#registering-resources).
+    [registration in OSG Topology](../../common/registration/#registering-resources).
 
 Review the other config files in that directory and make changes as applicable --
-see the [OSG-Configure documentation](/other/configuration-with-osg-configure) for details.
+see the [OSG-Configure documentation](../../other/configuration-with-osg-configure) for details.
 
 1.  Validate the configuration settings
 

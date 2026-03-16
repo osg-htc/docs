@@ -21,7 +21,7 @@ This document outlines how to run Frontier Squid in a Docker container.
 Before Starting
 ---------------
 
-Before starting the installation process, consider the following points (consulting [the Frontier Squid Reference section](/data/frontier-squid/#reference) as needed):
+Before starting the installation process, consider the following points (consulting [the Frontier Squid Reference section](../frontier-squid/#reference) as needed):
 
 1. **Docker:** For the purpose of this guide, the host must have a running docker service
    and you must have the ability to start containers (i.e., belong to the `docker` Unix group).
@@ -150,4 +150,4 @@ instructions to register your Frontier Squid host.
 Getting Help
 ------------
 
-To get assistance, please use the [this page](/common/help).
+To get assistance, please use the [this page](../../common/help).

@@ -13,7 +13,7 @@ This document describes the steps required to manage a VO's role
 in the Open Science Data Federation (OSDF) including selecting a namespace, registration,
 and selecting which resources are allowed to host or cache your data.
 
-For general information about the OSDF, see the [overview document](overview.md).
+For general information about the OSDF, see the [overview document](../osdf/overview.md).
 
 Site admins should work together with VO managers in order to perform these steps.
 

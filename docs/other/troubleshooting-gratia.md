@@ -258,7 +258,7 @@ Verify that your Gratia configuration is correct in `/etc/gratia/condor-ap/Probe
 
 In normal cases, `osg-configure` manages the relevant ProbeConfig and it can be configured by modifying
 `/etc/osg/config.d/30-gratia.ini`.
-Consult the [osg-configuration documentation](/other/configuration-with-osg-configure) for details.
+Consult the [osg-configuration documentation](../configuration-with-osg-configure) for details.
 
 If there are problems or special configuration, you might need to edit the Gratia configuration files yourself by
 modifying `/etc/gratia/htcondor-ce/ProbeConfig`.
@@ -386,4 +386,3 @@ The most common RPMs you will see are:
 | `gratia-probe-common`      | Code shared between all Gratia probes                                         |
 | `gratia-probe-condor-ap`   | The probe that tracks Access Point usage                                      |
 | `gratia-probe-htcondor-ce` | Probe that tracks HTCondor-CE usage                                           |
-
