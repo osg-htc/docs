@@ -61,6 +61,16 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
+**March 19, 2026:** IGTF 1.139; Upcoming: HTCondor-CE 25.7.0
+----------------------------------------------------------------------------------------------------------------------
+-   CA certificates based on [IGTF 1.139](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Update ArmeSFo CA re-issued based on SHA-2 family digest (AM)
+    -   The IGTF DCVOTA assurance profile has been added. For details, please refer to
+        [Domain Control Validation-Only Trust Assurance with Secured Infrastructure](https://www.igtf.net/ap/dcvota/)
+-   Upcoming
+    -   [HTCondor-CE 25.7.0](https://htcondor.com/htcondor-ce/v25/releases/#march-12-2026-2570)
+        -   Avoids confusing error messages when no routes are defined
+
 **March 12, 2026:** Pelican 7.23.0, HTCondor 25.0.8; Upcoming: HTCOndor 25.7.2
 ----------------------------------------------------------------------------------------------------------------------
 -   [Pelican 7.23.0](https://pelicanplatform.org/releases)
