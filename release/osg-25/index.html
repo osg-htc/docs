@@ -1423,6 +1423,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#march-26-2026-frontier-squid-614-osg-pki-tools-374" class="md-nav__link">
+    March 26, 2026: frontier-squid 6.14, osg-pki-tools 3.7.4
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#march-19-2026-igtf-1139-upcoming-htcondor-ce-2570" class="md-nav__link">
     March 19, 2026: IGTF 1.139; Upcoming: HTCondor-CE 25.7.0
   </a>
@@ -1978,6 +1985,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#march-26-2026-frontier-squid-614-osg-pki-tools-374" class="md-nav__link">
+    March 26, 2026: frontier-squid 6.14, osg-pki-tools 3.7.4
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#march-19-2026-igtf-1139-upcoming-htcondor-ce-2570" class="md-nav__link">
     March 19, 2026: IGTF 1.139; Upcoming: HTCondor-CE 25.7.0
   </a>
@@ -2180,6 +2194,52 @@ minor versions to access packages in newer EPEL sub-versions.</p>
 <li><a href="../../common/registration/#registering-resources">Registered administrative contacts</a></li>
 <li><a href="https://groups.google.com/u/1/a/osg-htc.org/g/site-announce">site-announce@osg-htc.org</a></li>
 <li><a href="https://groups.google.com/a/osg-htc.org/g/software-discuss">software-discuss@osg-htc.org</a></li>
+</ul>
+<h2 id="march-26-2026-frontier-squid-614-osg-pki-tools-374"><strong>March 26, 2026:</strong> frontier-squid 6.14, osg-pki-tools 3.7.4<a class="headerlink" href="#march-26-2026-frontier-squid-614-osg-pki-tools-374" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><a href="http://frontier.cern.ch/dist/frontier-squid-releasenotes.txt">Frontier-squid 6.14</a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have multiple workers, you must use the <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Rock_cache">Rock cache</a></p>
+</div>
+<ul>
+<li>Addressed security vulnerability <a href="https://github.com/squid-cache/squid/security/advisories/GHSA-c8cc-phh7-xmxr">SQUID-2025:2 Information Disclosure in Error handling</a></li>
+<li>Add support for Enterprise Linux 10.</li>
+<li>Disable admin emails from shoal-agent.</li>
+<li>Changed pip3 install of obsolete Python module <code>netifaces</code> to new <code>netifaces-plus</code> to  enable shoal-agent to run on EL10.</li>
+<li>Fixed setting permissions of shoal-download directories to prevent <code>Permission denied</code> errors.</li>
+<li>During build of source RPM, download additional Python modules <code>cffi</code> and
+    <code>typing_extensions</code> to support building EL9 and EL10 from source RPM on OSG
+    build machines where downloading is disabled.</li>
+<li>Support updating from frontier-squid-5 to this version.</li>
+<li><a href="https://github.com/squid-cache/squid/releases/tag/SQUID_6_14">Upgrade to 6.14-1 tarball</a></li>
+<li>Add an <code>ignore_vary</code> option to prevent Vary headers (like those from
+    Cloudflare) from interfering with caching in Rock cache, and enable
+    that option by default.</li>
+<li>Add a default value of <code>shared_transient_entries_limit 1048576</code> to
+    reduce the chances of clashing hashes of queries while using
+    multiple workers.  A clashing hash causes a query to not be cached.
+    This increased value could use up to 128MB of shared memory.</li>
+<li>Restored text of error messages that appear in rare cases and that were
+    missing from the previous release.</li>
+<li>Improved checks for cache memory configuration to allow multiple services to
+    have their own cache memory values and to prevent reduction in configured
+    cache memory during re-starts. Also, increased safety buffer of shared memory from 10% to 20%.</li>
+<li>Removed obsolete in2p3, gridpp, and triumf from <code>acl ATLAS_FRONTIER</code>.</li>
+<li>Add a patch from v7 to avoid a <code>slot-&gt;sameKey()</code> assertion error in
+    <code>rock/RockSwapDir.cc</code> that has been seen with multiple workers and
+    causes one worker to restart and prevent a query from being cached
+    until a full restart.</li>
+</ul>
+</li>
+<li>
+<p>osg-pki-tools 3.7.4</p>
+<ul>
+<li>Change the certificate term for osg-incommon-cert-request from
+    395 days to 199 days because that is now the maximum allowed</li>
+</ul>
+</li>
 </ul>
 <h2 id="march-19-2026-igtf-1139-upcoming-htcondor-ce-2570"><strong>March 19, 2026:</strong> IGTF 1.139; Upcoming: HTCondor-CE 25.7.0<a class="headerlink" href="#march-19-2026-igtf-1139-upcoming-htcondor-ce-2570" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2600,10 +2660,9 @@ These updates will require manual intervention, which will be documented and ann
 <h3 id="el10-packaging-differences">EL10 packaging differences<a class="headerlink" href="#el10-packaging-differences" title="Permanent link">&para;</a></h3>
 <p>The following OSG packages are not yet available for Enterprise Linux 10:</p>
 <ul>
-<li>frontier-squid</li>
 <li>glideinwms</li>
+<li>osg-pki-tools</li>
 <li>python3-scitokens</li>
-<li>htvault-config</li>
 </ul>
 <p>The following changes were made to packages in EL10:</p>
 <ul>
