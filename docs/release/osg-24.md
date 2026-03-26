@@ -20,6 +20,45 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
+**March 26, 2026:** osg-pki-tools 3.7.4; Upcoming: frontier-squid 6.14
+----------------------------------------------------------------------------------------------------------------------
+-   osg-pki-tools 3.7.4
+    -   Change the certificate term for osg-incommon-cert-request from
+        395 days to 199 days because that is now the maximum allowed
+-   Upcoming
+    -   [Frontier-squid 6.14](http://frontier.cern.ch/dist/frontier-squid-releasenotes.txt)
+
+        !!! note
+              If you have multiple workers, you must use the [Rock cache](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Rock_cache)
+
+        -   Addressed security vulnerability [SQUID-2025:2 Information Disclosure in Error handling](https://github.com/squid-cache/squid/security/advisories/GHSA-c8cc-phh7-xmxr)
+        -   Add support for Enterprise Linux 10.
+        -   Disable admin emails from shoal-agent.
+        -   Changed pip3 install of obsolete Python module `netifaces` to new `netifaces-plus` to  enable shoal-agent to run on EL10.
+        -   Fixed setting permissions of shoal-download directories to prevent `Permission denied` errors.
+        -   During build of source RPM, download additional Python modules `cffi` and
+            `typing_extensions` to support building EL9 and EL10 from source RPM on OSG
+            build machines where downloading is disabled.
+        -   Support updating from frontier-squid-5 to this version.
+        -   [Upgrade to 6.14-1 tarball](https://github.com/squid-cache/squid/releases/tag/SQUID_6_14)
+        -   Add an `ignore_vary` option to prevent Vary headers (like those from
+            Cloudflare) from interfering with caching in Rock cache, and enable
+            that option by default.
+        -   Add a default value of `shared_transient_entries_limit 1048576` to
+            reduce the chances of clashing hashes of queries while using
+            multiple workers.  A clashing hash causes a query to not be cached.
+            This increased value could use up to 128MB of shared memory.
+        -   Restored text of error messages that appear in rare cases and that were
+            missing from the previous release.
+        -   Improved checks for cache memory configuration to allow multiple services to
+            have their own cache memory values and to prevent reduction in configured
+            cache memory during re-starts. Also, increased safety buffer of shared memory from 10% to 20%.
+        -   Removed obsolete in2p3, gridpp, and triumf from `acl ATLAS_FRONTIER`.
+        -   Add a patch from v7 to avoid a `slot->sameKey()` assertion error in
+            `rock/RockSwapDir.cc` that has been seen with multiple workers and
+            causes one worker to restart and prevent a query from being cached
+            until a full restart.
+
 **March 19, 2026:** IGTF 1.139
 ----------------------------------------------------------------------------------------------------------------------
 -   CA certificates based on [IGTF 1.139](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
@@ -790,13 +829,6 @@ The following packages were removed from OSG 24:
 -  `x509-token-issuer`: removed due to lack of demand
 
 #### Container images ####
-
-!!! question "Where are the other OSG images?"
-    We intend to release `atlas-xcache`, `cms-xcache`, `frontier-squid`, `oidc-agent`, `osg-wn` container images by the
-    end of the year.
-
-    `stash-cache` and `stash-origin` images will be replaced by `pelican_platform/osdf-cache` and
-    `/pelican_platform/osdf-origin` images, respectively.
 
 The following container images have new tags for OSG 24:
 
