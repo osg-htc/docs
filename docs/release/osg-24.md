@@ -20,6 +20,20 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
+**April 2, 2026:** IGTF 1.140
+----------------------------------------------------------------------------------------------------------------------
+-   CA certificates based on [IGTF 1.140](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Added server TLS specific trust hierarchy for eMudhra joint trust (IN)
+
+    !!! note
+        This will be the last release to include a build with Gen3 GPG
+        package signatures.
+        This release also deprecates SSLeay and OpenSSL 0.x series subject name
+        hashes in the trust anchor directory (i.e. based on the MD5 encoding of the
+        binary encoding of the subject distinguised name). These will be removed
+        after August 2026. For reference, systems distributions dependent hereon
+        reached end of support in 2020 (RHEL5 ELS) or 2016 (for Debian 6 "Squeeze").
+
 **March 26, 2026:** osg-pki-tools 3.7.4; Upcoming: frontier-squid 6.14
 ----------------------------------------------------------------------------------------------------------------------
 -   osg-pki-tools 3.7.4
