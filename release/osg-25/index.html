@@ -1423,6 +1423,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#april-2-2026-igtf-1140-osdf-server-25-3" class="md-nav__link">
+    April 2, 2026: IGTF 1.140, osdf-server 25-3
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#march-26-2026-frontier-squid-614-osg-pki-tools-374" class="md-nav__link">
     March 26, 2026: frontier-squid 6.14, osg-pki-tools 3.7.4
   </a>
@@ -1985,6 +1992,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#april-2-2026-igtf-1140-osdf-server-25-3" class="md-nav__link">
+    April 2, 2026: IGTF 1.140, osdf-server 25-3
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#march-26-2026-frontier-squid-614-osg-pki-tools-374" class="md-nav__link">
     March 26, 2026: frontier-squid 6.14, osg-pki-tools 3.7.4
   </a>
@@ -2194,6 +2208,31 @@ minor versions to access packages in newer EPEL sub-versions.</p>
 <li><a href="../../common/registration/#registering-resources">Registered administrative contacts</a></li>
 <li><a href="https://groups.google.com/u/1/a/osg-htc.org/g/site-announce">site-announce@osg-htc.org</a></li>
 <li><a href="https://groups.google.com/a/osg-htc.org/g/software-discuss">software-discuss@osg-htc.org</a></li>
+</ul>
+<h2 id="april-2-2026-igtf-1140-osdf-server-25-3"><strong>April 2, 2026:</strong> IGTF 1.140, osdf-server 25-3<a class="headerlink" href="#april-2-2026-igtf-1140-osdf-server-25-3" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>CA certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.140</a></p>
+<ul>
+<li>Added server TLS specific trust hierarchy for eMudhra joint trust (IN)</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This will be the last release to include a build with Gen3 GPG
+package signatures.
+This release also deprecates SSLeay and OpenSSL 0.x series subject name
+hashes in the trust anchor directory (i.e. based on the MD5 encoding of the
+binary encoding of the subject distinguised name). These will be removed
+after August 2026. For reference, systems distributions dependent hereon
+reached end of support in 2020 (RHEL5 ELS) or 2016 (for Debian 6 "Squeeze").</p>
+</div>
+</li>
+<li>
+<p>osdf-server 25-3</p>
+<ul>
+<li>Add back xrdcl-pelican dependency</li>
+</ul>
+</li>
 </ul>
 <h2 id="march-26-2026-frontier-squid-614-osg-pki-tools-374"><strong>March 26, 2026:</strong> frontier-squid 6.14, osg-pki-tools 3.7.4<a class="headerlink" href="#march-26-2026-frontier-squid-614-osg-pki-tools-374" title="Permanent link">&para;</a></h2>
 <ul>
