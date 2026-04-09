@@ -5,7 +5,10 @@ Installing and Using the OSG Token Renewal Service
 
 This document contains instructions to install and configure the
 OSG Token Renewal Service package, `osg-token-renewer`,
-for obtaining and automatically renewing tokens with [oidc-agent](https://github.com/indigo-dc/oidc-agent).
+for obtaining and automatically renewing access tokens.
+The package supports two basic modes of operating, 
+one using OIDC authentication and one using the Oauth 2.0
+client_credentials grant type.
 
 
 Before Starting
@@ -14,7 +17,12 @@ Before Starting
 Before starting the installation process, consider the following points
 (consulting [the Reference section below](#reference) as needed):
 
-- An account is needed with an OIDC token issuer that offers the device flow
+- An account is needed with a token issuer.  If OIDC mode is going to be
+  used, the token issuer must offer the device flow and either support
+  dynamic client registration or a way to manually create a client ID
+  and secret.  Otherwise if the client credentials mode will be used, 
+  the token issuer must provide a way to create a client ID and secret
+  that supports the client_credentials grant type.
 - **User and Group IDs:** If they do not exist already, the installation will
   create the Linux user and group named `osg-token-svc`
 
@@ -30,15 +38,25 @@ steps to prepare in advance:
 Installing the OSG Token Renewal Service
 ----------------------------------------
 
-Install the OSG Token Renewal Service package:
+If OIDC mode will be used, install the OSG Token Renewal Service main package:
 
 ```console
 root@server # yum install osg-token-renewer
 ```
 
-This will install the `osg-token-renewer` scripts & systemd service files,
-and will pull in the `oidc-agent` package that the service depends on.
+This will install the `osg-token-renewer-client` subpackage which contains
+the scripts & systemd service files,
+and will pull in the [`oidc-agent`](https://github.com/indigo-dc/oidc-agent)
+package that the service depends on.
 
+It is possible for one installation to support both modes.  If that is
+needed, then use the above command.
+However, if only the client credentials mode will be used, instead
+install just the subpackage:
+
+```console
+root@server # yum install osg-token-renewer-client
+```
 
 Configuring the OSG Token Renewal Service
 -----------------------------------------
@@ -48,12 +66,15 @@ Configuring the OSG Token Renewal Service
 
 To create a new client account named `<ACCOUNT_SHORTNAME>`:
 
-1. Create a corresponding file named `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.pw`
-   with the encryption password to use for this client account.
+1. If using OIDC mode,
+   create a file named `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.pw`
+   with the encryption password to use for this account.
+   Choose any complicated password; it will be used by `oidc-agent` to
+   encrypt files on disk.
 1. Consult the
    [Requesting Tokens](https://osg-htc.org/technology/software/requesting-tokens/)
    document to determine which scopes you will need for this client account.
-1. Run the setup script as follows:
+1. If using OIDC mode, run the setup script as follows:
 
         :::console
         root@server # osg-token-renewer-setup <ACCOUNT_SHORTNAME>
@@ -69,30 +90,36 @@ To create a new client account named `<ACCOUNT_SHORTNAME>`:
         :::console
         root@server # osg-token-renewer-setup --manual myaccount123
 
+    On the other hand if you are using client credentials mode, add a
+    `--client-credentials` option, for example,
+
+        :::console
+        root@server # osg-token-renewer-setup --client-credentials myaccount123
+
 1. When prompted, enter your Issuer and desired scopes for this account
    from the list of valid options.
-   If you used `--manual`, also enter the client id and secret.
-1. You will also be prompted on the console to visit a web link to authorize
+   If you used `--manual` or `--client-credentials`,
+   also enter the client id and secret.
+1. In OIDC mode 
+   you will also be prompted on the console to visit a web link to authorize
    the client request with a passcode printed on the console.
    Follow the prompts (visit the web link, enter the request passcode,
    log in with your account for your issuer, and authorize the request).
 1. If this succeeds, you will be prompted with a new
    `[account <ACCOUNT_SHORTNAME>]` section to add to your `config.ini`.
-   Add the section to your `/etc/osg/token-renewer/config.ini`,
-   replacing the example section if it's still there.
+   Add the section to your `/etc/osg/token-renewer/config.ini`.
 
-Next you can configure one or more tokens for this client account.
+Next you can configure one or more tokens for this account.
 
 
 ### Configuring tokens
 
-After you have created an OIDC client account and added it to
+After you have created an account and added it to
 `/etc/osg/token-renewer/config.ini`, you need to create a corresponding `token`
 section in the config for each token that should be generated for this account
 (possibly with different options).
 
-1.  Choose a `<TOKEN_NAME>` and add a new `[token <TOKEN_NAME>]` section
-    (replacing the example section if it's still there).
+1.  Choose a `<TOKEN_NAME>` and add a new `[token <TOKEN_NAME>]` section.
 
     The `account` option in this section must match the `<ACCOUNT_SHORTNAME>`
     for the corresponding `[account <ACCOUNT_SHORTNAME>]` section.
@@ -108,19 +135,20 @@ section in the config for each token that should be generated for this account
     |:---------------|:----------------------------------------------------------|
     | `audience`     | list of audiences  (see [RFC7519](https://datatracker.ietf.org/doc/html/rfc7519#section-4.1.3)) |
     | `scope`        | list of [scopes](https://github.com/WLCG-AuthZ-WG/common-jwt-profile/blob/master/profile.md#capability-based-authorization-scope)               |
-    | `min_lifetime` | min token lifetime in seconds |
+    | `min_lifetime` | minimum token lifetime in seconds to remain in token<br> (default: get a new token every time the timer runs) |
 
     !!! note
         For tokens used against an HTCondor-CE, set the `audience` option to
         `<CE FQDN>:<CE PORT>`.
 
-### Example configuration
+### Example configurations
+
+An example OIDC mode configuration:
 
 ```file
 [account myclient1234]
 
 password_file = /etc/osg/tokens/myclient1234.pw
-
 
 
 [token mytoken567]
@@ -129,6 +157,23 @@ account = myclient1234
 token_path = /etc/osg/tokens/myclient1234.mytoken567.token
 ```
 
+An example client credentials mode configuration:
+
+```file
+[account myclient1234]
+
+token_request_url = https://cilogon.org:443/oauth2/token
+client_id = host:demo.opensciencegrid.org
+client_secret = redacted
+
+
+[token mytoken567]
+
+account = myclient1234
+token_path = /etc/osg/tokens/myclient1234.mytoken567.token
+audience = https://topology.opensciencegrid.org
+min_lifetime = 7200
+```
 ### Adjusting token renewal frequency
 
 It is possible to override the default `osg-token-renewer` systemd timer
@@ -215,7 +260,7 @@ Reference
 | Path                                                     | Description                                   |
 |:---------------------------------------------------------|:----------------------------------------------|
 | `/etc/osg/token-renewer/config.ini`                      | Main config file for service                  |
-| `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.pw`                 | Encryption password file for client account   |
+| `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.pw`                 | Encryption password file for OIDC client account   |
 | `/etc/osg/tokens/<ACCOUNT_SHORTNAME>.<TOKEN_NAME>.token` | Output location for token files               |
 | `/usr/sbin/osg-token-renewer-setup`                      | Setup script for each new client account      |
 | `/usr/lib/systemd/system/osg-token-renewer.service`      | SystemD service unit configuruation           |
