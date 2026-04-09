@@ -20,11 +20,6 @@ OSG 25 will be supported for [approximately two years total](release_series.md#s
     In January 2026, we plan to remove the the `current` symlink for the CVMFS-based OSG WN client,
     i.e. `/cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/current`
 
-!!! danger "Local credmon not yet supported in EL10"
-    The local credmon depends on `python3-scitokens`, which is currently missing from EPEL10.
-    Users of the local credmon should wait to upgrade to EL10 until `python3-scitokens` becomes
-    available.
-
 Enterprise Linux 10
 -------------------
 
@@ -60,6 +55,32 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [Registered administrative contacts](../common/registration.md#registering-resources)
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
+
+**April 9, 2026:** XRootD 5.9.2, xrootd-multiuser 2.2.1, Pelican 7.24.0, xrdcl-pelican 1.6.2, xrdhttp-pelican 0.0.11, xrootd-s3-http 2.2.0, htvault-config 2.2.0
+----------------------------------------------------------------------------------------------------------------------
+-   [XRootD 5.9.2-1.2](https://github.com/xrootd/xrootd/releases/tag/v5.9.2)
+    -   Relative path security check
+    -   Fix bug in user connection monitoring report
+    -   Other major and minor bug fixes
+-   [xrootd-multiuser 2.2.1-1.1](https://github.com/opensciencegrid/xrootd-multiuser/releases/tag/v2.2.1-1)
+    -   Fix crash with gfal-sum and macaroons
+-   [Pelican 7.24.0](https://github.com/PelicanPlatform/pelican/releases/tag/v7.24.0)
+    -   Significant updates to error classifications in Clients to provide users
+        with more actionable/intelligible errors
+    -   Add support for PKCS#11 to protect TLS credentials from unanticipated
+        XRootD security vulnerabilities
+    -   Caches and Origins now check for installation of a minimum required XRootD
+        version on startup and cause an error if no such version is found
+-   [xrdcl-pelican 1.6.2](https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v1.6.2)
+    -   Add ability to override cache endpoints via environment variable
+    -   Various bug fixes
+-   [xrdhttp-pelican 0.0.11](https://github.com/PelicanPlatform/xrdhttp-pelican/releases/tag/v0.0.11)
+    -   Handle federation token file in drop-privileges mode
+-   [xrootd-s3-http 0.6.5](https://github.com/PelicanPlatform/xrootd-s3-http/blob/main/README.md)
+    -   Initial release of xrootd-s3-http in OSG repositories
+-   [htvault-config 2.2.0](https://github.com/fermitools/htvault-config/releases/tag/v2.2.0)
+    -   Changed to wait for a leader to be selected in a raft cluster,
+        to fix a problem seen with openbao 2.5.1 and 2.5.2
 
 **April 2, 2026:** IGTF 1.140, osdf-server 25-3
 ----------------------------------------------------------------------------------------------------------------------
@@ -432,7 +453,6 @@ The following OSG packages are not yet available for Enterprise Linux 10:
 
 -   glideinwms
 -   osg-pki-tools
--   python3-scitokens
 
 The following changes were made to packages in EL10:
 
@@ -451,6 +471,3 @@ The following changes were made to packages in EL10:
 -   OSG WN Client:
     -   Removed gfal2 dependency as it is not supported on EL10
 
-### Container images ###
-
-We plan on releasing container images over the coming weeks.
