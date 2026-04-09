@@ -1423,6 +1423,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#april-9-2026-xrootd-592-xrootd-multiuser-221-pelican-7240-xrdcl-pelican-162-xrdhttp-pelican-0011-xrootd-s3-http-220-htvault-config-220" class="md-nav__link">
+    April 9, 2026: XRootD 5.9.2, xrootd-multiuser 2.2.1, Pelican 7.24.0, xrdcl-pelican 1.6.2, xrdhttp-pelican 0.0.11, xrootd-s3-http 2.2.0, htvault-config 2.2.0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#april-2-2026-igtf-1140-osdf-server-25-3" class="md-nav__link">
     April 2, 2026: IGTF 1.140, osdf-server 25-3
   </a>
@@ -1559,13 +1566,6 @@
           <li class="md-nav__item">
   <a href="#el10-packaging-differences" class="md-nav__link">
     EL10 packaging differences
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#container-images" class="md-nav__link">
-    Container images
   </a>
   
 </li>
@@ -1992,6 +1992,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#april-9-2026-xrootd-592-xrootd-multiuser-221-pelican-7240-xrdcl-pelican-162-xrdhttp-pelican-0011-xrootd-s3-http-220-htvault-config-220" class="md-nav__link">
+    April 9, 2026: XRootD 5.9.2, xrootd-multiuser 2.2.1, Pelican 7.24.0, xrdcl-pelican 1.6.2, xrdhttp-pelican 0.0.11, xrootd-s3-http 2.2.0, htvault-config 2.2.0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#april-2-2026-igtf-1140-osdf-server-25-3" class="md-nav__link">
     April 2, 2026: IGTF 1.140, osdf-server 25-3
   </a>
@@ -2132,13 +2139,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#container-images" class="md-nav__link">
-    Container images
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -2177,12 +2177,6 @@ OSG 23 has reached its end-of-life and will no longer be supported with the rele
 <p>In January 2026, we plan to remove the the <code>current</code> symlink for the CVMFS-based OSG WN client,
 i.e. <code>/cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/current</code></p>
 </div>
-<div class="admonition danger">
-<p class="admonition-title">Local credmon not yet supported in EL10</p>
-<p>The local credmon depends on <code>python3-scitokens</code>, which is currently missing from EPEL10.
-Users of the local credmon should wait to upgrade to EL10 until <code>python3-scitokens</code> becomes
-available.</p>
-</div>
 <h2 id="enterprise-linux-10">Enterprise Linux 10<a class="headerlink" href="#enterprise-linux-10" title="Permanent link">&para;</a></h2>
 <h3 id="microarchitecture">Microarchitecture<a class="headerlink" href="#microarchitecture" title="Permanent link">&para;</a></h3>
 <p>The x86-64 architecture contains multiple subversions with different CPU feature sets, referred to as
@@ -2208,6 +2202,46 @@ minor versions to access packages in newer EPEL sub-versions.</p>
 <li><a href="../../common/registration/#registering-resources">Registered administrative contacts</a></li>
 <li><a href="https://groups.google.com/u/1/a/osg-htc.org/g/site-announce">site-announce@osg-htc.org</a></li>
 <li><a href="https://groups.google.com/a/osg-htc.org/g/software-discuss">software-discuss@osg-htc.org</a></li>
+</ul>
+<h2 id="april-9-2026-xrootd-592-xrootd-multiuser-221-pelican-7240-xrdcl-pelican-162-xrdhttp-pelican-0011-xrootd-s3-http-220-htvault-config-220"><strong>April 9, 2026:</strong> XRootD 5.9.2, xrootd-multiuser 2.2.1, Pelican 7.24.0, xrdcl-pelican 1.6.2, xrdhttp-pelican 0.0.11, xrootd-s3-http 2.2.0, htvault-config 2.2.0<a class="headerlink" href="#april-9-2026-xrootd-592-xrootd-multiuser-221-pelican-7240-xrdcl-pelican-162-xrdhttp-pelican-0011-xrootd-s3-http-220-htvault-config-220" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://github.com/xrootd/xrootd/releases/tag/v5.9.2">XRootD 5.9.2-1.2</a><ul>
+<li>Relative path security check</li>
+<li>Fix bug in user connection monitoring report</li>
+<li>Other major and minor bug fixes</li>
+</ul>
+</li>
+<li><a href="https://github.com/opensciencegrid/xrootd-multiuser/releases/tag/v2.2.1-1">xrootd-multiuser 2.2.1-1.1</a><ul>
+<li>Fix crash with gfal-sum and macaroons</li>
+</ul>
+</li>
+<li><a href="https://github.com/PelicanPlatform/pelican/releases/tag/v7.24.0">Pelican 7.24.0</a><ul>
+<li>Significant updates to error classifications in Clients to provide users
+    with more actionable/intelligible errors</li>
+<li>Add support for PKCS#11 to protect TLS credentials from unanticipated
+    XRootD security vulnerabilities</li>
+<li>Caches and Origins now check for installation of a minimum required XRootD
+    version on startup and cause an error if no such version is found</li>
+</ul>
+</li>
+<li><a href="https://github.com/PelicanPlatform/xrdcl-pelican/releases/tag/v1.6.2">xrdcl-pelican 1.6.2</a><ul>
+<li>Add ability to override cache endpoints via environment variable</li>
+<li>Various bug fixes</li>
+</ul>
+</li>
+<li><a href="https://github.com/PelicanPlatform/xrdhttp-pelican/releases/tag/v0.0.11">xrdhttp-pelican 0.0.11</a><ul>
+<li>Handle federation token file in drop-privileges mode</li>
+</ul>
+</li>
+<li><a href="https://github.com/PelicanPlatform/xrootd-s3-http/blob/main/README.md">xrootd-s3-http 0.6.5</a><ul>
+<li>Initial release of xrootd-s3-http in OSG repositories</li>
+</ul>
+</li>
+<li><a href="https://github.com/fermitools/htvault-config/releases/tag/v2.2.0">htvault-config 2.2.0</a><ul>
+<li>Changed to wait for a leader to be selected in a raft cluster,
+    to fix a problem seen with openbao 2.5.1 and 2.5.2</li>
+</ul>
+</li>
 </ul>
 <h2 id="april-2-2026-igtf-1140-osdf-server-25-3"><strong>April 2, 2026:</strong> IGTF 1.140, osdf-server 25-3<a class="headerlink" href="#april-2-2026-igtf-1140-osdf-server-25-3" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2701,7 +2735,6 @@ These updates will require manual intervention, which will be documented and ann
 <ul>
 <li>glideinwms</li>
 <li>osg-pki-tools</li>
-<li>python3-scitokens</li>
 </ul>
 <p>The following changes were made to packages in EL10:</p>
 <ul>
@@ -2727,8 +2760,6 @@ These packages however, are still available in case sites have alternative means
 </ul>
 </li>
 </ul>
-<h3 id="container-images">Container images<a class="headerlink" href="#container-images" title="Permanent link">&para;</a></h3>
-<p>We plan on releasing container images over the coming weeks.</p>
 
               
             </article>
