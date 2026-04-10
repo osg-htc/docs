@@ -7,7 +7,7 @@ This document contains instructions to install and configure the
 OSG Token Renewal Service package, `osg-token-renewer`,
 for obtaining and automatically renewing access tokens.
 The package supports two basic modes of operating, 
-one using OIDC authentication and one using the Oauth 2.0
+one using OIDC authentication and one using the OAuth 2.0
 client_credentials grant type.
 
 
@@ -38,14 +38,14 @@ steps to prepare in advance:
 Installing the OSG Token Renewal Service
 ----------------------------------------
 
-If OIDC mode will be used, install the OSG Token Renewal Service main package:
+If using OIDC mode, install the OSG Token Renewal Service main package:
 
 ```console
 root@server # yum install osg-token-renewer
 ```
 
 This will install the `osg-token-renewer-client` subpackage which contains
-the scripts & systemd service files,
+the scripts and systemd service files,
 and will pull in the [`oidc-agent`](https://github.com/indigo-dc/oidc-agent)
 package that the service depends on.
 
