@@ -41,9 +41,11 @@ There are a number of ways to install both, such as:
    to determine processor count for GRACC reporting. Ensure a CPU request is set for pods in
    your workspace.
  
-1. Kuantifier relies on the Prometheus pod completion time metric to calculate workload job run times.
-   This metric is sometimes missed for pods that are spontaneously deleted, such as those created by
-   Deployments. For best results, run workload pods via Kubernetes Jobs.
+1. Confirm the method by which workload pods are launched in your namespace. 
+   By default, Kuantifier relies on kube-state-metrics' `kube_pod_completion_time` to calculate
+   job run times, which is only reliably reported for pods launched by Kubernetes Jobs.
+   Kuantifier provides a custom metric exporter to approximate the runtimes of pods launched by other means
+   (such as JupyterHub), which must be [enabled via configuration.](#last-seen-exporter)
 
 1. (Known issue) Kuantifier currently doesn't support calculating usage metrics for workload pods
    running multiple containers. Ensure that workload pods in your namespace have only one container.
@@ -121,6 +123,22 @@ must be made prior to installation. For full documentation of the values in the 
         :::yaml
         cronJob:
           schedule: "@daily"
+
+<div id="last-seen-exporter"></div>
+1. (Optional) If reporting on Pods that are not launched via Kubernetes Jobs, 
+   enable the Kuantifier last-seen-time Prometheus metric exporter.
+   
+        :::yaml
+        exporter:
+          enabled: true
+          config:
+            POD_NAME_PREFIX: "jupyter-" # Prefix for identifying workload pods
+       
+       
+    !!! note "Exporter Support"
+           The Kuantifier pod endtime exporter was developed in support of accounting Pods
+           launched by the JupyterHub operator. Usage with Pods launched via 
+           Deployments and StatefulSets is experimental.
 
 ### Installing Kuantifier
 
