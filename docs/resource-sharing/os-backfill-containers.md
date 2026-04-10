@@ -179,39 +179,79 @@ See [Advanced: Pod Security](#advanced-pod-security-configuration) for more deta
 
 ### Running with Docker on Ubuntu
 
-!!! warning "Removing AppArmor Restrictions"
+!!! warning "Reducing AppArmor Restrictions"
     AppArmor is a security layer on Ubuntu and other Debian-based systems that interferes with container-based jobs
-    running inside the OSPool EP container. The section below describes removing all restrictions that AppArmor would
-    normally place on the OSPool EP container. While other isolation mechanisms that Docker places between the host
-    and container remain intact in this configuration, the degree of isolation is lessened by removing AppArmor.
+    running inside the OSPool EP container. The section below describes removing several restrictions that AppArmor would
+    normally place on the OSPool EP container. While most default restrictions remain in place, the degree of isolation between
+    the container and the host is lessened by these changes.
     
 
-On Ubuntu and other Debian-based systems, the default [AppArmor profile](https://apparmor.net/) may prevent Singularity jobs from running inside your
-EP containers. This is a confirmed issue on Ubuntu 24.04+. The restrictions that Appormpor places on the OSPool EP container may be removed as follows:
+On Ubuntu and other Debian-based systems, the default [Docker AppArmor profile](https://docs.docker.com/engine/security/apparmor/) may prevent Singularity jobs from running inside your
+EP containers. This is a confirmed issue on Ubuntu 24.04+. The portions of the default Docker AppArmor that restrict Singularity from
+running inside the OSPool EP container may be removed as follows:
 
 1. Install `apparmor-utils` via apt.
 
         :::console
         root@ubuntu # apt-get install apparmor-utils
    
-1. Create a `docker-ep` apparmor profile with all restrictions lifted in `/etc/apparmor.d/docker-ep.profile`:
+1. Create a `docker-ep` AppArmor profile based on the [default](https://github.com/moby/profiles/blob/main/apparmor/template.go) 
+   in `/etc/apparmor.d/docker-ep.profile`. Changes from the default are highlighted:
 
-        include <tunables/global>
+```hl_lines="10 11 12 13 34 35 36"
+abi <abi/4.0>,
+include <tunables/global>
 
-        profile docker-ep flags=(attach_disconnected, mediate_deleted) {
-            # Allow all rules
-            capability,
-            network,
-            mount,
-            remount,
-            umount,
-            pivot_root,
-            ptrace,
-            signal,
-            dbus,
-            unix,
-            file,
-        }
+profile docker-ep flags=(attach_disconnected, mediate_deleted) {
+  network,
+  capability,
+  file,
+  umount,
+
+  # Allow unprivileged user namespace creation. This allows the EP
+  # to apply container isolation mechanisms between the outer Docker container and
+  # inner Singularity container.
+  userns,
+
+  # Host (privileged) processes may send signals to container processes.
+  signal (receive) peer=unconfined,
+  # runc may send signals to container processes (for "docker stop").
+  signal (receive) peer=runc,
+  # crun may send signals to container processes (for "docker stop" when used with crun OCI runtime).
+  signal (receive) peer=crun,
+  # dockerd may send signals to container processes (for "docker kill").
+  signal (receive) peer=unconfined,
+  # Container processes may send signals amongst themselves.
+  signal (send,receive) peer=docker-ep,
+
+  deny @{PROC}/* w,   # deny write for all files directly in /proc (not in a subdir)
+  # deny write to files not in /proc/<number>/** or /proc/sys/**
+  deny @{PROC}/{[^1-9],[^1-9][^0-9],[^1-9s][^0-9y][^0-9s],[^1-9][^0-9][^0-9][^0-9/]*}/** w,
+  deny @{PROC}/sys/[^k]** w,  # deny /proc/sys except /proc/sys/k* (effectively /proc/sys/kernel)
+  deny @{PROC}/sys/kernel/{?,??,[^s][^h][^m]**} w,  # deny everything except shm* in /proc/sys/kernel/
+  deny @{PROC}/sysrq-trigger rwklx,
+  deny @{PROC}/kcore rwklx,
+
+  # Allow mount(2) for Singularity's container setup.
+  # The default Docker profile contains "deny mount".
+  mount,
+
+  deny /sys/[^f]*/** wklx,
+  deny /sys/f[^s]*/** wklx,
+  deny /sys/fs/[^c]*/** wklx,
+  deny /sys/fs/c[^g]*/** wklx,
+  deny /sys/fs/cg[^r]*/** wklx,
+  deny /sys/firmware/** rwklx,
+  deny /sys/devices/virtual/powercap/** rwklx,
+  deny /sys/kernel/security/** rwklx,
+
+  # Allow processes within the container to trace each other,
+  # provided all other LSM and yama settings allow it.
+  ptrace (trace,tracedby,read,readby) peer=docker-ep,
+}
+
+```
+
 
 1. Install the AppArmor profile:
 
