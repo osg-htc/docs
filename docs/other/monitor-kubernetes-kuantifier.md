@@ -42,7 +42,7 @@ There are a number of ways to install both, such as:
    your workspace.
  
 1. Confirm the method by which workload pods are launched in your namespace. 
-   By default, Kuantifier relies on kube-state-metrics' kube_pod_completion_time to calculate
+   By default, Kuantifier relies on kube-state-metrics' `kube_pod_completion_time` to calculate
    job run times, which is only reliably reported for pods launched by Kubernetes Jobs.
    Kuantifier provides a custom metric exporter to approximate the runtimes of pods launched by other means
    (such as JupyterHub), which must be [enabled via configuration.](#last-seen-exporter)
