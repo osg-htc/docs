@@ -1864,9 +1864,11 @@ There are a number of ways to install both, such as:</p>
    your workspace.</p>
 </li>
 <li>
-<p>Kuantifier relies on the Prometheus pod completion time metric to calculate workload job run times.
-   This metric is sometimes missed for pods that are spontaneously deleted, such as those created by
-   Deployments. For best results, run workload pods via Kubernetes Jobs.</p>
+<p>Confirm the method by which workload pods are launched in your namespace. 
+   By default, Kuantifier relies on kube-state-metrics' <code>kube_pod_completion_time</code> to calculate
+   job run times, which is only reliably reported for pods launched by Kubernetes Jobs.
+   Kuantifier provides a custom metric exporter to approximate the runtimes of pods launched by other means
+   (such as JupyterHub), which must be <a href="#last-seen-exporter">enabled via configuration.</a></p>
 </li>
 <li>
 <p>(Known issue) Kuantifier currently doesn't support calculating usage metrics for workload pods
@@ -1961,6 +1963,25 @@ install multiple instances of the chart to support reporting on multiple namespa
 <span class="w">  </span><span class="nt">schedule</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;@daily&quot;</span><span class="w"></span>
 </code></pre></div>
 
+</li>
+</ol>
+<div id="last-seen-exporter"></div>
+<ol>
+<li>
+<p>(Optional) If reporting on Pods that are not launched via Kubernetes Jobs, 
+   enable the Kuantifier last-seen-time Prometheus metric exporter.</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">exporter</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">  </span><span class="nt">config</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">POD_NAME_PREFIX</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;jupyter-&quot;</span><span class="w"> </span><span class="c1"># Prefix for identifying workload pods</span><span class="w"></span>
+</code></pre></div>
+
+<div class="admonition note">
+<p class="admonition-title">Exporter Support</p>
+<p>The Kuantifier pod endtime exporter was developed in support of accounting Pods
+   launched by the JupyterHub operator. Usage with Pods launched via 
+   Deployments and StatefulSets is experimental.</p>
+</div>
 </li>
 </ol>
 <h3 id="installing-kuantifier">Installing Kuantifier<a class="headerlink" href="#installing-kuantifier" title="Permanent link">&para;</a></h3>
