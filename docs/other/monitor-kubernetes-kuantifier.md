@@ -132,7 +132,7 @@ must be made prior to installation. For full documentation of the values in the 
         exporter:
           enabled: true
           config:
-            POD_NAME_PREFIX: "juptyter-" # Prefix for identifying workload pods
+            POD_NAME_PREFIX: "jupyter-" # Prefix for identifying workload pods
        
        
     !!! note "Exporter Support"
