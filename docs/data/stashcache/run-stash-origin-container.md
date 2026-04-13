@@ -112,7 +112,7 @@ For example, if your host partition is `/srv/origin` and the name of your VO is 
 you should store the Astro VO's public data in `/srv/origin/astro/PUBLIC`,
 and protected data in `/srv/origin/astro/PROTECTED`.
 
-When starting the container, mount `/srv/origin/` into `/xcache/namespace` in the container,
+When starting the container, mount `/srv/origin/` into `/origin/namespace` in the container,
 and set the environment variables `XC_PUBLIC_ORIGIN_EXPORT=/astro/PUBLIC` and `XC_AUTH_ORIGIN_EXPORT=/astro/PROTECTED`.
 
 You may omit `XC_AUTH_ORIGIN_EXPORT` if you are only serving public data,
@@ -130,7 +130,7 @@ production-appropriate method using systemd.
 
 ```console
 user@host $ docker run --rm --publish 1094:1094 --publish 1095:1095 \
-             --volume <HOST PARTITION>:/xcache/namespace \
+             --volume <HOST PARTITION>:/origin/namespace \
              --volume <HOST CERT>:/etc/grid-security/hostcert.pem \
              --volume <HOST KEY>:/etc/grid-security/hostkey.pem \
              --env-file=/opt/origin/.env \
@@ -177,7 +177,7 @@ ExecStartPre=/usr/bin/docker pull opensciencegrid/stash-origin:23-release
 ExecStart=/usr/bin/docker run --rm --name %n \
   --publish 1094:1094 \
   --publish 1095:1095 \
-  --volume /srv/origin:/xcache/namespace \
+  --volume /srv/origin:/origin/namespace \
   --volume /etc/ssl/host.crt:/etc/grid-security/hostcert.pem \
   --volume /etc/ssl/host.key:/etc/grid-security/hostkey.pem \
   --env-file /opt/origin/.env \
