@@ -96,8 +96,8 @@ Depending on the VOs you want to support, additional data services may be necess
 - Some VOs elect to stream their larger input data from offsite using OSG's [Data Federation](data/osdf/overview.md).
   User jobs can make use of the OSG Data Federation without any services at your site but you may wish to run one or
   more of the following services:
-    -    [Data Cache](data/stashcache/run-stashcache-container.md) to further reduce load on your connection to the WAN.
-    -    [Data Origin](data/stashcache/run-stash-origin-container.md) to allow local users to stage their data into
+    -    [Data Cache](data/osdf/install-cache-container.md) to further reduce load on your connection to the WAN.
+    -    [Data Origin](data/osdf/install-origin-container.md) to allow local users to stage their data into
          the OSG Data Federation.
 - The largest sites will additionally run large-scale data services such as a "storage element".
   This is often required for sites that want to support more complex organizations such as ATLAS or CMS.
