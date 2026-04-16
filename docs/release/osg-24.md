@@ -20,6 +20,27 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
+**April 16, 2026:** osg-token-renewer 1.0.0, HTCondor 24.0.19; Upcoming: HTCondor 24.12.19
+----------------------------------------------------------------------------------------------------------------------
+-   [osg-token-renewer 1.0.0](https://github.com/opensciencegrid/osg-token-renewer/releases/tag/v1.0.0)
+    -   Add support for a client credentials mode that bypasses OIDC authentication
+-   [HTCondor 24.0.19](https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-19)
+    -   Now properly reports NVIDIA MIG GPU device names
+    -   Fix performance problem in the htcondor2 Python ClassAd parser
+    -   Fix `AllowedExecuteDuration` to be reliably enforced when no file transfer
+    -   Batch grid universe jobs now tolerate a dot in the username
+    -   Fix huge reported job execution times when an AP restarts
+    -   HTCondor tarballs now contain Pelican 7.24.0
+-   Upcoming:
+    -   [HTCondor 24.12.19](https://htcondor.readthedocs.io/en/24.x/version-history/feature-versions-24-x.html#version-24-12-19)
+        -   Fix crash when a user provided Docker script produces unexpected output
+        -   Now properly reports NVIDIA MIG GPU device names
+        -   Fix performance problem in the htcondor2 Python ClassAd parser
+        -   Fix `AllowedExecuteDuration` to be reliably enforced when no file transfer
+        -   Batch grid universe jobs now tolerate a dot in the username
+        -   Fix huge reported job execution times when an AP restarts
+        -   HTCondor tarballs now contain Pelican 7.24.0
+
 **April 9, 2026:** XRootD 5.9.2, xrootd-multiuser 2.2.1, Pelican 7.24.0, xrdcl-pelican 1.6.2, xrdhttp-pelican 0.0.11, xrootd-s3-http 2.2.0, htvault-config 2.2.0, openbao 2.5.2
 ----------------------------------------------------------------------------------------------------------------------
 -   [XRootD 5.9.2-1.2](https://github.com/xrootd/xrootd/releases/tag/v5.9.2)

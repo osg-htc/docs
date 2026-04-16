@@ -56,6 +56,41 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
+**April 16, 2026:** osg-token-renewer 1.0.0, HTCondor 24.0.19; Upcoming: HTCondor 24.12.19
+----------------------------------------------------------------------------------------------------------------------
+-   [osg-token-renewer 1.0.0](https://github.com/opensciencegrid/osg-token-renewer/releases/tag/v1.0.0)
+    -   Add support for a client credentials mode that bypasses OIDC authentication
+-   [HTCondor 25.0.9](https://htcondor.readthedocs.io/en/25.0/version-history/lts-versions-25-0.html#version-25-0-9)
+    -   Fix crash when a user provided Docker script produces unexpected output
+    -   Now properly reports NVIDIA MIG GPU device names
+    -   Fix performance problem in the htcondor2 Python ClassAd parser
+    -   Fix `AllowedExecuteDuration` to be reliably enforced when no file transfer
+    -   Batch grid universe jobs now tolerate a dot in the username
+    -   Fix huge reported job execution times when an AP restarts
+    -   HTCondor tarballs now contain Pelican 7.24.0
+-   Upcoming:
+    -   [HTCondor 25.8.2](https://htcondor.readthedocs.io/en/25.x/version-history/feature-versions-25-x.html#version-25-8-2)
+        -   Fix detection and reporting of NVIDIA MIG GPU attributes
+        -   Add `--rocm` flag to Apptainer GPU jobs to support AMD GPUs
+        -   Fix bug where jobs went on hold, but should be rerun, when using Pelican
+        -   Can now use `condor_rm -transfer` to fetch whatever output is available
+        -   Can now use `condor_q -aaf` to append columns to the standard output
+        -   Can now run `condor_top --history` to get fast response from stored data
+        -   `htcondor dag status` now includes information about file transfers
+        -   `htcondor job status` and `condor_q` now report cool down state information
+        -   `condor_run` no longer passes `getenv = true` to the submit file
+        -   Fix `condor_ssh_to_job` for setuid Apptainer or Singularity runtimes
+        -   The negotiator now knows the user's floor to avoid improper preemption
+        -   The `condor_shadow` now logs information about reconnect attempts
+        -   `condor_config_val` can now report configuration option's default value
+        -   Fix crash when a user provided Docker script produces unexpected output
+        -   Now properly reports NVIDIA MIG GPU device names
+        -   Fix performance problem in the htcondor2 Python ClassAd parser
+        -   Fix `AllowedExecuteDuration` to be reliably enforced when no file transfer
+        -   Batch grid universe jobs now tolerate a dot in the username
+        -   Fix huge reported job execution times when an AP restarts
+        -   HTCondor tarballs now contain Pelican 7.24.0
+
 **April 9, 2026:** XRootD 5.9.2, xrootd-multiuser 2.2.1, Pelican 7.24.0, xrdcl-pelican 1.6.2, xrdhttp-pelican 0.0.11, xrootd-s3-http 2.2.0, htvault-config 2.2.0
 ----------------------------------------------------------------------------------------------------------------------
 -   [XRootD 5.9.2-1.2](https://github.com/xrootd/xrootd/releases/tag/v5.9.2)
