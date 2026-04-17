@@ -60,6 +60,11 @@ Updates to critical packages are also announced by email and are sent to the fol
 ----------------------------------------------------------------------------------------------------------------------
 -   [osg-token-renewer 1.0.0](https://github.com/opensciencegrid/osg-token-renewer/releases/tag/v1.0.0)
     -   Add support for a client credentials mode that bypasses OIDC authentication
+
+    !!! warning "Possible osg-token-renewer update issue"
+        Make sure that `/etc/osg/token-renewer/config.ini` is owner:group of `root:osg-token-svc` and mode `640`,
+        exactly like `/etc/osg/token-renewer/config.ini.rpmnew`.  Without this fix, tokens will not be able to renew.
+
 -   [HTCondor 25.0.9](https://htcondor.readthedocs.io/en/25.0/version-history/lts-versions-25-0.html#version-25-0-9)
     -   Fix crash when a user provided Docker script produces unexpected output
     -   Now properly reports NVIDIA MIG GPU device names
