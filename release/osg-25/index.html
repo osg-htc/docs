@@ -2219,11 +2219,20 @@ minor versions to access packages in newer EPEL sub-versions.</p>
 </ul>
 <h2 id="april-16-2026-osg-token-renewer-100-htcondor-24019-upcoming-htcondor-241219"><strong>April 16, 2026:</strong> osg-token-renewer 1.0.0, HTCondor 24.0.19; Upcoming: HTCondor 24.12.19<a class="headerlink" href="#april-16-2026-osg-token-renewer-100-htcondor-24019-upcoming-htcondor-241219" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://github.com/opensciencegrid/osg-token-renewer/releases/tag/v1.0.0">osg-token-renewer 1.0.0</a><ul>
+<li>
+<p><a href="https://github.com/opensciencegrid/osg-token-renewer/releases/tag/v1.0.0">osg-token-renewer 1.0.0</a></p>
+<ul>
 <li>Add support for a client credentials mode that bypasses OIDC authentication</li>
 </ul>
+<div class="admonition warning">
+<p class="admonition-title">Possible osg-token-renewer update issue</p>
+<p>Make sure that <code>/etc/osg/token-renewer/config.ini</code> is owner:group of <code>root:osg-token-svc</code> and mode <code>640</code>,
+exactly like <code>/etc/osg/token-renewer/config.ini.rpmnew</code>.  Without this fix, tokens will not be able to renew.</p>
+</div>
 </li>
-<li><a href="https://htcondor.readthedocs.io/en/25.0/version-history/lts-versions-25-0.html#version-25-0-9">HTCondor 25.0.9</a><ul>
+<li>
+<p><a href="https://htcondor.readthedocs.io/en/25.0/version-history/lts-versions-25-0.html#version-25-0-9">HTCondor 25.0.9</a></p>
+<ul>
 <li>Fix crash when a user provided Docker script produces unexpected output</li>
 <li>Now properly reports NVIDIA MIG GPU device names</li>
 <li>Fix performance problem in the htcondor2 Python ClassAd parser</li>
