@@ -2067,8 +2067,10 @@ predefined client id and secret, add a <code>--manual</code> option, for example
 
 </li>
 <li>
-<p>When prompted, enter your Issuer and desired scopes for this account
-   from the list of valid options.
+<p>When prompted, enter your Issuer URL and desired scopes for this account.
+   The default and <code>--manual</code> modes present a list of valid options for these.
+   The <code>--client-credentials</code> mode does not, but use the Issuer URL as found
+   in an <code>iss</code> claim in a token.
    If you used <code>--manual</code> or <code>--client-credentials</code>,
    also enter the client id and secret.</p>
 </li>
