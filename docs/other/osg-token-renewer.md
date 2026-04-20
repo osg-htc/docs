@@ -96,8 +96,10 @@ To create a new client account named `<ACCOUNT_SHORTNAME>`:
         :::console
         root@server # osg-token-renewer-setup --client-credentials myaccount123
 
-1. When prompted, enter your Issuer and desired scopes for this account
-   from the list of valid options.
+1. When prompted, enter your Issuer URL and desired scopes for this account.
+   The default and `--manual` modes present a list of valid options for these.
+   The `--client-credentials` mode does not, but use the Issuer URL as found
+   in an `iss` claim in a token.
    If you used `--manual` or `--client-credentials`,
    also enter the client id and secret.
 1. In OIDC mode 
