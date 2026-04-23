@@ -56,6 +56,13 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
 
+**April 23, 2026:** Pelican 7.24.2, gratia-probe 2.9.1, ospool-ap 25-2
+----------------------------------------------------------------------------------------------------------------------
+-   [Pelican 7.24.2](https://github.com/PelicanPlatform/pelican/releases/tag/v7.24.2)
+    -   Fixes security vulnerability for Pelican servers
+-   gratia-probe 2.9.1 and ospool-ap 25-2
+    -   Gratia now reports `OSG_INSTITUTION_ID` on APs
+
 **April 16, 2026:** osg-token-renewer 1.0.0, HTCondor 24.0.19; Upcoming: HTCondor 24.12.19
 ----------------------------------------------------------------------------------------------------------------------
 -   [osg-token-renewer 1.0.0](https://github.com/opensciencegrid/osg-token-renewer/releases/tag/v1.0.0)
