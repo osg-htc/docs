@@ -40,7 +40,7 @@ while a separate `x86_64_v2` architecture is maintained to support v2 Almalinux 
 ### EPEL ###
 
 In EL10, the EPEL repositories have minor versions that correspond to your operating system's minor versions
-(see [this presentation](https://carlwgeorge.fedorapeople.org/presentations/the-road-to-epel-10.pdf) for details).
+(see [this presentation](https://archive.fosdem.org/2025/events/attachments/fosdem-2025-6844-the-road-to-epel-10/slides/238616/the-road-_Ny3Et4L.pdf) for details).
 As a result, there are packages missing from EPEL 10.0 that are availabe in EPEL 10.1 or EPEL 10.2.
 CentOS Stream 10 installations will point at the latest EPEL sub-version but other EL variants will need to upgrade OS
 minor versions to access packages in newer EPEL sub-versions.
@@ -55,6 +55,13 @@ Updates to critical packages are also announced by email and are sent to the fol
 -   [Registered administrative contacts](../common/registration.md#registering-resources)
 -   [site-announce@osg-htc.org](https://groups.google.com/u/1/a/osg-htc.org/g/site-announce)
 -   [software-discuss@osg-htc.org](https://groups.google.com/a/osg-htc.org/g/software-discuss)
+
+**April 23, 2026:** Pelican 7.24.2, gratia-probe 2.9.1, ospool-ap 25-2
+----------------------------------------------------------------------------------------------------------------------
+-   [Pelican 7.24.2](https://github.com/PelicanPlatform/pelican/releases/tag/v7.24.2)
+    -   Fixes security vulnerability for Pelican servers
+-   gratia-probe 2.9.1 and ospool-ap 25-2
+    -   Gratia now reports `OSG_INSTITUTION_ID` on APs
 
 **April 16, 2026:** osg-token-renewer 1.0.0, HTCondor 24.0.19; Upcoming: HTCondor 24.12.19
 ----------------------------------------------------------------------------------------------------------------------
