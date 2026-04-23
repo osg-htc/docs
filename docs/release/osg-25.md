@@ -40,7 +40,7 @@ while a separate `x86_64_v2` architecture is maintained to support v2 Almalinux 
 ### EPEL ###
 
 In EL10, the EPEL repositories have minor versions that correspond to your operating system's minor versions
-(see [this presentation](https://carlwgeorge.fedorapeople.org/presentations/the-road-to-epel-10.pdf) for details).
+(see [this presentation](https://archive.fosdem.org/2025/events/attachments/fosdem-2025-6844-the-road-to-epel-10/slides/238616/the-road-_Ny3Et4L.pdf) for details).
 As a result, there are packages missing from EPEL 10.0 that are availabe in EPEL 10.1 or EPEL 10.2.
 CentOS Stream 10 installations will point at the latest EPEL sub-version but other EL variants will need to upgrade OS
 minor versions to access packages in newer EPEL sub-versions.
