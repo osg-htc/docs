@@ -112,6 +112,11 @@ On EL hosts, the pilot container can also be managed via a systemctl service pro
 Running the Container with Docker
 ---------------------------------
 
+!!! note "Linux Flavor"
+    The instructions in this section pertain to running the OSPool EP container on an EL-based
+    host such as AlmaLinux. [Additional considerations](#running-with-docker-on-ubuntu) 
+    are required for running on Ubuntu and other Debian-based Linux flavors.
+
 The Docker image is kept in [DockerHub](https://hub.docker.com/r/opensciencegrid/osgvo-docker-pilot).
 In order to successfully start payload jobs:
 
@@ -172,6 +177,109 @@ to mount [CVMFS using cvmfsexec](#cvmfsexec) and invoke `singularity` for user j
 Singularity (now known as Apptainer) allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).
 See [Advanced: Pod Security](#advanced-pod-security-configuration) for more details.
 
+### Running with Docker on Ubuntu
+
+!!! warning "Reducing AppArmor Restrictions"
+    AppArmor is a security layer on Ubuntu and other Debian-based systems that interferes with container-based jobs
+    running inside the OSPool EP container. The section below describes removing several restrictions that AppArmor would
+    normally place on the OSPool EP container. While most default restrictions remain in place, the degree of isolation between
+    the container and the host is lessened by these changes.
+    
+
+On Ubuntu and other Debian-based systems, the default [Docker AppArmor profile](https://docs.docker.com/engine/security/apparmor/) may prevent Singularity jobs from running inside your
+EP containers. This is a confirmed issue on Ubuntu 24.04+. The portions of the default Docker AppArmor that restrict Singularity from
+running inside the OSPool EP container may be removed as follows:
+
+1. Install `apparmor-utils` via apt.
+
+        :::console
+        root@ubuntu # apt-get install apparmor-utils
+   
+1. Create a `docker-ep` AppArmor profile based on the [default](https://github.com/moby/profiles/blob/main/apparmor/template.go) 
+   in `/etc/apparmor.d/docker-ep.profile`. Changes from the default are highlighted:
+
+```hl_lines="10 11 12 13 34 35 36"
+abi <abi/4.0>,
+include <tunables/global>
+
+profile docker-ep flags=(attach_disconnected, mediate_deleted) {
+  network,
+  capability,
+  file,
+  umount,
+
+  # Allow unprivileged user namespace creation. This allows the EP
+  # to apply container isolation mechanisms between the outer Docker container and
+  # inner Singularity container.
+  userns,
+
+  # Host (privileged) processes may send signals to container processes.
+  signal (receive) peer=unconfined,
+  # runc may send signals to container processes (for "docker stop").
+  signal (receive) peer=runc,
+  # crun may send signals to container processes (for "docker stop" when used with crun OCI runtime).
+  signal (receive) peer=crun,
+  # dockerd may send signals to container processes (for "docker kill").
+  signal (receive) peer=unconfined,
+  # Container processes may send signals amongst themselves.
+  signal (send,receive) peer=docker-ep,
+
+  deny @{PROC}/* w,   # deny write for all files directly in /proc (not in a subdir)
+  # deny write to files not in /proc/<number>/** or /proc/sys/**
+  deny @{PROC}/{[^1-9],[^1-9][^0-9],[^1-9s][^0-9y][^0-9s],[^1-9][^0-9][^0-9][^0-9/]*}/** w,
+  deny @{PROC}/sys/[^k]** w,  # deny /proc/sys except /proc/sys/k* (effectively /proc/sys/kernel)
+  deny @{PROC}/sys/kernel/{?,??,[^s][^h][^m]**} w,  # deny everything except shm* in /proc/sys/kernel/
+  deny @{PROC}/sysrq-trigger rwklx,
+  deny @{PROC}/kcore rwklx,
+
+  # Allow mount(2) for Singularity's container setup.
+  # The default Docker profile contains "deny mount".
+  mount,
+
+  deny /sys/[^f]*/** wklx,
+  deny /sys/f[^s]*/** wklx,
+  deny /sys/fs/[^c]*/** wklx,
+  deny /sys/fs/c[^g]*/** wklx,
+  deny /sys/fs/cg[^r]*/** wklx,
+  deny /sys/firmware/** rwklx,
+  deny /sys/devices/virtual/powercap/** rwklx,
+  deny /sys/kernel/security/** rwklx,
+
+  # Allow processes within the container to trace each other,
+  # provided all other LSM and yama settings allow it.
+  ptrace (trace,tracedby,read,readby) peer=docker-ep,
+}
+
+```
+
+
+1. Install the AppArmor profile:
+
+        :::console
+        root@ubuntu # apparmor_parser -r /etc/apparmor.d/docker-ep.profile
+        root@ubuntu # aa-enforce /etc/apparmor.d/docker-ep.profile
+
+1. Update the Docker command from the previous section to use this unrestricted AppArmor profile.
+
+```hl_lines="6"
+docker run -it --rm --user osg  \
+       --pull=always            \
+       --security-opt seccomp=unconfined        \
+       --security-opt systempaths=unconfined    \
+       --security-opt no-new-privileges         \
+       --security-opt apparmor=docker-ep        \
+       --device /dev/fuse                       \
+       -v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
+       -v /worker-temp-dir:/pilot               \
+       -e GLIDEIN_Site="..."                    \
+       -e GLIDEIN_ResourceName="..."            \
+       -e GLIDEIN_Start_Extra="True"            \
+       -e OSG_SQUID_LOCATION="..."              \
+       -e CVMFSEXEC_REPOS="                     \
+            oasis.opensciencegrid.org           \
+            singularity.opensciencegrid.org"    \
+       hub.opensciencegrid.org/osg-htc/ospool-ep:24-release
+```
 
 Optional Configuration
 ----------------------
