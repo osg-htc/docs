@@ -2312,6 +2312,11 @@ or <a href="https://kubernetes.io/">Kubernetes</a>.</p>
              --name osdf-origin <span class="se">\</span>
              hub.osg-htc.org/pelican_platform/osdf-origin:latest
 </code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When you start the service for the first time, it will submit a <a href="#joining-the-origin-to-the-federation">registration 
+request</a>. </p>
+</div>
 <h2 id="validating-the-origin">Validating the Origin<a class="headerlink" href="#validating-the-origin" title="Permanent link">&para;</a></h2>
 <p>For each namespace in your <code>Origin.Exports</code> list, validate their functionality by using the following sections based on
 whether or not they have <code>PublicReads</code> in their <code>Capabilities</code> list.</p>
@@ -2395,8 +2400,10 @@ once the problem has been resolved.</p>
 <p>See <a href="../../../common/help/">this page</a> for requesting assistance;
 please include the logs and <code>pelican object get --debug</code> output in your request.</p>
 <h2 id="joining-the-origin-to-the-federation">Joining the Origin to the Federation<a class="headerlink" href="#joining-the-origin-to-the-federation" title="Permanent link">&para;</a></h2>
-<p>The origin must be registered with the OSG prior to joining the data federation.
-Send mail to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#115;&#103;&#45;&#104;&#116;&#99;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#115;&#103;&#45;&#104;&#116;&#99;&#46;&#111;&#114;&#103;</a> requesting registration; provide the following information:</p>
+<p>The origin must be registered with the OSG prior to joining the data federation. 
+When you start the service for the first time, it will submit a registration 
+request. We will not take action on that request until we hear from you. </p>
+<p>To finalize your registration, email <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#111;&#115;&#103;&#45;&#104;&#116;&#99;&#46;&#111;&#114;&#103;">&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#111;&#115;&#103;&#45;&#104;&#116;&#99;&#46;&#111;&#114;&#103;</a> with the following information: </p>
 <ul>
 <li>Origin hostname</li>
 <li>Administrative and security contact(s)</li>
