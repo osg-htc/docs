@@ -216,6 +216,10 @@ user@host $ docker run --rm \
              hub.osg-htc.org/pelican_platform/osdf-origin:latest
 ```
 
+!!! note
+	When you start the service for the first time, it will submit a [registration 
+	request](#joining-the-origin-to-the-federation). 
+
 
 Validating the Origin
 ---------------------
@@ -299,8 +303,11 @@ please include the logs and `pelican object get --debug` output in your request.
 Joining the Origin to the Federation
 ------------------------------------
 
-The origin must be registered with the OSG prior to joining the data federation.
-Send mail to <help@osg-htc.org> requesting registration; provide the following information:
+The origin must be registered with the OSG prior to joining the data federation. 
+When you start the service for the first time, it will submit a registration 
+request. We will not take action on that request until we hear from you. 
+
+To finalize your registration, email <support@osg-htc.org> with the following information: 
 
 *   Origin hostname
 *   Administrative and security contact(s)
