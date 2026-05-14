@@ -1457,6 +1457,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#may-14-2026-gratia-probe-292-vo-client-142-htcondor-24020-upcoming-htcondor-241220" class="md-nav__link">
+    May 14, 2026: gratia-probe 2.9.2, vo-client 142, HTCondor 24.0.20; Upcoming: HTCondor 24.12.20
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#may-7-2026-openbao-253" class="md-nav__link">
     May 7, 2026: OpenBao 2.5.3
   </a>
@@ -2169,6 +2176,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#may-14-2026-gratia-probe-292-vo-client-142-htcondor-24020-upcoming-htcondor-241220" class="md-nav__link">
+    May 14, 2026: gratia-probe 2.9.2, vo-client 142, HTCondor 24.0.20; Upcoming: HTCondor 24.12.20
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#may-7-2026-openbao-253" class="md-nav__link">
     May 7, 2026: OpenBao 2.5.3
   </a>
@@ -2582,6 +2596,55 @@ The initial release includes GlideinWMS 3.10.7, HTCondor 24.0.1, HTCondor 24.1.1
 <li><a href="../../common/registration/#registering-resources">Registered administrative contacts</a></li>
 <li><a href="https://groups.google.com/u/1/a/osg-htc.org/g/site-announce">site-announce@osg-htc.org</a></li>
 <li><a href="https://groups.google.com/a/osg-htc.org/g/software-discuss">software-discuss@osg-htc.org</a></li>
+</ul>
+<h2 id="may-14-2026-gratia-probe-292-vo-client-142-htcondor-24020-upcoming-htcondor-241220"><strong>May 14, 2026:</strong> gratia-probe 2.9.2, vo-client 142, HTCondor 24.0.20; Upcoming: HTCondor 24.12.20<a class="headerlink" href="#may-14-2026-gratia-probe-292-vo-client-142-htcondor-24020-upcoming-htcondor-241220" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>gratia-probe 2.9.2</p>
+<ul>
+<li>Fixes bug in 2.9.1 that prevented record delivery</li>
+</ul>
+<div class="admonition bug">
+<p class="admonition-title">Issue in previous gratia-probe release</p>
+<p>If you previously installed gratia-probe 2.9.1, please move any held records back into the 
+processing directory for reprocessing:</p>
+<ol>
+<li>Confirm that <code>PER_JOB_HISTORY_DIR</code> is set in your HTCondor config:<br />
+    <div class="highlight"><pre><span></span><code>$ condor_ce_config_val PER_JOB_HISTORY_DIR
+</code></pre></div></li>
+<li>Move quarantined gratia records back into the per job history dir:<br />
+    <div class="highlight"><pre><span></span><code>mv $(condor_ce_config_val PER_JOB_HISTORY_DIR)/quarantine/history* \
+   $(condor_ce_config_val PER_JOB_HISTORY_DIR)
+</code></pre></div></li>
+</ol>
+</div>
+</li>
+<li>
+<p>vo-client 142</p>
+<ul>
+<li>Add voms2-*-.cern.ch VOMS servers</li>
+</ul>
+</li>
+<li>
+<p><a href="https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-20">HTCondor 24.0.20</a></p>
+<ul>
+<li>Fix reporting of <code>RemoteUserCPU</code> in parallel universe</li>
+<li><code>condor_ssh_to_job</code> can now execute one-shot commands when using containers</li>
+<li><code>condor_ssh_to_job</code> now enters the proper cgroup when using containers</li>
+<li>HTCondor tarballs now contain Pelican 7.24.2</li>
+</ul>
+</li>
+<li>Upcoming:<ul>
+<li><a href="https://htcondor.readthedocs.io/en/24.x/version-history/feature-versions-24-x.html#version-24-12-20">HTCondor 24.12.20</a><ul>
+<li>Fixed Access Point spooled X.509 job proxy refresh</li>
+<li>Fix reporting of <code>RemoteUserCPU</code> in parallel universe</li>
+<li><code>condor_ssh_to_job</code> can now execute one-shot commands when using containers</li>
+<li><code>condor_ssh_to_job</code> now enters the proper cgroup when using containers</li>
+<li>HTCondor tarballs now contain Pelican 7.24.2</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h2 id="may-7-2026-openbao-253"><strong>May 7, 2026:</strong> OpenBao 2.5.3<a class="headerlink" href="#may-7-2026-openbao-253" title="Permanent link">&para;</a></h2>
 <ul>
