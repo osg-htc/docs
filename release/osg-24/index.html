@@ -2602,11 +2602,11 @@ The initial release includes GlideinWMS 3.10.7, HTCondor 24.0.1, HTCondor 24.1.1
 <li>
 <p>gratia-probe 2.9.2</p>
 <ul>
-<li>Fixes bug in 2.9.1 that prevented record delivery</li>
+<li>Fixes bug in 2.9.1 that prevented record delivery in the htcondor-ce probe</li>
 </ul>
 <div class="admonition bug">
-<p class="admonition-title">Issue in previous gratia-probe release</p>
-<p>If you previously installed gratia-probe 2.9.1, please move any held records back into the 
+<p class="admonition-title">Issue in previous gratia-probe-htcondor-ce release</p>
+<p>If you previously installed gratia-probe-htcondor-ce 2.9.1, please move any held records back into the 
 processing directory for reprocessing:</p>
 <ol>
 <li>Confirm that <code>PER_JOB_HISTORY_DIR</code> is set in your HTCondor config:<br />
@@ -2615,6 +2615,10 @@ processing directory for reprocessing:</p>
 <li>Move quarantined gratia records back into the per job history dir:<br />
     <div class="highlight"><pre><span></span><code>mv $(condor_ce_config_val PER_JOB_HISTORY_DIR)/quarantine/history* \
    $(condor_ce_config_val PER_JOB_HISTORY_DIR)
+</code></pre></div></li>
+<li>gratia-probe-htcondor-ce uses only <code>RoutedJob</code> ads and will move any non-<code>RoutedJob</code> ad into quarantine 
+     even when functioning properly. Confirm that no re-quarantined records have a <code>RoutedJob</code> attribute:
+    <div class="highlight"><pre><span></span><code>grep &#39;RoutedJob&#39; $(condor_ce_config_val PER_JOB_HISTORY_DIR)/quarantine/history*
 </code></pre></div></li>
 </ol>
 </div>
