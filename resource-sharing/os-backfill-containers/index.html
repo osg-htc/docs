@@ -2133,7 +2133,7 @@ the pilots may remain idle.</p>
    resource registration allows OSG to do proper usage accounting and maintain contacts in case of security incidents
    and other issues.</li>
 <li>An authentication token from the OSG: once contact and resource registration are complete, you can retrieve a token
-   through the <a href="https://os-registry.opensciencegrid.org/">OSPool Token Registry</a></li>
+   through the <a href="https://os-registry.osg-htc.org/">OSPool Token Registry</a></li>
 <li>An <a href="../../data/run-frontier-squid-container/">HTTP caching proxy</a> at or near your site.</li>
 </ol>
 <h2 id="running-the-container-via-rpm">Running the Container via RPM<a class="headerlink" href="#running-the-container-via-rpm" title="Permanent link">&para;</a></h2>
@@ -2149,7 +2149,7 @@ the pilots may remain idle.</p>
 
 </li>
 <li>
-<p><a href="https://os-registry.opensciencegrid.org/">Obtain an OSPool Access Token</a> for the pilot.</p>
+<p><a href="https://os-registry.osg-htc.org/">Obtain an OSPool Access Token</a> for the pilot.</p>
 </li>
 <li>
 <p>Copy the OSPool Access Token obtained in the previous step to <code>/etc/osg/ospool-ep.tkn</code>.</p>
@@ -2233,7 +2233,7 @@ In order to successfully start payload jobs:</p>
 <ol>
 <li><strong>Configure authentication:</strong>
    Authentication with the OSPool is performed using tokens retrieved from the
-   <a href="https://os-registry.opensciencegrid.org/">OSPool Token Registry</a>
+   <a href="https://os-registry.osg-htc.org/">OSPool Token Registry</a>
    which you can then pass to the container by volume mounting it as a file under <code>/etc/condor/tokens-orig.d/</code>.
    If you are using Docker to launch the container, this is done with the command line flag
    <code>-v /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org</code>.
