@@ -1430,6 +1430,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#july-8-2026-xrootd-596-osg-ca-certs-1143-3-osg-ce-25-4" class="md-nav__link">
+    July 8, 2026: XRootD 5.9.6, osg-ca-certs 1.143-3, osg-ce 25-4
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#june-25-2026-igtf-1143-osg-wn-client-25-4" class="md-nav__link">
     June 25, 2026: IGTF 1.143, osg-wn-client 25-4
   </a>
@@ -2062,6 +2069,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#july-8-2026-xrootd-596-osg-ca-certs-1143-3-osg-ce-25-4" class="md-nav__link">
+    July 8, 2026: XRootD 5.9.6, osg-ca-certs 1.143-3, osg-ce 25-4
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#june-25-2026-igtf-1143-osg-wn-client-25-4" class="md-nav__link">
     June 25, 2026: IGTF 1.143, osg-wn-client 25-4
   </a>
@@ -2330,6 +2344,28 @@ minor versions to access packages in newer EPEL sub-versions.</p>
 <li><a href="https://groups.google.com/a/osg-htc.org/g/software-discuss">software-discuss@osg-htc.org</a></li>
 </ul>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h2 id="july-8-2026-xrootd-596-osg-ca-certs-1143-3-osg-ce-25-4"><strong>July 8, 2026:</strong> XRootD 5.9.6, osg-ca-certs 1.143-3, osg-ce 25-4<a class="headerlink" href="#july-8-2026-xrootd-596-osg-ca-certs-1143-3-osg-ce-25-4" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://github.com/xrootd/xrootd/releases/tag/v5.9.6">XRootD 5.9.6-1.1</a><ul>
+<li>Security fixes for<ul>
+<li>HTTP protocol plugin</li>
+<li>Third-Party Copy plugin</li>
+<li>macaroons</li>
+<li>SciTokens plugin</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>osg-ca-certs 1.143-3<ul>
+<li>Add root CAs for ISRG Root YE and ISRG Root YR</li>
+<li>Add subordinate CAs for Let's Encrypt YE and Let's Encrypt YR</li>
+</ul>
+</li>
+<li>osg-ce 25-4<ul>
+<li>Add back frontier-squid dependency now that it's available on EL10</li>
+</ul>
+</li>
+</ul>
 <h2 id="june-25-2026-igtf-1143-osg-wn-client-25-4"><strong>June 25, 2026:</strong> IGTF 1.143, osg-wn-client 25-4<a class="headerlink" href="#june-25-2026-igtf-1143-osg-wn-client-25-4" title="Permanent link">&para;</a></h2>
 <ul>
 <li>CA certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.143</a><ul>
@@ -3085,7 +3121,6 @@ These updates will require manual intervention, which will be documented and ann
 <h3 id="el10-packaging-differences">EL10 packaging differences<a class="headerlink" href="#el10-packaging-differences" title="Permanent link">&para;</a></h3>
 <p>The following OSG packages are not yet available for Enterprise Linux 10:</p>
 <ul>
-<li>glideinwms</li>
 <li>osg-pki-tools</li>
 </ul>
 <p>The following changes were made to packages in EL10:</p>
@@ -3100,8 +3135,6 @@ These packages however, are still available in case sites have alternative means
 <code>ganglia</code> and <code>slurm</code> dependencies.</p>
 </div>
 <ul>
-<li>Removed <code>frontier-squid</code> as a dependency.
-    The dependency will be re-added when <code>frontier-squid</code> is available for EL10</li>
 <li>Removed <code>osg-ce-torque</code> as Torque is not available via EPEL</li>
 </ul>
 </li>
