@@ -1464,6 +1464,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#august-20-2026-htcondor-24023-osdf-server-7191-2-json-schema-validator-230-3-upcoming-htcondor-241223-cvmfs-2141" class="md-nav__link">
+    August 20, 2026: HTCondor 24.0.23, osdf-server 7.19.1-2, json-schema-validator 2.3.0-3; Upcoming: HTCondor 24.12.23, CVMFS 2.14.1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#august-6-2026-osg-ca-certs-1144-2-pelican-7260-xrdcl-pelican-171-openbao-260-htvault-config-241" class="md-nav__link">
     August 6, 2026: osg-ca-certs 1.144-2, Pelican 7.26.0, xrdcl-pelican 1.7.1, OpenBao 2.6.0, htvault-config 2.4.1
   </a>
@@ -2260,6 +2267,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#august-20-2026-htcondor-24023-osdf-server-7191-2-json-schema-validator-230-3-upcoming-htcondor-241223-cvmfs-2141" class="md-nav__link">
+    August 20, 2026: HTCondor 24.0.23, osdf-server 7.19.1-2, json-schema-validator 2.3.0-3; Upcoming: HTCondor 24.12.23, CVMFS 2.14.1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#august-6-2026-osg-ca-certs-1144-2-pelican-7260-xrdcl-pelican-171-openbao-260-htvault-config-241" class="md-nav__link">
     August 6, 2026: osg-ca-certs 1.144-2, Pelican 7.26.0, xrdcl-pelican 1.7.1, OpenBao 2.6.0, htvault-config 2.4.1
   </a>
@@ -2752,6 +2766,56 @@ The initial release includes GlideinWMS 3.10.7, HTCondor 24.0.1, HTCondor 24.1.1
 <li><a href="https://groups.google.com/a/osg-htc.org/g/software-discuss">software-discuss@osg-htc.org</a></li>
 </ul>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h2 id="august-20-2026-htcondor-24023-osdf-server-7191-2-json-schema-validator-230-3-upcoming-htcondor-241223-cvmfs-2141"><strong>August 20, 2026:</strong> HTCondor 24.0.23, osdf-server 7.19.1-2, json-schema-validator 2.3.0-3; Upcoming: HTCondor 24.12.23, CVMFS 2.14.1<a class="headerlink" href="#august-20-2026-htcondor-24023-osdf-server-7191-2-json-schema-validator-230-3-upcoming-htcondor-241223-cvmfs-2141" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><a href="https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-23">HTCondor 24.0.23</a></p>
+<ul>
+<li>Fix bug where FS authentication fails when <code>TCP_FORWARDING_HOST</code> is set</li>
+<li>Fix bug where <code>condor_history</code> might not find a specific cluster or proc</li>
+<li>HTCondor tarballs now contain Apptainer 1.5.3 and <a href="https://github.com/PelicanPlatform/pelican/releases/tag/v7.26.0">Pelican 7.26.0</a></li>
+<li>Removing Pelican server code reduces tarball size by 10 megabytes</li>
+</ul>
+</li>
+<li>
+<p>osdf-server 7.19.1-2</p>
+<ul>
+<li>Include xrootd-s3-http on EL8</li>
+</ul>
+</li>
+<li>
+<p>json-schema-validator 2.3.0-3</p>
+<ul>
+<li>Split executables and versioned libraries out of the -devel sub-package.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Downgrading to the previous version of
+<code>json-schema-validator-devel</code> requires removing <code>json-schema-validator</code>
+to avoid file conflicts, as follows:
+<code>yum swap json-schema-validator 'json-schema-validator-devel &lt; 2.3.0-3'</code></p>
+</div>
+</li>
+<li>
+<p>Upcoming</p>
+<ul>
+<li><a href="https://htcondor.readthedocs.io/en/24.x/version-history/feature-versions-24-x.html#version-24-12-23">HTCondor 24.12.23</a><ul>
+<li>Fix bug where FS authentication fails when <code>TCP_FORWARDING_HOST</code> is set</li>
+<li>Fix bug where <code>condor_history</code> might not find a specific cluster or proc</li>
+<li>HTCondor tarballs now contain Apptainer 1.5.3 and <a href="https://github.com/PelicanPlatform/pelican/releases/tag/v7.26.0">Pelican 7.26.0</a></li>
+<li>Removing Pelican server code reduces tarball size by 10 megabytes</li>
+</ul>
+</li>
+<li><a href="https://cvmfs.readthedocs.io/en/stable/cpt-releasenotes/#release-notes-for-cernvm-fs-2141">CVMFS 2.14.1</a><ul>
+<li>Major update over 2.13 including many bug fixes and features,
+    including significant improvements in defensive security.
+    Sites are encouraged to upgrade, especially large sites,
+    and to watch for and report problems.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h2 id="august-6-2026-osg-ca-certs-1144-2-pelican-7260-xrdcl-pelican-171-openbao-260-htvault-config-241"><strong>August 6, 2026:</strong> osg-ca-certs 1.144-2, Pelican 7.26.0, xrdcl-pelican 1.7.1, OpenBao 2.6.0, htvault-config 2.4.1<a class="headerlink" href="#august-6-2026-osg-ca-certs-1144-2-pelican-7260-xrdcl-pelican-171-openbao-260-htvault-config-241" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://github.com/opensciencegrid/osg-certificates/releases/tag/v1.144.igtf.1.144-2">osg-ca-certs 1.144-2</a><ul>
