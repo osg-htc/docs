@@ -23,6 +23,11 @@ Updates to critical packages are also announced by email and are sent to the fol
 Latest News
 -----------
 
+**August 21, 2026:** osg-ca-certs 1.144-3
+----------------------------------------------------------------------------------------------------------------------
+-   osg-ca-certs 1.144-3
+    -   Fix a syntax error in Let's Encrypt ISRG Root Cert Signing Policy
+
 **August 20, 2026:** HTCondor 24.0.23, osdf-server 7.19.1-2, json-schema-validator 2.3.0-3; Upcoming: HTCondor 24.12.23, CVMFS 2.14.1
 ----------------------------------------------------------------------------------------------------------------------
 -   [HTCondor 24.0.23](https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-23)
