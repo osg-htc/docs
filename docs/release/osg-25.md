@@ -59,6 +59,13 @@ Updates to critical packages are also announced by email and are sent to the fol
 Latest News
 -----------
 
+**September 3, 2026:** IGTF 1.146, openbao 2.6.2
+----------------------------------------------------------------------------------------------------------------------
+-   CA certificates based on [IGTF 1.146](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Removed superseded REUNA 2007 CA (CL)
+    -   Added IHEP 2026 hierarchy (CN)
+    -   Removed deprecated emSignClass1CAG1 (emSign Class 1 CA - G1) (IN)
+
 **August 21, 2026:** osg-ca-certs 1.144-3
 ----------------------------------------------------------------------------------------------------------------------
 -   osg-ca-certs 1.144-3
