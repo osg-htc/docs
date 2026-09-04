@@ -117,7 +117,7 @@ Running the Container with Docker
     host such as AlmaLinux. [Additional considerations](#running-with-docker-on-ubuntu) 
     are required for running on Ubuntu and other Debian-based Linux flavors.
 
-The Docker image is kept in [DockerHub](https://hub.docker.com/r/opensciencegrid/osgvo-docker-pilot).
+The Docker image is named `hub.osg-htc.org/osg-htc/ospool-ep` and is kept in [OSG Harbor](https://hub.osg-htc.org).
 In order to successfully start payload jobs:
 
 
@@ -278,7 +278,7 @@ docker run -it --rm --user osg  \
        -e CVMFSEXEC_REPOS="                     \
             oasis.opensciencegrid.org           \
             singularity.opensciencegrid.org"    \
-       hub.opensciencegrid.org/osg-htc/ospool-ep:24-release
+       hub.osg-htc.org/osg-htc/ospool-ep:25-release
 ```
 
 Optional Configuration
@@ -530,7 +530,7 @@ docker run -it --rm --user osg  \
        -e GLIDEIN_Start_Extra="True"            \
        -e OSG_SQUID_LOCATION="..."              \
        -e SINGULARITY_DISABLE_PID_NAMESPACES=True   \
-       hub.opensciencegrid.org/osg-htc/ospool-ep:25-release
+       hub.osg-htc.org/osg-htc/ospool-ep:25-release
 ```
 
 Best Practices
