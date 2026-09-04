@@ -199,7 +199,7 @@ steps to debug:
   which configuration files are evaluated and look for old files that
   may have been left from a previous installation.
 - More things to try are in the
-  [upstream documentation](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html#troubleshooting).
+  [upstream documentation](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart/#troubleshooting).
 
 ## Starting and Stopping services
 

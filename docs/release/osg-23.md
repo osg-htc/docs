@@ -15,7 +15,7 @@ Additionally, OSG 23 aligns the OSG and HTCondor Software Suite (HTCSS) release 
 
 -   OSG 23 main Yum repositories will contain HTCSS LTS series
     ([HTCondor 23.0](https://htcondor.readthedocs.io/en/23.0/index.html),
-    [HTCondor-CE 23.0](https://htcondor.com/htcondor-ce/v23/installation/htcondor-ce/))
+    HTCondor-CE 23.0
 -   OSG 23 upcoming Yum repositories will contain HTCSS feature series (HTCondor 23.x, HTCondor-CE 23.x)
 
 Known Issues
@@ -113,7 +113,7 @@ Latest News
     -   xrootd-lotman 0.0.5
 
 ### **August 14, 2025:** CVMFS 2.13.2, XRootD 5.8.4-1.2; Upcoming: frontier-squid 6.13-1.5, GlideinWMS 3.11.1
--   [CVMFS 2.13.2](https://cvmfs.readthedocs.io/en/2.13/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-13-2)
+-   CVMFS 2.13.2
     -   Includes important bug fixes to prevent client hangs and crashes
         and to avoid multiple concurrent server snapshots.  Everyone who
         has installed cvmfs client 2.12 or greater is especially encouraged
@@ -157,7 +157,7 @@ Latest News
     -   [Pelican 7.17.2](https://pelicanplatform.org/releases)
 
 ### **July 10, 2025:** CVMFS 2.13.1, htgettoken 2.4
--   [CVMFS 2.13.1](https://cvmfs.readthedocs.io/en/2.13/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-13-1)
+-   CVMFS 2.13.1
     -   Fixes a bug that has been present since cvmfs-2.12.0 which prevents
         periodic resets to the closest stratum 1, causing performance
         degradation. All who have upgraded to version 2.12.0 or later are
@@ -197,7 +197,7 @@ Latest News
     -   Added new CESNET CA Gen5 hierarchy and new off-line Root 2 (CZ)
     -   Withdrawn retired CILogon CAs cilogon-basic and cilogon-silver (US)
     -   A new version of the generation-4 package signing key
--   [CVMFS 2.13.0](https://cvmfs.readthedocs.io/en/2.13/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-13-0)
+-   CVMFS 2.13.0
     -   Various fixes and improvements in both the client and server packages
 -   [GlideinWMS 3.10.13](https://glideinwms.fnal.gov/doc.v3_10_13/history.html)
     -   Able to upload custom files to a HTCondor config.d directory in the Glidein
@@ -320,7 +320,7 @@ Latest News
 ### **February 27, 2025:** XRootD 5.7.3, CVMFS 2.12.6, IGTF 1.133, OSPool EP 1.0-6; Upcoming Pelican 7.13.0
 - [XRootD v5.7.3](https://github.com/xrootd/xrootd/releases/tag/v5.7.3)
     - Various major and minor bugfixes
-- [CVMFS 2.12.6](https://cvmfs.readthedocs.io/en/stable/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-12-6-2-12-5)
+- CVMFS 2.12.6
     - \[client\] Revert `CVMFS_PATCH_LEVEL` to 0 for `check_cvmfs.sh`
     - \[rpm\] fix package install on wsl2 and other non-systemd platforms
 - CA certificates based on [IGTF 1.133](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
@@ -407,7 +407,7 @@ Latest News
     -   added new trust anchor for TRGRID transition (TR)
 -   gratia-probe 2.8.5
     -   Log HTCondor schedd cron stdout/stderr for easier debugging
--   [HTCondor-CE 23.0.18](https://htcondor.com/htcondor-ce/v23/releases/#december-19-2024-23018)
+-   HTCondor-CE 23.0.18
     -   Does not pass WholeNode request expressions to non-HTCondor batch systems
     -   Fix certificate subject parsing in `condor_ce_host_network_check`
 -   XCache 3.7.0-2
@@ -517,7 +517,7 @@ Latest News
     -   Provide an error code on metadata lookup failure
 
 ### **September 12, 2024:** CVMFS 2.11.5, vault 1.17.2, htvault-config 1.18, htgettoken 2.0, xrootd-multiuser 2.2.0-1.1, xrdcl-pelican 0.9.3-2.1
--   [CVMFS 2.11.5](https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-11-5)
+-   CVMFS 2.11.5
     -   Fix blocking behavior in repositories when pipe reads take longer than a timeout
     -   Fix streaming cache manager with secure repositories
     -   Fix handling of network errors in streaming cache manager
@@ -553,7 +553,7 @@ Latest News
     -   Fixed crash in `condor_annex` script
     -   Fixed daemon crash after IDTOKEN request is approved by the collector
 -   Upcoming
-    -   [HTCondor-CE 23.9.1](https://htcondor.com/htcondor-ce/v23/releases/#2391)
+    -   HTCondor-CE 23.9.1
         -   Use new Job Router syntax by default
         -   Update configuration files to work with HTCondor 23.9.1 and later
     -   [HTCondor 23.9.6](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-9-6)
@@ -580,7 +580,7 @@ Latest News
     -   See upstream release notes for details
 
 ### **July 25, 2024:** HTCondor-CE 23.0.13, GlideinWMS 3.10.7, hosted-ce-tools 2.1: Upcoming: Pelican 7.9.5
--   [HTCondor-CE 23.0.13](https://htcondor.com/htcondor-ce/v23/releases/#23013)
+-   HTCondor-CE 23.0.13
     -   Include `condor_ce_upgrade_check` script
 -   [GlideinWMS 3.10.7](http://glideinwms.fnal.gov/doc.v3_10_7/history.html)
     -   Apptainer cache and temp directory set in the Glidein working directory
@@ -597,7 +597,7 @@ Latest News
     -   [Pelican 7.9.5](https://github.com/PelicanPlatform/pelican/releases/tag/v7.9.5)
 
 ### **July 17, 2024:** HTCondor-CE 23.0.12, IGTF 1.130; Upcoming: osdf-server 7.9.3, Pelican 7.9.3
--   [HTCondor-CE 23.0.12](https://htcondor.com/htcondor-ce/v23/releases/#23012)
+-   HTCondor-CE 23.0.12
     -   Fix whole node GPU request expression for non-HTCondor batch systems
 -   CA certificates based on [IGTF 1.130](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   osg-ca-certs version number matches igft-ca-certs version number
@@ -674,7 +674,7 @@ Latest News
     -   The bundled version of apptainer was moved to libexec in the tarball
 -   XRootD 5.6.9-1.3:
     -   Add g-stream monitoring for IO time for Pelican
--   [CVMFS 2.11.3](https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-11-3)
+-   CVMFS 2.11.3
     -   Update method of downloading the MaxMind GeoIP, including requiring new configuration parameter `CVMFS_GEO_ACCOUNT_ID`
 -   Upcoming
     -   [Pelican 7.8.1](https://github.com/PelicanPlatform/pelican/releases/tag/v7.8.0)
@@ -700,7 +700,7 @@ Latest News
     -   Fix DAGMan crash when a provisioner node was given a parent
     -   Fix bug that prevented use of ftp: URLs in file transfer
     -   Fix bug where jobs that matched an offline slot never start
--   [HTCondor-CE 23.0.8](https://htcondor.com/htcondor-ce/v23/releases/#2308)
+-   HTCondor-CE 23.0.8
     -   Fix memory request being ignored for whole node jobs
 
 ### **April 4, 2024:** XRootD 5.6.9; Upcoming: Pelican 7.6.2
@@ -852,7 +852,7 @@ Latest News
     -   Use configured CA path for the SciTokens plugin
 -   osg-ce meta package
     -   Correctly set value of `OSG_RELEASE_SERIES` attribute for OSG 23
--   [HTCondor-CE 23.0.1](https://htcondor.com/htcondor-ce/v23/releases/#2301)
+-   HTCondor-CE 23.0.1
     -   Add `condor_ce_test_token` command
 -   osg-system-profiler 1.7.0
     -   Add system cryptographic policy
@@ -868,7 +868,7 @@ Latest News
     -   Removed suspended SDG-G2 authority (CN)
     -   Removed suspended CNIC authority (CN)
     -   Removed all four discontinued DigitalTrust CAs operated by their issuer (AE)
--   [CVMFS 2.11.2](https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-11-2)
+-   CVMFS 2.11.2
     -   Bug fix release
 -   [cvmfs-x509-helper 2.4](https://github.com/cvmfs-contrib/cvmfs-x509-helper/releases/tag/2.4)
     -   Important bug fix for reading credentials from within an unprivileged user namespace such
@@ -893,7 +893,7 @@ Latest News
     -   All the fixes from HTCondor 23.0.1
 
 ### **October 26, 2023:** CVMFS 2.11.1-1.3, XRootD 5.6.2-2.3, osg-update-vos 1.4.2-2
--   [CVMFS 2.11.1-1.3](https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-11-1)
+-   CVMFS 2.11.1-1.3
     -   Important fix to bug impacting osgstorage.org repositories introduced in 2.11.0 --
             all 2.11.0 installations should upgrade urgently
     -   Fix race conditions on concurrent fuse3 mounts
@@ -949,7 +949,7 @@ This release contains the following major package updates compared to the curren
             `condor_schedd`
         -   Fixed a bug where the condor_startd could crash if a new match is made at the end a drain request
 
--   [HTCondor-CE 23.0.0](https://htcondor.com/htcondor-ce/v23/installation/htcondor-ce/):
+-   HTCondor-CE 23.0.0:
     an update from 6.0.0 in OSG 3.6 main.
 
     !!! warning "Job router configuration deprecation"

@@ -117,7 +117,7 @@ Running the Container with Docker
     host such as AlmaLinux. [Additional considerations](#running-with-docker-on-ubuntu) 
     are required for running on Ubuntu and other Debian-based Linux flavors.
 
-The Docker image is kept in [DockerHub](https://hub.docker.com/r/opensciencegrid/osgvo-docker-pilot).
+The Docker image is named `hub.osg-htc.org/osg-htc/ospool-ep` and is kept in [OSG Harbor](https://hub.osg-htc.org).
 In order to successfully start payload jobs:
 
 
@@ -175,7 +175,7 @@ Replace `/path/to/token` with the location you saved the token obtained from the
 The `--security-opt` options and device mount requested in the above `docker run` allow the container
 to mount [CVMFS using cvmfsexec](#cvmfsexec) and invoke `singularity` for user jobs.
 Singularity (now known as Apptainer) allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).
-See [Advanced: Pod Security](#advanced-pod-security-configuration) for more details.
+See [Advanced: Container Security](#advanced-container-security-configuration) for more details.
 
 ### Running with Docker on Ubuntu
 
@@ -278,7 +278,7 @@ docker run -it --rm --user osg  \
        -e CVMFSEXEC_REPOS="                     \
             oasis.opensciencegrid.org           \
             singularity.opensciencegrid.org"    \
-       hub.opensciencegrid.org/osg-htc/ospool-ep:24-release
+       hub.osg-htc.org/osg-htc/ospool-ep:25-release
 ```
 
 Optional Configuration
@@ -485,7 +485,7 @@ The recommended security flags for this configuration are as follows:
 The recommended security configuration can be further reduced in scope with the following configuration options:
 
 - Define a custom seccomp profile for the EP container: Rather than disabling seccomp entirely, a custom set of seccomp filters may
-  be defined. It is recommended to begin with the [default seccomp JSON configuration](https://github.com/moby/moby/blob/master/profiles/seccomp/default.json)
+  be defined. It is recommended to begin with the [default seccomp JSON configuration](https://github.com/moby/profiles/blob/seccomp/v0.2.3/seccomp/default.json)
   and add an additional section to enable the following syscalls:
   ```
   {
@@ -530,7 +530,7 @@ docker run -it --rm --user osg  \
        -e GLIDEIN_Start_Extra="True"            \
        -e OSG_SQUID_LOCATION="..."              \
        -e SINGULARITY_DISABLE_PID_NAMESPACES=True   \
-       hub.opensciencegrid.org/osg-htc/ospool-ep:25-release
+       hub.osg-htc.org/osg-htc/ospool-ep:25-release
 ```
 
 Best Practices

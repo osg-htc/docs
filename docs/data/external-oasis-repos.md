@@ -124,7 +124,7 @@ the same time.  `CVMFS_AUTO_GC=true` will automatically run garbage
 collection periodically after publications, but those times are not
 always convenient.
 
-Also, check the [cvmfs documentation](http://cvmfs.readthedocs.io/en/latest/cpt-repo.html#configuration-recommendation-by-use-case) for additional recommendations for special purpose repositories.
+Also, check the [cvmfs documentation](http://cvmfs.readthedocs.io/en/latest/cpt-repo/#configuration-recommendation-by-use-case) for additional recommendations for special purpose repositories.
 
 Now verify that the repository is readable over HTTP:
 
@@ -204,8 +204,8 @@ Once the repository is fully replicated on the OSG, the VO may proceed in publis
 
 !!! tip
     We strongly recommend the repository maintainer read through the upstream documentation on
-    [maintaining repositories](https://cvmfs.readthedocs.io/en/stable/cpt-repo.html#maintaining-a-cernvm-fs-repository) and
-    [content limitations](https://cvmfs.readthedocs.io/en/stable/cpt-repo.html#limitations-on-repository-content).
+    [maintaining repositories](https://cvmfs.readthedocs.io/en/stable/cpt-repo/#maintaining-a-cernvm-fs-repository) and
+    [content limitations](https://cvmfs.readthedocs.io/en/stable/cpt-repo/#limitations-on-repository-content).
 
 Finally, if the new repository will be used outside of the U.S., the
 VO should open a [GGUS](https://ggus.eu) ticket following EGI's
