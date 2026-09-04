@@ -113,7 +113,7 @@ Latest News
     -   xrootd-lotman 0.0.5
 
 ### **August 14, 2025:** CVMFS 2.13.2, XRootD 5.8.4-1.2; Upcoming: frontier-squid 6.13-1.5, GlideinWMS 3.11.1
--   [CVMFS 2.13.2](https://cvmfs.readthedocs.io/en/2.13/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-13-2)
+-   CVMFS 2.13.2
     -   Includes important bug fixes to prevent client hangs and crashes
         and to avoid multiple concurrent server snapshots.  Everyone who
         has installed cvmfs client 2.12 or greater is especially encouraged
@@ -157,7 +157,7 @@ Latest News
     -   [Pelican 7.17.2](https://pelicanplatform.org/releases)
 
 ### **July 10, 2025:** CVMFS 2.13.1, htgettoken 2.4
--   [CVMFS 2.13.1](https://cvmfs.readthedocs.io/en/2.13/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-13-1)
+-   CVMFS 2.13.1
     -   Fixes a bug that has been present since cvmfs-2.12.0 which prevents
         periodic resets to the closest stratum 1, causing performance
         degradation. All who have upgraded to version 2.12.0 or later are
@@ -197,7 +197,7 @@ Latest News
     -   Added new CESNET CA Gen5 hierarchy and new off-line Root 2 (CZ)
     -   Withdrawn retired CILogon CAs cilogon-basic and cilogon-silver (US)
     -   A new version of the generation-4 package signing key
--   [CVMFS 2.13.0](https://cvmfs.readthedocs.io/en/2.13/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-13-0)
+-   CVMFS 2.13.0
     -   Various fixes and improvements in both the client and server packages
 -   [GlideinWMS 3.10.13](https://glideinwms.fnal.gov/doc.v3_10_13/history.html)
     -   Able to upload custom files to a HTCondor config.d directory in the Glidein
@@ -320,7 +320,7 @@ Latest News
 ### **February 27, 2025:** XRootD 5.7.3, CVMFS 2.12.6, IGTF 1.133, OSPool EP 1.0-6; Upcoming Pelican 7.13.0
 - [XRootD v5.7.3](https://github.com/xrootd/xrootd/releases/tag/v5.7.3)
     - Various major and minor bugfixes
-- [CVMFS 2.12.6](https://cvmfs.readthedocs.io/en/stable/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-12-6-2-12-5)
+- CVMFS 2.12.6
     - \[client\] Revert `CVMFS_PATCH_LEVEL` to 0 for `check_cvmfs.sh`
     - \[rpm\] fix package install on wsl2 and other non-systemd platforms
 - CA certificates based on [IGTF 1.133](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
@@ -517,7 +517,7 @@ Latest News
     -   Provide an error code on metadata lookup failure
 
 ### **September 12, 2024:** CVMFS 2.11.5, vault 1.17.2, htvault-config 1.18, htgettoken 2.0, xrootd-multiuser 2.2.0-1.1, xrdcl-pelican 0.9.3-2.1
--   [CVMFS 2.11.5](https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-11-5)
+-   CVMFS 2.11.5
     -   Fix blocking behavior in repositories when pipe reads take longer than a timeout
     -   Fix streaming cache manager with secure repositories
     -   Fix handling of network errors in streaming cache manager
@@ -674,7 +674,7 @@ Latest News
     -   The bundled version of apptainer was moved to libexec in the tarball
 -   XRootD 5.6.9-1.3:
     -   Add g-stream monitoring for IO time for Pelican
--   [CVMFS 2.11.3](https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-11-3)
+-   CVMFS 2.11.3
     -   Update method of downloading the MaxMind GeoIP, including requiring new configuration parameter `CVMFS_GEO_ACCOUNT_ID`
 -   Upcoming
     -   [Pelican 7.8.1](https://github.com/PelicanPlatform/pelican/releases/tag/v7.8.0)
@@ -868,7 +868,7 @@ Latest News
     -   Removed suspended SDG-G2 authority (CN)
     -   Removed suspended CNIC authority (CN)
     -   Removed all four discontinued DigitalTrust CAs operated by their issuer (AE)
--   [CVMFS 2.11.2](https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-11-2)
+-   CVMFS 2.11.2
     -   Bug fix release
 -   [cvmfs-x509-helper 2.4](https://github.com/cvmfs-contrib/cvmfs-x509-helper/releases/tag/2.4)
     -   Important bug fix for reading credentials from within an unprivileged user namespace such
@@ -893,7 +893,7 @@ Latest News
     -   All the fixes from HTCondor 23.0.1
 
 ### **October 26, 2023:** CVMFS 2.11.1-1.3, XRootD 5.6.2-2.3, osg-update-vos 1.4.2-2
--   [CVMFS 2.11.1-1.3](https://cvmfs.readthedocs.io/en/2.11/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-11-1)
+-   CVMFS 2.11.1-1.3
     -   Important fix to bug impacting osgstorage.org repositories introduced in 2.11.0 --
             all 2.11.0 installations should upgrade urgently
     -   Fix race conditions on concurrent fuse3 mounts
