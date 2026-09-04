@@ -15,7 +15,7 @@ Additionally, OSG 23 aligns the OSG and HTCondor Software Suite (HTCSS) release 
 
 -   OSG 23 main Yum repositories will contain HTCSS LTS series
     ([HTCondor 23.0](https://htcondor.readthedocs.io/en/23.0/index.html),
-    [HTCondor-CE 23.0](https://htcondor.com/htcondor-ce/v23/installation/htcondor-ce/))
+    HTCondor-CE 23.0
 -   OSG 23 upcoming Yum repositories will contain HTCSS feature series (HTCondor 23.x, HTCondor-CE 23.x)
 
 Known Issues
@@ -407,7 +407,7 @@ Latest News
     -   added new trust anchor for TRGRID transition (TR)
 -   gratia-probe 2.8.5
     -   Log HTCondor schedd cron stdout/stderr for easier debugging
--   [HTCondor-CE 23.0.18](https://htcondor.com/htcondor-ce/v23/releases/#december-19-2024-23018)
+-   HTCondor-CE 23.0.18
     -   Does not pass WholeNode request expressions to non-HTCondor batch systems
     -   Fix certificate subject parsing in `condor_ce_host_network_check`
 -   XCache 3.7.0-2
@@ -553,7 +553,7 @@ Latest News
     -   Fixed crash in `condor_annex` script
     -   Fixed daemon crash after IDTOKEN request is approved by the collector
 -   Upcoming
-    -   [HTCondor-CE 23.9.1](https://htcondor.com/htcondor-ce/v23/releases/#2391)
+    -   HTCondor-CE 23.9.1
         -   Use new Job Router syntax by default
         -   Update configuration files to work with HTCondor 23.9.1 and later
     -   [HTCondor 23.9.6](https://htcondor.readthedocs.io/en/23.x/version-history/feature-versions-23-x.html#version-23-9-6)
@@ -580,7 +580,7 @@ Latest News
     -   See upstream release notes for details
 
 ### **July 25, 2024:** HTCondor-CE 23.0.13, GlideinWMS 3.10.7, hosted-ce-tools 2.1: Upcoming: Pelican 7.9.5
--   [HTCondor-CE 23.0.13](https://htcondor.com/htcondor-ce/v23/releases/#23013)
+-   HTCondor-CE 23.0.13
     -   Include `condor_ce_upgrade_check` script
 -   [GlideinWMS 3.10.7](http://glideinwms.fnal.gov/doc.v3_10_7/history.html)
     -   Apptainer cache and temp directory set in the Glidein working directory
@@ -597,7 +597,7 @@ Latest News
     -   [Pelican 7.9.5](https://github.com/PelicanPlatform/pelican/releases/tag/v7.9.5)
 
 ### **July 17, 2024:** HTCondor-CE 23.0.12, IGTF 1.130; Upcoming: osdf-server 7.9.3, Pelican 7.9.3
--   [HTCondor-CE 23.0.12](https://htcondor.com/htcondor-ce/v23/releases/#23012)
+-   HTCondor-CE 23.0.12
     -   Fix whole node GPU request expression for non-HTCondor batch systems
 -   CA certificates based on [IGTF 1.130](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   osg-ca-certs version number matches igft-ca-certs version number
@@ -700,7 +700,7 @@ Latest News
     -   Fix DAGMan crash when a provisioner node was given a parent
     -   Fix bug that prevented use of ftp: URLs in file transfer
     -   Fix bug where jobs that matched an offline slot never start
--   [HTCondor-CE 23.0.8](https://htcondor.com/htcondor-ce/v23/releases/#2308)
+-   HTCondor-CE 23.0.8
     -   Fix memory request being ignored for whole node jobs
 
 ### **April 4, 2024:** XRootD 5.6.9; Upcoming: Pelican 7.6.2
@@ -852,7 +852,7 @@ Latest News
     -   Use configured CA path for the SciTokens plugin
 -   osg-ce meta package
     -   Correctly set value of `OSG_RELEASE_SERIES` attribute for OSG 23
--   [HTCondor-CE 23.0.1](https://htcondor.com/htcondor-ce/v23/releases/#2301)
+-   HTCondor-CE 23.0.1
     -   Add `condor_ce_test_token` command
 -   osg-system-profiler 1.7.0
     -   Add system cryptographic policy
@@ -949,7 +949,7 @@ This release contains the following major package updates compared to the curren
             `condor_schedd`
         -   Fixed a bug where the condor_startd could crash if a new match is made at the end a drain request
 
--   [HTCondor-CE 23.0.0](https://htcondor.com/htcondor-ce/v23/installation/htcondor-ce/):
+-   HTCondor-CE 23.0.0:
     an update from 6.0.0 in OSG 3.6 main.
 
     !!! warning "Job router configuration deprecation"
