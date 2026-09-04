@@ -81,7 +81,7 @@ root@host # systemctl restart condor
 Updating Your OSG Compute Entrypoint
 ------------------------------------
 
-The OSG 23 release series contains [HTCondor-CE 23](https://htcondor.github.io/htcondor-ce/v23/releases/), a minor
+The OSG 23 release series contains HTCondor-CE 23, a minor
 version upgrade from HTCondor-CE 6, which was available in the OSG 3.6 release repositories.
 
 To upgrade your CE to OSG 23, follow the sections below.
@@ -94,7 +94,7 @@ To upgrade your CE to OSG 23, follow the sections below.
 
 1.  If you have an HTCondor batch system, also run the `condor_upgrade_check` script and address any issues found.
 
-1.  Also consult the [upgrade documentation](https://htcondor.github.io/htcondor-ce/v23/releases/#updating-to-htcondor-ce-23)
+1.  Also consult the upgrade documentation `https://htcondor.github.io/htcondor-ce/v23/releases/#updating-to-htcondor-ce-23` (dead link)
     for more information.
 
 ### Turning off CE services ###

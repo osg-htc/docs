@@ -915,7 +915,7 @@ Latest News
 ----------------------------------------------------------------------------------------------------------------------
 - [XRootD v5.7.3](https://github.com/xrootd/xrootd/releases/tag/v5.7.3)
     - Various major and minor bugfixes
-- [CVMFS 2.12.6](https://cvmfs.readthedocs.io/en/stable/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-12-6-2-12-5)
+- [CVMFS 2.12.6](https://cvmfs.readthedocs.io/en/2.12/cpt-releasenotes.html#release-notes-for-cernvm-fs-2-12-6-2-12-5)
     - \[client\] Revert `CVMFS_PATCH_LEVEL` to 0 for `check_cvmfs.sh`
     - \[rpm\] fix package install on wsl2 and other non-systemd platforms
 - CA certificates based on [IGTF 1.133](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
