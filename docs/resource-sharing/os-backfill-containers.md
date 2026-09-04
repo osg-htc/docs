@@ -175,7 +175,7 @@ Replace `/path/to/token` with the location you saved the token obtained from the
 The `--security-opt` options and device mount requested in the above `docker run` allow the container
 to mount [CVMFS using cvmfsexec](#cvmfsexec) and invoke `singularity` for user jobs.
 Singularity (now known as Apptainer) allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).
-See [Advanced: Pod Security](#advanced-pod-security-configuration) for more details.
+See [Advanced: Container Security](#advanced-container-security-configuration) for more details.
 
 ### Running with Docker on Ubuntu
 
