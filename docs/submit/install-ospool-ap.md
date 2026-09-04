@@ -163,10 +163,8 @@ Each institution will have its own policy about the kinds of jobs that are allow
 and data transfer may be more complicated.
 The [OSG Helpdesk Solutions](https://portal.osg-htc.org/documentation) page has information about
 what users should know;
-the [Organizing and Submitting HTC Workloads Tutorial](https://portal.osg-htc.org/documentation/htc_workloads/submitting_workloads/tutorial-organizing/) and
-<!---
-[Data Management Guide](https://portal.osg-htc.org/documentation/htc_workloads/managing_data/osgconnect-storage/)
---->
+[HTCondor Job Submission](https://portal.osg-htc.org/documentation/htc_workloads/workload_planning/htcondor_job_submission/),
+[Data Management Guide](https://portal.osg-htc.org/documentation/htc_workloads/managing_data/overview/), and
 [Policies for Using OSG Services and the OSPool](https://portal.osg-htc.org/documentation/overview/references/policy/)
 are particularly relevant.
 
