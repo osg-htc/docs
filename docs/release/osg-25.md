@@ -59,6 +59,26 @@ Updates to critical packages are also announced by email and are sent to the fol
 Latest News
 -----------
 
+**September 10, 2026:** XRootD 5.9.7, xrootd-s3-http 0.6.9, xrdcl-pelican 1.8.2, xrdhttp-pelican 0.0.13
+----------------------------------------------------------------------------------------------------------------------
+-   [XRootD 5.9.7](https://github.com/xrootd/xrootd/releases/tag/v5.9.7)
+    -   Fix HTTP TPC buffer exhaustion with multi-stream PULL
+    -   Fix potential crash with Pelican cache self tests
+    -   Other bug fixes
+-   [xrootd-s3-http 0.6.9](https://github.com/PelicanPlatform/xrootd-s3-http/releases#release-v0.6.9-1)
+    -   Fix POSC and listing bugs
+    -   Create intermediate directories on file open
+    -   Remove `s3_Statistics` log messages
+    -   Add WebDAV directory listing and creation
+    -   Add HTTP authorization callouts
+-   [xrdcl-pelican 1.8.2](https://github.com/PelicanPlatform/xrdcl-pelican/releases#release-v1.8.2)
+    -   Add per-origin fair scheduler
+    -   Back port various XRootD fixes
+    -   Crash and data truncation fixes
+-   [xrdhttp-pelican 0.0.13](https://github.com/PelicanPlatform/xrdhttp-pelican/releases#release-v0.0.13)
+    -   Make crash handler async signal safe
+    -   Add deadlock watchdog timer
+
 **September 3, 2026:** IGTF 1.146, openbao 2.6.2
 ----------------------------------------------------------------------------------------------------------------------
 -   CA certificates based on [IGTF 1.146](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
