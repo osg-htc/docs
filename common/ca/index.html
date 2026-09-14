@@ -1667,13 +1667,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#installing-other-cas" class="md-nav__link">
-    Installing other CAs
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1939,13 +1932,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#installing-other-cas" class="md-nav__link">
-    Installing other CAs
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -2203,24 +2189,6 @@ RPM dependencies while not actually installing any CAs. To install this RPM, run
 <p class="admonition-title">Warning</p>
 <p>If you choose this option, you are responsible for installing and maintaining the CA certificates. They must be installed in <code>/etc/grid-security/certificates</code>, or a symlink must be made from that location to the directory that contains the CA certificates.</p>
 </div>
-<h3 id="installing-other-cas">Installing other CAs<a class="headerlink" href="#installing-other-cas" title="Permanent link">&para;</a></h3>
-<p>In addition to the above CAs, you can install other CAs via RPM. These only work with the RPMs that provide CAs (that is, <code>osg-ca-certs</code> and the like, but not <code>osg-ca-scripts</code>.) They are in addition to the above RPMs, so do not only install these extra CAs.</p>
-<table>
-<thead>
-<tr>
-<th align="left"><strong>Set of CAs</strong></th>
-<th align="left"><strong>RPM name</strong></th>
-<th align="left"><strong>Installation command (as root)</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><a href="https://ca.cilogon.org/policy/openid">cilogon-openid</a></td>
-<td align="left">cilogon-openid-ca-cert</td>
-<td align="left"><code>yum install cilogon-openid-ca-cert</code></td>
-</tr>
-</tbody>
-</table>
 <h2 id="verifying-ca-certificates">Verifying CA Certificates<a class="headerlink" href="#verifying-ca-certificates" title="Permanent link">&para;</a></h2>
 <p>After installing or updating the CA certificates, they can be verified with the following command:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>curl --cacert &lt;CA FILE&gt; <span class="se">\</span>

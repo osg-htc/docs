@@ -2285,7 +2285,7 @@ Make sure the user you run your container as has write access to this directory.
 The <code>--security-opt</code> options and device mount requested in the above <code>docker run</code> allow the container
 to mount <a href="#cvmfsexec">CVMFS using cvmfsexec</a> and invoke <code>singularity</code> for user jobs.
 Singularity (now known as Apptainer) allows OSPool users to use their own container for their job (e.g., a common use case for GPU jobs).
-See <a href="#advanced-pod-security-configuration">Advanced: Pod Security</a> for more details.</p>
+See <a href="#advanced-container-security-configuration">Advanced: Container Security</a> for more details.</p>
 <h3 id="running-with-docker-on-ubuntu">Running with Docker on Ubuntu<a class="headerlink" href="#running-with-docker-on-ubuntu" title="Permanent link">&para;</a></h3>
 <div class="admonition warning">
 <p class="admonition-title">Reducing AppArmor Restrictions</p>
@@ -2567,7 +2567,7 @@ The recommended security flags for this configuration are as follows:</p>
 <p>The recommended security configuration can be further reduced in scope with the following configuration options:</p>
 <ul>
 <li>Define a custom seccomp profile for the EP container: Rather than disabling seccomp entirely, a custom set of seccomp filters may
-  be defined. It is recommended to begin with the <a href="https://github.com/moby/moby/blob/master/profiles/seccomp/default.json">default seccomp JSON configuration</a>
+  be defined. It is recommended to begin with the <a href="https://github.com/moby/profiles/blob/seccomp/v0.2.3/seccomp/default.json">default seccomp JSON configuration</a>
   and add an additional section to enable the following syscalls:
   <div class="highlight"><pre><span></span><code>{
   &quot;names&quot;: [
