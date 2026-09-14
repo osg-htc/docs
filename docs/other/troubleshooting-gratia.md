@@ -32,7 +32,7 @@ These are the definitions of the major elements in the above figure.
     Users do not directly interact with the collector.
 
 You can explore the details of the OSG accounting data at <https://gracc.opensciencegrid.org> and
-<https://display.opensciencegrid.org/>.
+<https://display.osg-htc.org/>.
 
 Determine Your Host Type
 ------------------------

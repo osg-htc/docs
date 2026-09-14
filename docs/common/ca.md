@@ -95,14 +95,6 @@ root@host # yum install empty-ca-certs –-enablerepo=osg-empty
     If you choose this option, you are responsible for installing and maintaining the CA certificates. They must be installed in `/etc/grid-security/certificates`, or a symlink must be made from that location to the directory that contains the CA certificates.
 
 
-### Installing other CAs ###
-
-In addition to the above CAs, you can install other CAs via RPM. These only work with the RPMs that provide CAs (that is, `osg-ca-certs` and the like, but not `osg-ca-scripts`.) They are in addition to the above RPMs, so do not only install these extra CAs.
-
-| **Set of CAs** | **RPM name**           | **Installation command (as root)**   |
-|:---------------|:-----------------------|:-------------------------------------|
-| [cilogon-openid](https://ca.cilogon.org/policy/openid) | cilogon-openid-ca-cert | `yum install cilogon-openid-ca-cert` |
-
 Verifying CA Certificates
 -------------------------
 
