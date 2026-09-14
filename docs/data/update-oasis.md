@@ -72,7 +72,7 @@ This command queues a process to sync the content of OASIS with the content of `
 
 ### Limitations on repository content ###
 
-Although CVMFS provides a POSIX filesystem, it does not work well with all types of content. Content in OASIS is expected to adhere to the [CVMFS repository content limitations](http://cvmfs.readthedocs.io/en/stable/cpt-repo.html#limitations-on-repository-content) so please review those guidelines carefully.
+Although CVMFS provides a POSIX filesystem, it does not work well with all types of content. Content in OASIS is expected to adhere to the [CVMFS repository content limitations](http://cvmfs.readthedocs.io/en/stable/cpt-repo/#limitations-on-repository-content) so please review those guidelines carefully.
 
 ### Testing ###
 
