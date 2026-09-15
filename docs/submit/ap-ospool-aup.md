@@ -89,6 +89,8 @@ In practice, the minimum required versions for each of the supported release ser
 
 | **HTCondor Release Series** | **Required Minimum Version** |
 |-----------------------------|------------------------------|
+| 26.x.y                      | 26.1.0                       |
+| 26.0.y                      | 26.0.1                       |
 | 25.x.y                      | 25.11.1                      |
 | 25.0.y                      | 25.0.12                      |
 | 24.x.y                      | 24.12.22                     |

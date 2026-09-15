@@ -3,12 +3,9 @@ title: Installing the OSDF Origin by RPM
 Installing the OSDF Origin by RPM
 =================================
 
-!!! warning "OSG 24+"
-    This installation guide requires OSG 24 or OSG 25
-
-!!! tip "Upgrading from a non-Pelican origin?"
-    This installation guide also walks you through upgrading an origin that you installed prior to OSG 24.
-    See [this section](#upgrading-a-non-pelican-origin) for more details.
+!!! tip "Upgrading from OSG 24?"
+    Pelican configuration semantics changed between OSG 24 and OSG 25.
+    See [Updating to OSG 25](../../../release/updating-to-osg-25) for more details.
 
 This document describes how to install an Open Science Data Federation (OSDF) Origin service via RPMs.
 This service, based on the [Pelican Platform](https://docs.pelicanplatform.org/federating-your-data), allows an
@@ -21,7 +18,6 @@ Before Starting
 Before starting the installation process, consider the following requirements:
 
 * __Operating system:__ A RHEL 8, RHEL 9, RHEL 10, or [compatible operating system](../../release/supported_platforms.md).
-  (RHEL 10 is not supported in OSG 24.)
 * __User IDs:__ If it does not exist already, the installation will create the Linux user named `xrootd` for running daemons.
 * __Host certificate:__ Required for authentication.  See note below.
 * __Network ports:__ The origin service requires the following ports open:
@@ -45,14 +41,7 @@ As with all OSG software installations, there are some one-time steps to prepare
 
 * Obtain root access to the host
 * Prepare [the required Yum repositories](../../common/yum.md);
-  the [OSG 25 repositories](../../common/yum.md#install-the-osg-repositories) should be used.
-
-    !!! danger "Upgrading to a Pelican origin"
-        If you are upgrading from a pre-Pelican OSDF origin, update all of your OSG 23 packages before installing the OSG 25
-        repositories:
-
-            :::console
-            root@host # yum update
+  the [OSG 26 repositories](../../common/yum.md#install-the-osg-repositories) should be used.
 
 !!! note "Host certificates"
     Origins are accessed by users through browsers, meaning origins need a certificate from a CA acceptable to a standard browser.
@@ -61,63 +50,27 @@ As with all OSG software installations, there are some one-time steps to prepare
     Note that, unlike legacy grid software, the public certificate file will need to contain the "full chain", including any
     intermediate CAs (if you're unsure about your setup, try accessing your origin from your browser).
     
-    In OSG 25, the following locations should be used:
+    The following locations should be used:
 
     * **Host Certificate Chain**: `/etc/pelican/certificates/tls.crt`
     * **Host Key**: `/etc/pelican/certificates/tls.key`
-    
-    In OSG 24, the following locations should be used
-    (note that they are in separate directories):
-
-    * **Host Certificate Chain**: `/etc/pki/tls/certs/pelican.crt`
-    * **Host Key**: `/etc/pki/tls/private/pelican.key`
 
 Upgrading a Non-Pelican Origin
 ------------------------------
 
 If you are running a non-Pelican origin, e.g. one that was installed before OSG 24, there are special considerations for
-the upgrade to ensure minimal downtime for your users.
-This document will guide you through the upgrade process by installing and configuring a Pelican origin alongside your
-non-Pelican origin.
-
-!!! note "Using different hosts"
-    You may install your new Pelican origin on a separate host if your underlying data store is shared between hosts.
-
-First, determine if you have an active non-Pelican origin service running:
-
-```console
-user@host $ systemctl status xrootd@stash-origin-auth \
-                             xrootd@stash-origin \
-                             xrootd-privileged@stash-origin-auth \
-            | grep -F 'Active: active'
-   Active: active (running) since Wed 2024-12-04 17:46:17 CST; 1 weeks 1 days ago
-```
-
-*   **If you do not see any output from the above command**, you may proceed with the rest of the documentation.
-
-*   **If you see any output from the above command**, you may proceed with the rest of the documentation but keep an eye
-    out for special instructions related to the upgrade:
-
-    !!! danger "Upgrading to a Pelican origin"
-        You will find upgrade-specific instructions here.
+the upgrade to ensure minimal downtime for your users. Please reach out to [help@osg-htc.org](mailto:help@osg-htc.org)
+for assistance.
 
 Installing the Origin
 ---------------------
 
-In OSG 25, the origin service is provided by the `osdf-server` RPM.
+The origin service is provided by the `osdf-server` RPM.
 Install it via the following command:
 
 ```console
 root@host # yum install osdf-server
 ```
-
-In OSG 24, the origin service is provided by the `osdf-origin` RPM.
-Install it via the following command:
-
-```console
-root@host # yum install osdf-origin
-```
-
 
 Configuring the Origin Server
 -----------------------------
@@ -186,15 +139,9 @@ Do the following steps to verify that the origin is functional:
 
 1.  Start the origin using one of the following commands:
 
-    OSG 25:
-
         :::console
         root@host$ systemctl start pelican-origin
 
-    OSG 24:
-
-        :::console
-        root@host$ systemctl start osdf-origin
 
 1.  Download a test file (POSIX) or object (S3) from your origin (replacing `ORIGIN_HOSTNAME` with the host name of your origin,
     and TEST_PATH with the OSDF path to the test file or object
@@ -208,8 +155,7 @@ Do the following steps to verify that the origin is functional:
 
     If the download fails, rerun the above `pelican object get` command with the `-d` flag added.
 
-    In OSG 25, additional debugging information is located in `/var/log/pelican/pelican-origin.log`.<br>
-    In OSG 24, additional debugging information is located in `/var/log/pelican/osdf-origin.log`.
+    Additional debugging information is located in `/var/log/pelican/pelican-origin.log`.<br>
 
     To increase the debugging information in the log file, edit your origin configuration file and set:
     ```
@@ -226,11 +172,6 @@ Do the following steps to verify that the origin is functional:
 Joining the Origin to the Federation
 ------------------------------------
 
-!!! danger "Upgrading to a Pelican origin"
-    Once registered, all OSDF clients of your namespace will be directed to your Pelican origin.
-    Before initiating this process, ensure that your Pelican origin is functioning and that you are ready to migrate
-    production transfers.
-
 The origin must be registered with the OSG prior to joining the data federation.
 Send mail to <help@osg-htc.org> requesting registration; provide the following information:
 
@@ -246,17 +187,12 @@ XRootD:
   Sitename: <RESOURCE NAME REGISTERED WITH OSG>
 ```
 
-Then, restart the origin by running one of the following commands:
+Then, restart the origin by running the following command:
 
-OSG 25:
 ```console
 root@host$ systemctl restart pelican-origin
 ```
 
-OSG 24:
-```console
-root@host$ systemctl restart osdf-origin
-```
 
 Validating the Origin Through the Federation
 --------------------------------------------
@@ -289,31 +225,16 @@ Once your origin has been registered in the federation:
 
 1.  Verify that your test is running against your Pelican origin:
 
-    In OSG 25:
-
         :::console
         user@host $ grep <TEST_PATH> /var/log/pelican/pelican-origin.log
-
-    In OSG 24:
-        
-        :::console
-        user@host $ grep <TEST_PATH> /var/log/pelican/osdf-origin.log
 
     Replacing `<TEST PATH>` with the same path that you used in step (1) or (2).
     If you see output, then the OSDF is directing client requests to your Pelican origin!
     If you do not see output, please [contact us](#getting-help).
 
-!!! danger "Upgrading to a Pelican origin"
-    Congratulations, you have fully verified the functionality of your Pelican origin!
-    You may uninstall the non-Pelican origin:
-    
-        root@host $ yum remove stash-origin
-
 Managing the Origin Service
 ---------------------------
 Use the following SystemD commands as root to start, stop, enable, and disable the OSDF Origin.
-
-OSG 25:
 
 | To...                                    | Run the command...                 |
 | :--------------------------------------- | :--------------------------------- |
@@ -321,16 +242,6 @@ OSG 25:
 | Stop the origin                          | `systemctl stop pelican-origin`    |
 | Enable the origin to start on boot       | `systemctl enable pelican-origin`  |
 | Disable the origin from starting on boot | `systemctl disable pelican-origin` |
-
-OSG 24:
-
-| To...                                    | Run the command...                 |
-| :--------------------------------------- | :--------------------------------- |
-| Start the origin                         | `systemctl start osdf-origin`      |
-| Stop the origin                          | `systemctl stop osdf-origin`       |
-| Enable the origin to start on boot       | `systemctl enable osdf-origin`     |
-| Disable the origin from starting on boot | `systemctl disable osdf-origin`    |
-
 
 Getting Help
 ------------

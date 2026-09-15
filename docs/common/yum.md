@@ -50,8 +50,8 @@ Their names start with `osg-upcoming` and have the same structure as our standar
 as well as the same guarantees of quality and production-readiness.
 
 There are separate sets of upcoming repositories for each release series.
-For example, the [OSG 25 repos](https://repo.osg-htc.org/osg/25-main/) have corresponding
-[25-upcoming repos](https://repo.osg-htc.org/osg/25-upcoming/).
+For example, the [OSG 26 repos](https://repo.osg-htc.org/osg/26-main/) have corresponding
+[26-upcoming repos](https://repo.osg-htc.org/osg/26-upcoming/).
 The upcoming repositories are meant to be layered on top of our standard repositories:
 installing software from the upcoming repositories requires also enabling the standard repositories from the same release.
 
@@ -65,10 +65,12 @@ supported by the OSG.
 
 The definitive list of software in the contrib repository can be found here:
 
+-   [OSG 26 EL10 contrib software repository](https://repo.osg-htc.org/osg/26-contrib/el10/x86_64/)
+-   [OSG 26 EL9 contrib software repository](https://repo.osg-htc.org/osg/26-contrib/el9/x86_64/)
+-   [OSG 26 EL8 contrib software repository](https://repo.osg-htc.org/osg/26-contrib/el8/x86_64/)
+-   [OSG 25 EL10 contrib software repository](https://repo.osg-htc.org/osg/25-contrib/el10/x86_64/)
 -   [OSG 25 EL9 contrib software repository](https://repo.osg-htc.org/osg/25-contrib/el9/x86_64/)
 -   [OSG 25 EL8 contrib software repository](https://repo.osg-htc.org/osg/25-contrib/el8/x86_64/)
--   [OSG 24 EL9 contrib software repository](https://repo.osg-htc.org/osg/24-contrib/el9/x86_64/)
--   [OSG 24 EL8 contrib software repository](https://repo.osg-htc.org/osg/24-contrib/el8/x86_64/)
 
 If you would like to distribute your software in the OSG `contrib` repository, please [contact us](../common/help.md) with a
 description of your software, what users it serves, and relevant RPM packaging.
@@ -149,11 +151,26 @@ You must install and enable these first.
 
 This document assumes a fresh install.
 For instructions on upgrading from one OSG series to another, see the
-[release series document](../release/updating-to-osg-24.md).
+[release series document](../release/updating-to-osg-26.md).
 
 1. Install the OSG repository for your OS version and the [OSG release series](../release/release_series.md) that you wish to
    use:
 
+    - OSG 26 EL10:
+
+            :::console
+            root@host # yum install https://repo.osg-htc.org/osg/26-main/osg-26-main-el10-release-latest.rpm
+
+    - OSG 26 EL9:
+
+            :::console
+            root@host # yum install https://repo.osg-htc.org/osg/26-main/osg-26-main-el9-release-latest.rpm
+
+    - OSG 26 EL8:
+
+            :::console
+            root@host # yum install https://repo.osg-htc.org/osg/26-main/osg-26-main-el8-release-latest.rpm
+    
     - OSG 25 EL10:
 
             :::console
@@ -169,16 +186,6 @@ For instructions on upgrading from one OSG series to another, see the
             :::console
             root@host # yum install https://repo.osg-htc.org/osg/25-main/osg-25-main-el8-release-latest.rpm
 
-    - OSG 24 EL9:
-
-            :::console
-            root@host # yum install https://repo.osg-htc.org/osg/24-main/osg-24-main-el9-release-latest.rpm
-
-    - OSG 24 EL8:
-
-            :::console
-            root@host # yum install https://repo.osg-htc.org/osg/24-main/osg-24-main-el8-release-latest.rpm
-
 
 1. The only OSG repository enabled by default is the release one.
    If you want to [enable another one](#repositories) (e.g. `osg-testing`), then edit its file
@@ -187,13 +194,13 @@ For instructions on upgrading from one OSG series to another, see the
         :::file hl_lines="7"
         [osg-testing]
         name=OSG Software for Enterprise Linux 9 - Testing - $basearch
-        #baseurl=https://repo.osg-htc.org/osg/24-main/el9/testing/$basearch
-        mirrorlist=https://repo.osg-htc.org/osg/24-main/el9/testing/$basearch
+        #baseurl=https://repo.osg-htc.org/osg/26-main/el9/testing/$basearch
+        mirrorlist=https://repo.osg-htc.org/osg/26-main/el9/testing/$basearch
         failovermethod=priority
         priority=98
         enabled=1
         gpgcheck=1
-        gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-24-developer
+        gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-26-developer
 
 Optional Configuration
 ----------------------
@@ -238,7 +245,7 @@ Or, to mirror only a single repository:
     <RANDOM> * * * * root rsync -aH rsync://repo-rsync.opensciencegrid.org/osg/<OSG_RELEASE>/el9/development /var/www/html/osg/<OSG_RELEASE>/el9
 
 
-Replace `<OSG_RELEASE>` with the OSG release you would like to use (e.g. `24-main`) and `<RANDOM>` with a number between 0
+Replace `<OSG_RELEASE>` with the OSG release you would like to use (e.g. `26-main`) and `<RANDOM>` with a number between 0
 and 59.
 
 On your worker node, you can replace the `baseurl` line of `/etc/yum.repos.d/osg.repo` with the appropriate URL for your
