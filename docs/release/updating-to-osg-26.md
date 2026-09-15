@@ -102,7 +102,6 @@ You may proceed with the [repository and RPM update process](#updating-the-osg-r
 Updating Your OSDF Cache or Origin
 ----------------------------------
 
-There are no breaking changes for Pelican services between OSG 25 and OSG 26.
 Upgrade the `osdf-server` RPM using the [repository and RPM update process](#updating-the-osg-repositories).
 
 Getting Help
