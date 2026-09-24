@@ -59,6 +59,41 @@ Updates to critical packages are also announced by email and are sent to the fol
 Latest News
 -----------
 
+**September 24, 2026:** Upcoming: HTCondor 25.14.1, XRootD 6.1.1
+----------------------------------------------------------------------------------------------------------------------
+-   Upcoming
+    -   [HTCondor 25.14.1](https://htcondor.readthedocs.io/en/25.x/version-history/feature-versions-25-x.html#version-25-14-1)
+        -   HTCondor no longer accepts multiple `queue` statements in a submit file
+        -   The credmon can now obtain and renew OAuth2 access tokens from Pelican
+        -   HTCondor now detects AMD GPUs that use ROCM 7
+        -   Container universe adds the detected GPU flag to the container command line
+        -   New self-service annex mode that works with any Slurm cluster
+        -   New metric daemon that can export metrics to Prometheus and Ganglia
+        -   Improvements to `condor_adstash` (see version history)
+        -   `condor_rm` now accepts the `-held` option
+        -   condor_watch_q now restores the terminal after exiting
+        -   Fix `condor_q` crash when using both `-batch` and `-af`
+    -   [XRootD 6.1.1](https://github.com/xrootd/xrootd/releases/tag/v6.0.0)
+        -   This is initial release of XRootD 6 in the 25-upcoming repository
+        -   New client plugins for HTTP and S3 protocol support based on CURL
+        -   New Rucio aware tape remote storage element plugin for backups (XrdOssArc)
+        -   New summary monitoring and g-stream monitoring support for HTTP traffic
+        -   HTTP ETag header support in XCache for enhanced cache control and validation
+        -   Support for sharing physical storage between multiple files (file cloning)
+        -   Support for statx syscall on Linux (improved XrdPosix on modern systems)
+        -   Support for tape operations with tokens (storage.stage and storage.poll in token scope)
+        -   Systemd units updated for better security and to enable privileged ports by default
+        -   WLCG data integrity support for HTTP TPC transfers using Repr-Digest header
+        -   Also see the [talk](https://indico.cern.ch/event/1622471/contributions/6945846/) on XRootD 6.0 at the EOS Workshop 2026 (slides & recording)
+
+**September 22, 2026:** HTCondor 25.0.14; Upcoming: HTCondor 25.0.14
+----------------------------------------------------------------------------------------------------------------------
+-   [HTCondor 25.0.14](https://htcondor.readthedocs.io/en/25.0/version-history/lts-versions-25-0.html#version-25-0-14)
+    -   Access Point [Security Fix](https://htcondor.org/security/vulnerabilities/HTCONDOR-2026-0002)
+-   Upcoming
+    -   [HTCondor 25.13.3](https://htcondor.readthedocs.io/en/25.x/version-history/feature-versions-25-x.html#version-25-13-3)
+        -   Access Point [Security Fix](https://htcondor.org/security/vulnerabilities/HTCONDOR-2026-0002)
+
 **September 10, 2026:** XRootD 5.9.7, xrootd-s3-http 0.6.9, xrdcl-pelican 1.8.2, xrdhttp-pelican 0.0.13
 ----------------------------------------------------------------------------------------------------------------------
 -   [XRootD 5.9.7](https://github.com/xrootd/xrootd/releases/tag/v5.9.7)
