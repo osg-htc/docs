@@ -59,6 +59,13 @@ Updates to critical packages are also announced by email and are sent to the fol
 Latest News
 -----------
 
+**October 8, 2026:** vo-client 143, OpenBao 2.6.4
+----------------------------------------------------------------------------------------------------------------------
+-   [vo-client 143](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-143)
+    -   Update DN of LSST VOMS Server
+-   XCache 4.1.1
+    -   Migrate to htcondor2 Python bindings
+
 **September 24, 2026:** Upcoming: HTCondor 25.14.1, XRootD 6.1.1
 ----------------------------------------------------------------------------------------------------------------------
 -   Upcoming

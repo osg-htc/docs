@@ -23,6 +23,14 @@ Updates to critical packages are also announced by email and are sent to the fol
 Latest News
 -----------
 
+**October 8, 2026:** vo-client 143, OpenBao 2.6.4
+----------------------------------------------------------------------------------------------------------------------
+-   [vo-client 143](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-143)
+    -   Update DN of LSST VOMS Server
+-   [OpenBao 2.6.4](https://github.com/openbao/openbao/releases/tag/v2.6.4)
+    -   Includes many security fixes including one critical and three high severity,
+        none of which impact htvault-config
+
 **September 22, 2026:** HTCondor 24.0.24; Upcoming: HTCondor 24.12.24
 ----------------------------------------------------------------------------------------------------------------------
 -   [HTCondor 24.0.24](https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-24)
