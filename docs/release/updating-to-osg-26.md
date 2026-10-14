@@ -107,7 +107,65 @@ You may proceed with the [repository and RPM update process](#updating-the-osg-r
 Updating Your OSDF Cache or Origin
 ----------------------------------
 
-Upgrade the `osdf-server` RPM using the [repository and RPM update process](#updating-the-osg-repositories).
+OSG 26 ships with the Pelican 26 series; note the following changes from 7.26 or earlier:
+
+**All Servers**
+
+-   The database schema has changed to support new user management features.
+    Back up your database before upgrading; if you need to downgrade, you will need to restore the database from
+    the backup.
+
+    Run the following command to get the location of the database file:
+
+        :::console
+        $ pelican-server config get server.dblocation
+
+    Then, use the following command to make a backup to a file named `pelicanbackup.sqlite`
+    (replacing `DBLOCATION` with the path to the database file):
+
+        :::console
+        $ sqlite3 DBLOCATION ".backup 'pelicanbackup.sqlite'"
+
+    To restore the backup, shut down the `osdf-server` service and overwrite the database with the backup file
+    using the following (replacing `DBLOCATION` with the path to the database file):
+
+        :::console
+        $ systemctl stop osdf-server
+        $ mv -f pelicanbackup.sqlite DBLOCATION
+
+
+-   If you specify UI admins via `Server.UIAdminUsers` and use OIDC for web UI access, you will need to
+    change the listed usernames to Pelican usernames.  **See the post-upgrade steps after upgrading the RPMs.**
+
+    !!! note
+        We recommend using admin groups instead of users ([Server.AdminGroups](https://docs.pelicanplatform.org/parameters#Server-AdminGroups))
+        to simplify access management going forward.
+
+Also note the changes if upgrading from 7.27 or earlier:
+
+**Origins**
+
+-   If you set `Origin.IssuerMode` to `oa4mp` in your configuration, you must change it to `embedded`.
+    Support for the OA4MP issuer has been removed and replaced with a token issuer built into the Pelican server.
+
+After making any necessary config changes and backups,
+you may proceed with the [repository and RPM update process](#updating-the-osg-repositories),
+then return here for post-upgrade steps.
+
+
+**Post-upgrade**
+
+If you specify UI admins via `Server.UIAdminUsers` and use OIDC for web UI access, do the following:
+
+1.  Log in to the web interface using the `admin` username and web admin password.
+    If you do not have a web admin password,
+    follow the [instructions for setting the password](https://docs.pelicanplatform.org/advanced-concepts/server#web-interface-administrator-password).
+
+2.  Go to the Settings page (the gear icon on the left), then "Users".
+3.  Find the user names (in the User column) of the people that should have web admin access,
+    and replace the `Server.UIAdminUsers` list with those user names.
+
+
 Updating Your GlideinWMS Frontend
 ---------------------------------
 
