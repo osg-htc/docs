@@ -23,6 +23,7 @@ Updating the OSG Repositories
     -   [Compute Entrypoint](#updating-your-osg-compute-entrypoint)
     -   [HTCondor hosts](#updating-your-htcondor-hosts)
     -   [OSDF Cache or Origin](#updating-your-osdf-cache-or-origin)
+    -   [GlideinWMS Frontend](#updating-your-glideinwms-frontend)
 
 1.  Clean the yum cache:
 
@@ -107,6 +108,17 @@ Updating Your OSDF Cache or Origin
 ----------------------------------
 
 Upgrade the `osdf-server` RPM using the [repository and RPM update process](#updating-the-osg-repositories).
+Updating Your GlideinWMS Frontend
+---------------------------------
+
+Verify your frontend configuration and make the following change, if necessary,
+before upgrading:
+
+*   In the security section of your frontend configuration (`frontend.xml`),
+    replace the `ProxyAll` plugin with `CredentialsBasic`.
+
+You may proceed with the [repository and RPM update process](#updating-the-osg-repositories).
+
 
 Getting Help
 ------------
