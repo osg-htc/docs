@@ -23,6 +23,22 @@ Updates to critical packages are also announced by email and are sent to the fol
 Latest News
 -----------
 
+**October 8, 2026:** vo-client 143, OpenBao 2.6.4
+----------------------------------------------------------------------------------------------------------------------
+-   [vo-client 143](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-143)
+    -   Update DN of LSST VOMS Server
+-   [OpenBao 2.6.4](https://github.com/openbao/openbao/releases/tag/v2.6.4)
+    -   Includes many security fixes including one critical and three high severity,
+        none of which impact htvault-config
+
+**September 22, 2026:** HTCondor 24.0.24; Upcoming: HTCondor 24.12.24
+----------------------------------------------------------------------------------------------------------------------
+-   [HTCondor 24.0.24](https://htcondor.readthedocs.io/en/24.0/version-history/lts-versions-24-0.html#version-24-0-24)
+    -   Access Point [Security Fix](https://htcondor.org/security/vulnerabilities/HTCONDOR-2026-0002)
+-   Upcoming
+    -   [HTCondor 24.12.24](https://htcondor.readthedocs.io/en/24.x/version-history/feature-versions-24-x.html#version-24-12-24)
+        -   Access Point [Security Fix](https://htcondor.org/security/vulnerabilities/HTCONDOR-2026-0002)
+
 **September 10, 2026:** XRootD 5.9.7, xrootd-s3-http 0.6.9, xrdcl-pelican 1.8.2, xrdhttp-pelican 0.0.13
 ----------------------------------------------------------------------------------------------------------------------
 -   [XRootD 5.9.7](https://github.com/xrootd/xrootd/releases/tag/v5.9.7)

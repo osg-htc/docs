@@ -91,12 +91,12 @@ In practice, the minimum required versions for each of the supported release ser
 |-----------------------------|------------------------------|
 | 26.x.y                      | 26.1.0                       |
 | 26.0.y                      | 26.0.1                       |
-| 25.x.y                      | 25.11.1                      |
-| 25.0.y                      | 25.0.12                      |
-| 24.x.y                      | 24.12.22                     |
-| 24.0.y                      | 24.0.22                      |
+| 25.x.y                      | 25.13.2                      |
+| 25.0.y                      | 25.0.13                      |
+| 24.x.y                      | 24.12.23                     |
+| 24.0.y                      | 24.0.23                      |
 
-This list updated on August 20, 2026.
+This list was updated on October 14, 2026.
 
 As the OSPool operations staff has a responsibility to the entire pool, the OSPool operations staff may disable the AP’s
 connection to the OSPool, as necessary, to maintain operational integrity and resource utilization.
