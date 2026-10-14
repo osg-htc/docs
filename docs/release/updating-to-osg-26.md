@@ -10,6 +10,11 @@ Please read through the instructions before upgrading.
     Instructions in this document pertain to updating from OSG 25 to OSG 26. If you are updating from OSG 24,
     see [Updating to OSG 25](../updating-to-osg-25)
 
+!!! note "Upgrading XRootD on EL 9"
+    If you use XRootD, for example on an OSDF Cache or Origin, or a Storage Element, or redirector,
+    and your host is running EL 9, you must use EL 9.7 or newer due to an incompatibility between
+    OpenSSL 3.0--3.3 and XRootD 6. EL8 and EL10 are not affected.
+
 Updating the OSG Repositories
 -----------------------------
 
