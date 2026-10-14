@@ -164,6 +164,7 @@ If you specify UI admins via `Server.UIAdminUsers` and use OIDC for web UI acces
 2.  Go to the Settings page (the gear icon on the left), then "Users".
 3.  Find the user names (in the User column) of the people that should have web admin access,
     and replace the `Server.UIAdminUsers` list with those user names.
+    (If there are two lines for a user, use the lower line.)
 
 
 Updating Your GlideinWMS Frontend
