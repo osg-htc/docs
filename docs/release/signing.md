@@ -35,6 +35,22 @@ The OSG Packaging Signing Keys
 The OSG Software Team has several GPG keys for signing RPMs;
 The key used depends on the OSG version and software repository used, as documented below:
 
+| OSG 26 Automated Signing Key |                                              |
+|--------------------|--------------------------------------------------------|
+| Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-26-auto`             |
+| Download           | [GitHub](https://raw.githubusercontent.com/osg-htc/docs/master/docs/release/RPM-GPG-KEY-OSG-26-auto) |
+| Fingerprint        | `45B7 5BDB 82B5 AA20 243F  AB79 2C95 C1D7 E901 4F81`   |
+| Key ID             | `e9014f81`                                             |
+| Repositories       | osg-26-development                                     |
+
+| OSG 26 Developer Signing Key |                                              |
+|--------------------|--------------------------------------------------------|
+| Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-26-developer`        |
+| Download           | [GitHub](https://raw.githubusercontent.com/osg-htc/docs/master/docs/release/RPM-GPG-KEY-OSG-26-developer) |
+| Fingerprint        | `F2F6 CDBF E487 1F85 CF23  B9ED E7EE 3E79 4C45 8860`   |
+| Key ID             | `4c458860`                                             |
+| Repositories       | All non-development osg-26 repositories                |
+
 | OSG 25 Automated Signing Key |                                              |
 |--------------------|--------------------------------------------------------|
 | Location           | `/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-25-auto`             |
@@ -93,6 +109,18 @@ You can see the fingerprint for yourself.
 On EL 8 and newer (GnuPG &gt;= 2.1.13):
 ```console
 
+$  gpg --import-options show-only --import < /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-26-auto 
+pub   rsa4096 2026-08-18 [SC]
+      45B75BDB82B5AA20243FAB792C95C1D7E9014F81
+uid                      OSG 26 Automated Signing Key <help@osg-htc.org>
+sub   rsa4096 2026-08-18 [E]
+
+$ gpg --import-options show-only --import < /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-26-developer
+pub   rsa4096 2026-08-18 [SC]
+      F2F6CDBFE4871F85CF23B9EDE7EE3E794C458860
+uid                      OSG 26 Developer Signing Key <help@osg-htc.org>
+sub   rsa4096 2026-08-18 [E]
+
 $  gpg --import-options show-only --import < /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-25-auto
 pub   rsa4096/0x467CD904222C5D49 2025-09-04 [SC]
       Key fingerprint = 376C 81EE 1421 311A 0FF4  3C3C 467C D904 222C 5D49
@@ -117,17 +145,4 @@ pub   rsa4096 2024-08-20 [SC]
       F77FE0C70A9BAA739FD352C99DF75B52EFFC3BE6
 uid                      OSG 24 Developer Signing Key <help@osg-htc.org>
 sub   rsa4096 2024-08-20 [E]
-
-$  gpg --import-options show-only --import < /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-23-auto
-pub   rsa4096 2023-06-23 [SC]
-      E2AF9F6E239FD62B537705C01760EDF64D4384D0
-uid                      OSG 23 Automated Signing Key <help@osg-htc.org>
-sub   rsa4096 2023-06-23 [E]
-
-$  gpg --import-options show-only --import < /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG-23-developer
-pub   rsa4096 2023-08-15 [SC]
-      4A56C5BBCDB0AAA2DDE9A690BDEEE24C92897C00
-uid                      OSG 23 Developer Signing Key <help@osg-chtc.org>
-sub   rsa4096 2023-08-15 [E]
 ```
-
