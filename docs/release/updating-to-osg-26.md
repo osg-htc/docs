@@ -3,9 +3,8 @@ title: Updating to OSG 26
 Updating to OSG 26
 ==================
 
-[OSG 26](release_series.md#series-overviews) (the *new series*) introduces support for EL10. Changes
-required to upgrade from OSG 25 are relatively minor.
-Please update all services to OSG 26 as soon as possible.
+This document provides instructions for upgrading to the OSG 26 series.
+Please read through the instructions before upgrading.
 
 !!! note "Updating from OSG <25"
     Instructions in this document pertain to updating from OSG 25 to OSG 26. If you are updating from OSG 24,
