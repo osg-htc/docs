@@ -10,6 +10,12 @@ EL10. The initial release includes GlideinWMS 3.10.15, HTCondor 25.0.2, HTCondor
 
 OSG 25 will be supported for [approximately two years total](release_series.md#series-life-cycle).
 
+!!! danger "Breaking Pelican changes coming"
+    In the coming weeks, we will be releasing Pelican v7.27 and v26.0 into OSG 25 main (as opposed to upcoming),
+    which will contain breaking changes if you are upgrading a Pelican service <= v7.26.3. We will provide specific
+    upgrade instructions at the time of release but in the meantime, if you are running a Pelican-based service
+    (e.g., OSDF cache or origin) we recommend disabling Yum auto-updates or setting your container image tag to
+    `v7.26.3` instead of `latest`.
 
 !!! info "OSG 23 end-of-life"
     Following our [release series support policy](release_series.md#series-life-cycle),
@@ -58,6 +64,15 @@ Updates to critical packages are also announced by email and are sent to the fol
 
 Latest News
 -----------
+
+**October 15, 2026:** GlideinWMS 3.10.19, osg-token-renewer 1.0.1
+----------------------------------------------------------------------------------------------------------------------
+-   [GlideinWMS 3.10.19](https://glideinwms.fnal.gov/doc.v3_10_19/history.html#stable)
+    -   This release adds a few bug fixes, especially to the Glideins
+    -   The custom scripts timeout now must be enabled explicitly, no more 10 minutes timeout by default
+    -   See the [CHANGELOG](https://github.com/glideinWMS/glideinwms/blob/master/CHANGELOG.md#v31019-2026-10-01) for important default changes
+-   [osg-token-renewer 1.0.1](https://github.com/opensciencegrid/osg-token-renewer/releases/tag/v1.0.1)
+    -   Fix bug that prevented the service user and group from being properly created and used
 
 **October 8, 2026:** vo-client 143, OpenBao 2.6.4
 ----------------------------------------------------------------------------------------------------------------------
