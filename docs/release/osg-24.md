@@ -23,6 +23,15 @@ Updates to critical packages are also announced by email and are sent to the fol
 Latest News
 -----------
 
+**October 15, 2026:** GlideinWMS 3.10.19, osg-token-renewer 1.0.1
+----------------------------------------------------------------------------------------------------------------------
+-   [GlideinWMS 3.10.19](https://glideinwms.fnal.gov/doc.v3_10_19/history.html#stable)
+    -   This release adds a few bug fixes, especially to the Glideins
+    -   The custom scripts timeout now must be enabled explicitly, no more 10 minutes timeout by default
+    -   See the [CHANGELOG](https://github.com/glideinWMS/glideinwms/blob/master/CHANGELOG.md#v31019-2026-10-01) for important default changes
+-   [osg-token-renewer 1.0.1](https://github.com/opensciencegrid/osg-token-renewer/releases/tag/v1.0.1)
+    -   Fix bug that prevented the service user and group from being properly created and used
+
 **October 8, 2026:** vo-client 143, OpenBao 2.6.4
 ----------------------------------------------------------------------------------------------------------------------
 -   [vo-client 143](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-143)
