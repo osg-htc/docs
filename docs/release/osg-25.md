@@ -11,11 +11,11 @@ EL10. The initial release includes GlideinWMS 3.10.15, HTCondor 25.0.2, HTCondor
 OSG 25 will be supported for [approximately two years total](release_series.md#series-life-cycle).
 
 !!! danger "Breaking Pelican changes coming"
-    In the coming weeks, we will be releasing Pelican v7.27 and v26.0 into OSG 25 main (as opposed to upcoming),
-    which will contain breaking changes if you are upgrading a Pelican service <= v7.26.3. We will provide specific
-    upgrade instructions at the time of release but in the meantime, if you are running a Pelican-based service
-    (e.g., OSDF cache or origin) we recommend disabling Yum auto-updates or setting your container image tag to
-    `v7.26.3` instead of `latest`.
+    In the coming weeks, we will be releasing Pelican v7.27 into OSG 25 main (as opposed to upcoming),
+    which will contain breaking changes if you are upgrading a Pelican service <= v7.26.3.
+    We will provide specific upgrade instructions at the time of release but in the meantime,
+    if you are running a Pelican-based service (e.g., OSDF cache or origin) we recommend disabling
+    Yum auto-updates or setting your container image tag to `v7.26.3` instead of `latest`.
 
 !!! info "OSG 23 end-of-life"
     Following our [release series support policy](release_series.md#series-life-cycle),
