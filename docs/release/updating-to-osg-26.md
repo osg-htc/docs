@@ -109,11 +109,15 @@ Updating Your OSDF Cache or Origin
 
 OSG 26 ships with the Pelican 26 series; note the following changes from 7.26 or earlier:
 
-**All Servers**
+**All**
+
+-   Configuration via environment variables starting with `OSDF_` and `STASH_` is no longer supported.
+    Replace the `OSDF_` or `STASH_` prefix with `PELICAN_`.
+    This also affects clients.
 
 -   The database schema has changed to support new user management features.
-    Back up your database before upgrading; if you need to downgrade, you will need to restore the database from
-    the backup.
+    **Back up your database before upgrading; if you need to downgrade, you will need to restore the database from
+    the backup.**
 
     Run the following command to get the location of the database file:
 
