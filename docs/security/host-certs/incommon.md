@@ -41,7 +41,7 @@ volume mounting a local directory (`~/path_to_dir`) into the `/output` directory
         :::console
         user@host $ docker run --rm  \
                      -v ~/path_to_dir:/output \
-                     hub.osg-htc.org/opensciencegrid/pki-tools:24-release \
+                     hub.osg-htc.org/opensciencegrid/pki-tools:26-release \
                      --hostname <HOSTNAME> \
                      --country <COUNTRY> \
                      --state <STATE> \
@@ -56,7 +56,7 @@ volume mounting a local directory (`~/path_to_dir`) into the `/output` directory
         :::console
         user@host $ docker run --rm  \
                      -v ~/path_to_dir:/output \
-                     hub.osg-htc.org/opensciencegrid/pki-tools:24-release \
+                     hub.osg-htc.org/opensciencegrid/pki-tools:26-release \
                      --country US \
                      --state Wisconsin \
                      --locality Madison \
@@ -204,4 +204,3 @@ References
 -   [CILogon documentation for requesting InCommon certificates](http://www.cilogon.org/globus-with-incommon-ca)
 
 -   [Useful OpenSSL commands (from NCSA)](http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html) - e.g. how to convert the format of your certificate.
-

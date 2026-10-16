@@ -349,6 +349,11 @@ pair, `xrootd-client`, and `voms-clients-cpp` installed:
     If your transfer does not succeed, re-run `xrdcp`  with `--debug 2` for more information.
 
 
+Updating to OSG 26
+------------------
+
+There are no manual steps necessary for authentication to work when upgrading from OSG 25 to OSG 26.
+
 Updating to OSG 25
 ------------------
 

@@ -75,12 +75,12 @@ nav:
       - 'Install from RPM': 'data/osdf/install-origin-rpm.md'
 - Releases:
   - 'Release Series': 'release/release_series.md'
+  - OSG 26:
+     - 'News': 'release/osg-26.md'
+     - 'Updating to OSG 26': 'release/updating-to-osg-26.md'
   - OSG 25:
      - 'News': 'release/osg-25.md'
      - 'Updating to OSG 25': 'release/updating-to-osg-25.md'
-  - OSG 24:
-     - 'News': 'release/osg-24.md'
-     - 'Updating to OSG 24': 'release/updating-to-osg-24.md'
   - 'Supported Platforms': 'release/supported_platforms.md'
   - 'OSG Yum Repos': 'common/yum.md'
   - 'Yum Basics': 'release/yum-basics.md'
@@ -123,4 +123,3 @@ plugins:
         data/stashcache/vo-data.md: data/osdf/overview.md
         submit/osg-flock.md: submit/install-ospool-ap.md
         other/configuration-with-osg-configure.md: 'https://github.com/opensciencegrid/osg-configure?tab=readme-ov-file#osg-configure'
-

@@ -3,13 +3,13 @@ title: Installing the OSDF Cache by RPM
 Installing the OSDF Cache by RPM
 ================================
 
-!!! warning "OSG 24+"
-    This installation guide requires OSG 24 or OSG 25
-
 This document describes how to install an Open Science Data Federation (OSDF) Cache service via RPMs.
 This service allows a site or regional network to cache data frequently used in Open Science Pool jobs,
 reducing data transfer over the wide-area network and increasing throughput to jobs.
 
+!!! tip "Upgrading from OSG 24?"
+    Pelican configuration semantics changed between OSG 24 and OSG 25.
+    See [Updating to OSG 25](../../../release/updating-to-osg-25) for more details.
 
 Before Starting
 ---------------
@@ -17,7 +17,6 @@ Before Starting
 Before starting the installation process, consider the following requirements:
 
 * __Operating system:__ A RHEL 8, RHEL 9, RHEL 10, or [compatible operating system](../../release/supported_platforms.md).
-  (RHEL 10 is not supported in OSG 24.)
 * __User IDs:__ If it does not exist already, the installation will create the Linux user named `xrootd` for running daemons.
 * __File Systems:__ The cache should have a partition of its own for storing data and metadata.
 * __Host certificate:__ Required for authentication.  See note below.
@@ -54,35 +53,21 @@ As with all OSG software installations, there are some one-time steps to prepare
     Note that, unlike legacy grid software, the public certificate file will need to contain the "full chain", including any
     intermediate CAs (if you're unsure about your setup, try accessing your cache from your browser).
 
-    In OSG 25, the following locations should be used:
+    The following locations should be used:
 
     * **Host Certificate Chain**: `/etc/pelican/certificates/tls.crt`
     * **Host Key**: `/etc/pelican/certificates/tls.key`
-    
-    In OSG 24, the following locations should be used
-    (note that they are in separate directories):
-
-    * **Host Certificate Chain**: `/etc/pki/tls/certs/pelican.crt`
-    * **Host Key**: `/etc/pki/tls/private/pelican.key`
 
 
 Installing the Cache
 --------------------
 
-In OSG 25, the cache service is provided by the `osdf-server` RPM.
+The cache service is provided by the `osdf-server` RPM.
 Install it via the following command:
 
 ```console
 root@host # yum install osdf-server
 ```
-
-In OSG 24, the cache service is provided by the `osdf-cache` RPM.
-Install it via the following command:
-
-```console
-root@host # yum install osdf-cache
-```
-
 
 Configuring the Cache Server
 ----------------------------
@@ -128,15 +113,9 @@ Do the following steps to verify that the cache is functional:
 
 1.  Start the cache using one of the following commands:
 
-    OSG 25:
-
         :::console
         root@host$ systemctl start pelican-cache
 
-    OSG 24:
-
-        :::console
-        root@host$ systemctl start osdf-cache
 
 1.  Download a test file from the OSDF through your cache (replacing `CACHE_HOSTNAME` with the host name of your cache)
 
@@ -147,8 +126,7 @@ Do the following steps to verify that the cache is functional:
 
     If the download fails, rerun the above `pelican object get` command with the `-d` flag added.
     
-    In OSG 25, additional debugging information is located in `/var/log/pelican/pelican-cache.log`.<br>
-    In OSG 24, additional debugging information is located in `/var/log/pelican/osdf-cache.log`.
+    Additional debugging information is located in `/var/log/pelican/pelican-cache.log`.<br>
 
     To increase the debugging information in the log file, edit your cache configuration file and set:
     ```
@@ -182,16 +160,8 @@ XRootD:
 
 Then, restart the cache by running one of the following commands:
 
-OSG 25:
-
 ```console
 root@host$ systemctl restart pelican-cache
-```
-
-OSG 24:
-
-```console
-root@host$ systemctl restart osdf-cache
 ```
 
 Let OSG Staff know that you have restarted the cache with the updated sitename,
@@ -202,24 +172,12 @@ Managing the Cache Service
 ---------------------------
 Use the following SystemD commands as root to start, stop, enable, and disable the OSDF Cache.
 
-OSG 25:
-
 | To...                                    | Run the command...                 |
 | :--------------------------------------- | :--------------------------------- |
 | Start the cache                          | `systemctl start pelican-cache`    |
 | Stop the cache                           | `systemctl stop pelican-cache`     |
 | Enable the cache to start on boot        | `systemctl enable pelican-cache`   |
 | Disable the cache from starting on boot  | `systemctl disable pelican-cache`  |
-
-OSG 24:
-
-| To...                                    | Run the command...                 |
-| :--------------------------------------- | :--------------------------------- |
-| Start the cache                          | `systemctl start osdf-cache`       |
-| Stop the cache                           | `systemctl stop osdf-cache`        |
-| Enable the cache to start on boot        | `systemctl enable osdf-cache`      |
-| Disable the cache from starting on boot  | `systemctl disable osdf-cache`     |
-
 
 Getting Help
 ------------

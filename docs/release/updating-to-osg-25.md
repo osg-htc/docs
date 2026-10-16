@@ -7,6 +7,10 @@ Updating to OSG 25
 required to upgrade from OSG 24 are relatively minor.
 Please update all services to OSG 25 as soon as possible.
 
+!!! note "Updating from OSG <24"
+    Instructions in this document pertain to updating from OSG 24 to OSG 25. If you are updating from OSG 23 or earlier,
+    reach out to [help@osg-htc.org](mailto:help@osg-htc.org)
+
 Updating the OSG Repositories
 -----------------------------
 

@@ -34,10 +34,13 @@ Series Overviews
 
 Since the start of the RPM-based OSG Software Stack, we have offered the following release series:
 
+-   **OSG 26** (started October 2026) introduces GlideinWMS 3.11 and XRootD 6.
+    The initial release includes GlideinWMS 3.11.11, HTCondor 26.0.1, HTCondor 26.1.1, HTCondor-CE 26.0, and XRootD 6.1.1.
+
 -   **OSG 25** (started October 2025) introduces support for EL10.
     The initial release includes GlideinWMS 3.10.15, HTCondor 25.0.1, HTCondor 25.1.1, HTCondor-CE 25.0, and XRootD 5.8.4.
 
--   **OSG 24** (started October 2024) introduces support for the ARM architecture.
+-   **OSG 24** (started October 2024, end-of-lifed October 2026) introduces support for the ARM architecture.
     The initial release includes GlideinWMS 3.10.7, HTCondor 24.0.1, HTCondor 24.1.1, HTCondor-CE 24.0, and XRootD 5.7.0.
 
 -   **OSG 23** (started October 2023, end-of-lifed October 2025) aligns the OSG release series and HTCondor Software Suite release cycles.
@@ -79,6 +82,7 @@ Support ends at the end of the month of the following dates unless otherwise spe
 
 | Release Series | Initial Release          | End of Regular Support   | End of Critical Bug/Security Support |
 |:--------------:|--------------------------|--------------------------|--------------------------------------|
+| 26             | Estimated September 2026 | Estimated September 2028 | Estimated September 2028             |
 | 25             | Estimated September 2025 | Estimated September 2027 | Estimated September 2027             |
 | 24             | October 2024             | Estimated September 2026 | Estimated September 2026             |
 | 23             | October 2023             | Estimated September 2025 | Estimated September 2025             |
