@@ -198,7 +198,7 @@ running inside the OSPool EP container may be removed as follows:
 1. Create a `docker-ep` AppArmor profile based on the [default](https://github.com/moby/profiles/blob/main/apparmor/template.go) 
    in `/etc/apparmor.d/docker-ep.profile`. Changes from the default are highlighted:
 
-```hl_lines="10 11 12 13 34 35 36"
+```hl_lines="10 11 12 13 34 35 36 37 38 39 40"
 abi <abi/4.0>,
 include <tunables/global>
 
@@ -235,6 +235,10 @@ profile docker-ep flags=(attach_disconnected, mediate_deleted) {
   # Allow mount(2) for Singularity's container setup.
   # The default Docker profile contains "deny mount".
   mount,
+  
+  # Allow pivot_root. This allows cvmfsexec inside the EP container to expose
+  # the mounted CVMFS repos at the appropriate location for the pilot.
+  pivot_root,
 
   deny /sys/[^f]*/** wklx,
   deny /sys/f[^s]*/** wklx,
