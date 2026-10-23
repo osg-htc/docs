@@ -138,7 +138,6 @@ Some guides on X.509 certificates:
 
 -   Useful commands: <http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html>
 -   Install GSI authentication on a server: <http://security.ncsa.illinois.edu/research/wssec/gsihttps/>
--   Certificates how-to: <http://www.nordugrid.org/documents/certificate_howto.html>
 
 See [this page](http://gagravarr.org/writing/openssl-certs/others.shtml) for examples of verifying certificates.
 
