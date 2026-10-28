@@ -19,6 +19,7 @@ The OSG Software Team supports at most two concurrent release series, __current_
 begin a new release series about every 12 months.
 Once a new series starts, the Software Team will support the previous series until the __next__ release series and will
 announce its end-of-life date at least 6 months in advance.
+In practice, this means that each release series is supported for approximately 2 years.
 
 When support ends for a release series, it means that the Software Team no longer updates the software, fixes issues, or
 troubleshoots installations for releases within the series.
