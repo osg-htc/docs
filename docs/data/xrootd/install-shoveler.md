@@ -29,7 +29,7 @@ graph LR
   C -- Raw --> D[XRootD Collector];
   D -- Summary --> C;
   C -- Summary --> E[(Storage)];
-  style shoveler1 font-weight:bolder,stroke-width:4px,stroke:#E74C3C,font-size:4em,color:#E74C3C
+  style shoveler1 font-weight:bolder,stroke-width:4px,stroke:#E74C3C,color:#E74C3C
   end;
 ```
 
