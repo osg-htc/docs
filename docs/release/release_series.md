@@ -19,6 +19,7 @@ The OSG Software Team supports at most two concurrent release series, __current_
 begin a new release series about every 12 months.
 Once a new series starts, the Software Team will support the previous series until the __next__ release series and will
 announce its end-of-life date at least 6 months in advance.
+In practice, this means that each release series is supported for approximately 2 years.
 
 When support ends for a release series, it means that the Software Team no longer updates the software, fixes issues, or
 troubleshoots installations for releases within the series.
@@ -77,17 +78,17 @@ Series Life-cycle
 
 Support ends at the end of the month of the following dates unless otherwise specified:
 
-| Release Series | Initial Release          | End of Regular Support   | End of Critical Bug/Security Support |
-|:--------------:|--------------------------|--------------------------|--------------------------------------|
-| 25             | Estimated September 2025 | Estimated September 2027 | Estimated September 2027             |
-| 24             | October 2024             | Estimated September 2026 | Estimated September 2026             |
-| 23             | October 2023             | Estimated September 2025 | Estimated September 2025             |
-| 3.6            | Februrary 2021           | 31 March 2024            | 30 June 2024                         |
-| 3.5            | August 2019              | 30 August 2021           | 1 May 2022                           |
-| 3.4            | June 2017                | 29 February 2020         | 30 November 2020                     |
-| 3.3            | August 2015              | 31 December 2017         | 31 May 2018                          |
-| 3.2            | November 2013            | 29 February 2016         | 31 August 2016                       |
-| 3.1            | April 2012               | 31 October 2014          | 30 April 2015                        |
+| Release Series | Initial Release | End of Regular Support   | End of Critical Bug/Security Support |
+|:--------------:|-----------------|--------------------------|--------------------------------------|
+| 25             | 21 October 2025 | Estimated September 2027 | Estimated September 2027             |
+| 24             | 31 October 2024 | Estimated September 2026 | Estimated September 2026             |
+| 23             | 3 October 2023  | 21 October 2025          | 21 October 2025                      |
+| 3.6            | Februrary 2021  | 31 March 2024            | 30 June 2024                         |
+| 3.5            | August 2019     | 30 August 2021           | 1 May 2022                           |
+| 3.4            | June 2017       | 29 February 2020         | 30 November 2020                     |
+| 3.3            | August 2015     | 31 December 2017         | 31 May 2018                          |
+| 3.2            | November 2013   | 29 February 2016         | 31 August 2016                       |
+| 3.1            | April 2012      | 31 October 2014          | 30 April 2015                        |
 
 
 Installing an OSG Release Series
