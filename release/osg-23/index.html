@@ -10,8 +10,15 @@
       
         <link rel="canonical" href="https://osg-htc.org/docs/release/osg-23/">
       
+      
+      
+      
+      
+        
+      
+      
       <link rel="icon" href="../../img/favicon.ico">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.8">
+      <meta name="generator" content="zensical-0.0.71">
     
     
       
@@ -19,27 +26,31 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.644de097.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
-        
       
+      <link rel="stylesheet" href="../../assets/stylesheets/modern/main.e442bf79.min.css">
+      
+      
+
+
     
+    
+      
     
     
       
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
       
     
     
       <link rel="stylesheet" href="../../css/extra.css">
     
-    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
     
       
   
@@ -48,35 +59,26 @@
   
   
 
-
-  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-69012-29","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
-  <script async src="https://www.google-analytics.com/analytics.js"></script>
-
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","UA-69012-29"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","UA-69012-29",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=UA-69012-29",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
 
     
     
   </head>
   
   
-    
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+    <body dir="ltr">
   
-    
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
+    <label class="md-overlay" for="__drawer" aria-hidden="true"></label>
     <div data-md-component="skip">
-      
-        
-        <a href="#osg-23-news" class="md-skip">
-          Skip to content
-        </a>
-      
+      <a href="#__skip" class="md-skip">
+        Skip to content
+      </a>
     </div>
     <div data-md-component="announce">
       
@@ -85,16 +87,19 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="OSG Site Documentation" class="md-header__button md-logo" aria-label="OSG Site Documentation" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
 
     </a>
-    <label class="md-header__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -114,53 +119,36 @@
     </div>
     
     
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
-      <label class="md-header__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Search">
-        
-        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
-        </button>
-      </nav>
+    
+    
       
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Initializing search
-          </div>
-          <ol class="md-search-result__list"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
 </div>
+      
     
-    
-      <div class="md-header__source">
+    <div class="md-header__source">
+      
         <a href="https://github.com/osg-htc/docs/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
   </div>
 </a>
-      </div>
-    
+      
+    </div>
   </nav>
   
 </header>
@@ -183,12 +171,13 @@
                     
 
 
+
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="OSG Site Documentation" class="md-nav__button md-logo" aria-label="OSG Site Documentation" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
 
     </a>
     OSG Site Documentation
@@ -198,7 +187,7 @@
       <a href="https://github.com/osg-htc/docs/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -210,14 +199,25 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../.." class="md-nav__link">
-        Home
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Home
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -225,14 +225,25 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../site-planning/" class="md-nav__link">
-        Site Planning
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Site Planning
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -240,14 +251,25 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../site-verification/" class="md-nav__link">
-        Site Verification
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Site Verification
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -255,14 +277,25 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../site-maintenance/" class="md-nav__link">
-        Site Maintenance
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Site Maintenance
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -270,14 +303,25 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../common/help/" class="md-nav__link">
-        Help / Security Incidents
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Help / Security Incidents
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -285,1423 +329,2585 @@
     
       
       
-      
-
+  
   
   
   
     
+    
+    
+    
       
+        
+        
+      
+    
     
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_6">
-          Registration
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Registration" data-md-level="1">
-        <label class="md-nav__title" for="__nav_6">
-          <span class="md-nav__icon md-icon"></span>
-          Registration
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
           
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
             
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Registration
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_6">
+              <span class="md-nav__icon md-icon"></span>
               
+  
+  Registration
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../common/contact-registration/" class="md-nav__link">
-        Contact Information
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Contact Information
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../common/registration/" class="md-nav__link">
-        Resources and Collaborations
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Resources and Collaborations
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-        </ul>
-      </nav>
+                
+              
+            </ul>
+          </nav>
+        
+      
     </li>
   
 
     
       
       
-      
-
+  
   
   
   
     
+    
+    
+    
       
+        
+        
+      
+    
     
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_7">
-          Resource Sharing
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Resource Sharing" data-md-level="1">
-        <label class="md-nav__title" for="__nav_7">
-          <span class="md-nav__icon md-icon"></span>
-          Resource Sharing
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
           
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
             
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Resource Sharing
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_7">
+              <span class="md-nav__icon md-icon"></span>
               
+  
+  Resource Sharing
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
   
   
   
     
+    
+    
+    
+      
+    
+    
     <li class="md-nav__item md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1" type="checkbox" id="__nav_7_1" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_7_1">
-          Compute
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Compute" data-md-level="2">
-        <label class="md-nav__title" for="__nav_7_1">
-          <span class="md-nav__icon md-icon"></span>
-          Compute
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
           
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
             
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Compute
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_7_1">
+              <span class="md-nav__icon md-icon"></span>
               
+  
+  Compute
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../resource-sharing/overview/" class="md-nav__link">
-        Overview
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Overview
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     
+    
+    
+    
+      
+    
+    
     <li class="md-nav__item md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1_2" type="checkbox" id="__nav_7_1_2" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_7_1_2">
-          Containers
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Containers" data-md-level="3">
-        <label class="md-nav__title" for="__nav_7_1_2">
-          <span class="md-nav__icon md-icon"></span>
-          Containers
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1_2" >
+        
           
+          <label class="md-nav__link" for="__nav_7_1_2" id="__nav_7_1_2_label" tabindex="0">
             
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Containers
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_1_2_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_7_1_2">
+              <span class="md-nav__icon md-icon"></span>
               
+  
+  Containers
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../resource-sharing/os-backfill-containers/" class="md-nav__link">
-        OSPool Containers
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  OSPool Containers
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../resource-sharing/user-containers/" class="md-nav__link">
-        User Allocations
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  User Allocations
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-        </ul>
-      </nav>
+                
+              
+            </ul>
+          </nav>
+        
+      
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     
+    
+    
+    
+      
+    
+    
     <li class="md-nav__item md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1_3" type="checkbox" id="__nav_7_1_3" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_7_1_3">
-          Compute Entrypoint
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Compute Entrypoint" data-md-level="3">
-        <label class="md-nav__title" for="__nav_7_1_3">
-          <span class="md-nav__icon md-icon"></span>
-          Compute Entrypoint
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1_3" >
+        
           
+          <label class="md-nav__link" for="__nav_7_1_3" id="__nav_7_1_3_label" tabindex="0">
             
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Compute Entrypoint
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_1_3_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_7_1_3">
+              <span class="md-nav__icon md-icon"></span>
               
+  
+  Compute Entrypoint
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../compute-element/htcondor-ce-overview/" class="md-nav__link">
-        HTCondor-CE Overview
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  HTCondor-CE Overview
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../compute-element/hosted-ce/" class="md-nav__link">
-        Request a Hosted CE
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Request a Hosted CE
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../compute-element/install-htcondor-ce/" class="md-nav__link">
-        Install HTCondor-CE
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Install HTCondor-CE
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-        </ul>
-      </nav>
+                
+              
+            </ul>
+          </nav>
+        
+      
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     
+    
+    
+    
+      
+    
+    
     <li class="md-nav__item md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1_4" type="checkbox" id="__nav_7_1_4" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_7_1_4">
-          Worker Node
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Worker Node" data-md-level="3">
-        <label class="md-nav__title" for="__nav_7_1_4">
-          <span class="md-nav__icon md-icon"></span>
-          Worker Node
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1_4" >
+        
           
+          <label class="md-nav__link" for="__nav_7_1_4" id="__nav_7_1_4_label" tabindex="0">
             
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Worker Node
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_1_4_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_7_1_4">
+              <span class="md-nav__icon md-icon"></span>
               
+  
+  Worker Node
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../worker-node/using-wn/" class="md-nav__link">
-        Overview
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Overview
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../worker-node/install-wn/" class="md-nav__link">
-        Install from RPM
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Install from RPM
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../worker-node/install-wn-tarball/" class="md-nav__link">
-        Install from Tarball
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Install from Tarball
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../worker-node/install-wn-oasis/" class="md-nav__link">
-        Install from OASIS
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Install from OASIS
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../worker-node/install-cvmfs/" class="md-nav__link">
-        Install CVMFS
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Install CVMFS
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../worker-node/install-apptainer/" class="md-nav__link">
-        Install Apptainer
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Install Apptainer
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../worker-node/using-wn-containers/" class="md-nav__link">
-        Using WN Containers
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Using WN Containers
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-            
+                
               
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
   
   
   
     
+    
+    
+    
+      
+    
+    
     <li class="md-nav__item md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_2" type="checkbox" id="__nav_7_2" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_7_2">
-          Data
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Data" data-md-level="2">
-        <label class="md-nav__title" for="__nav_7_2">
-          <span class="md-nav__icon md-icon"></span>
-          Data
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
           
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
             
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Data
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_7_2">
+              <span class="md-nav__icon md-icon"></span>
               
+  
+  Data
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
   
   
   
     
+    
+    
+    
+      
+    
+    
     <li class="md-nav__item md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_2_1" type="checkbox" id="__nav_7_2_1" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_7_2_1">
-          HTTP & OASIS
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="HTTP & OASIS" data-md-level="3">
-        <label class="md-nav__title" for="__nav_7_2_1">
-          <span class="md-nav__icon md-icon"></span>
-          HTTP & OASIS
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2_1" >
+        
           
+          <label class="md-nav__link" for="__nav_7_2_1" id="__nav_7_2_1_label" tabindex="0">
             
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  HTTP & OASIS
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_2_1_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_7_2_1">
+              <span class="md-nav__icon md-icon"></span>
               
+  
+  HTTP & OASIS
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../data/run-frontier-squid-container/" class="md-nav__link">
-        Running Frontier Squid in a Container
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Running Frontier Squid in a Container
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../data/frontier-squid/" class="md-nav__link">
-        Install Frontier Squid RPM
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Install Frontier Squid RPM
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../data/update-oasis/" class="md-nav__link">
-        Update OASIS Shared Repo
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Update OASIS Shared Repo
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../data/external-oasis-repos/" class="md-nav__link">
-        Install an OASIS Repo
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Install an OASIS Repo
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-        </ul>
-      </nav>
+                
+              
+            </ul>
+          </nav>
+        
+      
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     
+    
+    
+    
+      
+    
+    
     <li class="md-nav__item md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_2_2" type="checkbox" id="__nav_7_2_2" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_7_2_2">
-          XRootD
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="XRootD" data-md-level="3">
-        <label class="md-nav__title" for="__nav_7_2_2">
-          <span class="md-nav__icon md-icon"></span>
-          XRootD
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2_2" >
+        
           
+          <label class="md-nav__link" for="__nav_7_2_2" id="__nav_7_2_2_label" tabindex="0">
             
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  XRootD
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_2_2_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_7_2_2">
+              <span class="md-nav__icon md-icon"></span>
               
+  
+  XRootD
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../data/xrootd/overview/" class="md-nav__link">
-        XRootD Overview
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  XRootD Overview
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../data/xrootd/install-standalone/" class="md-nav__link">
-        Install XRootD Standalone
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Install XRootD Standalone
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../data/xrootd/xrootd-authorization/" class="md-nav__link">
-        Configure Authorization
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Configure Authorization
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../data/xrootd/install-client/" class="md-nav__link">
-        Using XRootD
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Using XRootD
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../data/xrootd/install-cms-xcache/" class="md-nav__link">
-        Install CMS XCache
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Install CMS XCache
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../data/xrootd/install-shoveler/" class="md-nav__link">
-        Install XRootD Shoveler
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Install XRootD Shoveler
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-            
+                
               
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
   
   
   
     
+    
+    
+    
+      
+    
+    
     <li class="md-nav__item md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_3" type="checkbox" id="__nav_7_3" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_7_3">
-          Other
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Other" data-md-level="2">
-        <label class="md-nav__title" for="__nav_7_3">
-          <span class="md-nav__icon md-icon"></span>
-          Other
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
           
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
             
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Other
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_7_3">
+              <span class="md-nav__icon md-icon"></span>
               
+  
+  Other
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../other/install-gwms-frontend/" class="md-nav__link">
-        Install GlideinWMS Frontend
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Install GlideinWMS Frontend
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../other/install-cvmfs-stratum1/" class="md-nav__link">
-        Install a CVMFS Stratum 1
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Install a CVMFS Stratum 1
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../other/troubleshooting-gratia/" class="md-nav__link">
-        Troubleshooting Gratia
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Troubleshooting Gratia
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../other/schedd-filebeats/" class="md-nav__link">
-        Install Transfer Log Filebeats
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Install Transfer Log Filebeats
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../other/osg-token-renewer/" class="md-nav__link">
-        Install OSG Token Renewal Service
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Install OSG Token Renewal Service
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-        </ul>
-      </nav>
+                
+              
+            </ul>
+          </nav>
+        
+      
     </li>
   
 
-            
-          
-        </ul>
-      </nav>
+                
+              
+            </ul>
+          </nav>
+        
+      
     </li>
   
 
     
       
       
-      
-
+  
   
   
   
     
+    
+    
+    
       
+        
+        
+      
+    
     
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_8">
-          Access Point
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Access Point" data-md-level="1">
-        <label class="md-nav__title" for="__nav_8">
-          <span class="md-nav__icon md-icon"></span>
-          Access Point
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
           
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
             
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Access Point
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_8">
+              <span class="md-nav__icon md-icon"></span>
               
+  
+  Access Point
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../submit/install-ospool-ap/" class="md-nav__link">
-        Install an OSPool Access Point
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Install an OSPool Access Point
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../submit/ap-ospool-aup/" class="md-nav__link">
-        Acceptable Use Policy
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Acceptable Use Policy
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-        </ul>
-      </nav>
+                
+              
+            </ul>
+          </nav>
+        
+      
     </li>
   
 
     
       
       
-      
-
+  
   
   
   
     
+    
+    
+    
       
+        
+        
+      
+    
     
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_9">
-          Data Federation (OSDF)
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Data Federation (OSDF)" data-md-level="1">
-        <label class="md-nav__title" for="__nav_9">
-          <span class="md-nav__icon md-icon"></span>
-          Data Federation (OSDF)
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
           
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
             
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Data Federation (OSDF)
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_9">
+              <span class="md-nav__icon md-icon"></span>
               
+  
+  Data Federation (OSDF)
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../data/osdf/overview/" class="md-nav__link">
-        Overview
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Overview
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     
+    
+    
+    
+      
+    
+    
     <li class="md-nav__item md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_2" type="checkbox" id="__nav_9_2" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_9_2">
-          Data Cache
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Data Cache" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_2">
-          <span class="md-nav__icon md-icon"></span>
-          Data Cache
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_2" >
+        
           
+          <label class="md-nav__link" for="__nav_9_2" id="__nav_9_2_label" tabindex="0">
             
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Data Cache
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_2_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_9_2">
+              <span class="md-nav__icon md-icon"></span>
               
+  
+  Data Cache
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../data/osdf/install-cache-container/" class="md-nav__link">
-        Install from container
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Install from container
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../data/osdf/install-cache-rpm/" class="md-nav__link">
-        Install from RPM
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Install from RPM
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-        </ul>
-      </nav>
+                
+              
+            </ul>
+          </nav>
+        
+      
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     
+    
+    
+    
+      
+    
+    
     <li class="md-nav__item md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_3" type="checkbox" id="__nav_9_3" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_9_3">
-          Data Origin
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Data Origin" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_3">
-          <span class="md-nav__icon md-icon"></span>
-          Data Origin
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_3" >
+        
           
+          <label class="md-nav__link" for="__nav_9_3" id="__nav_9_3_label" tabindex="0">
             
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Data Origin
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_3_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_9_3">
+              <span class="md-nav__icon md-icon"></span>
               
+  
+  Data Origin
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../data/osdf/install-origin-container/" class="md-nav__link">
-        Install from container
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Install from container
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../data/osdf/install-origin-rpm/" class="md-nav__link">
-        Install from RPM
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Install from RPM
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-        </ul>
-      </nav>
+                
+              
+            </ul>
+          </nav>
+        
+      
     </li>
   
 
-            
-          
-        </ul>
-      </nav>
+                
+              
+            </ul>
+          </nav>
+        
+      
     </li>
   
 
     
       
       
-      
-
+  
   
   
   
     
+    
+    
+    
       
+        
+        
+      
+    
     
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_10">
-          Releases
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Releases" data-md-level="1">
-        <label class="md-nav__title" for="__nav_10">
-          <span class="md-nav__icon md-icon"></span>
-          Releases
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
           
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
             
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Releases
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_10">
+              <span class="md-nav__icon md-icon"></span>
               
+  
+  Releases
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../release_series/" class="md-nav__link">
-        Release Series
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Release Series
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     
+    
+    
+    
+      
+    
+    
     <li class="md-nav__item md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_2" type="checkbox" id="__nav_10_2" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_10_2">
-          OSG 25
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="OSG 25" data-md-level="2">
-        <label class="md-nav__title" for="__nav_10_2">
-          <span class="md-nav__icon md-icon"></span>
-          OSG 25
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_2" >
+        
           
+          <label class="md-nav__link" for="__nav_10_2" id="__nav_10_2_label" tabindex="0">
             
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  OSG 25
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_2_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_10_2">
+              <span class="md-nav__icon md-icon"></span>
               
+  
+  OSG 25
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../osg-25/" class="md-nav__link">
-        News
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  News
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../updating-to-osg-25/" class="md-nav__link">
-        Updating to OSG 25
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Updating to OSG 25
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-        </ul>
-      </nav>
+                
+              
+            </ul>
+          </nav>
+        
+      
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     
+    
+    
+    
+      
+    
+    
     <li class="md-nav__item md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_3" type="checkbox" id="__nav_10_3" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_10_3">
-          OSG 24
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="OSG 24" data-md-level="2">
-        <label class="md-nav__title" for="__nav_10_3">
-          <span class="md-nav__icon md-icon"></span>
-          OSG 24
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_3" >
+        
           
+          <label class="md-nav__link" for="__nav_10_3" id="__nav_10_3_label" tabindex="0">
             
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  OSG 24
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_3_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_10_3">
+              <span class="md-nav__icon md-icon"></span>
               
+  
+  OSG 24
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../osg-24/" class="md-nav__link">
-        News
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  News
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../updating-to-osg-24/" class="md-nav__link">
-        Updating to OSG 24
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Updating to OSG 24
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-        </ul>
-      </nav>
+                
+              
+            </ul>
+          </nav>
+        
+      
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../supported_platforms/" class="md-nav__link">
-        Supported Platforms
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Supported Platforms
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../common/yum/" class="md-nav__link">
-        OSG Yum Repos
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  OSG Yum Repos
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../yum-basics/" class="md-nav__link">
-        Yum Basics
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Yum Basics
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../signing/" class="md-nav__link">
-        RPM Signing
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  RPM Signing
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-        </ul>
-      </nav>
+                
+              
+            </ul>
+          </nav>
+        
+      
     </li>
   
 
     
       
       
-      
-
+  
   
   
   
     
+    
+    
+    
       
+        
+        
+      
+    
     
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11" type="checkbox" id="__nav_11" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_11">
-          Tokens
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Tokens" data-md-level="1">
-        <label class="md-nav__title" for="__nav_11">
-          <span class="md-nav__icon md-icon"></span>
-          Tokens
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
           
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
             
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Tokens
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_11">
+              <span class="md-nav__icon md-icon"></span>
               
+  
+  Tokens
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../security/tokens/overview/" class="md-nav__link">
-        Overview
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Overview
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../security/tokens/using-tokens/" class="md-nav__link">
-        Using Tokens
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Using Tokens
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-        </ul>
-      </nav>
+                
+              
+            </ul>
+          </nav>
+        
+      
     </li>
   
 
     
       
       
-      
-
+  
   
   
   
     
+    
+    
+    
       
+        
+        
+      
+    
     
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_12">
-          CA Certificates
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="CA Certificates" data-md-level="1">
-        <label class="md-nav__title" for="__nav_12">
-          <span class="md-nav__icon md-icon"></span>
-          CA Certificates
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
           
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="">
             
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  CA Certificates
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_12">
+              <span class="md-nav__icon md-icon"></span>
               
+  
+  CA Certificates
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../common/ca/" class="md-nav__link">
-        Overview
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Overview
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../security/certificate-management/" class="md-nav__link">
-        Certificate Management Reference
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Certificate Management Reference
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     
+    
+    
+    
+      
+    
+    
     <li class="md-nav__item md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12_3" type="checkbox" id="__nav_12_3" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_12_3">
-          Host Certificates
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Host Certificates" data-md-level="2">
-        <label class="md-nav__title" for="__nav_12_3">
-          <span class="md-nav__icon md-icon"></span>
-          Host Certificates
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12_3" >
+        
           
+          <label class="md-nav__link" for="__nav_12_3" id="__nav_12_3_label" tabindex="0">
             
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Host Certificates
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_12_3_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_12_3">
+              <span class="md-nav__icon md-icon"></span>
               
+  
+  Host Certificates
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../security/host-certs/overview/" class="md-nav__link">
-        Overview
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Overview
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../security/host-certs/incommon/" class="md-nav__link">
-        Using InCommon
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Using InCommon
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-            
+                
               
+                
+                  
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../security/host-certs/lets-encrypt/" class="md-nav__link">
-        Using Let's Encrypt
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Using Let's Encrypt
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
 
-            
-          
-        </ul>
-      </nav>
+                
+              
+            </ul>
+          </nav>
+        
+      
     </li>
   
 
-            
-          
-        </ul>
-      </nav>
+                
+              
+            </ul>
+          </nav>
+        
+      
     </li>
   
 
@@ -1716,10 +2922,24 @@
               
               <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
                 <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
   
   
   
@@ -1728,13 +2948,17 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On this page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
   <a href="#known-issues" class="md-nav__link">
-    Known Issues
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Known Issues
+      </span>
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="Known Issues">
@@ -1742,7 +2966,11 @@
         
           <li class="md-nav__item">
   <a href="#ca-certificates-on-el9" class="md-nav__link">
-    CA Certificates on EL9
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        CA Certificates on EL9
+      </span>
+    </span>
   </a>
   
 </li>
@@ -1754,7 +2982,11 @@
       
         <li class="md-nav__item">
   <a href="#latest-news" class="md-nav__link">
-    Latest News
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Latest News
+      </span>
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="Latest News">
@@ -1762,455 +2994,715 @@
         
           <li class="md-nav__item">
   <a href="#october-9-2025-vo-client-139" class="md-nav__link">
-    October 9, 2025: vo-client 139
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>October 9, 2025:</strong> vo-client 139
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#october-2-2025-xrdcl-pelican-156" class="md-nav__link">
-    October 2, 2025: xrdcl-pelican 1.5.6
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>October 2, 2025:</strong> xrdcl-pelican 1.5.6
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#september-23-2025-upcoming-htcondor-231029-pelican-7193" class="md-nav__link">
-    September 23, 2025: Upcoming: HTCondor 23.10.29, Pelican 7.19.3
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>September 23, 2025:</strong> Upcoming: HTCondor 23.10.29, Pelican 7.19.3
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#september-18-2025-xrdcl-pelican-154-igtf-1137-xrootd-monitoring-shoveler-140-2" class="md-nav__link">
-    September 18, 2025: xrdcl-pelican 1.5.4, IGTF 1.137, xrootd-monitoring-shoveler 1.4.0-2
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>September 18, 2025:</strong> xrdcl-pelican 1.5.4, IGTF 1.137, xrootd-monitoring-shoveler 1.4.0-2
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#september-4-2025-pegasus-511-osg-configure-430" class="md-nav__link">
-    September 4, 2025: Pegasus 5.1.1, osg-configure 4.3.0
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>September 4, 2025:</strong> Pegasus 5.1.1, osg-configure 4.3.0
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#august-28-2025-xrootd-584-14" class="md-nav__link">
-    August 28, 2025: XRootD 5.8.4-1.4
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>August 28, 2025:</strong> XRootD 5.8.4-1.4
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#august-21-2025-openbao-232-htvault-config-210-htcondor-23028-xrdcl-pelican-142-upcoming-htcondor-231028-pelican-7181-xrdhttp-pelican-007-osdf-server-7180-xrootd-lotman-005" class="md-nav__link">
-    August 21, 2025: OpenBao 2.3.2, htvault-config 2.1.0, HTCondor 23.0.28, xrdcl-pelican 1.4.2; Upcoming: HTCondor 23.10.28, Pelican 7.18.1, xrdhttp-pelican 0.0.7, osdf-server 7.18.0, xrootd-lotman 0.0.5
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>August 21, 2025:</strong> OpenBao 2.3.2, htvault-config 2.1.0, HTCondor 23.0.28, xrdcl-pelican 1.4.2; Upcoming: HTCondor 23.10.28, Pelican 7.18.1, xrdhttp-pelican 0.0.7, osdf-server 7.18.0, xrootd-lotman 0.0.5
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#august-14-2025-cvmfs-2132-xrootd-584-12-upcoming-frontier-squid-613-15-glideinwms-3111" class="md-nav__link">
-    August 14, 2025: CVMFS 2.13.2, XRootD 5.8.4-1.2; Upcoming: frontier-squid 6.13-1.5, GlideinWMS 3.11.1
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>August 14, 2025:</strong> CVMFS 2.13.2, XRootD 5.8.4-1.2; Upcoming: frontier-squid 6.13-1.5, GlideinWMS 3.11.1
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#august-7-2025-osg-scitokens-mapfile-15-2-ospool-ep-23-9-glideinwms-31015" class="md-nav__link">
-    August 7, 2025: osg-scitokens-mapfile 15-2, ospool-ep 23-9, GlideinWMS 3.10.15
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>August 7, 2025:</strong> osg-scitokens-mapfile 15-2, ospool-ep 23-9, GlideinWMS 3.10.15
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#july-28-2025-htcondor-23027-upcoming-htcondor-231027-pelican-7170" class="md-nav__link">
-    July 28, 2025: HTCondor 23.0.27; Upcoming: HTCondor 23.10.27, Pelican 7.17.0
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>July 28, 2025:</strong> HTCondor 23.0.27; Upcoming: HTCondor 23.10.27, Pelican 7.17.0
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#july-10-2025-cvmfs-2131-htgettoken-24" class="md-nav__link">
-    July 10, 2025: CVMFS 2.13.1, htgettoken 2.4
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>July 10, 2025:</strong> CVMFS 2.13.1, htgettoken 2.4
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#june-26-2025-xrootd-583-12-htcondor-23026-upcoming-pelican-7170-htcondor-231026" class="md-nav__link">
-    June 26, 2025: XRootD 5.8.3-1.2, HTCondor 23.0.26; Upcoming: Pelican 7.17.0, HTCondor 23.10.26
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>June 26, 2025:</strong> XRootD 5.8.3-1.2, HTCondor 23.0.26; Upcoming: Pelican 7.17.0, HTCondor 23.10.26
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#june-19-2025-pelican-7166" class="md-nav__link">
-    June 19, 2025: Pelican 7.16.6
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>June 19, 2025:</strong> Pelican 7.16.6
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#june-12-2025-igtf-1136-cvmfs-2130-glideinwms-31013" class="md-nav__link">
-    June 12, 2025: IGTF 1.136, CVMFS 2.13.0, GlideinWMS 3.10.13
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>June 12, 2025:</strong> IGTF 1.136, CVMFS 2.13.0, GlideinWMS 3.10.13
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#may-29-2025-htcondor-23025-xrootd-582-15-xrdcl-pelican-123-frontier-squid-510-12-htgettoken-22-2-upcoming-htcondor-231025-pelican-7165" class="md-nav__link">
-    May 29, 2025: HTCondor 23.0.25, XRootD 5.8.2-1.5, xrdcl-pelican 1.2.3, frontier-squid 5.10-1.2, htgettoken 2.2-2; Upcoming: HTCondor 23.10.25, Pelican 7.16.5
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>May 29, 2025:</strong> HTCondor 23.0.25, XRootD 5.8.2-1.5, xrdcl-pelican 1.2.3, frontier-squid 5.10-1.2, htgettoken 2.2-2; Upcoming: HTCondor 23.10.25, Pelican 7.16.5
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#may-8-2025-igtf-1135-xrootd-581-13-xrdcl-pelican-121-openbao-220-htvault-config-200-decision-engine-205-upcoming-pelican-7153-xrdhttp-pelican-006" class="md-nav__link">
-    May 8, 2025: IGTF 1.135, XRootD 5.8.1-1.3, xrdcl-pelican 1.2.1, OpenBao 2.2.0, htvault-config 2.0.0, Decision Engine 2.0.5; Upcoming: Pelican 7.15.3, xrdhttp-pelican 0.0.6
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>May 8, 2025:</strong> IGTF 1.135, XRootD 5.8.1-1.3, xrdcl-pelican 1.2.1, OpenBao 2.2.0, htvault-config 2.0.0, Decision Engine 2.0.5; Upcoming: Pelican 7.15.3, xrdhttp-pelican 0.0.6
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#april-22-2025-htcondor-23024-upcoming-htcondor-231024-pelican-7152" class="md-nav__link">
-    April 22, 2025: HTCondor 23.0.24; Upcoming: HTCondor 23.10.24, Pelican 7.15.2
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>April 22, 2025:</strong> HTCondor 23.0.24; Upcoming: HTCondor 23.10.24, Pelican 7.15.2
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#april-10-2025-vo-client-138-2-osg-ca-cert-updater-22-ospool-ep-23-7-frontier-squid-59-33-upcoming-pelican-7150" class="md-nav__link">
-    April 10, 2025: vo-client 138-2, osg-ca-cert-updater 2.2, ospool-ep 23-7, frontier-squid 5.9-3.3; Upcoming: Pelican 7.15.0
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>April 10, 2025:</strong> vo-client 138-2, osg-ca-cert-updater 2.2, ospool-ep 23-7, frontier-squid 5.9-3.3; Upcoming: Pelican 7.15.0
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#april-3-2025-glideinwms-31011" class="md-nav__link">
-    April 3, 2025: GlideinWMS 3.10.11
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>April 3, 2025:</strong> GlideinWMS 3.10.11
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#march-27-2025-htcondor-23022-xrootd-573-15-htgettoken-22-upcoming-htcondor-231022" class="md-nav__link">
-    March 27, 2025: HTCondor 23.0.22, XRootD 5.7.3-1.5, htgettoken 2.2; Upcoming: HTCondor 23.10.22
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>March 27, 2025:</strong> HTCondor 23.0.22, XRootD 5.7.3-1.5, htgettoken 2.2; Upcoming: HTCondor 23.10.22
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#march-13-2025-igtf-1134-osg-pki-tools-372-upcoming-xrdhttp-pelican-003-pelican-7141" class="md-nav__link">
-    March 13, 2025: IGTF-1.134, osg-pki-tools 3.7.2; Upcoming: xrdhttp-pelican 0.0.3, Pelican 7.14.1
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>March 13, 2025:</strong> IGTF-1.134, osg-pki-tools 3.7.2; Upcoming: xrdhttp-pelican 0.0.3, Pelican 7.14.1
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#february-27-2025-xrootd-573-cvmfs-2126-igtf-1133-ospool-ep-10-6-upcoming-pelican-7130" class="md-nav__link">
-    February 27, 2025: XRootD 5.7.3, CVMFS 2.12.6, IGTF 1.133, OSPool EP 1.0-6; Upcoming Pelican 7.13.0
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>February 27, 2025:</strong> XRootD 5.7.3, CVMFS 2.12.6, IGTF 1.133, OSPool EP 1.0-6; Upcoming Pelican 7.13.0
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#february-13-2025-vo-package-v138-1-glideinwms-31010-xrootd-monitoring-shoveler-140-xrdcl-pelican-105" class="md-nav__link">
-    February 13, 2025: VO Package v138-1, GlideinWMS 3.10.10, XRootD Monitoring Shoveler 1.4.0, XRDCL Pelican 1.0.5
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>February 13, 2025:</strong> VO Package v138-1, GlideinWMS 3.10.10, XRootD Monitoring Shoveler 1.4.0, XRDCL Pelican 1.0.5
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#january-23-2025-vo-package-v137-4-osg-scitokens-mapfile-14-osg-ce-osg-wn-client-osg-xrootd-xcache-upcoming-pelican-7120" class="md-nav__link">
-    January 23, 2025: VO Package v137-4, osg-scitokens-mapfile 14, osg-ce, osg-wn-client, osg-xrootd, xcache; Upcoming: Pelican 7.12.0
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>January 23, 2025:</strong> VO Package v137-4, osg-scitokens-mapfile 14, osg-ce, osg-wn-client, osg-xrootd, xcache; Upcoming: Pelican 7.12.0
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#january-9-2025-frontier-squid-59-32" class="md-nav__link">
-    January 9, 2025: frontier-squid 5.9-3.2
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>January 9, 2025:</strong> frontier-squid 5.9-3.2
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#january-6-2025-htcondor-23019-upcoming-htcondor-231019" class="md-nav__link">
-    January 6, 2025: HTCondor 23.0.19; Upcoming: HTCondor 23.10.19
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>January 6, 2025:</strong> HTCondor 23.0.19; Upcoming: HTCondor 23.10.19
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#january-2-2025-xrootd-572-12" class="md-nav__link">
-    January 2, 2025: XRootD 5.7.2-1.2
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>January 2, 2025:</strong> XRootD 5.7.2-1.2
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#december-19-2024-igtf-1132-gratia-probe-258-htcondor-ce-23018-xcache-370-2" class="md-nav__link">
-    December 19, 2024: IGTF 1.132, gratia-probe 2.5.8, HTCondor-CE 23.0.18, XCache 3.7.0-2
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>December 19, 2024:</strong> IGTF 1.132, gratia-probe 2.5.8, HTCondor-CE 23.0.18, XCache 3.7.0-2
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#december-11-2024-xrootd-572-11-glideinwms-3108-upcoming-osdf-server-7117-pelican-7117" class="md-nav__link">
-    December 11, 2024: XRootD 5.7.2-1.1, GlideinWMS 3.10.8 Upcoming: osdf-server 7.11.7, Pelican 7.11.7
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>December 11, 2024:</strong> XRootD 5.7.2-1.1, GlideinWMS 3.10.8 Upcoming: osdf-server 7.11.7, Pelican 7.11.7
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#november-19-2024-htcondor-23018-upcoming-htcondor-231018" class="md-nav__link">
-    November 19, 2024: HTCondor 23.0.18; Upcoming: HTCondor 23.10.18
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>November 19, 2024:</strong> HTCondor 23.0.18; Upcoming: HTCondor 23.10.18
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#november-13-2024-xrootd-571-14" class="md-nav__link">
-    November 13, 2024: XRootD 5.7.1-1.4
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>November 13, 2024:</strong> XRootD 5.7.1-1.4
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#october-30-2024-upcoming-htcondor-23102-pelican-71011" class="md-nav__link">
-    October 30, 2024: Upcoming: HTCondor 23.10.2, Pelican 7.10.11
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>October 30, 2024:</strong> Upcoming: HTCondor 23.10.2, Pelican 7.10.11
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#october-24-2024-xrootd-571-13-htcondor-23017" class="md-nav__link">
-    October 24, 2024: XRootD 5.7.1-1.3, HTCondor 23.0.17
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>October 24, 2024:</strong> XRootD 5.7.1-1.3, HTCondor 23.0.17
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#october-10-2024-htcondor-23016-upcoming-osdf-server-7107" class="md-nav__link">
-    October 10, 2024: HTCondor 23.0.16; Upcoming: osdf-server 7.10.7
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>October 10, 2024:</strong> HTCondor 23.0.16; Upcoming: osdf-server 7.10.7
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#october-3-2024-igtf-1131-upcoming-htcondor-23101-pelican-7107" class="md-nav__link">
-    October 3, 2024: IGTF 1.131; Upcoming: HTCondor 23.10.1, Pelican 7.10.7
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>October 3, 2024:</strong> IGTF 1.131; Upcoming: HTCondor 23.10.1, Pelican 7.10.7
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#october-1-2024-htcondor-23015-xrootd-571-11-xrdcl-pelican-096" class="md-nav__link">
-    October 1, 2024: HTCondor 23.0.15, XRootD 5.7.1-1.1, xrdcl-pelican 0.9.6
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>October 1, 2024:</strong> HTCondor 23.0.15, XRootD 5.7.1-1.1, xrdcl-pelican 0.9.6
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#september-12-2024-cvmfs-2115-vault-1172-htvault-config-118-htgettoken-20-xrootd-multiuser-220-11-xrdcl-pelican-093-21" class="md-nav__link">
-    September 12, 2024: CVMFS 2.11.5, vault 1.17.2, htvault-config 1.18, htgettoken 2.0, xrootd-multiuser 2.2.0-1.1, xrdcl-pelican 0.9.3-2.1
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>September 12, 2024:</strong> CVMFS 2.11.5, vault 1.17.2, htvault-config 1.18, htgettoken 2.0, xrootd-multiuser 2.2.0-1.1, xrdcl-pelican 0.9.3-2.1
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#september-5-2024-xrootd-570-16" class="md-nav__link">
-    September 5, 2024: XRootD 5.7.0-1.6
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>September 5, 2024:</strong> XRootD 5.7.0-1.6
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#august-8-2024-htcondor-23014-upcoming-htcondor-ce-2391-htcondor-2396-pelican-799" class="md-nav__link">
-    August 8, 2024: HTCondor 23.0.14; Upcoming: HTCondor-CE 23.9.1, HTCondor 23.9.6, Pelican 7.9.9
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>August 8, 2024:</strong> HTCondor 23.0.14; Upcoming: HTCondor-CE 23.9.1, HTCondor 23.9.6, Pelican 7.9.9
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#july-30-2024-xrootd-570" class="md-nav__link">
-    July 30, 2024: XRootD 5.7.0
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>July 30, 2024:</strong> XRootD 5.7.0
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#july-25-2024-htcondor-ce-23013-glideinwms-3107-hosted-ce-tools-21-upcoming-pelican-795" class="md-nav__link">
-    July 25, 2024: HTCondor-CE 23.0.13, GlideinWMS 3.10.7, hosted-ce-tools 2.1: Upcoming: Pelican 7.9.5
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>July 25, 2024:</strong> HTCondor-CE 23.0.13, GlideinWMS 3.10.7, hosted-ce-tools 2.1: Upcoming: Pelican 7.9.5
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#july-17-2024-htcondor-ce-23012-igtf-1130-upcoming-osdf-server-793-pelican-793" class="md-nav__link">
-    July 17, 2024: HTCondor-CE 23.0.12, IGTF 1.130; Upcoming: osdf-server 7.9.3, Pelican 7.9.3
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>July 17, 2024:</strong> HTCondor-CE 23.0.12, IGTF 1.130; Upcoming: osdf-server 7.9.3, Pelican 7.9.3
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#june-27-2024-igtf-1129-osg-configure-420-upcoming-htcondor-2381" class="md-nav__link">
-    June 27, 2024: IGTF 1.129, osg-configure 4.2.0; Upcoming: HTCondor 23.8.1
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>June 27, 2024:</strong> IGTF 1.129, osg-configure 4.2.0; Upcoming: HTCondor 23.8.1
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#june-13-2024-htcondor-23012" class="md-nav__link">
-    June 13, 2024: HTCondor 23.0.12
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>June 13, 2024:</strong> HTCondor 23.0.12
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#june-11-2024-xrootd-569-16" class="md-nav__link">
-    June 11, 2024: XRootD 5.6.9-1.6
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>June 11, 2024:</strong> XRootD 5.6.9-1.6
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#may-16-2024-voms-210-031rc32-upcoming-htcondor-2372-pelican-782" class="md-nav__link">
-    May 16, 2024: VOMS 2.1.0-0.31.rc3.2; Upcoming: HTCondor 23.7.2, Pelican 7.8.2
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>May 16, 2024:</strong> VOMS 2.1.0-0.31.rc3.2; Upcoming: HTCondor 23.7.2, Pelican 7.8.2
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#may-9-2024-vo-package-v136" class="md-nav__link">
-    May 9, 2024: VO Package v136
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>May 9, 2024:</strong> VO Package v136
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#may-2-2024-xcache-370-osg-xrootd-23-6-upcoming-pelican-773" class="md-nav__link">
-    May 2, 2024: XCache 3.7.0, osg-xrootd 23-6; Upcoming: Pelican 7.7.3
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>May 2, 2024:</strong> XCache 3.7.0, osg-xrootd 23-6; Upcoming: Pelican 7.7.3
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#april-15-2024-upcoming-htcondor-2361" class="md-nav__link">
-    April 15, 2024: Upcoming: HTCondor 23.6.1
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>April 15, 2024:</strong> Upcoming: HTCondor 23.6.1
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#april-11-2024-htcondor-2308-lts-htcondor-ce-2308" class="md-nav__link">
-    April 11, 2024: HTCondor 23.0.8 LTS, HTCondor-CE 23.0.8
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>April 11, 2024:</strong> HTCondor 23.0.8 LTS, HTCondor-CE 23.0.8
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#april-4-2024-xrootd-569-upcoming-pelican-762" class="md-nav__link">
-    April 4, 2024: XRootD 5.6.9; Upcoming: Pelican 7.6.2
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>April 4, 2024:</strong> XRootD 5.6.9; Upcoming: Pelican 7.6.2
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#march-21-2024-osg-scitokens-mapfile-13-2-vo-client-135-1" class="md-nav__link">
-    March 21, 2024: osg-scitokens-mapfile 13-2, vo-client 135-1
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>March 21, 2024:</strong> osg-scitokens-mapfile 13-2, vo-client 135-1
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#march-14-2024-igtf-1128-osg-xrootd-23-5-htcondor-2306-lts-htcondor-ce-2306-upcoming-htcondor-2352-pelican-758" class="md-nav__link">
-    March 14, 2024: IGTF 1.128, osg-xrootd 23-5, HTCondor 23.0.6 LTS, HTCondor-CE 23.0.6; Upcoming: HTCondor 23.5.2, Pelican 7.5.8
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>March 14, 2024:</strong> IGTF 1.128, osg-xrootd 23-5, HTCondor 23.0.6 LTS, HTCondor-CE 23.0.6; Upcoming: HTCondor 23.5.2, Pelican 7.5.8
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#february-29-2024-xrootd-568-upcoming-pelican-757" class="md-nav__link">
-    February 29, 2024: XRootD 5.6.8; Upcoming: Pelican 7.5.7
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>February 29, 2024:</strong> XRootD 5.6.8; Upcoming: Pelican 7.5.7
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#february-27-2024-vo-package-v134-osg-pki-tools-371-osg-xrootd-36-22-glideinwms-3106" class="md-nav__link">
-    February 27, 2024: VO Package v134, osg-pki-tools 3.7.1, osg-xrootd 3.6-22, GlideinWMS 3.10.6
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>February 27, 2024:</strong> VO Package v134, osg-pki-tools 3.7.1, osg-xrootd 3.6-22, GlideinWMS 3.10.6
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#february-22-2024-xrootd-567-xrdcl-pelican-093-igtf-1127-glideinwms-3106-voms-2100-031rc31-upcoming-osg-token-renewer-090-oidc-agent-510-osdf-server-756" class="md-nav__link">
-    February 22, 2024: XRootD 5.6.7, xrdcl-pelican 0.9.3, IGTF 1.127, GlideinWMS 3.10.6, VOMS 2.10.0-0.31.rc3.1; Upcoming: osg-token-renewer 0.9.0, oidc-agent 5.1.0, osdf-server 7.5.6
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>February 22, 2024:</strong> XRootD 5.6.7, xrdcl-pelican 0.9.3, IGTF 1.127, GlideinWMS 3.10.6, VOMS 2.10.0-0.31.rc3.1; Upcoming: osg-token-renewer 0.9.0, oidc-agent 5.1.0, osdf-server 7.5.6
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#february-8-2024-frontier-squid-59-21-htcondor-2304-htvault-config-116-vault-1154-osg-configure-411-3-upcoming-htcondor-2340-pelican-751" class="md-nav__link">
-    February 8, 2024: Frontier-squid 5.9-2.1, HTCondor 23.0.4, htvault-config 1.16, vault 1.15.4, osg-configure 4.1.1-3; Upcoming: HTCondor 23.4.0, Pelican 7.5.1
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>February 8, 2024:</strong> Frontier-squid 5.9-2.1, HTCondor 23.0.4, htvault-config 1.16, vault 1.15.4, osg-configure 4.1.1-3; Upcoming: HTCondor 23.4.0, Pelican 7.5.1
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#january-4-2024-igtf-1126-ospool-ep-10-pelican-731" class="md-nav__link">
-    January 4, 2024: IGTF 1.126, ospool-ep 1.0; Pelican 7.3.1
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>January 4, 2024:</strong> IGTF 1.126, ospool-ep 1.0; Pelican 7.3.1
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#december-14-2023-xrootd-564-xcache-360-xrootd-multiuser-220-pelican-730" class="md-nav__link">
-    December 14, 2023: XRootD 5.6.4, XCache 3.6.0, xrootd-multiuser 2.2.0; Pelican 7.3.0
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>December 14, 2023:</strong> XRootD 5.6.4, XCache 3.6.0, xrootd-multiuser 2.2.0; Pelican 7.3.0
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#november-30-2023-vo-package-v133-igtf-1125-upcoming-pelican-721" class="md-nav__link">
-    November 30, 2023: VO Package v133, IGTF 1.125; Upcoming: Pelican 7.2.1
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>November 30, 2023:</strong> VO Package v133, IGTF 1.125; Upcoming: Pelican 7.2.1
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#november-16-2023-vo-package-v132-xrootd-563-osg-ce-23-2-htcondor-ce-2301-osg-system-profiler-170-upcoming-pelican-720" class="md-nav__link">
-    November 16, 2023: VO Package v132, XRootD 5.6.3, osg-ce 23-2, HTCondor-CE 23.0.1, osg-system-profiler 1.7.0; Upcoming: Pelican 7.2.0
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>November 16, 2023:</strong> VO Package v132, XRootD 5.6.3, osg-ce 23-2, HTCondor-CE 23.0.1, osg-system-profiler 1.7.0; Upcoming: Pelican 7.2.0
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#november-2-2023-igtf-1124-cvmfs-2112-cvmfs-x509-helper-24" class="md-nav__link">
-    November 2, 2023: IGTF 1.124, CVMFS 2.11.2, cvmfs-x509-helper 2.4
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>November 2, 2023:</strong> IGTF 1.124, CVMFS 2.11.2, cvmfs-x509-helper 2.4
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#october-31-2023-htcondor-2301-lts-upcoming-htcondor-2310" class="md-nav__link">
-    October 31, 2023: HTCondor 23.0.1 LTS; Upcoming: HTCondor 23.1.0
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>October 31, 2023:</strong> HTCondor 23.0.1 LTS; Upcoming: HTCondor 23.1.0
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#october-26-2023-cvmfs-2111-13-xrootd-562-23-osg-update-vos-142-2" class="md-nav__link">
-    October 26, 2023: CVMFS 2.11.1-1.3, XRootD 5.6.2-2.3, osg-update-vos 1.4.2-2
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>October 26, 2023:</strong> CVMFS 2.11.1-1.3, XRootD 5.6.2-2.3, osg-update-vos 1.4.2-2
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#october-3-2023-initial-release" class="md-nav__link">
-    October 3, 2023: Initial Release
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>October 3, 2023</strong>: Initial Release
+      </span>
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="October 3, 2023: Initial Release">
@@ -2218,21 +3710,33 @@
         
           <li class="md-nav__item">
   <a href="#major-package-updates" class="md-nav__link">
-    Major package updates
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Major package updates
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#package-removals" class="md-nav__link">
-    Package Removals
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Package Removals
+      </span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#container-images" class="md-nav__link">
-    Container Images
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Container Images
+      </span>
+    </span>
   </a>
   
 </li>
@@ -2249,7 +3753,11 @@
       
         <li class="md-nav__item">
   <a href="#announcements" class="md-nav__link">
-    Announcements
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Announcements
+      </span>
+    </span>
   </a>
   
 </li>
@@ -2262,14 +3770,16 @@
               </div>
             
           
-          <div class="md-content" data-md-component="content">
-            <article class="md-content__inner md-typeset">
+          
+            <div class="md-content" data-md-component="content">
               
+              <article class="md-content__inner md-typeset">
+                <a id="__skip" tabindex="-1"></a>
                 
-<a href="https://github.com/osg-htc/docs/edit/master/docs/release/osg-23.md" title="Edit this page" class="md-content__button md-icon">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
-</a>
+                  
 
+  
+  
 
 
 <h1 id="osg-23-news">OSG 23 News<a class="headerlink" href="#osg-23-news" title="Permanent link">&para;</a></h1>
@@ -3816,38 +5326,38 @@ be available in OSG upcoming repositories.</p>
 <table>
 <thead>
 <tr>
-<th align="left">Image name</th>
-<th align="left">Tags</th>
+<th style="text-align: left;">Image name</th>
+<th style="text-align: left;">Tags</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left"><code>hub.osg-htc.org/opensciencegrid/atlas-xcache</code></td>
-<td align="left"><code>23-release</code>, <code>23-testing</code></td>
+<td style="text-align: left;"><code>hub.osg-htc.org/opensciencegrid/atlas-xcache</code></td>
+<td style="text-align: left;"><code>23-release</code>, <code>23-testing</code></td>
 </tr>
 <tr>
-<td align="left"><code>hub.osg-htc.org/opensciencegrid/cms-xcache</code></td>
-<td align="left"><code>23-release</code>, <code>23-testing</code></td>
+<td style="text-align: left;"><code>hub.osg-htc.org/opensciencegrid/cms-xcache</code></td>
+<td style="text-align: left;"><code>23-release</code>, <code>23-testing</code></td>
 </tr>
 <tr>
-<td align="left"><code>hub.osg-htc.org/opensciencegrid/frontier-squid</code></td>
-<td align="left"><code>23-release</code>, <code>23-testing</code></td>
+<td style="text-align: left;"><code>hub.osg-htc.org/opensciencegrid/frontier-squid</code></td>
+<td style="text-align: left;"><code>23-release</code>, <code>23-testing</code></td>
 </tr>
 <tr>
-<td align="left"><code>hub.osg-htc.org/opensciencegrid/oidc-agent</code></td>
-<td align="left"><code>23-release</code>, <code>23-testing</code></td>
+<td style="text-align: left;"><code>hub.osg-htc.org/opensciencegrid/oidc-agent</code></td>
+<td style="text-align: left;"><code>23-release</code>, <code>23-testing</code></td>
 </tr>
 <tr>
-<td align="left"><code>hub.osg-htc.org/opensciencegrid/osgvo-docker-pilot</code></td>
-<td align="left"><code>23-release</code>, <code>23-testing</code></td>
+<td style="text-align: left;"><code>hub.osg-htc.org/opensciencegrid/osgvo-docker-pilot</code></td>
+<td style="text-align: left;"><code>23-release</code>, <code>23-testing</code></td>
 </tr>
 <tr>
-<td align="left"><code>hub.osg-htc.org/opensciencegrid/stash-cache</code></td>
-<td align="left"><code>23-release</code>, <code>23-testing</code></td>
+<td style="text-align: left;"><code>hub.osg-htc.org/opensciencegrid/stash-cache</code></td>
+<td style="text-align: left;"><code>23-release</code>, <code>23-testing</code></td>
 </tr>
 <tr>
-<td align="left"><code>hub.osg-htc.org/opensciencegrid/stash-origin</code></td>
-<td align="left"><code>23-release</code>, <code>23-testing</code></td>
+<td style="text-align: left;"><code>hub.osg-htc.org/opensciencegrid/stash-origin</code></td>
+<td style="text-align: left;"><code>23-release</code>, <code>23-testing</code></td>
 </tr>
 </tbody>
 </table>
@@ -3867,15 +5377,34 @@ see our <a href="https://osg-htc.org/technology/policy/container-release/">polic
 <li><a href="https://groups.google.com/a/osg-htc.org/g/software-discuss">software-discuss@osg-htc.org</a></li>
 </ul>
 
-              
-            </article>
-          </div>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
-            Back to top
-          </a>
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
         
       </main>
       
@@ -3883,7 +5412,7 @@ see our <a href="https://osg-htc.org/technology/policy/container-release/">polic
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
-      <div>
+      <div class="md-copyright">
     This material is based upon work supported by the
     <a href="https://nsf.gov">National Science Foundation</a>
     under Grant Nos.
@@ -3894,8 +5423,8 @@ see our <a href="https://osg-htc.org/technology/policy/container-release/">polic
     <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2030508">2030508</a>
     . Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
     Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-        Material for MkDocs
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+        Zensical
     </a>
 </div>
       
@@ -3904,13 +5433,24 @@ see our <a href="https://osg-htc.org/technology/policy/container-release/">polic
 </footer>
       
     </div>
-    <div class="md-dialog" data-md-component="dialog">
+    <div class="md-dialog" data-md-component="dialog" role="status" aria-atomic="true">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.5e67fbfe.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.c44cc438.min.js"></script>
+    
+      
+      
+      
+      
+        
+        
+          
+        
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["navigation.sections","navigation.top"],"redirect":"../../redirect.json","search":"../../assets/javascripts/workers/search.c47bb847.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","clipboard.error":"Could not copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.a2388154.min.js"></script>
       
     
   </body>
