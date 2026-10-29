@@ -113,6 +113,80 @@ markdown_extensions:
 
 plugins:
   - search
+  - llmstxt:
+      markdown_description: >-
+        Documentation for system administrators contributing computational and storage
+        capacity to the OSG Consortium: installing and operating HTCondor-CEs, worker nodes,
+        OSDF caches and origins, access points, and related OSG software.
+      full_output: llms-full.txt
+      sections:
+        Getting Started:
+          - index.md
+          - site-planning.md
+          - site-verification.md
+          - site-maintenance.md
+          - common/help.md
+        Registration:
+          - common/contact-registration.md
+          - common/registration.md
+        Compute:
+          - resource-sharing/overview.md: Overview of contributing compute capacity to the OSG
+          - resource-sharing/os-backfill-containers.md
+          - resource-sharing/user-containers.md
+          - compute-element/htcondor-ce-overview.md
+          - compute-element/hosted-ce.md
+          - compute-element/install-htcondor-ce.md
+          - worker-node/using-wn.md: Overview of OSG worker node client options
+          - worker-node/install-wn.md: Install the OSG worker node client from RPM
+          - worker-node/install-wn-tarball.md
+          - worker-node/install-wn-oasis.md
+          - worker-node/install-cvmfs.md
+          - worker-node/install-apptainer.md
+          - worker-node/using-wn-containers.md
+        Data:
+          - data/run-frontier-squid-container.md
+          - data/frontier-squid.md
+          - data/update-oasis.md
+          - data/external-oasis-repos.md
+          - data/xrootd/overview.md
+          - data/xrootd/install-standalone.md
+          - data/xrootd/xrootd-authorization.md
+          - data/xrootd/install-client.md
+          - data/xrootd/install-cms-xcache.md
+          - data/xrootd/install-shoveler.md
+        Other Services:
+          - other/install-gwms-frontend.md
+          - other/install-cvmfs-stratum1.md
+          - other/troubleshooting-gratia.md
+          - other/schedd-filebeats.md
+          - other/osg-token-renewer.md
+        Access Point:
+          - submit/install-ospool-ap.md
+          - submit/ap-ospool-aup.md
+        Data Federation (OSDF):
+          - data/osdf/overview.md: Overview of the Open Science Data Federation (OSDF)
+          - data/osdf/install-cache-container.md: Install an OSDF cache from a container
+          - data/osdf/install-cache-rpm.md: Install an OSDF cache from RPM
+          - data/osdf/install-origin-container.md: Install an OSDF origin from a container
+          - data/osdf/install-origin-rpm.md: Install an OSDF origin from RPM
+        Releases:
+          - release/release_series.md
+          - release/osg-25.md: OSG 25 release series news
+          - release/updating-to-osg-25.md
+          - release/osg-24.md: OSG 24 release series news
+          - release/updating-to-osg-24.md
+          - release/supported_platforms.md
+          - common/yum.md
+          - release/yum-basics.md
+          - release/signing.md
+        Security:
+          - security/tokens/overview.md: Overview of bearer tokens in the OSG
+          - security/tokens/using-tokens.md
+          - common/ca.md: Overview of CA certificates in the OSG
+          - security/certificate-management.md
+          - security/host-certs/overview.md: Overview of obtaining host certificates
+          - security/host-certs/incommon.md
+          - security/host-certs/lets-encrypt.md
   - redirects:
       redirect_maps:
         site-responsibilities.md: site-maintenance.md
