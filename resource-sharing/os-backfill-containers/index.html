@@ -3728,6 +3728,10 @@ profile docker-ep flags=(attach_disconnected, mediate_deleted) {
 <span class="hll">  # Allow mount(2) for Singularity's container setup.
 </span><span class="hll">  # The default Docker profile contains "deny mount".
 </span><span class="hll">  mount,
+</span><span class="hll">
+</span><span class="hll">  # Allow pivot_root. This allows cvmfsexec inside the EP container to expose
+</span><span class="hll">  # the mounted CVMFS repos at the appropriate location for the pilot.
+</span><span class="hll">  pivot_root,
 </span>
   deny /sys/[^f]*/** wklx,
   deny /sys/f[^s]*/** wklx,
