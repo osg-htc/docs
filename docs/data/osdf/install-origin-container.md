@@ -44,8 +44,8 @@ Before starting the installation process, consider the following requirements:
     * **Host Key**: `/etc/pelican/certificates/tls.key`
 
 
-!!! note "osdf-origin 7.18"
-    This document covers versions 7.18 and later of the `osdf-origin` container image.
+!!! note "osdf-origin 26.0.0"
+    This document covers versions 26.0.0 and later of the `osdf-origin` container image.
 
 !!! note "root"
     The paths used as examples on this page (e.g., `/etc/osdf-origin`) require root to edit;
@@ -198,7 +198,7 @@ user@host $ docker run --rm \
              --volume <ORIGIN_CONFIG_FILE>:/etc/pelican/config.d/99-local.yaml \
              --volume <OUTSIDE_DIRECTORY>:<INSIDE_DIRECTORY> \
              --name osdf-origin \
-             hub.osg-htc.org/pelican_platform/osdf-origin:latest
+             hub.osg-htc.org/pelican_platform/osdf-origin:v26.0
 ```
 
 Using the example values from the table, this is
@@ -213,7 +213,7 @@ user@host $ docker run --rm \
              --volume /etc/osdf-origin/config.yaml:/etc/pelican/config.d/99-local.yaml \
              --volume /mnt/origin:/pelican \
              --name osdf-origin \
-             hub.osg-htc.org/pelican_platform/osdf-origin:latest
+             hub.osg-htc.org/pelican_platform/osdf-origin:v26.0
 ```
 
 !!! note
@@ -410,7 +410,7 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker stop osdf-origin
 ExecStartPre=-/usr/bin/docker rm osdf-origin
-ExecStartPre=/usr/bin/docker pull hub.osg-htc.org/pelican_platform/osdf-origin:latest
+ExecStartPre=/usr/bin/docker pull hub.osg-htc.org/pelican_platform/osdf-origin:v26.0
 ExecStart=/usr/bin/docker run --rm --name osdf-origin \
   --publish 8443:8443 \
   --publish 8444:8444 \
@@ -420,7 +420,7 @@ ExecStart=/usr/bin/docker run --rm --name osdf-origin \
   --volume /etc/osdf-origin/config.yaml:/etc/pelican/config.d/99-local.yaml \
   --volume /mnt/origin:/pelican \
   --name osdf-origin \
-  hub.osg-htc.org/pelican_platform/osdf-origin:latest
+  hub.osg-htc.org/pelican_platform/osdf-origin:v26.0
 
 [Install]
 WantedBy=multi-user.target

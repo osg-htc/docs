@@ -50,8 +50,8 @@ Before starting the installation process, consider the following requirements:
     * **Host Key**: `/etc/pelican/certificates/tls.key`
 
 
-!!! note "osdf-cache 7.18"
-    This document covers versions 7.18 and later of the `osdf-cache` container image.
+!!! note "osdf-cache 26.0.0"
+    This document covers versions 26.0.0 and later of the `osdf-cache` container image.
 
 !!! note "root"
     The paths used as examples on this page (e.g., `/etc/osdf-cache`) require root to edit;
@@ -142,7 +142,7 @@ user@host $ docker run --rm \
              --volume <CACHE_CONFIG_FILE>:/etc/pelican/pelican.yaml \
              --volume <CACHE_PARTITION>:/run/pelican/cache \
              --name osdf-cache \
-             hub.osg-htc.org/pelican_platform/osdf-cache:latest
+             hub.osg-htc.org/pelican_platform/osdf-cache:v26.0
 ```
 
 Using the example values from the table, this is
@@ -157,7 +157,7 @@ user@host $ docker run --rm \
              --volume /etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml \
              --volume /mnt/cache:/run/pelican/cache \
              --name osdf-cache \
-             hub.osg-htc.org/pelican_platform/osdf-cache:latest
+             hub.osg-htc.org/pelican_platform/osdf-cache:v26.0
 ```
 
 
@@ -179,7 +179,7 @@ user@host $ docker run --rm \
              --volume <METADATA_PARTITION>:/run/pelican/cache/meta \
              --volume <DATA_PARTITION>:/run/pelican/cache/data \
              --name osdf-cache \
-             hub.osg-htc.org/pelican_platform/osdf-cache:latest
+             hub.osg-htc.org/pelican_platform/osdf-cache:v26.0
 ```
 
 Using the example values from the table, this is
@@ -196,7 +196,7 @@ user@host $ docker run --rm \
              --volume /mnt/cache-meta:/run/pelican/cache/meta \
              --volume /mnt/cache-data:/run/pelican/cache/data \
              --name osdf-cache \
-             hub.osg-htc.org/pelican_platform/osdf-cache:latest
+             hub.osg-htc.org/pelican_platform/osdf-cache:v26.0
 ```
 
 
@@ -350,7 +350,7 @@ user@host $ docker run --rm  \
              --volume /etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml \
              --volume /mnt/cache:/run/pelican/cache \
              --name osdf-cache \
-             hub.osg-htc.org/pelican_platform/osdf-cache:latest
+             hub.osg-htc.org/pelican_platform/osdf-cache:v26.0
 ```
 
 
