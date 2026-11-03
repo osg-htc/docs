@@ -138,14 +138,20 @@ OSG 26 ships with the Pelican 26 series; note the following changes from 7.26 or
         $ mv -f pelicanbackup.sqlite DBLOCATION
 
 
--   If you specify UI admins via `Server.UIAdminUsers` and use OIDC for web UI access, you will need to
-    change the listed usernames to Pelican usernames.  **See the post-upgrade steps after upgrading the RPMs.**
+-   If you use OIDC for web UI access, and use the `Server.UIAdminUsers`, `Server.UserAdminUsers`,
+    or `Server.CollectionAdminUsers` options, you will need to change the listed usernames to
+    Pelican usernames by running a migration script.
+
+    Download the [conversion helper script](https://gist.github.com/h2zh/7b73dcec439d40bc48074a26625a022a)
+    and run it before upgrading the RPMs.
 
     !!! note
         We recommend using admin groups instead of users ([Server.AdminGroups](https://docs.pelicanplatform.org/parameters#Server-AdminGroups))
         to simplify access management going forward.
 
-Also note the changes if upgrading from 7.27 or earlier:
+-   If you use API keys, you may need to re-create some of them.
+    After upgrading, check the server logs for the name of the key and the string "Re-mint it."
+    Then, recreate those API keys.
 
 **Origins**
 
@@ -156,19 +162,6 @@ After making any necessary config changes and backups,
 you may proceed with the [repository and RPM update process](#updating-the-osg-repositories),
 then return here for post-upgrade steps.
 
-
-**Post-upgrade**
-
-If you specify UI admins via `Server.UIAdminUsers` and use OIDC for web UI access, do the following:
-
-1.  Log in to the web interface using the `admin` username and web admin password.
-    If you do not have a web admin password,
-    follow the [instructions for setting the password](https://docs.pelicanplatform.org/advanced-concepts/server#web-interface-administrator-password).
-
-2.  Go to the Settings page (the gear icon on the left), then "Users".
-3.  Find the user names (in the User column) of the people that should have web admin access,
-    and replace the `Server.UIAdminUsers` list with those user names.
-    (If there are two lines for a user, use the lower line.)
 
 
 Updating Your GlideinWMS Frontend
