@@ -98,7 +98,7 @@ before starting the cache for the first time, it is recommended to generate a ke
         root@host$ chown root:pelican /etc/pelican/issuer-keys
 
         root@host$ cd /etc/pelican/issuer-keys
-        root@host$ pelican key create
+        root@host$ pelican-server key create
 
 
     The newly created files, `private-key.pem` and `issuer-pub.jwks` are the private and public keys, respectively.
