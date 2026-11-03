@@ -3611,7 +3611,7 @@ Ensure this user has read, write, and execute access to the scratch space.</p>
 host such as AlmaLinux. <a href="#running-with-docker-on-ubuntu">Additional considerations</a> 
 are required for running on Ubuntu and other Debian-based Linux flavors.</p>
 </div>
-<p>The Docker image is kept in <a href="https://hub.docker.com/r/opensciencegrid/osgvo-docker-pilot">DockerHub</a>.
+<p>The Docker image is named <code>hub.osg-htc.org/osg-htc/ospool-ep</code> and is kept in <a href="https://hub.osg-htc.org">OSG Harbor</a>.
 In order to successfully start payload jobs:</p>
 <ol>
 <li><strong>Configure authentication:</strong>
@@ -3775,7 +3775,7 @@ profile docker-ep flags=(attach_disconnected, mediate_deleted) {
        -e CVMFSEXEC_REPOS="                     \
             oasis.opensciencegrid.org           \
             singularity.opensciencegrid.org"    \
-       hub.opensciencegrid.org/osg-htc/ospool-ep:24-release
+       hub.osg-htc.org/osg-htc/ospool-ep:25-release
 </code></pre></div>
 <h2 id="optional-configuration">Optional Configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h2>
 <h3 id="cvmfs">CVMFS<a class="headerlink" href="#cvmfs" title="Permanent link">&para;</a></h3>
@@ -3997,7 +3997,7 @@ it decreases security between jobs running inside the EP by allowing them to rea
        -e GLIDEIN_Start_Extra="True"            \
        -e OSG_SQUID_LOCATION="..."              \
 <span class="hll">       -e SINGULARITY_DISABLE_PID_NAMESPACES=True   \
-</span>       hub.opensciencegrid.org/osg-htc/ospool-ep:25-release
+</span>       hub.osg-htc.org/osg-htc/ospool-ep:25-release
 </code></pre></div>
 <h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
 <p>We recommend pulling new versions of backfill containers at least every 72 hours.

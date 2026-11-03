@@ -3140,12 +3140,12 @@ singularity<span class="w"> </span>run<span class="w"> </span>--contain<span cla
 <span class="w">                </span>--bind<span class="w"> </span>/cvmfs<span class="w"> </span><span class="se">\</span>
 <span class="w">                </span>--bind<span class="w"> </span>/dev/fuse<span class="w"> </span><span class="se">\</span>
 <span class="w">                </span>--scratch<span class="w"> </span>/pilot<span class="w"> </span><span class="se">\</span>
-<span class="w">                </span>docker://opensciencegrid/osgvo-docker-pilot:23-release
+<span class="w">                </span>docker://hub.osg-htc.org/osg-htc/ospool-ep:25-release
 </code></pre></div>
 <p>The above example rebuilds the Docker container on each host.
 If you plan to run large numbers of these jobs, you can download the Docker container once and create a local
 Singularity image:</p>
-<div class="highlight"><pre><span></span><code>$ singularity build osgvo-pilot.sif docker://opensciencegrid/osgvo-docker-pilot:23-release
+<div class="highlight"><pre><span></span><code>$ singularity build osgvo-pilot.sif docker://hub.osg-htc.org/osg-htc/ospool-ep:25-release
 </code></pre></div>
 <p>In this case, the <code>singularity run</code> command should be changed to:</p>
 <div class="highlight"><pre><span></span><code>singularity run --contain --bind /cvmfs --bind /dev/fuse --scratch /pilot osgvo-pilot.sif
