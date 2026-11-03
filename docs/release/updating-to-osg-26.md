@@ -111,13 +111,14 @@ OSG 26 ships with the Pelican 26 series; note the following changes from 7.26 or
 
 **All**
 
--   Configuration via environment variables starting with `OSDF_` and `STASH_` is no longer supported.
-    Replace the `OSDF_` or `STASH_` prefix with `PELICAN_`.
-    This also affects clients.
+-   If you use environment variables that start with `OSDF_` or `STASH_`,
+    replace the `OSDF_` or `STASH_` prefix with `PELICAN_`.
+    You must do this for daemons and clients.
+    Configuration via environment variables starting with `OSDF_` and `STASH_` is dropped.
 
--   The database schema has changed to support new user management features.
-    **Back up your database before upgrading; if you need to downgrade, you will need to restore the database from
-    the backup.**
+-   **Back up your database before upgrading.**
+    The database schema has changed and, if you need to downgrade, you will need to restore the database from
+    the backup.
 
     Run the following command to get the location of the database file:
 
@@ -125,17 +126,17 @@ OSG 26 ships with the Pelican 26 series; note the following changes from 7.26 or
         $ pelican-server config get server.dblocation
 
     Then, use the following command to make a backup to a file named `pelicanbackup.sqlite`
-    (replacing `DBLOCATION` with the path to the database file):
+    (replacing `<DBLOCATION>` with the path to the database file):
 
         :::console
-        $ sqlite3 DBLOCATION ".backup 'pelicanbackup.sqlite'"
+        $ sqlite3 <DBLOCATION> ".backup 'pelicanbackup.sqlite'"
 
     To restore the backup, shut down the `osdf-server` service and overwrite the database with the backup file
-    using the following (replacing `DBLOCATION` with the path to the database file):
+    using the following (replacing `<DBLOCATION>` with the path to the database file):
 
         :::console
         $ systemctl stop osdf-server
-        $ mv -f pelicanbackup.sqlite DBLOCATION
+        $ mv -f pelicanbackup.sqlite <DBLOCATION>
 
 
 -   If you use OIDC for web UI access, and use the `Server.UIAdminUsers`, `Server.UserAdminUsers`,
@@ -159,8 +160,7 @@ OSG 26 ships with the Pelican 26 series; note the following changes from 7.26 or
     Support for the OA4MP issuer has been removed and replaced with a token issuer built into the Pelican server.
 
 After making any necessary config changes and backups,
-you may proceed with the [repository and RPM update process](#updating-the-osg-repositories),
-then return here for post-upgrade steps.
+you may proceed with the [repository and RPM update process](#updating-the-osg-repositories).
 
 
 
