@@ -53,7 +53,7 @@ There are a number of ways to install both, such as:
 Installation
 ------------
 
-Kuantifier itself is also installed via a Helm chart, hosted on [OSG Harbor](https://hub.opensciencegrid.org).
+Kuantifier itself is also installed via a Helm chart, hosted on [OSG Harbor](https://hub.osg-htc.org).
 
 
 ### Configuring Kuantifier's Values File
