@@ -159,6 +159,10 @@ OSG 26 ships with the Pelican 26 series; note the following changes from 7.26 or
 -   If you set `Origin.IssuerMode` to `oa4mp` in your configuration, you must change it to `embedded`.
     Support for the OA4MP issuer has been removed and replaced with a token issuer built into the Pelican server.
 
+For additional upgrade information, see *both* the
+[release notes for 7.27](https://github.com/PelicanPlatform/pelican/releases#release-v7.27.1) *and* the
+[release notes for 26.0](https://github.com/PelicanPlatform/pelican/releases#release-v26.0.0).
+
 After making any necessary config changes and backups,
 you may proceed with the [repository and RPM update process](#updating-the-osg-repositories).
 
