@@ -285,6 +285,27 @@ docker run -it --rm --user osg  \
        hub.osg-htc.org/osg-htc/ospool-ep:25-release
 ```
 
+Running the Container with Apptainer
+------------------------------------
+
+The EP container may be run via Apptainer in a similiar manner to Docker. Obtain the prerequisites for your container as outlined
+in section [Running the Container with Docker](#running-the-container-with-docker), then invoke the container via Apptainer
+as follows:
+
+```
+apptainer run \
+   -B /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org \
+   -B /worker-temp-dir:/pilot       \
+   --env GLIDEIN_Site="..."         \
+   --env GLIDEIN_ResourceName="..." \
+   --env OSG_SQUID_LOCATION="..." \
+   docker://hub.osg-htc.org/osg-htc/ospool-ep:25-release
+```
+
+!!! warning "CVMFS and Apptainer"
+    `cvmfsexec` is not supported inside an apptainer container. If you would like to support CVMFS in your apptainer container,
+    use the [bind-mount](#bind-mount) approach.
+
 Optional Configuration
 ----------------------
 
