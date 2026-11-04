@@ -288,9 +288,43 @@ docker run -it --rm --user osg  \
 Running the Container with Apptainer
 ------------------------------------
 
-The EP container may be run via Apptainer in a similiar manner to Docker. Obtain the prerequisites for your container as outlined
-in section [Running the Container with Docker](#running-the-container-with-docker), then invoke the container via Apptainer
-as follows:
+Apptainer is an unprivileged containerization tool that is available in some environments where
+Docker is absent. The EP container may be run via Apptainer in a similiar manner to Docker.
+In order to successfully start payload jobs via Apptainer:
+
+1. **Configure authentication:**
+   Authentication with the OSPool is performed using tokens retrieved from the
+   [OSPool Token Registry](https://os-registry.osg-htc.org/)
+   which you can then pass to the container by volume mounting it as a file under `/etc/condor/tokens-orig.d/`.
+   This is done with the command line flag
+   `-B /path/to/token:/etc/condor/tokens-orig.d/flock.opensciencegrid.org`.
+   Replace `/path/to/token` with the full path to the token you obtained from the OSPool Token Registry.
+1. Set `GLIDEIN_Site` and `GLIDEIN_ResourceName` to match the resource group name and resource name that you registered
+   in Topology, respectively.
+1. Set the `OSG_SQUID_LOCATION` environment variable to the HTTP address of your preferred Squid instance.
+1. System directories inside the apptainer container are mounted read-only. Create an external directory for job I/O 
+   outside of the container, then volume mount the desired directory on the host to `/pilot` inside the container.
+
+    This is done with the command line flag `-B /worker-temp-dir:/pilot`.
+    Replace `/worker-temp-dir` with a directory you created for jobs to write into.
+    Make sure the user you run your container as has write access to this directory.
+
+1. _Optional:_ add an expression with the `GLIDEIN_Start_Extra` environment variable to append to the
+   [HTCondor `START` expression](https://htcondor.readthedocs.io/en/latest/admin-manual/ep-policy-configuration.html#the-start-expression);
+   this limits the pilot to only run certain jobs.
+
+1. _Optional:_ [limit OSG pilot container resource usage](#limiting-resource-usage)
+
+1. _Optional:_ Enable [CVMFS](#cvmfs) via a CVMFS bind mount.
+
+!!! warning "CVMFS and Apptainer"
+    `cvmfsexec` is not supported inside an apptainer container. If you would like to support CVMFS in your apptainer container,
+    use the [bind-mount](#bind-mount) approach.
+
+!!! warning "GPU Resources"
+    Providing GPU resources to the OSPool via an apptainer container is not currently supported.
+
+Here is an example invocation using `apptainer run` by hand:
 
 ```
 apptainer run \
@@ -301,10 +335,6 @@ apptainer run \
    --env OSG_SQUID_LOCATION="..." \
    docker://hub.osg-htc.org/osg-htc/ospool-ep:25-release
 ```
-
-!!! warning "CVMFS and Apptainer"
-    `cvmfsexec` is not supported inside an apptainer container. If you would like to support CVMFS in your apptainer container,
-    use the [bind-mount](#bind-mount) approach.
 
 Optional Configuration
 ----------------------
