@@ -117,7 +117,7 @@ Running the Container with Docker
     host such as AlmaLinux. [Additional considerations](#running-with-docker-on-ubuntu) 
     are required for running on Ubuntu and other Debian-based Linux flavors.
 
-The Docker image is kept in [DockerHub](https://hub.docker.com/r/opensciencegrid/osgvo-docker-pilot).
+The Docker image is named `hub.osg-htc.org/osg-htc/ospool-ep` and is kept in [OSG Harbor](https://hub.osg-htc.org).
 In order to successfully start payload jobs:
 
 
@@ -198,7 +198,7 @@ running inside the OSPool EP container may be removed as follows:
 1. Create a `docker-ep` AppArmor profile based on the [default](https://github.com/moby/profiles/blob/main/apparmor/template.go) 
    in `/etc/apparmor.d/docker-ep.profile`. Changes from the default are highlighted:
 
-```hl_lines="10 11 12 13 34 35 36"
+```hl_lines="10 11 12 13 34 35 36 37 38 39 40"
 abi <abi/4.0>,
 include <tunables/global>
 
@@ -235,6 +235,10 @@ profile docker-ep flags=(attach_disconnected, mediate_deleted) {
   # Allow mount(2) for Singularity's container setup.
   # The default Docker profile contains "deny mount".
   mount,
+  
+  # Allow pivot_root. This allows cvmfsexec inside the EP container to expose
+  # the mounted CVMFS repos at the appropriate location for the pilot.
+  pivot_root,
 
   deny /sys/[^f]*/** wklx,
   deny /sys/f[^s]*/** wklx,
@@ -278,7 +282,7 @@ docker run -it --rm --user osg  \
        -e CVMFSEXEC_REPOS="                     \
             oasis.opensciencegrid.org           \
             singularity.opensciencegrid.org"    \
-       hub.opensciencegrid.org/osg-htc/ospool-ep:24-release
+       hub.osg-htc.org/osg-htc/ospool-ep:25-release
 ```
 
 Optional Configuration
@@ -530,7 +534,7 @@ docker run -it --rm --user osg  \
        -e GLIDEIN_Start_Extra="True"            \
        -e OSG_SQUID_LOCATION="..."              \
        -e SINGULARITY_DISABLE_PID_NAMESPACES=True   \
-       hub.opensciencegrid.org/osg-htc/ospool-ep:25-release
+       hub.osg-htc.org/osg-htc/ospool-ep:25-release
 ```
 
 Best Practices

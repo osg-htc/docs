@@ -1,4 +1,4 @@
-name: Deploy static MkDocs pages
+name: Deploy static Zensical pages
 on:
   push:
     branches:
@@ -11,10 +11,19 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
-      - name: Deploy MkDocs pages
-        if: startsWith(github.repository, 'osg-htc/')
-        uses: docker://squidfunk/mkdocs-material:8.2.8
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          args: >-
-            gh-deploy
-            --verbose
+          python-version: '3.13'
+          cache: pip
+      - name: Install Zensical
+        run: pip install -r requirements.txt ghp-import==2.1.0
+      - name: Build Zensical pages
+        run: zensical build --clean
+      - name: Deploy to gh-pages
+        if: startsWith(github.repository, 'osg-htc/')
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          ghp-import --no-jekyll --push \
+            --message "Deployed ${GITHUB_SHA::9} with Zensical version: $(zensical --version)" \
+            site
