@@ -18,7 +18,8 @@ Please read through the instructions before upgrading.
 Updating the OSG Repositories
 -----------------------------
 
-1.  Consult the relevant section for the service you're upgrading before updating the OSG Yum repositories:
+1.  Because configuration updates may be necessary, be sure to turn off any OSG services before updating them.
+    Consult the relevant section for the service you're upgrading before updating the OSG Yum repositories:
 
     -   [Compute Entrypoint](#updating-your-osg-compute-entrypoint)
     -   [HTCondor hosts](#updating-your-htcondor-hosts)
@@ -44,9 +45,6 @@ Updating the OSG Repositories
 
 1.  Update software:
 
-    !!! note
-        Because configuration updates will be necessary, be sure to turn off any OSG services
-        before updating them. Consult the sections below that match your situation.
 
             :::console
             root@host # yum update
