@@ -123,19 +123,26 @@ OSG 26 ships with the Pelican 26 series; note the following changes from 7.26 or
         :::console
         $ pelican-server config get server.dblocation
 
+    (Note: the default location is `/var/lib/pelican/pelican.sqlite`)
+
     Then, use the following command to make a backup to a file named `pelicanbackup.sqlite`
     (replacing `<DBLOCATION>` with the path to the database file):
 
         :::console
         $ sqlite3 <DBLOCATION> ".backup 'pelicanbackup.sqlite'"
 
-    To restore the backup, shut down the `osdf-server` service and overwrite the database with the backup file
-    using the following (replacing `<DBLOCATION>` with the path to the database file):
+    To restore the backup, shut down the `pelican-cache` service (for a cache) or the `pelican-origin` service (for an origin)
+    and overwrite the database with the backup file using the following (replacing `<DBLOCATION>` with the path to the database file):
 
         :::console
-        $ systemctl stop osdf-server
+        $ systemctl stop pelican-cache
         $ mv -f pelicanbackup.sqlite <DBLOCATION>
 
+    Or
+
+        :::console
+        $ systemctl stop pelican-origin
+        $ mv -f pelicanbackup.sqlite <DBLOCATION>
 
 -   If you use OIDC for web UI access, and use the `Server.UIAdminUsers`, `Server.UserAdminUsers`,
     or `Server.CollectionAdminUsers` options, you will need to change the listed usernames to
