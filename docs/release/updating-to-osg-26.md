@@ -157,7 +157,7 @@ OSG 26 ships with the Pelican 26 series; note the following changes from 7.26 or
 
 -   If you use API keys, you may need to re-create some of them.
     After upgrading, check the server logs for the name of the key and the string "Re-mint it."
-    Then, recreate those API keys.
+    Then, recreate those API keys using the [instructions for the pelican-server apikey command](https://docs.pelicanplatform.org/commands-reference/pelican-server/apikey/generate).
 
 **Origins**
 
