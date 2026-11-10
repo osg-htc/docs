@@ -184,6 +184,7 @@ This table provides a reminder of the parameters that will be used in the exampl
 | `HOST_CERT_CHAIN`     | `/etc/osdf-origin/hostcert.pem`  | The host certificate, with full chain                                                   | 
 | `HOST_KEY`            | `/etc/osdf-origin/hostkey.pem`   | The private key matching the host certificate                                           | 
 | `ORIGIN_CONFIG_FILE`  | `/etc/osdf-origin/config.yaml`   | The YAML file containing various origin settings                                        | 
+| `DATABASE_DIRECTORY`  | `/var/lib/osdf-origin`           | The directory to be used for storing the Pelican database files                         | 
 | `OUTSIDE_DIRECTORY`   | `/mnt/origin`                    | The directory outside the container that stores the data to be served                   | 
 | `INSIDE_DIRECTORY`    | `/pelican`                       | The path inside the container corresponding to StoragePrefix in your origin config file |
 
@@ -196,6 +197,7 @@ user@host $ docker run --rm \
              --volume <HOST_CERT_CHAIN>:/etc/pelican/certificates/tls.crt \
              --volume <HOST_KEY>:/etc/pelican/certificates/tls.key \
              --volume <ORIGIN_CONFIG_FILE>:/etc/pelican/config.d/99-local.yaml \
+             --volume <DATABASE_DIRECTORY>:/var/lib/pelican \
              --volume <OUTSIDE_DIRECTORY>:<INSIDE_DIRECTORY> \
              --name osdf-origin \
              hub.osg-htc.org/pelican_platform/osdf-origin:latest
@@ -211,6 +213,7 @@ user@host $ docker run --rm \
              --volume /etc/osdf-origin/hostcert.pem:/etc/pelican/certificates/tls.crt \
              --volume /etc/osdf-origin/hostkey.pem:/etc/pelican/certificates/tls.key \
              --volume /etc/osdf-origin/config.yaml:/etc/pelican/config.d/99-local.yaml \
+             --volume /var/lib/osdf-origin:/var/lib/pelican \
              --volume /mnt/origin:/pelican \
              --name osdf-origin \
              hub.osg-htc.org/pelican_platform/osdf-origin:latest
@@ -418,6 +421,7 @@ ExecStart=/usr/bin/docker run --rm --name osdf-origin \
   --volume /etc/osdf-origin/hostcert.pem:/etc/pelican/certificates/tls.crt \
   --volume /etc/osdf-origin/hostkey.pem:/etc/pelican/certificates/tls.key \
   --volume /etc/osdf-origin/config.yaml:/etc/pelican/config.d/99-local.yaml \
+  --volume /var/lib/osdf-origin:/var/lib/pelican \
   --volume /mnt/origin:/pelican \
   --name osdf-origin \
   hub.osg-htc.org/pelican_platform/osdf-origin:latest
