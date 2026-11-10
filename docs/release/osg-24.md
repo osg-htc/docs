@@ -23,6 +23,23 @@ Updates to critical packages are also announced by email and are sent to the fol
 Latest News
 -----------
 
+**November 9, 2026:** IGTF 1.147, XRootD 5.9.8-1.3
+----------------------------------------------------------------------------------------------------------------------
+-   CA certificates based on [IGTF 1.147](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Add new CERN Root CA 3 and Grid CA 2 ICA (CERN)
+    -   Updated DFN-GridGermany-Root with new SHA-2 family self-signature (DE)
+    -   Removed discontinued DigiCert roots and ICAs from TAGPMA:
+        DigiCertGridRootCA-Root, DigiCertGridTrustCAG2-Classic,
+        DigiCertGridCA-1G2-Classic-2015, DigiCertAssuredIDRootCA-Root,
+        DigiCert-Assured-ID-Grid-Client-RSA2048-SHA256-2022-CA1,
+        DigiCert-Assured-ID-Grid-TLS-RSA2048-SHA256-2022-CA1 (US)
+    -   Removed obsolete TCS Gen4 and Gen4B issuing CAs, as well as the Gen4B
+        private trust roots and USERTrustECCCertificationAuthority (EU)
+    -   Due to the dependency of the (outgoing) InCommon-RSA-IGTF-Server-CA-3,
+        the USERTrustRSACertificationAuthority is temporarily retained (US)
+-   [XRootD 5.9.8](https://github.com/xrootd/xrootd/releases/tag/v5.9.8)
+    -   Various bug fixes, see release notes for details
+
 **October 15, 2026:** GlideinWMS 3.10.19, osg-token-renewer 1.0.1
 ----------------------------------------------------------------------------------------------------------------------
 -   [GlideinWMS 3.10.19](https://glideinwms.fnal.gov/doc.v3_10_19/history.html#stable)
