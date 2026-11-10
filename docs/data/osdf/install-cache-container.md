@@ -132,6 +132,7 @@ This table provides a reminder of the parameters that will be used in the exampl
 | `HOST_CERT_CHAIN`     | `/etc/osdf-cache/hostcert.pem`   | The host certificate, with full chain                                                   | 
 | `HOST_KEY`            | `/etc/osdf-cache/hostkey.pem`    | The private key matching the host certificate                                           | 
 | `CACHE_CONFIG_FILE`   | `/etc/osdf-cache/config.yaml`    | The YAML file containing various cache settings                                         | 
+| `DATABASE_DIRECTORY`  | `/var/lib/osdf-cache`            | The directory to be used for storing the Pelican database files                         | 
 | `CACHE_PARTITION`     | `/mnt/cache`                     | The partition to be used for storing cached data (single partition setup only)          | 
 | `NAMESPACE_PARTITION` | `/mnt/cache-namespace`           | The partition to be used for storing namespace information (multi-partition setup only) | 
 | `METADATA_PARTITION`  | `/mnt/cache-meta`                | The partition to be used for storing metadata (multi-partition setup only)              | 
@@ -154,6 +155,7 @@ user@host $ docker run --rm \
              --volume <HOST_CERT_CHAIN>:/etc/pelican/certificates/tls.crt \
              --volume <HOST_KEY>:/etc/pelican/certificates/tls.key \
              --volume <CACHE_CONFIG_FILE>:/etc/pelican/pelican.yaml \
+             --volume <DATABASE_DIRECTORY>:/var/lib/pelican \
              --volume <CACHE_PARTITION>:/run/pelican/cache \
              --name osdf-cache \
              hub.osg-htc.org/pelican_platform/osdf-cache:v26.0
@@ -170,6 +172,7 @@ user@host $ docker run --rm \
              --volume /etc/osdf-cache/hostcert.pem:/etc/pelican/certificates/tls.crt \
              --volume /etc/osdf-cache/hostkey.pem:/etc/pelican/certificates/tls.key \
              --volume /etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml \
+             --volume /var/lib/osdf-cache:/var/lib/pelican \
              --volume /mnt/cache:/run/pelican/cache \
              --name osdf-cache \
              hub.osg-htc.org/pelican_platform/osdf-cache:v26.0
@@ -191,6 +194,7 @@ user@host $ docker run --rm \
              --volume <HOST_CERT_CHAIN>:/etc/pelican/certificates/tls.crt \
              --volume <HOST_KEY>:/etc/pelican/certificates/tls.key \
              --volume <CACHE_CONFIG_FILE>:/etc/pelican/pelican.yaml \
+             --volume <DATABASE_DIRECTORY>:/var/lib/pelican \
              --volume <NAMESPACE_PARTITION>:/run/pelican/cache/namespace \
              --volume <METADATA_PARTITION>:/run/pelican/cache/meta \
              --volume <DATA_PARTITION>:/run/pelican/cache/data \
@@ -209,6 +213,7 @@ user@host $ docker run --rm \
              --volume /etc/osdf-cache/hostcert.pem:/etc/pelican/certificates/tls.crt \
              --volume /etc/osdf-cache/hostkey.pem:/etc/pelican/certificates/tls.key \
              --volume /etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml \
+             --volume /var/lib/osdf-cache:/var/lib/pelican \
              --volume /mnt/cache-namespace:/run/pelican/cache/namespace \
              --volume /mnt/cache-meta:/run/pelican/cache/meta \
              --volume /mnt/cache-data:/run/pelican/cache/data \
@@ -337,6 +342,7 @@ ExecStart=/usr/bin/docker run --rm --name osdf-cache \
   --volume /etc/osdf-cache/hostcert.pem:/etc/pelican/certificates/tls.crt \
   --volume /etc/osdf-cache/hostkey.pem:/etc/pelican/certificates/tls.key \
   --volume /etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml \
+  --volume /var/lib/osdf-cache:/var/lib/pelican \
   --volume /mnt/cache:/run/pelican/cache \
   --name osdf-cache \
   hub.osg-htc.org/pelican_platform/osdf-cache:latest
@@ -367,6 +373,7 @@ user@host $ docker run --rm  \
              --volume /etc/osdf-cache/hostcert.pem:/etc/pelican/certificates/tls.crt \
              --volume /etc/osdf-cache/hostkey.pem:/etc/pelican/certificates/tls.key \
              --volume /etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml \
+             --volume /var/lib/osdf-cache:/var/lib/pelican \
              --volume /mnt/cache:/run/pelican/cache \
              --name osdf-cache \
              hub.osg-htc.org/pelican_platform/osdf-cache:v26.0
