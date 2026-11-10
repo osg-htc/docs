@@ -3480,6 +3480,11 @@ or <a href="https://kubernetes.io/">Kubernetes</a>.</p>
 <td>The YAML file containing various cache settings</td>
 </tr>
 <tr>
+<td><code>DATABASE_DIRECTORY</code></td>
+<td><code>/var/lib/osdf-cache</code></td>
+<td>The directory to be used for storing the Pelican database files</td>
+</tr>
+<tr>
 <td><code>CACHE_PARTITION</code></td>
 <td><code>/mnt/cache</code></td>
 <td>The partition to be used for storing cached data (single partition setup only)</td>
@@ -3512,6 +3517,7 @@ and is not recommended for caches with more than 10 TB of capacity.</p>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;HOST_CERT_CHAIN&gt;:/etc/pelican/certificates/tls.crt<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;HOST_KEY&gt;:/etc/pelican/certificates/tls.key<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;CACHE_CONFIG_FILE&gt;:/etc/pelican/pelican.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>--volume<span class="w"> </span>&lt;DATABASE_DIRECTORY&gt;:/var/lib/pelican<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;CACHE_PARTITION&gt;:/run/pelican/cache<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--name<span class="w"> </span>osdf-cache<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>hub.osg-htc.org/pelican_platform/osdf-cache:latest
@@ -3524,6 +3530,7 @@ and is not recommended for caches with more than 10 TB of capacity.</p>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-cache/hostcert.pem:/etc/pelican/certificates/tls.crt<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-cache/hostkey.pem:/etc/pelican/certificates/tls.key<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>--volume<span class="w"> </span>/var/lib/osdf-cache:/var/lib/pelican<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/mnt/cache:/run/pelican/cache<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--name<span class="w"> </span>osdf-cache<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>hub.osg-htc.org/pelican_platform/osdf-cache:latest
@@ -3538,6 +3545,7 @@ This improves performance and is recommended for caches with more than 10 TB of 
 <span class="w">             </span>--volume<span class="w"> </span>&lt;HOST_CERT_CHAIN&gt;:/etc/pelican/certificates/tls.crt<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;HOST_KEY&gt;:/etc/pelican/certificates/tls.key<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;CACHE_CONFIG_FILE&gt;:/etc/pelican/pelican.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>--volume<span class="w"> </span>&lt;DATABASE_DIRECTORY&gt;:/var/lib/pelican<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;NAMESPACE_PARTITION&gt;:/run/pelican/cache/namespace<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;METADATA_PARTITION&gt;:/run/pelican/cache/meta<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;DATA_PARTITION&gt;:/run/pelican/cache/data<span class="w"> </span><span class="se">\</span>
@@ -3552,6 +3560,7 @@ This improves performance and is recommended for caches with more than 10 TB of 
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-cache/hostcert.pem:/etc/pelican/certificates/tls.crt<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-cache/hostkey.pem:/etc/pelican/certificates/tls.key<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>--volume<span class="w"> </span>/var/lib/osdf-cache:/var/lib/pelican<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/mnt/cache-namespace:/run/pelican/cache/namespace<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/mnt/cache-meta:/run/pelican/cache/meta<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/mnt/cache-data:/run/pelican/cache/data<span class="w"> </span><span class="se">\</span>
@@ -3646,6 +3655,7 @@ ExecStart=/usr/bin/docker run --rm --name osdf-cache \
   --volume /etc/osdf-cache/hostcert.pem:/etc/pelican/certificates/tls.crt \
   --volume /etc/osdf-cache/hostkey.pem:/etc/pelican/certificates/tls.key \
   --volume /etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml \
+  --volume /var/lib/osdf-cache:/var/lib/pelican \
   --volume /mnt/cache:/run/pelican/cache \
   --name osdf-cache \
   hub.osg-htc.org/pelican_platform/osdf-cache:latest
@@ -3667,6 +3677,7 @@ The following example uses the <a href="#single-partition">single partition</a> 
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-cache/hostcert.pem:/etc/pelican/certificates/tls.crt<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-cache/hostkey.pem:/etc/pelican/certificates/tls.key<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>--volume<span class="w"> </span>/var/lib/osdf-cache:/var/lib/pelican<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/mnt/cache:/run/pelican/cache<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--name<span class="w"> </span>osdf-cache<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>hub.osg-htc.org/pelican_platform/osdf-cache:latest

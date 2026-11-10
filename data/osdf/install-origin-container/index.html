@@ -3661,6 +3661,11 @@ or <a href="https://kubernetes.io/">Kubernetes</a>.</p>
 <td>The YAML file containing various origin settings</td>
 </tr>
 <tr>
+<td><code>DATABASE_DIRECTORY</code></td>
+<td><code>/var/lib/osdf-origin</code></td>
+<td>The directory to be used for storing the Pelican database files</td>
+</tr>
+<tr>
 <td><code>OUTSIDE_DIRECTORY</code></td>
 <td><code>/mnt/origin</code></td>
 <td>The directory outside the container that stores the data to be served</td>
@@ -3679,6 +3684,7 @@ or <a href="https://kubernetes.io/">Kubernetes</a>.</p>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;HOST_CERT_CHAIN&gt;:/etc/pelican/certificates/tls.crt<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;HOST_KEY&gt;:/etc/pelican/certificates/tls.key<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;ORIGIN_CONFIG_FILE&gt;:/etc/pelican/config.d/99-local.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>--volume<span class="w"> </span>&lt;DATABASE_DIRECTORY&gt;:/var/lib/pelican<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;OUTSIDE_DIRECTORY&gt;:&lt;INSIDE_DIRECTORY&gt;<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--name<span class="w"> </span>osdf-origin<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>hub.osg-htc.org/pelican_platform/osdf-origin:latest
@@ -3691,6 +3697,7 @@ or <a href="https://kubernetes.io/">Kubernetes</a>.</p>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-origin/hostcert.pem:/etc/pelican/certificates/tls.crt<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-origin/hostkey.pem:/etc/pelican/certificates/tls.key<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-origin/config.yaml:/etc/pelican/config.d/99-local.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>--volume<span class="w"> </span>/var/lib/osdf-origin:/var/lib/pelican<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/mnt/origin:/pelican<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--name<span class="w"> </span>osdf-origin<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>hub.osg-htc.org/pelican_platform/osdf-origin:latest
@@ -3878,6 +3885,7 @@ ExecStart=/usr/bin/docker run --rm --name osdf-origin \
   --volume /etc/osdf-origin/hostcert.pem:/etc/pelican/certificates/tls.crt \
   --volume /etc/osdf-origin/hostkey.pem:/etc/pelican/certificates/tls.key \
   --volume /etc/osdf-origin/config.yaml:/etc/pelican/config.d/99-local.yaml \
+  --volume /var/lib/osdf-origin:/var/lib/pelican \
   --volume /mnt/origin:/pelican \
   --name osdf-origin \
   hub.osg-htc.org/pelican_platform/osdf-origin:latest
