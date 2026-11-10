@@ -69,7 +69,7 @@ Origin:
 Server:
   Hostname: "<FQDN>"
 ```
-Replacing `<FQDN>` with the externally-accessible FQDN of your cache service
+Replacing `<FQDN>` with the externally-accessible FQDN of your origin service
 (this should match one of the SANs in your host certificate).
 You will also uncomment and fill in the value for `XRootD.Sitename` in a later step, after registration is complete.
 
@@ -149,7 +149,7 @@ To configure your origin to serve objects from an S3 endpoint, see the
 Preparing for Initial Startup
 -----------------------------
 
-Before starting the cache for the first time, it is recommended that you pre-create
+Before starting the origin for the first time, it is recommended that you pre-create
 some files related to authentication using the tools in the Pelican server.
 
 1.  First, download the Pelican server from <https://github.com/PelicanPlatform/pelican/releases>,
