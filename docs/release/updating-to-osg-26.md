@@ -148,7 +148,7 @@ OSG 26 ships with the Pelican 26 series; note the following changes from 7.26 or
     or `Server.CollectionAdminUsers` options, you will need to change the listed usernames to
     Pelican usernames by running a migration script.
 
-    Download the [conversion helper script](https://gist.github.com/h2zh/7b73dcec439d40bc48074a26625a022a)
+    Download the [conversion helper script](https://raw.githubusercontent.com/PelicanPlatform/pelican/refs/heads/main/scripts/uiadminusers_v727_migration_helper.py)
     and run it before upgrading the RPMs.
 
     !!! note
