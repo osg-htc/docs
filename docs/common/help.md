@@ -20,8 +20,8 @@ support inquiry:
 
 *  Troubleshooting sections or pages for the problematic software
 *  Recent OSG Software release notes
+    -   [OSG 26](../release/osg-26.md)
     -   [OSG 25](../release/osg-25.md)
-    -   [OSG 24](../release/osg-24.md)
 *  [Outage](https://status.opensciencegrid.org/) information for OSG services
 
 ### Submitting support inquiries ###
