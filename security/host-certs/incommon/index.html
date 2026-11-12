@@ -2241,7 +2241,7 @@
   <span class="md-ellipsis">
     
   
-  OSG 25
+  OSG 26
 
     
   </span>
@@ -2254,6 +2254,117 @@
         
           <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_2_label" aria-expanded="false">
             <label class="md-nav__title" for="__nav_10_2">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  OSG 26
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../release/osg-26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  News
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../release/updating-to-osg-26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Updating to OSG 26
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_3" id="__nav_10_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  OSG 25
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_3_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_10_3">
               <span class="md-nav__icon md-icon"></span>
               
   
@@ -2304,117 +2415,6 @@
     
   
   Updating to OSG 25
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-                
-              
-            </ul>
-          </nav>
-        
-      
-    </li>
-  
-
-                
-              
-                
-                  
-  
-  
-  
-  
-    
-    
-    
-    
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_10_3" id="__nav_10_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-  OSG 24
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        
-          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_3_label" aria-expanded="false">
-            <label class="md-nav__title" for="__nav_10_3">
-              <span class="md-nav__icon md-icon"></span>
-              
-  
-  OSG 24
-
-            </label>
-            <ul class="md-nav__list" data-md-scrollfix>
-              
-                
-                  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../release/osg-24/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-  News
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-                
-              
-                
-                  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../release/updating-to-osg-24/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-  Updating to OSG 24
 
     
   </span>
@@ -3204,7 +3204,7 @@ another IGTF CA subscription, please <a href="../../../common/help/">contact us<
 volume mounting a local directory (<code>~/path_to_dir</code>) into the <code>/output</code> directory of the container.</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w">  </span><span class="se">\</span>
 <span class="w">             </span>-v<span class="w"> </span>~/path_to_dir:/output<span class="w"> </span><span class="se">\</span>
-<span class="w">             </span>hub.osg-htc.org/opensciencegrid/pki-tools:24-release<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>hub.osg-htc.org/opensciencegrid/pki-tools:26-release<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--hostname<span class="w"> </span>&lt;HOSTNAME&gt;<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--country<span class="w"> </span>&lt;COUNTRY&gt;<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--state<span class="w"> </span>&lt;STATE&gt;<span class="w"> </span><span class="se">\</span>
@@ -3218,7 +3218,7 @@ For example, the following generates a CSR for <code>test.opensciencegrid.org</c
 <code>bar.opensciencegrid.org</code> as SANs:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">user@host $ </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w">  </span><span class="se">\</span>
 <span class="w">             </span>-v<span class="w"> </span>~/path_to_dir:/output<span class="w"> </span><span class="se">\</span>
-<span class="w">             </span>hub.osg-htc.org/opensciencegrid/pki-tools:24-release<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>hub.osg-htc.org/opensciencegrid/pki-tools:26-release<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--country<span class="w"> </span>US<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--state<span class="w"> </span>Wisconsin<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--locality<span class="w"> </span>Madison<span class="w"> </span><span class="se">\</span>

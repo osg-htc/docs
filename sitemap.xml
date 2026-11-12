@@ -121,6 +121,9 @@
         <loc>https://osg-htc.org/docs/release/osg-25/</loc>
       </url>
       <url>
+        <loc>https://osg-htc.org/docs/release/osg-26/</loc>
+      </url>
+      <url>
         <loc>https://osg-htc.org/docs/release/release_series/</loc>
       </url>
       <url>
@@ -137,6 +140,9 @@
       </url>
       <url>
         <loc>https://osg-htc.org/docs/release/updating-to-osg-25/</loc>
+      </url>
+      <url>
+        <loc>https://osg-htc.org/docs/release/updating-to-osg-26/</loc>
       </url>
       <url>
         <loc>https://osg-htc.org/docs/release/yum-basics/</loc>

@@ -2380,7 +2380,7 @@
   <span class="md-ellipsis">
     
   
-  OSG 25
+  OSG 26
 
     
   </span>
@@ -2393,6 +2393,117 @@
         
           <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_2_label" aria-expanded="false">
             <label class="md-nav__title" for="__nav_10_2">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  OSG 26
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../release/osg-26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  News
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../release/updating-to-osg-26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Updating to OSG 26
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_3" id="__nav_10_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  OSG 25
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_3_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_10_3">
               <span class="md-nav__icon md-icon"></span>
               
   
@@ -2443,117 +2554,6 @@
     
   
   Updating to OSG 25
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-                
-              
-            </ul>
-          </nav>
-        
-      
-    </li>
-  
-
-                
-              
-                
-                  
-  
-  
-  
-  
-    
-    
-    
-    
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_10_3" id="__nav_10_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-  OSG 24
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        
-          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_3_label" aria-expanded="false">
-            <label class="md-nav__title" for="__nav_10_3">
-              <span class="md-nav__icon md-icon"></span>
-              
-  
-  OSG 24
-
-            </label>
-            <ul class="md-nav__list" data-md-scrollfix>
-              
-                
-                  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../release/osg-24/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-  News
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-                
-              
-                
-                  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../release/updating-to-osg-24/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-  Updating to OSG 24
 
     
   </span>
@@ -3204,18 +3204,18 @@
 
 
 <h1 id="installing-the-osdf-cache-by-rpm">Installing the OSDF Cache by RPM<a class="headerlink" href="#installing-the-osdf-cache-by-rpm" title="Permanent link">&para;</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">OSG 24+</p>
-<p>This installation guide requires OSG 24 or OSG 25</p>
-</div>
 <p>This document describes how to install an Open Science Data Federation (OSDF) Cache service via RPMs.
 This service allows a site or regional network to cache data frequently used in Open Science Pool jobs,
 reducing data transfer over the wide-area network and increasing throughput to jobs.</p>
+<div class="admonition tip">
+<p class="admonition-title">Upgrading from OSG 24?</p>
+<p>Pelican configuration semantics changed between OSG 24 and OSG 25.
+See <a href="../../../../release/updating-to-osg-25">Updating to OSG 25</a> for more details.</p>
+</div>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following requirements:</p>
 <ul>
-<li><strong>Operating system:</strong> A RHEL 8, RHEL 9, RHEL 10, or <a href="../../../release/supported_platforms/">compatible operating system</a>.
-  (RHEL 10 is not supported in OSG 24.)</li>
+<li><strong>Operating system:</strong> A RHEL 8, RHEL 9, RHEL 10, or <a href="../../../release/supported_platforms/">compatible operating system</a>.</li>
 <li><strong>User IDs:</strong> If it does not exist already, the installation will create the Linux user named <code>xrootd</code> for running daemons.</li>
 <li><strong>File Systems:</strong> The cache should have a partition of its own for storing data and metadata.</li>
 <li><strong>Host certificate:</strong> Required for authentication.  See note below.</li>
@@ -3257,26 +3257,16 @@ Examples include <a href="../../../security/host-certs/lets-encrypt/">Let's Encr
 Caches without a valid certificate for the browser cannot be added to the OSDF.
 Note that, unlike legacy grid software, the public certificate file will need to contain the "full chain", including any
 intermediate CAs (if you're unsure about your setup, try accessing your cache from your browser).</p>
-<p>In OSG 25, the following locations should be used:</p>
+<p>The following locations should be used:</p>
 <ul>
 <li><strong>Host Certificate Chain</strong>: <code>/etc/pelican/certificates/tls.crt</code></li>
 <li><strong>Host Key</strong>: <code>/etc/pelican/certificates/tls.key</code></li>
 </ul>
-<p>In OSG 24, the following locations should be used
-(note that they are in separate directories):</p>
-<ul>
-<li><strong>Host Certificate Chain</strong>: <code>/etc/pki/tls/certs/pelican.crt</code></li>
-<li><strong>Host Key</strong>: <code>/etc/pki/tls/private/pelican.key</code></li>
-</ul>
 </div>
 <h2 id="installing-the-cache">Installing the Cache<a class="headerlink" href="#installing-the-cache" title="Permanent link">&para;</a></h2>
-<p>In OSG 25, the cache service is provided by the <code>osdf-server</code> RPM.
+<p>The cache service is provided by the <code>osdf-server</code> RPM.
 Install it via the following command:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum<span class="w"> </span>install<span class="w"> </span>osdf-server
-</code></pre></div>
-<p>In OSG 24, the cache service is provided by the <code>osdf-cache</code> RPM.
-Install it via the following command:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">root@host # </span>yum<span class="w"> </span>install<span class="w"> </span>osdf-cache
 </code></pre></div>
 <h2 id="configuring-the-cache-server">Configuring the Cache Server<a class="headerlink" href="#configuring-the-cache-server" title="Permanent link">&para;</a></h2>
 <p>In <code>/etc/pelican/config.d/20-cache.yaml</code>, set <code>Cache.StorageLocation</code>, as follows,
@@ -3302,7 +3292,7 @@ before starting the cache for the first time, it is recommended to generate a ke
 <span class="gp">root@host$ </span>chown<span class="w"> </span>root:pelican<span class="w"> </span>/etc/pelican/issuer-keys
 
 <span class="gp">root@host$ </span><span class="nb">cd</span><span class="w"> </span>/etc/pelican/issuer-keys
-<span class="gp">root@host$ </span>pelican<span class="w"> </span>key<span class="w"> </span>create
+<span class="gp">root@host$ </span>pelican-server<span class="w"> </span>key<span class="w"> </span>create
 </code></pre></div>
 
 <p>The newly created files, <code>private-key.pem</code> and <code>issuer-pub.jwks</code> are the private and public keys, respectively.</p>
@@ -3316,12 +3306,7 @@ before starting the cache for the first time, it is recommended to generate a ke
 <ol>
 <li>
 <p>Start the cache using one of the following commands:</p>
-<p>OSG 25:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span>systemctl<span class="w"> </span>start<span class="w"> </span>pelican-cache
-</code></pre></div>
-
-<p>OSG 24:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span>systemctl<span class="w"> </span>start<span class="w"> </span>osdf-cache
 </code></pre></div>
 
 </li>
@@ -3333,8 +3318,7 @@ before starting the cache for the first time, it is recommended to generate a ke
 </code></pre></div>
 
 <p>If the download fails, rerun the above <code>pelican object get</code> command with the <code>-d</code> flag added.</p>
-<p>In OSG 25, additional debugging information is located in <code>/var/log/pelican/pelican-cache.log</code>.<br>
-In OSG 24, additional debugging information is located in <code>/var/log/pelican/osdf-cache.log</code>.</p>
+<p>Additional debugging information is located in <code>/var/log/pelican/pelican-cache.log</code>.<br></p>
 <p>To increase the debugging information in the log file, edit your cache configuration file and set:
 <div class="highlight"><pre><span></span><code>Logging:
   Level: debug
@@ -3359,17 +3343,12 @@ Send mail to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;
   Sitename: &lt;RESOURCE NAME REGISTERED WITH OSG&gt;
 </code></pre></div></p>
 <p>Then, restart the cache by running one of the following commands:</p>
-<p>OSG 25:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">root@host$ </span>systemctl<span class="w"> </span>restart<span class="w"> </span>pelican-cache
-</code></pre></div>
-<p>OSG 24:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">root@host$ </span>systemctl<span class="w"> </span>restart<span class="w"> </span>osdf-cache
 </code></pre></div>
 <p>Let OSG Staff know that you have restarted the cache with the updated sitename,
 so they can approve the new cache.</p>
 <h2 id="managing-the-cache-service">Managing the Cache Service<a class="headerlink" href="#managing-the-cache-service" title="Permanent link">&para;</a></h2>
 <p>Use the following SystemD commands as root to start, stop, enable, and disable the OSDF Cache.</p>
-<p>OSG 25:</p>
 <table>
 <thead>
 <tr>
@@ -3393,33 +3372,6 @@ so they can approve the new cache.</p>
 <tr>
 <td style="text-align: left;">Disable the cache from starting on boot</td>
 <td style="text-align: left;"><code>systemctl disable pelican-cache</code></td>
-</tr>
-</tbody>
-</table>
-<p>OSG 24:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">To...</th>
-<th style="text-align: left;">Run the command...</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">Start the cache</td>
-<td style="text-align: left;"><code>systemctl start osdf-cache</code></td>
-</tr>
-<tr>
-<td style="text-align: left;">Stop the cache</td>
-<td style="text-align: left;"><code>systemctl stop osdf-cache</code></td>
-</tr>
-<tr>
-<td style="text-align: left;">Enable the cache to start on boot</td>
-<td style="text-align: left;"><code>systemctl enable osdf-cache</code></td>
-</tr>
-<tr>
-<td style="text-align: left;">Disable the cache from starting on boot</td>
-<td style="text-align: left;"><code>systemctl disable osdf-cache</code></td>
 </tr>
 </tbody>
 </table>

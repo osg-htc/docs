@@ -2514,7 +2514,7 @@
   <span class="md-ellipsis">
     
   
-  OSG 25
+  OSG 26
 
     
   </span>
@@ -2527,6 +2527,117 @@
         
           <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_2_label" aria-expanded="false">
             <label class="md-nav__title" for="__nav_10_2">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  OSG 26
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../release/osg-26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  News
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../release/updating-to-osg-26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Updating to OSG 26
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_3" id="__nav_10_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  OSG 25
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_3_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_10_3">
               <span class="md-nav__icon md-icon"></span>
               
   
@@ -2577,117 +2688,6 @@
     
   
   Updating to OSG 25
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-                
-              
-            </ul>
-          </nav>
-        
-      
-    </li>
-  
-
-                
-              
-                
-                  
-  
-  
-  
-  
-    
-    
-    
-    
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_10_3" id="__nav_10_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-  OSG 24
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        
-          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_3_label" aria-expanded="false">
-            <label class="md-nav__title" for="__nav_10_3">
-              <span class="md-nav__icon md-icon"></span>
-              
-  
-  OSG 24
-
-            </label>
-            <ul class="md-nav__list" data-md-scrollfix>
-              
-                
-                  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../release/osg-24/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-  News
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-                
-              
-                
-                  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../release/updating-to-osg-24/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-  Updating to OSG 24
 
     
   </span>
@@ -3517,8 +3517,8 @@ intermediate CAs (if you're unsure about your setup, try accessing your origin f
 </ul>
 </div>
 <div class="admonition note">
-<p class="admonition-title">osdf-origin 7.18</p>
-<p>This document covers versions 7.18 and later of the <code>osdf-origin</code> container image.</p>
+<p class="admonition-title">osdf-origin 26.0.0</p>
+<p>This document covers versions 26.0.0 and later of the <code>osdf-origin</code> container image.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">root</p>
@@ -3537,7 +3537,7 @@ This document will use <code>/etc/osdf-origin/config.yaml</code> as the name of 
 Server:
   Hostname: "&lt;FQDN&gt;"
 </code></pre></div>
-Replacing <code>&lt;FQDN&gt;</code> with the externally-accessible FQDN of your cache service
+Replacing <code>&lt;FQDN&gt;</code> with the externally-accessible FQDN of your origin service
 (this should match one of the SANs in your host certificate).
 You will also uncomment and fill in the value for <code>XRootD.Sitename</code> in a later step, after registration is complete.</p>
 <p>You must tell Pelican the data to export to the federation.
@@ -3598,20 +3598,33 @@ where <code>&lt;SUBDIRECTORY 1&gt;</code>, <code>&lt;SUBDIRECTORY 2&gt;</code>, 
 <p>To configure your origin to serve objects from an S3 endpoint, see the
 <a href="https://docs.pelicanplatform.org/federating-your-data/s3-backend">upstream documentation</a>.</p>
 <h2 id="preparing-for-initial-startup">Preparing for Initial Startup<a class="headerlink" href="#preparing-for-initial-startup" title="Permanent link">&para;</a></h2>
+<p>Before starting the origin for the first time, it is recommended that you pre-create
+some files related to authentication using the tools in the Pelican server.</p>
 <ol>
 <li>
+<p>First, download the Pelican server from <a href="https://github.com/PelicanPlatform/pelican/releases">https://github.com/PelicanPlatform/pelican/releases</a>,
+    and install the executable as <code>/usr/local/bin/pelican-server</code></p>
+</li>
+<li>
 <p>The origin identifies itself to the federation via public key authentication;
-before starting the origin for the first time, it is recommended to generate a keypair.
-Download the Pelican client from <a href="https://github.com/PelicanPlatform/pelican/releases">https://github.com/PelicanPlatform/pelican/releases</a>,
-install the executable as <code>/usr/local/bin/pelican</code>, and run:</p>
+    generate a keypair by running:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span><span class="nb">cd</span><span class="w"> </span>/etc/osdf-origin
-<span class="gp">root@host$ </span>pelican<span class="w"> </span>key<span class="w"> </span>create
+<span class="gp">root@host$ </span>pelican-server<span class="w"> </span>key<span class="w"> </span>create
 </code></pre></div>
 
 <p>The newly created files, <code>private-key.pem</code> and <code>issuer-pub.jwks</code> are the private and public keys, respectively.</p>
 </li>
 <li>
 <p><strong>Save these files</strong>; if you lose the <code>private-key.pem</code> file, your origin will need to be re-approved.</p>
+</li>
+<li>
+<p>The web interface for the origin requires a password.
+    Run the following to create a password:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span><span class="nb">cd</span><span class="w"> </span>/etc/osdf-origin
+<span class="gp">root@host$ </span>pelican-server<span class="w"> </span>generate<span class="w"> </span>password
+</code></pre></div>
+
+<p>The newly created file, <code>server-web-passwd</code> is the hashed password for the web interface.</p>
 </li>
 </ol>
 <h2 id="running-an-origin">Running an Origin<a class="headerlink" href="#running-an-origin" title="Permanent link">&para;</a></h2>
@@ -3643,7 +3656,12 @@ or <a href="https://kubernetes.io/">Kubernetes</a>.</p>
 <tr>
 <td><code>PRIVATE_KEY</code></td>
 <td><code>/etc/osdf-origin/private-key.pem</code></td>
-<td>The private key generated by <code>pelican key create</code></td>
+<td>The private key generated by <code>pelican-server key create</code></td>
+</tr>
+<tr>
+<td><code>WEB_PASSWORD</code></td>
+<td><code>/etc/osdf-origin/server-web-passwd</code></td>
+<td>The password file created by <code>pelican-server generate password</code></td>
 </tr>
 <tr>
 <td><code>HOST_CERT_CHAIN</code></td>
@@ -3681,26 +3699,28 @@ or <a href="https://kubernetes.io/">Kubernetes</a>.</p>
 <span class="w">             </span>--publish<span class="w"> </span>&lt;ORIGIN_HOST_PORT&gt;:8443<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--publish<span class="w"> </span>&lt;WEB_INTERFACE_HOST<span class="w"> </span>PORT&gt;:8444<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;PRIVATE_KEY&gt;:/etc/pelican/issuer-keys/private-key.pem<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>--volume<span class="w"> </span>&lt;WEB_PASSWORD&gt;:/etc/pelican/server-web-passwd<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;HOST_CERT_CHAIN&gt;:/etc/pelican/certificates/tls.crt<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;HOST_KEY&gt;:/etc/pelican/certificates/tls.key<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;ORIGIN_CONFIG_FILE&gt;:/etc/pelican/config.d/99-local.yaml<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;DATABASE_DIRECTORY&gt;:/var/lib/pelican<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;OUTSIDE_DIRECTORY&gt;:&lt;INSIDE_DIRECTORY&gt;<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--name<span class="w"> </span>osdf-origin<span class="w"> </span><span class="se">\</span>
-<span class="w">             </span>hub.osg-htc.org/pelican_platform/osdf-origin:latest
+<span class="w">             </span>hub.osg-htc.org/pelican_platform/osdf-origin:v26.0
 </code></pre></div>
 <p>Using the example values from the table, this is</p>
 <div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--publish<span class="w"> </span><span class="m">8443</span>:8443<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--publish<span class="w"> </span><span class="m">8444</span>:8444<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-origin/private-key.pem:/etc/pelican/issuer-keys/private-key.pem<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-origin/server-web-passwd:/etc/pelican/server-web-passwd<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-origin/hostcert.pem:/etc/pelican/certificates/tls.crt<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-origin/hostkey.pem:/etc/pelican/certificates/tls.key<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-origin/config.yaml:/etc/pelican/config.d/99-local.yaml<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/var/lib/osdf-origin:/var/lib/pelican<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/mnt/origin:/pelican<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--name<span class="w"> </span>osdf-origin<span class="w"> </span><span class="se">\</span>
-<span class="w">             </span>hub.osg-htc.org/pelican_platform/osdf-origin:latest
+<span class="w">             </span>hub.osg-htc.org/pelican_platform/osdf-origin:v26.0
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -3738,7 +3758,7 @@ whether or not they have <code>PublicReads</code> in their <code>Capabilities</c
 </li>
 <li>
 <p>Retrieve or generate a JWT, depending on the output of the following command:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">user@host$ </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>osdf-origin<span class="w"> </span>pelican<span class="w"> </span>--config<span class="w"> </span>/etc/pelican/osdf-origin.yaml<span class="w"> </span>config<span class="w"> </span>get<span class="w"> </span>issuerurl
+<div class="codehilite"><pre><span></span><code><span class="gp">user@host$ </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>osdf-origin<span class="w"> </span>pelican-server<span class="w"> </span>--config<span class="w"> </span>/etc/pelican/osdf-origin.yaml<span class="w"> </span>config<span class="w"> </span>get<span class="w"> </span>issuerurl
 </code></pre></div>
 
 <ul>
@@ -3751,7 +3771,7 @@ whether or not they have <code>PublicReads</code> in their <code>Capabilities</c
 <p>If the above command returns an empty value (e.g., <code>server.issuerurl: ""</code>), generate a token by running the
     following inside the container:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">user@host$ </span>docker<span class="w"> </span>run<span class="w"> </span>osdf-origin<span class="w"> </span><span class="se">\</span>
-<span class="w">                      </span>pelican<span class="w"> </span>origin<span class="w"> </span>token<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
+<span class="w">                      </span>pelican-server<span class="w"> </span>origin<span class="w"> </span>token<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
 <span class="w">                              </span>--config<span class="w"> </span>/etc/pelican/osdf-origin.yaml<span class="w"> </span><span class="se">\</span>
 <span class="w">                              </span>--subject<span class="w"> </span><span class="s2">"test"</span><span class="w"> </span><span class="se">\ </span><span class="w"> </span><span class="c1"># set this to your Unix username if you've set Origin.Multiuser: true</span>
 <span class="go">                              --audience "https://wlcg.cern.ch/jwt/v1/any" \</span>
@@ -3877,18 +3897,19 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker stop osdf-origin
 ExecStartPre=-/usr/bin/docker rm osdf-origin
-ExecStartPre=/usr/bin/docker pull hub.osg-htc.org/pelican_platform/osdf-origin:latest
+ExecStartPre=/usr/bin/docker pull hub.osg-htc.org/pelican_platform/osdf-origin:v26.0
 ExecStart=/usr/bin/docker run --rm --name osdf-origin \
   --publish 8443:8443 \
   --publish 8444:8444 \
   --volume /etc/osdf-origin/private-key.pem:/etc/pelican/issuer-keys/private-key.pem \
+  --volume /etc/osdf-origin/server-web-passwd:/etc/pelican/server-web-passwd \
   --volume /etc/osdf-origin/hostcert.pem:/etc/pelican/certificates/tls.crt \
   --volume /etc/osdf-origin/hostkey.pem:/etc/pelican/certificates/tls.key \
   --volume /etc/osdf-origin/config.yaml:/etc/pelican/config.d/99-local.yaml \
   --volume /var/lib/osdf-origin:/var/lib/pelican \
   --volume /mnt/origin:/pelican \
   --name osdf-origin \
-  hub.osg-htc.org/pelican_platform/osdf-origin:latest
+  hub.osg-htc.org/pelican_platform/osdf-origin:v26.0
 
 [Install]
 WantedBy=multi-user.target

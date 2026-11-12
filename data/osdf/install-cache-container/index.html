@@ -2447,7 +2447,7 @@
   <span class="md-ellipsis">
     
   
-  OSG 25
+  OSG 26
 
     
   </span>
@@ -2460,6 +2460,117 @@
         
           <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_2_label" aria-expanded="false">
             <label class="md-nav__title" for="__nav_10_2">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  OSG 26
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../release/osg-26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  News
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../release/updating-to-osg-26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Updating to OSG 26
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_3" id="__nav_10_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  OSG 25
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_3_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_10_3">
               <span class="md-nav__icon md-icon"></span>
               
   
@@ -2510,117 +2621,6 @@
     
   
   Updating to OSG 25
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-                
-              
-            </ul>
-          </nav>
-        
-      
-    </li>
-  
-
-                
-              
-                
-                  
-  
-  
-  
-  
-    
-    
-    
-    
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_10_3" id="__nav_10_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-  OSG 24
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        
-          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_3_label" aria-expanded="false">
-            <label class="md-nav__title" for="__nav_10_3">
-              <span class="md-nav__icon md-icon"></span>
-              
-  
-  OSG 24
-
-            </label>
-            <ul class="md-nav__list" data-md-scrollfix>
-              
-                
-                  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../release/osg-24/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-  News
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-                
-              
-                
-                  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../release/updating-to-osg-24/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-  Updating to OSG 24
 
     
   </span>
@@ -3390,8 +3390,8 @@ If you're unsure about your setup, try accessing your cache from your browser.</
 </ul>
 </div>
 <div class="admonition note">
-<p class="admonition-title">osdf-cache 7.18</p>
-<p>This document covers versions 7.18 and later of the <code>osdf-cache</code> container image.</p>
+<p class="admonition-title">osdf-cache 26.0.0</p>
+<p>This document covers versions 26.0.0 and later of the <code>osdf-cache</code> container image.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">root</p>
@@ -3418,20 +3418,33 @@ Server:
 (this should match one of the SANs in your host certificate).
 You will also uncomment and fill in the value for <code>XRootD.Sitename</code> in a later step, after registration is complete.</p>
 <h2 id="preparing-for-initial-startup">Preparing for Initial Startup<a class="headerlink" href="#preparing-for-initial-startup" title="Permanent link">&para;</a></h2>
+<p>Before starting the cache for the first time, it is recommended that you pre-create
+some files related to authentication using the tools in the Pelican server.</p>
 <ol>
 <li>
+<p>First, download the Pelican server from <a href="https://github.com/PelicanPlatform/pelican/releases">https://github.com/PelicanPlatform/pelican/releases</a>,
+    and install the executable as <code>/usr/local/bin/pelican-server</code></p>
+</li>
+<li>
 <p>The cache identifies itself to the federation via public key authentication;
-before starting the cache for the first time, it is recommended to generate a keypair.
-Download the Pelican client from <a href="https://github.com/PelicanPlatform/pelican/releases">https://github.com/PelicanPlatform/pelican/releases</a>,
-install the executable as /usr/local/bin/pelican, and run:</p>
+    generate a key-pair by running:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span><span class="nb">cd</span><span class="w"> </span>/etc/osdf-cache
-<span class="gp">root@host$ </span>pelican<span class="w"> </span>key<span class="w"> </span>create
+<span class="gp">root@host$ </span>pelican-server<span class="w"> </span>key<span class="w"> </span>create
 </code></pre></div>
 
 <p>The newly created files, <code>private-key.pem</code> and <code>issuer-pub.jwks</code> are the private and public keys, respectively.</p>
 </li>
 <li>
 <p><strong>Save these files</strong>; if you lose the <code>private-key.pem</code> file, your cache will need to be re-approved.</p>
+</li>
+<li>
+<p>The web interface for the cache requires a password.
+    Run the following to create a password:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">root@host$ </span><span class="nb">cd</span><span class="w"> </span>/etc/osdf-cache
+<span class="gp">root@host$ </span>pelican-server<span class="w"> </span>generate<span class="w"> </span>password
+</code></pre></div>
+
+<p>The newly created file, <code>server-web-passwd</code> is the hashed password for the web interface.</p>
 </li>
 </ol>
 <h2 id="running-a-cache">Running a Cache<a class="headerlink" href="#running-a-cache" title="Permanent link">&para;</a></h2>
@@ -3462,7 +3475,12 @@ or <a href="https://kubernetes.io/">Kubernetes</a>.</p>
 <tr>
 <td><code>PRIVATE_KEY</code></td>
 <td><code>/etc/osdf-cache/private-key.pem</code></td>
-<td>The private key generated by <code>pelican key create</code></td>
+<td>The private key generated by <code>pelican-server key create</code></td>
+</tr>
+<tr>
+<td><code>WEB_PASSWORD</code></td>
+<td><code>/etc/osdf-cache/server-web-passwd</code></td>
+<td>The password file created by <code>pelican-server generate password</code></td>
 </tr>
 <tr>
 <td><code>HOST_CERT_CHAIN</code></td>
@@ -3514,26 +3532,28 @@ and is not recommended for caches with more than 10 TB of capacity.</p>
 <span class="w">             </span>--publish<span class="w"> </span>&lt;CACHE_HOST_PORT&gt;:8443<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--publish<span class="w"> </span>&lt;WEB_INTERFACE_HOST<span class="w"> </span>PORT&gt;:8444<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;PRIVATE_KEY&gt;:/etc/pelican/issuer-keys/private-key.pem<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>--volume<span class="w"> </span>&lt;WEB_PASSWORD&gt;:/etc/pelican/server-web-passwd<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;HOST_CERT_CHAIN&gt;:/etc/pelican/certificates/tls.crt<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;HOST_KEY&gt;:/etc/pelican/certificates/tls.key<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;CACHE_CONFIG_FILE&gt;:/etc/pelican/pelican.yaml<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;DATABASE_DIRECTORY&gt;:/var/lib/pelican<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;CACHE_PARTITION&gt;:/run/pelican/cache<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--name<span class="w"> </span>osdf-cache<span class="w"> </span><span class="se">\</span>
-<span class="w">             </span>hub.osg-htc.org/pelican_platform/osdf-cache:latest
+<span class="w">             </span>hub.osg-htc.org/pelican_platform/osdf-cache:v26.0
 </code></pre></div>
 <p>Using the example values from the table, this is</p>
 <div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--publish<span class="w"> </span><span class="m">8443</span>:8443<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--publish<span class="w"> </span><span class="m">8444</span>:8444<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-cache/private-key.pem:/etc/pelican/issuer-keys/private-key.pem<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-cache/server-web-passwd:/etc/pelican/server-web-passwd<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-cache/hostcert.pem:/etc/pelican/certificates/tls.crt<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-cache/hostkey.pem:/etc/pelican/certificates/tls.key<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/var/lib/osdf-cache:/var/lib/pelican<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/mnt/cache:/run/pelican/cache<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--name<span class="w"> </span>osdf-cache<span class="w"> </span><span class="se">\</span>
-<span class="w">             </span>hub.osg-htc.org/pelican_platform/osdf-cache:latest
+<span class="w">             </span>hub.osg-htc.org/pelican_platform/osdf-cache:v26.0
 </code></pre></div>
 <h3 id="multiple-partitions">Multiple partitions<a class="headerlink" href="#multiple-partitions" title="Permanent link">&para;</a></h3>
 <p>A cache may be configured to store namespace information, data, and metadata on separate partitions.
@@ -3542,6 +3562,7 @@ This improves performance and is recommended for caches with more than 10 TB of 
 <span class="w">             </span>--publish<span class="w"> </span>&lt;CACHE_HOST_PORT&gt;:8443<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--publish<span class="w"> </span>&lt;WEB_INTERFACE_PORT&gt;:8444<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;PRIVATE_KEY&gt;:/etc/pelican/issuer-keys/private-key.pem<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>--volume<span class="w"> </span>&lt;WEB_PASSWORD&gt;:/etc/pelican/server-web-passwd<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;HOST_CERT_CHAIN&gt;:/etc/pelican/certificates/tls.crt<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;HOST_KEY&gt;:/etc/pelican/certificates/tls.key<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;CACHE_CONFIG_FILE&gt;:/etc/pelican/pelican.yaml<span class="w"> </span><span class="se">\</span>
@@ -3550,13 +3571,14 @@ This improves performance and is recommended for caches with more than 10 TB of 
 <span class="w">             </span>--volume<span class="w"> </span>&lt;METADATA_PARTITION&gt;:/run/pelican/cache/meta<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>&lt;DATA_PARTITION&gt;:/run/pelican/cache/data<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--name<span class="w"> </span>osdf-cache<span class="w"> </span><span class="se">\</span>
-<span class="w">             </span>hub.osg-htc.org/pelican_platform/osdf-cache:latest
+<span class="w">             </span>hub.osg-htc.org/pelican_platform/osdf-cache:v26.0
 </code></pre></div>
 <p>Using the example values from the table, this is</p>
 <div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--publish<span class="w"> </span><span class="m">8443</span>:8443<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--publish<span class="w"> </span><span class="m">8444</span>:8444<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-cache/private-key.pem:/etc/pelican/issuer-keys/private-key.pem<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-cache/server-web-passwd:/etc/pelican/server-web-passwd<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-cache/hostcert.pem:/etc/pelican/certificates/tls.crt<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-cache/hostkey.pem:/etc/pelican/certificates/tls.key<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml<span class="w"> </span><span class="se">\</span>
@@ -3565,7 +3587,7 @@ This improves performance and is recommended for caches with more than 10 TB of 
 <span class="w">             </span>--volume<span class="w"> </span>/mnt/cache-meta:/run/pelican/cache/meta<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/mnt/cache-data:/run/pelican/cache/data<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--name<span class="w"> </span>osdf-cache<span class="w"> </span><span class="se">\</span>
-<span class="w">             </span>hub.osg-htc.org/pelican_platform/osdf-cache:latest
+<span class="w">             </span>hub.osg-htc.org/pelican_platform/osdf-cache:v26.0
 </code></pre></div>
 <h2 id="validating-the-cache">Validating the Cache<a class="headerlink" href="#validating-the-cache" title="Permanent link">&para;</a></h2>
 <p>You can use the Pelican client (from <a href="https://github.com/PelicanPlatform/pelican/releases">https://github.com/PelicanPlatform/pelican/releases</a>) to verify that the cache is functional.</p>
@@ -3652,6 +3674,7 @@ ExecStart=/usr/bin/docker run --rm --name osdf-cache \
   --publish 8443:8443 \
   --publish 8444:8444 \
   --volume /etc/osdf-cache/private-key.pem:/etc/pelican/issuer-keys/private-key.pem \
+  --volume /etc/osdf-cache/server-web-passwd:/etc/pelican/server-web-passwd \
   --volume /etc/osdf-cache/hostcert.pem:/etc/pelican/certificates/tls.crt \
   --volume /etc/osdf-cache/hostkey.pem:/etc/pelican/certificates/tls.key \
   --volume /etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml \
@@ -3674,13 +3697,14 @@ The following example uses the <a href="#single-partition">single partition</a> 
 <div class="highlight"><pre><span></span><code><span class="gp">user@host $ </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w">  </span><span class="se">\</span>
 <span class="w">             </span>--network<span class="o">=</span><span class="s2">"host"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-cache/private-key.pem:/etc/pelican/issuer-keys/private-key.pem<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-cache/server-web-passwd:/etc/pelican/server-web-passwd<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-cache/hostcert.pem:/etc/pelican/certificates/tls.crt<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-cache/hostkey.pem:/etc/pelican/certificates/tls.key<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/etc/osdf-cache/config.yaml:/etc/pelican/pelican.yaml<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/var/lib/osdf-cache:/var/lib/pelican<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--volume<span class="w"> </span>/mnt/cache:/run/pelican/cache<span class="w"> </span><span class="se">\</span>
 <span class="w">             </span>--name<span class="w"> </span>osdf-cache<span class="w"> </span><span class="se">\</span>
-<span class="w">             </span>hub.osg-htc.org/pelican_platform/osdf-cache:latest
+<span class="w">             </span>hub.osg-htc.org/pelican_platform/osdf-cache:v26.0
 </code></pre></div>
 <h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
 <p>To get assistance, please use the <a href="../../../common/help/">this page</a>.</p>
