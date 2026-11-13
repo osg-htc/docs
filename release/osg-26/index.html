@@ -2353,6 +2353,34 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#november-13-2026-initial-release" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>November 13, 2026:</strong> Initial Release
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="November 13, 2026: Initial Release">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#package-removals" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Package removals
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3051,6 +3079,34 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#november-13-2026-initial-release" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <strong>November 13, 2026:</strong> Initial Release
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="November 13, 2026: Initial Release">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#package-removals" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Package removals
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3089,6 +3145,89 @@ OSG 24 has reached its end-of-life and will no longer be supported with the rele
 <li><a href="https://groups.google.com/a/osg-htc.org/g/software-discuss">software-discuss@osg-htc.org</a></li>
 </ul>
 <h2 id="latest-news">Latest News<a class="headerlink" href="#latest-news" title="Permanent link">&para;</a></h2>
+<h2 id="november-13-2026-initial-release"><strong>November 13, 2026:</strong> Initial Release<a class="headerlink" href="#november-13-2026-initial-release" title="Permanent link">&para;</a></h2>
+<p>This initial release contains the following notable changes compared to the current OSG 25 release in <a href="../../common/yum/">main</a>:</p>
+<ul>
+<li>
+<p><a href="https://htcondor.readthedocs.io/en/latest/version-history/lts-versions-26-0.html">HTCondor 26.0.1</a> (see <a href="../updating-to-osg-26/#updating-your-htcondor-hosts">upgrade notes</a>)</p>
+<ul>
+<li>Initial implementation of the common files feature, where immutable files may only be transferred once when jobs run on the same execution point</li>
+<li>New self-service annex mode that works with any Slurm cluster</li>
+<li><code>condor_dag_checker</code> can now check submit files, sub-DAGs, and scripts</li>
+<li>Several improvements to throttle and monitor DAGMan resource usage</li>
+<li>New DAGMan <code>TOLERANCE</code> which gives fine control over what is a failure</li>
+<li>Added weak dependencies to DAGMan</li>
+<li>HTCondor now detects AMD GPUs that use ROCM 7</li>
+<li>Container universe adds the detected GPU flag to the container command line</li>
+<li>Several improvements to the <code>condor_credmon</code></li>
+<li>Administrators can now require units on memory and disk requests</li>
+<li>Can now append columns to <code>condor_q</code>, <code>condor_qusers</code>, <code>condor_status</code>, and <code>condor_who</code> output</li>
+<li>Can now automatically retry a job with a larger disk request</li>
+<li>Initial support for EP health checks</li>
+<li><code>condor_config_val</code> <code>--trace</code> finds a definition in a complex configuration</li>
+<li>Can now set a duration for a user's ceiling, floor, or priority factor</li>
+<li>New metric daemon that can export metrics to Prometheus and Ganglia</li>
+<li>Add CCB Tunneling for daemons with no outbound network connectivity</li>
+<li>The CCB can now proxy connections with both ends on private networks</li>
+<li>Can now maintain a job index to speed up common condor history queries</li>
+<li><code>condor_rm</code> now accepts the <code>-held</code> option</li>
+</ul>
+</li>
+<li>
+<p><a href="https://htcondor.com/htcondor-ce/v26/releases/">HTCondor-CE 26.0.1</a> (see <a href="../updating-to-osg-26/#updating-your-osg-compute-entrypoint">upgrade notes</a>)</p>
+</li>
+<li>
+<p><a href="https://github.com/PelicanPlatform/pelican/releases/tag/v26.0.0">Pelican 26.0.2</a> brings usability enhancements, a new Collections feature for delegating access management, a web-based client for Origins, and other features and bug fixes:</p>
+<ul>
+<li>New Features and Enhancements<ul>
+<li>[Origin]: New registration view for Origins</li>
+<li>[Origin]: HTTPS/WebDav, Globus, S3/Blob added as V2 Pelican backends</li>
+<li>[Client]: Client agent now has remote transfer server functionality</li>
+<li>[Client]: Error messages are more human readable</li>
+<li>[Origin]: Web client added</li>
+<li>[Cache]: Per-origin fair scheduler added to prevent single slow Origin from blocking a Cache’s other transfers</li>
+<li>[Client] Now infers destination filename when uploading to a directory</li>
+<li>[Origin] Added a standalone mode for the Origin, which allows the Origin to be its own federation</li>
+<li>[Origin] Per namespace IssuerJwks for embedded OAuth2 Issuer</li>
+<li>[Origin] Added pstore, an Origin storage backend that uses Cache V2 block store as an Origin’s primary data store rather than as a Cache</li>
+<li>[Origin] Added POSC, object metadata tracking/publishing to the V2 Origin</li>
+</ul>
+</li>
+<li>
+<p>Bugs Fixed</p>
+<ul>
+<li>[Origin] Added CORS support for the embedded OIDC issuer endpoints</li>
+<li>[Origin/Cache] All issuer keys registered at startup, not just lexicographically-first one</li>
+<li>[Client] No longer download a collection as if it were an object</li>
+<li>[Client] List a plain object instead of claiming listings are unsupported against POSIX V2 Origins</li>
+<li>[Origin] Added OPTIONS /  handler, no longer returns 405 #3626</li>
+<li>[Client] PelicanFS now forwards transfer options to the transfer jobs it creates</li>
+<li>[Client] Improve Director-response Cache keys and reuse #3655</li>
+<li>[Client] Upload now uses scopes with storage.modify if Client.EnableOverwrites is set</li>
+<li>[Servers] Added token clock skew tolerance to account for differences across servers</li>
+</ul>
+</li>
+<li>
+<p>Pelican 26.0.2 also includes all of the features and fixes from <a href="https://github.com/PelicanPlatform/pelican/releases/tag/v7.27.1">Pelican 7.27.1</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p>GlideinWMS 3.11.4 (see <a href="../updating-to-osg-26/#updating-your-glideinwms-frontend">upgrade notes</a>)</p>
+</li>
+<li>
+<p>XRootD 6.2.0</p>
+<ul>
+<li>Many fixes and features; see <a href="https://listserv.slac.stanford.edu/scripts/wa.exe?A2=XROOTD-L;8f4e2464.2302&amp;FT=&amp;P=3558585&amp;H=N&amp;S=">release announcement for 6.0.0</a> and <a href="https://github.com/xrootd/xrootd/releases">releases pages</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="package-removals">Package removals<a class="headerlink" href="#package-removals" title="Permanent link">&para;</a></h3>
+<p>The following packages were removed for OSG 26:</p>
+<ul>
+<li><code>osg-ca-certs-updater</code>: we recommend alternative means for automatically updating the osg-ca-certs RPM</li>
+<li><code>osg-pki-tools</code>: we recommend using Let's Encrypt certificates where possible. For IGTF certificates, contact your institution.</li>
+</ul>
 
 
 
