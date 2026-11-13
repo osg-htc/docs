@@ -5,7 +5,7 @@ Installing the OSDF Origin by RPM
 
 !!! tip "Upgrading from OSG 24?"
     Pelican configuration semantics changed between OSG 24 and OSG 25.
-    See [Updating to OSG 25](../../../release/updating-to-osg-25) for more details.
+    See [Updating to OSG 25](../../release/updating-to-osg-25.md) for more details.
 
 This document describes how to install an Open Science Data Federation (OSDF) Origin service via RPMs.
 This service, based on the [Pelican Platform](https://docs.pelicanplatform.org/federating-your-data), allows an
