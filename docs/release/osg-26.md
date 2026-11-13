@@ -5,8 +5,8 @@ OSG 26 News
 
 **Supported OS Versions:** EL8, EL9, EL10 (see [this document](supported_platforms.md) for details)
 
-OSG 26 is the third release series following our [annual release schedule](release_series.md) and includes support for
-EL10. The initial release includes GlideinWMS 3.11.4, HTCondor 26.0.1, HTCondor 26.1.0, HTCondor-CE 26.0.1, and XRootD 6.2.0.
+OSG 26 is the fourth release series following our [annual release schedule](release_series.md).
+The initial release includes GlideinWMS 3.11.4, HTCondor 26.0.1, HTCondor 26.1.0, HTCondor-CE 26.0.1, and XRootD 6.2.0.
 
 OSG 26 will be supported for [approximately two years total](release_series.md#series-life-cycle).
 
