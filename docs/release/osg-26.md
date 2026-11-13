@@ -41,7 +41,7 @@ This initial release contains the following notable changes compared to the curr
     -   New DAGMan `TOLERANCE` which gives fine control over what is a failure
     -   Added weak dependencies to DAGMan
     -   HTCondor now detects AMD GPUs that use ROCM 7
-    -   Container universe adds the detected GPU flag the container command line
+    -   Container universe adds the detected GPU flag to the container command line
     -   Several improvements to the `condor_credmon`
     -   Administrators can now require units on memory and disk requests
     -   Can now append columns to `condor_q`, `condor_qusers`, `condor_status`, and `condor_who` output
