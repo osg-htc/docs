@@ -8,7 +8,7 @@ Please read through the instructions before upgrading.
 
 !!! note "Updating from OSG <25"
     Instructions in this document pertain to updating from OSG 25 to OSG 26. If you are updating from OSG 24,
-    see [Updating to OSG 25](../updating-to-osg-25)
+    see [Updating to OSG 25](../../release/updating-to-osg-25.md)
 
 !!! note "Upgrading XRootD on EL 9"
     If you use XRootD, for example on an OSDF Cache or Origin, or a Storage Element, or redirector,
