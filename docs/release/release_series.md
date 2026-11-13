@@ -35,13 +35,13 @@ Series Overviews
 
 Since the start of the RPM-based OSG Software Stack, we have offered the following release series:
 
--   **OSG 26** (started October 2026) introduces GlideinWMS 3.11 and XRootD 6.
-    The initial release includes GlideinWMS 3.11.11, HTCondor 26.0.1, HTCondor 26.1.1, HTCondor-CE 26.0, and XRootD 6.1.1.
+-   **OSG 26** (started November 2026):
+    The initial release includes GlideinWMS 3.11.11, HTCondor 26.0.1, HTCondor 26.1.1, HTCondor-CE 26.0, and XRootD 6.2.0.
 
 -   **OSG 25** (started October 2025) introduces support for EL10.
     The initial release includes GlideinWMS 3.10.15, HTCondor 25.0.1, HTCondor 25.1.1, HTCondor-CE 25.0, and XRootD 5.8.4.
 
--   **OSG 24** (started October 2024, end-of-lifed October 2026) introduces support for the ARM architecture.
+-   **OSG 24** (started October 2024, end-of-lifed November 2026) introduces support for the ARM architecture.
     The initial release includes GlideinWMS 3.10.7, HTCondor 24.0.1, HTCondor 24.1.1, HTCondor-CE 24.0, and XRootD 5.7.0.
 
 -   **OSG 23** (started October 2023, end-of-lifed October 2025) aligns the OSG release series and HTCondor Software Suite release cycles.
@@ -81,17 +81,18 @@ Series Life-cycle
 
 Support ends at the end of the month of the following dates unless otherwise specified:
 
-| Release Series | Initial Release | End of Regular Support   | End of Critical Bug/Security Support |
-|:--------------:|-----------------|--------------------------|--------------------------------------|
-| 25             | 21 October 2025 | Estimated September 2027 | Estimated September 2027             |
-| 24             | 31 October 2024 | Estimated September 2026 | Estimated September 2026             |
-| 23             | 3 October 2023  | 21 October 2025          | 21 October 2025                      |
-| 3.6            | Februrary 2021  | 31 March 2024            | 30 June 2024                         |
-| 3.5            | August 2019     | 30 August 2021           | 1 May 2022                           |
-| 3.4            | June 2017       | 29 February 2020         | 30 November 2020                     |
-| 3.3            | August 2015     | 31 December 2017         | 31 May 2018                          |
-| 3.2            | November 2013   | 29 February 2016         | 31 August 2016                       |
-| 3.1            | April 2012      | 31 October 2014          | 30 April 2015                        |
+| Release Series | Initial Release  | End of Regular Support   | End of Critical Bug/Security Support |
+|:--------------:|------------------|--------------------------|--------------------------------------|
+|       26       | 12 November 2026 | Estimated September 2028 | Estimated September 2028             |
+|       25       | 21 October 2025  | Estimated September 2027 | Estimated September 2027             |
+|       24       | 31 October 2024  | 12 November 2026         | 12 November 2026                     |
+|       23       | 3 October 2023   | 21 October 2025          | 21 October 2025                      |
+|      3.6       | Februrary 2021   | 31 March 2024            | 30 June 2024                         |
+|      3.5       | August 2019      | 30 August 2021           | 1 May 2022                           |
+|      3.4       | June 2017        | 29 February 2020         | 30 November 2020                     |
+|      3.3       | August 2015      | 31 December 2017         | 31 May 2018                          |
+|      3.2       | November 2013    | 29 February 2016         | 31 August 2016                       |
+|      3.1       | April 2012       | 31 October 2014          | 30 April 2015                        |
 
 
 Installing an OSG Release Series
