@@ -34,7 +34,7 @@ Latest News
 This initial release contains the following notable changes compared to the current OSG 25 release in [main](../common/yum.md):
 
 -  [HTCondor 26.0.1](https://htcondor.readthedocs.io/en/latest/version-history/lts-versions-26-0.html) (see [upgrade notes](updating-to-osg-26.md#updating-your-htcondor-hosts))
-    -   Initial implementation of the common files feature, where immutable files 	may only be transferred once when jobs run on the same execution point
+    -   Initial implementation of the common files feature, where immutable files may only be transferred once when jobs run on the same execution point
     -   New self-service annex mode that works with any Slurm cluster
     -   `condor_dag_checker` can now check submit files, sub-DAGs, and scripts
     -   Several improvements to throttle and monitor DAGMan resource usage
