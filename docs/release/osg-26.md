@@ -5,8 +5,8 @@ OSG 26 News
 
 **Supported OS Versions:** EL8, EL9, EL10 (see [this document](supported_platforms.md) for details)
 
-OSG 26 is the third release series following our [annual release schedule](release_series.md) and includes support for
-EL10. The initial release includes GlideinWMS 3.11.4, HTCondor 26.0.1, HTCondor 26.1.0, HTCondor-CE 26.0.1, and XRootD 6.2.0.
+OSG 26 is the fourth release series following our [annual release schedule](release_series.md).
+The initial release includes GlideinWMS 3.11.4, HTCondor 26.0.1, HTCondor 26.1.0, HTCondor-CE 26.0.1, and XRootD 6.2.0.
 
 OSG 26 will be supported for [approximately two years total](release_series.md#series-life-cycle).
 
@@ -33,7 +33,7 @@ Latest News
 
 This initial release contains the following notable changes compared to the current OSG 25 release in [main](../common/yum.md):
 
--  [HTCondor 26.0.1](https://htcondor.readthedocs.io/en/latest/version-history/lts-versions-26-0.html) (see [upgrade notes](updating-to-osg-26.md#updating-your-htcondor-hosts))
+-   [HTCondor 26.0.1](https://htcondor.readthedocs.io/en/26.0/version-history/lts-versions-26-0.html#version-26-0-1) (see the [HTCondor upgrade notes](https://htcondor.readthedocs.io/en/26.0/version-history/upgrading-from-25-0-to-26-0-versions.html) and the [OSG upgrade notes](updating-to-osg-26.md#updating-your-htcondor-hosts))
     -   Initial implementation of the common files feature, where immutable files may only be transferred once when jobs run on the same execution point
     -   New self-service annex mode that works with any Slurm cluster
     -   `condor_dag_checker` can now check submit files, sub-DAGs, and scripts
@@ -87,6 +87,14 @@ This initial release contains the following notable changes compared to the curr
 
 -   XRootD 6.2.0
     -   Many fixes and features; see [release announcement for 6.0.0](https://listserv.slac.stanford.edu/scripts/wa.exe?A2=XROOTD-L;8f4e2464.2302&FT=&P=3558585&H=N&S=) and [releases pages](https://github.com/xrootd/xrootd/releases)
+
+-   Upcoming
+    -   [HTCondor 26.1.0](https://htcondor.readthedocs.io/en/26.x/version-history/feature-versions-26-x.html#version-26-1-0)
+        -   Add `htcondor cluster` tool to profile jobs and identify problems
+        -   `condor_gpu_discovery` identifies integrated GPUs that share host memory
+        -   The DAGMan Node Status file can be written in JSON format
+        -   Can now limit job's usage of compressed swap (zswap) on newer platforms
+        -   All changes from the recent 26.0.1 release
 
 
 ### Package removals ###
