@@ -53,7 +53,7 @@ This initial release contains the following notable changes compared to the curr
     -   Add CCB Tunneling for daemons with no outbound network connectivity
     -   The CCB can now proxy connections with both ends on private networks
     -   Can now maintain a job index to speed up common condor history queries
-    -   `condor_rm now` accepts the `-held` option
+    -   `condor_rm` now accepts the `-held` option
 
 -   [HTCondor-CE 26.0.1](https://htcondor.com/htcondor-ce/v26/releases/) (see [upgrade notes](updating-to-osg-26.md#updating-your-osg-compute-entrypoint))
 
