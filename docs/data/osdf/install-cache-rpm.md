@@ -9,7 +9,7 @@ reducing data transfer over the wide-area network and increasing throughput to j
 
 !!! tip "Upgrading from OSG 24?"
     Pelican configuration semantics changed between OSG 24 and OSG 25.
-    See [Updating to OSG 25](../../../release/updating-to-osg-25) for more details.
+    See [Updating to OSG 25](../../release/updating-to-osg-25.md) for more details.
 
 Before Starting
 ---------------
