@@ -3129,8 +3129,8 @@
 
 <h1 id="osg-26-news">OSG 26 News<a class="headerlink" href="#osg-26-news" title="Permanent link">&para;</a></h1>
 <p><strong>Supported OS Versions:</strong> EL8, EL9, EL10 (see <a href="../supported_platforms/">this document</a> for details)</p>
-<p>OSG 26 is the third release series following our <a href="../release_series/">annual release schedule</a> and includes support for
-EL10. The initial release includes GlideinWMS 3.11.4, HTCondor 26.0.1, HTCondor 26.1.0, HTCondor-CE 26.0.1, and XRootD 6.2.0.</p>
+<p>OSG 26 is the fourth release series following our <a href="../release_series/">annual release schedule</a>.
+The initial release includes GlideinWMS 3.11.4, HTCondor 26.0.1, HTCondor 26.1.0, HTCondor-CE 26.0.1, and XRootD 6.2.0.</p>
 <p>OSG 26 will be supported for <a href="../release_series/#series-life-cycle">approximately two years total</a>.</p>
 <div class="admonition info">
 <p class="admonition-title">OSG 24 end-of-life</p>
@@ -3149,7 +3149,7 @@ OSG 24 has reached its end-of-life and will no longer be supported with the rele
 <p>This initial release contains the following notable changes compared to the current OSG 25 release in <a href="../../common/yum/">main</a>:</p>
 <ul>
 <li>
-<p><a href="https://htcondor.readthedocs.io/en/latest/version-history/lts-versions-26-0.html">HTCondor 26.0.1</a> (see <a href="../updating-to-osg-26/#updating-your-htcondor-hosts">upgrade notes</a>)</p>
+<p><a href="https://htcondor.readthedocs.io/en/26.0/version-history/lts-versions-26-0.html#version-26-0-1">HTCondor 26.0.1</a> (see the <a href="https://htcondor.readthedocs.io/en/26.0/version-history/upgrading-from-25-0-to-26-0-versions.html">HTCondor upgrade notes</a> and the <a href="../updating-to-osg-26/#updating-your-htcondor-hosts">OSG upgrade notes</a>)</p>
 <ul>
 <li>Initial implementation of the common files feature, where immutable files may only be transferred once when jobs run on the same execution point</li>
 <li>New self-service annex mode that works with any Slurm cluster</li>
@@ -3219,6 +3219,19 @@ OSG 24 has reached its end-of-life and will no longer be supported with the rele
 <p>XRootD 6.2.0</p>
 <ul>
 <li>Many fixes and features; see <a href="https://listserv.slac.stanford.edu/scripts/wa.exe?A2=XROOTD-L;8f4e2464.2302&amp;FT=&amp;P=3558585&amp;H=N&amp;S=">release announcement for 6.0.0</a> and <a href="https://github.com/xrootd/xrootd/releases">releases pages</a></li>
+</ul>
+</li>
+<li>
+<p>Upcoming</p>
+<ul>
+<li><a href="https://htcondor.readthedocs.io/en/26.x/version-history/feature-versions-26-x.html#version-26-1-0">HTCondor 26.1.0</a><ul>
+<li>Add <code>htcondor cluster</code> tool to profile jobs and identify problems</li>
+<li><code>condor_gpu_discovery</code> identifies integrated GPUs that share host memory</li>
+<li>The DAGMan Node Status file can be written in JSON format</li>
+<li>Can now limit job's usage of compressed swap (zswap) on newer platforms</li>
+<li>All changes from the recent 26.0.1 release</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
