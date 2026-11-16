@@ -65,7 +65,7 @@ Updates to critical packages are also announced by email and are sent to the fol
 Latest News
 -----------
 
-**November 16, 2026:** IGTF 1.148, Lotman 0.1.0
+**November 16, 2026:** IGTF 1.148, Lotman 0.1.0, XRootD Lotman 0.1.0
 ----------------------------------------------------------------------------------------------------------------------
 -   CA certificates based on [IGTF 1.148](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     -   Added InCommon (DC=org,DC=incommon) RPDNC namespace also to emigtfc5r1 (US)  
