@@ -65,6 +65,16 @@ Updates to critical packages are also announced by email and are sent to the fol
 Latest News
 -----------
 
+**November 16, 2026:** IGTF 1.148, Lotman 0.1.0
+----------------------------------------------------------------------------------------------------------------------
+-   CA certificates based on [IGTF 1.148](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Added InCommon (DC=org,DC=incommon) RPDNC namespace also to emigtfc5r1 (US)  
+        \[this is part one of a two-step transitioning process for CertiNext/InCommon\]
+
+-   Lotman 0.1.0
+    -   Strict hierarchy mode and reservation semantics; extended APIs for lot timeline filtering. 
+    -   **Note**: Incompatible with Pelican Server < 26.0 (Pelican 26.0 is available in OSG 25)
+    
 **November 9, 2026:** IGTF 1.147, XRootD 5.9.8-1.3
 ----------------------------------------------------------------------------------------------------------------------
 -   CA certificates based on [IGTF 1.147](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
