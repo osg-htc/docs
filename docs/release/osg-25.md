@@ -73,7 +73,7 @@ Latest News
 
 -   Lotman 0.1.0
     -   Strict hierarchy mode and reservation semantics; extended APIs for lot timeline filtering. 
-    -   **Note**: Incompatible with Pelican Server < 26.0 (Pelican 26.0 is available in OSG 25)
+    -   **Note**: Incompatible with Pelican Server < 7.27 (Pelican 26.0 is available in OSG 25)
     
 **November 9, 2026:** IGTF 1.147, XRootD 5.9.8-1.3
 ----------------------------------------------------------------------------------------------------------------------
