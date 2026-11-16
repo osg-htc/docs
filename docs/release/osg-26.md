@@ -27,6 +27,12 @@ Updates to critical packages are also announced by email and are sent to the fol
 Latest News
 -----------
 
+**November 16, 2026:** IGTF 1.148
+----------------------------------------------------------------------------------------------------------------------
+-   CA certificates based on [IGTF 1.148](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Added InCommon (DC=org,DC=incommon) RPDNC namespace also to emigtfc5r1 (US)  
+        \[this is part one of a two-step transitioning process for CertiNext/InCommon\]
+
 **November 13, 2026:** Initial Release
 --------------------------------------
 
@@ -104,5 +110,3 @@ The following packages were removed for OSG 26:
 
 -   `osg-ca-certs-updater`: we recommend alternative means for automatically updating the osg-ca-certs RPM
 -   `osg-pki-tools`: we recommend using Let's Encrypt certificates where possible. For IGTF certificates, contact your institution.
-
-
