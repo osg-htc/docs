@@ -45,9 +45,8 @@ Updating the OSG Repositories
 
 1.  Update software:
 
-
-            :::console
-            root@host # yum update
+        :::console
+        root@host # yum update
 
     !!! warning
         -   Please be aware that running `yum update` may also update other RPMs.
