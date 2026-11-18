@@ -10,6 +10,7 @@ The initial release includes GlideinWMS 3.11.4, HTCondor 26.0.1, HTCondor 26.1.0
 
 OSG 26 will be supported for [approximately two years total](release_series.md#series-life-cycle).
 
+For notes on upgrading to OSG 26, visit the [OSG 26 upgrade instructions page](updating-to-osg-26.md).
 
 !!! info "OSG 24 end-of-life"
     Following our [release series support policy](release_series.md#series-life-cycle),
@@ -63,7 +64,7 @@ This initial release contains the following notable changes compared to the curr
 
 -   [HTCondor-CE 26.0.1](https://htcondor.com/htcondor-ce/v26/releases/) (see [upgrade notes](updating-to-osg-26.md#updating-your-osg-compute-entrypoint))
 
--   [Pelican 26.0.2](https://github.com/PelicanPlatform/pelican/releases/tag/v26.0.0) brings usability enhancements, a new Collections feature for delegating access management, a web-based client for Origins, and other features and bug fixes:
+-   [Pelican 26.0.2](https://github.com/PelicanPlatform/pelican/releases/tag/v26.0.0) brings usability enhancements, a new Collections feature for delegating access management, a web-based client for Origins, and other features and bug fixes (see [upgrade notes](updating-to-osg-26.md#updating-your-osdf-cache-or-origin)):
     -   New Features and Enhancements
         -   [Origin]: New registration view for Origins
         -   [Origin]: HTTPS/WebDav, Globus, S3/Blob added as V2 Pelican backends
