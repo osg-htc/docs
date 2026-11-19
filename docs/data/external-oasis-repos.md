@@ -90,8 +90,8 @@ The initial repository creation must be run as `root`:
     Deny from all
     Allow from 127.0.0.1
     Allow from ::1
-    Allow from 129.79.53.0/24 129.93.244.192/26 129.93.227.64/26
-    Allow from 2001:18e8:2:6::/56 2600:900:6::/48 
+    Allow from 129.93.244.192/26 129.93.227.64/26
+    Allow from 2600:900:6::/48 
     xEOFx
 
 Here, we increase the number of open files allowed, create the repository using the `mkfs` command, and then limit the hosts that are allowed to access the repo to the OSG CDN.
