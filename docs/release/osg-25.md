@@ -65,6 +65,27 @@ Updates to critical packages are also announced by email and are sent to the fol
 Latest News
 -----------
 
+**November 24, 2026:** xrdcl-pelican 1.8.4; Upcoming: XRootD 6.2.0, xrdcl-pelican 1.8.4, xrdhttp-pelican 0.0.14, xrootd-lotman 0.1.0
+----------------------------------------------------------------------------------------------------------------------
+-   [xrdcl-pelican 1.8.4](https://github.com/PelicanPlatform/xrdcl-pelican/releases#release-v1.8.3)
+    -   Various crash and hang fixes
+    -   Parse all supported checksum types from Digest headers
+-   Upcoming
+    -   [XRootD 6.2.0](https://github.com/xrootd/xrootd/releases/tag/v6.2.0)
+        -   Improvements for streaming checksum support
+        -   Client support for HTTP TPC in the client (xrdcp)
+        -   Client support for the WLCG tape REST API (xrdcp/xrdfs)
+        -   Support for gfal-style full URL syntax commands in xrdfs
+        -   New -4/-6 options in xrdfs to select IPv4/IPv6
+        -   New syntax to allow sec.protbind to bind to localhost
+    -   [xrdcl-pelican 1.8.4](https://github.com/PelicanPlatform/xrdcl-pelican/releases#release-v1.8.3)
+        -   Various crash and hang fixes
+        -   Parse all supported checksum types from Digest headers
+    -   [xrdhttp-pelican 0.0.14](https://github.com/PelicanPlatform/xrdhttp-pelican/releases#release-v0.0.14)
+        -   Compatible with xrootd 6.2.0
+    -   xrootd-lotman 0.1.0
+        -   Add compatibility with Lotman 0.1.0
+
 **November 16, 2026:** IGTF 1.148, Lotman 0.1.0, XRootD Lotman 0.1.0
 ----------------------------------------------------------------------------------------------------------------------
 -   CA certificates based on [IGTF 1.148](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
